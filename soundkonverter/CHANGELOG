@@ -1,0 +1,21 @@
+0.9.91 (1.0.0 beta2):
+-Add: flac and metaflac plugins
+-Add: faac, neroaac and aacgain plugins
+-Add: timidity plugin
+-Add: Enclosing %x space holders in the output directory with "[]" will only activate the space holder if the tag is not empty
+-Add: Czech translation (by Pavel Fric)
+-Change: use input file name as output file name if output mode is set to "metadata" and the file name can't be filled with either the track number or title
+-Change: added message box to warn the user when trying to rip audio cds with kde < 4.4.0
+-Change: don't close soundkonverter when started invisible but the conversion was aborted by the user
+-Fix: File conflict handling
+-Fix: Update file list if configuration changed
+-Fix: Rip CDs by passing parameters to soundkonverter
+-Fix: Replay Gain tool would only process one file/album
+-Fix: Downloading files from remote locations
+-Fix: Options editor wouldn't save modified tags
+-Fix: Hitting the button "edit tags" in the options editor wouldn't work
+-Fix: The options editor would cause a crash when files where removed from the file list
+-Fix: Race condition when trying to convert multiple files having the same output file name simultaneously
+
+0.9.90 (1.0.0 beta1):
+First usable release of the soundKonverter 1.0 series

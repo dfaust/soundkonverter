@@ -1,0 +1,34 @@
+<!DOCTYPE kpartgui SYSTEM "kpartgui.dtd">
+<kpartgui name="soundKonverter" version="1">
+    <MenuBar>
+        <Menu name="file">
+            <Action name="add_files" />
+            <Action name="add_folder" />
+            <Action name="add_audiocd" />
+            <Action name="add_url" />
+            <Action name="add_playlist" />
+            <Separator />
+            <Action name="load" />
+            <Action name="save" />
+        </Menu>
+        <Menu name="conversion"><Text>Conversion</Text>
+            <Action name="start" />
+            <Action name="stop_menu" />
+            <Separator />
+            <Action name="logviewer" />
+        </Menu>
+        <Menu name="tools"><Text>Tools</Text>
+            <Action name="replaygainscanner" />
+        </Menu>
+    </MenuBar>
+    <ToolBar name="toolbar" hidden="true" >
+        <text>Main Toolbar</text>
+        <Action name="add_files" />
+        <Action name="add_audiocd" />
+        <Separator />
+        <Action name="start" />
+        <Action name="stop_menu" />
+        <Separator />
+        <Action name="replaygainscanner" />
+    </ToolBar>
+</kpartgui>

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=soundKonverter/ReplayGainPlugin
+X-KDE-Derived=KPluginInfo
+Comment=soundKonverter replaygain plugin

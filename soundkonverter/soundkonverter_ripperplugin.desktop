@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=ServiceType
+X-KDE-ServiceType=soundKonverter/RipperPlugin
+X-KDE-Derived=KPluginInfo
+Comment=soundKonverter ripper plugin

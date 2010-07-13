@@ -1,0 +1,12 @@
+
+Please have a look at CMakeLists.txt first and ensure the paths to the TagLib and cdrapanoia include dirs and libs are set properly.
+(You'll need the TagLib and cdparanoia devel packages.)
+
+mkdir build
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+make
+sudo make install
+
+(make install DESTDIR=$HOME/tempdir makes a test installation into $HOME/tempdir)
+ 

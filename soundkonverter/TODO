@@ -1,0 +1,44 @@
+### Prio 1 ###
+
+test vfat compatible file names
+processID/convertID/... eindeutig berechnen ... müsste so funktionieren
+
+
+### Prio 2 ###
+
+make converted files wait for applying album gain
+read wav file length
+ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grundsätzlich
+ReplayGainScanner: split album through context menu
+ReplayGainScanner: split albums by disc
+edit ripper parameters
+ReplayGainScanner: parallele Berechnung
+session management
+temporäre dateien ordentlich erzeugen
+verwaiste temporäre dateien auffinden
+
+
+### Code ###
+
+KShell::quoteArg
+
+KStandardDirs::findExe("mplayer");
+
+
+### main.cpp ###
+
+signal( SIGQUIT, cleanup );
+signal( SIGINT, cleanup );
+
+namespace
+{
+  const char* description = I18N_NOOP("KDE Time tracker tool");
+
+  void cleanup( int )
+  {
+    kDebug(5970) << i18n("Just caught a software interrupt.");
+    kapp->exit();
+  }
+}
+
+###

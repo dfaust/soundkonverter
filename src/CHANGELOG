@@ -7,6 +7,7 @@
 -Change: use input file name as output file name if output mode is set to "metadata" and the file name can't be filled with either the track number or title
 -Change: added message box to warn the user when trying to rip audio cds with kde < 4.4.0
 -Change: don't close soundkonverter when started invisible but the conversion was aborted by the user
+-Change: don't save file list after each succeeded conversion because it was slowing down the conversion when converting a lot of files
 -Fix: File conflict handling
 -Fix: Update file list if configuration changed
 -Fix: Rip CDs by passing parameters to soundkonverter

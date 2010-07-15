@@ -636,7 +636,8 @@ void FileList::itemFinished( FileListItem *item, int state )
         item->setText( 0, i18n("Failed") );
     }
 
-    save( false );
+    // FIXME disabled until saving gets faster
+//     save( false );
 
 // ---- NOTE double use of _item_ !!! --------------------------------------------------
 

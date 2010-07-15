@@ -111,6 +111,7 @@ void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
 {
     showReplayGainScanner();
     replayGainScanner->addFiles( urls );
+    replayGainScanner->activateWindow();
 }
 
 void soundKonverter::ripCd( const QString& device )

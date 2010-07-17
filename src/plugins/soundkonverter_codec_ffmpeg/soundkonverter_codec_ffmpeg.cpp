@@ -187,7 +187,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
     {
         info.lossless = false;
         info.description = i18n("MPEG-1 Audio Layer II is an old lossy audio format."); // http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II
-        info.mimeTypes.append( "audio/mpeg" );
+//         info.mimeTypes.append( "audio/mpeg" );
         info.extensions.append( "mp2" );
     }
 //     else if( codecName == "sonic" ) // TODO description
@@ -255,7 +255,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
     {
         info.lossless = false;
         info.description = i18n("MPEG-1 Audio Layer I very old and lossy file format."); // http://en.wikipedia.org/wiki/MP1
-        info.mimeTypes.append( "audio/mpeg" );
+//         info.mimeTypes.append( "audio/mpeg" );
         info.extensions.append( "mp1" );
     }
     else if( codecName == "mpc" )

@@ -42,6 +42,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_mp3gain::formatInfo( const Q
         info.lossless = false;
         info.description = i18n("MP3 is a very popular lossy audio codec.");
         info.mimeTypes.append( "audio/x-mp3" );
+        info.mimeTypes.append( "audio/mp3" );
         info.mimeTypes.append( "audio/mpeg" );
         info.extensions.append( "mp3" );
     }

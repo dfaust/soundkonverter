@@ -2,7 +2,7 @@
 
 VERSION="0.9.91"
 
-if [ -e "../release/soundkonverter-"$VERSION".tar.bz2" ]; then
+if [ -e "../release/soundkonverter-"$VERSION".tar.gz" ]; then
   echo "release already exists; exiting"
   exit 0
 fi
@@ -16,8 +16,8 @@ cd "../release"
 cp -a "../src" "./tmp"
 mv "./tmp" "./soundkonverter-"$VERSION
 
-tar --exclude="*~" -cjf "./soundkonverter-"$VERSION".tar.bz2" "./soundkonverter-"$VERSION
-echo "new release written to: release/soundkonverter-"$VERSION".tar.bz2"
+tar --exclude="*~" -czf "./soundkonverter-"$VERSION".tar.gz" "./soundkonverter-"$VERSION
+echo "new release written to: release/soundkonverter-"$VERSION".tar.gz"
 
 rm -rf "./soundkonverter-"$VERSION
 

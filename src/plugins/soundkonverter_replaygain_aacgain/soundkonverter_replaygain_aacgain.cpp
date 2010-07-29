@@ -108,6 +108,7 @@ int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, Replay
 //     newItem->mode = mode;
 
     (*newItem->process) << binaries["aacgain"];
+    (*newItem->process) << "-k";
     if( mode == ReplayGainPlugin::Add )
     {
         (*newItem->process) << "-a";

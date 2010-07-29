@@ -86,6 +86,7 @@ int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, Replay
 //     newItem->mode = mode;
 
     (*newItem->process) << binaries["mp3gain"];
+    (*newItem->process) << "-k";
     if( mode == ReplayGainPlugin::Add )
     {
         (*newItem->process) << "-a";

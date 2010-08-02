@@ -39,7 +39,6 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     cProfile = new KComboBox( this );
     topBox->addWidget( cProfile );
     connect( cProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
-    connect( cProfile, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     topBox->addSpacing( 3 );
     pProfileRemove = new KPushButton( KIcon("edit-delete"), i18n("Remove"), this );
     topBox->addWidget( pProfileRemove );
@@ -323,6 +322,8 @@ void OptionsSimple::profileChanged()
 //     {
 //         formatChanged();
 //     }
+
+    somethingChanged();
 }
 
 // void OptionsSimple::formatChanged()

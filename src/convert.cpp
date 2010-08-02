@@ -606,6 +606,7 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     {
         if( items.at(i)->process == QObject::sender() )
         {
+            // FIXME crash discovered here - but no solution yet
             delete items.at(i)->process;
             items.at(i)->process = 0;
 

@@ -503,9 +503,13 @@ void OptionsEditor::itemRemoved( FileListItem *item )
 
 void OptionsEditor::applyChanges()
 {
+    ConversionOptions *newConversionOptions = options->currentConversionOptions();
+    
     for( int i=0; i<selectedItems.count(); i++ )
     {
-        selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, options->currentConversionOptions() );
+        if( newConversionOptions )
+            selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, newConversionOptions );
+        
         if( selectedItems.at(i)->tags )
         {
             selectedItems.at(i)->tags->title = lTitle->text();

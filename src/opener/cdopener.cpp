@@ -1040,7 +1040,7 @@ void CDOpener::proceedClicked()
         return;
     }
     
-    if( options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
+    if( options->currentConversionOptions() && options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
     {
         options->setOutputDirectoryMode( (int)OutputDirectory::MetaData );
     }

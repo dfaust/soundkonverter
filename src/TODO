@@ -6,6 +6,7 @@ processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
 ### Prio 2 ###
 
+optimize profiles
 activate replaygain window when opened on application start
 make converted files wait for applying album gain
 read wav file length

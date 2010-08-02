@@ -296,6 +296,12 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     else lastListItem = after;
     QString filePathName;
     QString device;
+    
+    if( !conversionOptions )
+    {
+        KMessageBox::error( this, i18n("No conversion options selected.") );
+        return;
+    }
 
     for( int i=0; i<fileList.count(); i++ )
     {
@@ -367,6 +373,12 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 {
     TimeCount = 0;
 
+    if( !conversionOptions )
+    {
+        KMessageBox::error( this, i18n("No conversion options selected.") );
+        return;
+    }
+
     int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
 
     pScanStatus->setValue( 0 );
@@ -388,6 +400,12 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 void FileList::addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions )
 {
     FileListItem *lastListItem = 0;
+
+    if( !conversionOptions )
+    {
+        KMessageBox::error( this, i18n("No conversion options selected.") );
+        return;
+    }
 
     for( int i=0; i<trackList.count(); i++ )
     {

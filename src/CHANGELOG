@@ -1,4 +1,5 @@
 0.9.92 (1.0.0 beta3):
+-Fix: Remove audio/mpeg mime type from mp1 and mp2 codecs in the ffmpeg and mplayer plugins because it would conflict with mp3
 -Fix: soundKonverter would get stuck when trying to add replaygain (add argument for mp3gain/aacgain to lower gain to avoid clipping)
 
 0.9.91 (1.0.0 beta2):

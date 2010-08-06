@@ -21,6 +21,7 @@
 // #include <kio/slavebase.h>
 //#include <kprocess.h>
 #include <kstandarddirs.h>
+#include <KMessageBox>
 
 #include <QFile>
 #include <QFileInfo>
@@ -601,6 +602,13 @@ void Convert::processOutput()
 
 void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
 {
+    if( QObject::sender() == 0 )
+    {
+        logger->log( 1000, QString("Error: processExit was called from a null sender. Exit code: %1").arg(exitCode) );
+        KMessageBox::error( 0, QString("Error: processExit was called from a null sender. Exit code: %1").arg(exitCode) );
+        return;
+    }
+    
     // search the item list for our item
     for( int i=0; i<items.size(); i++ )
     {
@@ -668,6 +676,13 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
 
 void Convert::pluginProcessFinished( int id, int exitCode )
 {
+    if( QObject::sender() == 0 )
+    {
+        logger->log( 1000, QString("Error: pluginProcessFinished was called from a null sender. Exit code: %1").arg(exitCode) );
+        KMessageBox::error( 0, QString("Error: pluginProcessFinished was called from a null sender. Exit code: %1").arg(exitCode) );
+        return;
+    }
+
     for( int i=0; i<items.size(); i++ )
     {
         if( ( items.at(i)->convertPlugin && items.at(i)->convertPlugin == QObject::sender() && items.at(i)->convertID == id ) ||

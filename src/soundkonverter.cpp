@@ -132,7 +132,7 @@ void soundKonverter::setupActions()
     connect( logviewer, SIGNAL(triggered()), this, SLOT(showLogViewer()) );
 
     KAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
-    replaygainscanner->setText(i18n("Replay Gain Scanner..."));
+    replaygainscanner->setText(i18n("Replay Gain tool..."));
     replaygainscanner->setIcon(KIcon("soundkonverter-replaygain"));
     connect( replaygainscanner, SIGNAL(triggered()), this, SLOT(showReplayGainScanner()) );
 
@@ -152,7 +152,7 @@ void soundKonverter::setupActions()
     connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
     
     KAction *add_url = actionCollection()->addAction("add_url");
-    add_url->setText(i18n("Add Url..."));
+    add_url->setText(i18n("Add url..."));
     add_url->setIcon(KIcon("network-workgroup"));
     connect( add_url, SIGNAL(triggered()), m_view, SLOT(showUrlDialog()) );
     

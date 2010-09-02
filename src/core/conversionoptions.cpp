@@ -20,7 +20,7 @@ bool ConversionOptions::equalsBasics( ConversionOptions *_other )
     if( !_other ) return false;
     return ( pluginName==_other->pluginName && profile==_other->profile && codecName==_other->codecName &&
              outputDirectoryMode==_other->outputDirectoryMode && outputDirectory==_other->outputDirectory &&
-             replaygain==_other->replaygain ); // && bpm==_other->bpm
+             replaygain==_other->replaygain && cmdArguments==_other->cmdArguments ); // && bpm==_other->bpm
 }
 
 QDomElement ConversionOptions::toXml( QDomDocument document )
@@ -39,6 +39,7 @@ QDomElement ConversionOptions::toXml( QDomDocument document )
     encodingOptions.setAttribute("samplingRate",samplingRate);
     encodingOptions.setAttribute("channels",channels);
     encodingOptions.setAttribute("compressionLevel",compressionLevel);
+    encodingOptions.setAttribute("cmdArguments",cmdArguments);
     conversionOptions.appendChild(encodingOptions);
     QDomElement outputOptions = document.createElement("outputOptions");
     outputOptions.setAttribute("outputDirectoryMode",outputDirectoryMode);
@@ -66,6 +67,7 @@ bool ConversionOptions::fromXml( QDomElement conversionOptions )
     samplingRate = encodingOptions.attribute("samplingRate").toInt();
     channels = encodingOptions.attribute("channels").toInt();
     compressionLevel = encodingOptions.attribute("compressionLevel").toDouble();
+    cmdArguments = encodingOptions.attribute("cmdArguments");
     QDomElement outputOptions = conversionOptions.elementsByTagName("outputOptions").at(0).toElement();
     outputDirectoryMode = outputOptions.attribute("outputDirectoryMode").toInt();
     outputDirectory = outputOptions.attribute("outputDirectory");

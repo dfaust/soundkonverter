@@ -6,6 +6,8 @@
 #include "ffmpegcodecwidget.h"
 
 
+// TODO video files
+
 soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {

@@ -221,11 +221,12 @@ void OptionsDetailed::formatChanged( const QString& format )
 void OptionsDetailed::encoderChanged( const QString& encoder )
 {
     CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( encoder );
-//     if( !plugin )
-//     {
+    if( !plugin )
+    {
+//         TODO leads to crashes
 //         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
-//         return;
-//     }
+        return;
+    }
     currentPlugin = plugin;
     if( wPlugin )
     {

@@ -208,9 +208,9 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
     LameConversionOptions *lameConversionOptions = 0;
-    if( _conversionOptions->pluginName == name() )
+    if( conversionOptions->pluginName == name() )
     {
-        lameConversionOptions = static_cast<LameConversionOptions*>(_conversionOptions);
+        lameConversionOptions = static_cast<LameConversionOptions*>(conversionOptions);
     }
 
     if( outputCodec == "mp3" )
@@ -314,6 +314,10 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
                     command += "d";
                 }
             }
+        }
+        if( conversionOptions->pluginName == name() )
+        {
+            command += conversionOptions->cmdArguments;
         }
         command += "\"" + inputFile.toLocalFile() + "\"";
         command += "\"" + outputFile.toLocalFile() + "\"";

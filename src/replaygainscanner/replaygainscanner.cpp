@@ -34,7 +34,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     config = _config;
     logger = _logger;
 
-    setCaption( i18n("Replay Gain Tool") );
+    setCaption( i18n("Replay Gain tool") );
     resize( 600, 400 );
     setWindowIcon( KIcon("soundkonverter-replaygain") );
 
@@ -219,7 +219,7 @@ void ReplayGainScanner::processStopped()
     pCancel->hide();
     pProgressBar->setMaximum( 100 );
     pProgressBar->setValue( 100 );
-    setCaption( i18n("Finished") + " - " + i18n("Replay Gain Tool") );
+    setCaption( i18n("Finished") + " - " + i18n("Replay Gain tool") );
 }
 
 void ReplayGainScanner::updateProgress( int progress, int totalSteps )
@@ -230,6 +230,6 @@ void ReplayGainScanner::updateProgress( int progress, int totalSteps )
 
     QString percent;
     percent.sprintf( "%i%%", (int)fPercent );
-    setCaption( percent + " - " + i18n("Replay Gain Tool") );
+    setCaption( percent + " - " + i18n("Replay Gain tool") );
 }
 

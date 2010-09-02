@@ -129,12 +129,12 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
 {
     if( currentFormat == format ) return;
     currentFormat = format;
-    setEnabled( currentFormat != "wav" && currentFormat != "flac" );
+    setEnabled( currentFormat != "wav" && currentFormat != "flac" && currentFormat != "alac" );
 }
 
 QString FFmpegCodecWidget::currentProfile()
 {
-    if( currentFormat == "wav" || currentFormat == "flac" )
+    if( currentFormat == "wav" || currentFormat == "flac" || currentFormat == "alac" )
     {
         return i18n("Lossless");
     }
@@ -250,7 +250,7 @@ int FFmpegCodecWidget::currentDataRate()
     {
         dataRate = 10590000;
     }
-    else if( currentFormat == "flac" )
+    else if( currentFormat == "flac" || currentFormat == "alac" )
     {
         dataRate = 6520000;
     }

@@ -16,7 +16,7 @@ class KListWidget;
 
 
 /**
- * @short The Replay Gain Tool
+ * @short The Dir Opener
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 0.3
  */

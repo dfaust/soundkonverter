@@ -12,6 +12,9 @@
 #include <QSpinBox>
 // #include <QSlider>
 
+#include <KLineEdit>
+
+
 LameCodecWidget::LameCodecWidget()
     : CodecWidget(),
     currentFormat( "mp3" )
@@ -138,7 +141,6 @@ LameCodecWidget::LameCodecWidget()
     userdefinedBoxLayout->addLayout( userdefinedMidBox );
 
     chChannels = new QCheckBox( i18n("Channels")+":", userdefinedBox );
-    connect( chChannels, SIGNAL(toggled(bool)), this, SLOT(channelsToggled(bool)) );
     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     userdefinedMidBox->addWidget( chChannels );
     cChannels = new KComboBox( userdefinedBox );
@@ -147,14 +149,14 @@ LameCodecWidget::LameCodecWidget()
     cChannels->addItem( i18n("Simple Stereo") );
     cChannels->addItem( i18n("Forced Joint Stereo") );
     cChannels->addItem( i18n("Dual Mono") );
+    cChannels->setEnabled( false );
     connect( cChannels, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     userdefinedMidBox->addWidget( cChannels );
-    channelsToggled( false );
+    connect( chChannels, SIGNAL(toggled(bool)), cChannels, SLOT(setEnabled(bool)) );
 
     userdefinedMidBox->addSpacing( 12 );
 
     chSamplerate = new QCheckBox( i18n("Resample")+":", userdefinedBox );
-    connect( chSamplerate, SIGNAL(toggled(bool)), this, SLOT(samplerateToggled(bool)) );
     connect( chSamplerate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     userdefinedMidBox->addWidget( chSamplerate );
     cSamplerate = new KComboBox( userdefinedBox );
@@ -168,13 +170,26 @@ LameCodecWidget::LameCodecWidget()
     cSamplerate->addItem( "44100 Hz" );
     cSamplerate->addItem( "48000 Hz" );
     cSamplerate->setCurrentIndex( 4 );
+    cSamplerate->setEnabled( false );
     connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     userdefinedMidBox->addWidget( cSamplerate );
-    samplerateToggled( false );
+    connect( chSamplerate, SIGNAL(toggled(bool)), cSamplerate, SLOT(setEnabled(bool)) );
 
     userdefinedMidBox->addStretch();
 
-    grid->setRowStretch( 2, 1 );
+    // cmd arguments box
+    
+    QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
+    grid->addLayout( cmdArgumentsBox, 2, 0 );
+
+    cCmdArguments = new QCheckBox( i18n("Additional arguments")+":", this );
+    cmdArgumentsBox->addWidget( cCmdArguments );
+    lCmdArguments = new KLineEdit( this );
+    lCmdArguments->setEnabled( false );
+    cmdArgumentsBox->addWidget( lCmdArguments );
+    connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
+
+    grid->setRowStretch( 3, 1 );
 
     presetChanged( cPreset->currentText() );
     modeChanged( 0 );
@@ -224,6 +239,8 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
     else options->samplingRate = 0;
     if( chChannels->isChecked() ) options->channels = cChannels->currentIndex() + 1;
     else options->channels = 0;
+    if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
+    else options->cmdArguments = "";
 
     return options;
 }
@@ -257,6 +274,8 @@ bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     chChannels->setChecked( options->channels != 0 );
     if( options->channels != 0 ) cChannels->setCurrentIndex( options->channels - 1 );
+    cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
+    if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
 
     return true;
 }
@@ -313,6 +332,7 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         cChannels->setCurrentIndex( 0 );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Low") )
@@ -327,6 +347,7 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         chChannels->setChecked( false );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Medium") )
@@ -340,6 +361,7 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         cBitrateMode->setCurrentIndex( 0 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("High") )
@@ -353,6 +375,7 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         cBitrateMode->setCurrentIndex( 0 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Very high") )
@@ -366,6 +389,7 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         cBitrateMode->setCurrentIndex( 0 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
 
@@ -387,12 +411,14 @@ QDomDocument LameCodecWidget::customProfile()
     encodingOptions.setAttribute("channels",cChannels->currentIndex());
     encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
     encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
+    encodingOptions.setAttribute("cmdArgumentsEnabled",cCmdArguments->isChecked() && cCmdArguments->isEnabled());
+    encodingOptions.setAttribute("cmdArguments",lCmdArguments->text());
     root.appendChild(encodingOptions);
     QDomElement data = profile.createElement("data");
     data.setAttribute("preset",cPreset->currentIndex());
     data.setAttribute("presetBitrate",iPresetBitrate->value());
-    data.setAttribute("presetBitrateCbr",cPresetBitrateCbr->isChecked()&&cPresetBitrateCbr->isEnabled());
-    data.setAttribute("presetFast",cPresetFast->isChecked()&&cPresetFast->isEnabled());
+    data.setAttribute("presetBitrateCbr",cPresetBitrateCbr->isChecked() && cPresetBitrateCbr->isEnabled());
+    data.setAttribute("presetFast",cPresetFast->isChecked() && cPresetFast->isEnabled());
     encodingOptions.appendChild(data);
     return profile;
 }
@@ -417,6 +443,8 @@ bool LameCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
     cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
     cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
+    cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
+    lCmdArguments->setText( encodingOptions.attribute("cmdArguments") );
     return true;
 }
 
@@ -612,13 +640,4 @@ void LameCodecWidget::qualitySpinBoxChanged( int quality )
     }
 }
 
-void LameCodecWidget::channelsToggled( bool enabled )
-{
-    cChannels->setEnabled( enabled );
-}
-
-void LameCodecWidget::samplerateToggled( bool enabled )
-{
-    cSamplerate->setEnabled( enabled );
-}
 

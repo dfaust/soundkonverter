@@ -38,7 +38,7 @@ QList<ReplayGainPipe> soundkonverter_replaygain_vorbisgain::codecTable()
     newPipe.codecName = "ogg vorbis";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["vorbisgain"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'vorbisgain'. vorbisgain is usually in the package 'vorbis-tools' which should be shipped with your distribution.");
+    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' which should be shipped with your distribution.");
     table.append( newPipe );
 
     return table;

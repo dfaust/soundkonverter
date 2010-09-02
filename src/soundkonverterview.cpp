@@ -495,7 +495,15 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
             options->setOutputDirectory( directory );
             ConversionOptions *conversionOptions = options->currentConversionOptions();
             delete options;
-            fileList->addFiles( k_urls, conversionOptions );
+            if( conversionOptions )
+            {
+                fileList->addFiles( k_urls, conversionOptions );
+            }
+            else
+            {
+                // FIXME error message, null pointer for conversion options
+                KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0"), i18n("Internal error") );
+            }
         }
         else
         {

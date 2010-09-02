@@ -39,14 +39,12 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     connect( optionsSimple->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(simpleOutputDirectoryModeChanged(int)) );
     connect( optionsSimple->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(simpleOutputDirectoryChanged(const QString&)) );
 
-
-
     optionsDetailed = new OptionsDetailed( config, this );
 //     connect( optionsDetailed, SIGNAL(optionsChanged()), this, SLOT(detailedOptionsChanged()) );
     connect( optionsDetailed->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(detailedOutputDirectoryModeChanged(int)) );
     connect( optionsDetailed->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(detailedOutputDirectoryChanged(const QString&)) );
     connect( optionsDetailed, SIGNAL(currentDataRateChanged(int)), optionsSimple, SLOT(currentDataRateChanged(int)) );
-    optionsDetailed->somethingChanged();
+//     optionsDetailed->somethingChanged();
 
     connect( optionsDetailed, SIGNAL(customProfilesEdited()), optionsSimple, SLOT(updateProfiles()) );
     connect( optionsSimple, SIGNAL(customProfilesEdited()), optionsDetailed, SLOT(updateProfiles()) );
@@ -60,6 +58,14 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     {
         format = config->data.general.defaultFormat;
     }
+    if( format.isEmpty() )
+    {
+        const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Lossy);
+        if( formats.count() > 0 )
+        {
+            format = formats.at(0);
+        }
+    }
     optionsDetailed->setCurrentFormat( format );
 
     QString profile;
@@ -70,6 +76,10 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     else
     {
         profile = config->data.general.defaultProfile;
+    }
+    if( profile.isEmpty() )
+    {
+        profile = i18n("High");
     }
     if( config->customProfiles().indexOf(profile) != -1 )
     {

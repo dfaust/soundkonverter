@@ -299,7 +299,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     
     if( !conversionOptions )
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        // FIXME error message, null pointer for conversion options
         return;
     }
 
@@ -375,7 +375,7 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 
     if( !conversionOptions )
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        // FIXME error message, null pointer for conversion options
         return;
     }
 
@@ -963,6 +963,11 @@ void FileList::save( bool user )
     QList<int> ids = config->conversionOptionsManager()->getAllIds();
     for( int i=0; i<ids.size(); i++ )
     {
+        if( !config->conversionOptionsManager()->getConversionOptions(ids.at(i)) )
+        {
+            // FIXME error message, null pointer for conversion options
+            continue;
+        }
         QDomElement conversionOptions = config->conversionOptionsManager()->getConversionOptions(ids.at(i))->toXml(list);
         conversionOptions.setAttribute("id",ids.at(i));
         root.appendChild(conversionOptions);

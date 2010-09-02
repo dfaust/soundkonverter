@@ -507,8 +507,16 @@ void OptionsEditor::applyChanges()
     
     for( int i=0; i<selectedItems.count(); i++ )
     {
+        if( !selectedItems.at(i) )
+        {
+            // FIXME error message, null pointer for file list item
+            continue;
+        }
+        
         if( newConversionOptions )
+        {
             selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, newConversionOptions );
+        }
         
         if( selectedItems.at(i)->tags )
         {

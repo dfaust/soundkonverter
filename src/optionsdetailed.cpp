@@ -136,7 +136,8 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         plugins.at(i)->deleteCodecWidget( widgets.at(i) );
     }
 */
-//     formatChanged( cFormat->currentText() );
+    cFormat->setCurrentIndex( 0 );
+    formatChanged( cFormat->currentText() );
 }
 
 
@@ -191,7 +192,7 @@ void OptionsDetailed::updateProfiles()
 
 void OptionsDetailed::formatChanged( const QString& format )
 {
-    QString oldEncoder = cPlugin->currentText();
+    const QString oldEncoder = cPlugin->currentText();
 
     cPlugin->clear();
     //if( format != "wav" ) // TODO make it nicer if wav is selected
@@ -202,10 +203,17 @@ void OptionsDetailed::formatChanged( const QString& format )
             cPlugin->addItems( config->data.backends.codecs.at(i).encoders );
         }
     }
+    cPlugin->setCurrentIndex( 0 );
 //     cPlugin->setEnabled( format != "wav" );
 
-    if( cPlugin->currentText() != oldEncoder ) encoderChanged( cPlugin->currentText() );
-    else if( wPlugin ) qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+    if( cPlugin->currentText() != oldEncoder )
+    {
+        encoderChanged( cPlugin->currentText() );
+    }
+    else if( wPlugin )
+    {
+        qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+    }
 
     somethingChanged();
 }
@@ -213,7 +221,11 @@ void OptionsDetailed::formatChanged( const QString& format )
 void OptionsDetailed::encoderChanged( const QString& encoder )
 {
     CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( encoder );
-    if( !plugin ) return; // TODO error message
+//     if( !plugin )
+//     {
+//         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
+//         return;
+//     }
     currentPlugin = plugin;
     if( wPlugin )
     {
@@ -472,7 +484,7 @@ QString OptionsDetailed::currentFormat()
 
 void OptionsDetailed::setCurrentFormat( const QString& format )
 {
-    if( cFormat->currentText() != format )
+    if( !format.isEmpty() && format != cFormat->currentText() )
     {
         cFormat->setCurrentIndex( cFormat->findText(format) );
         formatChanged( cFormat->currentText() );

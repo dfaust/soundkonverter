@@ -120,7 +120,14 @@ void UrlOpener::okClickedSlot()
 {
     if( page == ConversionOptionsPage )
     {
-        emit done( urls, options->currentConversionOptions() );
+        if( options->currentConversionOptions() )
+        {
+            emit done( urls, options->currentConversionOptions() );
+            accept();
+        }
+        else
+        {
+            KMessageBox::error( this, i18n("No conversion options selected.") );
+        }
     }
-    accept();
 }

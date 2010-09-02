@@ -12,6 +12,7 @@
 
 #include <KPushButton>
 #include <KIcon>
+#include <KMessageBox>
 
 
 OptionsLayer::OptionsLayer( Config *config, QWidget *parent )
@@ -121,8 +122,15 @@ void OptionsLayer::abort()
 
 void OptionsLayer::ok()
 {
-    emit done( urls, options->currentConversionOptions() );
-    fadeOut();
+    if( options->currentConversionOptions() )
+    {
+        emit done( urls, options->currentConversionOptions() );
+        fadeOut();
+    }
+    else
+    {
+        KMessageBox::error( this, i18n("No conversion options selected.") );
+    }
 }
 
 void OptionsLayer::setProfile( const QString& profile )

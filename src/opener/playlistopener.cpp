@@ -202,6 +202,13 @@ void PlaylistOpener::fileDialogAccepted()
 
 void PlaylistOpener::okClickedSlot()
 {
-    emit done( urls, options->currentConversionOptions() );
-    accept();
+    if( options->currentConversionOptions() )
+    {
+        emit done( urls, options->currentConversionOptions() );
+        accept();
+    }
+    else
+    {
+        KMessageBox::error( this, i18n("No conversion options selected.") );
+    }
 }

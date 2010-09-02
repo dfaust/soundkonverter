@@ -30,14 +30,17 @@ ConversionOptionsManager::~ConversionOptionsManager()
 
 int ConversionOptionsManager::addConversionOptions( ConversionOptions *conversionOptions )
 {
+    if( !conversionOptions )
+    {
+        // FIXME error message, null pointer for conversion options
+        return -1;
+    }
+    
     for( int i=0; i<elements.size(); i++ )
     {
         if( elements.at(i).conversionOptions->pluginName == conversionOptions->pluginName )
         {
-//             CodecPlugin *plugin = pluginLoader->codecPluginByName( conversionOptions->pluginName );
-//             if( !plugin ) break;
-//             if( plugin->equal(elements.at(i).conversionOptions,conversionOptions) )
-            if( elements.at(i).conversionOptions->equals(conversionOptions) ) // FIXME use the plugin's equal function / or does ist already work?
+            if( elements.at(i).conversionOptions->equals(conversionOptions) ) // NOTE equals gets reimplemented by the plugins
             {
                 elements[i].references++;
                 return elements.at(i).id;
@@ -70,7 +73,10 @@ ConversionOptions *ConversionOptionsManager::getConversionOptions( int id )
 {
     for( int i=0; i<elements.size(); i++ )
     {
-        if( elements.at(i).id == id ) return elements.at(i).conversionOptions;
+        if( elements.at(i).id == id )
+        {
+            return elements.at(i).conversionOptions;
+        }
     }
     return 0;
 }

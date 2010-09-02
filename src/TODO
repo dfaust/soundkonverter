@@ -1,8 +1,9 @@
 ### Prio 1 ###
 
+crashes with cd ripper and kde 4.4
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
-
+dolphin context menu
 
 ### Prio 2 ###
 
@@ -14,6 +15,7 @@ ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grund
 ReplayGainScanner: split album through context menu
 ReplayGainScanner: split albums by disc
 edit ripper parameters
+edit encoder parameters
 ReplayGainScanner: parallele Berechnung
 session management
 temporäre dateien ordentlich erzeugen

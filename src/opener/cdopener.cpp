@@ -1061,42 +1061,49 @@ void CDOpener::proceedClicked()
 
 void CDOpener::addClicked()
 {
-    QList<int> tracks;
-    QList<TagData*> tagList;
-
-    if( cEntireCd->isChecked() )
+    if( options->currentConversionOptions() )
     {
-//         cdManager->setDiscTags( cdId, new TagData( cArtist->currentText(), cComposer->currentText(), lAlbum->text(), lAlbum->text(), cGenre->currentText(), "", 1, iDisc->value(), iYear->value(), cdManager->getTimeCount(cdId) ) );
+        QList<int> tracks;
+        QList<TagData*> tagList;
 
-        tracks.append(0);
+        if( cEntireCd->isChecked() )
+        {
+    //         cdManager->setDiscTags( cdId, new TagData( cArtist->currentText(), cComposer->currentText(), lAlbum->text(), lAlbum->text(), cGenre->currentText(), "", 1, iDisc->value(), iYear->value(), cdManager->getTimeCount(cdId) ) );
+
+            tracks.append(0);
+            
+            tags[0]->length = compact_disc->discLength();
+            tagList += tags.at(0);
+        }
+        else
+        {
+            for( int i=0; i<trackList->topLevelItemCount(); i++ )
+            {
+                if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
+                {
+                    if( cArtist->currentText() != i18n("Various Artists") ) tags[i+1]->artist = cArtist->currentText();
+                    if( cComposer->currentText() != i18n("Various Composer") ) tags[i+1]->composer = cComposer->currentText();
+                    tags[i+1]->album = lAlbum->text();
+                    tags[i+1]->disc = iDisc->value();
+                    tags[i+1]->year = iYear->value();
+                    tags[i+1]->genre = cGenre->currentText();
+                    tags[i+1]->length = compact_disc->trackLength(i+1);
+
+                    tracks.append(i+1);
+                }
+            }
+            
+            tagList = tags.mid(1);
+
+            emit addTracks( compact_disc->deviceName(), tracks, compact_disc->tracks(), tagList, options->currentConversionOptions() );
+        }
         
-        tags[0]->length = compact_disc->discLength();
-        tagList += tags.at(0);
+        accept();
     }
     else
     {
-        for( int i=0; i<trackList->topLevelItemCount(); i++ )
-        {
-            if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
-            {
-                if( cArtist->currentText() != i18n("Various Artists") ) tags[i+1]->artist = cArtist->currentText();
-                if( cComposer->currentText() != i18n("Various Composer") ) tags[i+1]->composer = cComposer->currentText();
-                tags[i+1]->album = lAlbum->text();
-                tags[i+1]->disc = iDisc->value();
-                tags[i+1]->year = iYear->value();
-                tags[i+1]->genre = cGenre->currentText();
-                tags[i+1]->length = compact_disc->trackLength(i+1);
-
-                tracks.append(i+1);
-            }
-        }
-        
-        tagList = tags.mid(1);
-
-        emit addTracks( compact_disc->deviceName(), tracks, compact_disc->tracks(), tagList, options->currentConversionOptions() );
+        KMessageBox::error( this, i18n("No conversion options selected.") );
     }
-    
-    accept();
 }
 
 // void CDOpener::addAsOneTrackClicked()

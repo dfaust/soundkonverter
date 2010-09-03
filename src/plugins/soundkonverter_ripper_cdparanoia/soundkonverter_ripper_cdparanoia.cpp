@@ -66,12 +66,20 @@ QString soundkonverter_ripper_cdparanoia::getCodecFromFile( const KUrl& filename
     return "";
 }
 
+bool soundkonverter_ripper_cdparanoia::isConfigSupported( ActionType action, const QString& codecName )
+{
+    return true;
+}
+
+void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{}
+
 bool soundkonverter_ripper_cdparanoia::hasInfo()
 {
     return false;
 }
 
-void soundkonverter_ripper_cdparanoia::showInfo()
+void soundkonverter_ripper_cdparanoia::showInfo( QWidget *parent )
 {}
 
 int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )

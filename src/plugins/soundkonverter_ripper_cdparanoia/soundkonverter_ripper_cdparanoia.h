@@ -27,8 +27,10 @@ public:
     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
     
+    bool isConfigSupported( ActionType action, const QString& codecName );
+    void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
-    void showInfo();
+    void showInfo( QWidget *parent );
 
     int rip( const QString& device, int track, int tracks, const KUrl& outputFile );
     QStringList ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile );

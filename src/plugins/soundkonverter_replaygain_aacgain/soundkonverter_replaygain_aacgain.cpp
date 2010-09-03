@@ -86,12 +86,20 @@ QString soundkonverter_replaygain_aacgain::getCodecFromFile( const KUrl& filenam
     return "";
 }
 
+bool soundkonverter_replaygain_aacgain::isConfigSupported( ActionType action, const QString& codecName )
+{
+    return true;
+}
+
+void soundkonverter_replaygain_aacgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{}
+
 bool soundkonverter_replaygain_aacgain::hasInfo()
 {
     return false;
 }
 
-void soundkonverter_replaygain_aacgain::showInfo()
+void soundkonverter_replaygain_aacgain::showInfo( QWidget *parent )
 {}
 
 int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )

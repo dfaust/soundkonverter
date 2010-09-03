@@ -75,12 +75,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_flac::formatInfo( const QString& 
     return info;
 }
 
-bool soundkonverter_codec_flac::isConfigSupported( ActionType action )
+bool soundkonverter_codec_flac::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;
 }
 
-void soundkonverter_codec_flac::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_flac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {}
 
 bool soundkonverter_codec_flac::hasInfo()
@@ -88,7 +88,7 @@ bool soundkonverter_codec_flac::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_flac::showInfo()
+void soundkonverter_codec_flac::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_flac::newCodecWidget()

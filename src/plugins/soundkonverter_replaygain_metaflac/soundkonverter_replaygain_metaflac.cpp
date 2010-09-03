@@ -54,12 +54,20 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_metaflac::formatInfo( const 
     return info;
 }
 
+bool soundkonverter_replaygain_metaflac::isConfigSupported( ActionType action, const QString& codecName )
+{
+    return true;
+}
+
+void soundkonverter_replaygain_metaflac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{}
+
 bool soundkonverter_replaygain_metaflac::hasInfo()
 {
     return false;
 }
 
-void soundkonverter_replaygain_metaflac::showInfo()
+void soundkonverter_replaygain_metaflac::showInfo( QWidget *parent )
 {}
 
 int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )

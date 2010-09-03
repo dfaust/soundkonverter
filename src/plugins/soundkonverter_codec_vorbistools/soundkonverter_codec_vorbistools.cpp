@@ -89,7 +89,7 @@ QString soundkonverter_codec_vorbistools::getCodecFromFile( const KUrl& filename
     return "";
 }
 
-bool soundkonverter_codec_vorbistools::isConfigSupported( ActionType action )
+bool soundkonverter_codec_vorbistools::isConfigSupported( ActionType action, const QString& format )
 {
     return false;
 }
@@ -102,7 +102,7 @@ bool soundkonverter_codec_vorbistools::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_vorbistools::showInfo()
+void soundkonverter_codec_vorbistools::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_vorbistools::newCodecWidget()

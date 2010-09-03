@@ -356,12 +356,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
 //     return "";
 // }
 
-bool soundkonverter_codec_ffmpeg::isConfigSupported( ActionType action )
+bool soundkonverter_codec_ffmpeg::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;
 }
 
-void soundkonverter_codec_ffmpeg::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_ffmpeg::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {}
 
 bool soundkonverter_codec_ffmpeg::hasInfo()
@@ -369,7 +369,7 @@ bool soundkonverter_codec_ffmpeg::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_ffmpeg::showInfo()
+void soundkonverter_codec_ffmpeg::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_ffmpeg::newCodecWidget()

@@ -87,12 +87,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_timidity::formatInfo( const QStri
     return info;
 }
 
-bool soundkonverter_codec_timidity::isConfigSupported( ActionType action )
+bool soundkonverter_codec_timidity::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;
 }
 
-void soundkonverter_codec_timidity::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_timidity::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {}
 
 bool soundkonverter_codec_timidity::hasInfo()
@@ -100,7 +100,7 @@ bool soundkonverter_codec_timidity::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_timidity::showInfo()
+void soundkonverter_codec_timidity::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_timidity::newCodecWidget()

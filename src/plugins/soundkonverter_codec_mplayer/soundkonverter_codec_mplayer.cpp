@@ -354,12 +354,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
 //     return "";
 // }
 
-bool soundkonverter_codec_mplayer::isConfigSupported( ActionType action )
+bool soundkonverter_codec_mplayer::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;
 }
 
-void soundkonverter_codec_mplayer::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_mplayer::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {}
 
 bool soundkonverter_codec_mplayer::hasInfo()
@@ -367,7 +367,7 @@ bool soundkonverter_codec_mplayer::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_mplayer::showInfo()
+void soundkonverter_codec_mplayer::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_mplayer::newCodecWidget()

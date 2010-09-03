@@ -77,12 +77,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_faac::formatInfo( const QString& 
     return info;
 }
 
-bool soundkonverter_codec_faac::isConfigSupported( ActionType action )
+bool soundkonverter_codec_faac::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;
 }
 
-void soundkonverter_codec_faac::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_faac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {}
 
 bool soundkonverter_codec_faac::hasInfo()
@@ -90,7 +90,7 @@ bool soundkonverter_codec_faac::hasInfo()
     return false;
 }
 
-void soundkonverter_codec_faac::showInfo()
+void soundkonverter_codec_faac::showInfo( QWidget *parent )
 {}
 
 QWidget *soundkonverter_codec_faac::newCodecWidget()

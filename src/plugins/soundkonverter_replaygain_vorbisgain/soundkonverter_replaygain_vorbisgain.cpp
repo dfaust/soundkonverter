@@ -82,12 +82,20 @@ QString soundkonverter_replaygain_vorbisgain::getCodecFromFile( const KUrl& file
     return false;
 }*/
 
+bool soundkonverter_replaygain_vorbisgain::isConfigSupported( ActionType action, const QString& codecName )
+{
+    return true;
+}
+
+void soundkonverter_replaygain_vorbisgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{}
+
 bool soundkonverter_replaygain_vorbisgain::hasInfo()
 {
     return false;
 }
 
-void soundkonverter_replaygain_vorbisgain::showInfo()
+void soundkonverter_replaygain_vorbisgain::showInfo( QWidget *parent )
 {}
 
 int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )

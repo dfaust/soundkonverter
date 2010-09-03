@@ -32,16 +32,13 @@ class BackendsListWidget : public QGroupBox
 {
     Q_OBJECT
 public:
-    /**
-     * Default Constructor
-     */
+    /** Default Constructor */
     BackendsListWidget( const QString& _name, Config *_config, QWidget *parent=0 );
-
-    /**
-     * Default Destructor
-     */
+                           
+    /** Default Destructor*/
     virtual ~BackendsListWidget();
 
+    void setFormat( const QString& _format );
     void addItem( const QString& item );
     void clear();
     QStringList getList();
@@ -51,6 +48,7 @@ public:
 private:
     Config *config;
     QString name;
+    QString format;
 
     QStringList originalOrder;
 
@@ -64,6 +62,8 @@ private slots:
     void itemSelected( int item );
     void up();
     void down();
+    void configure();
+    void info();
 
 signals:
     void orderChanged();
@@ -78,14 +78,10 @@ class ConfigBackendsPage : public ConfigPageBase
 {
     Q_OBJECT
 public:
-    /**
-     * Default Constructor
-     */
+    /** Default Constructor */
     ConfigBackendsPage( Config *_config, QWidget *parent=0 );
 
-    /**
-     * Default Destructor
-     */
+    /** Default Destructor */
     virtual ~ConfigBackendsPage();
 
 private:

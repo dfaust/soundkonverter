@@ -26,10 +26,10 @@ public:
     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
 //     bool canApply( const KUrl& filename );
-//     bool isConfigSupported( ActionType action );
-//     bool showConfigDialog( ActionType action, const QString& format, QWidget *parent );
+    bool isConfigSupported( ActionType action, const QString& codecName );
+    void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
-    void showInfo();
+    void showInfo( QWidget *parent );
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );

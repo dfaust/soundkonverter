@@ -135,16 +135,15 @@ QString soundkonverter_codec_lame::getCodecFromFile( const KUrl& filename, const
     return "";
 }
 
-bool soundkonverter_codec_lame::isConfigSupported( ActionType action )
+bool soundkonverter_codec_lame::isConfigSupported( ActionType action, const QString& codecName )
 {
     return true;
 }
 
-void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
+void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
     KDialog *dialog = new KDialog( parent );
-//     dialog->setCaption( i18n("Configure %s",global_plugin_name)  );
-    dialog->setCaption( "Configure lame" );
+    dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
     dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
     QWidget *widget = new QWidget( dialog );
@@ -161,11 +160,24 @@ void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QStri
 
 bool soundkonverter_codec_lame::hasInfo()
 {
-    return false;
+    return true;
 }
 
-void soundkonverter_codec_lame::showInfo()
-{}
+void soundkonverter_codec_lame::showInfo( QWidget *parent )
+{
+    KDialog *dialog = new KDialog( parent );
+    dialog->setCaption( i18n("About %1").arg(global_plugin_name)  );
+    dialog->setButtons( KDialog::Ok );
+
+    QLabel *widget = new QLabel( dialog );
+    
+    widget->setText( i18n("LAME is a free high quality MP3 encoder.\nYou can get it at: http://lame.sourceforge.net") );
+
+    dialog->setMainWidget( widget );
+
+    dialog->enableButtonApply( false );
+    dialog->show();
+}
 
 QWidget *soundkonverter_codec_lame::newCodecWidget()
 {

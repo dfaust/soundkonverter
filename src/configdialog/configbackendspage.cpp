@@ -53,16 +53,23 @@ BackendsListWidget::BackendsListWidget( const QString& _name, Config *_config, Q
     pConfigure->setIcon( KIcon("configure") );
     pConfigure->setAutoRaise( true );
     pConfigure->setEnabled( false );
+    connect( pConfigure, SIGNAL(clicked()), this, SLOT(configure()) );
     arrowBox->addWidget( pConfigure );
     pInfo = new QToolButton( this );
     pInfo->setIcon( KIcon("help-about") );
     pInfo->setAutoRaise( true );
     pInfo->setEnabled( false );
     arrowBox->addWidget( pInfo );
+    connect( pInfo, SIGNAL(clicked()), this, SLOT(info()) );
 }
 
 BackendsListWidget::~BackendsListWidget()
 {}
+
+void BackendsListWidget::setFormat( const QString& _format )
+{
+    format = _format;
+}
 
 void BackendsListWidget::addItem( const QString& item )
 {
@@ -103,24 +110,24 @@ void BackendsListWidget::resetOrder()
 
 void BackendsListWidget::itemSelected( int row )
 {
-    QListWidgetItem *item = lBackends->item( row );
+    const QListWidgetItem *item = lBackends->item( row );
     if( !item ) return;
-    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName(item->text());
+    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
 
     pUp->setEnabled( row > 0 );
     pDown->setEnabled( row < lBackends->count()-1 );
     if( plugin )
     {
-        if( name=="Decoder" ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Decoder) );
-        else if( name=="Encoder" ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Encoder) );
-        else if( name=="Replay Gain" ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain) );
+        if( name == i18n("Decoder") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Decoder,format) );
+        else if( name == i18n("Encoder") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Encoder,format) );
+        else if( name == i18n("Replay Gain") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain,format) );
         pInfo->setEnabled( plugin->hasInfo() );
     }
 }
 
 void BackendsListWidget::up()
 {
-    int row = lBackends->currentRow();
+    const int row = lBackends->currentRow();
     lBackends->insertItem( row-1, lBackends->takeItem(row) );
     lBackends->setCurrentRow( row-1 );
     emit orderChanged();
@@ -128,10 +135,38 @@ void BackendsListWidget::up()
 
 void BackendsListWidget::down()
 {
-    int row = lBackends->currentRow();
+    const int row = lBackends->currentRow();
     lBackends->insertItem( row+1, lBackends->takeItem(row) );
     lBackends->setCurrentRow( row+1 );
     emit orderChanged();
+}
+
+void BackendsListWidget::configure()
+{
+    const int row = lBackends->currentRow();
+    const QListWidgetItem *item = lBackends->item( row );
+    if( !item ) return;
+    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
+
+    if( plugin )
+    {
+        if( name == i18n("Decoder") ) plugin->showConfigDialog( CodecPlugin::Decoder, format, this );
+        else if( name == i18n("Encoder") ) plugin->showConfigDialog( CodecPlugin::Encoder, format, this );
+        else if( name == i18n("Replay Gain") ) plugin->showConfigDialog( CodecPlugin::ReplayGain, format, this );
+    }
+}
+
+void BackendsListWidget::info()
+{
+    const int row = lBackends->currentRow();
+    const QListWidgetItem *item = lBackends->item( row );
+    if( !item ) return;
+    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
+
+    if( plugin )
+    {
+        plugin->showInfo( this );
+    }
 }
 
 // class ConfigBackendsPage
@@ -206,11 +241,14 @@ void ConfigBackendsPage::formatChanged( const QString& format )
         }
     }
     
-    currentFormat = format;
-
     decoderList->clear();
     encoderList->clear();
     replaygainList->clear();
+
+    currentFormat = format;
+    decoderList->setFormat( format );
+    encoderList->setFormat( format );
+    replaygainList->setFormat( format );
 
     formatGroup->setTitle( i18n("%1 settings",format) );
     

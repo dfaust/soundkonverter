@@ -29,21 +29,12 @@ class KDE_EXPORT CodecPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
-    enum ActionType
-    {
-        Decoder = 0,
-        Encoder = 1,
-        ReplayGain = 2
-    };
-
     CodecPlugin( QObject *parent=0 );
     virtual ~CodecPlugin();
     
     virtual QString type();
 
     virtual QList<ConversionPipeTrunk> codecTable() = 0;
-    virtual bool isConfigSupported( ActionType action ) = 0;
-    virtual void showConfigDialog( ActionType action, const QString& format, QWidget *parent ) = 0;
     virtual QWidget *newCodecWidget() = 0;
     virtual QWidget *deleteCodecWidget( QWidget *codecWidget );
 

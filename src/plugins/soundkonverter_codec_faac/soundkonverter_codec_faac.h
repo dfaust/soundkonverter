@@ -21,10 +21,12 @@ public:
 
     QList<ConversionPipeTrunk> codecTable();
     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
-    bool isConfigSupported( ActionType action );
-    void showConfigDialog( ActionType action, const QString& format, QWidget *parent );
+    
+    bool isConfigSupported( ActionType action, const QString& codecName );
+    void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
-    void showInfo();
+    void showInfo( QWidget *parent );
+    
     QWidget *newCodecWidget();
 
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );

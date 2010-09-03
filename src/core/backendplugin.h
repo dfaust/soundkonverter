@@ -47,6 +47,14 @@ class KDE_EXPORT BackendPlugin : public QObject
 {
     Q_OBJECT
 public:
+    enum ActionType
+    {
+        Decoder = 0,
+        Encoder = 1,
+        ReplayGain = 2,
+        Ripper = 3
+    };
+
     struct FormatInfo
     {
         QString codecName;      // the internal name of this codec
@@ -64,8 +72,10 @@ public:
 
     virtual FormatInfo formatInfo( const QString& codecName ) = 0;
     virtual QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
+    virtual bool isConfigSupported( ActionType action, const QString& codecName ) = 0;
+    virtual void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent ) = 0;
     virtual bool hasInfo() = 0;
-    virtual void showInfo() = 0;
+    virtual void showInfo( QWidget *parent ) = 0;
     virtual bool pause( int id );
     virtual bool resume( int id );
     virtual bool kill( int id );

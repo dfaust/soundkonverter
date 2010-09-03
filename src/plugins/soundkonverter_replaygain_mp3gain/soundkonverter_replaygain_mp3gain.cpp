@@ -64,12 +64,20 @@ QString soundkonverter_replaygain_mp3gain::getCodecFromFile( const KUrl& filenam
     return "";
 }
 
+bool soundkonverter_replaygain_mp3gain::isConfigSupported( ActionType action, const QString& codecName )
+{
+    return true;
+}
+
+void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{}
+
 bool soundkonverter_replaygain_mp3gain::hasInfo()
 {
     return false;
 }
 
-void soundkonverter_replaygain_mp3gain::showInfo()
+void soundkonverter_replaygain_mp3gain::showInfo( QWidget *parent )
 {}
 
 int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )

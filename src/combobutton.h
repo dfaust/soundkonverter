@@ -8,7 +8,7 @@
 class QString;
 class KIcon;
 class KPushButton;
-class KComboBox;
+class QComboBox;
 
 /**
  * @short ComboButton
@@ -19,9 +19,9 @@ class ComboButton : public QWidget
 {
     Q_OBJECT
 public:
-    enum SizeMode {
-        Min, Max
-    };
+//     enum SizeMode {
+//         Min, Max
+//     };
 
     /**
      * Constructor
@@ -30,56 +30,40 @@ public:
      */
     ComboButton( QWidget *parent );
 
-    /**
-     * Destructor
-     */
+    /** Destructor */
     virtual ~ComboButton();
 
-    /**
-     * Insert a new item with @p text at position @p index
-     */
+    /** Insert a new item with @p text at position @p index */
     void insertItem( const QString &text, int index = -1 );
-    /**
-     * Insert a new item with an icon @p pixmap and @p text at position @p index
-     */
+    /** Insert a new item with an icon @p pixmap and @p text at position @p index */
     void insertItem( const KIcon &icon, const QString &text, int index = -1 );
 
-    /**
-     * Increase the combobutton's height by @p height
-     */
+    /** Increase the combobutton's height by @p height */
     void increaseHeight( int height );
 
-    /**
-     * Sets m_sizeMode to @p mode
-     */
-    void setSizeMode( int mode );
+    /** Sets m_sizeMode to @p mode */
+//     void setSizeMode( int mode );
 
-    /**
-     * Returns the m_sizeMode
-     */
+    /** Returns the m_sizeMode */
     int sizeMode();
 
-    /**
-     * Sets the font of the combobutton
-     */
+    /** Sets the font of the combobutton */
     void setFont( const QFont& font );
 
-    /**
-     * Returns the font of the button
-     */
+    /** Returns the font of the button */
     QFont font();
 
 private:
     /** A pointer to the button */
     KPushButton *m_button;
     /** A pointer to the combobox */
-    KComboBox *m_box;
+    QComboBox *m_box;
 
     int m_increaseHeight;
     int m_iconHight;
 
     /** The current size mode */
-    int m_sizeMode;
+//     int m_sizeMode;
 
     /** Recalculate the size of the combobutton */
     void balanceSize();
@@ -91,19 +75,13 @@ private:
     //void setCurrentItem(int index);
 
 private slots:
-    /**
-     * Is called when the user selects an item from the popdown menu of the combobox
-     */
+    /** Is called when the user selects an item from the popdown menu of the combobox */
     void boxActivated( int index );
-    /**
-     * Is called when the user clicks the button
-     */
+    /** Is called when the user clicks the button */
     void buttonClicked();
 
 signals:
-    /**
-     * The signal clicked is emitted, when the user selects an item
-     */
+    /** The signal clicked is emitted, when the user selects an item */
     void clicked( int index );
 
 };

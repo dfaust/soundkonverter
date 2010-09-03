@@ -5,7 +5,9 @@
 #include <QString>
 #include <KIcon>
 #include <KPushButton>
-#include <KComboBox>
+#include <QComboBox>
+#include <QAbstractItemView>
+
 
 ComboButton::ComboButton( QWidget *parent )
     : QWidget( parent )
@@ -15,9 +17,8 @@ ComboButton::ComboButton( QWidget *parent )
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
 
-    m_box = new KComboBox( this );
+    m_box = new QComboBox( this );
     grid->addWidget( m_box, 0, 0 );
-//     m_box->setSizeAdjustPolicy( QComboBox::AdjustToContents ); // default
     connect( m_box, SIGNAL(activated(int)), this, SLOT(boxActivated(int)) );
     setFocusProxy( m_box );
 
@@ -26,7 +27,7 @@ ComboButton::ComboButton( QWidget *parent )
     connect( m_button, SIGNAL(clicked()), this, SLOT(buttonClicked()) );
     m_iconHight = m_button->iconSize().height();
 
-    m_sizeMode = Max;
+//     m_sizeMode = Max;
 
     balanceSize();
 }
@@ -41,6 +42,7 @@ void ComboButton::balanceSize()
     const int height = ( m_box->sizeHint().height() > m_button->sizeHint().height() ) ? m_box->sizeHint().height() : m_button->sizeHint().height();
 
     m_box->setFixedSize( width+19, height+m_increaseHeight );
+    m_box->view()->setMinimumWidth( m_box->view()->sizeHintForColumn(0) );
     m_button->setFixedSize( width, height+m_increaseHeight );
     m_button->setIconSize( QSize(m_iconHight+m_increaseHeight,m_iconHight+m_increaseHeight) );
 }
@@ -56,6 +58,7 @@ void ComboButton::insertItem( const QString &text, int index )
 {
     if( index == -1 ) index = m_box->count();
     m_box->insertItem( index, text );
+    if( text.count() > m_box->minimumContentsLength() ) m_box->setMinimumContentsLength( text.count() );
     repaintButton();
 }
 
@@ -63,6 +66,7 @@ void ComboButton::insertItem( const KIcon &icon, const QString &text, int index 
 {
     if( index == -1 ) index = m_box->count();
     m_box->insertItem( index, icon, text );
+    if( text.count() > m_box->minimumContentsLength() ) m_box->setMinimumContentsLength( text.count() );
     repaintButton();
 }
 
@@ -83,16 +87,16 @@ void ComboButton::buttonClicked()
     emit clicked( m_box->currentIndex() );
 }
 
-void ComboButton::setSizeMode( int mode )
-{
-    m_sizeMode = mode;
-    balanceSize();
-}
+// void ComboButton::setSizeMode( int mode )
+// {
+//     m_sizeMode = mode;
+//     balanceSize();
+// }
 
-int ComboButton::sizeMode()
-{
-    return m_sizeMode;
-}
+// int ComboButton::sizeMode()
+// {
+//     return m_sizeMode;
+// }
 
 void ComboButton::setFont( const QFont& font )
 {

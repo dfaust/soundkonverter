@@ -84,6 +84,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     cAdd->insertItem( KIcon("media-optical-audio"), i18n("Add CD tracks...") );
     cAdd->insertItem( KIcon("network-workgroup"), i18n("Add url...") );
     cAdd->insertItem( KIcon("view-media-playlist"), i18n("Add playlist...") );
+    cAdd->insertItem( KIcon("view-media-playlist"), i18n(",,,...~~~***'''^^^'''***~~~...,,,") );
     cAdd->increaseHeight( 6 );
     addBox->addWidget( cAdd );
     connect( cAdd, SIGNAL(clicked(int)), this, SLOT(addClicked(int)) );

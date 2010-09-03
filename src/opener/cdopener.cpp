@@ -421,7 +421,7 @@ CDOpener::~CDOpener()
 {
     delete cddb;
     #if KDE_IS_VERSION(4,4,0)
-    delete compact_disc;
+//     delete compact_disc;
     #endif
 }
 

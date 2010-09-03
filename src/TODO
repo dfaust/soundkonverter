@@ -21,6 +21,43 @@ session management
 temporäre dateien ordentlich erzeugen
 verwaiste temporäre dateien auffinden
 
+### Plugins ###
+[x] faac
+[x] ffmpeg          video files
+[x] flac
+[x] lame
+[x] mplayer         video files
+[x] neroaac
+[x] timidity
+[x] vorbistools
+[>] twolame
+[ ] gogo
+[>] musepack
+[ ] mpc123
+[>] aften
+[>] flake
+[>] mac
+[>] shorten
+[>] tta
+[ ] bonk
+[ ] optimfrog
+[>] wavpack
+[ ] lac
+[ ] lpac
+[>] speex
+[>] sox
+[ ] gstreamer
+[ ] phonon
+
+[x] aacgain
+[x] metaflac
+[x] mp3gain
+[x] vorbisgain
+[>] wvgain
+
+[x] cdparanoia
+[>] cdda2wav
+
 
 ### Code ###
 

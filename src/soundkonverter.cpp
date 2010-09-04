@@ -102,9 +102,9 @@ void soundKonverter::showSystemTray()
     #endif
 }
 
-void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory )
+void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
 {
-    m_view->addConvertFiles( urls, profile, format, directory );
+    m_view->addConvertFiles( urls, profile, format, directory, notifyCommand );
 }
 
 void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
@@ -225,7 +225,8 @@ void soundKonverter::conversionStarted()
 
 void soundKonverter::conversionStopped( int state )
 {
-    if( autoclose && state != 1 ) KApplication::kApplication()->quit(); // close app on conversion stop unless the conversion was stopped by the user
+    if( autoclose && state != 1 && !m_view->isVisible() )
+        KApplication::kApplication()->quit(); // close app on conversion stop unless the conversion was stopped by the user or the window is shown
 
     if( systemTray )
     {

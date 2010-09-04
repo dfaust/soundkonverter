@@ -37,7 +37,7 @@ int soundKonverterApp::newInstance()
     bool autoclose = false;
     bool autostart = false;
     
-    QString device = args->getOption( "rip" );
+    const QString device = args->getOption( "rip" );
     if( !device.isEmpty() )
     {
         mainWindow->ripCd( device );
@@ -56,10 +56,11 @@ int soundKonverterApp::newInstance()
 
     mainWindow->setAutoClose( autoclose );
     
-    QString profile = args->getOption( "profile" );
-    QString format = args->getOption( "format" );
-    QString directory = args->getOption( "output" );
-    
+    const QString profile = args->getOption( "profile" );
+    const QString format = args->getOption( "format" );
+    const QString directory = args->getOption( "output" );
+    const QString notifyCommand = args->getOption( "command" );
+
     if( args->isSet( "replaygain" ) )
     {
         KUrl::List urls;
@@ -67,7 +68,8 @@ int soundKonverterApp::newInstance()
         {
             urls.append( args->arg(i) );
         }
-        if( !urls.isEmpty() ) mainWindow->addReplayGainFiles( urls );
+        if( !urls.isEmpty() )
+            mainWindow->addReplayGainFiles( urls );
     }
     else
     {
@@ -76,7 +78,8 @@ int soundKonverterApp::newInstance()
         {
             urls.append( args->arg(i) );
         }
-        if( !urls.isEmpty() ) mainWindow->addConvertFiles( urls, profile, format, directory );
+        if( !urls.isEmpty() )
+            mainWindow->addConvertFiles( urls, profile, format, directory, notifyCommand );
     }
     args->clear();
     
@@ -106,11 +109,6 @@ int soundKonverterApp::newInstance()
         soundKonverter *widget = ::qt_cast<soundKonverter*>( mainWidget() );
 
         widget->increaseInstances();
-
-        QCString notify = args->getOption( "command" );
-        if( notify ) {
-            widget->setNotify( notify );
-        }
 
         QCString device = args->getOption( "rip" );
         if( device ) {

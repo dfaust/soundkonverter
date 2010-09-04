@@ -15,6 +15,7 @@
 #include <QStringList>
 #include <QLabel>
 #include <QRegExp>
+#include <QProcess>
 
 #include <KLocale>
 #include <KMessageBox>
@@ -514,11 +515,8 @@ void OutputDirectory::gotoDir()
         i = startDir.lastIndexOf( "/", i );
         startDir = startDir.left( i );
     }
-
-    kfm.clearProgram();
-    kfm << "dolphin";
-    kfm << startDir;
-    kfm.start();
+    
+    QProcess::startDetached( "dolphin", QStringList(startDir) );
 }
 
 void OutputDirectory::modeChangedSlot( int mode )

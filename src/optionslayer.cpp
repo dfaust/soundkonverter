@@ -124,7 +124,7 @@ void OptionsLayer::ok()
 {
     if( options->currentConversionOptions() )
     {
-        emit done( urls, options->currentConversionOptions() );
+        emit done( urls, options->currentConversionOptions(), command );
         fadeOut();
     }
     else
@@ -146,5 +146,10 @@ void OptionsLayer::setFormat( const QString& format )
 void OptionsLayer::setOutputDirectory( const QString& directory )
 {
     options->setOutputDirectory( directory );
+}
+
+void OptionsLayer::setCommand( const QString& _command )
+{
+    command = _command;
 }
 

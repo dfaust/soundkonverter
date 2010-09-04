@@ -52,6 +52,7 @@ private:
     int fadeMode; // 1 = fade in, 2 = fade out
     
     KUrl::List urls;
+    QString command;
 
     inline QBrush brushSetAlpha( QBrush brush, const int alpha )
     {
@@ -71,13 +72,16 @@ public slots:
     /** Set the current output directory */
     void setOutputDirectory( const QString& directory );
 
+    /** Set the command to execute after the conversion is complete */
+    void setCommand( const QString& _command );
+
 private slots:
     void fadeAnim();
     void abort();
     void ok();
     
 signals:
-    void done( const KUrl::List& urls, ConversionOptions *options );
+    void done( const KUrl::List& urls, ConversionOptions *options, const QString& command );
 
 };
 

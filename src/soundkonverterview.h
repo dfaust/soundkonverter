@@ -46,7 +46,7 @@ public:
     /** Destructor */
     virtual ~soundKonverterView();
     
-    void addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory );
+    void addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
 
     KAction *start() { return startAction; }
     KActionMenu *stopMenu() { return stopActionMenu; }

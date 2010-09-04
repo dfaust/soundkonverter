@@ -32,7 +32,6 @@ FileList::FileList( Config *_config, /*CDManager *_cdManager,*/ QWidget *parent 
     cdManager( _cdManager )*/
 {
     queue = false;
-    notify = "";
     optionsEditor = 0;
     tagEngine = config->tagEngine();
 
@@ -272,7 +271,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
 //                     addFilesTime.start();
-                    addFiles( KUrl(directory + "/" + *it), 0, codecName, conversionOptionsId );
+                    addFiles( KUrl(directory + "/" + *it), 0, "", codecName, conversionOptionsId );
 //                     addFilesTimeCount += addFilesTime.elapsed();
 //                     pScanStatusTime.start();
                     if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
@@ -289,7 +288,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     return count;
 }
 
-void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, QString codecName, int conversionOptionsId, FileListItem *after, bool enabled )
+void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, QString codecName, int conversionOptionsId, FileListItem *after, bool enabled )
 {
     FileListItem *lastListItem;
     if( !after && !enabled ) lastListItem = topLevelItem( topLevelItemCount()-1 );
@@ -344,7 +343,6 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
 //         addConversionOptionsTimeCount += addConversionOptionsTime.elapsed();
         lastListItem = newItem;
         newItem->codecName = codecName;
-        newItem->notify = notify;
         newItem->track = -1;
         newItem->url = fileList.at(i);
         newItem->local = ( newItem->url.isLocalFile() || newItem->url.protocol() == "file" );
@@ -353,6 +351,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
 //         readTagsTimeCount += readTagsTime.elapsed();
         newItem->time = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
 //         KMessageBox::information(this,"tags read, length: "+QString::number(newItem->time));
+        newItem->notifyCommand = command;
 //         addTopLevelItemTime.start();
         addTopLevelItem( newItem );
 //         addTopLevelItemTimeCount += addTopLevelItemTime.elapsed();
@@ -420,7 +419,7 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
         }
         lastListItem = newItem;
         newItem->codecName = "audio cd";
-        newItem->notify = notify;
+//         newItem->notifyCommand = notifyCommand;
         newItem->track = trackList.at(i);
         newItem->tracks = tracks;
         newItem->device = device;
@@ -666,6 +665,7 @@ void FileList::itemFinished( FileListItem *item, int state )
     else if( convertingCount() == 0 )
     {
         queue = false;
+        save( false );
         emit queueModeChanged( queue );
         float time = 0;
         for( int i=0; i<topLevelItemCount(); i++ )
@@ -917,7 +917,7 @@ void FileList::load( bool user )
                     item->tracks = file.attribute("tracks").toInt();
                     item->device = file.attribute("device");
                     item->time = file.attribute("time").toInt();
-                    item->notify = file.attribute("notify");
+                    item->notifyCommand = file.attribute("notifyCommand");
                     config->conversionOptionsManager()->increaseReferences( item->conversionOptionsId );
                     if( file.elementsByTagName("tags").count() > 0 )
                     {
@@ -988,7 +988,7 @@ void FileList::save( bool user )
         file.setAttribute("tracks",item->tracks);
         file.setAttribute("device",item->device);
         file.setAttribute("time",item->time);
-        file.setAttribute("notify",item->notify);
+        file.setAttribute("notifyCommand",item->notifyCommand);
         root.appendChild(file);
         if( item->tags )
         {

@@ -927,31 +927,16 @@ void Convert::remove( ConvertItem *item, int state )
         exitMessage = i18n("An error occured, the output file size is less that 1% of the input file size");
     }
     
-/*    if( item->fileListItem->notify != "" ) {
-        QString command = item->fileListItem->notify;
-        command.replace( "%u", item->fileListItem->url );
-        command.replace( "%i", item->fileListItem->options.filePathName.replace(" ","%20") );
-        command.replace( "%o", item->outputFilePathName.replace(" ","%20") );
-        logger->log( item->logID, " "+i18n("Executing command: \"%1\"").arg(command) );
-        notify.clearArguments();
-        QString paramSplinter;
-        // FIXME split correct (strings with spaces are splited by mistake)
-        // FIXME only one command can be executed at once!?
-        QStringList params = QStringList::split( ' ', item->fileListItem->notify );
-        for( QStringList::Iterator it = params.begin(); it != params.end(); ++it )
-        {
-            paramSplinter = *it;
-            paramSplinter.replace( "%u", item->fileListItem->url );
-            paramSplinter.replace( "%i", item->fileListItem->options.filePathName );
-            paramSplinter.replace( "%o", item->outputFilePathName );
-            notify << paramSplinter;
-        }
-        notify.start( KProcess::DontCare );
+    if( !item->fileListItem->notifyCommand.isEmpty() )
+    {
+        QString command = item->fileListItem->notifyCommand;
+//         command.replace( "%u", item->fileListItem->url );
+        command.replace( "%i", item->inputUrl.toLocalFile() );
+        command.replace( "%o", item->outputUrl.toLocalFile() );
+        logger->log( item->logID, i18n("Executing command: \"%1\"").arg(command) );
+        
+        QProcess::startDetached( command );
     }
-*/
-    item->fileListItem->converting = false;
-    emit finished( item->fileListItem, state ); // send signal to FileList
-    emit finishedProcess( item->logID, state ); // send signal to Logger
 
     if( QFile::exists(item->tempInputUrl.toLocalFile()) )
     {
@@ -977,18 +962,21 @@ void Convert::remove( ConvertItem *item, int state )
 
     emit timeFinished( item->finishedTime );
 
-    item->fileListItem = 0; // why?
+//     item->fileListItem = 0; // why?
     if( item->process != 0 ) delete item->process;
     item->process = 0;
 //     if( item->kioCopyJob != 0 ) delete item->kioCopyJob;
 //     item->kioCopyJob = 0;
 
     items.removeAll( item );
+    if( items.size() == 0 ) updateTimer.stop();
+
+    item->fileListItem->converting = false;
+    emit finished( item->fileListItem, state ); // send signal to FileList
+    emit finishedProcess( item->logID, state ); // send signal to Logger
 
     delete item;
     item = 0;
-
-    if( items.size() == 0 ) updateTimer.stop();
 }
 
 void Convert::kill( FileListItem *item )

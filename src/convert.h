@@ -203,7 +203,6 @@ private:
     CDManager* cdManager;
     FileList *fileList;
     Logger* logger;
-    KProcess notify;
     QMap<int,QString> usedOutputNames;
     
     struct LogQueue {

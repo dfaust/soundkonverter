@@ -64,7 +64,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     optionsLayer->hide();
 //     optionsLayer->fadeIn();
     gridLayout->addWidget( optionsLayer, 1, 0 );
-    connect( optionsLayer, SIGNAL(done(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    connect( optionsLayer, SIGNAL(done(const KUrl::List&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*,const QString&)) );
 
 
     // add a horizontal box layout for the add combobutton to the grid
@@ -329,7 +329,7 @@ void soundKonverterView::showPlaylistDialog()
     fileList->save( false );
 }
 
-void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory )
+void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
     KUrl::List k_urls;
     QStringList errorList;
@@ -497,7 +497,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
             delete options;
             if( conversionOptions )
             {
-                fileList->addFiles( k_urls, conversionOptions );
+                fileList->addFiles( k_urls, conversionOptions, notifyCommand );
             }
             else
             {
@@ -511,6 +511,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
             if( !profile.isEmpty() ) optionsLayer->setProfile( profile );
             if( !format.isEmpty() ) optionsLayer->setFormat( format );
             if( !directory.isEmpty() ) optionsLayer->setOutputDirectory( directory );
+            if( !notifyCommand.isEmpty() ) optionsLayer->setCommand( notifyCommand );
             optionsLayer->fadeIn();
         }
     }

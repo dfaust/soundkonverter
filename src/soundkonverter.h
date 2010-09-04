@@ -46,7 +46,7 @@ public:
     virtual ~soundKonverter();
     
     void showSystemTray();
-    void addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory );
+    void addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand );
     void addReplayGainFiles( const KUrl::List& urls );
     void ripCd( const QString& device );
     void setAutoClose( bool enabled ) { autoclose = enabled; }
@@ -81,6 +81,7 @@ private:
     void saveProperties( const KConfigGroup& );
     void readProperties( const KConfigGroup& );
     
+    /// exit soundkonverter after all files have been converted
     bool autoclose;
 
 //     KToggleAction *m_toolbarAction;

@@ -3,8 +3,7 @@
 #ifndef OUTPUTDIRECTORY_H
 #define OUTPUTDIRECTORY_H
 
-#include <qwidget.h>
-#include <kprocess.h>
+#include <QWidget>
 #include <KUrl>
 
 class FileListItem;
@@ -67,8 +66,6 @@ private:
     KPushButton *pDirGoto;
 
     bool modeJustChanged;
-
-    KProcess kfm;
 
     Config *config;
     

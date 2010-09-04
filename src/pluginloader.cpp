@@ -76,11 +76,11 @@ void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugi
             if( formatInfos.at(i).description.isEmpty() ) formatInfos[i].description = info.description;
             for( int j = 0; j < info.mimeTypes.count(); j++ )
             {
-                if( !formatInfos.at(i).mimeTypes.indexOf(info.mimeTypes.at(j)) ) formatInfos[i].mimeTypes.append( info.mimeTypes.at(j) );
+                if( !formatInfos.at(i).mimeTypes.contains(info.mimeTypes.at(j)) ) formatInfos[i].mimeTypes.append( info.mimeTypes.at(j) );
             }
             for( int j = 0; j < info.extensions.count(); j++ )
             {
-                if( !formatInfos.at(i).extensions.indexOf(info.extensions.at(j)) ) formatInfos[i].extensions.append( info.extensions.at(j) );
+                if( !formatInfos.at(i).extensions.contains(info.extensions.at(j)) ) formatInfos[i].extensions.append( info.extensions.at(j) );
             }
 
             if( formatInfos.at(i).lossless != info.lossless ) logger->log( 1000, "Disturbing Error: Plugin " + plugin->name() + " says " + codecName + " was " + (info.lossless?"lossless":"lossy") + " but it is already registed as " + (!info.lossless?"lossless":"lossy") );
@@ -623,6 +623,18 @@ QStringList PluginLoader::codecExtensions( const QString& codecName )
         if( formatInfos.at(i).codecName == codecName )
         {
             return formatInfos.at(i).extensions;
+        }
+    }
+    return QStringList();
+}
+
+QStringList PluginLoader::codecMimeTypes( const QString& codecName )
+{
+    for( int i=0; i<formatInfos.count(); i++ )
+    {
+        if( formatInfos.at(i).codecName == codecName )
+        {
+            return formatInfos.at(i).mimeTypes;
         }
     }
     return QStringList();

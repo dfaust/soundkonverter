@@ -146,10 +146,20 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( 5 );
 
+    QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
+    box->addLayout( createActionsMenuBox );
+    cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
+    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by diableing this option.") );
+    cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
+    createActionsMenuBox->addWidget( cCreateActionsMenu );
+    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+    
+    box->addSpacing( 5 );
+
     QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
     box->addLayout( removeFailedFilesBox );
-    cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files on a fail"), this );
-    cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files are converted correctly.") );
+    cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files if a conversion fails"), this );
+    cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files get converted correctly.") );
     cRemoveFailedFiles->setChecked( config->data.general.removeFailedFiles );
     removeFailedFilesBox->addWidget( cRemoveFailedFiles );
     connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
@@ -171,6 +181,7 @@ void ConfigGeneralPage::resetDefaults()
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
     iUpdateDelay->setValue( 100 );
+    cCreateActionsMenu->setChecked( true );
     cRemoveFailedFiles->setChecked( true );
 
     emit configChanged( true );
@@ -186,6 +197,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.updateDelay = iUpdateDelay->value();
+    config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
     config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
 }
 

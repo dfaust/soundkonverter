@@ -26,7 +26,7 @@ verwaiste temporäre dateien auffinden
 [x] ffmpeg          video files
 [x] flac
 [x] lame
-[x] mplayer         video files
+[x] mplayer         video files         parse progress
 [x] neroaac
 [x] timidity
 [x] vorbistools

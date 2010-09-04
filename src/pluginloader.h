@@ -80,6 +80,7 @@ public:
     bool isCodecHybrid( const QString& codecName );
     bool hasCodecInternalReplayGain( const QString& codecName );
     QStringList codecExtensions( const QString& codecName );
+    QStringList codecMimeTypes( const QString& codecName );
     QString codecDescription( const QString& codecName );
 
     /** returns a list of all plugins e.g. for connecting their signals */

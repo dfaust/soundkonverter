@@ -61,6 +61,7 @@ public:
 //             bool executeUserScript;
 //             bool showToolBar;
 //             int outputFilePermissions;
+            bool createActionsMenu;
             bool removeFailedFiles;
         } general;
         struct Backends {
@@ -80,6 +81,7 @@ public:
     void load();
     void save();
     
+    /// returns a list of all working custom profiles
     QStringList customProfiles();
 
     PluginLoader *pluginLoader() { return pPluginLoader; }
@@ -92,6 +94,8 @@ private:
     PluginLoader *pPluginLoader;
     TagEngine *pTagEngine;
     ConversionOptionsManager *pConversionOptionsManager;
+    
+    void writeServiceMenu();
 };
 
 #endif

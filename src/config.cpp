@@ -366,7 +366,7 @@ void Config::save()
     KConfigGroup group;
     
     group = conf->group( "General" );
-    group.writeEntry( "configVersion", 1000 );
+    group.writeEntry( "configVersion", 1001 );
     group.writeEntry( "startTab", data.general.startTab );
     group.writeEntry( "lastTab", data.general.lastTab );
     group.writeEntry( "defaultProfile", data.general.defaultProfile );

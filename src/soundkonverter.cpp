@@ -23,6 +23,7 @@
 #include <KIcon>
 #include <KStandardDirs>
 #include <KMenu>
+#include <QDir>
 
 #if KDE_IS_VERSION(4,4,0)
     #include <KStatusNotifierItem>
@@ -41,7 +42,7 @@ soundKonverter::soundKonverter()
     setAcceptDrops(true);
 
     logger = new Logger( this );
-    logger->log( 1000, "This is soundKonverter 1.0.0 beta2" );
+    logger->log( 1000, i18n("This is soundKonverter %1").arg("1.0.0 beta2") );
 
     config = new Config( logger, this );
     config->load();
@@ -67,6 +68,21 @@ soundKonverter::soundKonverter()
     setupGUI( ToolBar | Keys | Save | Create );
         
 //     helpMenu()->addTitle(i18n("About plugins"));
+
+    // clean up old files from previous soundKonverter versions
+    if( config->data.app.configVersion < 1001 )
+    {
+        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") )
+        {
+            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop");
+            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") );
+        }
+        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") )
+        {
+            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop");
+            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
+        }
+    }
 }
 
 soundKonverter::~soundKonverter()

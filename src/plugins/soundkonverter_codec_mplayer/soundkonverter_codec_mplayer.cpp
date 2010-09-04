@@ -69,17 +69,17 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "3gp";
 
     toCodecs += "wav";
-    toCodecs += "ogg vorbis";
-    toCodecs += "mp3";
-    toCodecs += "flac";
-    toCodecs += "wma";
-    toCodecs += "aac";
-    toCodecs += "ac3";
-    toCodecs += "alac";
-    toCodecs += "mp2";
-//     toCodecs += "sonic";
-//     toCodecs += "sonic lossless";
-    toCodecs += "amr nb";
+//     toCodecs += "ogg vorbis";
+//     toCodecs += "mp3";
+//     toCodecs += "flac";
+//     toCodecs += "wma";
+//     toCodecs += "aac";
+//     toCodecs += "ac3";
+//     toCodecs += "alac";
+//     toCodecs += "mp2";
+// //     toCodecs += "sonic";
+// //     toCodecs += "sonic lossless";
+//     toCodecs += "amr nb";
     
     for( int i=0; i<fromCodecs.count(); i++ )
     {
@@ -164,6 +164,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
         info.mimeTypes.append( "audio/aac" );
         info.mimeTypes.append( "audio/aacp" );
         info.mimeTypes.append( "audio/mp4" );
+        info.mimeTypes.append( "video/mp4" );
         info.extensions.append( "aac" );
         info.extensions.append( "3gp" );
         info.extensions.append( "mp4" );
@@ -469,6 +470,9 @@ float soundkonverter_codec_mplayer::parseOutput( const QString& output, int *len
         time = data.left( data.indexOf(" ") );
         return time.toFloat();
     }
+    
+    // decoding - new ???
+    // A: 921.7 (15:21.7) of 2260.0 (37:40.0)  0.4% [J
     
     // TODO error handling
     // Error while decoding stream #0.0

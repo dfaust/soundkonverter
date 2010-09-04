@@ -50,6 +50,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_aacgain::formatInfo( const Q
         info.mimeTypes.append( "audio/aac" );
         info.mimeTypes.append( "audio/aacp" );
         info.mimeTypes.append( "audio/mp4" );
+        info.mimeTypes.append( "video/mp4" );
         info.extensions.append( "aac" );
         info.extensions.append( "3gp" );
         info.extensions.append( "mp4" );

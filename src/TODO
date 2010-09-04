@@ -1,6 +1,7 @@
 ### Prio 1 ###
 
 crashes with cd ripper and kde 4.4
+solid won't find audio cds
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 dolphin context menu
@@ -15,10 +16,9 @@ ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grund
 ReplayGainScanner: split album through context menu
 ReplayGainScanner: split albums by disc
 edit ripper parameters
-edit encoder parameters
+edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
 session management
-temporäre dateien ordentlich erzeugen
 verwaiste temporäre dateien auffinden
 
 ### Plugins ###

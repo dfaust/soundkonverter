@@ -144,6 +144,16 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     updateDelayBox->addWidget( iUpdateDelay );
     connect( iUpdateDelay, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );
 
+    box->addSpacing( 5 );
+
+    QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
+    box->addLayout( removeFailedFilesBox );
+    cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files on a fail"), this );
+    cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files are converted correctly.") );
+    cRemoveFailedFiles->setChecked( config->data.general.removeFailedFiles );
+    removeFailedFilesBox->addWidget( cRemoveFailedFiles );
+    connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+
     box->addStretch();
 }
 
@@ -161,6 +171,7 @@ void ConfigGeneralPage::resetDefaults()
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
     iUpdateDelay->setValue( 100 );
+    cRemoveFailedFiles->setChecked( true );
 
     emit configChanged( true );
 }
@@ -175,6 +186,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.updateDelay = iUpdateDelay->value();
+    config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
 }
 
 // int ConfigGeneralPage::profileIndex( const QString& string )

@@ -3,10 +3,10 @@
 
 #include <QLayout>
 #include <QString>
+#include <QAbstractItemView>
 #include <KIcon>
 #include <KPushButton>
-#include <QComboBox>
-#include <QAbstractItemView>
+#include <KComboBox>
 
 
 ComboButton::ComboButton( QWidget *parent )
@@ -17,7 +17,7 @@ ComboButton::ComboButton( QWidget *parent )
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
 
-    m_box = new QComboBox( this );
+    m_box = new KComboBox( this );
     grid->addWidget( m_box, 0, 0 );
     connect( m_box, SIGNAL(activated(int)), this, SLOT(boxActivated(int)) );
     setFocusProxy( m_box );

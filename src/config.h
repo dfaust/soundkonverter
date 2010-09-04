@@ -61,6 +61,7 @@ public:
 //             bool executeUserScript;
 //             bool showToolBar;
 //             int outputFilePermissions;
+            bool removeFailedFiles;
         } general;
         struct Backends {
             QStringList rippers;

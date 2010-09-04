@@ -37,11 +37,13 @@
 
 CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent /*Mode default_mode, const QString& default_text,*/, Qt::WFlags f )
     : KDialog( parent, f ),
-    config( _config )
+    config( _config ),
+    noCdFound( false ),
+    cdTextFound( false ),
+    cddbFound( false )
+
 {
     setButtons( 0 );
-    
-    noCdFound = false;
     
     page = CdOpenPage;
 
@@ -351,28 +353,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent /*M
     connect( compact_disc, SIGNAL(discInformation(KCompactDisc::DiscInfo)), this, SLOT(slot_disc_information(KCompactDisc::DiscInfo)) );
     connect( compact_disc, SIGNAL(discStatusChanged(KCompactDisc::DiscStatus)), this, SLOT(slot_disc_status_changed(KCompactDisc::DiscStatus)) );
 
-    QStringList devices;
-    
-    if( !_device.isEmpty() )
-    {
-        devices.append( _device );
-    }
-    else
-    {
-        // finds all optical discs (not limited to audio cds)
-        QList<Solid::Device> solid_devices = Solid::Device::listFromType(Solid::DeviceInterface::StorageVolume, QString());
-        for( int i=0; i<solid_devices.count(); i++ )
-        {
-            if( solid_devices.value(i).is<Solid::OpticalDisc>() && solid_devices.value(i).is<Solid::Block>() )
-            {
-                Solid::OpticalDisc *solid_disc = solid_devices.value(i).as<Solid::OpticalDisc>();
-                Solid::Block *solid_block = solid_devices.value(i).as<Solid::Block>();
-//                 KMessageBox::information( 0, QString("found: %1").arg(solid_block->device()), "cool" );
-                devices.append( solid_block->device() );
-            }
-        }
-    }
-    
     cddb = new KCDDB::Client();
     if( !cddb )
     {
@@ -382,8 +362,33 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent /*M
     }
     connect( cddb, SIGNAL(finished(KCDDB::Result)), this, SLOT(lookup_cddb_done(KCDDB::Result)) );
 
-    cdTextFound = false;
-    cddbFound = false;
+    QStringList devices;
+    
+    if( !_device.isEmpty() )
+    {
+        devices.append( _device );
+    }
+    else
+    {
+        // finds all optical discs (not limited to audio cds)
+        QList<Solid::Device> solid_devices = Solid::Device::listFromType(Solid::DeviceInterface::OpticalDisc, QString());
+        for( int i=0; i<solid_devices.count(); i++ )
+        {
+            Solid::Block *solid_block = solid_devices[i].as<Solid::Block>();
+            if( solid_block )
+            {
+                devices.append( solid_block->device() );
+                KMessageBox::information( 0, QString("found: %1").arg(solid_block->device()), "debug" );
+            }
+/*            if( solid_devices.value(i).is<Solid::Block>() )
+            {
+//                 Solid::OpticalDisc *solid_disc = solid_devices.value(i).as<Solid::OpticalDisc>();
+                Solid::Block *solid_block = solid_devices.value(i).as<Solid::Block>();
+                KMessageBox::information( 0, QString("found: %1").arg(solid_block->device()), "cool" );
+                devices.append( solid_block->device() );
+            }*/
+        }
+    }
     
     QString device;
     if( devices.count() > 1 )
@@ -410,19 +415,19 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent /*M
     
     if( !device.isEmpty() ) compact_disc->setDevice( device, 50, true, "cdin" );
     
-    #if KDE_IS_VERSION(4,4,0)
-    #else
-//         KMessageBox::information( this, i18n("You are using a KDE version older than KDE 4.4.0. The library libkcompactdisc included in you release contains an error causing soundKonverter to crash. In order to rip audio CDs you need to add the file to the conversion list, save the list via the file menu, restart soundKonverter and load the saved file list again."), i18n("Known bug"), "libkcompactdisc_delete_bug" );
-        KMessageBox::information( this, i18n("You are using a KDE version older than KDE 4.4.0. The library libkcompactdisc included in you release contains an error causing which prevents the soundKonverter CD dialog from working after it has been opened once. In order to rip a second cd you need to restart soundKonverter."), i18n("Known bug"), "libkcompactdisc_delete_bug" );
-    #endif
+//     #if KDE_IS_VERSION(4,4,0)
+//     #else
+// //         KMessageBox::information( this, i18n("You are using a KDE version older than KDE 4.4.0. The library libkcompactdisc included in you release contains an error causing soundKonverter to crash. In order to rip audio CDs you need to add the file to the conversion list, save the list via the file menu, restart soundKonverter and load the saved file list again."), i18n("Known bug"), "libkcompactdisc_delete_bug" );
+//         KMessageBox::information( this, i18n("You are using a KDE version older than KDE 4.4.0. The library libkcompactdisc included in you release contains an error causing which prevents the soundKonverter CD dialog from working after it has been opened once. In order to rip a second cd you need to restart soundKonverter."), i18n("Known bug"), "libkcompactdisc_delete_bug" );
+//     #endif
 }
 
 CDOpener::~CDOpener()
 {
     delete cddb;
-    #if KDE_IS_VERSION(4,4,0)
+//     #if KDE_IS_VERSION(4,4,0)
 //     delete compact_disc;
-    #endif
+//     #endif
 }
 
 void CDOpener::slot_disc_changed( unsigned int tracks )

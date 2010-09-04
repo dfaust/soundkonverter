@@ -5,6 +5,8 @@
 -Fix: soundkonverter would crash when trying to rip a cd or add files if the options widget can't be initialized correctly
 -Fix: The options widget wasn't initialized correctly causing some crashes
 -Fix: Don't truncate text in the combo button (add files, etc.)
+-Change: Create temp files in the kde-user temp dir
+-Change: Remove partially converted files on abort or fail
 
 0.9.91 (1.0.0 beta2):
 -Add: flac and metaflac plugins

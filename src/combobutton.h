@@ -8,7 +8,7 @@
 class QString;
 class KIcon;
 class KPushButton;
-class QComboBox;
+class KComboBox;
 
 /**
  * @short ComboButton
@@ -57,7 +57,7 @@ private:
     /** A pointer to the button */
     KPushButton *m_button;
     /** A pointer to the combobox */
-    QComboBox *m_box;
+    KComboBox *m_box;
 
     int m_increaseHeight;
     int m_iconHight;

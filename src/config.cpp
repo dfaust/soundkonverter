@@ -59,6 +59,7 @@ void Config::load()
 //     data.general.executeUserScript = group.readEntry( "executeUserScript", false );
 //     data.general.showToolBar = group.readEntry( "showToolBar", false );
 //     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
+    data.general.removeFailedFiles = group.readEntry( "removeFailedFiles", true );
     
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
@@ -383,6 +384,7 @@ void Config::save()
 //     group.writeEntry( "executeUserScript", data.general.executeUserScript );
 //     group.writeEntry( "showToolBar", data.general.showToolBar );
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
+    group.writeEntry( "removeFailedFiles", data.general.removeFailedFiles );
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );

@@ -82,7 +82,8 @@ KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extensio
     QString tempUrl;
     int i=0;
     do {
-        tempUrl = QString("/tmp/soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
+        tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
+//         tempUrl = QString("/tmp/soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
         i++;
     } while( QFile::exists(tempUrl) );
     
@@ -926,14 +927,6 @@ void Convert::remove( ConvertItem *item, int state )
         exitMessage = i18n("An error occured, the output file size is less that 1% of the input file size");
     }
     
-    logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)").arg(state).arg(exitMessage) );
-    
-    logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
-    logger->log( item->logID, "\t" + i18n("Output file size") + ": " + Global::prettyNumber(outputFileInfo.size(),"B") );
-    logger->log( item->logID, "\t" + i18n("File size ratio") + ": " + Global::prettyNumber(fileRatio*100,"%") );
-
-    emit timeFinished( item->finishedTime );
-
 /*    if( item->fileListItem->notify != "" ) {
         QString command = item->fileListItem->notify;
         command.replace( "%u", item->fileListItem->url );
@@ -968,8 +961,21 @@ void Convert::remove( ConvertItem *item, int state )
     {
         QFile::remove(item->tempConvertUrl.toLocalFile());
     }
+    if( state != 0 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
+    {
+        QFile::remove(item->outputUrl.toLocalFile());
+        logger->log( item->logID, i18n("Removing partially converted output file") );
+    }
     
     usedOutputNames.remove( item->logID );
+
+    logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)").arg(state).arg(exitMessage) );
+    
+    logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
+    logger->log( item->logID, "\t" + i18n("Output file size") + ": " + Global::prettyNumber(outputFileInfo.size(),"B") );
+    logger->log( item->logID, "\t" + i18n("File size ratio") + ": " + Global::prettyNumber(fileRatio*100,"%") );
+
+    emit timeFinished( item->finishedTime );
 
     item->fileListItem = 0; // why?
     if( item->process != 0 ) delete item->process;

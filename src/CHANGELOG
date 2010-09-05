@@ -1,9 +1,10 @@
-0.9.93 (1.0.0 beta3):
+0.9.92 (1.0.0 beta3):
 -Add: User defined command line arguments for lame
 -Add: User defined command to execute after a file has been converted
 -Add: Create action menus for the file manager
 -Add: Flake plugin
 -Add: TwoLame plugin (Warning: Corrupted a file while testing)
+-Add: Monkey's Audio Compressor plugin
 -Change: Create temp files in the kde-user temp dir
 -Change: Remove partially converted files on abort or fail
 -Change: Remove old KDE4 action menus created by soundKonverter 0.3

@@ -55,7 +55,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_flake::formatInfo( const QString&
     if( codecName == "flac" )
     {
         info.lossless = true;
-        info.description = i18n("Flake is an alternative flac encoder.\nFor more information see: http://flake-enc.sourceforge.net");
+        info.description = i18n("Flac is a free and lossless audio codec.\nFor more information see: http://flac.sourceforge.net");
         info.mimeTypes.append( "audio/x-flac" );
         info.mimeTypes.append( "audio/x-flac+ogg" );
         info.mimeTypes.append( "audio/x-oggflac" );
@@ -89,7 +89,9 @@ bool soundkonverter_codec_flake::hasInfo()
 }
 
 void soundkonverter_codec_flake::showInfo( QWidget *parent )
-{}
+{
+//         info.description = i18n("Flake is an alternative flac encoder.\nFor more information see: http://flake-enc.sourceforge.net");
+}
 
 QWidget *soundkonverter_codec_flake::newCodecWidget()
 {
@@ -138,9 +140,6 @@ QStringList soundkonverter_codec_flake::convertCommand( const KUrl& inputFile, c
         if( conversionOptions->pluginName == global_plugin_name )
         {
             command += "-"+QString::number((int)conversionOptions->compressionLevel);
-        }
-        if( conversionOptions->pluginName == name() )
-        {
             command += conversionOptions->cmdArguments;
         }
         command += "\"" + inputFile.toLocalFile() + "\"";

@@ -114,8 +114,7 @@ ConversionOptions *Options::currentConversionOptions()
 bool Options::setCurrentConversionOptions( ConversionOptions *options )
 {
     const bool success = optionsDetailed->setCurrentConversionOptions( options );
-    tabChanged( 0 ); // NOTE not very clean, but optionsSimple needs to get updated
-//     optionsSimple->refill();
+    tabChanged( 0 ); // update optionsSimple
     return success;
 }
 
@@ -182,7 +181,6 @@ void Options::tabChanged( const int pageIndex )
         QString toolTip;
         const bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );
         const bool replaygainChecked = optionsDetailed->isReplayGainChecked();
-//         KMessageBox::information( this, QString::number(replaygain) );
 //         bool bpm = optionsDetailed->isBpmEnabled();
         optionsSimple->setReplayGainEnabled( replaygainEnabled, toolTip );
         optionsSimple->setReplayGainChecked( replaygainChecked );

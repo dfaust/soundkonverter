@@ -280,7 +280,6 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
     }
 }
 
-// FIXME maybe buggy
 void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 {
     applyChanges();

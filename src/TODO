@@ -18,6 +18,7 @@ edit ripper parameters
 edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
 session management
+changing default decoder only takes effect after retsart
 
 ### Plugins ###
 [x] faac
@@ -39,7 +40,7 @@ session management
 [>] tta
 [ ] bonk
 [ ] optimfrog
-[>] wavpack
+[x] wavpack
 [ ] lac
 [ ] lpac
 [>] speex

@@ -102,29 +102,7 @@ QWidget *soundkonverter_codec_mac::newCodecWidget()
 
 int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
-
-    CodecPluginItem *newItem = new CodecPluginItem( this );
-    newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
-    connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
-    connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
-
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
-
-    emit log( newItem->id, command.join(" ") );
-
-    backendItems.append( newItem );
-    return newItem->id;
-}
-
-QStringList soundkonverter_codec_mac::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
-{
-    if( !_conversionOptions ) return QStringList();
+    if( !_conversionOptions ) return -1;
     
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
@@ -147,7 +125,28 @@ QStringList soundkonverter_codec_mac::convertCommand( const KUrl& inputFile, con
         command += "-d";
     }
 
-    return command;
+    if( command.isEmpty() ) return -1;
+
+    CodecPluginItem *newItem = new CodecPluginItem( this );
+    newItem->id = lastId++;
+    newItem->process = new KProcess( newItem );
+    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
+    connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
+    newItem->process->start();
+
+    emit log( newItem->id, command.join(" ") );
+
+    backendItems.append( newItem );
+    return newItem->id;
+}
+
+QStringList soundkonverter_codec_mac::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+{
+    return QStringList();
 }
 
 float soundkonverter_codec_mac::parseOutput( const QString& output )

@@ -27,6 +27,9 @@
 #include <knuminput.h>
 #include <ktextedit.h>
 
+
+// TODO use QPointer or QSharedPointer
+
 OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     : KPageDialog( parent ),
     config( _config )
@@ -314,8 +317,9 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 //         disconnect( options, SIGNAL(optionsChanged()), 0, 0 );
 //         options->setCurrentOptions( items.first()->options );
 //         connect( options, SIGNAL(optionsChanged()), this, SLOT(optionsChanged()) );
-        options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(selectedItems.first()->conversionOptionsId) );
-
+        const bool success = options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(selectedItems.first()->conversionOptionsId) );
+        options->setEnabled( success );
+        // TODO show error message
 
         // info tab
         ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(items.first()->conversionOptionsId);
@@ -516,6 +520,10 @@ void OptionsEditor::applyChanges()
         if( newConversionOptions )
         {
             selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, newConversionOptions );
+        }
+        else
+        {
+            // TODO error message
         }
         
         if( selectedItems.at(i)->tags )

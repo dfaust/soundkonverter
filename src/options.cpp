@@ -113,7 +113,7 @@ ConversionOptions *Options::currentConversionOptions()
 
 bool Options::setCurrentConversionOptions( ConversionOptions *options )
 {
-    const bool success =  optionsDetailed->setCurrentConversionOptions( options );
+    const bool success = optionsDetailed->setCurrentConversionOptions( options );
     tabChanged( 0 ); // NOTE not very clean, but optionsSimple needs to get updated
 //     optionsSimple->refill();
     return success;
@@ -170,14 +170,18 @@ void Options::tabChanged( const int pageIndex )
 {
     if( pageIndex == 0 )
     {
+        // HACK signals are firing back
+        disconnect( optionsSimple, SIGNAL(optionsChanged()), 0, 0 );
+        disconnect( optionsSimple->outputDirectory, SIGNAL(modeChanged(int)), 0, 0 );
+        disconnect( optionsSimple->outputDirectory, SIGNAL(directoryChanged(const QString&)), 0, 0 );
+
         //pAdvancedOptionsToggle->hide();
         optionsSimple->updateProfiles();
         optionsSimple->setCurrentProfile( optionsDetailed->currentProfile() );
         optionsSimple->setCurrentFormat( optionsDetailed->currentFormat() );
-        // HACK signals are firing back
         QString toolTip;
-        bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );
-        bool replaygainChecked = optionsDetailed->isReplayGainChecked();
+        const bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );
+        const bool replaygainChecked = optionsDetailed->isReplayGainChecked();
 //         KMessageBox::information( this, QString::number(replaygain) );
 //         bool bpm = optionsDetailed->isBpmEnabled();
         optionsSimple->setReplayGainEnabled( replaygainEnabled, toolTip );
@@ -187,6 +191,10 @@ void Options::tabChanged( const int pageIndex )
         
         optionsSimple->outputDirectory->setMode( optionsDetailed->outputDirectory->mode() );
         optionsSimple->outputDirectory->setDirectory( optionsDetailed->outputDirectory->directory() );
+
+        connect( optionsSimple, SIGNAL(optionsChanged()), this, SLOT(simpleOptionsChanged()) );
+        connect( optionsSimple->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(simpleOutputDirectoryModeChanged(int)) );
+        connect( optionsSimple->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(simpleOutputDirectoryChanged(const QString&)) );
     }
 //     else
 //     {

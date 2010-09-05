@@ -290,13 +290,13 @@ void OptionsDetailed::somethingChanged()
 ConversionOptions *OptionsDetailed::currentConversionOptions()
 {
     ConversionOptions *options = 0;
-    if( wPlugin )
+    if( wPlugin && currentPlugin )
     {
         options = qobject_cast<CodecWidget*>(wPlugin)->currentConversionOptions();
         if( options )
         {
             options->codecName = cFormat->currentText();
-            options->pluginName = ( currentPlugin != 0 ) ? currentPlugin->name() : "";
+            options->pluginName = currentPlugin->name();
             options->profile = qobject_cast<CodecWidget*>(wPlugin)->currentProfile();
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();

@@ -44,6 +44,7 @@ find_package(Taglib REQUIRED)
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES})
 
 add_subdirectory(plugins/soundkonverter_codec_lame)
+add_subdirectory(plugins/soundkonverter_codec_twolame)
 add_subdirectory(plugins/soundkonverter_codec_vorbistools)
 add_subdirectory(plugins/soundkonverter_codec_flac)
 add_subdirectory(plugins/soundkonverter_codec_flake)

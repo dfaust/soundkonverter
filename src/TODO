@@ -5,6 +5,9 @@ solid won't find audio cds
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
+check if user defines profiles get saved correctly -> lamecodecwidget
+options editor defaults to ogg
+
 ### Prio 2 ###
 
 optimize profiles
@@ -28,12 +31,12 @@ session management
 [x] neroaac
 [x] timidity
 [x] vorbistools
-[>] twolame
+[x] twolame
 [ ] gogo
 [>] musepack
 [ ] mpc123
 [>] aften
-[>] flake
+[x] flake                               parse progress
 [>] mac
 [>] shorten
 [>] tta

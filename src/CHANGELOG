@@ -3,6 +3,7 @@
 -Add: User defined command to execute after a file has been converted
 -Add: Create action menus for the file manager
 -Add: Flake plugin
+-Add: TwoLame plugin
 -Change: Create temp files in the kde-user temp dir
 -Change: Remove partially converted files on abort or fail
 -Change: Remove old KDE4 action menus created by soundKonverter 0.3
@@ -11,6 +12,7 @@
 -Fix: soundkonverter would crash when trying to rip a cd or add files if the options widget can't be initialized correctly
 -Fix: The options widget wasn't initialized correctly causing some crashes
 -Fix: Don't truncate text in the combo button (add files, etc.)
+-Fix: Try the plugin selected by the user in the detailed tab at fist
 
 0.9.91 (1.0.0 beta2):
 -Add: flac and metaflac plugins

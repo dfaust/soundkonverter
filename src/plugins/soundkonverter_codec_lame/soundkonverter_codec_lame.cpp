@@ -97,7 +97,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_lame::formatInfo( const QString& 
         info.lossless = false;
         info.description = i18n("MP2 is an old lossy audio codec.");
         info.mimeTypes.append( "audio/x-mp2" );
-        info.extensions.append( "mp32" );
+        info.extensions.append( "mp2" );
     }
     else if( codecName == "wav" )
     {

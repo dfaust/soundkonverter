@@ -161,10 +161,9 @@ QStringList soundkonverter_codec_flake::convertCommand( const KUrl& inputFile, c
 
 float soundkonverter_codec_flake::parseOutput( const QString& output )
 {
-    // 01-Unknown.wav: 98% complete, ratio=0,479    // encode
-    // 01-Unknown.wav: 27% complete                 // decode
+    // progress:   6% | ratio: 0.556 | bitrate: 784.4 kbps
   
-    QRegExp regEnc("(\\d+)% complete");
+    QRegExp regEnc("progress:\\s+(\\d+)%");
     if( output.contains(regEnc) )
     {
         return (float)regEnc.cap(1).toInt();

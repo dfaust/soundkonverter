@@ -3,7 +3,7 @@
 -Add: User defined command to execute after a file has been converted
 -Add: Create action menus for the file manager
 -Add: Flake plugin
--Add: TwoLame plugin
+-Add: TwoLame plugin (Warning: Corrupted a file while testing)
 -Change: Create temp files in the kde-user temp dir
 -Change: Remove partially converted files on abort or fail
 -Change: Remove old KDE4 action menus created by soundKonverter 0.3

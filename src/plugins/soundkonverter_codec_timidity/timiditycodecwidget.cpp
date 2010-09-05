@@ -24,7 +24,6 @@ TimidityCodecWidget::~TimidityCodecWidget()
 ConversionOptions *TimidityCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
     return options;
 }
 

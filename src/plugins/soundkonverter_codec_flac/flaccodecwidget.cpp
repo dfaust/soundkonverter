@@ -61,7 +61,6 @@ FlacCodecWidget::~FlacCodecWidget()
 ConversionOptions *FlacCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
     options->qualityMode = ConversionOptions::Lossless;
     options->compressionLevel = iCompressionLevel->value();
     return options;

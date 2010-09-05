@@ -96,7 +96,6 @@ FFmpegCodecWidget::~FFmpegCodecWidget()
 ConversionOptions *FFmpegCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
     options->qualityMode = ConversionOptions::Bitrate;
     options->bitrate = iBitrate->value();
     options->quality = -1000;

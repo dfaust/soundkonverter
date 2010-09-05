@@ -114,7 +114,6 @@ FlakeCodecWidget::~FlakeCodecWidget()
 ConversionOptions *FlakeCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
     options->qualityMode = ConversionOptions::Lossless;
     options->compressionLevel = iCompressionLevel->value();
     if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();

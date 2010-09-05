@@ -128,7 +128,6 @@ double VorbisToolsCodecWidget::qualityForBitrate( int bitrate )
 ConversionOptions *VorbisToolsCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
 
     if( cMode->currentText()==i18n("Quality") )
     {

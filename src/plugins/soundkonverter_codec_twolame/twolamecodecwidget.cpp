@@ -317,7 +317,7 @@ bool TwoLameCodecWidget::setCustomProfile( const QString& profile, const QDomDoc
     QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
     cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
     modeChanged( cMode->currentIndex() );
-    sQuality->setValue( 9 - encodingOptions.attribute("quality").toInt() );
+    sQuality->setValue( encodingOptions.attribute("quality").toInt() );
     iQuality->setValue( encodingOptions.attribute("quality").toInt() );
     chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
     cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );

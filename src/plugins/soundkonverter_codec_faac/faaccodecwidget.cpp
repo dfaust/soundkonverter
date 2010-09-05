@@ -128,7 +128,6 @@ double FaacCodecWidget::qualityForBitrate( int bitrate )
 ConversionOptions *FaacCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
 
     if( cMode->currentText()==i18n("Quality") )
     {

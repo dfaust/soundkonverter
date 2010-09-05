@@ -128,7 +128,6 @@ double NeroaacCodecWidget::qualityForBitrate( int bitrate )
 ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->pluginName = global_plugin_name;
 
     if( cMode->currentText()==i18n("Quality") )
     {

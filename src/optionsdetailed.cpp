@@ -296,6 +296,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
         if( options )
         {
             options->codecName = cFormat->currentText();
+            options->pluginName = ( currentPlugin != 0 ) ? currentPlugin->name() : "";
             options->profile = qobject_cast<CodecWidget*>(wPlugin)->currentProfile();
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();

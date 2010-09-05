@@ -321,6 +321,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
     
     QStringList decoders;
     QStringList encoders;
+    // get the lists of decoders and encoders ordered by the user in the config dialog
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
         if( config->data.backends.codecs.at(i).codecName == codecFrom )
@@ -332,9 +333,11 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
             encoders = config->data.backends.codecs.at(i).encoders;
         }
     }
+    // prepend the preferred plugin
     encoders.removeAll( preferredPlugin );
     encoders.prepend( preferredPlugin );
     
+    // build all possible pipes
     for( int i=0; i<conversionPipeTrunks.count(); i++ )
     {
         if( conversionPipeTrunks.at(i).codecFrom == codecFrom && conversionPipeTrunks.at(i).codecTo == codecTo && conversionPipeTrunks.at(i).enabled )
@@ -343,10 +346,12 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
             newPipe.trunks += conversionPipeTrunks.at(i);
             if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
             {
+                // add rating depending on the position in the list ordered by the user, decoders don't count much
                 newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
             }
             if( encoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
             {
+                // add rating depending on the position in the list ordered by the user, encoders do count much
                 newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000000;
             }
             list += newPipe;
@@ -364,11 +369,13 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                     newPipe.trunks += conversionPipeTrunks.at(j);
                     if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
                     {
+                        // add rating depending on the position in the list ordered by the user, decoders don't count much
                         newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
                         newPipe.trunks[1].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
                     }
                     if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
                     {
+                        // add rating depending on the position in the list ordered by the user, encoders do count much
                         newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(1).plugin->name()) ) * 1000000;
                         newPipe.trunks[1].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(1).plugin->name()) ) * 1000000;
                     }

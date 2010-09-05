@@ -182,7 +182,7 @@ LameCodecWidget::LameCodecWidget()
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 2, 0 );
 
-    cCmdArguments = new QCheckBox( i18n("Additional arguments")+":", this );
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
     cmdArgumentsBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );

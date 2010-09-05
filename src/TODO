@@ -4,7 +4,6 @@ crashes with cd ripper and kde 4.4
 solid won't find audio cds
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
-dolphin context menu
 
 ### Prio 2 ###
 
@@ -19,7 +18,6 @@ edit ripper parameters
 edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
 session management
-verwaiste temporäre dateien auffinden
 
 ### Plugins ###
 [x] faac

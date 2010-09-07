@@ -272,9 +272,9 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
     else if( codecName == "shorten" )
     {
         info.lossless = true;
-        info.description = i18n("Shorten is an old lossless audio format."); // http://en.wikipedia.org/wiki/Shorten
-        info.mimeTypes.append( "audio/x-ms-wma" );
-        info.extensions.append( "wma" );
+        info.description = i18n("Shorten is a free and lossless audio codec.\nFor more information see: http://etree.org/shnutils/shorten/");
+        info.mimeTypes.append( "application/x-shorten" );
+        info.extensions.append( "shn" );
     }
 //     else if( codecName == "mlp" ) // TODO description
 //     {

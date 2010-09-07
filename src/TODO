@@ -36,8 +36,8 @@ changing default decoder only takes effect after retsart
 [>] aften
 [x] flake
 [x] mac
-[>] shorten
-[>] tta
+[x] shorten
+[ ] tta
 [ ] bonk
 [ ] optimfrog
 [x] wavpack
@@ -52,7 +52,8 @@ changing default decoder only takes effect after retsart
 [x] metaflac
 [x] mp3gain
 [x] vorbisgain
-[>] wvgain
+[x] wvgain
+[ ] replaygain
 
 [x] cdparanoia
 [>] cdda2wav

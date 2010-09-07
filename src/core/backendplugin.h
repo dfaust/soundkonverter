@@ -70,7 +70,7 @@ public:
     virtual QString name() = 0;
     virtual QString type() = 0;
 
-    virtual FormatInfo formatInfo( const QString& codecName ) = 0;
+    virtual FormatInfo formatInfo( const QString& codecName );
     virtual QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
     virtual bool isConfigSupported( ActionType action, const QString& codecName ) = 0;
     virtual void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent ) = 0;

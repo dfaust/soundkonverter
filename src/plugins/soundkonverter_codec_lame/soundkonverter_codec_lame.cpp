@@ -21,6 +21,10 @@ soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QSt
     : CodecPlugin( parent )
 {
     binaries["lame"] = "";
+    
+    allCodecs += "mp3";
+    allCodecs += "mp2";
+    allCodecs += "wav";
 }
 
 soundkonverter_codec_lame::~soundkonverter_codec_lame()
@@ -111,29 +115,29 @@ BackendPlugin::FormatInfo soundkonverter_codec_lame::formatInfo( const QString& 
     return info;
 }
 
-QString soundkonverter_codec_lame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
-    {
-        return "mp3";
-    }
-    else if( mimeType == "audio/x-mp2" || mimeType == "audio/mp2" || mimeType == "video/mpeg" )
-    {
-        return "mp2";
-    }
-    else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-    {
-        return "wav";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".mp3") ) return "mp3";
-        if( filename.url().endsWith(".mp2") ) return "mp2";
-        if( filename.url().endsWith(".wav") ) return "wav";
-    }
-
-    return "";
-}
+// QString soundkonverter_codec_lame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
+//     {
+//         return "mp3";
+//     }
+//     else if( mimeType == "audio/x-mp2" || mimeType == "audio/mp2" || mimeType == "video/mpeg" )
+//     {
+//         return "mp2";
+//     }
+//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
+//     {
+//         return "wav";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".mp3") ) return "mp3";
+//         if( filename.url().endsWith(".mp2") ) return "mp2";
+//         if( filename.url().endsWith(".wav") ) return "wav";
+//     }
+// 
+//     return "";
+// }
 
 bool soundkonverter_codec_lame::isConfigSupported( ActionType action, const QString& codecName )
 {

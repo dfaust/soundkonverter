@@ -11,6 +11,9 @@ soundkonverter_codec_vorbistools::soundkonverter_codec_vorbistools( QObject *par
 {
     binaries["oggenc"] = "";
     binaries["oggdec"] = "";
+    
+    allCodecs += "ogg vorbis";
+    allCodecs += "wav";
 }
 
 soundkonverter_codec_vorbistools::~soundkonverter_codec_vorbistools()
@@ -70,24 +73,24 @@ BackendPlugin::FormatInfo soundkonverter_codec_vorbistools::formatInfo( const QS
     return info;
 }
 
-QString soundkonverter_codec_vorbistools::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
-    {
-        return "ogg vorbis";
-    }
-    else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-    {
-        return "wav";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
-        if( filename.url().endsWith(".wav") ) return "wav";
-    }
-
-    return "";
-}
+// QString soundkonverter_codec_vorbistools::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
+//     {
+//         return "ogg vorbis";
+//     }
+//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
+//     {
+//         return "wav";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
+//         if( filename.url().endsWith(".wav") ) return "wav";
+//     }
+// 
+//     return "";
+// }
 
 bool soundkonverter_codec_vorbistools::isConfigSupported( ActionType action, const QString& format )
 {

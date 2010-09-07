@@ -8,6 +8,8 @@ soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *p
     : ReplayGainPlugin( parent )
 {
     binaries["mp3gain"] = "";
+    
+    allCodecs += "mp3";
 }
 
 soundkonverter_replaygain_mp3gain::~soundkonverter_replaygain_mp3gain()
@@ -50,19 +52,19 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_mp3gain::formatInfo( const Q
     return info;
 }
 
-QString soundkonverter_replaygain_mp3gain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
-    {
-        return "mp3";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".mp3") ) return "mp3";
-    }
-
-    return "";
-}
+// QString soundkonverter_replaygain_mp3gain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
+//     {
+//         return "mp3";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".mp3") ) return "mp3";
+//     }
+// 
+//     return "";
+// }
 
 bool soundkonverter_replaygain_mp3gain::isConfigSupported( ActionType action, const QString& codecName )
 {

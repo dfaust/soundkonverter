@@ -8,6 +8,9 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
     : ReplayGainPlugin( parent )
 {
     binaries["aacgain"] = "";
+    
+    allCodecs += "aac";
+    allCodecs += "mp3";
 }
 
 soundkonverter_replaygain_aacgain::~soundkonverter_replaygain_aacgain()
@@ -68,24 +71,24 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_aacgain::formatInfo( const Q
     return info;
 }
 
-QString soundkonverter_replaygain_aacgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "audio/aac" || mimeType == "audio/aacp" || mimeType == "audio/mp4" )
-    {
-        return "aac";
-    }
-    else if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
-    {
-        return "mp3";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".aac") ) return "aac";
-        if( filename.url().endsWith(".mp3") ) return "mp3";
-    }
-
-    return "";
-}
+// QString soundkonverter_replaygain_aacgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "audio/aac" || mimeType == "audio/aacp" || mimeType == "audio/mp4" )
+//     {
+//         return "aac";
+//     }
+//     else if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
+//     {
+//         return "mp3";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".aac") ) return "aac";
+//         if( filename.url().endsWith(".mp3") ) return "mp3";
+//     }
+// 
+//     return "";
+// }
 
 bool soundkonverter_replaygain_aacgain::isConfigSupported( ActionType action, const QString& codecName )
 {

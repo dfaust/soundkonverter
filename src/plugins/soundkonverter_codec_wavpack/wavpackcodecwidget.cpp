@@ -16,7 +16,7 @@
 
 WavPackCodecWidget::WavPackCodecWidget()
     : CodecWidget(),
-    currentFormat( "wv" )
+    currentFormat( "wavpack" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );

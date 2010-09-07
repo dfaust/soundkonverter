@@ -5,7 +5,7 @@
 -Add: Flake plugin
 -Add: TwoLame plugin (Warning: Corrupted a file while testing)
 -Add: Monkey's Audio Compressor plugin
--Add: WavPack plugin
+-Add: WavPack and Wv Gain plugin
 -Change: Create temp files in the kde-user temp dir
 -Change: Remove partially converted files on abort or fail
 -Change: Remove old KDE4 action menus created by soundKonverter 0.3

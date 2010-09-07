@@ -8,6 +8,8 @@ soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObj
     : ReplayGainPlugin( parent )
 {
     binaries["vorbisgain"] = "";
+    
+    allCodecs += "ogg vorbis";
 }
 
 soundkonverter_replaygain_vorbisgain::~soundkonverter_replaygain_vorbisgain()
@@ -61,19 +63,19 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( cons
     return info;
 }
 
-QString soundkonverter_replaygain_vorbisgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
-    {
-        return "ogg vorbis";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
-    }
-
-    return "";
-}
+// QString soundkonverter_replaygain_vorbisgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
+//     {
+//         return "ogg vorbis";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
+//     }
+// 
+//     return "";
+// }
 
 /*bool soundkonverter_replaygain_vorbisgain::canApply( const KUrl& filename )
 {

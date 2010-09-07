@@ -20,6 +20,9 @@ soundkonverter_codec_twolame::soundkonverter_codec_twolame( QObject *parent, con
     : CodecPlugin( parent )
 {
     binaries["twolame"] = "";
+    
+    allCodecs += "mp2";
+    allCodecs += "wav";
 }
 
 soundkonverter_codec_twolame::~soundkonverter_codec_twolame()
@@ -78,24 +81,24 @@ BackendPlugin::FormatInfo soundkonverter_codec_twolame::formatInfo( const QStrin
     return info;
 }
 
-QString soundkonverter_codec_twolame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-{
-    if( mimeType == "audio/x-mp2" || mimeType == "audio/mp2" || mimeType == "video/mpeg" )
-    {
-        return "mp2";
-    }
-    else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-    {
-        return "wav";
-    }
-    else if( mimeType == "application/octet-stream" )
-    {
-        if( filename.url().endsWith(".mp2") ) return "mp2";
-        if( filename.url().endsWith(".wav") ) return "wav";
-    }
-
-    return "";
-}
+// QString soundkonverter_codec_twolame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+// {
+//     if( mimeType == "audio/x-mp2" || mimeType == "audio/mp2" || mimeType == "video/mpeg" )
+//     {
+//         return "mp2";
+//     }
+//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
+//     {
+//         return "wav";
+//     }
+//     else if( mimeType == "application/octet-stream" )
+//     {
+//         if( filename.url().endsWith(".mp2") ) return "mp2";
+//         if( filename.url().endsWith(".wav") ) return "wav";
+//     }
+// 
+//     return "";
+// }
 
 bool soundkonverter_codec_twolame::isConfigSupported( ActionType action, const QString& codecName )
 {

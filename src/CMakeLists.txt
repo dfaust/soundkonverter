@@ -59,6 +59,7 @@ add_subdirectory(plugins/soundkonverter_replaygain_vorbisgain)
 add_subdirectory(plugins/soundkonverter_replaygain_metaflac)
 add_subdirectory(plugins/soundkonverter_replaygain_mp3gain)
 add_subdirectory(plugins/soundkonverter_replaygain_aacgain)
+add_subdirectory(plugins/soundkonverter_replaygain_wvgain)
 add_subdirectory(plugins/soundkonverter_ripper_cdparanoia)
 
 include(MacroOptionalAddSubdirectory)

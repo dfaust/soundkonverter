@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=soundKonverter wvgain plugin
+X-KDE-Library=soundkonverter_replaygain_wvgain
+ServiceTypes=soundKonverter/ReplayGainPlugin
+X-KDE-PluginInfo-Author=Daniel Faust
+X-KDE-PluginInfo-Email=hessijames@gmail.com
+X-KDE-PluginInfo-Name=soundkonverter_replaygain_wvgain
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL

@@ -293,23 +293,23 @@ QString LameCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 6 && chChannels->isChecked() && cChannels->currentIndex() == 0 && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 6 && chChannels->isChecked() && cChannels->currentIndex() == 0 && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
     {
         return i18n("Very low");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 5 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 5 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
     {
         return i18n("Low");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 4 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 4 && !chChannels->isChecked() && !chSamplerate->isChecked() )
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 3 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 3 && !chChannels->isChecked() && !chSamplerate->isChecked() )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 2 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 2 && !chChannels->isChecked() && !chSamplerate->isChecked() )
     {
         return i18n("Very high");
     }

@@ -38,7 +38,7 @@ int main(int argc, char **argv)
     options.add( "invisible", ki18n("Start soundKonverter invisible") );
     options.add( "autostart", ki18n("Start the conversion immediately (enabled when using '--invisible')") );
     options.add( "autoclose", ki18n("Close soundKonverter after all files are converted (enabled when using '--invisible')") );
-    options.add( "command <command>", ki18n("Execute <command> after each file has been converted") );
+    options.add( "command <command>", ki18n("Execute <command> after each file has been converted (%i=input file, %o=output file)") );
     options.add( "+[files]", ki18n("Audio file(s) to append to the file list") );
     KCmdLineArgs::addCmdLineOptions(options);
     

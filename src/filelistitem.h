@@ -56,7 +56,7 @@ public:
     bool ripping;               // is this track currently being ripped?
 
     float time;                 // the length of the track, used for the calculation of the progress bar
-    QString notifyCommand;            // execute this command, when the file is converted
+    QString notifyCommand;      // execute this command, when the file is converted (%i=input file, %o=output file)
 };
 
 class FileListItemDelegate : public QItemDelegate

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=soundKonverter MusePack Replay Gain plugin
+X-KDE-Library=soundkonverter_replaygain_musepackgain
+ServiceTypes=soundKonverter/ReplayGainPlugin
+X-KDE-PluginInfo-Author=Daniel Faust
+X-KDE-PluginInfo-Email=hessijames@gmail.com
+X-KDE-PluginInfo-Name=soundkonverter_replaygain_musepackgain
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL

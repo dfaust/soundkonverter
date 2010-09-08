@@ -1,24 +1,22 @@
 
-#ifndef LAMECODECWIDGET_H
-#define LAMECODECWIDGET_H
+#ifndef MUSEPACKCODECWIDGET_H
+#define MUSEPACKCODECWIDGET_H
 
 #include "../../core/codecwidget.h"
 
-#include <QGroupBox>
-
 class KComboBox;
-class QSpinBox;
-class QCheckBox;
-class QLabel;
-class QSlider;
 class KLineEdit;
+class QSlider;
+class QDoubleSpinBox;
+class QGroupBox;
+class QCheckBox;
 
-class LameCodecWidget : public CodecWidget
+class MusePackCodecWidget : public CodecWidget
 {
     Q_OBJECT
 public:
-    LameCodecWidget();
-    ~LameCodecWidget();
+    MusePackCodecWidget();
+    ~MusePackCodecWidget();
 
     ConversionOptions *currentConversionOptions();
     bool setCurrentConversionOptions( ConversionOptions *_options );
@@ -26,44 +24,33 @@ public:
     QString currentProfile();
     bool setCurrentProfile( const QString& profile );
     QDomDocument customProfile();
-    bool setCustomProfile( const QString& profile, const QDomDocument& data );
+    bool setCustomProfile( const QString& profile, const QDomDocument& document );
     int currentDataRate();
 
 private:
     // preset selection
     KComboBox *cPreset;
-    QSpinBox *iPresetBitrate;
-    QCheckBox *cPresetBitrateCbr;
-    QCheckBox *cPresetFast;
     // user defined options
     QGroupBox *userdefinedBox;
-    KComboBox *cMode;
-    QSpinBox *iQuality;
     QSlider *sQuality;
-    KComboBox *cBitrateMode;
-    QCheckBox *chChannels;
-    KComboBox *cChannels;
-    QCheckBox *chSamplerate;
-    KComboBox *cSamplerate;
+    QDoubleSpinBox *dQuality;
     QCheckBox *cCmdArguments;
     KLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 
-    int bitrateForQuality( int quality );
-    int qualityForBitrate( int bitrate );
+    int bitrateForQuality( double quality );
+    double qualityForBitrate( int bitrate );
 
 private slots:
     // presets
     void presetChanged( const QString& preset );
-    void presetBitrateChanged( int bitrate );
     // user defined options
-    void modeChanged( int mode );
     void qualitySliderChanged( int quality );
-    void qualitySpinBoxChanged( int quality );
+    void qualitySpinBoxChanged( double quality );
 
 signals:
     void somethingChanged();
 };
 
-#endif // LAMECODECWIDGET_H
+#endif // MUSEPACKCODECWIDGET_H

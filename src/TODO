@@ -31,7 +31,7 @@ changing default decoder only takes effect after retsart
 [x] vorbistools
 [x] twolame
 [ ] gogo
-[>] musepack
+[x] musepack
 [ ] mpc123
 [>] aften
 [x] flake
@@ -53,7 +53,7 @@ changing default decoder only takes effect after retsart
 [x] mp3gain
 [x] vorbisgain
 [x] wvgain
-[ ] replaygain
+[x] replaygain
 
 [x] cdparanoia
 [>] cdda2wav

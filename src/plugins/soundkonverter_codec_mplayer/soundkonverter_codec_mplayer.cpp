@@ -259,7 +259,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
 //         info.mimeTypes.append( "audio/mpeg" );
         info.extensions.append( "mp1" );
     }
-    else if( codecName == "mpc" )
+    else if( codecName == "musepack" )
     {
         info.lossless = false;
         info.description = i18n("Musepack is a free and lossy file format based on mp2 and optimized for high quality."); // http://en.wikipedia.org/wiki/Musepack

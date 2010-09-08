@@ -249,10 +249,11 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
     else if( codecName == "speex" )
     {
         info.lossless = false;
-        info.description = i18n("Speex is a free and lossy audio codec designed for encoding speech."); // http://en.wikipedia.org/wiki/Speex
-        info.mimeTypes.append( "audio/speex" );
-        info.mimeTypes.append( "audio/ogg" );
+        info.description = i18n("Speex is a free and lossy audio codec designed for low quality speech encoding.\nFor more information see: http://www.speex.org");
+        info.mimeTypes.append( "audio/x-speex" );
+        info.mimeTypes.append( "audio/x-speex+ogg" );
         info.extensions.append( "spx" );
+//         info.extensions.append( "ogg" );
     }
     else if( codecName == "mp1" )
     {
@@ -261,7 +262,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
 //         info.mimeTypes.append( "audio/mpeg" );
         info.extensions.append( "mp1" );
     }
-    else if( codecName == "mpc" )
+    else if( codecName == "musepack" )
     {
         info.lossless = false;
         info.description = i18n("Musepack is a free and lossy file format based on mp2 and optimized for high quality."); // http://en.wikipedia.org/wiki/Musepack

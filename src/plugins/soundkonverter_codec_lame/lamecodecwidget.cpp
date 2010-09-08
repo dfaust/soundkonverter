@@ -28,7 +28,7 @@ LameCodecWidget::LameCodecWidget()
     QHBoxLayout *presetBox = new QHBoxLayout();
     grid->addLayout( presetBox, 0, 0 );
 
-    lPreset = new QLabel( i18n("Preset")+":", this );
+    QLabel *lPreset = new QLabel( i18n("Preset")+":", this );
     presetBox->addWidget( lPreset );
     cPreset = new KComboBox( this );
     cPreset->addItem( i18n("Medium") );
@@ -40,7 +40,7 @@ LameCodecWidget::LameCodecWidget()
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
     connect( cPreset, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     presetBox->addWidget( cPreset );
-    cPreset->setToolTip( i18n("Either use one of lames's presets or your own settings.") );
+//     cPreset->setToolTip( i18n("Either use one of lames's presets or your own settings.") );
 
     iPresetBitrate = new QSpinBox( this );
     iPresetBitrate->setRange( 8, 320 );

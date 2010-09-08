@@ -7,6 +7,7 @@
 -Add: Monkey's Audio Compressor plugin
 -Add: WavPack and Wv Gain plugin
 -Add: shorten plugin
+-Add: MusePack codec and replaygain plugins
 -Change: Create temp files in the kde-user temp dir
 -Change: Remove partially converted files on abort or fail
 -Change: Remove old KDE4 action menus created by soundKonverter 0.3

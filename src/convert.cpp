@@ -745,7 +745,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
             }
             else
             {
-                if( items.at(i)->state == ConvertItem::convert && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                if( items.at(i)->state == ConvertItem::convert && config->data.general.removeFailedFiles && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                 {
                     QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
@@ -757,7 +757,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 {
                     if( QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
                         QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
-                    if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                    if( config->data.general.removeFailedFiles && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                         QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
                 logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );

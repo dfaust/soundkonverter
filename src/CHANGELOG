@@ -1,3 +1,7 @@
+0.9.93 (1.0.0 rc1):
+-Fix: Delete temp files properly if a conversion pipe failed
+-Fix: alac extensions
+
 0.9.92 (1.0.0 beta3):
 -Add: User defined command line arguments for lame and some new plugins
 -Add: User defined command to execute after a file has been converted

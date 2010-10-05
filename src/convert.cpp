@@ -233,13 +233,17 @@ void Convert::get( ConvertItem *item )
 
 void Convert::convert( ConvertItem *item )
 {
-    if( !item ) return;
+    if( !item )
+        return;
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
-    if( !conversionOptions ) return;
+    if( !conversionOptions )
+        return;
     
     KUrl inputUrl;
-    if( item->tempInputUrl.toLocalFile().isEmpty() ) inputUrl = item->inputUrl;
-    else inputUrl = item->tempInputUrl;
+    if( !item->tempInputUrl.toLocalFile().isEmpty() )
+        inputUrl = item->tempInputUrl;
+    else
+        inputUrl = item->inputUrl;
     
     if( item->outputUrl.isEmpty() )
     {
@@ -256,7 +260,8 @@ void Convert::convert( ConvertItem *item )
         return;
     }
 
-    if( !updateTimer.isActive() ) updateTimer.start( config->data.general.updateDelay );
+    if( !updateTimer.isActive() )
+        updateTimer.start( config->data.general.updateDelay );
 
     if( item->conversionPipes.at(item->take).trunks.count() == 1 ) // conversion can be done by one plugin alone
     {
@@ -265,7 +270,7 @@ void Convert::convert( ConvertItem *item )
         item->convertPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
         if( item->convertPlugin->type() == "codec" )
         {
-            bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+            const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
             item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
         }
         else if( item->convertPlugin->type() == "ripper" )
@@ -291,7 +296,7 @@ void Convert::convert( ConvertItem *item )
             item->fileListItem->ripping = true;
             command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl("-") );
         }
-        bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+        const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
         command2 = plugin2->convertCommand( KUrl("-"), item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
         if( !command1.isEmpty() && !command2.isEmpty() )
         {
@@ -335,22 +340,25 @@ void Convert::convert( ConvertItem *item )
 void Convert::encode( ConvertItem *item )
 {
     // file has been decoded by plugin1 last time this function was executed
-    if( !item ) return;
-    if( !item->encodePlugin ) return;
+    if( !item || !item->encodePlugin )
+        return;
+
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
-    if( !conversionOptions ) return;
+    if( !conversionOptions )
+        return;
 
     logger->log( item->logID, i18n("Encoding") );
     item->state = ConvertItem::encode;
     item->convertPlugin = item->encodePlugin;
     item->encodePlugin = 0;
-    bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+    const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
     item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( item->tempConvertUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
 }
 
 void Convert::replaygain( ConvertItem *item )
 {
-    if( !item ) return;
+    if( !item )
+        return;
 
     logger->log( item->logID, i18n("Applying Replay Gain") );
 
@@ -365,7 +373,8 @@ void Convert::replaygain( ConvertItem *item )
     item->replaygainPlugin = item->replaygainPipes.at(item->take).plugin;
     item->replaygainID = item->replaygainPlugin->apply( item->outputUrl );
     
-    if( !updateTimer.isActive() ) updateTimer.start( config->data.general.updateDelay );
+    if( !updateTimer.isActive() )
+        updateTimer.start( config->data.general.updateDelay );
 }
 
 void Convert::writeTags( ConvertItem *item )
@@ -664,9 +673,20 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
             }
             else
             {
-                if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                if( items.at(i)->state == ConvertItem::convert && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                 {
                     QFile::remove(items.at(i)->outputUrl.toLocalFile());
+                }
+                else if( items.at(i)->state == ConvertItem::decode && QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                {
+                    QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
+                }
+                else if( items.at(i)->state == ConvertItem::encode )
+                {
+                    if( QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                        QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
+                    if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                        QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
                 logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
                 executeSameStep( items.at(i) );
@@ -725,9 +745,20 @@ void Convert::pluginProcessFinished( int id, int exitCode )
             }
             else
             {
-                if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                if( items.at(i)->state == ConvertItem::convert && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                 {
                     QFile::remove(items.at(i)->outputUrl.toLocalFile());
+                }
+                else if( items.at(i)->state == ConvertItem::decode && QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                {
+                    QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
+                }
+                else if( items.at(i)->state == ConvertItem::encode )
+                {
+                    if( QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                        QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
+                    if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                        QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
                 logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
                 executeSameStep( items.at(i) );

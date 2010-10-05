@@ -182,7 +182,8 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
         info.lossless = true;
         info.description = i18n("Apple Lossless Audio Codec is a lossless audio format from Apple."); // http://en.wikipedia.org/wiki/Alac
 //         info.mimeTypes.append( "audio/x-ms-wma" );
-        info.extensions.append( "m41" );
+        info.extensions.append( "m4a" );
+        info.extensions.append( "mp4" );
     }
     else if( codecName == "mp2" )
     {

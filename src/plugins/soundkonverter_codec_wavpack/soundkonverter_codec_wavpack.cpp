@@ -41,7 +41,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_wavpack::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["wvunpack"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode wavpack files, you need to install 'wvunpack'.\wvunpack should be in the package 'wavpack'.");
+    newTrunk.problemInfo = i18n("In order to decode wavpack files, you need to install 'wvunpack'.\nwvunpack should be in the package 'wavpack'.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 

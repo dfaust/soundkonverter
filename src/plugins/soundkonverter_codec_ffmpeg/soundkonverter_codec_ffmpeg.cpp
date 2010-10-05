@@ -184,7 +184,8 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
         info.lossless = true;
         info.description = i18n("Apple Lossless Audio Codec is a lossless audio format from Apple."); // http://en.wikipedia.org/wiki/Alac
 //         info.mimeTypes.append( "audio/x-ms-wma" );
-        info.extensions.append( "m41" );
+        info.extensions.append( "m4a" );
+        info.extensions.append( "mp4" );
     }
     else if( codecName == "mp2" )
     {
@@ -398,16 +399,19 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
         command += "\"" + inputFile.toLocalFile() + "\"";
         command += "-acodec";
         command += codecMap[conversionOptions->codecName];
-        command += "-ab";
-        command += QString::number(conversionOptions->bitrate) + "k";
-        if( conversionOptions->samplingRate > 0 )
+        if( outputCodec != "alac" )
         {
-            command += "-ar";
-            command += QString::number(conversionOptions->samplingRate);
-        }
-        if( conversionOptions->channels > 0 )
-        {
-            command += "-ac 1";
+            command += "-ab";
+            command += QString::number(conversionOptions->bitrate) + "k";
+            if(  conversionOptions->samplingRate > 0 )
+            {
+                command += "-ar";
+                command += QString::number(conversionOptions->samplingRate);
+            }
+            if( conversionOptions->channels > 0 )
+            {
+                command += "-ac 1";
+            }
         }
         command += "\"" + outputFile.toLocalFile() + "\"";
     }

@@ -422,7 +422,6 @@ QStringList CDOpener::cdDevices()
     
     QFile *file;
     QString line;
-    QString dev;
     int pos;
 
     file = new QFile( "/proc/sys/dev/cdrom/info" );
@@ -432,31 +431,37 @@ QStringList CDOpener::cdDevices()
         return devices;
     }
 
-    QRegExp reg("drive name:\\s+(\\S+)");
     QTextStream stream( file );
     line = stream.readLine();
     while( !line.isNull() )
     {
-        if( line.contains(reg) )
+        if( line.contains("drive name:") )
         {
-            dev = reg.cap(1);
+            line = line.right( line.length() - line.indexOf(":") - 1 );
+            line = line.simplified();
             
-            if( dev.contains("sr") )
+            const QStringList list = line.split( " ", QString::SkipEmptyParts );
+            
+            foreach( QString dev, list )
             {
-                pos = dev.indexOf("r");
-                dev = dev.right( dev.length()-pos-1 );
-                dev = "/dev/scd"+dev;
-                cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-                if( cdDrive && cdda_open(cdDrive) == 0 )
-                    devices += dev;
+                if( dev.contains("sr") )
+                {
+                    pos = dev.indexOf("r");
+                    dev = dev.right( dev.length()-pos-1 );
+                    dev = "/dev/scd"+dev;
+                    cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
+                    if( cdDrive && cdda_open(cdDrive) == 0 )
+                        devices += dev;
+                }
+                else if( dev.contains("hd") )
+                {
+                    dev = "/dev/"+dev;
+                    cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
+                    if( cdDrive && cdda_open(cdDrive) == 0 )
+                        devices += dev;
+                }
             }
-            else if( dev.contains("hd") )
-            {
-                dev = "/dev/"+dev;
-                cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-                if( cdDrive && cdda_open(cdDrive) == 0 )
-                    devices += dev;
-            }
+            break;
         }
         line = stream.readLine();
     }

@@ -5,8 +5,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/mod
 find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
-# find_package(Cdparanoia)
-#macro_log_feature(CDPARANOIA_FOUND "cdparanoia" "Reads digital audio directly from a CD, then writes the data to a file or pipe in several different formats" "http://www.xiph.org/paranoia/" FALSE "" "Required for building Audex.")
+find_package(Cdparanoia REQUIRED)
+# macro_log_feature(CDPARANOIA_FOUND "cdparanoia" "Reads digital audio directly from a CD, then writes the data to a file or pipe in several different formats" "http://www.xiph.org/paranoia/" FALSE "" "Required for building soundKonverter.")
 
 set(TAGLIB_MIN_VERSION "1.4")
 find_package(Taglib REQUIRED)
@@ -41,7 +41,7 @@ find_package(Taglib REQUIRED)
 #
 
 
-include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES})
+include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
 add_subdirectory(plugins/soundkonverter_codec_lame)
 add_subdirectory(plugins/soundkonverter_codec_twolame)
@@ -90,8 +90,6 @@ install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 # ADD_DEFINITIONS(${TAGLIB_CFLAGS} -DQT_STL)
 
 set(soundkonverter_SRCS
-#    audiocd/cdmanager.cpp
-#    audiocd/paranoia.cpp
    configdialog/configdialog.cpp
    configdialog/configpagebase.cpp
    configdialog/configgeneralpage.cpp
@@ -129,7 +127,8 @@ set(soundkonverter_SRCS
    conversionoptionsmanager.cpp
    global.cpp
    codecproblems.cpp
- )
+)
+
 
 #kde4_automoc(${soundkonverter_SRCS})
 
@@ -139,7 +138,7 @@ set(soundkonverter_SRCS
 
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
 
-target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS} ${TAGLIB_LIBRARIES} kcddb kcompactdisc soundkonvertercore)
+target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
 
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 

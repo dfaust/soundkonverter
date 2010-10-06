@@ -6,7 +6,6 @@
 #include "optionslayer.h"
 #include "core/conversionoptions.h"
 #include "outputdirectory.h"
-// #include "audiocd/cdmanager.h"
 #include "codecproblems.h"
 
 #include <KLocale>
@@ -26,10 +25,9 @@
 #include <KStandardDirs>
 
 
-FileList::FileList( Config *_config, /*CDManager *_cdManager,*/ QWidget *parent )
+FileList::FileList( Config *_config, QWidget *parent )
     : QTreeWidget( parent ),
-    config( _config )/*,
-    cdManager( _cdManager )*/
+    config( _config )
 {
     queue = false;
     optionsEditor = 0;
@@ -435,7 +433,8 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
 
 void FileList::updateItem( FileListItem *item )
 {
-    if( !item ) return;
+    if( !item )
+        return;
 
     KUrl outputUrl;
     

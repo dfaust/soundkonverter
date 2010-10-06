@@ -1,6 +1,9 @@
 0.9.93 (1.0.0 rc1):
+-Change: Re-enable the CD ripper (using paranoia again)
+-Change: Save frames properly when generating cuesheet files
 -Fix: Delete temp files properly if a conversion pipe failed
 -Fix: alac extensions
+-Fix: Some bugs in the CD ripper dialog
 
 0.9.92 (1.0.0 beta3):
 -Add: User defined command line arguments for lame and some new plugins

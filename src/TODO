@@ -1,12 +1,12 @@
 ### Prio 1 ###
 
-crashes with cd ripper and kde 4.4
-solid won't find audio cds
+finalize cd ripper
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
 ### Prio 2 ###
 
+use qt animations
 optimize profiles
 activate replaygain window when opened on application start
 make converted files wait for applying album gain

@@ -5,13 +5,17 @@
 #include <KDialog>
 #include <QTimer>
 
-#include <libkcompactdisc/kcompactdisc.h>
-
 #include <libkcddb/kcddb.h>
 #include <libkcddb/client.h>
 #include <libkcddb/cdinfo.h>
 
-// class CDManager;
+extern "C"
+{
+#include <cdda_interface.h>
+#include <cdda_paranoia.h>
+}
+
+
 class TagEngine;
 class Config;
 class Options;
@@ -42,15 +46,18 @@ public:
         CdOpenPage,
         ConversionOptionsPage
     };
-
-//     enum Mode {
-//         all_tracks,
-//         selected_tracks,
-//         full_cd
-//     };
+    
+    enum Columns {
+        Column_Rip      = 0,
+        Column_Track    = 1,
+        Column_Artist   = 2,
+        Column_Composer = 3,
+        Column_Title    = 4,
+        Column_Length   = 5
+    };
 
     /** Constructor */
-    CDOpener( Config *_config, /*CDManager *_cdManager,*/ const QString& _device, QWidget *parent = 0 /*Mode default_mode = all_tracks, const QString& default_text = "",*/, Qt::WFlags f=0 );
+    CDOpener( Config *_config, const QString& _device, QWidget *parent = 0, Qt::WFlags f=0 );
 
     /** Destructor */
     virtual ~CDOpener();
@@ -59,6 +66,9 @@ public:
     bool noCdFound;
 
 private:
+    QStringList cdDevices();
+    bool openCdDevice( const QString& _device );
+    
     /** the widget for selecting and editing the cd tracks */
     QWidget *cdOpenerWidget;
     /** the widget for showing the progress of reading the cd / cddb data */
@@ -87,9 +97,6 @@ private:
     /** A combobox for entering or selecting the genre of the album */
     KComboBox *cGenre;
 
-    /** Request CDDB information */
-//     KPushButton *pCDDB;
-
     /** The groupbox shows the selected track numbers */
     QGroupBox *tagGroupBox;
 
@@ -113,6 +120,8 @@ private:
     
     /** Save the tag information to a cue file */
     KPushButton *pSaveCue;
+    /** Request CDDB information */
+    KPushButton *pCDDB;
     /** Rip enitre CD as one track */
     QCheckBox *cEntireCd;
     /** Add selected tracks to the file list and quit the dialog */
@@ -122,17 +131,24 @@ private:
     /** Quit the dialog */
     KPushButton *pCancel;
 
-//     CDManager *cdManager;
-    KCompactDisc *compact_disc;
-    KCDDB::Client *cddb;
     Config *config;
+    
+    QString device;
+    
+    cdrom_drive *cdDrive;
+    cdrom_paranoia *cdParanoia;
+    
+//     void *wmHandle;
+    
+    KCDDB::Client *cddb;
 
     QList<TagData*> tags; // @0 disc tags
     bool cdTextFound;
     bool cddbFound;
+    
+    QTimer timeoutTimer;
 
     QList<int> selectedTracks;
-    QList<QTreeWidgetItem*> selectedItems;
 
     int columnByName( const QString& name ); // should be obsolete
 
@@ -155,11 +171,10 @@ private:
     void fadeOut();
 
 private slots:
-    void slot_disc_changed( unsigned int tracks );
-    void slot_disc_information( KCompactDisc::DiscInfo );
-    void slot_disc_status_changed( KCompactDisc::DiscStatus status );
+    void requestCddb( bool autoRequest = false );
     void lookup_cddb_done( KCDDB::Result result );
-    
+    void timeout();
+
     void trackChanged();
     void trackUpPressed();
     void trackDownPressed();

@@ -124,9 +124,10 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     if( extension.isEmpty() ) extension = options->codecName;
 
     QString fileName;
-    if( fileListItem->track == -1 ) fileName = fileListItem->url.fileName();
-    else if( fileListItem->tags != 0 ) fileName =  QString().sprintf("%02i",fileListItem->tags->track) + " - " + fileListItem->tags->title + "." + extension;
-    else fileName = "track" + QString::number(fileListItem->track) + "." + extension; // NOTE shouldn't be possible
+    if( fileListItem->track == -1 )
+        fileName = fileListItem->url.fileName();
+    else
+        fileName =  QString().sprintf("%02i",fileListItem->tags->track) + " - " + fileListItem->tags->artist + " - " + fileListItem->tags->title + "." + extension;
 
     // if the user wants to change the output directory/file name per file! TODO
 //     if( !fileListItem->options.outputFilePathName.isEmpty() ) {

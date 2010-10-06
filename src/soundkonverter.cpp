@@ -162,10 +162,10 @@ void soundKonverter::setupActions()
     add_folder->setIcon(KIcon("folder"));
     connect( add_folder, SIGNAL(triggered()), m_view, SLOT(showDirDialog()) );
     
-//     KAction *add_audiocd = actionCollection()->addAction("add_audiocd");
-//     add_audiocd->setText(i18n("Add CD tracks..."));
-//     add_audiocd->setIcon(KIcon("media-optical-audio"));
-//     connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
+    KAction *add_audiocd = actionCollection()->addAction("add_audiocd");
+    add_audiocd->setText(i18n("Add CD tracks..."));
+    add_audiocd->setIcon(KIcon("media-optical-audio"));
+    connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
     
     KAction *add_url = actionCollection()->addAction("add_url");
     add_url->setText(i18n("Add url..."));

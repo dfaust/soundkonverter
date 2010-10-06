@@ -84,35 +84,34 @@ void soundkonverter_ripper_cdparanoia::showInfo( QWidget *parent )
 
 int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
 {
+    QStringList command;
+
+    command += binaries["cdparanoia"];
+    command += "-e";
+    command += "-d";
+    command += device;
+    if( track > 0 )
+    {
+        command += QString::number(track);
+    }
+    else
+    {
+        command += "1-" + QString::number(tracks);
+    }
+    command += "\"" + outputFile.toLocalFile() + "\"";
+
     RipperPluginItem *newItem = new RipperPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess();
+    newItem->process = new KProcess( newItem );
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    if( track > 0 )
-    {
-        (*newItem->process) << binaries["cdparanoia"];
-        (*newItem->process) << "-e";
-        (*newItem->process) << "-d";
-        (*newItem->process) << device;
-        (*newItem->process) << QString::number(track);
-        (*newItem->process) << outputFile.toLocalFile();
-        newItem->process->start();
-        emit log( newItem->id, "cdparanoia -e -d " + device + " " + QString::number(track) + " " + outputFile.toLocalFile() );
-    }
-    else
-    {
-        (*newItem->process) << "cdparanoia";
-        (*newItem->process) << "-e";
-        (*newItem->process) << "-d";
-        (*newItem->process) << device;
-        (*newItem->process) << "0:" + QString::number(tracks);
-        (*newItem->process) << outputFile.toLocalFile();
-        newItem->process->start();
-        emit log( newItem->id, "cdparanoia -e -d " + device + " 0:" + QString::number(tracks) + " " + outputFile.toLocalFile() );
-    }
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
+    newItem->process->start();
+
+    emit log( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

@@ -81,7 +81,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     cAdd->setFont( font );
     cAdd->insertItem( KIcon("audio-x-generic"), i18n("Add files...") );
     cAdd->insertItem( KIcon("folder"), i18n("Add folder...") );
-//     cAdd->insertItem( KIcon("media-optical-audio"), i18n("Add CD tracks...") );
+    cAdd->insertItem( KIcon("media-optical-audio"), i18n("Add CD tracks...") );
     cAdd->insertItem( KIcon("network-workgroup"), i18n("Add url...") );
     cAdd->insertItem( KIcon("view-media-playlist"), i18n("Add playlist...") );
     cAdd->increaseHeight( 6 );

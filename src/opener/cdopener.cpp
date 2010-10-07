@@ -5,9 +5,6 @@
 #include "../options.h"
 #include "../outputdirectory.h"
 
-// #include "../wmlib/include/wm_cdrom.h"
-// #include "../wmlib/include/wm_cdtext.h"
-
 #include <KLocale>
 #include <KPushButton>
 #include <KLineEdit>
@@ -30,6 +27,7 @@
 #include <QDir>
 #include <QFile>
 #include <QCheckBox>
+#include <QHeaderView>
 
 
 CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt::WFlags f )
@@ -368,7 +366,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     }
     else
     {
-        const QStringList devices = cdDevices();
+        const QMap<QString,QString> devices = cdDevices();
         if( devices.count() <= 0 )
         {
             noCdFound = true;
@@ -376,17 +374,27 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         }
         else if( devices.count() == 1 )
         {
-            success = openCdDevice( devices.at(0) );
+            success = openCdDevice( devices.keys().at(0) );
         }
         else
         {
+            QStringList list;
+            foreach( const QString desc, devices.values() )
+            {
+                list.append( desc );
+            }
             bool ok = false;
-            const QString dev = KInputDialog::getItem( i18n("Select CD-ROM drive"), i18n("Multiple CD-ROM drives where found. Please select one:"), devices, 0, false, &ok, this );
+            const QString selection = KInputDialog::getItem( i18n("Select CD-ROM drive"), i18n("Multiple CD-ROM drives where found. Please select one:"), list, 0, false, &ok, this );
 
             if( ok )
             {
                 // The user selected an item and pressed OK
-                success = openCdDevice( dev );
+                success = openCdDevice( devices.keys().at(list.indexOf(selection)) );
+            }
+            else
+            {
+                noCdFound = true;
+                return;
             }
         }
     }
@@ -416,13 +424,12 @@ CDOpener::~CDOpener()
         delete cddb;
 }
 
-QStringList CDOpener::cdDevices()
+QMap<QString,QString> CDOpener::cdDevices()
 {
-    QStringList devices;
+    QMap<QString,QString> devices;
     
     QFile *file;
     QString line;
-    int pos;
 
     file = new QFile( "/proc/sys/dev/cdrom/info" );
     if( !file->open(QIODevice::ReadOnly | QIODevice::Text) )
@@ -430,6 +437,11 @@ QStringList CDOpener::cdDevices()
         KMessageBox::information(this,"can't open /proc/sys/dev/cdrom/info");
         return devices;
     }
+
+    QStringList deviceList;
+    QStringList cdBurnList;
+    QStringList dvdPlayList;
+    QStringList dvdBurnList;
 
     QTextStream stream( file );
     line = stream.readLine();
@@ -439,39 +451,63 @@ QStringList CDOpener::cdDevices()
         {
             line = line.right( line.length() - line.indexOf(":") - 1 );
             line = line.simplified();
-            
-            const QStringList list = line.split( " ", QString::SkipEmptyParts );
-            
-            foreach( QString dev, list )
-            {
-                if( dev.contains("sr") )
-                {
-                    pos = dev.indexOf("r");
-                    dev = dev.right( dev.length()-pos-1 );
-                    dev = "/dev/scd"+dev;
-                    cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-                    if( cdDrive && cdda_open(cdDrive) == 0 )
-                        devices += dev;
-                }
-                else if( dev.contains("hd") )
-                {
-                    dev = "/dev/"+dev;
-                    cdDrive = cdda_identify( dev.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-                    if( cdDrive && cdda_open(cdDrive) == 0 )
-                        devices += dev;
-                }
-            }
-            break;
+            deviceList = line.split( " ", QString::SkipEmptyParts );
+        }
+        else if( line.contains("Can write CD-R:") )
+        {
+            line = line.right( line.length() - line.indexOf(":") - 1 );
+            line = line.simplified();
+            cdBurnList = line.split( " ", QString::SkipEmptyParts );
+        }
+        else if( line.contains("Can read DVD:") )
+        {
+            line = line.right( line.length() - line.indexOf(":") - 1 );
+            line = line.simplified();
+            dvdPlayList = line.split( " ", QString::SkipEmptyParts );
+        }
+        else if( line.contains("Can write DVD-R:") )
+        {
+            line = line.right( line.length() - line.indexOf(":") - 1 );
+            line = line.simplified();
+            dvdBurnList = line.split( " ", QString::SkipEmptyParts );
         }
         line = stream.readLine();
     }
 
     file->close();
 
+    for( int i=0; i<deviceList.count(); i++ )
+    {
+        if( deviceList.at(i).contains("sr") || deviceList.at(i).contains("hd") )
+        {
+            if( deviceList.at(i).contains("sr") )
+                deviceList[i] = deviceList.at(i).right( deviceList.at(i).length() - deviceList.at(i).indexOf("r") - 1 );
+            
+            deviceList[i] = "/dev/scd"+deviceList.at(i);
+            cdDrive = cdda_identify( deviceList.at(i).toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
+            if( cdDrive && cdda_open(cdDrive) == 0 )
+            {
+                QString type;
+                if( dvdBurnList.at(i) == "1" )
+                    type = i18n("DVD Recorder");
+                else if( dvdPlayList.at(i) == "1" && cdBurnList.at(i) == "1" )
+                    type = i18n("CD Recorder") + "/" + i18n("DVD Player");
+                else if( dvdPlayList.at(i) == "1" )
+                    type = i18n("DVD Player");
+                else if( cdBurnList.at(i) == "1" )
+                    type = i18n("CD Recorder");
+                else
+                    type = i18n("CD Player");
+                const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(type).arg(deviceList.at(i)).arg(cdda_tracks(cdDrive));
+                devices.insert( deviceList.at(i), desc );
+            }
+        }
+    }
+
     return devices;
 }
 
-bool CDOpener::openCdDevice(const QString& _device)
+bool CDOpener::openCdDevice( const QString& _device )
 {
     // paranoia init
 
@@ -689,15 +725,26 @@ void CDOpener::timeout()
     fadeOut();
 }
 
-// int CDOpener::columnByName( const QString& name )
-// {
-//     QTreeWidgetItem *header = trackList->headerItem();
-// 
-//     for( int i=0; i<trackList->columnCount(); ++i ) {
-//         if( header->text(i) == name ) return i;
+void CDOpener::adjustColumns()
+{
+//     const int availableWidth = trackList->contentsRect().width() - trackList->columnWidth(Column_Rip) - trackList->columnWidth(Column_Track) - trackList->columnWidth(Column_Length);
+//     int artistWidth = trackList->isColumnHidden( Column_Artist ) ? 0 : trackList->header()->sectionSizeHint( Column_Artist );
+//     int titleWidth = trackList->isColumnHidden( Column_Title ) ? 0 : trackList->header()->sectionSizeHint( Column_Title );
+//     int composerWidth = trackList->isColumnHidden( Column_Composer ) ? 0 : trackList->header()->sectionSizeHint( Column_Composer );
+//     
+//     const int preferredWidth = artistWidth + titleWidth + composerWidth;
+//     
+//     if( preferredWidth > availableWidth )
+//     {
+//         artistWidth *= availableWidth / preferredWidth;
+//         titleWidth *= availableWidth / preferredWidth;
+//         composerWidth *= availableWidth / preferredWidth;
 //     }
-//     return -1;
-// }
+//     
+//     trackList->setColumnWidth( Column_Artist, artistWidth );
+//     trackList->setColumnWidth( Column_Title, titleWidth );
+//     trackList->setColumnWidth( Column_Composer, composerWidth );
+}
 
 void CDOpener::trackUpPressed()
 {
@@ -943,7 +990,7 @@ void CDOpener::trackTitleChanged( const QString& text )
         tags.at(selectedTracks.at(i))->title = text;
     }
     
-//     trackList->setColumnWidth( trackList->sizeHintForColumn( Column_Title ) );
+    adjustColumns();
 }
 
 void CDOpener::trackArtistChanged( const QString& text )
@@ -958,6 +1005,8 @@ void CDOpener::trackArtistChanged( const QString& text )
             item->setText( Column_Artist, text );
         tags.at(selectedTracks.at(i))->artist = text;
     }
+    
+    adjustColumns();
 }
 
 void CDOpener::trackComposerChanged( const QString& text )
@@ -972,6 +1021,8 @@ void CDOpener::trackComposerChanged( const QString& text )
             item->setText( Column_Composer, text );
         tags.at(selectedTracks.at(i))->composer = text;
     }
+    
+    adjustColumns();
 }
 
 void CDOpener::trackCommentChanged()

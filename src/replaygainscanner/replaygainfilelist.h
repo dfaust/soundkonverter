@@ -26,6 +26,12 @@ class ReplayGainFileList : public QTreeWidget
 {
     Q_OBJECT
 public:
+    enum Columns {
+        Column_File     = 0,
+        Column_Track    = 1,
+        Column_Album    = 2
+    };
+
     /** Constructor */
     ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent=0 );
 

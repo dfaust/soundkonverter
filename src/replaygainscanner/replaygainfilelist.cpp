@@ -272,11 +272,12 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
 
 void ReplayGainFileList::resizeEvent( QResizeEvent *event )
 {
-    if( event->size().width() < 300 ) return;
+    if( event->size().width() < 300 )
+        return;
 
-    setColumnWidth( 0, event->size().width()-160 );
-    setColumnWidth( 1, 80 );
-    setColumnWidth( 2, 80 );
+    setColumnWidth( Column_File, event->size().width()-160 );
+    setColumnWidth( Column_Track, 80 );
+    setColumnWidth( Column_Album, 80 );
 }
 
 int ReplayGainFileList::listDir( const QString& directory, const QStringList& filter, bool recursive, bool fast, int count )
@@ -414,7 +415,8 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
 
 //     emit fileCountChanged( topLevelItemCount() );
 
-    if( unsupportedList.size() > 0 ) KMessageBox::errorList( this, i18n("The following files could not be added:"), unsupportedList );
+    if( unsupportedList.size() > 0 )
+        KMessageBox::errorList( this, i18n("The following files could not be added:"), unsupportedList );
 }
 
 void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList )
@@ -466,37 +468,39 @@ void ReplayGainFileList::removeSelectedItems()
 
 void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
 {
-    if( !item ) return;
+    if( !item )
+        return;
     
     if( item->type == ReplayGainFileListItem::Album )
     {
-        item->setText( 0, item->albumName + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
+        item->setText( Column_File, item->albumName + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
     }
     else
     {
-        item->setText( 0, item->url.pathOrUrl() );
+        item->setText( Column_File, item->url.pathOrUrl() );
         if( item->tags && item->tags->track_gain != 210588 )
         {
-            item->setText( 1, QString().sprintf("%+.2f dB",item->tags->track_gain) );
+            item->setText( Column_Track, QString().sprintf("%+.2f dB",item->tags->track_gain) );
         }
         else
         {
-            item->setText( 1, "?" );
+            item->setText( Column_Track, "?" );
         }
         if( item->tags && item->tags->album_gain != 210588 )
         {
-            item->setText( 2, QString().sprintf("%+.2f dB",item->tags->album_gain) );
+            item->setText( Column_Album, QString().sprintf("%+.2f dB",item->tags->album_gain) );
         }
         else
         {
-            item->setText( 2, "?" );
+            item->setText( Column_Album, "?" );
         }
     }
 }
 
 void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )
 {
-    if( itemList.count() == 0 ) return;
+    if( itemList.count() == 0 )
+        return;
     
     QList<ReplayGainPipe> pipes = config->pluginLoader()->getReplayGainPipes( itemList.at(0)->codecName );
     
@@ -512,7 +516,8 @@ void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& ite
     
     currentPlugin = pipes.at(itemList.at(0)->take).plugin;
     
-    if( !currentPlugin ) return;
+    if( !currentPlugin )
+        return;
     
     KUrl::List urls;
     for( int i=0; i<itemList.count(); i++ )
@@ -651,7 +656,8 @@ void ReplayGainFileList::processNextFile()
     for( int i=0; i<topLevelItemCount() && count<config->data.general.numFiles; i++ )
     {
         item = topLevelItem(i);
-        if( item->state != ReplayGainFileListItem::Waiting ) continue;
+        if( item->state != ReplayGainFileListItem::Waiting )
+            continue;
         if( item->type == ReplayGainFileListItem::Track )
         {
             itemList += item;

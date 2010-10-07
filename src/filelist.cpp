@@ -221,12 +221,13 @@ void FileList::dropEvent( QDropEvent *event )
 
 void FileList::resizeEvent( QResizeEvent *event )
 {
-    if( event->size().width() < 500 ) return;
+    if( event->size().width() < 500 )
+        return;
 
-    setColumnWidth( 0, 140 );
-    setColumnWidth( 1, (event->size().width()-260)/2 );
-    setColumnWidth( 2, (event->size().width()-260)/2 );
-    setColumnWidth( 3, 120 );
+    setColumnWidth( Column_State, 140 );
+    setColumnWidth( Column_Input, (event->size().width()-260)/2 );
+    setColumnWidth( Column_Output, (event->size().width()-260)/2 );
+    setColumnWidth( Column_Quality, 120 );
 }
 
 int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
@@ -453,41 +454,42 @@ void FileList::updateItem( FileListItem *item )
 //             outputUrl = OutputDirectory::uniqueFileName( outputUrl );
 //         }
 //     }
-    item->setText( 2, outputUrl.toLocalFile() );
+    item->setText( Column_Output, outputUrl.toLocalFile() );
 
     if( !item->converting )
     {
         if( QFile::exists(outputUrl.toLocalFile()) )
         {
-            item->setText( 0, i18n("Will be skipped") );
+            item->setText( Column_State, i18n("Will be skipped") );
         }
         else
         {
-            item->setText( 0, i18n("Waiting") );
+            item->setText( Column_State, i18n("Waiting") );
         }
     }
     else
     {
-        item->setText( 0, i18n("Converting") );
+        item->setText( Column_State, i18n("Converting") );
     }
 
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
-    if( options ) item->setText( 3, options->profile );
+    if( options )
+        item->setText( Column_Quality, options->profile );
     
     if( item->track >= 0 )
     {
         if( item->tags )
         {
-            item->setText( 1, QString().sprintf("%02i",item->tags->track) + " - " + item->tags->artist + " - " + item->tags->title );
+            item->setText( Column_Input, QString().sprintf("%02i",item->tags->track) + " - " + item->tags->artist + " - " + item->tags->title );
         }
         else // shouldn't be possible
         {
-            item->setText( 1, i18n("CD track %1").arg(item->track) );
+            item->setText( Column_Input, i18n("CD track %1").arg(item->track) );
         }
     }
     else
     {
-        item->setText( 1, item->url.pathOrUrl() );
+        item->setText( Column_Input, item->url.pathOrUrl() );
         //if( options ) item->setToolTip( 0, i18n("The file %1 will be converted from %2 to %3 using the %4 profile.\nIt will be saved to: %5").arg(item->url.pathOrUrl()).arg(item->codecName).arg(options->codecName).arg(options->profile).arg(outputUrl.toLocalFile()) );
     }
 }
@@ -525,7 +527,7 @@ void FileList::startConversion()
     for( int i=0; i<topLevelItemCount(); i++ ) {
         item = topLevelItem( i );
         if( !item->converting && item->text(0) != i18n("Will be skipped") ) {
-            item->setText( 0, i18n("Waiting") );
+            item->setText( Column_State, i18n("Waiting") );
         }
     }
     queue = true;
@@ -645,11 +647,11 @@ void FileList::itemFinished( FileListItem *item, int state )
     }
     else if( state == 1 )
     {
-        item->setText( 0, i18n("Stopped") );
+        item->setText( Column_State, i18n("Stopped") );
     }
     else
     {
-        item->setText( 0, i18n("Failed") );
+        item->setText( Column_State, i18n("Failed") );
     }
 
     // FIXME disabled until saving gets faster

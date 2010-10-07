@@ -15,7 +15,6 @@ class TagEngine;
 class OptionsEditor;
 class OptionsLayer;
 class ConversionOptions;
-// class CDManager;
 
 class QMenu;
 class KAction;
@@ -30,16 +29,20 @@ class FileList : public QTreeWidget
 {
     Q_OBJECT
 public:
+    enum Columns {
+        Column_State    = 0,
+        Column_Input    = 1,
+        Column_Output   = 2,
+        Column_Quality  = 3
+    };
+
     /** Constructor */
-    FileList( Config *_config, /*CDManager *_cdManager,*/ QWidget *parent = 0 );
+    FileList( Config *_config, QWidget *parent = 0 );
 
     /** Destructor */
     virtual ~FileList();
 
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
-
-    //bool queueEnabled() { return queue; } not used
-//     int columnByName( const QString& name ); // NOTE seems to be unneeded -> remove
 
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
     
@@ -83,7 +86,6 @@ private:
     TagEngine *tagEngine;
     OptionsEditor *optionsEditor;
     OptionsLayer *optionsLayer;
-//     CDManager *cdManager;
 
     QMenu *contextMenu;
     KAction *editAction;

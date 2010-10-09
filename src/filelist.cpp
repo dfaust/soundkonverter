@@ -348,7 +348,15 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
 //         readTagsTime.start();
         newItem->tags = tagEngine->readTags( newItem->url );
 //         readTagsTimeCount += readTagsTime.elapsed();
-        newItem->time = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
+        if( !newItem->tags && newItem->codecName == "wav" && newItem->local )
+        {
+            QFile file( newItem->url.toLocalFile() );
+            newItem->length = file.size() / 176400; // assuming it's a 44100 Hz, 16 bit wave file
+        }
+        else
+        {
+            newItem->length = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
+        }
 //         KMessageBox::information(this,"tags read, length: "+QString::number(newItem->time));
         newItem->notifyCommand = command;
 //         addTopLevelItemTime.start();
@@ -358,7 +366,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         updateItem( newItem );
 //         updateItemTimeCount += updateItemTime.elapsed();
 //         timeChangedTime.start();
-        emit timeChanged( newItem->time );
+        emit timeChanged( newItem->length );
 //         timeChangedTimeCount += timeChangedTime.elapsed();
     }
     
@@ -423,10 +431,10 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
         newItem->tracks = tracks;
         newItem->device = device;
         newItem->tags = tagList.at(i);
-        newItem->time = newItem->tags ? newItem->tags->length : 200.0f;
+        newItem->length = newItem->tags ? newItem->tags->length : 200.0f;
         addTopLevelItem( newItem );
         updateItem( newItem );
-        emit timeChanged( newItem->time );
+        emit timeChanged( newItem->length );
     }
 
     emit fileCountChanged( topLevelItemCount() );
@@ -456,20 +464,45 @@ void FileList::updateItem( FileListItem *item )
 //     }
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
-    if( !item->converting )
+    switch( item->state )
     {
-        if( QFile::exists(outputUrl.toLocalFile()) )
+        case FileListItem::WaitingForConversion:
         {
-            item->setText( Column_State, i18n("Will be skipped") );
+            if( QFile::exists(outputUrl.toLocalFile()) )
+            {
+                item->setText( Column_State, i18n("Will be skipped") );
+            }
+            else
+            {
+                item->setText( Column_State, i18n("Waiting") );
+            }
+            break;
         }
-        else
+        case FileListItem::WaitingForAlbumGain:
         {
-            item->setText( Column_State, i18n("Waiting") );
+            item->setText( Column_State, i18n("Waiting for Replay Gain") );
+            break;
         }
-    }
-    else
-    {
-        item->setText( Column_State, i18n("Converting") );
+        case FileListItem::Ripping:
+        {
+            item->setText( Column_State, i18n("Ripping") );
+            break;
+        }
+        case FileListItem::Converting:
+        {
+            item->setText( Column_State, i18n("Converting") );
+            break;
+        }
+        case FileListItem::Stopped:
+        {
+            item->setText( Column_State, i18n("Stopped") );
+            break;
+        }
+        case FileListItem::Failed:
+        {
+            item->setText( Column_State, i18n("Failed") );
+            break;
+        }
     }
 
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
@@ -524,10 +557,15 @@ void FileList::startConversion()
 {
     // iterate through all items and set the state to "Waiting"
     FileListItem *item;
-    for( int i=0; i<topLevelItemCount(); i++ ) {
+    for( int i=0; i<topLevelItemCount(); i++ )
+    {
         item = topLevelItem( i );
-        if( !item->converting && item->text(0) != i18n("Will be skipped") ) {
-            item->setText( Column_State, i18n("Waiting") );
+//         if( !item->converting && item->text(0) != i18n("Will be skipped") )
+        if( item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+        {
+            item->state = FileListItem::WaitingForConversion;
+            updateItem( item );
+//             item->setText( Column_State, i18n("Waiting") );
         }
     }
     queue = true;
@@ -542,9 +580,12 @@ void FileList::killConversion()
     emit queueModeChanged( queue );
 
     FileListItem *item;
-    for( int i=0; i<topLevelItemCount(); i++ ) {
+    for( int i=0; i<topLevelItemCount(); i++ )
+    {
         item = topLevelItem( i );
-        if( item->converting ) {
+//         if( item->converting )
+        if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
+        {
             emit killItem( item );
         }
     }
@@ -566,7 +607,8 @@ void FileList::continueConversion()
 
 void FileList::convertNextItem()
 {
-    if( !queue ) return;
+    if( !queue )
+        return;
 
     int count = convertingCount();
     QStringList devices;
@@ -576,7 +618,7 @@ void FileList::convertNextItem()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->ripping )
+        if( item->state == FileListItem::Ripping )
         {
             devices += item->device;
         }
@@ -586,7 +628,7 @@ void FileList::convertNextItem()
     for( int i=0; i<topLevelItemCount() && count < config->data.general.numFiles; i++ )
     {
         item = topLevelItem( i );
-        if( !item->converting && item->text(0) == i18n("Waiting") )
+        if( item->state == FileListItem::WaitingForConversion )
         {
             if( item->track >= 0 && !devices.contains(item->device) )
             {
@@ -604,7 +646,8 @@ void FileList::convertNextItem()
 
 //     itemsSelected();
 
-    if( count == 0 ) itemFinished( 0, 0 );
+    if( count == 0 )
+        itemFinished( 0, 0 );
 }
 
 int FileList::waitingCount()
@@ -615,7 +658,9 @@ int FileList::waitingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->text(0) == i18n("Waiting") ) count++;
+//         if( item->text(0) == i18n("Waiting") )
+        if( item->state == FileListItem::WaitingForConversion )
+            count++;
     }
     return count;
 }
@@ -628,30 +673,50 @@ int FileList::convertingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->converting ) count++;
+//         if( item->converting )
+        if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
+            count++;
     }
+    
     return count;
 }
 
 void FileList::itemFinished( FileListItem *item, int state )
 {
-    if( state == 0 )
+    if( item )
     {
-        if( item )
+        bool waitForAlbumGain;
+        if( !config->data.general.waitForAlbumGain )
+            waitForAlbumGain = false;
+        // TODO check if item has to wait for others of the same album
+
+        if( state == 0 )
         {
-            config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-            emit itemRemoved( item );
-            delete item;
-//         itemsSelected();
+            if( !waitForAlbumGain )
+            {
+                config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
+                emit itemRemoved( item );
+                delete item;
+    //         itemsSelected();
+            }
+            else
+            {
+                item->state = FileListItem::WaitingForAlbumGain;
+                updateItem( item );
+            }
         }
-    }
-    else if( state == 1 )
-    {
-        item->setText( Column_State, i18n("Stopped") );
-    }
-    else
-    {
-        item->setText( Column_State, i18n("Failed") );
+        else if( state == 1 )
+        {
+            item->state = FileListItem::Stopped;
+            updateItem( item );
+    //         item->setText( Column_State, i18n("Stopped") );
+        }
+        else
+        {
+            item->state = FileListItem::Failed;
+            updateItem( item );
+    //         item->setText( Column_State, i18n("Failed") );
+        }
     }
 
     // FIXME disabled until saving gets faster
@@ -673,7 +738,7 @@ void FileList::itemFinished( FileListItem *item, int state )
         {
             item = topLevelItem( i );
             updateItem( item );
-            time += item->time;
+            time += item->length;
         }
         emit finished( time );
         emit conversionStopped( state );
@@ -691,7 +756,8 @@ void FileList::rippingFinished( const QString& device )
         for( int i=0; i<topLevelItemCount(); i++ )
         {
             item = topLevelItem( i );
-            if( !item->converting && item->text(0) == i18n("Waiting") )
+//             if( !item->converting && item->text(0) == i18n("Waiting") )
+            if( item->state == FileListItem::WaitingForConversion )
             {
                 if( item->track >= 0 && item->device == device )
                 {
@@ -708,7 +774,8 @@ void FileList::showContextMenu( const QPoint& point )
     FileListItem *item = (FileListItem*)itemAt( point );
 
     // if item is null, we can abort here
-    if( !item ) return;
+    if( !item )
+        return;
 
     // add a tilte to our context manu
     //contextMenu->insertTitle( static_cast<FileListItem*>(item)->fileName ); // TODO sqeeze or something else
@@ -716,7 +783,8 @@ void FileList::showContextMenu( const QPoint& point )
     // TODO implement pasting, etc.
 
     // is this file (of our item) beeing converted at the moment?
-    if( !item->converting )
+//     if( !item->converting )
+    if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
     {
         editAction->setVisible( true );
         removeAction->setVisible( true );
@@ -805,9 +873,10 @@ void FileList::removeSelectedItems()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->isSelected() && !item->converting )
+//         if( item->isSelected() && !item->converting )
+        if( item->isSelected() && item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
         {
-            emit timeChanged( -item->time );
+            emit timeChanged( -item->length );
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             emit itemRemoved( item );
             delete item;
@@ -837,7 +906,9 @@ void FileList::killSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->converting ) emit killItem( item );
+//         if( item->converting )
+        if( item->state == FileListItem::Converting || item->state == FileListItem::Ripping || item->state == FileListItem::ApplyingReplayGain )
+            emit killItem( item );
     }
 }
 
@@ -875,7 +946,8 @@ void FileList::load( bool user )
             for( int i=0; i<topLevelItemCount(); i++ )
             {
                 item = topLevelItem(i);
-                if( !item->converting )
+//                 if( !item->converting )
+                if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
                     emit itemRemoved( item );
@@ -917,7 +989,7 @@ void FileList::load( bool user )
                     item->track = file.attribute("track").toInt();
                     item->tracks = file.attribute("tracks").toInt();
                     item->device = file.attribute("device");
-                    item->time = file.attribute("time").toInt();
+                    item->length = file.attribute("time").toInt();
                     item->notifyCommand = file.attribute("notifyCommand");
                     config->conversionOptionsManager()->increaseReferences( item->conversionOptionsId );
                     if( file.elementsByTagName("tags").count() > 0 )
@@ -942,7 +1014,7 @@ void FileList::load( bool user )
                     }
                     addTopLevelItem( item );
                     updateItem( item );
-                    emit timeChanged( item->time );
+                    emit timeChanged( item->length );
                 }
             }
         }
@@ -988,7 +1060,7 @@ void FileList::save( bool user )
         file.setAttribute("track",item->track);
         file.setAttribute("tracks",item->tracks);
         file.setAttribute("device",item->device);
-        file.setAttribute("time",item->time);
+        file.setAttribute("time",item->length);
         file.setAttribute("notifyCommand",item->notifyCommand);
         root.appendChild(file);
         if( item->tags )

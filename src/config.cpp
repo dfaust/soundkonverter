@@ -1,6 +1,7 @@
 
 #include "config.h"
 #include "logger.h"
+#include "global.h"
 
 #include <KConfigGroup>
 #include <QDir>
@@ -46,6 +47,7 @@ void Config::load()
     data.general.specifyOutputDirectory = group.readEntry( "specifyOutputDirectory", QDir::homePath() + "/soundKonverter" );
     data.general.metaDataOutputDirectory = group.readEntry( "metaDataOutputDirectory", QDir::homePath() + "/soundKonverter/%b/%d - %n - %a - %t" );
     data.general.copyStructureOutputDirectory = group.readEntry( "copyStructureOutputDirectory", QDir::homePath() + "/soundKonverter" );
+    data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", false );
     data.general.useVFATNames = group.readEntry( "useVFATNames", true );
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
 //     data.general.priority = group.readEntry( "priority", 10 );
@@ -366,7 +368,7 @@ void Config::save()
     KConfigGroup group;
     
     group = conf->group( "General" );
-    group.writeEntry( "configVersion", 1001 );
+    group.writeEntry( "configVersion", SOUNDKONVERTER_VERSION_NUMBER );
     group.writeEntry( "startTab", data.general.startTab );
     group.writeEntry( "lastTab", data.general.lastTab );
     group.writeEntry( "defaultProfile", data.general.defaultProfile );

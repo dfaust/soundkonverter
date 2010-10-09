@@ -1,6 +1,7 @@
 0.9.93 (1.0.0 rc1):
 -Change: Re-enable the CD ripper (using paranoia again)
 -Change: Save frames properly when generating cuesheet files
+-Fix: Retry conversion if file output size is too small
 -Fix: Delete temp files properly if a conversion pipe failed
 -Fix: alac extensions
 -Fix: Some bugs in the CD ripper dialog

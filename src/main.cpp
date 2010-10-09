@@ -2,6 +2,7 @@
 
 #include "soundkonverterapp.h"
 #include "soundkonverter.h"
+#include "global.h"
 
 #include <kdeui_export.h>
 #include <KMainWindow>
@@ -15,7 +16,7 @@ static const char description[] =
     //I18N_NOOP("soundKonverter is a frontend to various audio encoders and decoders.\n\nsoundKonverter needs other programs that are converting the files in the background called backends.\n\nIf you find a bug, please don't hesitate to report it to me.\nYou can either report it at https://bugs.launchpad.net/soundkonverter or you can send me an email to hessijames@gmail.com.\nPlease keep in mind that it may take some time until I get to fix it.");
     I18N_NOOP("soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n\nPlease file bug reports at https://bugs.launchpad.net/ubuntu/+source/soundkonverter\nor simply send me a mail to hessijames@gmail.com");
 
-static const char version[] = "1.0.0 beta 3";
+static const char version[] = SOUNDKONVERTER_VERSION_STRING;
 
 int main(int argc, char **argv)
 {

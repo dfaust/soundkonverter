@@ -284,9 +284,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 {
     applyChanges();
     
-    for( QList<FileListItem*>::Iterator it = items.begin(); it != items.end(); ) {
-        if( (*it)->converting || (*it) == 0 ) it = items.erase( it );
-        else it++;
+    for( QList<FileListItem*>::Iterator it = items.begin(); it != items.end(); )
+    {
+        if( (*it)->state == FileListItem::Ripping || (*it)->state == FileListItem::Converting || (*it)->state == FileListItem::ApplyingReplayGain )
+            it = items.erase( it );
+        else
+            it++;
     }
 
     selectedItems = items;

@@ -109,12 +109,12 @@ void ConvertItem::updateTimes()
 
     float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime + bpmTime;
 
-    getTime *= fileListItem->time/sum;
-    convertTime *= fileListItem->time/sum;
-    decodeTime *= fileListItem->time/sum;
-    encodeTime *= fileListItem->time/sum;
-    replaygainTime *= fileListItem->time/sum;
-    bpmTime *= fileListItem->time/sum;
+    getTime *= fileListItem->length/sum;
+    convertTime *= fileListItem->length/sum;
+    decodeTime *= fileListItem->length/sum;
+    encodeTime *= fileListItem->length/sum;
+    replaygainTime *= fileListItem->length/sum;
+    bpmTime *= fileListItem->length/sum;
     
     finishedTime = 0.0f;
     switch( state )
@@ -192,7 +192,8 @@ void Convert::cleanUp()
 
 void Convert::get( ConvertItem *item )
 {
-    if( item->take > 0 ) remove( item, -1 );
+    if( item->take > 0 )
+        remove( item, -1 );
 
     logger->log( item->logID, i18n("Getting file") );
     item->state = ConvertItem::get;
@@ -235,6 +236,7 @@ void Convert::convert( ConvertItem *item )
 {
     if( !item )
         return;
+    
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( !conversionOptions )
         return;
@@ -275,7 +277,8 @@ void Convert::convert( ConvertItem *item )
         }
         else if( item->convertPlugin->type() == "ripper" )
         {
-            item->fileListItem->ripping = true;
+//             item->fileListItem->ripping = true;
+            item->fileListItem->state = FileListItem::Ripping;
             item->convertID = qobject_cast<RipperPlugin*>(item->convertPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
         }
     }
@@ -293,7 +296,8 @@ void Convert::convert( ConvertItem *item )
         }
         else if( plugin1->type() == "ripper" )
         {
-            item->fileListItem->ripping = true;
+//             item->fileListItem->ripping = true;
+            item->fileListItem->state = FileListItem::Ripping;
             command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl("-") );
         }
         const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
@@ -330,7 +334,8 @@ void Convert::convert( ConvertItem *item )
             }
             else if( plugin1->type() == "ripper" )
             {
-                item->fileListItem->ripping = true;
+//                 item->fileListItem->ripping = true;
+                item->fileListItem->state = FileListItem::Ripping;
                 item->convertID = qobject_cast<RipperPlugin*>(plugin1)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->tempConvertUrl );
             }
         }
@@ -424,7 +429,7 @@ void Convert::executeNextStep( ConvertItem *item )
 {
     logger->log( item->logID, i18n("Executing next step") );
 
-    int take = item->take;
+    item->lastTake = item->take;
     item->take = 0;
     item->progress = 0.0f;
 
@@ -440,7 +445,7 @@ void Convert::executeNextStep( ConvertItem *item )
             else remove( item, 0 );
             break;
         case ConvertItem::decode:
-            if( item->mode & ConvertItem::encode ) { item->take = take; encode(item); }
+            if( item->mode & ConvertItem::encode ) { item->take = item->lastTake; encode(item); }
             else if( item->mode & ConvertItem::replaygain ) replaygain(item);
 //             else if( item->mode & ConvertItem::bpm ) bpm(item);
             else remove( item, 0 );
@@ -482,7 +487,7 @@ void Convert::executeSameStep( ConvertItem *item )
         case ConvertItem::decode:
             convert(item);
             return;
-        case ConvertItem::encode: // TODO try next encoder instead of decoding again
+        case ConvertItem::encode: // TODO try next encoder instead of decoding again (not so easy at the moment)
             convert(item);
             return;
         case ConvertItem::replaygain:
@@ -655,7 +660,8 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                 }
                 else*/ if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
                 {
-                    items.at(i)->fileListItem->ripping = false;
+//                     items.at(i)->fileListItem->ripping = false;
+                    items.at(i)->fileListItem->state = FileListItem::Converting;
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
                 if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
@@ -734,7 +740,8 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 items.at(i)->finishedTime += fileTime;
                 if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
                 {
-                    items.at(i)->fileListItem->ripping = false;
+//                     items.at(i)->fileListItem->ripping = false;
+                    items.at(i)->fileListItem->state = FileListItem::Converting;
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
                 if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
@@ -912,7 +919,8 @@ void Convert::add( FileListItem* item )
     newItem->updateTimes();
     
     // (visual) feedback
-    item->converting = true;
+//     item->converting = true;
+    item->state = FileListItem::Converting;
     
     newItem->progressedTime.start();
 
@@ -927,20 +935,12 @@ void Convert::remove( ConvertItem *item, int state )
     //                  item->decodeTime + item->encodeTime + item->replaygainTime );
 
     QString exitMessage;
-    if( state == 0 ) exitMessage = i18n("Normal exit");
-    else if( state == 1 ) exitMessage = i18n("Aborted by the user");
-    else exitMessage = i18n("An error occured");
-    
-    if( state == 0 )
-    {
-        writeTags( item );
-    }
-    
+
     QFileInfo outputFileInfo( item->outputUrl.toLocalFile() );
     float fileRatio = outputFileInfo.size();
     if( item->fileListItem->track > 0 )
     {
-        fileRatio /= item->fileListItem->time*4*44100;
+        fileRatio /= item->fileListItem->length*4*44100;
     }
     else if( !item->fileListItem->local )
     {
@@ -954,8 +954,25 @@ void Convert::remove( ConvertItem *item, int state )
     }
     if( fileRatio < 0.01 && state != 1 )
     {
-        if( state == 0 ) state = -2;
+//         if( state == 0 ) state = -2;
         exitMessage = i18n("An error occured, the output file size is less that 1% of the input file size");
+        
+        if( state == 0 )
+        {
+            logger->log( item->logID, i18n("Conversion failed, trying again. Exit code -2 (%2)").arg(exitMessage) );
+            item->take = item->lastTake;
+            executeSameStep( item );
+            return;
+        }
+    }
+    
+    if( state == 0 ) exitMessage = i18n("Normal exit");
+    else if( state == 1 ) exitMessage = i18n("Aborted by the user");
+    else exitMessage = i18n("An error occured");
+    
+    if( state == 0 )
+    {
+        writeTags( item );
     }
     
     if( !item->fileListItem->notifyCommand.isEmpty() )
@@ -994,7 +1011,8 @@ void Convert::remove( ConvertItem *item, int state )
     emit timeFinished( item->finishedTime );
 
 //     item->fileListItem = 0; // why?
-    if( item->process != 0 ) delete item->process;
+    if( item->process != 0 )
+        delete item->process;
     item->process = 0;
 //     if( item->kioCopyJob != 0 ) delete item->kioCopyJob;
 //     item->kioCopyJob = 0;
@@ -1002,7 +1020,7 @@ void Convert::remove( ConvertItem *item, int state )
     items.removeAll( item );
     if( items.size() == 0 ) updateTimer.stop();
 
-    item->fileListItem->converting = false;
+//     item->fileListItem->converting = false;
     emit finished( item->fileListItem, state ); // send signal to FileList
     emit finishedProcess( item->logID, state ); // send signal to Logger
 

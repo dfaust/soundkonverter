@@ -13,27 +13,31 @@
 
 #include <QPainter>
 
+
 FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     : QTreeWidgetItem( parent, after )
 {
-    converting = false;
-    time = 0;
-    ripping = false;
+    state = WaitingForConversion;
+//     converting = false;
+    length = 0;
+//     ripping = false;
     tags = 0;
 }
 
 FileListItem::FileListItem( QTreeWidget *parent )
     : QTreeWidgetItem( parent )
 {
-    converting = false;
-    time = 0;
-    ripping = false;
+    state = WaitingForConversion;
+//     converting = false;
+    length = 0;
+//     ripping = false;
     tags = 0;
 }
 
 FileListItem::~FileListItem()
 {
-    if( tags ) delete tags;
+    if( tags )
+        delete tags;
 }
 
 FileListItemDelegate::FileListItemDelegate( QObject *parent )
@@ -52,12 +56,11 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
 
     QStyleOptionViewItem _option = option;
 
-
-    if( item->converting )
+//     if( item->converting )
+    if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
     {
-        if (option.state & QStyle::State_Selected)
+        if( option.state & QStyle::State_Selected )
         {
-            //_option.palette.setColor( QPalette::Highlight, QColor(215,62,62) );
             backgroundColor = QColor(215,62,62);
         }
         else
@@ -65,9 +68,20 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
             backgroundColor = QColor(255,234,234);
         }
     }
+    else if( item->state == FileListItem::Failed )
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = QColor(235,139,49);
+        }
+        else
+        {
+            backgroundColor = QColor(255,157,65);
+        }
+    }
     else
     {
-        if (option.state & QStyle::State_Selected)
+        if( option.state & QStyle::State_Selected )
         {
             backgroundColor = option.palette.highlight().color();
         }   

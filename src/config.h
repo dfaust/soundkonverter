@@ -50,6 +50,7 @@ public:
             QString metaDataOutputDirectory;
             QString copyStructureOutputDirectory;
 //             int priority;
+            bool waitForAlbumGain;
             bool useVFATNames;
             enum ConflictHandling {
                 NewFileName = 0,

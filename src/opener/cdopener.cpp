@@ -4,6 +4,7 @@
 #include "../config.h"
 #include "../options.h"
 #include "../outputdirectory.h"
+#include "../global.h"
 
 #include <KLocale>
 #include <KPushButton>
@@ -1211,21 +1212,18 @@ void CDOpener::saveCuesheetClicked()
 
     QString content;
 
+    content.append( "REM COMMENT \"soundKonverter " + QString(SOUNDKONVERTER_VERSION_STRING) + "\"\n" );
     content.append( "TITLE \"" + lAlbum->text() + "\"\n" );
-    if( cArtist->currentText() != i18n("Various Artists") )
-        content.append( "PERFORMER \"" + cArtist->currentText() + "\"\n" );
-    if( cArtist->currentText() != i18n("Various Composer") )
-        content.append( "SONGWRITER \"" + cComposer->currentText() + "\"\n" );
+    content.append( "PERFORMER \"" + cArtist->currentText() + "\"\n" );
+    content.append( "SONGWRITER \"" + cComposer->currentText() + "\"\n" );
     content.append( "FILE \"\" WAVE\n" );
 
     for( int i=1; i<tags.count(); i++ )
     {
         content.append( QString().sprintf("  TRACK %02i AUDIO\n",tags.at(i)->track ) );
         content.append( "    TITLE \"" + tags.at(i)->title + "\"\n" );
-        if( cArtist->currentText() == i18n("Various Artists") )
-            content.append( "    PERFORMER \"" + tags.at(i)->artist + "\"\n" );
-        if( cArtist->currentText() == i18n("Various Composer") )
-            content.append( "    SONGWRITER \"" + tags.at(i)->composer + "\"\n" );
+        content.append( "    PERFORMER \"" + tags.at(i)->artist + "\"\n" );
+        content.append( "    SONGWRITER \"" + tags.at(i)->composer + "\"\n" );
         const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i);
         const long length = (8 * size) / (44100 * 2 * 16);
         const long frames = (8 * size) / (588 * 2 * 16);

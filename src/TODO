@@ -1,16 +1,16 @@
 ### Prio 1 ###
 
-finalize cd ripper
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
 ### Prio 2 ###
 
 use qt animations
+cdtext
 optimize profiles
+make shortcuts work
 activate replaygain window when opened on application start
 make converted files wait for applying album gain
-read wav file length
 ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grundsätzlich
 ReplayGainScanner: split album through context menu
 ReplayGainScanner: split albums by disc
@@ -19,6 +19,11 @@ edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
 session management
 changing default decoder only takes effect after retsart
+
+### Prio 3 ###
+
+better ripping control
+
 
 ### Plugins ###
 [x] faac
@@ -65,21 +70,15 @@ KShell::quoteArg
 
 KStandardDirs::findExe("mplayer");
 
-
 ### main.cpp ###
 
 signal( SIGQUIT, cleanup );
 signal( SIGINT, cleanup );
 
-namespace
+void cleanup( int )
 {
-  const char* description = I18N_NOOP("KDE Time tracker tool");
-
-  void cleanup( int )
-  {
     kDebug(5970) << i18n("Just caught a software interrupt.");
     kapp->exit();
-  }
 }
 
 ###

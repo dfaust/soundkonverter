@@ -5,6 +5,7 @@
  */
 #include "soundkonverter.h"
 #include "soundkonverterview.h"
+#include "global.h"
 #include "config.h"
 #include "configdialog/configdialog.h"
 #include "logger.h"
@@ -42,7 +43,7 @@ soundKonverter::soundKonverter()
     setAcceptDrops(true);
 
     logger = new Logger( this );
-    logger->log( 1000, i18n("This is soundKonverter %1").arg("1.0.0 beta2") );
+    logger->log( 1000, i18n("This is soundKonverter %1").arg(SOUNDKONVERTER_VERSION_STRING) );
 
     config = new Config( logger, this );
     config->load();

@@ -16,7 +16,6 @@
 #include "opener/urlopener.h"
 #include "opener/playlistopener.h"
 #include "convert.h"
-// #include "audiocd/cdmanager.h"
 #include "options.h"
 #include "codecproblems.h"
 
@@ -51,7 +50,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     gridLayout->setContentsMargins( 6, 6, 6, 6 );
 //     gridLayout->setSpacing( 0 );
 
-    fileList = new FileList( config, /*cdManager,*/ this );
+    fileList = new FileList( config, this );
     gridLayout->addWidget( fileList, 1, 0 );
     gridLayout->setRowStretch( 1, 1 );
     connect( fileList, SIGNAL(fileCountChanged(int)), this, SLOT(fileCountChanged(int)) );
@@ -132,14 +131,8 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 
-    if( QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) ) fileList->load( false );
-
-    // DEBUG
-//     fileList->addFiles(KUrl("file:///home/daniel/Musik/Backup/1 - 04 - Ratatat - Mirando.mp3"), optionsLayer->currentConversionOptions());
-//     fileList->addFiles(KUrl("file:///home/daniel/Musik/Backup/1 - 04 - Ratatat - Mirando.mp3"), optionsLayer->currentConversionOptions());
-//     fileList->addFiles(KUrl("file:///home/daniel/Musik/Backup/1 - 04 - Ratatat - Mirando.mp3"), optionsLayer->currentConversionOptions());
-//     fileList->addFiles(KUrl("file:///home/daniel/Musik/Backup/1 - 04 - Ratatat - Mirando.mp3"), optionsLayer->currentConversionOptions());
-//     fileList->addFiles(KUrl("file:///home/daniel/Musik/Backup/1 - 04 - Ratatat - Mirando.mp3"), optionsLayer->currentConversionOptions());
+    if( QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
+        fileList->load( false );
 }
 
 soundKonverterView::~soundKonverterView()

@@ -952,7 +952,7 @@ void Convert::remove( ConvertItem *item, int state )
         QFileInfo inputFileInfo( item->inputUrl.toLocalFile() );
         fileRatio /= inputFileInfo.size();
     }
-    if( fileRatio < 0.01 && state != 1 )
+    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 )
     {
 //         if( state == 0 ) state = -2;
         exitMessage = i18n("An error occured, the output file size is less that 1% of the input file size");
@@ -961,6 +961,7 @@ void Convert::remove( ConvertItem *item, int state )
         {
             logger->log( item->logID, i18n("Conversion failed, trying again. Exit code -2 (%2)").arg(exitMessage) );
             item->take = item->lastTake;
+            QFile::remove( item->outputUrl.toLocalFile() );
             executeSameStep( item );
             return;
         }

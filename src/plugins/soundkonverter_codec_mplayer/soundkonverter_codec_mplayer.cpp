@@ -531,6 +531,10 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
         command += binaries["mplayer"];
         command += "-ao";
         command += "pcm:file=\"" + outputFile.toLocalFile() + "\"";
+        command += "-vc";
+        command += "null";
+        command += "-vo";
+        command += "null";
         command += "\"" + inputFile.toLocalFile() + "\"";
     }
 

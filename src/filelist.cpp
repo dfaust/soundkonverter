@@ -243,7 +243,8 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
     for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
     {
-        if( *it == "." || *it == ".." ) continue;
+        if( *it == "." || *it == ".." )
+            continue;
         
 //         fileInfoTime.start();
         QFileInfo fileInfo( directory + "/" + *it );
@@ -295,7 +296,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     QString filePathName;
     QString device;
     
-    if( !conversionOptions )
+    if( !conversionOptions && conversionOptionsId == -1 )
     {
         // FIXME error message, null pointer for conversion options
         return;
@@ -372,7 +373,8 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     
     emit fileCountChanged( topLevelItemCount() );
     
-    if( QObject::sender() == optionsLayer ) save( false );
+    if( QObject::sender() == optionsLayer )
+        save( false );
 }
 
 void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
@@ -385,7 +387,7 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
         return;
     }
 
-    int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
+    const int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
 
     pScanStatus->setValue( 0 );
     pScanStatus->setMaximum( 0 );
@@ -829,7 +831,8 @@ void FileList::selectPreviousItem()
 {
     QTreeWidgetItem *item = itemAbove( selectedItems().first() );
 
-    if( !item ) return;
+    if( !item )
+        return;
 
     disconnect( this, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 
@@ -850,7 +853,8 @@ void FileList::selectNextItem()
 {
     QTreeWidgetItem *item = itemBelow( selectedItems().last() );
 
-    if( !item ) return;
+    if( !item )
+        return;
 
     disconnect( this, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 

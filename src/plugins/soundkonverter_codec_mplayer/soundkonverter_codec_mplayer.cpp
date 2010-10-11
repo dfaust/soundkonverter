@@ -38,7 +38,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 {
     QList<ConversionPipeTrunk> table;
     
-    // encode
+    // decode
     fromCodecs += "wav";
     fromCodecs += "ogg vorbis";
     fromCodecs += "mp3";
@@ -52,7 +52,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 //     fromCodecs += "sonic lossless";
     fromCodecs += "als";
     fromCodecs += "amr nb";
-    // decode
     fromCodecs += "amr wb";
     fromCodecs += "ape";
 //     fromCodecs += "eac3";
@@ -65,9 +64,22 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 //     fromCodecs += "truespeech";
     fromCodecs += "tta";
     fromCodecs += "wavpack";
+    fromCodecs += "ra";
     // containers
     fromCodecs += "3gp";
+    fromCodecs += "rm";
+    // video
+    fromCodecs += "avi";
+    fromCodecs += "mkv";
+    fromCodecs += "ogv";
+    fromCodecs += "mpeg";
+    fromCodecs += "mov";
+    fromCodecs += "mp4";
+    fromCodecs += "flv";
+    fromCodecs += "wmv";
+    fromCodecs += "rv";
 
+    // encode
     toCodecs += "wav";
 //     toCodecs += "ogg vorbis";
 //     toCodecs += "mp3";
@@ -313,6 +325,14 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
         info.extensions.append( "wv" );
         info.extensions.append( "wvp" );
     }
+    else if( codecName == "ra" )
+    {
+        info.lossless = false;
+        info.description = i18n("Real Media Audio is a propritary and lossy codec.");
+        info.mimeTypes.append( "audio/vnd.rn-realaudio" );
+        info.extensions.append( "ra" );
+        info.extensions.append( "rax" );
+    }
     else if( codecName == "3gp" )
     {
         info.lossless = false;
@@ -327,6 +347,103 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
         info.extensions.append( "3ga" );
         info.extensions.append( "3gp2" );
         info.extensions.append( "3gpp2" );
+    }
+    else if( codecName == "rm" )
+    {
+        info.lossless = false;
+        info.description = i18n("Real Media is a propritary and lossy codec.");
+        info.mimeTypes.append( "application/vnd.rn-realmedia" );
+        info.extensions.append( "rm" );
+        info.extensions.append( "rmj" );
+        info.extensions.append( "rmm" );
+        info.extensions.append( "rms" );
+        info.extensions.append( "rmvb" );
+        info.extensions.append( "rmx" );
+        info.extensions.append( "rm" );
+        info.extensions.append( "rm" );
+        info.extensions.append( "rm" );
+        info.extensions.append( "rm" );
+    }
+    else if( codecName == "avi" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/x-msvideo" );
+        info.extensions.append( "avi" );
+        info.extensions.append( "divx" );
+    }
+    else if( codecName == "mkv" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/x-matroska" );
+        info.extensions.append( "mkv" );
+    }
+    else if( codecName == "ogv" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/ogg" );
+        info.extensions.append( "ogv" );
+    }
+    else if( codecName == "mpeg" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/mpeg" );
+        info.extensions.append( "mpg" );
+        info.extensions.append( "mpeg" );
+        info.extensions.append( "m2t" );
+        info.extensions.append( "m2ts" );
+        info.extensions.append( "mod" );
+        info.extensions.append( "mp2" );
+        info.extensions.append( "mpe" );
+        info.extensions.append( "mts" );
+        info.extensions.append( "ts" );
+        info.extensions.append( "vob" );
+    }
+    else if( codecName == "mov" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/quicktime" );
+        info.extensions.append( "mov" );
+        info.extensions.append( "moov" );
+        info.extensions.append( "qt" );
+        info.extensions.append( "qtvr" );
+    }
+    else if( codecName == "mp4" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/mp4" );
+        info.extensions.append( "mp4" );
+        info.extensions.append( "m4v" );
+    }
+    else if( codecName == "flv" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/x-flv" );
+        info.mimeTypes.append( "video/flv" );
+        info.extensions.append( "flv" );
+    }
+    else if( codecName == "wmv" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/x-ms-wmv" );
+        info.mimeTypes.append( "video/x-ms-asf" );
+        info.extensions.append( "wmv" );
+        info.extensions.append( "asf" );
+    }
+    else if( codecName == "rv" )
+    {
+        info.lossless = false;
+//         info.description = i18n("");
+        info.mimeTypes.append( "video/vnd.rn-realvideo" );
+        info.extensions.append( "rv" );
+        info.extensions.append( "rvx" );
     }
 
     return info;

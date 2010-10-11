@@ -27,10 +27,10 @@ better ripping control
 
 ### Plugins ###
 [x] faac
-[x] ffmpeg          video files
+[x] ffmpeg
 [x] flac
 [x] lame
-[x] mplayer         video files         parse progress
+[x] mplayer         parse progress
 [x] neroaac
 [x] timidity
 [x] vorbistools

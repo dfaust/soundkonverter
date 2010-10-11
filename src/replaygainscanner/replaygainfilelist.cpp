@@ -72,7 +72,7 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     connect( removeAction, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
     addAction( removeAction );
 //     paste = new KAction( i18n("Paste"), "editpaste", 0, this, 0, actionCollection, "paste" );  // TODO paste
-    newAction = new KAction( KIcon("file-new"), i18n("New album"), this );
+//     newAction = new KAction( KIcon("file-new"), i18n("New album"), this );
 //     connect( newAction, SIGNAL(triggered()), this, SLOT(newAlbum()) );
 
     contextMenu = new QMenu( this );
@@ -805,7 +805,7 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
     }
 
     // show the popup menu
-    contextMenu->popup( mapToGlobal(point) );
+    contextMenu->popup( viewport()->mapToGlobal(point) );
 }
 
 void ReplayGainFileList::updateProgress()

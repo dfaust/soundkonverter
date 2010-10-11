@@ -119,7 +119,8 @@ FileList::~FileList()
 
 void FileList::dragEnterEvent( QDragEnterEvent *event )
 {
-    if( event->mimeData()->hasFormat("text/uri-list") ) event->acceptProposedAction();
+    if( event->mimeData()->hasFormat("text/uri-list") )
+        event->acceptProposedAction();
 }
 
 void FileList::dropEvent( QDropEvent *event )
@@ -799,7 +800,7 @@ void FileList::showContextMenu( const QPoint& point )
     }
 
     // show the popup menu
-    contextMenu->popup( mapToGlobal(point) );
+    contextMenu->popup( viewport()->mapToGlobal(point) );
 }
 
 void FileList::showOptionsEditorDialog()

@@ -8,7 +8,6 @@ processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 use qt animations
 cdtext
 optimize profiles
-make shortcuts work
 activate replaygain window when opened on application start
 make converted files wait for applying album gain
 ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grundsätzlich

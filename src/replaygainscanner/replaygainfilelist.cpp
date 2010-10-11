@@ -56,32 +56,26 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     grid->setColumnStretch( 1, 2 );
 
     collapseAction = new KAction( KIcon("view-process-all"), i18n("Collapse all"), this );
+    collapseAction->setShortcut( Qt::CTRL | Qt::Key_Minus );
     connect( collapseAction, SIGNAL(triggered()), this, SLOT(collapseAll()) );
+    addAction( collapseAction );
     expandAction = new KAction( KIcon("view-process-all-tree"), i18n("Expand all"), this );
+    expandAction->setShortcut( Qt::CTRL | Qt::Key_Plus );
     connect( expandAction, SIGNAL(triggered()), this, SLOT(expandAll()) );
+    addAction( expandAction );
 //     startAction = new KAction( KIcon("system-run"), i18n("Calculate Replay Gain"), this );
 //     connect( startAction, SIGNAL(triggered()), this, SLOT(convertSelectedItems()) );
 //     stopAction = new KAction( KIcon("process-stop"), i18n("Stop Calculation"), this );
 //     connect( stopAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
     removeAction = new KAction( KIcon("edit-delete"), i18n("Remove"), this );
-//     removeAction->setShortcut( Qt::Key_Delete );
-//     removeAction->setShortcut( QKeySequence::Delete );
-//     actionCollection()->addAction("remove_file", removeAction);
+    removeAction->setShortcut( QKeySequence::Delete );
     connect( removeAction, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
+    addAction( removeAction );
 //     paste = new KAction( i18n("Paste"), "editpaste", 0, this, 0, actionCollection, "paste" );  // TODO paste
     newAction = new KAction( KIcon("file-new"), i18n("New album"), this );
 //     connect( newAction, SIGNAL(triggered()), this, SLOT(newAlbum()) );
 
     contextMenu = new QMenu( this );
-    contextMenu->addAction( collapseAction );
-    contextMenu->addAction( expandAction );
-    contextMenu->addSeparator();
-    contextMenu->addAction( removeAction );
-    //contextMenu->addAction( paste );
-    contextMenu->addAction( newAction );
-//     contextMenu->addSeparator();
-//     contextMenu->addAction( startAction );
-//     contextMenu->addAction( stopAction );
 
     setContextMenuPolicy( Qt::CustomContextMenu );
     connect( this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)) );
@@ -101,12 +95,14 @@ ReplayGainFileList::~ReplayGainFileList()
 
 void ReplayGainFileList::dragEnterEvent( QDragEnterEvent *event )
 {
-    if( event->mimeData()->hasFormat("text/uri-list") || event->source() == this ) event->acceptProposedAction();
+    if( event->mimeData()->hasFormat("text/uri-list") || event->source() == this )
+        event->acceptProposedAction();
 }
 
 void ReplayGainFileList::dragMoveEvent( QDragMoveEvent *event )
 {
-    if( itemAt(event->pos()) && itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type!=ReplayGainFileListItem::Track ) QTreeWidget::dragMoveEvent(event);
+    if( itemAt(event->pos()) && itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type!=ReplayGainFileListItem::Track )
+        QTreeWidget::dragMoveEvent(event);
 }
 
 void ReplayGainFileList::dropEvent( QDropEvent *event )
@@ -783,18 +779,29 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 
     // TODO implement pasting, etc.
 
+    contextMenu->clear();
+
     // is this file (of our item) beeing converted at the moment?
     if( item && item->state != ReplayGainFileListItem::Processing )
     {
-        removeAction->setVisible( true );
-//         startAction->setVisible( true );
-//         stopAction->setVisible( false );
+        contextMenu->addAction( collapseAction );
+        contextMenu->addAction( expandAction );
+        contextMenu->addSeparator();
+        contextMenu->addAction( removeAction );
+        //contextMenu->addAction( paste );
+        contextMenu->addAction( newAction );
+        //contextMenu->addSeparator();
+        //contextMenu->addAction( startAction );
     }
     else
     {
-        removeAction->setVisible( false );
-//         startAction->setVisible( false );
-//         stopAction->setVisible( true );
+        contextMenu->addAction( collapseAction );
+        contextMenu->addAction( expandAction );
+        contextMenu->addSeparator();
+        //contextMenu->addAction( paste );
+        contextMenu->addAction( newAction );
+        //contextMenu->addSeparator();
+        //contextMenu->addAction( stopAction );
     }
 
     // show the popup menu

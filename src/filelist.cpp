@@ -78,21 +78,16 @@ FileList::FileList( Config *_config, QWidget *parent )
     stopAction = new KAction( KIcon("process-stop"), i18n("Stop conversion"), this );
     connect( stopAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
     removeAction = new KAction( KIcon("edit-delete"), i18n("Remove"), this );
-//     removeAction->setShortcut( Qt::Key_Delete );
-//     removeAction->setShortcut( QKeySequence(Qt::CTRL + Qt::Key_D) );
-//     removeAction->setShortcut( QKeySequence::Delete );
-//     actionCollection()->addAction("remove_file", removeAction);
+    removeAction->setShortcut( QKeySequence::Delete );
     connect( removeAction, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
+    addAction( removeAction );
+//     KAction *removeActionGlobal = new KAction( KIcon("edit-delete"), i18n("Remove"), this );
+//     removeActionGlobal->setShortcut( QKeySequence::Delete );
+//     connect( removeActionGlobal, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
+//     addAction( removeActionGlobal );
 //     paste = new KAction( i18n("Paste"), "editpaste", 0, this, 0, actionCollection, "paste" );  // TODO paste
 
     contextMenu = new QMenu( this );
-    contextMenu->addAction( editAction );
-    contextMenu->addSeparator();
-    contextMenu->addAction( removeAction );
-    //contextMenu->addAction( paste );
-    contextMenu->addSeparator();
-    contextMenu->addAction( startAction );
-    contextMenu->addAction( stopAction );
 
     setContextMenuPolicy( Qt::CustomContextMenu );
     connect( this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)) );
@@ -784,21 +779,23 @@ void FileList::showContextMenu( const QPoint& point )
 
     // TODO implement pasting, etc.
 
+    contextMenu->clear();
+
     // is this file (of our item) beeing converted at the moment?
-//     if( !item->converting )
     if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
     {
-        editAction->setVisible( true );
-        removeAction->setVisible( true );
-        startAction->setVisible( true );
-        stopAction->setVisible( false );
+        contextMenu->addAction( editAction );
+        contextMenu->addSeparator();
+        contextMenu->addAction( removeAction );
+        //contextMenu->addAction( paste );
+        contextMenu->addSeparator();
+        contextMenu->addAction( startAction );
     }
     else
     {
-        editAction->setVisible( false );
-        removeAction->setVisible( false );
-        startAction->setVisible( false );
-        stopAction->setVisible( true );
+        //contextMenu->addAction( paste );
+        //contextMenu->addSeparator();
+        contextMenu->addAction( stopAction );
     }
 
     // show the popup menu
@@ -807,10 +804,10 @@ void FileList::showContextMenu( const QPoint& point )
 
 void FileList::showOptionsEditorDialog()
 {
-    if( optionsEditor == 0 )
+    if( !optionsEditor )
     {
         optionsEditor = new OptionsEditor( config, this );
-        if( optionsEditor == 0 )
+        if( !optionsEditor )
         {
              // TODO error message
             return;
@@ -874,10 +871,10 @@ void FileList::selectNextItem()
 void FileList::removeSelectedItems()
 {
     FileListItem *item;
-    for( int i=0; i<topLevelItemCount(); i++ )
+    QList<QTreeWidgetItem*> items = selectedItems();
+    for( int i=0; i<items.size(); i++ )
     {
-        item = topLevelItem( i );
-//         if( item->isSelected() && !item->converting )
+        item = (FileListItem*)items.at(i);
         if( item->isSelected() && item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
         {
             emit timeChanged( -item->length );
@@ -894,10 +891,13 @@ void FileList::removeSelectedItems()
 
 void FileList::convertSelectedItems()
 {
+    FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
-        emit convertItem( (FileListItem*)items.at(i) );
+        item = (FileListItem*)items.at(i);
+        if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+            emit convertItem( (FileListItem*)items.at(i) );
     }
     
     emit conversionStarted();
@@ -910,7 +910,6 @@ void FileList::killSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-//         if( item->converting )
         if( item->state == FileListItem::Converting || item->state == FileListItem::Ripping || item->state == FileListItem::ApplyingReplayGain )
             emit killItem( item );
     }
@@ -919,6 +918,7 @@ void FileList::killSelectedItems()
 void FileList::itemsSelected()
 {
     selectedFiles.clear();
+    
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {

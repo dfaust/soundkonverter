@@ -7,6 +7,7 @@
 -Fix: alac extensions
 -Fix: Some bugs in the CD ripper dialog
 -Fix: Drag'n'drop directories wouldn't work
+-Fix: Make shortcuts work
 
 0.9.92 (1.0.0 beta3):
 -Add: User defined command line arguments for lame and some new plugins

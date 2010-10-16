@@ -65,7 +65,7 @@ private:
     KPushButton* pFormatInfo;
 
     QCheckBox *cReplayGain;
-    QCheckBox *cBpm;
+//     QCheckBox *cBpm;
     QLabel *lEstimSize;
 
     Config *config;

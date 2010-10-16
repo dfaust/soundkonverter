@@ -40,7 +40,7 @@ QList<ReplayGainPipe> soundkonverter_replaygain_musepackgain::codecTable()
     newPipe.codecName = "musepack";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["replaygain"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'replaygain'. replaygain is usually in the package 'replaygain' which should be shipped with your distribution.");
+    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for musepack files, you need to install 'replaygain'.\nYou can get it at http://www.musepack.net");
     table.append( newPipe );
 
     return table;

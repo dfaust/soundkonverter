@@ -959,7 +959,7 @@ void Convert::remove( ConvertItem *item, int state )
         
         if( state == 0 )
         {
-            logger->log( item->logID, i18n("Conversion failed, trying again. Exit code -2 (%2)").arg(exitMessage) );
+            logger->log( item->logID, i18n("Conversion failed, trying again. Exit code: -2 (%1)").arg(exitMessage) );
             item->take = item->lastTake;
             QFile::remove( item->outputUrl.toLocalFile() );
             executeSameStep( item );

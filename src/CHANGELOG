@@ -1,5 +1,6 @@
 0.9.93 (1.0.0 rc1):
 -Add: Video formats for ffmpeg and mplayer
+-Add: German translation
 -Change: Re-enable the CD ripper (using paranoia again)
 -Change: Save frames properly when generating cuesheet files
 -Fix: Retry conversion if file output size is too small

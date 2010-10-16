@@ -11,11 +11,7 @@
 #include "logger.h"
 #include "logviewer.h"
 #include "replaygainscanner/replaygainscanner.h"
-#include "aboutplugins.h"
 
-// #include <KAction>
-// #include <KStandardAction>
-// #include <KMessageBox>
 #include <KActionCollection>
 #include <KApplication>
 #include <KActionMenu>
@@ -47,8 +43,6 @@ soundKonverter::soundKonverter()
 
     config = new Config( logger, this );
     config->load();
-
-//     cdManager = new CDManager( this );
 
     m_view = new soundKonverterView( logger, config, cdManager, this );
     connect( m_view, SIGNAL(signalConversionStarted()), this, SLOT(conversionStarted()) );
@@ -88,9 +82,14 @@ soundKonverter::soundKonverter()
 
 soundKonverter::~soundKonverter()
 {
-    if( logViewer ) delete logViewer;
-    if( replayGainScanner ) delete replayGainScanner;
-    if( systemTray ) delete systemTray;
+    if( logViewer )
+        delete logViewer;
+    
+    if( replayGainScanner )
+        delete replayGainScanner;
+    
+    if( systemTray )
+        delete systemTray;
 }
 
 void soundKonverter::saveProperties( const KConfigGroup& )

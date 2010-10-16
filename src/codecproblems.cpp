@@ -68,7 +68,7 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
                 }
                 else
                 {
-                    messageList += "<b>Possible solutions for " + codecName + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n") + i18n("\n\nAffected files:\n") + problemList.at(i).affectedFiles.join("\n");
+                    messageList += "<b>Possible solutions for " + codecName + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n") + "\n\n" + i18n("Affected files:") + "\n" + problemList.at(i).affectedFiles.join("\n");
                 }
             }
         }

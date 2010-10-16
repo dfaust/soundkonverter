@@ -93,8 +93,8 @@ set(soundkonverter_SRCS
    configdialog/configdialog.cpp
    configdialog/configpagebase.cpp
    configdialog/configgeneralpage.cpp
-   configdialog/configadvancedpage.cpp
    configdialog/configbackendspage.cpp
+#    configdialog/configadvancedpage.cpp
    metadata/tagengine.cpp
    opener/fileopener.cpp
    opener/diropener.cpp
@@ -104,29 +104,29 @@ set(soundkonverter_SRCS
    replaygainscanner/replaygainscanner.cpp
    replaygainscanner/replaygainfilelist.cpp
    replaygainscanner/replaygainfilelistitem.cpp
+   global.cpp
    main.cpp
    soundkonverter.cpp
    soundkonverterapp.cpp
    soundkonverterview.cpp
+   codecproblems.cpp
+   combobutton.cpp
    config.cpp
+   conversionoptionsmanager.cpp
+   convert.cpp
    filelist.cpp
    filelistitem.cpp
-   combobutton.cpp
-   progressindicator.cpp
+   logger.cpp
+   logviewer.cpp
    options.cpp
    optionssimple.cpp
    optionsdetailed.cpp
-   optionslayer.cpp
    optionseditor.cpp
+   optionslayer.cpp
    pluginloader.cpp
+   progressindicator.cpp
    outputdirectory.cpp
-   convert.cpp
-   logger.cpp
-   logviewer.cpp
-   aboutplugins.cpp
-   conversionoptionsmanager.cpp
-   global.cpp
-   codecproblems.cpp
+#    aboutplugins.cpp
 )
 
 

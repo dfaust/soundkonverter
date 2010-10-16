@@ -163,7 +163,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     // and fill in the headers
     trackList->setColumnCount( 5 );
     QStringList labels;
-    labels.append( i18n("Rip") );
+    labels.append( i18nc("column title","Rip") );
     labels.append( i18n("Track") );
     labels.append( i18n("Artist") );
     labels.append( i18n("Composer") );

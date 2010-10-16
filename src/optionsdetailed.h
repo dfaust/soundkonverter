@@ -56,7 +56,7 @@ private:
     KComboBox *cPlugin;
     QWidget *wPlugin;
     QCheckBox *cReplayGain;
-    QCheckBox *cBpm;
+//     QCheckBox *cBpm;
     QLabel *lEstimSize;
     KPushButton *pProfileSave;
     QToolButton *pProfileLoad;

@@ -90,9 +90,9 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     bottomBox->addWidget( cReplayGain );
     //connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     bottomBox->addSpacing( 12 );
-    cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
-    cBpm->hide();
-    bottomBox->addWidget( cBpm );
+//     cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
+//     cBpm->hide();
+//     bottomBox->addWidget( cBpm );
     //connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     bottomBox->addStretch();
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
@@ -301,7 +301,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();
             options->replaygain = cReplayGain->isChecked();
-            options->bpm = cBpm->isChecked();
+//             options->bpm = cBpm->isChecked();
         }
     }
     config->data.general.lastFormat = cFormat->currentText();
@@ -317,7 +317,7 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
     cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
     encoderChanged( cPlugin->currentText() );
     cReplayGain->setChecked( options->replaygain );
-    cBpm->setChecked( options->bpm );
+//     cBpm->setChecked( options->bpm );
 
     if( wPlugin ) return qobject_cast<CodecWidget*>(wPlugin)->setCurrentConversionOptions( options );
     else return false;

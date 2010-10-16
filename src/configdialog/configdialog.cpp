@@ -13,7 +13,7 @@
 
 #include "../config.h"
 #include "configgeneralpage.h"
-#include "configadvancedpage.h"
+// #include "configadvancedpage.h"
 #include "configbackendspage.h"
 
 #include <KLocale>

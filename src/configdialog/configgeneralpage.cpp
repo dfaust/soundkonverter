@@ -139,7 +139,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     updateDelayBox->addWidget( lUpdateDelay );
     iUpdateDelay = new KIntSpinBox( 50, 1000, 50, 100, parent );
     iUpdateDelay->setToolTip( i18n("Update the progress bar in this interval (time in milliseconds)") );
-    iUpdateDelay->setSuffix( i18n("ms") );
+    iUpdateDelay->setSuffix( i18nc("milliseconds","ms") );
     iUpdateDelay->setValue( config->data.general.updateDelay );
     updateDelayBox->addWidget( iUpdateDelay );
     connect( iUpdateDelay, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );

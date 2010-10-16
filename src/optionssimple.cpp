@@ -93,10 +93,10 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     optionalBox->addWidget( cReplayGain );
     connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     optionalBox->addSpacing( 12 );
-    cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
-    cBpm->hide();
-    optionalBox->addWidget( cBpm );
-    connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
+//     cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
+//     cBpm->hide();
+//     optionalBox->addWidget( cBpm );
+//     connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     optionalBox->addStretch();
 
     QLabel *lInfo = new QLabel( text, this );
@@ -183,7 +183,7 @@ void OptionsSimple::profileInfo()
     else if( sProfileString == i18n("Low") )
     {
         KMessageBox::information( this,
-            i18n("This produces sound files of a low quality.\nThat can be useful if you habe a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."),
+            i18n("This produces sound files of a low quality.\nThat can be useful if you have a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."),
             i18n("Profile info for %1",sProfileString) );
     }
     else if( sProfileString == i18n("Medium") )

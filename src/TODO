@@ -17,7 +17,7 @@ edit ripper parameters
 edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
 session management
-changing default decoder only takes effect after retsart
+changing default decoder only takes effect after restart
 
 ### Prio 3 ###
 

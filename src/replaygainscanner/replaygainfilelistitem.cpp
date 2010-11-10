@@ -1,6 +1,7 @@
 
 #include "replaygainfilelistitem.h"
 #include <QResizeEvent> // NOTE needed by drag'n'drop events - but why?
+#include <QPainter>
 
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
@@ -52,3 +53,97 @@ ReplayGainFileListItem::~ReplayGainFileListItem()
 // {
 //     event->acceptProposedAction();
 // }
+
+ReplayGainFileListItemDelegate::ReplayGainFileListItemDelegate( QObject *parent )
+    : QItemDelegate( parent )
+{}
+
+// TODO margin
+void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
+{
+    ReplayGainFileListItem *item =  static_cast<ReplayGainFileListItem*>( index.internalPointer() );
+    QTreeWidget *fileList = item->treeWidget();
+    
+    QColor backgroundColor;
+
+    painter->save();
+
+    QStyleOptionViewItem _option = option;
+
+    if( item->state == ReplayGainFileListItem::Processing )
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = QColor(215,62,62);
+        }
+        else
+        {
+            backgroundColor = QColor(255,234,234);
+        }
+    }
+    else if( item->state == ReplayGainFileListItem::Failed )
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = QColor(235,139,49);
+        }
+        else
+        {
+            backgroundColor = QColor(255,157,65);
+        }
+    }
+    else
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = option.palette.highlight().color();
+        }   
+        else
+        {
+            backgroundColor = option.palette.base().color();
+        }
+    }
+    
+    painter->fillRect( option.rect, backgroundColor );
+
+    int m_left, m_top, m_right, m_bottom;
+    item->treeWidget()->getContentsMargins( &m_left, &m_top, &m_right, &m_bottom );
+    //QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y()+m_top, option.rect.width()-m_left-m_right, option.rect.height()-m_top-m_bottom );
+    QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y(), option.rect.width()-m_left-m_right, option.rect.height() );
+
+    QRect textRect = painter->boundingRect( QRect(), Qt::AlignLeft|Qt::TextSingleLine, item->text(index.column()) );
+
+    if ( textRect.width() < m_rect.width() )
+    {
+        painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+    }
+    else
+    {
+        painter->drawText( m_rect, Qt::AlignRight|Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+        QLinearGradient linearGrad( QPoint(m_rect.x(),0), QPoint(m_rect.x()+15,0) );
+        linearGrad.setColorAt( 0, backgroundColor );
+        backgroundColor.setAlpha( 0 );
+        linearGrad.setColorAt( 1, backgroundColor );
+        painter->fillRect( m_rect.x(), m_rect.y(), 15, m_rect.height(), linearGrad );
+    }
+//     painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+    
+//     QItemDelegate::paint( painter, _option, index );
+
+    painter->restore();
+
+//     int progress = (index.row() != 0 ? 100 / index.row() : 0);
+// 
+//     // draw your cool progress bar here
+//     QStyleOptionProgressBar opt;
+//     opt.rect = option.rect;
+//     opt.minimum = 0;
+//     opt.maximum = 100;
+//     opt.progress = progress;
+//     opt.text = QString("%1%").arg(progress);
+//     opt.textVisible = true;
+//     QApplication::style()->drawControl(QStyle::CE_ProgressBar, &opt, painter, 0);
+
+    // maybe even let default implementation draw list item contents?
+    // QItemDelegate::paint(painter, option, index);
+}

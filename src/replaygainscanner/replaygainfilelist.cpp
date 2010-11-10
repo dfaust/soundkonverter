@@ -29,6 +29,8 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     setAcceptDrops( true );
     setDragEnabled( true );
 
+    setItemDelegate( new ReplayGainFileListItemDelegate(this) );
+
     setColumnCount( 3 );
     QStringList labels;
     labels.append( i18n("File") );
@@ -495,7 +497,7 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
 
 void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )
 {
-    if( itemList.count() == 0 )
+    if( itemList.count() <= 0 )
         return;
     
     QList<ReplayGainPipe> pipes = config->pluginLoader()->getReplayGainPipes( itemList.at(0)->codecName );
@@ -509,6 +511,22 @@ void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& ite
         processNextFile();
         return;
     }
+    
+/*    float albumGain = ( itemList.at(0) && itemList.at(0)->tags ) ? itemList.at(0)->tags->album_gain : 0;
+    bool calcGain = false;
+    for( int i=1; i<itemList.count(); i++ )
+    {
+        if( !itemList.at(i)->tags || ( itemList.at(i) && itemList.at(i)->tags && albumGain != itemList.at(i)->tags->album_gain ) )
+        {
+            calcGain = true;
+            break;
+        }
+    }
+    if( !calcGain )
+    {
+        processNextFile();
+        return;
+    }*/
     
     currentPlugin = pipes.at(itemList.at(0)->take).plugin;
     
@@ -672,7 +690,7 @@ void ReplayGainFileList::processNextFile()
         {
             count++;
             processItems( itemList );
-            break;
+            return;
         }
     }
     

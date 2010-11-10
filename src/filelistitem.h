@@ -16,6 +16,7 @@
 
 #include <QTreeWidgetItem>
 #include <QItemDelegate>
+#include <QPointer>
 
 #include <KUrl>
 
@@ -46,7 +47,7 @@ public:
     virtual ~FileListItem();
 
     int conversionOptionsId;
-    TagData *tags;              // we need to instruct the tagengine to read the tags from the file!
+    QPointer<TagData> tags;     // we need to instruct the tagengine to read the tags from the file!
                                 // and the user can change them!
     KUrl url;                   // the original input file path name
     KUrl outputUrl;             // if the user wants to change the output directory/file name per file!

@@ -14,8 +14,9 @@
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 0.3
  */
-class TagData
+class TagData : public QObject
 {
+    Q_OBJECT
 public:
     /** Constructor */
     TagData( const QString& _artist = QString::null, const QString& _composer = QString::null,

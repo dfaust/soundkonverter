@@ -3,6 +3,8 @@
 #define REPLAYGAINFILELISTITEM_H
 
 #include <QTreeWidget>
+#include <QItemDelegate>
+#include <QPointer>
 #include <KUrl>
 
 #include "metadata/tagengine.h"
@@ -34,7 +36,7 @@ public:
     QString albumName;
     QString codecName;
     int samplingRate;
-    TagData *tags;
+    QPointer<TagData> tags;
     
     int time;
     
@@ -46,6 +48,14 @@ public:
 //     void dragMoveEvent( QDragMoveEvent *event );
 //     void dropEvent( QDropEvent *event );
 
+};
+
+class ReplayGainFileListItemDelegate : public QItemDelegate
+{
+public:
+    ReplayGainFileListItemDelegate( QObject *parent = 0 );
+
+    virtual void paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 };
 
 #endif // REPLAYGAINFILELISTITEM_H

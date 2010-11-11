@@ -175,7 +175,8 @@ void DirOpener::addClicked()
     QStringList selectedCodecs;
     for( int i = 0; i < fileTypes->count(); i++ )
     {
-        if( fileTypes->item(i)->checkState() == Qt::Checked ) selectedCodecs += fileTypes->item(i)->text();
+        if( fileTypes->item(i)->checkState() == Qt::Checked )
+            selectedCodecs += fileTypes->item(i)->text();
     }
 
 //     emit accept();
@@ -183,6 +184,7 @@ void DirOpener::addClicked()
     {
         if( options->currentConversionOptions() )
         {
+            hide();
             emit done( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, options->currentConversionOptions() );
             accept();
         }
@@ -193,6 +195,7 @@ void DirOpener::addClicked()
     }
     else if( mode == ReplayGain )
     {
+        hide();
         emit done( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs );
         accept();
     }

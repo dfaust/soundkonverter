@@ -523,6 +523,11 @@ void FileList::updateItem( FileListItem *item )
         item->setText( Column_Input, item->url.pathOrUrl() );
         //if( options ) item->setToolTip( 0, i18n("The file %1 will be converted from %2 to %3 using the %4 profile.\nIt will be saved to: %5").arg(item->url.pathOrUrl()).arg(item->codecName).arg(options->codecName).arg(options->profile).arg(outputUrl.toLocalFile()) );
     }
+    
+    update( indexFromItem( item, 0 ) );
+    update( indexFromItem( item, 1 ) );
+    update( indexFromItem( item, 2 ) );
+    update( indexFromItem( item, 3 ) );
 }
 
 void FileList::updateItems( QList<FileListItem*> items )

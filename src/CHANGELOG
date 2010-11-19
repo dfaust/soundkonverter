@@ -1,4 +1,5 @@
 0.9.94:
+-Add: Updated czech translation (by Pavel Fric)
 -Fix: Tint items in the Replay Gain scanner red while calculating Raply Gain
 -Fix: Make the Replay Gain scanner skip file with calculated tags
 -Fix: Ensure items in the file list and Replay Gain file list get redrawn after an update

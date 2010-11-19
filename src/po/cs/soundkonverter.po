@@ -3,25 +3,26 @@
 #
 # Daniel Faust <hessijames@gmail.com>, 2006, 2007.
 # Pavel Fric <pavelfric@seznam.cz>, 2010.
+# Pavel Fric <fripohled@blogspot.com>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
-"soundkonverter/\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad."
+"net/ubuntu/%2Bsource/soundkonverter/\n"
 "POT-Creation-Date: 2010-10-16 16:49+0200\n"
-"PO-Revision-Date: 2010-05-03 20:41+0200\n"
-"Last-Translator: Pavel Fric\n"
+"PO-Revision-Date: 2010-11-02 08:47+0100\n"
+"Last-Translator: Pavel Fric <fripohled@blogspot.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Launchpad-Export-Date: 2009-06-29 16:20+0000\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr ""
+msgstr "Řešení potíží s jádrem"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -29,6 +30,9 @@ msgid ""
 "Maybe you need to install an additional plugin via the package manager of "
 "your distribution."
 msgstr ""
+"SoundKonverteru se nepodařilo nalézt žádné chybějící balíčky.\n"
+"Možná potřebujete přes správce balíčků své distribuce nainstalovat "
+"nějaký dodatečný přídavný modul ."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -36,18 +40,25 @@ msgid ""
 "additional programs.\n"
 "Possible solutions are listed below."
 msgstr ""
+"Některé z nainstalovaných přídavných modulů nepracují, "
+"protože postrádají dodatečné programy.\n"
+"Možná řešení jsou vypsána níže."
 
 #: codecproblems.cpp:37
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
+"Některé ze souborů nelze rozluštit.\n"
+"Možná řešení jsou vypsána níže."
 
 #: codecproblems.cpp:41
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
+"Vyrovnávání hlasitosti není pro některé ze souborů podporováno.\n"
+"Možná řešení jsou vypsána níže."
 
 #: codecproblems.cpp:47
 msgid ""
@@ -55,16 +66,23 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
+"Získávání skladeb ze zvukových CD není podporováno žádným "
+"z nainstalovaných přídavných modulů.\n"
+"Podívejte se, prosím, na správce balíčků své distribuce, abyste sehnal "
+"přídavný modul vytahovače skladeb z CD pro soundKonverter."
 
 #: codecproblems.cpp:51
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
+"Získávání skladeb ze zvukových CD není v současnosti podporováno "
+"z důvodu chybějících jader.\n"
+"Možná řešení jsou vypsána níže."
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
-msgstr ""
+msgstr "Ovlivněné soubory:"
 
 #: config.cpp:42 config.cpp:44 config.cpp:311 config.cpp:356
 #: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:59
@@ -106,7 +124,7 @@ msgstr "Vysoká"
 
 #: config.cpp:218 config.cpp:253 config.cpp:255
 msgid "Try internal"
-msgstr ""
+msgstr "Zkusit vnitřní"
 
 #: config.cpp:312 config.cpp:328 configdialog/configgeneralpage.cpp:60
 #: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:335
@@ -262,15 +280,13 @@ msgid "User defined"
 msgstr "Stanoveno uživatelem"
 
 #: config.cpp:434
-#, fuzzy
 msgid "Convert with soundKonverter"
-msgstr "Převést pomocí soundKonverteru..."
+msgstr "Převést pomocí soundKonverteru"
 
 #: config.cpp:468
-#, fuzzy
 msgid "Add Replay Gain with soundKonverter"
 msgstr ""
-"Přidat vyrovnávání hlasitosti přehrávaných skladeb pomocí soundKonverteru..."
+"Přidat vyrovnávání hlasitosti přehrávaných skladeb pomocí soundKonverteru"
 
 #: configdialog/configbackendspage.cpp:121
 #: configdialog/configbackendspage.cpp:153
@@ -291,14 +307,12 @@ msgid "Replay Gain"
 msgstr "Vyrovnávání hlasitosti přehrávaných skladeb"
 
 #: configdialog/configbackendspage.cpp:182
-#, fuzzy
 msgid "CD ripper"
 msgstr "Vytahovač skladeb z CD"
 
 #: configdialog/configbackendspage.cpp:186
-#, fuzzy
 msgid "Backend"
-msgstr "Podpůrné vrstvy"
+msgstr "Jádro"
 
 #: configdialog/configbackendspage.cpp:197
 msgid "Format"
@@ -309,16 +323,16 @@ msgid ""
 "You have changed the current settings.\n"
 "Do you want to save them?"
 msgstr ""
+"Změnil jste nynější nastavení.\n"
+"Chcete je uložit?"
 
 #: configdialog/configbackendspage.cpp:237
-#, fuzzy
 msgid "Settings changed"
-msgstr "Nastavení"
+msgstr "Nastavení změněno"
 
 #: configdialog/configbackendspage.cpp:254
-#, fuzzy
 msgid "%1 settings"
-msgstr "Nastavení"
+msgstr "%1 nastavení"
 
 #: configdialog/configdialog.cpp:35
 msgid "General"
@@ -382,11 +396,13 @@ msgid ""
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
+"Neměl byste toto číslo nastavit vyšší než je množství instalovaných "
+"procesorových jader.\n"
+"Byla zjištěna %1 procesorová jádra."
 
 #: configdialog/configgeneralpage.cpp:138
-#, fuzzy
 msgid "Status update delay"
-msgstr "Zpoždění obnovy informace o stavu (čas v ms)"
+msgstr "Zpoždění obnovy informace o stavu"
 
 #: configdialog/configgeneralpage.cpp:141
 msgid "Update the progress bar in this interval (time in milliseconds)"
@@ -396,27 +412,32 @@ msgstr "Obnovit pruh s průběhem v tomto časovém úseku (čas v milisekundác
 #: global.cpp:91 global.cpp:92
 msgctxt "milliseconds"
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid "Create actions menus for the file manager"
-msgstr ""
+msgstr "Vytvořit nabídky činností pro správce souborů"
 
 #: configdialog/configgeneralpage.cpp:152
 msgid ""
 "These service menus won't get removed if you uninstall soundKonverter.\n"
 "But you can remove them by diableing this option."
 msgstr ""
+"Tyto služebné nabídky nebudou, pokud odinstalujete soundKonverter, "
+"odstraněny.\n"
+"Ale můžete je odstranit zakázáním této volby."
 
 #: configdialog/configgeneralpage.cpp:161
 msgid "Remove partially converted files if a conversion fails"
-msgstr ""
+msgstr "Odstranit zčásti převedené soubory, pokud převod selže"
 
 #: configdialog/configgeneralpage.cpp:162
 msgid ""
 "Disable this for debugging or if you are sure the files get converted "
 "correctly."
 msgstr ""
+"Toto zakažte pro ladění, nebo pokud si jste jistý, že soubory byly "
+"převedeny správně."
 
 #: convert.cpp:198 convert.cpp:1090
 msgid "Getting file"
@@ -424,7 +445,7 @@ msgstr "Přijímá se soubor"
 
 #: convert.cpp:260 convert.cpp:372
 msgid "No more backends left to try :("
-msgstr ""
+msgstr "Nezbyla žádná další jádra k vyzkoušení : -("
 
 #: convert.cpp:270 convert.cpp:308 convert.cpp:1094 filelist.cpp:491
 #: soundkonverter.cpp:234 soundkonverter.cpp:237 soundkonverter.cpp:265
@@ -450,7 +471,7 @@ msgstr "Zapisují se značky"
 
 #: convert.cpp:398
 msgid "Moving file to destination"
-msgstr ""
+msgstr "Přesunuje se soubor do cíle"
 
 #: convert.cpp:405
 msgid "Running user script"
@@ -461,37 +482,32 @@ msgid "Executing next step"
 msgstr "Provádí se další krok"
 
 #: convert.cpp:543
-#, fuzzy
 msgid "Read tags sucessfully"
 msgstr "Značky úspěšně přečteny"
 
 #: convert.cpp:547
 msgid "Unable to read tags"
-msgstr ""
+msgstr "Nelze přečíst značky"
 
 #: convert.cpp:573
 msgid "An error accured. Error code: %1 (%2)"
-msgstr ""
+msgstr "Vyskytla se chyba. Kód chyby: %1 (%2)"
 
 #: convert.cpp:697 convert.cpp:770
-#, fuzzy
 msgid "Conversion failed. Exit code: %1"
-msgstr "Probíhá odstraňování souboru ze seznamu převodů. Kód ukončení %1"
+msgstr "Převod se nezdařil. Kód ukončení %1"
 
 #: convert.cpp:838
-#, fuzzy
 msgid "CD track"
-msgstr "Přidat skladby na CD"
+msgstr "Stopa na CD"
 
 #: convert.cpp:842 filelist.cpp:518
-#, fuzzy
 msgid "CD track %1"
-msgstr "Skladba %1"
+msgstr "Stopa na CD %1"
 
 #: convert.cpp:849
-#, fuzzy
 msgid "Adding new item to conversion list: '%1'"
-msgstr "Do seznamu převodů se přidává nová položka: `%1'"
+msgstr "Do seznamu s převody se přidává nová položka: '%1'"
 
 #: convert.cpp:857
 msgid "Got log ID: %1"
@@ -502,23 +518,24 @@ msgstr "Nové ID zápisu: %1"
 msgid ""
 "An error occured, the output file size is less that 1% of the input file size"
 msgstr ""
+"Vyskytla se chyba. Výstupní velikost souboru je menší než 1% vstupní "
+"velikosti souboru"
 
 #: convert.cpp:962
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
-msgstr ""
+msgstr "Převod se nezdařil. Kód ukončení: -2 (%1)"
 
 #: convert.cpp:970
-#, fuzzy
 msgid "Normal exit"
-msgstr "Obvyklá"
+msgstr "Obvyklé ukončení"
 
 #: convert.cpp:971
 msgid "Aborted by the user"
-msgstr ""
+msgstr "Přerušeno uživatelem"
 
 #: convert.cpp:972
 msgid "An error occured"
-msgstr ""
+msgstr "Vyskytla se chyba"
 
 #: convert.cpp:985
 msgid "Executing command: \"%1\""
@@ -526,26 +543,23 @@ msgstr "Provádí se příkaz: \"%1\""
 
 #: convert.cpp:1001
 msgid "Removing partially converted output file"
-msgstr ""
+msgstr "Odstraňuje se částečně převedený výstupní soubor"
 
 #: convert.cpp:1006
-#, fuzzy
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr "Probíhá odstraňování souboru ze seznamu převodů. Kód ukončení %1"
+msgstr "Probíhá odstraňování souboru ze seznamu převodů. Kód ukončení %1 (%2)"
 
 #: convert.cpp:1008
-#, fuzzy
 msgid "Conversion time"
-msgstr "Převod"
+msgstr "Doba převodu"
 
 #: convert.cpp:1009
 msgid "Output file size"
-msgstr ""
+msgstr "Velikost výstupního souboru"
 
 #: convert.cpp:1010
-#, fuzzy
 msgid "File size ratio"
-msgstr "Souborový formát"
+msgstr "Poměr velikosti souboru"
 
 #: convert.cpp:1099 filelist.cpp:486
 msgid "Ripping"
@@ -565,12 +579,11 @@ msgstr "Získává se"
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:68
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:67
 msgid "Wave won't compress the audio stream."
-msgstr ""
+msgstr "Wave nezhustí zvukový proud."
 
 #: core/backendplugin.cpp:100
-#, fuzzy
 msgid "Killing process on user request"
-msgstr "Ukončuje se proces..."
+msgstr "Proces se ukončuje z požadavku uživatele"
 
 #: filelist.cpp:43
 msgid "State"
@@ -611,7 +624,6 @@ msgid "Quality"
 msgstr "Kvalita"
 
 #: filelist.cpp:74
-#, fuzzy
 msgid "Edit options..."
 msgstr "Upravit volby..."
 
@@ -625,9 +637,8 @@ msgstr "Zastavit převod"
 
 #: filelist.cpp:80 optionssimple.cpp:43
 #: replaygainscanner/replaygainfilelist.cpp:70
-#, fuzzy
 msgid "Remove"
-msgstr "Soubor přesunut"
+msgstr "Odstranit"
 
 #: filelist.cpp:159 opener/fileopener.cpp:113 opener/playlistopener.cpp:117
 #: replaygainscanner/replaygainfilelist.cpp:206 soundkonverterview.cpp:357
@@ -636,19 +647,21 @@ msgid ""
 "Maybe you need to install an additional soundKonverter plugin.\n"
 "You should have a look at your distribution's package manager for this."
 msgstr ""
+"Tento typ souboru je soundKonverteru neznámý.\n"
+"Možná potřebujete nainstalovat dodatečný přídavný modul soundKonverteru.\n"
+"Kvůli tomuto byste se měl podívat na správce balíčků své distribuce."
 
 #: filelist.cpp:197 opener/fileopener.cpp:153 opener/playlistopener.cpp:157
 #: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:244
 #: soundkonverterview.cpp:395
 msgid "... and %1 more files"
-msgstr ""
+msgstr "... a %1 další soubory"
 
 #: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:191
 #: opener/fileopener.cpp:177 opener/playlistopener.cpp:212
 #: opener/urlopener.cpp:132 optionslayer.cpp:132
-#, fuzzy
 msgid "No conversion options selected."
-msgstr "Upravit převodní volby"
+msgstr "Nevybrány žádné převodní volby."
 
 #: filelist.cpp:471
 msgid "Will be skipped"
@@ -659,9 +672,8 @@ msgid "Waiting"
 msgstr "Čeká se"
 
 #: filelist.cpp:481
-#, fuzzy
 msgid "Waiting for Replay Gain"
-msgstr "Přidává se vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Čeká se na vyrovnávání hlasitosti přehrávaných skladeb"
 
 #: filelist.cpp:496
 msgid "Stopped"
@@ -677,37 +689,39 @@ msgid ""
 "\n"
 "If not, the saved file list will be appended."
 msgstr ""
+"Chcete přepsat nynější seznam se soubory?\n"
+"\n"
+"Pokud ne, bude připojen uložený souborový seznam."
 
 #: global.cpp:84 global.cpp:85 global.cpp:100 global.cpp:101
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: global.cpp:85 global.cpp:86 global.cpp:101 global.cpp:102
 msgctxt "hours"
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: global.cpp:86 global.cpp:87 global.cpp:88 global.cpp:102 global.cpp:103
 #: global.cpp:104
 msgctxt "minutes"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: global.cpp:87 global.cpp:88 global.cpp:89 global.cpp:90 global.cpp:91
 #: global.cpp:103 global.cpp:104 global.cpp:105
 msgctxt "seconds"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: logger.cpp:75
-#, fuzzy
 msgid "Filename"
-msgstr "Soubor přesunut"
+msgstr "Název souboru"
 
 #: logger.cpp:76
 msgid "Log ID"
-msgstr ""
+msgstr "ID zápisu"
 
 #: logger.cpp:158
 msgid "Finished logging"
@@ -719,31 +733,27 @@ msgstr "Prohlížeč zápisů"
 
 #: logviewer.cpp:25
 msgid "Update"
-msgstr ""
+msgstr "Obnovit"
 
 #: logviewer.cpp:28
-#, fuzzy
 msgid "Save to file..."
-msgstr "Uložit soubor cue..."
+msgstr "Uložit do souboru..."
 
 #: logviewer.cpp:95
-#, fuzzy
 msgid "Save log file"
-msgstr "U&ložit seznam se soubory"
+msgstr "Uložit soubor se zápisem"
 
 #: logviewer.cpp:100
-#, fuzzy
 msgid "File already exists. Do you really want to overwrite it?"
-msgstr ""
-"Jeden soubor s tímto názvem již existuje.\n"
-"\n"
-"Chcete jej přepsat?"
+msgstr "Soubor již existuje. Opravdu si jej přejete přepsat?"
 
 #: logviewer.cpp:104
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
 msgstr ""
+"Zápis do souboru selhal.\n"
+"Možná nemáte oprávnění pro zápis."
 
 #: main.cpp:17
 msgid ""
@@ -754,6 +764,13 @@ msgid ""
 "soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
+"soundKonverter je rozhraní pro různé převodníky zvuku, nástroje "
+"pro vyrovnávání hlasitosti přehrávaných skladeb a vytahovače skladeb z CD.\n"
+"\n"
+"Chyby, prosím, hlašte na stránkách https://bugs.launchpad.net/ubuntu/+source/"
+"soundkonverter\n"
+"nebo autorovi jednoduše zašlete dopis na adresu elektronické pošty "
+"hessijames@gmail.com"
 
 #: main.cpp:23
 msgid "soundKonverter"
@@ -761,48 +778,47 @@ msgstr "soundKonverter"
 
 #: main.cpp:23
 msgid "(C) 2010 Daniel Faust"
-msgstr ""
+msgstr "(C) 2010 Daniel Faust"
 
 #: main.cpp:24
 msgid "Daniel Faust"
-msgstr ""
+msgstr "Daniel Faust"
 
 #: main.cpp:25
 msgid "David Vignoni"
-msgstr ""
+msgstr "David Vignoni"
 
 #: main.cpp:25
 msgid "Nuvola icon theme"
-msgstr ""
+msgstr "Motiv ikon Nuvola"
 
 #: main.cpp:26
 msgid "Scott Wheeler"
-msgstr ""
+msgstr "Scott Wheeler"
 
 #: main.cpp:26
-#, fuzzy
 msgid "TagLib"
-msgstr "Značky"
+msgstr "TagLib"
 
 #: main.cpp:27
 msgid "Marco Nelles"
-msgstr ""
+msgstr "Marco Nelles"
 
 #: main.cpp:27
 msgid "Audex"
-msgstr ""
+msgstr "Audex"
 
 #: main.cpp:28
 msgid "Amarok developers"
-msgstr ""
+msgstr "Vývojáři Amaroku"
 
 #: main.cpp:28
 msgid "Amarok"
-msgstr ""
+msgstr "Amarok"
 
 #: main.cpp:29
 msgid "All programmers of audio converters"
-msgstr ""
+msgstr "Všichni programátoři převodníku zvuku"
 
 #: main.cpp:33
 msgid "Open the Replay Gain tool an add all given files"
@@ -833,11 +849,10 @@ msgid "Start soundKonverter invisible"
 msgstr "Spustit soundKonverter neviditelný"
 
 #: main.cpp:40
-#, fuzzy
 msgid "Start the conversion immediately (enabled when using '--invisible')"
 msgstr ""
-"Zavřít soundKonverter, když byly všechny soubory převedeny (povoleno, když "
-"je zapnuto 'invisible')"
+"Začít s převodem okamžitě (povoleno, když "
+"je zapnuto '--invisible')"
 
 #: main.cpp:41
 msgid ""
@@ -848,11 +863,14 @@ msgstr ""
 "je zapnuto 'invisible')"
 
 #: main.cpp:42
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Execute <command> after each file has been converted (%i=input file, %"
 "o=output file)"
-msgstr "Provést příkaz <command>, když byly převedeny všechny soubory"
+msgstr ""
+"Provést příkaz <command>, když byly všechny soubory převedeny (%i=input "
+"file, %"
+"o=output file)"
 
 #: main.cpp:43
 msgid "Audio file(s) to append to the file list"
@@ -863,14 +881,12 @@ msgid "Add CD tracks"
 msgstr "Přidat skladby na CD"
 
 #: opener/cdopener.cpp:58
-#, fuzzy
 msgid "1. Select CD tracks"
-msgstr "Přidat vybrané skladby"
+msgstr "1. Vybrat stopy na CD"
 
 #: opener/cdopener.cpp:63 opener/diropener.cpp:56 opener/urlopener.cpp:53
-#, fuzzy
 msgid "2. Set conversion options"
-msgstr "Upravit převodní volby"
+msgstr "2. Nastavit převodní volby"
 
 #: opener/cdopener.cpp:96 opener/cdopener.cpp:220 optionseditor.cpp:113
 msgid "Artist:"
@@ -909,10 +925,9 @@ msgid "Genre:"
 msgstr "Žánr:"
 
 #: opener/cdopener.cpp:166
-#, fuzzy
 msgctxt "column title"
 msgid "Rip"
-msgstr "Získává se"
+msgstr "Získat"
 
 #: opener/cdopener.cpp:167 opener/cdopener.cpp:936
 #: replaygainscanner/replaygainfilelist.cpp:35
@@ -932,9 +947,8 @@ msgid "Title"
 msgstr "Název"
 
 #: opener/cdopener.cpp:171
-#, fuzzy
 msgid "Length"
-msgstr "Síla"
+msgstr "Délka"
 
 #: opener/cdopener.cpp:182
 msgid "No track selected"
@@ -950,22 +964,20 @@ msgstr "Poznámka:"
 
 #: opener/cdopener.cpp:279 opener/diropener.cpp:143 opener/fileopener.cpp:53
 #: opener/playlistopener.cpp:39 opener/urlopener.cpp:70 optionslayer.cpp:43
-#, fuzzy
 msgid "Select your desired output options and click on \"Ok\"."
-msgstr "Zvolte upřednostňované výstupní volby a klepněte na\"Zavřít\"."
+msgstr "Zvolte své upřednostňované výstupní volby a klepněte na \"OK\"."
 
 #: opener/cdopener.cpp:300
-#, fuzzy
 msgid "Save cue sheet..."
 msgstr "Uložit soubor cue..."
 
 #: opener/cdopener.cpp:305
 msgid "Request CDDB"
-msgstr ""
+msgstr "Vyžádat si CDDB"
 
 #: opener/cdopener.cpp:310
 msgid "Rip entire CD to one file"
-msgstr ""
+msgstr "Získat celé CD do jednoho souboru"
 
 #: opener/cdopener.cpp:321
 msgid ""
@@ -973,6 +985,9 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
+"Získávání skladeb z celého CD do jednoho souboru není podporováno "
+"nainstalovanými jádry.\n"
+"Možná řešení jsou vypsána níže.\n"
 
 #: opener/cdopener.cpp:325
 msgid ""
@@ -981,10 +996,16 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin wich supports ripping to one file."
 msgstr ""
+"Získávání skladeb z celého CD do jednoho souboru není podporováno "
+"nainstalovanými jádry.\n"
+"Prověřte, prosím, na správce balíčků své distribuce, abyste nainstaloval "
+"dodatečný přídavný modul vytahovače skladeb, který podporuje získávání "
+"skladeb "
+"do jednoho souboru."
 
 #: opener/cdopener.cpp:332 opener/diropener.cpp:37 opener/urlopener.cpp:81
 msgid "Proceed"
-msgstr ""
+msgstr "Pokračovat"
 
 #: opener/cdopener.cpp:335 opener/fileopener.cpp:61
 #: opener/playlistopener.cpp:47 opener/urlopener.cpp:84 optionslayer.cpp:51
@@ -994,39 +1015,36 @@ msgstr "OK"
 #: opener/cdopener.cpp:339 opener/fileopener.cpp:64
 #: opener/playlistopener.cpp:50 opener/urlopener.cpp:88 optionslayer.cpp:54
 #: replaygainscanner/replaygainscanner.cpp:91
-#, fuzzy
 msgid "Cancel"
-msgstr "Kanály"
+msgstr "Zrušit"
 
 #: opener/cdopener.cpp:388
 msgid "Select CD-ROM drive"
-msgstr ""
+msgstr "Vybrat mechaniku CD-ROM"
 
 #: opener/cdopener.cpp:388
 msgid "Multiple CD-ROM drives where found. Please select one:"
-msgstr ""
+msgstr "Bylo nalezeno více mechanik CD. Vyberte, prosím, jednu:"
 
 #: opener/cdopener.cpp:493
-#, fuzzy
 msgid "DVD Recorder"
-msgstr "Dekodér"
+msgstr "Vypalovačka DVD"
 
 #: opener/cdopener.cpp:495 opener/cdopener.cpp:499
-#, fuzzy
 msgid "CD Recorder"
-msgstr "Dekodér"
+msgstr "Vypalovačka CD"
 
 #: opener/cdopener.cpp:495 opener/cdopener.cpp:497
 msgid "DVD Player"
-msgstr ""
+msgstr "Přehrávač DVD"
 
 #: opener/cdopener.cpp:501
 msgid "CD Player"
-msgstr ""
+msgstr "Přehrávač CD"
 
 #: opener/cdopener.cpp:502
 msgid "%1 (%2): Audio CD with %3 tracks"
-msgstr ""
+msgstr "%1 (%2): Audio CD s %3 stopami"
 
 #: opener/cdopener.cpp:558 opener/cdopener.cpp:559 opener/cdopener.cpp:562
 #: opener/cdopener.cpp:569 opener/cdopener.cpp:570
@@ -1035,17 +1053,15 @@ msgstr "Neznámý"
 
 #: opener/cdopener.cpp:611
 msgid "Please wait, trying to download CDDB data ..."
-msgstr ""
+msgstr "Počkejte, prosím, probíhá pokus o stažení dat CDDB..."
 
 #: opener/cdopener.cpp:655
 msgid "Select CDDB Entry"
-msgstr ""
+msgstr "Vybrat záznam CDDB"
 
 #: opener/cdopener.cpp:655
-#, fuzzy
 msgid "Multiple CDDB entries where found. Please select one:"
-msgstr ""
-"Nalezeno více téměř odpovídajících záznamů  CDDB. Vyberte, prosím, jeden:"
+msgstr "Nalezeno více záznamů v CDDB. Vyberte, prosím, jeden:"
 
 #: opener/cdopener.cpp:850
 msgid "All tracks"
@@ -1057,7 +1073,7 @@ msgstr "Skladby"
 
 #: opener/cdopener.cpp:1118
 msgid "Please select at least one track in order to proceed."
-msgstr ""
+msgstr "Vyberte, prosím, alespoň jednu skladbu, aby se mohlo pokračovat."
 
 #: opener/cdopener.cpp:1205
 msgid ""
@@ -1078,23 +1094,21 @@ msgid "Add folder"
 msgstr "Přidat složku"
 
 #: opener/diropener.cpp:51
-#, fuzzy
 msgid "1. Select directory"
-msgstr "Zdrojový adresář"
+msgstr "1. Vybrat adresář"
 
 #: opener/diropener.cpp:82
 msgid "Directory:"
 msgstr "Adresář:"
 
 #: opener/diropener.cpp:89
-#, fuzzy
 msgid "Only add selected file formats:"
-msgstr "Informace o vybraném formátu souborů"
+msgstr "Přidat pouze vybrané formáty souborů:"
 
 #: opener/diropener.cpp:117 opener/fileopener.cpp:69
 #: replaygainscanner/replaygainscanner.cpp:136
 msgid "<a href=\"format-help\">Are you missing some file formats?</a>"
-msgstr ""
+msgstr "<a href=\"format-help\">Chybí vám nějaké formáty souborů?</a>"
 
 #: opener/diropener.cpp:125
 msgid "Select all"
@@ -1110,62 +1124,56 @@ msgstr "Rekurzivní"
 
 #: opener/diropener.cpp:135
 msgid "If checked, files from subdirectories will be added, too."
-msgstr ""
+msgstr "V případě, že je označeno, budou soubory v podadresářích přidány též."
 
 #: opener/fileopener.cpp:30 opener/fileopener.cpp:73
 #: opener/playlistopener.cpp:55 replaygainscanner/replaygainscanner.cpp:140
-#, fuzzy
 msgid "Add Files"
-msgstr "Přidat soubory..."
+msgstr "Přidat soubory"
 
 #: opener/fileopener.cpp:48 replaygainscanner/replaygainscanner.cpp:130
-#, fuzzy
 msgid "%1 files"
-msgstr "%1 Soubory"
+msgstr "%1 soubory"
 
 #: opener/fileopener.cpp:50 replaygainscanner/replaygainscanner.cpp:132
-#, fuzzy
 msgid "All supported files"
-msgstr "Všechny podporované formáty"
+msgstr "Všechny podporované soubory"
 
 #: opener/fileopener.cpp:51 replaygainscanner/replaygainscanner.cpp:133
-#, fuzzy
 msgid "All files"
-msgstr "Soubory"
+msgstr "Všechny soubory"
 
 #: opener/playlistopener.cpp:30
 msgid "Add playlist"
-msgstr ""
+msgstr "Přidat seznam skladeb"
 
 #: opener/playlistopener.cpp:191
 msgid "The following files couldn't be found:\n"
-msgstr ""
+msgstr "Následující soubory se nepodařilo nalézt:\n"
 
 #: opener/playlistopener.cpp:194
-#, fuzzy
 msgid "Files not found"
-msgstr "Nenalezené programy"
+msgstr "Soubory nenalezeny"
 
 #: opener/urlopener.cpp:35
 msgid "Add url"
-msgstr ""
+msgstr "Přidat adresu (URL)"
 
 #: opener/urlopener.cpp:48
 msgid "1. Enter url"
-msgstr ""
+msgstr "1. Zadat adresu (URL)"
 
 #: opener/urlopener.cpp:102
 msgid "The Url you entered is invalid. Please try again."
-msgstr ""
+msgstr "Adresa, kterou jste zadal, je neplatná. Zkuste to, prosím, znovu."
 
 #: optionsdetailed.cpp:45 optionssimple.cpp:55
 msgid "Output format"
 msgstr "Výstupní formát"
 
 #: optionsdetailed.cpp:55
-#, fuzzy
 msgid "Use Plugin"
-msgstr "Přídavné moduly"
+msgstr "Použít přídavný modul"
 
 #: optionsdetailed.cpp:89 optionssimple.cpp:92
 msgid "Calculate Replay Gain tags"
@@ -1176,15 +1184,16 @@ msgid "Save current options as a profile"
 msgstr "Uložit nynější volby jako profil"
 
 #: optionsdetailed.cpp:111
-#, fuzzy
 msgid "Load saved profiles"
-msgstr "Odstranit profil?"
+msgstr "Nahrát uložené profily"
 
 #: optionsdetailed.cpp:258
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
 msgstr ""
+"Vyrovnávání hlasitosti není pro %1 souborový formát podporováno.\n"
+"Možná řešení jsou vypsána níže."
 
 #: optionsdetailed.cpp:262
 msgid ""
@@ -1192,12 +1201,17 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional Replay Gain plugin."
 msgstr ""
+"Vyrovnávání hlasitosti není pro %1 souborový formát podporováno.\n"
+"Prověřte, prosím, na správce balíčků své distribuce, abyste nainstaloval "
+"dodatečný přídavný modul pro vyrovnávání hlasitosti."
 
 #: optionsdetailed.cpp:278 optionssimple.cpp:382
 msgid ""
 "Using the current conversion options will create files with approximately %1 "
 "per minute."
 msgstr ""
+"Použití nynějších převodních voleb vytvoří soubory s přibližně %1 "
+"za minutu."
 
 #: optionsdetailed.cpp:331
 msgid "New profile"
@@ -1227,11 +1241,11 @@ msgstr ""
 
 #: optionseditor.cpp:40
 msgid "Previous"
-msgstr ""
+msgstr "Předchozí"
 
 #: optionseditor.cpp:42
 msgid "Next"
-msgstr ""
+msgstr "Další"
 
 #. i18n: file: soundkonverterui.rc:14
 #. i18n: ectx: Menu (conversion)
@@ -1240,9 +1254,8 @@ msgid "Conversion"
 msgstr "Převod"
 
 #: optionseditor.cpp:57
-#, fuzzy
 msgid "Choose your prefered output options and click on \"Apply\"!"
-msgstr "Zvolte upřednostňované výstupní volby a klepněte na\"Zavřít\"."
+msgstr "Zvolte své upřednostňované výstupní volby a klepněte na \"Použít\"."
 
 #: optionseditor.cpp:66
 msgid "Edit conversion options"
@@ -1261,7 +1274,6 @@ msgid "Edit tags"
 msgstr "Upravit značky"
 
 #: optionseditor.cpp:227
-#, fuzzy
 msgid "Infos"
 msgstr "Informace"
 
@@ -1270,7 +1282,6 @@ msgid "No file selected"
 msgstr "Nevybrán žádný soubor"
 
 #: optionseditor.cpp:349
-#, fuzzy
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1280,9 +1291,9 @@ msgid ""
 "to read the tags after downloading."
 msgstr ""
 "Značky se nepodařilo přečíst, protože soubor není místní.\n"
-"soundKonverter se značky pokusí přečíst krátce před převodem souboru.\n"
+"SoundKonverter se značky pokusí přečíst krátce před převodem souboru.\n"
 "Pokud chcete značky upravit, můžete stisknout tlačítko níže.\n"
-"Ale pak se soundKonverter značky už nebude pokoušet přečíst."
+"Ale pak se soundKonverter značky po stažení už nebude pokoušet přečíst."
 
 #: optionseditor.cpp:358
 msgid ""
@@ -1335,22 +1346,21 @@ msgstr "Informace o vybraném formátu souborů"
 
 #: optionssimple.cpp:68
 msgid "<a href=\"format-help\">More</a>"
-msgstr ""
+msgstr "<a href=\"format-help\">Více</a>"
 
 #: optionssimple.cpp:89
 msgid "Optional:"
-msgstr ""
+msgstr "Volitelné:"
 
 #: optionssimple.cpp:180
-#, fuzzy
 msgid ""
 "This produces sound files of a very low quality.\n"
 "That can be useful if you have a mobile device where your storage space is "
 "limited. It is not recommended to save your music in this quality without a "
 "copy with higher quality."
 msgstr ""
-"Toto vytvoří zvukové soubory nízké kvality.\n"
-"Smysl to má v tom případě, když máte mobilní zařízení s malým ukládacím "
+"Toto vytvoří zvukové soubory velmi nízké kvality.\n"
+"Smysl to má v tom případě, když máte přenosné zařízení s malým ukládacím "
 "místem. Nedoporučuje se, abyste ukládal svou hudbu v této kvalitě bez toho, "
 "že byste ji měl zazálohovanou ve vyšší kvalitě."
 
@@ -1358,10 +1368,9 @@ msgstr ""
 #: optionssimple.cpp:199 optionssimple.cpp:205 optionssimple.cpp:211
 #: optionssimple.cpp:217 optionssimple.cpp:223 optionssimple.cpp:229
 msgid "Profile info for %1"
-msgstr ""
+msgstr "Informace o profilu pro %1"
 
 #: optionssimple.cpp:186
-#, fuzzy
 msgid ""
 "This produces sound files of a low quality.\n"
 "That can be useful if you have a mobile device where your storage space is "
@@ -1369,7 +1378,7 @@ msgid ""
 "copy with higher quality."
 msgstr ""
 "Toto vytvoří zvukové soubory nízké kvality.\n"
-"Smysl to má v tom případě, když máte mobilní zařízení s malým ukládacím "
+"Smysl to má v tom případě, když máte přenosné zařízení s malým ukládacím "
 "místem. Nedoporučuje se, abyste ukládal svou hudbu v této kvalitě bez toho, "
 "že byste ji měl zazálohovanou ve vyšší kvalitě."
 
@@ -1427,7 +1436,7 @@ msgstr "Můžete popsat vlastní profil na kartě \"Podrobné\"."
 
 #: optionssimple.cpp:228
 msgid "This is a user defined profile."
-msgstr ""
+msgstr "Toto je profil stanovený uživatelem."
 
 #: optionssimple.cpp:235
 msgid "Do you really want to remove the profile: %1"
@@ -1439,11 +1448,11 @@ msgstr "Odstranit profil?"
 
 #: optionssimple.cpp:259
 msgid "Format info for %1"
-msgstr ""
+msgstr "Informace o formátu pro %1"
 
 #: optionssimple.cpp:269
 msgid "Sorry, no format information available."
-msgstr ""
+msgstr "Promiňte, ale není dostupná žádná informace o formátu."
 
 #: outputdirectory.cpp:43
 msgid "By meta data"
@@ -1466,9 +1475,8 @@ msgid "Choose an output directory"
 msgstr "Vybrat výstupní adresář"
 
 #: outputdirectory.cpp:70
-#, fuzzy
 msgid "Open the output directory with Dolphin"
-msgstr "Otevřít Konqueror s výstupním adresářem"
+msgstr "Otevřít výstupní adresář v programu Dolphin"
 
 #: outputdirectory.cpp:198
 msgid "Unknown Artist"
@@ -1503,7 +1511,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Pojmenovat všechny převedené soubory podle zadaného vzoru"
 
 #: outputdirectory.cpp:544
-#, fuzzy
 msgid ""
 "The following strings are wildcards, that will be replaced\n"
 "by the information in the meta data:\n"
@@ -1519,10 +1526,19 @@ msgid ""
 "%y - Year\n"
 "%f - Original file name"
 msgstr ""
-"<p>Následující řetězce jsou zástupnými symboly, které budou nahrazeny údaji "
-"obsaženými ve značkách:</p><p>%a - Umělec<br>%b - Album<br>%c - Poznámka<br>%"
-"d - Číslo disku<br>%g - Žánr<br>%n - Číslo skladby<br>%p - Skladatel<br>%t - "
-"Název<br>%y - Rok<br>%f - Původní název souboru<p>"
+"Následující řetězce jsou zástupnými symboly, které budou nahrazeny\n"
+"údaji obsaženými ve značkách:\n"
+"\n"
+"%a - Umělec\n"
+"%b - Album\n"
+"%c - Poznámka\n"
+"%d - Číslo disku\n"
+"%g - Žánr\n"
+"%n - Číslo skladby\n"
+"%p - Skladatel\n"
+"%t - Název\n"
+"%y - Rok\n"
+"%f - Původní název souboru"
 
 #: outputdirectory.cpp:551
 msgid ""
@@ -1547,7 +1563,7 @@ msgstr "Kopírovat úplnou strukturu adresářů pro všechny převedené soubor
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:33
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:34
 msgid "Mode"
-msgstr ""
+msgstr "Režim"
 
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:38
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:173
@@ -1585,6 +1601,10 @@ msgid ""
 "installation of your distribution. Many distributions offer faac in an "
 "additional software repository."
 msgstr ""
+"Abyste mohl zakódovat AAC, potřebujete nainstalovat 'faac'\n"
+"Protože však faac zahrnuje patentovaný kodek, nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce. Mnoho distribucí "
+"faac nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:44
 msgid ""
@@ -1593,6 +1613,10 @@ msgid ""
 "installation of your distribution. Many distributions offer faad in an "
 "additional software repository."
 msgstr ""
+"Abyste mohl rozkódovat AAC, potřebujete nainstalovat 'faad'.\n"
+"Protože však faad zahrnuje patentovaný kodek, nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce. Mnoho distribucí "
+"faad nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:59
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:178
@@ -1600,7 +1624,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:62
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:52
 msgid "Advanced Audio Coding is a lossy and popular audio format."
-msgstr ""
+msgstr "Advanced Audio Coding je ztrátový a oblíbený zvukový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:58
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
@@ -1626,6 +1650,11 @@ msgid ""
 "may not be included in the default installation of your distribution. Many "
 "distributions offer ffmpeg in an additional software repository."
 msgstr ""
+"Potřebujete nainstalovat 'ffmpeg'. Protože však ffmpeg zahrnuje mnoho "
+"patentovaných "
+"kodeků, nemůže být zahrnut ve výchozí instalaci vaší distribuce. Mnoho "
+"distribucí "
+"ffmpeg nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:140
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:137
@@ -1634,6 +1663,8 @@ msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
 "For more information see: http://www.xiph.org/vorbis/"
 msgstr ""
+"Ogg Vorbis je svobodný a ztrátový zvukový kodek o vysoké jakosti\n"
+"Další údaje hledejte na stránkách: http://www.xiph.org/vorbis/"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:151
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:94
@@ -1641,7 +1672,7 @@ msgstr ""
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:65
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:45
 msgid "MP3 is a very popular lossy audio codec."
-msgstr ""
+msgstr "MP3 je velmi oblíbený ztrátový zvukový kodek."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:160
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:157
@@ -1649,31 +1680,35 @@ msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it name says, it compresses without any loss."
 msgstr ""
+"FLAC je svobodný bezztrátový zvukový kodek.\n"
+"Jak říká jeho název, zhušťuje bez jakýchkoli ztrát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:171
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:168
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
 msgstr ""
+"Windows Media Audio je soukromě vlastněný zvukový kodek od firmy Microsoft."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:191
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:188
 msgid "Dolby Digital-Audio"
-msgstr ""
+msgstr "Dolby Digital-Audio"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:198
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:195
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple."
 msgstr ""
+"Apple Lossless Audio Codec je bezztrátový zvukový formát od firmy Apple."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:206
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:203
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
-msgstr ""
+msgstr "MPEG-1 Audio Layer II je starý a ztrátový zvukový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:227
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:224
 msgid "MPEG-4 Audio Lossless Coding"
-msgstr ""
+msgstr "MPEG-4 Audio Lossless Coding"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:234
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:231
@@ -1681,6 +1716,8 @@ msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
 msgstr ""
+"Adaptive Multi-Rate Narrow-Band je založen na 3GP a používán hlavně na "
+"zhušťování řeči při spojení pomocí přenosných zařízení."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:243
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:240
@@ -1688,11 +1725,13 @@ msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
 msgstr ""
+"Adaptive Multi-Rate Wide-Band je pokročilou verzí AMR NB, která používá "
+"vyšší poměr dat, čehož výsledkem je vyšší jakost."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:251
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:248
 msgid "Monkey's Audio is a propritary lossless audio format."
-msgstr ""
+msgstr "Monkey's Audio je soukromě vlastněný bezztrátový zvukový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:266
 #: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:58
@@ -1701,11 +1740,14 @@ msgid ""
 "encoding.\n"
 "For more information see: http://www.speex.org"
 msgstr ""
+"Speex je svobodný a ztrátový zvukový kodek navržený pro kódování "
+"řeči do souboru o nízké jakosti.\n"
+"Další údaje hledejte na stránkách: http://www.speex.org"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:275
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:271
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
-msgstr ""
+msgstr "MPEG-1 Audio Layer I je velmi starý a ztrátový souborový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:278
@@ -1715,6 +1757,8 @@ msgid ""
 "Musepack is a free and lossy file format based on mp2 and optimized for high "
 "quality."
 msgstr ""
+"Musepack je svobodný a ztrátový souborový formát založený na MP2 a "
+"vyladěný pro vysokou jakost."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:292
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:288
@@ -1723,50 +1767,56 @@ msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
+"Shorten je svobodný a bezztrátový zvukový kodek.\n"
+"Další údaje hledejte na stránkách: http://etree.org/shnutils/shorten/"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:320
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:316
 msgid "True Audio is a free lossless audio format."
-msgstr ""
+msgstr "True Audio je svobodný bezztrátový zvukový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:327
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:323
 msgid "WavPack is a free lossless audio format."
-msgstr ""
+msgstr "WavPack je svobodný bezztrátový zvukový formát."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:335
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:331
 msgid "Real Media Audio is a propritary and lossy codec."
-msgstr ""
+msgstr "Real Media Audio je soukromě vlastněný a ztrátový kodek."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:343
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:339
 msgid "3GP is a audio/video container format for mobile devices."
-msgstr ""
+msgstr "3GP je formátem schránky pro zvuk/obraz určený pro přenosná zařízení."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:358
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:354
 msgid "Real Media is a propritary and lossy codec."
-msgstr ""
+msgstr "Real Media je soukromě vlastněný a ztrátový kodek."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:31
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
 msgid "Compression level"
-msgstr ""
+msgstr "Úroveň zhuštění"
 
 #: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:35
 msgid ""
 "In order to encode flac files, you need to install 'flac'.\n"
 "flac should be shipped with your distribution."
 msgstr ""
+"Abyste mohl zakódovat soubory FLAC, potřebujete nainstalovat 'flac'.\n"
+"Program flac by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:43
 msgid ""
 "In order to decode flac files, you need to install 'flac'.\n"
 "flac should be shipped with your distribution."
 msgstr ""
+"Abyste mohl rozkódovat soubory FLAC, potřebujete nainstalovat 'flac'.\n"
+"Program flac by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:58
 #: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:58
@@ -1774,6 +1824,8 @@ msgid ""
 "Flac is a free and lossless audio codec.\n"
 "For more information see: http://flac.sourceforge.net"
 msgstr ""
+"FLAC je svobodný a bezztrátový zvukový kodek.\n"
+"Další údaje hledejte na stránkách: http://flac.sourceforge.net"
 
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:185
@@ -1782,73 +1834,76 @@ msgstr ""
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:108
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:47
 msgid "Additional encoder arguments"
-msgstr ""
+msgstr "Dodatečné argumenty pro kodér"
 
 #: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:35
 msgid ""
 "In order to encode flake files, you need to install 'flake'.\n"
 "You can get it at http://flake-enc.sourceforge.net"
 msgstr ""
+"Abyste mohl zakódovat soubory flake, potřebujete nainstalovat 'flake'.\n"
+"Dostanete jej na stránkách http://flake-enc.sourceforge.net"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:34
 msgid "Preset"
-msgstr ""
+msgstr "Přednastavení"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:35
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:527
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:40
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:307
-#, fuzzy
 msgid "Standard"
-msgstr "Začít"
+msgstr "Obvyklá"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:534
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:41
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:312
 msgid "Extreme"
-msgstr ""
+msgstr "Mimořádná"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:541
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:42
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:317
 msgid "Insane"
-msgstr ""
+msgstr "Zázračná"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:548
 msgid "Specify bitrate"
-msgstr ""
+msgstr "Stanovit datový tok"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:53
 msgid "cbr"
-msgstr ""
+msgstr "CBR"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:56
 msgid ""
 "Encode using a constant bitrate.\n"
 "Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
 msgstr ""
+"Kódování pomocí stálého datového toku.\n"
+"Pracuje jen s 80, 96, 112, 128, 160, 192, 224, 256 a 320 kbps"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:60
-#, fuzzy
 msgid "Fast encoding"
-msgstr "Dekóduje se"
+msgstr "Rychlé zakódování"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:63
 msgid ""
 "Use a faster encoding alogrithm (results in a slightly lower output quality)."
 msgstr ""
+"Použít pro zakódování rychlejší algoritmus (výsledkem je o něco nižší jakost "
+"výstupu)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:109
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:61
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:61
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:61
-#, fuzzy
 msgid "Bitrate mode"
-msgstr "Datový tok"
+msgstr "Režim datového toku"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:112
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:263
@@ -1863,7 +1918,7 @@ msgstr "Datový tok"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:169
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:372
 msgid "Variable"
-msgstr ""
+msgstr "Proměnný"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:113
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:234
@@ -1882,7 +1937,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:176
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:390
 msgid "Avarage"
-msgstr ""
+msgstr "Průměrný"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:114
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:271
@@ -1897,39 +1952,40 @@ msgstr ""
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:177
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:391
 msgid "Constant"
-msgstr ""
+msgstr "Stálý"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:148
-#, fuzzy
 msgid "Joint Stereo"
-msgstr "Smíšené stereo"
+msgstr "Společné stereo"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:149
-#, fuzzy
 msgid "Simple Stereo"
-msgstr "Jednoduchý"
+msgstr "Jednoduché stereo"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:150
-#, fuzzy
 msgid "Forced Joint Stereo"
-msgstr "Vynucené smíšené stereo"
+msgstr "Vynucené společné stereo"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:151
-#, fuzzy
 msgid "Dual Mono"
-msgstr "Mono"
+msgstr "Dvojité mono"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:525
 msgid ""
 "This preset should provide near transparency to most people on most music "
 "(~150 kbps abr)."
 msgstr ""
+"Tato předvolba by měla být pro většinu lidí u většiny hudby snadno "
+"pochopitelná (~150 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:532
 msgid ""
 "This preset should generally be transparent to most people on most music\n"
 "and is already quite high in quality (~230 kbps abr)."
 msgstr ""
+"Tato předvolba by měla být většině lidí u většiny hudby obecně snadno "
+"pochopitelná a je už, co se týče jakosti záznamu, docela vysoká (~230 kbps "
+"abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:539
 msgid ""
@@ -1937,6 +1993,10 @@ msgid ""
 "generally provide\n"
 "slightly higher quality than the standard mode (~280 kbps abr)."
 msgstr ""
+"Pokud máte neobyčejně dobrý sluch a podobně neobyčejné vybavení, poskytne "
+"vám\n"
+"tato předvolba obecně vyšší jakost, než jakou poskytuje \"průměrný\" "
+"režim (~280 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:546
 msgid ""
@@ -1945,10 +2005,15 @@ msgid ""
 "the absolute highest quality with no regard to filesize, this is the way to "
 "go (320 kbps cbr)."
 msgstr ""
+"Tato předvolba bude obvykle pro většinu lidí a většinu situací až "
+"přespříliš, ale jestliže musíte mít\n"
+"vyloženě nejvyšší jakost bez ohledu na "
+"velikost souboru, je toto právě ta cesta, kterou se chcete dát (320 kbps "
+"cbr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:592
 msgid "Quality level from 9 to 0 where 0 is the highes quality."
-msgstr ""
+msgstr "Úroveň jakosti od 9 do 0, kde 0 představuje nejvyšší jakost."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:47
 msgid ""
@@ -1957,6 +2022,10 @@ msgid ""
 "installation of your distribution.\n"
 "Many distributions offer lame in an additional software repository."
 msgstr ""
+"Abyste mohl zakódovat soubory MP3, potřebujete nainstalovat 'lame'.\n"
+"Protože však MP3 je patentovaný souborový formát, lame nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Mnoho distribucí lame nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:55
 msgid ""
@@ -1965,6 +2034,10 @@ msgid ""
 "installation of your distribution.\n"
 "Many distributions offer lame in an additional software repository."
 msgstr ""
+"Abyste mohl rozkódovat soubory MP3, potřebujete nainstalovat 'lame'.\n"
+"Protože však MP3 je patentovaný souborový formát, lame nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Mnoho distribucí lame nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:63
 msgid ""
@@ -1973,6 +2046,11 @@ msgid ""
 "installation of your distribution.\n"
 "Many distributions offer lame in an additional software repository."
 msgstr ""
+"Abyste mohl zakódovat/rozkódovat soubory MP3, potřebujete nainstalovat "
+"'lame'.\n"
+"Protože však MP3 je patentovaný souborový formát, lame nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Mnoho distribucí lame nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:71
 msgid ""
@@ -1981,6 +2059,10 @@ msgid ""
 "installation of your distribution.\n"
 "Many distributions offer lame in an additional software repository."
 msgstr ""
+"Abyste mohl rozkódovat soubory MP2, potřebujete nainstalovat 'lame'.\n"
+"Protože však MP3 je patentovaný souborový formát, lame nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Mnoho distribucí lame nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:79
 msgid ""
@@ -1989,43 +2071,54 @@ msgid ""
 "installation of your distribution.\n"
 "Many distributions offer lame in an additional software repository."
 msgstr ""
+"Abyste mohl zakódovat soubory MP3/rozkódovat soubory MP2, potřebujete "
+"nainstalovat 'lame'.\n"
+"Protože však MP3 je patentovaný souborový formát, lame nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Mnoho distribucí lame nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:102
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:68
 msgid "MP2 is an old lossy audio codec."
-msgstr ""
+msgstr "MP2 je starý ztrátový zvukový kodek."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:150
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:111
 msgid "Configure %1"
-msgstr ""
+msgstr "Nastavit %1"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:173
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:134
 msgid "About %1"
-msgstr ""
+msgstr "O %1"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:178
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
+"LAME je svobodný vysoce jakostní kodér MP3.\n"
+"Dostanete jej na stránkách http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:35
 msgid ""
 "In order to encode ape files, you need to install 'mac'.\n"
 "You can get it at http://www.monkeysaudio.com"
 msgstr ""
+"Abyste mohl zakódovat APE, potřebujete nainstalovat 'mac'.\n"
+"Dostanete jej na stránkách http://www.monkeysaudio.com"
 
 #: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:43
 msgid ""
 "In order to decode ape files, you need to install 'mac'.\n"
 "You can get it at http://www.monkeysaudio.com"
 msgstr ""
+"Abyste mohl rozkódovat APE, potřebujete nainstalovat 'mac'.\n"
+"Dostanete jej na stránkách http://www.monkeysaudio.com"
 
 #: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:58
 msgid "Monkey’s Audio is a fast and efficient lossless audio format."
-msgstr ""
+msgstr "Monkey's Audio je rychlý a schopný bezztrátový zvukový formát."
 
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
 msgid ""
@@ -2033,71 +2126,79 @@ msgid ""
 "it may not be included in the default installation of your distribution. "
 "Many distributions offer mplayer in an additional software repository."
 msgstr ""
+"Potřebujete nainstalovat 'mplayer' Protože však mplayer zahrnuje mnoho "
+"patentovaných "
+"kodeků, nemůže být zahrnut ve výchozí instalaci vaší distribuce. Mnoho "
+"distribucí "
+"mplayer nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:263
 msgid "Speex is a free and lossy audio codec designed for encoding speech."
-msgstr ""
+msgstr "Speex je svobodný a ztrátový zvukový kodek navržený pro kódování řeči."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:292
-#, fuzzy
 msgid "Telephone"
-msgstr "Zrušit výběr"
+msgstr "Telefon"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:297
 msgid "Thumb"
-msgstr ""
+msgstr "Palec"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:39
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:302
 msgid "Radio"
-msgstr ""
+msgstr "Rádio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:43
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:322
 msgid "Braindead"
-msgstr ""
+msgstr "Vymaštěný"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:295
 msgid "low quality (~60 kbps abr)."
-msgstr ""
+msgstr "Nízká jakost (~60 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:300
 msgid "low/medium quality (~90 kbps abr)."
-msgstr ""
+msgstr "Nízká/Střední jakost (~90 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:305
 msgid "medium quality (~130 kbps abr)."
-msgstr ""
+msgstr "Střední jakost (~130 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:310
 msgid "high quality (~180 kbps abr)."
-msgstr ""
+msgstr "Vysoká jakost (~180 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:315
 msgid "excellent quality (~210 kbps abr)."
-msgstr ""
+msgstr "Vynikající jakost (~210 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:320
 msgid "excellent quality (~240 kbps abr)."
-msgstr ""
+msgstr "Vynikající jakost (~240 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:325
 msgid "excellent quality (~270 kbps abr)."
-msgstr ""
+msgstr "Vynikající jakost (~270 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:36
 msgid ""
 "In order to encode musepack files, you need to install 'mppenc'.\n"
 "You can get it at http://www.musepack.net"
 msgstr ""
+"Abyste mohl zakódovat soubory musepack, potřebujete nainstalovat 'mppenc'.\n"
+"Dostanete jej na stránkách http://www.musepack.net"
 
 #: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:44
 msgid ""
 "In order to decode musepack files, you need to install 'mppdec'.\n"
 "You can get it at http://www.musepack.net"
 msgstr ""
+"Abyste mohl rozkódovat soubory musepack, potřebujete nainstalovat 'mppdec'.\n"
+"Dostanete jej na stránkách http://wwwmusepack.net"
 
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:39
 msgid ""
@@ -2105,6 +2206,10 @@ msgid ""
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
 "aac-codec.php after entering an email adress."
 msgstr ""
+"Abyste mohl zakódovat soubory AAC, potřebujete nainstalovat 'neroAacEnc'.\n"
+"Dostanete jej na stránkách http://www.nero."
+"com/enu/downloads-nerodigital-nero-"
+"aac-codec.php, jakmile zadáte adresu elektronické pošty."
 
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:47
 msgid ""
@@ -2112,68 +2217,93 @@ msgid ""
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
 "aac-codec.php after entering an email adress."
 msgstr ""
+"Abyste mohl rozkódovat soubory AAC, potřebujete nainstalovat 'neroAacDec'.\n"
+"Dostanete jej na stránkách http://www.nero."
+"com/enu/downloads-nerodigital-nero-"
+"aac-codec.php, jakmile zadáte adresu elektronické pošty."
 
 #: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:35
 msgid ""
 "In order to encode shorten files, you need to install 'shorten'.\n"
 "You can get it at http://etree.org/shnutils/shorten/"
 msgstr ""
+"Abyste mohl zakódovat soubory shorten, potřebujete nainstalovat 'shorten'.\n"
+"Dostanete jej na stránkách http://etree.org/shnutils/shorten/"
 
 #: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:43
 msgid ""
 "In order to decode shorten files, you need to install 'shorten'.\n"
 "You can get it at http://etree.org/shnutils/shorten/"
 msgstr ""
+"Abyste mohl rozkódovat soubory shorten, potřebujete nainstalovat 'shorten'.\n"
+"Dostanete jej na stránkách http://etree.org/shnutils/shorten/"
 
 #: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:36
 msgid ""
 "In order to encode speex files, you need to install the package 'speex'.\n"
 "speex should be shipped with your distribution."
 msgstr ""
+"Abyste mohl zakódovat soubory speex, potřebujete nainstalovat balíček "
+"'speex'.\n"
+"Program speex by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:44
 msgid ""
 "In order to decode speex files, you need to install the package 'speex'.\n"
 "speex should be shipped with your distribution."
 msgstr ""
+"Abyste mohl rozkódovat soubory speex, potřebujete nainstalovat balíček "
+"'speex'.\n"
+"Program speex by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:36
 msgid ""
 "In order to decode midi files, you need to install 'timidity'.\n"
 "timidity should be shipped with your distribution."
 msgstr ""
+"Abyste mohl rozkódovat soubory MIDI, potřebujete nainstalovat 'timidity'.\n"
+"Program timidity by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:44
 msgid ""
 "In order to decode mod files, you need to install 'timidity'.\n"
 "timidity should be shipped with your distribution."
 msgstr ""
+"Abyste mohl rozkódovat soubory MOD, potřebujete nainstalovat 'timidity'.\n"
+"Program timidity by měl být umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:59
 msgid ""
 "midi is a very old sound file format, that doesn't encode audio waves but "
 "stores instrument timings."
 msgstr ""
+"MIDI je velmi starý zvukový formát, který neprovádí zakódování zvukových "
+"vln, "
+"ale ukládá načasování nástrojů."
 
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:68
 msgid ""
 "mod is a very old sound file format, that doesn't encode audio waves but "
 "stores instrument timings."
 msgstr ""
+"MOD je velmi starý zvukový formát, který neprovádí zakódování zvukových vln, "
+"ale ukládá načasování nástrojů."
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:45
 msgid "In order to encode mp2 files, you need to install 'twolame'."
-msgstr ""
+msgstr "Abyste mohl zakódovat soubory MP2, potřebujete nainstalovat 'twolame'."
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:139
 msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
 msgstr ""
+"TwoLame je svobodný kodér MP2.\n"
+"Dostanete jej na stránkách http://www.twolame.org"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:72
 msgid "Joint"
-msgstr ""
+msgstr "Společné"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:73
 msgid "Stereo"
@@ -2181,11 +2311,11 @@ msgstr "Stereo"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:74
 msgid "Dual"
-msgstr ""
+msgstr "Dvojité"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:383
 msgid "Quality level from -50 to 50."
-msgstr ""
+msgstr "Úroveň jakosti od -50 do 50."
 
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:36
 msgid ""
@@ -2193,6 +2323,10 @@ msgid ""
 "oggenc is usually in the package 'vorbis-tools' which should be shipped with "
 "your distribution."
 msgstr ""
+"Abyste mohl zakódovat soubory Ogg Vorbis, potřebujete nainstalovat balíček "
+"'oggenc'.\n"
+"Program oggenc je obvykle v balíčku 'vorbis-tools', který by měl být umístěn "
+"ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:44
 msgid ""
@@ -2200,18 +2334,27 @@ msgid ""
 "oggdec is usually in the package 'vorbis-tools' which should be shipped with "
 "your distribution."
 msgstr ""
+"Abyste mohl zakódovat soubory Ogg Vorbis, potřebujete nainstalovat balíček "
+"'oggdec'.\n"
+"Program oggdec je obvykle v balíčku 'vorbis-tools', který by měl být umístěn "
+"ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:36
 msgid ""
 "In order to encode wavpack files, you need to install 'wavpack'.\n"
 "You can get it at http://www.wavpack.com"
 msgstr ""
+"Abyste mohl zakódovat soubory WavPack, potřebujete nainstalovat 'wavpack'.\n"
+"Dostanete jej na stránkách http://www.wavpack.com"
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:44
 msgid ""
 "In order to decode wavpack files, you need to install 'wvunpack'.\n"
 "wvunpack should be in the package 'wavpack'."
 msgstr ""
+"Abyste mohl rozkódovat soubory WavPack, potřebujete nainstalovat 'wvunpack'."
+"\n"
+"Program wvunpack by měl být v balíčku 'wavpack'."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:59
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:57
@@ -2219,25 +2362,24 @@ msgid ""
 "WavPack is a free and lossless audio codec.\n"
 "For more information see: http://www.wavpack.com"
 msgstr ""
+"WavPack je svobodný a bezztrátový zvukový kodek.\n"
+"Pro další informace se podívejte na stránky http://www.wavpack.com"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
-#, fuzzy
 msgid "Fast"
-msgstr "Formátovat"
+msgstr "Rychle"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:35
 msgid "Normal"
 msgstr "Obvyklá"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:36
-#, fuzzy
 msgid "High quality"
-msgstr "Kvalita"
+msgstr "Vysoká jakost"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:37
-#, fuzzy
 msgid "Very high quality"
-msgstr "Velmi vysoká"
+msgstr "Velmi vysoká jakost"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:32
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:38
@@ -2248,6 +2390,11 @@ msgid ""
 "default installation of your distribution.\n"
 "Some distributions offer aacgain in an additional software repository."
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory AAC, "
+"potřebujete nainstalovat 'aacgain'.\n"
+"Protože je však aac patentovaný souborový formát, nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Některé distribuce aacgain nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:31
 msgid ""
@@ -2255,10 +2402,14 @@ msgid ""
 "'metaflac'. metaflac is usually in the package 'flac' which should be "
 "shipped with your distribution."
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory FLAC, "
+"potřebujete nainstalovat balíček 'metaflac'.\n"
+"Program metaflac je obvykle v balíčku 'flac', který by měl být umístěn ve "
+"vaší distribuci."
 
 #: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:45
 msgid "FLAC is a free and lossless audio codec."
-msgstr ""
+msgstr "FLAC je svobodný a bezztrátový zvukový kodek."
 
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:31
 msgid ""
@@ -2268,6 +2419,11 @@ msgid ""
 "default installation of your distribution.\n"
 "Some distributions offer mp3gain in an additional software repository."
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory MP3, "
+"potřebujete nainstalovat 'mp3gain'.\n"
+"Protože je však MP3 patentovaný souborový formát, mp3gain nemůže být zahrnut "
+"ve výchozí instalaci vaší distribuce.\n"
+"Některé distribuce mp3gain nabízí v dodatečném skladišti programů."
 
 #: plugins/soundkonverter_replaygain_musepack/soundkonverter_replaygain_musepackgain.cpp:43
 msgid ""
@@ -2275,6 +2431,9 @@ msgid ""
 "install 'replaygain'.\n"
 "You can get it at http://www.musepack.net"
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory musepack, "
+"potřebujete nainstalovat 'replaygain'.\n"
+"Dostanete jej na stránkách http://wwwmusepack.net"
 
 #: plugins/soundkonverter_replaygain_vorbisgain/soundkonverter_replaygain_vorbisgain.cpp:43
 msgid ""
@@ -2282,16 +2441,24 @@ msgid ""
 "install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' "
 "which should be shipped with your distribution."
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory Ogg "
+"Vorbis, "
+"potřebujete nainstalovat balíček 'vorbisgain'.\n"
+"Program vorbisgain je obvykle v balíčku 'vorbisgain', který by měl být "
+"umístěn ve vaší distribuci."
 
 #: plugins/soundkonverter_replaygain_vorbisgain/soundkonverter_replaygain_vorbisgain.cpp:57
 msgid "Ogg Vorbis is a free and lossy high quality audio codec."
-msgstr ""
+msgstr "Ogg Vorbis je svobodný a ztrátový zvukový kodek o vysoké jakosti."
 
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:43
 msgid ""
 "In order to calculate Replay Gain tags for wavpack files, you need to "
 "install 'wvgain'. wvgain is usually in the package 'wavpack'."
 msgstr ""
+"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory WavPack, "
+"potřebujete nainstalovat balíček 'wvgain'.\n"
+"Program wvgain je obvykle v balíčku 'wavpack'."
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:52
 msgid ""
@@ -2299,15 +2466,18 @@ msgid ""
 "cdparanoia. cdparanoia is usually shipped with your distribution, the "
 "package name can vary."
 msgstr ""
+"Abyste mohl provádět získávání jednotlivých skladeb ze zvukových CD nebo "
+"do jednoho souboru, potřebujete nainstalovat 'cdparanoia'.\n"
+"Program cdparanoia je obvykle umístěn ve vaší distribuci. Název balíčku "
+"se může lišit."
 
 #: progressindicator.cpp:38
 msgid "Speed"
 msgstr "Rychlost"
 
 #: progressindicator.cpp:46
-#, fuzzy
 msgid "Remaining time"
-msgstr "Značky se nepodařilo přečíst"
+msgstr "Zbývající čas"
 
 #: progressindicator.cpp:84 replaygainscanner/replaygainscanner.cpp:222
 #: soundkonverter.cpp:251 soundkonverter.cpp:254
@@ -2315,43 +2485,38 @@ msgid "Finished"
 msgstr "Hotovo"
 
 #: replaygainscanner/replaygainfilelist.cpp:34
-#, fuzzy
 msgid "File"
-msgstr "Nepodařilo se"
+msgstr "Soubor"
 
 #: replaygainscanner/replaygainfilelist.cpp:36
 msgid "Album"
 msgstr "Album"
 
 #: replaygainscanner/replaygainfilelist.cpp:58
-#, fuzzy
 msgid "Collapse all"
-msgstr "Zavřít všechna alba"
+msgstr "Složit vše"
 
 #: replaygainscanner/replaygainfilelist.cpp:62
 msgid "Expand all"
-msgstr ""
+msgstr "Rozbalit vše"
 
 #: replaygainscanner/replaygainfilelist.cpp:415
 msgid "The following files could not be added:"
-msgstr ""
+msgstr "Následující soubory se nepodařilo přidat:"
 
 #: replaygainscanner/replaygainscanner.cpp:37
 #: replaygainscanner/replaygainscanner.cpp:222
 #: replaygainscanner/replaygainscanner.cpp:233
-#, fuzzy
 msgid "Replay Gain tool"
 msgstr "Nástroj pro vyrovnávání hlasitosti přehrávaných skladeb"
 
 #: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:161
 #: soundkonverterview.cpp:82
-#, fuzzy
 msgid "Add folder..."
 msgstr "Přidat složku..."
 
 #: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:156
 #: soundkonverterview.cpp:81
-#, fuzzy
 msgid "Add files..."
 msgstr "Přidat soubory..."
 
@@ -2368,103 +2533,87 @@ msgid "Untag tagged"
 msgstr "Zrušit označení označeného"
 
 #: replaygainscanner/replaygainscanner.cpp:98
-#, fuzzy
 msgid "Close"
-msgstr "Skladatel"
+msgstr "Zavřít"
 
 #: soundkonverter.cpp:42
-#, fuzzy
 msgid "This is soundKonverter %1"
-msgstr "soundKonverter"
+msgstr "Toto je soundKonverter %1"
 
 #: soundkonverter.cpp:73 soundkonverter.cpp:78
-#, fuzzy
 msgid "Removing old file: %1"
-msgstr "Probíhá přesun souboru"
+msgstr "Odstraňuje se starý soubor: %1"
 
 #: soundkonverter.cpp:145
 msgid "View logs..."
-msgstr ""
+msgstr "Zobrazit zápisy..."
 
 #: soundkonverter.cpp:151
-#, fuzzy
 msgid "Replay Gain tool..."
-msgstr "&Nástroj pro vyrovnávání hlasitosti přehrávaných skladeb..."
+msgstr "Nástroj pro vyrovnávání hlasitosti přehrávaných skladeb..."
 
 #: soundkonverter.cpp:166 soundkonverterview.cpp:83
-#, fuzzy
 msgid "Add CD tracks..."
 msgstr "Přidat stopy na CD..."
 
 #: soundkonverter.cpp:171 soundkonverterview.cpp:84
-#, fuzzy
 msgid "Add url..."
-msgstr "Přidat..."
+msgstr "Přidat adresu (URL)..."
 
 #: soundkonverter.cpp:176 soundkonverterview.cpp:85
-#, fuzzy
 msgid "Add playlist..."
-msgstr "Přidat soubory..."
+msgstr "Přidat seznam skladeb..."
 
 #: soundkonverter.cpp:181
-#, fuzzy
 msgid "Load file list"
-msgstr "Na&hrát seznam se soubory"
+msgstr "Nahrát seznam se soubory"
 
 #: soundkonverter.cpp:186
-#, fuzzy
 msgid "Save file list"
-msgstr "U&ložit seznam se soubory"
+msgstr "Uložit seznam se soubory"
 
 #: soundkonverterview.cpp:93 soundkonverterview.cpp:96
 msgid "Start"
 msgstr "Začít"
 
 #: soundkonverterview.cpp:103 soundkonverterview.cpp:115
-#, fuzzy
 msgid "Stop"
-msgstr "Zastaveno"
+msgstr "Zastavit"
 
 #: soundkonverterview.cpp:104
-#, fuzzy
 msgid "Stop imediatelly"
-msgstr "Zastav&it okamžitě"
+msgstr "Zastavit okamžitě"
 
 #: soundkonverterview.cpp:107
-#, fuzzy
 msgid "Stop after current conversions are completed"
-msgstr "Za&stavit po dokončení současného souboru"
+msgstr "Zastavit po dokončení současných převodů"
 
 #: soundkonverterview.cpp:110
-#, fuzzy
 msgid "Continue after current conversions are completed"
-msgstr "&Pokračovat po dokončení současného souboru"
+msgstr "Pokračovat po dokončení současných převodů"
 
 #: soundkonverterview.cpp:281
-#, fuzzy
 msgid "No CD device found"
-msgstr "Nenalezeno žádné audio CD."
+msgstr "Nenalezeno žádné zařízení CD"
 
 #. i18n: file: soundkonverterui.rc:20
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:6
 msgid "Tools"
-msgstr ""
+msgstr "Nástroje"
 
 #. i18n: file: soundkonverterui.rc:25
 #. i18n: ectx: ToolBar (toolbar)
 #: rc.cpp:9
 msgid "Main Toolbar"
-msgstr ""
+msgstr "Hlavní nástrojový pruh"
 
 #: rc.cpp:10
-#, fuzzy
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Pavel Fric"
 
 #: rc.cpp:11
-#, fuzzy
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "fripohled.blogspot.com"

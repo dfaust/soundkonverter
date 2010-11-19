@@ -881,16 +881,15 @@ void FileList::removeSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->isSelected() && item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+        if( item && item->isSelected() && item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
         {
             emit timeChanged( -item->length );
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             emit itemRemoved( item );
             delete item;
-            i--;
         }
     }
-    emit fileCountChanged( topLevelItemCount() ); // would that be i ?
+    emit fileCountChanged( topLevelItemCount() );
     
     itemsSelected();
 }

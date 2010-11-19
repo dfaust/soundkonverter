@@ -163,7 +163,7 @@ BackendPlugin::FormatInfo soundkonverter_codec_ffmpeg::formatInfo( const QString
         info.mimeTypes.append( "audio/x-oggflac" );
         info.extensions.append( "flac" );
         info.extensions.append( "fla" );
-        info.extensions.append( "ogg" );
+//         info.extensions.append( "ogg" );
     }
     else if( codecName == "wma" )
     {

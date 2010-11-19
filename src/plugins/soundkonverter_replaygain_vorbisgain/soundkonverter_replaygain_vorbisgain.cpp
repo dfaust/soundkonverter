@@ -57,6 +57,9 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( cons
         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.");
         info.mimeTypes.append( "application/ogg" );
         info.mimeTypes.append( "audio/vorbis" );
+        info.mimeTypes.append( "application/x-ogg" );
+        info.mimeTypes.append( "audio/ogg" );
+        info.mimeTypes.append( "audio/x-vorbis+ogg" );
         info.extensions.append( "ogg" );
     }
 

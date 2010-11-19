@@ -60,6 +60,9 @@ BackendPlugin::FormatInfo soundkonverter_codec_vorbistools::formatInfo( const QS
         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: http://www.xiph.org/vorbis/");
         info.mimeTypes.append( "application/ogg" );
         info.mimeTypes.append( "audio/vorbis" );
+        info.mimeTypes.append( "application/x-ogg" );
+        info.mimeTypes.append( "audio/ogg" );
+        info.mimeTypes.append( "audio/x-vorbis+ogg" );
         info.extensions.append( "ogg" );
     }
     else if( codecName == "wav" )

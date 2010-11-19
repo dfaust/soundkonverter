@@ -4,6 +4,7 @@
 -Fix: Ensure items in the file list and Replay Gain file list get redrawn after an update
 -Fix: Hide open directory dialog before scanning the directory to show the progressbar
 -Fix: Don't crash when deleting file list items
+-Fix: Don't recognize vorbis files as flac
 
 0.9.93 (1.0.0 rc1):
 -Add: Video formats for ffmpeg and mplayer

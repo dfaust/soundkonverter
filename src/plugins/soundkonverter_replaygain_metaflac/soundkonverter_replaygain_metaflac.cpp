@@ -48,7 +48,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_metaflac::formatInfo( const 
         info.mimeTypes.append( "audio/x-oggflac" );
         info.extensions.append( "flac" );
         info.extensions.append( "fla" );
-        info.extensions.append( "ogg" );
+//         info.extensions.append( "ogg" );
     }
 
     return info;

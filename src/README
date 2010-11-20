@@ -1,16 +1,8 @@
 
 This is a preview version of soundKonverter 1.0
 Most features are implemented although some more plugins will come before the final release.
-At this satge soundKonverter >should< be stable and harmless but that is not guaranteed. If you find a bug, please report it.
+At this stage soundKonverter >should< be stable and harmless but that is not guaranteed. If you find a bug, please report it.
 
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com
-or create a bug report/ask a question at https://launchpad.net/ubuntu/+source/soundkonverter
-
-Known Bugs:
-(- if you use a kde version minor 4.4.0 please keep in mind that the libkcompact disc shipped with kde contains a bug
-  causing soundkonverter to crash everytime it tries to close the cd drive. so you need to add the cd tracks, save the files list, restart
-  and load the file list again. in order to avoid this bug, upgrade to kde 4.4.0 or higher or compile an updated version of libkcompactdisc)
-- if you use a kde version minor 4.4.0 please keep in mind that the libkcompact disc shipped with kde contains a bug
-  causing soundkonverter to crash everytime it tries to close the cd drive. that's why the libkcompactdisc doesn't get deleted in KDE < 4.4.0
-  making it necessary to restart soundkonverter when changing the cd
+or create a bug report/ask a question at https://bugs.launchpad.net/soundkonverter

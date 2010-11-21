@@ -278,7 +278,7 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
             {
                 if( conversionOptions->bitrateMode == ConversionOptions::Abr )
                 {
-                    command += "-abr";
+                    command += "--abr";
                     command += QString::number(conversionOptions->bitrate);
                     if( conversionOptions->bitrateMin > 0 || conversionOptions->bitrateMax > 0 )
                     {
@@ -296,7 +296,7 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
                 }
                 else if( conversionOptions->bitrateMode == ConversionOptions::Cbr )
                 {
-                    command += "-cbr";
+                    command += "--cbr";
                     command += "-b";
                     command += QString::number(conversionOptions->bitrate);
                 }

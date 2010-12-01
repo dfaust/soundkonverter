@@ -1,8 +1,8 @@
 
-This is a preview version of soundKonverter 1.0
-Most features are implemented although some more plugins will come before the final release.
-At this stage soundKonverter >should< be stable and harmless but that is not guaranteed. If you find a bug, please report it.
+This is a release candidate of soundKonverter 1.0.0
+At this stage there shouldn't be any bugs any more. Unfortunately there are most likely some left. So if you see one, call me.
+soundKonverter >should< be stable and harmless but that is not guaranteed.
 
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com
-or create a bug report/ask a question at https://bugs.launchpad.net/soundkonverter
+but the best way is to create a bug report/ask a question at https://bugs.launchpad.net/soundkonverter

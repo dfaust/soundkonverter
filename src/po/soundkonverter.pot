@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2010-10-16 16:49+0200\n"
+"POT-Creation-Date: 2010-12-01 15:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -543,7 +543,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:75
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:81
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:75
-#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:68
+#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:71
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:67
 msgid "Wave won't compress the audio stream."
 msgstr ""
@@ -603,12 +603,12 @@ msgid "Stop conversion"
 msgstr ""
 
 #: filelist.cpp:80 optionssimple.cpp:43
-#: replaygainscanner/replaygainfilelist.cpp:70
+#: replaygainscanner/replaygainfilelist.cpp:72
 msgid "Remove"
 msgstr ""
 
 #: filelist.cpp:159 opener/fileopener.cpp:113 opener/playlistopener.cpp:117
-#: replaygainscanner/replaygainfilelist.cpp:206 soundkonverterview.cpp:357
+#: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:357
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -616,14 +616,14 @@ msgid ""
 msgstr ""
 
 #: filelist.cpp:197 opener/fileopener.cpp:153 opener/playlistopener.cpp:157
-#: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:244
+#: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:395
 msgid "... and %1 more files"
 msgstr ""
 
-#: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:191
+#: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:193
 #: opener/fileopener.cpp:177 opener/playlistopener.cpp:212
-#: opener/urlopener.cpp:132 optionslayer.cpp:132
+#: opener/urlopener.cpp:132 optionslayer.cpp:141
 msgid "No conversion options selected."
 msgstr ""
 
@@ -647,7 +647,7 @@ msgstr ""
 msgid "Failed"
 msgstr ""
 
-#: filelist.cpp:947
+#: filelist.cpp:951
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -719,8 +719,7 @@ msgid ""
 "soundKonverter is a frontend to various audio converters, Replay Gain tools "
 "and CD rippers.\n"
 "\n"
-"Please file bug reports at https://bugs.launchpad.net/ubuntu/+source/"
-"soundkonverter\n"
+"Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
 
@@ -871,7 +870,7 @@ msgid "Rip"
 msgstr ""
 
 #: opener/cdopener.cpp:167 opener/cdopener.cpp:936
-#: replaygainscanner/replaygainfilelist.cpp:35
+#: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr ""
 
@@ -2184,23 +2183,23 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: replaygainscanner/replaygainfilelist.cpp:34
+#: replaygainscanner/replaygainfilelist.cpp:36
 msgid "File"
 msgstr ""
 
-#: replaygainscanner/replaygainfilelist.cpp:36
+#: replaygainscanner/replaygainfilelist.cpp:38
 msgid "Album"
 msgstr ""
 
-#: replaygainscanner/replaygainfilelist.cpp:58
+#: replaygainscanner/replaygainfilelist.cpp:60
 msgid "Collapse all"
 msgstr ""
 
-#: replaygainscanner/replaygainfilelist.cpp:62
+#: replaygainscanner/replaygainfilelist.cpp:64
 msgid "Expand all"
 msgstr ""
 
-#: replaygainscanner/replaygainfilelist.cpp:415
+#: replaygainscanner/replaygainfilelist.cpp:417
 msgid "The following files could not be added:"
 msgstr ""
 

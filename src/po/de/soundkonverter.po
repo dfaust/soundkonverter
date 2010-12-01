@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad."
-"net/ubuntu/%2Bsource/soundkonverter/\n"
-"POT-Creation-Date: 2010-10-16 16:49+0200\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
+"soundkonverter/\n"
+"POT-Creation-Date: 2010-12-01 15:04+0100\n"
 "PO-Revision-Date: 2010-10-16 17:01+0200\n"
 "Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -576,7 +576,7 @@ msgstr "Rippe"
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:75
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:81
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:75
-#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:68
+#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:71
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:67
 msgid "Wave won't compress the audio stream."
 msgstr "Wave komprimiert die Audio-Daten nicht."
@@ -636,12 +636,12 @@ msgid "Stop conversion"
 msgstr "Konvertierung stoppen"
 
 #: filelist.cpp:80 optionssimple.cpp:43
-#: replaygainscanner/replaygainfilelist.cpp:70
+#: replaygainscanner/replaygainfilelist.cpp:72
 msgid "Remove"
 msgstr "Entfernen"
 
 #: filelist.cpp:159 opener/fileopener.cpp:113 opener/playlistopener.cpp:117
-#: replaygainscanner/replaygainfilelist.cpp:206 soundkonverterview.cpp:357
+#: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:357
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -652,14 +652,14 @@ msgstr ""
 "Dazu sollten Sie im Paketmanager ihrer Distribution nachschauen."
 
 #: filelist.cpp:197 opener/fileopener.cpp:153 opener/playlistopener.cpp:157
-#: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:244
+#: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:395
 msgid "... and %1 more files"
 msgstr "... und %1 weitere Dateien"
 
-#: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:191
+#: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:193
 #: opener/fileopener.cpp:177 opener/playlistopener.cpp:212
-#: opener/urlopener.cpp:132 optionslayer.cpp:132
+#: opener/urlopener.cpp:132 optionslayer.cpp:141
 msgid "No conversion options selected."
 msgstr "Keine Konvertierungsoptionen ausgewählt."
 
@@ -683,7 +683,7 @@ msgstr "Gestoppt"
 msgid "Failed"
 msgstr "Fehlgeschlagen"
 
-#: filelist.cpp:947
+#: filelist.cpp:951
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -760,15 +760,13 @@ msgid ""
 "soundKonverter is a frontend to various audio converters, Replay Gain tools "
 "and CD rippers.\n"
 "\n"
-"Please file bug reports at https://bugs.launchpad.net/ubuntu/+source/"
-"soundkonverter\n"
+"Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
 "soundKonverter ist eine Oberfläche für verschiedene Audio-Konvertierer, "
 "Raplay Gain Werkzeuge und CD-Ripper.\n"
 "\n"
-"Bitte erstellen Sie Fehlerberichte unter https://bugs.launchpad.net/ubuntu/"
-"+source/soundkonverter\n"
+"Bitte erstellen Sie Fehlerberichte unter https://bugs.launchpad.net/soundkonverter\n"
 "oder senden Sie mir einfach eine E-Mail an hessijames@gmail.com"
 
 #: main.cpp:23
@@ -924,7 +922,7 @@ msgid "Rip"
 msgstr "Rippen"
 
 #: opener/cdopener.cpp:167 opener/cdopener.cpp:936
-#: replaygainscanner/replaygainfilelist.cpp:35
+#: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Stück"
 
@@ -2138,10 +2136,9 @@ msgid ""
 "Many distributions offer mplayer in an additional software repository."
 msgstr ""
 "Sie müssen 'mplayer' installieren. Da mplayer patentierte Codecs beinhaltet "
-"ist es wahrscheinlich nicht in der "
-"Standardinstallation ihrer Distribution enthalten. Die meißten "
-"Distributionen stellen es jedoch in einer zusätzlichen Paketquelle zur "
-"Verfügung."
+"ist es wahrscheinlich nicht in der Standardinstallation ihrer Distribution "
+"enthalten. Die meißten Distributionen stellen es jedoch in einer "
+"zusätzlichen Paketquelle zur Verfügung."
 
 #: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:263
 msgid "Speex is a free and lossy audio codec designed for encoding speech."
@@ -2495,23 +2492,23 @@ msgstr "Verbleibende Zeit"
 msgid "Finished"
 msgstr "Beendet"
 
-#: replaygainscanner/replaygainfilelist.cpp:34
+#: replaygainscanner/replaygainfilelist.cpp:36
 msgid "File"
 msgstr "Datei"
 
-#: replaygainscanner/replaygainfilelist.cpp:36
+#: replaygainscanner/replaygainfilelist.cpp:38
 msgid "Album"
 msgstr "Album"
 
-#: replaygainscanner/replaygainfilelist.cpp:58
+#: replaygainscanner/replaygainfilelist.cpp:60
 msgid "Collapse all"
 msgstr "Alle zuklappen"
 
-#: replaygainscanner/replaygainfilelist.cpp:62
+#: replaygainscanner/replaygainfilelist.cpp:64
 msgid "Expand all"
 msgstr "Alle aufklappen"
 
-#: replaygainscanner/replaygainfilelist.cpp:415
+#: replaygainscanner/replaygainfilelist.cpp:417
 msgid "The following files could not be added:"
 msgstr "Die folgenden Dateien konnten nicht hinzugefügt werden:"
 

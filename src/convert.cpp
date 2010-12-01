@@ -666,7 +666,7 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                 }
                 if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
                 {
-                    items[i]->mode = ConvertItem::Mode( items[i]->mode ^ ConvertItem::replaygain );
+                    items.at(i)->mode = ConvertItem::Mode( items[i]->mode ^ ConvertItem::replaygain );
                 }
                 if( items.at(i)->state == ConvertItem::decode )
                 {

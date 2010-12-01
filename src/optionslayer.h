@@ -14,6 +14,7 @@
 
 #include <QWidget>
 #include <QColor>
+#include <QTimer>
 #include <KUrl>
 
 class Config;
@@ -21,7 +22,6 @@ class Options;
 class ConversionOptions;
 
 class QFrame;
-class QPropertyAnimation;
 class KPushButton;
 
 /**
@@ -30,8 +30,6 @@ class KPushButton;
 class OptionsLayer : public QWidget
 {
     Q_OBJECT
-    Q_PROPERTY( qreal opacity READ opacity WRITE setOpacity )
-    
 public:
     /** Constructor */
     OptionsLayer( Config *config, QWidget *parent );
@@ -48,15 +46,13 @@ private:
     Options *options;
     KPushButton *pOk;
     KPushButton *pCancel;
-    
-    QPropertyAnimation *aAnimation;
-    qreal rOpacity;
 
+    QTimer fadeTimer;
+    float fadeAlpha;
+    int fadeMode; // 1 = fade in, 2 = fade out
+    
     KUrl::List urls;
     QString command;
-    
-    qreal opacity();
-    void setOpacity( qreal opacity );
 
     inline QBrush brushSetAlpha( QBrush brush, const int alpha )
     {
@@ -80,7 +76,7 @@ public slots:
     void setCommand( const QString& _command );
 
 private slots:
-    void animationFinished();
+    void fadeAnim();
     void abort();
     void ok();
     

@@ -109,7 +109,19 @@ public slots:
 
 private slots:
     void applyChanges();
+
+    void editOptionsClicked();
     void editTagsClicked();
+    
+    void editTitleClicked();
+    void editNumberClicked();
+    void editArtistClicked();
+    void editComposerClicked();
+    void editAlbumClicked();
+    void editDiscClicked();
+    void editYearClicked();
+    void editGenreClicked();
+    void editCommentClicked();
 
 signals:
     // connected to FileList

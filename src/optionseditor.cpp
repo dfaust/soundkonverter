@@ -67,7 +67,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pEditOptions->setFixedWidth( pEditOptions->sizeHint().width() );
     conversionOptionsGridLayout->addWidget( pEditOptions, 3, 0, Qt::AlignHCenter );
     pEditOptions->hide();
-//     connect( pEditOptions, SIGNAL(clicked()), this, SLOT(editOptionsClicked()) );
+    connect( pEditOptions, SIGNAL(clicked()), this, SLOT(editOptionsClicked()) );
 
 
 
@@ -93,7 +93,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pTitleEdit->setFixedSize( lTitle->sizeHint().height(), lTitle->sizeHint().height() );
     pTitleEdit->hide();
     titleBox->addWidget( pTitleEdit );
-//     connect( pTitleEdit, SIGNAL(clicked()), this, SLOT(editTitleClicked()) );
+    connect( pTitleEdit, SIGNAL(clicked()), this, SLOT(editTitleClicked()) );
     lNumberLabel = new QLabel( i18n("Track No.:"), tagsWidget );
     titleBox->addWidget( lNumberLabel );
     iNumber = new KIntSpinBox( 0, 999, 1, 1, tagsWidget );
@@ -104,7 +104,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pNumberEdit->setFixedSize( iNumber->sizeHint().height(), iNumber->sizeHint().height() );
     pNumberEdit->hide();
     titleBox->addWidget( pNumberEdit );
-//     connect( pNumberEdit, SIGNAL(clicked()), this, SLOT(editNumberClicked()) );
+    connect( pNumberEdit, SIGNAL(clicked()), this, SLOT(editNumberClicked()) );
 
     // add a horizontal box layout for the artist and the composer
     QHBoxLayout *artistBox = new QHBoxLayout();
@@ -120,7 +120,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pArtistEdit->setFixedSize( lArtist->sizeHint().height(), lArtist->sizeHint().height() );
     pArtistEdit->hide();
     artistBox->addWidget( pArtistEdit );
-//     connect( pArtistEdit, SIGNAL(clicked()), this, SLOT(editArtistClicked()) );
+    connect( pArtistEdit, SIGNAL(clicked()), this, SLOT(editArtistClicked()) );
     lComposerLabel = new QLabel( i18n("Composer:"), tagsWidget );
     artistBox->addWidget( lComposerLabel );
     lComposer = new KLineEdit( tagsWidget );
@@ -131,7 +131,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pComposerEdit->setFixedSize( lComposer->sizeHint().height(), lComposer->sizeHint().height() );
     pComposerEdit->hide();
     artistBox->addWidget( pComposerEdit );
-//     connect( pComposerEdit, SIGNAL(clicked()), this, SLOT(editComposerClicked()) );
+    connect( pComposerEdit, SIGNAL(clicked()), this, SLOT(editComposerClicked()) );
 
     // add a horizontal box layout for the album
     QHBoxLayout *albumBox = new QHBoxLayout();
@@ -147,7 +147,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pAlbumEdit->setFixedSize( lAlbum->sizeHint().height(), lAlbum->sizeHint().height() );
     pAlbumEdit->hide();
     albumBox->addWidget( pAlbumEdit );
-//     connect( pAlbumEdit, SIGNAL(clicked()), this, SLOT(editAlbumClicked()) );
+    connect( pAlbumEdit, SIGNAL(clicked()), this, SLOT(editAlbumClicked()) );
 
     // add a horizontal box layout for the disc number, year and genre
     QHBoxLayout *albumdataBox = new QHBoxLayout();
@@ -163,7 +163,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pDiscEdit->setFixedSize( iDisc->sizeHint().height(), iDisc->sizeHint().height() );
     pDiscEdit->hide();
     albumdataBox->addWidget( pDiscEdit );
-//     connect( pDiscEdit, SIGNAL(clicked()), this, SLOT(editDiscClicked()) );
+    connect( pDiscEdit, SIGNAL(clicked()), this, SLOT(editDiscClicked()) );
     albumdataBox->addStretch();
     lYearLabel = new QLabel( i18n("Year:"), tagsWidget );
     albumdataBox->addWidget( lYearLabel );
@@ -175,7 +175,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pYearEdit->setFixedSize( iYear->sizeHint().height(), iYear->sizeHint().height() );
     pYearEdit->hide();
     albumdataBox->addWidget( pYearEdit );
-//     connect( pYearEdit, SIGNAL(clicked()), this, SLOT(editYearClicked()) );
+    connect( pYearEdit, SIGNAL(clicked()), this, SLOT(editYearClicked()) );
     albumdataBox->addStretch();
     lGenreLabel = new QLabel( i18n("Genre:"), tagsWidget );
     albumdataBox->addWidget( lGenreLabel );
@@ -192,7 +192,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pGenreEdit->setFixedSize( cGenre->sizeHint().height(), cGenre->sizeHint().height() );
     pGenreEdit->hide();
     albumdataBox->addWidget( pGenreEdit );
-//     connect( pGenreEdit, SIGNAL(clicked()), this, SLOT(editGenreClicked()) );
+    connect( pGenreEdit, SIGNAL(clicked()), this, SLOT(editGenreClicked()) );
 
     // add a horizontal box layout for the comment
     QHBoxLayout *commentBox = new QHBoxLayout();
@@ -208,7 +208,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pCommentEdit->setFixedSize( lTitle->sizeHint().height(), lTitle->sizeHint().height() );
     pCommentEdit->hide();
     commentBox->addWidget( pCommentEdit );
-//     connect( pCommentEdit, SIGNAL(clicked()), this, SLOT(editCommentClicked()) );
+    connect( pCommentEdit, SIGNAL(clicked()), this, SLOT(editCommentClicked()) );
     tagsGridLayout->setRowStretch( 4, 1 );
 
     lEditTags = new QLabel( "", tagsWidget );
@@ -377,7 +377,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     else {
         setCaption( i18n("%1 Files").arg(items.count()) );
         QList<FileListItem*>::Iterator it = items.begin();
-//         ConversionOptions cOptions = (*it)->options;
+        int conversionOptionsId = (*it)->conversionOptionsId;
         QString title = ( (*it)->tags == 0 ) ? "" : (*it)->tags->title;
         int number = ( (*it)->tags == 0 ) ? 0 : (*it)->tags->track;
         QString artist = ( (*it)->tags == 0 ) ? "" : (*it)->tags->artist;
@@ -388,12 +388,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         QString genre = ( (*it)->tags == 0 ) ? "" : (*it)->tags->genre;
         QString comment = ( (*it)->tags == 0 ) ? "" : (*it)->tags->comment;
         while( it != items.end() ) {
-/*            if( !cOptions.nearlyEqual((*it)->options) ) {
+           if( (*it)->conversionOptionsId != conversionOptionsId ) {
                 options->setEnabled( false );
                 lEditOptions->setText( i18n("You have selected multiple files with different conversion options.\nYou can change the options of all files by hitting the button below.") );
                 lEditOptions->show();
                 pEditOptions->show();
-            }*/
+            }
             if( (*it)->tags == 0 ) {
                 setTagInputEnabled( false );
                 lEditTags->setText( i18n("Reading the tags of one or more files failed.\n"
@@ -459,6 +459,8 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 //             disconnect( options, SIGNAL(optionsChanged()), 0, 0 );
 //             options->setCurrentOptions( items.first()->options );
 //             connect( options, SIGNAL(optionsChanged()), this, SLOT(optionsChanged()) );
+            const bool success = options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(conversionOptionsId) );
+            options->setEnabled( success );
         }
         if( lTitle->isEnabled() ) {
             lTitle->setText( title );
@@ -519,7 +521,7 @@ void OptionsEditor::applyChanges()
             continue;
         }
         
-        if( newConversionOptions )
+        if( newConversionOptions && options->isEnabled() )
         {
             selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, newConversionOptions );
         }
@@ -530,19 +532,42 @@ void OptionsEditor::applyChanges()
         
         if( selectedItems.at(i)->tags )
         {
-            selectedItems.at(i)->tags->title = lTitle->text();
-            selectedItems.at(i)->tags->track = iNumber->value();
-            selectedItems.at(i)->tags->artist = lArtist->text();
-            selectedItems.at(i)->tags->composer = lComposer->text();
-            selectedItems.at(i)->tags->album = lAlbum->text();
-            selectedItems.at(i)->tags->disc = iDisc->value();
-            selectedItems.at(i)->tags->year = iYear->value();
-            selectedItems.at(i)->tags->genre = cGenre->currentText();
-            selectedItems.at(i)->tags->comment = tComment->toPlainText();
+            if( lTitle->isEnabled() )
+                selectedItems.at(i)->tags->title = lTitle->text();
+            if( iNumber->isEnabled() )
+                selectedItems.at(i)->tags->track = iNumber->value();
+            if( lArtist->isEnabled() )
+                selectedItems.at(i)->tags->artist = lArtist->text();
+            if( lComposer->isEnabled() )
+                selectedItems.at(i)->tags->composer = lComposer->text();
+            if( lAlbum->isEnabled() )
+                selectedItems.at(i)->tags->album = lAlbum->text();
+            if( iDisc->isEnabled() )
+                selectedItems.at(i)->tags->disc = iDisc->value();
+            if( iYear->isEnabled() )
+                selectedItems.at(i)->tags->year = iYear->value();
+            if( cGenre->isEnabled() )
+                selectedItems.at(i)->tags->genre = cGenre->currentText();
+            if( tComment->isEnabled() )
+                selectedItems.at(i)->tags->comment = tComment->toPlainText();
         }
     }
     
     emit updateFileListItems( selectedItems );
+}
+
+void OptionsEditor::editOptionsClicked()
+{
+    options->setEnabled( true );
+    lEditOptions->hide();
+    pEditOptions->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() )
+    {
+        ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( selectedItems.first()->conversionOptionsId );
+        if( conversionOptions )
+            options->setCurrentConversionOptions( conversionOptions );
+    }
 }
 
 void OptionsEditor::editTagsClicked()
@@ -552,6 +577,127 @@ void OptionsEditor::editTagsClicked()
         selectedItems.at(i)->tags = new TagData();
     }
 
-    itemsSelected( selectedItems );
+//     itemsSelected( selectedItems );
+
+    editTitleClicked();
+    editNumberClicked();
+    editArtistClicked();
+    editComposerClicked();
+    editAlbumClicked();
+    editDiscClicked();
+    editYearClicked();
+    editGenreClicked();
+    editCommentClicked();
 }
+
+void OptionsEditor::editTitleClicked()
+{
+    lTitle->setEnabled( true );
+    lTitle->setFocus();
+    pTitleEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        lTitle->setText( selectedItems.first()->tags->title );
+    }
+}
+
+void OptionsEditor::editNumberClicked()
+{
+    iNumber->setEnabled( true );
+    iNumber->setFocus();
+    pNumberEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        iNumber->setValue( selectedItems.first()->tags->track );
+    }
+}
+
+void OptionsEditor::editArtistClicked()
+{
+    lArtist->setEnabled( true );
+    lArtist->setFocus();
+    pArtistEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        lArtist->setText( selectedItems.first()->tags->artist );
+    }
+}
+
+void OptionsEditor::editComposerClicked()
+{
+    lComposer->setEnabled( true );
+    lComposer->setFocus();
+    pComposerEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        lComposer->setText( selectedItems.first()->tags->composer );
+    }
+}
+
+void OptionsEditor::editAlbumClicked()
+{
+    lAlbum->setEnabled( true );
+    lAlbum->setFocus();
+    pAlbumEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        lAlbum->setText( selectedItems.first()->tags->album );
+    }
+}
+
+void OptionsEditor::editDiscClicked()
+{
+    iDisc->setEnabled( true );
+    iDisc->setFocus();
+    pDiscEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        iDisc->setValue( selectedItems.first()->tags->disc );
+    }
+}
+
+void OptionsEditor::editYearClicked()
+{
+    iYear->setEnabled( true );
+    iYear->setFocus();
+    pYearEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        iYear->setValue( selectedItems.first()->tags->year );
+    }
+}
+
+void OptionsEditor::editGenreClicked()
+{
+    cGenre->setEnabled( true );
+    cGenre->setFocus();
+    pGenreEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        cGenre->setCurrentItem( selectedItems.first()->tags->genre );
+    }
+}
+
+void OptionsEditor::editCommentClicked()
+{
+    tComment->setEnabled( true );
+    tComment->setReadOnly( false );
+    tComment->setFocus();
+    pCommentEdit->hide();
+    
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        tComment->setPlainText( selectedItems.first()->tags->comment );
+    }
+}
+
+
 

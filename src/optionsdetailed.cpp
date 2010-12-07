@@ -316,6 +316,8 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
     formatChanged( cFormat->currentText() );
     cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
     encoderChanged( cPlugin->currentText() );
+    outputDirectory->setMode( (OutputDirectory::Mode)options->outputDirectoryMode );
+    outputDirectory->setDirectory( options->outputDirectory );
     cReplayGain->setChecked( options->replaygain );
 //     cBpm->setChecked( options->bpm );
 

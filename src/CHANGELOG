@@ -1,3 +1,8 @@
+-Fix: Display correct conversion options in the conversion options editor with multiple files selected
+-Fix: Apply output directory to the conversion options input widget
+-Fix: Don't update conversion options or tags in the conversion options editor with multiple files selected if they don't match
+-Fix: Make edit conversion options/tags buttons in the conversion options editor work
+
 0.9.94 (1.0.0 rc2):
 -Add: Updated czech translation (by Pavel Fric)
 -Fix: Tint items in the Replay Gain scanner red while calculating Replay Gain

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2010-12-01 15:04+0100\n"
+"POT-Creation-Date: 2010-12-07 16:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,14 +71,14 @@ msgstr ""
 #: configdialog/configgeneralpage.cpp:251
 #: configdialog/configgeneralpage.cpp:256
 #: configdialog/configgeneralpage.cpp:261 options.cpp:53 options.cpp:72
-#: optionsdetailed.cpp:342
+#: optionsdetailed.cpp:344
 msgid "Last used"
 msgstr ""
 
 #: config.cpp:43 config.cpp:315 config.cpp:322 config.cpp:328
 #: configdialog/configgeneralpage.cpp:63
 #: configdialog/configgeneralpage.cpp:249 options.cpp:82
-#: optionsdetailed.cpp:338 optionssimple.cpp:155 optionssimple.cpp:195
+#: optionsdetailed.cpp:340 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:213
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:260
@@ -107,7 +107,7 @@ msgid "Try internal"
 msgstr ""
 
 #: config.cpp:312 config.cpp:328 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:335
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:337
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:225
@@ -132,7 +132,7 @@ msgid "Very low"
 msgstr ""
 
 #: config.cpp:313 config.cpp:328 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:336
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:338
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:205
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:237
@@ -157,7 +157,7 @@ msgid "Low"
 msgstr ""
 
 #: config.cpp:314 config.cpp:328 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:337
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:339
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:209
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:249
@@ -184,7 +184,7 @@ msgid "Medium"
 msgstr ""
 
 #: config.cpp:316 config.cpp:328 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:339
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:341
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:217
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:271
@@ -209,7 +209,7 @@ msgid "Very high"
 msgstr ""
 
 #: config.cpp:317 config.cpp:332 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:254 optionsdetailed.cpp:340
+#: configdialog/configgeneralpage.cpp:254 optionsdetailed.cpp:342
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:197
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
@@ -237,13 +237,13 @@ msgid "Lossless"
 msgstr ""
 
 #: config.cpp:318 config.cpp:336 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:259 optionsdetailed.cpp:341
+#: configdialog/configgeneralpage.cpp:259 optionsdetailed.cpp:343
 #: optionssimple.cpp:158 optionssimple.cpp:213 optionssimple.cpp:290
 #: soundkonverterview.cpp:451 soundkonverterview.cpp:453
 msgid "Hybrid"
 msgstr ""
 
-#: config.cpp:340 optionsdetailed.cpp:344 optionssimple.cpp:160
+#: config.cpp:340 optionsdetailed.cpp:346 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
@@ -623,7 +623,7 @@ msgstr ""
 
 #: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:193
 #: opener/fileopener.cpp:177 opener/playlistopener.cpp:212
-#: opener/urlopener.cpp:132 optionslayer.cpp:141
+#: opener/urlopener.cpp:132 optionslayer.cpp:132
 msgid "No conversion options selected."
 msgstr ""
 
@@ -1134,23 +1134,23 @@ msgid ""
 "per minute."
 msgstr ""
 
-#: optionsdetailed.cpp:331
+#: optionsdetailed.cpp:333
 msgid "New profile"
 msgstr ""
 
-#: optionsdetailed.cpp:331
+#: optionsdetailed.cpp:333
 msgid "Enter a name for the new profile:"
 msgstr ""
 
-#: optionsdetailed.cpp:347
+#: optionsdetailed.cpp:349
 msgid "You cannot overwrite the built-in profiles."
 msgstr ""
 
-#: optionsdetailed.cpp:347 optionsdetailed.cpp:367
+#: optionsdetailed.cpp:349 optionsdetailed.cpp:369
 msgid "Profile already exists"
 msgstr ""
 
-#: optionsdetailed.cpp:367
+#: optionsdetailed.cpp:369
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
@@ -1221,6 +1221,12 @@ msgstr ""
 
 #: optionseditor.cpp:378
 msgid "%1 Files"
+msgstr ""
+
+#: optionseditor.cpp:393
+msgid ""
+"You have selected multiple files with different conversion options.\n"
+"You can change the options of all files by hitting the button below."
 msgstr ""
 
 #: optionseditor.cpp:399

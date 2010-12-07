@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2010-12-01 15:04+0100\n"
-"PO-Revision-Date: 2010-11-02 08:47+0100\n"
+"POT-Creation-Date: 2010-12-07 16:16+0100\n"
+"PO-Revision-Date: 2010-12-06 20:56+0100\n"
 "Last-Translator: Pavel Fric <fripohled@blogspot.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
@@ -91,14 +91,14 @@ msgstr "Ovlivněné soubory:"
 #: configdialog/configgeneralpage.cpp:251
 #: configdialog/configgeneralpage.cpp:256
 #: configdialog/configgeneralpage.cpp:261 options.cpp:53 options.cpp:72
-#: optionsdetailed.cpp:342
+#: optionsdetailed.cpp:344
 msgid "Last used"
 msgstr "Naposledy použitý"
 
 #: config.cpp:43 config.cpp:315 config.cpp:322 config.cpp:328
 #: configdialog/configgeneralpage.cpp:63
 #: configdialog/configgeneralpage.cpp:249 options.cpp:82
-#: optionsdetailed.cpp:338 optionssimple.cpp:155 optionssimple.cpp:195
+#: optionsdetailed.cpp:340 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:213
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:260
@@ -120,14 +120,14 @@ msgstr "Naposledy použitý"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:260
 #: soundkonverterview.cpp:436 soundkonverterview.cpp:438
 msgid "High"
-msgstr "Vysoká"
+msgstr "Vysoká kvalita"
 
 #: config.cpp:218 config.cpp:253 config.cpp:255
 msgid "Try internal"
 msgstr "Zkusit vnitřní"
 
 #: config.cpp:312 config.cpp:328 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:335
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:337
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:225
@@ -149,10 +149,10 @@ msgstr "Zkusit vnitřní"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:225
 #: soundkonverterview.cpp:421 soundkonverterview.cpp:423
 msgid "Very low"
-msgstr "Velmi nízká"
+msgstr "Velmi nízká kvalita"
 
 #: config.cpp:313 config.cpp:328 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:336
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:338
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:205
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:237
@@ -174,10 +174,10 @@ msgstr "Velmi nízká"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:237
 #: soundkonverterview.cpp:426 soundkonverterview.cpp:428
 msgid "Low"
-msgstr "Nízká"
+msgstr "Nízká kvalita"
 
 #: config.cpp:314 config.cpp:328 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:337
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:339
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:209
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:249
@@ -201,10 +201,10 @@ msgstr "Nízká"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:249
 #: soundkonverterview.cpp:431 soundkonverterview.cpp:433
 msgid "Medium"
-msgstr "Střední"
+msgstr "Střední kvalita"
 
 #: config.cpp:316 config.cpp:328 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:339
+#: configdialog/configgeneralpage.cpp:249 optionsdetailed.cpp:341
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:217
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:271
@@ -226,10 +226,10 @@ msgstr "Střední"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:271
 #: soundkonverterview.cpp:441 soundkonverterview.cpp:443
 msgid "Very high"
-msgstr "Velmi vysoká"
+msgstr "Velmi vysoká kvalita"
 
 #: config.cpp:317 config.cpp:332 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:254 optionsdetailed.cpp:340
+#: configdialog/configgeneralpage.cpp:254 optionsdetailed.cpp:342
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:197
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
@@ -254,16 +254,16 @@ msgstr "Velmi vysoká"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:97
 #: soundkonverterview.cpp:446 soundkonverterview.cpp:448
 msgid "Lossless"
-msgstr "Bezztrátový"
+msgstr "Bezztrátová kvalita"
 
 #: config.cpp:318 config.cpp:336 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:259 optionsdetailed.cpp:341
+#: configdialog/configgeneralpage.cpp:259 optionsdetailed.cpp:343
 #: optionssimple.cpp:158 optionssimple.cpp:213 optionssimple.cpp:290
 #: soundkonverterview.cpp:451 soundkonverterview.cpp:453
 msgid "Hybrid"
-msgstr "Smíšený"
+msgstr "Smíšená kvalita"
 
-#: config.cpp:340 optionsdetailed.cpp:344 optionssimple.cpp:160
+#: config.cpp:340 optionsdetailed.cpp:346 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
@@ -285,8 +285,7 @@ msgstr "Převést pomocí soundKonverteru"
 
 #: config.cpp:468
 msgid "Add Replay Gain with soundKonverter"
-msgstr ""
-"Přidat vyrovnávání hlasitosti přehrávaných skladeb pomocí soundKonverteru"
+msgstr "Přidat vyrovnání hlasitosti skladeb pomocí soundKonverteru"
 
 #: configdialog/configbackendspage.cpp:121
 #: configdialog/configbackendspage.cpp:153
@@ -304,7 +303,7 @@ msgstr "Kodér"
 #: configdialog/configbackendspage.cpp:155
 #: configdialog/configbackendspage.cpp:218 convert.cpp:1107
 msgid "Replay Gain"
-msgstr "Vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Vyrovnávání hlasitosti skladeb"
 
 #: configdialog/configbackendspage.cpp:182
 msgid "CD ripper"
@@ -316,7 +315,7 @@ msgstr "Jádro"
 
 #: configdialog/configbackendspage.cpp:197
 msgid "Format"
-msgstr "Formátovat"
+msgstr "Formát"
 
 #: configdialog/configbackendspage.cpp:237
 msgid ""
@@ -340,7 +339,7 @@ msgstr "Obecné"
 
 #: configdialog/configdialog.cpp:45 main.cpp:29
 msgid "Backends"
-msgstr "Podpůrné vrstvy"
+msgstr "Jádra"
 
 #: configdialog/configgeneralpage.cpp:42
 msgid "Start in Mode"
@@ -348,11 +347,11 @@ msgstr "Spustit v režimu"
 
 #: configdialog/configgeneralpage.cpp:46 options.cpp:95
 msgid "Simple"
-msgstr "Jednoduchý"
+msgstr "Jednoduché volby"
 
 #: configdialog/configgeneralpage.cpp:47 options.cpp:96
 msgid "Detailed"
-msgstr "Podrobný"
+msgstr "Podrobné volby"
 
 #: configdialog/configgeneralpage.cpp:56
 msgid "Default profile"
@@ -372,7 +371,7 @@ msgstr "nahradí některé zvláštní znaky jako '?' znakem '_'."
 
 #: configdialog/configgeneralpage.cpp:109
 msgid "Conflict handling"
-msgstr "Zacházení při střetu"
+msgstr "Zvládání střetů"
 
 #: configdialog/configgeneralpage.cpp:112
 msgid "Generate new file name"
@@ -412,7 +411,7 @@ msgstr "Obnovit pruh s průběhem v tomto časovém úseku (čas v milisekundác
 #: global.cpp:91 global.cpp:92
 msgctxt "milliseconds"
 msgid "ms"
-msgstr "ms"
+msgstr " ms"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid "Create actions menus for the file manager"
@@ -463,7 +462,7 @@ msgstr "Kóduje se"
 
 #: convert.cpp:368
 msgid "Applying Replay Gain"
-msgstr "Přidává se vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Přidává se vyrovnání hlasitosti skladeb"
 
 #: convert.cpp:387
 msgid "Writing tags"
@@ -659,7 +658,7 @@ msgstr "... a %1 další soubory"
 
 #: filelist.cpp:410 opener/cdopener.cpp:1191 opener/diropener.cpp:193
 #: opener/fileopener.cpp:177 opener/playlistopener.cpp:212
-#: opener/urlopener.cpp:132 optionslayer.cpp:141
+#: opener/urlopener.cpp:132 optionslayer.cpp:132
 msgid "No conversion options selected."
 msgstr "Nevybrány žádné převodní volby."
 
@@ -673,7 +672,7 @@ msgstr "Čeká se"
 
 #: filelist.cpp:481
 msgid "Waiting for Replay Gain"
-msgstr "Čeká se na vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Čeká se na vyrovnání hlasitosti skladeb"
 
 #: filelist.cpp:496
 msgid "Stopped"
@@ -764,9 +763,10 @@ msgid ""
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
 "soundKonverter je rozhraní pro různé převodníky zvuku, nástroje pro "
-"vyrovnávání hlasitosti přehrávaných skladeb a vytahovače skladeb z CD.\n"
+"vyrovnání hlasitosti skladeb a vytahovače skladeb z CD.\n"
 "\n"
-"Chyby, prosím, hlašte na stránkách https://bugs.launchpad.net/soundkonverter\n"
+"Chyby, prosím, hlaste na stránkách https://bugs.launchpad.net/"
+"soundkonverter\n"
 "nebo autorovi jednoduše zašlete dopis na adresu elektronické pošty "
 "hessijames@gmail.com"
 
@@ -821,8 +821,8 @@ msgstr "Všichni programátoři převodníku zvuku"
 #: main.cpp:33
 msgid "Open the Replay Gain tool an add all given files"
 msgstr ""
-"Otevřít nástroj pro vyrovnávání hlasitosti přehrávaných skladeb a přidat "
-"všechny dané soubory"
+"Otevřít nástroj pro vyrovnání hlasitosti skladeb a přidat všechny dané "
+"soubory"
 
 #: main.cpp:35
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1171,7 +1171,7 @@ msgstr "Použít přídavný modul"
 
 #: optionsdetailed.cpp:89 optionssimple.cpp:92
 msgid "Calculate Replay Gain tags"
-msgstr "Spočítat značky vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Spočítat značky k vyrovnání hlasitosti skladeb"
 
 #: optionsdetailed.cpp:103
 msgid "Save current options as a profile"
@@ -1197,7 +1197,7 @@ msgid ""
 msgstr ""
 "Vyrovnávání hlasitosti není pro %1 souborový formát podporováno.\n"
 "Prověřte, prosím, na správce balíčků své distribuce, abyste nainstaloval "
-"dodatečný přídavný modul pro vyrovnávání hlasitosti."
+"dodatečný přídavný modul pro vyrovnání hlasitosti."
 
 #: optionsdetailed.cpp:278 optionssimple.cpp:382
 msgid ""
@@ -1206,23 +1206,23 @@ msgid ""
 msgstr ""
 "Použití nynějších převodních voleb vytvoří soubory s přibližně %1 za minutu."
 
-#: optionsdetailed.cpp:331
+#: optionsdetailed.cpp:333
 msgid "New profile"
 msgstr "Nový profil"
 
-#: optionsdetailed.cpp:331
+#: optionsdetailed.cpp:333
 msgid "Enter a name for the new profile:"
 msgstr "Zadejte název pro nový profil:"
 
-#: optionsdetailed.cpp:347
+#: optionsdetailed.cpp:349
 msgid "You cannot overwrite the built-in profiles."
 msgstr "Vestavěné profily nelze přepsat ."
 
-#: optionsdetailed.cpp:347 optionsdetailed.cpp:367
+#: optionsdetailed.cpp:349 optionsdetailed.cpp:369
 msgid "Profile already exists"
 msgstr "Profil již existuje"
 
-#: optionsdetailed.cpp:367
+#: optionsdetailed.cpp:369
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
@@ -1305,6 +1305,14 @@ msgstr ""
 #: optionseditor.cpp:378
 msgid "%1 Files"
 msgstr "%1 Soubory"
+
+#: optionseditor.cpp:393
+msgid ""
+"You have selected multiple files with different conversion options.\n"
+"You can change the options of all files by hitting the button below."
+msgstr ""
+"Vybral jste více souborů s různými volbami pro převod.\n"
+"Volby všech souborů můžete upravit klepnutím na dolní tlačítko."
 
 #: optionseditor.cpp:399
 msgid ""
@@ -1909,7 +1917,7 @@ msgstr "Režim datového toku"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:169
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:372
 msgid "Variable"
-msgstr "Proměnný"
+msgstr "Proměnlivý"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:113
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:234
@@ -2375,7 +2383,7 @@ msgid ""
 "default installation of your distribution.\n"
 "Some distributions offer aacgain in an additional software repository."
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory AAC, "
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory AAC, "
 "potřebujete nainstalovat 'aacgain'.\n"
 "Protože je však aac patentovaný souborový formát, nemůže být zahrnut ve "
 "výchozí instalaci vaší distribuce.\n"
@@ -2387,7 +2395,7 @@ msgid ""
 "'metaflac'. metaflac is usually in the package 'flac' which should be "
 "shipped with your distribution."
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory FLAC, "
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory FLAC, "
 "potřebujete nainstalovat balíček 'metaflac'.\n"
 "Program metaflac je obvykle v balíčku 'flac', který by měl být umístěn ve "
 "vaší distribuci."
@@ -2404,7 +2412,7 @@ msgid ""
 "default installation of your distribution.\n"
 "Some distributions offer mp3gain in an additional software repository."
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory MP3, "
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory MP3, "
 "potřebujete nainstalovat 'mp3gain'.\n"
 "Protože je však MP3 patentovaný souborový formát, mp3gain nemůže být zahrnut "
 "ve výchozí instalaci vaší distribuce.\n"
@@ -2416,7 +2424,7 @@ msgid ""
 "install 'replaygain'.\n"
 "You can get it at http://www.musepack.net"
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory musepack, "
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory musepack, "
 "potřebujete nainstalovat 'replaygain'.\n"
 "Dostanete jej na stránkách http://wwwmusepack.net"
 
@@ -2426,8 +2434,8 @@ msgid ""
 "install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' "
 "which should be shipped with your distribution."
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory Ogg "
-"Vorbis, potřebujete nainstalovat balíček 'vorbisgain'.\n"
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory Ogg Vorbis, "
+"potřebujete nainstalovat balíček 'vorbisgain'.\n"
 "Program vorbisgain je obvykle v balíčku 'vorbisgain', který by měl být "
 "umístěn ve vaší distribuci."
 
@@ -2440,7 +2448,7 @@ msgid ""
 "In order to calculate Replay Gain tags for wavpack files, you need to "
 "install 'wvgain'. wvgain is usually in the package 'wavpack'."
 msgstr ""
-"Abyste mohl spočítat značky pro vyrovnávání hlasitosti pro soubory WavPack, "
+"Abyste mohl spočítat značky pro vyrovnání hlasitosti pro soubory WavPack, "
 "potřebujete nainstalovat balíček 'wvgain'.\n"
 "Program wvgain je obvykle v balíčku 'wavpack'."
 
@@ -2492,7 +2500,7 @@ msgstr "Následující soubory se nepodařilo přidat:"
 #: replaygainscanner/replaygainscanner.cpp:222
 #: replaygainscanner/replaygainscanner.cpp:233
 msgid "Replay Gain tool"
-msgstr "Nástroj pro vyrovnávání hlasitosti přehrávaných skladeb"
+msgstr "Nástroj pro vyrovnání hlasitosti skladeb"
 
 #: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:161
 #: soundkonverterview.cpp:82
@@ -2534,7 +2542,7 @@ msgstr "Zobrazit zápisy..."
 
 #: soundkonverter.cpp:151
 msgid "Replay Gain tool..."
-msgstr "Nástroj pro vyrovnávání hlasitosti přehrávaných skladeb..."
+msgstr "Nástroj pro vyrovnání hlasitosti skladeb..."
 
 #: soundkonverter.cpp:166 soundkonverterview.cpp:83
 msgid "Add CD tracks..."
@@ -2978,13 +2986,6 @@ msgstr "fripohled.blogspot.com"
 
 #~ msgid "Conversion options"
 #~ msgstr "Volby pro převod"
-
-#~ msgid ""
-#~ "You have selected multiple files with different conversion options.\n"
-#~ "You can change the options of all files by hitting the button below."
-#~ msgstr ""
-#~ "Vybral jste více souborů s různými volbami pro převod.\n"
-#~ "Volby všech souborů můžete upravit klepnutím na dolní tlačítko."
 
 #~ msgid "Choose output options"
 #~ msgstr "Zvolte výstupní volby"

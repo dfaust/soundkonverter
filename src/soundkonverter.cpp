@@ -241,7 +241,7 @@ void soundKonverter::conversionStarted()
 
 void soundKonverter::conversionStopped( int state )
 {
-    if( autoclose && state != 1 && !m_view->isVisible() )
+    if( autoclose && state != 1 /*&& !m_view->isVisible()*/ )
         KApplication::kApplication()->quit(); // close app on conversion stop unless the conversion was stopped by the user or the window is shown
 
     if( systemTray )

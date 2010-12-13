@@ -1,7 +1,11 @@
+0.9.95:
+-Add: Updated czech translation (by Pavel Fric)
+-Change: Close soundkonverter if --autoclose was passed, even if the main window is visible
 -Fix: Display correct conversion options in the conversion options editor with multiple files selected
 -Fix: Apply output directory to the conversion options input widget
 -Fix: Don't update conversion options or tags in the conversion options editor with multiple files selected if they don't match
 -Fix: Make edit conversion options/tags buttons in the conversion options editor work
+-Fix: Fix possible crash in the log viewer
 
 0.9.94 (1.0.0 rc2):
 -Add: Updated czech translation (by Pavel Fric)

@@ -73,6 +73,9 @@ void LogViewer::itemChanged()
     kLog->clear();
     LoggerItem* item = logger->getLog( cItem->itemData(cItem->currentIndex()).toInt() );
 
+    if( !item )
+        return;
+
     for( QStringList::Iterator b = item->data.begin(); b != item->data.end(); ++b )
     {
         kLog->append( *b );

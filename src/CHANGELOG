@@ -1,6 +1,7 @@
 0.9.95:
 -Add: Updated czech translation (by Pavel Fric)
 -Change: Close soundkonverter if --autoclose was passed, even if the main window is visible
+-Change: Use --replaygain-accurate for lame
 -Fix: Display correct conversion options in the conversion options editor with multiple files selected
 -Fix: Apply output directory to the conversion options input widget
 -Fix: Don't update conversion options or tags in the conversion options editor with multiple files selected if they don't match

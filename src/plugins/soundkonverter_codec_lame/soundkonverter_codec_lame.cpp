@@ -234,6 +234,14 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         command += binaries["lame"];
         command += "--nohist";
         command += "--pad-id3v2";
+        if( replayGain )
+        {
+            command += "--replaygain-accurate";
+        }
+        else
+        {
+            command += "--noreplaygain";
+        }
         if( lameConversionOptions && lameConversionOptions->data.preset != LameConversionOptions::Data::UserDefined )
         {
             command += "--preset";

@@ -84,7 +84,7 @@ public:
     virtual float parseOutput( const QString& output ) = 0;
 
     /** search for the backend binaries in the given directories */
-    virtual void scanForBackends( const QStringList& directoryList );
+    virtual void scanForBackends( const QStringList& directoryList = QStringList() );
     /** holds all backend binaries and their location if they were found */
     QMap<QString,QString> binaries;
 

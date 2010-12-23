@@ -116,7 +116,7 @@ void PluginLoader::load()
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
                 codecPlugins.append( plugin );
-                plugin->scanForBackends( QStringList("/usr/local/bin") << "/usr/bin" );
+                plugin->scanForBackends();
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {
@@ -148,7 +148,7 @@ void PluginLoader::load()
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
                 replaygainPlugins.append( plugin );
-                plugin->scanForBackends( QStringList("/usr/local/bin") << "/usr/bin" );
+                plugin->scanForBackends();
                 QList<ReplayGainPipe> codecTable = plugin->codecTable();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {
@@ -179,7 +179,7 @@ void PluginLoader::load()
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
                 ripperPlugins.append( plugin );
-                plugin->scanForBackends( QStringList("/usr/local/bin") << "/usr/bin" );
+                plugin->scanForBackends();
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {

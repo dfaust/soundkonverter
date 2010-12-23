@@ -2,6 +2,7 @@
 #include "backendplugin.h"
 
 #include <QFile>
+#include <KStandardDirs>
 
 
 BackendPluginItem::BackendPluginItem( QObject *parent )
@@ -46,12 +47,15 @@ void BackendPlugin::scanForBackends( const QStringList& directoryList )
 {
     for( QMap<QString, QString>::Iterator a = binaries.begin(); a != binaries.end(); ++a )
     {
-        a.value() = "";
-        for( QList<QString>::const_iterator b = directoryList.begin(); b != directoryList.end(); ++b )
+        a.value() = KStandardDirs::findExe( a.key() );
+        if( a.value().isEmpty() )
         {
-            if( QFile::exists((*b) + "/" + a.key()) )
+            for( QList<QString>::const_iterator b = directoryList.begin(); b != directoryList.end(); ++b )
             {
-                a.value() = (*b) + "/" + a.key();
+                if( QFile::exists((*b) + "/" + a.key()) )
+                {
+                    a.value() = (*b) + "/" + a.key();
+                }
             }
         }
     }

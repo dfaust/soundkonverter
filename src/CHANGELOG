@@ -1,5 +1,6 @@
 0.9.95:
 -Add: Updated czech translation (by Pavel Fric)
+-Add: Read Replay Gain in more formats
 -Change: Close soundkonverter if --autoclose was passed, even if the main window is visible
 -Change: Use --replaygain-accurate for lame
 -Chnage: Use PATH variable to find backends

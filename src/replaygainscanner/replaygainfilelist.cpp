@@ -408,7 +408,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
             newItem->type = ReplayGainFileListItem::Track;
             newItem->codecName = codecName;
             newItem->samplingRate = tags->samplingRate;
-            newItem->url = url;
+            newItem->url = fileList.at(i);
             newItem->tags = tags;
             newItem->time = tags->length;
         }
@@ -417,7 +417,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
             newItem = new ReplayGainFileListItem( this );
             newItem->type = ReplayGainFileListItem::Track;
             newItem->codecName = codecName;
-            newItem->url = url;
+            newItem->url = fileList.at(i);
             newItem->time = 200;
         }
         

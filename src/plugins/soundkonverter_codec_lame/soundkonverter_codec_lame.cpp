@@ -45,7 +45,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["lame"] != "" );
     newTrunk.problemInfo = i18n("In order to encode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
-    newTrunk.data.hasInternalReplayGain = true;
+    newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     newTrunk.codecFrom = "mp3";
@@ -61,7 +61,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["lame"] != "" );
     newTrunk.problemInfo = i18n("In order to encode/decode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
-    newTrunk.data.hasInternalReplayGain = true;
+    newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     newTrunk.codecFrom = "mp2";
@@ -77,7 +77,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.rating = 70;
     newTrunk.enabled = ( binaries["lame"] != "" );
     newTrunk.problemInfo = i18n("In order to encode mp3/decode mp2 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
-    newTrunk.data.hasInternalReplayGain = true;
+    newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
@@ -234,14 +234,15 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         command += binaries["lame"];
         command += "--nohist";
         command += "--pad-id3v2";
-        if( replayGain )
-        {
-            command += "--replaygain-accurate";
-        }
-        else
-        {
-            command += "--noreplaygain";
-        }
+//         if( replayGain )
+//         {
+//             command += "--replaygain-accurate";
+//         }
+//         else
+//         {
+//             command += "--noreplaygain";
+//         }
+        command += "--noreplaygain";
         if( lameConversionOptions && lameConversionOptions->data.preset != LameConversionOptions::Data::UserDefined )
         {
             command += "--preset";

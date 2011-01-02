@@ -335,6 +335,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
     QString device;
     QStringList unsupportedList;
     int samplingRate;
+    KUrl url;
 
     for( int i=0; i<fileList.count(); i++ )
     {
@@ -356,16 +357,21 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
             newAlbumItem = 0;
             newItem = 0;
             samplingRate = tags->samplingRate;
+            url = fileList.at(i);
 
             // search for an existing album
             for( int j=0; j<topLevelItemCount(); j++ )
             {
-                if( topLevelItem(j)->type == ReplayGainFileListItem::Album && topLevelItem(j)->codecName == codecName && topLevelItem(j)->samplingRate == samplingRate && topLevelItem(j)->albumName == tags->album )
+                if( topLevelItem(j)->type == ReplayGainFileListItem::Album &&
+                    topLevelItem(j)->albumName == tags->album &&
+                    topLevelItem(j)->url.toLocalFile() == url.directory() &&
+                    topLevelItem(j)->codecName == codecName &&
+                    topLevelItem(j)->samplingRate == samplingRate )
                 {
                     newItem = new ReplayGainFileListItem( topLevelItem(j) );
                     newItem->type = ReplayGainFileListItem::Track;
                     newItem->codecName = codecName;
-                    newItem->url = fileList.at(i);
+                    newItem->url = url;
                     newItem->tags = tags;
                     newItem->time = tags->length;
                     break;
@@ -380,6 +386,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
                 newAlbumItem->type = ReplayGainFileListItem::Album;
                 newAlbumItem->codecName = codecName;
                 newAlbumItem->samplingRate = samplingRate;
+                newAlbumItem->url = url.directory();
                 newAlbumItem->albumName = tags->album;
                 newAlbumItem->setExpanded( true );
                 newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
@@ -390,17 +397,27 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
                 newItem->type = ReplayGainFileListItem::Track;
                 newItem->codecName = codecName;
                 newItem->samplingRate = samplingRate;
-                newItem->url = fileList.at(i);
+                newItem->url = url;
                 newItem->tags = tags;
                 newItem->time = tags->length;
             }
+        }
+        else if( tags )
+        {
+            newItem = new ReplayGainFileListItem( this );
+            newItem->type = ReplayGainFileListItem::Track;
+            newItem->codecName = codecName;
+            newItem->samplingRate = tags->samplingRate;
+            newItem->url = url;
+            newItem->tags = tags;
+            newItem->time = tags->length;
         }
         else
         {
             newItem = new ReplayGainFileListItem( this );
             newItem->type = ReplayGainFileListItem::Track;
             newItem->codecName = codecName;
-            newItem->url = fileList.at(i);
+            newItem->url = url;
             newItem->time = 200;
         }
         

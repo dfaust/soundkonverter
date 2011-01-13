@@ -197,16 +197,16 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
         {
             command += "--downmix";
         }
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
     else
     {
         command += binaries["oggdec"];
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

@@ -231,8 +231,8 @@ QStringList soundkonverter_codec_twolame::convertCommand( const KUrl& inputFile,
         {
             command += conversionOptions->cmdArguments;
         }
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 //     else
 //     {

@@ -154,15 +154,15 @@ QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, co
             command += QString::number(conversionOptions->samplingRate);
         }
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
     else
     {
         command += binaries["faad"];
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

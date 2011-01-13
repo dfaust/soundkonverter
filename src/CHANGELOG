@@ -4,12 +4,12 @@
 -Change: Close soundkonverter if --autoclose was passed, even if the main window is visible
 -Change: Remove internal Replay Gain calculation from lame plugin since it's not writing tags
 -Change: Use PATH variable to find backends
--Chnage: Replay Gain Scanner: Split tracks in different albums if the files are in different directories
 -Fix: Display correct conversion options in the conversion options editor with multiple files selected
 -Fix: Apply output directory to the conversion options input widget
 -Fix: Don't update conversion options or tags in the conversion options editor with multiple files selected if they don't match
 -Fix: Make edit conversion options/tags buttons in the conversion options editor work
 -Fix: Fix possible crash in the log viewer
+-Fix: Handle files with quotation characters (") correctly
 
 0.9.94 (1.0.0 rc2):
 -Add: Updated czech translation (by Pavel Fric)

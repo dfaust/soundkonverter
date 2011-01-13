@@ -161,17 +161,17 @@ QStringList soundkonverter_codec_neroaac::convertCommand( const KUrl& inputFile,
             }
         }
         command += "-if";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-of";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
     else
     {
         command += binaries["neroAacDec"];
         command += "-if";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-of";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

@@ -1012,8 +1012,8 @@ void Convert::remove( ConvertItem *item, int state )
     emit timeFinished( item->finishedTime );
 
 //     item->fileListItem = 0; // why?
-    if( item->process != 0 )
-        delete item->process;
+    if( item->process )
+        item->process->deleteLater();
     item->process = 0;
 //     if( item->kioCopyJob != 0 ) delete item->kioCopyJob;
 //     item->kioCopyJob = 0;

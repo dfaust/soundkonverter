@@ -144,17 +144,17 @@ QStringList soundkonverter_codec_flac::convertCommand( const KUrl& inputFile, co
         {
             command += "--replay-gain";
         }
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
     else
     {
         command += binaries["flac"];
         command += "-d";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

@@ -530,12 +530,12 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
     {
         command += binaries["mplayer"];
         command += "-ao";
-        command += "pcm:file=\"" + outputFile.toLocalFile() + "\"";
+        command += "pcm:file=\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-vc";
         command += "null";
         command += "-vo";
         command += "null";
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
@@ -566,8 +566,8 @@ QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile,
     {
         command += "mplayer";
         command += "-i";
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

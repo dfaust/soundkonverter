@@ -141,12 +141,12 @@ BackendPlugin::FormatInfo soundkonverter_codec_lame::formatInfo( const QString& 
 
 bool soundkonverter_codec_lame::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
-    KDialog *dialog = new KDialog( parent );
+/*    KDialog *dialog = new KDialog( parent );
     dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
     dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
@@ -159,7 +159,7 @@ void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QStri
 //     connect( widget, SIGNAL( changed( bool ) ), dialog, SLOT( enableButtonApply( bool ) ) );
 
     dialog->enableButtonApply( false );
-    dialog->show();
+    dialog->show();*/
 }
 
 bool soundkonverter_codec_lame::hasInfo()
@@ -344,15 +344,15 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         {
             command += conversionOptions->cmdArguments;
         }
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
     else
     {
         command += binaries["lame"];
         command += "--decode";
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 
     return command;

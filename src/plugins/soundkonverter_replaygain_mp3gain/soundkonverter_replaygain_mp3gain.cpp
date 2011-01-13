@@ -3,6 +3,11 @@
 
 #include "soundkonverter_replaygain_mp3gain.h"
 
+#include <KDialog>
+#include <QComboBox>
+#include <QHBoxLayout>
+#include <QLabel>
+
 
 soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
@@ -72,7 +77,28 @@ bool soundkonverter_replaygain_mp3gain::isConfigSupported( ActionType action, co
 }
 
 void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+/*    KDialog *dialog = new KDialog( parent );
+    dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+    dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+
+    QWidget *widget = new QWidget( dialog );
+    QHBoxLayout *box = new QHBoxLayout( widget );
+    QLabel *lTag = new QLabel( i18n("Use tag format:"), widget );
+    box->addWidget( lTag );
+    QComboBox *cTag = new QComboBox( widget );
+    cTag->addItem( "APE" );
+    cTag->addItem( "ID3v2" );
+    box->addWidget( cTag );
+
+    dialog->setMainWidget( widget );
+//     connect( dialog, SIGNAL( applyClicked() ), widget, SLOT( save() ) );
+//     connect( dialog, SIGNAL( okClicked() ), widget, SLOT( save() ) );
+//     connect( widget, SIGNAL( changed( bool ) ), dialog, SLOT( enableButtonApply( bool ) ) );
+
+    dialog->enableButtonApply( false );
+    dialog->show();*/
+}
 
 bool soundkonverter_replaygain_mp3gain::hasInfo()
 {

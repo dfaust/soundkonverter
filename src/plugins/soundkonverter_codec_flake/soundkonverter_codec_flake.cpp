@@ -142,9 +142,9 @@ QStringList soundkonverter_codec_flake::convertCommand( const KUrl& inputFile, c
             command += "-"+QString::number((int)conversionOptions->compressionLevel);
             command += conversionOptions->cmdArguments;
         }
-        command += "\"" + inputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
     }
 //     else
 //     {

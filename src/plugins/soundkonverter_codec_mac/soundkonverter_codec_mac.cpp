@@ -110,8 +110,8 @@ int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& output
     if( outputCodec == "ape" )
     {
         command += binaries["mac"];
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
         if( conversionOptions->pluginName == global_plugin_name )
         {
             command += "-c"+QString::number((int)conversionOptions->compressionLevel);
@@ -120,8 +120,8 @@ int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& output
     else
     {
         command += binaries["mac"];
-        command += "\"" + inputFile.toLocalFile() + "\"";
-        command += "\"" + outputFile.toLocalFile() + "\"";
+        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
         command += "-d";
     }
 

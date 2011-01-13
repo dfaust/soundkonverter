@@ -33,7 +33,7 @@ QList<ReplayGainPipe> soundkonverter_replaygain_aacgain::codecTable()
     table.append( newPipe );
 
     newPipe.codecName = "mp3";
-    newPipe.rating = 100;
+    newPipe.rating = 90;
     newPipe.enabled = ( binaries["aacgain"] != "" );
     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository.");
     table.append( newPipe );

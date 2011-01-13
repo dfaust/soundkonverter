@@ -10,6 +10,7 @@
 -Fix: Make edit conversion options/tags buttons in the conversion options editor work
 -Fix: Fix possible crash in the log viewer
 -Fix: Handle files with quotation characters (") correctly
+-Fix: When adding multiple files of different formats, the formats wouldn't be recognized correctly
 
 0.9.94 (1.0.0 rc2):
 -Add: Updated czech translation (by Pavel Fric)

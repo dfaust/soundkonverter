@@ -40,7 +40,7 @@ public:
     
     ReplayGainFileListItem *topLevelItem( int index ) const { return static_cast<ReplayGainFileListItem*>( QTreeWidget::topLevelItem(index) ); }
     
-    void addFiles( const KUrl::List& fileList, QString codecName = "", ReplayGainFileListItem *after = 0, bool enabled = false );
+    void addFiles( const KUrl::List& fileList, const QString& _codecName = "", ReplayGainFileListItem *after = 0, bool enabled = false );
     
     void calcAllReplayGain( bool force = false );
     void removeAllReplayGain();

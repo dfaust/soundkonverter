@@ -325,12 +325,13 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
     return count;
 }
 
-void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName, ReplayGainFileListItem *after, bool enabled )
+void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _codecName, ReplayGainFileListItem *after, bool enabled )
 {
     ReplayGainFileListItem *lastListItem;
     if( !after && !enabled ) lastListItem = topLevelItem( topLevelItemCount()-1 );
     else lastListItem = after;
     ReplayGainFileListItem *newAlbumItem, *newItem;
+    QString codecName;
     QString filePathName;
     QString device;
     QStringList unsupportedList;
@@ -339,7 +340,11 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, QString codecName
 
     for( int i=0; i<fileList.count(); i++ )
     {
-        if( codecName.isEmpty() )
+        if( !_codecName.isEmpty() )
+        {
+            codecName = _codecName;
+        }
+        else
         {
             codecName = config->pluginLoader()->getCodecFromFile( fileList.at(i) );
             

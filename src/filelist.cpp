@@ -284,11 +284,12 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     return count;
 }
 
-void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, QString codecName, int conversionOptionsId, FileListItem *after, bool enabled )
+void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId, FileListItem *after, bool enabled )
 {
     FileListItem *lastListItem;
     if( !after && !enabled ) lastListItem = topLevelItem( topLevelItemCount()-1 );
     else lastListItem = after;
+    QString codecName;
     QString filePathName;
     QString device;
     
@@ -307,7 +308,11 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             continue;
         }
         
-        if( codecName.isEmpty() )
+        if( !_codecName.isEmpty() )
+        {
+            codecName = _codecName;
+        }
+        else
         {
             codecName = config->pluginLoader()->getCodecFromFile( fileList.at(i) );
 

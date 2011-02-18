@@ -124,6 +124,7 @@ void OptionsLayer::ok()
 {
     if( options->currentConversionOptions() )
     {
+        options->accepted();
         emit done( urls, options->currentConversionOptions(), command );
         fadeOut();
     }

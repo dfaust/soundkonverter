@@ -1182,6 +1182,8 @@ void CDOpener::addClicked()
             }
         }
 
+        options->accepted();
+
         emit addTracks( device, tracks, trackCount, tagList, options->currentConversionOptions() );
         
         accept();

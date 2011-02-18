@@ -552,6 +552,8 @@ void OptionsEditor::applyChanges()
                 selectedItems.at(i)->tags->comment = tComment->toPlainText();
         }
     }
+
+    options->accepted();
     
     emit updateFileListItems( selectedItems );
 }

@@ -234,6 +234,40 @@ void Options::setOutputDirectory( const QString& directory )
     simpleOutputDirectoryChanged( directory );
 }
 
+void Options::accepted()
+{
+    const OutputDirectory::Mode mode = (OutputDirectory::Mode)config->data.general.lastOutputDirectoryMode;
+
+    if( mode == OutputDirectory::MetaData )
+    {
+        const QString path = config->data.general.metaDataOutputDirectory;
+        if( config->data.general.lastMetaDataOutputDirectoryPaths.contains(path) )
+            config->data.general.lastMetaDataOutputDirectoryPaths.removeAll( path );
+        else if( config->data.general.lastMetaDataOutputDirectoryPaths.size() >= 5 )
+            config->data.general.lastMetaDataOutputDirectoryPaths.removeLast();
+        config->data.general.lastMetaDataOutputDirectoryPaths.prepend( path );
+    }
+    else if( mode == OutputDirectory::Specify )
+    {
+        const QString path = config->data.general.specifyOutputDirectory;
+        if( config->data.general.lastNormalOutputDirectoryPaths.contains(path) )
+            config->data.general.lastNormalOutputDirectoryPaths.removeAll( path );
+        else if( !config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
+            config->data.general.lastNormalOutputDirectoryPaths.removeLast();
+        config->data.general.lastNormalOutputDirectoryPaths.prepend( path );
+    }
+    else if( mode == OutputDirectory::CopyStructure )
+    {
+        const QString path = config->data.general.copyStructureOutputDirectory;
+        if( config->data.general.lastNormalOutputDirectoryPaths.contains(path) )
+            config->data.general.lastNormalOutputDirectoryPaths.removeAll( path );
+        else if( !config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
+            config->data.general.lastNormalOutputDirectoryPaths.removeLast();
+        config->data.general.lastNormalOutputDirectoryPaths.prepend( path );
+    }
+}
+
+
 // void Options::somethingChanged()
 // {
 //     emit optionsChanged();

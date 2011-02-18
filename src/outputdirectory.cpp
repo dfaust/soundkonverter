@@ -52,10 +52,6 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
 //     connect( lDir, SIGNAL(textChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
     cDir = new KComboBox( true, this );
-//     cDir->addItems( tagEngine->genreList );
-//     cDir->clearEditText();
-//     KCompletion *cDirCompletion = cDir->completionObject();
-//     cDirCompletion->insertItems( tagEngine->genreList );
     box->addWidget( cDir, 1 );
     connect( cDir, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
@@ -535,6 +531,8 @@ void OutputDirectory::updateMode( Mode mode )
 {
     if( mode == MetaData ) {
 //         if( config->data.general.metaDataOutputDirectory.isEmpty() ) config->data.general.metaDataOutputDirectory = QDir::homeDirPath() + "/soundKonverter/%b/%d - %n - %a - %t";
+        cDir->clear();
+        cDir->addItems( config->data.general.lastMetaDataOutputDirectoryPaths );
         cDir->setEditText( config->data.general.metaDataOutputDirectory );
         cDir->setEnabled( true );
         pDirSelect->setEnabled( true );
@@ -544,6 +542,7 @@ void OutputDirectory::updateMode( Mode mode )
         cDir->setToolTip( i18n("The following strings are wildcards, that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name") );
     }
     else if( mode == Source ) {
+        cDir->clear();
         cDir->setEditText( "" );
         cDir->setEnabled( false );
         pDirSelect->setEnabled( false );
@@ -553,6 +552,8 @@ void OutputDirectory::updateMode( Mode mode )
     }
     else if( mode == Specify ) {
 //         if( config->data.general.specifyOutputDirectory.isEmpty() ) config->data.general.specifyOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
+        cDir->clear();
+        cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
         cDir->setEditText( config->data.general.specifyOutputDirectory );
         cDir->setEnabled( true );
         pDirSelect->setEnabled( true );
@@ -562,6 +563,8 @@ void OutputDirectory::updateMode( Mode mode )
     }
     else if( mode == CopyStructure ) {
 //         if( config->data.general.copyStructureOutputDirectory.isEmpty() ) config->data.general.copyStructureOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
+        cDir->clear();
+        cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
         cDir->setEditText( config->data.general.copyStructureOutputDirectory );
         cDir->setEnabled( true );
         pDirSelect->setEnabled( true );

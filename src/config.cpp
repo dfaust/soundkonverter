@@ -47,6 +47,8 @@ void Config::load()
     data.general.specifyOutputDirectory = group.readEntry( "specifyOutputDirectory", QDir::homePath() + "/soundKonverter" );
     data.general.metaDataOutputDirectory = group.readEntry( "metaDataOutputDirectory", QDir::homePath() + "/soundKonverter/%b/%d - %n - %a - %t" );
     data.general.copyStructureOutputDirectory = group.readEntry( "copyStructureOutputDirectory", QDir::homePath() + "/soundKonverter" );
+    data.general.lastMetaDataOutputDirectoryPaths = group.readEntry( "lastMetaDataOutputDirectoryPaths", QStringList() );
+    data.general.lastNormalOutputDirectoryPaths = group.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
     data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", false );
     data.general.useVFATNames = group.readEntry( "useVFATNames", true );
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
@@ -379,6 +381,8 @@ void Config::save()
     group.writeEntry( "specifyOutputDirectory", data.general.specifyOutputDirectory );
     group.writeEntry( "metaDataOutputDirectory", data.general.metaDataOutputDirectory );
     group.writeEntry( "copyStructureOutputDirectory", data.general.copyStructureOutputDirectory );
+    group.writeEntry( "lastMetaDataOutputDirectoryPaths", data.general.lastMetaDataOutputDirectoryPaths );
+    group.writeEntry( "lastNormalOutputDirectoryPaths", data.general.lastNormalOutputDirectoryPaths );
     group.writeEntry( "useVFATNames", data.general.useVFATNames );
     group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
 //     group.writeEntry( "priority", data.general.priority );

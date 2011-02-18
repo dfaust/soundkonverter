@@ -169,6 +169,7 @@ void FileOpener::okClickedSlot()
 {
     if( options->currentConversionOptions() )
     {
+        options->accepted();
         emit done( urls, options->currentConversionOptions() );
         accept();
     }

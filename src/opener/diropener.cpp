@@ -185,6 +185,7 @@ void DirOpener::addClicked()
         if( options->currentConversionOptions() )
         {
             hide();
+            options->accepted();
             emit done( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, options->currentConversionOptions() );
             accept();
         }

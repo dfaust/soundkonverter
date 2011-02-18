@@ -49,6 +49,8 @@ public:
             QString specifyOutputDirectory;
             QString metaDataOutputDirectory;
             QString copyStructureOutputDirectory;
+            QStringList lastMetaDataOutputDirectoryPaths;
+            QStringList lastNormalOutputDirectoryPaths;
 //             int priority;
             bool waitForAlbumGain;
             bool useVFATNames;

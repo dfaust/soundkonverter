@@ -139,7 +139,7 @@ set(soundkonverter_SRCS
 
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
 
-target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
 
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 

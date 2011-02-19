@@ -551,16 +551,6 @@ void FileList::updateAllItems()
     }
 }
 
-// int FileList::columnByName( const QString& name )
-// {
-//     QTreeWidgetItem *header = headerItem();
-// 
-//     for( int i=0; i<columnCount(); ++i ) {
-//         if( header->text(i) == name ) return i;
-//     }
-//     return -1;
-// }
-
 void FileList::startConversion()
 {
     // iterate through all items and set the state to "Waiting"

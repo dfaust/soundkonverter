@@ -153,8 +153,6 @@ private:
 
     QList<int> selectedTracks;
 
-    int columnByName( const QString& name ); // should be obsolete
-
     /** Show the progress of reading the cd / cddb data */
     QLabel *lOverlayLabel;
 

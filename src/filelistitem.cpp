@@ -98,7 +98,6 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
     //QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y()+m_top, option.rect.width()-m_left-m_right, option.rect.height()-m_top-m_bottom );
     QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y(), option.rect.width()-m_left-m_right, option.rect.height() );
 
-    //if( index.column() == static_cast<FileList*>(item->treeWidget())->columnByName(i18n("Input")) || index.column() == static_cast<FileList*>(item->treeWidget())->columnByName(i18n("Output")) )
     if( index.column() == 1 || index.column() == 2 )
     {
         QRect textRect = painter->boundingRect( QRect(), Qt::AlignLeft|Qt::TextSingleLine, item->text(index.column()) );

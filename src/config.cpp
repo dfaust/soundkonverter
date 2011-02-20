@@ -65,6 +65,7 @@ void Config::load()
 //     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
     data.general.createActionsMenu = group.readEntry( "createActionsMenu", true );
     data.general.removeFailedFiles = group.readEntry( "removeFailedFiles", true );
+    data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
     
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
@@ -393,6 +394,7 @@ void Config::save()
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
     group.writeEntry( "createActionsMenu", data.general.createActionsMenu );
     group.writeEntry( "removeFailedFiles", data.general.removeFailedFiles );
+    group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );

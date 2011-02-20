@@ -49,6 +49,7 @@ private:
     KIntSpinBox *iUpdateDelay;
     QCheckBox *cCreateActionsMenu;
     QCheckBox *cRemoveFailedFiles;
+    KComboBox *cReplayGainGrouping;
 
     Config *config;
 

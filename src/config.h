@@ -22,14 +22,16 @@ class Config : public QObject
 {
     Q_OBJECT
 public:
-    struct CodecData {
+    struct CodecData
+    {
         QString codecName;
         QStringList encoders;
         QStringList decoders;
         QStringList replaygain;
     };
 
-    struct ProfileData {
+    struct ProfileData
+    {
         QString fileName;
         QString profileName;
         QString pluginName;
@@ -37,8 +39,10 @@ public:
         QDomDocument data;
     };
 
-    struct Data {
-        struct General {
+    struct Data
+    {
+        struct General
+        {
             int startTab;
             int lastTab;
             QString defaultProfile;
@@ -54,7 +58,8 @@ public:
 //             int priority;
             bool waitForAlbumGain;
             bool useVFATNames;
-            enum ConflictHandling {
+            enum ConflictHandling
+            {
                 NewFileName = 0,
                 Skip = 1,
                 Overwrite = 2
@@ -66,15 +71,27 @@ public:
 //             int outputFilePermissions;
             bool createActionsMenu;
             bool removeFailedFiles;
+            enum ReplayGainGrouping
+            {
+                AlbumDirectory = 0,
+                Album = 1,
+                Directory = 2
+            } replayGainGrouping;
         } general;
-        struct Backends {
+        
+        struct Backends
+        {
             QStringList rippers;
             QList<CodecData> codecs;
         } backends;
-        QList<ProfileData> profiles;
-        struct App {
+        
+        struct App
+        {
             int configVersion;
         } app;
+        
+        QList<ProfileData> profiles;
+
     } data;
 
     Config( Logger *_logger, QObject *parent );

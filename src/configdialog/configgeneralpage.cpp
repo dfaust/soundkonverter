@@ -114,7 +114,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //     sConflictHandling += i18n("Overwrite file");
     cConflictHandling->addItems( sConflictHandling );
     cConflictHandling->setToolTip( i18n("Do that if the output file already exists") );
-    cConflictHandling->setCurrentIndex( config->data.general.conflictHandling );
+    cConflictHandling->setCurrentIndex( (int)config->data.general.conflictHandling );
     conflictHandlingBox->addWidget( cConflictHandling );
     connect( cConflictHandling, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
 
@@ -164,6 +164,21 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     removeFailedFilesBox->addWidget( cRemoveFailedFiles );
     connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
+    box->addSpacing( 20 );
+
+    QHBoxLayout *replayGainGroupingBox = new QHBoxLayout( 0 );
+    box->addLayout( replayGainGroupingBox );
+    QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by")+":", this );
+    replayGainGroupingBox->addWidget( lReplayGainGrouping );
+    cReplayGainGrouping = new KComboBox( this );
+    cReplayGainGrouping->addItem( i18n("Album tags and directories") );
+    cReplayGainGrouping->addItem( i18n("Album tags only") );
+    cReplayGainGrouping->addItem( i18n("Directories only") );
+//     cReplayGainGrouping->setToolTip( i18n("") );
+    cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
+    replayGainGroupingBox->addWidget( cReplayGainGrouping );
+    connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+
     box->addStretch();
 }
 
@@ -183,6 +198,7 @@ void ConfigGeneralPage::resetDefaults()
     iUpdateDelay->setValue( 100 );
     cCreateActionsMenu->setChecked( true );
     cRemoveFailedFiles->setChecked( true );
+    cReplayGainGrouping->setCurrentIndex( 0 );
 
     emit configChanged( true );
 }
@@ -199,6 +215,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.updateDelay = iUpdateDelay->value();
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
     config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
+    config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
 }
 
 // int ConfigGeneralPage::profileIndex( const QString& string )

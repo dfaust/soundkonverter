@@ -368,10 +368,20 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
             for( int j=0; j<topLevelItemCount(); j++ )
             {
                 if( topLevelItem(j)->type == ReplayGainFileListItem::Album &&
-                    topLevelItem(j)->albumName == tags->album &&
-                    topLevelItem(j)->url.toLocalFile() == url.directory() &&
                     topLevelItem(j)->codecName == codecName &&
-                    topLevelItem(j)->samplingRate == samplingRate )
+                    topLevelItem(j)->samplingRate == samplingRate &&
+                    (
+                        config->data.general.replayGainGrouping == Config::Data::General::AlbumDirectory &&
+                        topLevelItem(j)->albumName == tags->album &&
+                        topLevelItem(j)->url.toLocalFile() == url.directory()
+                    ) || (
+                        config->data.general.replayGainGrouping == Config::Data::General::Album &&
+                        topLevelItem(j)->albumName == tags->album
+                    ) || (
+                        config->data.general.replayGainGrouping == Config::Data::General::Directory &&
+                        topLevelItem(j)->url.toLocalFile() == url.directory()
+                    )
+                    )
                 {
                     newItem = new ReplayGainFileListItem( topLevelItem(j) );
                     newItem->type = ReplayGainFileListItem::Track;
@@ -493,7 +503,8 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
     
     if( item->type == ReplayGainFileListItem::Album )
     {
-        item->setText( Column_File, item->albumName + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
+        const QString identificator = config->data.general.replayGainGrouping == Config::Data::General::Directory ? item->url.pathOrUrl().right(item->url.pathOrUrl().length()-item->url.pathOrUrl().lastIndexOf("/")-1) : item->albumName;
+        item->setText( Column_File, identificator + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
     }
     else
     {

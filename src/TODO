@@ -1,5 +1,6 @@
 ### Prio 1 ###
 
+replay gain: multiple ogg files -> progress
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
@@ -9,7 +10,6 @@ save last options as user profile
 use qt animations
 cdtext
 optimize profiles
-activate replaygain window when opened on application start
 make converted files wait for applying album gain
 ReplayGainScanner: Drag'n'Drop ... verbesserungswürdig, funktioniert aber grundsätzlich
 ReplayGainScanner: split album through context menu

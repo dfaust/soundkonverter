@@ -36,6 +36,7 @@ int soundKonverterApp::newInstance()
     bool visible = true;
     bool autoclose = false;
     bool autostart = false;
+    bool activateMainWindow = true;
     
     const QString device = args->getOption( "rip" );
     if( !device.isEmpty() )
@@ -54,6 +55,9 @@ int soundKonverterApp::newInstance()
         mainWindow->showSystemTray();
     }
 
+    if( visible )
+        mainWindow->show();
+
     mainWindow->setAutoClose( autoclose );
     
     const QString profile = args->getOption( "profile" );
@@ -69,7 +73,10 @@ int soundKonverterApp::newInstance()
             urls.append( args->arg(i) );
         }
         if( !urls.isEmpty() )
+        {
             mainWindow->addReplayGainFiles( urls );
+            activateMainWindow = false;
+        }
     }
     else
     {
@@ -83,11 +90,11 @@ int soundKonverterApp::newInstance()
     }
     args->clear();
     
-    if( visible ) mainWindow->show();
+    if( activateMainWindow )
+        mainWindow->activateWindow();
     
-    mainWindow->activateWindow();
-    
-    if( autostart ) mainWindow->startConversion();
+    if( autostart )
+        mainWindow->startConversion();
 
     return 0;
 

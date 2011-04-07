@@ -114,6 +114,11 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
+    for( int i=0; i<fileList.count(); i++ )
+    {
+        newItem->data.lengthList += 200;
+    }
+
 //     newItem->mode = mode;
     (*newItem->process) << binaries["vorbisgain"];
     if( mode == ReplayGainPlugin::Add )
@@ -167,6 +172,7 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
 //     return command;
 // }
 
+// float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output, BackendPluginItem *backendItem ) TODO ogg replaygain fix
 float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output )
 {
     // 35% - /home/daniel/soundKonverter/LP3/2 - 04 - Ratatat - Mirando.ogg

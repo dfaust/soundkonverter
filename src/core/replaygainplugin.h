@@ -28,8 +28,12 @@ class KDE_EXPORT ReplayGainPluginItem : public BackendPluginItem
 public:
     ReplayGainPluginItem( QObject *parent=0 );
     virtual ~ReplayGainPluginItem();
-  
+
+    struct Data // additional data
+    {
+        QList<int> lengthList;
 //     ReplayGainPlugin::ApplyMode mode;
+    } data;
 };
 
 

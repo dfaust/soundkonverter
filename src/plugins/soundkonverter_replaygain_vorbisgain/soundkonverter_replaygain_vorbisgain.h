@@ -33,6 +33,7 @@ public:
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
+//     float parseOutput( const QString& output, BackendPluginItem *backendItem = 0 ); TODO ogg replaygain fix
 //     QString applyCommand( const KUrl::List& fileList, ApplyMode mode = Add );
 };
 

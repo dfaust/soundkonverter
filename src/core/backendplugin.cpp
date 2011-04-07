@@ -139,6 +139,7 @@ void BackendPlugin::processOutput()
         {
             QString output = backendItems.at(i)->process->readAllStandardOutput().data();
             progress = parseOutput( output );
+//             progress = parseOutput( output, backendItems.at(i) ); TODO ogg replaygain fix
             if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
             if( progress == -1 ) emit log( backendItems.at(i)->id, output );
             return;

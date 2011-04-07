@@ -82,6 +82,7 @@ public:
 //     virtual void setPriority( int _priority );
     virtual float progress( int id );
     virtual float parseOutput( const QString& output ) = 0;
+//     virtual float parseOutput( const QString& output, BackendPluginItem *backendItem = 0 ) = 0; TODO ogg replaygain fix
 
     /** search for the backend binaries in the given directories */
     virtual void scanForBackends( const QStringList& directoryList = QStringList() );

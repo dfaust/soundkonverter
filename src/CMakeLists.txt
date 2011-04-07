@@ -82,7 +82,6 @@ set(soundkonvertercore_SRCS
 kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
 
 target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
-#set_target_properties(soundkonvertercore PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION} )
 install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 
 
@@ -131,12 +130,6 @@ set(soundkonverter_SRCS
 )
 
 
-#kde4_automoc(${soundkonverter_SRCS})
-
-#kde4_add_ui_files(soundkonverter_SRCS soundkonverterview_base.ui prefs_base.ui)
-
-#kde4_add_kcfg_files(soundkonverter_SRCS settings.kcfgc )
-
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
 
 target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
@@ -147,17 +140,16 @@ install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 ########### install files ###############
 
 install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-#install( FILES soundkonverter.kcfg  DESTINATION  ${KCFG_INSTALL_DIR} )
 install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
 
 install(FILES soundkonverter_codecplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_replaygainplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_ripperplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES soundkonverter-rip-audiocd.desktop DESTINATION ${DATA_INSTALL_DIR}/solid/actions)
 
 add_subdirectory(icons)
 add_subdirectory(images)
 
 # dependencies: taglib, cdparanoia
-### dependencies: taglib, libmediainfo, zenlib, cdparanoia
 
 macro_display_feature_log()

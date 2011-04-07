@@ -6,7 +6,7 @@
 -Change: Close soundkonverter if --autoclose was passed, even if the main window is visible
 -Change: Remove internal Replay Gain calculation from lame plugin since it's not writing tags
 -Change: Use PATH variable to find backends
--Change: Activte Replay Gain tool when adding files
+-Change: Activate Replay Gain tool when adding files
 -Fix: Display correct conversion options in the conversion options editor with multiple files selected
 -Fix: Apply output directory to the conversion options input widget
 -Fix: Don't update conversion options or tags in the conversion options editor with multiple files selected if they don't match

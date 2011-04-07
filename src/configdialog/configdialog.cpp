@@ -25,6 +25,7 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     config( _config )
 {
     setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
+    setCaption( i18n("Settings") );
     configChanged(false);
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );

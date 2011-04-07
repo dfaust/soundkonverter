@@ -440,7 +440,7 @@ msgstr ""
 
 #: configdialog/configgeneralpage.cpp:171
 msgid "Group files in the Replay Gain tool by"
-msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von:"
+msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von"
 
 #: configdialog/configgeneralpage.cpp:174
 msgid "Album tags and directories"

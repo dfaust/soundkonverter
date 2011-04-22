@@ -1,4 +1,4 @@
-0.9.95:
+0.9.95 (1.0.0 rc3):
 -Add: Updated czech translation (by Pavel Fric)
 -Add: Read Replay Gain in more formats
 -Add: Save last 5 output directory paths (accessible through the directory combobox)

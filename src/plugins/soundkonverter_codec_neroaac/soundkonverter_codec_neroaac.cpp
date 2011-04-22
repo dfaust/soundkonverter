@@ -116,7 +116,7 @@ int soundkonverter_codec_neroaac::convert( const KUrl& inputFile, const KUrl& ou
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
-    newItem->data.length = tags ? tags->length : 0;
+    newItem->data.length = tags ? tags->length : 200;
     newItem->process = new KProcess( newItem );
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );

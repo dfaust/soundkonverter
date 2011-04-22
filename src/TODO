@@ -1,5 +1,8 @@
 ### Prio 1 ###
 
+aac files with mp3gain
+id3 vs. ape tags with mp3gain
+
 replay gain: multiple ogg files -> progress
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren

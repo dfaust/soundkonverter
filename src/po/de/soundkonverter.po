@@ -779,7 +779,7 @@ msgid ""
 "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
-"soundKonverter ist eine Oberfläche für verschiedene Audio-Konvertierer, "
+"soundKonverter ist eine Oberfläche für verschiedene Audio-Konverter, "
 "Raplay Gain Werkzeuge und CD-Ripper.\n"
 "\n"
 "Bitte erstellen Sie Fehlerberichte unter https://bugs.launchpad.net/"
@@ -832,7 +832,7 @@ msgstr "Amarok"
 
 #: main.cpp:29
 msgid "All programmers of audio converters"
-msgstr "Alle Programmierer von Audio-Konvertierern"
+msgstr "Alle Programmierer von Audio-Konvertern"
 
 #: main.cpp:33
 msgid "Open the Replay Gain tool an add all given files"

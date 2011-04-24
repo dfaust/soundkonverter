@@ -152,12 +152,12 @@ QStringList soundkonverter_codec_neroaac::convertCommand( const KUrl& inputFile,
             if( conversionOptions->bitrateMode == ConversionOptions::Abr )
             {
                 command += "-br";
-                command += QString::number(conversionOptions->bitrate);
+                command += QString::number(conversionOptions->bitrate*1000);
             }
             else if( conversionOptions->bitrateMode == ConversionOptions::Cbr )
             {
                 command += "-cbr";
-                command += QString::number(conversionOptions->bitrate);
+                command += QString::number(conversionOptions->bitrate*1000);
             }
         }
         command += "-if";

@@ -1,3 +1,6 @@
+1.0.0:
+-Fix: Call neroAacEnc with the correct bitrate
+
 0.9.95 (1.0.0 rc3):
 -Add: Updated czech translation (by Pavel Fric)
 -Add: Read Replay Gain in more formats

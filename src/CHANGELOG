@@ -1,6 +1,6 @@
 1.0.0:
 -Fix: Call neroAacEnc with the correct bitrate
--Fix: Undo mp3gain changes correctly
+-Fix: Undo mp3gain and aacgain changes correctly
 
 0.9.95 (1.0.0 rc3):
 -Add: Updated czech translation (by Pavel Fric)

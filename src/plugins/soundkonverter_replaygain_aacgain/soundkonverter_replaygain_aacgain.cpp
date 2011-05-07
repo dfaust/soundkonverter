@@ -132,8 +132,9 @@ int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, Replay
     }
     else
     {
-        (*newItem->process) << "-s";
-        (*newItem->process) << "d";
+        (*newItem->process) << "-u";
+//         (*newItem->process) << "-s";
+//         (*newItem->process) << "d";
     }
     for( int i = 0; i < fileList.count(); i++ )
     {

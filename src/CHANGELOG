@@ -1,6 +1,7 @@
 1.0.0:
 -Fix: Call neroAacEnc with the correct bitrate
 -Fix: Undo mp3gain and aacgain changes correctly
+-Fix: Loading the wrong Replay Gain plugin
 -Change: Make it possible to overwrite hidden lame parameters with the additional partameters option
 
 0.9.95 (1.0.0 rc3):

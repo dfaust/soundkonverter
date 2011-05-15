@@ -23,25 +23,37 @@
 
 bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& pipe2 )
 {
-    int rating1 = 0, rating2 = 0;
-    if( pipe1.trunks.count() == 1 ) {
+    int rating1 = 0;
+    int rating2 = 0;
+    
+    if( pipe1.trunks.count() == 1 )
+    {
         rating1 = pipe1.trunks.at(0).rating + 10;
-    } else {
+    }
+    else
+    {
         rating1 = ( pipe1.trunks.at(0).rating < pipe1.trunks.at(1).rating ) ? pipe1.trunks.at(0).rating : pipe1.trunks.at(1).rating;
-        if( pipe1.trunks.at(0).codecTo == "wav" ) rating1 += 5;
+        if( pipe1.trunks.at(0).codecTo == "wav" )
+            rating1 += 5;
     }
-    if( pipe2.trunks.count() == 1 ) {
+    
+    if( pipe2.trunks.count() == 1 )
+    {
         rating2 = pipe2.trunks.at(0).rating + 10;
-    } else {
-        rating2 = ( pipe2.trunks.at(0).rating < pipe2.trunks.at(1).rating ) ? pipe2.trunks.at(0).rating : pipe2.trunks.at(1).rating;
-        if( pipe2.trunks.at(0).codecTo == "wav" ) rating2 += 5;
     }
+    else
+    {
+        rating2 = ( pipe2.trunks.at(0).rating < pipe2.trunks.at(1).rating ) ? pipe2.trunks.at(0).rating : pipe2.trunks.at(1).rating;
+        if( pipe2.trunks.at(0).codecTo == "wav" )
+            rating2 += 5;
+    }
+    
     return rating1 > rating2;
 };
 
-bool lessThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& pipe2 )
+bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& pipe2 )
 {
-    return pipe1.rating < pipe2.rating;
+    return pipe1.rating > pipe2.rating;
 };
 
 //
@@ -402,7 +414,7 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
         }
     }
     
-    qSort( list.begin(), list.end(), lessThanReplayGainPipe );
+    qSort( list.begin(), list.end(), moreThanReplayGainPipe );
     
     int lastPos = 0;
     

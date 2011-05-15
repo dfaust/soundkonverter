@@ -314,13 +314,27 @@ QList<ReplayGainPlugin*> PluginLoader::replaygainForCodec( const QString& codecN
     return replaygain.toList();
 }
 
-CodecPlugin *PluginLoader::codecPluginByName( const QString& name )
+BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
 {
     for( int i=0; i<codecPlugins.count(); i++ )
     {
         if( codecPlugins.at(i)->name() == name )
         {
             return codecPlugins.at(i);
+        }
+    }
+    for( int i=0; i<replaygainPlugins.count(); i++ )
+    {
+        if( replaygainPlugins.at(i)->name() == name )
+        {
+            return replaygainPlugins.at(i);
+        }
+    }
+    for( int i=0; i<ripperPlugins.count(); i++ )
+    {
+        if( ripperPlugins.at(i)->name() == name )
+        {
+            return ripperPlugins.at(i);
         }
     }
 

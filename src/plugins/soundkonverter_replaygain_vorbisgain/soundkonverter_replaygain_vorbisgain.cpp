@@ -89,7 +89,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( cons
 
 bool soundkonverter_replaygain_vorbisgain::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_replaygain_vorbisgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )

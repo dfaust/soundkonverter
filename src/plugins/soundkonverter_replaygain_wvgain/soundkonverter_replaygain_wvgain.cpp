@@ -72,7 +72,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_wvgain::formatInfo( const QS
 
 bool soundkonverter_replaygain_wvgain::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_replaygain_wvgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )

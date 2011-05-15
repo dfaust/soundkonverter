@@ -976,8 +976,10 @@ void FileList::load( bool user )
                 QDomNodeList conversionOptions = root.elementsByTagName("conversionOptions");
                 for( int i=0; i<conversionOptions.count(); i++ )
                 {
-                    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( conversionOptions.at(i).toElement().attribute("pluginName") );
-                    if( !plugin ) continue;
+                    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( conversionOptions.at(i).toElement().attribute("pluginName") );
+                    if( !plugin )
+                        continue;
+                    
                     conversionOptionsIds[conversionOptions.at(i).toElement().attribute("id").toInt()] = config->conversionOptionsManager()->addConversionOptions( plugin->conversionOptionsFromXml(conversionOptions.at(i).toElement()) );
                 }
                 QDomNodeList files = root.elementsByTagName("file");

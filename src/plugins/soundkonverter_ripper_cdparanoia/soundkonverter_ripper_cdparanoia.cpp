@@ -68,7 +68,7 @@ QString soundkonverter_ripper_cdparanoia::getCodecFromFile( const KUrl& filename
 
 bool soundkonverter_ripper_cdparanoia::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )

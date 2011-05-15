@@ -15,6 +15,12 @@ soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *p
     binaries["mp3gain"] = "";
     
     allCodecs += "mp3";
+    
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+    
+    group = conf->group( "Plugin-"+name() );
+    tagMode = group.readEntry( "tagMode", 0 );
 }
 
 soundkonverter_replaygain_mp3gain::~soundkonverter_replaygain_mp3gain()
@@ -78,26 +84,44 @@ bool soundkonverter_replaygain_mp3gain::isConfigSupported( ActionType action, co
 
 void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
-/*    KDialog *dialog = new KDialog( parent );
-    dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-    dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    if( !configDialog.data() )
+    {
+        configDialog = new KDialog( parent );
+        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel /*| KDialog::Apply*/ );
 
-    QWidget *widget = new QWidget( dialog );
-    QHBoxLayout *box = new QHBoxLayout( widget );
-    QLabel *lTag = new QLabel( i18n("Use tag format:"), widget );
-    box->addWidget( lTag );
-    QComboBox *cTag = new QComboBox( widget );
-    cTag->addItem( "APE" );
-    cTag->addItem( "ID3v2" );
-    box->addWidget( cTag );
+        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
+        QLabel *configDialogTagLabel = new QLabel( i18n("Use tag format:"), configDialogWidget );
+        configDialogBox->addWidget( configDialogTagLabel );
+        configDialogTagLabelComboBox = new QComboBox( configDialogWidget );
+        configDialogTagLabelComboBox->addItem( "APE" );
+        configDialogTagLabelComboBox->addItem( "ID3v2" );
+        configDialogBox->addWidget( configDialogTagLabelComboBox );
 
-    dialog->setMainWidget( widget );
-//     connect( dialog, SIGNAL( applyClicked() ), widget, SLOT( save() ) );
-//     connect( dialog, SIGNAL( okClicked() ), widget, SLOT( save() ) );
-//     connect( widget, SIGNAL( changed( bool ) ), dialog, SLOT( enableButtonApply( bool ) ) );
+        configDialog.data()->setMainWidget( configDialogWidget );
+        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        //connect( configDialog.data(), SIGNAL( applyClicked() ), this, SLOT( configDialogSave() ) );
+        //connect( configDialogTagLabelComboBox, SIGNAL( changed( bool ) ), this, SLOT( enableButtonApply( bool ) ) );
 
-    dialog->enableButtonApply( false );
-    dialog->show();*/
+        configDialog.data()->enableButtonApply( false );
+    }
+    configDialogTagLabelComboBox->setCurrentIndex( tagMode );
+    configDialog.data()->show();
+}
+
+void soundkonverter_replaygain_mp3gain::configDialogSave()
+{
+    if( configDialog.data() )
+    {
+        tagMode = configDialogTagLabelComboBox->currentIndex();
+
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+        
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "tagMode", tagMode );
+    }
 }
 
 bool soundkonverter_replaygain_mp3gain::hasInfo()
@@ -140,6 +164,16 @@ int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, Replay
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(undoProcessExit(int,QProcess::ExitStatus)) );
         undoFileList = fileList;
     }
+    if( tagMode == 0 )
+    {
+        (*newItem->process) << "-s";
+        (*newItem->process) << "a";
+    }
+    else
+    {
+        (*newItem->process) << "-s";
+        (*newItem->process) << "i";
+    }
     for( int i=0; i<fileList.count(); i++ )
     {
         (*newItem->process) << fileList.at(i).toLocalFile();
@@ -180,6 +214,16 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     (*item->process) << binaries["mp3gain"];
     (*item->process) << "-s";
     (*item->process) << "d";
+    if( tagMode == 0 )
+    {
+        (*item->process) << "-s";
+        (*item->process) << "a";
+    }
+    else
+    {
+        (*item->process) << "-s";
+        (*item->process) << "i";
+    }
     for( int i=0; i<undoFileList.count(); i++ )
     {
         (*item->process) << undoFileList.at(i).toLocalFile();

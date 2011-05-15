@@ -59,7 +59,7 @@ public:
     QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
 
     /** returns the codec plugin with the specified name */
-    CodecPlugin *codecPluginByName( const QString& name ); // TODO make it BackendPlugin *backendPluginByName ?
+    BackendPlugin *backendPluginByName( const QString& name ); // TODO make it BackendPlugin *backendPluginByName ?
 
     /** returns a list of possible conversion pipes (TODO sorted by user and automatic rating) */
     QList<ConversionPipe> getConversionPipes( const QString& codecFrom, const QString& codecTo, const QString& preferredPlugin = "" ); // TODO change name

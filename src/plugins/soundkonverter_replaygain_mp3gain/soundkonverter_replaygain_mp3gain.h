@@ -5,9 +5,11 @@
 #include "../../core/replaygainplugin.h"
 
 #include <KUrl>
+#include <QWeakPointer>
 
 class ConversionOptions;
-
+class KDialog;
+class QComboBox;
 
 class soundkonverter_replaygain_mp3gain : public ReplayGainPlugin
 {
@@ -38,10 +40,17 @@ public:
 private:
     KUrl::List undoFileList;
     
+    QWeakPointer<KDialog> configDialog;
+    QComboBox *configDialogTagLabelComboBox;
+    
+    int tagMode;
+    
 private slots:
     /** The undo process has exited */
     virtual void undoProcessExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ );
 
+    void configDialogSave();
+    
 };
 
 // K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_mp3gain, KGenericFactory<soundkonverter_replaygain_mp3gain> );

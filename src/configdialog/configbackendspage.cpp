@@ -32,29 +32,35 @@ BackendsListWidget::BackendsListWidget( const QString& _name, Config *_config, Q
 {
     QVBoxLayout *box = new QVBoxLayout( 0 );
     setLayout( box );
+    
     lBackends = new QListWidget( this );
     connect( lBackends, SIGNAL(currentRowChanged(int)), this, SLOT(itemSelected(int)) );
     box->addWidget( lBackends );
+    
     QHBoxLayout *arrowBox = new QHBoxLayout( 0 );
     box->addLayout( arrowBox );
+    
     pUp = new QToolButton( this );
     pUp->setIcon( KIcon("arrow-up") );
     pUp->setAutoRaise( true );
     pUp->setEnabled( false );
     connect( pUp, SIGNAL(clicked()), this, SLOT(up()) );
     arrowBox->addWidget( pUp );
+    
     pDown = new QToolButton( this );
     pDown->setIcon( KIcon("arrow-down") );
     pDown->setAutoRaise( true );
     pDown->setEnabled( false );
     connect( pDown, SIGNAL(clicked()), this, SLOT(down()) );
     arrowBox->addWidget( pDown );
+    
     pConfigure = new QToolButton( this );
     pConfigure->setIcon( KIcon("configure") );
     pConfigure->setAutoRaise( true );
     pConfigure->setEnabled( false );
     connect( pConfigure, SIGNAL(clicked()), this, SLOT(configure()) );
     arrowBox->addWidget( pConfigure );
+    
     pInfo = new QToolButton( this );
     pInfo->setIcon( KIcon("help-about") );
     pInfo->setAutoRaise( true );
@@ -111,16 +117,24 @@ void BackendsListWidget::resetOrder()
 void BackendsListWidget::itemSelected( int row )
 {
     const QListWidgetItem *item = lBackends->item( row );
-    if( !item ) return;
-    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
+    
+    if( !item )
+        return;
+    
+    BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     pUp->setEnabled( row > 0 );
     pDown->setEnabled( row < lBackends->count()-1 );
+    
     if( plugin )
     {
-        if( name == i18n("Decoder") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Decoder,format) );
-        else if( name == i18n("Encoder") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Encoder,format) );
-        else if( name == i18n("Replay Gain") ) pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain,format) );
+        if( name == i18n("Decoder") )
+            pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Decoder,format) );
+        else if( name == i18n("Encoder") )
+            pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Encoder,format) );
+        else if( name == i18n("Replay Gain") )
+            pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain,format) );
+        
         pInfo->setEnabled( plugin->hasInfo() );
     }
 }
@@ -145,14 +159,20 @@ void BackendsListWidget::configure()
 {
     const int row = lBackends->currentRow();
     const QListWidgetItem *item = lBackends->item( row );
-    if( !item ) return;
-    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
+    
+    if( !item )
+        return;
+    
+    BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     if( plugin )
     {
-        if( name == i18n("Decoder") ) plugin->showConfigDialog( CodecPlugin::Decoder, format, this );
-        else if( name == i18n("Encoder") ) plugin->showConfigDialog( CodecPlugin::Encoder, format, this );
-        else if( name == i18n("Replay Gain") ) plugin->showConfigDialog( CodecPlugin::ReplayGain, format, this );
+        if( name == i18n("Decoder") )
+            plugin->showConfigDialog( CodecPlugin::Decoder, format, this );
+        else if( name == i18n("Encoder") )
+            plugin->showConfigDialog( CodecPlugin::Encoder, format, this );
+        else if( name == i18n("Replay Gain") )
+            plugin->showConfigDialog( CodecPlugin::ReplayGain, format, this );
     }
 }
 
@@ -160,13 +180,14 @@ void BackendsListWidget::info()
 {
     const int row = lBackends->currentRow();
     const QListWidgetItem *item = lBackends->item( row );
-    if( !item ) return;
-    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( item->text() );
+    
+    if( !item )
+        return;
+    
+    BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     if( plugin )
-    {
         plugin->showInfo( this );
-    }
 }
 
 // class ConfigBackendsPage

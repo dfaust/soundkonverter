@@ -220,7 +220,7 @@ void OptionsDetailed::formatChanged( const QString& format )
 
 void OptionsDetailed::encoderChanged( const QString& encoder )
 {
-    CodecPlugin *plugin = config->pluginLoader()->codecPluginByName( encoder );
+    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( encoder );
     if( !plugin )
     {
 //         TODO leads to crashes

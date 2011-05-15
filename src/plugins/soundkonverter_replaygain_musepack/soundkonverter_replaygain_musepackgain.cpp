@@ -88,7 +88,7 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_musepackgain::formatInfo( co
 
 bool soundkonverter_replaygain_musepackgain::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_replaygain_musepackgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )

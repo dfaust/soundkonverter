@@ -234,6 +234,11 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         command += binaries["lame"];
         command += "--nohist";
         command += "--pad-id3v2";
+        if( conversionOptions->pluginName != name() || !conversionOptions->cmdArguments.contains("-q") )
+        {
+            command += "-q";
+            command += "2";
+        }
 //         if( replayGain )
 //         {
 //             command += "--replaygain-accurate";
@@ -242,7 +247,10 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
 //         {
 //             command += "--noreplaygain";
 //         }
-        command += "--noreplaygain";
+        if( conversionOptions->pluginName != name() || !conversionOptions->cmdArguments.contains("replaygain") )
+        {
+            command += "--noreplaygain";
+        }
         if( lameConversionOptions && lameConversionOptions->data.preset != LameConversionOptions::Data::UserDefined )
         {
             command += "--preset";
@@ -279,7 +287,10 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         {
             if( conversionOptions->qualityMode == ConversionOptions::Quality )
             {
-                command += "--vbr-new";
+                if( conversionOptions->pluginName != name() || !conversionOptions->cmdArguments.contains("--vbr-old") )
+                {
+                    command += "--vbr-new";
+                }
                 command += "-V";
                 command += QString::number(conversionOptions->quality);
             }

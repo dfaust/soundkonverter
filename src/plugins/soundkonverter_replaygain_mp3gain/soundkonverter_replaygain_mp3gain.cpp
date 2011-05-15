@@ -110,14 +110,14 @@ void soundkonverter_replaygain_mp3gain::showInfo( QWidget *parent )
 
 int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
-    if( fileList.count() <= 0 ) return -1;
+    if( fileList.count() <= 0 )
+        return -1;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new KProcess( newItem );
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
-    connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
 //     newItem->mode = mode;
 
@@ -126,19 +126,21 @@ int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, Replay
     if( mode == ReplayGainPlugin::Add )
     {
         (*newItem->process) << "-a";
+        connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
     }
     else if( mode == ReplayGainPlugin::Force )
     {
         (*newItem->process) << "-s";
         (*newItem->process) << "r";
+        connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
     }
     else
     {
         (*newItem->process) << "-u";
-//         (*newItem->process) << "-s";
-//         (*newItem->process) << "d";
+        connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(undoProcessExit(int,QProcess::ExitStatus)) );
+        undoFileList = fileList;
     }
-    for( int i = 0; i < fileList.count(); i++ )
+    for( int i=0; i<fileList.count(); i++ )
     {
         (*newItem->process) << fileList.at(i).toLocalFile();
     }
@@ -148,33 +150,42 @@ int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, Replay
     return newItem->id;
 }
 
-// QString soundkonverter_replaygain_mp3gain::applyCommand( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
-// {
-//     QString command;
-// 
-//     if( fileList.count() <= 0 ) return command;
-// 
-//     if( mode == ReplayGainPlugin::Add )
-//     {
-//         command += "mp3gain";
-//         command += " --album";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-//     else
-//     {
-//         command += "mp3gain";
-//         command += " --clean";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-// 
-//     return command;
-// }
+void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ )
+{
+    if( undoFileList.count() <= 0 )
+        return;
+    
+    ReplayGainPluginItem *item = 0;
+
+    for( int i=0; i<backendItems.size(); i++ )
+    {
+        if( backendItems.at(i)->process == QObject::sender() )
+        {
+            item = (ReplayGainPluginItem*)backendItems.at(i);
+            break;
+        }
+    }
+
+    if( !item )
+        return;
+    
+    if( item->process )
+        item->process->deleteLater();
+    
+    item->process = new KProcess( item );
+    item->process->setOutputChannelMode( KProcess::MergedChannels );
+    connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
+    connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
+
+    (*item->process) << binaries["mp3gain"];
+    (*item->process) << "-s";
+    (*item->process) << "d";
+    for( int i=0; i<undoFileList.count(); i++ )
+    {
+        (*item->process) << undoFileList.at(i).toLocalFile();
+    }
+    item->process->start();
+}
 
 float soundkonverter_replaygain_mp3gain::parseOutput( const QString& output )
 {
@@ -196,14 +207,6 @@ float soundkonverter_replaygain_mp3gain::parseOutput( const QString& output )
     }
     
     return progress;
-/*
-    if( output == "" || !output.contains("%") ) return -1.0f;
-
-    QString data = output;
-    int space = data.indexOf(" ") + 1;
-    int percent = data.indexOf("%");
-    data = data.mid( space, percent-space );
-    return data.toFloat();*/
 }
 
 #include "soundkonverter_replaygain_mp3gain.moc"

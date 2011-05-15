@@ -34,6 +34,14 @@ public:
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
 //     QString applyCommand( const KUrl::List& fileList, ApplyMode mode = Add );
+
+private:
+    KUrl::List undoFileList;
+    
+private slots:
+    /** The undo process has exited */
+    virtual void undoProcessExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ );
+
 };
 
 // K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_mp3gain, KGenericFactory<soundkonverter_replaygain_mp3gain> );

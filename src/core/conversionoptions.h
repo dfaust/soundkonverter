@@ -31,8 +31,8 @@ public:
 
     // plugin must ensure that these values are set, so an alternative plugin can be used
     enum QualityMode { Quality = 0, Bitrate = 1, Lossless = 2 } qualityMode;
-    double quality;                 // set both values in order to fail back if the other plugin does not support the quality mode
-    int bitrate;                    // "
+    double quality;                 // plugin specific quaily value
+    int bitrate;                    // set in order to fall back if the other plugin does not support the quality mode [kbit/s]
     enum BitrateMode { Vbr = 0, Abr = 1, Cbr = 2 } bitrateMode;
     int bitrateMin, bitrateMax;     // set to 0 to disable, only used when qualityMode==Bitrate and BitrateMode!=Cbr
     int samplingRate;               // in Hz, set to 0 to disable

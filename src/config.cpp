@@ -221,18 +221,6 @@ void Config::load()
             enabledPlugins += i18n("Try internal");
         }
         newPlugins.clear();
-        for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
-        {
-            if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
-            {
-                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
-                enabledPlugins += pluginName;
-                if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
-                {
-                    newPlugins += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
-                }
-            }
-        }
         for( int j=0; j<pPluginLoader->replaygainPipes.count(); j++ )
         {
             if( pPluginLoader->replaygainPipes.at(j).codecName == formats.at(i) && pPluginLoader->replaygainPipes.at(j).enabled )

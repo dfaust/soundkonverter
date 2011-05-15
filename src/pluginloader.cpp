@@ -406,26 +406,35 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
 {
     QList<ReplayGainPipe> list;
 
+    QStringList backends;
+    // get the lists of decoders and encoders ordered by the user in the config dialog
+    for( int i=0; i<config->data.backends.codecs.count(); i++ )
+    {
+        if( config->data.backends.codecs.at(i).codecName == codecName )
+        {
+            backends = config->data.backends.codecs.at(i).replaygain;
+        }
+    }
+    // prepend the preferred plugin
+    backends.removeAll( preferredPlugin );
+    backends.prepend( preferredPlugin );
+
     for( int i=0; i<replaygainPipes.count(); i++ )
     {
         if( replaygainPipes.at(i).codecName == codecName && replaygainPipes.at(i).enabled )
         {
-            list += replaygainPipes.at(i);
+            ReplayGainPipe newPipe = replaygainPipes.at(i);
+            if( backends.indexOf(newPipe.plugin->name()) != -1 )
+            {
+                // add rating depending on the position in the list ordered by the user
+                newPipe.rating += ( backends.count() - backends.indexOf(newPipe.plugin->name()) ) * 1000;
+            }
+            list += newPipe;
         }
     }
     
     qSort( list.begin(), list.end(), moreThanReplayGainPipe );
     
-    int lastPos = 0;
-    
-    for( int i=0; i<list.count(); i++ )
-    {
-        if( list.at(i).plugin->name() == preferredPlugin )
-        {
-            list.move( i, lastPos++ );
-        }
-    }
-
     return list;
 }
 

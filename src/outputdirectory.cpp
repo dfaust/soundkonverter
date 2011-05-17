@@ -529,7 +529,8 @@ void OutputDirectory::modeChangedSlot( int mode )
 
 void OutputDirectory::updateMode( Mode mode )
 {
-    if( mode == MetaData ) {
+    if( mode == MetaData )
+    {
 //         if( config->data.general.metaDataOutputDirectory.isEmpty() ) config->data.general.metaDataOutputDirectory = QDir::homeDirPath() + "/soundKonverter/%b/%d - %n - %a - %t";
         cDir->clear();
         cDir->addItems( config->data.general.lastMetaDataOutputDirectoryPaths );
@@ -541,7 +542,8 @@ void OutputDirectory::updateMode( Mode mode )
 //         cDir->setToolTip( i18n("<p>The following strings are wildcards, that will be replaced by the information in the meta data:</p><p>%a - Artist<br>%b - Album<br>%c - Comment<br>%d - Disc number<br>%g - Genre<br>%n - Track number<br>%p - Composer<br>%t - Title<br>%y - Year<br>%f - Original file name<p>") );
         cDir->setToolTip( i18n("The following strings are wildcards, that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name") );
     }
-    else if( mode == Source ) {
+    else if( mode == Source )
+    {
         cDir->clear();
         cDir->setEditText( "" );
         cDir->setEnabled( false );
@@ -550,7 +552,8 @@ void OutputDirectory::updateMode( Mode mode )
         cMode->setToolTip( i18n("Output all converted files into the same directory as the original files") );
         cDir->setToolTip("");
     }
-    else if( mode == Specify ) {
+    else if( mode == Specify )
+    {
 //         if( config->data.general.specifyOutputDirectory.isEmpty() ) config->data.general.specifyOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
         cDir->clear();
         cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
@@ -561,7 +564,8 @@ void OutputDirectory::updateMode( Mode mode )
         cMode->setToolTip( i18n("Output all converted files into the specified output directory") );
         cDir->setToolTip("");
     }
-    else if( mode == CopyStructure ) {
+    else if( mode == CopyStructure )
+    {
 //         if( config->data.general.copyStructureOutputDirectory.isEmpty() ) config->data.general.copyStructureOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
         cDir->clear();
         cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
@@ -572,6 +576,9 @@ void OutputDirectory::updateMode( Mode mode )
         cMode->setToolTip( i18n("Copy the whole directory structure for all converted files") );
         cDir->setToolTip("");
     }
+    
+    cDir->setMinimumWidth( 200 );
+    cDir->view()->setMinimumWidth( cDir->view()->sizeHintForColumn(0) );
 }
 
 void OutputDirectory::directoryChangedSlot( const QString& directory )

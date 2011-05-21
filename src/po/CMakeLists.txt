@@ -8,3 +8,4 @@ endif (NOT GETTEXT_MSGFMT_EXECUTABLE)
 
 add_subdirectory(cs)
 add_subdirectory(de)
+add_subdirectory(hu)

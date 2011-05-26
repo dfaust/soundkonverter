@@ -1,5 +1,7 @@
 1.0.0:
 -Add: Option to choose between APE and ID3v2  tags for mp3gain and aacgain
+-Add: Hungarian translation (by Dr. Orosz Tamás)
+-Add: French translation (by Yannick Ernult)
 -Fix: Call neroAacEnc with the correct bitrate
 -Fix: Undo mp3gain and aacgain changes correctly
 -Fix: Loading the wrong Replay Gain plugin

@@ -6,5 +6,7 @@ Icon=soundkonverter
 Type=Application
 DocPath=soundkonverter/soundkonverter.html
 GenericName=An audio file converter
+GenericName[fr]=Convertisseur de fichiers audio
+GenericName[de]=Ein Konvertierprogramm für Audio-Dateien
 Terminal=false
 Categories=AudioVideo;AudioVideoEditing;CD;

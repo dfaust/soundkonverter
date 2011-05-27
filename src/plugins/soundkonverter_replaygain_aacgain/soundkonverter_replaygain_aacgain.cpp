@@ -14,7 +14,7 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
 {
     binaries["aacgain"] = "";
     
-    allCodecs += "aac";
+    allCodecs += "m4v";
     allCodecs += "mp3";
     
     KSharedConfig::Ptr conf = KGlobal::config();
@@ -37,14 +37,14 @@ QList<ReplayGainPipe> soundkonverter_replaygain_aacgain::codecTable()
     QList<ReplayGainPipe> table;
     ReplayGainPipe newPipe;
 
-    newPipe.codecName = "aac";
+    newPipe.codecName = "m4a";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["aacgain"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository.");
+    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository."); // FIXME change to aac to m4a after string-freeze
     table.append( newPipe );
 
     newPipe.codecName = "mp3";
-    newPipe.rating = 90;
+    newPipe.rating = 95;
     newPipe.enabled = ( binaries["aacgain"] != "" );
     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository.");
     table.append( newPipe );
@@ -57,18 +57,15 @@ BackendPlugin::FormatInfo soundkonverter_replaygain_aacgain::formatInfo( const Q
     BackendPlugin::FormatInfo info;
     info.codecName = codecName;
 
-    if( codecName == "aac" )
+    if( codecName == "m4a" )
     {
         info.lossless = false;
-        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding
-        info.mimeTypes.append( "audio/aac" );
-        info.mimeTypes.append( "audio/aacp" );
+        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
         info.mimeTypes.append( "audio/mp4" );
-        info.mimeTypes.append( "video/mp4" );
-        info.extensions.append( "aac" );
-        info.extensions.append( "3gp" );
-        info.extensions.append( "mp4" );
+        info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
+        info.extensions.append( "f4a" );
+        info.extensions.append( "aac" );
     }
     else if( codecName == "mp3" )
     {

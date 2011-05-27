@@ -250,7 +250,7 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     importantCodecs += "ogg vorbis";
     importantCodecs += "mp3";
     importantCodecs += "flac";
-    importantCodecs += "aac";
+    importantCodecs += "m4a";
     importantCodecs += "wma";
     importantCodecs += "speex";
     int listIterator = 0;

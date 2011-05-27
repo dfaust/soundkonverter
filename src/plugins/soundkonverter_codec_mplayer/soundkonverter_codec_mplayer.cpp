@@ -10,20 +10,6 @@ soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, con
     : CodecPlugin( parent )
 {
     binaries["mplayer"] = "";
-    
-    // encoders
-    codecMap["wav"] = "pcm_s16le";
-    codecMap["ogg vorbis"] = "libvorbis"; // vorbis
-    codecMap["mp3"] = "libmp3lame";
-    codecMap["flac"] = "flac";
-    codecMap["wma"] = "wmav2";
-    codecMap["aac"] = "libfaac"; // aac
-    codecMap["ac3"] = "ac3";
-    codecMap["alac"] = "alac";
-    codecMap["mp2"] = "mp2";
-//     codecMap["sonic"] = "sonic";
-//     codecMap["sonic lossless"] = "sonicls";
-    codecMap["amr nb"] = "libopencore_amrnb";
 }
 
 soundkonverter_codec_mplayer::~soundkonverter_codec_mplayer()
@@ -38,7 +24,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 {
     QList<ConversionPipeTrunk> table;
     
-    // decode
+    /// decode
     fromCodecs += "wav";
     fromCodecs += "ogg vorbis";
     fromCodecs += "mp3";
@@ -48,27 +34,22 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "ac3";
     fromCodecs += "alac";
     fromCodecs += "mp2";
-//     fromCodecs += "sonic";
-//     fromCodecs += "sonic lossless";
     fromCodecs += "als";
     fromCodecs += "amr nb";
     fromCodecs += "amr wb";
     fromCodecs += "ape";
-//     fromCodecs += "eac3";
     fromCodecs += "speex";
+    fromCodecs += "m4a";
     fromCodecs += "mp1";
     fromCodecs += "mpc";
     fromCodecs += "shorten";
-//     fromCodecs += "mlp";
-//     fromCodecs += "truehd";
-//     fromCodecs += "truespeech";
     fromCodecs += "tta";
     fromCodecs += "wavpack";
     fromCodecs += "ra";
-    // containers
+    /// containers
     fromCodecs += "3gp";
     fromCodecs += "rm";
-    // video
+    /// video
     fromCodecs += "avi";
     fromCodecs += "mkv";
     fromCodecs += "ogv";
@@ -79,19 +60,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "wmv";
     fromCodecs += "rv";
 
-    // encode
+    /// encode
     toCodecs += "wav";
-//     toCodecs += "ogg vorbis";
-//     toCodecs += "mp3";
-//     toCodecs += "flac";
-//     toCodecs += "wma";
-//     toCodecs += "aac";
-//     toCodecs += "ac3";
-//     toCodecs += "alac";
-//     toCodecs += "mp2";
-// //     toCodecs += "sonic";
-// //     toCodecs += "sonic lossless";
-//     toCodecs += "amr nb";
     
     for( int i=0; i<fromCodecs.count(); i++ )
     {
@@ -174,13 +144,11 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
         info.lossless = false;
         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding
         info.mimeTypes.append( "audio/aac" );
-        info.mimeTypes.append( "audio/aacp" );
-        info.mimeTypes.append( "audio/mp4" );
-        info.mimeTypes.append( "video/mp4" );
+//         info.mimeTypes.append( "audio/aacp" );
         info.extensions.append( "aac" );
-        info.extensions.append( "3gp" );
-        info.extensions.append( "mp4" );
-        info.extensions.append( "m4a" );
+//         info.extensions.append( "3gp" );
+//         info.extensions.append( "mp4" );
+//         info.extensions.append( "m4a" );
     }
     else if( codecName == "ac3" ) // TODO description
     {
@@ -196,6 +164,16 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
 //         info.mimeTypes.append( "audio/x-ms-wma" );
         info.extensions.append( "m4a" );
         info.extensions.append( "mp4" );
+    }
+    else if( codecName == "m4a" )
+    {
+        info.lossless = false;
+        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
+        info.mimeTypes.append( "audio/mp4" );
+        info.mimeTypes.append( "audio/x-m4a" );
+        info.extensions.append( "m4a" );
+        info.extensions.append( "f4a" );
+        info.extensions.append( "aac" );
     }
     else if( codecName == "mp2" )
     {
@@ -415,10 +393,11 @@ BackendPlugin::FormatInfo soundkonverter_codec_mplayer::formatInfo( const QStrin
     else if( codecName == "mp4" )
     {
         info.lossless = false;
-//         info.description = i18n("");
+//         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
         info.mimeTypes.append( "video/mp4" );
         info.extensions.append( "mp4" );
         info.extensions.append( "m4v" );
+        info.extensions.append( "f4v" );
     }
     else if( codecName == "flv" )
     {
@@ -526,7 +505,7 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
         }
         command += "\"" + outputFile.toLocalFile() + "\"";*/
     }
-    else // NOTE really necessary?
+    else
     {
         command += binaries["mplayer"];
         command += "-ao";

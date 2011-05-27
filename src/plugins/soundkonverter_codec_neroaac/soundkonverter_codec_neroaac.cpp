@@ -15,7 +15,8 @@ soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, con
     binaries["neroAacEnc"] = "";
     binaries["neroAacDec"] = "";
     
-    allCodecs += "aac";
+    allCodecs += "m4a";
+    allCodecs += "mp4";
     allCodecs += "wav";
 }
 
@@ -33,18 +34,26 @@ QList<ConversionPipeTrunk> soundkonverter_codec_neroaac::codecTable()
     ConversionPipeTrunk newTrunk;
 
     newTrunk.codecFrom = "wav";
-    newTrunk.codecTo = "aac";
-    newTrunk.rating = 100;
+    newTrunk.codecTo = "m4a";
+    newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacEnc"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode aac files, you need to install 'neroAacEnc'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress.");
+    newTrunk.problemInfo = i18n("In order to encode aac files, you need to install 'neroAacEnc'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress."); // FIXME change to aac to m4a after string-freeze
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
-    newTrunk.codecFrom = "aac";
+    newTrunk.codecFrom = "m4a";
     newTrunk.codecTo = "wav";
-    newTrunk.rating = 100;
+    newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacDec"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'neroAacDec'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress.");
+    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'neroAacDec'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress."); // FIXME change to aac to m4a after string-freeze
+    newTrunk.data.hasInternalReplayGain = false;
+    table.append( newTrunk );
+
+    newTrunk.codecFrom = "mp4";
+    newTrunk.codecTo = "wav";
+    newTrunk.rating = 90;
+    newTrunk.enabled = ( binaries["neroAacDec"] != "" );
+    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'neroAacDec'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress."); // FIXME change to aac to mp4 after string-freeze
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -56,18 +65,24 @@ BackendPlugin::FormatInfo soundkonverter_codec_neroaac::formatInfo( const QStrin
     BackendPlugin::FormatInfo info;
     info.codecName = codecName;
 
-    if( codecName == "aac" )
+    if( codecName == "m4a" )
     {
         info.lossless = false;
-        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding
-        info.mimeTypes.append( "audio/aac" );
-        info.mimeTypes.append( "audio/aacp" );
+        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
         info.mimeTypes.append( "audio/mp4" );
-        info.mimeTypes.append( "video/mp4" );
-        info.extensions.append( "aac" );
-        info.extensions.append( "3gp" );
-        info.extensions.append( "mp4" );
+        info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
+        info.extensions.append( "f4a" );
+        info.extensions.append( "aac" );
+    }
+    else if( codecName == "mp4" )
+    {
+        info.lossless = false;
+//         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
+        info.mimeTypes.append( "video/mp4" );
+        info.extensions.append( "mp4" );
+        info.extensions.append( "m4v" );
+        info.extensions.append( "f4v" );
     }
     else if( codecName == "wav" )
     {
@@ -112,7 +127,9 @@ QWidget *soundkonverter_codec_neroaac::newCodecWidget()
 int soundkonverter_codec_neroaac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -139,7 +156,7 @@ QStringList soundkonverter_codec_neroaac::convertCommand( const KUrl& inputFile,
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-    if( outputCodec == "aac" )
+    if( outputCodec == "m4a" )
     {
         command += binaries["neroAacEnc"];
         if( conversionOptions->qualityMode == ConversionOptions::Quality )
@@ -179,7 +196,8 @@ QStringList soundkonverter_codec_neroaac::convertCommand( const KUrl& inputFile,
 
 float soundkonverter_codec_neroaac::parseOutput( const QString& output, int length )
 {
-    if( length == 0 ) return -1;
+    if( length == 0 )
+        return -1;
     
     // Processed 218 seconds...
   
@@ -210,8 +228,10 @@ void soundkonverter_codec_neroaac::processOutput()
             QString output = backendItems.at(i)->process->readAllStandardOutput().data();
             pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
             progress = parseOutput( output, pluginItem->data.length );
-            if( progress == -1 && !output.simplified().isEmpty() ) emit log( backendItems.at(i)->id, output );
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
+            if( progress == -1 && !output.simplified().isEmpty() )
+                emit log( backendItems.at(i)->id, output );
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
             return;
         }
     }

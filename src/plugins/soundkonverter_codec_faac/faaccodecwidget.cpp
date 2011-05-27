@@ -328,25 +328,8 @@ int FaacCodecWidget::currentDataRate()
     }
     else
     {
-        if( cMode->currentIndex() == 0 )
-        {
-            dataRate = 500000 + dQuality->value()*150000;
-            if( dQuality->value() > 7 ) dataRate += (dQuality->value()-7)*250000;
-            if( dQuality->value() > 9 ) dataRate += (dQuality->value()-9)*800000;
-        }
-        else
-        {
-            dataRate = dQuality->value()/8*60*1000;
-        }
-        
-//         if( chChannels->isChecked() )
-//         {
-//             dataRate *= 0.9f;
-//         }
-        if( chSamplerate->isChecked() && cSamplerate->currentText().replace(" Hz","").toInt() <= 22050 )
-        {
-            dataRate *= 0.9f;
-        }
+        // TODO calculate data rate for faac
+        dataRate = 0;
     }
     
     return dataRate;

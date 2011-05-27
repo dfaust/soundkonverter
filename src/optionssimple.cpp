@@ -155,7 +155,7 @@ void OptionsSimple::updateProfiles()
     sProfile += i18n("High");
     sProfile += i18n("Very high");
     sProfile += i18n("Lossless");
-    sProfile += i18n("Hybrid");
+//     sProfile += i18n("Hybrid"); // currently unused
     sProfile += config->customProfiles();
     sProfile += i18n("User defined");
     cProfile->addItems( sProfile );

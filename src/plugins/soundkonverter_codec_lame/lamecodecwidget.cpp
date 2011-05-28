@@ -601,7 +601,7 @@ void LameCodecWidget::modeChanged( int mode )
 //         sQuality->setTickInterval( 800 );
         sQuality->setSingleStep( 8 );
         iQuality->setRange( 8, 320 );
-        iQuality->setSingleStep( 8 );
+        iQuality->setSingleStep( 1 );
         iQuality->setSuffix( " kbps" );
         sQuality->setValue( 160 );
         iQuality->setValue( 160 );

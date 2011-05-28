@@ -360,7 +360,7 @@ void VorbisToolsCodecWidget::modeChanged( int mode )
 //         sQuality->setTickInterval( 100 );
         sQuality->setSingleStep( 50 );
         dQuality->setRange( -1, 10 );
-        dQuality->setSingleStep( 0.5 );
+        dQuality->setSingleStep( 0.01 );
         dQuality->setDecimals( 2 );
         dQuality->setSuffix( "" );
         sQuality->setValue( 400 );
@@ -378,7 +378,7 @@ void VorbisToolsCodecWidget::modeChanged( int mode )
 //         sQuality->setTickInterval( 800 );
         sQuality->setSingleStep( 800 );
         dQuality->setRange( 8, 320 );
-        dQuality->setSingleStep( 8 );
+        dQuality->setSingleStep( 1 );
         dQuality->setDecimals( 0 );
         dQuality->setSuffix( " kbps" );
         sQuality->setValue( 16000 );

@@ -20,7 +20,7 @@
 
 NeroaacCodecWidget::NeroaacCodecWidget()
     : CodecWidget(),
-    currentFormat( "aac" )
+    currentFormat( "m4a" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
@@ -357,10 +357,9 @@ void NeroaacCodecWidget::modeChanged( int mode )
     if( mode == 0 )
     {
         sQuality->setRange( 0, 100 );
-//         sQuality->setTickInterval( 100 );
         sQuality->setSingleStep( 5 );
         dQuality->setRange( 0, 1 );
-        dQuality->setSingleStep( 0.05 );
+        dQuality->setSingleStep( 0.01 );
         dQuality->setDecimals( 2 );
         dQuality->setSuffix( "" );
         sQuality->setValue( 50 );
@@ -374,11 +373,10 @@ void NeroaacCodecWidget::modeChanged( int mode )
     }
     else
     {
-        sQuality->setRange( 800, 40000 );
-//         sQuality->setTickInterval( 800 );
-        sQuality->setSingleStep( 800 );
-        dQuality->setRange( 8, 400 );
-        dQuality->setSingleStep( 8 );
+        sQuality->setRange( 1600, 40000 );
+        sQuality->setSingleStep( 1600 );
+        dQuality->setRange( 16, 400 );
+        dQuality->setSingleStep( 1 );
         dQuality->setDecimals( 0 );
         dQuality->setSuffix( " kbps" );
         sQuality->setValue( 16000 );

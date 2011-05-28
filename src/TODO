@@ -4,6 +4,9 @@ replay gain: multiple ogg files -> progress
 test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
+faac:
+-c <freq>     Set the bandwidth in Hz (default: automatic, i.e. adapts maximum value to input sample rate).
+
 ### Prio 2 ###
 
 save last options as user profile

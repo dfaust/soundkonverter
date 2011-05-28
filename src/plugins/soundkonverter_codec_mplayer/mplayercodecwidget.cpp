@@ -20,7 +20,7 @@
 
 MPlayerCodecWidget::MPlayerCodecWidget()
     : CodecWidget(),
-    currentFormat( "ogg" )
+    currentFormat( "ogg vorbis" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );

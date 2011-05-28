@@ -20,7 +20,7 @@
 
 FaacCodecWidget::FaacCodecWidget()
     : CodecWidget(),
-    currentFormat( "aac" )
+    currentFormat( "m4a" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
@@ -208,11 +208,11 @@ QString FaacCodecWidget::currentProfile()
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 120 &&  !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 &&  !chSamplerate->isChecked() )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 &&  !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 180 &&  !chSamplerate->isChecked() )
     {
         return i18n("Very high");
     }
@@ -261,8 +261,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 120 );
-        dQuality->setValue( 120 );
+        sQuality->setValue( 140 );
+        dQuality->setValue( 140 );
 //         cBitrateMode->setCurrentIndex( 0 );
 //         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
@@ -272,8 +272,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 140 );
-        dQuality->setValue( 140 );
+        sQuality->setValue( 180 );
+        dQuality->setValue( 180 );
 //         cBitrateMode->setCurrentIndex( 0 );
 //         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
@@ -343,7 +343,7 @@ void FaacCodecWidget::modeChanged( int mode )
 //         sQuality->setTickInterval( 100 );
         sQuality->setSingleStep( 10 );
         dQuality->setRange( 10, 500 );
-        dQuality->setSingleStep( 10 );
+        dQuality->setSingleStep( 1 );
         dQuality->setDecimals( 0 );
         dQuality->setSuffix( "" );
         sQuality->setValue( 100 );
@@ -357,15 +357,14 @@ void FaacCodecWidget::modeChanged( int mode )
     }
     else
     {
-        sQuality->setRange( 8, 320 );
-//         sQuality->setTickInterval( 800 );
+        sQuality->setRange( 60, 152 ); // max. value 152 kbps/stereo with a 16 kHz cutoff
         sQuality->setSingleStep( 8 );
-        dQuality->setRange( 8, 320 );
-        dQuality->setSingleStep( 8 );
+        dQuality->setRange( 60, 152 );
+        dQuality->setSingleStep( 1 );
         dQuality->setDecimals( 0 );
         dQuality->setSuffix( " kbps" );
-        sQuality->setValue( 160 );
-        dQuality->setValue( 160 );
+        sQuality->setValue( 128 );
+        dQuality->setValue( 128 );
 //         dQuality->setValue( bitrateForQuality(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
 

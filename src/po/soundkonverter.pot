@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-05-21 09:53+0200\n"
+"POT-Creation-Date: 2011-05-28 17:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -239,8 +239,8 @@ msgstr ""
 
 #: config.cpp:309 config.cpp:327 configdialog/configgeneralpage.cpp:66
 #: configdialog/configgeneralpage.cpp:276 optionsdetailed.cpp:343
-#: optionssimple.cpp:158 optionssimple.cpp:213 optionssimple.cpp:290
-#: soundkonverterview.cpp:451 soundkonverterview.cpp:453
+#: optionssimple.cpp:213 optionssimple.cpp:290 soundkonverterview.cpp:451
+#: soundkonverterview.cpp:453
 msgid "Hybrid"
 msgstr ""
 
@@ -554,14 +554,14 @@ msgid "Ripping"
 msgstr ""
 
 #: core/backendplugin.cpp:37
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:72
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:132
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:115
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:135
 #: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:69
 #: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:69
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:109
 #: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:66
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:129
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:84
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:99
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:90
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:81
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:75
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:71
@@ -1484,7 +1484,8 @@ msgstr ""
 msgid "Resample"
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:36
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:38
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:46
 msgid ""
 "In order to encode aac files, you need to install 'faac'.\n"
 "Since faac inludes a patented codec, it may not be included in the default "
@@ -1492,7 +1493,9 @@ msgid ""
 "additional software repository."
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:44
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:54
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:62
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:70
 msgid ""
 "In order to decode aac files, you need to install 'faad'.\n"
 "Since faad inludes a patented codec, it may not be included in the default "
@@ -1500,11 +1503,13 @@ msgid ""
 "additional software repository."
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:59
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:178
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:175
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:62
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:75
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:85
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:96
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:181
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:207
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:145
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:171
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:71
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:63
 msgid "Advanced Audio Coding is a lossy and popular audio format."
 msgstr ""
@@ -1527,81 +1532,81 @@ msgstr ""
 msgid "Mono"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:110
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:113
 msgid ""
 "You need to install 'ffmpeg'. Since ffmpeg inludes many patented codecs, it "
 "may not be included in the default installation of your distribution. Many "
 "distributions offer ffmpeg in an additional software repository."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:140
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:137
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:143
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:60
 msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
 "For more information see: http://www.xiph.org/vorbis/"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:151
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:154
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:94
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:148
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:76
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:118
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:56
 msgid "MP3 is a very popular lossy audio codec."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:160
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:157
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:163
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:127
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it name says, it compresses without any loss."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:171
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:168
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:174
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:138
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:191
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:188
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:192
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:156
 msgid "Dolby Digital-Audio"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:198
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:195
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:199
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:163
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:206
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:203
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:217
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:181
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:227
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:224
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:238
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:202
 msgid "MPEG-4 Audio Lossless Coding"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:234
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:231
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:245
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:209
 msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:243
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:240
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:254
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:218
 msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:251
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:248
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:262
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:226
 msgid "Monkey's Audio is a propritary lossless audio format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:266
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:277
 #: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:58
 msgid ""
 "Speex is a free and lossy audio codec designed for low quality speech "
@@ -1609,13 +1614,13 @@ msgid ""
 "For more information see: http://www.speex.org"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:275
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:271
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:286
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:249
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:278
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:293
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:256
 #: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:58
 #: plugins/soundkonverter_replaygain_musepack/soundkonverter_replaygain_musepackgain.cpp:57
 msgid ""
@@ -1623,36 +1628,36 @@ msgid ""
 "quality."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:292
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:288
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:303
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:266
 #: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:57
 msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:320
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:316
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:331
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:294
 msgid "True Audio is a free lossless audio format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:327
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:323
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:338
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:301
 msgid "WavPack is a free lossless audio format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:335
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:331
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:346
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:309
 msgid "Real Media Audio is a propritary and lossy codec."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:343
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:339
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:354
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:317
 msgid "3GP is a audio/video container format for mobile devices."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:358
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:354
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:369
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:332
 msgid "Real Media is a propritary and lossy codec."
 msgstr ""
 
@@ -1759,7 +1764,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:595
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:64
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:169
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:372
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:371
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:64
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:169
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:372
@@ -1776,7 +1781,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:65
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:146
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:176
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:390
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:388
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:65
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:146
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:176
@@ -1793,7 +1798,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:614
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:66
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:177
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:391
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:389
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:66
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:177
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:391
@@ -1922,14 +1927,14 @@ msgstr ""
 msgid "Monkey’s Audio is a fast and efficient lossless audio format."
 msgstr ""
 
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:77
 msgid ""
 "You need to install 'mplayer'. Since mplayer inludes many patented codecs, "
 "it may not be included in the default installation of your distribution. "
 "Many distributions offer mplayer in an additional software repository."
 msgstr ""
 
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:263
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:241
 msgid "Speex is a free and lossy audio codec designed for encoding speech."
 msgstr ""
 
@@ -1993,14 +1998,15 @@ msgid ""
 "You can get it at http://www.musepack.net"
 msgstr ""
 
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:39
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:40
 msgid ""
 "In order to encode aac files, you need to install 'neroAacEnc'.\n"
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
 "aac-codec.php after entering an email adress."
 msgstr ""
 
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:47
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:48
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:56
 msgid ""
 "In order to decode aac files, you need to install 'neroAacDec'.\n"
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
@@ -2060,7 +2066,7 @@ msgid "In order to encode mp2 files, you need to install 'twolame'."
 msgstr ""
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:111
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:113
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:110
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:90
 msgid "Configure %1"
 msgstr ""
@@ -2146,7 +2152,7 @@ msgid ""
 "Some distributions offer aacgain in an additional software repository."
 msgstr ""
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:118
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:95
 msgid "Use tag format:"
 msgstr ""

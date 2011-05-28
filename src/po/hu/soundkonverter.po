@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%"
-"2Bsource/soundkonverter/\n"
-"POT-Creation-Date: 2011-05-21 09:53+0200\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
+"soundkonverter/\n"
+"POT-Creation-Date: 2011-05-28 17:07+0200\n"
 "PO-Revision-Date: 2011-05-21 21:02+0200\n"
 "Last-Translator: Tamas Orosz <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -254,8 +254,8 @@ msgstr "Veszteségmentes"
 
 #: config.cpp:309 config.cpp:327 configdialog/configgeneralpage.cpp:66
 #: configdialog/configgeneralpage.cpp:276 optionsdetailed.cpp:343
-#: optionssimple.cpp:158 optionssimple.cpp:213 optionssimple.cpp:290
-#: soundkonverterview.cpp:451 soundkonverterview.cpp:453
+#: optionssimple.cpp:213 optionssimple.cpp:290 soundkonverterview.cpp:451
+#: soundkonverterview.cpp:453
 msgid "Hybrid"
 msgstr "Keverék"
 
@@ -581,14 +581,14 @@ msgid "Ripping"
 msgstr "Beolvasás"
 
 #: core/backendplugin.cpp:37
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:72
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:132
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:115
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:135
 #: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:69
 #: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:69
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:109
 #: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:66
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:129
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:84
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:99
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:90
 #: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:81
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:75
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:71
@@ -1603,7 +1603,8 @@ msgstr "Bitráta"
 msgid "Resample"
 msgstr "Újramintavételezés"
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:36
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:38
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:46
 msgid ""
 "In order to encode aac files, you need to install 'faac'.\n"
 "Since faac inludes a patented codec, it may not be included in the default "
@@ -1616,7 +1617,9 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van az faac kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:44
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:54
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:62
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:70
 msgid ""
 "In order to decode aac files, you need to install 'faad'.\n"
 "Since faad inludes a patented codec, it may not be included in the default "
@@ -1629,11 +1632,13 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van az faad kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:59
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:178
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:175
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:62
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:75
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:85
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:96
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:181
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:207
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:145
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:171
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:71
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:63
 msgid "Advanced Audio Coding is a lossy and popular audio format."
 msgstr ""
@@ -1658,7 +1663,7 @@ msgstr "Csatornák"
 msgid "Mono"
 msgstr "Monó"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:110
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:113
 msgid ""
 "You need to install 'ffmpeg'. Since ffmpeg inludes many patented codecs, it "
 "may not be included in the default installation of your distribution. Many "
@@ -1670,8 +1675,8 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van a ffmpeg kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:140
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:137
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:143
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:60
 msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
@@ -1681,16 +1686,16 @@ msgstr ""
 "audiókodek.\n"
 "Több információkért látogassa meg a http://www.xiph.org/vorbis weboldalt."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:151
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:154
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:94
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:148
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:76
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:118
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:56
 msgid "MP3 is a very popular lossy audio codec."
 msgstr "Az MP3 egy nagyon népszerű, veszteségesen tömörítő audiókodek."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:160
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:157
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:163
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:127
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it name says, it compresses without any loss."
@@ -1698,35 +1703,35 @@ msgstr ""
 "Az flac egy ingyenes, veszteségmentesen tömörítő audiókodek.\n"
 "Ahogy a neve is mutatja, veszteségmentesen tömörít."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:171
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:168
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:174
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:138
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
 msgstr "A Windows Media Audio A Microsoft saját audiókodeke."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:191
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:188
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:192
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:156
 msgid "Dolby Digital-Audio"
 msgstr "Dolby Digital Audio"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:198
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:195
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:199
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:163
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple."
 msgstr ""
 "Az Apple Lossless Audio Codec egy veszteségmentesen tömörítő audióformátum "
 "az Apple-től."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:206
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:203
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:217
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:181
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
 msgstr "Az MPEG-1 Audio Layer egy régi, veszteségesen tömörítő audióformátum."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:227
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:224
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:238
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:202
 msgid "MPEG-4 Audio Lossless Coding"
 msgstr "MPEG-4 Audio Veszteségmentesen tömörítő Kódolás"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:234
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:231
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:245
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:209
 msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
@@ -1734,8 +1739,8 @@ msgstr ""
 "Az Adaptive Multi-Rate Narrow-Band a 3gp-n alapszik és főként beszéd "
 "tömörítésére használják a mobilkommunikációban."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:243
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:240
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:254
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:218
 msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
@@ -1744,14 +1749,14 @@ msgstr ""
 "Multi-Rate Narrow-Band-nak, és a magasabb adatsebességnek köszönhetően jobb "
 "minőséget nyújt."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:251
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:248
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:262
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:226
 msgid "Monkey's Audio is a propritary lossless audio format."
 msgstr ""
 "A Monkey's Audio egy szabadalommal védett, veszteségmentesen tömörítő "
 "audióformátum."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:266
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:277
 #: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:58
 msgid ""
 "Speex is a free and lossy audio codec designed for low quality speech "
@@ -1762,14 +1767,14 @@ msgstr ""
 "beszéd kódolásához.\n"
 "További információkért látogassa meg a http://www.speex.org weboldalt."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:275
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:271
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:286
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:249
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
 msgstr ""
 "Az MPEG-1 Audio Layer egy nagyon régi és veszteségesen tömörítő fájlformátum."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:278
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:293
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:256
 #: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:58
 #: plugins/soundkonverter_replaygain_musepack/soundkonverter_replaygain_musepackgain.cpp:57
 msgid ""
@@ -1779,8 +1784,8 @@ msgstr ""
 "A Musepack egy ingyenes és veszteségesen tömörítő, az mp2-re alapuló "
 "fájlformátum, kiváló minőségre optimalizálva."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:292
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:288
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:303
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:266
 #: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:57
 msgid ""
 "Shorten is a free and lossless audio codec.\n"
@@ -1790,29 +1795,29 @@ msgstr ""
 "További információért látogassa meg a http://etree.org/shnutils/shorten/ "
 "weboldalt."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:320
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:316
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:331
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:294
 msgid "True Audio is a free lossless audio format."
 msgstr "A True Audio egy ingyenes és veszteségmentesen tömörítő audióformátum."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:327
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:323
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:338
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:301
 msgid "WavPack is a free lossless audio format."
 msgstr "A WavPack egy ingyenes és veszteségmentesen tömörítő audióformátum."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:335
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:331
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:346
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:309
 msgid "Real Media Audio is a propritary and lossy codec."
 msgstr ""
 "A Real Media Audio egy szabadalommal védett és veszteségesen tömörítő kodek."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:343
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:339
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:354
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:317
 msgid "3GP is a audio/video container format for mobile devices."
 msgstr "A 3GP egy audió/videó konténer formátum hordozható eszközökhöz."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:358
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:354
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:369
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:332
 msgid "Real Media is a propritary and lossy codec."
 msgstr "A Real Media egy szabadalommal védett és veszteségesen tömörítő kodek."
 
@@ -1931,7 +1936,7 @@ msgstr "Bitráta mód"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:595
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:64
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:169
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:372
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:371
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:64
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:169
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:372
@@ -1948,7 +1953,7 @@ msgstr "Változó"
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:65
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:146
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:176
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:390
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:388
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:65
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:146
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:176
@@ -1965,7 +1970,7 @@ msgstr "Átlagos"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:614
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:66
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:177
-#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:391
+#: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:389
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:66
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:177
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:391
@@ -2138,7 +2143,7 @@ msgstr ""
 "A Monkey's Audio egy gyors és hatékony, veszteségmentesen tömörítő "
 "audióformátum."
 
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:77
 msgid ""
 "You need to install 'mplayer'. Since mplayer inludes many patented codecs, "
 "it may not be included in the default installation of your distribution. "
@@ -2150,7 +2155,7 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van az mplayer kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:263
+#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:241
 msgid "Speex is a free and lossy audio codec designed for encoding speech."
 msgstr ""
 "A Speex egy ingyenes és veszteségesen tömörítő audiókodek beszéd kódolására."
@@ -2219,7 +2224,7 @@ msgstr ""
 "A musepack fájlok dekódolásához telepítenie kell az mppdec-et.\n"
 "Letöltheti a http://www.musepack.net weboldalról."
 
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:39
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:40
 msgid ""
 "In order to encode aac files, you need to install 'neroAacEnc'.\n"
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
@@ -2229,7 +2234,8 @@ msgstr ""
 "Letöltheti a http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec."
 "php weboldalról egy e-mail cím megadása után."
 
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:47
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:48
+#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:56
 msgid ""
 "In order to decode aac files, you need to install 'neroAacDec'.\n"
 "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
@@ -2308,7 +2314,7 @@ msgid "In order to encode mp2 files, you need to install 'twolame'."
 msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:111
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:113
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:110
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:90
 msgid "Configure %1"
 msgstr "Beállítás %1"
@@ -2414,7 +2420,7 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van az aacgain kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:118
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:95
 msgid "Use tag format:"
 msgstr "Címkeformátum használata:"

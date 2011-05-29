@@ -1,7 +1,48 @@
 
-This is a release candidate of soundKonverter 1.0.0
-At this stage there shouldn't be any bugs any more. Unfortunately there are most likely some left. So if you see one, call me.
-soundKonverter >should< be stable and harmless but that is not guaranteed.
+soundKonverter is a frontend to various audio converters.
+
+The key features are:
+- Audio conversion
+- Replay Gain calculation
+- CD ripping
+
+
+
+Installation:
+=============
+        mkdir build
+        cd build
+        cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+        make
+        sudo make install
+
+For installing soundKonverter to your home directory see Building Amarok Locally at: http://amarok.kde.org/wiki/2.0_Development_HowTo
+
+
+
+Git repository:
+===============
+For everybody who is interested, there is a git repository at http://gitorious.org/soundkonverter/soundkonverter
+In order to obtain the source code from the git repository you need to install 'git' and execute the following commands:
+initialize local git repository
+        git clone git://gitorious.org/soundkonverter/soundkonverter.git
+update repository
+        git pull
+
+
+
+Precompiled packages:
+=====================
+openSUSE users should add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
+eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_11.3 for openSUSE 11.3.
+Or add the KDE:Extra repository.
+
+Non suse distributions are not tested, so please tell me if something is wrong with the packages.
+
+
+
+Please report every bug you find, that's the only way I can fix it.
+===================================================================
 
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com

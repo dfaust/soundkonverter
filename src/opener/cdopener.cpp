@@ -1126,6 +1126,7 @@ void CDOpener::proceedClicked()
 
     cdOpenerWidget->hide();
     pSaveCue->hide();
+    pCDDB->hide();
     cEntireCd->hide();
     options->show();
     page = ConversionOptionsPage;

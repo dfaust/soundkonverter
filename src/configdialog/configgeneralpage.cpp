@@ -126,7 +126,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     numFilesBox->addWidget( lNumFiles );
     iNumFiles = new KIntSpinBox( 1, 100, 1, 3, this );
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
-    iNumFiles->setToolTip( i18n("You shouldn't set this number higher then the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processors.count()) ); // FIXME change "then" -> "than" after string-freeze
+    iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processors.count()) );
     iNumFiles->setValue( config->data.general.numFiles );
     numFilesBox->addWidget( iNumFiles );
     connect( iNumFiles, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );

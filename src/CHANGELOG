@@ -4,7 +4,7 @@
 -Add: French translation (by Yannick Ernult)
 -Fix: Call neroAacEnc with the correct bitrate
 -Fix: Undo mp3gain and aacgain changes correctly
--Fix: Loading the wrong Replay Gain plugin
+-Fix: Load the right Replay Gain plugin
 -Change: Make it possible to overwrite hidden lame parameters with the additional parameters option
 -Change: Distinguish between aac and m4a files, where aac is the transport stream and m4a an mp4 container with aac data; mp4 is the video container
 

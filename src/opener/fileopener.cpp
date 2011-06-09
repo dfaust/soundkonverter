@@ -31,6 +31,10 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setWindowIcon( KIcon("audio-x-generic") );
     setButtons( 0 );
     
+    // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        resize( parent->width() - 10, sizeHint().height() );
+    
     QWidget *widget = new QWidget();
     setMainWidget( widget );
 

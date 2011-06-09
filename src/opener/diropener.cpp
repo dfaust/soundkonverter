@@ -145,6 +145,10 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     adjustSize();
     options->hide();
     
+    // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        resize( parent->width() - 10, sizeHint().height() );
+    
     
     KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
     if( !url.isEmpty() ) uDirectory->setUrl( url );

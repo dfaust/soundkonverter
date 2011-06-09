@@ -577,6 +577,7 @@ void OutputDirectory::updateMode( Mode mode )
         cDir->setToolTip("");
     }
     
+    // Prevent the directory combo box from beeing too wide because of the directory history
     cDir->setMinimumWidth( 200 );
     cDir->view()->setMinimumWidth( cDir->view()->sizeHintForColumn(0) );
 }

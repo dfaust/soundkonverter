@@ -72,6 +72,10 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     adjustSize();
     options->hide();
 
+    // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        resize( parent->width() - 10, sizeHint().height() );
+    
     
     // add a horizontal box layout for the control elements
     QHBoxLayout *controlBox = new QHBoxLayout( 0 );

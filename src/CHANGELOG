@@ -1,5 +1,5 @@
 1.0.1:
-
+-Change: Prevent Options dialogs from getting too wide
 
 1.0.0:
 -Add: Option to choose between APE and ID3v2  tags for mp3gain and aacgain

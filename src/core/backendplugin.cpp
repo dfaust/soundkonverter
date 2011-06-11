@@ -511,28 +511,28 @@ QString BackendPlugin::standardMessage( const QString& type, const QStringList& 
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
             
-        return i18n( "In order to encode '%1' files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
+        return i18n( "In order to encode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "decode_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
             
-        return i18n( "In order to decode '%1' files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
+        return i18n( "In order to decode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "transcode_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
             
-        return i18n( "In order to transcode '%1' files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
+        return i18n( "In order to transcode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "replygain_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
             
-        return i18n( "In order to calculate Replay Gain tags for '%1' files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
+        return i18n( "In order to calculate Replay Gain tags for %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "install_opensource_backend" )
     {

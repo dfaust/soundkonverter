@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-05-28 17:07+0200\n"
+"POT-Creation-Date: 2011-06-11 12:57+0200\n"
 "PO-Revision-Date: 2011-05-26 09:56+0200\n"
 "Last-Translator: Yannick ERNULT\n"
 "Language-Team: none\n"
@@ -97,8 +97,8 @@ msgstr "Utilisé en dernier"
 #: configdialog/configgeneralpage.cpp:266 options.cpp:82
 #: optionsdetailed.cpp:340 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:213
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:260
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:188
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:230
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:154
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:192
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:310
@@ -126,8 +126,8 @@ msgstr "Essayer en interne"
 #: config.cpp:303 config.cpp:319 configdialog/configgeneralpage.cpp:60
 #: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:337
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:225
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:176
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:200
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:142
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:166
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:298
@@ -151,8 +151,8 @@ msgstr "Très basse qualité "
 #: config.cpp:304 config.cpp:319 configdialog/configgeneralpage.cpp:61
 #: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:338
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:205
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:237
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:180
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:210
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:146
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:175
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:302
@@ -176,8 +176,8 @@ msgstr "Basse qualité"
 #: config.cpp:305 config.cpp:319 configdialog/configgeneralpage.cpp:62
 #: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:339
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:209
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:249
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:184
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:150
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:184
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
@@ -203,8 +203,8 @@ msgstr "Qualité moyenne"
 #: config.cpp:307 config.cpp:319 configdialog/configgeneralpage.cpp:64
 #: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:341
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:217
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:271
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:192
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:240
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:158
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:200
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:314
@@ -228,7 +228,7 @@ msgstr "Très haute qualité"
 #: config.cpp:308 config.cpp:323 configdialog/configgeneralpage.cpp:65
 #: configdialog/configgeneralpage.cpp:271 optionsdetailed.cpp:342
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:197
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:172
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:87
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:92
@@ -262,7 +262,7 @@ msgstr "Hybride"
 
 #: config.cpp:331 optionsdetailed.cpp:346 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:195
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:39
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:317
@@ -391,8 +391,9 @@ msgid "Number of files to convert at once"
 msgstr "Nombre de fichiers à convertir en même temps"
 
 #: configdialog/configgeneralpage.cpp:129
+#, fuzzy
 msgid ""
-"You shouldn't set this number higher then the amount of installed processor "
+"You shouldn't set this number higher than the amount of installed processor "
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
@@ -583,24 +584,206 @@ msgid "Ripping"
 msgstr "Extraction en cours"
 
 #: core/backendplugin.cpp:37
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:115
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:135
-#: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:69
-#: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:69
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:109
-#: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:66
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:99
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:90
-#: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:81
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:75
-#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:71
-#: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:67
 msgid "Wave won't compress the audio stream."
 msgstr "Wave ne compresse pas le flux audio."
 
-#: core/backendplugin.cpp:104
+#: core/backendplugin.cpp:45
+#, fuzzy
+msgid ""
+"Advanced Audio Coding is a lossy and popular audio format. It is widely used "
+"by Apple Inc."
+msgstr "Advanced Audio Coding (aac) est un format audio populaire avec perte."
+
+#: core/backendplugin.cpp:52
+msgid ""
+"m4a files are encoded with the aac codec. It is widely used by Apple Inc."
+msgstr ""
+
+#: core/backendplugin.cpp:71
+msgid ""
+"Ogg Vorbis is a free and lossy high quality audio codec.\n"
+"For more information see: http://www.xiph.org/vorbis/"
+msgstr ""
+"Ogg Vorbis est un codec audio libre de très haute qualité avec perte.\n"
+"Pour plus d'informations : http://www.xiph.org/vorbis/"
+
+#: core/backendplugin.cpp:83
+msgid ""
+"MP3 is the most popular lossy audio codec. It's supported by all audio "
+"players."
+msgstr ""
+
+#: core/backendplugin.cpp:92
+#, fuzzy
+msgid ""
+"Flac is the free lossless audio codec.\n"
+"As it's name says, it compresses without any loss of quality."
+msgstr "Free Lossless Audio Codec (Flac) est un codec audio libre sans perte."
+
+#: core/backendplugin.cpp:102
+msgid "Windows Media Audio is a propritary audio codec from Microsoft."
+msgstr ""
+"Windows Media Audio (wma) est un codec audio propriétaire de Microsoft."
+
+#: core/backendplugin.cpp:109
+msgid "Dolby Digital-Audio"
+msgstr "Dolby Digital-Audio"
+
+#: core/backendplugin.cpp:116
+#, fuzzy
+msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
+msgstr "Apple Lossless Audio Codec est un format audio sans perte d'Apple."
+
+#: core/backendplugin.cpp:124
+msgid "MPEG-1 Audio Layer II is an old lossy audio format."
+msgstr "Mpeg-1 Audio Layer II est un vieux codec audio."
+
+#: core/backendplugin.cpp:146
+msgid "MPEG-4 Audio Lossless Coding"
+msgstr "Mpeg-4 Audio Lossless Coding"
+
+#: core/backendplugin.cpp:153
+msgid ""
+"Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
+"compression in mobile communication."
+msgstr ""
+"Adaptive Multi-Rate Narrow-Band est basé sur 3gp et principalement utilisé "
+"pour la compression des discours lors des communications mobiles."
+
+#: core/backendplugin.cpp:162
+msgid ""
+"Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
+"higher data rate resulting in a higher quality."
+msgstr ""
+"Adaptive Multi-Rate Wide-Band est une version avancée de amr nb qui utilise "
+"un débit supérieur résultant une qualité accrue."
+
+#: core/backendplugin.cpp:170
+#, fuzzy
+msgid ""
+"Monkey’s Audio is a fast and efficient but propritary lossless audio format."
+msgstr "Monkey's Audio est un codec audio rapide et efficace sans perte."
+
+#: core/backendplugin.cpp:186
+msgid ""
+"Speex is a free and lossy audio codec designed for low quality speech "
+"encoding.\n"
+"For more information see: http://www.speex.org"
+msgstr ""
+"Speex est un codec audio libre avec perte spécialisé dans l'encodage des "
+"discours.\n"
+"Pour plus d'informations : http://www.speex.org"
+
+#: core/backendplugin.cpp:194
+msgid "MPEG-1 Audio Layer I very old and lossy file format."
+msgstr "Mpeg-1 Audio Layer I est un très vieux codec audio avec perte."
+
+#: core/backendplugin.cpp:201
+msgid ""
+"Musepack is a free and lossy file format based on mp2 and optimized for high "
+"quality."
+msgstr ""
+"Pusepack (mpc) est un codec audio libre avec perte basé sur mp2 et optimisé "
+"pour une haute qualité."
+
+#: core/backendplugin.cpp:211
+msgid ""
+"Shorten is a free and lossless audio codec.\n"
+"For more information see: http://etree.org/shnutils/shorten/"
+msgstr ""
+"Shorten est un codec audio libre sans perte.\n"
+"Pour plus d'informations : http://etree.org/shnutils/shorten/"
+
+#: core/backendplugin.cpp:239
+msgid "True Audio is a free lossless audio format."
+msgstr "True Audio est un codec audio libre sans perte."
+
+#: core/backendplugin.cpp:246
+msgid ""
+"WavPack is a free and lossless audio codec.\n"
+"For more information see: http://www.wavpack.com"
+msgstr ""
+"WavPack est un codec audio libre sans perte.\n"
+"Pour plus d'informations : http://www.wavpack.com"
+
+#: core/backendplugin.cpp:254
+msgid "Real Media Audio is a propritary and lossy codec."
+msgstr "Real Media Audio est un codec propriétaire avec perte."
+
+#: core/backendplugin.cpp:262
+msgid "3GP is a audio/video container format for mobile devices."
+msgstr "3GP est un conteneur audio/vidéo pour les dispositifs nomades."
+
+#: core/backendplugin.cpp:277
+msgid "Real Media is a propritary and lossy codec."
+msgstr "Real Media est un codec propriétaire avec perte."
+
+#: core/backendplugin.cpp:366
+msgid ""
+"midi is a very old sound file format, that doesn't encode audio waves but "
+"stores instrument timings."
+msgstr ""
+"Midi est un très vieux codec audio qui stocke les timings des intruments."
+
+#: core/backendplugin.cpp:375
+#, fuzzy
+msgid ""
+"Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
+"encode audio waves but stores instrument timings."
+msgstr ""
+"Midi est un très vieux codec audio qui stocke les timings des intruments."
+
+#: core/backendplugin.cpp:447
 msgid "Killing process on user request"
 msgstr "Interruption forcée du processus sur demande de l'utilisateur en cours"
+
+#: core/backendplugin.cpp:514
+#, fuzzy
+msgid "In order to encode %1 files, you need to install '%2'."
+msgstr ""
+"Pour encoder des fichiers au format mp2, vous devez installer 'twolame'."
+
+#: core/backendplugin.cpp:521
+#, fuzzy
+msgid "In order to decode %1 files, you need to install '%2'."
+msgstr ""
+"Pour encoder des fichiers au format mp2, vous devez installer 'twolame'."
+
+#: core/backendplugin.cpp:528
+#, fuzzy
+msgid "In order to transcode %1 files, you need to install '%2'."
+msgstr ""
+"Pour encoder des fichiers au format mp2, vous devez installer 'twolame'."
+
+#: core/backendplugin.cpp:535
+#, fuzzy
+msgid ""
+"In order to calculate Replay Gain tags for %1 files, you need to install "
+"'%2'."
+msgstr ""
+"Pour calculer les tags Replay Gain des fichiers wavpack, vous devez "
+"installer 'wvgain'.\\ Wvgain est habituellement fourni avec le paquet "
+"'wavpack'."
+
+#: core/backendplugin.cpp:542
+msgid "'%1' should be shipped with your distribution."
+msgstr ""
+
+#: core/backendplugin.cpp:549
+#, fuzzy
+msgid ""
+"Since '%1' inludes patented codecs, it may not be included in the default "
+"installation of your distribution. Many distributions offer '%1' in an "
+"additional software repository."
+msgstr ""
+"Vous devez installer 'ffmpeg'. Puisque 'ffmpeg' inclut beaucoup de codecs "
+"brevetés, il se peut qu'il ne soit pas installé par défaut avec votre "
+"distribution. Beaucoup de distributions proposent 'ffmpeg' dans un dépôt "
+"supplémentaire."
+
+#: core/backendplugin.cpp:556
+msgid "You can download '%1' at %2"
+msgstr ""
 
 #: filelist.cpp:43
 msgid "State"
@@ -615,9 +798,9 @@ msgid "Output"
 msgstr "Fichier de destination"
 
 #: filelist.cpp:46 optionssimple.cpp:37
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:37
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:132
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:166
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:35
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:102
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:138
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:84
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:220
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:260
@@ -657,7 +840,7 @@ msgstr "Arrêter la conversion"
 msgid "Remove"
 msgstr "Supprimer"
 
-#: filelist.cpp:159 opener/fileopener.cpp:113 opener/playlistopener.cpp:117
+#: filelist.cpp:159 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
 #: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:357
 msgid ""
 "This file type is unknown to soundKonverter.\n"
@@ -668,15 +851,15 @@ msgstr ""
 "Il se pourrait que vous ayez besoin d'installer un module supplémentaire.\n"
 "Jetez un œil au gestionnaire de paquets de votre distribution."
 
-#: filelist.cpp:197 opener/fileopener.cpp:153 opener/playlistopener.cpp:157
-#: opener/playlistopener.cpp:189 replaygainscanner/replaygainfilelist.cpp:246
+#: filelist.cpp:197 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:395
 msgid "... and %1 more files"
 msgstr "... et %1 fichiers restants"
 
-#: filelist.cpp:415 opener/cdopener.cpp:1193 opener/diropener.cpp:194
-#: opener/fileopener.cpp:178 opener/playlistopener.cpp:213
-#: opener/urlopener.cpp:133 optionslayer.cpp:133
+#: filelist.cpp:415 opener/cdopener.cpp:1194 opener/diropener.cpp:198
+#: opener/fileopener.cpp:182 opener/playlistopener.cpp:217
+#: opener/urlopener.cpp:137 optionslayer.cpp:133
 msgid "No conversion options selected."
 msgstr "Aucune option de conversion sélectionnée."
 
@@ -904,7 +1087,7 @@ msgstr "Artiste :"
 
 #: opener/cdopener.cpp:101 opener/cdopener.cpp:699 opener/cdopener.cpp:888
 #: opener/cdopener.cpp:892 opener/cdopener.cpp:942 opener/cdopener.cpp:971
-#: opener/cdopener.cpp:1170
+#: opener/cdopener.cpp:1171
 msgid "Various Artists"
 msgstr "Artistes divers"
 
@@ -914,7 +1097,7 @@ msgstr "Compositeur :"
 
 #: opener/cdopener.cpp:114 opener/cdopener.cpp:702 opener/cdopener.cpp:902
 #: opener/cdopener.cpp:906 opener/cdopener.cpp:952 opener/cdopener.cpp:977
-#: opener/cdopener.cpp:1171
+#: opener/cdopener.cpp:1172
 msgid "Various Composer"
 msgstr "Compositeurs divers"
 
@@ -972,8 +1155,8 @@ msgstr "Titre :"
 msgid "Comment:"
 msgstr "Commentaire :"
 
-#: opener/cdopener.cpp:279 opener/diropener.cpp:143 opener/fileopener.cpp:53
-#: opener/playlistopener.cpp:39 opener/urlopener.cpp:70 optionslayer.cpp:43
+#: opener/cdopener.cpp:279 opener/diropener.cpp:143 opener/fileopener.cpp:57
+#: opener/playlistopener.cpp:43 opener/urlopener.cpp:70 optionslayer.cpp:43
 msgid "Select your desired output options and click on \"Ok\"."
 msgstr ""
 "Sélectionner vos options de destination désirées puis cliquer sur \"Ok\"."
@@ -1013,17 +1196,17 @@ msgstr ""
 "supplémentaire supportant l'extraction vers un fichier unique peut être "
 "installé."
 
-#: opener/cdopener.cpp:332 opener/diropener.cpp:37 opener/urlopener.cpp:81
+#: opener/cdopener.cpp:332 opener/diropener.cpp:37 opener/urlopener.cpp:85
 msgid "Proceed"
 msgstr "Suivant"
 
-#: opener/cdopener.cpp:335 opener/fileopener.cpp:61
-#: opener/playlistopener.cpp:47 opener/urlopener.cpp:84 optionslayer.cpp:51
+#: opener/cdopener.cpp:335 opener/fileopener.cpp:65
+#: opener/playlistopener.cpp:51 opener/urlopener.cpp:88 optionslayer.cpp:51
 msgid "Ok"
 msgstr "Ok"
 
-#: opener/cdopener.cpp:339 opener/fileopener.cpp:64
-#: opener/playlistopener.cpp:50 opener/urlopener.cpp:88 optionslayer.cpp:54
+#: opener/cdopener.cpp:339 opener/fileopener.cpp:68
+#: opener/playlistopener.cpp:54 opener/urlopener.cpp:92 optionslayer.cpp:54
 #: replaygainscanner/replaygainscanner.cpp:91
 msgid "Cancel"
 msgstr "Annuler"
@@ -1085,7 +1268,7 @@ msgstr "Pistes"
 msgid "Please select at least one track in order to proceed."
 msgstr "Merci de choisir au moins une piste pour continuer."
 
-#: opener/cdopener.cpp:1207
+#: opener/cdopener.cpp:1208
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1095,7 +1278,7 @@ msgstr ""
 "\n"
 "Voulez-vous écraser le fichier existant ?"
 
-#: opener/cdopener.cpp:1208
+#: opener/cdopener.cpp:1209
 msgid "File already exists"
 msgstr "Le fichier existe déjà"
 
@@ -1115,7 +1298,7 @@ msgstr "Dossier :"
 msgid "Only add selected file formats:"
 msgstr "Ajouter uniquement les formats sélectionnés :"
 
-#: opener/diropener.cpp:117 opener/fileopener.cpp:69
+#: opener/diropener.cpp:117 opener/fileopener.cpp:73
 #: replaygainscanner/replaygainscanner.cpp:136
 msgid "<a href=\"format-help\">Are you missing some file formats?</a>"
 msgstr ""
@@ -1138,20 +1321,20 @@ msgstr "Récursif"
 msgid "If checked, files from subdirectories will be added, too."
 msgstr "Si cochée, les fichiers des sous-dossiers seront ajoutés aussi."
 
-#: opener/fileopener.cpp:30 opener/fileopener.cpp:73
-#: opener/playlistopener.cpp:55 replaygainscanner/replaygainscanner.cpp:140
+#: opener/fileopener.cpp:30 opener/fileopener.cpp:77
+#: opener/playlistopener.cpp:59 replaygainscanner/replaygainscanner.cpp:140
 msgid "Add Files"
 msgstr "Ajouter des fichiers"
 
-#: opener/fileopener.cpp:48 replaygainscanner/replaygainscanner.cpp:130
+#: opener/fileopener.cpp:52 replaygainscanner/replaygainscanner.cpp:130
 msgid "%1 files"
 msgstr "%1 fichiers"
 
-#: opener/fileopener.cpp:50 replaygainscanner/replaygainscanner.cpp:132
+#: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:132
 msgid "All supported files"
 msgstr "Tous les fichiers supportés"
 
-#: opener/fileopener.cpp:51 replaygainscanner/replaygainscanner.cpp:133
+#: opener/fileopener.cpp:55 replaygainscanner/replaygainscanner.cpp:133
 msgid "All files"
 msgstr "Tous les fichiers"
 
@@ -1159,11 +1342,11 @@ msgstr "Tous les fichiers"
 msgid "Add playlist"
 msgstr "Ajouter une liste de lecture"
 
-#: opener/playlistopener.cpp:191
+#: opener/playlistopener.cpp:195
 msgid "The following files couldn't be found:\n"
 msgstr "Les fichiers suivants n'ont pas pu être trouvé :\n"
 
-#: opener/playlistopener.cpp:194
+#: opener/playlistopener.cpp:198
 msgid "Files not found"
 msgstr "Fichiers non trouvés"
 
@@ -1175,7 +1358,7 @@ msgstr "Ajouter un adresse internet"
 msgid "1. Enter url"
 msgstr "1. Entrer l'adresse internet"
 
-#: opener/urlopener.cpp:102
+#: opener/urlopener.cpp:106
 msgid "The Url you entered is invalid. Please try again."
 msgstr ""
 "L'adresse internet que vous avez entrée n'est pas valide. Merci de réessayer."
@@ -1584,7 +1767,7 @@ msgstr ""
 msgid "Copy the whole directory structure for all converted files"
 msgstr "Copier toute la structure des dossiers de tous les fichiers convertis"
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:34
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:32
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:80
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:34
 #: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:34
@@ -1593,8 +1776,8 @@ msgstr "Copier toute la structure des dossiers de tous les fichiers convertis"
 msgid "Mode"
 msgstr "Mode"
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:38
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:173
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:36
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:145
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:34
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:85
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:267
@@ -1612,53 +1795,14 @@ msgstr "Mode"
 msgid "Bitrate"
 msgstr "Débit"
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:87
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:69
-#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:159
-#: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:69
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:87
-#: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:82
-#: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:87
-msgid "Resample"
-msgstr "Rééchantillonage"
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:59
+#, fuzzy
+msgid "Sample rate"
+msgstr "Stéréo simple"
 
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:38
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:46
-msgid ""
-"In order to encode aac files, you need to install 'faac'.\n"
-"Since faac inludes a patented codec, it may not be included in the default "
-"installation of your distribution. Many distributions offer faac in an "
-"additional software repository."
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:63
+msgid "Automatic"
 msgstr ""
-"Pour encoder des fichiers au format aac, vous devez installer 'faac'.\n"
-"Puisque 'faac' inclut un codec breveté, il se peut qu'il ne soit pas "
-"installé par défaut avec votre distribution. Beaucoup de distributions "
-"proposent 'faac' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:54
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:62
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:70
-msgid ""
-"In order to decode aac files, you need to install 'faad'.\n"
-"Since faad inludes a patented codec, it may not be included in the default "
-"installation of your distribution. Many distributions offer faad in an "
-"additional software repository."
-msgstr ""
-"Pour décoder des fichiers au format aac, vous devez installer 'faad'.\n"
-"Puisque 'faad' inclut un codec breveté, il se peut qu'il ne soit pas "
-"installé par défaut avec votre distribution. Beaucoup de distributions "
-"proposent 'faad' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:85
-#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:96
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:181
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:207
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:145
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:171
-#: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:71
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:63
-msgid "Advanced Audio Coding is a lossy and popular audio format."
-msgstr "Advanced Audio Coding (aac) est un format audio populaire avec perte."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:58
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
@@ -1678,152 +1822,14 @@ msgstr "Canaux"
 msgid "Mono"
 msgstr "Mono"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:113
-msgid ""
-"You need to install 'ffmpeg'. Since ffmpeg inludes many patented codecs, it "
-"may not be included in the default installation of your distribution. Many "
-"distributions offer ffmpeg in an additional software repository."
-msgstr ""
-"Vous devez installer 'ffmpeg'. Puisque 'ffmpeg' inclut beaucoup de codecs "
-"brevetés, il se peut qu'il ne soit pas installé par défaut avec votre "
-"distribution. Beaucoup de distributions proposent 'ffmpeg' dans un dépôt "
-"supplémentaire."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:143
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:107
-#: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:60
-msgid ""
-"Ogg Vorbis is a free and lossy high quality audio codec.\n"
-"For more information see: http://www.xiph.org/vorbis/"
-msgstr ""
-"Ogg Vorbis est un codec audio libre de très haute qualité avec perte.\n"
-"Pour plus d'informations : http://www.xiph.org/vorbis/"
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:154
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:94
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:118
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:56
-msgid "MP3 is a very popular lossy audio codec."
-msgstr "MP3 est un codec audio très populaire avec perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:163
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:127
-msgid ""
-"Flac is the free lossless audio codec.\n"
-"As it name says, it compresses without any loss."
-msgstr "Free Lossless Audio Codec (Flac) est un codec audio libre sans perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:174
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:138
-msgid "Windows Media Audio is a propritary audio codec from Microsoft."
-msgstr ""
-"Windows Media Audio (wma) est un codec audio propriétaire de Microsoft."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:192
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:156
-msgid "Dolby Digital-Audio"
-msgstr "Dolby Digital-Audio"
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:199
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:163
-msgid "Apple Lossless Audio Codec is a lossless audio format from Apple."
-msgstr "Apple Lossless Audio Codec est un format audio sans perte d'Apple."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:217
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:181
-msgid "MPEG-1 Audio Layer II is an old lossy audio format."
-msgstr "Mpeg-1 Audio Layer II est un vieux codec audio."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:238
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:202
-msgid "MPEG-4 Audio Lossless Coding"
-msgstr "Mpeg-4 Audio Lossless Coding"
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:245
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:209
-msgid ""
-"Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
-"compression in mobile communication."
-msgstr ""
-"Adaptive Multi-Rate Narrow-Band est basé sur 3gp et principalement utilisé "
-"pour la compression des discours lors des communications mobiles."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:254
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:218
-msgid ""
-"Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
-"higher data rate resulting in a higher quality."
-msgstr ""
-"Adaptive Multi-Rate Wide-Band est une version avancée de amr nb qui utilise "
-"un débit supérieur résultant une qualité accrue."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:262
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:226
-msgid "Monkey's Audio is a propritary lossless audio format."
-msgstr "Monkey's Audio (ape) est un codec audio sans perte propriétaire."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:277
-#: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:58
-msgid ""
-"Speex is a free and lossy audio codec designed for low quality speech "
-"encoding.\n"
-"For more information see: http://www.speex.org"
-msgstr ""
-"Speex est un codec audio libre avec perte spécialisé dans l'encodage des "
-"discours.\n"
-"Pour plus d'informations : http://www.speex.org"
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:286
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:249
-msgid "MPEG-1 Audio Layer I very old and lossy file format."
-msgstr "Mpeg-1 Audio Layer I est un très vieux codec audio avec perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:293
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:256
-#: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:58
-#: plugins/soundkonverter_replaygain_musepack/soundkonverter_replaygain_musepackgain.cpp:57
-msgid ""
-"Musepack is a free and lossy file format based on mp2 and optimized for high "
-"quality."
-msgstr ""
-"Pusepack (mpc) est un codec audio libre avec perte basé sur mp2 et optimisé "
-"pour une haute qualité."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:303
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:266
-#: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:57
-msgid ""
-"Shorten is a free and lossless audio codec.\n"
-"For more information see: http://etree.org/shnutils/shorten/"
-msgstr ""
-"Shorten est un codec audio libre sans perte.\n"
-"Pour plus d'informations : http://etree.org/shnutils/shorten/"
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:331
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:294
-msgid "True Audio is a free lossless audio format."
-msgstr "True Audio est un codec audio libre sans perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:338
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:301
-msgid "WavPack is a free lossless audio format."
-msgstr "WavPack est un codec audio libre sans perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:346
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:309
-msgid "Real Media Audio is a propritary and lossy codec."
-msgstr "Real Media Audio est un codec propriétaire avec perte."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:354
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:317
-msgid "3GP is a audio/video container format for mobile devices."
-msgstr "3GP est un conteneur audio/vidéo pour les dispositifs nomades."
-
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:369
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:332
-msgid "Real Media is a propritary and lossy codec."
-msgstr "Real Media est un codec propriétaire avec perte."
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:69
+#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:159
+#: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:69
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:87
+#: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:82
+#: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:87
+msgid "Resample"
+msgstr "Rééchantillonage"
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
@@ -1831,31 +1837,6 @@ msgstr "Real Media est un codec propriétaire avec perte."
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
 msgid "Compression level"
 msgstr "Niveau de compression"
-
-#: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:35
-msgid ""
-"In order to encode flac files, you need to install 'flac'.\n"
-"flac should be shipped with your distribution."
-msgstr ""
-"Pour encoder des fichiers au format flac, vous devez installer 'flac'.\n"
-"Flac devrait être fourni sur votre distribution."
-
-#: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:43
-msgid ""
-"In order to decode flac files, you need to install 'flac'.\n"
-"flac should be shipped with your distribution."
-msgstr ""
-"Pour décoder des fichiers au format flac, vous devez installer 'flac'.\n"
-"Flac devrait être fourni sur votre distribution."
-
-#: plugins/soundkonverter_codec_flac/soundkonverter_codec_flac.cpp:58
-#: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:58
-msgid ""
-"Flac is a free and lossless audio codec.\n"
-"For more information see: http://flac.sourceforge.net"
-msgstr ""
-"Free Lossless Audio Codec (Flac) est un codec audio libre sans perte.\n"
-"Pour plus d'informations : http://flac.sourceforge.net"
 
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:185
@@ -1867,14 +1848,6 @@ msgid "Additional encoder arguments"
 msgstr ""
 "Arguments supplémentaires\n"
 "de l'encodeur"
-
-#: plugins/soundkonverter_codec_flake/soundkonverter_codec_flake.cpp:35
-msgid ""
-"In order to encode flake files, you need to install 'flake'.\n"
-"You can get it at http://flake-enc.sourceforge.net"
-msgstr ""
-"Pour encoder des fichiers au format flake, vous devez installer 'flake'.\n"
-"Pour plus d'informations : http://flake-enc.sourceforge.net"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:34
@@ -2045,120 +2018,18 @@ msgstr ""
 msgid "Quality level from 9 to 0 where 0 is the highes quality."
 msgstr "Niveau de qualité de 9 à 0 où 0 est la qualité la plus élevée."
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:47
-msgid ""
-"In order to encode mp3 files, you need to install 'lame'.\n"
-"Since mp3 is a patented file format, lame may not be included in the default "
-"installation of your distribution.\n"
-"Many distributions offer lame in an additional software repository."
-msgstr ""
-"Pour encoder au format mp3, vous devez installer 'lame'.\n"
-"Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
-"inclus dans l'installation de base de votre distribution.\n"
-"Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:55
-msgid ""
-"In order to decode mp3 files, you need to install 'lame'.\n"
-"Since mp3 is a patented file format, lame may not be included in the default "
-"installation of your distribution.\n"
-"Many distributions offer lame in an additional software repository."
-msgstr ""
-"Pour décoder des fichiers au format mp3, vous devez installer 'lame'.\n"
-"Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
-"inclus dans l'installation de base de votre distribution.\n"
-"Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:63
-msgid ""
-"In order to encode/decode mp3 files, you need to install 'lame'.\n"
-"Since mp3 is a patented file format, lame may not be included in the default "
-"installation of your distribution.\n"
-"Many distributions offer lame in an additional software repository."
-msgstr ""
-"Pour encoder/décoder au format mp3, vous devez installer 'lame'.\n"
-"Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
-"inclus dans l'installation de base de votre distribution.\n"
-"Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:71
-msgid ""
-"In order to decode mp2 files, you need to install 'lame'.\n"
-"Since mp3 is a patented file format, lame may not be included in the default "
-"installation of your distribution.\n"
-"Many distributions offer lame in an additional software repository."
-msgstr ""
-"Pour encoder au format mp2, vous devez installer 'lame'.\n"
-"Puisque le mp2 est un format breveté, il se peut que 'lame' ne soit pas "
-"inclus dans l'installation de base de votre distribution.\n"
-"Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:79
-msgid ""
-"In order to encode mp3/decode mp2 files, you need to install 'lame'.\n"
-"Since mp3 is a patented file format, lame may not be included in the default "
-"installation of your distribution.\n"
-"Many distributions offer lame in an additional software repository."
-msgstr ""
-"Pour encoder au format mp3/décoder en mp2, vous devez installer 'lame'.\n"
-"Puisque le mp2 et le mp3 sont des formats brevetés, il se peut que 'lame' ne "
-"soit pas inclus dans l'installation de base de votre distribution.\n"
-"Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:102
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:68
-msgid "MP2 is an old lossy audio codec."
-msgstr "MP2 est un vieux codec audio avec perte."
-
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:173
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:134
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:117
+#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:83
 msgid "About %1"
 msgstr "Environ %1"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:178
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:122
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
 "LAME est un encodeur MP3 libre de haute qualité.\n"
 "Pour plus d'informations : http://lame.sourceforge.net"
-
-#: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:35
-msgid ""
-"In order to encode ape files, you need to install 'mac'.\n"
-"You can get it at http://www.monkeysaudio.com"
-msgstr ""
-"Pour encoder au format ape, vous devez installer 'mac'.\n"
-"Pour plus d'informations : http://www.monkeysaudio.com"
-
-#: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:43
-msgid ""
-"In order to decode ape files, you need to install 'mac'.\n"
-"You can get it at http://www.monkeysaudio.com"
-msgstr ""
-"Pour décoder des fichiers au format ape, vous devez installer 'mac'.\n"
-"Pour plus d'informations : http://www.monkeysaudio.com"
-
-#: plugins/soundkonverter_codec_mac/soundkonverter_codec_mac.cpp:58
-msgid "Monkey’s Audio is a fast and efficient lossless audio format."
-msgstr "Monkey's Audio est un codec audio rapide et efficace sans perte."
-
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:77
-msgid ""
-"You need to install 'mplayer'. Since mplayer inludes many patented codecs, "
-"it may not be included in the default installation of your distribution. "
-"Many distributions offer mplayer in an additional software repository."
-msgstr ""
-"Vous devez installer 'mplayer'. Puisque 'mplayer' inclut beaucoup de codecs "
-"brevetés, il se peut qu'il ne soit pas fourni dans l'insallation de base de "
-"votre distribution. Beaucoup de dsitributions proposent 'mplayer' dans un "
-"dépôt supplémentaire."
-
-#: plugins/soundkonverter_codec_mplayer/soundkonverter_codec_mplayer.cpp:241
-msgid "Speex is a free and lossy audio codec designed for encoding speech."
-msgstr ""
-"Speex est un codec audio libre avec perte spécialisé dans la compression de "
-"discours."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:292
@@ -2208,121 +2079,13 @@ msgstr "Très haute qualité (~240 kpbs abr)."
 msgid "excellent quality (~270 kbps abr)."
 msgstr "Qualité insensée (~270 kpbs abr)."
 
-#: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:36
-msgid ""
-"In order to encode musepack files, you need to install 'mppenc'.\n"
-"You can get it at http://www.musepack.net"
-msgstr ""
-"Pour encoder des fichiers au format musepack, vous devez installer "
-"'mppenc'.\n"
-"Pour plus d'informations : http://www.musepack.net"
-
-#: plugins/soundkonverter_codec_musepack/soundkonverter_codec_musepack.cpp:44
-msgid ""
-"In order to decode musepack files, you need to install 'mppdec'.\n"
-"You can get it at http://www.musepack.net"
-msgstr ""
-"Pour décoder des fichiers au format musepack, vous devez installer "
-"'mppdec'.\n"
-"Pour plus d'informations : http://www.musepack.net"
-
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:40
-msgid ""
-"In order to encode aac files, you need to install 'neroAacEnc'.\n"
-"You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
-"aac-codec.php after entering an email adress."
-msgstr ""
-"Pour encoder des fichiers au format aac, vous devez installer 'neroAacEnc'.\n"
-"Vous pouvez le télécharger sur http://www.nero.com/enu/downloads-nerodigital-"
-"nero-aac-codec.php après avoir entré un courriel."
-
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:48
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:56
-msgid ""
-"In order to decode aac files, you need to install 'neroAacDec'.\n"
-"You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
-"aac-codec.php after entering an email adress."
+msgid "You can download '%1' at '%2' after entering an email adress."
 msgstr ""
-"Pour décoder des fichiers au format aac, vous devez installer 'neroAacDec'.\n"
-"Vous pouvez le télécharger sur http://www.nero.com/enu/downloads-nerodigital-"
-"nero-aac-codec.php après avoir entré un courriel."
 
-#: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:35
-msgid ""
-"In order to encode shorten files, you need to install 'shorten'.\n"
-"You can get it at http://etree.org/shnutils/shorten/"
-msgstr ""
-"Pour encoder des fichiers au format shorten, vous devez installer "
-"'shorten'.\n"
-"Pour plus d'informations : http://etree.org/shnutils/shorten/"
-
-#: plugins/soundkonverter_codec_shorten/soundkonverter_codec_shorten.cpp:43
-msgid ""
-"In order to decode shorten files, you need to install 'shorten'.\n"
-"You can get it at http://etree.org/shnutils/shorten/"
-msgstr ""
-"Pour décoder des fichiers au format shorten, vous devez installer "
-"'shorten'.\n"
-"Pour plus d'informations : http://etree.org/shnutils/shorten/"
-
-#: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:36
-msgid ""
-"In order to encode speex files, you need to install the package 'speex'.\n"
-"speex should be shipped with your distribution."
-msgstr ""
-"Pour encoder des fichiers au format speex, vous devez installer 'speex'.\n"
-"Speex devrait être fourni de base avec votre distribution."
-
-#: plugins/soundkonverter_codec_speex/soundkonverter_codec_speex.cpp:44
-msgid ""
-"In order to decode speex files, you need to install the package 'speex'.\n"
-"speex should be shipped with your distribution."
-msgstr ""
-"Pour décoder des fichiers au format speex, vous devez installer 'speex'.\n"
-"Speex devrait être fourni de base avec votre distribution."
-
-#: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:36
-msgid ""
-"In order to decode midi files, you need to install 'timidity'.\n"
-"timidity should be shipped with your distribution."
-msgstr ""
-"Pour décoder des fichiers au format midi, vous devez installer 'timidity'.\n"
-"Timidity devrait être fourni de base avec votre distribution."
-
-#: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:44
-msgid ""
-"In order to decode mod files, you need to install 'timidity'.\n"
-"timidity should be shipped with your distribution."
-msgstr ""
-"Pour décoder des fichiers au format mod, vous devez installer 'timidity'.\n"
-"Timidity devrait être fourni de base avec votre distribution."
-
-#: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:59
-msgid ""
-"midi is a very old sound file format, that doesn't encode audio waves but "
-"stores instrument timings."
-msgstr ""
-"Midi est un très vieux codec audio qui stocke les timings des intruments."
-
-#: plugins/soundkonverter_codec_timidity/soundkonverter_codec_timidity.cpp:68
-msgid ""
-"mod is a very old sound file format, that doesn't encode audio waves but "
-"stores instrument timings."
-msgstr ""
-"Mod est un très vieux codec audio qui stocke les timings des intruments."
-
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:45
-msgid "In order to encode mp2 files, you need to install 'twolame'."
-msgstr ""
-"Pour encoder des fichiers au format mp2, vous devez installer 'twolame'."
-
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:111
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:110
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:90
-msgid "Configure %1"
-msgstr "Configure %1"
-
-#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:139
+#: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:88
 msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
@@ -2347,53 +2110,20 @@ msgid "Quality level from -50 to 50."
 msgstr "Niveau de qualité de -50 à 50."
 
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:36
-msgid ""
-"In order to encode ogg vorbis files, you need to install 'oggenc'.\n"
-"oggenc is usually in the package 'vorbis-tools' which should be shipped with "
-"your distribution."
-msgstr ""
-"Pour encoder des fichiers au format ogg vorbis, vous devez installer "
-"'oggenc'.\n"
-"Oggenc est habituellement fourni dans le paquet 'vorbis-tools' qui devrait "
-"être fourni de base avec votre distribution."
-
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:44
+#: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:31
+#, fuzzy
 msgid ""
-"In order to decode ogg vorbis files, you need to install 'oggdec'.\n"
-"oggdec is usually in the package 'vorbis-tools' which should be shipped with "
-"your distribution."
+"'%1' is usually in the package '%2' which should be shipped with your "
+"distribution."
 msgstr ""
-"Pour décoder des fichiers au format ogg vorbis, vous devez installer "
-"'oggdec'.\n"
-"Oggdec est habituellement fourni dans le paquet 'vorbis-tools' qui devrait "
-"être fourni de base avec votre distribution."
-
-#: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:36
-msgid ""
-"In order to encode wavpack files, you need to install 'wavpack'.\n"
-"You can get it at http://www.wavpack.com"
-msgstr ""
-"Pour encoder des fichiers au format wavpack, vous devez installer "
-"'wavpack'.\n"
-"Pour plus d'informations : http://www.wavpack.com"
+"Pour encoder des fichiers au format speex, vous devez installer 'speex'.\n"
+"Speex devrait être fourni de base avec votre distribution."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:44
-msgid ""
-"In order to decode wavpack files, you need to install 'wvunpack'.\n"
-"wvunpack should be in the package 'wavpack'."
+#: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:31
+msgid "'%1' is usually in the package '%2' which you can download at %3"
 msgstr ""
-"Pour décoder des fichiers au format wavpack, vous devez installer "
-"'wunpack'.\n"
-"Wunpack devrait être fourni par le paquet 'wavpack'."
-
-#: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:59
-#: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:57
-msgid ""
-"WavPack is a free and lossless audio codec.\n"
-"For more information see: http://www.wavpack.com"
-msgstr ""
-"WavPack est un codec audio libre sans perte.\n"
-"Pour plus d'informations : http://www.wavpack.com"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
@@ -2411,92 +2141,23 @@ msgstr "Haute qualité"
 msgid "Very high quality"
 msgstr "Très haute qualité"
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:43
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:49
-msgid ""
-"In order to calculate Replay Gain tags for aac files, you need to install "
-"'aacgain'.\n"
-"Since aac is a patented file format, aacgain may not be included in the "
-"default installation of your distribution.\n"
-"Some distributions offer aacgain in an additional software repository."
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers aac, vous devez installer "
-"'aacgain'.\n"
-"Puisque aac est un codec breveté, il se peut qu'aacgain ne soit pas fourni "
-"de base dans votre distribution.\n"
-"Certaines distributions proposent aacgain dans un dépôt supplémentaire."
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:64
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:58
+msgid "Configure %1"
+msgstr "Configure %1"
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:95
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:69
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:63
 msgid "Use tag format:"
 msgstr "Utiliser le format de tag :"
 
-#: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:31
-msgid ""
-"In order to calculate Replay Gain tags for flac files, you need to install "
-"'metaflac'. metaflac is usually in the package 'flac' which should be "
-"shipped with your distribution."
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers flac, vous devez installer "
-"'metaflac'. Metaflac est habituellement fourni par le paquet 'flac' qui "
-"devrait être installé de base avec votre distribution."
-
-#: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:45
-msgid "FLAC is a free and lossless audio codec."
-msgstr "FLAC est un codec audio libre sans perte."
-
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:42
-msgid ""
-"In order to calculate Replay Gain tags for mp3 files, you need to install "
-"'mp3gain'.\n"
-"Since mp3 is a patented file format, mp3gain may not be included in the "
-"default installation of your distribution.\n"
-"Some distributions offer mp3gain in an additional software repository."
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers mp3, vous devez installer "
-"'mp3gain'.\n"
-"Puisque le codec mp3 est breveté, il se peut que 'mp3gain' ne soit pas "
-"fourni de base avec votre distribution.\n"
-"Certaines distributions proposent 'mp3gain' dans un dépôt supplémentaire."
-
-#: plugins/soundkonverter_replaygain_musepack/soundkonverter_replaygain_musepackgain.cpp:43
-msgid ""
-"In order to calculate Replay Gain tags for musepack files, you need to "
-"install 'replaygain'.\n"
-"You can get it at http://www.musepack.net"
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers musepack, vous devez "
-"installer 'replaygain'.\n"
-"Pour plus d'informations : http://www.musepack.net"
-
-#: plugins/soundkonverter_replaygain_vorbisgain/soundkonverter_replaygain_vorbisgain.cpp:43
-msgid ""
-"In order to calculate Replay Gain tags for ogg vorbis files, you need to "
-"install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' "
-"which should be shipped with your distribution."
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers ogg vorbis, vous devez "
-"installer 'vorbisgain'. Il devrait être fourni en standard par votre "
-"distribution."
-
-#: plugins/soundkonverter_replaygain_vorbisgain/soundkonverter_replaygain_vorbisgain.cpp:57
-msgid "Ogg Vorbis is a free and lossy high quality audio codec."
-msgstr "Ogg Vorbis est un codec audio libre avec perte de très haute qualité."
-
-#: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:43
-msgid ""
-"In order to calculate Replay Gain tags for wavpack files, you need to "
-"install 'wvgain'. wvgain is usually in the package 'wavpack'."
-msgstr ""
-"Pour calculer les tags Replay Gain des fichiers wavpack, vous devez "
-"installer 'wvgain'.\\ Wvgain est habituellement fourni avec le paquet "
-"'wavpack'."
-
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:52
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:40
+#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
-"cdparanoia. cdparanoia is usually shipped with your distribution, the "
-"package name can vary."
+"'cdparanoia'.\n"
+"'cdparanoia' is usually shipped with your distribution, the package name can "
+"vary."
 msgstr ""
 "Pour extraire des CDs audio par piste ou vers un fichier unique, vous devez "
 "installer 'cdparanoia'. Cdparanoia est habituellement fourni de base avec "
@@ -2636,3 +2297,327 @@ msgstr "Vos noms"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Vos courriels"
+
+#~ msgid ""
+#~ "In order to encode aac files, you need to install 'faac'.\n"
+#~ "Since faac inludes a patented codec, it may not be included in the "
+#~ "default installation of your distribution. Many distributions offer faac "
+#~ "in an additional software repository."
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format aac, vous devez installer 'faac'.\n"
+#~ "Puisque 'faac' inclut un codec breveté, il se peut qu'il ne soit pas "
+#~ "installé par défaut avec votre distribution. Beaucoup de distributions "
+#~ "proposent 'faac' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to decode aac files, you need to install 'faad'.\n"
+#~ "Since faad inludes a patented codec, it may not be included in the "
+#~ "default installation of your distribution. Many distributions offer faad "
+#~ "in an additional software repository."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format aac, vous devez installer 'faad'.\n"
+#~ "Puisque 'faad' inclut un codec breveté, il se peut qu'il ne soit pas "
+#~ "installé par défaut avec votre distribution. Beaucoup de distributions "
+#~ "proposent 'faad' dans un dépôt supplémentaire."
+
+#~ msgid "MP3 is a very popular lossy audio codec."
+#~ msgstr "MP3 est un codec audio très populaire avec perte."
+
+#~ msgid "Monkey's Audio is a propritary lossless audio format."
+#~ msgstr "Monkey's Audio (ape) est un codec audio sans perte propriétaire."
+
+#~ msgid "WavPack is a free lossless audio format."
+#~ msgstr "WavPack est un codec audio libre sans perte."
+
+#~ msgid ""
+#~ "In order to encode flac files, you need to install 'flac'.\n"
+#~ "flac should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format flac, vous devez installer 'flac'.\n"
+#~ "Flac devrait être fourni sur votre distribution."
+
+#~ msgid ""
+#~ "In order to decode flac files, you need to install 'flac'.\n"
+#~ "flac should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format flac, vous devez installer 'flac'.\n"
+#~ "Flac devrait être fourni sur votre distribution."
+
+#~ msgid ""
+#~ "Flac is a free and lossless audio codec.\n"
+#~ "For more information see: http://flac.sourceforge.net"
+#~ msgstr ""
+#~ "Free Lossless Audio Codec (Flac) est un codec audio libre sans perte.\n"
+#~ "Pour plus d'informations : http://flac.sourceforge.net"
+
+#~ msgid ""
+#~ "In order to encode flake files, you need to install 'flake'.\n"
+#~ "You can get it at http://flake-enc.sourceforge.net"
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format flake, vous devez installer 'flake'.\n"
+#~ "Pour plus d'informations : http://flake-enc.sourceforge.net"
+
+#~ msgid ""
+#~ "In order to encode mp3 files, you need to install 'lame'.\n"
+#~ "Since mp3 is a patented file format, lame may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Many distributions offer lame in an additional software repository."
+#~ msgstr ""
+#~ "Pour encoder au format mp3, vous devez installer 'lame'.\n"
+#~ "Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
+#~ "inclus dans l'installation de base de votre distribution.\n"
+#~ "Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to decode mp3 files, you need to install 'lame'.\n"
+#~ "Since mp3 is a patented file format, lame may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Many distributions offer lame in an additional software repository."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format mp3, vous devez installer 'lame'.\n"
+#~ "Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
+#~ "inclus dans l'installation de base de votre distribution.\n"
+#~ "Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to encode/decode mp3 files, you need to install 'lame'.\n"
+#~ "Since mp3 is a patented file format, lame may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Many distributions offer lame in an additional software repository."
+#~ msgstr ""
+#~ "Pour encoder/décoder au format mp3, vous devez installer 'lame'.\n"
+#~ "Puisque le mp3 est un format breveté, il se peut que 'lame' ne soit pas "
+#~ "inclus dans l'installation de base de votre distribution.\n"
+#~ "Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to decode mp2 files, you need to install 'lame'.\n"
+#~ "Since mp3 is a patented file format, lame may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Many distributions offer lame in an additional software repository."
+#~ msgstr ""
+#~ "Pour encoder au format mp2, vous devez installer 'lame'.\n"
+#~ "Puisque le mp2 est un format breveté, il se peut que 'lame' ne soit pas "
+#~ "inclus dans l'installation de base de votre distribution.\n"
+#~ "Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to encode mp3/decode mp2 files, you need to install 'lame'.\n"
+#~ "Since mp3 is a patented file format, lame may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Many distributions offer lame in an additional software repository."
+#~ msgstr ""
+#~ "Pour encoder au format mp3/décoder en mp2, vous devez installer 'lame'.\n"
+#~ "Puisque le mp2 et le mp3 sont des formats brevetés, il se peut que 'lame' "
+#~ "ne soit pas inclus dans l'installation de base de votre distribution.\n"
+#~ "Beaucoup de distributions proposent 'lame' dans un dépôt supplémentaire."
+
+#~ msgid "MP2 is an old lossy audio codec."
+#~ msgstr "MP2 est un vieux codec audio avec perte."
+
+#~ msgid ""
+#~ "In order to encode ape files, you need to install 'mac'.\n"
+#~ "You can get it at http://www.monkeysaudio.com"
+#~ msgstr ""
+#~ "Pour encoder au format ape, vous devez installer 'mac'.\n"
+#~ "Pour plus d'informations : http://www.monkeysaudio.com"
+
+#~ msgid ""
+#~ "In order to decode ape files, you need to install 'mac'.\n"
+#~ "You can get it at http://www.monkeysaudio.com"
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format ape, vous devez installer 'mac'.\n"
+#~ "Pour plus d'informations : http://www.monkeysaudio.com"
+
+#~ msgid ""
+#~ "You need to install 'mplayer'. Since mplayer inludes many patented "
+#~ "codecs, it may not be included in the default installation of your "
+#~ "distribution. Many distributions offer mplayer in an additional software "
+#~ "repository."
+#~ msgstr ""
+#~ "Vous devez installer 'mplayer'. Puisque 'mplayer' inclut beaucoup de "
+#~ "codecs brevetés, il se peut qu'il ne soit pas fourni dans l'insallation "
+#~ "de base de votre distribution. Beaucoup de dsitributions proposent "
+#~ "'mplayer' dans un dépôt supplémentaire."
+
+#~ msgid "Speex is a free and lossy audio codec designed for encoding speech."
+#~ msgstr ""
+#~ "Speex est un codec audio libre avec perte spécialisé dans la compression "
+#~ "de discours."
+
+#~ msgid ""
+#~ "In order to encode musepack files, you need to install 'mppenc'.\n"
+#~ "You can get it at http://www.musepack.net"
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format musepack, vous devez installer "
+#~ "'mppenc'.\n"
+#~ "Pour plus d'informations : http://www.musepack.net"
+
+#~ msgid ""
+#~ "In order to decode musepack files, you need to install 'mppdec'.\n"
+#~ "You can get it at http://www.musepack.net"
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format musepack, vous devez installer "
+#~ "'mppdec'.\n"
+#~ "Pour plus d'informations : http://www.musepack.net"
+
+#~ msgid ""
+#~ "In order to encode aac files, you need to install 'neroAacEnc'.\n"
+#~ "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
+#~ "aac-codec.php after entering an email adress."
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format aac, vous devez installer "
+#~ "'neroAacEnc'.\n"
+#~ "Vous pouvez le télécharger sur http://www.nero.com/enu/downloads-"
+#~ "nerodigital-nero-aac-codec.php après avoir entré un courriel."
+
+#~ msgid ""
+#~ "In order to decode aac files, you need to install 'neroAacDec'.\n"
+#~ "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
+#~ "aac-codec.php after entering an email adress."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format aac, vous devez installer "
+#~ "'neroAacDec'.\n"
+#~ "Vous pouvez le télécharger sur http://www.nero.com/enu/downloads-"
+#~ "nerodigital-nero-aac-codec.php après avoir entré un courriel."
+
+#~ msgid ""
+#~ "In order to encode shorten files, you need to install 'shorten'.\n"
+#~ "You can get it at http://etree.org/shnutils/shorten/"
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format shorten, vous devez installer "
+#~ "'shorten'.\n"
+#~ "Pour plus d'informations : http://etree.org/shnutils/shorten/"
+
+#~ msgid ""
+#~ "In order to decode shorten files, you need to install 'shorten'.\n"
+#~ "You can get it at http://etree.org/shnutils/shorten/"
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format shorten, vous devez installer "
+#~ "'shorten'.\n"
+#~ "Pour plus d'informations : http://etree.org/shnutils/shorten/"
+
+#~ msgid ""
+#~ "In order to decode speex files, you need to install the package 'speex'.\n"
+#~ "speex should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format speex, vous devez installer 'speex'.\n"
+#~ "Speex devrait être fourni de base avec votre distribution."
+
+#~ msgid ""
+#~ "In order to decode midi files, you need to install 'timidity'.\n"
+#~ "timidity should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format midi, vous devez installer "
+#~ "'timidity'.\n"
+#~ "Timidity devrait être fourni de base avec votre distribution."
+
+#~ msgid ""
+#~ "In order to decode mod files, you need to install 'timidity'.\n"
+#~ "timidity should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format mod, vous devez installer "
+#~ "'timidity'.\n"
+#~ "Timidity devrait être fourni de base avec votre distribution."
+
+#~ msgid ""
+#~ "mod is a very old sound file format, that doesn't encode audio waves but "
+#~ "stores instrument timings."
+#~ msgstr ""
+#~ "Mod est un très vieux codec audio qui stocke les timings des intruments."
+
+#~ msgid ""
+#~ "In order to encode ogg vorbis files, you need to install 'oggenc'.\n"
+#~ "oggenc is usually in the package 'vorbis-tools' which should be shipped "
+#~ "with your distribution."
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format ogg vorbis, vous devez installer "
+#~ "'oggenc'.\n"
+#~ "Oggenc est habituellement fourni dans le paquet 'vorbis-tools' qui "
+#~ "devrait être fourni de base avec votre distribution."
+
+#~ msgid ""
+#~ "In order to decode ogg vorbis files, you need to install 'oggdec'.\n"
+#~ "oggdec is usually in the package 'vorbis-tools' which should be shipped "
+#~ "with your distribution."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format ogg vorbis, vous devez installer "
+#~ "'oggdec'.\n"
+#~ "Oggdec est habituellement fourni dans le paquet 'vorbis-tools' qui "
+#~ "devrait être fourni de base avec votre distribution."
+
+#~ msgid ""
+#~ "In order to encode wavpack files, you need to install 'wavpack'.\n"
+#~ "You can get it at http://www.wavpack.com"
+#~ msgstr ""
+#~ "Pour encoder des fichiers au format wavpack, vous devez installer "
+#~ "'wavpack'.\n"
+#~ "Pour plus d'informations : http://www.wavpack.com"
+
+#~ msgid ""
+#~ "In order to decode wavpack files, you need to install 'wvunpack'.\n"
+#~ "wvunpack should be in the package 'wavpack'."
+#~ msgstr ""
+#~ "Pour décoder des fichiers au format wavpack, vous devez installer "
+#~ "'wunpack'.\n"
+#~ "Wunpack devrait être fourni par le paquet 'wavpack'."
+
+#~ msgid ""
+#~ "In order to calculate Replay Gain tags for aac files, you need to install "
+#~ "'aacgain'.\n"
+#~ "Since aac is a patented file format, aacgain may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Some distributions offer aacgain in an additional software repository."
+#~ msgstr ""
+#~ "Pour calculer les tags Replay Gain des fichiers aac, vous devez installer "
+#~ "'aacgain'.\n"
+#~ "Puisque aac est un codec breveté, il se peut qu'aacgain ne soit pas "
+#~ "fourni de base dans votre distribution.\n"
+#~ "Certaines distributions proposent aacgain dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to calculate Replay Gain tags for flac files, you need to "
+#~ "install 'metaflac'. metaflac is usually in the package 'flac' which "
+#~ "should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour calculer les tags Replay Gain des fichiers flac, vous devez "
+#~ "installer 'metaflac'. Metaflac est habituellement fourni par le paquet "
+#~ "'flac' qui devrait être installé de base avec votre distribution."
+
+#~ msgid "FLAC is a free and lossless audio codec."
+#~ msgstr "FLAC est un codec audio libre sans perte."
+
+#~ msgid ""
+#~ "In order to calculate Replay Gain tags for mp3 files, you need to install "
+#~ "'mp3gain'.\n"
+#~ "Since mp3 is a patented file format, mp3gain may not be included in the "
+#~ "default installation of your distribution.\n"
+#~ "Some distributions offer mp3gain in an additional software repository."
+#~ msgstr ""
+#~ "Pour calculer les tags Replay Gain des fichiers mp3, vous devez installer "
+#~ "'mp3gain'.\n"
+#~ "Puisque le codec mp3 est breveté, il se peut que 'mp3gain' ne soit pas "
+#~ "fourni de base avec votre distribution.\n"
+#~ "Certaines distributions proposent 'mp3gain' dans un dépôt supplémentaire."
+
+#~ msgid ""
+#~ "In order to calculate Replay Gain tags for musepack files, you need to "
+#~ "install 'replaygain'.\n"
+#~ "You can get it at http://www.musepack.net"
+#~ msgstr ""
+#~ "Pour calculer les tags Replay Gain des fichiers musepack, vous devez "
+#~ "installer 'replaygain'.\n"
+#~ "Pour plus d'informations : http://www.musepack.net"
+
+#~ msgid ""
+#~ "In order to calculate Replay Gain tags for ogg vorbis files, you need to "
+#~ "install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' "
+#~ "which should be shipped with your distribution."
+#~ msgstr ""
+#~ "Pour calculer les tags Replay Gain des fichiers ogg vorbis, vous devez "
+#~ "installer 'vorbisgain'. Il devrait être fourni en standard par votre "
+#~ "distribution."
+
+#~ msgid "Ogg Vorbis is a free and lossy high quality audio codec."
+#~ msgstr ""
+#~ "Ogg Vorbis est un codec audio libre avec perte de très haute qualité."

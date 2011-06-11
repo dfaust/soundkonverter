@@ -41,64 +41,16 @@ QList<ReplayGainPipe> soundkonverter_replaygain_aacgain::codecTable()
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["aacgain"] != "" );
     newPipe.problemInfo = standardMessage( "replygain_codec,backend", "m4a", "aacgain" ) + "\n" + standardMessage( "install_patented_backend", "aacgain" );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository.");
     table.append( newPipe );
 
     newPipe.codecName = "mp3";
     newPipe.rating = 95;
     newPipe.enabled = ( binaries["aacgain"] != "" );
     newPipe.problemInfo = standardMessage( "replygain_codec,backend", "mp3", "aacgain" ) + "\n" + standardMessage( "install_patented_backend", "aacgain" );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for aac files, you need to install 'aacgain'.\nSince aac is a patented file format, aacgain may not be included in the default installation of your distribution.\nSome distributions offer aacgain in an additional software repository.");
     table.append( newPipe );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_replaygain_aacgain::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "m4a" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
-//         info.mimeTypes.append( "audio/mp4" );
-//         info.mimeTypes.append( "audio/x-m4a" );
-//         info.extensions.append( "m4a" );
-//         info.extensions.append( "f4a" );
-//         info.extensions.append( "aac" );
-//     }
-//     else if( codecName == "mp3" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("MP3 is a very popular lossy audio codec.");
-//         info.mimeTypes.append( "audio/x-mp3" );
-//         info.mimeTypes.append( "audio/mpeg" );
-//         info.extensions.append( "mp3" );
-//     }
-// 
-//     return info;
-// }
-
-// QString soundkonverter_replaygain_aacgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "audio/aac" || mimeType == "audio/aacp" || mimeType == "audio/mp4" )
-//     {
-//         return "aac";
-//     }
-//     else if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
-//     {
-//         return "mp3";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".aac") ) return "aac";
-//         if( filename.url().endsWith(".mp3") ) return "mp3";
-//     }
-// 
-//     return "";
-// }
 
 bool soundkonverter_replaygain_aacgain::isConfigSupported( ActionType action, const QString& codecName )
 {

@@ -20,7 +20,6 @@ public:
     QString name();
 
     QList<ConversionPipeTrunk> codecTable();
-//     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
     
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );

@@ -34,7 +34,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_speex::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["speexenc"] != "" );
     newTrunk.problemInfo = standardMessage( "encode_codec,backend", "speex", "speex" ) + "\n" + standardMessage( "install_opensource_backend", "speex" );
-//     newTrunk.problemInfo = i18n("In order to encode speex files, you need to install the package 'speex'.\nspeex should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -43,49 +42,11 @@ QList<ConversionPipeTrunk> soundkonverter_codec_speex::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["speexdec"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "speex", "speex" ) + "\n" + standardMessage( "install_opensource_backend", "speex" );
-//     newTrunk.problemInfo = i18n("In order to decode speex files, you need to install the package 'speex'.\nspeex should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_codec_speex::formatInfo( const QString& codecName )
-// {
-//     if( codecName == "speex" )
-//     {
-//         BackendPlugin::FormatInfo info;
-//         info.codecName = codecName;
-//         info.lossless = false;
-//         info.description = i18n("Speex is a free and lossy audio codec designed for low quality speech encoding.\nFor more information see: http://www.speex.org");
-//         info.mimeTypes.append( "audio/x-speex" );
-//         info.mimeTypes.append( "audio/x-speex+ogg" );
-//         info.extensions.append( "spx" );
-// //         info.extensions.append( "ogg" );
-//         return info;
-//     }
-// 
-//     return BackendPlugin::formatInfo( codecName );
-// }
-
-// QString soundkonverter_codec_speex::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
-//     {
-//         return "speex";
-//     }
-//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-//     {
-//         return "wav";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".ogg") ) return "speex";
-//         if( filename.url().endsWith(".wav") ) return "wav";
-//     }
-// 
-//     return "";
-// }
 
 bool soundkonverter_codec_speex::isConfigSupported( ActionType action, const QString& format )
 {

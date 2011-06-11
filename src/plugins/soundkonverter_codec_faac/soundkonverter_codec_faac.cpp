@@ -74,53 +74,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     return table;
 }
 
-// BackendPlugin::FormatInfo soundkonverter_codec_faac::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "aac" )
-//     {
-//         info.lossless = false;
-//         info.description = standardMessage( "aac_description" );
-//         info.mimeTypes.append( "audio/aac" );
-// //         info.mimeTypes.append( "audio/aacp" );
-//         info.extensions.append( "aac" );
-// //         info.extensions.append( "3gp" );
-// //         info.extensions.append( "mp4" );
-// //         info.extensions.append( "m4a" );
-//     }
-//     else if( codecName == "m4a" )
-//     {
-//         info.lossless = false;
-//         info.description = standardMessage( "m4a_description" );
-//         info.mimeTypes.append( "audio/mp4" );
-//         info.mimeTypes.append( "audio/x-m4a" );
-//         info.extensions.append( "m4a" );
-//         info.extensions.append( "f4a" );
-//         info.extensions.append( "aac" );
-//     }
-//     else if( codecName == "mp4" )
-//     {
-//         info.lossless = false;
-// //         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
-//         info.mimeTypes.append( "video/mp4" );
-//         info.extensions.append( "mp4" );
-//         info.extensions.append( "m4v" );
-//         info.extensions.append( "f4v" );
-//     }
-//     else if( codecName == "wav" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Wave won't compress the audio stream.");
-//         info.mimeTypes.append( "audio/x-wav" );
-//         info.mimeTypes.append( "audio/wav" );
-//         info.extensions.append( "wav" );
-//     }
-// 
-//     return info;
-// }
-
 bool soundkonverter_codec_faac::isConfigSupported( ActionType action, const QString& codecName )
 {
     return false;

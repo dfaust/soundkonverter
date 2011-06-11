@@ -34,7 +34,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_timidity::codecTable()
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["timidity"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "midi", "timidity" ) + "\n" + standardMessage( "install_opensource_backend", "timidity" );
-//     newTrunk.problemInfo = i18n("In order to decode midi files, you need to install 'timidity'.\ntimidity should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -43,51 +42,11 @@ QList<ConversionPipeTrunk> soundkonverter_codec_timidity::codecTable()
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["timidity"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "mod", "timidity" ) + "\n" + standardMessage( "install_opensource_backend", "timidity" );
-//     newTrunk.problemInfo = i18n("In order to decode mod files, you need to install 'timidity'.\ntimidity should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_codec_timidity::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "midi" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("midi is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
-//         info.mimeTypes.append( "audio/midi" );
-//         info.extensions.append( "midi" );
-//         info.extensions.append( "mid" );
-//         info.extensions.append( "kar" );
-//     }
-//     if( codecName == "midi" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("mod is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
-//         info.mimeTypes.append( "audio/x-mod" );
-//         info.extensions.append( "669" );
-//         info.extensions.append( "m15" );
-//         info.extensions.append( "med" );
-//         info.extensions.append( "mod" );
-//         info.extensions.append( "mtm" );
-//         info.extensions.append( "ult" );
-//         info.extensions.append( "uni" );
-//     }
-//     else if( codecName == "wav" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Wave won't compress the audio stream.");
-//         info.mimeTypes.append( "audio/x-wav" );
-//         info.mimeTypes.append( "audio/wav" );
-//         info.extensions.append( "wav" );
-//     }
-// 
-//     return info;
-// }
 
 bool soundkonverter_codec_timidity::isConfigSupported( ActionType action, const QString& codecName )
 {

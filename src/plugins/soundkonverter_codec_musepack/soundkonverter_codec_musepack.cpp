@@ -34,7 +34,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_musepack::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["mppenc"] != "" );
     newTrunk.problemInfo = standardMessage( "encode_codec,backend", "musepack", "mppenc" ) + "\n" + standardMessage( "install_website_backend,url", "mppenc", "http://www.musepack.net" );
-//     newTrunk.problemInfo = i18n("In order to encode musepack files, you need to install 'mppenc'.\nYou can get it at http://www.musepack.net");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -43,50 +42,11 @@ QList<ConversionPipeTrunk> soundkonverter_codec_musepack::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["mppdec"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "musepack", "mppdec" ) + "\n" + standardMessage( "install_website_backend,url", "mppdec", "http://www.musepack.net" );
-//     newTrunk.problemInfo = i18n("In order to decode musepack files, you need to install 'mppdec'.\nYou can get it at http://www.musepack.net");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_codec_musepack::formatInfo( const QString& codecName )
-// {
-//     if( codecName == "musepack" )
-//     {
-//         BackendPlugin::FormatInfo info;
-//         info.codecName = codecName;
-//         info.lossless = false;
-//         info.description = i18n("Musepack is a free and lossy file format based on mp2 and optimized for high quality."); // http://en.wikipedia.org/wiki/Musepack
-//         info.mimeTypes.append( "audio/x-musepack" );
-//         info.mimeTypes.append( "audio/musepack" );
-//         info.extensions.append( "mpc" );
-//         info.extensions.append( "mp+" );
-//         info.extensions.append( "mpp" );
-//         return info;
-//     }
-// 
-//     return BackendPlugin::formatInfo( codecName );
-// }
-
-// QString soundkonverter_codec_musepack::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
-//     {
-//         return "ogg vorbis";
-//     }
-//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-//     {
-//         return "wav";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
-//         if( filename.url().endsWith(".wav") ) return "wav";
-//     }
-// 
-//     return "";
-// }
 
 bool soundkonverter_codec_musepack::isConfigSupported( ActionType action, const QString& format )
 {

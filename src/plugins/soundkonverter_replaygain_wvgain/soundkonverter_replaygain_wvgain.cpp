@@ -20,18 +20,6 @@ QString soundkonverter_replaygain_wvgain::name()
     return global_plugin_name;
 }
 
-// QMap<QString,int> soundkonverter_replaygain_wvgain::codecList()
-// {
-//     QMap<QString,int> list;
-// 
-//     if( binaries["wvgain"] != "" )
-//     {
-//         list.insert( "ogg vorbis", 100 );
-//     }
-// 
-//     return list;
-// }
-
 QList<ReplayGainPipe> soundkonverter_replaygain_wvgain::codecTable()
 {
     QList<ReplayGainPipe> table;
@@ -41,35 +29,10 @@ QList<ReplayGainPipe> soundkonverter_replaygain_wvgain::codecTable()
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["wvgain"] != "" );
     newPipe.problemInfo = standardMessage( "replaygain_codec,backend", "wavpack", "wvgain" ) + "\n" + i18n( "'%1' is usually in the package '%2' which you can download at %3", QString("wvgain"), QString("wavpack"), QString("http://www.wavpack.com") );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for wavpack files, you need to install 'wvgain'. wvgain is usually in the package 'wavpack'.");
     table.append( newPipe );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_replaygain_wvgain::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "wavpack" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
-//         info.mimeTypes.append( "audio/x-wavpack" );
-//         info.extensions.append( "wv" );
-//         info.extensions.append( "wvp" );
-//     }
-// 
-//     return info;
-// }
-
-/*bool soundkonverter_replaygain_wvgain::canApply( const KUrl& filename )
-{
-    if( filename.url().endsWith(".ogg") ) return true;
-
-    return false;
-}*/
 
 bool soundkonverter_replaygain_wvgain::isConfigSupported( ActionType action, const QString& codecName )
 {
@@ -122,34 +85,6 @@ int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayG
     backendItems.append( newItem );
     return newItem->id;
 }
-
-// QString soundkonverter_replaygain_wvgain::applyCommand( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
-// {
-//     QString command;
-// 
-//     if( fileList.count() <= 0 ) return command;
-// 
-//     if( mode == ReplayGainPlugin::Add )
-//     {
-//         command += "wvgain";
-//         command += " --album";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-//     else
-//     {
-//         command += "wvgain";
-//         command += " --clean";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-// 
-//     return command;
-// }
 
 float soundkonverter_replaygain_wvgain::parseOutput( const QString& output )
 {

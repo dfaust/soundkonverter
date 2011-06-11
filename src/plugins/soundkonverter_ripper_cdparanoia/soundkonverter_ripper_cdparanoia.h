@@ -21,7 +21,6 @@ public:
 
     QString name();
     
-//     RipperInfo ripperInfo();
     QList<ConversionPipeTrunk> codecTable();
 
     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );

@@ -20,18 +20,6 @@ QString soundkonverter_replaygain_vorbisgain::name()
     return global_plugin_name;
 }
 
-// QMap<QString,int> soundkonverter_replaygain_vorbisgain::codecList()
-// {
-//     QMap<QString,int> list;
-// 
-//     if( binaries["vorbisgain"] != "" )
-//     {
-//         list.insert( "ogg vorbis", 100 );
-//     }
-// 
-//     return list;
-// }
-
 QList<ReplayGainPipe> soundkonverter_replaygain_vorbisgain::codecTable()
 {
     QList<ReplayGainPipe> table;
@@ -41,52 +29,10 @@ QList<ReplayGainPipe> soundkonverter_replaygain_vorbisgain::codecTable()
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["vorbisgain"] != "" );
     newPipe.problemInfo = standardMessage( "replygain_codec,backend", "ogg vorbis", "vorbisgain" ) + "\n" + standardMessage( "install_opensource_backend", "vorbisgain" );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' which should be shipped with your distribution.");
     table.append( newPipe );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "ogg vorbis" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.");
-//         info.mimeTypes.append( "application/ogg" );
-//         info.mimeTypes.append( "audio/vorbis" );
-//         info.mimeTypes.append( "application/x-ogg" );
-//         info.mimeTypes.append( "audio/ogg" );
-//         info.mimeTypes.append( "audio/x-vorbis+ogg" );
-//         info.extensions.append( "ogg" );
-//     }
-// 
-//     return info;
-// }
-
-// QString soundkonverter_replaygain_vorbisgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "application/x-ogg" || mimeType == "application/ogg" || mimeType == "audio/ogg" || mimeType == "audio/vorbis" || mimeType == "audio/x-vorbis+ogg" )
-//     {
-//         return "ogg vorbis";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".ogg") ) return "ogg vorbis";
-//     }
-// 
-//     return "";
-// }
-
-/*bool soundkonverter_replaygain_vorbisgain::canApply( const KUrl& filename )
-{
-    if( filename.url().endsWith(".ogg") ) return true;
-
-    return false;
-}*/
 
 bool soundkonverter_replaygain_vorbisgain::isConfigSupported( ActionType action, const QString& codecName )
 {
@@ -144,34 +90,6 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
     backendItems.append( newItem );
     return newItem->id;
 }
-
-// QString soundkonverter_replaygain_vorbisgain::applyCommand( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
-// {
-//     QString command;
-// 
-//     if( fileList.count() <= 0 ) return command;
-// 
-//     if( mode == ReplayGainPlugin::Add )
-//     {
-//         command += "vorbisgain";
-//         command += " --album";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-//     else
-//     {
-//         command += "vorbisgain";
-//         command += " --clean";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-// 
-//     return command;
-// }
 
 // float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output, BackendPluginItem *backendItem ) TODO ogg replaygain fix
 float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output )

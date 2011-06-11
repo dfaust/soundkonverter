@@ -40,43 +40,10 @@ QList<ReplayGainPipe> soundkonverter_replaygain_mp3gain::codecTable()
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["mp3gain"] != "" );
     newPipe.problemInfo = standardMessage( "replygain_codec,backend", "mp3", "mp3gain" ) + "\n" + standardMessage( "install_patented_backend", "mp3gain" );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for mp3 files, you need to install 'mp3gain'.\nSince mp3 is a patented file format, mp3gain may not be included in the default installation of your distribution.\nSome distributions offer mp3gain in an additional software repository.");
     table.append( newPipe );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_replaygain_mp3gain::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "mp3" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("MP3 is a very popular lossy audio codec.");
-//         info.mimeTypes.append( "audio/x-mp3" );
-//         info.mimeTypes.append( "audio/mp3" );
-//         info.mimeTypes.append( "audio/mpeg" );
-//         info.extensions.append( "mp3" );
-//     }
-// 
-//     return info;
-// }
-
-// QString soundkonverter_replaygain_mp3gain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "audio/x-mp3" || mimeType == "audio/mp3" || mimeType == "audio/mpeg" )
-//     {
-//         return "mp3";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".mp3") ) return "mp3";
-//     }
-// 
-//     return "";
-// }
 
 bool soundkonverter_replaygain_mp3gain::isConfigSupported( ActionType action, const QString& codecName )
 {

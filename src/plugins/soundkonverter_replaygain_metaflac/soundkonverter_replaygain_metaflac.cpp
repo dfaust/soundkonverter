@@ -29,31 +29,10 @@ QList<ReplayGainPipe> soundkonverter_replaygain_metaflac::codecTable()
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["metaflac"] != "" );
     newPipe.problemInfo = standardMessage( "replygain_codec,backend", "flac", "metaflac" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", QString("metaflac"), QString("flac") );
-//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for flac files, you need to install 'metaflac'. metaflac is usually in the package 'flac' which should be shipped with your distribution.");
     table.append( newPipe );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_replaygain_metaflac::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "flac" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("FLAC is a free and lossless audio codec.");
-//         info.mimeTypes.append( "audio/x-flac" );
-//         info.mimeTypes.append( "audio/x-flac+ogg" );
-//         info.mimeTypes.append( "audio/x-oggflac" );
-//         info.extensions.append( "flac" );
-//         info.extensions.append( "fla" );
-// //         info.extensions.append( "ogg" );
-//     }
-// 
-//     return info;
-// }
 
 bool soundkonverter_replaygain_metaflac::isConfigSupported( ActionType action, const QString& codecName )
 {
@@ -73,7 +52,8 @@ void soundkonverter_replaygain_metaflac::showInfo( QWidget *parent )
 
 int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
-    if( fileList.count() <= 0 ) return -1;
+    if( fileList.count() <= 0 )
+        return -1;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
@@ -101,34 +81,6 @@ int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, Repla
     backendItems.append( newItem );
     return newItem->id;
 }
-
-// QString soundkonverter_replaygain_metaflac::applyCommand( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
-// {
-//     QString command;
-// 
-//     if( fileList.count() <= 0 ) return command;
-// 
-//     if( mode == ReplayGainPlugin::Add )
-//     {
-//         command += "metaflac";
-//         command += " --album";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-//     else
-//     {
-//         command += "metaflac";
-//         command += " --clean";
-//         for( int i = 0; i < fileList.count(); i++ )
-//         {
-//             command += " \"" + fileList.at(i).toLocalFile() + "\"";
-//         }
-//     }
-// 
-//     return command;
-// }
 
 float soundkonverter_replaygain_metaflac::parseOutput( const QString& output )
 {

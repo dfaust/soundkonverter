@@ -27,18 +27,6 @@ QString soundkonverter_ripper_cdparanoia::name()
     return global_plugin_name;
 }
 
-/*
-RipperInfo soundkonverter_ripper_cdparanoia::ripperInfo()
-{
-    RipperInfo info;
-    info.enabled = !binaries["cdparanoia"].isEmpty();
-    info.canRipEntireCd = true;
-    info.rating = 100;
-    info.problemInfo = i18n("In order to rip audio cds with cdparanoia, you need to install the cdparanoia package.\nMost distibutions are providing this package.");
-    
-    return info;
-}
-*/
 QList<ConversionPipeTrunk> soundkonverter_ripper_cdparanoia::codecTable()
 {
     QList<ConversionPipeTrunk> table;

@@ -36,44 +36,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_flake::codecTable()
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
-//     newTrunk.codecFrom = "flac";
-//     newTrunk.codecTo = "wav";
-//     newTrunk.rating = 100;
-//     newTrunk.enabled = ( binaries["flake"] != "" );
-//     newTrunk.problemInfo = i18n("In order to decode flake files, you need to install 'flake'.\nflake should be shipped with your distribution.");
-//     newTrunk.data.hasInternalReplayGain = false;
-//     table.append( newTrunk );
-
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_codec_flake::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "flac" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Flac is a free and lossless audio codec.\nFor more information see: http://flac.sourceforge.net");
-//         info.mimeTypes.append( "audio/x-flac" );
-//         info.mimeTypes.append( "audio/x-flac+ogg" );
-//         info.mimeTypes.append( "audio/x-oggflac" );
-//         info.extensions.append( "flac" );
-//         info.extensions.append( "fla" );
-// //         info.extensions.append( "ogg" );
-//     }
-//     else if( codecName == "wav" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Wave won't compress the audio stream.");
-//         info.mimeTypes.append( "audio/x-wav" );
-//         info.mimeTypes.append( "audio/wav" );
-//         info.extensions.append( "wav" );
-//     }
-// 
-//     return info;
-// }
 
 bool soundkonverter_codec_flake::isConfigSupported( ActionType action, const QString& codecName )
 {

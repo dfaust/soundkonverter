@@ -38,7 +38,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_neroaac::codecTable()
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacEnc"] != "" );
     newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a", "neroAacEnc" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email adress.", QString("neroAacEnc"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
-//     newTrunk.problemInfo = i18n("In order to encode aac files, you need to install 'neroAacEnc'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -47,7 +46,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_neroaac::codecTable()
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacDec"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a", "neroAacDec" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email adress.", QString("neroAacDec"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
-//     newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'neroAacDec'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -56,48 +54,11 @@ QList<ConversionPipeTrunk> soundkonverter_codec_neroaac::codecTable()
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacDec"] != "" );
     newTrunk.problemInfo = standardMessage( "decode_codec,backend", "mp4", "neroAacDec" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email adress.", QString("neroAacDec"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
-//     newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'neroAacDec'.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php after entering an email adress.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
-
-// BackendPlugin::FormatInfo soundkonverter_codec_neroaac::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "m4a" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
-//         info.mimeTypes.append( "audio/mp4" );
-//         info.mimeTypes.append( "audio/x-m4a" );
-//         info.extensions.append( "m4a" );
-//         info.extensions.append( "f4a" );
-//         info.extensions.append( "aac" );
-//     }
-//     else if( codecName == "mp4" )
-//     {
-//         info.lossless = false;
-// //         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
-//         info.mimeTypes.append( "video/mp4" );
-//         info.extensions.append( "mp4" );
-//         info.extensions.append( "m4v" );
-//         info.extensions.append( "f4v" );
-//     }
-//     else if( codecName == "wav" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Wave won't compress the audio stream.");
-//         info.mimeTypes.append( "audio/x-wav" );
-//         info.mimeTypes.append( "audio/wav" );
-//         info.extensions.append( "wav" );
-//     }
-// 
-//     return info;
-// }
 
 bool soundkonverter_codec_neroaac::isConfigSupported( ActionType action, const QString& codecName )
 {

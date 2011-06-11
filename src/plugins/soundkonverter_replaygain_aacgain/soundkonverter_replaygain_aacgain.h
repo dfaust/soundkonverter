@@ -25,11 +25,8 @@ public:
 
     QString name();
 
-//     QMap<QString,int> codecList();
     QList<ReplayGainPipe> codecTable();
-//     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
-//     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
-//     bool canApply( const KUrl& filename );
+
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
@@ -37,7 +34,6 @@ public:
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
-//     QString applyCommand( const KUrl::List& fileList, ApplyMode mode = Add );
     
 private:
     KUrl::List undoFileList;

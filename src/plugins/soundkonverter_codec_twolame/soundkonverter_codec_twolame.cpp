@@ -43,85 +43,33 @@ QList<ConversionPipeTrunk> soundkonverter_codec_twolame::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["twolame"] != "" );
     newTrunk.problemInfo = standardMessage( "encode_codec,backend", "mp2", "twolame" );
-//     newTrunk.problemInfo = i18n("In order to encode mp2 files, you need to install 'twolame'.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
-
-//     newTrunk.codecFrom = "mp2";
-//     newTrunk.codecTo = "wav";
-//     newTrunk.rating = 100;
-//     newTrunk.enabled = ( binaries["twolame"] != "" );
-//     newTrunk.problemInfo = i18n("In order to decode mp2 files, you need to install 'twolame'.");
-//     newTrunk.data.hasInternalReplayGain = false;
-//     table.append( newTrunk );
 
     return table;
 }
 
-// BackendPlugin::FormatInfo soundkonverter_codec_twolame::formatInfo( const QString& codecName )
-// {
-//     BackendPlugin::FormatInfo info;
-//     info.codecName = codecName;
-// 
-//     if( codecName == "mp2" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("MP2 is an old lossy audio codec.");
-//         info.mimeTypes.append( "audio/x-mp2" );
-//         info.extensions.append( "mp2" );
-//     }
-//     else if( codecName == "wav" )
-//     {
-//         info.lossless = true;
-//         info.description = i18n("Wave won't compress the audio stream.");
-//         info.mimeTypes.append( "audio/x-wav" );
-//         info.mimeTypes.append( "audio/wav" );
-//         info.extensions.append( "wav" );
-//     }
-// 
-//     return info;
-// }
-
-// QString soundkonverter_codec_twolame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
-// {
-//     if( mimeType == "audio/x-mp2" || mimeType == "audio/mp2" || mimeType == "video/mpeg" )
-//     {
-//         return "mp2";
-//     }
-//     else if( mimeType == "audio/x-wav" || mimeType == "audio/wav" )
-//     {
-//         return "wav";
-//     }
-//     else if( mimeType == "application/octet-stream" )
-//     {
-//         if( filename.url().endsWith(".mp2") ) return "mp2";
-//         if( filename.url().endsWith(".wav") ) return "wav";
-//     }
-// 
-//     return "";
-// }
-
 bool soundkonverter_codec_twolame::isConfigSupported( ActionType action, const QString& codecName )
 {
-    return true;
+    return false;
 }
 
 void soundkonverter_codec_twolame::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
-    KDialog *dialog = new KDialog( parent );
-    dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-    dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+//     KDialog *dialog = new KDialog( parent );
+//     dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+//     dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
-    QWidget *widget = new QWidget( dialog );
+//     QWidget *widget = new QWidget( dialog );
     
 
-    dialog->setMainWidget( widget );
+//     dialog->setMainWidget( widget );
 //     connect( dialog, SIGNAL( applyClicked() ), widget, SLOT( save() ) );
 //     connect( dialog, SIGNAL( okClicked() ), widget, SLOT( save() ) );
 //     connect( widget, SIGNAL( changed( bool ) ), dialog, SLOT( enableButtonApply( bool ) ) );
 
-    dialog->enableButtonApply( false );
-    dialog->show();
+//     dialog->enableButtonApply( false );
+//     dialog->show();
 }
 
 bool soundkonverter_codec_twolame::hasInfo()

@@ -73,9 +73,9 @@ public:
     bool canDecode( const QString& codecName, QStringList *errorList = 0 );
     bool canReplayGain( const QString& codecName, CodecPlugin *plugin, QStringList *errorList = 0 );
     bool canRipEntireCd( QStringList *errorList = 0 );
-    QMap<QString,QStringList> decodeProblems();
-    QMap<QString,QStringList> encodeProblems();
-    QMap<QString,QStringList> replaygainProblems();
+    QMap<QString,QStringList> decodeProblems( bool detailed = false );
+    QMap<QString,QStringList> encodeProblems( bool detailed = false );
+    QMap<QString,QStringList> replaygainProblems( bool detailed = false );
     bool isCodecLossless( const QString& codecName );
     bool isCodecHybrid( const QString& codecName );
     bool hasCodecInternalReplayGain( const QString& codecName );

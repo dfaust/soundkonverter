@@ -75,6 +75,7 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
         QLabel *solutionsLabel = new QLabel( messageList.join("\n\n").replace("\n","<br>"), this );
         solutionsLabel->setMargin( 8 );
         solutionsLabel->setWordWrap( true );
+        solutionsLabel->setTextInteractionFlags( Qt::TextSelectableByMouse );
         
         QScrollArea *solutionsScrollArea = new QScrollArea();
         solutionsScrollArea->setWidget( solutionsLabel );

@@ -563,17 +563,20 @@ bool PluginLoader::canRipEntireCd( QStringList *errorList )
     return false;
 }
 
-QMap<QString,QStringList> PluginLoader::decodeProblems()
+QMap<QString,QStringList> PluginLoader::decodeProblems( bool detailed )
 {
     QMap<QString,QStringList> problems;
     QStringList errorList;
     QStringList enabledCodecs;
     
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    if( !detailed )
     {
-        if( conversionPipeTrunks.at(i).enabled )
+        for( int i=0; i<conversionPipeTrunks.size(); i++ )
         {
-            enabledCodecs += conversionPipeTrunks.at(i).codecFrom;
+            if( conversionPipeTrunks.at(i).enabled )
+            {
+                enabledCodecs += conversionPipeTrunks.at(i).codecFrom;
+            }
         }
     }
 
@@ -588,17 +591,20 @@ QMap<QString,QStringList> PluginLoader::decodeProblems()
     return problems;
 }
 
-QMap<QString,QStringList> PluginLoader::encodeProblems()
+QMap<QString,QStringList> PluginLoader::encodeProblems( bool detailed )
 {
     QMap<QString,QStringList> problems;
     QStringList errorList;
     QStringList enabledCodecs;
     
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    if( !detailed )
     {
-        if( conversionPipeTrunks.at(i).enabled )
+        for( int i=0; i<conversionPipeTrunks.size(); i++ )
         {
-            enabledCodecs += conversionPipeTrunks.at(i).codecTo;
+            if( conversionPipeTrunks.at(i).enabled )
+            {
+                enabledCodecs += conversionPipeTrunks.at(i).codecTo;
+            }
         }
     }
 
@@ -613,14 +619,26 @@ QMap<QString,QStringList> PluginLoader::encodeProblems()
     return problems;
 }
 
-QMap<QString,QStringList> PluginLoader::replaygainProblems()
+QMap<QString,QStringList> PluginLoader::replaygainProblems( bool detailed )
 {
     QMap<QString,QStringList> problems;
     QStringList errorList;
-  
+    QStringList enabledCodecs;
+
+    if( !detailed )
+    {
+        for( int i=0; i<replaygainPipes.size(); i++ )
+        {
+            if( replaygainPipes.at(i).enabled )
+            {
+                enabledCodecs += replaygainPipes.at(i).codecName;
+            }
+        }
+    }
+
     for( int i=0; i<replaygainPipes.size(); i++ )
     {
-        if( !replaygainPipes.at(i).enabled && !replaygainPipes.at(i).problemInfo.isEmpty() && !problems.value(replaygainPipes.at(i).codecName).contains(replaygainPipes.at(i).problemInfo) )
+        if( !replaygainPipes.at(i).enabled && !replaygainPipes.at(i).problemInfo.isEmpty() && !problems.value(replaygainPipes.at(i).codecName).contains(replaygainPipes.at(i).problemInfo) && !enabledCodecs.contains(replaygainPipes.at(i).codecName) )
         {
               problems[replaygainPipes.at(i).codecName] += replaygainPipes.at(i).problemInfo;
         }

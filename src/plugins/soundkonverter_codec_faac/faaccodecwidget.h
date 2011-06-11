@@ -8,7 +8,6 @@ class KComboBox;
 class QSlider;
 class QDoubleSpinBox;
 class QCheckBox;
-// class QLabel;
 
 class FaacCodecWidget : public CodecWidget
 {
@@ -30,10 +29,6 @@ private:
     KComboBox *cMode;
     QSlider *sQuality;
     QDoubleSpinBox *dQuality;
-//     KComboBox *cBitrateMode;
-//     QCheckBox *chChannels;
-//     KComboBox *cChannels;
-    QCheckBox *chSamplerate;
     KComboBox *cSamplerate;
 
     QString currentFormat; // holds the current output file format
@@ -45,8 +40,6 @@ private slots:
     void modeChanged( int mode );
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( double quality );
-//     void channelsToggled( bool enabled );
-    void samplerateToggled( bool enabled );
 
 signals:
     void somethingChanged();

@@ -40,31 +40,32 @@ QList<ReplayGainPipe> soundkonverter_replaygain_vorbisgain::codecTable()
     newPipe.codecName = "ogg vorbis";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["vorbisgain"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' which should be shipped with your distribution.");
+    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "ogg vorbis", "vorbisgain" ) + "\n" + standardMessage( "install_opensource_backend", "vorbisgain" );
+//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for ogg vorbis files, you need to install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' which should be shipped with your distribution.");
     table.append( newPipe );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "ogg vorbis" )
-    {
-        info.lossless = false;
-        info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.");
-        info.mimeTypes.append( "application/ogg" );
-        info.mimeTypes.append( "audio/vorbis" );
-        info.mimeTypes.append( "application/x-ogg" );
-        info.mimeTypes.append( "audio/ogg" );
-        info.mimeTypes.append( "audio/x-vorbis+ogg" );
-        info.extensions.append( "ogg" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_replaygain_vorbisgain::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "ogg vorbis" )
+//     {
+//         info.lossless = false;
+//         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.");
+//         info.mimeTypes.append( "application/ogg" );
+//         info.mimeTypes.append( "audio/vorbis" );
+//         info.mimeTypes.append( "application/x-ogg" );
+//         info.mimeTypes.append( "audio/ogg" );
+//         info.mimeTypes.append( "audio/x-vorbis+ogg" );
+//         info.extensions.append( "ogg" );
+//     }
+// 
+//     return info;
+// }
 
 // QString soundkonverter_replaygain_vorbisgain::getCodecFromFile( const KUrl& filename, const QString& mimeType )
 // {

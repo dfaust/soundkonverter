@@ -23,7 +23,7 @@ public:
 
 //     QMap<QString,int> codecList();
     QList<ReplayGainPipe> codecTable();
-    BackendPlugin::FormatInfo formatInfo( const QString& codecName );
+//     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
 //     bool canApply( const KUrl& filename );
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );

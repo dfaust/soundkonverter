@@ -33,7 +33,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_wavpack::codecTable()
     newTrunk.codecTo = "wavpack";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["wavpack"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode wavpack files, you need to install 'wavpack'.\nYou can get it at http://www.wavpack.com");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "wavpack", "wavpack" ) + "\n" + standardMessage( "install_website_backend,url", "wavpack", "http://www.wavpack.com" );
+//     newTrunk.problemInfo = i18n("In order to encode wavpack files, you need to install 'wavpack'.\nYou can get it at http://www.wavpack.com");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -41,37 +42,38 @@ QList<ConversionPipeTrunk> soundkonverter_codec_wavpack::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["wvunpack"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode wavpack files, you need to install 'wvunpack'.\nwvunpack should be in the package 'wavpack'.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "wavpack", "wvunpack" ) + "\n" + i18n( "'%1' is usually in the package '%2' which you can download at %3", "wvunpack", "wavpack", "http://www.wavpack.com" );
+//     newTrunk.problemInfo = i18n("In order to decode wavpack files, you need to install 'wvunpack'.\nwvunpack should be in the package 'wavpack'.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_wavpack::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "wavpack" )
-    {
-        info.lossless = true;
-        info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
-        info.mimeTypes.append( "audio/x-wavpack" );
-        info.extensions.append( "wv" );
-        info.extensions.append( "wvp" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_wavpack::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "wavpack" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
+//         info.mimeTypes.append( "audio/x-wavpack" );
+//         info.extensions.append( "wv" );
+//         info.extensions.append( "wvp" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 bool soundkonverter_codec_wavpack::isConfigSupported( ActionType action, const QString& codecName )
 {

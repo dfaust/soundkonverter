@@ -42,7 +42,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_twolame::codecTable()
     newTrunk.codecTo = "mp2";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["twolame"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode mp2 files, you need to install 'twolame'.");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "mp2", "twolame" );
+//     newTrunk.problemInfo = i18n("In order to encode mp2 files, you need to install 'twolame'.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -57,29 +58,29 @@ QList<ConversionPipeTrunk> soundkonverter_codec_twolame::codecTable()
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_twolame::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "mp2" )
-    {
-        info.lossless = false;
-        info.description = i18n("MP2 is an old lossy audio codec.");
-        info.mimeTypes.append( "audio/x-mp2" );
-        info.extensions.append( "mp2" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_twolame::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "mp2" )
+//     {
+//         info.lossless = false;
+//         info.description = i18n("MP2 is an old lossy audio codec.");
+//         info.mimeTypes.append( "audio/x-mp2" );
+//         info.extensions.append( "mp2" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 // QString soundkonverter_codec_twolame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
 // {

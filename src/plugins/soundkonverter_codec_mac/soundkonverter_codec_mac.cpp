@@ -32,7 +32,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mac::codecTable()
     newTrunk.codecTo = "ape";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["mac"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode ape files, you need to install 'mac'.\nYou can get it at http://www.monkeysaudio.com");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "ape", "mac" ) + "\n" + standardMessage( "install_website_backend,url", "mac", "http://www.monkeysaudio.com" );
+//     newTrunk.problemInfo = i18n("In order to encode ape files, you need to install 'mac'.\nYou can get it at http://www.monkeysaudio.com");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -40,37 +41,38 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mac::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["mac"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode ape files, you need to install 'mac'.\nYou can get it at http://www.monkeysaudio.com");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "ape", "mac" ) + "\n" + standardMessage( "install_website_backend,url", "mac", "http://www.monkeysaudio.com" );
+//     newTrunk.problemInfo = i18n("In order to decode ape files, you need to install 'mac'.\nYou can get it at http://www.monkeysaudio.com");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_mac::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "ape" )
-    {
-        info.lossless = true;
-        info.description = i18n("Monkey’s Audio is a fast and efficient lossless audio format.");
-        info.mimeTypes.append( "audio/x-ape" );
-        info.extensions.append( "ape" );
-        info.extensions.append( "mac" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_mac::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "ape" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Monkey’s Audio is a fast and efficient lossless audio format.");
+//         info.mimeTypes.append( "audio/x-ape" );
+//         info.extensions.append( "ape" );
+//         info.extensions.append( "mac" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 bool soundkonverter_codec_mac::isConfigSupported( ActionType action, const QString& codecName )
 {

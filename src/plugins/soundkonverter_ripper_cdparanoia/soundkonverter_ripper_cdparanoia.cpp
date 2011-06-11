@@ -49,16 +49,10 @@ QList<ConversionPipeTrunk> soundkonverter_ripper_cdparanoia::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["cdparanoia"] != "" );
     newTrunk.data.canRipEntireCd = true;
-    newTrunk.problemInfo = i18n("In order to rip audio cds per track or to a single file, you need to install cdparanoia. cdparanoia is usually shipped with your distribution, the package name can vary.");
+    newTrunk.problemInfo = i18n( "In order to rip audio cds per track or to a single file, you need to install 'cdparanoia'.\n'cdparanoia' is usually shipped with your distribution, the package name can vary." );
     table.append( newTrunk );
 
     return table;
-}
-
-BackendPlugin::FormatInfo soundkonverter_ripper_cdparanoia::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    return info;
 }
 
 QString soundkonverter_ripper_cdparanoia::getCodecFromFile( const KUrl& filename, const QString& mimeType )

@@ -40,28 +40,29 @@ QList<ReplayGainPipe> soundkonverter_replaygain_wvgain::codecTable()
     newPipe.codecName = "wavpack";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["wvgain"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for wavpack files, you need to install 'wvgain'. wvgain is usually in the package 'wavpack'.");
+    newPipe.problemInfo = standardMessage( "replaygain_codec,backend", "wavpack", "wvgain" ) + "\n" + i18n( "'%1' is usually in the package '%2' which you can download at %3", "wvgain", "wavpack", "http://www.wavpack.com" );
+//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for wavpack files, you need to install 'wvgain'. wvgain is usually in the package 'wavpack'.");
     table.append( newPipe );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_replaygain_wvgain::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "wavpack" )
-    {
-        info.lossless = true;
-        info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
-        info.mimeTypes.append( "audio/x-wavpack" );
-        info.extensions.append( "wv" );
-        info.extensions.append( "wvp" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_replaygain_wvgain::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "wavpack" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
+//         info.mimeTypes.append( "audio/x-wavpack" );
+//         info.extensions.append( "wv" );
+//         info.extensions.append( "wvp" );
+//     }
+// 
+//     return info;
+// }
 
 /*bool soundkonverter_replaygain_wvgain::canApply( const KUrl& filename )
 {

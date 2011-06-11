@@ -32,7 +32,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_shorten::codecTable()
     newTrunk.codecTo = "shorten";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["shorten"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode shorten files, you need to install 'shorten'.\nYou can get it at http://etree.org/shnutils/shorten/");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "shorten", "shorten" ) + "\n" + standardMessage( "install_website_backend,url", "shorten", "http://etree.org/shnutils/shorten/" );
+//     newTrunk.problemInfo = i18n("In order to encode shorten files, you need to install 'shorten'.\nYou can get it at http://etree.org/shnutils/shorten/");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -40,28 +41,29 @@ QList<ConversionPipeTrunk> soundkonverter_codec_shorten::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["shorten"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode shorten files, you need to install 'shorten'.\nYou can get it at http://etree.org/shnutils/shorten/");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "shorten", "shorten" ) + "\n" + standardMessage( "install_website_backend,url", "shorten", "http://etree.org/shnutils/shorten/" );
+//     newTrunk.problemInfo = i18n("In order to decode shorten files, you need to install 'shorten'.\nYou can get it at http://etree.org/shnutils/shorten/");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_shorten::formatInfo( const QString& codecName )
-{
-    if( codecName == "shorten" )
-    {
-        BackendPlugin::FormatInfo info;
-        info.codecName = codecName;
-        info.lossless = true;
-        info.description = i18n("Shorten is a free and lossless audio codec.\nFor more information see: http://etree.org/shnutils/shorten/");
-        info.mimeTypes.append( "application/x-shorten" );
-        info.extensions.append( "shn" );
-        return info;
-    }
-
-    return BackendPlugin::formatInfo( codecName );
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_shorten::formatInfo( const QString& codecName )
+// {
+//     if( codecName == "shorten" )
+//     {
+//         BackendPlugin::FormatInfo info;
+//         info.codecName = codecName;
+//         info.lossless = true;
+//         info.description = i18n("Shorten is a free and lossless audio codec.\nFor more information see: http://etree.org/shnutils/shorten/");
+//         info.mimeTypes.append( "application/x-shorten" );
+//         info.extensions.append( "shn" );
+//         return info;
+//     }
+// 
+//     return BackendPlugin::formatInfo( codecName );
+// }
 
 bool soundkonverter_codec_shorten::isConfigSupported( ActionType action, const QString& codecName )
 {

@@ -24,7 +24,6 @@ public:
 //     RipperInfo ripperInfo();
     QList<ConversionPipeTrunk> codecTable();
 
-    BackendPlugin::FormatInfo formatInfo( const QString& codecName );
     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
     
     bool isConfigSupported( ActionType action, const QString& codecName );

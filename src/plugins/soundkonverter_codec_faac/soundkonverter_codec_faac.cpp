@@ -35,7 +35,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecTo = "aac";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faac"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode aac files, you need to install 'faac'.\nSince faac inludes a patented codec, it may not be included in the default installation of your distribution. Many distributions offer faac in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -43,7 +43,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecTo = "m4a";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faac"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode aac files, you need to install 'faac'.\nSince faac inludes a patented codec, it may not be included in the default installation of your distribution. Many distributions offer faac in an additional software repository."); // FIXME change to aac to m4a after string-freeze
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -51,7 +51,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faad"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'faad'.\nSince faad inludes a patented codec, it may not be included in the default installation of your distribution. Many distributions offer faad in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -59,7 +59,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faad"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'faad'.\nSince faad inludes a patented codec, it may not be included in the default installation of your distribution. Many distributions offer faad in an additional software repository."); // FIXME change to aac to m4a after string-freeze
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -67,59 +67,59 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faad"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode aac files, you need to install 'faad'.\nSince faad inludes a patented codec, it may not be included in the default installation of your distribution. Many distributions offer faad in an additional software repository."); // FIXME change to aac to mp4 after string-freeze
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "mp4", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_faac::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "aac" )
-    {
-        info.lossless = false;
-        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding
-        info.mimeTypes.append( "audio/aac" );
-//         info.mimeTypes.append( "audio/aacp" );
-        info.extensions.append( "aac" );
-//         info.extensions.append( "3gp" );
-//         info.extensions.append( "mp4" );
+// BackendPlugin::FormatInfo soundkonverter_codec_faac::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "aac" )
+//     {
+//         info.lossless = false;
+//         info.description = standardMessage( "aac_description" );
+//         info.mimeTypes.append( "audio/aac" );
+// //         info.mimeTypes.append( "audio/aacp" );
+//         info.extensions.append( "aac" );
+// //         info.extensions.append( "3gp" );
+// //         info.extensions.append( "mp4" );
+// //         info.extensions.append( "m4a" );
+//     }
+//     else if( codecName == "m4a" )
+//     {
+//         info.lossless = false;
+//         info.description = standardMessage( "m4a_description" );
+//         info.mimeTypes.append( "audio/mp4" );
+//         info.mimeTypes.append( "audio/x-m4a" );
 //         info.extensions.append( "m4a" );
-    }
-    else if( codecName == "m4a" )
-    {
-        info.lossless = false;
-        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // FIXME change to aac to mp4 after string-freeze
-        info.mimeTypes.append( "audio/mp4" );
-        info.mimeTypes.append( "audio/x-m4a" );
-        info.extensions.append( "m4a" );
-        info.extensions.append( "f4a" );
-        info.extensions.append( "aac" );
-    }
-    else if( codecName == "mp4" )
-    {
-        info.lossless = false;
-//         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
-        info.mimeTypes.append( "video/mp4" );
-        info.extensions.append( "mp4" );
-        info.extensions.append( "m4v" );
-        info.extensions.append( "f4v" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+//         info.extensions.append( "f4a" );
+//         info.extensions.append( "aac" );
+//     }
+//     else if( codecName == "mp4" )
+//     {
+//         info.lossless = false;
+// //         info.description = i18n("Advanced Audio Coding is a lossy and popular audio format."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding // change to aac to mp4 after string-freeze
+//         info.mimeTypes.append( "video/mp4" );
+//         info.extensions.append( "mp4" );
+//         info.extensions.append( "m4v" );
+//         info.extensions.append( "f4v" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 bool soundkonverter_codec_faac::isConfigSupported( ActionType action, const QString& codecName )
 {

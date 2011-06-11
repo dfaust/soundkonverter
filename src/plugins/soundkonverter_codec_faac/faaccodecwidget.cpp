@@ -8,11 +8,9 @@
 
 #include <QLayout>
 #include <QLabel>
-// #include <QCheckBox>
 #include <KLocale>
 #include <KComboBox>
 #include <QDoubleSpinBox>
-// #include <QGroupBox>
 #include <QSlider>
 #include <QCheckBox>
 #include <QLineEdit>
@@ -41,8 +39,6 @@ FaacCodecWidget::FaacCodecWidget()
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
-//     sQuality->setTickPosition( QSlider::TicksBelow );
-//     sQuality->setFixedWidth( sQuality->sizeHint().width() );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( sQuality );
@@ -51,44 +47,20 @@ FaacCodecWidget::FaacCodecWidget()
     dQuality->setRange( 8, 320 );
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
-//     dQuality->setFixedHeight( cMode->minimumSizeHint().height() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
     connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
     topBox->addWidget( dQuality );
-
-//     topBox->addSpacing( 12 );
-// 
-//     QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode")+":", this );
-//     topBox->addWidget( lBitrateMode );
-//     cBitrateMode = new KComboBox( this );
-//     cBitrateMode->addItem( i18n("Variable") );
-//     cBitrateMode->addItem( i18n("Avarage") );
-//     cBitrateMode->addItem( i18n("Constant") );
-//     cBitrateMode->setFixedWidth( cBitrateMode->sizeHint().width() );
-//     connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-//     topBox->addWidget( cBitrateMode );
 
     topBox->addStretch();
 
     QHBoxLayout *midBox = new QHBoxLayout();
     grid->addLayout( midBox, 1, 0 );
 
-//     chChannels = new QCheckBox( i18n("Channels")+":", this );
-//     connect( chChannels, SIGNAL(toggled(bool)), this, SLOT(channelsToggled(bool)) );
-//     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-//     midBox->addWidget( chChannels );
-//     cChannels = new KComboBox( this );
-//     cChannels->addItem( i18n("Mono") );
-//     midBox->addWidget( cChannels );
-//     channelsToggled( false );
-// 
-//     midBox->addSpacing( 12 );
+    QLabel *lSamplerate = new QLabel( i18n("Sample rate") + ":", this );
+    midBox->addWidget( lSamplerate );
 
-    chSamplerate = new QCheckBox( i18n("Resample")+":", this );
-    connect( chSamplerate, SIGNAL(toggled(bool)), this, SLOT(samplerateToggled(bool)) );
-    connect( chSamplerate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( chSamplerate );
     cSamplerate = new KComboBox( this );
+    cSamplerate->addItem( i18n("Automatic") );
     cSamplerate->addItem( "8000 Hz" );
     cSamplerate->addItem( "11025 Hz" );
     cSamplerate->addItem( "12000 Hz" );
@@ -98,10 +70,8 @@ FaacCodecWidget::FaacCodecWidget()
     cSamplerate->addItem( "32000 Hz" );
     cSamplerate->addItem( "44100 Hz" );
     cSamplerate->addItem( "48000 Hz" );
-    cSamplerate->setCurrentIndex( 4 );
     connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     midBox->addWidget( cSamplerate );
-    samplerateToggled( false );
 
     midBox->addStretch();
 
@@ -147,17 +117,19 @@ ConversionOptions *FaacCodecWidget::currentConversionOptions()
         options->bitrateMin = 0;
         options->bitrateMax = 0;
     }
-    if( chSamplerate->isChecked() ) options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
-    else options->samplingRate = 0;
-//     if( chChannels->isChecked() ) options->channels = 1;
-//     else options->channels = 0;
+    
+    if( cSamplerate->currentIndex() == 0 )
+        options->samplingRate = 0;
+    else
+        options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
 
     return options;
 }
 
 bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name ) return false;
+    if( !_options || _options->pluginName != global_plugin_name )
+        return false;
     
     ConversionOptions *options = _options;
 
@@ -176,9 +148,12 @@ bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 //         if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Avarage")) );
 //         else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
-    chSamplerate->setChecked( options->samplingRate != 0 );
-    if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-//     chChannels->setChecked( options->channels != 0 );
+    
+//     chSamplerate->setChecked( options->samplingRate != 0 );
+    if( options->samplingRate == 0 )
+        cSamplerate->setCurrentIndex( 0 );
+    else
+        cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     
     return true;
 }
@@ -196,23 +171,23 @@ QString FaacCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 60 &&  chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 60 && cSamplerate->currentIndex() == 5 )
     {
         return i18n("Very low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 80 &&  chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 80 && cSamplerate->currentIndex() == 5 )
     {
         return i18n("Low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 100 &&  !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 100 && cSamplerate->currentIndex() == 0 )
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 &&  !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 && cSamplerate->currentIndex() == 0 )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 180 &&  !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 180 && cSamplerate->currentIndex() == 0 )
     {
         return i18n("Very high");
     }
@@ -228,10 +203,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 60 );
         dQuality->setValue( 60 );
-//         cBitrateMode->setCurrentIndex( 0 );
-//         chChannels->setChecked( true );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
+//         chSamplerate->setChecked( true );
+        cSamplerate->setCurrentIndex( 5 );
         return true;
     }
     else if( profile == i18n("Low") )
@@ -240,10 +213,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 80 );
         dQuality->setValue( 80 );
-//         cBitrateMode->setCurrentIndex( 0 );
-//         chChannels->setChecked( false );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
+//         chSamplerate->setChecked( true );
+        cSamplerate->setCurrentIndex( 5 );
         return true;
     }
     else if( profile == i18n("Medium") )
@@ -252,9 +223,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 100 );
         dQuality->setValue( 100 );
-//         cBitrateMode->setCurrentIndex( 0 );
-//         chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
+//         chSamplerate->setChecked( false );
+        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("High") )
@@ -263,9 +233,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 140 );
         dQuality->setValue( 140 );
-//         cBitrateMode->setCurrentIndex( 0 );
-//         chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
+//         chSamplerate->setChecked( false );
+        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("Very high") )
@@ -274,9 +243,8 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 180 );
         dQuality->setValue( 180 );
-//         cBitrateMode->setCurrentIndex( 0 );
-//         chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
+//         chSamplerate->setChecked( false );
+        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
 
@@ -294,9 +262,8 @@ QDomDocument FaacCodecWidget::customProfile()
     encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
     encodingOptions.setAttribute("quality",dQuality->value());
 //     encodingOptions.setAttribute("bitrateMode",cBitrateMode->currentIndex());
-//     encodingOptions.setAttribute("channelsEnabled",chChannels->isChecked() && chChannels->isEnabled());
-//     encodingOptions.setAttribute("channels",cChannels->currentIndex());
-    encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
+//     encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
+    encodingOptions.setAttribute("samplerateEnabled",cSamplerate->currentIndex() > 0);
     encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
     root.appendChild(encodingOptions);
     return profile;
@@ -311,10 +278,12 @@ bool FaacCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
     sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
     dQuality->setValue( encodingOptions.attribute("quality").toDouble() );
 //     cBitrateMode->setCurrentIndex( encodingOptions.attribute("bitrateMode").toInt() );
-//     chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
-//     cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
-    chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
-    cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
+//     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
+    if( encodingOptions.attribute("samplerateEnabled").toInt() )
+        cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
+    else
+        cSamplerate->setCurrentIndex( 0 );
+            
     return true;
 }
 
@@ -383,16 +352,6 @@ void FaacCodecWidget::qualitySliderChanged( int quality )
 void FaacCodecWidget::qualitySpinBoxChanged( double quality )
 {
     sQuality->setValue( round(quality) );
-}
-
-// void FaacCodecWidget::channelsToggled( bool enabled )
-// {
-//     cChannels->setEnabled( enabled );
-// }
-
-void FaacCodecWidget::samplerateToggled( bool enabled )
-{
-    cSamplerate->setEnabled( enabled );
 }
 
 

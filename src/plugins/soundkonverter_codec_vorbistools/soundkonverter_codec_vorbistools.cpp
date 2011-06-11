@@ -33,7 +33,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_vorbistools::codecTable()
     newTrunk.codecTo = "ogg vorbis";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["oggenc"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode ogg vorbis files, you need to install 'oggenc'.\noggenc is usually in the package 'vorbis-tools' which should be shipped with your distribution.");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "ogg vorbis", "oggenc" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", "oggenc", "vorbis-tools" );
+//     newTrunk.problemInfo = i18n("In order to encode ogg vorbis files, you need to install 'oggenc'.\noggenc is usually in the package 'vorbis-tools' which should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -41,40 +42,41 @@ QList<ConversionPipeTrunk> soundkonverter_codec_vorbistools::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["oggdec"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode ogg vorbis files, you need to install 'oggdec'.\noggdec is usually in the package 'vorbis-tools' which should be shipped with your distribution.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "ogg vorbis", "oggdec" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", "oggdec", "vorbis-tools" );
+//     newTrunk.problemInfo = i18n("In order to decode ogg vorbis files, you need to install 'oggdec'.\noggdec is usually in the package 'vorbis-tools' which should be shipped with your distribution.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_vorbistools::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "ogg vorbis" )
-    {
-        info.lossless = false;
-//         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: <a href=\"http://www.xiph.org/vorbis/\">http://www.xiph.org/vorbis/</a>");
-        info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: http://www.xiph.org/vorbis/");
-        info.mimeTypes.append( "application/ogg" );
-        info.mimeTypes.append( "audio/vorbis" );
-        info.mimeTypes.append( "application/x-ogg" );
-        info.mimeTypes.append( "audio/ogg" );
-        info.mimeTypes.append( "audio/x-vorbis+ogg" );
-        info.extensions.append( "ogg" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_vorbistools::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "ogg vorbis" )
+//     {
+//         info.lossless = false;
+// //         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: <a href=\"http://www.xiph.org/vorbis/\">http://www.xiph.org/vorbis/</a>");
+//         info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: http://www.xiph.org/vorbis/");
+//         info.mimeTypes.append( "application/ogg" );
+//         info.mimeTypes.append( "audio/vorbis" );
+//         info.mimeTypes.append( "application/x-ogg" );
+//         info.mimeTypes.append( "audio/ogg" );
+//         info.mimeTypes.append( "audio/x-vorbis+ogg" );
+//         info.extensions.append( "ogg" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 // QString soundkonverter_codec_vorbistools::getCodecFromFile( const KUrl& filename, const QString& mimeType )
 // {

@@ -44,7 +44,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.codecTo = "mp3";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["lame"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "mp3", "lame" ) + "\n" + standardMessage( "install_patented_backend", "lame" );
+//     newTrunk.problemInfo = i18n("In order to encode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -52,7 +53,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["lame"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "mp3", "lame" ) + "\n" + standardMessage( "install_patented_backend", "lame" );
+//     newTrunk.problemInfo = i18n("In order to decode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -60,7 +62,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.codecTo = "mp3";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["lame"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode/decode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "transcode_codec,backend", "mp3", "lame" ) + "\n" + standardMessage( "install_patented_backend", "lame" );
+//     newTrunk.problemInfo = i18n("In order to encode/decode mp3 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -68,7 +71,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 70;
     newTrunk.enabled = ( binaries["lame"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode mp2 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "mp2", "lame" ) + "\n" + standardMessage( "install_patented_backend", "lame" );
+//     newTrunk.problemInfo = i18n("In order to decode mp2 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -76,44 +80,45 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
     newTrunk.codecTo = "mp3";
     newTrunk.rating = 70;
     newTrunk.enabled = ( binaries["lame"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode mp3/decode mp2 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
+    newTrunk.problemInfo = standardMessage( "transcode_codec,backend", "mp2/mp3", "lame" ) + "\n" + standardMessage( "install_patented_backend", "lame" );
+//     newTrunk.problemInfo = i18n("In order to encode mp3/decode mp2 files, you need to install 'lame'.\nSince mp3 is a patented file format, lame may not be included in the default installation of your distribution.\nMany distributions offer lame in an additional software repository.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_lame::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "mp3" )
-    {
-        info.lossless = false;
-        info.description = i18n("MP3 is a very popular lossy audio codec.");
-        info.mimeTypes.append( "audio/x-mp3" );
-        info.mimeTypes.append( "audio/mpeg" );
-        info.extensions.append( "mp3" );
-    }
-    else if( codecName == "mp2" )
-    {
-        info.lossless = false;
-        info.description = i18n("MP2 is an old lossy audio codec.");
-        info.mimeTypes.append( "audio/x-mp2" );
-        info.extensions.append( "mp2" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_lame::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "mp3" )
+//     {
+//         info.lossless = false;
+//         info.description = i18n("MP3 is a very popular lossy audio codec.");
+//         info.mimeTypes.append( "audio/x-mp3" );
+//         info.mimeTypes.append( "audio/mpeg" );
+//         info.extensions.append( "mp3" );
+//     }
+//     else if( codecName == "mp2" )
+//     {
+//         info.lossless = false;
+//         info.description = i18n("MP2 is an old lossy audio codec.");
+//         info.mimeTypes.append( "audio/x-mp2" );
+//         info.extensions.append( "mp2" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 // QString soundkonverter_codec_lame::getCodecFromFile( const KUrl& filename, const QString& mimeType )
 // {

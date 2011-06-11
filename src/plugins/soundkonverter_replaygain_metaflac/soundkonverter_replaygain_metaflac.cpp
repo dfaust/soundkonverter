@@ -28,31 +28,32 @@ QList<ReplayGainPipe> soundkonverter_replaygain_metaflac::codecTable()
     newPipe.codecName = "flac";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["metaflac"] != "" );
-    newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for flac files, you need to install 'metaflac'. metaflac is usually in the package 'flac' which should be shipped with your distribution.");
+    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "flac", "metaflac" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", "metaflac", "flac" );
+//     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for flac files, you need to install 'metaflac'. metaflac is usually in the package 'flac' which should be shipped with your distribution.");
     table.append( newPipe );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_replaygain_metaflac::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "flac" )
-    {
-        info.lossless = true;
-        info.description = i18n("FLAC is a free and lossless audio codec.");
-        info.mimeTypes.append( "audio/x-flac" );
-        info.mimeTypes.append( "audio/x-flac+ogg" );
-        info.mimeTypes.append( "audio/x-oggflac" );
-        info.extensions.append( "flac" );
-        info.extensions.append( "fla" );
-//         info.extensions.append( "ogg" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_replaygain_metaflac::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "flac" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("FLAC is a free and lossless audio codec.");
+//         info.mimeTypes.append( "audio/x-flac" );
+//         info.mimeTypes.append( "audio/x-flac+ogg" );
+//         info.mimeTypes.append( "audio/x-oggflac" );
+//         info.extensions.append( "flac" );
+//         info.extensions.append( "fla" );
+// //         info.extensions.append( "ogg" );
+//     }
+// 
+//     return info;
+// }
 
 bool soundkonverter_replaygain_metaflac::isConfigSupported( ActionType action, const QString& codecName )
 {

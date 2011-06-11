@@ -32,7 +32,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_flac::codecTable()
     newTrunk.codecTo = "flac";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["flac"] != "" );
-    newTrunk.problemInfo = i18n("In order to encode flac files, you need to install 'flac'.\nflac should be shipped with your distribution.");
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "flac", "flac" ) + "\n" + standardMessage( "install_opensource_backend", "flac" );
     newTrunk.data.hasInternalReplayGain = true;
     table.append( newTrunk );
 
@@ -40,40 +40,40 @@ QList<ConversionPipeTrunk> soundkonverter_codec_flac::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["flac"] != "" );
-    newTrunk.problemInfo = i18n("In order to decode flac files, you need to install 'flac'.\nflac should be shipped with your distribution.");
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "flac", "flac" ) + "\n" + standardMessage( "install_opensource_backend", "flac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     return table;
 }
 
-BackendPlugin::FormatInfo soundkonverter_codec_flac::formatInfo( const QString& codecName )
-{
-    BackendPlugin::FormatInfo info;
-    info.codecName = codecName;
-
-    if( codecName == "flac" )
-    {
-        info.lossless = true;
-        info.description = i18n("Flac is a free and lossless audio codec.\nFor more information see: http://flac.sourceforge.net");
-        info.mimeTypes.append( "audio/x-flac" );
-        info.mimeTypes.append( "audio/x-flac+ogg" );
-        info.mimeTypes.append( "audio/x-oggflac" );
-        info.extensions.append( "flac" );
-        info.extensions.append( "fla" );
-//         info.extensions.append( "ogg" );
-    }
-    else if( codecName == "wav" )
-    {
-        info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
-        info.mimeTypes.append( "audio/x-wav" );
-        info.mimeTypes.append( "audio/wav" );
-        info.extensions.append( "wav" );
-    }
-
-    return info;
-}
+// BackendPlugin::FormatInfo soundkonverter_codec_flac::formatInfo( const QString& codecName )
+// {
+//     BackendPlugin::FormatInfo info;
+//     info.codecName = codecName;
+// 
+//     if( codecName == "flac" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Flac is a free and lossless audio codec.\nFor more information see: http://flac.sourceforge.net");
+//         info.mimeTypes.append( "audio/x-flac" );
+//         info.mimeTypes.append( "audio/x-flac+ogg" );
+//         info.mimeTypes.append( "audio/x-oggflac" );
+//         info.extensions.append( "flac" );
+//         info.extensions.append( "fla" );
+// //         info.extensions.append( "ogg" );
+//     }
+//     else if( codecName == "wav" )
+//     {
+//         info.lossless = true;
+//         info.description = i18n("Wave won't compress the audio stream.");
+//         info.mimeTypes.append( "audio/x-wav" );
+//         info.mimeTypes.append( "audio/wav" );
+//         info.extensions.append( "wav" );
+//     }
+// 
+//     return info;
+// }
 
 bool soundkonverter_codec_flac::isConfigSupported( ActionType action, const QString& codecName )
 {

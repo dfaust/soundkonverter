@@ -23,7 +23,7 @@ public:
 
 //     QMap<QString,int> codecList();
     QList<ReplayGainPipe> codecTable();
-    BackendPlugin::FormatInfo formatInfo( const QString& codecName );
+//     BackendPlugin::FormatInfo formatInfo( const QString& codecName );
 //     QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
 //     bool canApply( const KUrl& filename );
     bool isConfigSupported( ActionType action, const QString& codecName );

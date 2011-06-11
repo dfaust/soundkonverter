@@ -88,7 +88,13 @@ public:
     virtual void scanForBackends( const QStringList& directoryList = QStringList() );
     /** holds all backend binaries and their location if they were found */
     QMap<QString,QString> binaries;
-
+    
+    QString standardMessage( const QString& type, const QStringList& arguments );
+    QString standardMessage( const QString& type );
+    QString standardMessage( const QString& type, const QString& arguments1 );
+    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2 );
+    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 );
+    
 protected:
     QList<BackendPluginItem*> backendItems;
     int lastId;
@@ -96,7 +102,7 @@ protected:
 //     int priority;
 
 signals:
-    void log( int id, const QString& message );
+    void log( int id, const QString& message, const QStringList& arguments = QStringList() );
     void jobFinished( int id, int exitCode );
 
 private slots:

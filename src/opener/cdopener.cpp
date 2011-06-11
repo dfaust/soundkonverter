@@ -174,6 +174,9 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     trackList->setSelectionMode( QAbstractItemView::ExtendedSelection );
     trackList->setSortingEnabled( false );
     trackList->setRootIsDecorated( false );
+    trackList->header()->setResizeMode( Column_Artist, QHeaderView::ResizeToContents );
+    trackList->header()->setResizeMode( Column_Composer, QHeaderView::ResizeToContents );
+    trackList->header()->setResizeMode( Column_Title, QHeaderView::ResizeToContents );
     connect( trackList, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
     gridLayout->setRowStretch( 1, 1 );
 
@@ -727,27 +730,6 @@ void CDOpener::timeout()
     fadeOut();
 }
 
-void CDOpener::adjustColumns()
-{
-//     const int availableWidth = trackList->contentsRect().width() - trackList->columnWidth(Column_Rip) - trackList->columnWidth(Column_Track) - trackList->columnWidth(Column_Length);
-//     int artistWidth = trackList->isColumnHidden( Column_Artist ) ? 0 : trackList->header()->sectionSizeHint( Column_Artist );
-//     int titleWidth = trackList->isColumnHidden( Column_Title ) ? 0 : trackList->header()->sectionSizeHint( Column_Title );
-//     int composerWidth = trackList->isColumnHidden( Column_Composer ) ? 0 : trackList->header()->sectionSizeHint( Column_Composer );
-//     
-//     const int preferredWidth = artistWidth + titleWidth + composerWidth;
-//     
-//     if( preferredWidth > availableWidth )
-//     {
-//         artistWidth *= availableWidth / preferredWidth;
-//         titleWidth *= availableWidth / preferredWidth;
-//         composerWidth *= availableWidth / preferredWidth;
-//     }
-//     
-//     trackList->setColumnWidth( Column_Artist, artistWidth );
-//     trackList->setColumnWidth( Column_Title, titleWidth );
-//     trackList->setColumnWidth( Column_Composer, composerWidth );
-}
-
 void CDOpener::trackUpPressed()
 {
     QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.first() - 2 );
@@ -991,8 +973,6 @@ void CDOpener::trackTitleChanged( const QString& text )
             item->setText( Column_Title, text );
         tags.at(selectedTracks.at(i))->title = text;
     }
-    
-    adjustColumns();
 }
 
 void CDOpener::trackArtistChanged( const QString& text )
@@ -1007,8 +987,6 @@ void CDOpener::trackArtistChanged( const QString& text )
             item->setText( Column_Artist, text );
         tags.at(selectedTracks.at(i))->artist = text;
     }
-    
-    adjustColumns();
 }
 
 void CDOpener::trackComposerChanged( const QString& text )
@@ -1023,8 +1001,6 @@ void CDOpener::trackComposerChanged( const QString& text )
             item->setText( Column_Composer, text );
         tags.at(selectedTracks.at(i))->composer = text;
     }
-    
-    adjustColumns();
 }
 
 void CDOpener::trackCommentChanged()

@@ -1,4 +1,5 @@
 1.0.1:
+-Fix: CDDB requests
 -Change: Prevent options dialogs from getting too wide
 
 1.0.0:

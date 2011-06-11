@@ -612,12 +612,13 @@ void CDOpener::requestCddb( bool autoRequest )
     
     timeoutTimer.start( autoRequest ? 10000 : 20000 );
 
+    // cddb needs offsets +150 frames (2 seconds * 75 frames per second)
     KCDDB::TrackOffsetList offsets;
     for( int i=1; i<=cdda_tracks(cdDrive); i++ )
     {
-        offsets.append( cdda_track_firstsector(cdDrive,i) );
+        offsets.append( cdda_track_firstsector(cdDrive,i) + 150 );
     }
-    offsets.append( cdda_disc_lastsector(cdDrive) );
+    offsets.append( cdda_disc_lastsector(cdDrive) + 150 );
 
     cddb->config().reparse();
     cddb->setBlockingMode( false );

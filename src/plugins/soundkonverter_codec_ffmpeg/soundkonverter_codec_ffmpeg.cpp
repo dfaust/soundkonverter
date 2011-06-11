@@ -116,7 +116,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
             }
             else
             {
-                newTrunk.problemInfo = standardMessage( "encode_codec,backend", toCodecs.at(i), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
+                newTrunk.problemInfo = standardMessage( "encode_codec,backend", toCodecs.at(j), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
             }
 //             newTrunk.problemInfo = i18n("You need to install 'ffmpeg'. Since ffmpeg inludes many patented codecs, it may not be included in the default installation of your distribution. Many distributions offer ffmpeg in an additional software repository.");
             newTrunk.data.hasInternalReplayGain = false;

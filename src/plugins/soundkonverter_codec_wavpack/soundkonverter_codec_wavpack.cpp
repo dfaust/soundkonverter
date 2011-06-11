@@ -42,7 +42,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_wavpack::codecTable()
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["wvunpack"] != "" );
-    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "wavpack", "wvunpack" ) + "\n" + i18n( "'%1' is usually in the package '%2' which you can download at %3", "wvunpack", "wavpack", "http://www.wavpack.com" );
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "wavpack", "wvunpack" ) + "\n" + i18n( "'%1' is usually in the package '%2' which you can download at %3", QString("wvunpack"), QString("wavpack"), QString("http://www.wavpack.com") );
 //     newTrunk.problemInfo = i18n("In order to decode wavpack files, you need to install 'wvunpack'.\nwvunpack should be in the package 'wavpack'.");
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );

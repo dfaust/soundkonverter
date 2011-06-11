@@ -28,7 +28,7 @@ QList<ReplayGainPipe> soundkonverter_replaygain_metaflac::codecTable()
     newPipe.codecName = "flac";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["metaflac"] != "" );
-    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "flac", "metaflac" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", "metaflac", "flac" );
+    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "flac", "metaflac" ) + "\n" + i18n( "'%1' is usually in the package '%2' which should be shipped with your distribution.", QString("metaflac"), QString("flac") );
 //     newPipe.problemInfo = i18n("In order to calculate Replay Gain tags for flac files, you need to install 'metaflac'. metaflac is usually in the package 'flac' which should be shipped with your distribution.");
     table.append( newPipe );
 

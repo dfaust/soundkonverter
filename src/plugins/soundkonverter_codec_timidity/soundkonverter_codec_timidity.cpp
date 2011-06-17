@@ -110,8 +110,8 @@ QStringList soundkonverter_codec_timidity::convertCommand( const KUrl& inputFile
         command += binaries["timidity"];
         command += "-Ow";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
     }
 
     return command;

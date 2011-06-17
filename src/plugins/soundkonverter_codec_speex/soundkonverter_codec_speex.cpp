@@ -150,16 +150,16 @@ QStringList soundkonverter_codec_speex::convertCommand( const KUrl& inputFile, c
         {
             command += "--downmix";
         }
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
     else
     {
         command += binaries["speexdec"];
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     return command;

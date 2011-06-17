@@ -134,16 +134,16 @@ QStringList soundkonverter_codec_wavpack::convertCommand( const KUrl& inputFile,
         {
             command += "--raw-pcm";
         }
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
     else
     {
         command += binaries["wvunpack"];
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     return command;

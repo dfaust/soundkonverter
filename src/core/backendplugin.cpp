@@ -586,3 +586,9 @@ QString BackendPlugin::standardMessage(const QString& type, const QString& argum
     return standardMessage( type, arguments );
 }
 
+/// see http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_03.html
+QString BackendPlugin::escapeUrl( const KUrl& url )
+{
+    return url.toLocalFile().replace("\"","\\\"").replace("$","\\$").replace("`","\\`");
+}
+

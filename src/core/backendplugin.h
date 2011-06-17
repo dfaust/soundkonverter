@@ -95,6 +95,9 @@ public:
     QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2 );
     QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 );
     
+    /** returns the url as a string with all special characters escaped so the bash can find the files */
+    QString escapeUrl( const KUrl& url );
+    
 protected:
     QList<BackendPluginItem*> backendItems;
     int lastId;

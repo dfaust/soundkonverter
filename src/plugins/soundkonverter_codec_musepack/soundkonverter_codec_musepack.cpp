@@ -153,14 +153,14 @@ QStringList soundkonverter_codec_musepack::convertCommand( const KUrl& inputFile
                 command += conversionOptions->cmdArguments;
             }
         }
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
     else
     {
         command += binaries["mppdec"];
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     return command;

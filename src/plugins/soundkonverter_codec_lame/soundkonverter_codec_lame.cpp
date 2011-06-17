@@ -299,15 +299,15 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         {
             command += conversionOptions->cmdArguments;
         }
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
     else
     {
         command += binaries["lame"];
         command += "--decode";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     return command;

@@ -174,7 +174,7 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
     {
         command += binaries["ffmpeg"];
         command += "-i";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-acodec";
         command += codecMap[conversionOptions->codecName];
         if( outputCodec != "alac" )
@@ -191,14 +191,14 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
                 command += "-ac 1";
             }
         }
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
     else
     {
         command += binaries["ffmpeg"];
         command += "-i";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
@@ -226,12 +226,12 @@ QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, 
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-    if( conversionOptions->codecName == "wav" )
+    if( outputCodec == "wav" )
     {
-        command += "ffmpeg";
+        command += binaries["ffmpeg"];
         command += "-i";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+        command += "\"" + escapeUrl(outputFile) + "\"";
     }
 
     return command;

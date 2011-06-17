@@ -128,12 +128,12 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
     {
         command += binaries["mplayer"];
         command += "-ao";
-        command += "pcm:file=\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "pcm:file=\"" + escapeUrl(outputFile) + "\"";
         command += "-vc";
         command += "null";
         command += "-vo";
         command += "null";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
+        command += "\"" + escapeUrl(inputFile) + "\"";
     }
     else
     {
@@ -164,13 +164,17 @@ QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile,
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-    if( conversionOptions->codecName == "wav" )
-    {
-        command += "mplayer";
-        command += "-i";
-        command += "\"" + inputFile.toLocalFile().replace("\"","\\\"") + "\"";
-        command += "\"" + outputFile.toLocalFile().replace("\"","\\\"") + "\"";
-    }
+//     if( outputCodec == "wav" )
+//     {
+//         command += binaries["mplayer"];
+//         command += "-ao";
+//         command += "pcm:file=\"" + escapeUrl(outputFile) + "\"";
+//         command += "-vc";
+//         command += "null";
+//         command += "-vo";
+//         command += "null";
+//         command += "\"" + escapeUrl(inputFile) + "\"";
+//     }
 
     return command;
 }

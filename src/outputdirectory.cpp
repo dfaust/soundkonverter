@@ -424,57 +424,6 @@ QString OutputDirectory::vfatPath( const QString& path )
     return s;
 }
 
-
-// copyright            : (C) 2002 by Mark Kretschmann
-// email                : markey@web.de
-// modified             : 2006 Daniel Faust <hessijames@gmail.com>
-// QString OutputDirectory::vfatPath( const QString& path )
-// {
-//     QString s = path.right( path.length() - path.findRev("/") - 1 );
-//     QString p = path.left( path.findRev("/") + 1 );
-// 
-//     for( uint i = 0; i < s.length(); i++ )
-//     {
-//         QChar c = s.ref( i );
-//         if( c < QChar(0x20)
-//                 || c=='*' || c=='?' || c=='<' || c=='>'
-//                 || c=='|' || c=='"' || c==':' || c=='/'
-//                 || c=='\\' )
-//             c = '_';
-//         s.ref( i ) = c;
-//     }
-// 
-//     uint len = s.length();
-//     if( len == 3 || (len > 3 && s[3] == '.') )
-//     {
-//         QString l = s.left(3).lower();
-//         if( l=="aux" || l=="con" || l=="nul" || l=="prn" )
-//             s = "_" + s;
-//     }
-//     else if( len == 4 || (len > 4 && s[4] == '.') )
-//     {
-//         QString l = s.left(3).lower();
-//         QString d = s.mid(3,1);
-//         if( (l=="com" || l=="lpt") &&
-//                 (d=="0" || d=="1" || d=="2" || d=="3" || d=="4" ||
-//                     d=="5" || d=="6" || d=="7" || d=="8" || d=="9") )
-//             s = "_" + s;
-//     }
-// 
-//     while( s.startsWith( "." ) )
-//         s = s.mid(1);
-// 
-//     while( s.endsWith( "." ) )
-//         s = s.left( s.length()-1 );
-// 
-//     s = s.left(255);
-//     len = s.length();
-//     if( s[len-1] == ' ' )
-//         s[len-1] = '_';
-// 
-//     return p + s;
-// }
-
 void OutputDirectory::selectDir()
 {
     QString dir = cDir->currentText();

@@ -538,8 +538,7 @@ msgstr "Log-ID: %1"
 msgid ""
 "An error occured, the output file size is less that 1% of the input file size"
 msgstr ""
-"Es trat ein Fehler auf, die Ausgabedatei ist weniger als 1% der Eingabedatei "
-"groß"
+"Es trat ein Fehler auf, die Ausgabedatei ist weniger als 1% der Eingabedatei groß"
 
 #: convert.cpp:962
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"

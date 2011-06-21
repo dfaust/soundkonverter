@@ -539,8 +539,7 @@ msgstr "Nové ID zápisu: %1"
 msgid ""
 "An error occured, the output file size is less that 1% of the input file size"
 msgstr ""
-"Vyskytla se chyba. Výstupní velikost souboru je menší než 1% vstupní "
-"velikosti souboru"
+"Vyskytla se chyba. Výstupní velikost souboru je menší než 1% vstupní velikosti souboru"
 
 #: convert.cpp:962
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"

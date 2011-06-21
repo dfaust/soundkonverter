@@ -1,4 +1,5 @@
 1.0.1:
+-Add: Brazilian Portuguese translation (by Tex Weissffudder)
 -Change: Prevent options dialogs from getting too wide
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly

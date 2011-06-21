@@ -95,7 +95,8 @@ void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugi
                 if( !formatInfos.at(i).extensions.contains(info.extensions.at(j)) ) formatInfos[i].extensions.append( info.extensions.at(j) );
             }
 
-            if( formatInfos.at(i).lossless != info.lossless ) logger->log( 1000, "Disturbing Error: Plugin " + plugin->name() + " says " + codecName + " was " + (info.lossless?"lossless":"lossy") + " but it is already registed as " + (!info.lossless?"lossless":"lossy") );
+            if( formatInfos.at(i).lossless != info.lossless )
+                logger->log( 1000, "Disturbing Error: Plugin " + plugin->name() + " says " + codecName + " was " + (info.lossless?"lossless":"lossy") + " but it is already registed as " + (!info.lossless?"lossless":"lossy") );
 
             return;
         }
@@ -217,7 +218,8 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
 
     for( int i=0; i<conversionPipeTrunks.count(); i++ )
     {
-        if( !conversionPipeTrunks.at(i).enabled ) continue;
+        if( !conversionPipeTrunks.at(i).enabled )
+            continue;
       
         if( possibilities & Encode )
         {
@@ -237,7 +239,8 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     {
         for( int i=0; i<replaygainPipes.count(); i++ )
         {
-            if( !replaygainPipes.at(i).enabled ) continue;
+            if( !replaygainPipes.at(i).enabled )
+                continue;
           
             set += replaygainPipes.at(i).codecName;
         }

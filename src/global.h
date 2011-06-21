@@ -15,7 +15,7 @@
 #include <QString>
 
 #define SOUNDKONVERTER_VERSION_NUMBER 1003
-#define SOUNDKONVERTER_VERSION_STRING "1.0.0 rc3"
+#define SOUNDKONVERTER_VERSION_STRING "1.0.1"
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>

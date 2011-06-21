@@ -11,6 +11,7 @@
 #include "logger.h"
 #include "logviewer.h"
 #include "replaygainscanner/replaygainscanner.h"
+#include "codecoptimizations.h"
 
 #include <KActionCollection>
 #include <KApplication>
@@ -61,7 +62,7 @@ soundKonverter::soundKonverter()
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
     setupGUI( ToolBar | Keys | Save | Create );
-        
+
 //     helpMenu()->addTitle(i18n("About plugins"));
 
     // clean up old files from previous soundKonverter versions
@@ -78,16 +79,32 @@ soundKonverter::soundKonverter()
             logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
         }
     }
+
+/*    // Check if new backends got installed and the backend settings can be optimized
+    QList<CodecOptimizations::Optimization> optimizationList;
+    CodecOptimizations::Optimization optimization;
+    optimization.codecName = "mp3";
+    optimization.mode = CodecOptimizations::Optimization::Encode;
+    optimization.currentBackend = "ffmpeg";
+    optimization.betterBackend = "lame";
+    optimizationList.append(optimization);
+    optimization.codecName = "flac";
+    optimization.mode = CodecOptimizations::Optimization::Encode;
+    optimization.currentBackend = "flake";
+    optimization.betterBackend = "flac";
+    optimizationList.append(optimization);
+    CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
+    optimizationsDialog->show();*/
 }
 
 soundKonverter::~soundKonverter()
 {
     if( logViewer )
         delete logViewer;
-    
+
     if( replayGainScanner )
         delete replayGainScanner;
-    
+
     if( systemTray )
         delete systemTray;
 }
@@ -96,12 +113,12 @@ void soundKonverter::saveProperties( const KConfigGroup& )
 {
     m_view->saveFileList( false );
 }
-    
+
 void soundKonverter::readProperties( const KConfigGroup& )
 {
     m_view->loadFileList( false );
 }
-    
+
 void soundKonverter::showSystemTray()
 {
     #if KDE_IS_VERSION(4,4,0)
@@ -156,37 +173,37 @@ void soundKonverter::setupActions()
     add_files->setText(i18n("Add files..."));
     add_files->setIcon(KIcon("audio-x-generic"));
     connect( add_files, SIGNAL(triggered()), m_view, SLOT(showFileDialog()) );
-    
+
     KAction *add_folder = actionCollection()->addAction("add_folder");
     add_folder->setText(i18n("Add folder..."));
     add_folder->setIcon(KIcon("folder"));
     connect( add_folder, SIGNAL(triggered()), m_view, SLOT(showDirDialog()) );
-    
+
     KAction *add_audiocd = actionCollection()->addAction("add_audiocd");
     add_audiocd->setText(i18n("Add CD tracks..."));
     add_audiocd->setIcon(KIcon("media-optical-audio"));
     connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
-    
+
     KAction *add_url = actionCollection()->addAction("add_url");
     add_url->setText(i18n("Add url..."));
     add_url->setIcon(KIcon("network-workgroup"));
     connect( add_url, SIGNAL(triggered()), m_view, SLOT(showUrlDialog()) );
-    
+
     KAction *add_playlist = actionCollection()->addAction("add_playlist");
     add_playlist->setText(i18n("Add playlist..."));
     add_playlist->setIcon(KIcon("view-media-playlist"));
     connect( add_playlist, SIGNAL(triggered()), m_view, SLOT(showPlaylistDialog()) );
-    
+
     KAction *load = actionCollection()->addAction("load");
     load->setText(i18n("Load file list"));
     load->setIcon(KIcon("document-open"));
     connect( load, SIGNAL(triggered()), m_view, SLOT(loadFileList()) );
-    
+
     KAction *save = actionCollection()->addAction("save");
     save->setText(i18n("Save file list"));
     save->setIcon(KIcon("document-save"));
     connect( save, SIGNAL(triggered()), m_view, SLOT(saveFileList()) );
-    
+
     actionCollection()->addAction("start", m_view->start());
     actionCollection()->addAction("stop_menu", m_view->stopMenu());
 }

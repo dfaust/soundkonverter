@@ -18,7 +18,6 @@
 #include "convert.h"
 #include "options.h"
 #include "codecproblems.h"
-#include "codecoptimizations.h"
 
 #include <KLocale>
 #include <KPushButton>
@@ -141,16 +140,6 @@ soundKonverterView::~soundKonverterView()
 
 void soundKonverterView::addClicked( int index )
 {
-//     QList<CodecOptimizations::Optimization> optimizationList;
-//     CodecOptimizations::Optimization optimization;
-//     optimization.codecName = "mp3";
-//     optimization.mode = CodecOptimizations::Optimization::Encode;
-//     optimization.currentBackend = "ffmpeg";
-//     optimization.betterBackend = "lame";
-//     optimizationList.append(optimization);
-//     CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
-//     optimizationsDialog->exec();
-
     if( index == 0 )
     {
         showFileDialog();
@@ -192,11 +181,11 @@ void soundKonverterView::showFileDialog()
 void soundKonverterView::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::Convert, this );
-    
+
     connect( dialog, SIGNAL(done(const KUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
 
     dialog->exec();
-    
+
     disconnect( dialog, SIGNAL(done(const KUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
 
     delete dialog;
@@ -260,7 +249,7 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
 
     kapp->eventLoop()->exitLoop();
 */
-    
+
     QString message;
     QStringList errorList;
     if( !config->pluginLoader()->canDecode("audio cd",&errorList) )
@@ -291,7 +280,7 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
 //         KMessageBox::information( this, i18n("No audio CD found.") );
         KMessageBox::error( this, i18n("No CD device found") );
     }
-    
+
     delete dialog;
 /*
     kapp->eventLoop()->enterLoop();
@@ -340,7 +329,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
     //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
-    
+
     for( int i=0; i<urls.size(); i++ )
     {
         QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i) );
@@ -475,7 +464,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
                 }
             }
         }
-        
+
         if( lossy )
         {
             format = "";
@@ -556,7 +545,7 @@ void soundKonverterView::conversionStopped( int state )
 void soundKonverterView::queueModeChanged( bool enabled )
 {
     stopAction->setVisible( enabled );
-    continueAction->setVisible( !enabled );    
+    continueAction->setVisible( !enabled );
 }
 
 void soundKonverterView::loadFileList( bool user )

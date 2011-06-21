@@ -5,6 +5,8 @@
 
 #include <KDialog>
 
+class QPushButton;
+
 
 /**
  * @short Shows a message box with suggestions for optimizing the backend order
@@ -24,15 +26,28 @@ public:
         } mode;
         QString currentBackend;
         QString betterBackend;
-        bool ignore;
+        enum Solution {
+            Fix,
+            Ignore,
+            Undecided
+        } solution;
     };
-    
+
     /** Default Constructor */
     CodecOptimizations( const QList<Optimization>& optimizationList, QWidget *parent=0, Qt::WFlags f=0 );
 
     /** Default Destructor */
     virtual ~CodecOptimizations();
 
+private:
+    QList<Optimization> optimizationList;
+    QList<QPushButton*> solutionFixButtons;
+
+private slots:
+    void okClicked();
+
+signals:
+    void solutions( const QList<Optimization>& solutions );
 };
 
 #endif // CODECOPTIMIZATIONS_H

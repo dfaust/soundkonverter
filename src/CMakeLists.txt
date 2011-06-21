@@ -110,6 +110,7 @@ set(soundkonverter_SRCS
    soundkonverterapp.cpp
    soundkonverterview.cpp
    codecproblems.cpp
+   codecoptimizations.cpp
    combobutton.cpp
    config.cpp
    conversionoptionsmanager.cpp

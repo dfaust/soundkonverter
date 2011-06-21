@@ -18,6 +18,7 @@
 #include "convert.h"
 #include "options.h"
 #include "codecproblems.h"
+#include "codecoptimizations.h"
 
 #include <KLocale>
 #include <KPushButton>
@@ -140,6 +141,16 @@ soundKonverterView::~soundKonverterView()
 
 void soundKonverterView::addClicked( int index )
 {
+//     QList<CodecOptimizations::Optimization> optimizationList;
+//     CodecOptimizations::Optimization optimization;
+//     optimization.codecName = "mp3";
+//     optimization.mode = CodecOptimizations::Optimization::Encode;
+//     optimization.currentBackend = "ffmpeg";
+//     optimization.betterBackend = "lame";
+//     optimizationList.append(optimization);
+//     CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
+//     optimizationsDialog->exec();
+
     if( index == 0 )
     {
         showFileDialog();

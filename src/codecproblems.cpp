@@ -59,16 +59,16 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
         QStringList messageList;
         for( int i=0; i<problemList.count(); i++ )
         {
-            QString codecName = problemList.at(i).codecName;
+            const QString codecName = problemList.at(i).codecName;
             if( codecName != "wav" )
             {
                 if( problemList.at(i).affectedFiles.isEmpty() )
                 {
-                    messageList += "<b>Possible solutions for " + codecName + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n");
+                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n");
                 }
                 else
                 {
-                    messageList += "<b>Possible solutions for " + codecName + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n") + "\n\n" + i18n("Affected files:") + "\n" + problemList.at(i).affectedFiles.join("\n");
+                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n") + "\n\n" + i18n("Affected files:") + "\n" + problemList.at(i).affectedFiles.join("\n");
                 }
             }
         }

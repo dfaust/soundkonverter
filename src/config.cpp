@@ -6,6 +6,7 @@
 #include <KConfigGroup>
 #include <QDir>
 #include <QDomElement>
+#include <QTime>
 #include <solid/device.h>
 #include <KStandardDirs>
 
@@ -30,11 +31,14 @@ Config::~Config()
 
 void Config::load()
 {
+    QTime time;
+    time.start();
+
     QStringList formats;
-  
+
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group;
-    
+
     group = conf->group( "General" );
     data.app.configVersion = group.readEntry( "configVersion", 0 );
     data.general.startTab = group.readEntry( "startTab", 0 );
@@ -66,7 +70,7 @@ void Config::load()
     data.general.createActionsMenu = group.readEntry( "createActionsMenu", true );
     data.general.removeFailedFiles = group.readEntry( "removeFailedFiles", true );
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
-    
+
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
     formats = group.readEntry( "formats", QStringList() );
@@ -89,11 +93,11 @@ void Config::load()
     QStringList enabledPlugins;
     QStringList newPlugins;
     int codecIndex;
-    
+
     formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
 
     // build default backend priority list
-    
+
     // ripper
     enabledPlugins.clear();
     newPlugins.clear();
@@ -128,9 +132,12 @@ void Config::load()
     {
         data.backends.rippers += newPlugins.at(i).right(newPlugins.at(i).length()-8);
     }
-    
+
     for( int i=0; i<formats.count(); i++ )
     {
+        if( formats.at(i) == "wav" )
+            continue;
+
         found = false;
         for( int k=0; k<data.backends.codecs.count(); k++ )
         {
@@ -146,7 +153,7 @@ void Config::load()
             codecData.codecName = formats.at(i);
             data.backends.codecs += codecData;
         }
-        
+
         for( int j=0; j<data.backends.codecs.count(); j++ )
         {
             if( data.backends.codecs.at(j).codecName == formats.at(i) )
@@ -251,12 +258,12 @@ void Config::load()
             data.backends.codecs[codecIndex].replaygain += newPlugins.at(j).right(newPlugins.at(j).length()-8);
         }
     }
-    
+
     // load profiles
     QFile profilesFile;
 
     logger->log( 1000, "\nloading profiles ..." );
-    
+
     QDir profilesDir( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) );
     profilesDir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
 
@@ -295,7 +302,7 @@ void Config::load()
         }
     }
     logger->log( 1000, "... all profiles loaded\n" );
-    
+
     QString profile;
     QStringList sFormat;
     QStringList sProfile;
@@ -348,16 +355,44 @@ void Config::load()
         }
     }
 
+    group = conf->group( "BackendOptimizationsIgnoreList" );
+    const int backendOptimizationsIgnoreListCount = group.readEntry( "count", 0 );
+
+    CodecOptimizations::Optimization optimization;
+    for( int i=0; i<backendOptimizationsIgnoreListCount; i++ )
+    {
+        const QStringList backendOptimization = group.readEntry( QString("ignore_%1").arg(i), QStringList() );
+        optimization.codecName = backendOptimization.at(0);
+        const QString mode = backendOptimization.at(1);
+        if( mode == "Encode" )
+        {
+            optimization.mode = CodecOptimizations::Optimization::Encode;
+        }
+        else if( mode == "Decode" )
+        {
+            optimization.mode = CodecOptimizations::Optimization::Decode;
+        }
+        else if( mode == "ReplayGain" )
+        {
+            optimization.mode = CodecOptimizations::Optimization::ReplayGain;
+        }
+        optimization.currentBackend = backendOptimization.at(2);
+        optimization.betterBackend = backendOptimization.at(3);
+        optimization.solution = CodecOptimizations::Optimization::Ignore;
+        data.backendOptimizationsIgnoreList.optimizationList.append(optimization);
+    }
+
+    logger->log( 1000, QString("Loading of the configuration took %1 ms").arg(time.elapsed()) );
 }
 
 void Config::save()
 {
     QString format;
     QStringList formats;
-  
+
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group;
-    
+
     group = conf->group( "General" );
     group.writeEntry( "configVersion", SOUNDKONVERTER_VERSION_NUMBER );
     group.writeEntry( "startTab", data.general.startTab );
@@ -395,7 +430,31 @@ void Config::save()
         formats += format;
     }
     group.writeEntry( "formats", formats );
-    
+
+    group = conf->group( "BackendOptimizationsIgnoreList" );
+    group.writeEntry( "count", data.backendOptimizationsIgnoreList.optimizationList.count() );
+
+    for( int i=0; i<data.backendOptimizationsIgnoreList.optimizationList.count(); i++ )
+    {
+        QStringList backendOptimization;
+        backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).codecName;
+        if( data.backendOptimizationsIgnoreList.optimizationList.at(i).mode == CodecOptimizations::Optimization::Encode )
+        {
+            backendOptimization << "Encode";
+        }
+        else if( data.backendOptimizationsIgnoreList.optimizationList.at(i).mode == CodecOptimizations::Optimization::Decode )
+        {
+            backendOptimization << "Decode";
+        }
+        else if( data.backendOptimizationsIgnoreList.optimizationList.at(i).mode == CodecOptimizations::Optimization::ReplayGain )
+        {
+            backendOptimization << "ReplayGain";
+        }
+        backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).currentBackend;
+        backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).betterBackend;
+        group.writeEntry( QString("ignore_%1").arg(i), backendOptimization );
+    }
+
     writeServiceMenu();
 }
 
@@ -410,7 +469,7 @@ void Config::writeServiceMenu()
         content += "[Desktop Entry]\n";
         content += "Type=Service\n";
         content += "Encoding=UTF-8\n";
-        
+
         const QStringList convertFormats = pPluginLoader->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
 
         mimeTypes.clear();
@@ -418,9 +477,9 @@ void Config::writeServiceMenu()
         {
             mimeTypes += pPluginLoader->codecMimeTypes( format );
         }
-        
+
         content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
-        
+
         content += "Icon=soundkonverter\n";
         content += "Actions=ConvertWithSoundkonverter;\n\n";
 
@@ -428,7 +487,7 @@ void Config::writeServiceMenu()
         content += "Name="+i18n("Convert with soundKonverter")+"\n";
         content += "Icon=soundkonverter\n";
         content += "Exec=soundkonverter %F\n";
-        
+
         if( mimeTypes.count() > 0 )
         {
             QFile convertActionFile( KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" ) );
@@ -452,7 +511,7 @@ void Config::writeServiceMenu()
         {
             mimeTypes += pPluginLoader->codecMimeTypes( format );
         }
-        
+
         content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
 
         content += "Icon=soundkonverter_replaygain\n";
@@ -484,11 +543,11 @@ void Config::writeServiceMenu()
 QStringList Config::customProfiles()
 {
     QStringList profiles;
-  
+
     for( int i=0; i<data.profiles.count(); i++ )
     {
         QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( data.profiles.at(i).codecName );
-      
+
         for( int j=0; j<plugins.count(); j++ )
         {
             if( plugins.at(j) && data.profiles.at(i).pluginName == plugins.at(j)->name() )
@@ -498,7 +557,220 @@ QStringList Config::customProfiles()
             }
         }
     }
-    
+
     return profiles;
+}
+
+QList<CodecOptimizations::Optimization> Config::getOptimizations()
+{
+    QTime time;
+    time.start();
+
+    QList<CodecOptimizations::Optimization> optimizationList;
+    CodecOptimizations::Optimization optimization;
+
+    QStringList tempPluginList;
+    QStringList optimizedPluginList;
+    QString pluginName;
+    int codecIndex;
+    bool ignore;
+
+    QStringList formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    for( int i=0; i<formats.count(); i++ )
+    {
+        if( formats.at(i) == "wav" )
+            continue;
+
+        codecIndex = -1;
+        for( int j=0; j<data.backends.codecs.count(); j++ )
+        {
+            if( data.backends.codecs.at(j).codecName == formats.at(i) )
+            {
+                codecIndex = j;
+                break;
+            }
+        }
+        if( codecIndex == -1 )
+            continue;
+
+        // encoders
+        tempPluginList.clear();
+        for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->conversionPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            {
+                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+                {
+                    tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        tempPluginList.sort();
+        optimizedPluginList.clear();
+        for( int j=tempPluginList.count()-1; j>=0; j-- )
+        {
+            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+        }
+        if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).encoders.count() != 0 )
+        {
+            ignore = false;
+            for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::Encode &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).encoders.first() &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
+                )
+                {
+                    ignore = true;
+                }
+            }
+
+            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).encoders.first() )
+            {
+                optimization.codecName = formats.at(i);
+                optimization.mode = CodecOptimizations::Optimization::Encode;
+                optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
+                optimization.betterBackend = optimizedPluginList.first();
+                optimizationList.append(optimization);
+            }
+        }
+
+        // decoders
+        tempPluginList.clear();
+        for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            {
+                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+                {
+                    tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        tempPluginList.sort();
+        optimizedPluginList.clear();
+        for( int j=tempPluginList.count()-1; j>=0; j-- )
+        {
+            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+        }
+        if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).decoders.count() != 0 )
+        {
+            ignore = false;
+            for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::Decode &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).decoders.first() &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
+                )
+                {
+                    ignore = true;
+                }
+            }
+
+            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).decoders.first() )
+            {
+                optimization.codecName = formats.at(i);
+                optimization.mode = CodecOptimizations::Optimization::Decode;
+                optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
+                optimization.betterBackend = optimizedPluginList.first();
+                optimizationList.append(optimization);
+            }
+        }
+
+        // replaygain
+        tempPluginList.clear();
+        for( int j=0; j<pPluginLoader->replaygainPipes.count(); j++ )
+        {
+            if( pPluginLoader->replaygainPipes.at(j).codecName == formats.at(i) && pPluginLoader->replaygainPipes.at(j).enabled )
+            {
+                pluginName = pPluginLoader->replaygainPipes.at(j).plugin->name();
+                if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+                {
+                    tempPluginList += QString::number(pPluginLoader->replaygainPipes.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        tempPluginList.sort();
+        optimizedPluginList.clear();
+        for( int j=tempPluginList.count()-1; j>=0; j-- )
+        {
+            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+        }
+        if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).replaygain.count() != 0 )
+        {
+            ignore = false;
+            for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::ReplayGain &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).replaygain.first() &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
+                )
+                {
+                    ignore = true;
+                }
+            }
+
+            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).replaygain.first() )
+            {
+                optimization.codecName = formats.at(i);
+                optimization.mode = CodecOptimizations::Optimization::ReplayGain;
+                optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
+                optimization.betterBackend = optimizedPluginList.first();
+                optimizationList.append(optimization);
+            }
+        }
+    }
+
+    logger->log( 1000, QString("Generation of the optimization list took %1 ms").arg(time.elapsed()) );
+
+    return optimizationList;
+}
+
+void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& optimizationList )
+{
+    int codecIndex;
+
+    for( int i=0; i<optimizationList.count(); i++ )
+    {
+        if( optimizationList.at(i).solution == CodecOptimizations::Optimization::Fix )
+        {
+            codecIndex = -1;
+            for( int j=0; j<data.backends.codecs.count(); j++ )
+            {
+                if( data.backends.codecs.at(j).codecName == optimizationList.at(i).codecName )
+                {
+                    codecIndex = j;
+                    break;
+                }
+            }
+            if( codecIndex == -1 )
+                continue;
+
+            if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Encode )
+            {
+                data.backends.codecs[codecIndex].encoders.removeAll( optimizationList.at(i).betterBackend );
+                data.backends.codecs[codecIndex].encoders.prepend( optimizationList.at(i).betterBackend );
+            }
+            else if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Decode )
+            {
+                data.backends.codecs[codecIndex].decoders.removeAll( optimizationList.at(i).betterBackend );
+                data.backends.codecs[codecIndex].decoders.prepend( optimizationList.at(i).betterBackend );
+            }
+            else if( optimizationList.at(i).mode == CodecOptimizations::Optimization::ReplayGain )
+            {
+                data.backends.codecs[codecIndex].replaygain.removeAll( optimizationList.at(i).betterBackend );
+                data.backends.codecs[codecIndex].replaygain.prepend( optimizationList.at(i).betterBackend );
+            }
+        }
+        else if( optimizationList.at(i).solution == CodecOptimizations::Optimization::Ignore )
+        {
+            data.backendOptimizationsIgnoreList.optimizationList.append(optimizationList.at(i));
+        }
+    }
 }
 

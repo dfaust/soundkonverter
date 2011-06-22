@@ -7,7 +7,7 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <QButtonGroup>
-#include <KPushButton>
+#include <QRadioButton>
 
 
 CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimizationList, QWidget* parent, Qt::WFlags f )
@@ -46,18 +46,26 @@ CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimization
         QLabel *solutionLabel = new QLabel( frame );
         grid->addWidget( solutionLabel, i, 0 );
         if( mode == Optimization::Encode )
+        {
             solutionLabel->setText( i18n( "For encoding %1 files the backend '%2' can be replaced with '%3'.", codecName, currentBackend, betterBackend ) );
+        }
+        else if( mode == Optimization::Decode && codecName == "audio cd" )
+        {
+            solutionLabel->setText( i18n( "For ripping audio cds the backend '%2' can be replaced with '%3'.", currentBackend, betterBackend ) );
+        }
         else if( mode == Optimization::Decode )
+        {
             solutionLabel->setText( i18n( "For decoding %1 files the backend '%2' can be replaced with '%3'.", codecName, currentBackend, betterBackend ) );
+        }
         else if( mode == Optimization::ReplayGain )
+        {
             solutionLabel->setText( i18n( "For applying Replay Gain to %1 files the backend '%2' can be replaced with '%3'.", codecName, currentBackend, betterBackend ) );
+        }
 
-        KPushButton *solutionIgnore = new KPushButton( KIcon("dialog-cancel"), i18n("Ignore"), frame );
-        solutionIgnore->setCheckable( true );
+        QRadioButton *solutionIgnore = new QRadioButton( i18n("Ignore"), frame );
         grid->addWidget( solutionIgnore, i, 1 );
 
-        KPushButton *solutionFix = new KPushButton( KIcon("dialog-ok-apply"), i18n("Fix"), frame );
-        solutionFix->setCheckable( true );
+        QRadioButton *solutionFix = new QRadioButton( i18n("Fix"), frame );
         solutionFix->setChecked( true );
         solutionFixButtons.append( solutionFix );
         grid->addWidget( solutionFix, i, 2 );

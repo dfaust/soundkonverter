@@ -1,7 +1,7 @@
  //
 // C++ Interface: pluginloader
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -37,7 +37,7 @@ struct ConversionPipe
 class PluginLoader : public QObject // TODO parent
 {
     friend class Config;
-  
+
     Q_OBJECT
 public:
     PluginLoader( Logger *_logger, Config *parent );
@@ -51,7 +51,7 @@ public:
     void load();
 
     QStringList formatList( Possibilities, CompressionType );
-    
+
     /** returns a list of encoder plugins for the given format (mime type or extension)
         the first value is the default encoder */
     QList<CodecPlugin*> encodersForCodec( const QString& codecName );
@@ -59,7 +59,7 @@ public:
     QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
 
     /** returns the codec plugin with the specified name */
-    BackendPlugin *backendPluginByName( const QString& name ); // TODO make it BackendPlugin *backendPluginByName ?
+    BackendPlugin *backendPluginByName( const QString& name );
 
     /** returns a list of possible conversion pipes (TODO sorted by user and automatic rating) */
     QList<ConversionPipe> getConversionPipes( const QString& codecFrom, const QString& codecTo, const QString& preferredPlugin = "" ); // TODO change name
@@ -97,7 +97,7 @@ private:
 //     void addCodecItem( ConversionPipeTrunk trunk );
 //     void addReplayGainItem( ReplayGainPipe pipe );
     void addFormatInfo( const QString& codecName, BackendPlugin *plugin );
-    
+
     /** holds all known codec plugins */
     QList<CodecPlugin*> codecPlugins;
     /** holds all known replay gain plugins */

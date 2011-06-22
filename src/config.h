@@ -10,6 +10,7 @@
 #include "pluginloader.h"
 #include "metadata/tagengine.h"
 #include "conversionoptionsmanager.h"
+#include "codecoptimizations.h"
 
 #include <QDomDocument>
 
@@ -78,18 +79,23 @@ public:
                 Directory = 2
             } replayGainGrouping;
         } general;
-        
+
         struct Backends
         {
             QStringList rippers;
             QList<CodecData> codecs;
         } backends;
-        
+
+        struct BackendOptimizationsIgnoreList
+        {
+            QList<CodecOptimizations::Optimization> optimizationList;
+        } backendOptimizationsIgnoreList;
+
         struct App
         {
             int configVersion;
         } app;
-        
+
         QList<ProfileData> profiles;
 
     } data;
@@ -100,13 +106,20 @@ public:
 
     void load();
     void save();
-    
+
     /// returns a list of all working custom profiles
     QStringList customProfiles();
+
+    /// Check if new backends got installed and the backend settings can be optimized
+    QList<CodecOptimizations::Optimization> getOptimizations();
 
     PluginLoader *pluginLoader() { return pPluginLoader; }
     TagEngine *tagEngine() { return pTagEngine; }
     ConversionOptionsManager *conversionOptionsManager() { return pConversionOptionsManager; }
+
+public slots:
+    /// Optimize backend settings according to the user input
+    void doOptimizations( const QList<CodecOptimizations::Optimization>& optimizationList );
 
 private:
     Logger *logger;
@@ -114,7 +127,7 @@ private:
     PluginLoader *pPluginLoader;
     TagEngine *pTagEngine;
     ConversionOptionsManager *pConversionOptionsManager;
-    
+
     void writeServiceMenu();
 };
 

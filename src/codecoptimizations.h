@@ -5,7 +5,7 @@
 
 #include <KDialog>
 
-class QPushButton;
+class QRadioButton;
 
 
 /**
@@ -41,13 +41,13 @@ public:
 
 private:
     QList<Optimization> optimizationList;
-    QList<QPushButton*> solutionFixButtons;
+    QList<QRadioButton*> solutionFixButtons;
 
 private slots:
     void okClicked();
 
 signals:
-    void solutions( const QList<Optimization>& solutions );
+    void solutions( const QList<CodecOptimizations::Optimization>& solutions );
 };
 
 #endif // CODECOPTIMIZATIONS_H

@@ -11,7 +11,6 @@
 #include "logger.h"
 #include "logviewer.h"
 #include "replaygainscanner/replaygainscanner.h"
-#include "codecoptimizations.h"
 
 #include <KActionCollection>
 #include <KApplication>
@@ -80,21 +79,14 @@ soundKonverter::soundKonverter()
         }
     }
 
-/*    // Check if new backends got installed and the backend settings can be optimized
-    QList<CodecOptimizations::Optimization> optimizationList;
-    CodecOptimizations::Optimization optimization;
-    optimization.codecName = "mp3";
-    optimization.mode = CodecOptimizations::Optimization::Encode;
-    optimization.currentBackend = "ffmpeg";
-    optimization.betterBackend = "lame";
-    optimizationList.append(optimization);
-    optimization.codecName = "flac";
-    optimization.mode = CodecOptimizations::Optimization::Encode;
-    optimization.currentBackend = "flake";
-    optimization.betterBackend = "flac";
-    optimizationList.append(optimization);
-    CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
-    optimizationsDialog->show();*/
+    // Check if new backends got installed and the backend settings can be optimized
+    QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations();
+    if( !optimizationList.isEmpty() )
+    {
+        CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
+        connect( optimizationsDialog, SIGNAL(solutions(const QList<CodecOptimizations::Optimization>&)), config, SLOT(doOptimizations(const QList<CodecOptimizations::Optimization>&)) );
+        optimizationsDialog->open();
+    }
 }
 
 soundKonverter::~soundKonverter()

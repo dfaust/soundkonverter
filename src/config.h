@@ -111,7 +111,7 @@ public:
     QStringList customProfiles();
 
     /// Check if new backends got installed and the backend settings can be optimized
-    QList<CodecOptimizations::Optimization> getOptimizations();
+    QList<CodecOptimizations::Optimization> getOptimizations( bool includeIgnored = false );
 
     PluginLoader *pluginLoader() { return pPluginLoader; }
     TagEngine *tagEngine() { return pTagEngine; }

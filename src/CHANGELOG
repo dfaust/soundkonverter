@@ -1,5 +1,6 @@
 1.0.1:
 -Add: Brazilian Portuguese translation (by Tex Weissffudder)
+-Add: Inform the user if there is a better backend available for a given format (e.g. prefer lame over ffmpeg)
 -Change: Prevent options dialogs from getting too wide
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly

@@ -561,7 +561,7 @@ QStringList Config::customProfiles()
     return profiles;
 }
 
-QList<CodecOptimizations::Optimization> Config::getOptimizations()
+QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIgnored )
 {
     QTime time;
     time.start();
@@ -627,13 +627,26 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations()
                 }
             }
 
-            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).encoders.first() )
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).encoders.first() )
             {
-                optimization.codecName = formats.at(i);
-                optimization.mode = CodecOptimizations::Optimization::Encode;
-                optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
-                optimization.betterBackend = optimizedPluginList.first();
-                optimizationList.append(optimization);
+                if( ignore && includeIgnored )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::Encode;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Ignore;
+                    optimizationList.append(optimization);
+                }
+                else if( !ignore )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::Encode;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Undecided;
+                    optimizationList.append(optimization);
+                }
             }
         }
 
@@ -671,13 +684,26 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations()
                 }
             }
 
-            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).decoders.first() )
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).decoders.first() )
             {
-                optimization.codecName = formats.at(i);
-                optimization.mode = CodecOptimizations::Optimization::Decode;
-                optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
-                optimization.betterBackend = optimizedPluginList.first();
-                optimizationList.append(optimization);
+                if( ignore && includeIgnored )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::Decode;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Ignore;
+                    optimizationList.append(optimization);
+                }
+                else if( !ignore )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::Decode;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Undecided;
+                    optimizationList.append(optimization);
+                }
             }
         }
 
@@ -712,16 +738,30 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations()
                 )
                 {
                     ignore = true;
+                    break;
                 }
             }
 
-            if( !ignore && optimizedPluginList.first() != data.backends.codecs.at(codecIndex).replaygain.first() )
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).replaygain.first() )
             {
-                optimization.codecName = formats.at(i);
-                optimization.mode = CodecOptimizations::Optimization::ReplayGain;
-                optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
-                optimization.betterBackend = optimizedPluginList.first();
-                optimizationList.append(optimization);
+                if( ignore && includeIgnored )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::ReplayGain;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Ignore;
+                    optimizationList.append(optimization);
+                }
+                else if( !ignore )
+                {
+                    optimization.codecName = formats.at(i);
+                    optimization.mode = CodecOptimizations::Optimization::ReplayGain;
+                    optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
+                    optimization.betterBackend = optimizedPluginList.first();
+                    optimization.solution = CodecOptimizations::Optimization::Undecided;
+                    optimizationList.append(optimization);
+                }
             }
         }
     }
@@ -734,6 +774,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations()
 void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& optimizationList )
 {
     int codecIndex;
+    bool found;
 
     for( int i=0; i<optimizationList.count(); i++ )
     {
@@ -750,6 +791,19 @@ void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& opt
             }
             if( codecIndex == -1 )
                 continue;
+
+            for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == optimizationList.at(i).codecName &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == optimizationList.at(i).mode &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == optimizationList.at(i).currentBackend &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizationList.at(i).betterBackend
+                )
+                {
+                    data.backendOptimizationsIgnoreList.optimizationList.removeAt( j );
+                    break;
+                }
+            }
 
             if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Encode )
             {
@@ -769,7 +823,22 @@ void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& opt
         }
         else if( optimizationList.at(i).solution == CodecOptimizations::Optimization::Ignore )
         {
-            data.backendOptimizationsIgnoreList.optimizationList.append(optimizationList.at(i));
+            for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                found = false;
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == optimizationList.at(i).codecName &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == optimizationList.at(i).mode &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == optimizationList.at(i).currentBackend &&
+                    data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizationList.at(i).betterBackend
+                )
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if( !found )
+                data.backendOptimizationsIgnoreList.optimizationList.append(optimizationList.at(i));
         }
     }
 }

@@ -1,7 +1,7 @@
 //
 // C++ Interface: configbackendspage
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -34,7 +34,7 @@ class BackendsListWidget : public QGroupBox
 public:
     /** Default Constructor */
     BackendsListWidget( const QString& _name, Config *_config, QWidget *parent=0 );
-                           
+
     /** Default Destructor*/
     virtual ~BackendsListWidget();
 
@@ -94,14 +94,17 @@ private:
     BackendsListWidget *decoderList;
     BackendsListWidget *encoderList;
     BackendsListWidget *replaygainList;
-    
+
+    KPushButton *pShowOptimizations;
+
     QString currentFormat;
 
 private slots:
-    void formatChanged( const QString& format );
+    void formatChanged( const QString& format, bool ignoreChanges = false );
 //     void encoderChanged( const QString& encoder );
 //     void configureEncoder();
 //     void orderChanged();
+    void showOptimizations();
 
 public slots:
     void resetDefaults();

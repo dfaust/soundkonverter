@@ -42,6 +42,7 @@ CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimization
         const Optimization::Mode mode = optimizationList.at(i).mode;
         const QString currentBackend = optimizationList.at(i).currentBackend;
         const QString betterBackend = optimizationList.at(i).betterBackend;
+        const Optimization::Solution solution = optimizationList.at(i).solution;
 
         QLabel *solutionLabel = new QLabel( frame );
         grid->addWidget( solutionLabel, i, 0 );
@@ -63,11 +64,14 @@ CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimization
         }
 
         QRadioButton *solutionIgnore = new QRadioButton( i18n("Ignore"), frame );
+        if( solution == Optimization::Ignore )
+            solutionIgnore->setChecked( true );
         grid->addWidget( solutionIgnore, i, 1 );
 
         QRadioButton *solutionFix = new QRadioButton( i18n("Fix"), frame );
-        solutionFix->setChecked( true );
         solutionFixButtons.append( solutionFix );
+        if( solution != Optimization::Ignore )
+            solutionFix->setChecked( true );
         grid->addWidget( solutionFix, i, 2 );
 
         QButtonGroup *solutionButtonGroup = new QButtonGroup( frame );

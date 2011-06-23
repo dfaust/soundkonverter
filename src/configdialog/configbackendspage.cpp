@@ -1,7 +1,7 @@
 //
 // C++ Implementation: configbackendspage
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -32,35 +32,35 @@ BackendsListWidget::BackendsListWidget( const QString& _name, Config *_config, Q
 {
     QVBoxLayout *box = new QVBoxLayout( 0 );
     setLayout( box );
-    
+
     lBackends = new QListWidget( this );
     connect( lBackends, SIGNAL(currentRowChanged(int)), this, SLOT(itemSelected(int)) );
     box->addWidget( lBackends );
-    
+
     QHBoxLayout *arrowBox = new QHBoxLayout( 0 );
     box->addLayout( arrowBox );
-    
+
     pUp = new QToolButton( this );
     pUp->setIcon( KIcon("arrow-up") );
     pUp->setAutoRaise( true );
     pUp->setEnabled( false );
     connect( pUp, SIGNAL(clicked()), this, SLOT(up()) );
     arrowBox->addWidget( pUp );
-    
+
     pDown = new QToolButton( this );
     pDown->setIcon( KIcon("arrow-down") );
     pDown->setAutoRaise( true );
     pDown->setEnabled( false );
     connect( pDown, SIGNAL(clicked()), this, SLOT(down()) );
     arrowBox->addWidget( pDown );
-    
+
     pConfigure = new QToolButton( this );
     pConfigure->setIcon( KIcon("configure") );
     pConfigure->setAutoRaise( true );
     pConfigure->setEnabled( false );
     connect( pConfigure, SIGNAL(clicked()), this, SLOT(configure()) );
     arrowBox->addWidget( pConfigure );
-    
+
     pInfo = new QToolButton( this );
     pInfo->setIcon( KIcon("help-about") );
     pInfo->setAutoRaise( true );
@@ -117,15 +117,15 @@ void BackendsListWidget::resetOrder()
 void BackendsListWidget::itemSelected( int row )
 {
     const QListWidgetItem *item = lBackends->item( row );
-    
+
     if( !item )
         return;
-    
+
     BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     pUp->setEnabled( row > 0 );
     pDown->setEnabled( row < lBackends->count()-1 );
-    
+
     if( plugin )
     {
         if( name == i18n("Decoder") )
@@ -134,7 +134,7 @@ void BackendsListWidget::itemSelected( int row )
             pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::Encoder,format) );
         else if( name == i18n("Replay Gain") )
             pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain,format) );
-        
+
         pInfo->setEnabled( plugin->hasInfo() );
     }
 }
@@ -159,10 +159,10 @@ void BackendsListWidget::configure()
 {
     const int row = lBackends->currentRow();
     const QListWidgetItem *item = lBackends->item( row );
-    
+
     if( !item )
         return;
-    
+
     BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     if( plugin )
@@ -180,10 +180,10 @@ void BackendsListWidget::info()
 {
     const int row = lBackends->currentRow();
     const QListWidgetItem *item = lBackends->item( row );
-    
+
     if( !item )
         return;
-    
+
     BackendPlugin *plugin = config->pluginLoader()->backendPluginByName( item->text() );
 
     if( plugin )
@@ -240,6 +240,14 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatBox->addWidget( replaygainList );
     connect( replaygainList, SIGNAL(orderChanged()), this, SIGNAL(configChanged()) );
 
+    QHBoxLayout *optimizationsBox = new QHBoxLayout( 0 );
+    box->addLayout( optimizationsBox );
+    optimizationsBox->addStretch();
+    pShowOptimizations = new KPushButton( KIcon("games-solve"), i18n("Show possible optimizations"), this );
+    optimizationsBox->addWidget( pShowOptimizations );
+    connect( pShowOptimizations, SIGNAL(clicked()), this, SLOT(showOptimizations()) );
+    optimizationsBox->addStretch();
+
     box->addStretch();
 
     formatChanged( cSelectorFormat->currentText() );
@@ -249,20 +257,20 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 ConfigBackendsPage::~ConfigBackendsPage()
 {}
 
-void ConfigBackendsPage::formatChanged( const QString& format )
+void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChanges )
 {
     QStringList plugins;
 
-    if( decoderList->changed() || encoderList->changed() || replaygainList->changed() )
+    if( !ignoreChanges && ( decoderList->changed() || encoderList->changed() || replaygainList->changed() ) )
     {
-        int ret = KMessageBox::questionYesNo( this, i18n("You have changed the current settings.\nDo you want to save them?"), i18n("Settings changed") );
+        const int ret = KMessageBox::questionYesNo( this, i18n("You have changed the current settings.\nDo you want to save them?"), i18n("Settings changed") );
         if( ret == KMessageBox::Yes )
         {
             saveSettings();
             config->save();
         }
     }
-    
+
     decoderList->clear();
     encoderList->clear();
     replaygainList->clear();
@@ -273,7 +281,7 @@ void ConfigBackendsPage::formatChanged( const QString& format )
     replaygainList->setFormat( format );
 
     formatGroup->setTitle( i18n("%1 settings",format) );
-    
+
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
         if( config->data.backends.codecs.at(i).codecName == format )
@@ -298,20 +306,6 @@ void ConfigBackendsPage::formatChanged( const QString& format )
     replaygainList->resetOrder();
 }
 
-// void ConfigBackendsPage::configureEncoder()
-// {
-// //     QString encoder = cEncoder->currentText();
-// 
-// /*    QList<CodecPlugin*> plugins = config->pluginLoader()->encodersForFormat( cSelectorFormat->currentText() );
-//     for( int i = 0; i < plugins.count(); i++ ) {
-//         if( plugins.at(i)->name() == encoder )
-//         {
-//             plugins.at(i)->showConfigDialog( cSelectorFormat->currentText(), this );
-//         }
-//     }*/
-// }
-
-
 void ConfigBackendsPage::resetDefaults()
 {
 
@@ -333,6 +327,36 @@ void ConfigBackendsPage::saveSettings()
     decoderList->resetOrder();
     encoderList->resetOrder();
     replaygainList->resetOrder();
+
+    bool found;
+
+    // ensure that the user won't get bothered by a optimization message at the next start
+    QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations( true );
+    for( int i=0; i<optimizationList.count(); i++ )
+    {
+        if( optimizationList.at(i).codecName == currentFormat )
+        {
+            for( int j=0; j<config->data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
+            {
+                found = false;
+                if( config->data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == optimizationList.at(i).codecName &&
+                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == optimizationList.at(i).mode &&
+                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == optimizationList.at(i).currentBackend &&
+                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizationList.at(i).betterBackend
+                )
+                {
+                    found = true;
+                    break;
+                }
+            }
+
+            if( !found )
+            {
+                optimizationList[i].solution = CodecOptimizations::Optimization::Ignore;
+                config->data.backendOptimizationsIgnoreList.optimizationList.append(optimizationList.at(i));
+            }
+        }
+    }
 }
 
 // void ConfigBackendsPage::orderChanged()
@@ -340,5 +364,21 @@ void ConfigBackendsPage::saveSettings()
 //     emit configChanged( decoderList->changed() || encoderList->changed() || replaygainList->changed() );
 // }
 
+void ConfigBackendsPage::showOptimizations()
+{
+    QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations( true );
+    if( !optimizationList.isEmpty() )
+    {
+        CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
+        connect( optimizationsDialog, SIGNAL(solutions(const QList<CodecOptimizations::Optimization>&)), config, SLOT(doOptimizations(const QList<CodecOptimizations::Optimization>&)) );
+        optimizationsDialog->exec();
+    }
+    else
+    {
+        KMessageBox::information( this, i18n("All backend settings seem to be optimal, there is nothing to do.") );
+    }
+
+    formatChanged( cSelectorFormat->currentText(), true );
+}
 
 

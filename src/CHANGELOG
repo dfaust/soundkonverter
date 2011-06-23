@@ -4,6 +4,7 @@
 -Change: Prevent options dialogs from getting too wide
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly
+-Fix: Filnames wouldn't be FAT compatible if output mode was copy directory structure
 
 1.0.0:
 -Add: Option to choose between APE and ID3v2  tags for mp3gain and aacgain

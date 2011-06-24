@@ -3,7 +3,6 @@
 more accurate problem infos
 
 replay gain: multiple ogg files -> progress
-test vfat compatible file names
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
 sample rate saving in plugins: customProfile, setCustomProfile

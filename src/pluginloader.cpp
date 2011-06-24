@@ -1,7 +1,7 @@
 //
 // C++ Implementation: pluginloader
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -25,7 +25,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
 {
     int rating1 = 0;
     int rating2 = 0;
-    
+
     if( pipe1.trunks.count() == 1 )
     {
         rating1 = pipe1.trunks.at(0).rating + 10;
@@ -36,7 +36,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
         if( pipe1.trunks.at(0).codecTo == "wav" )
             rating1 += 5;
     }
-    
+
     if( pipe2.trunks.count() == 1 )
     {
         rating2 = pipe2.trunks.at(0).rating + 10;
@@ -47,7 +47,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
         if( pipe2.trunks.at(0).codecTo == "wav" )
             rating2 += 5;
     }
-    
+
     return rating1 > rating2;
 };
 
@@ -85,14 +85,18 @@ void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugi
     {
         if( formatInfos.at(i).codecName == codecName )
         {
-            if( formatInfos.at(i).description.isEmpty() ) formatInfos[i].description = info.description;
-            for( int j = 0; j < info.mimeTypes.count(); j++ )
+            if( formatInfos.at(i).description.isEmpty() )
+                formatInfos[i].description = info.description;
+
+            for( int j=0; j < info.mimeTypes.count(); j++ )
             {
-                if( !formatInfos.at(i).mimeTypes.contains(info.mimeTypes.at(j)) ) formatInfos[i].mimeTypes.append( info.mimeTypes.at(j) );
+                if( !formatInfos.at(i).mimeTypes.contains(info.mimeTypes.at(j)) )
+                    formatInfos[i].mimeTypes.append( info.mimeTypes.at(j) );
             }
-            for( int j = 0; j < info.extensions.count(); j++ )
+            for( int j=0; j < info.extensions.count(); j++ )
             {
-                if( !formatInfos.at(i).extensions.contains(info.extensions.at(j)) ) formatInfos[i].extensions.append( info.extensions.at(j) );
+                if( !formatInfos.at(i).extensions.contains(info.extensions.at(j)) )
+                    formatInfos[i].extensions.append( info.extensions.at(j) );
             }
 
             if( formatInfos.at(i).lossless != info.lossless )
@@ -220,7 +224,7 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     {
         if( !conversionPipeTrunks.at(i).enabled )
             continue;
-      
+
         if( possibilities & Encode )
         {
             if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecTo) ) set += conversionPipeTrunks.at(i).codecTo;
@@ -241,14 +245,14 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
         {
             if( !replaygainPipes.at(i).enabled )
                 continue;
-          
+
             set += replaygainPipes.at(i).codecName;
         }
     }
 
     list = set.toList();
     list.sort();
-    
+
     QStringList importantCodecs;
     importantCodecs += "ogg vorbis";
     importantCodecs += "mp3";
@@ -268,7 +272,7 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     {
         list.move( list.indexOf("wav"), list.count()-1 );
     }
-    
+
     return list;
 }
 
@@ -347,7 +351,7 @@ BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
 QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom, const QString& codecTo, const QString& preferredPlugin )
 {
     QList<ConversionPipe> list;
-    
+
     QStringList decoders;
     QStringList encoders;
     // get the lists of decoders and encoders ordered by the user in the config dialog
@@ -365,7 +369,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
     // prepend the preferred plugin
     encoders.removeAll( preferredPlugin );
     encoders.prepend( preferredPlugin );
-    
+
     // build all possible pipes
     for( int i=0; i<conversionPipeTrunks.count(); i++ )
     {
@@ -390,7 +394,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
             for( int j = 0; j < conversionPipeTrunks.count(); j++ )
             {
                 if( i == j ) continue;
-                
+
                 if( conversionPipeTrunks.at(j).codecFrom == conversionPipeTrunks.at(i).codecTo && conversionPipeTrunks.at(j).codecTo == codecTo && conversionPipeTrunks.at(j).enabled )
                 {
                     ConversionPipe newPipe;
@@ -449,9 +453,9 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
             list += newPipe;
         }
     }
-    
+
     qSort( list.begin(), list.end(), moreThanReplayGainPipe );
-    
+
     return list;
 }
 
@@ -483,7 +487,7 @@ bool PluginLoader::canDecode( const QString& codecName, QStringList *errorList )
             return true;
         }
     }
-    
+
     if( errorList )
     {
         for( int i=0; i<conversionPipeTrunks.size(); i++ )
@@ -520,7 +524,7 @@ bool PluginLoader::canReplayGain( const QString& codecName, CodecPlugin *plugin,
             }
         }
     }
-    
+
     if( errorList )
     {
         // internal replaygain are not inlcuded in the error list
@@ -571,7 +575,7 @@ QMap<QString,QStringList> PluginLoader::decodeProblems( bool detailed )
     QMap<QString,QStringList> problems;
     QStringList errorList;
     QStringList enabledCodecs;
-    
+
     if( !detailed )
     {
         for( int i=0; i<conversionPipeTrunks.size(); i++ )
@@ -599,7 +603,7 @@ QMap<QString,QStringList> PluginLoader::encodeProblems( bool detailed )
     QMap<QString,QStringList> problems;
     QStringList errorList;
     QStringList enabledCodecs;
-    
+
     if( !detailed )
     {
         for( int i=0; i<conversionPipeTrunks.size(); i++ )
@@ -685,7 +689,15 @@ QStringList PluginLoader::codecExtensions( const QString& codecName )
     {
         if( formatInfos.at(i).codecName == codecName )
         {
-            return formatInfos.at(i).extensions;
+            QStringList extensions = formatInfos.at(i).extensions;
+
+            if( codecName == "ogg vorbis" && config->data.general.preferredOggVorbisExtension == "oga" )
+            {
+                extensions.removeAll( "oga" );
+                extensions.prepend( "oga" );
+            }
+
+            return extensions;
         }
     }
     return QStringList();

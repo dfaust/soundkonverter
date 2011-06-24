@@ -117,8 +117,8 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     QString path;
     KUrl url;
 
-    if( extension.isEmpty() )
-        extension = config->pluginLoader()->codecExtensions(options->codecName).at(0);
+    if( extension.isEmpty() && config->pluginLoader()->codecExtensions(options->codecName).count() > 0 )
+        extension = config->pluginLoader()->codecExtensions(options->codecName).first();
 
     if( extension.isEmpty() )
         extension = options->codecName;

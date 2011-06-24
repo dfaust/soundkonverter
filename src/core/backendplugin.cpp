@@ -413,7 +413,7 @@ QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mi
             return allCodecs.at(i);
         }
     }
-    
+
     const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 );
 
     for( int i=0; i<allCodecs.count(); i++ )
@@ -423,7 +423,7 @@ QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mi
             return allCodecs.at(i);
         }
     }
-        
+
     return "";
 }
 
@@ -466,11 +466,11 @@ float BackendPlugin::progress( int id )
 // void BackendPlugin::setPriority( int _priority )
 // {
 //     priority = _priority;
-//     
+//
 //     for( int i=0; i<backendItems.size(); i++ )
 //     {
 //         backendItems.at(i)->process->setPriority( priority );
-//     }    
+//     }
 // }
 
 void BackendPlugin::processOutput()
@@ -510,52 +510,52 @@ QString BackendPlugin::standardMessage( const QString& type, const QStringList& 
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "In order to encode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "decode_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "In order to decode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "transcode_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "In order to transcode %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "replygain_codec,backend" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "In order to calculate Replay Gain tags for %1 files, you need to install '%2'.", arguments.at(0), arguments.at(1) );
     }
     if( type == "install_opensource_backend" )
     {
         if( arguments.count() != 1 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "'%1' should be shipped with your distribution.", arguments.at(0) );
     }
     if( type == "install_patented_backend" )
     {
         if( arguments.count() != 1 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "Since '%1' inludes patented codecs, it may not be included in the default installation of your distribution. Many distributions offer '%1' in an additional software repository.", arguments.at(0) );
     }
     if( type == "install_website_backend,url" )
     {
         if( arguments.count() != 2 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
-            
+
         return i18n( "You can download '%1' at %2", arguments.at(0), arguments.at(1) );
     }
-    
+
     return QString();
 }
 

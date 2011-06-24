@@ -1,7 +1,7 @@
 //
 // C++ Implementation: configgeneralpage
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -56,6 +56,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QLabel *lDefaultProfile = new QLabel( i18n("Default profile")+":", this );
     defaultProfileBox->addWidget( lDefaultProfile );
     cDefaultProfile = new KComboBox( this );
+    QStringList sDefaultProfile;
     sDefaultProfile += i18n("Last used");
     sDefaultProfile += i18n("Very low");
     sDefaultProfile += i18n("Low");
@@ -91,7 +92,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //     cPriority->setCurrentIndex( config->data.general.priority / 10 ); // NOTE that just works for 'normal' and 'low'
 //     priorityBox->addWidget( cPriority );
 //     connect( cPriority, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
-// 
+//
 //     box->addSpacing( 5 );
 
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
@@ -109,10 +110,9 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling")+":", this );
     conflictHandlingBox->addWidget( lConflictHandling );
     cConflictHandling = new KComboBox( this );
-    sConflictHandling += i18n("Generate new file name");
-    sConflictHandling += i18n("Skip file");
-//     sConflictHandling += i18n("Overwrite file");
-    cConflictHandling->addItems( sConflictHandling );
+    cConflictHandling->addItem( i18n("Generate new file name") );
+    cConflictHandling->addItem( i18n("Skip file") );
+//     cConflictHandling->addItem( i18n("Overwrite file") );
     cConflictHandling->setToolTip( i18n("Do that if the output file already exists") );
     cConflictHandling->setCurrentIndex( (int)config->data.general.conflictHandling );
     conflictHandlingBox->addWidget( cConflictHandling );
@@ -153,7 +153,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
     createActionsMenuBox->addWidget( cCreateActionsMenu );
     connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
-    
+
     box->addSpacing( 5 );
 
     QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
@@ -174,10 +174,22 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cReplayGainGrouping->addItem( i18n("Album tags and directories") );
     cReplayGainGrouping->addItem( i18n("Album tags only") );
     cReplayGainGrouping->addItem( i18n("Directories only") );
-//     cReplayGainGrouping->setToolTip( i18n("") );
     cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+
+    box->addSpacing( 20 );
+
+    QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout( 0 );
+    box->addLayout( preferredOggVorbisExtensionBox );
+    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred extension for ogg vorbis files")+":", this );
+    preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
+    cPreferredOggVorbisExtension = new KComboBox( this );
+    cPreferredOggVorbisExtension->addItem( "ogg" );
+    cPreferredOggVorbisExtension->addItem( "oga" );
+    cPreferredOggVorbisExtension->setCurrentIndex( config->data.general.preferredOggVorbisExtension == "ogg" ? 0 : 1 );
+    preferredOggVorbisExtensionBox->addWidget( cPreferredOggVorbisExtension );
+    connect( cPreferredOggVorbisExtension, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
 
     box->addStretch();
 }
@@ -199,6 +211,7 @@ void ConfigGeneralPage::resetDefaults()
     cCreateActionsMenu->setChecked( true );
     cRemoveFailedFiles->setChecked( true );
     cReplayGainGrouping->setCurrentIndex( 0 );
+    cPreferredOggVorbisExtension->setCurrentIndex( 0 );
 
     emit configChanged( true );
 }
@@ -216,40 +229,8 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
     config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
+    config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
 }
-
-// int ConfigGeneralPage::profileIndex( const QString& string )
-// {
-//     return sDefaultProfile.indexOf( string );
-// }
-// 
-// int ConfigGeneralPage::formatIndex( const QString& string )
-// {
-//     return sDefaultFormat.indexOf( string );
-// }
-
-// void ConfigGeneralPage::selectDir()
-// {
-//     QString startDir = lDir->text();
-//     int i = startDir.find( QRegExp("%[aAbBcCdDgGnNpPtTyY]{1,1}") );
-//     if( i != -1 ) {
-//         i = startDir.findRev( "/", i );
-//         startDir = startDir.left( i );
-//     }
-// 
-//     QString directory = KFileDialog::getExistingDirectory( startDir, 0, i18n("Choose an output directory") );
-//     if( !directory.isEmpty() ) {
-//         QString dir = lDir->text();
-//         i = dir.find( QRegExp("%[aAbBcCdDgGnNpPtTyY]{1,1}") );
-//         if( i != -1 ) {
-//             i = dir.findRev( "/", i );
-//             lDir->setText( directory + dir.mid(i) );
-//         }
-//         else {
-//             lDir->setText( directory );
-//         }
-//     }
-// }
 
 void ConfigGeneralPage::profileChanged()
 {
@@ -288,15 +269,6 @@ void ConfigGeneralPage::profileChanged()
             }
         }
     }
-    
+
     if( cDefaultFormat->findText(lastFormat) != -1 ) cDefaultFormat->setCurrentIndex( cDefaultFormat->findText(lastFormat) );
 }
-
-
-
-
-
-
-
-
-

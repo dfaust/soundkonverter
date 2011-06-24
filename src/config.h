@@ -78,6 +78,7 @@ public:
                 Album = 1,
                 Directory = 2
             } replayGainGrouping;
+            QString preferredOggVorbisExtension;
         } general;
 
         struct Backends

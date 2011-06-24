@@ -70,6 +70,7 @@ void Config::load()
     data.general.createActionsMenu = group.readEntry( "createActionsMenu", true );
     data.general.removeFailedFiles = group.readEntry( "removeFailedFiles", true );
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
+    data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
 
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
@@ -418,6 +419,7 @@ void Config::save()
     group.writeEntry( "createActionsMenu", data.general.createActionsMenu );
     group.writeEntry( "removeFailedFiles", data.general.removeFailedFiles );
     group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
+    group.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-06-25 11:27+0200\n"
+"POT-Creation-Date: 2011-06-25 11:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -554,7 +554,7 @@ msgstr ""
 #: convert.cpp:957
 #, c-format
 msgid ""
-"An error occured, the output file size is less that 1\\% of the input file "
+"An error occured, the output file size is less than 1\\% of the input file "
 "size"
 msgstr ""
 

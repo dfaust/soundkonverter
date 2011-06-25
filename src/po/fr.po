@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-06-24 10:25+0200\n"
+"POT-Creation-Date: 2011-06-25 11:27+0200\n"
 "PO-Revision-Date: 2011-05-26 09:56+0200\n"
 "Last-Translator: Yannick ERNULT\n"
 "Language-Team: none\n"
@@ -118,20 +118,20 @@ msgstr "Informations sur le profile %1"
 msgid "Affected files:"
 msgstr "Fichiers affectés :"
 
-#: config.cpp:46 config.cpp:48 config.cpp:309 config.cpp:354
-#: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:59
-#: configdialog/configgeneralpage.cpp:262
-#: configdialog/configgeneralpage.cpp:264
-#: configdialog/configgeneralpage.cpp:268
-#: configdialog/configgeneralpage.cpp:273
-#: configdialog/configgeneralpage.cpp:278 options.cpp:53 options.cpp:72
+#: config.cpp:46 config.cpp:48 config.cpp:310 config.cpp:355
+#: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:243
+#: configdialog/configgeneralpage.cpp:245
+#: configdialog/configgeneralpage.cpp:249
+#: configdialog/configgeneralpage.cpp:254
+#: configdialog/configgeneralpage.cpp:259 options.cpp:53 options.cpp:72
 #: optionsdetailed.cpp:344
 msgid "Last used"
 msgstr "Utilisé en dernier"
 
-#: config.cpp:47 config.cpp:313 config.cpp:320 config.cpp:326
-#: configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:266 options.cpp:82
+#: config.cpp:47 config.cpp:314 config.cpp:321 config.cpp:327
+#: configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:247 options.cpp:82
 #: optionsdetailed.cpp:340 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:188
@@ -156,12 +156,12 @@ msgstr "Utilisé en dernier"
 msgid "High"
 msgstr "Haute qualité"
 
-#: config.cpp:228 config.cpp:251 config.cpp:253
+#: config.cpp:229 config.cpp:252 config.cpp:254
 msgid "Try internal"
 msgstr "Essayer en interne"
 
-#: config.cpp:310 config.cpp:326 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:337
+#: config.cpp:311 config.cpp:327 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:337
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:176
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:200
@@ -185,8 +185,8 @@ msgstr "Essayer en interne"
 msgid "Very low"
 msgstr "Très basse qualité "
 
-#: config.cpp:311 config.cpp:326 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:338
+#: config.cpp:312 config.cpp:327 configdialog/configgeneralpage.cpp:62
+#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:338
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:210
@@ -210,8 +210,8 @@ msgstr "Très basse qualité "
 msgid "Low"
 msgstr "Basse qualité"
 
-#: config.cpp:312 config.cpp:326 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:339
+#: config.cpp:313 config.cpp:327 configdialog/configgeneralpage.cpp:63
+#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:339
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:184
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
@@ -237,8 +237,8 @@ msgstr "Basse qualité"
 msgid "Medium"
 msgstr "Qualité moyenne"
 
-#: config.cpp:314 config.cpp:326 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:266 optionsdetailed.cpp:341
+#: config.cpp:315 config.cpp:327 configdialog/configgeneralpage.cpp:65
+#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:341
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:192
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:240
@@ -262,8 +262,8 @@ msgstr "Qualité moyenne"
 msgid "Very high"
 msgstr "Très haute qualité"
 
-#: config.cpp:315 config.cpp:330 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:271 optionsdetailed.cpp:342
+#: config.cpp:316 config.cpp:331 configdialog/configgeneralpage.cpp:66
+#: configdialog/configgeneralpage.cpp:252 optionsdetailed.cpp:342
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:172
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
@@ -290,14 +290,14 @@ msgstr "Très haute qualité"
 msgid "Lossless"
 msgstr "Sans perte"
 
-#: config.cpp:316 config.cpp:334 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:276 optionsdetailed.cpp:343
+#: config.cpp:317 config.cpp:335 configdialog/configgeneralpage.cpp:67
+#: configdialog/configgeneralpage.cpp:257 optionsdetailed.cpp:343
 #: optionssimple.cpp:213 optionssimple.cpp:290 soundkonverterview.cpp:451
 #: soundkonverterview.cpp:453
 msgid "Hybrid"
 msgstr "Hybride"
 
-#: config.cpp:338 optionsdetailed.cpp:346 optionssimple.cpp:160
+#: config.cpp:339 optionsdetailed.cpp:346 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:195
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
@@ -313,11 +313,11 @@ msgstr "Hybride"
 msgid "User defined"
 msgstr "Personnalisé"
 
-#: config.cpp:487
+#: config.cpp:489
 msgid "Convert with soundKonverter"
 msgstr "Convertir avec soundKonverter"
 
-#: config.cpp:521
+#: config.cpp:523
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Ajouter Replay Gain avec soundKonverter "
 
@@ -335,7 +335,7 @@ msgstr "Encodeur"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1107
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1106
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
@@ -403,27 +403,27 @@ msgstr "Options avancées"
 msgid "Default profile"
 msgstr "Profile par défaut"
 
-#: configdialog/configgeneralpage.cpp:73
+#: configdialog/configgeneralpage.cpp:74
 msgid "Default format"
 msgstr "Format par défaut"
 
-#: configdialog/configgeneralpage.cpp:99
+#: configdialog/configgeneralpage.cpp:100
 msgid "Use FAT compatible output file names"
 msgstr "Utiliser des noms de fichiers compatibles FAT"
 
-#: configdialog/configgeneralpage.cpp:100
+#: configdialog/configgeneralpage.cpp:101
 msgid "Replaces some special characters like '?' by '_'."
 msgstr "Remplace certains caractères spéciaux comme '?' par '_'."
 
-#: configdialog/configgeneralpage.cpp:109
+#: configdialog/configgeneralpage.cpp:110
 msgid "Conflict handling"
 msgstr "Conflit de fichier"
 
-#: configdialog/configgeneralpage.cpp:112
+#: configdialog/configgeneralpage.cpp:113
 msgid "Generate new file name"
 msgstr "Générer un nouveau nom de fichier"
 
-#: configdialog/configgeneralpage.cpp:113
+#: configdialog/configgeneralpage.cpp:114
 msgid "Skip file"
 msgstr "Ignorer le fichier"
 
@@ -501,7 +501,11 @@ msgstr "Tags des albums seulement"
 msgid "Directories only"
 msgstr "Dossiers seulement"
 
-#: convert.cpp:198 convert.cpp:1090
+#: configdialog/configgeneralpage.cpp:185
+msgid "Preferred extension for ogg vorbis files"
+msgstr ""
+
+#: convert.cpp:198 convert.cpp:1089
 msgid "Getting file"
 msgstr "Obtention du fichier en cours"
 
@@ -509,17 +513,17 @@ msgstr "Obtention du fichier en cours"
 msgid "No more backends left to try :("
 msgstr "Il n'y a plus de module à essayer :("
 
-#: convert.cpp:270 convert.cpp:308 convert.cpp:1094 filelist.cpp:496
+#: convert.cpp:270 convert.cpp:308 convert.cpp:1093 filelist.cpp:496
 #: soundkonverter.cpp:243 soundkonverter.cpp:246 soundkonverter.cpp:274
 #: soundkonverter.cpp:276
 msgid "Converting"
 msgstr "Conversion en cours"
 
-#: convert.cpp:323 convert.cpp:1098
+#: convert.cpp:323 convert.cpp:1097
 msgid "Decoding"
 msgstr "Décodage en cours"
 
-#: convert.cpp:355 convert.cpp:1103
+#: convert.cpp:355 convert.cpp:1102
 msgid "Encoding"
 msgstr "Encodage en cours"
 
@@ -575,56 +579,57 @@ msgstr "Ajouter un nouvel élément à la liste de conversion : '%1'"
 msgid "Got log ID: %1"
 msgstr "Identification du log : %1"
 
-#: convert.cpp:958
-#, c-format
+#: convert.cpp:957
+#, fuzzy, c-format
 msgid ""
-"An error occured, the output file size is less that 1% of the input file size"
+"An error occured, the output file size is less that 1\\% of the input file "
+"size"
 msgstr ""
 "Une erreur est survenue, le fichier de destination est plus petit de 1% que "
 "le fichier source"
 
-#: convert.cpp:962
+#: convert.cpp:961
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "La conversion a échoué, nouvel essai. Code de sortie : -2 (%1)"
 
-#: convert.cpp:970
+#: convert.cpp:969
 msgid "Normal exit"
 msgstr "Sortie sans erreur"
 
-#: convert.cpp:971
+#: convert.cpp:970
 msgid "Aborted by the user"
 msgstr "Interrompu par l'utilisateur"
 
-#: convert.cpp:972
+#: convert.cpp:971
 msgid "An error occured"
 msgstr "Une erreur est survenue"
 
-#: convert.cpp:985
+#: convert.cpp:984
 msgid "Executing command: \"%1\""
 msgstr "Exécution de la commande : \"%1\""
 
-#: convert.cpp:1001
+#: convert.cpp:1000
 msgid "Removing partially converted output file"
 msgstr "Suppression du fichier partiellement converti"
 
-#: convert.cpp:1006
+#: convert.cpp:1005
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr ""
 "Suppression du fichier de la liste de conversion. Code de sortie %1 (%2)"
 
-#: convert.cpp:1008
+#: convert.cpp:1007
 msgid "Conversion time"
 msgstr "Temps de conversion"
 
-#: convert.cpp:1009
+#: convert.cpp:1008
 msgid "Output file size"
 msgstr "Taille du fichier de destination"
 
-#: convert.cpp:1010
+#: convert.cpp:1009
 msgid "File size ratio"
 msgstr "Ratio de la taille du fichier"
 
-#: convert.cpp:1099 filelist.cpp:491
+#: convert.cpp:1098 filelist.cpp:491
 msgid "Ripping"
 msgstr "Extraction en cours"
 

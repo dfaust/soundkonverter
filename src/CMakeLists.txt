@@ -15,29 +15,29 @@ find_package(Taglib REQUIRED)
 # include(CheckCXXSourceCompiles)
 # set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDES}")
 # set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
-# 
+#
 # check_cxx_source_compiles("#include <asftag.h>
 # int main() { TagLib::ASF::Tag tag; return 0;}" TAGLIB_ASF_FOUND)
 # if( NOT TAGLIB_ASF_FOUND )
 #     message(FATAL_ERROR "TagLib does not have ASF support compiled in.")
 # endif( NOT TAGLIB_ASF_FOUND )
-# 
+#
 # check_cxx_source_compiles("#include <mp4tag.h>
 # int main() { TagLib::MP4::Tag tag(0, 0); return 0;}" TAGLIB_MP4_FOUND)
 # if( NOT TAGLIB_MP4_FOUND )
 #     message(FATAL_ERROR "TagLib does not have MP4 support compiled in.")
 # endif( NOT TAGLIB_MP4_FOUND )
-# 
+#
 # set(CMAKE_REQUIRED_INCLUDES)
 # set(CMAKE_REQUIRED_LIBRARIES)
-# 
+#
 # set(TAGLIB-EXTRAS_MIN_VERSION "1.0")
 # find_package(Taglib-Extras REQUIRED)
-# 
+#
 # include(CheckTagLibFileName)
-# 
+#
 # check_taglib_filename(COMPLEX_TAGLIB_FILENAME)
-# 
+#
 #
 
 
@@ -133,7 +133,7 @@ set(soundkonverter_SRCS
 
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
 
-target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
 
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 

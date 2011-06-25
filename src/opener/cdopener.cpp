@@ -31,6 +31,71 @@
 #include <QHeaderView>
 
 
+PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f )
+    : QWidget( parent, f ),
+    track( _track ),
+    m_treeWidgetItem( _treeWidgetItem )
+{
+    QHBoxLayout *trackPlayerBox = new QHBoxLayout( 0 );
+    setLayout( trackPlayerBox );
+
+    pStartPlayback = new KPushButton( KIcon("media-playback-start"), "", this );
+    pStartPlayback->setFixedSize( 16, 16 );
+    trackPlayerBox->addWidget( pStartPlayback );
+    connect( pStartPlayback, SIGNAL(clicked()), this, SLOT(startPlaybackClicked()) );
+    pStopPlayback = new KPushButton( KIcon("media-playback-stop"), "", this );
+    pStopPlayback->setFixedSize( 16, 16 );
+    pStopPlayback->hide();
+    trackPlayerBox->addWidget( pStopPlayback );
+    connect( pStopPlayback, SIGNAL(clicked()), this, SLOT(stopPlaybackClicked()) );
+    seekSlider = new Phonon::SeekSlider( this );
+    seekSlider->setMediaObject( mediaObject );
+    seekSlider->setIconVisible( false );
+    seekSlider->hide();
+    trackPlayerBox->addWidget( seekSlider, 1 );
+    trackPlayerBox->addStretch();
+}
+
+PlayerWidget::~PlayerWidget()
+{}
+
+void PlayerWidget::startPlaybackClicked()
+{
+/*    playing = true;
+    pStartPlayback->hide();
+    pStopPlayback->show();
+    seekSlider->show();*/
+    emit startPlayback( track );
+}
+
+void PlayerWidget::stopPlaybackClicked()
+{
+/*    playing = false;
+    pStartPlayback->show();
+    pStopPlayback->hide();
+    seekSlider->hide();*/
+    emit stopPlayback();
+}
+
+void PlayerWidget::trackChanged( int _track )
+{
+    if( _track != track )
+    {
+        playing = false;
+        pStartPlayback->show();
+        pStopPlayback->hide();
+        seekSlider->hide();
+    }
+    else
+    {
+        playing = true;
+        pStartPlayback->hide();
+        pStopPlayback->show();
+        seekSlider->show();
+    }
+}
+
+
 CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
     config( _config ),
@@ -42,13 +107,13 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     cddb( 0 )
 {
     setButtons( 0 );
-    
+
     page = CdOpenPage;
 
     // let the dialog look nice
     setCaption( i18n("Add CD tracks") );
     setWindowIcon( KIcon("media-optical-audio") );
-    
+
     QWidget *widget = new QWidget( this );
     QGridLayout *mainGrid = new QGridLayout( widget );
     QGridLayout *topGrid = new QGridLayout( 0 );
@@ -71,9 +136,9 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
 
     // CD Opener Widget
-    
+
     cdOpenerWidget = new QWidget( widget );
-    mainGrid->addWidget( cdOpenerWidget, 2, 0 );    
+    mainGrid->addWidget( cdOpenerWidget, 2, 0 );
 
     // the grid for all widgets in the dialog
     QGridLayout *gridLayout = new QGridLayout( cdOpenerWidget );
@@ -155,7 +220,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     topGridLayout->setColumnStretch( 1, 1 );
     topGridLayout->setColumnStretch( 3, 1 );
-    
+
 
     // generate the list view for the tracks
     trackList = new QTreeWidget( cdOpenerWidget );
@@ -169,6 +234,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     labels.append( i18n("Composer") );
     labels.append( i18n("Title") );
     labels.append( i18n("Length") );
+    labels.append( i18n("Player") );
     trackList->setHeaderLabels( labels );
     trackList->setSelectionBehavior( QAbstractItemView::SelectRows );
     trackList->setSelectionMode( QAbstractItemView::ExtendedSelection );
@@ -177,10 +243,12 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     trackList->header()->setResizeMode( Column_Artist, QHeaderView::ResizeToContents );
     trackList->header()->setResizeMode( Column_Composer, QHeaderView::ResizeToContents );
     trackList->header()->setResizeMode( Column_Title, QHeaderView::ResizeToContents );
+//     trackList->setMouseTracking( true );
     connect( trackList, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
+//     connect( trackList, SIGNAL(itemEntered(QTreeWidgetItem*,int)), this, SLOT(itemHighlighted(QTreeWidgetItem*,int)) );
     gridLayout->setRowStretch( 1, 1 );
 
-    
+
     // create the box at the bottom for editing the tags
     tagGroupBox = new QGroupBox( i18n("No track selected"), cdOpenerWidget );
     gridLayout->addWidget( tagGroupBox, 2, 0 );
@@ -259,8 +327,24 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     trackCommentBox->addWidget( pTrackCommentEdit );
     connect( pTrackCommentEdit, SIGNAL(clicked()), this, SLOT(editTrackCommentClicked()) );
 
-    
-    
+
+    audioOutput = new Phonon::AudioOutput( Phonon::MusicCategory, this );
+    mediaObject = new Phonon::MediaObject( this );
+    mediaObject->setTickInterval( 500 );
+
+    Phonon::createPath( mediaObject, audioOutput );
+
+    mediaController = new Phonon::MediaController( mediaObject );
+    mediaController->setAutoplayTitles( false );
+
+    mediaSource = new Phonon::MediaSource( Phonon::Cd, _device );
+    mediaObject->setCurrentSource( *mediaSource ); // WARNING doesn't work with phonon-xine
+
+    connect( mediaController, SIGNAL(titleChanged(int)), this, SLOT(playbackTitleChanged(int)) );
+    connect( mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(playbackStateChanged(Phonon::State,Phonon::State)) );
+
+
+
     // Cd Opener Overlay Widget
 
     cdOpenerOverlayWidget = new QWidget( widget );
@@ -273,12 +357,12 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     lOverlayLabel->setAlignment( Qt::AlignCenter );
     cdOpenerOverlayWidget->setAutoFillBackground( true );
     QPalette newPalette = cdOpenerOverlayWidget->palette();
-    newPalette.setBrush( QPalette::Window, brushSetAlpha( newPalette.window(), 192.0f ) );
+    newPalette.setBrush( QPalette::Window, brushSetAlpha( newPalette.window(), 192 ) );
     cdOpenerOverlayWidget->setPalette( newPalette );
 
-    
+
     // Conversion Options Widget
-    
+
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
     mainGrid->addWidget( options, 2, 0 );
     adjustSize();
@@ -320,7 +404,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
         cEntireCd->setPalette( notificationPalette );
         if( !errorList.isEmpty() )
-        {  
+        {
             errorList.prepend( i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPossible solutions are listed below.\n") );
         }
         else
@@ -345,8 +429,8 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     connect( &fadeTimer, SIGNAL(timeout()), this, SLOT(fadeAnim()) );
     fadeAlpha = 255.0f;
-    
-    
+
+
     cddb = new KCDDB::Client();
 //     if( !cddb )
 //     {
@@ -356,14 +440,14 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 //     }
     connect( cddb, SIGNAL(finished(KCDDB::Result)), this, SLOT(lookup_cddb_done(KCDDB::Result)) );
 
-    
+
     // set up timeout timer
     timeoutTimer.setSingleShot( true );
     connect( &timeoutTimer, SIGNAL(timeout()), this, SLOT(timeout()) );
-    
-    
+
+
     bool success = false;
-    
+
     if( !_device.isEmpty() )
     {
         success = openCdDevice( _device );
@@ -402,10 +486,10 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
             }
         }
     }
-    
+
     if( !success )
     {
-        KMessageBox::information(this,"success = false");
+        KMessageBox::information(this,"success = false, couldn't open audio device");
         noCdFound = true;
         return;
     }
@@ -431,7 +515,7 @@ CDOpener::~CDOpener()
 QMap<QString,QString> CDOpener::cdDevices()
 {
     QMap<QString,QString> devices;
-    
+
     QFile *file;
     QString line;
 
@@ -486,7 +570,7 @@ QMap<QString,QString> CDOpener::cdDevices()
         {
             if( deviceList.at(i).contains("sr") )
                 deviceList[i] = deviceList.at(i).right( deviceList.at(i).length() - deviceList.at(i).indexOf("r") - 1 );
-            
+
             deviceList[i] = "/dev/scd"+deviceList.at(i);
             cdDrive = cdda_identify( deviceList.at(i).toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
             if( cdDrive && cdda_open(cdDrive) == 0 )
@@ -532,17 +616,17 @@ bool CDOpener::openCdDevice( const QString& _device )
     cdParanoia = paranoia_init( cdDrive );
 
     device = _device;
-    
+
     // cd text
-    
+
 //     const int status = wm_cd_init( device.toAscii().data(), "", "", "", &wmHandle );
-// 
+//
 //     struct cdtext_info *info = 0;
-// 
+//
 //     if( !WM_CDS_ERROR(status) )
 //     {
 //         info = wm_cd_get_cdtext( wmHandle );
-// 
+//
 //         if( !info || !info->valid || info->count_of_entries != cdda_tracks(cdDrive) )
 //         if( !info || !info->valid )
 //         {
@@ -553,7 +637,7 @@ bool CDOpener::openCdDevice( const QString& _device )
 
 
     // add tracks to list
-    
+
     qDeleteAll( tags );
     tags.clear();
 
@@ -564,7 +648,7 @@ bool CDOpener::openCdDevice( const QString& _device )
     newTags->year = (QDate::currentDate()).year();
     newTags->genre = i18n("Unknown");
     tags += newTags;
-    
+
     for( int i=0; i<cdda_tracks(cdDrive); i++ )
     {
         TagData *newTags = new TagData();
@@ -574,7 +658,7 @@ bool CDOpener::openCdDevice( const QString& _device )
         const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,newTags->track)-cdda_track_firstsector(cdDrive,newTags->track));
         newTags->length = (8 * size) / (44100 * 2 * 16);
         tags += newTags;
-        
+
         QStringList data;
         data.append( "" );
         data.append( QString().sprintf("%02i",newTags->track) );
@@ -583,12 +667,18 @@ bool CDOpener::openCdDevice( const QString& _device )
         data.append( newTags->title );
         data.append( QString().sprintf("%i:%02i",newTags->length/60,newTags->length%60) );
         QTreeWidgetItem *item = new QTreeWidgetItem( trackList, data );
+        PlayerWidget *playerWidget = new PlayerWidget( mediaObject, newTags->track, item, this );
+//         playerWidget->hide();
+        connect( playerWidget, SIGNAL(startPlayback(int)), this, SLOT(startPlayback(int)) );
+        connect( playerWidget, SIGNAL(stopPlayback()), this, SLOT(stopPlayback()) );
+        playerWidgets.append( playerWidget );
+        trackList->setItemWidget( item, Column_Player, playerWidget );
         item->setCheckState( 0, Qt::Checked );
     }
     trackList->resizeColumnToContents( Column_Rip );
     trackList->resizeColumnToContents( Column_Track );
     trackList->resizeColumnToContents( Column_Length );
-    
+
     if( trackList->topLevelItem(0) )
         trackList->topLevelItem(0)->setSelected( true );
 
@@ -598,21 +688,21 @@ bool CDOpener::openCdDevice( const QString& _device )
     iDisc->setValue( tags.at(0)->disc );
     iYear->setValue( tags.at(0)->year );
     cGenre->setEditText( tags.at(0)->genre );
-    
+
     artistChanged( cArtist->currentText() );
     composerChanged( cComposer->currentText() );
 
-    
+
     // request cddb data
     requestCddb( true );
-    
+
     return true;
 }
 
 void CDOpener::requestCddb( bool autoRequest )
 {
     lOverlayLabel->setText( i18n("Please wait, trying to download CDDB data ...") );
-    
+
     timeoutTimer.start( autoRequest ? 10000 : 20000 );
 
     // cddb needs offsets +150 frames (2 seconds * 75 frames per second)
@@ -631,14 +721,14 @@ void CDOpener::requestCddb( bool autoRequest )
 void CDOpener::lookup_cddb_done( KCDDB::Result result )
 {
     timeoutTimer.stop();
-    
+
     if( result != KCDDB::Success && result != KCDDB::MultipleRecordFound )
     {
     //     error = Error(i18n("No entry found in CDDB."), i18n("This means no data found in the CDDB database. Please enter the data manually. Maybe try another CDDB server."), Error::ERROR, this);
         fadeOut();
         return;
     }
-    
+
     cddbFound = true;
 
     KCDDB::CDInfo info = cddb->lookupResponse().first();
@@ -688,10 +778,10 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
         tags.at(i)->artist = info.track(i-1).get(KCDDB::Artist).toString();
         tags.at(i)->title = info.track(i-1).get(KCDDB::Title).toString();
         tags.at(i)->comment = info.track(i-1).get(KCDDB::Comment).toString();
-        
+
         if( artist == "" ) artist = tags.at(i)->artist;
         else if( artist != tags.at(i)->artist ) various_artists = true;
-        
+
         if( composer == "" ) composer = tags.at(i)->composer;
         else if( composer != tags.at(i)->composer ) various_composer = true;
 
@@ -699,26 +789,26 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
         item->setText( 2, tags.at(i)->artist );
         item->setText( 4, tags.at(i)->title );
     }
-    
+
     if( various_artists ) tags.at(0)->artist = i18n("Various Artists");
     else tags.at(0)->artist = artist;
 
     if( various_composer ) tags.at(0)->composer = i18n("Various Composer");
     else tags.at(0)->composer = composer;
-    
+
     tags.at(0)->album = info.get(KCDDB::Title).toString();
     tags.at(0)->year = info.get(KCDDB::Year).toInt();
     tags.at(0)->genre = info.get(KCDDB::Genre).toString();
 
     // TODO resize colums up to a certain width
-    
+
     cArtist->setEditText( tags.at(0)->artist );
     cComposer->setEditText( tags.at(0)->composer );
     lAlbum->setText( tags.at(0)->album );
     iDisc->setValue( tags.at(0)->disc );
     iYear->setValue( tags.at(0)->year );
     cGenre->setEditText( tags.at(0)->genre );
-    
+
     artistChanged( cArtist->currentText() );
     composerChanged( cComposer->currentText() );
 
@@ -813,7 +903,7 @@ void CDOpener::trackChanged()
         tTrackComment->setReadOnly( true );
         tTrackComment->setText( "" );
         pTrackCommentEdit->hide();
-        
+
         pTrackUp->setEnabled( false );
         pTrackDown->setEnabled( false );
 
@@ -921,7 +1011,7 @@ void CDOpener::trackChanged()
         lTrackTitle->setEnabled( true );
         lTrackTitle->setText( tags.at(selectedTracks.at(0))->title );
         pTrackTitleEdit->hide();
-        
+
         if( cArtist->currentText() == i18n("Various Artists") ) {
             lTrackArtist->setEnabled( true );
             lTrackArtist->setText( tags.at(selectedTracks.at(0))->artist );
@@ -931,7 +1021,7 @@ void CDOpener::trackChanged()
             lTrackArtist->setText( cArtist->currentText() );
             pTrackArtistEdit->hide();
         }
-        
+
         if( cComposer->currentText() == i18n("Various Composer") ) {
             lTrackComposer->setEnabled( true );
             lTrackComposer->setText( tags.at(selectedTracks.at(0))->composer );
@@ -941,7 +1031,7 @@ void CDOpener::trackChanged()
             lTrackComposer->setText( cComposer->currentText() );
             pTrackComposerEdit->hide();
         }
-        
+
         tTrackComment->setEnabled( true );
         tTrackComment->setReadOnly( false );
         tTrackComment->setText( tags.at(selectedTracks.at(0))->comment );
@@ -1083,19 +1173,19 @@ void CDOpener::fadeAnim()
 void CDOpener::proceedClicked()
 {
     int trackCount = 0;
-  
+
     for( int i=0; i<trackList->topLevelItemCount(); i++ )
     {
         if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
             trackCount++;
     }
-    
+
     if( trackCount == 0 )
     {
         KMessageBox::error( this, i18n("Please select at least one track in order to proceed.") );
         return;
     }
-    
+
     if( options->currentConversionOptions() && options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
     {
         options->setOutputDirectoryMode( (int)OutputDirectory::MetaData );
@@ -1135,7 +1225,7 @@ void CDOpener::addClicked()
             tags.at(0)->genre = cGenre->currentText();
             const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,trackCount)-cdda_track_firstsector(cdDrive,1));
             tags.at(0)->length = (8 * size) / (44100 * 2 * 16);
-            
+
             tagList.append( tags.at(0) );
             tracks.append( 0 );
         }
@@ -1153,7 +1243,7 @@ void CDOpener::addClicked()
                     tags.at(i+1)->genre = cGenre->currentText();
                     const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,i+1)-cdda_track_firstsector(cdDrive,i+1));
                     tags.at(i+1)->length = (8 * size) / (44100 * 2 * 16);
-                    
+
                     tagList.append( tags.at(i+1) );
                     tracks.append( i+1 );
                 }
@@ -1163,7 +1253,7 @@ void CDOpener::addClicked()
         options->accepted();
 
         emit addTracks( device, tracks, trackCount, tagList, options->currentConversionOptions() );
-        
+
         accept();
     }
     else
@@ -1216,5 +1306,57 @@ void CDOpener::saveCuesheetClicked()
     cueFile.close();
 }
 
+// void CDOpener::itemHighlighted( QTreeWidgetItem *item, int column )
+// {
+//     for( int i=0; i<playerWidgets.count(); i++ )
+//     {
+//         if( item == playerWidgets.at(i)->treeWidgetItem() )
+//             playerWidgets[i]->show();
+//         else if( !playerWidgets.at(i)->isPlaying() )
+//             playerWidgets[i]->hide();
+//     }
+// }
+
+void CDOpener::startPlayback( int track )
+{
+    for( int i=0; i<playerWidgets.count(); i++ )
+    {
+        if( i+1 != track && playerWidgets.at(i)->isPlaying() )
+            playerWidgets[i]->trackChanged( track );
+    }
+
+    mediaController->setCurrentTitle( track );
+    mediaObject->play();
+}
+
+void CDOpener::stopPlayback()
+{
+    mediaObject->stop();
+}
+
+void CDOpener::playbackTitleChanged( int title )
+{
+    for( int i=0; i<playerWidgets.count(); i++ )
+    {
+        if( ( i+1 != title &&  playerWidgets.at(i)->isPlaying() ) ||
+            ( i+1 == title && !playerWidgets.at(i)->isPlaying() )
+        )
+            playerWidgets[i]->trackChanged( title );
+    }
+}
+
+void CDOpener::playbackStateChanged( Phonon::State newstate, Phonon::State oldstate )
+{
+    Q_UNUSED(oldstate)
+
+    if( newstate == Phonon::StoppedState )
+    {
+        playbackTitleChanged( 0 );
+    }
+    else if( newstate == Phonon::PlayingState )
+    {
+        playbackTitleChanged( mediaController->currentTitle() );
+    }
+}
 
 

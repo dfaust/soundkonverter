@@ -15,6 +15,12 @@ extern "C"
 #include <cdda_paranoia.h>
 }
 
+#include <phonon/audiooutput.h>
+#include <phonon/seekslider.h>
+#include <phonon/mediaobject.h>
+#include <phonon/volumeslider.h>
+#include <phonon/backendcapabilities.h>
+#include <Phonon/MediaController>
 
 class TagEngine;
 class Config;
@@ -33,6 +39,36 @@ class QCheckBox;
 class TagData;
 
 
+class PlayerWidget : public QWidget
+{
+     Q_OBJECT
+public:
+    PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent = 0, Qt::WindowFlags f = 0 );
+    virtual ~PlayerWidget();
+
+    void trackChanged( int track );
+    bool isPlaying() { return playing; }
+    QTreeWidgetItem *treeWidgetItem() { return m_treeWidgetItem; }
+
+private:
+    int track;
+    bool playing;
+    QTreeWidgetItem *m_treeWidgetItem;
+
+    KPushButton *pStartPlayback;
+    KPushButton *pStopPlayback;
+    Phonon::SeekSlider *seekSlider;
+
+private slots:
+    void startPlaybackClicked();
+    void stopPlaybackClicked();
+
+signals:
+    void startPlayback( int track );
+    void stopPlayback();
+};
+
+
 /**
  * @short Shows a dialog for selecting files from a CD
  * @author Daniel Faust <hessijames@gmail.com>
@@ -46,14 +82,15 @@ public:
         CdOpenPage,
         ConversionOptionsPage
     };
-    
+
     enum Columns {
         Column_Rip      = 0,
         Column_Track    = 1,
         Column_Artist   = 2,
         Column_Composer = 3,
         Column_Title    = 4,
-        Column_Length   = 5
+        Column_Length   = 5,
+        Column_Player   = 6
     };
 
     /** Constructor */
@@ -69,7 +106,7 @@ private:
     /** returns a list of devices holding audio cds plus a short description (track count) */
     QMap<QString,QString> cdDevices();
     bool openCdDevice( const QString& _device );
-    
+
     /** the widget for selecting and editing the cd tracks */
     QWidget *cdOpenerWidget;
     /** the widget for showing the progress of reading the cd / cddb data */
@@ -118,7 +155,14 @@ private:
     /** A textedit for entering a comment for a track */
     KTextEdit *tTrackComment;
     KPushButton *pTrackCommentEdit;
-    
+
+    Phonon::AudioOutput *audioOutput;
+    Phonon::MediaObject *mediaObject;
+    Phonon::MediaController *mediaController;
+    Phonon::MediaSource *mediaSource;
+
+    QList<PlayerWidget*> playerWidgets;
+
     /** Save the tag information to a cue file */
     KPushButton *pSaveCue;
     /** Request CDDB information */
@@ -133,20 +177,20 @@ private:
     KPushButton *pCancel;
 
     Config *config;
-    
+
     QString device;
-    
+
     cdrom_drive *cdDrive;
     cdrom_paranoia *cdParanoia;
-    
+
 //     void *wmHandle;
-    
+
     KCDDB::Client *cddb;
 
     QList<TagData*> tags; // @0 disc tags
     bool cdTextFound;
     bool cddbFound;
-    
+
     QTimer timeoutTimer;
 
     QList<int> selectedTracks;
@@ -165,7 +209,7 @@ private:
         brush.setColor( color );
         return brush;
     }
-    
+
     void fadeIn();
     void fadeOut();
 
@@ -187,6 +231,12 @@ private slots:
     void editTrackArtistClicked();
     void editTrackComposerClicked();
     void editTrackCommentClicked();
+//     void itemHighlighted( QTreeWidgetItem *item, int column );
+
+    void startPlayback( int track );
+    void stopPlayback();
+    void playbackTitleChanged( int title );
+    void playbackStateChanged( Phonon::State newstate, Phonon::State oldstate );
 
     void proceedClicked();
     void addClicked();
@@ -194,7 +244,7 @@ private slots:
     void saveCuesheetClicked();
 
     void fadeAnim();
-    
+
 signals:
     void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions );
     void addDisc( const QString& device, ConversionOptions *conversionOptions );

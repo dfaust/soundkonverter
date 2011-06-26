@@ -52,7 +52,7 @@ CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimization
         }
         else if( mode == Optimization::Decode && codecName == "audio cd" )
         {
-            solutionLabel->setText( i18n( "For ripping audio cds the backend '%2' can be replaced with '%3'.", currentBackend, betterBackend ) );
+            solutionLabel->setText( i18n( "For ripping audio cds the backend '%1' can be replaced with '%2'.", currentBackend, betterBackend ) );
         }
         else if( mode == Optimization::Decode )
         {

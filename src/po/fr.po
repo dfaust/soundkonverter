@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-06-25 11:50+0200\n"
+"POT-Creation-Date: 2011-06-26 21:16+0200\n"
 "PO-Revision-Date: 2011-05-26 09:56+0200\n"
 "Last-Translator: Yannick ERNULT\n"
 "Language-Team: none\n"
@@ -33,7 +33,7 @@ msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
 
 #: codecoptimizations.cpp:55
-msgid "For ripping audio cds the backend '%2' can be replaced with '%3'."
+msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
 msgstr ""
 
 #: codecoptimizations.cpp:59
@@ -217,7 +217,6 @@ msgstr "Basse qualité"
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:220
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:150
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:184
-#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:306
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:353
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:520
@@ -907,7 +906,7 @@ msgstr ""
 msgid "... and %1 more files"
 msgstr "... et %1 fichiers restants"
 
-#: filelist.cpp:415 opener/cdopener.cpp:1171 opener/diropener.cpp:198
+#: filelist.cpp:415 opener/cdopener.cpp:1261 opener/diropener.cpp:198
 #: opener/fileopener.cpp:182 opener/playlistopener.cpp:217
 #: opener/urlopener.cpp:137 optionslayer.cpp:133
 msgid "No conversion options selected."
@@ -1119,111 +1118,116 @@ msgstr ""
 msgid "Audio file(s) to append to the file list"
 msgstr "Fichier(s) audio(s) à ajouter à la liste"
 
-#: opener/cdopener.cpp:49
+#: opener/cdopener.cpp:114
 msgid "Add CD tracks"
 msgstr "Convertir des pistes CD"
 
-#: opener/cdopener.cpp:58
+#: opener/cdopener.cpp:123
 msgid "1. Select CD tracks"
 msgstr "1. Sélectionner des pistes CD"
 
-#: opener/cdopener.cpp:63 opener/diropener.cpp:56 opener/urlopener.cpp:53
+#: opener/cdopener.cpp:128 opener/diropener.cpp:56 opener/urlopener.cpp:53
 msgid "2. Set conversion options"
 msgstr "2. Options de conversion"
 
-#: opener/cdopener.cpp:96 opener/cdopener.cpp:223 optionseditor.cpp:113
+#: opener/cdopener.cpp:161 opener/cdopener.cpp:291 optionseditor.cpp:113
 msgid "Artist:"
 msgstr "Artiste :"
 
-#: opener/cdopener.cpp:101 opener/cdopener.cpp:703 opener/cdopener.cpp:871
-#: opener/cdopener.cpp:875 opener/cdopener.cpp:925 opener/cdopener.cpp:954
-#: opener/cdopener.cpp:1148
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:793 opener/cdopener.cpp:961
+#: opener/cdopener.cpp:965 opener/cdopener.cpp:1015 opener/cdopener.cpp:1044
+#: opener/cdopener.cpp:1238
 msgid "Various Artists"
 msgstr "Artistes divers"
 
-#: opener/cdopener.cpp:108 opener/cdopener.cpp:234 optionseditor.cpp:124
+#: opener/cdopener.cpp:173 opener/cdopener.cpp:302 optionseditor.cpp:124
 msgid "Composer:"
 msgstr "Compositeur :"
 
-#: opener/cdopener.cpp:114 opener/cdopener.cpp:706 opener/cdopener.cpp:885
-#: opener/cdopener.cpp:889 opener/cdopener.cpp:935 opener/cdopener.cpp:960
-#: opener/cdopener.cpp:1149
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:796 opener/cdopener.cpp:975
+#: opener/cdopener.cpp:979 opener/cdopener.cpp:1025 opener/cdopener.cpp:1050
+#: opener/cdopener.cpp:1239
 msgid "Various Composer"
 msgstr "Compositeurs divers"
 
-#: opener/cdopener.cpp:121 optionseditor.cpp:140
+#: opener/cdopener.cpp:186 optionseditor.cpp:140
 msgid "Album:"
 msgstr "Album :"
 
-#: opener/cdopener.cpp:129 optionseditor.cpp:156
+#: opener/cdopener.cpp:194 optionseditor.cpp:156
 msgid "Disc No.:"
 msgstr "Disque numéro :"
 
-#: opener/cdopener.cpp:137 optionseditor.cpp:168
+#: opener/cdopener.cpp:202 optionseditor.cpp:168
 msgid "Year:"
 msgstr "Année :"
 
-#: opener/cdopener.cpp:145 optionseditor.cpp:180
+#: opener/cdopener.cpp:210 optionseditor.cpp:180
 msgid "Genre:"
 msgstr "Genre :"
 
-#: opener/cdopener.cpp:166
+#: opener/cdopener.cpp:231
 msgctxt "column title"
 msgid "Rip"
 msgstr "Extraction"
 
-#: opener/cdopener.cpp:167 opener/cdopener.cpp:919
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1009
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Piste"
 
-#: opener/cdopener.cpp:168
+#: opener/cdopener.cpp:233
 msgid "Artist"
 msgstr "Artiste"
 
-#: opener/cdopener.cpp:169
+#: opener/cdopener.cpp:234
 msgid "Composer"
 msgstr "Compositeur"
 
-#: opener/cdopener.cpp:170
+#: opener/cdopener.cpp:235
 msgid "Title"
 msgstr "Titre"
 
-#: opener/cdopener.cpp:171
+#: opener/cdopener.cpp:236
 msgid "Length"
 msgstr "Longueur"
 
-#: opener/cdopener.cpp:185
+#: opener/cdopener.cpp:237
+#, fuzzy
+msgid "Player"
+msgstr "Lecteur de CD"
+
+#: opener/cdopener.cpp:253
 msgid "No track selected"
 msgstr "Aucune piste sélectionnée"
 
-#: opener/cdopener.cpp:208 optionseditor.cpp:86
+#: opener/cdopener.cpp:276 optionseditor.cpp:86
 msgid "Title:"
 msgstr "Titre :"
 
-#: opener/cdopener.cpp:249 optionseditor.cpp:201
+#: opener/cdopener.cpp:317 optionseditor.cpp:201
 msgid "Comment:"
 msgstr "Commentaire :"
 
-#: opener/cdopener.cpp:282 opener/diropener.cpp:143 opener/fileopener.cpp:57
+#: opener/cdopener.cpp:366 opener/diropener.cpp:143 opener/fileopener.cpp:57
 #: opener/playlistopener.cpp:43 opener/urlopener.cpp:70 optionslayer.cpp:43
 msgid "Select your desired output options and click on \"Ok\"."
 msgstr ""
 "Sélectionner vos options de destination désirées puis cliquer sur \"Ok\"."
 
-#: opener/cdopener.cpp:303
+#: opener/cdopener.cpp:387
 msgid "Save cue sheet..."
 msgstr "Enregistrer le fichier cue"
 
-#: opener/cdopener.cpp:308
+#: opener/cdopener.cpp:392
 msgid "Request CDDB"
 msgstr "Requête CDDB"
 
-#: opener/cdopener.cpp:313
+#: opener/cdopener.cpp:397
 msgid "Rip entire CD to one file"
 msgstr "Extraire tout le CD vers un fichier unique"
 
-#: opener/cdopener.cpp:324
+#: opener/cdopener.cpp:408
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1233,7 +1237,7 @@ msgstr ""
 "modules installés.\n"
 "Les solutions possibles sont listées ci-dessous.\n"
 
-#: opener/cdopener.cpp:328
+#: opener/cdopener.cpp:412
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1246,79 +1250,79 @@ msgstr ""
 "supplémentaire supportant l'extraction vers un fichier unique peut être "
 "installé."
 
-#: opener/cdopener.cpp:335 opener/diropener.cpp:37 opener/urlopener.cpp:85
+#: opener/cdopener.cpp:419 opener/diropener.cpp:37 opener/urlopener.cpp:85
 msgid "Proceed"
 msgstr "Suivant"
 
-#: opener/cdopener.cpp:338 opener/fileopener.cpp:65
+#: opener/cdopener.cpp:422 opener/fileopener.cpp:65
 #: opener/playlistopener.cpp:51 opener/urlopener.cpp:88 optionslayer.cpp:51
 msgid "Ok"
 msgstr "Ok"
 
-#: opener/cdopener.cpp:342 opener/fileopener.cpp:68
+#: opener/cdopener.cpp:426 opener/fileopener.cpp:68
 #: opener/playlistopener.cpp:54 opener/urlopener.cpp:92 optionslayer.cpp:54
 #: replaygainscanner/replaygainscanner.cpp:91
 msgid "Cancel"
 msgstr "Annuler"
 
-#: opener/cdopener.cpp:391
+#: opener/cdopener.cpp:475
 msgid "Select CD-ROM drive"
 msgstr "Choisir le lecteur de CD"
 
-#: opener/cdopener.cpp:391
+#: opener/cdopener.cpp:475
 msgid "Multiple CD-ROM drives where found. Please select one:"
 msgstr "Plusieurs lecteurs de CD ont été trouvés. Merci d'en choisir un :"
 
-#: opener/cdopener.cpp:496
+#: opener/cdopener.cpp:580
 msgid "DVD Recorder"
 msgstr "Graveur de DVD"
 
-#: opener/cdopener.cpp:498 opener/cdopener.cpp:502
+#: opener/cdopener.cpp:582 opener/cdopener.cpp:586
 msgid "CD Recorder"
 msgstr "Graveur de CD"
 
-#: opener/cdopener.cpp:498 opener/cdopener.cpp:500
+#: opener/cdopener.cpp:582 opener/cdopener.cpp:584
 msgid "DVD Player"
 msgstr "Lecteur de DVD"
 
-#: opener/cdopener.cpp:504
+#: opener/cdopener.cpp:588
 msgid "CD Player"
 msgstr "Lecteur de CD"
 
-#: opener/cdopener.cpp:505
+#: opener/cdopener.cpp:589
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2) : CD audio avec %3 pistes"
 
-#: opener/cdopener.cpp:561 opener/cdopener.cpp:562 opener/cdopener.cpp:565
-#: opener/cdopener.cpp:572 opener/cdopener.cpp:573
+#: opener/cdopener.cpp:645 opener/cdopener.cpp:646 opener/cdopener.cpp:649
+#: opener/cdopener.cpp:656 opener/cdopener.cpp:657
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: opener/cdopener.cpp:614
+#: opener/cdopener.cpp:704
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Merci de patienter, téléchargement des données CDDB en cours..."
 
-#: opener/cdopener.cpp:659
+#: opener/cdopener.cpp:749
 msgid "Select CDDB Entry"
 msgstr "Sélectionner l'entrée CDDB"
 
-#: opener/cdopener.cpp:659
+#: opener/cdopener.cpp:749
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Plusieurs entrées CDDB ont été trouvées. Merci d'en choisir une :"
 
-#: opener/cdopener.cpp:833
+#: opener/cdopener.cpp:923
 msgid "All tracks"
 msgstr "Toutes les pistes"
 
-#: opener/cdopener.cpp:837
+#: opener/cdopener.cpp:927
 msgid "Tracks"
 msgstr "Pistes"
 
-#: opener/cdopener.cpp:1095
+#: opener/cdopener.cpp:1185
 msgid "Please select at least one track in order to proceed."
 msgstr "Merci de choisir au moins une piste pour continuer."
 
-#: opener/cdopener.cpp:1185
+#: opener/cdopener.cpp:1275
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1328,7 +1332,7 @@ msgstr ""
 "\n"
 "Voulez-vous écraser le fichier existant ?"
 
-#: opener/cdopener.cpp:1186
+#: opener/cdopener.cpp:1276
 msgid "File already exists"
 msgstr "Le fichier existe déjà"
 
@@ -1904,24 +1908,30 @@ msgstr ""
 msgid "Preset"
 msgstr "Profile"
 
+#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
+#, fuzzy
+msgctxt "Backend profile"
+msgid "Medium"
+msgstr "Qualité moyenne"
+
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:35
-#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:527
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:40
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:307
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Standard"
 msgstr "Standard"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
-#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:534
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:41
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:312
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Extreme"
 msgstr "Extrême"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
-#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:541
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:42
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:317
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Insane"
 msgstr "Démentiel"
 
@@ -2034,6 +2044,11 @@ msgstr ""
 "Ce profile devrait être transparent pour la plupart des gens sur la pluplart "
 "des musiques (~150 kbps abr)."
 
+#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:527
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:307
+msgid "Standard"
+msgstr "Standard"
+
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:532
 msgid ""
 "This preset should generally be transparent to most people on most music\n"
@@ -2042,6 +2057,11 @@ msgstr ""
 "Ce profile devrait être transparent pour la plupart des gens sur la "
 "pluplart\n"
 "des musiques et propose une haute qualité (~230 kbps abr)."
+
+#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:534
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:312
+msgid "Extreme"
+msgstr "Extrême"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:539
 msgid ""
@@ -2052,6 +2072,11 @@ msgstr ""
 "Si vous avez de très bonnes oreilles et un très bon équipement, ce profile\n"
 "vous fournira généralement une qualité supérieure au mode standard (~280 "
 "kbps abr)."
+
+#: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:541
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:317
+msgid "Insane"
+msgstr "Démentiel"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:546
 msgid ""
@@ -2082,32 +2107,48 @@ msgstr ""
 "Pour plus d'informations : http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:292
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Telephone"
 msgstr "Téléphone"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:297
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Thumb"
 msgstr "Étiquette"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:39
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:302
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Radio"
 msgstr "Radio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:43
-#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:322
+#, fuzzy
+msgctxt "Backend profile"
 msgid "Braindead"
 msgstr "Braindead"
+
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:292
+msgid "Telephone"
+msgstr "Téléphone"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:295
 msgid "low quality (~60 kbps abr)."
 msgstr "Basse qualité (~60 kpbs abr)"
 
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:297
+msgid "Thumb"
+msgstr "Étiquette"
+
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:300
 msgid "low/medium quality (~90 kbps abr)."
 msgstr "Basse/moyenne qualité (~90 kpbs abr)"
+
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:302
+msgid "Radio"
+msgstr "Radio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:305
 msgid "medium quality (~130 kbps abr)."
@@ -2124,6 +2165,10 @@ msgstr "Qualité excellente (~210 kpbs abr)."
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:320
 msgid "excellent quality (~240 kbps abr)."
 msgstr "Très haute qualité (~240 kpbs abr)."
+
+#: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:322
+msgid "Braindead"
+msgstr "Braindead"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:325
 msgid "excellent quality (~270 kbps abr)."

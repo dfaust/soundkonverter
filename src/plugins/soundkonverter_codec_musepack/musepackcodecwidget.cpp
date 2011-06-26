@@ -34,13 +34,13 @@ MusePackCodecWidget::MusePackCodecWidget()
     QLabel *lPreset = new QLabel( i18n("Preset")+":", this );
     presetBox->addWidget( lPreset );
     cPreset = new KComboBox( this );
-    cPreset->addItem( i18n("Telephone") );
-    cPreset->addItem( i18n("Thumb") );
-    cPreset->addItem( i18n("Radio") );
-    cPreset->addItem( i18n("Standard") );
-    cPreset->addItem( i18n("Extreme") );
-    cPreset->addItem( i18n("Insane") );
-    cPreset->addItem( i18n("Braindead") );
+    cPreset->addItem( i18nc("Backend profile","Telephone") );
+    cPreset->addItem( i18nc("Backend profile","Thumb") );
+    cPreset->addItem( i18nc("Backend profile","Radio") );
+    cPreset->addItem( i18nc("Backend profile","Standard") );
+    cPreset->addItem( i18nc("Backend profile","Extreme") );
+    cPreset->addItem( i18nc("Backend profile","Insane") );
+    cPreset->addItem( i18nc("Backend profile","Braindead") );
     cPreset->addItem( i18n("User defined") );
     cPreset->setCurrentIndex( 3 );
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
@@ -65,7 +65,7 @@ MusePackCodecWidget::MusePackCodecWidget()
 
     QLabel *lQuality = new QLabel( i18n("Quality"), userdefinedBox );
     userdefinedTopBox->addWidget( lQuality );
-    
+
     userdefinedTopBox->addSpacing( 5 );
 
     sQuality = new QSlider( Qt::Horizontal, userdefinedBox );
@@ -88,7 +88,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     userdefinedTopBox->addStretch();
 
     // cmd arguments box
-    
+
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 2, 0 );
 
@@ -138,14 +138,14 @@ ConversionOptions *MusePackCodecWidget::currentConversionOptions()
 bool MusePackCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     MusePackConversionOptions *options = static_cast<MusePackConversionOptions*>(_options);
     cPreset->setCurrentIndex( (int)options->data.preset );
     presetChanged( cPreset->currentText() );
     dQuality->setValue( options->quality );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
-    
+
     return true;
 }
 
@@ -269,7 +269,7 @@ bool MusePackCodecWidget::setCustomProfile( const QString& profile, const QDomDo
 int MusePackCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -281,7 +281,7 @@ int MusePackCodecWidget::currentDataRate()
 //         if( dQuality->value() > 9 ) dataRate += (dQuality->value()-9)*800000;
         dataRate = 0;
     }
-    
+
     return dataRate;
 }
 

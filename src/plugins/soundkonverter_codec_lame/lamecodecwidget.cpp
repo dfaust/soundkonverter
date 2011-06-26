@@ -31,10 +31,10 @@ LameCodecWidget::LameCodecWidget()
     QLabel *lPreset = new QLabel( i18n("Preset")+":", this );
     presetBox->addWidget( lPreset );
     cPreset = new KComboBox( this );
-    cPreset->addItem( i18n("Medium") );
-    cPreset->addItem( i18n("Standard") );
-    cPreset->addItem( i18n("Extreme") );
-    cPreset->addItem( i18n("Insane") );
+    cPreset->addItem( i18nc("Backend profile","Medium") );
+    cPreset->addItem( i18nc("Backend profile","Standard") );
+    cPreset->addItem( i18nc("Backend profile","Extreme") );
+    cPreset->addItem( i18nc("Backend profile","Insane") );
     cPreset->addItem( i18n("Specify bitrate") );
     cPreset->addItem( i18n("User defined") );
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
@@ -115,7 +115,7 @@ LameCodecWidget::LameCodecWidget()
     cBitrateMode->setFixedWidth( cBitrateMode->sizeHint().width() );
     connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     userdefinedTopBox->addWidget( cBitrateMode );
-    
+
     /*
     QLabel *lBitrateRange = new QLabel( i18n("Bitrate range")+":", userdefinedBox );
     userdefinedTopBox->addWidget( lBitrateRange );
@@ -178,7 +178,7 @@ LameCodecWidget::LameCodecWidget()
     userdefinedMidBox->addStretch();
 
     // cmd arguments box
-    
+
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 2, 0 );
 
@@ -451,7 +451,7 @@ bool LameCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
 int LameCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -509,7 +509,7 @@ int LameCodecWidget::currentDataRate()
             dataRate *= 1.1f;
         }
     }
-    
+
     return dataRate;
 }
 

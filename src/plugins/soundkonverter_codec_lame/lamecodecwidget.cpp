@@ -517,28 +517,28 @@ void LameCodecWidget::presetChanged( const QString& preset )
 {
     cPreset->setToolTip( "" );
 
-    if( preset == i18n("Medium") )
+    if( preset == i18nc("Backend profile","Medium") )
     {
         iPresetBitrate->setEnabled( false );
         cPresetFast->setEnabled( true );
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("This preset should provide near transparency to most people on most music (~150 kbps abr).") );
     }
-    else if( preset == i18n("Standard") )
+    else if( preset == i18nc("Backend profile","Standard") )
     {
         iPresetBitrate->setEnabled( false );
         cPresetFast->setEnabled( true );
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("This preset should generally be transparent to most people on most music\nand is already quite high in quality (~230 kbps abr).") );
     }
-    else if( preset == i18n("Extreme") )
+    else if( preset == i18nc("Backend profile","Extreme") )
     {
         iPresetBitrate->setEnabled( false );
         cPresetFast->setEnabled( true );
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("If you have extremely good hearing and similar equipment, this preset will generally provide\nslightly higher quality than the standard mode (~280 kbps abr).") );
     }
-    else if( preset == i18n("Insane") )
+    else if( preset == i18nc("Backend profile","Insane") )
     {
         iPresetBitrate->setEnabled( false );
         cPresetFast->setEnabled( false );

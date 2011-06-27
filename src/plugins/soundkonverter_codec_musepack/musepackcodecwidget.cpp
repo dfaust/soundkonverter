@@ -289,37 +289,37 @@ void MusePackCodecWidget::presetChanged( const QString& preset )
 {
     cPreset->setToolTip( "" );
 
-    if( preset == i18n("Telephone") )
+    if( preset == i18nc("Backend profile","Telephone") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("low quality (~60 kbps abr).") );
     }
-    else if( preset == i18n("Thumb") )
+    else if( preset == i18nc("Backend profile","Thumb") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("low/medium quality (~90 kbps abr).") );
     }
-    else if( preset == i18n("Radio") )
+    else if( preset == i18nc("Backend profile","Radio") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("medium quality (~130 kbps abr).") );
     }
-    else if( preset == i18n("Standard") )
+    else if( preset == i18nc("Backend profile","Standard") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("high quality (~180 kbps abr).") );
     }
-    else if( preset == i18n("Extreme") )
+    else if( preset == i18nc("Backend profile","Extreme") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("excellent quality (~210 kbps abr).") );
     }
-    else if( preset == i18n("Insane") )
+    else if( preset == i18nc("Backend profile","Insane") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("excellent quality (~240 kbps abr).") );
     }
-    else if( preset == i18n("Braindead") )
+    else if( preset == i18nc("Backend profile","Braindead") )
     {
         userdefinedBox->setEnabled( false );
         cPreset->setToolTip( i18n("excellent quality (~270 kbps abr).") );

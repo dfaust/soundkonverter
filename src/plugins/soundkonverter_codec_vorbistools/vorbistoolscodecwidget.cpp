@@ -6,16 +6,13 @@
 
 #include <math.h>
 
-#include <QLayout>
-#include <QLabel>
-// #include <QCheckBox>
 #include <KLocale>
 #include <KComboBox>
+#include <QLayout>
+#include <QLabel>
 #include <QDoubleSpinBox>
-// #include <QGroupBox>
 #include <QSlider>
 #include <QCheckBox>
-#include <QLineEdit>
 
 
 VorbisToolsCodecWidget::VorbisToolsCodecWidget()
@@ -41,8 +38,6 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
-//     sQuality->setTickPosition( QSlider::TicksBelow );
-//     sQuality->setFixedWidth( sQuality->sizeHint().width() );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( sQuality );
@@ -51,7 +46,6 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
     dQuality->setRange( 8, 320 );
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
-//     dQuality->setFixedHeight( cMode->minimumSizeHint().height() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
     connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
     topBox->addWidget( dQuality );
@@ -158,7 +152,7 @@ ConversionOptions *VorbisToolsCodecWidget::currentConversionOptions()
 bool VorbisToolsCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
@@ -179,7 +173,7 @@ bool VorbisToolsCodecWidget::setCurrentConversionOptions( ConversionOptions *_op
     chSamplerate->setChecked( options->samplingRate != 0 );
     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     chChannels->setChecked( options->channels != 0 );
-    
+
     return true;
 }
 
@@ -321,7 +315,7 @@ bool VorbisToolsCodecWidget::setCustomProfile( const QString& profile, const QDo
 int VorbisToolsCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -338,7 +332,7 @@ int VorbisToolsCodecWidget::currentDataRate()
         {
             dataRate = dQuality->value()/8*60*1000;
         }
-        
+
         if( chChannels->isChecked() )
         {
             dataRate *= 0.9f;
@@ -348,7 +342,7 @@ int VorbisToolsCodecWidget::currentDataRate()
             dataRate *= 0.9f;
         }
     }
-    
+
     return dataRate;
 }
 
@@ -357,7 +351,6 @@ void VorbisToolsCodecWidget::modeChanged( int mode )
     if( mode == 0 )
     {
         sQuality->setRange( -100, 1000 );
-//         sQuality->setTickInterval( 100 );
         sQuality->setSingleStep( 50 );
         dQuality->setRange( -1, 10 );
         dQuality->setSingleStep( 0.01 );
@@ -375,7 +368,6 @@ void VorbisToolsCodecWidget::modeChanged( int mode )
     else
     {
         sQuality->setRange( 800, 32000 );
-//         sQuality->setTickInterval( 800 );
         sQuality->setSingleStep( 800 );
         dQuality->setRange( 8, 320 );
         dQuality->setSingleStep( 1 );

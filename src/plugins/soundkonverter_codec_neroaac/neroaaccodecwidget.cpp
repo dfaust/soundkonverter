@@ -8,11 +8,9 @@
 
 #include <QLayout>
 #include <QLabel>
-// #include <QCheckBox>
 #include <KLocale>
 #include <KComboBox>
 #include <QDoubleSpinBox>
-// #include <QGroupBox>
 #include <QSlider>
 #include <QCheckBox>
 #include <QLineEdit>
@@ -81,7 +79,7 @@ NeroaacCodecWidget::NeroaacCodecWidget()
 //     cChannels->addItem( i18n("Mono") );
 //     midBox->addWidget( cChannels );
 //     channelsToggled( false );
-// 
+//
 //     midBox->addSpacing( 12 );
 
 //     chSamplerate = new QCheckBox( i18n("Resample")+":", this );
@@ -158,7 +156,7 @@ ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
 bool NeroaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
@@ -179,7 +177,7 @@ bool NeroaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_option
 //     chSamplerate->setChecked( options->samplingRate != 0 );
 //     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
 //     chChannels->setChecked( options->channels != 0 );
-    
+
     return true;
 }
 
@@ -321,7 +319,7 @@ bool NeroaacCodecWidget::setCustomProfile( const QString& profile, const QDomDoc
 int NeroaacCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -338,7 +336,7 @@ int NeroaacCodecWidget::currentDataRate()
         {
             dataRate = dQuality->value()/8*60*1000;
         }
-        
+
 //         if( chChannels->isChecked() )
 //         {
 //             dataRate *= 0.9f;
@@ -348,7 +346,7 @@ int NeroaacCodecWidget::currentDataRate()
 //             dataRate *= 0.9f;
 //         }
     }
-    
+
     return dataRate;
 }
 

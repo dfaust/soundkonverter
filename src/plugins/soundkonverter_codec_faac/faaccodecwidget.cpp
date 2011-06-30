@@ -6,14 +6,12 @@
 
 #include <math.h>
 
-#include <QLayout>
-#include <QLabel>
 #include <KLocale>
 #include <KComboBox>
+#include <QLayout>
+#include <QLabel>
 #include <QDoubleSpinBox>
 #include <QSlider>
-#include <QCheckBox>
-#include <QLineEdit>
 
 
 FaacCodecWidget::FaacCodecWidget()
@@ -104,7 +102,6 @@ ConversionOptions *FaacCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Quality;
         options->quality = dQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
-//         options->bitrateMode = ConversionOptions::Vbr;
         options->bitrateMin = 0;
         options->bitrateMax = 0;
     }
@@ -113,11 +110,10 @@ ConversionOptions *FaacCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Bitrate;
         options->bitrate = dQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
-//         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Avarage") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
         options->bitrateMin = 0;
         options->bitrateMax = 0;
     }
-    
+
     if( cSamplerate->currentIndex() == 0 )
         options->samplingRate = 0;
     else
@@ -130,7 +126,7 @@ bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
-    
+
     ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
@@ -138,23 +134,19 @@ bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         cMode->setCurrentIndex( cMode->findText(i18n("Quality")) );
         modeChanged( cMode->currentIndex() );
         dQuality->setValue( options->quality );
-//         cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Variable")) );
     }
     else
     {
         cMode->setCurrentIndex( cMode->findText(i18n("Bitrate")) );
         modeChanged( cMode->currentIndex() );
         dQuality->setValue( options->bitrate );
-//         if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Avarage")) );
-//         else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
-    
-//     chSamplerate->setChecked( options->samplingRate != 0 );
+
     if( options->samplingRate == 0 )
         cSamplerate->setCurrentIndex( 0 );
     else
         cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-    
+
     return true;
 }
 
@@ -203,7 +195,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 60 );
         dQuality->setValue( 60 );
-//         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 5 );
         return true;
     }
@@ -213,7 +204,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 80 );
         dQuality->setValue( 80 );
-//         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 5 );
         return true;
     }
@@ -223,7 +213,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 100 );
         dQuality->setValue( 100 );
-//         chSamplerate->setChecked( false );
         cSamplerate->setCurrentIndex( 0 );
         return true;
     }
@@ -233,7 +222,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 140 );
         dQuality->setValue( 140 );
-//         chSamplerate->setChecked( false );
         cSamplerate->setCurrentIndex( 0 );
         return true;
     }
@@ -243,7 +231,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 180 );
         dQuality->setValue( 180 );
-//         chSamplerate->setChecked( false );
         cSamplerate->setCurrentIndex( 0 );
         return true;
     }
@@ -261,8 +248,6 @@ QDomDocument FaacCodecWidget::customProfile()
     QDomElement encodingOptions = profile.createElement("encodingOptions");
     encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
     encodingOptions.setAttribute("quality",dQuality->value());
-//     encodingOptions.setAttribute("bitrateMode",cBitrateMode->currentIndex());
-//     encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
     encodingOptions.setAttribute("samplerateEnabled",cSamplerate->currentIndex() > 0);
     encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
     root.appendChild(encodingOptions);
@@ -283,14 +268,14 @@ bool FaacCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
         cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
     else
         cSamplerate->setCurrentIndex( 0 );
-            
+
     return true;
 }
 
 int FaacCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -300,7 +285,7 @@ int FaacCodecWidget::currentDataRate()
         // TODO calculate data rate for faac
         dataRate = 0;
     }
-    
+
     return dataRate;
 }
 

@@ -4,7 +4,7 @@
 #include "ffmpegcodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-#include <math.h>
+
 
 #include <QLayout>
 #include <QLabel>

@@ -11,7 +11,6 @@
 #include <KLineEdit>
 #include <QLayout>
 #include <QLabel>
-// #include <QCheckBox>
 #include <QDoubleSpinBox>
 #include <QGroupBox>
 #include <QSlider>
@@ -43,10 +42,10 @@ MusePackCodecWidget::MusePackCodecWidget()
     cPreset->addItem( i18nc("Backend profile","Braindead") );
     cPreset->addItem( i18n("User defined") );
     cPreset->setCurrentIndex( 3 );
+    cPreset->setToolTip( i18n("Either use one of MusePacks's presets or your own settings.") );
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
     connect( cPreset, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     presetBox->addWidget( cPreset );
-//     cPreset->setToolTip( i18n("Either use one of MusePacks's presets or your own settings.") );
 
     presetBox->addStretch();
 

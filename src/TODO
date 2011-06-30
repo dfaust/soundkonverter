@@ -36,6 +36,7 @@ better ripping control
 [x] mplayer         parse progress
 [x] neroaac
 [x] timidity
+[x] fluidsynth
 [x] vorbistools
 [x] twolame
 [ ] gogo
@@ -83,5 +84,16 @@ void cleanup( int )
     kDebug(5970) << i18n("Just caught a software interrupt.");
     kapp->exit();
 }
+
+
+Create a named pipe called pipe.wav
+#: mkfifo pipe.wav
+
+ Now execute the following command. It will hang, as it is waiting for the data to flow through the pipe.
+#: lame --preset standard pipe.wav output.file
+
+ In a different terminal, execute the following command, to get the data flowing.
+#: mplayer -ao pcm:file=pipe.wav input.file
+
 
 ###

@@ -10,7 +10,7 @@ BackendPluginItem::BackendPluginItem( QObject *parent )
 {
     process = 0;
     id = -1;
-    progress = 0.0f;
+    progress = -1;
 }
 
 BackendPluginItem::~BackendPluginItem()

@@ -1,43 +1,24 @@
 
 #include "convert.h"
 #include "config.h"
-// #include "tagengine.h"
-// #include "cdmanager.h"
 #include "logger.h"
 #include "filelist.h"
-// #include "replaygainscanner.h"
 #include "core/conversionoptions.h"
 #include "core/codecplugin.h"
 #include "outputdirectory.h"
 #include "global.h"
 
-#include <math.h>
-
-#include <klocale.h>
-#include <kglobal.h>
-//#include <kdebug.h>
-#include <ktemporaryfile.h>
-// #include <kio/job.h>
-// #include <kio/slavebase.h>
-//#include <kprocess.h>
-#include <kstandarddirs.h>
+#include <KLocale>
+#include <KGlobal>
+#include <KTemporaryFile>
+#include <KStandardDirs>
 #include <KMessageBox>
+#include <KComponentData>
 
 #include <QFile>
 #include <QFileInfo>
 #include <QTimer>
 
-#include <QtDBus/QtDBus>
-#include <kcomponentdata.h>
-
-// Create a named pipe called pipe.wav
-// #: mkfifo pipe.wav
-
-//  Now execute the following command. It will hang, as it is waiting for the data to flow through the pipe.
-// #: lame --preset standard pipe.wav output.file
-
-//  In a different terminal, execute the following command, to get the data flowing.
-// #: mplayer -ao pcm:file=pipe.wav input.file
 
 ConvertItem::ConvertItem()
 {
@@ -61,29 +42,12 @@ ConvertItem::ConvertItem( FileListItem *item )
 ConvertItem::~ConvertItem()
 {}
 
-// void ConvertItem::generateTempUrl( const QString& extension )
-// {
-// //     if( QFile::exists(tempUrl.toLocalFile()) )
-// //     {
-// //         QFile::remove(tempUrl.toLocalFile());
-// //     }
-//
-//     int i=0;
-//     do {
-//         tempConvertUrl.setUrl(QString("/tmp/soundkonverter_temp_%1_%2.%3").arg(logID).arg(i).arg(extension));
-//         i++;
-//     } while( QFile::exists(tempConvertUrl.toLocalFile()) );
-//
-// //     tempUrl.setUrl(QString("/tmp/sk_temp_%1.%2").arg(logID).arg(extension));
-// }
-
 KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension )
 {
     QString tempUrl;
     int i=0;
     do {
         tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
-//         tempUrl = QString("/tmp/soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
         i++;
     } while( QFile::exists(tempUrl) );
 
@@ -198,7 +162,6 @@ void Convert::get( ConvertItem *item )
     logger->log( item->logID, i18n("Getting file") );
     item->state = ConvertItem::get;
 
-//     item->generateTempUrl( item->inputUrl.fileName().right(item->inputUrl.fileName().length()-item->inputUrl.fileName().lastIndexOf(".")-1) );
     item->tempInputUrl = item->generateTempUrl( "download", item->inputUrl.fileName().mid(item->inputUrl.fileName().lastIndexOf(".")+1) );
 
     if( !updateTimer.isActive() ) updateTimer.start( config->data.general.updateDelay );
@@ -277,7 +240,6 @@ void Convert::convert( ConvertItem *item )
         }
         else if( item->convertPlugin->type() == "ripper" )
         {
-//             item->fileListItem->ripping = true;
             item->fileListItem->state = FileListItem::Ripping;
             item->convertID = qobject_cast<RipperPlugin*>(item->convertPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
         }
@@ -296,7 +258,6 @@ void Convert::convert( ConvertItem *item )
         }
         else if( plugin1->type() == "ripper" )
         {
-//             item->fileListItem->ripping = true;
             item->fileListItem->state = FileListItem::Ripping;
             command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl("-") );
         }
@@ -334,7 +295,6 @@ void Convert::convert( ConvertItem *item )
             }
             else if( plugin1->type() == "ripper" )
             {
-//                 item->fileListItem->ripping = true;
                 item->fileListItem->state = FileListItem::Ripping;
                 item->convertID = qobject_cast<RipperPlugin*>(plugin1)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->tempConvertUrl );
             }
@@ -740,7 +700,6 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 items.at(i)->finishedTime += fileTime;
                 if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
                 {
-//                     items.at(i)->fileListItem->ripping = false;
                     items.at(i)->fileListItem->state = FileListItem::Converting;
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
@@ -795,7 +754,8 @@ void Convert::pluginLog( int id, const QString& message )
         }
     }
 
-    if( message.trimmed().isEmpty() ) return;
+    if( message.trimmed().isEmpty() )
+        return;
 
     // search the matching process
     for( int i=0; i<items.size(); i++ )
@@ -919,7 +879,6 @@ void Convert::add( FileListItem* item )
     newItem->updateTimes();
 
     // (visual) feedback
-//     item->converting = true;
     item->state = FileListItem::Converting;
 
     newItem->progressedTime.start();
@@ -1063,6 +1022,7 @@ void Convert::updateProgress()
     float time = 0;
     float fileTime;
     float fileProgress;
+    QString fileProgressString;
 
     // trigger flushing of the logger cache
     pluginLog( 0, "" );
@@ -1082,28 +1042,38 @@ void Convert::updateProgress()
             fileProgress = items.at(i)->progress;
         }
 
+        if( fileProgress >= 0 )
+        {
+            fileProgressString = Global::prettyNumber(fileProgress,"%");
+        }
+        else
+        {
+            fileProgressString = i18nc("The conversion progress can't be determined","Unknown");
+            fileProgress = 0; // make it a valid value so the calculations below work
+        }
+
         switch( items.at(i)->state )
         {
             case ConvertItem::get:
                 fileTime = items.at(i)->getTime;
-                items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+Global::prettyNumber(fileProgress,"%") );
+                items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
                 break;
             case ConvertItem::convert:
                 fileTime = items.at(i)->convertTime;
-                items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+Global::prettyNumber(fileProgress,"%") );
+                items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
                 break;
             case ConvertItem::decode:
                 fileTime = items.at(i)->decodeTime;
-                if( items.at(i)->convertPlugin->type() == "convert" ) items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+Global::prettyNumber(fileProgress,"%") );
-                else if( items.at(i)->convertPlugin->type() == "ripper" ) items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+Global::prettyNumber(fileProgress,"%") );
+                if( items.at(i)->convertPlugin->type() == "convert" ) items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
+                else if( items.at(i)->convertPlugin->type() == "ripper" ) items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
                 break;
             case ConvertItem::encode:
                 fileTime = items.at(i)->encodeTime;
-                items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+Global::prettyNumber(fileProgress,"%") );
+                items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
             case ConvertItem::replaygain:
                 fileTime = items.at(i)->replaygainTime;
-                items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+Global::prettyNumber(fileProgress,"%") );
+                items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
 //             case ConvertItem::bpm:
 //                 items.at(i)->fileListItem->setText( 0, i18n("Calculating BPM")+"... "+Global::prettyNumber(fileProgress,"%") );

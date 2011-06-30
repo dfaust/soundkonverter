@@ -19,7 +19,7 @@ struct ConversionPipeTrunk
     bool enabled; // can we use this conversion pipe? (all needed backends installed?)
     int rating;
     QString problemInfo; // howto message, if a backend is missing
-    
+
     struct Data // additional data
     {
         bool hasInternalReplayGain;
@@ -37,7 +37,7 @@ public:
 
     KProcess *process;
     int id;
-    float progress;
+    float progress;             // hold the current progress, -1 is the initial value and shows that the progress can't be determined
 };
 
 /**
@@ -63,7 +63,7 @@ public:
         QStringList mimeTypes;  // TODO this is obsolete - delete - really? what's with dolphin's actions context menu
         QStringList extensions;
     };
-  
+
     BackendPlugin( QObject *parent=0 );
     virtual ~BackendPlugin();
 
@@ -88,16 +88,16 @@ public:
     virtual void scanForBackends( const QStringList& directoryList = QStringList() );
     /** holds all backend binaries and their location if they were found */
     QMap<QString,QString> binaries;
-    
+
     QString standardMessage( const QString& type, const QStringList& arguments );
     QString standardMessage( const QString& type );
     QString standardMessage( const QString& type, const QString& arguments1 );
     QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2 );
     QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 );
-    
+
     /** returns the url as a string with all special characters escaped so the bash can find the files */
     QString escapeUrl( const KUrl& url );
-    
+
 protected:
     QList<BackendPluginItem*> backendItems;
     int lastId;

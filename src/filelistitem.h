@@ -1,7 +1,7 @@
 //
 // C++ Interface: filelistitem
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -36,7 +36,7 @@ public:
         Stopped,
         Failed
     };
-    
+
     /** Constructor */
     FileListItem( QTreeWidget *parent );
 
@@ -52,14 +52,12 @@ public:
     KUrl url;                   // the original input file path name
     KUrl outputUrl;             // if the user wants to change the output directory/file name per file!
     QString codecName;          // the codec name of the input file
-    State state;
-//     bool converting;            // is this item being converted at the moment?
+    State state;                // is this item being converted or ripper or etc.
     bool local;                 // is this a local file?
     int track;                  // the number of the track, if it is on an audio cd
                                 // if it is lower than 0, it isn't an audio cd track at all
     int tracks;                 // the total amount of tracks on the cd
     QString device;             // the device of the audio cd
-//     bool ripping;               // is this track currently being ripped?
 
     float length;               // the length of the track, used for the calculation of the progress bar
     QString notifyCommand;      // execute this command, when the file is converted (%i=input file, %o=output file)

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=soundKonverter Fluidsynth Plugin
+X-KDE-Library=soundkonverter_codec_fluidsynth
+ServiceTypes=soundKonverter/CodecPlugin
+X-KDE-PluginInfo-Author=Daniel Faust
+X-KDE-PluginInfo-Email=hessijames@gmail.com
+X-KDE-PluginInfo-Name=soundkonverter_codec_fluidsynth
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL

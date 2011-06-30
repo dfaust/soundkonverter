@@ -573,7 +573,8 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
 
     QStringList tempPluginList;
     QStringList optimizedPluginList;
-    QString pluginName;
+    int currentBackendRating;
+    int betterBackendRating;
     int codecIndex;
     bool ignore;
 
@@ -601,7 +602,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         {
             if( pPluginLoader->conversionPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
             {
-                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                const QString pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
                 {
                     tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
@@ -612,7 +613,17 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         optimizedPluginList.clear();
         for( int j=tempPluginList.count()-1; j>=0; j-- )
         {
-            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const QString pluginName = tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const int pluginRating = tempPluginList.at(j).left(8).toInt();
+            optimizedPluginList += pluginName;
+            if( data.backends.codecs.at(codecIndex).encoders.count() > 0 && pluginName == data.backends.codecs.at(codecIndex).encoders.first() )
+            {
+                currentBackendRating = pluginRating;
+            }
+            if( i == tempPluginList.count()-1 )
+            {
+                betterBackendRating = pluginRating;
+            }
         }
         if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).encoders.count() != 0 )
         {
@@ -629,7 +640,8 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
             }
 
-            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).encoders.first() )
+            // is there a better plugin available and has the better plugin really a higher rating or was it just sorted alphabetically at the top
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).encoders.first() && betterBackendRating > currentBackendRating )
             {
                 if( ignore && includeIgnored )
                 {
@@ -658,7 +670,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         {
             if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
             {
-                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                const QString pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
                 {
                     tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
@@ -669,7 +681,17 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         optimizedPluginList.clear();
         for( int j=tempPluginList.count()-1; j>=0; j-- )
         {
-            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const QString pluginName = tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const int pluginRating = tempPluginList.at(j).left(8).toInt();
+            optimizedPluginList += pluginName;
+            if( data.backends.codecs.at(codecIndex).decoders.count() > 0 && pluginName == data.backends.codecs.at(codecIndex).decoders.first() )
+            {
+                currentBackendRating = pluginRating;
+            }
+            if( i == tempPluginList.count()-1 )
+            {
+                betterBackendRating = pluginRating;
+            }
         }
         if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).decoders.count() != 0 )
         {
@@ -686,7 +708,8 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
             }
 
-            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).decoders.first() )
+            // is there a better plugin available and has the better plugin really a higher rating or was it just sorted alphabetically at the top
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).decoders.first() && betterBackendRating > currentBackendRating )
             {
                 if( ignore && includeIgnored )
                 {
@@ -715,7 +738,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         {
             if( pPluginLoader->replaygainPipes.at(j).codecName == formats.at(i) && pPluginLoader->replaygainPipes.at(j).enabled )
             {
-                pluginName = pPluginLoader->replaygainPipes.at(j).plugin->name();
+                const QString pluginName = pPluginLoader->replaygainPipes.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
                 {
                     tempPluginList += QString::number(pPluginLoader->replaygainPipes.at(j).rating).rightJustified(8,'0') + pluginName;
@@ -726,7 +749,17 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         optimizedPluginList.clear();
         for( int j=tempPluginList.count()-1; j>=0; j-- )
         {
-            optimizedPluginList += tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const QString pluginName = tempPluginList.at(j).right(tempPluginList.at(j).length()-8);
+            const int pluginRating = tempPluginList.at(j).left(8).toInt();
+            optimizedPluginList += pluginName;
+            if( data.backends.codecs.at(codecIndex).replaygain.count() > 0 && pluginName == data.backends.codecs.at(codecIndex).replaygain.first() )
+            {
+                currentBackendRating = pluginRating;
+            }
+            if( i == tempPluginList.count()-1 )
+            {
+                betterBackendRating = pluginRating;
+            }
         }
         if( optimizedPluginList.count() != 0 && data.backends.codecs.at(codecIndex).replaygain.count() != 0 )
         {
@@ -744,7 +777,8 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
             }
 
-            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).replaygain.first() )
+            // is there a better plugin available and has the better plugin really a higher rating or was it just sorted alphabetically at the top
+            if( optimizedPluginList.first() != data.backends.codecs.at(codecIndex).replaygain.first() && betterBackendRating > currentBackendRating )
             {
                 if( ignore && includeIgnored )
                 {

@@ -4,10 +4,6 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
-class QSlider;
-class QSpinBox;
-
 class TimidityCodecWidget : public CodecWidget
 {
     Q_OBJECT

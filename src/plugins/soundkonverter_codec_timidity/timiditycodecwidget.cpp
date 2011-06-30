@@ -4,13 +4,7 @@
 #include "timiditycodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-#include <math.h>
-
-#include <QLayout>
-#include <QLabel>
 #include <KLocale>
-#include <QSpinBox>
-#include <QSlider>
 
 
 TimidityCodecWidget::TimidityCodecWidget()
@@ -29,14 +23,17 @@ ConversionOptions *TimidityCodecWidget::currentConversionOptions()
 
 bool TimidityCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+    if( !_options || _options->pluginName != global_plugin_name )
+        return false;
+
     return true;
 }
 
 void TimidityCodecWidget::setCurrentFormat( const QString& format )
 {
-    if( currentFormat == format ) return;
+    if( currentFormat == format )
+        return;
+
     currentFormat = format;
     setEnabled( currentFormat != "wav" );
 }
@@ -69,12 +66,12 @@ bool TimidityCodecWidget::setCustomProfile( const QString& profile, const QDomDo
 int TimidityCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
     }
-    
+
     return dataRate;
 }
 

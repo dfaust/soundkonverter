@@ -913,7 +913,7 @@ void Convert::remove( ConvertItem *item, int state )
     }
     if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 )
     {
-        exitMessage = i18n("An error occured, the output file size is less than 1\% of the input file size");
+        exitMessage = i18n("An error occured, the output file size is less than one percent of the input file size");
 
         if( state == 0 )
         {

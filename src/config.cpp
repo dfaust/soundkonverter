@@ -72,6 +72,28 @@ void Config::load()
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
     data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
 
+    group = conf->group( "Advanced" );
+    data.advanced.useSharedMemoryForTempFiles = group.readEntry( "useSharedMemoryForTempFiles", false );
+    data.advanced.sharedMemorySize = 0;
+    if( QFile::exists("/dev/shm") )
+    {
+        system("df -B 1M /dev/shm | tail -1 > /dev/shm/soundkonverter_shm_size");
+        QFile chkdf("/dev/shm/soundkonverter_shm_size");
+        if( chkdf.open(QIODevice::ReadOnly|QIODevice::Text) )
+        {
+            QTextStream t( &chkdf );
+            QString s = t.readLine();
+            QRegExp rxlen( "^(?:\\S+)(?:\\s+)(?:\\s+)(\\d+)(?:\\s+)(\\d+)(?:\\s+)(\\d+)(?:\\s+)(\\d+)" );
+            if( s.contains(rxlen) )
+            {
+                data.advanced.sharedMemorySize = rxlen.cap(1).toInt();
+            }
+            chkdf.close();
+        }
+        chkdf.remove();
+    }
+    data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 2 );
+
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
     formats = group.readEntry( "formats", QStringList() );
@@ -420,6 +442,10 @@ void Config::save()
     group.writeEntry( "removeFailedFiles", data.general.removeFailedFiles );
     group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
     group.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
+
+    group = conf->group( "Advanced" );
+    group.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );
+    group.writeEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.maxSizeForSharedMemoryTempFiles );
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );

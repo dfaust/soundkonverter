@@ -96,4 +96,12 @@ Create a named pipe called pipe.wav
 #: mplayer -ao pcm:file=pipe.wav input.file
 
 
+QFile debugfile("/dev/shm/soundKonverter");
+if( debugfile.open(QIODevice::Append|QIODevice::Text) )
+{
+    QTextStream debugstream(&debugfile);
+    debugstream << "type: " << storageVolume->fsType() << "\n";
+    debugfile.close();
+}
+
 ###

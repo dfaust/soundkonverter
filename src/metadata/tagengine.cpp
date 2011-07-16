@@ -111,7 +111,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
     TagData *tagData = new TagData();
 
     TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit() );
-    
+
     if( !fileref.isNull() )
     {
         TagLib::Tag *tag = fileref.tag();
@@ -163,7 +163,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             // POPM : rating, playcount
             // APIC : TagLib::ID3v2::AttachedPictureFrame
             // UFID : TagLib::ID3v2::UniqueFileIdentifierFrame
-            
+
             if ( file->ID3v2Tag() )
             {
                 if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
@@ -176,7 +176,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 //             {
 //                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
 //                     track_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
-// 
+//
 //                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
 //                     album_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
 //             }
@@ -186,7 +186,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             // ALBUMARTIST
             // BPM
             // COMPILATION (1 vs. 0)
-            
+
             if ( file->tag() )
             {
                 if ( !file->tag()->fieldListMap()[ "COMPOSER" ].isEmpty() )
@@ -197,7 +197,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 
 //                 if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
 //                     track_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_TRACK_GAIN"].front() );
-// 
+//
 //                 if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
 //                     album_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
             }
@@ -214,7 +214,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 
 //                 if ( !file->xiphComment()->fieldListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
 //                     track_gain = TStringToQString( file->xiphComment()->fieldListMap()["REPLAYGAIN_TRACK_GAIN"].front() );
-// 
+//
 //                 if ( !file->xiphComment()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
 //                     album_gain = TStringToQString( file->xiphComment()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
             }
@@ -235,7 +235,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             // tmpo : BPM
             // disk
             // cpil : Compilation (true vs. false)
-            
+
             TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
             if( mp4tag )
             {
@@ -296,7 +296,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 //             else
 //                 tagData->track_gain = track_gain.toFloat();
 //         }
-// 
+//
 //         if( !album_gain.isEmpty() )
 //         {
 //             int i = album_gain.indexOf(' ');
@@ -455,7 +455,7 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
 // bool TagEngine::canWrite( QString format )
 // {
 //     format = format.lower();
-// 
+//
 //     if( format == "ogg" ||
 //         format == "flac" || format == "fla" ||
 //         format == "mp3" || // TODO mp2 ?

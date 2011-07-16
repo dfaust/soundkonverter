@@ -4,6 +4,7 @@
 -Add: Make it possible to choose the preferred extension for ogg vorbis files
 -Add: Playing CD tracks before ripping them
 -Add: Fluidsynth plugin
+-Add: Possibility to write temporary files to /dev/shm
 -Change: Prevent options dialogs from getting too wide
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly

@@ -94,7 +94,7 @@ set(soundkonverter_SRCS
    configdialog/configpagebase.cpp
    configdialog/configgeneralpage.cpp
    configdialog/configbackendspage.cpp
-#    configdialog/configadvancedpage.cpp
+   configdialog/configadvancedpage.cpp
    metadata/tagengine.cpp
    metadata/MetaReplayGain.cpp
    opener/fileopener.cpp

@@ -20,12 +20,6 @@
 #include <QTimer>
 
 
-ConvertItem::ConvertItem()
-{
-    // create a new item with the file list item pointer set to zero
-    ConvertItem( (FileListItem*)0 );
-}
-
 ConvertItem::ConvertItem( FileListItem *item )
 {
     fileListItem = item;
@@ -42,12 +36,19 @@ ConvertItem::ConvertItem( FileListItem *item )
 ConvertItem::~ConvertItem()
 {}
 
-KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension )
+KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension, bool useSharedMemory )
 {
     QString tempUrl;
     int i=0;
     do {
-        tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
+        if( useSharedMemory )
+        {
+            tempUrl = "/dev/shm/" + QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
+        }
+        else
+        {
+            tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
+        }
         i++;
     } while( QFile::exists(tempUrl) );
 
@@ -288,7 +289,26 @@ void Convert::convert( ConvertItem *item )
             item->updateTimes();
             item->convertPlugin = plugin1;
             item->encodePlugin = plugin2;
-            item->tempConvertUrl = item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(0).codecTo).first() );
+            int estimatedFileSize = 0;
+            if( item->fileListItem->state == FileListItem::Ripping && item->fileListItem->tags )
+            {
+                estimatedFileSize = item->fileListItem->tags->length * 44100*16*2/8/1024/1024;
+            }
+            else if( item->fileListItem->tags )
+            {
+                QFileInfo fileInfo( inputUrl.toLocalFile() );
+                estimatedFileSize = fileInfo.size()/1024/1024;
+                if( config->pluginLoader()->isCodecLossless(item->fileListItem->codecName) )
+                {
+                    estimatedFileSize *= 1.4;
+                }
+                else
+                {
+                    estimatedFileSize *= 10;
+                }
+            }
+            const bool useSharedMemory = config->data.advanced.useSharedMemoryForTempFiles && estimatedFileSize > 0 && estimatedFileSize < config->data.advanced.maxSizeForSharedMemoryTempFiles;
+            item->tempConvertUrl = item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(0).codecTo).first(), useSharedMemory );
             if( plugin1->type() == "codec" )
             {
                 item->convertID = qobject_cast<CodecPlugin*>(plugin1)->convert( inputUrl, item->tempConvertUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );

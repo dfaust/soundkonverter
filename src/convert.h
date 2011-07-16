@@ -70,9 +70,6 @@ public:
         //remove_temp       = 0x0400  // Remove the downloaded temp file
     };
 
-    /** Default Constructor */
-    ConvertItem();
-
     /** Constructor, @p item A pointer to the file list item */
     ConvertItem( FileListItem *item );
 
@@ -116,9 +113,9 @@ public:
     KUrl tempInputUrl;
     /** the temp file for the pipe */
     KUrl tempConvertUrl;
-    
+
 //     void generateTempUrl( const QString& extension );
-    KUrl generateTempUrl( const QString& prefix, const QString& extension );
+    KUrl generateTempUrl( const QString& prefix, const QString& extension, bool useSharedMemory = false );
 
     /** what shall we do with the file? */
     Mode mode;
@@ -135,14 +132,14 @@ public:
     float encodeTime;
     float replaygainTime;
     float bpmTime;
-    
+
     float finishedTime; // the time of the finished conversion steps
-    
+
     void updateTimes();
 
     /** the current conversion progress */
     float progress;
-    
+
     QTime progressedTime;
 };
 
@@ -170,7 +167,7 @@ private:
 
     /** Convert the file */
     void convert( ConvertItem *item );
-    
+
     /** Encode the file after it has been decoded in convert() */
     void encode( ConvertItem *item );
 
@@ -206,13 +203,13 @@ private:
     FileList *fileList;
     Logger* logger;
     QMap<int,QString> usedOutputNames;
-    
+
     struct LogQueue {
         int id;
         BackendPlugin *plugin;
         QStringList messages;
     };
-    
+
     QList<LogQueue> pluginLogQueue;
 
     QTimer updateTimer;

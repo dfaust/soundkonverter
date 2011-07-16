@@ -81,6 +81,13 @@ public:
             QString preferredOggVorbisExtension;
         } general;
 
+        struct Advanced
+        {
+            bool useSharedMemoryForTempFiles;
+            int maxSizeForSharedMemoryTempFiles; // maximum file size for storing in shared memory [MiB]
+            int sharedMemorySize; // the size of the tmpfs
+        } advanced;
+
         struct Backends
         {
             QStringList rippers;

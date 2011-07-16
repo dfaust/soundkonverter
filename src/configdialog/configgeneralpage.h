@@ -43,11 +43,8 @@ private:
     QCheckBox *cUseVFATNames;
     KComboBox *cConflictHandling;
     KIntSpinBox *iNumFiles;
-    KIntSpinBox *iUpdateDelay;
     QCheckBox *cCreateActionsMenu;
-    QCheckBox *cRemoveFailedFiles;
     KComboBox *cReplayGainGrouping;
-    KComboBox *cPreferredOggVorbisExtension;
 
     Config *config;
 

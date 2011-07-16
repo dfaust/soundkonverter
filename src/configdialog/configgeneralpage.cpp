@@ -13,21 +13,20 @@
 
 #include "../config.h"
 
-#include <klocale.h>
-#include <kcombobox.h>
-#include <knuminput.h>
-#include <kiconloader.h>
-#include <klineedit.h>
-#include <kpushbutton.h>
-#include <kfiledialog.h>
+#include <KLocale>
+#include <KComboBox>
+#include <KLineEdit>
+#include <KPushButton>
+#include <KFileDialog>
+#include <KIntSpinBox>
 
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qdir.h>
-#include <qregexp.h>
+#include <QLayout>
+#include <QLabel>
+#include <QCheckBox>
+#include <QDir>
+
 #include <solid/device.h>
-
+#include <solid/storagevolume.h>
 
 // ### soundkonverter 0.4: add an option to use vfat save names when the output device is vfat
 
@@ -133,19 +132,6 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( 5 );
 
-    QHBoxLayout *updateDelayBox = new QHBoxLayout( 0 );
-    box->addLayout( updateDelayBox );
-    QLabel* lUpdateDelay = new QLabel( i18n("Status update delay")+":", this );
-    updateDelayBox->addWidget( lUpdateDelay );
-    iUpdateDelay = new KIntSpinBox( 50, 1000, 50, 100, parent );
-    iUpdateDelay->setToolTip( i18n("Update the progress bar in this interval (time in milliseconds)") );
-    iUpdateDelay->setSuffix( i18nc("milliseconds","ms") );
-    iUpdateDelay->setValue( config->data.general.updateDelay );
-    updateDelayBox->addWidget( iUpdateDelay );
-    connect( iUpdateDelay, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );
-
-    box->addSpacing( 5 );
-
     QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
     box->addLayout( createActionsMenuBox );
     cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
@@ -153,16 +139,6 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
     createActionsMenuBox->addWidget( cCreateActionsMenu );
     connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
-
-    box->addSpacing( 5 );
-
-    QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
-    box->addLayout( removeFailedFilesBox );
-    cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files if a conversion fails"), this );
-    cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files get converted correctly.") );
-    cRemoveFailedFiles->setChecked( config->data.general.removeFailedFiles );
-    removeFailedFilesBox->addWidget( cRemoveFailedFiles );
-    connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
     box->addSpacing( 20 );
 
@@ -177,19 +153,6 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
-
-    box->addSpacing( 20 );
-
-    QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout( 0 );
-    box->addLayout( preferredOggVorbisExtensionBox );
-    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred extension for ogg vorbis files")+":", this );
-    preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
-    cPreferredOggVorbisExtension = new KComboBox( this );
-    cPreferredOggVorbisExtension->addItem( "ogg" );
-    cPreferredOggVorbisExtension->addItem( "oga" );
-    cPreferredOggVorbisExtension->setCurrentIndex( config->data.general.preferredOggVorbisExtension == "ogg" ? 0 : 1 );
-    preferredOggVorbisExtensionBox->addWidget( cPreferredOggVorbisExtension );
-    connect( cPreferredOggVorbisExtension, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
 
     box->addStretch();
 }
@@ -207,11 +170,8 @@ void ConfigGeneralPage::resetDefaults()
     cConflictHandling->setCurrentIndex( 0 );
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
-    iUpdateDelay->setValue( 100 );
     cCreateActionsMenu->setChecked( true );
-    cRemoveFailedFiles->setChecked( true );
     cReplayGainGrouping->setCurrentIndex( 0 );
-    cPreferredOggVorbisExtension->setCurrentIndex( 0 );
 
     emit configChanged( true );
 }
@@ -225,11 +185,8 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
-    config->data.general.updateDelay = iUpdateDelay->value();
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
-    config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
-    config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
 }
 
 void ConfigGeneralPage::profileChanged()

@@ -1,7 +1,7 @@
 //
 // C++ Implementation: configdialog
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -13,7 +13,7 @@
 
 #include "../config.h"
 #include "configgeneralpage.h"
-// #include "configadvancedpage.h"
+#include "configadvancedpage.h"
 #include "configbackendspage.h"
 
 #include <KLocale>
@@ -37,10 +37,10 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     generalPage->setIcon( KIcon("configure") );
     connect( configGeneralPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
-//     configAdvancedPage = new ConfigAdvancedPage( config, this );
-//     advancedPage = addPage( (QWidget*)configAdvancedPage, i18n("Advanced") );
-//     advancedPage->setIcon( KIcon("preferences-desktop-gaming") );
-//     connect( configAdvancedPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
+    configAdvancedPage = new ConfigAdvancedPage( config, this );
+    advancedPage = addPage( (QWidget*)configAdvancedPage, i18n("Advanced") );
+    advancedPage->setIcon( KIcon("preferences-desktop-gaming") );
+    connect( configAdvancedPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configBackendsPage = new ConfigBackendsPage( config, this );
     backendsPage = addPage( (QWidget*)configBackendsPage, i18n("Backends") );
@@ -68,10 +68,10 @@ void ConfigDialog::applyClicked()
 void ConfigDialog::okClicked()
 {
     configGeneralPage->saveSettings();
-//     configAdvancedPage->saveSettings();
+    configAdvancedPage->saveSettings();
     configBackendsPage->saveSettings();
     config->save();
-    
+
     if( lastUseVFATNames != config->data.general.useVFATNames || lastConflictHandling != (int)config->data.general.conflictHandling )
     {
         emit updateFileList();
@@ -86,7 +86,7 @@ void ConfigDialog::defaultClicked()
     }
     else if( currentPage() == advancedPage )
     {
-//         configAdvancedPage->resetDefaults();
+        configAdvancedPage->resetDefaults();
     }
     else if( currentPage() == backendsPage )
     {

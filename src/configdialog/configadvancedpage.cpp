@@ -20,7 +20,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <KComboBox>
-// #include <QGroupBox>d
+// #include <QGroupBox>
 // #include <QListView>
 
 
@@ -131,7 +131,7 @@ void ConfigAdvancedPage::resetDefaults()
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
     iUpdateDelay->setValue( 100 );
     cRemoveFailedFiles->setChecked( true );
-    cUseSharedMemoryForTempFiles->setChecked( cUseSharedMemoryForTempFiles->isEnabled() );
+    cUseSharedMemoryForTempFiles->setChecked( false );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 2 );
 
     emit configChanged( true );

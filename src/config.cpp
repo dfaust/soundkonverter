@@ -646,7 +646,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 currentBackendRating = pluginRating;
             }
-            if( i == tempPluginList.count()-1 )
+            if( j == tempPluginList.count()-1 )
             {
                 betterBackendRating = pluginRating;
             }
@@ -714,7 +714,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 currentBackendRating = pluginRating;
             }
-            if( i == tempPluginList.count()-1 )
+            if( j == tempPluginList.count()-1 )
             {
                 betterBackendRating = pluginRating;
             }
@@ -782,7 +782,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 currentBackendRating = pluginRating;
             }
-            if( i == tempPluginList.count()-1 )
+            if( j == tempPluginList.count()-1 )
             {
                 betterBackendRating = pluginRating;
             }

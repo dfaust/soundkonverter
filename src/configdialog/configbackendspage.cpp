@@ -328,35 +328,13 @@ void ConfigBackendsPage::saveSettings()
     encoderList->resetOrder();
     replaygainList->resetOrder();
 
-    bool found;
-
-    // ensure that the user won't get bothered by a optimization message at the next start
+    // ensure that the user won't get bothered by an optimization message at the next start
     QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations( true );
     for( int i=0; i<optimizationList.count(); i++ )
     {
-        if( optimizationList.at(i).codecName == currentFormat )
-        {
-            for( int j=0; j<config->data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
-            {
-                found = false;
-                if( config->data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == optimizationList.at(i).codecName &&
-                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == optimizationList.at(i).mode &&
-                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == optimizationList.at(i).currentBackend &&
-                    config->data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizationList.at(i).betterBackend
-                )
-                {
-                    found = true;
-                    break;
-                }
-            }
-
-            if( !found )
-            {
-                optimizationList[i].solution = CodecOptimizations::Optimization::Ignore;
-                config->data.backendOptimizationsIgnoreList.optimizationList.append(optimizationList.at(i));
-            }
-        }
+        optimizationList[i].solution = CodecOptimizations::Optimization::Ignore;
     }
+    config->data.backendOptimizationsIgnoreList.optimizationList = optimizationList;
 }
 
 // void ConfigBackendsPage::orderChanged()

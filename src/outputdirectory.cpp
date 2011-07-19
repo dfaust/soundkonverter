@@ -113,6 +113,9 @@ void OutputDirectory::setDirectory( const QString& directory )
 
 QString OutputDirectory::filesystem()
 {
+    if( directory().isEmpty() )
+        return QString();
+
     QString filePath;
     QString fsType;
 

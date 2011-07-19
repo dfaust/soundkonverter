@@ -2,6 +2,7 @@
 #include "filelist.h"
 // // #include "filelistitem.h"
 #include "config.h"
+#include "logger.h"
 #include "optionseditor.h"
 #include "optionslayer.h"
 #include "core/conversionoptions.h"
@@ -25,8 +26,9 @@
 #include <KStandardDirs>
 
 
-FileList::FileList( Config *_config, QWidget *parent )
+FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
     : QTreeWidget( parent ),
+    logger( _logger ),
     config( _config )
 {
     queue = false;
@@ -67,7 +69,7 @@ FileList::FileList( Config *_config, QWidget *parent )
     pScanStatus->hide();
     grid->addWidget( pScanStatus, 1, 1 );
     grid->setColumnStretch( 1, 2 );
-    
+
     // we haven't got access to the action collection of soundKonverter, so let's create a new one
 //     actionCollection = new KActionCollection( this );
 
@@ -131,7 +133,7 @@ void FileList::dropEvent( QDropEvent *event )
     //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
-    
+
     for( int i=0; i<q_urls.size(); i++ )
     {
         QString codecName = config->pluginLoader()->getCodecFromFile( q_urls.at(i) );
@@ -199,7 +201,7 @@ void FileList::dropEvent( QDropEvent *event )
             problemList += problem;
         }
     }
-    
+
     if( problemList.count() > 0 )
     {
         CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Decode, problemList, this );
@@ -229,7 +231,7 @@ void FileList::resizeEvent( QResizeEvent *event )
 int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
 {
     QString codecName;
-  
+
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
 
@@ -241,11 +243,11 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     {
         if( *it == "." || *it == ".." )
             continue;
-        
+
 //         fileInfoTime.start();
         QFileInfo fileInfo( directory + "/" + *it );
 //         fileInfoTimeCount += fileInfoTime.elapsed();
-        
+
         if( fileInfo.isDir() && recursive )
         {
             count = listDir( directory + "/" + *it, filter, recursive, conversionOptionsId, fast, count );
@@ -253,7 +255,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
         else if( !fileInfo.isDir() ) // NOTE checking for isFile may not work with all file names
         {
             count++;
-            
+
             if( fast )
             {
                 pScanStatus->setMaximum( count );
@@ -263,7 +265,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 //                 getCodecFromFileTime.start();
                 codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + *it );
 //                 getCodecFromFileTimeCount += getCodecFromFileTime.elapsed();
-                
+
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
 //                     addFilesTime.start();
@@ -287,15 +289,18 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId, FileListItem *after, bool enabled )
 {
     FileListItem *lastListItem;
-    if( !after && !enabled ) lastListItem = topLevelItem( topLevelItemCount()-1 );
-    else lastListItem = after;
+    if( !after && !enabled )
+        lastListItem = topLevelItem( topLevelItemCount()-1 );
+    else
+        lastListItem = after;
+
     QString codecName;
     QString filePathName;
     QString device;
-    
+
     if( !conversionOptions && conversionOptionsId == -1 )
     {
-        // FIXME error message, null pointer for conversion options
+        logger->log( 1000, "@addFiles: No conversion options given" );
         return;
     }
 
@@ -307,7 +312,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             addDir( fileList.at(i), true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
             continue;
         }
-        
+
         if( !_codecName.isEmpty() )
         {
             codecName = _codecName;
@@ -371,9 +376,9 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         emit timeChanged( newItem->length );
 //         timeChangedTimeCount += timeChangedTime.elapsed();
     }
-    
+
     emit fileCountChanged( topLevelItemCount() );
-    
+
     if( QObject::sender() == optionsLayer )
         save( false );
 }
@@ -384,7 +389,7 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 
     if( !conversionOptions )
     {
-        // FIXME error message, null pointer for conversion options
+        logger->log( 1000, "@addDir: No conversion options given" );
         return;
     }
 
@@ -395,14 +400,14 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     pScanStatus->show(); // show the status while scanning the directories
 //     kapp->processEvents();
     tScanStatus.start();
-    
+
     Time.start();
     listDir( directory.path(), codecList, recursive, conversionOptionsId, true );
     listDir( directory.path(), codecList, recursive, conversionOptionsId );
     TimeCount += Time.elapsed();
-    
+
     pScanStatus->hide(); // hide the status bar, when the scan is done
-    
+
     qDebug() << "TimeCount: " << TimeCount;
 }
 
@@ -412,7 +417,7 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
 
     if( !conversionOptions )
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        logger->log( 1000, "@addTracks: No conversion options given" );
         return;
     }
 
@@ -449,7 +454,7 @@ void FileList::updateItem( FileListItem *item )
         return;
 
     KUrl outputUrl;
-    
+
     if( !item->outputUrl.toLocalFile().isEmpty() )
     {
         outputUrl = item->outputUrl;
@@ -511,7 +516,7 @@ void FileList::updateItem( FileListItem *item )
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
     if( options )
         item->setText( Column_Quality, options->profile );
-    
+
     if( item->track >= 0 )
     {
         if( item->tags )
@@ -528,7 +533,7 @@ void FileList::updateItem( FileListItem *item )
         item->setText( Column_Input, item->url.pathOrUrl() );
         //if( options ) item->setToolTip( 0, i18n("The file %1 will be converted from %2 to %3 using the %4 profile.\nIt will be saved to: %5").arg(item->url.pathOrUrl()).arg(item->codecName).arg(options->codecName).arg(options->profile).arg(outputUrl.toLocalFile()) );
     }
-    
+
     update( indexFromItem( item, 0 ) );
     update( indexFromItem( item, 1 ) );
     update( indexFromItem( item, 2 ) );
@@ -675,7 +680,7 @@ int FileList::convertingCount()
         if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
             count++;
     }
-    
+
     return count;
 }
 
@@ -885,7 +890,7 @@ void FileList::removeSelectedItems()
         }
     }
     emit fileCountChanged( topLevelItemCount() );
-    
+
     itemsSelected();
 }
 
@@ -899,7 +904,7 @@ void FileList::convertSelectedItems()
         if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
             emit convertItem( (FileListItem*)items.at(i) );
     }
-    
+
     emit conversionStarted();
 }
 
@@ -918,7 +923,7 @@ void FileList::killSelectedItems()
 void FileList::itemsSelected()
 {
     selectedFiles.clear();
-    
+
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
@@ -979,7 +984,7 @@ void FileList::load( bool user )
                     CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( conversionOptions.at(i).toElement().attribute("pluginName") );
                     if( !plugin )
                         continue;
-                    
+
                     conversionOptionsIds[conversionOptions.at(i).toElement().attribute("id").toInt()] = config->conversionOptionsManager()->addConversionOptions( plugin->conversionOptionsFromXml(conversionOptions.at(i).toElement()) );
                 }
                 QDomNodeList files = root.elementsByTagName("file");
@@ -1056,7 +1061,7 @@ void FileList::save( bool user )
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem(i);
-        
+
         QDomElement file = list.createElement("file");
         file.setAttribute("url",item->url.pathOrUrl());
         file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
@@ -1090,7 +1095,7 @@ void FileList::save( bool user )
             file.appendChild(tags);
         }
     }
-    
+
     QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
     if( listFile.open( QIODevice::WriteOnly ) )

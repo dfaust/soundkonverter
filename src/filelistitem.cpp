@@ -1,7 +1,7 @@
 //
 // C++ Implementation: filelistitem
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -18,9 +18,7 @@ FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     : QTreeWidgetItem( parent, after )
 {
     state = WaitingForConversion;
-//     converting = false;
     length = 0;
-//     ripping = false;
     tags = 0;
 }
 
@@ -28,9 +26,7 @@ FileListItem::FileListItem( QTreeWidget *parent )
     : QTreeWidgetItem( parent )
 {
     state = WaitingForConversion;
-//     converting = false;
     length = 0;
-//     ripping = false;
     tags = 0;
 }
 
@@ -49,14 +45,13 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
 {
     FileListItem *item =  static_cast<FileListItem*>( index.internalPointer() );
     QTreeWidget *fileList = item->treeWidget();
-    
+
     QColor backgroundColor;
 
     painter->save();
 
     QStyleOptionViewItem _option = option;
 
-//     if( item->converting )
     if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
     {
         if( option.state & QStyle::State_Selected )
@@ -84,13 +79,13 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
         if( option.state & QStyle::State_Selected )
         {
             backgroundColor = option.palette.highlight().color();
-        }   
+        }
         else
         {
             backgroundColor = option.palette.base().color();
         }
     }
-    
+
     painter->fillRect( option.rect, backgroundColor );
 
     int m_left, m_top, m_right, m_bottom;
@@ -121,13 +116,13 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
     {
         painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
     }
-    
+
     //QItemDelegate::paint( painter, _option, index );
 
     painter->restore();
 
 //     int progress = (index.row() != 0 ? 100 / index.row() : 0);
-// 
+//
 //     // draw your cool progress bar here
 //     QStyleOptionProgressBar opt;
 //     opt.rect = option.rect;

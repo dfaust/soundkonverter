@@ -11,6 +11,7 @@
 
 class FileListItem;
 class Config;
+class Logger;
 class TagEngine;
 class OptionsEditor;
 class OptionsLayer;
@@ -37,7 +38,7 @@ public:
     };
 
     /** Constructor */
-    FileList( Config *_config, QWidget *parent = 0 );
+    FileList( Logger *_logger, Config *_config, QWidget *parent = 0 );
 
     /** Destructor */
     virtual ~FileList();
@@ -45,7 +46,7 @@ public:
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
 
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
-    
+
     void load( bool user = false );
     void save( bool user = false );
     void updateAllItems();
@@ -58,7 +59,7 @@ private:
     QProgressBar *pScanStatus;
     /** Update timer for the scan status */
     QTime tScanStatus;
-    
+
     int TimeCount;
     QTime Time;
 
@@ -83,6 +84,7 @@ private:
     QString notifyCommand;
 
     Config *config;
+    Logger *logger;
     TagEngine *tagEngine;
     OptionsEditor *optionsEditor;
     OptionsLayer *optionsLayer;
@@ -101,7 +103,7 @@ private slots:
     void convertSelectedItems();
     void killSelectedItems();
     void itemsSelected();
-    
+
     void updateItems( QList<FileListItem*> items );
 
     // connected to OptionsEditor

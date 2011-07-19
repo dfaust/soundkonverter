@@ -39,6 +39,7 @@ public:
     void setMode( Mode );
     QString directory();
     void setDirectory( const QString& );
+    QString filesystem();
 
     static KUrl calcPath( FileListItem *fileListItem, Config *config, QString extension = "" );
     static KUrl changeExtension( const KUrl& url, const QString& extension );
@@ -68,7 +69,7 @@ private:
     bool modeJustChanged;
 
     Config *config;
-    
+
 signals:
     void modeChanged( int );
     void directoryChanged( const QString& );

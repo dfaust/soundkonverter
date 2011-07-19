@@ -50,7 +50,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     gridLayout->setContentsMargins( 6, 6, 6, 6 );
 //     gridLayout->setSpacing( 0 );
 
-    fileList = new FileList( config, this );
+    fileList = new FileList( logger, config, this );
     gridLayout->addWidget( fileList, 1, 0 );
     gridLayout->setRowStretch( 1, 1 );
     connect( fileList, SIGNAL(fileCountChanged(int)), this, SLOT(fileCountChanged(int)) );

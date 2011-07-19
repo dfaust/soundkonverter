@@ -25,13 +25,17 @@
 #include <KIcon>
 #include <KPushButton>
 
+#include <solid/device.h>
+#include <solid/storagevolume.h>
+#include <solid/storageaccess.h>
+
+
 OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     : QWidget( parent ),
     config( _config )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-//     grid->setSpacing( 6 );
 
     QHBoxLayout *box = new QHBoxLayout( );
     grid->addLayout( box, 0, 0 );
@@ -46,10 +50,6 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     cMode->addItem( i18n("Copy directory structure") );
     box->addWidget( cMode );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChangedSlot(int)) );
-//     lDir = new KLineEdit( this );
-//     box->addWidget( lDir );
-//     lDir->setClearButtonShown( true );
-//     connect( lDir, SIGNAL(textChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
     cDir = new KComboBox( true, this );
     box->addWidget( cDir, 1 );
@@ -99,13 +99,44 @@ void OutputDirectory::setMode( OutputDirectory::Mode mode )
 
 QString OutputDirectory::directory()
 {
-    if( (Mode)cMode->currentIndex() != Source ) return cDir->currentText();
-    else return "";
+    if( (Mode)cMode->currentIndex() != Source )
+        return cDir->currentText();
+    else
+        return "";
 }
 
 void OutputDirectory::setDirectory( const QString& directory )
 {
-    if( (Mode)cMode->currentIndex() != Source ) cDir->setEditText( directory );
+    if( (Mode)cMode->currentIndex() != Source )
+        cDir->setEditText( directory );
+}
+
+QString OutputDirectory::filesystem()
+{
+    QString filePath;
+    QString fsType;
+
+    QList<Solid::Device> deviceList = Solid::Device::listFromType(Solid::DeviceInterface::StorageVolume, QString());
+
+    foreach( Solid::Device device, deviceList )
+    {
+        Solid::StorageVolume *storageVolume = device.as<Solid::StorageVolume>();
+        Solid::StorageAccess *storageAccess = device.as<Solid::StorageAccess>();
+
+        if( !storageVolume || !storageAccess )
+            continue;
+
+        if( !storageAccess->filePath().isEmpty() && directory().startsWith(storageAccess->filePath()) && storageVolume->usage() == Solid::StorageVolume::FileSystem )
+        {
+            if( storageAccess->filePath().length() > filePath.length() )
+            {
+                filePath = storageAccess->filePath();
+                fsType = storageVolume->fsType();
+            }
+        }
+    }
+
+    return fsType;
 }
 
 KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QString extension )
@@ -132,7 +163,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     // if the user wants to change the output directory/file name per file! TODO
 //     if( !fileListItem->options.outputFilePathName.isEmpty() ) {
 //         path = uniqueFileName( changeExtension(fileListItem->options.outputFilePathName,extension) );
-//         if( config->data.general.useVFATNames ) path = vfatPath( path );
+//         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" ) path = vfatPath( path );
 //         return path;
 //     }
 
@@ -140,7 +171,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     {
         path = options->outputDirectory+"/"+fileName;
 
-        if( config->data.general.useVFATNames )
+        if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
         url = changeExtension( KUrl(path), extension );
@@ -241,7 +272,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         filename.replace("/",",");
         path.replace( "$replace_by_filename$", filename );
 
-        if( config->data.general.useVFATNames )
+        if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
         url = KUrl( path + "." + extension );
@@ -263,7 +294,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         // At this point, basePath and originalPath overlap on the left for cutpos characters (which might be 0).
         path = basePath+originalPath.mid(cutpos);
 
-        if( config->data.general.useVFATNames )
+        if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
         url = changeExtension( KUrl(path), extension );
@@ -277,7 +308,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     {
         path = fileListItem->url.toLocalFile();
 
-        if( config->data.general.useVFATNames )
+        if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
         url = changeExtension( KUrl(path), extension );
@@ -303,17 +334,6 @@ KUrl OutputDirectory::changeExtension( const KUrl& url, const QString& extension
 
 KUrl OutputDirectory::uniqueFileName( const KUrl& url, const QStringList& usedOutputNames )
 {
-/*    QFileInfo fileInfo( url.toLocalFile() );
-
-    // generate an unique file name
-    while( fileInfo.exists() )
-    {
-//         fileInfo.setFile( fileInfo.filePath().left( fileInfo.filePath().lastIndexOf(".")+1 ) + i18n("new") + fileInfo.filePath().right( fileInfo.filePath().length() - fileInfo.filePath().lastIndexOf(".") ) );
-        fileInfo.setFile( fileInfo.filePath().left( fileInfo.filePath().lastIndexOf(".")+1 ) + i18n("new") + fileInfo.filePath().mid( fileInfo.filePath().lastIndexOf(".") ) );
-    }
-
-    return KUrl( fileInfo.filePath().replace( "//", "/" ) );*/
-
     KUrl uniqueUrl = url;
 
     while( QFile::exists(uniqueUrl.toLocalFile()) || usedOutputNames.contains(uniqueUrl.toLocalFile()) )

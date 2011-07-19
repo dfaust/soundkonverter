@@ -21,9 +21,9 @@ public:
 
     bool equalsBasics( ConversionOptions *_other );
     virtual bool equals( ConversionOptions *_other ); // checks if the other ConversionOptions is equal to this
-    
+
     virtual QDomElement toXml( QDomDocument document );
-    
+
     virtual bool fromXml( QDomElement conversionOptions );
 
     QString pluginName;             // an idetificator to see which plugin created the ConversionOptions
@@ -46,8 +46,11 @@ public:
     // these values are set by OptionsDetailed::currentConversionOptions
     QString profile;                // the precalculated profile for the simple tab
     QString codecName;              // the output format (was outputFormat)
+
     int outputDirectoryMode;
     QString outputDirectory;
+    QString outputFilesystem;       // the filesystem of the output directory
+
     bool replaygain;
     bool bpm;
 };

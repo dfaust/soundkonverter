@@ -362,7 +362,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "midi" )
     {
-        info.lossless = true;
+        info.lossless = false;
         info.description = i18n("midi is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
         info.mimeTypes.append( "audio/midi" );
         info.extensions.append( "midi" );
@@ -371,7 +371,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "mod" )
     {
-        info.lossless = true;
+        info.lossless = false;
         info.description = i18n("Amiga-SoundTracker-Audio is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
         info.mimeTypes.append( "audio/x-mod" );
         info.extensions.append( "669" );

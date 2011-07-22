@@ -152,6 +152,9 @@ QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFi
     if( !_conversionOptions )
         return QStringList();
 
+    if( outputFile == "-" )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 

@@ -294,18 +294,23 @@ void Convert::convert( ConvertItem *item )
             {
                 estimatedFileSize = item->fileListItem->tags->length * 44100*16*2/8/1024/1024;
             }
-            else if( item->fileListItem->tags )
+            else
             {
                 QFileInfo fileInfo( inputUrl.toLocalFile() );
-                estimatedFileSize = fileInfo.size()/1024/1024;
+                estimatedFileSize = fileInfo.size();
                 if( config->pluginLoader()->isCodecLossless(item->fileListItem->codecName) )
                 {
                     estimatedFileSize *= 1.4;
+                }
+                else if( item->fileListItem->codecName == "midi" || item->fileListItem->codecName == "mod" )
+                {
+                    estimatedFileSize *= 1000;
                 }
                 else
                 {
                     estimatedFileSize *= 10;
                 }
+                estimatedFileSize /= 1024*1024;
             }
             const bool useSharedMemory = config->data.advanced.useSharedMemoryForTempFiles && estimatedFileSize > 0 && estimatedFileSize < config->data.advanced.maxSizeForSharedMemoryTempFiles;
             item->tempConvertUrl = item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(0).codecTo).first(), useSharedMemory );

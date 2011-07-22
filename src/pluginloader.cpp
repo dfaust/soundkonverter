@@ -361,14 +361,17 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
         {
             decoders = config->data.backends.codecs.at(i).decoders;
         }
-        if( config->data.backends.codecs.at(i).codecName == codecFrom )
+        if( config->data.backends.codecs.at(i).codecName == codecTo && codecTo != "wav" )
         {
             encoders = config->data.backends.codecs.at(i).encoders;
         }
     }
     // prepend the preferred plugin
-    encoders.removeAll( preferredPlugin );
-    encoders.prepend( preferredPlugin );
+    if( !preferredPlugin.isEmpty() )
+    {
+        encoders.removeAll( preferredPlugin );
+        encoders.prepend( preferredPlugin );
+    }
 
     // build all possible pipes
     for( int i=0; i<conversionPipeTrunks.count(); i++ )
@@ -393,7 +396,8 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
         {
             for( int j = 0; j < conversionPipeTrunks.count(); j++ )
             {
-                if( i == j ) continue;
+                if( i == j )
+                    continue;
 
                 if( conversionPipeTrunks.at(j).codecFrom == conversionPipeTrunks.at(i).codecTo && conversionPipeTrunks.at(j).codecTo == codecTo && conversionPipeTrunks.at(j).enabled )
                 {

@@ -296,7 +296,10 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
         if( options )
         {
             options->codecName = cFormat->currentText();
-            options->pluginName = currentPlugin->name();
+            if( options->codecName != "wav" )
+                options->pluginName = currentPlugin->name();
+            else
+                options->pluginName = "";
             options->profile = qobject_cast<CodecWidget*>(wPlugin)->currentProfile();
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();

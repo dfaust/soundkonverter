@@ -29,17 +29,13 @@ public:
 
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
-    float parseOutput( const QString& output, int *length );
     float parseOutput( const QString& output );
 
 private:
    QStringList fromCodecs;
    QStringList toCodecs;
    QMap<QString,QString> codecMap;
-    
-private slots:
-    /** Get the process' output */
-    void processOutput();
+
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( mplayer, soundkonverter_codec_mplayer );

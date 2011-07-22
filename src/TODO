@@ -5,7 +5,6 @@ more accurate problem infos
 replay gain: multiple ogg files -> progress
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
-sample rate saving in plugins: customProfile, setCustomProfile
 
 ### Prio 2 ###
 
@@ -33,7 +32,7 @@ better ripping control
 [x] ffmpeg
 [x] flac
 [x] lame
-[x] mplayer         parse progress
+[x] mplayer
 [x] neroaac
 [x] timidity
 [x] fluidsynth

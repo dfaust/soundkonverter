@@ -23,7 +23,7 @@ QString soundkonverter_codec_mplayer::name()
 QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 {
     QList<ConversionPipeTrunk> table;
-    
+
     /// decode
     fromCodecs += "wav";
     fromCodecs += "ogg vorbis";
@@ -62,14 +62,14 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 
     /// encode
     toCodecs += "wav";
-    
+
     for( int i=0; i<fromCodecs.count(); i++ )
     {
         for( int j=0; j<toCodecs.count(); j++ )
         {
             if( fromCodecs.at(i) == "wav" && toCodecs.at(j) == "wav" )
                 continue;
-          
+
             ConversionPipeTrunk newTrunk;
             newTrunk.codecFrom = fromCodecs.at(i);
             newTrunk.codecTo = toCodecs.at(j);
@@ -86,7 +86,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     codecs += QSet<QString>::fromList(fromCodecs);
     codecs += QSet<QString>::fromList(toCodecs);
     allCodecs = codecs.toList();
-    
+
     return table;
 }
 
@@ -121,24 +121,9 @@ QWidget *soundkonverter_codec_mplayer::newCodecWidget()
 
 int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
-
-    if( outputCodec == "wav" )
-    {
-        command += binaries["mplayer"];
-        command += "-ao";
-        command += "pcm:file=\"" + escapeUrl(outputFile) + "\"";
-        command += "-vc";
-        command += "null";
-        command += "-vo";
-        command += "null";
-        command += "\"" + escapeUrl(inputFile) + "\"";
-    }
-    else
-    {
+    QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
+    if( command.isEmpty() )
         return -1;
-    }
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -159,77 +144,49 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
 
 QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    if( !_conversionOptions )
+        return QStringList();
+
+    if( outputFile == "-" )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-//     if( outputCodec == "wav" )
-//     {
-//         command += binaries["mplayer"];
-//         command += "-ao";
-//         command += "pcm:file=\"" + escapeUrl(outputFile) + "\"";
-//         command += "-vc";
-//         command += "null";
-//         command += "-vo";
-//         command += "null";
-//         command += "\"" + escapeUrl(inputFile) + "\"";
-//     }
+    if( outputCodec == "wav" )
+    {
+        command += binaries["mplayer"];
+        command += "-ao";
+        command += "pcm:file=\"" + escapeUrl(outputFile) + "\"";
+        command += "-vc";
+        command += "null";
+        command += "-vo";
+        command += "null";
+        command += "\"" + escapeUrl(inputFile) + "\"";
+    }
 
     return command;
 }
 
-float soundkonverter_codec_mplayer::parseOutput( const QString& output, int *length )
-{
-    // size=    1508kB time=48.25 bitrate= 256.0kbits/s
-    
-    QString data = output;
-    QString time;
-    
-    QRegExp reg("(\\d{2,}):(\\d{2}):(\\d{2})\\.(\\d{2})");
-    if( length && data.contains(reg) )
-    {
-        *length = reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
-//         emit log( 1000, "got length: " + QString::number(*length) );
-    }
-    if( data.contains("time") )
-    {
-        data.remove( 0, data.indexOf("time")+5 );
-        time = data.left( data.indexOf(" ") );
-        return time.toFloat();
-    }
-    
-    // decoding - new ???
-    // A: 921.7 (15:21.7) of 2260.0 (37:40.0)  0.4% [J
-    
-    // TODO error handling
-    // Error while decoding stream #0.0
-    
-    return -1;
-}
-
 float soundkonverter_codec_mplayer::parseOutput( const QString& output )
 {
-    return parseOutput( output, 0 );
-}
+    // decoding - new ???
+    // A: 921.7 (15:21.7) of 2260.0 (37:40.0)  0.4% [J
 
-void soundkonverter_codec_mplayer::processOutput()
-{
-    CodecPluginItem *pluginItem;
-    float progress;
-    for( int i=0; i<backendItems.size(); i++ )
+    QString data = output;
+
+    QRegExp reg("A:\\s+(\\d+\\.\\d)\\s+\\(.*\\)\\s+of\\s+(\\d+\\.\\d)\\s+\\(.*\\)");
+    if( data.contains(reg) )
     {
-        if( backendItems.at(i)->process == QObject::sender() )
-        {
-            QString output = backendItems.at(i)->process->readAllStandardOutput().data();
-            pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
-            progress = parseOutput( output, &pluginItem->data.length );
-            if( progress == -1 && !output.simplified().isEmpty() ) emit log( backendItems.at(i)->id, output );
-            progress = progress * 100 / pluginItem->data.length;
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
-            return;
-        }
+        return reg.cap(1).toFloat()/reg.cap(2).toFloat()*100.0f;
     }
+
+    // no encoding
+
+    // TODO error handling
+    // Error while decoding stream #0.0
+
+    return -1;
 }
 
 #include "soundkonverter_codec_mplayer.moc"

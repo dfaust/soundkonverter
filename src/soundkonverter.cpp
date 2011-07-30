@@ -141,7 +141,6 @@ void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
 
 void soundKonverter::ripCd( const QString& device )
 {
-//     KMessageBox::error( this, i18n("opening cd") );
     m_view->showCdDialog( device != "auto" ? device : "" );
 }
 
@@ -213,7 +212,8 @@ void soundKonverter::showConfigDialog()
 
 void soundKonverter::showLogViewer()
 {
-    if( !logViewer ) logViewer = new LogViewer( logger, 0 );
+    if( !logViewer )
+        logViewer = new LogViewer( logger, 0 );
 
     logViewer->show();
     logViewer->raise();
@@ -224,7 +224,8 @@ void soundKonverter::showLogViewer()
 
 void soundKonverter::showReplayGainScanner()
 {
-    if( !replayGainScanner ) replayGainScanner = new ReplayGainScanner( config, logger, 0 );
+    if( !replayGainScanner )
+        replayGainScanner = new ReplayGainScanner( config, logger, 0 );
 
     replayGainScanner->show();
     replayGainScanner->raise();
@@ -242,7 +243,6 @@ void soundKonverter::conversionStarted()
         #if KDE_IS_VERSION(4,4,0)
             systemTray->setToolTip( "soundkonverter", i18n("Converting") + ": 0%", "" );
         #else
-//             systemTray->setMovie( QMovie(KStandardDirs::findResource("data","soundkonverter/images/systray.mng")) );
             systemTray->setToolTip( i18n("Converting") + ": 0%" );
         #endif
     }
@@ -256,18 +256,17 @@ void soundKonverter::conversionStopped( int state )
     if( systemTray )
     {
         #if KDE_IS_VERSION(4,4,0)
-//             systemTray->setIconByName( "soundkonverter" );
             systemTray->setToolTip( "soundkonverter", i18n("Finished"), "" );
         #else
-//             systemTray->setIcon( KIcon("soundkonverter") );
             systemTray->setToolTip( i18n("Finished") );
         #endif
     }
 }
 
-void soundKonverter::progressChanged(const QString& progress)
+void soundKonverter::progressChanged( const QString& progress )
 {
     setWindowTitle( progress + " - soundKonverter" );
+
     if( systemTray )
     {
         #if KDE_IS_VERSION(4,4,0)

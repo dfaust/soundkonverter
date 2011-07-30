@@ -51,10 +51,10 @@ better ripping control
 [x] wavpack
 [ ] lac
 [ ] lpac
-[>] speex
+[x] speex
 [>] sox
 [ ] gstreamer
-[ ] phonon
+[ ] phonon?
 
 [x] aacgain
 [x] metaflac
@@ -88,10 +88,10 @@ void cleanup( int )
 Create a named pipe called pipe.wav
 #: mkfifo pipe.wav
 
- Now execute the following command. It will hang, as it is waiting for the data to flow through the pipe.
+Now execute the following command. It will hang, as it is waiting for the data to flow through the pipe.
 #: lame --preset standard pipe.wav output.file
 
- In a different terminal, execute the following command, to get the data flowing.
+In a different terminal, execute the following command, to get the data flowing.
 #: mplayer -ao pcm:file=pipe.wav input.file
 
 

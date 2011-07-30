@@ -672,6 +672,8 @@ bool PluginLoader::isCodecLossless( const QString& codecName )
 
 bool PluginLoader::isCodecHybrid( const QString& codecName )
 {
+    Q_UNUSED(codecName)
+
     return false;
 }
 

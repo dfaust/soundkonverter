@@ -40,6 +40,8 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     cPreferredOggVorbisExtension->setCurrentIndex( config->data.general.preferredOggVorbisExtension == "ogg" ? 0 : 1 );
     preferredOggVorbisExtensionBox->addWidget( cPreferredOggVorbisExtension );
     connect( cPreferredOggVorbisExtension, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    preferredOggVorbisExtensionBox->setStretch( 0, 3 );
+    preferredOggVorbisExtensionBox->setStretch( 1, 1 );
 
     box->addSpacing( 5 );
 
@@ -53,6 +55,18 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     iUpdateDelay->setValue( config->data.general.updateDelay );
     updateDelayBox->addWidget( iUpdateDelay );
     connect( iUpdateDelay, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );
+    updateDelayBox->setStretch( 0, 3 );
+    updateDelayBox->setStretch( 1, 1 );
+
+    box->addSpacing( 5 );
+
+    QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
+    box->addLayout( useVFATNamesBox );
+    cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
+    cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
+    cUseVFATNames->setChecked( config->data.general.useVFATNames );
+    useVFATNamesBox->addWidget( cUseVFATNames );
+    connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
     box->addSpacing( 5 );
 
@@ -85,6 +99,8 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     iMaxSizeForSharedMemoryTempFiles->setEnabled( cUseSharedMemoryForTempFiles->isChecked() );
     connect( cUseSharedMemoryForTempFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
     connect( cUseSharedMemoryForTempFiles, SIGNAL(toggled(bool)), iMaxSizeForSharedMemoryTempFiles, SLOT(setEnabled(bool)) );
+    useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
+    useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
 
 //     QGroupBox *coverGroup = new QGroupBox( i18n("CD covers"), this );
 //     box->addWidget( coverGroup );
@@ -130,6 +146,7 @@ void ConfigAdvancedPage::resetDefaults()
 {
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
     iUpdateDelay->setValue( 100 );
+    cUseVFATNames->setChecked( false );
     cRemoveFailedFiles->setChecked( true );
     cUseSharedMemoryForTempFiles->setChecked( false );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 2 );
@@ -141,6 +158,7 @@ void ConfigAdvancedPage::saveSettings()
 {
     config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
     config->data.general.updateDelay = iUpdateDelay->value();
+    config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
     config->data.advanced.maxSizeForSharedMemoryTempFiles = iMaxSizeForSharedMemoryTempFiles->value();

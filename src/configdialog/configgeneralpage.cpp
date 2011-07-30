@@ -94,16 +94,6 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //
 //     box->addSpacing( 5 );
 
-    QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
-    box->addLayout( useVFATNamesBox );
-    cUseVFATNames = new QCheckBox( i18n("Use FAT compatible output file names"), this );
-    cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.") );
-    cUseVFATNames->setChecked( config->data.general.useVFATNames );
-    useVFATNamesBox->addWidget( cUseVFATNames );
-    connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
-
-    box->addSpacing( 5 );
-
     QHBoxLayout *conflictHandlingBox = new QHBoxLayout( 0 );
     box->addLayout( conflictHandlingBox );
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling")+":", this );
@@ -129,6 +119,8 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     iNumFiles->setValue( config->data.general.numFiles );
     numFilesBox->addWidget( iNumFiles );
     connect( iNumFiles, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );
+    numFilesBox->setStretch( 0, 3 );
+    numFilesBox->setStretch( 1, 1 );
 
     box->addSpacing( 5 );
 
@@ -166,7 +158,6 @@ void ConfigGeneralPage::resetDefaults()
     cDefaultProfile->setCurrentIndex( 0 );
     cDefaultFormat->setCurrentIndex( 0 );
 //     cPriority->setCurrentIndex( 1 );
-    cUseVFATNames->setChecked( true );
     cConflictHandling->setCurrentIndex( 0 );
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
@@ -182,7 +173,6 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.defaultProfile = cDefaultProfile->currentText();
     config->data.general.defaultFormat = cDefaultFormat->currentText();
 //     config->data.general.priority = cPriority->currentIndex() * 10; // NOTE that just works for 'normal' and 'low'
-    config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();

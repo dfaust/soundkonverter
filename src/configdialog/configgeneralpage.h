@@ -40,7 +40,6 @@ private:
     KComboBox *cDefaultFormat;
 //     KComboBox *cPriority;
 //     QStringList sPriority;
-    QCheckBox *cUseVFATNames;
     KComboBox *cConflictHandling;
     KIntSpinBox *iNumFiles;
     QCheckBox *cCreateActionsMenu;

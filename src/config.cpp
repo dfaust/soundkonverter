@@ -53,8 +53,8 @@ void Config::load()
     data.general.copyStructureOutputDirectory = group.readEntry( "copyStructureOutputDirectory", QDir::homePath() + "/soundKonverter" );
     data.general.lastMetaDataOutputDirectoryPaths = group.readEntry( "lastMetaDataOutputDirectoryPaths", QStringList() );
     data.general.lastNormalOutputDirectoryPaths = group.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
-    data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", false );
-    data.general.useVFATNames = group.readEntry( "useVFATNames", true );
+//     data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", false );
+    data.general.useVFATNames = group.readEntry( "useVFATNames", false );
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
 //     data.general.priority = group.readEntry( "priority", 10 );
     data.general.numFiles = group.readEntry( "numFiles", 0 );

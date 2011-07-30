@@ -688,10 +688,10 @@ void FileList::itemFinished( FileListItem *item, int state )
 {
     if( item )
     {
-        bool waitForAlbumGain;
-        if( !config->data.general.waitForAlbumGain )
-            waitForAlbumGain = false;
-        // TODO check if item has to wait for others of the same album
+//         bool waitForAlbumGain;
+//         if( !config->data.general.waitForAlbumGain )
+//             waitForAlbumGain = false;
+//         // TODO check if item has to wait for others of the same album
 
         if( state == 0 )
         {

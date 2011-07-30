@@ -40,6 +40,7 @@ public:
 private:
     KComboBox *cPreferredOggVorbisExtension;
     KIntSpinBox *iUpdateDelay;
+    QCheckBox *cUseVFATNames;
     QCheckBox *cRemoveFailedFiles;
     QCheckBox *cUseSharedMemoryForTempFiles;
     KIntSpinBox *iMaxSizeForSharedMemoryTempFiles;

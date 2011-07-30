@@ -36,16 +36,17 @@ public:
     virtual ~OutputDirectory();
 
     Mode mode();
-    void setMode( Mode );
+    void setMode( Mode mode );
     QString directory();
-    void setDirectory( const QString& );
+    void setDirectory( const QString& directory );
     QString filesystem();
 
-    static KUrl calcPath( FileListItem *fileListItem, Config *config, QString extension = "" );
+    static KUrl calcPath( FileListItem *fileListItem, Config *config, QString extension = "", bool fast = true );
     static KUrl changeExtension( const KUrl& url, const QString& extension );
     static KUrl uniqueFileName( const KUrl& url, const QStringList& usedOutputNames = QStringList() );
     static KUrl makePath( const KUrl& url );
     static QString vfatPath( const QString& path );
+    static QString ntfsPath( const QString& path );
 
 public slots:
     //void setActive( bool );
@@ -60,6 +61,8 @@ private slots:
 
 private:
     void updateMode( Mode );
+
+    static QString filesystemForDirectory( QString dir = "" );
 
     KComboBox *cMode;
     KComboBox *cDir;

@@ -213,7 +213,7 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(item->fileListItem->outputUrl) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config),usedOutputNames.values()) );
+        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(item->fileListItem->outputUrl) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config,"",false),usedOutputNames.values()) );
         item->fileListItem->outputUrl = item->outputUrl;
         fileList->updateItem( item->fileListItem );
     }
@@ -898,6 +898,8 @@ void Convert::add( FileListItem* item )
 
         logger->log( newItem->logID, "\t... pipes built" );
         // debug end
+
+    logger->log( newItem->logID, "File system type: " + conversionOptions->outputFilesystem );
 
     newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::convert );
 

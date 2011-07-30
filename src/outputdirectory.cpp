@@ -113,7 +113,12 @@ void OutputDirectory::setDirectory( const QString& directory )
 
 QString OutputDirectory::filesystem()
 {
-    if( directory().isEmpty() )
+    return filesystemForDirectory( directory() );
+}
+
+QString OutputDirectory::filesystemForDirectory( QString dir )
+{
+    if( dir.isEmpty() )
         return QString();
 
     QString filePath;
@@ -129,7 +134,7 @@ QString OutputDirectory::filesystem()
         if( !storageVolume || !storageAccess )
             continue;
 
-        if( !storageAccess->filePath().isEmpty() && directory().startsWith(storageAccess->filePath()) && storageVolume->usage() == Solid::StorageVolume::FileSystem )
+        if( !storageAccess->filePath().isEmpty() && dir.startsWith(storageAccess->filePath()) && storageVolume->usage() == Solid::StorageVolume::FileSystem )
         {
             if( storageAccess->filePath().length() > filePath.length() )
             {
@@ -142,7 +147,7 @@ QString OutputDirectory::filesystem()
     return fsType;
 }
 
-KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QString extension )
+KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QString extension, bool fast )
 {
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
@@ -176,6 +181,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
 
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
+
+        if( options->outputFilesystem == "ntfs" )
+            path = ntfsPath( path );
 
         url = changeExtension( KUrl(path), extension );
 
@@ -278,6 +286,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
+        if( options->outputFilesystem == "ntfs" )
+            path = ntfsPath( path );
+
         url = KUrl( path + "." + extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
@@ -300,6 +311,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
+        if( options->outputFilesystem == "ntfs" )
+            path = ntfsPath( path );
+
         url = changeExtension( KUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
@@ -311,8 +325,13 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
     {
         path = fileListItem->url.toLocalFile();
 
-        if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
+        const QString outputFilesystem = fast ? "" : filesystemForDirectory(path);
+
+        if( config->data.general.useVFATNames || outputFilesystem == "vfat" )
             path = vfatPath( path );
+
+        if( outputFilesystem == "ntfs" )
+            path = ntfsPath( path );
 
         url = changeExtension( KUrl(path), extension );
 
@@ -377,19 +396,19 @@ QString OutputDirectory::vfatPath( const QString& path )
     else
         s.replace( '/', '_' ); // on windows we have to replace / instead
 
-        for( int i = 0; i < s.length(); i++ )
-        {
-            QChar c = s[ i ];
-            if( c < QChar(0x20) || c == QChar(0x7F) // 0x7F = 127 = DEL control character
-                || c=='*' || c=='?' || c=='<' || c=='>'
-                || c=='|' || c=='"' || c==':' )
-                c = '_';
-            else if( c == '[' )
-                c = '(';
-            else if ( c == ']' )
-                c = ')';
-            s[ i ] = c;
-        }
+    for( int i = 0; i < s.length(); i++ )
+    {
+        QChar c = s[ i ];
+        if( c < QChar(0x20) || c == QChar(0x7F) // 0x7F = 127 = DEL control character
+            || c=='*' || c=='?' || c=='<' || c=='>'
+            || c=='|' || c=='"' || c==':' )
+            c = '_';
+        else if( c == '[' )
+            c = '(';
+        else if ( c == ']' )
+            c = ')';
+        s[ i ] = c;
+    }
 
     /* beware of reserved device names */
     uint len = s.length();
@@ -432,6 +451,29 @@ QString OutputDirectory::vfatPath( const QString& path )
         if( ( s.at( i ) == QDir::separator() ) && ( s.at( i - 1 ) == ' ' ) )
             s[i - 1] = '_';
     }
+
+    return s;
+}
+
+QString OutputDirectory::ntfsPath( const QString& path )
+{
+    QString s = path;
+
+    if( QDir::separator() == '/' ) // we are on *nix, \ is a valid character in file or directory names, NOT the dir separator
+        s.replace( '\\', '_' );
+    else
+        s.replace( '/', '_' ); // on windows we have to replace / instead
+
+    for( int i = 0; i < s.length(); i++ )
+    {
+        QChar c = s[ i ];
+        if( c=='*' || c=='?' || c=='<' || c=='>' || c=='|' || c=='"' || c==':' )
+            c = '_';
+        s[ i ] = c;
+    }
+
+    /* max path length of Windows API */
+    s = s.left(255);
 
     return s;
 }

@@ -6,7 +6,7 @@
 -Add: Fluidsynth plugin
 -Add: Possibility to write temporary files to /dev/shm
 -Change: Prevent options dialogs from getting too wide
--Chnage: Automatically remove FAT incompatible characters if output directory is on a FAT volume (doesn't work with 'Source directory' output mode at the moment)
+-Change: Automatically remove FAT incompatible characters if output directory is on a FAT volume
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly
 -Fix: Filnames wouldn't be FAT compatible if output mode was copy directory structure

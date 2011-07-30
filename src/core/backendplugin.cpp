@@ -11,6 +11,7 @@ BackendPluginItem::BackendPluginItem( QObject *parent )
     process = 0;
     id = -1;
     progress = -1;
+    needsConfiguration = false;
 }
 
 BackendPluginItem::~BackendPluginItem()
@@ -490,15 +491,22 @@ void BackendPlugin::processOutput()
     }
 }
 
-void BackendPlugin::processExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ )
+void BackendPlugin::processExit( int exitCode, QProcess::ExitStatus exitStatus )
 {
+    Q_UNUSED(exitStatus)
+
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
+            if( backendItems.at(i)->needsConfiguration )
+                exitCode = 100;
+
             emit jobFinished( backendItems.at(i)->id, exitCode );
+
             delete backendItems.at(i);
             backendItems.removeAt(i);
+
             return;
         }
     }

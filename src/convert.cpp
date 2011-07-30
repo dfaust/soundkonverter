@@ -751,8 +751,17 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                     if( config->data.general.removeFailedFiles && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                         QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
-                logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
-                executeSameStep( items.at(i) );
+
+                if( exitCode == 100 )
+                {
+                    logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+                    remove( items.at(i), 100 );
+                }
+                else
+                {
+                    logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
+                    executeSameStep( items.at(i) );
+                }
             }
         }
     }
@@ -950,9 +959,14 @@ void Convert::remove( ConvertItem *item, int state )
         }
     }
 
-    if( state == 0 ) exitMessage = i18n("Normal exit");
-    else if( state == 1 ) exitMessage = i18n("Aborted by the user");
-    else exitMessage = i18n("An error occured");
+    if( state == 0 )
+        exitMessage = i18nc("Conversion exit status","Normal exit");
+    else if( state == 1 )
+        exitMessage = i18nc("Conversion exit status","Aborted by the user");
+    else if( state == 100 )
+        exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+    else
+        exitMessage = i18nc("Conversion exit status","An error occured");
 
     if( state == 0 )
     {
@@ -994,22 +1008,20 @@ void Convert::remove( ConvertItem *item, int state )
 
     emit timeFinished( item->finishedTime );
 
-//     item->fileListItem = 0; // why?
     if( item->process )
         item->process->deleteLater();
     item->process = 0;
 //     if( item->kioCopyJob != 0 ) delete item->kioCopyJob;
 //     item->kioCopyJob = 0;
 
-    items.removeAll( item );
-    if( items.size() == 0 ) updateTimer.stop();
-
-//     item->fileListItem->converting = false;
     emit finished( item->fileListItem, state ); // send signal to FileList
     emit finishedProcess( item->logID, state ); // send signal to Logger
 
+    items.removeAll( item );
     delete item;
-    item = 0;
+
+    if( items.size() == 0 )
+        updateTimer.stop();
 }
 
 void Convert::kill( FileListItem *item )

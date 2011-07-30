@@ -128,7 +128,17 @@ int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, const KUrl&
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
-        return -1;
+    {
+        if( soundFontFile.isEmpty() )
+        {
+            command += "sleep";
+            command += "1";
+        }
+        else
+        {
+            return -1;
+        }
+    }
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -141,7 +151,15 @@ int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, const KUrl&
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    if( soundFontFile.isEmpty() )
+    {
+        emit log( newItem->id, i18n("FluidSynth is not configured, yet. You need to set a SoundFont file.") );
+        newItem->needsConfiguration = true;
+    }
+    else
+    {
+        emit log( newItem->id, command.join(" ") );
+    }
 
     backendItems.append( newItem );
     return newItem->id;
@@ -149,6 +167,9 @@ int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, const KUrl&
 
 QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
+    if( soundFontFile.isEmpty() )
+        return QStringList();
+
     if( !_conversionOptions )
         return QStringList();
 

@@ -38,6 +38,7 @@ public:
     KProcess *process;
     int id;
     float progress;             // hold the current progress, -1 is the initial value and shows that the progress can't be determined
+    bool needsConfiguration;
 };
 
 /**

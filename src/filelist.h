@@ -122,7 +122,7 @@ public slots:
     void continueConversion();
 
     // connected to Convert
-    /** The conversion of an item has finished and the state is reported ( 0 = ok, -1 = error, 1 = aborted ) */
+    /** The conversion of an item has finished and the state is reported ( 0 = ok, -1 = error, 1 = aborted, 100 = backend needs configuration ) */
     void itemFinished( FileListItem*, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );

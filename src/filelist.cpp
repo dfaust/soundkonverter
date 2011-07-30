@@ -364,7 +364,6 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         {
             newItem->length = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
         }
-//         KMessageBox::information(this,"tags read, length: "+QString::number(newItem->time));
         newItem->notifyCommand = command;
 //         addTopLevelItemTime.start();
         addTopLevelItem( newItem );
@@ -506,6 +505,11 @@ void FileList::updateItem( FileListItem *item )
             item->setText( Column_State, i18n("Stopped") );
             break;
         }
+        case FileListItem::BackendNeedsConfiguration:
+        {
+            item->setText( Column_State, i18n("Backend not configured") );
+            break;
+        }
         case FileListItem::Failed:
         {
             item->setText( Column_State, i18n("Failed") );
@@ -563,14 +567,13 @@ void FileList::startConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-//         if( !item->converting && item->text(0) != i18n("Will be skipped") )
-        if( item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+        if( item->state == FileListItem::Stopped || item->state == FileListItem::BackendNeedsConfiguration || item->state == FileListItem::Failed )
         {
             item->state = FileListItem::WaitingForConversion;
             updateItem( item );
-//             item->setText( Column_State, i18n("Waiting") );
         }
     }
+
     queue = true;
     emit queueModeChanged( queue );
     emit conversionStarted();
@@ -586,7 +589,6 @@ void FileList::killConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-//         if( item->converting )
         if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
         {
             emit killItem( item );
@@ -661,7 +663,6 @@ int FileList::waitingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-//         if( item->text(0) == i18n("Waiting") )
         if( item->state == FileListItem::WaitingForConversion )
             count++;
     }
@@ -676,7 +677,6 @@ int FileList::convertingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-//         if( item->converting )
         if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
             count++;
     }
@@ -712,13 +712,16 @@ void FileList::itemFinished( FileListItem *item, int state )
         {
             item->state = FileListItem::Stopped;
             updateItem( item );
-    //         item->setText( Column_State, i18n("Stopped") );
+        }
+        else if( state == 100 )
+        {
+            item->state = FileListItem::BackendNeedsConfiguration;
+            updateItem( item );
         }
         else
         {
             item->state = FileListItem::Failed;
             updateItem( item );
-    //         item->setText( Column_State, i18n("Failed") );
         }
     }
 
@@ -759,7 +762,6 @@ void FileList::rippingFinished( const QString& device )
         for( int i=0; i<topLevelItemCount(); i++ )
         {
             item = topLevelItem( i );
-//             if( !item->converting && item->text(0) == i18n("Waiting") )
             if( item->state == FileListItem::WaitingForConversion )
             {
                 if( item->track >= 0 && item->device == device )
@@ -955,7 +957,6 @@ void FileList::load( bool user )
             for( int i=0; i<topLevelItemCount(); i++ )
             {
                 item = topLevelItem(i);
-//                 if( !item->converting )
                 if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
@@ -1036,8 +1037,8 @@ void FileList::load( bool user )
 
 void FileList::save( bool user )
 {
-//     QTime time;
-//     time.start();
+    QTime time;
+    time.start();
 
     QDomDocument list("soundkonverter_filelist");
     QDomElement root = list.createElement("soundkonverter");
@@ -1105,7 +1106,7 @@ void FileList::save( bool user )
         listFile.close();
     }
 
-//     KMessageBox::information(0,"save file list: " + QString::number(time.elapsed()));
+    logger->log( 1000, QString("Saving the file list took %1 ms").arg(time.elapsed()) );
 }
 
 

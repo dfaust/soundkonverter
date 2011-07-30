@@ -34,6 +34,7 @@ public:
         WaitingForAlbumGain,
         ApplyingReplayGain,
         Stopped,
+        BackendNeedsConfiguration,
         Failed
     };
 

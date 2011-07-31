@@ -139,9 +139,9 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by")+":", this );
     replayGainGroupingBox->addWidget( lReplayGainGrouping );
     cReplayGainGrouping = new KComboBox( this );
-    cReplayGainGrouping->addItem( i18n("Album tags and directories") );
-    cReplayGainGrouping->addItem( i18n("Album tags only") );
-    cReplayGainGrouping->addItem( i18n("Directories only") );
+    cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Album tags and directories") );
+    cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Album tags only") );
+    cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Directories only") );
     cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );

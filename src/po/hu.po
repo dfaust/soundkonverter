@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-07-14 12:52+0200\n"
+"POT-Creation-Date: 2011-07-31 13:16+0200\n"
 "PO-Revision-Date: 2011-05-21 21:02+0200\n"
 "Last-Translator: Tamas Orosz <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -117,21 +117,21 @@ msgstr "%1 profilinformáció"
 msgid "Affected files:"
 msgstr "Érintett fájlok:"
 
-#: config.cpp:46 config.cpp:48 config.cpp:310 config.cpp:355
-#: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:243
-#: configdialog/configgeneralpage.cpp:245
-#: configdialog/configgeneralpage.cpp:249
-#: configdialog/configgeneralpage.cpp:254
-#: configdialog/configgeneralpage.cpp:259 options.cpp:53 options.cpp:72
-#: optionsdetailed.cpp:344
+#: config.cpp:46 config.cpp:48 config.cpp:332 config.cpp:377
+#: configdialog/configgeneralpage.cpp:44 configdialog/configgeneralpage.cpp:59
+#: configdialog/configgeneralpage.cpp:190
+#: configdialog/configgeneralpage.cpp:192
+#: configdialog/configgeneralpage.cpp:196
+#: configdialog/configgeneralpage.cpp:201
+#: configdialog/configgeneralpage.cpp:206 options.cpp:53 options.cpp:72
+#: optionsdetailed.cpp:352
 msgid "Last used"
 msgstr "Utoljára használt"
 
-#: config.cpp:47 config.cpp:314 config.cpp:321 config.cpp:327
-#: configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:247 options.cpp:82
-#: optionsdetailed.cpp:340 optionssimple.cpp:155 optionssimple.cpp:195
+#: config.cpp:47 config.cpp:336 config.cpp:343 config.cpp:349
+#: configdialog/configgeneralpage.cpp:63
+#: configdialog/configgeneralpage.cpp:194 options.cpp:82
+#: optionsdetailed.cpp:348 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:219
@@ -155,12 +155,12 @@ msgstr "Utoljára használt"
 msgid "High"
 msgstr "Jó"
 
-#: config.cpp:229 config.cpp:252 config.cpp:254
+#: config.cpp:251 config.cpp:274 config.cpp:276
 msgid "Try internal"
 msgstr "Próbálja a belsőt"
 
-#: config.cpp:311 config.cpp:327 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:337
+#: config.cpp:333 config.cpp:349 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:345
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:168
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:192
@@ -184,8 +184,8 @@ msgstr "Próbálja a belsőt"
 msgid "Very low"
 msgstr "Nagyon gyenge"
 
-#: config.cpp:312 config.cpp:327 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:338
+#: config.cpp:334 config.cpp:349 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:346
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:172
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
@@ -209,8 +209,8 @@ msgstr "Nagyon gyenge"
 msgid "Low"
 msgstr "Gyenge"
 
-#: config.cpp:313 config.cpp:327 configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:339
+#: config.cpp:335 config.cpp:349 configdialog/configgeneralpage.cpp:62
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:347
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:176
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:210
@@ -234,8 +234,8 @@ msgstr "Gyenge"
 msgid "Medium"
 msgstr "Megfelelő"
 
-#: config.cpp:315 config.cpp:327 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:247 optionsdetailed.cpp:341
+#: config.cpp:337 config.cpp:349 configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:349
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:184
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:228
@@ -259,8 +259,8 @@ msgstr "Megfelelő"
 msgid "Very high"
 msgstr "Nagyon jó"
 
-#: config.cpp:316 config.cpp:331 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:252 optionsdetailed.cpp:342
+#: config.cpp:338 config.cpp:353 configdialog/configgeneralpage.cpp:65
+#: configdialog/configgeneralpage.cpp:199 optionsdetailed.cpp:350
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
@@ -289,14 +289,14 @@ msgstr "Nagyon jó"
 msgid "Lossless"
 msgstr "Veszteségmentes"
 
-#: config.cpp:317 config.cpp:335 configdialog/configgeneralpage.cpp:67
-#: configdialog/configgeneralpage.cpp:257 optionsdetailed.cpp:343
+#: config.cpp:339 config.cpp:357 configdialog/configgeneralpage.cpp:66
+#: configdialog/configgeneralpage.cpp:204 optionsdetailed.cpp:351
 #: optionssimple.cpp:213 optionssimple.cpp:290 soundkonverterview.cpp:451
 #: soundkonverterview.cpp:453
 msgid "Hybrid"
 msgstr "Keverék"
 
-#: config.cpp:339 optionsdetailed.cpp:346 optionssimple.cpp:160
+#: config.cpp:361 optionsdetailed.cpp:354 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
@@ -312,13 +312,75 @@ msgstr "Keverék"
 msgid "User defined"
 msgstr "Egyéni"
 
-#: config.cpp:489
+#: config.cpp:515
 msgid "Convert with soundKonverter"
 msgstr "Konvertálás a soundKonverterrel"
 
-#: config.cpp:523
+#: config.cpp:549
 msgid "Add Replay Gain with soundKonverter"
 msgstr "A hangerő-korrekció hozzáadása a soundKonverterhez"
+
+#: configdialog/configadvancedpage.cpp:35
+msgid "Preferred extension for ogg vorbis files"
+msgstr ""
+
+#: configdialog/configadvancedpage.cpp:50
+msgid "Status update delay"
+msgstr "Státuszfrissítés késleltetése"
+
+#: configdialog/configadvancedpage.cpp:53
+msgid "Update the progress bar in this interval (time in milliseconds)"
+msgstr ""
+"A folyamatjelző frissítése ilyen időközönként (ezredmásodpercben megadva)"
+
+#: configdialog/configadvancedpage.cpp:54 global.cpp:82 global.cpp:83
+#: global.cpp:84 global.cpp:85
+msgctxt "milliseconds"
+msgid "ms"
+msgstr "ms"
+
+#: configdialog/configadvancedpage.cpp:65
+#, fuzzy
+msgid "Always use FAT compatible output file names"
+msgstr "Használjon FAT-kompatibilis fájlneveket"
+
+#: configdialog/configadvancedpage.cpp:66
+msgid ""
+"Replaces some special characters like '?' by '_'.\n"
+"If the output directoy is on a FAT file system FAT compatible file names "
+"will automatically be used independently from this option."
+msgstr ""
+
+#: configdialog/configadvancedpage.cpp:75
+msgid "Remove partially converted files if a conversion fails"
+msgstr "Részben konvertált fájlok eltávolítása, ha a konverzió meghiúsul"
+
+#: configdialog/configadvancedpage.cpp:76
+msgid ""
+"Disable this for debugging or if you are sure the files get converted "
+"correctly."
+msgstr ""
+"Tiltsa le ezt a hibakereséshez vagy ha biztos benne, hogy a fájlok "
+"konvertálása tökéletes."
+
+#: configdialog/configadvancedpage.cpp:85
+msgid "Store temporary files in memory unless the estimted size is more than"
+msgstr ""
+
+#: configdialog/configadvancedpage.cpp:89
+msgid ""
+"Don't store files that are expected to be bigger than this value in memory "
+"to avoid swapping"
+msgstr ""
+
+#: configdialog/configadvancedpage.cpp:90
+msgctxt "mega in bytes"
+msgid "MiB"
+msgstr ""
+
+#: configdialog/configadvancedpage.cpp:97
+msgid "It seems there's no filesystem mounted on /dev/shm"
+msgstr ""
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -334,7 +396,7 @@ msgstr "Kóder"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1076
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1115
 msgid "Replay Gain"
 msgstr "Hangerő-korrekció"
 
@@ -370,7 +432,7 @@ msgstr "A beállítások megváltoztak"
 msgid "%1 settings"
 msgstr "%1 beállítások"
 
-#: configdialog/configbackendspage.cpp:378
+#: configdialog/configbackendspage.cpp:386
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
 
@@ -382,59 +444,55 @@ msgstr "Beállítások"
 msgid "General"
 msgstr "Általános"
 
+#: configdialog/configdialog.cpp:41
+msgid "Advanced"
+msgstr ""
+
 #: configdialog/configdialog.cpp:46 main.cpp:29
 msgid "Backends"
 msgstr "Háttérprogramok"
 
-#: configdialog/configgeneralpage.cpp:42
+#: configdialog/configgeneralpage.cpp:41
 msgid "Start in Mode"
 msgstr "Indítási mód"
 
-#: configdialog/configgeneralpage.cpp:46 options.cpp:95
+#: configdialog/configgeneralpage.cpp:45 options.cpp:95
 msgid "Simple"
 msgstr "Egyszerű"
 
-#: configdialog/configgeneralpage.cpp:47 options.cpp:96
+#: configdialog/configgeneralpage.cpp:46 options.cpp:96
 msgid "Detailed"
 msgstr "Részletes"
 
-#: configdialog/configgeneralpage.cpp:56
+#: configdialog/configgeneralpage.cpp:55
 msgid "Default profile"
 msgstr "Alapértelmezett profil"
 
-#: configdialog/configgeneralpage.cpp:74
+#: configdialog/configgeneralpage.cpp:73
 msgid "Default format"
 msgstr "Alapértelmezett formátum"
 
-#: configdialog/configgeneralpage.cpp:100
-msgid "Use FAT compatible output file names"
-msgstr "Használjon FAT-kompatibilis fájlneveket"
-
-#: configdialog/configgeneralpage.cpp:101
-msgid "Replaces some special characters like '?' by '_'."
-msgstr "Speciális karakterek (pl. '?') cseréje erre: '_'."
-
-#: configdialog/configgeneralpage.cpp:110
+#: configdialog/configgeneralpage.cpp:99
 msgid "Conflict handling"
 msgstr "Konfliktuskezelés"
 
-#: configdialog/configgeneralpage.cpp:113
+#: configdialog/configgeneralpage.cpp:102
 msgid "Generate new file name"
 msgstr "Új fájlnév előállítása"
 
-#: configdialog/configgeneralpage.cpp:114
+#: configdialog/configgeneralpage.cpp:103
 msgid "Skip file"
 msgstr "Fájl kihagyása"
 
-#: configdialog/configgeneralpage.cpp:116
+#: configdialog/configgeneralpage.cpp:105
 msgid "Do that if the output file already exists"
 msgstr "Ha a kimeneti fájl már létezik, tegye ezt"
 
-#: configdialog/configgeneralpage.cpp:125
+#: configdialog/configgeneralpage.cpp:114
 msgid "Number of files to convert at once"
 msgstr "Egyszerre konvertálandó fájlok száma"
 
-#: configdialog/configgeneralpage.cpp:129
+#: configdialog/configgeneralpage.cpp:118
 #, fuzzy
 msgid ""
 "You shouldn't set this number higher than the amount of installed processor "
@@ -444,26 +502,11 @@ msgstr ""
 "Ez a szám nem lehet nagyobb, mint a telepített processzormagok száma.\n"
 "Az Ön gépében %1 processzormag található."
 
-#: configdialog/configgeneralpage.cpp:138
-msgid "Status update delay"
-msgstr "Státuszfrissítés késleltetése"
-
-#: configdialog/configgeneralpage.cpp:141
-msgid "Update the progress bar in this interval (time in milliseconds)"
-msgstr ""
-"A folyamatjelző frissítése ilyen időközönként (ezredmásodpercben megadva)"
-
-#: configdialog/configgeneralpage.cpp:142 global.cpp:89 global.cpp:90
-#: global.cpp:91 global.cpp:92
-msgctxt "milliseconds"
-msgid "ms"
-msgstr "ms"
-
-#: configdialog/configgeneralpage.cpp:151
+#: configdialog/configgeneralpage.cpp:129
 msgid "Create actions menus for the file manager"
 msgstr "Műveleti menük létrehozása a fájlkezelőhöz"
 
-#: configdialog/configgeneralpage.cpp:152
+#: configdialog/configgeneralpage.cpp:130
 msgid ""
 "These service menus won't get removed if you uninstall soundKonverter.\n"
 "But you can remove them by diableing this option."
@@ -472,113 +515,109 @@ msgstr ""
 "törlésekor.\n"
 "Eltávolításukhoz tiltsa le ezt a kapcsolót."
 
-#: configdialog/configgeneralpage.cpp:161
-msgid "Remove partially converted files if a conversion fails"
-msgstr "Részben konvertált fájlok eltávolítása, ha a konverzió meghiúsul"
-
-#: configdialog/configgeneralpage.cpp:162
-msgid ""
-"Disable this for debugging or if you are sure the files get converted "
-"correctly."
-msgstr ""
-"Tiltsa le ezt a hibakereséshez vagy ha biztos benne, hogy a fájlok "
-"konvertálása tökéletes."
-
-#: configdialog/configgeneralpage.cpp:171
+#: configdialog/configgeneralpage.cpp:139
 msgid "Group files in the Replay Gain tool by"
 msgstr "Fájlok csoportosítása a hangerő-korrekciónál ez alapján:"
 
-#: configdialog/configgeneralpage.cpp:174
+#: configdialog/configgeneralpage.cpp:142
+#, fuzzy
+msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
 msgstr "Albumcímkék és könyvtárak"
 
-#: configdialog/configgeneralpage.cpp:175
+#: configdialog/configgeneralpage.cpp:143
+#, fuzzy
+msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
 msgstr "Csak albumcímkék"
 
-#: configdialog/configgeneralpage.cpp:176
+#: configdialog/configgeneralpage.cpp:144
+#, fuzzy
+msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Csak könyvtárak"
 
-#: configdialog/configgeneralpage.cpp:185
-msgid "Preferred extension for ogg vorbis files"
-msgstr ""
-
-#: convert.cpp:162 convert.cpp:1059
+#: convert.cpp:163 convert.cpp:1098
 msgid "Getting file"
 msgstr "Fájl megszerzése"
 
-#: convert.cpp:223 convert.cpp:332
+#: convert.cpp:224 convert.cpp:357
 msgid "No more backends left to try :("
 msgstr "Nincs több kipróbálható háttérprogram :("
 
-#: convert.cpp:233 convert.cpp:269 convert.cpp:1063 filelist.cpp:496
-#: soundkonverter.cpp:243 soundkonverter.cpp:246 soundkonverter.cpp:274
-#: soundkonverter.cpp:276
+#: convert.cpp:234 convert.cpp:270 convert.cpp:1102 filelist.cpp:500
+#: soundkonverter.cpp:244 soundkonverter.cpp:246 soundkonverter.cpp:273
+#: soundkonverter.cpp:275
 msgid "Converting"
 msgstr "Konvertálás"
 
-#: convert.cpp:284 convert.cpp:1067
+#: convert.cpp:285 convert.cpp:1106
 msgid "Decoding"
 msgstr "Dekódolás"
 
-#: convert.cpp:315 convert.cpp:1072
+#: convert.cpp:340 convert.cpp:1111
 msgid "Encoding"
 msgstr "Kódolás"
 
-#: convert.cpp:328
+#: convert.cpp:353
 msgid "Applying Replay Gain"
 msgstr "Hangerő-korrekció alkalmazása"
 
-#: convert.cpp:347
+#: convert.cpp:372
 msgid "Writing tags"
 msgstr "Címkék írása"
 
-#: convert.cpp:358
+#: convert.cpp:383
 msgid "Moving file to destination"
 msgstr "Fájl mozgatása a célhelyre"
 
-#: convert.cpp:365
+#: convert.cpp:390
 msgid "Running user script"
 msgstr "Felhasználói szkript futtatása"
 
-#: convert.cpp:390
+#: convert.cpp:415
 msgid "Executing next step"
 msgstr "A következő lépés végrehajtása"
 
-#: convert.cpp:503
+#: convert.cpp:528
 msgid "Read tags sucessfully"
 msgstr "A címkék beolvasása sikerült"
 
-#: convert.cpp:507
+#: convert.cpp:532
 msgid "Unable to read tags"
 msgstr "A címkék beolvasása nem sikerült"
 
-#: convert.cpp:533
+#: convert.cpp:558
 msgid "An error accured. Error code: %1 (%2)"
 msgstr "Hiba történt. Hibakód: %1 (%2)"
 
-#: convert.cpp:657 convert.cpp:729
+#: convert.cpp:682 convert.cpp:762
 msgid "Conversion failed. Exit code: %1"
 msgstr "A konvertálás meghiúsult. Hibakód: %1"
 
-#: convert.cpp:798
+#: convert.cpp:757
+msgid ""
+"Conversion failed. At least one of the used backends needs to be configured "
+"properly."
+msgstr ""
+
+#: convert.cpp:832
 msgid "CD track"
 msgstr "CD-szám"
 
-#: convert.cpp:802 filelist.cpp:523
+#: convert.cpp:836 filelist.cpp:532
 msgid "CD track %1"
 msgstr "CD-szám %1"
 
-#: convert.cpp:809
+#: convert.cpp:843
 msgid "Adding new item to conversion list: '%1'"
 msgstr "Új elem hozzáadása a konvertálási listához: '%1'"
 
-#: convert.cpp:817
+#: convert.cpp:851
 msgid "Got log ID: %1"
 msgstr "Napló azonosító: %1"
 
-#: convert.cpp:916
+#: convert.cpp:952
 #, fuzzy
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
@@ -587,61 +626,72 @@ msgstr ""
 "Hiba történt, a kimeneti fájl mérete kevesebb mint 1% a bemeneti fájl "
 "méretének"
 
-#: convert.cpp:920
+#: convert.cpp:956
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "A konvertálás meghiúsult. Próbálja újra. Hibakód: -2 (%1)"
 
-#: convert.cpp:928
+#: convert.cpp:965
+#, fuzzy
+msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Normál kilépés"
 
-#: convert.cpp:929
+#: convert.cpp:967
+#, fuzzy
+msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Felhasználó által megszakítva"
 
-#: convert.cpp:930
+#: convert.cpp:969
+msgctxt "Conversion exit status"
+msgid "Backend needs configuration"
+msgstr ""
+
+#: convert.cpp:971
+#, fuzzy
+msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Hiba történt"
 
-#: convert.cpp:943
+#: convert.cpp:984
 msgid "Executing command: \"%1\""
 msgstr "Parancs futtatása: \"%1\""
 
-#: convert.cpp:959
+#: convert.cpp:1000
 msgid "Removing partially converted output file"
 msgstr "A részben konvertált kimeneti fájl eltávolítása"
 
-#: convert.cpp:964
+#: convert.cpp:1005
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Fájl eltávolítása a konvertálási listából. Hibakód: %1 (%2)"
 
-#: convert.cpp:966
+#: convert.cpp:1007
 msgid "Conversion time"
 msgstr "Konvertálási idő"
 
-#: convert.cpp:967
+#: convert.cpp:1008
 msgid "Output file size"
 msgstr "Kimeneti fájl mérete"
 
-#: convert.cpp:968
+#: convert.cpp:1009
 msgid "File size ratio"
 msgstr "Fájlméret aránya"
 
-#: convert.cpp:1051
+#: convert.cpp:1090
 #, fuzzy
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: convert.cpp:1068 filelist.cpp:491
+#: convert.cpp:1107 filelist.cpp:495
 msgid "Ripping"
 msgstr "Beolvasás"
 
-#: core/backendplugin.cpp:37
+#: core/backendplugin.cpp:38
 msgid "Wave won't compress the audio stream."
 msgstr "A Wave nem fogja tömöríteni az audio folyamot."
 
-#: core/backendplugin.cpp:45
+#: core/backendplugin.cpp:46
 #, fuzzy
 msgid ""
 "Advanced Audio Coding is a lossy and popular audio format. It is widely used "
@@ -650,12 +700,12 @@ msgstr ""
 "Az Advanced Audio Coding egy veszteségesen tömörítő és népszerű "
 "audióformátum."
 
-#: core/backendplugin.cpp:52
+#: core/backendplugin.cpp:53
 msgid ""
 "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
 msgstr ""
 
-#: core/backendplugin.cpp:71
+#: core/backendplugin.cpp:72
 msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
 "For more information see: http://www.xiph.org/vorbis/"
@@ -664,13 +714,13 @@ msgstr ""
 "audiókodek.\n"
 "Több információkért látogassa meg a http://www.xiph.org/vorbis weboldalt."
 
-#: core/backendplugin.cpp:83
+#: core/backendplugin.cpp:84
 msgid ""
 "MP3 is the most popular lossy audio codec. It's supported by all audio "
 "players."
 msgstr ""
 
-#: core/backendplugin.cpp:92
+#: core/backendplugin.cpp:93
 #, fuzzy
 msgid ""
 "Flac is the free lossless audio codec.\n"
@@ -679,30 +729,30 @@ msgstr ""
 "Az flac egy ingyenes, veszteségmentesen tömörítő audiókodek.\n"
 "Ahogy a neve is mutatja, veszteségmentesen tömörít."
 
-#: core/backendplugin.cpp:102
+#: core/backendplugin.cpp:103
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
 msgstr "A Windows Media Audio A Microsoft saját audiókodeke."
 
-#: core/backendplugin.cpp:109
+#: core/backendplugin.cpp:110
 msgid "Dolby Digital-Audio"
 msgstr "Dolby Digital Audio"
 
-#: core/backendplugin.cpp:116
+#: core/backendplugin.cpp:117
 #, fuzzy
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
 msgstr ""
 "Az Apple Lossless Audio Codec egy veszteségmentesen tömörítő audióformátum "
 "az Apple-től."
 
-#: core/backendplugin.cpp:124
+#: core/backendplugin.cpp:125
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
 msgstr "Az MPEG-1 Audio Layer egy régi, veszteségesen tömörítő audióformátum."
 
-#: core/backendplugin.cpp:146
+#: core/backendplugin.cpp:147
 msgid "MPEG-4 Audio Lossless Coding"
 msgstr "MPEG-4 Audio Veszteségmentesen tömörítő Kódolás"
 
-#: core/backendplugin.cpp:153
+#: core/backendplugin.cpp:154
 msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
@@ -710,7 +760,7 @@ msgstr ""
 "Az Adaptive Multi-Rate Narrow-Band a 3gp-n alapszik és főként beszéd "
 "tömörítésére használják a mobilkommunikációban."
 
-#: core/backendplugin.cpp:162
+#: core/backendplugin.cpp:163
 msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
@@ -719,7 +769,7 @@ msgstr ""
 "Multi-Rate Narrow-Band-nak, és a magasabb adatsebességnek köszönhetően jobb "
 "minőséget nyújt."
 
-#: core/backendplugin.cpp:170
+#: core/backendplugin.cpp:171
 #, fuzzy
 msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
@@ -727,7 +777,7 @@ msgstr ""
 "A Monkey's Audio egy gyors és hatékony, veszteségmentesen tömörítő "
 "audióformátum."
 
-#: core/backendplugin.cpp:186
+#: core/backendplugin.cpp:187
 msgid ""
 "Speex is a free and lossy audio codec designed for low quality speech "
 "encoding.\n"
@@ -737,12 +787,12 @@ msgstr ""
 "beszéd kódolásához.\n"
 "További információkért látogassa meg a http://www.speex.org weboldalt."
 
-#: core/backendplugin.cpp:194
+#: core/backendplugin.cpp:195
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
 msgstr ""
 "Az MPEG-1 Audio Layer egy nagyon régi és veszteségesen tömörítő fájlformátum."
 
-#: core/backendplugin.cpp:201
+#: core/backendplugin.cpp:202
 msgid ""
 "Musepack is a free and lossy file format based on mp2 and optimized for high "
 "quality."
@@ -750,7 +800,7 @@ msgstr ""
 "A Musepack egy ingyenes és veszteségesen tömörítő, az mp2-re alapuló "
 "fájlformátum, kiváló minőségre optimalizálva."
 
-#: core/backendplugin.cpp:211
+#: core/backendplugin.cpp:212
 msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
@@ -759,11 +809,11 @@ msgstr ""
 "További információért látogassa meg a http://etree.org/shnutils/shorten/ "
 "weboldalt."
 
-#: core/backendplugin.cpp:239
+#: core/backendplugin.cpp:240
 msgid "True Audio is a free lossless audio format."
 msgstr "A True Audio egy ingyenes és veszteségmentesen tömörítő audióformátum."
 
-#: core/backendplugin.cpp:246
+#: core/backendplugin.cpp:247
 msgid ""
 "WavPack is a free and lossless audio codec.\n"
 "For more information see: http://www.wavpack.com"
@@ -771,20 +821,20 @@ msgstr ""
 "A WavPack egy ingyenes és veszteségmentesen tömörítő audiókodek.\n"
 "További információkért látogassa meg a http://www.wavpack.com weboldalt."
 
-#: core/backendplugin.cpp:254
+#: core/backendplugin.cpp:255
 msgid "Real Media Audio is a propritary and lossy codec."
 msgstr ""
 "A Real Media Audio egy szabadalommal védett és veszteségesen tömörítő kodek."
 
-#: core/backendplugin.cpp:262
+#: core/backendplugin.cpp:263
 msgid "3GP is a audio/video container format for mobile devices."
 msgstr "A 3GP egy audió/videó konténer formátum hordozható eszközökhöz."
 
-#: core/backendplugin.cpp:277
+#: core/backendplugin.cpp:278
 msgid "Real Media is a propritary and lossy codec."
 msgstr "A Real Media egy szabadalommal védett és veszteségesen tömörítő kodek."
 
-#: core/backendplugin.cpp:366
+#: core/backendplugin.cpp:367
 msgid ""
 "midi is a very old sound file format, that doesn't encode audio waves but "
 "stores instrument timings."
@@ -792,7 +842,7 @@ msgstr ""
 "A midi egy nagyon régi hangfájl-formátum, ami nem hangot kódol, hanem "
 "hangszerek időzítését tárolja."
 
-#: core/backendplugin.cpp:375
+#: core/backendplugin.cpp:376
 #, fuzzy
 msgid ""
 "Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
@@ -801,26 +851,26 @@ msgstr ""
 "A midi egy nagyon régi hangfájl-formátum, ami nem hangot kódol, hanem "
 "hangszerek időzítését tárolja."
 
-#: core/backendplugin.cpp:447
+#: core/backendplugin.cpp:448
 msgid "Killing process on user request"
 msgstr "A folyamat a felhasználó kérésére megszakítva"
 
-#: core/backendplugin.cpp:514
+#: core/backendplugin.cpp:522
 #, fuzzy
 msgid "In order to encode %1 files, you need to install '%2'."
 msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
 
-#: core/backendplugin.cpp:521
+#: core/backendplugin.cpp:529
 #, fuzzy
 msgid "In order to decode %1 files, you need to install '%2'."
 msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
 
-#: core/backendplugin.cpp:528
+#: core/backendplugin.cpp:536
 #, fuzzy
 msgid "In order to transcode %1 files, you need to install '%2'."
 msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
 
-#: core/backendplugin.cpp:535
+#: core/backendplugin.cpp:543
 #, fuzzy
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
@@ -830,11 +880,11 @@ msgstr ""
 "telepítenie kell a 'wvgain'-t.\n"
 "A wvgain rendszerint a 'wavpack' csomag része."
 
-#: core/backendplugin.cpp:542
+#: core/backendplugin.cpp:550
 msgid "'%1' should be shipped with your distribution."
 msgstr ""
 
-#: core/backendplugin.cpp:549
+#: core/backendplugin.cpp:557
 #, fuzzy
 msgid ""
 "Since '%1' inludes patented codecs, it may not be included in the default "
@@ -847,23 +897,23 @@ msgstr ""
 "Bizonyos disztribúcióknál lehetőség van a ffmpeg kiegészítő "
 "szoftvertárolókból történő telepítésére. "
 
-#: core/backendplugin.cpp:556
+#: core/backendplugin.cpp:564
 msgid "You can download '%1' at %2"
 msgstr ""
 
-#: filelist.cpp:43
+#: filelist.cpp:45
 msgid "State"
 msgstr "Állapot"
 
-#: filelist.cpp:44
+#: filelist.cpp:46
 msgid "Input"
 msgstr "Bemenet"
 
-#: filelist.cpp:45 outputdirectory.cpp:39
+#: filelist.cpp:47 outputdirectory.cpp:43
 msgid "Output"
 msgstr "Kimenet"
 
-#: filelist.cpp:46 optionssimple.cpp:37
+#: filelist.cpp:48 optionssimple.cpp:37
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:33
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:100
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:134
@@ -889,24 +939,24 @@ msgstr "Kimenet"
 msgid "Quality"
 msgstr "Minőség"
 
-#: filelist.cpp:74
+#: filelist.cpp:76
 msgid "Edit options..."
 msgstr "Beállítások szerkesztése..."
 
-#: filelist.cpp:76
+#: filelist.cpp:78
 msgid "Start conversion"
 msgstr "Konvertálás indítása"
 
-#: filelist.cpp:78
+#: filelist.cpp:80
 msgid "Stop conversion"
 msgstr "Konvertálás leállítása"
 
-#: filelist.cpp:80 optionssimple.cpp:43
+#: filelist.cpp:82 optionssimple.cpp:43
 #: replaygainscanner/replaygainfilelist.cpp:72
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: filelist.cpp:159 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: filelist.cpp:161 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
 #: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:357
 msgid ""
 "This file type is unknown to soundKonverter.\n"
@@ -917,39 +967,37 @@ msgstr ""
 "Lehet, hogy kiegészítő bővítményeket kell telepítenie.\n"
 "Nézzen körül disztribúciója csomagkezelőjében."
 
-#: filelist.cpp:197 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: filelist.cpp:199 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
 #: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:395
 msgid "... and %1 more files"
 msgstr "... és %1 fájl"
 
-#: filelist.cpp:415 opener/cdopener.cpp:1261 opener/diropener.cpp:198
-#: opener/fileopener.cpp:182 opener/playlistopener.cpp:217
-#: opener/urlopener.cpp:137 optionslayer.cpp:133
-msgid "No conversion options selected."
-msgstr "Nincsenek konvertálási beállítások kiválasztva."
-
-#: filelist.cpp:476
+#: filelist.cpp:480
 msgid "Will be skipped"
 msgstr "Ki lesz hagyva"
 
-#: filelist.cpp:480 soundkonverter.cpp:121 soundkonverter.cpp:125
+#: filelist.cpp:484 soundkonverter.cpp:121 soundkonverter.cpp:125
 msgid "Waiting"
 msgstr "Várakozás"
 
-#: filelist.cpp:486
+#: filelist.cpp:490
 msgid "Waiting for Replay Gain"
 msgstr "Várakozás a hangerő-korrekcióra"
 
-#: filelist.cpp:501
+#: filelist.cpp:505
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: filelist.cpp:506
+#: filelist.cpp:510
+msgid "Backend not configured"
+msgstr ""
+
+#: filelist.cpp:515
 msgid "Failed"
 msgstr "Meghiúsult"
 
-#: filelist.cpp:946
+#: filelist.cpp:953
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -959,24 +1007,24 @@ msgstr ""
 "\n"
 "Ha nem, a mentett fájllista lesz csatolva."
 
-#: global.cpp:84 global.cpp:85 global.cpp:100 global.cpp:101
+#: global.cpp:77 global.cpp:78 global.cpp:94 global.cpp:95
 msgctxt "days"
 msgid "d"
 msgstr "nap"
 
-#: global.cpp:85 global.cpp:86 global.cpp:101 global.cpp:102
+#: global.cpp:78 global.cpp:79 global.cpp:95 global.cpp:96
 msgctxt "hours"
 msgid "h"
 msgstr "ó"
 
-#: global.cpp:86 global.cpp:87 global.cpp:88 global.cpp:102 global.cpp:103
-#: global.cpp:104
+#: global.cpp:79 global.cpp:80 global.cpp:81 global.cpp:96 global.cpp:97
+#: global.cpp:98
 msgctxt "minutes"
 msgid "m"
 msgstr "p"
 
-#: global.cpp:87 global.cpp:88 global.cpp:89 global.cpp:90 global.cpp:91
-#: global.cpp:103 global.cpp:104 global.cpp:105
+#: global.cpp:80 global.cpp:81 global.cpp:82 global.cpp:83 global.cpp:84
+#: global.cpp:97 global.cpp:98 global.cpp:99
 msgctxt "seconds"
 msgid "s"
 msgstr "mp"
@@ -1335,6 +1383,11 @@ msgstr "Számok"
 msgid "Please select at least one track in order to proceed."
 msgstr "Válasszon ki legalább egy fájlt a folytatáshoz."
 
+#: opener/cdopener.cpp:1261 opener/diropener.cpp:198 opener/fileopener.cpp:182
+#: opener/playlistopener.cpp:217 opener/urlopener.cpp:137 optionslayer.cpp:133
+msgid "No conversion options selected."
+msgstr "Nincsenek konvertálási beállítások kiválasztva."
+
 #: opener/cdopener.cpp:1275
 msgid ""
 "A file with this name already exists.\n"
@@ -1471,23 +1524,23 @@ msgid ""
 "per minute."
 msgstr "A jelenlegi konvertálási beállításokkal percenként %1 fájl készül el."
 
-#: optionsdetailed.cpp:333
+#: optionsdetailed.cpp:340
 msgid "New profile"
 msgstr "Új profil"
 
-#: optionsdetailed.cpp:333
+#: optionsdetailed.cpp:340
 msgid "Enter a name for the new profile:"
 msgstr "Írjon be egy nevet az új profilnak:"
 
-#: optionsdetailed.cpp:349
+#: optionsdetailed.cpp:357
 msgid "You cannot overwrite the built-in profiles."
 msgstr "A beépített profilokat nem írhatja felül."
 
-#: optionsdetailed.cpp:349 optionsdetailed.cpp:369
+#: optionsdetailed.cpp:357 optionsdetailed.cpp:377
 msgid "Profile already exists"
 msgstr "A profil már létezik"
 
-#: optionsdetailed.cpp:369
+#: optionsdetailed.cpp:377
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
@@ -1722,23 +1775,23 @@ msgstr "%1 formátuminformáció"
 msgid "Sorry, no format information available."
 msgstr "Sajnálom, nem érhető el formátuminformáció."
 
-#: outputdirectory.cpp:43
+#: outputdirectory.cpp:47
 msgid "By meta data"
 msgstr "Metaadat szerint"
 
-#: outputdirectory.cpp:44
+#: outputdirectory.cpp:48
 msgid "Source directory"
 msgstr "Forráskönyvtár"
 
-#: outputdirectory.cpp:45
+#: outputdirectory.cpp:49
 msgid "Specify output directory"
 msgstr "Célkönyvtár megadása"
 
-#: outputdirectory.cpp:46
+#: outputdirectory.cpp:50
 msgid "Copy directory structure"
 msgstr "Könyvtárszerkezet másolása"
 
-#: outputdirectory.cpp:61 outputdirectory.cpp:429
+#: outputdirectory.cpp:61 outputdirectory.cpp:494
 msgid "Choose an output directory"
 msgstr "A kimeneti könyvtár kiválasztása"
 
@@ -1746,39 +1799,39 @@ msgstr "A kimeneti könyvtár kiválasztása"
 msgid "Open the output directory with Dolphin"
 msgstr "A kimeneti könyvtár megnyitása a Dolphin fájlkezelővel"
 
-#: outputdirectory.cpp:207
+#: outputdirectory.cpp:249
 msgid "Unknown Artist"
 msgstr "Ismeretlen előadó"
 
-#: outputdirectory.cpp:211
+#: outputdirectory.cpp:253
 msgid "Unknown Album"
 msgstr "Ismeretlen album"
 
-#: outputdirectory.cpp:215
+#: outputdirectory.cpp:257
 msgid "No Comment"
 msgstr "Nincs megjegyzés"
 
-#: outputdirectory.cpp:222
+#: outputdirectory.cpp:264
 msgid "Unknown Genre"
 msgstr "Ismeretlen műfaj"
 
-#: outputdirectory.cpp:229
+#: outputdirectory.cpp:271
 msgid "Unknown Composer"
 msgstr "Ismeretlen zeneszerző"
 
-#: outputdirectory.cpp:233
+#: outputdirectory.cpp:275
 msgid "Unknown Title"
 msgstr "Ismeretlen cím"
 
-#: outputdirectory.cpp:322
+#: outputdirectory.cpp:364
 msgid "new"
 msgstr "új"
 
-#: outputdirectory.cpp:479
+#: outputdirectory.cpp:544
 msgid "Name all converted files according to the specified pattern"
 msgstr "Minden konvertált fájl átnevezése a megadott minta alapján"
 
-#: outputdirectory.cpp:481
+#: outputdirectory.cpp:546
 msgid ""
 "The following strings are wildcards, that will be replaced\n"
 "by the information in the meta data:\n"
@@ -1808,16 +1861,16 @@ msgstr ""
 "%y - Év\n"
 "%f - Eredeti fájlnév"
 
-#: outputdirectory.cpp:490
+#: outputdirectory.cpp:555
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr "Minden konvertált fájl az eredeti fájl könyvtárába kerüljön"
 
-#: outputdirectory.cpp:502
+#: outputdirectory.cpp:567
 msgid "Output all converted files into the specified output directory"
 msgstr "Minden konvertált fájl a megadott kimeneti könyvtárba kerüljön"
 
-#: outputdirectory.cpp:514
+#: outputdirectory.cpp:579
 msgid "Copy the whole directory structure for all converted files"
 msgstr "Az egész könyvtárszerkezet másolása minden konvertált fájlnál"
 
@@ -1916,6 +1969,10 @@ msgid ""
 "In order to convert the midi data to a wave form you need a SoundFont which "
 "maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
+msgstr ""
+
+#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:156
+msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
 msgstr ""
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
@@ -2259,7 +2316,7 @@ msgid "Remaining time"
 msgstr "Hátralévő idő"
 
 #: progressindicator.cpp:84 replaygainscanner/replaygainscanner.cpp:222
-#: soundkonverter.cpp:260 soundkonverter.cpp:263
+#: soundkonverter.cpp:259 soundkonverter.cpp:261
 msgid "Finished"
 msgstr "Befejezve"
 
@@ -2289,12 +2346,12 @@ msgstr "Az alábbi fájlok nem adhatók hozzá:"
 msgid "Replay Gain tool"
 msgstr "Hangerő-korrekciós eszköz"
 
-#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:170
+#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:169
 #: soundkonverterview.cpp:82
 msgid "Add folder..."
 msgstr "Mappa hozzáadása..."
 
-#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:165
+#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:164
 #: soundkonverterview.cpp:81
 msgid "Add files..."
 msgstr "Fájlok hozzáadása..."
@@ -2323,31 +2380,31 @@ msgstr "Ez a soundKonverter %1"
 msgid "Removing old file: %1"
 msgstr "Régi fájl eltávolítása: %1"
 
-#: soundkonverter.cpp:154
+#: soundkonverter.cpp:153
 msgid "View logs..."
 msgstr "Naplók megtekintése..."
 
-#: soundkonverter.cpp:160
+#: soundkonverter.cpp:159
 msgid "Replay Gain tool..."
 msgstr "Hangerő-korrekciós eszköz..."
 
-#: soundkonverter.cpp:175 soundkonverterview.cpp:83
+#: soundkonverter.cpp:174 soundkonverterview.cpp:83
 msgid "Add CD tracks..."
 msgstr "CD-számok hozzáadása..."
 
-#: soundkonverter.cpp:180 soundkonverterview.cpp:84
+#: soundkonverter.cpp:179 soundkonverterview.cpp:84
 msgid "Add url..."
 msgstr "Url hozzáadása..."
 
-#: soundkonverter.cpp:185 soundkonverterview.cpp:85
+#: soundkonverter.cpp:184 soundkonverterview.cpp:85
 msgid "Add playlist..."
 msgstr "Lejátszólista hozzáadása..."
 
-#: soundkonverter.cpp:190
+#: soundkonverter.cpp:189
 msgid "Load file list"
 msgstr "Fájllista betöltése"
 
-#: soundkonverter.cpp:195
+#: soundkonverter.cpp:194
 msgid "Save file list"
 msgstr "Fájllista mentése"
 
@@ -2384,6 +2441,9 @@ msgstr "Név"
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "E-mail"
+
+#~ msgid "Replaces some special characters like '?' by '_'."
+#~ msgstr "Speciális karakterek (pl. '?') cseréje erre: '_'."
 
 #~ msgid "Standard"
 #~ msgstr "Szabványos"

@@ -38,7 +38,7 @@ public:
     KProcess *process;
     int id;
     float progress;             // hold the current progress, -1 is the initial value and shows that the progress can't be determined
-    bool needsConfiguration;
+    bool needsConfiguration;    // this way the plugin can report back that it needs to be configured (currently used by fluidsynth)
 };
 
 /**

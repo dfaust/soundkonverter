@@ -4,7 +4,6 @@
 
 #include "backendplugin.h"
 
-// #include <QMultiMap> // inherits QMap
 #include <QMap>
 #include <KUrl>
 
@@ -31,8 +30,9 @@ public:
 
     struct Data // additional data
     {
-        QList<int> lengthList;
-//     ReplayGainPlugin::ApplyMode mode;
+        int fileCount;
+        int processedFiles;
+        float lastFileProgress;
     } data;
 };
 
@@ -50,20 +50,13 @@ public:
 
     ReplayGainPlugin( QObject *parent=0 );
     ~ReplayGainPlugin();
-    
+
     virtual QString type();
 
-//     virtual QMap<QString,int> codecList() = 0; // TODO rating, etc.
     virtual QList<ReplayGainPipe> codecTable() = 0;
-//     virtual bool canApply( const KUrl& filename ) = 0;
-//     virtual bool isConfigSupported() = 0;
-//     virtual bool showConfigDialog( const QString& format, QWidget *parent ) = 0;
 
     /** converts a file; TODO notify Conversion when the process has been finished */
     virtual int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
-    /** returns a command for converting a file through a pipe; "" if pipes aren't supported */
-//     virtual QString applyCommand( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
-//     virtual bool pipesSupported() = 0;
 
 protected:
     int lastId;

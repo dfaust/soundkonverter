@@ -29,7 +29,12 @@ public:
     void showInfo( QWidget *parent );
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
+    float parseOutput( const QString& output, ReplayGainPluginItem *replayGainItem );
     float parseOutput( const QString& output );
+
+private slots:
+    /** Get the process' output */
+    void processOutput();
 
 };
 

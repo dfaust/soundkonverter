@@ -8,7 +8,7 @@ soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObj
     : ReplayGainPlugin( parent )
 {
     binaries["vorbisgain"] = "";
-    
+
     allCodecs += "ogg vorbis";
 }
 
@@ -52,7 +52,8 @@ void soundkonverter_replaygain_vorbisgain::showInfo( QWidget *parent )
 
 int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
-    if( fileList.count() <= 0 ) return -1;
+    if( fileList.count() <= 0 )
+        return -1;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
@@ -61,12 +62,8 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    for( int i=0; i<fileList.count(); i++ )
-    {
-        newItem->data.lengthList += 200;
-    }
+    newItem->data.fileCount = fileList.count();
 
-//     newItem->mode = mode;
     (*newItem->process) << binaries["vorbisgain"];
     if( mode == ReplayGainPlugin::Add )
     {
@@ -92,16 +89,64 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
 }
 
 // float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output, BackendPluginItem *backendItem ) TODO ogg replaygain fix
+float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output, ReplayGainPluginItem *replayGainItem )
+{
+    float progress = -1;
+
+    // -12.14 dB |  46927 |  0.25 |    11599 | 03 - Sugar.ogg
+    //   59% - 04 - Suggestions.ogg
+
+    QRegExp regApply("(\\d+)%");
+    if( output.contains(regApply) )
+    {
+        progress = (float)regApply.cap(1).toInt();
+    }
+
+    if( progress == -1 )
+        return -1;
+
+    if( !replayGainItem )
+        progress;
+
+    if( progress > 90 && replayGainItem->data.lastFileProgress <= 90 )
+    {
+        replayGainItem->data.processedFiles++;
+    }
+    replayGainItem->data.lastFileProgress = progress;
+
+    int processedFiles = replayGainItem->data.processedFiles;
+    if( progress > 90 )
+        processedFiles--;
+
+    return float( processedFiles * 100 + progress ) / replayGainItem->data.fileCount;
+}
+
 float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output )
 {
-    // 35% - /home/daniel/soundKonverter/LP3/2 - 04 - Ratatat - Mirando.ogg
-    
-    if( output.contains("Gain   |  Peak  | Scale | New Peak | Track") || output.contains("----------+--------+-------+----------+------") ) return 0.0f;
-    if( output == "" || !output.contains("%") ) return -1.0f;
+    return parseOutput( output, 0 );
+}
 
-    QString data = output;
-    data = data.left( data.indexOf("%") );
-    return data.toFloat();
+void soundkonverter_replaygain_vorbisgain::processOutput()
+{
+    ReplayGainPluginItem *pluginItem;
+    float progress;
+    for( int i=0; i<backendItems.size(); i++ )
+    {
+        if( backendItems.at(i)->process == QObject::sender() )
+        {
+            const QString output = backendItems.at(i)->process->readAllStandardOutput().data();
+            pluginItem = qobject_cast<ReplayGainPluginItem*>(backendItems.at(i));
+            progress = parseOutput( output, pluginItem );
+
+            if( progress == -1 && !output.simplified().isEmpty() )
+                emit log( backendItems.at(i)->id, output );
+
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
+
+            return;
+        }
+    }
 }
 
 #include "soundkonverter_replaygain_vorbisgain.moc"

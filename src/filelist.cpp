@@ -688,7 +688,7 @@ void FileList::itemFinished( FileListItem *item, int state )
 {
     if( item )
     {
-//         bool waitForAlbumGain;
+        bool waitForAlbumGain = false;
 //         if( !config->data.general.waitForAlbumGain )
 //             waitForAlbumGain = false;
 //         // TODO check if item has to wait for others of the same album

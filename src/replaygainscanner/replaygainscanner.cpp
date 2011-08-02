@@ -173,11 +173,11 @@ void ReplayGainScanner::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::ReplayGain, this );
     
-    connect( dialog, SIGNAL(done(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
+    connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
 
     dialog->exec();
     
-    disconnect( dialog, SIGNAL(done(const KUrl&,bool,const QStringList&)), 0, 0 );
+    disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), 0, 0 );
 
     delete dialog;
 }

@@ -50,7 +50,7 @@ private slots:
 private:
     /** config pointer */
     Config *config;
-    
+
     /** the widget for selecting the directory */
     QWidget *dirOpenerWidget;
     /** the conversion options editor widget */
@@ -68,9 +68,9 @@ private:
     KPushButton *pSelectAll;
     KPushButton *pSelectNone;
     QCheckBox *cRecursive;
-    
+
 signals:
-    void done( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions = 0 );
+    void open( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions = 0 );
 };
 
 

@@ -399,6 +399,7 @@ void BackendPlugin::scanForBackends( const QStringList& directoryList )
                 if( QFile::exists((*b) + "/" + a.key()) )
                 {
                     a.value() = (*b) + "/" + a.key();
+                    break;
                 }
             }
         }
@@ -430,11 +431,15 @@ QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mi
 
 bool BackendPlugin::pause( int id )
 {
+    Q_UNUSED(id)
+
     return false;
 }
 
 bool BackendPlugin::resume( int id )
 {
+    Q_UNUSED(id)
+
     return false;
 }
 

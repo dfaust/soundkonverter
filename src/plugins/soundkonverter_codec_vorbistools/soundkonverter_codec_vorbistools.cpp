@@ -9,9 +9,11 @@
 soundkonverter_codec_vorbistools::soundkonverter_codec_vorbistools( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["oggenc"] = "";
     binaries["oggdec"] = "";
-    
+
     allCodecs += "ogg vorbis";
     allCodecs += "wav";
 }
@@ -48,13 +50,20 @@ QList<ConversionPipeTrunk> soundkonverter_codec_vorbistools::codecTable()
     return table;
 }
 
-bool soundkonverter_codec_vorbistools::isConfigSupported( ActionType action, const QString& format )
+bool soundkonverter_codec_vorbistools::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
-void soundkonverter_codec_vorbistools::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
-{}
+void soundkonverter_codec_vorbistools::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_vorbistools::hasInfo()
 {
@@ -62,7 +71,9 @@ bool soundkonverter_codec_vorbistools::hasInfo()
 }
 
 void soundkonverter_codec_vorbistools::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_vorbistools::newCodecWidget()
 {
@@ -79,7 +90,8 @@ QWidget *soundkonverter_codec_vorbistools::newCodecWidget()
 int soundkonverter_codec_vorbistools::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -100,8 +112,13 @@ int soundkonverter_codec_vorbistools::convert( const KUrl& inputFile, const KUrl
 
 QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -168,7 +185,7 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
 float soundkonverter_codec_vorbistools::parseOutput( const QString& output )
 {
     //         [ 99.5%]
-  
+
     if( output == "" || !output.contains("%") || output.contains("error",Qt::CaseInsensitive) ) return -1;
 
     QString data = output;

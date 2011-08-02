@@ -19,12 +19,12 @@
 
 DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
-    mode( _mode ),
-    config( _config )
+    config( _config ),
+    mode( _mode )
 {
     setCaption( i18n("Add folder") );
     setWindowIcon( KIcon("folder") );
-    
+
     if( mode == Convert )
     {
         setButtons( KDialog::User1 | KDialog::Cancel );
@@ -33,7 +33,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     {
         setButtons( KDialog::Ok | KDialog::Cancel );
     }
-    
+
     setButtonText( KDialog::User1, i18n("Proceed") );
     setButtonIcon( KDialog::User1, KIcon("go-next") );
 
@@ -68,12 +68,12 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
         lOptions->hide();
         lineFrame->hide();
     }
-    
+
     // Dir Opener Widget
-    
+
     dirOpenerWidget = new QWidget( widget );
-    mainGrid->addWidget( dirOpenerWidget, 2, 0 );    
-    
+    mainGrid->addWidget( dirOpenerWidget, 2, 0 );
+
     QVBoxLayout *box = new QVBoxLayout( dirOpenerWidget );
 
     QHBoxLayout *directoryBox = new QHBoxLayout();
@@ -85,10 +85,10 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     uDirectory = new KUrlRequester( QDir::homePath(), dirOpenerWidget );
     uDirectory->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     directoryBox->addWidget( uDirectory );
-    
+
     QLabel *labelDirectory = new QLabel( i18n("Only add selected file formats:"), dirOpenerWidget );
     box->addWidget( labelDirectory );
-    
+
     QHBoxLayout *fileTypesBox = new QHBoxLayout();
     box->addLayout( fileTypesBox );
 
@@ -109,7 +109,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
         newItem->setFlags( Qt::ItemIsEnabled | Qt::ItemIsUserCheckable );
         newItem->setCheckState( Qt::Checked );
     }
-    
+
     QVBoxLayout *fileTypesFormatsBox = new QVBoxLayout();
     fileTypesBox->addLayout( fileTypesFormatsBox );
 
@@ -139,17 +139,17 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
 
 
     // Conversion Options Widget
-    
+
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
     mainGrid->addWidget( options, 2, 0 );
     adjustSize();
     options->hide();
-    
+
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
         resize( parent->width() - 10, sizeHint().height() );
-    
-    
+
+
     KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
     if( !url.isEmpty() ) uDirectory->setUrl( url );
     else emit reject(); // TODO reject properly
@@ -190,7 +190,7 @@ void DirOpener::addClicked()
         {
             hide();
             options->accepted();
-            emit done( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, options->currentConversionOptions() );
+            emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, options->currentConversionOptions() );
             accept();
         }
         else
@@ -201,7 +201,7 @@ void DirOpener::addClicked()
     else if( mode == ReplayGain )
     {
         hide();
-        emit done( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs );
+        emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs );
         accept();
     }
 }
@@ -225,7 +225,7 @@ void DirOpener::selectNoneClicked()
 void DirOpener::showHelp()
 {
     QList<CodecProblems::Problem> problemList;
-    
+
     QMap<QString,QStringList> problems = ( mode == Convert ) ? config->pluginLoader()->decodeProblems() : config->pluginLoader()->replaygainProblems();
     for( int i=0; i<problems.count(); i++ )
     {

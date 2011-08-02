@@ -80,7 +80,7 @@ void LogViewer::itemChanged()
     {
         kLog->append( *b );
     }
-    
+
     QPalette currentPalette = kLog->palette();
     if( item->completed )
     {
@@ -115,11 +115,15 @@ void LogViewer::save()
 
 void LogViewer::processRemoved( int id )
 {
+    Q_UNUSED(id)
+
     refillLogs();
 }
 
 void LogViewer::updateProcess( int id )
 {
+    Q_UNUSED(id)
+
     refillLogs();
 }
 

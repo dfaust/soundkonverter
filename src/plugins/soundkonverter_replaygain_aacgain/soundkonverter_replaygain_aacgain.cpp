@@ -12,14 +12,16 @@
 soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["aacgain"] = "";
-    
+
     allCodecs += "m4v";
     allCodecs += "mp3";
-    
+
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group;
-    
+
     group = conf->group( "Plugin-"+name() );
     tagMode = group.readEntry( "tagMode", 0 );
 }
@@ -54,11 +56,18 @@ QList<ReplayGainPipe> soundkonverter_replaygain_aacgain::codecTable()
 
 bool soundkonverter_replaygain_aacgain::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return true;
 }
 
 void soundkonverter_replaygain_aacgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{    if( !configDialog.data() )
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
+    if( !configDialog.data() )
     {
         configDialog = new KDialog( parent );
         configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
@@ -92,7 +101,7 @@ void soundkonverter_replaygain_aacgain::configDialogSave()
 
         KSharedConfig::Ptr conf = KGlobal::config();
         KConfigGroup group;
-        
+
         group = conf->group( "Plugin-"+name() );
         group.writeEntry( "tagMode", tagMode );
     }
@@ -104,7 +113,9 @@ bool soundkonverter_replaygain_aacgain::hasInfo()
 }
 
 void soundkonverter_replaygain_aacgain::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
@@ -116,8 +127,6 @@ int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, Replay
     newItem->process = new KProcess( newItem );
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
-
-//     newItem->mode = mode;
 
     (*newItem->process) << binaries["aacgain"];
     (*newItem->process) << "-k";
@@ -158,11 +167,14 @@ int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, Replay
     return newItem->id;
 }
 
-void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ )
+void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
 {
+    Q_UNUSED(exitCode)
+    Q_UNUSED(exitStatus)
+
     if( undoFileList.count() <= 0 )
         return;
-    
+
     ReplayGainPluginItem *item = 0;
 
     for( int i=0; i<backendItems.size(); i++ )
@@ -176,10 +188,10 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
 
     if( !item )
         return;
-    
+
     if( item->process )
         item->process->deleteLater();
-    
+
     item->process = new KProcess( item );
     item->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
@@ -209,7 +221,7 @@ float soundkonverter_replaygain_aacgain::parseOutput( const QString& output )
 {
     //  9% of 45218064 bytes analyzed
     // [1/10] 32% of 13066690 bytes analyzed
-    
+
     float progress = -1.0f;
 
     QRegExp reg1("\\[(\\d+)/(\\d+)\\] (\\d+)%");
@@ -223,16 +235,8 @@ float soundkonverter_replaygain_aacgain::parseOutput( const QString& output )
     {
         progress = reg2.cap(1).toInt();
     }
-    
-    return progress;
-/*
-    if( output == "" || !output.contains("%") ) return -1.0f;
 
-    QString data = output;
-    int space = data.indexOf(" ") + 1;
-    int percent = data.indexOf("%");
-    data = data.mid( space, percent-space );
-    return data.toFloat();*/
+    return progress;
 }
 
 #include "soundkonverter_replaygain_aacgain.moc"

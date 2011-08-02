@@ -54,7 +54,7 @@ MacCodecWidget::MacCodecWidget()
     topBox->addStretch();
 
     grid->setRowStretch( 1, 1 );
-    
+
     iCompressionLevel->setValue( 2 );
 }
 
@@ -72,7 +72,7 @@ ConversionOptions *MacCodecWidget::currentConversionOptions()
 bool MacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
     iCompressionLevel->setValue( options->compressionLevel/1000 );
     return true;
@@ -110,6 +110,8 @@ QDomDocument MacCodecWidget::customProfile()
 
 bool MacCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     sCompressionLevel->setValue( encodingOptions.attribute("compressionLevel").toInt()/1000 );
@@ -119,7 +121,7 @@ bool MacCodecWidget::setCustomProfile( const QString& profile, const QDomDocumen
 int MacCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -128,7 +130,7 @@ int MacCodecWidget::currentDataRate()
     {
         dataRate = 6400000;
     }
-    
+
     return dataRate;
 }
 

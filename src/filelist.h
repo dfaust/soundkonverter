@@ -83,8 +83,8 @@ private:
      */
     QString notifyCommand;
 
-    Config *config;
     Logger *logger;
+    Config *config;
     TagEngine *tagEngine;
     OptionsEditor *optionsEditor;
     OptionsLayer *optionsLayer;

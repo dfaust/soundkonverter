@@ -271,12 +271,16 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
 
 void OptionsDetailed::somethingChanged()
 {
+    int dataRate = 0;
+
     if( wPlugin )
+        dataRate = qobject_cast<CodecWidget*>(wPlugin)->currentDataRate();
+
+    if( dataRate > 0 )
     {
-        int rate = qobject_cast<CodecWidget*>(wPlugin)->currentDataRate();
-        lEstimSize->setText( QString(QChar(8776))+" "+Global::prettyNumber(rate,"B")+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(Global::prettyNumber(rate,"B")) );
-        emit currentDataRateChanged( rate );
+        const QString dataRateString = Global::prettyNumber(dataRate,"B");
+        lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
+        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
     }
     else
     {
@@ -284,7 +288,7 @@ void OptionsDetailed::somethingChanged()
         lEstimSize->setToolTip( "" );
     }
 
-//     emit optionsChanged();
+    emit currentDataRateChanged( dataRate );
 }
 
 ConversionOptions *OptionsDetailed::currentConversionOptions()

@@ -9,6 +9,8 @@
 soundkonverter_codec_wavpack::soundkonverter_codec_wavpack( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["wavpack"] = "";
     binaries["wvunpack"] = "";
 
@@ -50,11 +52,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_wavpack::codecTable()
 
 bool soundkonverter_codec_wavpack::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_wavpack::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_wavpack::hasInfo()
 {
@@ -62,7 +71,9 @@ bool soundkonverter_codec_wavpack::hasInfo()
 }
 
 void soundkonverter_codec_wavpack::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_wavpack::newCodecWidget()
 {
@@ -79,7 +90,8 @@ QWidget *soundkonverter_codec_wavpack::newCodecWidget()
 int soundkonverter_codec_wavpack::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -100,8 +112,13 @@ int soundkonverter_codec_wavpack::convert( const KUrl& inputFile, const KUrl& ou
 
 QStringList soundkonverter_codec_wavpack::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -153,13 +170,13 @@ float soundkonverter_codec_wavpack::parseOutput( const QString& output )
 {
     // creating test.wv,  58% done...
     // restoring test.wv.wav,  31% done...
-  
+
     QRegExp reg("\\s+(\\d+)% done");
     if( output.contains(reg) )
     {
         return (float)reg.cap(1).toInt();
     }
-    
+
     return -1;
 }
 

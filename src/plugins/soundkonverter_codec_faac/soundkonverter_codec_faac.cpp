@@ -9,6 +9,8 @@
 soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["faac"] = "";
     binaries["faad"] = "";
 
@@ -76,11 +78,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
 
 bool soundkonverter_codec_faac::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_faac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_faac::hasInfo()
 {
@@ -88,7 +97,9 @@ bool soundkonverter_codec_faac::hasInfo()
 }
 
 void soundkonverter_codec_faac::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_faac::newCodecWidget()
 {
@@ -105,7 +116,8 @@ QWidget *soundkonverter_codec_faac::newCodecWidget()
 int soundkonverter_codec_faac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -126,8 +138,13 @@ int soundkonverter_codec_faac::convert( const KUrl& inputFile, const KUrl& outpu
 
 QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -167,21 +184,21 @@ QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, co
 float soundkonverter_codec_faac::parseOutput( const QString& output )
 {
     //  9397/9397  (100%)|  136.1  |    9.1/9.1    |   23.92x | 0.0
-  
+
     QRegExp regEnc("(\\d+)/(\\d+)");
     if( output.contains(regEnc) )
     {
         return (float)regEnc.cap(1).toInt()*100/regEnc.cap(2).toInt();
     }
-    
+
     // 15% decoding xxx
-    
+
     QRegExp regDec("(\\d+)%");
     if( output.contains(regDec) )
     {
         return (float)regDec.cap(1).toInt();
     }
-    
+
     return -1;
 }
 

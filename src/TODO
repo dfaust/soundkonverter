@@ -2,7 +2,6 @@
 
 more accurate problem infos
 
-replay gain: multiple ogg files -> progress
 processID/convertID/... eindeutig berechnen ... müsste so funktionieren
 
 
@@ -19,7 +18,6 @@ ReplayGainScanner: split albums by disc
 edit ripper parameters
 edit encoder parameters [/]
 ReplayGainScanner: parallele Berechnung
-session management
 changing default decoder only takes effect after restart
 
 ### Prio 3 ###

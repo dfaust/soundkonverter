@@ -107,6 +107,8 @@ void ConvertItem::updateTimes()
             if( mode & ConvertItem::encode ) finishedTime += encodeTime;
             if( mode & ConvertItem::replaygain ) finishedTime += replaygainTime;
             break;
+        default:
+            break;
     }
 }
 
@@ -481,6 +483,8 @@ void Convert::executeSameStep( ConvertItem *item )
 //         case ConvertItem::bpm:
 //             bpm(item);
 //             return;
+        default:
+            break;
     }
 
     remove( item, -1 ); // shouldn't be possible
@@ -602,6 +606,8 @@ void Convert::processOutput()
 
 void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
 {
+    Q_UNUSED(exitStatus)
+
     if( QObject::sender() == 0 )
     {
         logger->log( 1000, QString("Error: processExit was called from a null sender. Exit code: %1").arg(exitCode) );

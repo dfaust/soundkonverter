@@ -14,6 +14,8 @@
 soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["fluidsynth"] = "";
 
     allCodecs += "midi";
@@ -61,11 +63,17 @@ QList<ConversionPipeTrunk> soundkonverter_codec_fluidsynth::codecTable()
 
 bool soundkonverter_codec_fluidsynth::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return true;
 }
 
 void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     if( !configDialog.data() )
     {
         configDialog = new KDialog( parent );
@@ -110,7 +118,9 @@ bool soundkonverter_codec_fluidsynth::hasInfo()
 }
 
 void soundkonverter_codec_fluidsynth::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_fluidsynth::newCodecWidget()
 {
@@ -167,17 +177,18 @@ int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, const KUrl&
 
 QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( soundFontFile.isEmpty() )
-        return QStringList();
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(_conversionOptions)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
 
-    if( !_conversionOptions )
+    if( soundFontFile.isEmpty() )
         return QStringList();
 
     if( outputFile == "-" )
         return QStringList();
 
     QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
 
     if( outputCodec == "wav" )
     {
@@ -194,6 +205,8 @@ QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFi
 
 float soundkonverter_codec_fluidsynth::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // no output
 
     return -1;

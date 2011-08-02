@@ -425,6 +425,8 @@ QDomDocument LameCodecWidget::customProfile()
 
 bool LameCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
@@ -450,7 +452,7 @@ bool LameCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
 
 int LameCodecWidget::currentDataRate()
 {
-    int dataRate;
+    int dataRate = 0;
 
     if( currentFormat == "wav" )
     {

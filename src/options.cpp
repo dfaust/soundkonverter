@@ -89,12 +89,12 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     {
         optionsDetailed->setCurrentProfile( profile );
     }
-    
+
     int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
 
     tab->addTab( optionsSimple, i18n("Simple") );
     tab->addTab( optionsDetailed, i18n("Detailed") );
-    
+
     tab->setCurrentIndex( startTab );
 
 
@@ -158,6 +158,8 @@ void Options::detailedOutputDirectoryModeChanged( const int mode )
 
 void Options::detailedOutputDirectoryChanged( const QString& directory )
 {
+    Q_UNUSED(directory)
+
 //     if(optionsSimple && optionsSimple->outputDirectory) optionsSimple->outputDirectory->setDirectory( directory );
 }
 
@@ -186,7 +188,7 @@ void Options::tabChanged( const int pageIndex )
         optionsSimple->setReplayGainChecked( replaygainChecked );
 //         optionsSimple->setBpmChecked( bpm );
         optionsSimple->setCurrentPlugin( optionsDetailed->getCurrentPlugin() );
-        
+
         optionsSimple->outputDirectory->setMode( optionsDetailed->outputDirectory->mode() );
         optionsSimple->outputDirectory->setDirectory( optionsDetailed->outputDirectory->directory() );
 
@@ -272,7 +274,7 @@ void Options::accepted()
 // {
 //     emit optionsChanged();
 // }
-// 
+//
 // // TODO right this way? - seems to work
 // void Options::configChanged()
 // {

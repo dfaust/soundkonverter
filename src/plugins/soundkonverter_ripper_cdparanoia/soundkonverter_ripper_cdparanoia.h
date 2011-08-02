@@ -20,11 +20,9 @@ public:
     virtual ~soundkonverter_ripper_cdparanoia();
 
     QString name();
-    
+
     QList<ConversionPipeTrunk> codecTable();
 
-    QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream" );
-    
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();

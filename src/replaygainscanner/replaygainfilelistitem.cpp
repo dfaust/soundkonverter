@@ -43,12 +43,12 @@ ReplayGainFileListItem::~ReplayGainFileListItem()
 // {
 //     if( event->mimeData()->hasFormat("text/uri-list") ) event->acceptProposedAction();
 // }
-// 
+//
 // void ReplayGainFileListItem::dragMoveEvent( QDragMoveEvent *event )
 // {
 //     if( 1 ) event->acceptProposedAction();
 // }
-// 
+//
 // void ReplayGainFileListItem::dropEvent( QDropEvent *event )
 // {
 //     event->acceptProposedAction();
@@ -62,8 +62,7 @@ ReplayGainFileListItemDelegate::ReplayGainFileListItemDelegate( QObject *parent 
 void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     ReplayGainFileListItem *item =  static_cast<ReplayGainFileListItem*>( index.internalPointer() );
-    QTreeWidget *fileList = item->treeWidget();
-    
+
     QColor backgroundColor;
 
     painter->save();
@@ -109,13 +108,13 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
         if( option.state & QStyle::State_Selected )
         {
             backgroundColor = option.palette.highlight().color();
-        }   
+        }
         else
         {
             backgroundColor = option.palette.base().color();
         }
     }
-    
+
     painter->fillRect( option.rect, backgroundColor );
 
     int m_left, m_top, m_right, m_bottom;
@@ -139,13 +138,13 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
         painter->fillRect( m_rect.x(), m_rect.y(), 15, m_rect.height(), linearGrad );
     }
 //     painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
-    
+
 //     QItemDelegate::paint( painter, _option, index );
 
     painter->restore();
 
 //     int progress = (index.row() != 0 ? 100 / index.row() : 0);
-// 
+//
 //     // draw your cool progress bar here
 //     QStyleOptionProgressBar opt;
 //     opt.rect = option.rect;

@@ -148,7 +148,7 @@ void OptionsSimple::updateProfiles()
     QString lastProfile = cProfile->currentText();
     QStringList sProfile;
     cProfile->clear();
-    
+
     sProfile += i18n("Very low");
     sProfile += i18n("Low");
     sProfile += i18n("Medium");
@@ -159,7 +159,7 @@ void OptionsSimple::updateProfiles()
     sProfile += config->customProfiles();
     sProfile += i18n("User defined");
     cProfile->addItems( sProfile );
-    
+
     if( cProfile->findText(lastProfile) != -1 )
     {
         cProfile->setCurrentIndex( cProfile->findText(lastProfile) );
@@ -253,7 +253,7 @@ void OptionsSimple::formatInfo()
 {
     QString format = cFormat->currentText();
     QString info = config->pluginLoader()->codecDescription(format);
-    
+
     if( !info.isEmpty() )
     {
         KMessageBox::information( this, info, i18n("Format info for %1",format), QString(), KMessageBox::Notify | KMessageBox::AllowLink );
@@ -374,12 +374,13 @@ void OptionsSimple::somethingChanged()
     emit optionsChanged();
 }
 
-void OptionsSimple::currentDataRateChanged( int rate )
+void OptionsSimple::currentDataRateChanged( int dataRate )
 {
-    if( rate > 0 )
+    if( dataRate > 0 )
     {
-        lEstimSize->setText( QString(QChar(8776))+" "+Global::prettyNumber(rate,"B")+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(Global::prettyNumber(rate,"B")) );
+        const QString dataRateString = Global::prettyNumber(dataRate,"B");
+        lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
+        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
     }
     else
     {

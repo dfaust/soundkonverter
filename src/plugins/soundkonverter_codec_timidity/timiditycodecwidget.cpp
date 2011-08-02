@@ -60,6 +60,9 @@ QDomDocument TimidityCodecWidget::customProfile()
 
 bool TimidityCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+    Q_UNUSED(document)
+
     return true;
 }
 

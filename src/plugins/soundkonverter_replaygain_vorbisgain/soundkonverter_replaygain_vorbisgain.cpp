@@ -7,6 +7,8 @@
 soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["vorbisgain"] = "";
 
     allCodecs += "ogg vorbis";
@@ -36,11 +38,18 @@ QList<ReplayGainPipe> soundkonverter_replaygain_vorbisgain::codecTable()
 
 bool soundkonverter_replaygain_vorbisgain::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_replaygain_vorbisgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_replaygain_vorbisgain::hasInfo()
 {
@@ -48,7 +57,9 @@ bool soundkonverter_replaygain_vorbisgain::hasInfo()
 }
 
 void soundkonverter_replaygain_vorbisgain::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
@@ -106,7 +117,7 @@ float soundkonverter_replaygain_vorbisgain::parseOutput( const QString& output, 
         return -1;
 
     if( !replayGainItem )
-        progress;
+        return progress;
 
     if( progress > 90 && replayGainItem->data.lastFileProgress <= 90 )
     {

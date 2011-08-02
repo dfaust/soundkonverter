@@ -44,7 +44,6 @@ FileListItemDelegate::FileListItemDelegate( QObject *parent )
 void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const
 {
     FileListItem *item =  static_cast<FileListItem*>( index.internalPointer() );
-    QTreeWidget *fileList = item->treeWidget();
 
     QColor backgroundColor;
 

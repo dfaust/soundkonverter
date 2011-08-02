@@ -101,7 +101,7 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     midBox->addStretch();
 
     // cmd arguments box
-    
+
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 2, 0 );
 
@@ -312,6 +312,8 @@ QDomDocument TwoLameCodecWidget::customProfile()
 
 bool TwoLameCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
@@ -331,7 +333,7 @@ bool TwoLameCodecWidget::setCustomProfile( const QString& profile, const QDomDoc
 int TwoLameCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -362,7 +364,7 @@ int TwoLameCodecWidget::currentDataRate()
             dataRate *= 0.9f;
         }
     }
-    
+
     return dataRate;
 }
 

@@ -51,7 +51,7 @@ FlacCodecWidget::FlacCodecWidget()
     topBox->addStretch();
 
     grid->setRowStretch( 1, 1 );
-    
+
     iCompressionLevel->setValue( 5 );
 }
 
@@ -69,7 +69,7 @@ ConversionOptions *FlacCodecWidget::currentConversionOptions()
 bool FlacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
     iCompressionLevel->setValue( options->compressionLevel );
     return true;
@@ -107,6 +107,8 @@ QDomDocument FlacCodecWidget::customProfile()
 
 bool FlacCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     sCompressionLevel->setValue( encodingOptions.attribute("compressionLevel").toInt() );
@@ -116,7 +118,7 @@ bool FlacCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
 int FlacCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -125,7 +127,7 @@ int FlacCodecWidget::currentDataRate()
     {
         dataRate = 6400000;
     }
-    
+
     return dataRate;
 }
 

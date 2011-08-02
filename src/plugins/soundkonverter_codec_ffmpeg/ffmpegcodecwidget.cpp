@@ -113,14 +113,14 @@ ConversionOptions *FFmpegCodecWidget::currentConversionOptions()
 bool FFmpegCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
 
     iBitrate->setValue( options->bitrate );
     chSamplerate->setChecked( options->samplingRate != 0 );
     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     chChannels->setChecked( options->channels != 0 );
-    
+
     return true;
 }
 
@@ -230,6 +230,8 @@ QDomDocument FFmpegCodecWidget::customProfile()
 
 bool FFmpegCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     sBitrate->setValue( encodingOptions.attribute("quality").toInt() );
@@ -244,7 +246,7 @@ bool FFmpegCodecWidget::setCustomProfile( const QString& profile, const QDomDocu
 int FFmpegCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -256,7 +258,7 @@ int FFmpegCodecWidget::currentDataRate()
     else
     {
         dataRate = iBitrate->value()/8*60*1000;
-        
+
         if( chChannels->isChecked() )
         {
             dataRate *= 0.9f;
@@ -266,7 +268,7 @@ int FFmpegCodecWidget::currentDataRate()
             dataRate *= 0.9f;
         }
     }
-    
+
     return dataRate;
 }
 

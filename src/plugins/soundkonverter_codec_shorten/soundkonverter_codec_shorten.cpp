@@ -9,6 +9,8 @@
 soundkonverter_codec_shorten::soundkonverter_codec_shorten( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["shorten"] = "";
 
     allCodecs += "shorten";
@@ -49,11 +51,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_shorten::codecTable()
 
 bool soundkonverter_codec_shorten::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_shorten::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_shorten::hasInfo()
 {
@@ -61,7 +70,9 @@ bool soundkonverter_codec_shorten::hasInfo()
 }
 
 void soundkonverter_codec_shorten::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_shorten::newCodecWidget()
 {
@@ -78,7 +89,8 @@ QWidget *soundkonverter_codec_shorten::newCodecWidget()
 int soundkonverter_codec_shorten::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -99,8 +111,13 @@ int soundkonverter_codec_shorten::convert( const KUrl& inputFile, const KUrl& ou
 
 QStringList soundkonverter_codec_shorten::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -127,8 +144,10 @@ QStringList soundkonverter_codec_shorten::convertCommand( const KUrl& inputFile,
 
 float soundkonverter_codec_shorten::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // no output provided
-    
+
     return -1;
 }
 

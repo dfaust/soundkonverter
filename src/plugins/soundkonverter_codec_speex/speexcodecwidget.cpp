@@ -158,7 +158,7 @@ ConversionOptions *SpeexCodecWidget::currentConversionOptions()
 bool SpeexCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
@@ -179,7 +179,7 @@ bool SpeexCodecWidget::setCurrentConversionOptions( ConversionOptions *_options 
     chSamplerate->setChecked( options->samplingRate != 0 );
     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     chChannels->setChecked( options->channels != 0 );
-    
+
     return true;
 }
 
@@ -304,6 +304,8 @@ QDomDocument SpeexCodecWidget::customProfile()
 
 bool SpeexCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
@@ -321,7 +323,7 @@ bool SpeexCodecWidget::setCustomProfile( const QString& profile, const QDomDocum
 int SpeexCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -338,7 +340,7 @@ int SpeexCodecWidget::currentDataRate()
         {
             dataRate = dQuality->value()/8*60*1000;
         }
-        
+
         if( chChannels->isChecked() )
         {
             dataRate *= 0.9f;
@@ -348,7 +350,7 @@ int SpeexCodecWidget::currentDataRate()
             dataRate *= 0.9f;
         }
     }
-    
+
     return dataRate;
 }
 

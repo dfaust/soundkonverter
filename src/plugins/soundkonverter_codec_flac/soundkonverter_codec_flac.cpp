@@ -9,6 +9,8 @@
 soundkonverter_codec_flac::soundkonverter_codec_flac( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["flac"] = "";
 
     allCodecs += "flac";
@@ -49,11 +51,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_flac::codecTable()
 
 bool soundkonverter_codec_flac::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_flac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_flac::hasInfo()
 {
@@ -61,7 +70,9 @@ bool soundkonverter_codec_flac::hasInfo()
 }
 
 void soundkonverter_codec_flac::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_flac::newCodecWidget()
 {
@@ -78,7 +89,8 @@ QWidget *soundkonverter_codec_flac::newCodecWidget()
 int soundkonverter_codec_flac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -99,8 +111,13 @@ int soundkonverter_codec_flac::convert( const KUrl& inputFile, const KUrl& outpu
 
 QStringList soundkonverter_codec_flac::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -136,7 +153,7 @@ float soundkonverter_codec_flac::parseOutput( const QString& output )
 {
     // 01-Unknown.wav: 98% complete, ratio=0,479    // encode
     // 01-Unknown.wav: 27% complete                 // decode
-  
+
     QRegExp regEnc("(\\d+)% complete");
     if( output.contains(regEnc) )
     {

@@ -7,6 +7,8 @@
 soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["metaflac"] = "";
 
     allCodecs += "flac";
@@ -36,11 +38,18 @@ QList<ReplayGainPipe> soundkonverter_replaygain_metaflac::codecTable()
 
 bool soundkonverter_replaygain_metaflac::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return true;
 }
 
 void soundkonverter_replaygain_metaflac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_replaygain_metaflac::hasInfo()
 {
@@ -48,7 +57,9 @@ bool soundkonverter_replaygain_metaflac::hasInfo()
 }
 
 void soundkonverter_replaygain_metaflac::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
@@ -62,7 +73,6 @@ int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, Repla
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-//     newItem->mode = mode;
     (*newItem->process) << binaries["metaflac"];
     if( mode == ReplayGainPlugin::Add || mode == ReplayGainPlugin::Force )
     {
@@ -84,6 +94,8 @@ int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, Repla
 
 float soundkonverter_replaygain_metaflac::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // metaflac doesn't provide any progress data
     return -1;
 }

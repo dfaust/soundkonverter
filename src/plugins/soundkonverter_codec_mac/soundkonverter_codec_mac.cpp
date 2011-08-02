@@ -9,6 +9,8 @@
 soundkonverter_codec_mac::soundkonverter_codec_mac( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["mac"] = "";
 
     allCodecs += "ape";
@@ -49,11 +51,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mac::codecTable()
 
 bool soundkonverter_codec_mac::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_mac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_mac::hasInfo()
 {
@@ -61,7 +70,9 @@ bool soundkonverter_codec_mac::hasInfo()
 }
 
 void soundkonverter_codec_mac::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_mac::newCodecWidget()
 {
@@ -77,8 +88,13 @@ QWidget *soundkonverter_codec_mac::newCodecWidget()
 
 int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return -1;
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return -1;
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -100,7 +116,8 @@ int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& output
         command += "-d";
     }
 
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -121,13 +138,21 @@ int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& output
 
 QStringList soundkonverter_codec_mac::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
+    Q_UNUSED(inputFile)
+    Q_UNUSED(outputFile)
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(outputCodec)
+    Q_UNUSED(_conversionOptions)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
     return QStringList();
 }
 
 float soundkonverter_codec_mac::parseOutput( const QString& output )
 {
     // Progress: 55.2% (1.0 seconds remaining, 1.2 seconds total)
-  
+
     QRegExp regEnc("Progress:\\s+(\\d+.\\d)%");
     if( output.contains(regEnc) )
     {

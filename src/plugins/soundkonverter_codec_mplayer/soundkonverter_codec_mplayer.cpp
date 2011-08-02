@@ -9,6 +9,8 @@
 soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["mplayer"] = "";
 }
 
@@ -93,11 +95,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
 
 bool soundkonverter_codec_mplayer::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_mplayer::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_mplayer::hasInfo()
 {
@@ -105,7 +114,9 @@ bool soundkonverter_codec_mplayer::hasInfo()
 }
 
 void soundkonverter_codec_mplayer::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_mplayer::newCodecWidget()
 {
@@ -144,14 +155,15 @@ int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& ou
 
 QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions )
-        return QStringList();
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(_conversionOptions)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
 
     if( outputFile == "-" )
         return QStringList();
 
     QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
 
     if( outputCodec == "wav" )
     {

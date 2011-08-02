@@ -9,6 +9,8 @@
 soundkonverter_codec_timidity::soundkonverter_codec_timidity( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["timidity"] = "";
 
     allCodecs += "midi";
@@ -50,11 +52,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_timidity::codecTable()
 
 bool soundkonverter_codec_timidity::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_timidity::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_timidity::hasInfo()
 {
@@ -62,7 +71,9 @@ bool soundkonverter_codec_timidity::hasInfo()
 }
 
 void soundkonverter_codec_timidity::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_timidity::newCodecWidget()
 {
@@ -79,7 +90,8 @@ QWidget *soundkonverter_codec_timidity::newCodecWidget()
 int soundkonverter_codec_timidity::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -100,10 +112,12 @@ int soundkonverter_codec_timidity::convert( const KUrl& inputFile, const KUrl& o
 
 QStringList soundkonverter_codec_timidity::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(_conversionOptions)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
     QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
 
     if( outputCodec == "wav" )
     {
@@ -119,6 +133,8 @@ QStringList soundkonverter_codec_timidity::convertCommand( const KUrl& inputFile
 
 float soundkonverter_codec_timidity::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // no output
 
     return -1;

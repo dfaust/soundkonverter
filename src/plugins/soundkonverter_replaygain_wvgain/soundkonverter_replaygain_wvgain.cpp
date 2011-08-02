@@ -7,6 +7,8 @@
 soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["wvgain"] = "";
 
     allCodecs += "wavpack";
@@ -36,11 +38,18 @@ QList<ReplayGainPipe> soundkonverter_replaygain_wvgain::codecTable()
 
 bool soundkonverter_replaygain_wvgain::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_replaygain_wvgain::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_replaygain_wvgain::hasInfo()
 {
@@ -48,11 +57,14 @@ bool soundkonverter_replaygain_wvgain::hasInfo()
 }
 
 void soundkonverter_replaygain_wvgain::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
-    if( fileList.count() <= 0 ) return -1;
+    if( fileList.count() <= 0 )
+        return -1;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
@@ -61,7 +73,6 @@ int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayG
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-//     newItem->mode = mode;
     (*newItem->process) << binaries["wvgain"];
     if( mode == ReplayGainPlugin::Add )
     {
@@ -89,7 +100,7 @@ int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayG
 float soundkonverter_replaygain_wvgain::parseOutput( const QString& output )
 {
     // analyzing test.wv,  35% done...
-  
+
     QRegExp reg("\\s+(\\d+)% done");
     if( output.contains(reg) )
     {

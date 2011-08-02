@@ -34,18 +34,18 @@ public:
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
-    
+
 private:
     KUrl::List undoFileList;
-    
+
     QWeakPointer<KDialog> configDialog;
     QComboBox *configDialogTagLabelComboBox;
-    
+
     int tagMode;
 
 private slots:
     /** The undo process has exited */
-    virtual void undoProcessExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ );
+    virtual void undoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 
     void configDialogSave();
 

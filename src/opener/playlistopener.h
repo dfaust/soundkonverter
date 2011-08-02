@@ -1,7 +1,7 @@
 //
 // C++ Interface: opener
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -34,7 +34,7 @@ public:
 
 private:
     Config *config;
-  
+
     KFileDialog *fileDialog;
     Options *options;
     KUrl::List urls;
@@ -47,7 +47,7 @@ private slots:
     void okClickedSlot();
 
 signals:
-    void done( const KUrl::List& files, ConversionOptions *conversionOptions );
+    void open( const KUrl::List& files, ConversionOptions *conversionOptions );
 
 };
 

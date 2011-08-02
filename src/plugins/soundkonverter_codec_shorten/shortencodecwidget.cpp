@@ -24,7 +24,7 @@ ShortenCodecWidget::ShortenCodecWidget()
     grid->setSpacing( 6 );
 
     // cmd arguments box
-    
+
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 1, 0 );
 
@@ -53,7 +53,7 @@ ConversionOptions *ShortenCodecWidget::currentConversionOptions()
 bool ShortenCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
-    
+
     ConversionOptions *options = _options;
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
@@ -93,6 +93,8 @@ QDomDocument ShortenCodecWidget::customProfile()
 
 bool ShortenCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
@@ -103,7 +105,7 @@ bool ShortenCodecWidget::setCustomProfile( const QString& profile, const QDomDoc
 int ShortenCodecWidget::currentDataRate()
 {
     int dataRate;
-    
+
     if( currentFormat == "wav" )
     {
         dataRate = 10590000;
@@ -112,7 +114,7 @@ int ShortenCodecWidget::currentDataRate()
     {
         dataRate = 6400000;
     }
-    
+
     return dataRate;
 }
 

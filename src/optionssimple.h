@@ -40,7 +40,7 @@ public:
 
     /** Refills the whole form (e.g. after a config change) */
 //     void refill(); // TODO syncronize with optionsDetailed
-// 
+//
     void setCurrentProfile( const QString& profile );
     void setCurrentFormat( const QString& format );
     void setCurrentOutputDirectory( const QString& directory );
@@ -72,7 +72,7 @@ private:
     CodecPlugin *currentPlugin;
 
 public slots:
-    void currentDataRateChanged( int rate );
+    void currentDataRateChanged( int dataRate );
     void updateProfiles();
 
 private slots:

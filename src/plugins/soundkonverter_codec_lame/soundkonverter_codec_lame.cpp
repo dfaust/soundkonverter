@@ -20,8 +20,10 @@
 soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["lame"] = "";
-    
+
     allCodecs += "mp3";
     allCodecs += "mp2";
     allCodecs += "wav";
@@ -85,17 +87,24 @@ QList<ConversionPipeTrunk> soundkonverter_codec_lame::codecTable()
 
 bool soundkonverter_codec_lame::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+
 /*    KDialog *dialog = new KDialog( parent );
     dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
     dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
     QWidget *widget = new QWidget( dialog );
-    
+
 
     dialog->setMainWidget( widget );
 //     connect( dialog, SIGNAL( applyClicked() ), widget, SLOT( save() ) );
@@ -118,7 +127,7 @@ void soundkonverter_codec_lame::showInfo( QWidget *parent )
     dialog->setButtons( KDialog::Ok );
 
     QLabel *widget = new QLabel( dialog );
-    
+
     widget->setText( i18n("LAME is a free high quality MP3 encoder.\nYou can get it at: http://lame.sourceforge.net") );
 
     dialog->setMainWidget( widget );
@@ -142,7 +151,8 @@ QWidget *soundkonverter_codec_lame::newCodecWidget()
 int soundkonverter_codec_lame::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -163,8 +173,13 @@ int soundkonverter_codec_lame::convert( const KUrl& inputFile, const KUrl& outpu
 
 QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
     LameConversionOptions *lameConversionOptions = 0;
@@ -317,13 +332,13 @@ float soundkonverter_codec_lame::parseOutput( const QString& output )
 {
     // decoding
     // Frame#  1398/8202   256 kbps  L  R (...)
-    
+
     // encoding
-    // \r  3600/3696   (97%)|    0:05/    0:05|    0:05/    0:05|   18.190x|    0:00 
-  
+    // \r  3600/3696   (97%)|    0:05/    0:05|    0:05/    0:05|   18.190x|    0:00
+
     QString data = output;
     QString frame, count;
-    
+
     if( output.contains("Frame#") )
     {
         data.remove( 0, data.indexOf("Frame#")+7 );
@@ -346,7 +361,7 @@ float soundkonverter_codec_lame::parseOutput( const QString& output )
         data.remove( data.indexOf("%"), data.length()-data.indexOf("%") );
         return data.toFloat();
     }*/
-    
+
     return -1;
 }
 

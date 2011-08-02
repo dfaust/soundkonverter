@@ -11,8 +11,10 @@
 soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["ffmpeg"] = "";
-    
+
     // encoders
     codecMap["wav"] = "pcm_s16le";
     codecMap["ogg vorbis"] = "libvorbis"; // vorbis
@@ -39,7 +41,7 @@ QString soundkonverter_codec_ffmpeg::name()
 QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
 {
     QList<ConversionPipeTrunk> table;
-    
+
     /// decode
     fromCodecs += "wav";
     fromCodecs += "ogg vorbis";
@@ -96,15 +98,15 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
 //     toCodecs += "sonic";
 //     toCodecs += "sonic lossless";
     toCodecs += "amr nb";
-    
-    
+
+
     for( int i=0; i<fromCodecs.count(); i++ )
     {
         for( int j=0; j<toCodecs.count(); j++ )
         {
             if( fromCodecs.at(i) == "wav" && toCodecs.at(j) == "wav" )
                 continue;
-          
+
             ConversionPipeTrunk newTrunk;
             newTrunk.codecFrom = fromCodecs.at(i);
             newTrunk.codecTo = toCodecs.at(j);
@@ -132,18 +134,25 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     codecs += QSet<QString>::fromList(fromCodecs);
     codecs += QSet<QString>::fromList(toCodecs);
     allCodecs = codecs.toList();
-    
+
     return table;
 }
 
 
 bool soundkonverter_codec_ffmpeg::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
 void soundkonverter_codec_ffmpeg::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
-{}
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_ffmpeg::hasInfo()
 {
@@ -151,7 +160,9 @@ bool soundkonverter_codec_ffmpeg::hasInfo()
 }
 
 void soundkonverter_codec_ffmpeg::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_ffmpeg::newCodecWidget()
 {
@@ -167,6 +178,10 @@ QWidget *soundkonverter_codec_ffmpeg::newCodecWidget()
 
 int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
@@ -220,11 +235,12 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
 
 QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions )
-        return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(_conversionOptions)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
     QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
 
     if( outputCodec == "wav" )
     {
@@ -240,15 +256,14 @@ QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, 
 float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *length )
 {
     // size=    1508kB time=48.25 bitrate= 256.0kbits/s
-    
+
     QString data = output;
     QString time;
-    
+
     QRegExp reg("(\\d{2,}):(\\d{2}):(\\d{2})\\.(\\d{2})");
     if( length && data.contains(reg) )
     {
         *length = reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
-//         emit log( 1000, "got length: " + QString::number(*length) );
     }
     if( data.contains("time") )
     {
@@ -256,10 +271,10 @@ float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *leng
         time = data.left( data.indexOf(" ") );
         return time.toFloat();
     }
-    
+
     // TODO error handling
     // Error while decoding stream #0.0
-    
+
     return -1;
 }
 

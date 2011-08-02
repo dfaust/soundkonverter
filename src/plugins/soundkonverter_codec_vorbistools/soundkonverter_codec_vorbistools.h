@@ -21,8 +21,8 @@ public:
 
     QList<ConversionPipeTrunk> codecTable();
 
-    bool isConfigSupported( ActionType action, const QString& format );
-    void showConfigDialog( ActionType action, const QString& format, QWidget *parent );
+    bool isConfigSupported( ActionType action, const QString& codecName );
+    void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
     QWidget *newCodecWidget();

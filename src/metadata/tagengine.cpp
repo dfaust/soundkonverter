@@ -419,7 +419,7 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 mp4tag->setDisk( QString::number(tagData->disc) );
             }
         }
-        /*if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not
+        if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not
         {
             if ( file->ID3v2Tag() )
             {

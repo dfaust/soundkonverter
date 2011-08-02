@@ -98,13 +98,13 @@ void PlayerWidget::trackChanged( int _track )
 
 CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
-    config( _config ),
     noCdFound( false ),
-    cdTextFound( false ),
-    cddbFound( false ),
+    config( _config ),
     cdDrive( 0 ),
     cdParanoia( 0 ),
-    cddb( 0 )
+    cddb( 0 ),
+    cdTextFound( false ),
+    cddbFound( false )
 {
     setButtons( 0 );
 
@@ -1297,7 +1297,7 @@ void CDOpener::saveCuesheetClicked()
         const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i);
         const long length = (8 * size) / (44100 * 2 * 16);
         const long frames = (8 * size) / (588 * 2 * 16);
-        content.append( QString().sprintf("    INDEX 01 %02i:%02i:%02i\n",length/60,length%60,frames%75) );
+        content.append( QString().sprintf("    INDEX 01 %02li:%02li:%02li\n",length/60,length%60,frames%75) );
     }
 
     QTextStream ts( &cueFile );

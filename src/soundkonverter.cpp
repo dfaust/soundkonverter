@@ -30,8 +30,8 @@
 
 soundKonverter::soundKonverter()
     : KXmlGuiWindow(),
-      logViewer( 0 ),
       replayGainScanner( 0 ),
+      logViewer( 0 ),
       systemTray( 0 ),
       autoclose( false )
 {
@@ -101,13 +101,17 @@ soundKonverter::~soundKonverter()
         delete systemTray;
 }
 
-void soundKonverter::saveProperties( const KConfigGroup& )
+void soundKonverter::saveProperties( KConfigGroup& configGroup )
 {
+    Q_UNUSED(configGroup)
+
     m_view->saveFileList( false );
 }
 
-void soundKonverter::readProperties( const KConfigGroup& )
+void soundKonverter::readProperties( const KConfigGroup& configGroup )
 {
+    Q_UNUSED(configGroup)
+
     m_view->loadFileList( false );
 }
 

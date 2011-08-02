@@ -129,7 +129,7 @@ void UrlOpener::okClickedSlot()
         if( options->currentConversionOptions() )
         {
             options->accepted();
-            emit done( urls, options->currentConversionOptions() );
+            emit open( urls, options->currentConversionOptions() );
             accept();
         }
         else

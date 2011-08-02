@@ -214,15 +214,18 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         while( path.indexOf(reg) != -1 )
         {
             if( fileListItem->tags &&
-                ( reg.cap(2) == "a" && !fileListItem->tags->artist.isEmpty() ) ||
-                ( reg.cap(2) == "b" && !fileListItem->tags->album.isEmpty() ) ||
-                ( reg.cap(2) == "c" && !fileListItem->tags->comment.isEmpty() ) ||
-                ( reg.cap(2) == "d" && fileListItem->tags->disc != 0 ) ||
-                ( reg.cap(2) == "g" && !fileListItem->tags->genre.isEmpty() ) ||
-                ( reg.cap(2) == "n" && fileListItem->tags->track != 0 ) ||
-                ( reg.cap(2) == "p" && !fileListItem->tags->composer.isEmpty() ) ||
-                ( reg.cap(2) == "t" && !fileListItem->tags->title.isEmpty() ) ||
-                ( reg.cap(2) == "y" && fileListItem->tags->year != 0 ) )
+                (
+                  ( reg.cap(2) == "a" && !fileListItem->tags->artist.isEmpty() ) ||
+                  ( reg.cap(2) == "b" && !fileListItem->tags->album.isEmpty() ) ||
+                  ( reg.cap(2) == "c" && !fileListItem->tags->comment.isEmpty() ) ||
+                  ( reg.cap(2) == "d" && fileListItem->tags->disc != 0 ) ||
+                  ( reg.cap(2) == "g" && !fileListItem->tags->genre.isEmpty() ) ||
+                  ( reg.cap(2) == "n" && fileListItem->tags->track != 0 ) ||
+                  ( reg.cap(2) == "p" && !fileListItem->tags->composer.isEmpty() ) ||
+                  ( reg.cap(2) == "t" && !fileListItem->tags->title.isEmpty() ) ||
+                  ( reg.cap(2) == "y" && fileListItem->tags->year != 0 )
+                )
+              )
             {
                 path.replace( reg, "\\1%\\2\\3" );
             }

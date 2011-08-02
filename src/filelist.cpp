@@ -490,6 +490,11 @@ void FileList::updateItem( FileListItem *item )
             item->setText( Column_State, i18n("Waiting for Replay Gain") );
             break;
         }
+        case FileListItem::ApplyingReplayGain:
+        {
+            item->setText( Column_State, i18n("Replay Gain") );
+            break;
+        }
         case FileListItem::Ripping:
         {
             item->setText( Column_State, i18n("Ripping") );
@@ -883,7 +888,7 @@ void FileList::removeSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item && item->isSelected() && item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+        if( item && item->isSelected() && ( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed ) )
         {
             emit timeChanged( -item->length );
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );

@@ -256,6 +256,8 @@ QDomDocument FaacCodecWidget::customProfile()
 
 bool FaacCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
 {
+    Q_UNUSED(profile)
+
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
     cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );

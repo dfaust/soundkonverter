@@ -177,6 +177,7 @@ void Config::load()
             data.backends.codecs += codecData;
         }
 
+        codecIndex = -1;
         for( int j=0; j<data.backends.codecs.count(); j++ )
         {
             if( data.backends.codecs.at(j).codecName == formats.at(i) )
@@ -185,6 +186,8 @@ void Config::load()
                 break;
             }
         }
+        if( codecIndex == -1 )
+            continue;
 
         // encoders
         enabledPlugins.clear();
@@ -599,8 +602,8 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
 
     QStringList tempPluginList;
     QStringList optimizedPluginList;
-    int currentBackendRating;
-    int betterBackendRating;
+    int currentBackendRating = 0;
+    int betterBackendRating = 0;
     int codecIndex;
     bool ignore;
 
@@ -836,7 +839,6 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
 void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& optimizationList )
 {
     int codecIndex;
-    bool found;
 
     for( int i=0; i<optimizationList.count(); i++ )
     {
@@ -885,9 +887,10 @@ void Config::doOptimizations( const QList<CodecOptimizations::Optimization>& opt
         }
         else if( optimizationList.at(i).solution == CodecOptimizations::Optimization::Ignore )
         {
+            bool found = false;
+
             for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
             {
-                found = false;
                 if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == optimizationList.at(i).codecName &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == optimizationList.at(i).mode &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == optimizationList.at(i).currentBackend &&

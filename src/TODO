@@ -69,8 +69,6 @@ better ripping control
 
 KShell::quoteArg
 
-KStandardDirs::findExe("mplayer");
-
 ### main.cpp ###
 
 signal( SIGQUIT, cleanup );

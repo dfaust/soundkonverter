@@ -1,7 +1,7 @@
 //
 // C++ Interface: global
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -15,7 +15,7 @@
 #include <QString>
 
 #define SOUNDKONVERTER_VERSION_NUMBER 1003
-#define SOUNDKONVERTER_VERSION_STRING "1.0.1"
+#define SOUNDKONVERTER_VERSION_STRING "1.1.0 rc1"
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>

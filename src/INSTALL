@@ -4,9 +4,9 @@ Please have a look at CMakeLists.txt first and ensure the paths to the TagLib an
 
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+cmake -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` ..
 make
 sudo make install
 
 (make install DESTDIR=$HOME/tempdir makes a test installation into $HOME/tempdir)
- 
+

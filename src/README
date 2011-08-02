@@ -12,7 +12,7 @@ Installation:
 =============
         mkdir build
         cd build
-        cmake -DCMAKE_INSTALL_PREFIX=/usr ..
+        cmake -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` ..
         make
         sudo make install
 
@@ -33,17 +33,30 @@ update repository
 
 Precompiled packages:
 =====================
-openSUSE users should add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
+openSUSE users should either add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
 eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_11.3 for openSUSE 11.3.
 Or add the KDE:Extra repository.
+eg.: http://download.opensuse.org/repositories/KDE:/Extra/openSUSE_11.4 for openSUSE 11.4
+Mor information about openSUSE KDE repositories: http://en.opensuse.org/KDE_repositories
 
-Non suse distributions are not tested, so please tell me if something is wrong with the packages.
+Ubuntu/Debain Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
+Packages for non openSUSE distributions are not tested, so please tell me if something is wrong with the packages.
 
 
 
 Please report every bug you find, that's the only way I can fix it.
 ===================================================================
-
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com
 but the best way is to create a bug report/ask a question at https://bugs.launchpad.net/soundkonverter
+
+
+
+Participating:
+==============
+Translations:
+If you would like to translate soundKonverter to your native language you can request a new translation at https://www.transifex.net/projects/p/soundkonverter
+
+Patches:
+You can very easily clone the current code with gitorious. You can then work in your cloned version and request a merge.
+Have a look at: http://gitorious.org/soundkonverter/soundkonverter

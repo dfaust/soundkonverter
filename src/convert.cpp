@@ -29,8 +29,6 @@ ConvertItem::ConvertItem( FileListItem *item )
     replaygainID = -1;
     take = 0;
     killed = false;
-    process = 0;
-    kioCopyJob = 0;
 }
 
 ConvertItem::~ConvertItem()
@@ -171,31 +169,31 @@ void Convert::get( ConvertItem *item )
 
 /*    if( item->inputUrl.isLocalFile() && item->tempInputUrl.isLocalFile() )
     {
-        item->process->clearProgram();
+        item->process.data()->clearProgram();
 
-        *(item->process) << "cp";
-        *(item->process) << item->inputUrl.toLocalFile();
-        *(item->process) << item->tempInputUrl.toLocalFile();
+        *(item->process.data()) << "cp";
+        *(item->process.data()) << item->inputUrl.toLocalFile();
+        *(item->process.data()) << item->tempInputUrl.toLocalFile();
 
         logger->log( item->logID, "cp \"" + item->inputUrl.toLocalFile() + "\" \"" + item->tempInputUrl.toLocalFile() + "\"" );
 
-//         item->process->setPriority( config->data.general.priority );
-        item->process->start();
+//         item->process.data()->setPriority( config->data.general.priority );
+        item->process.data()->start();
     }
     else
     {
         logger->log( item->logID, "copying \"" + item->inputUrl.pathOrUrl() + "\" to \"" + item->tempInputUrl.toLocalFile() + "\"" );
 
-        item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
-        connect( item->kioCopyJob, SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
-        connect( item->kioCopyJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
+        item->kioCopyJob.data() = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
+        connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
+        connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
     }*/
 
     logger->log( item->logID, "copying \"" + item->inputUrl.pathOrUrl() + "\" to \"" + item->tempInputUrl.toLocalFile() + "\"" );
 
     item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
-    connect( item->kioCopyJob, SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
-    connect( item->kioCopyJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
+    connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
+    connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
 }
 
 void Convert::convert( ConvertItem *item )
@@ -273,12 +271,12 @@ void Convert::convert( ConvertItem *item )
             item->state = ConvertItem::convert;
             logger->log( item->logID, "\t" + command1.join(" ") + " | " + command2.join(" ") );
             item->process = new KProcess();
-            item->process->setOutputChannelMode( KProcess::MergedChannels );
-            connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
-            connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
-            item->process->clearProgram();
-            item->process->setShellCommand( command1.join(" ") + " | " + command2.join(" ") );
-            item->process->start();
+            item->process.data()->setOutputChannelMode( KProcess::MergedChannels );
+            connect( item->process.data(), SIGNAL(readyRead()), this, SLOT(processOutput()) );
+            connect( item->process.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
+            item->process.data()->clearProgram();
+            item->process.data()->setShellCommand( command1.join(" ") + " | " + command2.join(" ") );
+            item->process.data()->start();
         }
         else
         {
@@ -327,6 +325,9 @@ void Convert::convert( ConvertItem *item )
             }
         }
     }
+
+    if( !item->process.data() && item->convertID == -1 )
+        executeSameStep( item );
 }
 
 void Convert::encode( ConvertItem *item )
@@ -495,7 +496,7 @@ void Convert::kioJobProgress( KJob *job, unsigned long percent )
     // search the item list for our item
     for( int i=0; i<items.count(); i++ )
     {
-        if( items.at(i)->kioCopyJob == job )
+        if( items.at(i)->kioCopyJob.data() == job )
         {
             items.at(i)->progress = (float)percent;
         }
@@ -507,9 +508,9 @@ void Convert::kioJobFinished( KJob *job )
     // search the item list for our item
     for( int i=0; i<items.count(); i++ )
     {
-        if( items.at(i)->kioCopyJob == job )
+        if( items.at(i)->kioCopyJob.data() == job )
         {
-            items.at(i)->kioCopyJob = 0;
+            items.at(i)->kioCopyJob.data()->deleteLater();
 
             // copy was successful
             if( job->error() == 0 )
@@ -574,14 +575,14 @@ void Convert::processOutput()
 
     for( int i=0; i<items.size(); i++ )
     {
-        if( items.at(i)->process == QObject::sender() )
+        if( items.at(i)->process.data() == QObject::sender() )
         {
             // TODO more cases
             if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.count() == 1 )
             {
                 BackendPlugin *plugin1;
                 plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
-                output = items.at(i)->process->readAllStandardOutput().data();
+                output = items.at(i)->process.data()->readAllStandardOutput().data();
                 progress1 = plugin1->parseOutput( output );
                 if( progress1 > items.at(i)->progress ) items[i]->progress = progress1;
                 if( progress1 == -1 && !output.simplified().isEmpty() ) logger->log( items.at(i)->logID, "\t" + output.trimmed() );
@@ -592,7 +593,7 @@ void Convert::processOutput()
                 BackendPlugin *plugin1, *plugin2;
                 plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
                 plugin2 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(1).plugin;
-                output = items.at(i)->process->readAllStandardOutput().data();
+                output = items.at(i)->process.data()->readAllStandardOutput().data();
                 progress1 = plugin1->parseOutput( output );
                 progress2 = plugin2->parseOutput( output );
                 if( progress1 > items.at(i)->progress ) items[i]->progress = progress1;
@@ -618,11 +619,10 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     // search the item list for our item
     for( int i=0; i<items.size(); i++ )
     {
-        if( items.at(i)->process == QObject::sender() )
+        if( items.at(i)->process.data() == QObject::sender() )
         {
-            // FIXME crash discovered here - but no solution yet
-            delete items.at(i)->process;
-            items.at(i)->process = 0;
+            // FIXME crash discovered here - but no solution yet - maybe fixed by using deleteLater
+            items.at(i)->process.data()->deleteLater();
 
             if( items.at(i)->killed )
             {
@@ -1016,11 +1016,10 @@ void Convert::remove( ConvertItem *item, int state )
 
     emit timeFinished( item->finishedTime );
 
-    if( item->process )
-        item->process->deleteLater();
-    item->process = 0;
-//     if( item->kioCopyJob != 0 ) delete item->kioCopyJob;
-//     item->kioCopyJob = 0;
+    if( item->process.data() )
+        item->process.data()->deleteLater();
+    if( item->kioCopyJob.data() )
+        item->kioCopyJob.data()->deleteLater();
 
     emit finished( item->fileListItem, state ); // send signal to FileList
     emit finishedProcess( item->logID, state ); // send signal to Logger
@@ -1041,8 +1040,8 @@ void Convert::kill( FileListItem *item )
             items.at(i)->killed = true;
             if( items.at(i)->convertID != -1 ) items.at(i)->convertPlugin->kill( items.at(i)->convertID );
             else if( items.at(i)->replaygainID != -1 ) items.at(i)->replaygainPlugin->kill( items.at(i)->replaygainID );
-            else if( items.at(i)->process != 0 ) items.at(i)->process->kill();
-            else if( items.at(i)->kioCopyJob != 0 ) items.at(i)->kioCopyJob->kill( KJob::EmitResult );
+            else if( items.at(i)->process.data() != 0 ) items.at(i)->process.data()->kill();
+            else if( items.at(i)->kioCopyJob.data() != 0 ) items.at(i)->kioCopyJob.data()->kill( KJob::EmitResult );
         }
     }
 }

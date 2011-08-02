@@ -15,6 +15,7 @@
 #include <QList>
 #include <QTime>
 #include <QTimer>
+#include <QWeakPointer>
 
 #include <KProcess>
 #include <KTemporaryFile>
@@ -89,9 +90,9 @@ public:
     int lastTake;
 
     /** for the conversion and moving the file to a temporary place */
-    KProcess *process;
+    QWeakPointer<KProcess> process;
     /** for moving the file to the temporary directory */
-    KIO::FileCopyJob *kioCopyJob;
+    QWeakPointer<KIO::FileCopyJob> kioCopyJob;
     /** the id from the plugin (-1 if false) */
     int convertID;
     /** the id from the plugin (-1 if false) */

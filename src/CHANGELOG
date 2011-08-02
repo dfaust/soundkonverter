@@ -7,6 +7,7 @@
 -Add: Possibility to write temporary files to /dev/shm
 -Change: Prevent options dialogs from getting too wide
 -Change: Automatically remove FAT incompatible characters if output directory is on a FAT volume
+-Change: MusePack: Find mpenc, mpcdec and mpcgain backends, too
 -Fix: CDDB requests
 -Fix: Handle files with dollar signs and backticks (`) correctly
 -Fix: Filnames wouldn't be FAT compatible if output mode was copy directory structure

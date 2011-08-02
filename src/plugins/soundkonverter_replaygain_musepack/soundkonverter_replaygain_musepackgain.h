@@ -21,6 +21,9 @@ public:
 
     QString name();
 
+    /** search for the backend binaries in the given directories */
+    virtual void scanForBackends( const QStringList& directoryList = QStringList() );
+
     QList<ReplayGainPipe> codecTable();
 
     bool isConfigSupported( ActionType action, const QString& codecName );

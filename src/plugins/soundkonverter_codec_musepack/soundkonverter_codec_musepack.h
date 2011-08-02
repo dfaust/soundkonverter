@@ -19,10 +19,13 @@ public:
 
     QString name();
 
+    /** search for the backend binaries in the given directories */
+    virtual void scanForBackends( const QStringList& directoryList = QStringList() );
+
     QList<ConversionPipeTrunk> codecTable();
 
-    bool isConfigSupported( ActionType action, const QString& format );
-    void showConfigDialog( ActionType action, const QString& format, QWidget *parent );
+    bool isConfigSupported( ActionType action, const QString& codecName );
+    void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
     QWidget *newCodecWidget();

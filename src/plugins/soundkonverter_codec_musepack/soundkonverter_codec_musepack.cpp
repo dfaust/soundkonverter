@@ -5,13 +5,18 @@
 #include "musepackconversionoptions.h"
 #include "musepackcodecwidget.h"
 
+#include <KStandardDirs>
+#include <QFile>
+
 
 soundkonverter_codec_musepack::soundkonverter_codec_musepack( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
 {
+    Q_UNUSED(args)
+
     binaries["mppenc"] = "";
     binaries["mppdec"] = "";
-    
+
     allCodecs += "musepack";
     allCodecs += "wav";
 }
@@ -22,6 +27,51 @@ soundkonverter_codec_musepack::~soundkonverter_codec_musepack()
 QString soundkonverter_codec_musepack::name()
 {
     return global_plugin_name;
+}
+
+void soundkonverter_codec_musepack::scanForBackends( const QStringList& directoryList )
+{
+    binaries["mppenc"] = KStandardDirs::findExe( "mppenc" );
+    if( binaries["mppenc"].isEmpty() )
+        binaries["mppenc"] = KStandardDirs::findExe( "mpcenc" );
+
+    if( binaries["mppenc"].isEmpty() )
+    {
+        for( QList<QString>::const_iterator b = directoryList.begin(); b != directoryList.end(); ++b )
+        {
+            if( QFile::exists((*b) + "/mppenc") )
+            {
+                binaries["mppenc"] = (*b) + "/mppenc";
+                break;
+            }
+            else if( QFile::exists((*b) + "/mpcenc") )
+            {
+                binaries["mppenc"] = (*b) + "/mpcenc";
+                break;
+            }
+        }
+    }
+
+    binaries["mppdec"] = KStandardDirs::findExe( "mppdec" );
+    if( binaries["mppdec"].isEmpty() )
+        binaries["mppdec"] = KStandardDirs::findExe( "mpcdec" );
+
+    if( binaries["mppdec"].isEmpty() )
+    {
+        for( QList<QString>::const_iterator b = directoryList.begin(); b != directoryList.end(); ++b )
+        {
+            if( QFile::exists((*b) + "/mppdec") )
+            {
+                binaries["mppdec"] = (*b) + "/mppdec";
+                break;
+            }
+            else if( QFile::exists((*b) + "/mpcdec") )
+            {
+                binaries["mppdec"] = (*b) + "/mpcdec";
+                break;
+            }
+        }
+    }
 }
 
 QList<ConversionPipeTrunk> soundkonverter_codec_musepack::codecTable()
@@ -48,13 +98,20 @@ QList<ConversionPipeTrunk> soundkonverter_codec_musepack::codecTable()
     return table;
 }
 
-bool soundkonverter_codec_musepack::isConfigSupported( ActionType action, const QString& format )
+bool soundkonverter_codec_musepack::isConfigSupported( ActionType action, const QString& codecName )
 {
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+
     return false;
 }
 
-void soundkonverter_codec_musepack::showConfigDialog( ActionType action, const QString& format, QWidget *parent )
-{}
+void soundkonverter_codec_musepack::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
+{
+    Q_UNUSED(action)
+    Q_UNUSED(codecName)
+    Q_UNUSED(parent)
+}
 
 bool soundkonverter_codec_musepack::hasInfo()
 {
@@ -62,7 +119,9 @@ bool soundkonverter_codec_musepack::hasInfo()
 }
 
 void soundkonverter_codec_musepack::showInfo( QWidget *parent )
-{}
+{
+    Q_UNUSED(parent)
+}
 
 QWidget *soundkonverter_codec_musepack::newCodecWidget()
 {
@@ -79,7 +138,8 @@ QWidget *soundkonverter_codec_musepack::newCodecWidget()
 int soundkonverter_codec_musepack::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
-    if( command.isEmpty() ) return -1;
+    if( command.isEmpty() )
+        return -1;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
@@ -100,8 +160,13 @@ int soundkonverter_codec_musepack::convert( const KUrl& inputFile, const KUrl& o
 
 QStringList soundkonverter_codec_musepack::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_conversionOptions ) return QStringList();
-    
+    Q_UNUSED(inputCodec)
+    Q_UNUSED(tags)
+    Q_UNUSED(replayGain)
+
+    if( !_conversionOptions )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
     MusePackConversionOptions *musepackConversionOptions = 0;

@@ -1038,10 +1038,14 @@ void Convert::kill( FileListItem *item )
         if( items.at(i)->fileListItem == item )
         {
             items.at(i)->killed = true;
-            if( items.at(i)->convertID != -1 ) items.at(i)->convertPlugin->kill( items.at(i)->convertID );
-            else if( items.at(i)->replaygainID != -1 ) items.at(i)->replaygainPlugin->kill( items.at(i)->replaygainID );
-            else if( items.at(i)->process.data() != 0 ) items.at(i)->process.data()->kill();
-            else if( items.at(i)->kioCopyJob.data() != 0 ) items.at(i)->kioCopyJob.data()->kill( KJob::EmitResult );
+            if( items.at(i)->convertID != -1 && items.at(i)->convertPlugin )
+                items.at(i)->convertPlugin->kill( items.at(i)->convertID );
+            else if( items.at(i)->replaygainID != -1 && items.at(i)->replaygainPlugin )
+                items.at(i)->replaygainPlugin->kill( items.at(i)->replaygainID );
+            else if( items.at(i)->process.data() != 0 )
+                items.at(i)->process.data()->kill();
+            else if( items.at(i)->kioCopyJob.data() != 0 )
+                items.at(i)->kioCopyJob.data()->kill( KJob::EmitResult );
         }
     }
 }
@@ -1073,11 +1077,11 @@ void Convert::updateProgress()
 
     for( int i=0; i<items.size(); i++ )
     {
-        if( items.at(i)->convertID != -1 )
+        if( items.at(i)->convertID != -1 && items.at(i)->convertPlugin )
         {
             fileProgress = items.at(i)->convertPlugin->progress( items.at(i)->convertID );
         }
-        else if( items.at(i)->replaygainID != -1 )
+        else if( items.at(i)->replaygainID != -1 && items.at(i)->replaygainPlugin )
         {
             fileProgress = items.at(i)->replaygainPlugin->progress( items.at(i)->replaygainID );
         }

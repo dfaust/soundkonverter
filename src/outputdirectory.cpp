@@ -24,10 +24,7 @@
 #include <KLineEdit>
 #include <KIcon>
 #include <KPushButton>
-
-#include <solid/device.h>
-#include <solid/storagevolume.h>
-#include <solid/storageaccess.h>
+#include <kmountpoint.h>
 
 
 OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
@@ -116,35 +113,16 @@ QString OutputDirectory::filesystem()
     return filesystemForDirectory( directory() );
 }
 
-QString OutputDirectory::filesystemForDirectory( QString dir )
+QString OutputDirectory::filesystemForDirectory( const QString& dir )
 {
     if( dir.isEmpty() )
         return QString();
 
-    QString filePath;
-    QString fsType;
+    KMountPoint::Ptr mp = KMountPoint::currentMountPoints().findByPath( dir );
+    if( !mp )
+        return QString();
 
-    QList<Solid::Device> deviceList = Solid::Device::listFromType(Solid::DeviceInterface::StorageVolume, QString());
-
-    foreach( Solid::Device device, deviceList )
-    {
-        Solid::StorageVolume *storageVolume = device.as<Solid::StorageVolume>();
-        Solid::StorageAccess *storageAccess = device.as<Solid::StorageAccess>();
-
-        if( !storageVolume || !storageAccess )
-            continue;
-
-        if( !storageAccess->filePath().isEmpty() && dir.startsWith(storageAccess->filePath()) && storageVolume->usage() == Solid::StorageVolume::FileSystem )
-        {
-            if( storageAccess->filePath().length() > filePath.length() )
-            {
-                filePath = storageAccess->filePath();
-                fsType = storageVolume->fsType();
-            }
-        }
-    }
-
-    return fsType;
+    return mp->mountType();
 }
 
 KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QString extension, bool fast )

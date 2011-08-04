@@ -62,7 +62,7 @@ private slots:
 private:
     void updateMode( Mode );
 
-    static QString filesystemForDirectory( QString dir = "" );
+    static QString filesystemForDirectory( const QString& dir = "" );
 
     KComboBox *cMode;
     KComboBox *cDir;

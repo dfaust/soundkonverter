@@ -827,7 +827,12 @@ void FileList::showContextMenu( const QPoint& point )
     contextMenu->clear();
 
     // is this file (of our item) beeing converted at the moment?
-    if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+    if( item->state == FileListItem::WaitingForConversion ||
+        item->state == FileListItem::Stopped ||
+        item->state == FileListItem::BackendNeedsConfiguration ||
+        item->state == FileListItem::DiscFull ||
+        item->state == FileListItem::Failed
+      )
     {
         contextMenu->addAction( editAction );
         contextMenu->addSeparator();

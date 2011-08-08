@@ -85,7 +85,7 @@ public:
         {
             bool useSharedMemoryForTempFiles;
             int maxSizeForSharedMemoryTempFiles; // maximum file size for storing in shared memory [MiB]
-            int sharedMemorySize; // the size of the tmpfs
+            int sharedMemorySize; // the size of the tmpfs [MiB]
         } advanced;
 
         struct Backends

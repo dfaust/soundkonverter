@@ -248,7 +248,14 @@ public slots:
 
 signals:
     // connected to FileList
-    /** The conversion of an item has finished and the state is reported ( 0 = ok, -1 = error, 1 = aborted, 100 = backend needs configuration ) */
+    /**
+     * The conversion of an item has finished and the state is reported:
+     * 0   = ok
+     * -1  = error
+     * 1   = aborted
+     * 100 = backend needs configuration
+     * 101 = disc is full
+     */
     void finished( FileListItem *item, int state );
     /** The next track from the device can be ripped while the track is being encoded */
     void rippingFinished( const QString& device );

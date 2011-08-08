@@ -14,7 +14,10 @@
 #include <KAction>
 // #include <kactioncollection.h>
 #include <KMessageBox>
-#include <QProgressBar>
+#include <KStandardDirs>
+// #include <KDiskFreeSpaceInfo>
+#include <kmountpoint.h>
+// #include <KIO/Job>
 
 #include <QLayout>
 #include <QGridLayout>
@@ -23,7 +26,7 @@
 #include <QFile>
 #include <QResizeEvent>
 #include <QDir>
-#include <KStandardDirs>
+#include <QProgressBar>
 
 
 FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
@@ -515,6 +518,11 @@ void FileList::updateItem( FileListItem *item )
             item->setText( Column_State, i18n("Backend not configured") );
             break;
         }
+        case FileListItem::DiscFull:
+        {
+            item->setText( Column_State, i18n("Disc full") );
+            break;
+        }
         case FileListItem::Failed:
         {
             item->setText( Column_State, i18n("Failed") );
@@ -689,6 +697,25 @@ int FileList::convertingCount()
     return count;
 }
 
+// qulonglong FileList::spaceLeftForDirectory( const QString& dir )
+// {
+//     if( dir.isEmpty() )
+//         return 0;
+//
+//     KMountPoint::Ptr mp = KMountPoint::currentMountPoints().findByPath( dir );
+//     if( !mp )
+//         return 0;
+//
+//     KDiskFreeSpaceInfo job = KDiskFreeSpaceInfo::freeSpaceInfo( mp->mountPoint() );
+//     if( !job.isValid() )
+//         return 0;
+//
+//     KIO::filesize_t mBSize = job.size() / 1024 / 1024;
+//     KIO::filesize_t mBUsed = job.used() / 1024 / 1024;
+//
+//     return mBSize - mBUsed;
+// }
+
 void FileList::itemFinished( FileListItem *item, int state )
 {
     if( item )
@@ -721,6 +748,11 @@ void FileList::itemFinished( FileListItem *item, int state )
         else if( state == 100 )
         {
             item->state = FileListItem::BackendNeedsConfiguration;
+            updateItem( item );
+        }
+        else if( state == 101 )
+        {
+            item->state = FileListItem::DiscFull;
             updateItem( item );
         }
         else

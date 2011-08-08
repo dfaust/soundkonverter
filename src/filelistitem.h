@@ -35,6 +35,7 @@ public:
         ApplyingReplayGain,
         Stopped,
         BackendNeedsConfiguration,
+        DiscFull,
         Failed
     };
 

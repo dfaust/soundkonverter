@@ -67,6 +67,8 @@ private:
     int waitingCount();
     int convertingCount();
 
+//     qulonglong spaceLeftForDirectory( const QString& dir );
+
     QList<FileListItem*> selectedFiles;
 
     void dragEnterEvent( QDragEnterEvent *event );
@@ -75,6 +77,8 @@ private:
     void resizeEvent( QResizeEvent *event );
 
     bool queue;
+
+//     QStringList fullDiscs; // a list of mount points with volumes that don't have enougth space left
 
     /**
      * A command that should be executed after the conversion of a file is complete
@@ -122,7 +126,14 @@ public slots:
     void continueConversion();
 
     // connected to Convert
-    /** The conversion of an item has finished and the state is reported ( 0 = ok, -1 = error, 1 = aborted, 100 = backend needs configuration ) */
+    /**
+     * The conversion of an item has finished and the state is reported:
+     * 0   = ok
+     * -1  = error
+     * 1   = aborted
+     * 100 = backend needs configuration
+     * 101 = disc is full
+     */
     void itemFinished( FileListItem*, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );

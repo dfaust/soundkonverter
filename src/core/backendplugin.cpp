@@ -11,7 +11,6 @@ BackendPluginItem::BackendPluginItem( QObject *parent )
     process = 0;
     id = -1;
     progress = -1;
-    needsConfiguration = false;
 }
 
 BackendPluginItem::~BackendPluginItem()
@@ -481,16 +480,20 @@ float BackendPlugin::progress( int id )
 
 void BackendPlugin::processOutput()
 {
-    float progress;
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            QString output = backendItems.at(i)->process->readAllStandardOutput().data();
-            progress = parseOutput( output );
-//             progress = parseOutput( output, backendItems.at(i) ); TODO ogg replaygain fix
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
-            if( progress == -1 ) emit log( backendItems.at(i)->id, output );
+            const QString output = backendItems.at(i)->process->readAllStandardOutput().data();
+
+            const float progress = parseOutput( output );
+
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
+
+            if( progress == -1 )
+                emit log( backendItems.at(i)->id, output );
+
             return;
         }
     }
@@ -504,12 +507,9 @@ void BackendPlugin::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            if( backendItems.at(i)->needsConfiguration )
-                exitCode = 100;
-
             emit jobFinished( backendItems.at(i)->id, exitCode );
 
-            delete backendItems.at(i);
+            backendItems.at(i)->deleteLater();
             backendItems.removeAt(i);
 
             return;

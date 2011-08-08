@@ -326,8 +326,18 @@ void Convert::convert( ConvertItem *item )
         }
     }
 
-    if( !item->process.data() && item->convertID == -1 )
-        executeSameStep( item );
+    if( !item->process.data() )
+    {
+        if( item->convertID == -1 )
+        {
+            executeSameStep( item );
+        }
+        else if( item->convertID == -100 )
+        {
+            logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+            remove( item, 100 );
+        }
+    }
 }
 
 void Convert::encode( ConvertItem *item )
@@ -758,16 +768,8 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                         QFile::remove(items.at(i)->outputUrl.toLocalFile());
                 }
 
-                if( exitCode == 100 )
-                {
-                    logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
-                    remove( items.at(i), 100 );
-                }
-                else
-                {
-                    logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
-                    executeSameStep( items.at(i) );
-                }
+                logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1").arg(exitCode) );
+                executeSameStep( items.at(i) );
             }
         }
     }

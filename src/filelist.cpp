@@ -580,7 +580,11 @@ void FileList::startConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Stopped || item->state == FileListItem::BackendNeedsConfiguration || item->state == FileListItem::Failed )
+        if( item->state == FileListItem::Stopped ||
+            item->state == FileListItem::BackendNeedsConfiguration ||
+            item->state == FileListItem::DiscFull ||
+            item->state == FileListItem::Failed
+          )
         {
             item->state = FileListItem::WaitingForConversion;
             updateItem( item );
@@ -602,7 +606,10 @@ void FileList::killConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
+        if( item->state == FileListItem::Ripping ||
+            item->state == FileListItem::Converting ||
+            item->state == FileListItem::ApplyingReplayGain
+          )
         {
             emit killItem( item );
         }
@@ -679,6 +686,7 @@ int FileList::waitingCount()
         if( item->state == FileListItem::WaitingForConversion )
             count++;
     }
+
     return count;
 }
 
@@ -690,7 +698,10 @@ int FileList::convertingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
+        if( item->state == FileListItem::Ripping ||
+            item->state == FileListItem::Converting ||
+            item->state == FileListItem::ApplyingReplayGain
+          )
             count++;
     }
 
@@ -765,8 +776,6 @@ void FileList::itemFinished( FileListItem *item, int state )
     // FIXME disabled until saving gets faster
 //     save( false );
 
-// ---- NOTE double use of _item_ !!! --------------------------------------------------
-
     if( waitingCount() > 0 && queue )
     {
         convertNextItem();
@@ -779,9 +788,9 @@ void FileList::itemFinished( FileListItem *item, int state )
         float time = 0;
         for( int i=0; i<topLevelItemCount(); i++ )
         {
-            item = topLevelItem( i );
-            updateItem( item );
-            time += item->length;
+            FileListItem *temp_item = topLevelItem( i );
+            updateItem( temp_item ); // TODO why?
+            time += temp_item->length;
         }
         emit finished( time );
         emit conversionStopped( state );
@@ -925,7 +934,12 @@ void FileList::removeSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item && item->isSelected() && ( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed ) )
+        if( item && item->isSelected() &&
+            ( item->state == FileListItem::WaitingForConversion ||
+              item->state == FileListItem::Stopped ||
+              item->state == FileListItem::Failed
+            )
+          )
         {
             emit timeChanged( -item->length );
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
@@ -940,16 +954,29 @@ void FileList::removeSelectedItems()
 
 void FileList::convertSelectedItems()
 {
+    bool started = false;
     FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
-            emit convertItem( (FileListItem*)items.at(i) );
-    }
+        if( item->state == FileListItem::WaitingForConversion ||
+            item->state == FileListItem::Stopped ||
+            item->state == FileListItem::BackendNeedsConfiguration ||
+            item->state == FileListItem::DiscFull ||
+            item->state == FileListItem::Failed
+          )
+        {
+            // emit conversionStarted first because in case the plugin reports an error the conversion stop immediately
+            // and the itemFinished slot gets called. If conversionStarted was emitted at the end of this function
+            // it might broadcast the message that the conversion has started after the conversion already stopped
+            if( !started )
+                emit conversionStarted();
 
-    emit conversionStarted();
+            emit convertItem( (FileListItem*)items.at(i) );
+            started = true;
+        }
+    }
 }
 
 void FileList::killSelectedItems()
@@ -959,7 +986,10 @@ void FileList::killSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->state == FileListItem::Converting || item->state == FileListItem::Ripping || item->state == FileListItem::ApplyingReplayGain )
+        if( item->state == FileListItem::Converting ||
+            item->state == FileListItem::Ripping ||
+            item->state == FileListItem::ApplyingReplayGain
+          )
             emit killItem( item );
     }
 }
@@ -992,14 +1022,19 @@ void FileList::load( bool user )
 {
     if( topLevelItemCount() > 0 )
     {
-        int ret = KMessageBox::questionYesNo( this, i18n("Do you want to overwrite the current file list?\n\nIf not, the saved file list will be appended.") );
+        const int ret = KMessageBox::questionYesNo( this, i18n("Do you want to overwrite the current file list?\n\nIf not, the saved file list will be appended.") );
         if( ret == KMessageBox::Yes )
         {
             FileListItem *item;
             for( int i=0; i<topLevelItemCount(); i++ )
             {
                 item = topLevelItem(i);
-                if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Stopped || item->state == FileListItem::Failed )
+                if( item->state == FileListItem::WaitingForConversion ||
+                    item->state == FileListItem::Stopped ||
+                    item->state == FileListItem::BackendNeedsConfiguration ||
+                    item->state == FileListItem::DiscFull ||
+                    item->state == FileListItem::Failed
+                  )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
                     emit itemRemoved( item );

@@ -229,6 +229,15 @@ float soundkonverter_replaygain_mp3gain::parseOutput( const QString& output )
         progress = reg2.cap(1).toInt();
     }
 
+    // Applying mp3 gain change of -6 to /home/user/file.mp3...
+    // Undoing mp3gain changes (6,6) to /home/user/file.mp3...
+    // Deleting tag info of /home/user/file.mp3...
+    QRegExp reg3("[Applying mp3 gain change|Undoing mp3gain changes|Deleting tag info]");
+    if( progress == -1 && output.contains(reg3) )
+    {
+        progress = 0.0f;
+    }
+
     return progress;
 }
 

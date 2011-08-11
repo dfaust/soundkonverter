@@ -17,6 +17,11 @@ class KAction;
 // class QMenu;
 
 
+// NOTE Currently only one plugin can run at a time. If there should run more than one plugin simultaniously in the future seom things have to be rewritten.
+// - Like identifying items not only by their processId but also by the plugin,
+// - Qeue management
+
+
 /**
  * @short The file list of the Replay Gain scanner
  * @author Daniel Faust <hessijames@gmail.com>
@@ -37,19 +42,19 @@ public:
 
     /** Destructor */
     virtual ~ReplayGainFileList();
-    
+
     ReplayGainFileListItem *topLevelItem( int index ) const { return static_cast<ReplayGainFileListItem*>( QTreeWidget::topLevelItem(index) ); }
-    
+
     void addFiles( const KUrl::List& fileList, const QString& _codecName = "", ReplayGainFileListItem *after = 0, bool enabled = false );
-    
+
     void calcAllReplayGain( bool force = false );
     void removeAllReplayGain();
     void cancelProcess();
-    
+
 private:
     Config *config;
     Logger *logger;
-    
+
     QTimer updateTimer;
 
     /** Lists all file in a directory and adds them to the file list, if fast is false. The number of listed files is returned */
@@ -73,14 +78,14 @@ private:
     ReplayGainPlugin *currentPlugin;
     int currentId;
     int currentTime;
-    
+
     int totalTime;
     int processedTime;
-    
+
 //     QList<ReplayGainFileListItem*> processedItems;
 
     QTreeWidgetItem *lastAlbumItem;
-    
+
     QMenu *contextMenu;
     KAction *collapseAction;
     KAction *expandAction;
@@ -97,7 +102,7 @@ private:
 
 public slots:
     void addDir( const KUrl& directory, bool recursive, const QStringList& codecList );
-    
+
 private slots:
     void removeSelectedItems();
     void showContextMenu( const QPoint& point );

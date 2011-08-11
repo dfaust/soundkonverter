@@ -740,21 +740,29 @@ void ReplayGainFileList::processNextFile()
             }
         }
 
-        if( !calcGain )
-        {
-            for( int j=0; j<item->childCount(); j++ )
-            {
-                ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
-                child->state = ReplayGainFileListItem::Processed;
-                updateItem( child );
-                processedTime += child->time;
-            }
-            item->state = ReplayGainFileListItem::Processed;
-            updateItem( item );
-            if( item->type == ReplayGainFileListItem::Track )
-                processedTime += item->time;
-        }
-        else
+//         // why?
+//         if( !calcGain )
+//         {
+//             for( int j=0; j<item->childCount(); j++ )
+//             {
+//                 ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+//                 child->state = ReplayGainFileListItem::Processed;
+//                 updateItem( child );
+//                 processedTime += child->time;
+//             }
+//             item->state = ReplayGainFileListItem::Processed;
+//             updateItem( item );
+//             if( item->type == ReplayGainFileListItem::Track )
+//                 processedTime += item->time;
+//         }
+//         else
+//         {
+//             count++;
+//             processItems( itemList );
+//             return;
+//         }
+
+        if( calcGain )
         {
             count++;
             processItems( itemList );
@@ -809,6 +817,7 @@ void ReplayGainFileList::pluginProcessFinished( int id, int exitCode )
         item = topLevelItem(i);
         if( item->type == ReplayGainFileListItem::Track && item->processId == id )
         {
+            item->processId = -1;
             if( killed )
             {
                 item->state = ReplayGainFileListItem::Waiting;
@@ -835,6 +844,7 @@ void ReplayGainFileList::pluginProcessFinished( int id, int exitCode )
                 child = (ReplayGainFileListItem*)item->child(j);
                 if( child->processId == id )
                 {
+                    child->processId = -1;
                     if( killed )
                     {
                         child->state = ReplayGainFileListItem::Waiting;

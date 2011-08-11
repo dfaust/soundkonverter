@@ -40,7 +40,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
 
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
-    
+
     QGridLayout* grid = new QGridLayout( widget );
 
     QHBoxLayout* filterBox = new QHBoxLayout();
@@ -131,7 +131,7 @@ void ReplayGainScanner::showFileDialog()
     }
     filterList.prepend( allFilter.join(" ") + "|" + i18n("All supported files") );
     filterList += "*.*|" + i18n("All files");
-    
+
     // add the control elements
     QLabel *formatHelp = new QLabel( i18n("<a href=\"format-help\">Are you missing some file formats?</a>"), this );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
@@ -164,7 +164,7 @@ void ReplayGainScanner::showHelp()
             problemList += problem;
         }
     }
-    
+
     CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Debug, problemList, this );
     problemsDialog->exec();
 }
@@ -172,11 +172,11 @@ void ReplayGainScanner::showHelp()
 void ReplayGainScanner::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::ReplayGain, this );
-    
+
     connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
 
     dialog->exec();
-    
+
     disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), 0, 0 );
 
     delete dialog;
@@ -226,7 +226,7 @@ void ReplayGainScanner::updateProgress( int progress, int totalSteps )
 {
     pProgressBar->setMaximum( totalSteps );
     pProgressBar->setValue( progress );
-    float fPercent = totalSteps > 0 ? progress * 100 / totalSteps : 0;
+    const float fPercent = totalSteps > 0 ? progress * 100 / totalSteps : 0;
 
     QString percent;
     percent.sprintf( "%i%%", (int)fPercent );

@@ -1,23 +1,22 @@
+# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
-# Tamas Orosz <orosz.tamaas@gmail.com>, 2011.
+# 
 # Orosz Tamás, 2011.
+# Tamas Orosz <orosz.tamaas@gmail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
-"soundkonverter/\n"
+"Project-Id-Version: soundkonverter\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/soundkonverter\n"
 "POT-Creation-Date: 2011-08-11 19:37+0200\n"
-"PO-Revision-Date: 2011-05-21 21:02+0200\n"
-"Last-Translator: Tamas Orosz <orosz.tamaas@gmail.com>\n"
-"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
-"Language: hu\n"
+"PO-Revision-Date: 2011-08-12 00:19+0000\n"
+"Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
+"Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/team/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
@@ -28,51 +27,55 @@ msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
+"Háttérprogramokat telepített vagy távolított el, a soundKonverter "
+"beállításai optimalizálhatók."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
+"A(z) %1 fáljok kódolásához a(z) '%2' háttérprogram lecserélhető erre: '%3'. "
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
 msgstr ""
+"Audió CD-k beolvasásához a(z) '%1' háttérprogram lecserélhető erre: '%2'. "
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
+"A(z) %1 fáljok dekódolásához a(z) '%2' háttérprogram lecserélhető erre: "
+"'%3'. "
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
+"A(z) %1 fáljok hangerő-korrekciójához a(z) '%2' háttérprogram lecserélhető "
+"erre: '%3'. "
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
-msgstr ""
+msgstr "Mellőzés"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr ""
+msgstr "Rögzítés"
 
 #: codecproblems.cpp:28
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
-"Maybe you need to install an additional plugin via the package manager of "
-"your distribution."
+"Maybe you need to install an additional plugin via the package manager of your distribution."
 msgstr ""
 "A soundKonverter nem talál hiányzó csomagokat.\n"
-"Lehet, hogy további csomago(ka)t kell telepítenie a "
-"csomagkezelőjesegítségével."
+"Lehet, hogy további csomago(ka)t kell telepítenie a csomagkezelője segítségével."
 
 #: codecproblems.cpp:32
 msgid ""
-"Some of the installed plugins aren't working because they are missing "
-"additional programs.\n"
+"Some of the installed plugins aren't working because they are missing additional programs.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Némelyik bővítmény nem működik, mert működéséhez további programok "
-"szükségesek.\n"
+"Némelyik bővítmény nem működik, mert működéséhez további programok szükségesek.\n"
 "A lehetséges megoldások lentebb láthatók."
 
 #: codecproblems.cpp:37
@@ -94,8 +97,7 @@ msgstr ""
 #: codecproblems.cpp:47
 msgid ""
 "Ripping audio CDs is not supported by any installed plugin.\n"
-"Please have a look at your distributions package manager in order to get a "
-"cd ripper plugin for soundKonverter."
+"Please have a look at your distributions package manager in order to get a cd ripper plugin for soundKonverter."
 msgstr ""
 "Valamelyik telepített bővítmény nem támogatja az Audio CD-írást.\n"
 "CD-író bővítmény beszerzéséhez nézzen körül a csomagkezelőben."
@@ -109,9 +111,8 @@ msgstr ""
 "A lehetséges megoldások lentebb láthatók."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
-#, fuzzy
 msgid "Possible solutions for %1"
-msgstr "%1 profilinformáció"
+msgstr "Lehetséges megoldások ehhez: %1"
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
@@ -322,7 +323,7 @@ msgstr "A hangerő-korrekció hozzáadása a soundKonverterhez"
 
 #: configdialog/configadvancedpage.cpp:35
 msgid "Preferred extension for ogg vorbis files"
-msgstr ""
+msgstr "Alapértelmezett kiterjesztés az ogg vorbis fájlokhoz"
 
 #: configdialog/configadvancedpage.cpp:50
 msgid "Status update delay"
@@ -340,15 +341,13 @@ msgid "ms"
 msgstr "ms"
 
 #: configdialog/configadvancedpage.cpp:65
-#, fuzzy
 msgid "Always use FAT compatible output file names"
-msgstr "Használjon FAT-kompatibilis fájlneveket"
+msgstr ""
 
 #: configdialog/configadvancedpage.cpp:66
 msgid ""
 "Replaces some special characters like '?' by '_'.\n"
-"If the output directoy is on a FAT file system FAT compatible file names "
-"will automatically be used independently from this option."
+"If the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option."
 msgstr ""
 
 #: configdialog/configadvancedpage.cpp:75
@@ -414,7 +413,7 @@ msgstr "Formátum"
 
 #: configdialog/configbackendspage.cpp:246
 msgid "Show possible optimizations"
-msgstr ""
+msgstr "Mutassa a lehetséges optimalizálásokat"
 
 #: configdialog/configbackendspage.cpp:266
 msgid ""
@@ -434,7 +433,7 @@ msgstr "%1 beállítások"
 
 #: configdialog/configbackendspage.cpp:386
 msgid "All backend settings seem to be optimal, there is nothing to do."
-msgstr ""
+msgstr "Minden háttérprogram beállítása jónak tűnik, nincs teendője."
 
 #: configdialog/configdialog.cpp:28
 msgid "Settings"
@@ -493,10 +492,8 @@ msgid "Number of files to convert at once"
 msgstr "Egyszerre konvertálandó fájlok száma"
 
 #: configdialog/configgeneralpage.cpp:118
-#, fuzzy
 msgid ""
-"You shouldn't set this number higher than the amount of installed processor "
-"cores.\n"
+"You shouldn't set this number higher than the amount of installed processor cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
 "Ez a szám nem lehet nagyobb, mint a telepített processzormagok száma.\n"
@@ -511,8 +508,7 @@ msgid ""
 "These service menus won't get removed if you uninstall soundKonverter.\n"
 "But you can remove them by diableing this option."
 msgstr ""
-"Ezek a szolgáltatási menük nem lesznek eltávolítva a SoundKonverter "
-"törlésekor.\n"
+"Ezek a szolgáltatási menük nem lesznek eltávolítva a SoundKonverter törlésekor.\n"
 "Eltávolításukhoz tiltsa le ezt a kapcsolót."
 
 #: configdialog/configgeneralpage.cpp:139
@@ -520,22 +516,19 @@ msgid "Group files in the Replay Gain tool by"
 msgstr "Fájlok csoportosítása a hangerő-korrekciónál ez alapján:"
 
 #: configdialog/configgeneralpage.cpp:142
-#, fuzzy
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr "Albumcímkék és könyvtárak"
+msgstr ""
 
 #: configdialog/configgeneralpage.cpp:143
-#, fuzzy
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr "Csak albumcímkék"
+msgstr ""
 
 #: configdialog/configgeneralpage.cpp:144
-#, fuzzy
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr "Csak könyvtárak"
+msgstr ""
 
 #: convert.cpp:163 convert.cpp:1109
 msgid "Getting file"
@@ -618,29 +611,24 @@ msgid "Got log ID: %1"
 msgstr "Napló azonosító: %1"
 
 #: convert.cpp:960
-#, fuzzy
 msgid ""
-"An error occured, the output file size is less than one percent of the input "
-"file size"
+"An error occured, the output file size is less than one percent of the input"
+" file size"
 msgstr ""
-"Hiba történt, a kimeneti fájl mérete kevesebb mint 1% a bemeneti fájl "
-"méretének"
 
 #: convert.cpp:964
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "A konvertálás meghiúsult. Próbálja újra. Hibakód: -2 (%1)"
 
 #: convert.cpp:973
-#, fuzzy
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr "Normál kilépés"
+msgstr ""
 
 #: convert.cpp:975
-#, fuzzy
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr "Felhasználó által megszakítva"
+msgstr ""
 
 #: convert.cpp:977
 msgctxt "Conversion exit status"
@@ -648,10 +636,9 @@ msgid "Backend needs configuration"
 msgstr ""
 
 #: convert.cpp:979
-#, fuzzy
 msgctxt "Conversion exit status"
 msgid "An error occured"
-msgstr "Hiba történt"
+msgstr ""
 
 #: convert.cpp:992
 msgid "Executing command: \"%1\""
@@ -678,10 +665,9 @@ msgid "File size ratio"
 msgstr "Fájlméret aránya"
 
 #: convert.cpp:1101
-#, fuzzy
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr "Ismeretlen"
+msgstr ""
 
 #: convert.cpp:1118 filelist.cpp:503
 msgid "Ripping"
@@ -692,26 +678,26 @@ msgid "Wave won't compress the audio stream."
 msgstr "A Wave nem fogja tömöríteni az audio folyamot."
 
 #: core/backendplugin.cpp:45
-#, fuzzy
 msgid ""
-"Advanced Audio Coding is a lossy and popular audio format. It is widely used "
-"by Apple Inc."
+"Advanced Audio Coding is a lossy and popular audio format. It is widely used"
+" by Apple Inc."
 msgstr ""
 "Az Advanced Audio Coding egy veszteségesen tömörítő és népszerű "
-"audióformátum."
+"audióformátum. Az Apple széles körben használja."
 
 #: core/backendplugin.cpp:52
 msgid ""
 "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
 msgstr ""
+"Az m4a fájlokat az aac kodekkel lehet kódolni. Az Apple széles körben "
+"használja."
 
 #: core/backendplugin.cpp:71
 msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
 "For more information see: http://www.xiph.org/vorbis/"
 msgstr ""
-"Az Ogg Vorbis egy ingyenes és veszteségesen tömörítő, kiváló minőségű "
-"audiókodek.\n"
+"Az Ogg Vorbis egy ingyenes és veszteségesen tömörítő, kiváló minőségű audiókodek.\n"
 "Több információkért látogassa meg a http://www.xiph.org/vorbis weboldalt."
 
 #: core/backendplugin.cpp:83
@@ -719,9 +705,10 @@ msgid ""
 "MP3 is the most popular lossy audio codec. It's supported by all audio "
 "players."
 msgstr ""
+"Az MP3 a legnépszerűbb veszteségesen tömörítő audiókodek. Minden "
+"audiólejátszó támogatja."
 
 #: core/backendplugin.cpp:92
-#, fuzzy
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it's name says, it compresses without any loss of quality."
@@ -738,7 +725,6 @@ msgid "Dolby Digital-Audio"
 msgstr "Dolby Digital Audio"
 
 #: core/backendplugin.cpp:116
-#, fuzzy
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
 msgstr ""
 "Az Apple Lossless Audio Codec egy veszteségmentesen tömörítő audióformátum "
@@ -765,12 +751,11 @@ msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
 msgstr ""
-"Az Adaptive Multi-Rate Wide-Band egy továbbfejlesztett változata az Adaptive "
-"Multi-Rate Narrow-Band-nak, és a magasabb adatsebességnek köszönhetően jobb "
-"minőséget nyújt."
+"Az Adaptive Multi-Rate Wide-Band egy továbbfejlesztett változata az Adaptive"
+" Multi-Rate Narrow-Band-nak, és a magasabb adatsebességnek köszönhetően jobb"
+" minőséget nyújt."
 
 #: core/backendplugin.cpp:170
-#, fuzzy
 msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
 msgstr ""
@@ -779,23 +764,22 @@ msgstr ""
 
 #: core/backendplugin.cpp:186
 msgid ""
-"Speex is a free and lossy audio codec designed for low quality speech "
-"encoding.\n"
+"Speex is a free and lossy audio codec designed for low quality speech encoding.\n"
 "For more information see: http://www.speex.org"
 msgstr ""
-"A Speex egy ingyenes és veszteségesen tömörítő audiókodek gyenge minőségű "
-"beszéd kódolásához.\n"
+"A Speex egy ingyenes és veszteségesen tömörítő audiókodek gyenge minőségű beszéd kódolásához.\n"
 "További információkért látogassa meg a http://www.speex.org weboldalt."
 
 #: core/backendplugin.cpp:194
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
 msgstr ""
-"Az MPEG-1 Audio Layer egy nagyon régi és veszteségesen tömörítő fájlformátum."
+"Az MPEG-1 Audio Layer egy nagyon régi és veszteségesen tömörítő "
+"fájlformátum."
 
 #: core/backendplugin.cpp:201
 msgid ""
-"Musepack is a free and lossy file format based on mp2 and optimized for high "
-"quality."
+"Musepack is a free and lossy file format based on mp2 and optimized for high"
+" quality."
 msgstr ""
 "A Musepack egy ingyenes és veszteségesen tömörítő, az mp2-re alapuló "
 "fájlformátum, kiváló minőségre optimalizálva."
@@ -806,12 +790,12 @@ msgid ""
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
 "A Shorten egy ingyenes és veszteségmentesen tömörítő audiókodek.\n"
-"További információért látogassa meg a http://etree.org/shnutils/shorten/ "
-"weboldalt."
+"További információért látogassa meg a http://etree.org/shnutils/shorten/ weboldalt."
 
 #: core/backendplugin.cpp:239
 msgid "True Audio is a free lossless audio format."
-msgstr "A True Audio egy ingyenes és veszteségmentesen tömörítő audióformátum."
+msgstr ""
+"A True Audio egy ingyenes és veszteségmentesen tömörítő audióformátum."
 
 #: core/backendplugin.cpp:246
 msgid ""
@@ -832,7 +816,8 @@ msgstr "A 3GP egy audió/videó konténer formátum hordozható eszközökhöz."
 
 #: core/backendplugin.cpp:277
 msgid "Real Media is a propritary and lossy codec."
-msgstr "A Real Media egy szabadalommal védett és veszteségesen tömörítő kodek."
+msgstr ""
+"A Real Media egy szabadalommal védett és veszteségesen tömörítő kodek."
 
 #: core/backendplugin.cpp:366
 msgid ""
@@ -843,63 +828,53 @@ msgstr ""
 "hangszerek időzítését tárolja."
 
 #: core/backendplugin.cpp:375
-#, fuzzy
 msgid ""
 "Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
 "encode audio waves but stores instrument timings."
 msgstr ""
-"A midi egy nagyon régi hangfájl-formátum, ami nem hangot kódol, hanem "
-"hangszerek időzítését tárolja."
+"Az Amiga-SoundTracker-Audio egy nagyon régi hangfájl-formátum, ami nem "
+"hangot kódol, hanem hangszerek időzítését tárolja."
 
 #: core/backendplugin.cpp:452
 msgid "Killing process on user request"
 msgstr "A folyamat a felhasználó kérésére megszakítva"
 
 #: core/backendplugin.cpp:527
-#, fuzzy
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
+msgstr "A(z) %1 fájlok kódolásához telepítenie kell a(z) '%2'-t."
 
 #: core/backendplugin.cpp:534
-#, fuzzy
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
+msgstr "A(z) %1 fájlok kódolásához telepítenie kell a(z) '%2'-t."
 
 #: core/backendplugin.cpp:541
-#, fuzzy
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr "Az mp2 fájlok kódolásához telepítenie kell a twolame-et."
+msgstr "A(z) %2 fájlok kódolásához telepítenie kell a(z) '%2'-t."
 
 #: core/backendplugin.cpp:548
-#, fuzzy
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
-"Ahhoz, hogy hangerő-korrekciós címkéket számoljon wavpack fájlokhoz, "
-"telepítenie kell a 'wvgain'-t.\n"
-"A wvgain rendszerint a 'wavpack' csomag része."
+"Ahhoz, hogy hangerő-korrekciós címkéket számoljon '%1' fájlokhoz, "
+"telepítenie kell a(z) '%2'-t."
 
 #: core/backendplugin.cpp:555
 msgid "'%1' should be shipped with your distribution."
-msgstr ""
+msgstr "A(z) '%1' rendszerint megtalálható a disztribúciójában."
 
 #: core/backendplugin.cpp:562
-#, fuzzy
 msgid ""
 "Since '%1' inludes patented codecs, it may not be included in the default "
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
-"Telepítenie kell az ffmpeg-et.\n"
-"Mivel az ffmpeg szabadalommal védett kodekeket tartalmaz, valószínűleg nincs "
-"telepítve a rendszerén.\n"
-"Bizonyos disztribúcióknál lehetőség van a ffmpeg kiegészítő "
-"szoftvertárolókból történő telepítésére. "
+"Mivel a(z) '%1' szabadalommal védett kodekeket tartalmaz, valószínűleg nincs telepítve a rendszerén.\n"
+"Bizonyos disztribúcióknál lehetőség van a(z) '%1' kiegészítő szoftvertárolókból történő telepítésére. "
 
 #: core/backendplugin.cpp:569
 msgid "You can download '%1' at %2"
-msgstr ""
+msgstr "A(z) '%1'-t innen töltheti le: %2"
 
 #: filelist.cpp:48
 msgid "State"
@@ -1075,17 +1050,14 @@ msgstr ""
 
 #: main.cpp:17
 msgid ""
-"soundKonverter is a frontend to various audio converters, Replay Gain tools "
-"and CD rippers.\n"
+"soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n"
 "\n"
 "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
-"A soundKonverter audiókonverterek, hangerő-korrekciós eszközök és CD-másolók "
-"felülete.\n"
+"A soundKonverter audiókonverterek, hangerő-korrekciós eszközök és CD-másolók felülete.\n"
 "\n"
-"Hibabejelentés a https://bugs.launchpad.net/soundkonverter weboldalon\n"
-"vagy a hessijames@gmail.com e-mail címen."
+"Hibabejelentés a https://bugs.launchpad.net/soundkonverter weboldalon vagy a hessijames@gmail.com e-mail címen."
 
 #: main.cpp:23
 msgid "soundKonverter"
@@ -1260,9 +1232,8 @@ msgid "Length"
 msgstr "Hossz"
 
 #: opener/cdopener.cpp:237
-#, fuzzy
 msgid "Player"
-msgstr "CD-lejátszó"
+msgstr "Lejátszó"
 
 #: opener/cdopener.cpp:253
 msgid "No track selected"
@@ -1295,25 +1266,19 @@ msgstr "Az egész CD beolvasása egy fájlba"
 
 #: opener/cdopener.cpp:408
 msgid ""
-"Ripping an entire cd to a single file is not supported by the installed "
-"backends.\n"
+"Ripping an entire cd to a single file is not supported by the installed backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
-"Az egész CD egy fájlba történő beolvasását nem támogatják a telepített "
-"háttérprogramok.\n"
+"Az egész CD egy fájlba történő beolvasását nem támogatják a telepített háttérprogramok.\n"
 "A lehetséges megoldások lentebb láthatók.\n"
 
 #: opener/cdopener.cpp:412
 msgid ""
-"Ripping an entire cd to a single file is not supported by the installed "
-"backends.\n"
-"Please check your distribution's package manager in order to install an "
-"additional ripper plugin wich supports ripping to one file."
+"Ripping an entire cd to a single file is not supported by the installed backends.\n"
+"Please check your distribution's package manager in order to install an additional ripper plugin wich supports ripping to one file."
 msgstr ""
-"Az egész CD egy fájlba történő beolvasását nem támogatják a telepített "
-"háttérprogramok.\n"
-"Nézzen körül disztribúciója csomagkezelőjében olyan kiegészítő bővítményért, "
-"ami támogatja a CD-k egy fájlba történő beolvasását."
+"Az egész CD egy fájlba történő beolvasását nem támogatják a telepített háttérprogramok.\n"
+"Nézzen körül disztribúciója csomagkezelőjében olyan kiegészítő bővítményért, ami támogatja a CD-k egy fájlba történő beolvasását."
 
 #: opener/cdopener.cpp:419 opener/diropener.cpp:37 opener/urlopener.cpp:85
 msgid "Proceed"
@@ -1515,17 +1480,15 @@ msgstr ""
 #: optionsdetailed.cpp:262
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
-"Please check your distribution's package manager in order to install an "
-"additional Replay Gain plugin."
+"Please check your distribution's package manager in order to install an additional Replay Gain plugin."
 msgstr ""
 "A hangerő-korrekció nem támogatja az alábbi fájlformátumot: %1.\n"
-"Ellenőrizze disztribúciójában a csomagkezelőt kiegészítő hangerő-korrekciós "
-"bővítmény telepítéséért."
+"Ellenőrizze disztribúciójában a csomagkezelőt kiegészítő hangerő-korrekciós bővítmény telepítéséért."
 
 #: optionsdetailed.cpp:283 optionssimple.cpp:383
 msgid ""
-"Using the current conversion options will create files with approximately %1 "
-"per minute."
+"Using the current conversion options will create files with approximately %1"
+" per minute."
 msgstr "A jelenlegi konvertálási beállításokkal percenként %1 fájl készül el."
 
 #: optionsdetailed.cpp:344
@@ -1599,32 +1562,25 @@ msgstr "Nincs fájl kiválasztva"
 #: optionseditor.cpp:349
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
-"soundKonverter will try to read the tags, when it is about to convert the "
-"file.\n"
-"If you want to edit the tags, you can hit the button below but then "
-"soundKonverter will not try\n"
+"soundKonverter will try to read the tags, when it is about to convert the file.\n"
+"If you want to edit the tags, you can hit the button below but then soundKonverter will not try\n"
 "to read the tags after downloading."
 msgstr ""
 "A címkék nem olvashatók, mivel ez nem egy helyi fájl.\n"
 "A soundKonverter megpróbálja beolvasni a címkéket a konvertálás során.\n"
-"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de "
-"ekkor\n"
+"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de ekkor\n"
 " a soundKonverter nem próbálja meg beolvasni a címkéket a letöltés után."
 
 #: optionseditor.cpp:358
 msgid ""
 "Reading the tags of this file failed.\n"
-"soundKonverter will try to read the tags a second time, when it is about to "
-"convert the file.\n"
-"If you want to edit the tags, you can hit the button below but then "
-"soundKonverter will not try\n"
+"soundKonverter will try to read the tags a second time, when it is about to convert the file.\n"
+"If you want to edit the tags, you can hit the button below but then soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
 "A címkék beolvasása közben hiba történt.\n"
-"A soundKonverter megpróbálja újból beolvasni a címkéket a konvertálás "
-"során.\n"
-"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de "
-"ekkor\n"
+"A soundKonverter megpróbálja újból beolvasni a címkéket a konvertálás során.\n"
+"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de ekkor\n"
 " a soundKonverter nem próbálja újból beolvasni a címkéket."
 
 #: optionseditor.cpp:378
@@ -1642,17 +1598,13 @@ msgstr ""
 #: optionseditor.cpp:399
 msgid ""
 "Reading the tags of one or more files failed.\n"
-"soundKonverter will try to read the tags a second time, when it is about to "
-"convert the files.\n"
-"If you want to edit the tags, you can hit the button below but then "
-"soundKonverter will not try\n"
+"soundKonverter will try to read the tags a second time, when it is about to convert the files.\n"
+"If you want to edit the tags, you can hit the button below but then soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
 "A címkék beolvasása közben hiba történt.\n"
-"A soundKonverter megpróbálja újból beolvasni a címkéket a konvertálás "
-"során.\n"
-"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de "
-"ekkor\n"
+"A soundKonverter megpróbálja újból beolvasni a címkéket a konvertálás során.\n"
+"Ha Ön szeretné szerkeszteni a címkéket, nyomja meg az alábbi gombot, de ekkor\n"
 " a soundKonverter nem próbálja újból beolvasni a címkéket."
 
 #: optionssimple.cpp:45
@@ -1682,15 +1634,11 @@ msgstr "Tetszőleges:"
 #: optionssimple.cpp:180
 msgid ""
 "This produces sound files of a very low quality.\n"
-"That can be useful if you have a mobile device where your storage space is "
-"limited. It is not recommended to save your music in this quality without a "
-"copy with higher quality."
+"That can be useful if you have a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."
 msgstr ""
 "Nagyon gyenge minőségű hangfájlok készülnek.\n"
-"Ez hasznos lehet egy hordozható eszköz esetén, ahol korlátozott a "
-"tárkapacitás.\n"
-"Nem ajánlott ilyen gyenge minőségű hangfájl készítése egy jobb minőségű "
-"másolat nélkül."
+"Ez hasznos lehet egy hordozható eszköz esetén, ahol korlátozott a tárkapacitás.\n"
+"Nem ajánlott ilyen gyenge minőségű hangfájl készítése egy jobb minőségű másolat nélkül."
 
 #: optionssimple.cpp:181 optionssimple.cpp:187 optionssimple.cpp:193
 #: optionssimple.cpp:199 optionssimple.cpp:205 optionssimple.cpp:211
@@ -1701,15 +1649,11 @@ msgstr "%1 profilinformáció"
 #: optionssimple.cpp:186
 msgid ""
 "This produces sound files of a low quality.\n"
-"That can be useful if you have a mobile device where your storage space is "
-"limited. It is not recommended to save your music in this quality without a "
-"copy with higher quality."
+"That can be useful if you have a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."
 msgstr ""
 "Gyenge minőségű hangfájlok készülnek.\n"
-"Ez hasznos lehet egy hordozható eszköz esetén, ahol korlátozott a "
-"tárkapacitás.\n"
-"Nem ajánlott ilyen gyenge minőségű hangfájl készítése egy jobb minőségű "
-"másolat nélkül."
+"Ez hasznos lehet egy hordozható eszköz esetén, ahol korlátozott a tárkapacitás.\n"
+"Nem ajánlott ilyen gyenge minőségű hangfájl készítése egy jobb minőségű másolat nélkül."
 
 #: optionssimple.cpp:192
 msgid ""
@@ -1730,12 +1674,10 @@ msgstr ""
 #: optionssimple.cpp:204
 msgid ""
 "This produces sound files of a very high quality.\n"
-"You should only use this, if you are a quality freak and have enough disc "
-"space available."
+"You should only use this, if you are a quality freak and have enough disc space available."
 msgstr ""
 "Kitűnő minőségű hangfájlok készülnek.\n"
-"Csak akkor használja, ha Ön \"minőségrajongó\" és elegendő hely van a "
-"lemezen."
+"Csak akkor használja, ha Ön \"minőségrajongó\" és elegendő hely van a lemezen."
 
 #: optionssimple.cpp:210
 msgid ""
@@ -1747,8 +1689,7 @@ msgstr ""
 
 #: optionssimple.cpp:216
 msgid ""
-"This produces two files. One lossy compressed playable file and one "
-"correction file.\n"
+"This produces two files. One lossy compressed playable file and one correction file.\n"
 "Both files together result in a file that is equivalent to the input file."
 msgstr ""
 "Két fájl készül. Az egyik egy veszteségesen tömörített, lejátszható\n"
@@ -1907,13 +1848,12 @@ msgid "Bitrate"
 msgstr "Bitráta"
 
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:57
-#, fuzzy
 msgid "Sample rate"
-msgstr "Egyszerű sztereó"
+msgstr "Mintavételezési ráta"
 
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:61
 msgid "Automatic"
-msgstr ""
+msgstr "Automatikus"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:58
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
@@ -1970,8 +1910,7 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:86
 msgid ""
-"In order to convert the midi data to a wave form you need a SoundFont which "
-"maps the midi data to sound effects.\n"
+"In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
 
@@ -1986,7 +1925,6 @@ msgstr "Előre beállított"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:522
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Medium"
 msgstr "Megfelelő"
@@ -1995,7 +1933,6 @@ msgstr "Megfelelő"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:529
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:39
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:308
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Standard"
 msgstr "Szabványos"
@@ -2004,7 +1941,6 @@ msgstr "Szabványos"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:536
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:40
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:313
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Extreme"
 msgstr "Rendkívüli"
@@ -2013,7 +1949,6 @@ msgstr "Rendkívüli"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:543
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:41
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:318
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Insane"
 msgstr "Őrületes"
@@ -2041,7 +1976,8 @@ msgstr "Gyors kódolás"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:63
 msgid ""
-"Use a faster encoding alogrithm (results in a slightly lower output quality)."
+"Use a faster encoding alogrithm (results in a slightly lower output "
+"quality)."
 msgstr ""
 "Használjon egy gyorsabb kódolási algoritmust (alig gyengébb minőséget "
 "eredményez)."
@@ -2136,24 +2072,19 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:541
 msgid ""
-"If you have extremely good hearing and similar equipment, this preset will "
-"generally provide\n"
+"If you have extremely good hearing and similar equipment, this preset will generally provide\n"
 "slightly higher quality than the standard mode (~280 kbps abr)."
 msgstr ""
-"Ha nagyon jó hallása van és a berendezései is jók, ez a beállítás alig jobb "
-"minőséget nyújt,\n"
+"Ha nagyon jó hallása van és a berendezései is jók, ez a beállítás alig jobb minőséget nyújt,\n"
 "mint az átlagos (~280 kbps átlagos bitráta)"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:548
 msgid ""
-"This preset will usually be overkill for most people and most situations, "
-"but if you must have\n"
-"the absolute highest quality with no regard to filesize, this is the way to "
-"go (320 kbps cbr)."
+"This preset will usually be overkill for most people and most situations, but if you must have\n"
+"the absolute highest quality with no regard to filesize, this is the way to go (320 kbps cbr)."
 msgstr ""
 "A legtöbb esetben ez a beállítás nem szükséges, de amennyiben Önnek\n"
-"a legjobb minőség szükséges és nem számít a fájl mérete, válassza ezt(320 "
-"kbps konstans bitráta)."
+"a legjobb minőség szükséges és nem számít a fájl mérete, válassza ezt(320 kbps konstans bitráta)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:594
 msgid "Quality level from 9 to 0 where 0 is the highes quality."
@@ -2174,28 +2105,24 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:293
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Telephone"
 msgstr "Telefon"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:298
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Thumb"
 msgstr "Bélyegkép"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:303
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Radio"
 msgstr "Rádió"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:42
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:323
-#, fuzzy
 msgctxt "Backend profile"
 msgid "Braindead"
 msgstr "Agyhalott"
@@ -2237,6 +2164,7 @@ msgstr "kiváló minőség (~270 kbps átlagos bitráta)"
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:58
 msgid "You can download '%1' at '%2' after entering an email adress."
 msgstr ""
+"A(z) '%1'-t egy érvényes e-mail cím megadása után innen töltheti le: %2 "
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:97
 msgid ""
@@ -2265,18 +2193,17 @@ msgstr "A minőség szintje -50 és 50 között."
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:38
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:46
 #: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:33
-#, fuzzy
 msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
-"A speex fájlok kódolásához telepítenie kell a speex-et.\n"
-"A speex rendszerint megtalálható a disztribúciójában."
+"A(z) '%1' rendszerint a '%2' csomag része, ami megtalálható a "
+"disztribúciójában."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
-msgstr ""
+msgstr "A(z) '%1' rendszerint a '%2' csomag része, ami innen tölthető le: %3"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
@@ -2300,12 +2227,9 @@ msgid "Use tag format:"
 msgstr "Címkeformátum használata:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:42
-#, fuzzy
 msgid ""
-"In order to rip audio cds per track or to a single file, you need to install "
-"'cdparanoia'.\n"
-"'cdparanoia' is usually shipped with your distribution, the package name can "
-"vary."
+"In order to rip audio cds per track or to a single file, you need to install 'cdparanoia'.\n"
+"'cdparanoia' is usually shipped with your distribution, the package name can vary."
 msgstr ""
 "Ahhoz, hogy audio CD-t írjon számonként vagy egy fájlba, telepítenie kell a "
 "cdparanoia-t. A cdparanoia rendszerint a disztribúció része, a csomag neve "
@@ -2446,362 +2370,4 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "E-mail"
 
-#~ msgid "Replaces some special characters like '?' by '_'."
-#~ msgstr "Speciális karakterek (pl. '?') cseréje erre: '_'."
 
-#~ msgid "Standard"
-#~ msgstr "Szabványos"
-
-#~ msgid "Extreme"
-#~ msgstr "Rendkívüli"
-
-#~ msgid "Insane"
-#~ msgstr "Őrületes"
-
-#~ msgid "Telephone"
-#~ msgstr "Telefon"
-
-#~ msgid "Thumb"
-#~ msgstr "Bélyegkép"
-
-#~ msgid "Radio"
-#~ msgstr "Rádió"
-
-#~ msgid "Braindead"
-#~ msgstr "Agyhalott"
-
-#~ msgid ""
-#~ "In order to encode aac files, you need to install 'faac'.\n"
-#~ "Since faac inludes a patented codec, it may not be included in the "
-#~ "default installation of your distribution. Many distributions offer faac "
-#~ "in an additional software repository."
-#~ msgstr ""
-#~ "Az aac fájlok kódolásához telepítenie kell az faac-t.\n"
-#~ "Mivel az faac szabadalommal védett kodeket tartalmaz, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van az faac kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to decode aac files, you need to install 'faad'.\n"
-#~ "Since faad inludes a patented codec, it may not be included in the "
-#~ "default installation of your distribution. Many distributions offer faad "
-#~ "in an additional software repository."
-#~ msgstr ""
-#~ "Az aac fájlok dekódolásához telepítenie kell az faad-t.\n"
-#~ "Mivel az faad szabadalommal védett kodeket tartalmaz, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van az faad kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid "MP3 is a very popular lossy audio codec."
-#~ msgstr "Az MP3 egy nagyon népszerű, veszteségesen tömörítő audiókodek."
-
-#~ msgid "Monkey's Audio is a propritary lossless audio format."
-#~ msgstr ""
-#~ "A Monkey's Audio egy szabadalommal védett, veszteségmentesen tömörítő "
-#~ "audióformátum."
-
-#~ msgid "WavPack is a free lossless audio format."
-#~ msgstr "A WavPack egy ingyenes és veszteségmentesen tömörítő audióformátum."
-
-#~ msgid ""
-#~ "In order to encode flac files, you need to install 'flac'.\n"
-#~ "flac should be shipped with your distribution."
-#~ msgstr ""
-#~ "Az flac fájlok kódolásához telepítenie kell az flac-t.\n"
-#~ "Az flac rendszerint megtalálható a disztribúciójában."
-
-#~ msgid ""
-#~ "In order to decode flac files, you need to install 'flac'.\n"
-#~ "flac should be shipped with your distribution."
-#~ msgstr ""
-#~ "Az flac fájlok dekódolásához telepítenie kell az flac-t.\n"
-#~ "Az flac rendszerint megtalálható a disztribúciójában."
-
-#~ msgid ""
-#~ "Flac is a free and lossless audio codec.\n"
-#~ "For more information see: http://flac.sourceforge.net"
-#~ msgstr ""
-#~ "Az Flac egy ingyenes és veszteségmentesen tömörítő audiókodek.\n"
-#~ "További információkért látogassa meg a http://flac.sourceforge.net "
-#~ "weboldalt."
-
-#~ msgid ""
-#~ "In order to encode flake files, you need to install 'flake'.\n"
-#~ "You can get it at http://flake-enc.sourceforge.net"
-#~ msgstr ""
-#~ "A flake fájlok kódolásához telepítenie kell a flake-t.\n"
-#~ "Letöltheti a http://flake-enc.sourceforge.net weboldalról."
-
-#~ msgid ""
-#~ "In order to encode mp3 files, you need to install 'lame'.\n"
-#~ "Since mp3 is a patented file format, lame may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Many distributions offer lame in an additional software repository."
-#~ msgstr ""
-#~ "Az mp3 fájlok kódolásához telepítenie kell a lame-et.\n"
-#~ "Mivel az mp3 egy szabadalommal védett fájlformátum, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van a lame kiegészítő "
-#~ "szoftvertárolókból történő telepítésére."
-
-#~ msgid ""
-#~ "In order to decode mp3 files, you need to install 'lame'.\n"
-#~ "Since mp3 is a patented file format, lame may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Many distributions offer lame in an additional software repository."
-#~ msgstr ""
-#~ "Az mp3 fájlok dekódolásához telepítenie kell a lame-et.\n"
-#~ "Mivel az mp3 egy szabadalommal védett fájlformátum, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van a lame kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to encode/decode mp3 files, you need to install 'lame'.\n"
-#~ "Since mp3 is a patented file format, lame may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Many distributions offer lame in an additional software repository."
-#~ msgstr ""
-#~ "Az mp3 fájlok kódolásához/dekódolásához telepítenie kell a lame-et.\n"
-#~ "Mivel az mp3 egy szabadalommal védett fájlformátum, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van a lame kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to decode mp2 files, you need to install 'lame'.\n"
-#~ "Since mp3 is a patented file format, lame may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Many distributions offer lame in an additional software repository."
-#~ msgstr ""
-#~ "Az mp2 fájlok kódolásához telepítenie kell a lame-et.\n"
-#~ "Mivel az mp2 egy szabadalommal védett fájlformátum, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van a lame kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to encode mp3/decode mp2 files, you need to install 'lame'.\n"
-#~ "Since mp3 is a patented file format, lame may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Many distributions offer lame in an additional software repository."
-#~ msgstr ""
-#~ "Az mp3 fájlok kódolásához/mp2 fájlok dekódolásához telepítenie kell a "
-#~ "lame-et.\n"
-#~ "Mivel az mp3 egy szabadalommal védett fájlformátum, valószínűleg nincs "
-#~ "telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van a lame kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid "MP2 is an old lossy audio codec."
-#~ msgstr "Az MP2 egy régi, veszteségesen tömörítő audiókodek."
-
-#~ msgid ""
-#~ "In order to encode ape files, you need to install 'mac'.\n"
-#~ "You can get it at http://www.monkeysaudio.com"
-#~ msgstr ""
-#~ "Az ape fájlok kódolásához telepítenie kell a mac-et.\n"
-#~ "Letöltheti a http://www.monkeysaudio.com weboldalról."
-
-#~ msgid ""
-#~ "In order to decode ape files, you need to install 'mac'.\n"
-#~ "You can get it at http://www.monkeysaudio.com"
-#~ msgstr ""
-#~ "Az ape fájlok dekódolásához telepítenie kell a mac-et.\n"
-#~ "Letöltheti a http://www.monkeysaudio.com weboldalról."
-
-#~ msgid ""
-#~ "You need to install 'mplayer'. Since mplayer inludes many patented "
-#~ "codecs, it may not be included in the default installation of your "
-#~ "distribution. Many distributions offer mplayer in an additional software "
-#~ "repository."
-#~ msgstr ""
-#~ "Telepítenie kell az mplayer-t.\n"
-#~ "Mivel az mplayer szabadalommal védett kodekeket tartalmaz, valószínűleg "
-#~ "nincs telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van az mplayer kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid "Speex is a free and lossy audio codec designed for encoding speech."
-#~ msgstr ""
-#~ "A Speex egy ingyenes és veszteségesen tömörítő audiókodek beszéd "
-#~ "kódolására."
-
-#~ msgid ""
-#~ "In order to encode musepack files, you need to install 'mppenc'.\n"
-#~ "You can get it at http://www.musepack.net"
-#~ msgstr ""
-#~ "A musepack fájlok kódolásához telepítenie kell az mppenc-et.\n"
-#~ "Letöltheti a http://www.musepack.net weboldalról."
-
-#~ msgid ""
-#~ "In order to decode musepack files, you need to install 'mppdec'.\n"
-#~ "You can get it at http://www.musepack.net"
-#~ msgstr ""
-#~ "A musepack fájlok dekódolásához telepítenie kell az mppdec-et.\n"
-#~ "Letöltheti a http://www.musepack.net weboldalról."
-
-#~ msgid ""
-#~ "In order to encode aac files, you need to install 'neroAacEnc'.\n"
-#~ "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
-#~ "aac-codec.php after entering an email adress."
-#~ msgstr ""
-#~ "Az aac fájlok kódolásához telepítenie kell a neroAacEnc-et.\n"
-#~ "Letöltheti a http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec."
-#~ "php weboldalról egy e-mail cím megadása után."
-
-#~ msgid ""
-#~ "In order to decode aac files, you need to install 'neroAacDec'.\n"
-#~ "You can download it at http://www.nero.com/enu/downloads-nerodigital-nero-"
-#~ "aac-codec.php after entering an email adress."
-#~ msgstr ""
-#~ "Az aac fájlok dekódolásához telepítenie kell a neroAacDec-et.\n"
-#~ "Letöltheti a http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec."
-#~ "php weboldalról egy e-mail cím megadása után."
-
-#~ msgid ""
-#~ "In order to encode shorten files, you need to install 'shorten'.\n"
-#~ "You can get it at http://etree.org/shnutils/shorten/"
-#~ msgstr ""
-#~ "A shorten fájlok kódolásához telepítenie kell a shorten-t.\n"
-#~ "Letöltheti a http://etree.org/shnutils/shorten/ weboldalról."
-
-#~ msgid ""
-#~ "In order to decode shorten files, you need to install 'shorten'.\n"
-#~ "You can get it at http://etree.org/shnutils/shorten/"
-#~ msgstr ""
-#~ "A shorten fájlok dekódolásához telepítenie kell a shorten-t.\n"
-#~ "Letöltheti a http://etree.org/shnutils/shorten/ weboldalról."
-
-#~ msgid ""
-#~ "In order to decode speex files, you need to install the package 'speex'.\n"
-#~ "speex should be shipped with your distribution."
-#~ msgstr ""
-#~ "A speex fájlok dekódolásához telepítenie kell a speex-et.\n"
-#~ "A speex rendszerint megtalálható a disztribúciójában."
-
-#~ msgid ""
-#~ "In order to decode midi files, you need to install 'timidity'.\n"
-#~ "timidity should be shipped with your distribution."
-#~ msgstr ""
-#~ "A midi fájlok dekódolásához telepítenie kell a timidity-t.\n"
-#~ "A timidity rendszerint megtalálható a disztribúciójában."
-
-#~ msgid ""
-#~ "In order to decode mod files, you need to install 'timidity'.\n"
-#~ "timidity should be shipped with your distribution."
-#~ msgstr ""
-#~ "A mod fájlok dekódolásához telepítenie kell a timidity-t.\n"
-#~ "A timidity rendszerint megtalálható a disztribúciójában."
-
-#~ msgid ""
-#~ "mod is a very old sound file format, that doesn't encode audio waves but "
-#~ "stores instrument timings."
-#~ msgstr ""
-#~ "A mod egy nagyon régi hangfájl-formátum, ami nem hangot kódol, "
-#~ "hanemhangszerek időzítését tárolja."
-
-#~ msgid ""
-#~ "In order to encode ogg vorbis files, you need to install 'oggenc'.\n"
-#~ "oggenc is usually in the package 'vorbis-tools' which should be shipped "
-#~ "with your distribution."
-#~ msgstr ""
-#~ "Az ogg vorbis fájlok kódolásához telepítenie kell a az oggenc-et.\n"
-#~ "Az oggenc rendszerint a vorbis-tools csomag része, ami megtalálható a "
-#~ "disztribúciójában."
-
-#~ msgid ""
-#~ "In order to decode ogg vorbis files, you need to install 'oggdec'.\n"
-#~ "oggdec is usually in the package 'vorbis-tools' which should be shipped "
-#~ "with your distribution."
-#~ msgstr ""
-#~ "Az ogg vorbis fájlok dekódolásához telepítenie kell az oggdec-et.\n"
-#~ "Az oggdec rendszerint a vorbis-tools csomag része, ami megtalálható a "
-#~ "disztribúciójában."
-
-#~ msgid ""
-#~ "In order to encode wavpack files, you need to install 'wavpack'.\n"
-#~ "You can get it at http://www.wavpack.com"
-#~ msgstr ""
-#~ "A wavpack fájlok kódolásához telepítenie kell a wavpack-et.\n"
-#~ "Letöltheti a http://www.wavpack.com weboldalról."
-
-#~ msgid ""
-#~ "In order to decode wavpack files, you need to install 'wvunpack'.\n"
-#~ "wvunpack should be in the package 'wavpack'."
-#~ msgstr ""
-#~ "A wavpack fájlok kódolásához telepítenie kell a wvunpack-et.\n"
-#~ "A wvunpack a wavpack csomag része."
-
-#~ msgid ""
-#~ "In order to calculate Replay Gain tags for aac files, you need to install "
-#~ "'aacgain'.\n"
-#~ "Since aac is a patented file format, aacgain may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Some distributions offer aacgain in an additional software repository."
-#~ msgstr ""
-#~ "Ahhoz, hogy hangerő-korrekciós címkéket számoljon aac fájlokhoz, "
-#~ "telepítenie kell az 'aacgain'-t.\n"
-#~ "Mivel az aac egy szabadalommal védett fájlformátum, az aacgain "
-#~ "valószínűleg nincs telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van az aacgain kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to calculate Replay Gain tags for flac files, you need to "
-#~ "install 'metaflac'. metaflac is usually in the package 'flac' which "
-#~ "should be shipped with your distribution."
-#~ msgstr ""
-#~ "Ahhoz, hogy hangerő-korrekciós címkéket számoljon flac fájlokhoz, "
-#~ "telepítenie kell a 'metaflac'-et.\n"
-#~ "A metaflac rendszerint az 'flac' csomag része, ami megtalálható a "
-#~ "disztribúciójában."
-
-#~ msgid "FLAC is a free and lossless audio codec."
-#~ msgstr "A FLAC egy ingyenes és veszteségmentesen tömörítő audiókodek."
-
-#~ msgid ""
-#~ "In order to calculate Replay Gain tags for mp3 files, you need to install "
-#~ "'mp3gain'.\n"
-#~ "Since mp3 is a patented file format, mp3gain may not be included in the "
-#~ "default installation of your distribution.\n"
-#~ "Some distributions offer mp3gain in an additional software repository."
-#~ msgstr ""
-#~ "Ahhoz, hogy hangerő-korrekciós címkéket számoljon mp3 fájlokhoz, "
-#~ "telepítenie kell az 'mp3gain'-t.\n"
-#~ "Mivel az mp3 egy szabadalommal védett fájlformátum, az mp3gain "
-#~ "valószínűleg nincs telepítve a rendszerén.\n"
-#~ "Bizonyos disztribúcióknál lehetőség van az mp3gain kiegészítő "
-#~ "szoftvertárolókból történő telepítésére. "
-
-#~ msgid ""
-#~ "In order to calculate Replay Gain tags for musepack files, you need to "
-#~ "install 'replaygain'.\n"
-#~ "You can get it at http://www.musepack.net"
-#~ msgstr ""
-#~ "Ahhoz, hogy hangerő-korrekciós címkéket számoljon musepack fájlokhoz, "
-#~ "telepítenie kell a 'replaygain'-t.\n"
-#~ "Letöltheti a http://www.musepack.net weboldalról."
-
-#~ msgid ""
-#~ "In order to calculate Replay Gain tags for ogg vorbis files, you need to "
-#~ "install 'vorbisgain'. vorbisgain is usually in the package 'vorbisgain' "
-#~ "which should be shipped with your distribution."
-#~ msgstr ""
-#~ "Ahhoz, hogy hangerő-korrekciós címkéket számoljon ogg vorbis fájlokhoz, "
-#~ "telepítenie kell a 'vorbisgain'-t.\n"
-#~ "A vorbisgain rendszerint a 'vorbisgain' csomag része, ami megtalálható a "
-#~ "disztribúciójában."
-
-#~ msgid "Ogg Vorbis is a free and lossy high quality audio codec."
-#~ msgstr ""
-#~ "Az Ogg Vorbis egy ingyenes és veszteségesen tömörítő jó minőségű "
-#~ "audiókodek."
-
-#~ msgid "Tools"
-#~ msgstr "Eszközök"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Fő eszköztár"

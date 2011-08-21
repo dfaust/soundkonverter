@@ -15,19 +15,19 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 
     binaries["ffmpeg"] = "";
 
-    // encoders
-    codecMap["wav"] = "pcm_s16le";
-    codecMap["ogg vorbis"] = "libvorbis"; // vorbis
-    codecMap["mp3"] = "libmp3lame";
-    codecMap["flac"] = "flac";
-    codecMap["wma"] = "wmav2";
+//     // encoders
+//     codecMap["wav"] = "pcm_s16le";
+//     codecMap["ogg vorbis"] = "libvorbis"; // vorbis
+//     codecMap["mp3"] = "libmp3lame";
+//     codecMap["flac"] = "flac";
+//     codecMap["wma"] = "wmav2";
 //     codecMap["aac"] = "libfaac"; // aac - removed from ffmpeg ???
-    codecMap["ac3"] = "ac3";
-    codecMap["alac"] = "alac";
-    codecMap["mp2"] = "mp2";
-//     codecMap["sonic"] = "sonic";
-//     codecMap["sonic lossless"] = "sonicls";
-    codecMap["amr nb"] = "libopencore_amrnb";
+//     codecMap["ac3"] = "ac3";
+//     codecMap["alac"] = "alac";
+//     codecMap["mp2"] = "mp2";
+// //     codecMap["sonic"] = "sonic";
+// //     codecMap["sonic lossless"] = "sonicls";
+//     codecMap["amr nb"] = "libopencore_amrnb"; // amr
 }
 
 soundkonverter_codec_ffmpeg::~soundkonverter_codec_ffmpeg()
@@ -41,6 +41,39 @@ QString soundkonverter_codec_ffmpeg::name()
 QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
 {
     QList<ConversionPipeTrunk> table;
+
+    if( !binaries["ffmpeg"].isEmpty() )
+    {
+        infoProcess = new KProcess();
+        infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+        connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+        connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
+
+        QStringList command;
+        command += binaries["ffmpeg"];
+        command += "-codecs";
+        infoProcess.data()->clearProgram();
+        infoProcess.data()->setShellCommand( command.join(" ") );
+        infoProcess.data()->start();
+
+        infoProcess.data()->waitForFinished( 1000 );
+    }
+    else
+    {
+        // encoders
+        codecMap["wav"] = "pcm_s16le";
+        codecMap["ogg vorbis"] = "libvorbis"; // vorbis
+        codecMap["mp3"] = "libmp3lame";
+        codecMap["flac"] = "flac";
+        codecMap["wma"] = "wmav2";
+        codecMap["aac"] = "libfaac"; // aac - removed from ffmpeg ???
+        codecMap["ac3"] = "ac3";
+        codecMap["alac"] = "alac";
+        codecMap["mp2"] = "mp2";
+//         codecMap["sonic"] = "sonic";
+//         codecMap["sonic lossless"] = "sonicls";
+        codecMap["amr nb"] = "libopencore_amrnb";
+    }
 
     /// decode
     fromCodecs += "wav";
@@ -85,19 +118,41 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "rv";
 
     /// encode
-    toCodecs += "wav";
-    toCodecs += "ogg vorbis";
-    toCodecs += "mp3";
-    toCodecs += "flac";
-    toCodecs += "wma";
-//     toCodecs += "aac"; // libfaac removed from ffmpeg ???
-    toCodecs += "ac3";
-    toCodecs += "alac";
-//     toCodecs += "m4a"; // libfaac removed from ffmpeg ???
-    toCodecs += "mp2";
-//     toCodecs += "sonic";
-//     toCodecs += "sonic lossless";
-    toCodecs += "amr nb";
+    if( !codecMap["wav"].isEmpty() )
+        toCodecs += "wav";
+
+    if( !codecMap["ogg vorbis"].isEmpty() )
+        toCodecs += "ogg vorbis";
+
+    if( !codecMap["mp3"].isEmpty() )
+        toCodecs += "mp3";
+
+    if( !codecMap["flac"].isEmpty() )
+        toCodecs += "flac";
+
+    if( !codecMap["wma"].isEmpty() )
+        toCodecs += "wma";
+
+    if( !codecMap["aac"].isEmpty() )
+        toCodecs += "aac"; // libfaac removed from ffmpeg ???
+
+    if( !codecMap["ac3"].isEmpty() )
+        toCodecs += "ac3";
+
+    if( !codecMap["alac"].isEmpty() )
+        toCodecs += "alac";
+
+    if( !codecMap["aac"].isEmpty() )
+        toCodecs += "m4a"; // libfaac removed from ffmpeg ???
+
+    if( !codecMap["mp2"].isEmpty() )
+        toCodecs += "mp2";
+
+//         toCodecs += "sonic";
+//         toCodecs += "sonic lossless";
+
+    if( !codecMap["amr nb"].isEmpty() )
+        toCodecs += "amr nb";
 
 
     for( int i=0; i<fromCodecs.count(); i++ )
@@ -255,21 +310,18 @@ QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, 
 
 float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *length )
 {
-    // size=    1508kB time=48.25 bitrate= 256.0kbits/s
+    // Duration: 00:02:16.50, start: 0.000000, bitrate: 1411 kb/s
+    // size=    2445kB time=00:01:58.31 bitrate= 169.3kbits/s
 
-    QString data = output;
-    QString time;
-
-    QRegExp reg("(\\d{2,}):(\\d{2}):(\\d{2})\\.(\\d{2})");
-    if( length && data.contains(reg) )
+    QRegExp regLength("Duration: (\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    if( length && output.contains(regLength) )
     {
-        *length = reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
+        *length = regLength.cap(1).toInt()*3600 + regLength.cap(2).toInt()*60 + regLength.cap(3).toInt();
     }
-    if( data.contains("time") )
+    QRegExp reg("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    if( output.contains(reg) )
     {
-        data.remove( 0, data.indexOf("time")+5 );
-        time = data.left( data.indexOf(" ") );
-        return time.toFloat();
+        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();;
     }
 
     // TODO error handling
@@ -285,22 +337,72 @@ float soundkonverter_codec_ffmpeg::parseOutput( const QString& output )
 
 void soundkonverter_codec_ffmpeg::processOutput()
 {
-    CodecPluginItem *pluginItem;
-    float progress;
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            QString output = backendItems.at(i)->process->readAllStandardOutput().data();
-            pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
-            progress = parseOutput( output, &pluginItem->data.length );
-            if( progress == -1 && !output.simplified().isEmpty() ) emit log( backendItems.at(i)->id, output );
+            const QString output = backendItems.at(i)->process->readAllStandardOutput().data();
+
+            CodecPluginItem *pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
+
+            float progress = parseOutput( output, &pluginItem->data.length );
+            if( progress == -1 && !output.simplified().isEmpty() )
+                emit log( backendItems.at(i)->id, output );
+
             progress = progress * 100 / pluginItem->data.length;
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
+
             return;
         }
     }
 }
+
+void soundkonverter_codec_ffmpeg::infoProcessOutput()
+{
+    const QString output = infoProcess.data()->readAllStandardOutput().data();
+
+    // DEA    pcm_s16le       PCM signed 16-bit little-endian
+
+    if( output.contains( QRegExp(" (D| )E.{4} pcm_s16le")) )
+        codecMap["wav"] = "pcm_s16le";
+
+    if( output.contains( QRegExp(" (D| )E.{4} libvorbis")) )
+        codecMap["ogg vorbis"] = "libvorbis";
+
+    if( output.contains( QRegExp(" (D| )E.{4} libmp3lame")) )
+        codecMap["mp3"] = "libmp3lame";
+
+    if( output.contains( QRegExp(" (D| )E.{4} flac")) )
+        codecMap["flac"] = "flac";
+
+    if( output.contains( QRegExp(" (D| )E.{4} wmav2")) )
+        codecMap["wma"] = "wmav2";
+
+    if( output.contains( QRegExp(" (D| )E.{4} libfaac")) )
+        codecMap["aac"] = "libfaac";
+
+    if( output.contains( QRegExp(" (D| )E.{4} ac3")) )
+        codecMap["ac3"] = "ac3";
+
+    if( output.contains( QRegExp(" (D| )E.{4} alac")) )
+        codecMap["alac"] = "alac";
+
+    if( output.contains( QRegExp(" (D| )E.{4} mp2")) )
+        codecMap["mp2"] = "mp2";
+
+    if( output.contains( QRegExp(" (D| )E.{4} libopencore_amrnb")) )
+        codecMap["amr nb"] = "libopencore_amrnb";
+}
+
+void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
+{
+    Q_UNUSED(exitStatus)
+    Q_UNUSED(exitCode)
+
+    infoProcess.data()->deleteLater();
+}
+
 
 #include "soundkonverter_codec_ffmpeg.moc"
 

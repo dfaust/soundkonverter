@@ -113,7 +113,7 @@ private slots:
     virtual void processOutput();
 
     /** The process has exited */
-    virtual void processExit( int exitCode, QProcess::ExitStatus /*exitStatus*/ );
+    virtual void processExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
 #endif // BACKENDPLUGIN_H

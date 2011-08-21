@@ -392,7 +392,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
             }
             list += newPipe;
         }
-        else if( conversionPipeTrunks.at(i).codecFrom == codecFrom && isCodecLossless(conversionPipeTrunks.at(i).codecTo) && conversionPipeTrunks.at(i).enabled )
+        else if( conversionPipeTrunks.at(i).codecFrom == codecFrom && codecTo == "wav" /*isCodecLossless(conversionPipeTrunks.at(i).codecTo)*/ && conversionPipeTrunks.at(i).enabled )
         {
             for( int j = 0; j < conversionPipeTrunks.count(); j++ )
             {

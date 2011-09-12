@@ -4,13 +4,11 @@
 #include "faaccodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-#include <math.h>
-
 #include <KLocale>
 #include <KComboBox>
 #include <QLayout>
 #include <QLabel>
-#include <QDoubleSpinBox>
+#include <QSpinBox>
 #include <QSlider>
 
 
@@ -41,12 +39,12 @@ FaacCodecWidget::FaacCodecWidget()
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( sQuality );
 
-    dQuality = new QDoubleSpinBox( this );
+    dQuality = new QSpinBox( this );
     dQuality->setRange( 8, 320 );
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
-    connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
-    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+    connect( dQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
+    connect( dQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( dQuality );
 
     topBox->addStretch();
@@ -82,15 +80,15 @@ FaacCodecWidget::~FaacCodecWidget()
 {}
 
 // TODO optimize
-int FaacCodecWidget::bitrateForQuality( double quality )
+int FaacCodecWidget::bitrateForQuality( int quality )
 {
     return quality*100/3;
 }
 
 // TODO optimize
-double FaacCodecWidget::qualityForBitrate( int bitrate )
+int FaacCodecWidget::qualityForBitrate( int bitrate )
 {
-    return (double)bitrate*3/100;
+    return bitrate*3/100;
 }
 
 ConversionOptions *FaacCodecWidget::currentConversionOptions()
@@ -152,7 +150,9 @@ bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 
 void FaacCodecWidget::setCurrentFormat( const QString& format )
 {
-    if( currentFormat == format ) return;
+    if( currentFormat == format )
+        return;
+
     currentFormat = format;
     setEnabled( currentFormat != "wav" );
 }
@@ -263,7 +263,7 @@ bool FaacCodecWidget::setCustomProfile( const QString& profile, const QDomDocume
     cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
     modeChanged( cMode->currentIndex() );
     sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-    dQuality->setValue( encodingOptions.attribute("quality").toDouble() );
+    dQuality->setValue( encodingOptions.attribute("quality").toInt() );
 //     cBitrateMode->setCurrentIndex( encodingOptions.attribute("bitrateMode").toInt() );
 //     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
     if( encodingOptions.attribute("samplerateEnabled").toInt() )
@@ -300,7 +300,6 @@ void FaacCodecWidget::modeChanged( int mode )
         sQuality->setSingleStep( 10 );
         dQuality->setRange( 10, 500 );
         dQuality->setSingleStep( 1 );
-        dQuality->setDecimals( 0 );
         dQuality->setSuffix( "" );
         sQuality->setValue( 100 );
         dQuality->setValue( 100 );
@@ -317,7 +316,6 @@ void FaacCodecWidget::modeChanged( int mode )
         sQuality->setSingleStep( 8 );
         dQuality->setRange( 60, 152 );
         dQuality->setSingleStep( 1 );
-        dQuality->setDecimals( 0 );
         dQuality->setSuffix( " kbps" );
         sQuality->setValue( 128 );
         dQuality->setValue( 128 );
@@ -333,12 +331,12 @@ void FaacCodecWidget::modeChanged( int mode )
 
 void FaacCodecWidget::qualitySliderChanged( int quality )
 {
-    dQuality->setValue( double(quality) );
+    dQuality->setValue( quality );
 }
 
-void FaacCodecWidget::qualitySpinBoxChanged( double quality )
+void FaacCodecWidget::qualitySpinBoxChanged( int quality )
 {
-    sQuality->setValue( round(quality) );
+    sQuality->setValue( quality );
 }
 
 

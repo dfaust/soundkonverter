@@ -2,13 +2,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
 # Sérgio Marques <smarquespt@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/soundkonverter\n"
 "POT-Creation-Date: 2011-08-11 19:37+0200\n"
-"PO-Revision-Date: 2011-08-12 00:19+0000\n"
+"PO-Revision-Date: 2011-08-19 15:25+0000\n"
 "Last-Translator: smarquespt <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.net/projects/p/soundkonverter/team/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -982,7 +983,7 @@ msgstr "Infraestrutura não configurada"
 
 #: filelist.cpp:523
 msgid "Disc full"
-msgstr ""
+msgstr "O disco está cheio"
 
 #: filelist.cpp:528
 msgid "Failed"

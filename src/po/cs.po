@@ -2,16 +2,18 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
-# Pavel Fric <fripohled@blogspot.com>, 2010.
+# Translators:
 # Daniel Faust <hessijames@gmail.com>, 2006, 2007.
+# Pavel Fric <fripohled.blogspot.com>, 2011.
+# Pavel Fric <fripohled@blogspot.com>, 2010.
 # Pavel Fric <pavelfric@seznam.cz>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/soundkonverter\n"
 "POT-Creation-Date: 2011-08-11 19:37+0200\n"
-"PO-Revision-Date: 2011-08-12 00:19+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
+"PO-Revision-Date: 2011-08-18 06:54+0000\n"
+"Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/team/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,32 +30,35 @@ msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
+"Nainstaloval jste nebo odstranil jádra a vaše nastavení pro soundKonverter "
+"lze vyladit."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr ""
+msgstr "Pro zakódování %1 souboru lze jádro '%2' nahradit '%3'."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
-msgstr ""
+msgstr "Pro získání dat ze zvukových CD lze jádro '%1' nahradit '%2'."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr ""
+msgstr "Pro dekódování  souboru lze jádro '%2' nahradit '%3'."
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
+"Pro použití vyrovnání hlasitosti na %1 souborů lze '%2' nahradit '%3'."
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
-msgstr ""
+msgstr "Nevšímat si"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr ""
+msgstr "Opravit"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -100,12 +105,12 @@ msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Získávání skladeb ze zvukových CD není v současnosti podporováno z důvodu chybějících jader.\n"
+"Vytahování skladeb ze zvukových CD není v současnosti podporováno z důvodu chybějících jader.\n"
 "Možná řešení jsou vypsána níže."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 msgid "Possible solutions for %1"
-msgstr ""
+msgstr "Možná řešení pro %1"
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
@@ -316,7 +321,7 @@ msgstr "Přidat vyrovnání hlasitosti skladeb pomocí soundKonverteru"
 
 #: configdialog/configadvancedpage.cpp:35
 msgid "Preferred extension for ogg vorbis files"
-msgstr ""
+msgstr "Upřednostňovaná přípona pro soubory Ogg Vorbis"
 
 #: configdialog/configadvancedpage.cpp:50
 msgid "Status update delay"
@@ -334,13 +339,15 @@ msgstr " ms"
 
 #: configdialog/configadvancedpage.cpp:65
 msgid "Always use FAT compatible output file names"
-msgstr ""
+msgstr "Vždy použít názvy pro výstupní soubory slučitelné s FAT"
 
 #: configdialog/configadvancedpage.cpp:66
 msgid ""
 "Replaces some special characters like '?' by '_'.\n"
 "If the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option."
 msgstr ""
+"Nahradit některé zvláštní znaky jako '?' podtržítkem '_'.\n"
+"Pokud je výstupní adresář na souborovém systému FAT, použijí se s FAT slučitelné názvy souborů automaticky nezávisle na této volbě."
 
 #: configdialog/configadvancedpage.cpp:75
 msgid "Remove partially converted files if a conversion fails"
@@ -357,21 +364,24 @@ msgstr ""
 #: configdialog/configadvancedpage.cpp:85
 msgid "Store temporary files in memory unless the estimted size is more than"
 msgstr ""
+"uchovávat dočasné soubory v paměti, dokud není odhadovaná velikost větší než"
 
 #: configdialog/configadvancedpage.cpp:89
 msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
+"Neuchovávat soubory, u nichž se očekává, že budou větší než tato hodnota, v "
+"paměti kvůli vyhnutí se prohazování (swapping)"
 
 #: configdialog/configadvancedpage.cpp:90
 msgctxt "mega in bytes"
 msgid "MiB"
-msgstr ""
+msgstr "MiB"
 
 #: configdialog/configadvancedpage.cpp:97
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr ""
+msgstr "Zdá se, že na /dev/shm není připojen žádný souborový systém"
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -405,7 +415,7 @@ msgstr "Formát"
 
 #: configdialog/configbackendspage.cpp:246
 msgid "Show possible optimizations"
-msgstr ""
+msgstr "Ukázat možná vyladění"
 
 #: configdialog/configbackendspage.cpp:266
 msgid ""
@@ -426,6 +436,7 @@ msgstr "%1 nastavení"
 #: configdialog/configbackendspage.cpp:386
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
+"Zdá se, že všechna nastavení jádra jsou ta nejlepší. Není tu co dělat."
 
 #: configdialog/configdialog.cpp:28
 msgid "Settings"
@@ -437,7 +448,7 @@ msgstr "Obecné"
 
 #: configdialog/configdialog.cpp:41
 msgid "Advanced"
-msgstr ""
+msgstr "Pokročilé"
 
 #: configdialog/configdialog.cpp:46 main.cpp:29
 msgid "Backends"
@@ -488,6 +499,8 @@ msgid ""
 "You shouldn't set this number higher than the amount of installed processor cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
+"Toto číslo byste neměl nastavit vyšší než je množství instalovaných procesorových jader.\n"
+"Byla zjištěna %1 procesorová jádra."
 
 #: configdialog/configgeneralpage.cpp:129
 msgid "Create actions menus for the file manager"
@@ -508,17 +521,17 @@ msgstr "Soubory v nástroji na vyrovnávání hlasitosti seskupit podle"
 #: configdialog/configgeneralpage.cpp:142
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr ""
+msgstr "Značky alb a adresáře"
 
 #: configdialog/configgeneralpage.cpp:143
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr ""
+msgstr "Pouze značky alb"
 
 #: configdialog/configgeneralpage.cpp:144
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr ""
+msgstr "Pouze adresáře"
 
 #: convert.cpp:163 convert.cpp:1109
 msgid "Getting file"
@@ -543,6 +556,8 @@ msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
+"Převod se nezdařil. Alespoň jedno z použitých jader je potřeba nastavit "
+"správně."
 
 #: convert.cpp:353 convert.cpp:1122
 msgid "Encoding"
@@ -605,6 +620,8 @@ msgid ""
 "An error occured, the output file size is less than one percent of the input"
 " file size"
 msgstr ""
+"Vyskytla se chyba. Velikost výstupního souboru je menší než jedno procento "
+"velikosti vstupního souboru"
 
 #: convert.cpp:964
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
@@ -613,22 +630,22 @@ msgstr "Převod se nezdařil. Kód ukončení: -2 (%1)"
 #: convert.cpp:973
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr ""
+msgstr "Obvyklé ukončení"
 
 #: convert.cpp:975
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr ""
+msgstr "Zrušeno uživatelem"
 
 #: convert.cpp:977
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr ""
+msgstr "Jádro potřebuje nastavení"
 
 #: convert.cpp:979
 msgctxt "Conversion exit status"
 msgid "An error occured"
-msgstr ""
+msgstr "Vyskytla se chyba"
 
 #: convert.cpp:992
 msgid "Executing command: \"%1\""
@@ -657,11 +674,11 @@ msgstr "Poměr velikosti souboru"
 #: convert.cpp:1101
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr ""
+msgstr "Neznámá"
 
 #: convert.cpp:1118 filelist.cpp:503
 msgid "Ripping"
-msgstr "Získává se"
+msgstr "Vytahuje se"
 
 #: core/backendplugin.cpp:37
 msgid "Wave won't compress the audio stream."
@@ -672,11 +689,15 @@ msgid ""
 "Advanced Audio Coding is a lossy and popular audio format. It is widely used"
 " by Apple Inc."
 msgstr ""
+"Advanced Audio Coding (AAC) je ztrátový a oblíbený zvukový formát. Je široce"
+" používán společností Apple Inc."
 
 #: core/backendplugin.cpp:52
 msgid ""
 "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
 msgstr ""
+"Soubory m4a jsou kódovány kodekem AAC, který jJe široce používán společností"
+" Apple Inc."
 
 #: core/backendplugin.cpp:71
 msgid ""
@@ -691,12 +712,16 @@ msgid ""
 "MP3 is the most popular lossy audio codec. It's supported by all audio "
 "players."
 msgstr ""
+"MP3 je nejoblíbený ztrátový zvukový kodek. Je podporován všemi přehrávači "
+"zvuku."
 
 #: core/backendplugin.cpp:92
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it's name says, it compresses without any loss of quality."
 msgstr ""
+"FLAC je svobodný bezztrátový zvukový kodek (Free Lossless Audio Codec).\n"
+"Jak říká jeho název, data zhušťuje bez ztráty jakosti."
 
 #: core/backendplugin.cpp:102
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
@@ -705,11 +730,13 @@ msgstr ""
 
 #: core/backendplugin.cpp:109
 msgid "Dolby Digital-Audio"
-msgstr "Dolby Digital-Audio"
+msgstr "Dolby Digital Audio"
 
 #: core/backendplugin.cpp:116
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
 msgstr ""
+"Apple Lossless Audio Codec je bezztrátový zvukový formát od společnosti "
+"Apple Inc."
 
 #: core/backendplugin.cpp:124
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
@@ -739,6 +766,8 @@ msgstr ""
 msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
 msgstr ""
+"Monkey’s Audio je rychlý a výkonný ale značkový (soukromý) bezztrátový "
+"zvukový formát."
 
 #: core/backendplugin.cpp:186
 msgid ""
@@ -805,6 +834,8 @@ msgid ""
 "Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
 "encode audio waves but stores instrument timings."
 msgstr ""
+"Amiga-SoundTracker-Audio je velmi starý formát zvukového souboru, který "
+"nekóduje zvukové vlny, ale uchovává časy nástrojů."
 
 #: core/backendplugin.cpp:452
 msgid "Killing process on user request"
@@ -812,25 +843,27 @@ msgstr "Proces se ukončuje z požadavku uživatele"
 
 #: core/backendplugin.cpp:527
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr ""
+msgstr "Pro zakódování %1 souborů potřebujete nainstalovat '%2'."
 
 #: core/backendplugin.cpp:534
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr ""
+msgstr "Pro dekódování %1 souborů potřebujete nainstalovat '%2'."
 
 #: core/backendplugin.cpp:541
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr ""
+msgstr "Pro překódování %1 souborů potřebujete nainstalovat '%2'."
 
 #: core/backendplugin.cpp:548
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
+"Pro spočítání značek vyrovnání hlasitosti pro %1 souborů potřebujete "
+"nainstalovat '%2'."
 
 #: core/backendplugin.cpp:555
 msgid "'%1' should be shipped with your distribution."
-msgstr ""
+msgstr "'%1' by měl být přítomen ve vaší distribuci."
 
 #: core/backendplugin.cpp:562
 msgid ""
@@ -838,10 +871,13 @@ msgid ""
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
+"Protože '%1' zahrnuje patentované kodeky, nemůže být zahrnut ve výchozí "
+"instalaci vaší distribuce. Hodně distribucí '%1' nabízí v dodatečném skladu "
+"s programy."
 
 #: core/backendplugin.cpp:569
 msgid "You can download '%1' at %2"
-msgstr ""
+msgstr "'%1' můžete stáhnout na %2"
 
 #: filelist.cpp:48
 msgid "State"
@@ -933,11 +969,11 @@ msgstr "Zastaveno"
 
 #: filelist.cpp:518
 msgid "Backend not configured"
-msgstr ""
+msgstr "Jádro není nastaveno"
 
 #: filelist.cpp:523
 msgid "Disc full"
-msgstr ""
+msgstr "Disk je plný"
 
 #: filelist.cpp:528
 msgid "Failed"
@@ -1204,7 +1240,7 @@ msgstr "Délka"
 
 #: opener/cdopener.cpp:237
 msgid "Player"
-msgstr ""
+msgstr "Přehrávač"
 
 #: opener/cdopener.cpp:253
 msgid "No track selected"
@@ -1820,11 +1856,11 @@ msgstr "Datový tok"
 
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:57
 msgid "Sample rate"
-msgstr ""
+msgstr "Vzorkovací kmitočet"
 
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:61
 msgid "Automatic"
-msgstr ""
+msgstr "Automaticky"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:58
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
@@ -1877,17 +1913,21 @@ msgstr "Nastavit %1"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
 msgid "Use SoundFont file:"
-msgstr ""
+msgstr "Použít soubor se zvukovým písmem:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:86
 msgid ""
 "In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
+"Pro převedení MIDI dat do podoby vlny (WAV) potřebujete zvukové písmo (SoundFont), které rozvrhne MIDI data ke zvukovým efektům.\n"
+"Podívejte se na %1 pro získání souborů se zvukovými písmy."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:141
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
 msgstr ""
+"FluidSynth ještě není nastaven. Potřebujete nastavit soubor se zvukovým "
+"písmem."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:33
@@ -1898,7 +1938,7 @@ msgstr "Přednastavení"
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:522
 msgctxt "Backend profile"
 msgid "Medium"
-msgstr ""
+msgstr "Střední"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:35
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:529
@@ -1906,7 +1946,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:308
 msgctxt "Backend profile"
 msgid "Standard"
-msgstr ""
+msgstr "Obvyklá"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:536
@@ -1914,7 +1954,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:313
 msgctxt "Backend profile"
 msgid "Extreme"
-msgstr ""
+msgstr "Ohromná"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:543
@@ -1922,7 +1962,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:318
 msgctxt "Backend profile"
 msgid "Insane"
-msgstr ""
+msgstr "Zázračná"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:550
@@ -1931,7 +1971,7 @@ msgstr "Stanovit datový tok"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:53
 msgid "cbr"
-msgstr "CBR"
+msgstr "SDT (CBR)"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:56
 msgid ""
@@ -2079,29 +2119,30 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:293
 msgctxt "Backend profile"
 msgid "Telephone"
-msgstr ""
+msgstr "Telefon"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:298
 msgctxt "Backend profile"
 msgid "Thumb"
-msgstr ""
+msgstr "Palec"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:303
 msgctxt "Backend profile"
 msgid "Radio"
-msgstr ""
+msgstr "Rádio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:42
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:323
 msgctxt "Backend profile"
 msgid "Braindead"
-msgstr ""
+msgstr "Klinická smrt"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
 msgstr ""
+"Buď použijte jedno z přednastavení MusePack nebo své vlastní nastavení."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:296
 msgid "low quality (~60 kbps abr)."
@@ -2135,7 +2176,7 @@ msgstr "Vynikající jakost (~270 kbps abr)."
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:50
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:58
 msgid "You can download '%1' at '%2' after entering an email adress."
-msgstr ""
+msgstr "'%1' můžete po zadání adresy elektronické pošty stáhnout na '%2."
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:97
 msgid ""
@@ -2168,11 +2209,12 @@ msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
+"'%1' je obvykle v balíčku '%2', jenž by měl být přítomen ve vaší distribuci."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
-msgstr ""
+msgstr "'%1' je obvykle v balíčku '%2', který můžete stáhnout na %3"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
@@ -2200,6 +2242,8 @@ msgid ""
 "In order to rip audio cds per track or to a single file, you need to install 'cdparanoia'.\n"
 "'cdparanoia' is usually shipped with your distribution, the package name can vary."
 msgstr ""
+"Pro vytahování skladeb ze zvukových CD po jednotlivých stopách nebo do jednoho souboru potřebujete nainstalovat 'cdparanoia'.\n"
+"Program 'cdparanoia' je obvykle přítomen ve vaší distribuci. Název balíčku se může různit."
 
 #: progressindicator.cpp:38
 msgid "Speed"

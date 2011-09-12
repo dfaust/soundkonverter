@@ -2,14 +2,15 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
-#   <hessijames@gmail.com>, 2011.
+# Translators:
 # Daniel Faust <hessijames@gmail.com>, 2010, 2011.
+#   <hessijames@gmail.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/soundkonverter\n"
 "POT-Creation-Date: 2011-08-11 19:37+0200\n"
-"PO-Revision-Date: 2011-08-12 18:27+0000\n"
+"PO-Revision-Date: 2011-08-18 15:05+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/team/de/)\n"
 "MIME-Version: 1.0\n"
@@ -38,6 +39,7 @@ msgstr ""
 #: codecoptimizations.cpp:55
 msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
 msgstr ""
+"Um Audio-CDs zu rippen kann das Backend '%1' durch '%2' ersetzt werden."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
@@ -348,6 +350,8 @@ msgid ""
 "Replaces some special characters like '?' by '_'.\n"
 "If the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option."
 msgstr ""
+"Ersetze einige Sonderzeichen wie '?' durch '_'.\n"
+"Wenn das Ausgabeverzeichnis auf einem FAT Dateisystem liegt werden unabhängig von deiser Option automatisch FAT kompatible Dateinamen verwendet."
 
 #: configdialog/configadvancedpage.cpp:75
 msgid "Remove partially converted files if a conversion fails"
@@ -366,12 +370,16 @@ msgstr ""
 #: configdialog/configadvancedpage.cpp:85
 msgid "Store temporary files in memory unless the estimted size is more than"
 msgstr ""
+"Speichere temporäre Dateien im Arbeitsspeicher wenn die geschätzte Größe "
+"kleiner ist als"
 
 #: configdialog/configadvancedpage.cpp:89
 msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
+"Speichere keine Dateien im Arbeitsspeicher, die größer sind als dieser Wert,"
+" um Auslagerungen zu vermeiden"
 
 #: configdialog/configadvancedpage.cpp:90
 msgctxt "mega in bytes"
@@ -380,7 +388,7 @@ msgstr "MiB"
 
 #: configdialog/configadvancedpage.cpp:97
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr ""
+msgstr "Es scheint kein Dateisystem auf /dev/shm eingehängt zu sein"
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -520,17 +528,17 @@ msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von"
 #: configdialog/configgeneralpage.cpp:142
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr ""
+msgstr "Album-Tags und Verzeichnissen"
 
 #: configdialog/configgeneralpage.cpp:143
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr ""
+msgstr "Nur Album-Tags"
 
 #: configdialog/configgeneralpage.cpp:144
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr ""
+msgstr "Nur Verzeichnissen"
 
 #: convert.cpp:163 convert.cpp:1109
 msgid "Getting file"
@@ -555,6 +563,8 @@ msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
+"Konvertierung fehlgeschlagen. Mindestens ein Backend muss erst noch "
+"eingerichtet werden."
 
 #: convert.cpp:353 convert.cpp:1122
 msgid "Encoding"
@@ -633,12 +643,12 @@ msgstr "Normale Beendigung"
 #: convert.cpp:975
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr ""
+msgstr "Vom Benutzer abgebrochen"
 
 #: convert.cpp:977
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr ""
+msgstr "Backend muss konfiguriert werden"
 
 #: convert.cpp:979
 msgctxt "Conversion exit status"
@@ -687,11 +697,15 @@ msgid ""
 "Advanced Audio Coding is a lossy and popular audio format. It is widely used"
 " by Apple Inc."
 msgstr ""
+"Advanced Audio Coding ist ein verlustbehaftetes und populäres Audio-Format. "
+"Es wird vor allem von Apple Inc. verwendet."
 
 #: core/backendplugin.cpp:52
 msgid ""
 "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
 msgstr ""
+"mp4 Dateien sind mit dem aac Codec kodiert. Es wird vor allem von Apple Inc."
+" verwendet."
 
 #: core/backendplugin.cpp:71
 msgid ""
@@ -706,6 +720,8 @@ msgid ""
 "MP3 is the most popular lossy audio codec. It's supported by all audio "
 "players."
 msgstr ""
+"MP3 ist der populärste verlustbehaftete Audio-Codec. Es wird von allen "
+"Audio-Playern unterstützt."
 
 #: core/backendplugin.cpp:92
 msgid ""
@@ -863,6 +879,9 @@ msgid ""
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
+"Da '%1' patentierte Codecs beinhaltet ist es wahrscheinlich nicht in der "
+"Standardinstallation ihrer Distribution enthalten. Viele Distributionen "
+"stellen '%1' jedoch in einer zusätzlichen Paketquelle zur Verfügung."
 
 #: core/backendplugin.cpp:569
 msgid "You can download '%1' at %2"
@@ -1909,10 +1928,14 @@ msgid ""
 "In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
+"Um midi-Dateien in Wellenform zu konvertieren wird eine SoundFont-Datei benötigt, die midi-Daten mit Sound-Effekten verbindet.\n"
+"Schauen Sie sich %1 an, um SoundFont-Dateien zu bekommen."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:141
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
 msgstr ""
+"FluidSynth ist noch nicht konfiguriert. Sie müssen eine SoundFont-Datei "
+"auswählen."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:33
@@ -2127,6 +2150,8 @@ msgstr "Gehirntot"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
 msgstr ""
+"Benutzen Sie entweder eine von MusePacks Voreinstellungen oder Ihre eigenen "
+"Optionen."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:296
 msgid "low quality (~60 kbps abr)."
@@ -2195,11 +2220,15 @@ msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
+"'%1' ist üblicherweise im Paket '%2', welches mit ihrer Distribution "
+"mitgeliefert worden sein sollte."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
 msgstr ""
+"'%1' ist üblicherweise im Paket '%2', welches Sie unter %3 herunterladen "
+"können"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
@@ -2227,6 +2256,8 @@ msgid ""
 "In order to rip audio cds per track or to a single file, you need to install 'cdparanoia'.\n"
 "'cdparanoia' is usually shipped with your distribution, the package name can vary."
 msgstr ""
+"Um Audio-CDs in einzelne Dateien oder eine einzige Datei rippen zu können, müssen Sie 'cdparanoia' installieren.\n"
+"'cdparanoia' wird normalerweise mit ihrer Distribution ausgeliefert, der Paketname kann allerdings verschieden sein."
 
 #: progressindicator.cpp:38
 msgid "Speed"

@@ -1,4 +1,7 @@
 1.1.0:
+-Add: Estonian translation (by Mihkel Tõnnov)
+-Add: Serbian translation (by Slobodan Terzić)
+-Add: Spanish (Argentinian) translation (by akana_sfe)
 -Change: Only use wav as temp codec
 
 1.0.90 (1.1.0 rc1):

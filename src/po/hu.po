@@ -2,6 +2,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
 # Orosz Tamás, 2011.
 # Tamas Orosz <orosz.tamaas@gmail.com>, 2011.
 msgid ""
@@ -9,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/soundkonverter\n"
 "POT-Creation-Date: 2011-08-11 19:37+0200\n"
-"PO-Revision-Date: 2011-08-12 00:19+0000\n"
+"PO-Revision-Date: 2011-09-09 20:45+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/team/hu/)\n"
 "MIME-Version: 1.0\n"
@@ -342,13 +343,15 @@ msgstr "ms"
 
 #: configdialog/configadvancedpage.cpp:65
 msgid "Always use FAT compatible output file names"
-msgstr ""
+msgstr "Használjon FAT-kompatibilis kimeneti fájlneveket"
 
 #: configdialog/configadvancedpage.cpp:66
 msgid ""
 "Replaces some special characters like '?' by '_'.\n"
 "If the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option."
 msgstr ""
+"Speciális karakterek (pl. '?' vagy '_') helyettesítése.\n"
+"Ha a kimeneti könyvtár egy FAT fájlrendszeren helyezkedik el, akkor a program automatikusan FAT-kompatibilis fájlneveket alkalmaz, ettől a beállítástól függetlenül."
 
 #: configdialog/configadvancedpage.cpp:75
 msgid "Remove partially converted files if a conversion fails"
@@ -365,21 +368,25 @@ msgstr ""
 #: configdialog/configadvancedpage.cpp:85
 msgid "Store temporary files in memory unless the estimted size is more than"
 msgstr ""
+"Az ideiglenes fájlokat tárolja a memóriában, ha a becsült méretük nem "
+"nagyobb, mint"
 
 #: configdialog/configadvancedpage.cpp:89
 msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
+"Ne tárolja az itt megadott értéknél nagyobb fájlokat a memóriában (a "
+"swapping elkerülése végett)"
 
 #: configdialog/configadvancedpage.cpp:90
 msgctxt "mega in bytes"
 msgid "MiB"
-msgstr ""
+msgstr "MB"
 
 #: configdialog/configadvancedpage.cpp:97
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr ""
+msgstr "Úgy látszik nincsen fájlrendszer csatolva itt: /dev/shm"
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -445,7 +452,7 @@ msgstr "Általános"
 
 #: configdialog/configdialog.cpp:41
 msgid "Advanced"
-msgstr ""
+msgstr "Speciális"
 
 #: configdialog/configdialog.cpp:46 main.cpp:29
 msgid "Backends"
@@ -518,17 +525,17 @@ msgstr "Fájlok csoportosítása a hangerő-korrekciónál ez alapján:"
 #: configdialog/configgeneralpage.cpp:142
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr ""
+msgstr "Albumcímkék és könyvtárak"
 
 #: configdialog/configgeneralpage.cpp:143
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr ""
+msgstr "Csak albumcímkék"
 
 #: configdialog/configgeneralpage.cpp:144
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr ""
+msgstr "Csak könyvtárak"
 
 #: convert.cpp:163 convert.cpp:1109
 msgid "Getting file"
@@ -553,6 +560,8 @@ msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
+"A konvertálás meghiúsult. A használt háttérprogramok közül legalább egyet "
+"megfelelően be kell állítani."
 
 #: convert.cpp:353 convert.cpp:1122
 msgid "Encoding"
@@ -615,6 +624,8 @@ msgid ""
 "An error occured, the output file size is less than one percent of the input"
 " file size"
 msgstr ""
+"Hiba történt, a kimeneti fájl mérete kevesebb mint egy százaléka a bemeneti "
+"fájl méretének"
 
 #: convert.cpp:964
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
@@ -623,22 +634,22 @@ msgstr "A konvertálás meghiúsult. Próbálja újra. Hibakód: -2 (%1)"
 #: convert.cpp:973
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr ""
+msgstr "Normál kilépés"
 
 #: convert.cpp:975
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr ""
+msgstr "Felhasználó által megszakítva"
 
 #: convert.cpp:977
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr ""
+msgstr "Be kell állítani a háttérprogramot"
 
 #: convert.cpp:979
 msgctxt "Conversion exit status"
 msgid "An error occured"
-msgstr ""
+msgstr "Hiba történt"
 
 #: convert.cpp:992
 msgid "Executing command: \"%1\""
@@ -667,7 +678,7 @@ msgstr "Fájlméret aránya"
 #: convert.cpp:1101
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
 #: convert.cpp:1118 filelist.cpp:503
 msgid "Ripping"
@@ -966,11 +977,11 @@ msgstr "Leállítva"
 
 #: filelist.cpp:518
 msgid "Backend not configured"
-msgstr ""
+msgstr "A háttérprogram nincs beállítva"
 
 #: filelist.cpp:523
 msgid "Disc full"
-msgstr ""
+msgstr "A lemez megtelt"
 
 #: filelist.cpp:528
 msgid "Failed"
@@ -1906,17 +1917,21 @@ msgstr "Beállítás %1"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
 msgid "Use SoundFont file:"
-msgstr ""
+msgstr "SoundFont fájl használata:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:86
 msgid ""
 "In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
+"Midi adat hangfájllá konvertálásához egy SoundFont fájlra van szüksége, ami a midi adatot hangefektekké képzi le.\n"
+"A SoundFont fájlok beszerzéséhez nézzen szét itt: %1 ."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:141
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
 msgstr ""
+"A FluidSynth még nincs konfigurálva. Előbb be kell állítani egy SoundFont "
+"fájlt."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:33
@@ -2129,7 +2144,7 @@ msgstr "Agyhalott"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
-msgstr ""
+msgstr "Használja valamelyik MusePacks beállítást vagy a sajátját."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:296
 msgid "low quality (~60 kbps abr)."

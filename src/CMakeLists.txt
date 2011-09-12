@@ -43,6 +43,7 @@ find_package(Taglib REQUIRED)
 
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
+add_subdirectory(plugins/soundkonverter_codec_aften)
 add_subdirectory(plugins/soundkonverter_codec_lame)
 add_subdirectory(plugins/soundkonverter_codec_twolame)
 add_subdirectory(plugins/soundkonverter_codec_vorbistools)

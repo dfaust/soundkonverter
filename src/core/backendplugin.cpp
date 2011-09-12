@@ -59,7 +59,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "mp4" )
     {
         info.lossless = false;
-//         info.description = i18n("mp4 files are vide files with an aac encoded audio stream. It is widely used by Apple Inc.");
+//         info.description = i18n("mp4 files are video files with an aac encoded audio stream. It is widely used by Apple Inc.");
         info.mimeTypes.append( "video/mp4" );
         info.extensions.append( "mp4" );
         info.extensions.append( "m4v" );
@@ -110,13 +110,21 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.mimeTypes.append( "audio/ac3" );
         info.extensions.append( "ac3" );
     }
-    else if( codecName == "alac" ) // TODO mime type, etc.
+//     else if( codecName == "e-ac3" ) // TODO mimtypes, extensions
+//     {
+//         info.lossless = false;
+//         info.description = i18n("Dolby Digital Plus (Enhanced AC-3) is an advanced version of AC-3 for use on Blu-Ray discs.");
+//         info.mimeTypes.append( "audio/eac3" );
+//         info.extensions.append( "eac3" );
+//     }
+    else if( codecName == "alac" )
     {
         info.lossless = true;
         info.description = i18n("Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."); // http://en.wikipedia.org/wiki/Alac
-//         info.mimeTypes.append( "audio/x-ms-wma" );
+        info.mimeTypes.append( "audio/mp4" );
+        info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
-        info.extensions.append( "mp4" );
+        info.extensions.append( "f4a" );
     }
     else if( codecName == "mp2" )
     {
@@ -143,8 +151,8 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "als" ) // TODO mime type, etc.
     {
         info.lossless = true;
-        info.description = i18n("MPEG-4 Audio Lossless Coding");
-//         info.mimeTypes.append( "audio/x-ms-wma" );
+        info.description = i18n("MPEG-4 Audio Lossless Coding"); // http://en.wikipedia.org/wiki/Audio_Lossless_Coding
+        info.mimeTypes.append( "audio/mp4" );
         info.extensions.append( "mp4" );
     }
     else if( codecName == "amr nb" )
@@ -171,15 +179,8 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.mimeTypes.append( "audio/x-ape" );
         info.extensions.append( "ape" );
         info.extensions.append( "mac" );
-        info.extensions.append( "apl" ); // TODO apl?
+        info.extensions.append( "apl" );
     }
-//     else if( codecName == "eac3" )
-//     {
-//         info.lossless = false;
-//         info.description = i18n("Dolby Digital Plus (Enhanced AC-3) is an advanced version of AC-3 for use on Blu-Ray discs.");
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
-//     }
     else if( codecName == "speex" )
     {
         info.lossless = false;
@@ -282,15 +283,10 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.extensions.append( "rms" );
         info.extensions.append( "rmvb" );
         info.extensions.append( "rmx" );
-        info.extensions.append( "rm" );
-        info.extensions.append( "rm" );
-        info.extensions.append( "rm" );
-        info.extensions.append( "rm" );
     }
     else if( codecName == "avi" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/x-msvideo" );
         info.extensions.append( "avi" );
         info.extensions.append( "divx" );
@@ -298,21 +294,18 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "mkv" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/x-matroska" );
         info.extensions.append( "mkv" );
     }
     else if( codecName == "ogv" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/ogg" );
         info.extensions.append( "ogv" );
     }
     else if( codecName == "mpeg" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/mpeg" );
         info.extensions.append( "mpg" );
         info.extensions.append( "mpeg" );
@@ -328,7 +321,6 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "mov" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/quicktime" );
         info.extensions.append( "mov" );
         info.extensions.append( "moov" );
@@ -338,7 +330,6 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "flv" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/x-flv" );
         info.mimeTypes.append( "video/flv" );
         info.extensions.append( "flv" );
@@ -346,7 +337,6 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "wmv" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/x-ms-wmv" );
         info.mimeTypes.append( "video/x-ms-asf" );
         info.extensions.append( "wmv" );
@@ -355,7 +345,6 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "rv" )
     {
         info.lossless = false;
-//         info.description = i18n("");
         info.mimeTypes.append( "video/vnd.rn-realvideo" );
         info.extensions.append( "rv" );
         info.extensions.append( "rvx" );

@@ -15,11 +15,11 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
     setWindowIcon( KIcon("help-about") );
     setButtons( KDialog::Close );
     setButtonFocus( KDialog::Close );
-    
+
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
     QVBoxLayout *box = new QVBoxLayout( widget );
-    
+
     QString message;
     if( mode == Debug )
     {
@@ -29,7 +29,8 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
         }
         else
         {
-            message = i18n("Some of the installed plugins aren't working because they are missing additional programs.\nPossible solutions are listed below.");
+//             message = i18n("Some of the installed plugins aren't working because they are missing additional programs.\nPossible solutions are listed below.");
+            message = i18n("Some of the installed plugins aren't working.\nPossible solutions are listed below.");
         }
     }
     else if( mode == Decode )
@@ -64,11 +65,11 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
             {
                 if( problemList.at(i).affectedFiles.isEmpty() )
                 {
-                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n");
+                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>"+i18nc("like in either or","or")+"</b>\n");
                 }
                 else
                 {
-                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>or</b>\n") + "\n\n" + i18n("Affected files:") + "\n" + problemList.at(i).affectedFiles.join("\n");
+                    messageList += "<b>" + i18n("Possible solutions for %1", codecName) + "</b>:\n" + problemList.at(i).solutions.join("\n<b>"+i18nc("like in either or","or")+"</b>\n") + "\n\n" + i18n("Affected files:") + "\n" + problemList.at(i).affectedFiles.join("\n");
                 }
             }
         }
@@ -76,7 +77,7 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
         solutionsLabel->setMargin( 8 );
         solutionsLabel->setWordWrap( true );
         solutionsLabel->setTextInteractionFlags( Qt::TextSelectableByMouse );
-        
+
         QScrollArea *solutionsScrollArea = new QScrollArea();
         solutionsScrollArea->setWidget( solutionsLabel );
         box->addWidget( solutionsScrollArea );

@@ -43,7 +43,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "speex";
     fromCodecs += "m4a";
     fromCodecs += "mp1";
-    fromCodecs += "mpc";
+    fromCodecs += "musepack";
     fromCodecs += "shorten";
     fromCodecs += "tta";
     fromCodecs += "wavpack";

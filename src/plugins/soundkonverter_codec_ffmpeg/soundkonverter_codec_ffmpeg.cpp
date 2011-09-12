@@ -62,7 +62,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "speex";
     fromCodecs += "m4a";
     fromCodecs += "mp1";
-    fromCodecs += "mpc";
+    fromCodecs += "musepack";
     fromCodecs += "shorten";
 //     fromCodecs += "mlp";
 //     fromCodecs += "truehd";

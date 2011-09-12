@@ -48,6 +48,7 @@ private slots:
     virtual void undoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 
     void configDialogSave();
+    void configDialogDefault();
 
 };
 

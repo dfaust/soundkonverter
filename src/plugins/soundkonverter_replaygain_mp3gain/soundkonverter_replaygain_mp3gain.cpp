@@ -64,7 +64,7 @@ void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, con
     {
         configDialog = new KDialog( parent );
         configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel /*| KDialog::Apply*/ );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
@@ -77,10 +77,7 @@ void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, con
 
         configDialog.data()->setMainWidget( configDialogWidget );
         connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        //connect( configDialog.data(), SIGNAL( applyClicked() ), this, SLOT( configDialogSave() ) );
-        //connect( configDialogTagLabelComboBox, SIGNAL( changed( bool ) ), this, SLOT( enableButtonApply( bool ) ) );
-
-        configDialog.data()->enableButtonApply( false );
+        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogTagLabelComboBox->setCurrentIndex( tagMode );
     configDialog.data()->show();
@@ -97,6 +94,16 @@ void soundkonverter_replaygain_mp3gain::configDialogSave()
 
         group = conf->group( "Plugin-"+name() );
         group.writeEntry( "tagMode", tagMode );
+
+        configDialog.data()->deleteLater();
+    }
+}
+
+void soundkonverter_replaygain_mp3gain::configDialogDefault()
+{
+    if( configDialog.data() )
+    {
+        configDialogTagLabelComboBox->setCurrentIndex( 0 );
     }
 }
 

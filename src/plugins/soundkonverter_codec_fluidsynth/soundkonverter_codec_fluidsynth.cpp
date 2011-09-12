@@ -91,8 +91,6 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
 
         configDialog.data()->setMainWidget( configDialogWidget );
         connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-
-        configDialog.data()->enableButtonApply( false );
     }
     configDialogSoundFontUrlRequester->setUrl( soundFontFile );
     configDialog.data()->show();
@@ -109,6 +107,8 @@ void soundkonverter_codec_fluidsynth::configDialogSave()
 
         group = conf->group( "Plugin-"+name() );
         group.writeEntry( "soundFontFile", soundFontFile );
+
+        configDialog.data()->deleteLater();
     }
 }
 

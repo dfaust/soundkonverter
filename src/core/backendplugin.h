@@ -52,7 +52,8 @@ public:
         Decoder = 0,
         Encoder = 1,
         ReplayGain = 2,
-        Ripper = 3
+        Ripper = 3,
+        General = 4
     };
 
     struct FormatInfo

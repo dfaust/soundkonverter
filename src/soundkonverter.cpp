@@ -11,6 +11,7 @@
 #include "logger.h"
 #include "logviewer.h"
 #include "replaygainscanner/replaygainscanner.h"
+#include "aboutplugins.h"
 
 #include <KActionCollection>
 #include <KApplication>
@@ -156,13 +157,17 @@ void soundKonverter::setupActions()
     KAction *logviewer = actionCollection()->addAction("logviewer");
     logviewer->setText(i18n("View logs..."));
     logviewer->setIcon(KIcon("view-list-text"));
-//     newAct->setShortcut(Qt::Key_F6);
     connect( logviewer, SIGNAL(triggered()), this, SLOT(showLogViewer()) );
 
     KAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
     replaygainscanner->setText(i18n("Replay Gain tool..."));
     replaygainscanner->setIcon(KIcon("soundkonverter-replaygain"));
     connect( replaygainscanner, SIGNAL(triggered()), this, SLOT(showReplayGainScanner()) );
+
+    KAction *aboutplugins = actionCollection()->addAction("aboutplugins");
+    aboutplugins->setText(i18n("About plugins..."));
+    aboutplugins->setIcon(KIcon("preferences-plugin"));
+    connect( aboutplugins, SIGNAL(triggered()), this, SLOT(showAboutPlugins()) );
 
     KAction *add_files = actionCollection()->addAction("add_files");
     add_files->setText(i18n("Add files..."));
@@ -221,9 +226,6 @@ void soundKonverter::showLogViewer()
 
     logViewer->show();
     logViewer->raise();
-/*    AboutPlugins *dialog = new AboutPlugins( config, this );
-    dialog->exec();
-    delete dialog;*/
 }
 
 void soundKonverter::showReplayGainScanner()
@@ -233,6 +235,13 @@ void soundKonverter::showReplayGainScanner()
 
     replayGainScanner->show();
     replayGainScanner->raise();
+}
+
+void soundKonverter::showAboutPlugins()
+{
+    AboutPlugins *dialog = new AboutPlugins( config, this );
+    dialog->exec();
+    dialog->deleteLater();
 }
 
 void soundKonverter::startConversion()

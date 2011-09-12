@@ -20,9 +20,11 @@
         <Menu name="tools"><Text>Tools</Text>
             <Action name="replaygainscanner" />
         </Menu>
+        <Menu name="help">
+            <Action name="aboutplugins" />
+        </Menu>
     </MenuBar>
     <ToolBar name="toolbar" hidden="true" >
-        <text>Main Toolbar</text>
         <Action name="add_files" />
         <Action name="add_audiocd" />
         <Separator />

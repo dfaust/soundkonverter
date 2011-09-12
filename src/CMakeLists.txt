@@ -129,7 +129,7 @@ set(soundkonverter_SRCS
    pluginloader.cpp
    progressindicator.cpp
    outputdirectory.cpp
-#    aboutplugins.cpp
+   aboutplugins.cpp
 )
 
 

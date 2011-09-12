@@ -56,6 +56,7 @@ private slots:
     void showConfigDialog();
     void showLogViewer();
     void showReplayGainScanner();
+    void showAboutPlugins();
     void progressChanged( const QString& progress );
 
     /** The conversion has started */

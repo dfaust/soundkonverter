@@ -78,7 +78,6 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
             newTrunk.rating = 80;
             newTrunk.enabled = ( binaries["mplayer"] != "" );
             newTrunk.problemInfo = standardMessage( "decode_codec,backend", fromCodecs.at(i), "mplayer" ) + "\n" + standardMessage( "install_patented_backend", "mplayer" );
-//             newTrunk.problemInfo = i18n("You need to install 'mplayer'. Since mplayer inludes many patented codecs, it may not be included in the default installation of your distribution. Many distributions offer mplayer in an additional software repository.");
             newTrunk.data.hasInternalReplayGain = false;
             table.append( newTrunk );
         }
@@ -132,7 +131,7 @@ QWidget *soundkonverter_codec_mplayer::newCodecWidget()
 
 int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
+    const QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
         return -1;
 
@@ -196,7 +195,6 @@ float soundkonverter_codec_mplayer::parseOutput( const QString& output )
     // no encoding
 
     // TODO error handling
-    // Error while decoding stream #0.0
 
     return -1;
 }

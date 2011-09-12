@@ -11,7 +11,7 @@ soundKonverter currently supports the following plugins and file formats:
 Encoders/Decoders:
                 Encode:                                                 Decode:
 faac            (aac,m4a)                                               (aac,m4a)
-ffmpeg          (ogg vorbis,mp3,flac,wma,ac3,alac,mp2,amr nb)           (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,mpc,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
+ffmpeg          (ogg vorbis,mp3,flac,wma,aac,m4a,ac3,alac,mp2,amr nb)   (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,mpc,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
 flac            (flac)                                                  (flac)
 lame            (mp3)                                                   (mp2,mp3)
 mplayer                                                                 (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,mpc,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
@@ -25,6 +25,7 @@ flake           (flac)
 mac             (ape)                                                   (ape)
 shorten         (shorten)                                               (shorten)
 wavpack         (wavpack)                                               (wavpack)
+speex           (speex)                                                 (speex)
 
 Replay Gain calculators:
 aacgain         (aac,mp3)
@@ -101,6 +102,9 @@ More information about openSUSE KDE repositories: http://en.opensuse.org/KDE_rep
 
 Ubuntu/Debain Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
 Packages for non openSUSE distributions are not tested, so please tell me if something is wrong with the packages.
+
+If you want to just install the soundkonverter package without adding a repository, you can use the following url:
+http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
 
 If your distribution is not listed here, you should start an internet search, there might be precompiled packages for your distribution provided by somebody else.
 (But make sure the source is trustworthy of cause...)

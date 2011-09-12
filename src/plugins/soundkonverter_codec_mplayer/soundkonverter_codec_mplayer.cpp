@@ -75,7 +75,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
             ConversionPipeTrunk newTrunk;
             newTrunk.codecFrom = fromCodecs.at(i);
             newTrunk.codecTo = toCodecs.at(j);
-            newTrunk.rating = 90;
+            newTrunk.rating = 80;
             newTrunk.enabled = ( binaries["mplayer"] != "" );
             newTrunk.problemInfo = standardMessage( "decode_codec,backend", fromCodecs.at(i), "mplayer" ) + "\n" + standardMessage( "install_patented_backend", "mplayer" );
 //             newTrunk.problemInfo = i18n("You need to install 'mplayer'. Since mplayer inludes many patented codecs, it may not be included in the default installation of your distribution. Many distributions offer mplayer in an additional software repository.");

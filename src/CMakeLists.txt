@@ -86,10 +86,6 @@ kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
 target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
 install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 
-
-# add_definitions(${TAGLIB_CFLAGS} "${TAGLIB_CFLAGS}/..")
-# ADD_DEFINITIONS(${TAGLIB_CFLAGS} -DQT_STL)
-
 set(soundkonverter_SRCS
    configdialog/configdialog.cpp
    configdialog/configpagebase.cpp
@@ -152,7 +148,5 @@ install(FILES soundkonverter-rip-audiocd.desktop DESTINATION ${DATA_INSTALL_DIR}
 
 add_subdirectory(icons)
 add_subdirectory(images)
-
-# dependencies: taglib, cdparanoia
 
 macro_display_feature_log()

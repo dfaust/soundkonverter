@@ -4,8 +4,6 @@
 
 #include "../../core/codecplugin.h"
 
-#include <QWeakPointer>
-
 class ConversionOptions;
 
 
@@ -27,7 +25,7 @@ public:
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
-
+    
     QWidget *newCodecWidget();
 
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
@@ -39,14 +37,10 @@ private:
    QStringList fromCodecs;
    QStringList toCodecs;
    QMap<QString,QString> codecMap;
-   QWeakPointer<KProcess> infoProcess;
-
+    
 private slots:
     /** Get the process' output */
     void processOutput();
-
-    void infoProcessOutput();
-    void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg );

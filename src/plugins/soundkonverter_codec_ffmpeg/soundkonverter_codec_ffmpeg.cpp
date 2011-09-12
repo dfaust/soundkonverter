@@ -5,8 +5,14 @@
 #include "../../core/conversionoptions.h"
 #include "ffmpegcodecwidget.h"
 
+#include <KMessageBox>
+#include <KDialog>
+#include <QCheckBox>
+#include <QHBoxLayout>
+#include <QFileInfo>
 
-// TODO video files
+
+// TODO check for decoders at runtime, too
 
 soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
@@ -15,19 +21,138 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 
     binaries["ffmpeg"] = "";
 
-    // encoders
-    codecMap["wav"] = "pcm_s16le";
-    codecMap["ogg vorbis"] = "libvorbis"; // vorbis
-    codecMap["mp3"] = "libmp3lame";
-    codecMap["flac"] = "flac";
-    codecMap["wma"] = "wmav2";
-//     codecMap["aac"] = "libfaac"; // aac - removed from ffmpeg ???
-    codecMap["ac3"] = "ac3";
-    codecMap["alac"] = "alac";
-    codecMap["mp2"] = "mp2";
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    configVersion = group.readEntry( "configVersion", 0 );
+    experimentalCodecsEnabled = group.readEntry( "experimentalCodecsEnabled", false );
+    ffmpegLastModified = group.readEntry( "ffmpegLastModified", QDateTime() );
+    ffmpegCodecList = group.readEntry( "codecList", QStringList() ).toSet();
+
+    CodecData data;
+    FFmpegCodecData ffmpegData;
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "wav";
+    ffmpegData.name = "pcm_s16le";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "ogg vorbis";
+    ffmpegData.name = "libvorbis";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "vorbis";
+    ffmpegData.external = true; // ?
+    ffmpegData.experimental = true;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "mp3";
+    ffmpegData.name = "libmp3lame";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "flac";
+    ffmpegData.name = "flac";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "wma";
+    ffmpegData.name = "wmav2";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "wmav1";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "aac";
+    ffmpegData.name = "libfaac";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "aac";
+    ffmpegData.external = false;
+    ffmpegData.experimental = true;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "m4a";
+    ffmpegData.name = "libfaac";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "aac";
+    ffmpegData.external = false;
+    ffmpegData.experimental = true;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "ac3";
+    ffmpegData.name = "ac3";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "alac";
+    ffmpegData.name = "alac";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "mp2";
+    ffmpegData.name = "mp2";
+    ffmpegData.external = false;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
+    data.ffmpegCodecList.clear();
+    data.codecName = "amr nb";
+    ffmpegData.name = "libopencore_amrnb";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    codecList.append( data );
+
 //     codecMap["sonic"] = "sonic";
 //     codecMap["sonic lossless"] = "sonicls";
-    codecMap["amr nb"] = "libopencore_amrnb";
+//     codecMap["real audio 1"] = "real_144";
+//     codecMap["e-ac3"] = "eac3";
+
+    for( int i=0; i<codecList.count(); i++ )
+    {
+        for( int j=0; j<codecList.at(i).ffmpegCodecList.count(); j++ )
+        {
+            if( !codecList.at(i).ffmpegCodecList.at(j).external && ( !codecList.at(i).ffmpegCodecList.at(j).experimental || experimentalCodecsEnabled ) )
+            {
+                codecList[i].currentFFmpegCodec = codecList.at(i).ffmpegCodecList.at(j);
+                break;
+            }
+        }
+    }
 }
 
 soundkonverter_codec_ffmpeg::~soundkonverter_codec_ffmpeg()
@@ -38,9 +163,16 @@ QString soundkonverter_codec_ffmpeg::name()
     return global_plugin_name;
 }
 
+int soundkonverter_codec_ffmpeg::version()
+{
+    return global_plugin_version;
+}
+
 QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
 {
     QList<ConversionPipeTrunk> table;
+    QStringList fromCodecs;
+    QStringList toCodecs;
 
     /// decode
     fromCodecs += "wav";
@@ -58,7 +190,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "amr nb";
     fromCodecs += "amr wb";
     fromCodecs += "ape";
-//     fromCodecs += "eac3";
+//     fromCodecs += "e-ac3";
     fromCodecs += "speex";
     fromCodecs += "m4a";
     fromCodecs += "mp1";
@@ -85,20 +217,39 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "rv";
 
     /// encode
-    toCodecs += "wav";
-    toCodecs += "ogg vorbis";
-    toCodecs += "mp3";
-    toCodecs += "flac";
-    toCodecs += "wma";
-//     toCodecs += "aac"; // libfaac removed from ffmpeg ???
-    toCodecs += "ac3";
-    toCodecs += "alac";
-//     toCodecs += "m4a"; // libfaac removed from ffmpeg ???
-    toCodecs += "mp2";
-//     toCodecs += "sonic";
-//     toCodecs += "sonic lossless";
-    toCodecs += "amr nb";
+    if( !binaries["ffmpeg"].isEmpty() )
+    {
+        QFileInfo ffmpegInfo( binaries["ffmpeg"] );
+        if( ffmpegInfo.lastModified() > ffmpegLastModified || configVersion < version() )
+        {
+            infoProcess = new KProcess();
+            infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
+            QStringList command;
+            command += binaries["ffmpeg"];
+            command += "-codecs";
+            infoProcess.data()->clearProgram();
+            infoProcess.data()->setShellCommand( command.join(" ") );
+            infoProcess.data()->start();
+
+            infoProcess.data()->waitForFinished( 3000 );
+        }
+    }
+
+    for( int i=0; i<codecList.count(); i++ )
+    {
+        for( int j=0; j<codecList.at(i).ffmpegCodecList.count(); j++ )
+        {
+            if( ( !codecList.at(i).ffmpegCodecList.at(j).experimental || experimentalCodecsEnabled ) && ffmpegCodecList.contains(codecList.at(i).ffmpegCodecList.at(j).name) )
+            {
+                codecList[i].currentFFmpegCodec = codecList.at(i).ffmpegCodecList.at(j);
+                break;
+            }
+        }
+        toCodecs += codecList.at(i).codecName;
+    }
 
     for( int i=0; i<fromCodecs.count(); i++ )
     {
@@ -107,24 +258,57 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
             if( fromCodecs.at(i) == "wav" && toCodecs.at(j) == "wav" )
                 continue;
 
+            bool codecEnabled = ( toCodecs.at(j) == "wav" ); // always enabled if decoding
+            QStringList ffmpegProblemInfo;
+            if( !codecEnabled )
+            {
+                for( int k=0; k<codecList.count(); k++ )
+                {
+                    if( codecList.at(k).codecName == toCodecs.at(j) )
+                    {
+                        if( !codecList.at(k).currentFFmpegCodec.name.isEmpty() ) // there is a ffmpeg codec set
+                        {
+                            if( codecList.at(k).currentFFmpegCodec.experimental && !experimentalCodecsEnabled ) // ... but it's experimental and experimental codecs are disabled by default
+                            {
+                                ffmpegProblemInfo.append( i18n("Enable experimental codecs in the ffmpeg configuration dialog.") );
+                            }
+                            else // everything should work, lets exit
+                            {
+                                codecEnabled = true;
+                                break;
+                            }
+                        }
+                        for( int l=0; l<codecList.at(k).ffmpegCodecList.count(); l++ )
+                        {
+                            if( codecList.at(k).ffmpegCodecList.at(l).external )
+                            {
+                                ffmpegProblemInfo.append( i18n("Compile ffmpeg with %1 support.",codecList.at(k).ffmpegCodecList.at(l).name) );
+                            }
+                        }
+                    }
+                }
+            }
+
             ConversionPipeTrunk newTrunk;
             newTrunk.codecFrom = fromCodecs.at(i);
             newTrunk.codecTo = toCodecs.at(j);
             newTrunk.rating = 90;
-            newTrunk.enabled = ( binaries["ffmpeg"] != "" );
-            if( toCodecs.at(j) == "wav" )
+            newTrunk.enabled = ( binaries["ffmpeg"] != "" ) && codecEnabled;
+            if( binaries["ffmpeg"] == "" )
             {
-                newTrunk.problemInfo = standardMessage( "decode_codec,backend", fromCodecs.at(i), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
-            }
-            else if( fromCodecs.at(i) == "wav" )
-            {
-                newTrunk.problemInfo = standardMessage( "encode_codec,backend", toCodecs.at(j), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
+                if( toCodecs.at(j) == "wav" )
+                {
+                    newTrunk.problemInfo = standardMessage( "decode_codec,backend", fromCodecs.at(i), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
+                }
+                else if( fromCodecs.at(i) == "wav" )
+                {
+                    newTrunk.problemInfo = standardMessage( "encode_codec,backend", toCodecs.at(j), "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
+                }
             }
             else
             {
-//                 newTrunk.problemInfo = standardMessage( "transcode_codec,backend", "?", "ffmpeg" ) + "\n" + standardMessage( "install_patented_backend", "ffmpeg" );
+                newTrunk.problemInfo = ffmpegProblemInfo.join("\n"+i18nc("like in either or","or")+"\n");
             }
-//             newTrunk.problemInfo = i18n("You need to install 'ffmpeg'. Since ffmpeg inludes many patented codecs, it may not be included in the default installation of your distribution. Many distributions offer ffmpeg in an additional software repository.");
             newTrunk.data.hasInternalReplayGain = false;
             table.append( newTrunk );
         }
@@ -144,14 +328,60 @@ bool soundkonverter_codec_ffmpeg::isConfigSupported( ActionType action, const QS
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    return false;
+    return true;
 }
 
 void soundkonverter_codec_ffmpeg::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
     Q_UNUSED(action)
     Q_UNUSED(codecName)
-    Q_UNUSED(parent)
+
+    if( !configDialog.data() )
+    {
+        configDialog = new KDialog( parent );
+        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+
+        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
+        configDialogExperimantalCodecsEnabledCheckBox = new QCheckBox( i18n("Enable experimental codecs"), configDialogWidget );
+        configDialogBox->addWidget( configDialogExperimantalCodecsEnabledCheckBox );
+
+        configDialog.data()->setMainWidget( configDialogWidget );
+        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+    }
+    configDialogExperimantalCodecsEnabledCheckBox->setChecked( experimentalCodecsEnabled );
+    configDialog.data()->show();
+}
+
+void soundkonverter_codec_ffmpeg::configDialogSave()
+{
+    if( configDialog.data() )
+    {
+        const bool old_experimentalCodecsEnabled = experimentalCodecsEnabled;
+        experimentalCodecsEnabled = configDialogExperimantalCodecsEnabledCheckBox->isChecked();
+
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "experimentalCodecsEnabled", experimentalCodecsEnabled );
+
+        if( experimentalCodecsEnabled != old_experimentalCodecsEnabled )
+        {
+            KMessageBox::information( configDialog.data(), i18n("Please restart soundKonverter in order to activate the changes.") );
+        }
+        configDialog.data()->deleteLater();
+    }
+}
+
+void soundkonverter_codec_ffmpeg::configDialogDefault()
+{
+    if( configDialog.data() )
+    {
+        configDialogExperimantalCodecsEnabledCheckBox->setChecked( false );
+    }
 }
 
 bool soundkonverter_codec_ffmpeg::hasInfo()
@@ -190,9 +420,21 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
         command += binaries["ffmpeg"];
         command += "-i";
         command += "\"" + escapeUrl(inputFile) + "\"";
-        command += "-acodec";
-        command += codecMap[conversionOptions->codecName];
-        if( outputCodec != "alac" )
+        for( int i=0; i<codecList.count(); i++ )
+        {
+            if( codecList.at(i).codecName == outputCodec )
+            {
+                command += "-acodec";
+                command += codecList.at(i).currentFFmpegCodec.name;
+                if( codecList.at(i).currentFFmpegCodec.experimental )
+                {
+                    command += "-strict";
+                    command += "experimental";
+                }
+                break;
+            }
+        }
+        if( outputCodec != "alac" && outputCodec != "flac" )
         {
             command += "-ab";
             command += QString::number(conversionOptions->bitrate) + "k";
@@ -205,6 +447,10 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
             {
                 command += "-ac 1";
             }
+        }
+        if( conversionOptions->pluginName == name() )
+        {
+            command += conversionOptions->cmdArguments;
         }
         command += "\"" + escapeUrl(outputFile) + "\"";
     }
@@ -255,21 +501,18 @@ QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, 
 
 float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *length )
 {
-    // size=    1508kB time=48.25 bitrate= 256.0kbits/s
+    // Duration: 00:02:16.50, start: 0.000000, bitrate: 1411 kb/s
+    // size=    2445kB time=00:01:58.31 bitrate= 169.3kbits/s
 
-    QString data = output;
-    QString time;
-
-    QRegExp reg("(\\d{2,}):(\\d{2}):(\\d{2})\\.(\\d{2})");
-    if( length && data.contains(reg) )
+    QRegExp regLength("Duration: (\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    if( length && output.contains(regLength) )
     {
-        *length = reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
+        *length = regLength.cap(1).toInt()*3600 + regLength.cap(2).toInt()*60 + regLength.cap(3).toInt();
     }
-    if( data.contains("time") )
+    QRegExp reg("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    if( output.contains(reg) )
     {
-        data.remove( 0, data.indexOf("time")+5 );
-        time = data.left( data.indexOf(" ") );
-        return time.toFloat();
+        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();;
     }
 
     // TODO error handling
@@ -285,22 +528,65 @@ float soundkonverter_codec_ffmpeg::parseOutput( const QString& output )
 
 void soundkonverter_codec_ffmpeg::processOutput()
 {
-    CodecPluginItem *pluginItem;
-    float progress;
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            QString output = backendItems.at(i)->process->readAllStandardOutput().data();
-            pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
-            progress = parseOutput( output, &pluginItem->data.length );
-            if( progress == -1 && !output.simplified().isEmpty() ) emit log( backendItems.at(i)->id, output );
+            const QString output = backendItems.at(i)->process->readAllStandardOutput().data();
+
+            CodecPluginItem *pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
+
+            float progress = parseOutput( output, &pluginItem->data.length );
+            if( progress == -1 && !output.simplified().isEmpty() )
+                emit log( backendItems.at(i)->id, output );
+
             progress = progress * 100 / pluginItem->data.length;
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
+
             return;
         }
     }
 }
+
+void soundkonverter_codec_ffmpeg::infoProcessOutput()
+{
+    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+}
+
+void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
+{
+    Q_UNUSED(exitStatus)
+    Q_UNUSED(exitCode)
+
+    ffmpegCodecList.clear();
+
+    for( int i=0; i<codecList.count(); i++ )
+    {
+        for( int j=0; j<codecList.at(i).ffmpegCodecList.count(); j++ )
+        {
+            if( infoProcessOutputData.contains( QRegExp(" (D| )E.{4} "+codecList.at(i).ffmpegCodecList.at(j).name+" ")) )
+            {
+                ffmpegCodecList += codecList.at(i).ffmpegCodecList.at(j).name;
+            }
+        }
+    }
+
+    QFileInfo ffmpegInfo( binaries["ffmpeg"] );
+    ffmpegLastModified = ffmpegInfo.lastModified();
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    group.writeEntry( "configVersion", version() );
+    group.writeEntry( "ffmpegLastModified", ffmpegLastModified );
+    group.writeEntry( "codecList", ffmpegCodecList.toList() );
+
+    infoProcessOutputData.clear();
+    infoProcess.data()->deleteLater();
+}
+
 
 #include "soundkonverter_codec_ffmpeg.moc"
 

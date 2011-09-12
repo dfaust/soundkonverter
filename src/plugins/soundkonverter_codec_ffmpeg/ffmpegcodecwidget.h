@@ -8,7 +8,7 @@ class KComboBox;
 class QSlider;
 class QSpinBox;
 class QCheckBox;
-// class QLabel;
+class KLineEdit;
 
 class FFmpegCodecWidget : public CodecWidget
 {
@@ -33,6 +33,8 @@ private:
     KComboBox *cChannels;
     QCheckBox *chSamplerate;
     KComboBox *cSamplerate;
+    QCheckBox *cCmdArguments;
+    KLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

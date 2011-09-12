@@ -4,15 +4,12 @@
 #include "ffmpegcodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-
-
-#include <QLayout>
-#include <QLabel>
-// #include <QCheckBox>
 #include <KLocale>
 #include <KComboBox>
+#include <KLineEdit>
+#include <QLayout>
+#include <QLabel>
 #include <QDoubleSpinBox>
-// #include <QGroupBox>
 #include <QSlider>
 #include <QCheckBox>
 #include <QLineEdit>
@@ -87,7 +84,19 @@ FFmpegCodecWidget::FFmpegCodecWidget()
 
     midBox->addStretch();
 
-    grid->setRowStretch( 2, 1 );
+    // cmd arguments box
+
+    QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
+    grid->addLayout( cmdArgumentsBox, 2, 0 );
+
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cmdArgumentsBox->addWidget( cCmdArguments );
+    lCmdArguments = new KLineEdit( this );
+    lCmdArguments->setEnabled( false );
+    cmdArgumentsBox->addWidget( lCmdArguments );
+    connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
+
+    grid->setRowStretch( 3, 1 );
 }
 
 FFmpegCodecWidget::~FFmpegCodecWidget()
@@ -106,27 +115,36 @@ ConversionOptions *FFmpegCodecWidget::currentConversionOptions()
     else options->samplingRate = 0;
     if( chChannels->isChecked() ) options->channels = 1;
     else options->channels = 0;
+    if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
+    else options->cmdArguments = "";
 
     return options;
 }
 
 bool FFmpegCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name ) return false;
+    if( !_options || _options->pluginName != global_plugin_name )
+        return false;
 
     ConversionOptions *options = _options;
 
     iBitrate->setValue( options->bitrate );
     chSamplerate->setChecked( options->samplingRate != 0 );
-    if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
+    if( options->samplingRate != 0 )
+        cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
     chChannels->setChecked( options->channels != 0 );
+    cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
+    if( !options->cmdArguments.isEmpty() )
+        lCmdArguments->setText( options->cmdArguments );
 
     return true;
 }
 
 void FFmpegCodecWidget::setCurrentFormat( const QString& format )
 {
-    if( currentFormat == format ) return;
+    if( currentFormat == format )
+        return;
+
     currentFormat = format;
     setEnabled( currentFormat != "wav" && currentFormat != "flac" && currentFormat != "alac" );
 }
@@ -170,6 +188,7 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
         chChannels->setChecked( true );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Low") )
@@ -179,6 +198,7 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
         chChannels->setChecked( false );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Medium") )
@@ -187,6 +207,7 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
         iBitrate->setValue( 160 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("High") )
@@ -195,6 +216,7 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
         iBitrate->setValue( 240 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Very high") )
@@ -203,6 +225,7 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
         iBitrate->setValue( 320 );
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
+        cCmdArguments->setChecked( false );
         return true;
     }
 
@@ -224,6 +247,8 @@ QDomDocument FFmpegCodecWidget::customProfile()
     encodingOptions.setAttribute("channels",cChannels->currentIndex());
     encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
     encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
+    encodingOptions.setAttribute("cmdArgumentsEnabled",cCmdArguments->isChecked() && cCmdArguments->isEnabled());
+    encodingOptions.setAttribute("cmdArguments",lCmdArguments->text());
     root.appendChild(encodingOptions);
     return profile;
 }
@@ -240,6 +265,8 @@ bool FFmpegCodecWidget::setCustomProfile( const QString& profile, const QDomDocu
     cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
     cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
+    cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
+    lCmdArguments->setText( encodingOptions.attribute("cmdArguments") );
     return true;
 }
 

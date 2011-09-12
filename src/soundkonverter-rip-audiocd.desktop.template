@@ -1,0 +1,10 @@
+[Desktop Entry]
+X-KDE-Solid-Predicate=OpticalDisc.availableContent & 'Audio'
+Type=Service
+Actions=Rip
+X-KDE-Priority=TopLevel
+
+[Desktop Action Rip]
+_Name=Rip Audio CD with soundKonverter
+Icon=soundkonverter
+Exec=soundkonverter --rip %d

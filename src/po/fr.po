@@ -2346,4 +2346,11 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Vos courriels"
 
+#: rc.cpp:9
+msgid "An audio file converter"
+msgstr "Convertisseur de fichiers audio"
+
+#: rc.cpp:10
+msgid "Rip Audio CD with soundKonverter"
+msgstr ""
 

@@ -41,7 +41,7 @@ bool soundkonverter_replaygain_metaflac::isConfigSupported( ActionType action, c
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    return true;
+    return false;
 }
 
 void soundkonverter_replaygain_metaflac::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )

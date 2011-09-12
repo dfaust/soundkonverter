@@ -103,8 +103,8 @@ More information about openSUSE KDE repositories: http://en.opensuse.org/KDE_rep
 Ubuntu/Debain Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
 Packages for non openSUSE distributions are not tested, so please tell me if something is wrong with the packages.
 
-If you want to just install the soundkonverter package without adding a repository, you can use the following url:
-http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
+Here is another download interface with some instructions (please check if the version number is up-to-date):
+http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter-1.1.0
 
 If your distribution is not listed here, you should start an internet search, there might be precompiled packages for your distribution provided by somebody else.
 (But make sure the source is trustworthy of cause...)

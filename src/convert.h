@@ -5,9 +5,6 @@
 
 #include "pluginloader.h"
 
-//#include <kio/jobclasses.h>
-// #include <kio/job.h>
-// #include <kio/copyjob.h>
 #include <kio/job.h>
 #include <kio/jobclasses.h>
 
@@ -27,24 +24,6 @@ class FileList;
 class FileListItem;
 class ReplayGain;
 class Logger;
-
-//class KProcess;
-
-/*class RatedListItem
-{
-public:
-    RatedListItem( CodecPlugin *_plugin1, CodecPlugin *_plugin2, int _rating ) { plugin1 = _plugin1; plugin2 = _plugin2; rating = _rating; }
-    ~RatedListItem() {}
-
-    CodecPlugin *plugin1;
-    CodecPlugin *plugin2;
-    int rating;
-
-    bool operator<(RatedListItem const& b)
-    {
-        return this->rating < b.rating;
-    }
-};*/
 
 /**
  * @short The items for the conversion (for every active file)
@@ -192,9 +171,6 @@ private:
 
     /** Remove item @p item and emit the state @p state */
     void remove( ConvertItem *item, int state = 0 );
-
-    /** build all possible conversion pipes */
-    //void calcPipes( ConvertItem *item );
 
     /** holds all active files */
     QList<ConvertItem*> items;

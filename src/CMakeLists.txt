@@ -43,6 +43,7 @@ find_package(Taglib REQUIRED)
 
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
+
 add_subdirectory(plugins/soundkonverter_codec_aften)
 add_subdirectory(plugins/soundkonverter_codec_lame)
 add_subdirectory(plugins/soundkonverter_codec_twolame)
@@ -68,6 +69,7 @@ add_subdirectory(plugins/soundkonverter_replaygain_wvgain)
 add_subdirectory(plugins/soundkonverter_replaygain_musepack)
 add_subdirectory(plugins/soundkonverter_ripper_cdparanoia)
 
+
 include(MacroOptionalAddSubdirectory)
 macro_optional_add_subdirectory( po )
 
@@ -80,11 +82,10 @@ set(soundkonvertercore_SRCS
    core/replaygainplugin.cpp
    core/ripperplugin.cpp
 )
-
 kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
-
 target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
 install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
+
 
 set(soundkonverter_SRCS
    configdialog/configdialog.cpp
@@ -127,16 +128,10 @@ set(soundkonverter_SRCS
    outputdirectory.cpp
    aboutplugins.cpp
 )
-
-
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
-
 target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
-
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 
-
-########### install files ###############
 
 install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
@@ -149,4 +144,10 @@ install(FILES soundkonverter-rip-audiocd.desktop DESTINATION ${DATA_INSTALL_DIR}
 add_subdirectory(icons)
 add_subdirectory(images)
 
+
 macro_display_feature_log()
+
+
+# uninstall target
+configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
+add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)

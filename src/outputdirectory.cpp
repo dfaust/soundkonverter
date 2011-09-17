@@ -342,7 +342,7 @@ KUrl OutputDirectory::uniqueFileName( const KUrl& url, const QStringList& usedOu
     while( QFile::exists(uniqueUrl.toLocalFile()) || usedOutputNames.contains(uniqueUrl.toLocalFile()) )
     {
         QString fileName = uniqueUrl.fileName();
-        fileName = fileName.left( fileName.lastIndexOf(".")+1 ) + i18n("new") + fileName.mid( fileName.lastIndexOf(".") );
+        fileName = fileName.left( fileName.lastIndexOf(".")+1 ) + i18nc("will be appended to the filename if a file with the same name already exists","new") + fileName.mid( fileName.lastIndexOf(".") );
         uniqueUrl.setFileName( fileName );
     }
 

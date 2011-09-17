@@ -65,7 +65,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
 //     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
     connect( pFormatInfo, SIGNAL(clicked()), this, SLOT(formatInfo()) );
     topBox->addSpacing( 3 );
-    QLabel *formatHelp = new QLabel( i18n("<a href=\"format-help\">More</a>"), this );
+    QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More") + "</a>", this );
     topBox->addWidget( formatHelp );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
     topBox->addStretch( );

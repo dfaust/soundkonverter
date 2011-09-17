@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-08-11 19:37+0200\n"
+"POT-Creation-Date: 2011-09-17 17:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,50 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: aboutplugins.cpp:18
+msgid "About plugins"
+msgstr ""
+
+#: aboutplugins.cpp:30
+msgid "Installed plugins:"
+msgstr ""
+
+#: aboutplugins.cpp:107
+msgid "About plugin %1:"
+msgstr ""
+
+#: aboutplugins.cpp:109
+msgid "Plugin type: %1"
+msgstr ""
+
+#: aboutplugins.cpp:115
+msgid "Backend binaries:"
+msgstr ""
+
+#: aboutplugins.cpp:120
+msgid "%1 found at: %2"
+msgstr ""
+
+#: aboutplugins.cpp:122
+msgid "%1 (not found)"
+msgstr ""
+
+#: aboutplugins.cpp:143 aboutplugins.cpp:163
+msgid "Supported codecs:"
+msgstr ""
+
+#: aboutplugins.cpp:146
+msgid "Encode: %1"
+msgstr ""
+
+#: aboutplugins.cpp:149
+msgid "Decode: %1"
+msgstr ""
+
+#: aboutplugins.cpp:173
+msgid "Configure %1 ..."
+msgstr ""
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
@@ -61,43 +105,48 @@ msgid ""
 "your distribution."
 msgstr ""
 
-#: codecproblems.cpp:32
+#: codecproblems.cpp:33
 msgid ""
-"Some of the installed plugins aren't working because they are missing "
-"additional programs.\n"
+"Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
 
-#: codecproblems.cpp:37
+#: codecproblems.cpp:38
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
 
-#: codecproblems.cpp:41
+#: codecproblems.cpp:42
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
 
-#: codecproblems.cpp:47
+#: codecproblems.cpp:48
 msgid ""
 "Ripping audio CDs is not supported by any installed plugin.\n"
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
 
-#: codecproblems.cpp:51
+#: codecproblems.cpp:52
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
 
-#: codecproblems.cpp:67 codecproblems.cpp:71
+#: codecproblems.cpp:68 codecproblems.cpp:72
 msgid "Possible solutions for %1"
 msgstr ""
 
-#: codecproblems.cpp:71
+#: codecproblems.cpp:68 codecproblems.cpp:72
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:310
+msgctxt "like in either or"
+msgid "or"
+msgstr ""
+
+#: codecproblems.cpp:72
 msgid "Affected files:"
 msgstr ""
 
@@ -107,20 +156,22 @@ msgstr ""
 #: configdialog/configgeneralpage.cpp:192
 #: configdialog/configgeneralpage.cpp:196
 #: configdialog/configgeneralpage.cpp:201
-#: configdialog/configgeneralpage.cpp:206 options.cpp:53 options.cpp:72
+#: configdialog/configgeneralpage.cpp:206 options.cpp:47 options.cpp:66
 #: optionsdetailed.cpp:356
 msgid "Last used"
 msgstr ""
 
 #: config.cpp:47 config.cpp:339 config.cpp:346 config.cpp:352
 #: configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:194 options.cpp:82
+#: configdialog/configgeneralpage.cpp:194 options.cpp:76
 #: optionsdetailed.cpp:352 optionssimple.cpp:155 optionssimple.cpp:195
 #: optionssimple.cpp:282
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:149
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:219
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:154
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:192
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:172
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:213
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:310
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:367
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:154
@@ -129,8 +180,8 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:217
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:211
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:258
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:213
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:260
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:159
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:195
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:219
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:267
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:207
@@ -146,10 +197,12 @@ msgstr ""
 #: config.cpp:336 config.cpp:352 configdialog/configgeneralpage.cpp:60
 #: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:349
 #: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:137
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:162
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:168
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:192
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:142
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:166
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:160
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:184
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:298
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:322
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:142
@@ -158,8 +211,8 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:190
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:199
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:223
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:201
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:225
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:147
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:171
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:207
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:231
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:195
@@ -171,10 +224,12 @@ msgstr ""
 #: config.cpp:337 config.cpp:352 configdialog/configgeneralpage.cpp:61
 #: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:350
 #: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:141
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:170
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:172
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:146
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:175
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:164
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:194
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:302
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:338
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:146
@@ -183,8 +238,8 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:199
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:203
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:235
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:205
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:237
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:151
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:179
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:211
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:244
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:199
@@ -196,10 +251,12 @@ msgstr ""
 #: config.cpp:338 config.cpp:352 configdialog/configgeneralpage.cpp:62
 #: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:351
 #: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:145
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:178
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:176
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:210
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:150
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:184
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:168
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:204
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:306
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:353
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:150
@@ -208,8 +265,8 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:208
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:207
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:247
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:209
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:249
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:155
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:187
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:215
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:256
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:203
@@ -221,10 +278,12 @@ msgstr ""
 #: config.cpp:340 config.cpp:352 configdialog/configgeneralpage.cpp:64
 #: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:353
 #: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:153
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:184
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:228
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:158
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:200
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:176
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:222
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:314
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:381
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:158
@@ -233,8 +292,8 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:226
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:215
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:269
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:217
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:271
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:163
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:203
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:223
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:278
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:211
@@ -246,8 +305,9 @@ msgstr ""
 #: config.cpp:341 config.cpp:356 configdialog/configgeneralpage.cpp:65
 #: configdialog/configgeneralpage.cpp:199 optionsdetailed.cpp:354
 #: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:133
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:138
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:156
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:87
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:92
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:144
@@ -262,7 +322,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:195
 #: plugins/soundkonverter_codec_shorten/shortencodecwidget.cpp:72
 #: plugins/soundkonverter_codec_shorten/shortencodecwidget.cpp:77
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:197
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:143
 #: plugins/soundkonverter_codec_timidity/timiditycodecwidget.cpp:43
 #: plugins/soundkonverter_codec_timidity/timiditycodecwidget.cpp:48
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:203
@@ -282,15 +342,16 @@ msgstr ""
 
 #: config.cpp:364 optionsdetailed.cpp:358 optionssimple.cpp:160
 #: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:156
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:161
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:179
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:39
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:317
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:161
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:43
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:185
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:218
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:220
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:166
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:226
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:214
 msgid "User defined"
@@ -376,7 +437,7 @@ msgstr ""
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1126 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1105 filelist.cpp:498
 msgid "Replay Gain"
 msgstr ""
 
@@ -434,11 +495,11 @@ msgstr ""
 msgid "Start in Mode"
 msgstr ""
 
-#: configdialog/configgeneralpage.cpp:45 options.cpp:95
+#: configdialog/configgeneralpage.cpp:45 options.cpp:89
 msgid "Simple"
 msgstr ""
 
-#: configdialog/configgeneralpage.cpp:46 options.cpp:96
+#: configdialog/configgeneralpage.cpp:46 options.cpp:90
 msgid "Detailed"
 msgstr ""
 
@@ -506,147 +567,174 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr ""
 
-#: convert.cpp:163 convert.cpp:1109
+#: convert.cpp:163 convert.cpp:1088
 msgid "Getting file"
 msgstr ""
 
-#: convert.cpp:224 convert.cpp:370
+#: convert.cpp:193
+msgid "Copying \"%1\" to \"%2\""
+msgstr ""
+
+#: convert.cpp:225 convert.cpp:371
 msgid "No more backends left to try :("
 msgstr ""
 
-#: convert.cpp:234 convert.cpp:270 convert.cpp:1113 filelist.cpp:508
-#: soundkonverter.cpp:248 soundkonverter.cpp:250 soundkonverter.cpp:277
-#: soundkonverter.cpp:279
+#: convert.cpp:235 convert.cpp:271 convert.cpp:1092 filelist.cpp:508
+#: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
+#: soundkonverter.cpp:288
 msgid "Converting"
 msgstr ""
 
-#: convert.cpp:285 convert.cpp:1117
+#: convert.cpp:286 convert.cpp:1096
 msgid "Decoding"
 msgstr ""
 
-#: convert.cpp:337
+#: convert.cpp:338
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
 
-#: convert.cpp:353 convert.cpp:1122
+#: convert.cpp:354 convert.cpp:1101
 msgid "Encoding"
 msgstr ""
 
-#: convert.cpp:366
+#: convert.cpp:367
 msgid "Applying Replay Gain"
 msgstr ""
 
-#: convert.cpp:385
+#: convert.cpp:386
 msgid "Writing tags"
 msgstr ""
 
-#: convert.cpp:396
+#: convert.cpp:397
 msgid "Moving file to destination"
 msgstr ""
 
-#: convert.cpp:403
+#: convert.cpp:404
 msgid "Running user script"
 msgstr ""
 
-#: convert.cpp:428
+#: convert.cpp:429
 msgid "Executing next step"
 msgstr ""
 
-#: convert.cpp:543
+#: convert.cpp:544
 msgid "Read tags sucessfully"
 msgstr ""
 
-#: convert.cpp:547
+#: convert.cpp:548
 msgid "Unable to read tags"
 msgstr ""
 
-#: convert.cpp:573
+#: convert.cpp:560 convert.cpp:565
+msgctxt "removing file"
+msgid "Removing: %1"
+msgstr ""
+
+#: convert.cpp:574
 msgid "An error accured. Error code: %1 (%2)"
 msgstr ""
 
-#: convert.cpp:698 convert.cpp:771
+#: convert.cpp:697 convert.cpp:769
 msgid "Conversion failed. Exit code: %1"
 msgstr ""
 
-#: convert.cpp:840
-msgid "CD track"
+#: convert.cpp:838
+msgctxt "identificator for the logger"
+msgid "CD track %1: %2 - %3"
 msgstr ""
 
-#: convert.cpp:844 filelist.cpp:545
+#: convert.cpp:842
+msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr ""
 
-#: convert.cpp:851
+#: convert.cpp:849
 msgid "Adding new item to conversion list: '%1'"
 msgstr ""
 
-#: convert.cpp:859
+#: convert.cpp:857
 msgid "Got log ID: %1"
 msgstr ""
 
-#: convert.cpp:960
+#: convert.cpp:885
+msgid "Track number: %1, device: %2"
+msgstr ""
+
+#: convert.cpp:890
+msgid "Possible conversion strategies:"
+msgstr ""
+
+#: convert.cpp:903
+msgid "File system type: %1"
+msgstr ""
+
+#: convert.cpp:954
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
 "file size"
 msgstr ""
 
-#: convert.cpp:964
+#: convert.cpp:958
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr ""
 
-#: convert.cpp:973
+#: convert.cpp:967
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr ""
 
-#: convert.cpp:975
+#: convert.cpp:969
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr ""
 
-#: convert.cpp:977
+#: convert.cpp:971
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr ""
 
-#: convert.cpp:979
+#: convert.cpp:973
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr ""
 
-#: convert.cpp:992
+#: convert.cpp:986
 msgid "Executing command: \"%1\""
 msgstr ""
 
-#: convert.cpp:1008
+#: convert.cpp:1002
 msgid "Removing partially converted output file"
 msgstr ""
 
-#: convert.cpp:1013
+#: convert.cpp:1007
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr ""
 
-#: convert.cpp:1015
+#: convert.cpp:1009
 msgid "Conversion time"
 msgstr ""
 
-#: convert.cpp:1016
+#: convert.cpp:1010
 msgid "Output file size"
 msgstr ""
 
-#: convert.cpp:1017
+#: convert.cpp:1011
 msgid "File size ratio"
 msgstr ""
 
-#: convert.cpp:1101
+#: convert.cpp:1080
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr ""
 
-#: convert.cpp:1118 filelist.cpp:503
+#: convert.cpp:1097 filelist.cpp:503
 msgid "Ripping"
+msgstr ""
+
+#: convert.cpp:1114
+msgid "Progress: %1"
 msgstr ""
 
 #: core/backendplugin.cpp:37
@@ -690,126 +778,126 @@ msgstr ""
 msgid "Dolby Digital-Audio"
 msgstr ""
 
-#: core/backendplugin.cpp:116
+#: core/backendplugin.cpp:123
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
 msgstr ""
 
-#: core/backendplugin.cpp:124
+#: core/backendplugin.cpp:132
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
 msgstr ""
 
-#: core/backendplugin.cpp:146
+#: core/backendplugin.cpp:154
 msgid "MPEG-4 Audio Lossless Coding"
 msgstr ""
 
-#: core/backendplugin.cpp:153
+#: core/backendplugin.cpp:161
 msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
 msgstr ""
 
-#: core/backendplugin.cpp:162
+#: core/backendplugin.cpp:170
 msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
 msgstr ""
 
-#: core/backendplugin.cpp:170
+#: core/backendplugin.cpp:178
 msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
 msgstr ""
 
-#: core/backendplugin.cpp:186
+#: core/backendplugin.cpp:187
 msgid ""
 "Speex is a free and lossy audio codec designed for low quality speech "
 "encoding.\n"
 "For more information see: http://www.speex.org"
 msgstr ""
 
-#: core/backendplugin.cpp:194
+#: core/backendplugin.cpp:195
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
 msgstr ""
 
-#: core/backendplugin.cpp:201
+#: core/backendplugin.cpp:202
 msgid ""
 "Musepack is a free and lossy file format based on mp2 and optimized for high "
 "quality."
 msgstr ""
 
-#: core/backendplugin.cpp:211
+#: core/backendplugin.cpp:212
 msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
 
-#: core/backendplugin.cpp:239
+#: core/backendplugin.cpp:240
 msgid "True Audio is a free lossless audio format."
 msgstr ""
 
-#: core/backendplugin.cpp:246
+#: core/backendplugin.cpp:247
 msgid ""
 "WavPack is a free and lossless audio codec.\n"
 "For more information see: http://www.wavpack.com"
 msgstr ""
 
-#: core/backendplugin.cpp:254
+#: core/backendplugin.cpp:255
 msgid "Real Media Audio is a propritary and lossy codec."
 msgstr ""
 
-#: core/backendplugin.cpp:262
+#: core/backendplugin.cpp:263
 msgid "3GP is a audio/video container format for mobile devices."
 msgstr ""
 
-#: core/backendplugin.cpp:277
+#: core/backendplugin.cpp:278
 msgid "Real Media is a propritary and lossy codec."
 msgstr ""
 
-#: core/backendplugin.cpp:366
+#: core/backendplugin.cpp:355
 msgid ""
 "midi is a very old sound file format, that doesn't encode audio waves but "
 "stores instrument timings."
 msgstr ""
 
-#: core/backendplugin.cpp:375
+#: core/backendplugin.cpp:364
 msgid ""
 "Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
 "encode audio waves but stores instrument timings."
 msgstr ""
 
-#: core/backendplugin.cpp:452
+#: core/backendplugin.cpp:441
 msgid "Killing process on user request"
 msgstr ""
 
-#: core/backendplugin.cpp:527
+#: core/backendplugin.cpp:516
 msgid "In order to encode %1 files, you need to install '%2'."
 msgstr ""
 
-#: core/backendplugin.cpp:534
+#: core/backendplugin.cpp:523
 msgid "In order to decode %1 files, you need to install '%2'."
 msgstr ""
 
-#: core/backendplugin.cpp:541
+#: core/backendplugin.cpp:530
 msgid "In order to transcode %1 files, you need to install '%2'."
 msgstr ""
 
-#: core/backendplugin.cpp:548
+#: core/backendplugin.cpp:537
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
 
-#: core/backendplugin.cpp:555
+#: core/backendplugin.cpp:544
 msgid "'%1' should be shipped with your distribution."
 msgstr ""
 
-#: core/backendplugin.cpp:562
+#: core/backendplugin.cpp:551
 msgid ""
 "Since '%1' inludes patented codecs, it may not be included in the default "
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
 
-#: core/backendplugin.cpp:569
+#: core/backendplugin.cpp:558
 msgid "You can download '%1' at %2"
 msgstr ""
 
@@ -826,9 +914,12 @@ msgid "Output"
 msgstr ""
 
 #: filelist.cpp:51 optionssimple.cpp:37
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:33
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:100
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:134
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:31
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:76
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:105
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:31
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:98
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:132
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:84
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:220
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:260
@@ -839,9 +930,9 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:35
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:130
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:164
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:37
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:132
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:166
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:35
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:85
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:116
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:138
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:172
@@ -886,7 +977,7 @@ msgstr ""
 msgid "Will be skipped"
 msgstr ""
 
-#: filelist.cpp:487 soundkonverter.cpp:125 soundkonverter.cpp:129
+#: filelist.cpp:487 soundkonverter.cpp:126 soundkonverter.cpp:130
 msgid "Waiting"
 msgstr ""
 
@@ -908,6 +999,10 @@ msgstr ""
 
 #: filelist.cpp:528
 msgid "Failed"
+msgstr ""
+
+#: filelist.cpp:545
+msgid "CD track %1"
 msgstr ""
 
 #: filelist.cpp:1025
@@ -1307,7 +1402,7 @@ msgstr ""
 
 #: opener/diropener.cpp:117 opener/fileopener.cpp:73
 #: replaygainscanner/replaygainscanner.cpp:136
-msgid "<a href=\"format-help\">Are you missing some file formats?</a>"
+msgid "Are you missing some file formats?"
 msgstr ""
 
 #: opener/diropener.cpp:125
@@ -1437,7 +1532,9 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: optionseditor.cpp:51
+#. i18n: file: soundkonverterui.rc:14
+#. i18n: ectx: Menu (conversion)
+#: optionseditor.cpp:51 rc.cpp:3
 msgid "Conversion"
 msgstr ""
 
@@ -1526,7 +1623,7 @@ msgid "Information about the selected file format"
 msgstr ""
 
 #: optionssimple.cpp:68
-msgid "<a href=\"format-help\">More</a>"
+msgid "More"
 msgstr ""
 
 #: optionssimple.cpp:89
@@ -1660,6 +1757,8 @@ msgid "Unknown Title"
 msgstr ""
 
 #: outputdirectory.cpp:345
+msgctxt ""
+"will be appended to the filename if a file with the same name already exists"
 msgid "new"
 msgstr ""
 
@@ -1697,26 +1796,29 @@ msgstr ""
 msgid "Copy the whole directory structure for all converted files"
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:30
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:28
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:28
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:80
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:32
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:34
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:32
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:33
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:31
 msgid "Mode"
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:34
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:140
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:34
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:32
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:111
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:32
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:138
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:31
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:85
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:267
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:612
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:34
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:36
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:171
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:38
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:173
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:36
+#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:122
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:178
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:399
@@ -1725,48 +1827,39 @@ msgstr ""
 msgid "Bitrate"
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:57
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:55
 msgid "Sample rate"
 msgstr ""
 
-#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:61
+#: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:59
 msgid "Automatic"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:58
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:55
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:58
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:76
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:67
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:70
 msgid "Channels"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:63
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:147
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:63
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:81
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:71
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:75
 msgid "Mono"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:69
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:66
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:159
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:69
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:87
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:82
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:81
 msgid "Resample"
 msgstr ""
 
-#: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
-#: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
-#: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:31
-#: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
-msgid "Compression level"
-msgstr ""
-
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:92
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:185
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:94
@@ -1776,10 +1869,34 @@ msgstr ""
 msgid "Additional encoder arguments"
 msgstr ""
 
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:273
+msgid "Enable experimental codecs in the ffmpeg configuration dialog."
+msgstr ""
+
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:285
+msgid "Compile ffmpeg with %1 support."
+msgstr ""
+
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:342
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:66
 msgid "Configure %1"
+msgstr ""
+
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:347
+msgid "Enable experimental codecs"
+msgstr ""
+
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:373
+msgid "Please restart soundKonverter in order to activate the changes."
+msgstr ""
+
+#: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
+#: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
+#: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:31
+#: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
+msgid "Compression level"
 msgstr ""
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
@@ -1858,7 +1975,6 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:109
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:59
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:61
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:55
 msgid "Bitrate mode"
 msgstr ""
@@ -1869,9 +1985,6 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:62
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:167
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:371
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:64
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:169
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:374
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:58
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:163
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:367
@@ -1886,10 +1999,6 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:144
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:174
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:388
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:65
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:146
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:176
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:392
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:59
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
@@ -1903,9 +2012,6 @@ msgstr ""
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:64
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:175
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:389
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:66
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:177
-#: plugins/soundkonverter_codec_speex/speexcodecwidget.cpp:393
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:60
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:171
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:385
@@ -2105,7 +2211,7 @@ msgid "Remaining time"
 msgstr ""
 
 #: progressindicator.cpp:84 replaygainscanner/replaygainscanner.cpp:222
-#: soundkonverter.cpp:263 soundkonverter.cpp:265
+#: soundkonverter.cpp:272 soundkonverter.cpp:274
 msgid "Finished"
 msgstr ""
 
@@ -2135,12 +2241,12 @@ msgstr ""
 msgid "Replay Gain tool"
 msgstr ""
 
-#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:173
+#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:178
 #: soundkonverterview.cpp:83
 msgid "Add folder..."
 msgstr ""
 
-#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:168
+#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:173
 #: soundkonverterview.cpp:82
 msgid "Add files..."
 msgstr ""
@@ -2161,15 +2267,15 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: soundkonverter.cpp:42
+#: soundkonverter.cpp:43
 msgid "This is soundKonverter %1"
 msgstr ""
 
-#: soundkonverter.cpp:73 soundkonverter.cpp:78
+#: soundkonverter.cpp:74 soundkonverter.cpp:79
 msgid "Removing old file: %1"
 msgstr ""
 
-#: soundkonverter.cpp:157
+#: soundkonverter.cpp:158
 msgid "View logs..."
 msgstr ""
 
@@ -2177,23 +2283,27 @@ msgstr ""
 msgid "Replay Gain tool..."
 msgstr ""
 
-#: soundkonverter.cpp:178 soundkonverterview.cpp:84
+#: soundkonverter.cpp:168
+msgid "About plugins..."
+msgstr ""
+
+#: soundkonverter.cpp:183 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
 msgstr ""
 
-#: soundkonverter.cpp:183 soundkonverterview.cpp:85
+#: soundkonverter.cpp:188 soundkonverterview.cpp:85
 msgid "Add url..."
 msgstr ""
 
-#: soundkonverter.cpp:188 soundkonverterview.cpp:86
+#: soundkonverter.cpp:193 soundkonverterview.cpp:86
 msgid "Add playlist..."
 msgstr ""
 
-#: soundkonverter.cpp:193
+#: soundkonverter.cpp:198
 msgid "Load file list"
 msgstr ""
 
-#: soundkonverter.cpp:198
+#: soundkonverter.cpp:203
 msgid "Save file list"
 msgstr ""
 
@@ -2221,12 +2331,26 @@ msgstr ""
 msgid "No CD device found"
 msgstr ""
 
-#: rc.cpp:1
+#. i18n: file: soundkonverterui.rc:20
+#. i18n: ectx: Menu (tools)
+#: rc.cpp:6
+msgid "Tools"
+msgstr ""
+
+#: rc.cpp:7
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
 
-#: rc.cpp:2
+#: rc.cpp:8
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
+msgstr ""
+
+#: rc.cpp:9
+msgid "An audio file converter"
+msgstr ""
+
+#: rc.cpp:10
+msgid "Rip Audio CD with soundKonverter"
 msgstr ""

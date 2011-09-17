@@ -1,7 +1,7 @@
 //
 // C++ Implementation: opener
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -30,11 +30,11 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setCaption( i18n("Add Files") );
     setWindowIcon( KIcon("audio-x-generic") );
     setButtons( 0 );
-    
+
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
         resize( parent->width() - 10, sizeHint().height() );
-    
+
     QWidget *widget = new QWidget();
     setMainWidget( widget );
 
@@ -53,10 +53,10 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     }
     filterList.prepend( allFilter.join(" ") + "|" + i18n("All supported files") );
     filterList += "*.*|" + i18n("All files");
-    
+
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
     mainGrid->addWidget( options, 1, 0 );
-    
+
     // add a horizontal box layout for the control elements
     QHBoxLayout *controlBox = new QHBoxLayout( 0 );
     mainGrid->addLayout( controlBox, 2, 0 );
@@ -68,9 +68,9 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     pCancel = new KPushButton( KIcon("dialog-cancel"), i18n("Cancel"), widget );
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    
+
     // add the control elements
-    formatHelp = new QLabel( i18n("<a href=\"format-help\">Are you missing some file formats?</a>"), widget );
+    formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
 
     fileDialog = new KFileDialog( KUrl(QDir::homePath()), filterList.join("\n"), this, formatHelp );
@@ -90,7 +90,7 @@ void FileOpener::fileDialogAccepted()
     //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
-  
+
     urls.clear();
     urls = fileDialog->selectedUrls();
 
@@ -159,7 +159,7 @@ void FileOpener::fileDialogAccepted()
             problemList += problem;
         }
     }
-    
+
     if( problemList.count() > 0 )
     {
         CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Decode, problemList, this );

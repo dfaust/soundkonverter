@@ -114,7 +114,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     fileTypesBox->addLayout( fileTypesFormatsBox );
 
     fileTypesFormatsBox->addWidget( fileTypes );
-    QLabel *formatHelp = new QLabel( i18n("<a href=\"format-help\">Are you missing some file formats?</a>"), this );
+    QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", this );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
     fileTypesFormatsBox->addWidget( formatHelp );
 

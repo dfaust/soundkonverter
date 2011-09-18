@@ -35,7 +35,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_aften::codecTable()
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["aften"] != "" );
     newTrunk.problemInfo = standardMessage( "encode_codec,backend", "ac3", "aften" ) + "\n" + standardMessage( "install_opensource_backend", "aften" );
-    newTrunk.data.hasInternalReplayGain = true;
+    newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
     newTrunk.codecFrom = "ac3";

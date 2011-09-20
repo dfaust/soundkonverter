@@ -29,6 +29,7 @@ public:
 private:
     QSlider *sBitrate;
     QSpinBox *iBitrate;
+    KComboBox *cBitrate;
     QCheckBox *chChannels;
     KComboBox *cChannels;
     QCheckBox *chSamplerate;

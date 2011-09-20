@@ -47,6 +47,31 @@ FFmpegCodecWidget::FFmpegCodecWidget()
     connect( iBitrate, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( iBitrate );
 
+    cBitrate = new KComboBox( this );
+    cBitrate->addItem( "32 kbps" );
+    cBitrate->addItem( "40 kbps" );
+    cBitrate->addItem( "48 kbps" );
+    cBitrate->addItem( "56 kbps" );
+    cBitrate->addItem( "64 kbps" );
+    cBitrate->addItem( "80 kbps" );
+    cBitrate->addItem( "96 kbps" );
+    cBitrate->addItem( "112 kbps" );
+    cBitrate->addItem( "128 kbps" );
+    cBitrate->addItem( "160 kbps" );
+    cBitrate->addItem( "192 kbps" );
+    cBitrate->addItem( "224 kbps" );
+    cBitrate->addItem( "256 kbps" );
+    cBitrate->addItem( "320 kbps" );
+    cBitrate->addItem( "384 kbps" );
+    cBitrate->addItem( "448 kbps" );
+    cBitrate->addItem( "512 kbps" );
+    cBitrate->addItem( "576 kbps" );
+    cBitrate->addItem( "640 kbps" );
+    cBitrate->setCurrentIndex( 10 );
+    cBitrate->hide();
+    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    topBox->addWidget( cBitrate );
+
     topBox->addStretch();
 
     QHBoxLayout *midBox = new QHBoxLayout();
@@ -106,7 +131,10 @@ ConversionOptions *FFmpegCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
     options->qualityMode = ConversionOptions::Bitrate;
-    options->bitrate = iBitrate->value();
+    if( currentFormat == "ac3" )
+        options->bitrate = cBitrate->currentText().replace(" kbps","").toInt();
+    else
+        options->bitrate = iBitrate->value();
     options->quality = -1000;
     options->bitrateMode = ConversionOptions::Cbr;
     options->bitrateMin = 0;
@@ -128,7 +156,10 @@ bool FFmpegCodecWidget::setCurrentConversionOptions( ConversionOptions *_options
 
     ConversionOptions *options = _options;
 
-    iBitrate->setValue( options->bitrate );
+    if( currentFormat == "ac3" )
+        cBitrate->setCurrentIndex( cBitrate->findText(QString::number(options->bitrate)+" kbps") );
+    else
+        iBitrate->setValue( options->bitrate );
     chSamplerate->setChecked( options->samplingRate != 0 );
     if( options->samplingRate != 0 )
         cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
@@ -146,6 +177,20 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
         return;
 
     currentFormat = format;
+
+    if( currentFormat == "ac3" )
+    {
+        sBitrate->hide();
+        iBitrate->hide();
+        cBitrate->show();
+    }
+    else
+    {
+        sBitrate->show();
+        iBitrate->show();
+        cBitrate->hide();
+    }
+
     setEnabled( currentFormat != "wav" && currentFormat != "flac" && currentFormat != "alac" );
 }
 
@@ -155,25 +200,51 @@ QString FFmpegCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( iBitrate->value() == 64 && chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( currentFormat == "ac3" )
     {
-        return i18n("Very low");
+        if( cBitrate->currentText() == "64 kbps" && chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+        {
+            return i18n("Very low");
+        }
+        else if( cBitrate->currentText() == "128 kbps" && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+        {
+            return i18n("Low");
+        }
+        else if( cBitrate->currentText() == "192 kbps" && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("Medium");
+        }
+        else if( cBitrate->currentText() == "320 kbps" && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("High");
+        }
+        else if( cBitrate->currentText() == "640 kbps" && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("Very high");
+        }
     }
-    else if( iBitrate->value() == 128 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else
     {
-        return i18n("Low");
-    }
-    else if( iBitrate->value() == 160 && !chChannels->isChecked() && !chSamplerate->isChecked() )
-    {
-        return i18n("Medium");
-    }
-    else if( iBitrate->value() == 240 && !chChannels->isChecked() && !chSamplerate->isChecked() )
-    {
-        return i18n("High");
-    }
-    else if( iBitrate->value() == 320 && !chChannels->isChecked() && !chSamplerate->isChecked() )
-    {
-        return i18n("Very high");
+        if( iBitrate->value() == 64 && chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+        {
+            return i18n("Very low");
+        }
+        else if( iBitrate->value() == 128 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+        {
+            return i18n("Low");
+        }
+        else if( iBitrate->value() == 160 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("Medium");
+        }
+        else if( iBitrate->value() == 240 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("High");
+        }
+        else if( iBitrate->value() == 320 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+        {
+            return i18n("Very high");
+        }
     }
 
     return i18n("User defined");
@@ -183,8 +254,15 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
 {
     if( profile == i18n("Very low") )
     {
-        sBitrate->setValue( 64 );
-        iBitrate->setValue( 64 );
+        if( currentFormat == "ac3" )
+        {
+            cBitrate->setCurrentIndex( cBitrate->findText("64 kbps") );
+        }
+        else
+        {
+            sBitrate->setValue( 64 );
+            iBitrate->setValue( 64 );
+        }
         chChannels->setChecked( true );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
@@ -193,8 +271,15 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Low") )
     {
-        sBitrate->setValue( 128 );
-        iBitrate->setValue( 128 );
+        if( currentFormat == "ac3" )
+        {
+            cBitrate->setCurrentIndex( cBitrate->findText("128 kbps") );
+        }
+        else
+        {
+            sBitrate->setValue( 128 );
+            iBitrate->setValue( 128 );
+        }
         chChannels->setChecked( false );
         chSamplerate->setChecked( true );
         cSamplerate->setCurrentIndex( 4 );
@@ -203,8 +288,15 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Medium") )
     {
-        sBitrate->setValue( 160 );
-        iBitrate->setValue( 160 );
+        if( currentFormat == "ac3" )
+        {
+            cBitrate->setCurrentIndex( cBitrate->findText("192 kbps") );
+        }
+        else
+        {
+            sBitrate->setValue( 160 );
+            iBitrate->setValue( 160 );
+        }
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
@@ -212,8 +304,15 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("High") )
     {
-        sBitrate->setValue( 240 );
-        iBitrate->setValue( 240 );
+        if( currentFormat == "ac3" )
+        {
+            cBitrate->setCurrentIndex( cBitrate->findText("320 kbps") );
+        }
+        else
+        {
+            sBitrate->setValue( 240 );
+            iBitrate->setValue( 240 );
+        }
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
@@ -221,8 +320,15 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Very high") )
     {
-        sBitrate->setValue( 320 );
-        iBitrate->setValue( 320 );
+        if( currentFormat == "ac3" )
+        {
+            cBitrate->setCurrentIndex( cBitrate->findText("640 kbps") );
+        }
+        else
+        {
+            sBitrate->setValue( 320 );
+            iBitrate->setValue( 320 );
+        }
         chChannels->setChecked( false );
         chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
@@ -241,7 +347,14 @@ QDomDocument FFmpegCodecWidget::customProfile()
     profile.appendChild(root);
     QDomElement encodingOptions = profile.createElement("encodingOptions");
     encodingOptions.setAttribute("qualityMode","1");
-    encodingOptions.setAttribute("quality",iBitrate->value());
+    if( currentFormat == "ac3" )
+    {
+        encodingOptions.setAttribute("quality",cBitrate->currentText().replace(" kbps","").toInt());
+    }
+    else
+    {
+        encodingOptions.setAttribute("quality",iBitrate->value());
+    }
     encodingOptions.setAttribute("bitrateMode","1");
     encodingOptions.setAttribute("channelsEnabled",chChannels->isChecked() && chChannels->isEnabled());
     encodingOptions.setAttribute("channels",cChannels->currentIndex());
@@ -259,8 +372,15 @@ bool FFmpegCodecWidget::setCustomProfile( const QString& profile, const QDomDocu
 
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    sBitrate->setValue( encodingOptions.attribute("quality").toInt() );
-    iBitrate->setValue( encodingOptions.attribute("quality").toInt() );
+    if( currentFormat == "ac3" )
+    {
+        cBitrate->setCurrentIndex( cBitrate->findText(encodingOptions.attribute("quality")+" kbps") );
+    }
+    else
+    {
+        sBitrate->setValue( encodingOptions.attribute("quality").toInt() );
+        iBitrate->setValue( encodingOptions.attribute("quality").toInt() );
+    }
     chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
     cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
@@ -281,6 +401,19 @@ int FFmpegCodecWidget::currentDataRate()
     else if( currentFormat == "flac" || currentFormat == "alac" )
     {
         dataRate = 6520000;
+    }
+    else if( currentFormat == "ac3" )
+    {
+        dataRate = cBitrate->currentText().replace(" kbps","").toInt()/8*60*1000;
+
+        if( chChannels->isChecked() )
+        {
+            dataRate *= 0.9f;
+        }
+        if( chSamplerate->isChecked() && cSamplerate->currentText().replace(" Hz","").toInt() <= 22050 )
+        {
+            dataRate *= 0.9f;
+        }
     }
     else
     {

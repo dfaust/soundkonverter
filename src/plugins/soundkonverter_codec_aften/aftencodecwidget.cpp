@@ -47,6 +47,30 @@ AftenCodecWidget::AftenCodecWidget()
     connect( dQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( dQuality );
 
+    cBitrate = new KComboBox( this );
+    cBitrate->addItem( "32 kbps" );
+    cBitrate->addItem( "40 kbps" );
+    cBitrate->addItem( "48 kbps" );
+    cBitrate->addItem( "56 kbps" );
+    cBitrate->addItem( "64 kbps" );
+    cBitrate->addItem( "80 kbps" );
+    cBitrate->addItem( "96 kbps" );
+    cBitrate->addItem( "112 kbps" );
+    cBitrate->addItem( "128 kbps" );
+    cBitrate->addItem( "160 kbps" );
+    cBitrate->addItem( "192 kbps" );
+    cBitrate->addItem( "224 kbps" );
+    cBitrate->addItem( "256 kbps" );
+    cBitrate->addItem( "320 kbps" );
+    cBitrate->addItem( "384 kbps" );
+    cBitrate->addItem( "448 kbps" );
+    cBitrate->addItem( "512 kbps" );
+    cBitrate->addItem( "576 kbps" );
+    cBitrate->addItem( "640 kbps" );
+    cBitrate->hide();
+    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    topBox->addWidget( cBitrate );
+
     topBox->addStretch();
 
     grid->setRowStretch( 1, 1 );
@@ -84,8 +108,8 @@ ConversionOptions *AftenCodecWidget::currentConversionOptions()
     else
     {
         options->qualityMode = ConversionOptions::Bitrate;
-        options->bitrate = dQuality->value();
-        options->quality = qualityForBitrate( options->bitrate );
+        options->bitrate = cBitrate->currentText().replace(" kbps","").toInt();
+        options->quality = qualityForBitrate( cBitrate->currentText().replace(" kbps","").toInt() );
         options->bitrateMin = 0;
         options->bitrateMax = 0;
     }
@@ -110,7 +134,7 @@ bool AftenCodecWidget::setCurrentConversionOptions( ConversionOptions *_options 
     {
         cMode->setCurrentIndex( cMode->findText(i18n("Bitrate")) );
         modeChanged( cMode->currentIndex() );
-        dQuality->setValue( options->bitrate );
+        cBitrate->setCurrentIndex( cBitrate->findText(QString::number(options->bitrate)+" kbps") );
     }
 
     return true;
@@ -212,7 +236,14 @@ QDomDocument AftenCodecWidget::customProfile()
     profile.appendChild(root);
     QDomElement encodingOptions = profile.createElement("encodingOptions");
     encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
-    encodingOptions.setAttribute("quality",dQuality->value());
+    if( cMode->currentIndex() == 0 )
+    {
+        encodingOptions.setAttribute("quality",dQuality->value());
+    }
+    else
+    {
+        encodingOptions.setAttribute("quality",cBitrate->currentText().replace(" kbps","").toInt());
+    }
     root.appendChild(encodingOptions);
     return profile;
 }
@@ -223,8 +254,16 @@ bool AftenCodecWidget::setCustomProfile( const QString& profile, const QDomDocum
 
     QDomElement root = document.documentElement();
     QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-    dQuality->setValue( encodingOptions.attribute("quality").toInt() );
+    cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
+    if( encodingOptions.attribute("qualityMode").toInt() == 0 )
+    {
+        sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
+        dQuality->setValue( encodingOptions.attribute("quality").toInt() );
+    }
+    else
+    {
+        cBitrate->setCurrentIndex( cBitrate->findText(encodingOptions.attribute("quality")+" kbps") );
+    }
     return true;
 }
 
@@ -257,18 +296,18 @@ void AftenCodecWidget::modeChanged( int mode )
         dQuality->setValue( 240 );
 //         dQuality->setValue( qualityForBitrate(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
+        sQuality->show();
+        dQuality->show();
+        cBitrate->hide();
     }
     else
     {
-        sQuality->setRange( 32, 640 );
-        sQuality->setSingleStep( 8 );
-        dQuality->setRange( 32, 640 );
-        dQuality->setSingleStep( 1 );
-        dQuality->setSuffix( " kbps" );
-        sQuality->setValue( 192 );
-        dQuality->setValue( 192 );
+        cBitrate->setCurrentIndex( cBitrate->findText("192 kbps") );
 //         dQuality->setValue( bitrateForQuality(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
+        sQuality->hide();
+        dQuality->hide();
+        cBitrate->show();
     }
 }
 

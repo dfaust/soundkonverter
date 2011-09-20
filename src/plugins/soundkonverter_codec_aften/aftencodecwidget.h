@@ -28,6 +28,7 @@ private:
     KComboBox *cMode;
     QSlider *sQuality;
     QSpinBox *dQuality;
+    KComboBox *cBitrate;
 
     QString currentFormat; // holds the current output file format
 

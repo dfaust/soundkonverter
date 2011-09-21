@@ -37,9 +37,12 @@ QString CodecPlugin::type()
 
 QWidget *CodecPlugin::deleteCodecWidget( QWidget *codecWidget )
 {
-    if( lastUsedConversionOptions ) delete lastUsedConversionOptions;
+    if( lastUsedConversionOptions )
+        delete lastUsedConversionOptions;
+
     lastUsedConversionOptions = qobject_cast<CodecWidget*>(codecWidget)->currentConversionOptions();
-    delete codecWidget;
+    codecWidget->deleteLater();
+
     return 0;
 }
 

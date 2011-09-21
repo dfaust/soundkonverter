@@ -72,9 +72,11 @@ Un-Installation:
 ================
 For uninstalling soundKonverter, open a console and change to the soundKonverter build directory.
 (If you followed the instructions above it's the directory named 'build' in the soundKonverter source directory.)
-Then execute the following command:
+Then execute one of the following commands:
 
 sudo xargs rm < install_manifest.txt
+or
+make uninstall
 
 In order to remove the soundKonverter configuration and kde integration, run the following commands:
 

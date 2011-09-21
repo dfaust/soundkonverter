@@ -20,6 +20,8 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     setButtons( KDialog::Close );
     setButtonFocus( KDialog::Close );
 
+    resize( 500, 300 );
+
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
     QHBoxLayout *box = new QHBoxLayout( widget );

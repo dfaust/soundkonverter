@@ -1,7 +1,7 @@
 //
 // C++ Implementation: optionseditor
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -43,7 +43,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     setButtonIcon( KDialog::User1, KIcon("go-next") );
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyChanges()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(applyChanges()) );
-    
+
     button(KDialog::User2)->setAutoRepeat(true);
     button(KDialog::User1)->setAutoRepeat(true);
 
@@ -283,7 +283,7 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
 void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 {
     applyChanges();
-    
+
     for( QList<FileListItem*>::Iterator it = items.begin(); it != items.end(); )
     {
         if( (*it)->state == FileListItem::Ripping || (*it)->state == FileListItem::Converting || (*it)->state == FileListItem::ApplyingReplayGain )
@@ -325,24 +325,25 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
         // info tab
         ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(items.first()->conversionOptionsId);
-        lPipes->setText("");
+        QString pipes_text;
         if( conversionOptions )
         {
-            QString inputCodec = config->pluginLoader()->getCodecFromFile( items.first()->url );
-            QList<ConversionPipe> pipes = config->pluginLoader()->getConversionPipes( inputCodec, conversionOptions->codecName, conversionOptions->pluginName );
-            for( int i=0; i<pipes.size(); i++ )
+            pipes_text = i18n("Possible conversion strategies:");
+            const QString inputCodec = config->pluginLoader()->getCodecFromFile( items.first()->url );
+            QList<ConversionPipe> conversionPipes = config->pluginLoader()->getConversionPipes( inputCodec, conversionOptions->codecName, conversionOptions->pluginName );
+            for( int i=0; i<conversionPipes.size(); i++ )
             {
-                if( pipes.at(i).trunks.count() == 1 )
+                QStringList pipe_str;
+
+                for( int j=0; j<conversionPipes.at(i).trunks.size(); j++ )
                 {
-                    lPipes->setText( lPipes->text() + QString::number(i+1) + ": " + pipes.at(i).trunks.at(0).plugin->name() + " (rating: " + QString::number(pipes.at(i).trunks.at(0).rating) + ")\n" );
+                    pipe_str += QString("%1 %2 %3 (%4)").arg(conversionPipes.at(i).trunks.at(j).codecFrom).arg("->").arg(conversionPipes.at(i).trunks.at(j).codecTo).arg(conversionPipes.at(i).trunks.at(j).plugin->name());
                 }
-                else if( pipes.at(i).trunks.count() == 2 )
-                {
-                    lPipes->setText( lPipes->text() + QString::number(i+1) + ": " + pipes.at(i).trunks.at(0).plugin->name() + " > " + pipes.at(i).trunks.at(1).plugin->name() + " (rating: " + QString::number(pipes.at(i).trunks.at(0).rating) + " & " + QString::number(pipes.at(i).trunks.at(1).rating) + ")\n" );
-                }
+
+                pipes_text += "\n" + pipe_str.join(", ");
             }
         }
-
+        lPipes->setText( pipes_text );
 
         if( items.first()->tags == 0 && !items.first()->local ) {
             setTagInputEnabled( false );
@@ -512,7 +513,7 @@ void OptionsEditor::itemRemoved( FileListItem *item )
 void OptionsEditor::applyChanges()
 {
     ConversionOptions *newConversionOptions = options->currentConversionOptions();
-    
+
     for( int i=0; i<selectedItems.count(); i++ )
     {
         if( !selectedItems.at(i) )
@@ -520,7 +521,7 @@ void OptionsEditor::applyChanges()
             // FIXME error message, null pointer for file list item
             continue;
         }
-        
+
         if( newConversionOptions && options->isEnabled() )
         {
             selectedItems.at(i)->conversionOptionsId = config->conversionOptionsManager()->updateConversionOptions( selectedItems.at(i)->conversionOptionsId, newConversionOptions );
@@ -529,7 +530,7 @@ void OptionsEditor::applyChanges()
         {
             // TODO error message
         }
-        
+
         if( selectedItems.at(i)->tags )
         {
             if( lTitle->isEnabled() )
@@ -554,7 +555,7 @@ void OptionsEditor::applyChanges()
     }
 
     options->accepted();
-    
+
     emit updateFileListItems( selectedItems );
 }
 
@@ -563,7 +564,7 @@ void OptionsEditor::editOptionsClicked()
     options->setEnabled( true );
     lEditOptions->hide();
     pEditOptions->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() )
     {
         ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( selectedItems.first()->conversionOptionsId );
@@ -597,7 +598,7 @@ void OptionsEditor::editTitleClicked()
     lTitle->setEnabled( true );
     lTitle->setFocus();
     pTitleEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         lTitle->setText( selectedItems.first()->tags->title );
@@ -609,7 +610,7 @@ void OptionsEditor::editNumberClicked()
     iNumber->setEnabled( true );
     iNumber->setFocus();
     pNumberEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         iNumber->setValue( selectedItems.first()->tags->track );
@@ -621,7 +622,7 @@ void OptionsEditor::editArtistClicked()
     lArtist->setEnabled( true );
     lArtist->setFocus();
     pArtistEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         lArtist->setText( selectedItems.first()->tags->artist );
@@ -633,7 +634,7 @@ void OptionsEditor::editComposerClicked()
     lComposer->setEnabled( true );
     lComposer->setFocus();
     pComposerEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         lComposer->setText( selectedItems.first()->tags->composer );
@@ -645,7 +646,7 @@ void OptionsEditor::editAlbumClicked()
     lAlbum->setEnabled( true );
     lAlbum->setFocus();
     pAlbumEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         lAlbum->setText( selectedItems.first()->tags->album );
@@ -657,7 +658,7 @@ void OptionsEditor::editDiscClicked()
     iDisc->setEnabled( true );
     iDisc->setFocus();
     pDiscEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         iDisc->setValue( selectedItems.first()->tags->disc );
@@ -669,7 +670,7 @@ void OptionsEditor::editYearClicked()
     iYear->setEnabled( true );
     iYear->setFocus();
     pYearEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         iYear->setValue( selectedItems.first()->tags->year );
@@ -681,7 +682,7 @@ void OptionsEditor::editGenreClicked()
     cGenre->setEnabled( true );
     cGenre->setFocus();
     pGenreEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         cGenre->setCurrentItem( selectedItems.first()->tags->genre );
@@ -694,7 +695,7 @@ void OptionsEditor::editCommentClicked()
     tComment->setReadOnly( false );
     tComment->setFocus();
     pCommentEdit->hide();
-    
+
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         tComment->setPlainText( selectedItems.first()->tags->comment );

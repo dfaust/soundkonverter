@@ -1,7 +1,7 @@
 //
 // C++ Interface: optionseditor
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -112,7 +112,7 @@ private slots:
 
     void editOptionsClicked();
     void editTagsClicked();
-    
+
     void editTitleClicked();
     void editNumberClicked();
     void editArtistClicked();

@@ -890,14 +890,14 @@ void Convert::add( FileListItem* item )
     logger->log( newItem->logID, "\t" + i18n("Possible conversion strategies:") );
     for( int i=0; i<newItem->conversionPipes.size(); i++ )
     {
-        QString pipe_str;
+        QStringList pipe_str;
 
-        for( int j = 0; j < newItem->conversionPipes.at(i).trunks.size(); j++ )
+        for( int j=0; j<newItem->conversionPipes.at(i).trunks.size(); j++ )
         {
-            pipe_str += newItem->conversionPipes.at(i).trunks.at(j).codecFrom + " -> " + newItem->conversionPipes.at(i).trunks.at(j).codecTo + " ( " + newItem->conversionPipes.at(i).trunks.at(j).plugin->name() + " ) , ";
+            pipe_str += QString("%1 %2 %3 (%4)").arg(newItem->conversionPipes.at(i).trunks.at(j).codecFrom).arg("->").arg(newItem->conversionPipes.at(i).trunks.at(j).codecTo).arg(newItem->conversionPipes.at(i).trunks.at(j).plugin->name());
         }
 
-        logger->log( newItem->logID, "\t\t" + pipe_str );
+        logger->log( newItem->logID, "\t\t" + pipe_str.join(", ") );
     }
 
     logger->log( newItem->logID, i18n("File system type: %1",conversionOptions->outputFilesystem) );

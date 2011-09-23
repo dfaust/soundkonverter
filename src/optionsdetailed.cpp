@@ -6,12 +6,8 @@
 #include "outputdirectory.h"
 #include "global.h"
 
-#include <kdebug.h>
-
 #include <QLayout>
 #include <QLabel>
-// #include <QString>
-// #include <QToolTip>
 
 #include <KLocale>
 #include <QFrame>
@@ -48,7 +44,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     topBox->addWidget( cFormat );
     cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
-    connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
+//     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
 
     topBox->addStretch();
 
@@ -96,6 +92,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     //connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     bottomBox->addStretch();
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
+    lEstimSize->hide(); // hide for now because most plugins report inaccurate data
     bottomBox->addWidget( lEstimSize );
     pProfileSave = new KPushButton( KIcon("document-save"), "", this );
     bottomBox->addWidget( pProfileSave );
@@ -136,8 +133,9 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         plugins.at(i)->deleteCodecWidget( widgets.at(i) );
     }
 */
-    cFormat->setCurrentIndex( 0 );
-    formatChanged( cFormat->currentText() );
+// seems to cause "ghost widgets" but isn't necessary anyway
+//     cFormat->setCurrentIndex( 0 );
+//     formatChanged( cFormat->currentText() );
 }
 
 
@@ -156,7 +154,8 @@ void OptionsDetailed::setReplayGainChecked( bool enabled )
 
 bool OptionsDetailed::isReplayGainEnabled( QString *toolTip )
 {
-    if( toolTip ) *toolTip = cReplayGain->toolTip();
+    if( toolTip )
+        *toolTip = cReplayGain->toolTip();
 
     return cReplayGain->isEnabled();
 }
@@ -294,6 +293,7 @@ void OptionsDetailed::somethingChanged()
 ConversionOptions *OptionsDetailed::currentConversionOptions()
 {
     ConversionOptions *options = 0;
+
     if( wPlugin && currentPlugin )
     {
         options = qobject_cast<CodecWidget*>(wPlugin)->currentConversionOptions();
@@ -312,7 +312,9 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
 //             options->bpm = cBpm->isChecked();
         }
     }
+
     config->data.general.lastFormat = cFormat->currentText();
+
     return options;
 }
 
@@ -341,7 +343,7 @@ bool OptionsDetailed::saveCustomProfile()
     if( wPlugin && currentPlugin )
     {
         bool ok;
-        QString profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
+        const QString profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
         if( !ok )
             return false;
 
@@ -440,7 +442,7 @@ bool OptionsDetailed::saveCustomProfile()
 
 void OptionsDetailed::loadCustomProfileButtonClicked()
 {
-    QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&","");
+    const QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&","");
     loadCustomProfile( profile );
     config->data.general.lastProfile = profile;
 }

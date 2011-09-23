@@ -82,6 +82,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     grid->addLayout( estimSizeBox, 2, 0 );
     estimSizeBox->addStretch();
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
+    lEstimSize->hide(); // hide for now because most plugins report inaccurate data
     estimSizeBox->addWidget( lEstimSize );
 
     QHBoxLayout *optionalBox = new QHBoxLayout();

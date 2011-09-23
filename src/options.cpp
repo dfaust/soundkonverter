@@ -84,7 +84,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
         optionsDetailed->setCurrentProfile( profile );
     }
 
-    int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
+    const int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
 
     tab->addTab( optionsSimple, i18n("Simple") );
     tab->addTab( optionsDetailed, i18n("Detailed") );

@@ -71,7 +71,7 @@ int Logger::registerProcess( const KUrl& filename )
     item->textStream.setDevice( &(item->file) );
 
     processes.append( item );
-    
+
     log( item->id, i18n("Filename") + ": " + item->filename.pathOrUrl() );
     log( item->id, i18n("Log ID") + ": " + QString::number(item->id) );
 

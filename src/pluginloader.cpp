@@ -13,8 +13,6 @@
 #include "logger.h"
 #include "config.h"
 
-#include <kdebug.h>
-
 #include <QSet>
 
 #include <KServiceTypeTrader>

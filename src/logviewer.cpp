@@ -13,9 +13,9 @@
 
 
 LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f )
+    : KDialog( parent, f ),
+    logger( _logger )
 {
-    logger = _logger;
     connect( logger, SIGNAL(removedProcess(int)), this, SLOT(processRemoved(int)) );
     connect( logger, SIGNAL(updateProcess(int)), this, SLOT(updateProcess(int)) );
 
@@ -52,19 +52,30 @@ LogViewer::~LogViewer()
 
 void LogViewer::refillLogs()
 {
-    QString name;
-    QString currentProcess = cItem->currentText();
+    const QString currentProcess = cItem->currentText();
+
     cItem->clear();
+
     QList<LoggerItem*> logs = logger->getLogs();
     for( QList<LoggerItem*>::Iterator a = logs.begin(); a != logs.end(); ++a )
     {
-        name = (*a)->filename.pathOrUrl();
+        QString name = (*a)->filename.pathOrUrl();
         // TODO make the string width dependend on the window width
-        if( name.length() > 73 ) name = name.left(35) + "..." + name.right(35);
-        cItem->addItem( name + " - " + QString::number((*a)->id), QVariant((*a)->id) );
+        if( name.length() > 73 )
+            name = name.left(35) + "..." + name.right(35);
+
+//         cItem->addItem( name + " - " + QString::number((*a)->id), QVariant((*a)->id) );
+        if( (*a)->id == 1000 )
+            cItem->addItem( i18n("soundKonverter application log"), QVariant((*a)->id) );
+        else
+            cItem->addItem( name, QVariant((*a)->id) );
     }
-    if( cItem->findText(currentProcess) != -1 ) cItem->setCurrentIndex( cItem->findText(currentProcess) );
-    else cItem->setCurrentIndex( 0 );
+
+    if( cItem->findText(currentProcess) != -1 )
+        cItem->setCurrentIndex( cItem->findText(currentProcess) );
+    else
+        cItem->setCurrentIndex( 0 );
+
     itemChanged();
 }
 
@@ -95,12 +106,15 @@ void LogViewer::itemChanged()
 
 void LogViewer::save()
 {
-    QString fileName = KFileDialog::getSaveFileName( KUrl(), "*.txt\n*.log", this, i18n("Save log file") );
-    if( fileName.isEmpty() ) return;
+    const QString fileName = KFileDialog::getSaveFileName( KUrl(), "*.txt\n*.log", this, i18n("Save log file") );
+    if( fileName.isEmpty() )
+        return;
+
     QFile file( fileName );
     if( file.exists() )
     {
-        if( KMessageBox::questionYesNo(this,i18n("File already exists. Do you really want to overwrite it?")) == KMessageBox::No ) return;
+        if( KMessageBox::questionYesNo(this,i18n("File already exists. Do you really want to overwrite it?")) == KMessageBox::No )
+            return;
     }
     if( !file.open(QIODevice::WriteOnly) )
     {

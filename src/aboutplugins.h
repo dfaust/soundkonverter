@@ -34,9 +34,12 @@ private:
     QLabel *aboutPluginLabel;
     KPushButton *configurePlugin;
 
+    QMap<QString,QString> problemInfos;
+
 private slots:
     void currentPluginChanged( const QString& pluginName );
     void configurePluginClicked();
+    void showProblemInfo( const QString& problemId );
 
 };
 

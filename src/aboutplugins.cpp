@@ -8,6 +8,7 @@
 #include <QLayout>
 #include <QLabel>
 #include <QListWidget>
+#include <QToolTip>
 
 
 AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
@@ -73,7 +74,9 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     aboutPluginLabel = new QLabel( this );
     aboutPluginLabel->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred );
     aboutPluginLabel->setWordWrap( true );
+    aboutPluginLabel->setTextFormat( Qt::RichText );
     pluginInfoBox->addWidget( aboutPluginLabel );
+    connect( aboutPluginLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(showProblemInfo(const QString&)) );
 
     pluginInfoBox->addStretch();
 
@@ -119,37 +122,47 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     for( int i=0; i<binaries.count(); i++ )
     {
         if( !binaries.values().at(i).isEmpty() )
-            binariesString += i18n("%1 found at: %2",binaries.keys().at(i),binaries.values().at(i));
+            binariesString += i18n("%1 (found at: %2)",binaries.keys().at(i),"<span style=\"color:green\">" + binaries.values().at(i) + "</span>");
         else
-            binariesString += i18n("%1 (not found)",binaries.keys().at(i));
+            binariesString += "<span style=\"color:red\">" + i18n("%1 (not found)",binaries.keys().at(i)) + "</span>";
     }
-    info += binariesString.join("\n");
+    info += binariesString.join("<br>");
 
+    problemInfos.clear();
     if( currentPlugin->type() == "codec" )
     {
         CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
 
         QStringList codecsString;
-        QSet<QString> encode;
-        QSet<QString> decode;
+        QMap<QString,bool> encodeCodecs;
+        QMap<QString,bool> decodeCodecs;
         QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
         for( int i=0; i<codecTable.count(); i++ )
         {
-            if( codecTable.at(i).codecTo != "wav" )
-                encode += codecTable.at(i).codecTo;
+            if( codecTable.at(i).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(i).codecTo) || !encodeCodecs[codecTable.at(i).codecTo] ) )
+                encodeCodecs[codecTable.at(i).codecTo] = codecTable.at(i).enabled;
 
-            if( codecTable.at(i).codecFrom != "wav" )
-                decode += codecTable.at(i).codecFrom;
+            if( codecTable.at(i).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(i).codecFrom) || !decodeCodecs[codecTable.at(i).codecFrom] ) )
+                decodeCodecs[codecTable.at(i).codecFrom] = codecTable.at(i).enabled;
         }
-        QStringList list;
         codecsString += i18n("Supported codecs:");
-        list = encode.toList();
-        list.sort();
+        QStringList list;
+        for( int i=0; i<encodeCodecs.count(); i++ )
+        {
+            const QString codecName = encodeCodecs.keys().at(i);
+            problemInfos["encode-"+codecName] = config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
+            list += encodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
+        }
         codecsString += i18n("Encode: %1",list.join(", "));
-        list = decode.toList();
-        list.sort();
+        list.clear();
+        for( int i=0; i<decodeCodecs.count(); i++ )
+        {
+            const QString codecName = decodeCodecs.keys().at(i);
+            problemInfos["decode-"+codecName] = config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
+            list += decodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
+        }
         codecsString += i18n("Decode: %1",list.join(", "));
-        info += codecsString.join("\n");
+        info += codecsString.join("<br>");
     }
     else if( currentPlugin->type() == "replaygain" )
     {
@@ -159,16 +172,17 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         QList<ReplayGainPipe> codecTable = replaygainPlugin->codecTable();
         for( int i=0; i<codecTable.count(); i++ )
         {
-            codecs += codecTable.at(i).codecName;
+            const QString codecName = codecTable.at(i).codecName;
+            problemInfos["replaygain-"+codecName] = config->pluginLoader()->pluginReplayGainProblems( pluginName, codecName );
+            codecs += codecTable.at(i).enabled ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"replaygain-"+codecName+"\">" + codecName + "</a>";
         }
-        codecs.sort();
-        info += QString( i18n("Supported codecs:") + "\n" + codecs.join(", ") );
+        info += QString( i18n("Supported codecs:") + "<br>" + codecs.join(", ") );
     }
     else if( currentPlugin->type() == "ripper" )
     {
     }
 
-    aboutPluginLabel->setText( info.join("\n\n") );
+    aboutPluginLabel->setText( info.join("<br><br>") );
 
     if( currentPlugin->isConfigSupported(BackendPlugin::General,"") )
     {
@@ -187,5 +201,10 @@ void AboutPlugins::configurePluginClicked()
     {
         currentPlugin->showConfigDialog( BackendPlugin::General, "", this );
     }
+}
+
+void AboutPlugins::showProblemInfo( const QString& problemId )
+{
+    QToolTip::showText( QCursor::pos(), problemInfos[problemId], aboutPluginLabel );
 }
 

@@ -76,6 +76,9 @@ public:
     QMap<QString,QStringList> decodeProblems( bool detailed = false );
     QMap<QString,QStringList> encodeProblems( bool detailed = false );
     QMap<QString,QStringList> replaygainProblems( bool detailed = false );
+    QString pluginDecodeProblems( const QString& pluginName, const QString& codecName );
+    QString pluginEncodeProblems( const QString& pluginName, const QString& codecName );
+    QString pluginReplayGainProblems( const QString& pluginName, const QString& codecName );
     bool isCodecLossless( const QString& codecName );
     bool isCodecHybrid( const QString& codecName );
     bool hasCodecInternalReplayGain( const QString& codecName );

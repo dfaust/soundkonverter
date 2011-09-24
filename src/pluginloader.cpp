@@ -711,6 +711,45 @@ QMap<QString,QStringList> PluginLoader::replaygainProblems( bool detailed )
     return problems;
 }
 
+QString PluginLoader::pluginDecodeProblems( const QString& pluginName, const QString& codecName )
+{
+    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    {
+        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && conversionPipeTrunks.at(i).plugin->name() == pluginName && conversionPipeTrunks.at(i).codecFrom == codecName )
+        {
+              return conversionPipeTrunks.at(i).problemInfo;
+        }
+    }
+
+    return QString();
+}
+
+QString PluginLoader::pluginEncodeProblems( const QString& pluginName, const QString& codecName )
+{
+    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    {
+        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && conversionPipeTrunks.at(i).plugin->name() == pluginName && conversionPipeTrunks.at(i).codecTo == codecName )
+        {
+              return conversionPipeTrunks.at(i).problemInfo;
+        }
+    }
+
+    return QString();
+}
+
+QString PluginLoader::pluginReplayGainProblems( const QString& pluginName, const QString& codecName )
+{
+    for( int i=0; i<replaygainPipes.size(); i++ )
+    {
+        if( !replaygainPipes.at(i).enabled && !replaygainPipes.at(i).problemInfo.isEmpty() && replaygainPipes.at(i).plugin->name() == pluginName && replaygainPipes.at(i).codecName == codecName )
+        {
+              return replaygainPipes.at(i).problemInfo;
+        }
+    }
+
+    return QString();
+}
+
 bool PluginLoader::isCodecLossless( const QString& codecName )
 {
     for( int i=0; i<formatInfos.count(); i++ )

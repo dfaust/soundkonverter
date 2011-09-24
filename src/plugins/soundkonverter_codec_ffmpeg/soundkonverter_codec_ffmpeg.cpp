@@ -266,20 +266,17 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
                 {
                     if( codecList.at(k).codecName == toCodecs.at(j) )
                     {
-                        if( !codecList.at(k).currentFFmpegCodec.name.isEmpty() ) // there is a ffmpeg codec set
+                        if( !codecList.at(k).currentFFmpegCodec.name.isEmpty() ) // everything should work, lets exit
                         {
-                            if( codecList.at(k).currentFFmpegCodec.experimental && !experimentalCodecsEnabled ) // ... but it's experimental and experimental codecs are disabled by default
-                            {
-                                ffmpegProblemInfo.append( i18n("Enable experimental codecs in the ffmpeg configuration dialog.") );
-                            }
-                            else // everything should work, lets exit
-                            {
-                                codecEnabled = true;
-                                break;
-                            }
+                            codecEnabled = true;
+                            break;
                         }
                         for( int l=0; l<codecList.at(k).ffmpegCodecList.count(); l++ )
                         {
+                            if( codecList.at(k).ffmpegCodecList.at(l).experimental && !experimentalCodecsEnabled )
+                            {
+                                ffmpegProblemInfo.append( i18n("Enable experimental codecs in the ffmpeg configuration dialog.") );
+                            }
                             if( codecList.at(k).ffmpegCodecList.at(l).external )
                             {
                                 ffmpegProblemInfo.append( i18n("Compile ffmpeg with %1 support.",codecList.at(k).ffmpegCodecList.at(l).name) );

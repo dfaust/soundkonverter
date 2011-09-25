@@ -44,7 +44,7 @@ SpeexCodecWidget::SpeexCodecWidget()
     topBox->addWidget( sQuality );
 
     dQuality = new QDoubleSpinBox( this );
-    dQuality->setRange( 8, 320 );
+    dQuality->setRange( 8, 160 );
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
@@ -146,19 +146,19 @@ QString SpeexCodecWidget::currentProfile()
     {
         return i18n("Very low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 3.0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 4.0 )
     {
         return i18n("Low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 4.0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 6.0 )
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 5.0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 8.0 )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 6.0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 10.0 )
     {
         return i18n("Very high");
     }
@@ -180,32 +180,32 @@ bool SpeexCodecWidget::setCurrentProfile( const QString& profile )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 300 );
-        dQuality->setValue( 3.0 );
+        sQuality->setValue( 400 );
+        dQuality->setValue( 4.0 );
         return true;
     }
     else if( profile == i18n("Medium") )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 400 );
-        dQuality->setValue( 4.0 );
+        sQuality->setValue( 600 );
+        dQuality->setValue( 6.0 );
         return true;
     }
     else if( profile == i18n("High") )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 500 );
-        dQuality->setValue( 5.0 );
+        sQuality->setValue( 800 );
+        dQuality->setValue( 8.0 );
         return true;
     }
     else if( profile == i18n("Very high") )
     {
         cMode->setCurrentIndex( 0 );
         modeChanged( 0 );
-        sQuality->setValue( 600 );
-        dQuality->setValue( 6.0 );
+        sQuality->setValue( 1000 );
+        dQuality->setValue( 10.0 );
         return true;
     }
 
@@ -247,19 +247,6 @@ int SpeexCodecWidget::currentDataRate()
     {
         dataRate = 10590000;
     }
-    else
-    {
-        if( cMode->currentIndex() == 0 )
-        {
-            dataRate = 500000 + dQuality->value()*150000;
-            if( dQuality->value() > 7 ) dataRate += (dQuality->value()-7)*250000;
-            if( dQuality->value() > 9 ) dataRate += (dQuality->value()-9)*800000;
-        }
-        else
-        {
-            dataRate = dQuality->value()/8*60*1000;
-        }
-    }
 
     return dataRate;
 }
@@ -281,14 +268,14 @@ void SpeexCodecWidget::modeChanged( int mode )
     }
     else
     {
-        sQuality->setRange( 8, 320 );
+        sQuality->setRange( 8, 160 );
         sQuality->setSingleStep( 8 );
-        dQuality->setRange( 8, 320 );
+        dQuality->setRange( 8, 160 );
         dQuality->setSingleStep( 8 );
         dQuality->setDecimals( 0 );
         dQuality->setSuffix( " kbps" );
-        sQuality->setValue( 160 );
-        dQuality->setValue( 160 );
+        sQuality->setValue( 64 );
+        dQuality->setValue( 64 );
 //         dQuality->setValue( bitrateForQuality(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
     }

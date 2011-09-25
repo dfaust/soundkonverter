@@ -151,15 +151,9 @@ QStringList soundkonverter_codec_speex::convertCommand( const KUrl& inputFile, c
 
 float soundkonverter_codec_speex::parseOutput( const QString& output )
 {
-    //         [ 99.5%]
+    // no output
 
-    if( output == "" || !output.contains("%") || output.contains("error",Qt::CaseInsensitive) )
-        return -1;
-
-    QString data = output;
-    data.remove( 0, data.indexOf("[")+1 );
-    data = data.left( data.indexOf("%") );
-    return data.toFloat();
+    return -1;
 }
 
 

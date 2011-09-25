@@ -949,7 +949,8 @@ void Convert::remove( ConvertItem *item, int state )
         QFileInfo inputFileInfo( item->inputUrl.toLocalFile() );
         fileRatio /= inputFileInfo.size();
     }
-    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 )
+    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
+    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 && ( !conversionOptions || conversionOptions->codecName != "speex" ) )
     {
         exitMessage = i18n("An error occured, the output file size is less than one percent of the input file size");
 

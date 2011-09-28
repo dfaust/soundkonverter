@@ -293,11 +293,12 @@ void Config::load()
     QDir profilesDir( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) );
     profilesDir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
 
-    QStringList profilesDirList = profilesDir.entryList();
+    const QStringList profilesDirList = profilesDir.entryList();
 
     for( int i=0; i<profilesDirList.count(); i++ )
     {
-        if( profilesDirList.at(i) == "." || profilesDirList.at(i) == ".." ) continue;
+        if( profilesDirList.at(i) == "." || profilesDirList.at(i) == ".." )
+            continue;
 
         logger->log( 1000, "\tloading file: " + profilesDirList.at(i) );
 
@@ -322,9 +323,13 @@ void Config::load()
             }
             else
             {
-                logger->log( 1000, "\tfailed to load plugin: bad file format" );
+                logger->log( 1000, "<pre>\t\t<span style=\"color:red\">failed to load profile: bad file format</span></pre>" );
             }
             profilesFile.close();
+        }
+        else
+        {
+            logger->log( 1000, "<pre>\t\t<span style=\"color:red\">can't open file for reading</span></pre>" );
         }
     }
     logger->log( 1000, "... all profiles loaded\n" );
@@ -408,7 +413,7 @@ void Config::load()
         data.backendOptimizationsIgnoreList.optimizationList.append(optimization);
     }
 
-    logger->log( 1000, QString("Loading of the configuration took %1 ms").arg(time.elapsed()) );
+    logger->log( 1000, QString("loading of the configuration took %1 ms").arg(time.elapsed()) );
 }
 
 void Config::save()
@@ -831,7 +836,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         }
     }
 
-    logger->log( 1000, QString("Generation of the optimization list took %1 ms").arg(time.elapsed()) );
+    logger->log( 1000, QString("generation of the optimization list took %1 ms").arg(time.elapsed()) );
 
     return optimizationList;
 }

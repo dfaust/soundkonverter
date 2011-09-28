@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: soundKonverter Version 1.0.0 rc2\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-09-17 17:34+0200\n"
+"POT-Creation-Date: 2011-09-28 15:33+0200\n"
 "PO-Revision-Date: 2011-06-06 HO:MI+ZONE\n"
 "Last-Translator: cjtex <cjtex74@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,53 +16,54 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: aboutplugins.cpp:18
+#: aboutplugins.cpp:19
 msgid "About plugins"
 msgstr ""
 
-#: aboutplugins.cpp:30
+#: aboutplugins.cpp:33
 msgid "Installed plugins:"
 msgstr ""
 
-#: aboutplugins.cpp:107
+#: aboutplugins.cpp:112
 #, fuzzy
 msgid "About plugin %1:"
 msgstr "Sobre %1"
 
-#: aboutplugins.cpp:109
+#: aboutplugins.cpp:114
 msgid "Plugin type: %1"
 msgstr ""
 
-#: aboutplugins.cpp:115
+#: aboutplugins.cpp:120
 #, fuzzy
 msgid "Backend binaries:"
 msgstr "Backends"
 
-#: aboutplugins.cpp:120
-msgid "%1 found at: %2"
-msgstr ""
+#: aboutplugins.cpp:125
+#, fuzzy
+msgid "%1 (found at: %2)"
+msgstr "Arquivos não encontrados"
 
-#: aboutplugins.cpp:122
+#: aboutplugins.cpp:127
 #, fuzzy
 msgid "%1 (not found)"
 msgstr "Arquivos não encontrados"
 
-#: aboutplugins.cpp:143 aboutplugins.cpp:163
+#: aboutplugins.cpp:148 aboutplugins.cpp:179
 #, fuzzy
 msgid "Supported codecs:"
 msgstr "Todos os arquivos suportados"
 
-#: aboutplugins.cpp:146
+#: aboutplugins.cpp:156
 #, fuzzy
 msgid "Encode: %1"
 msgstr "Codificador"
 
-#: aboutplugins.cpp:149
+#: aboutplugins.cpp:164
 #, fuzzy
 msgid "Decode: %1"
 msgstr "Decodificador"
 
-#: aboutplugins.cpp:173
+#: aboutplugins.cpp:189
 #, fuzzy
 msgid "Configure %1 ..."
 msgstr "Configurar %1"
@@ -164,7 +165,7 @@ msgid "Possible solutions for %1"
 msgstr "Perfil de informação para %1"
 
 #: codecproblems.cpp:68 codecproblems.cpp:72
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:310
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:307
 msgctxt "like in either or"
 msgid "or"
 msgstr ""
@@ -173,28 +174,29 @@ msgstr ""
 msgid "Affected files:"
 msgstr "Arquivos afetados:"
 
-#: config.cpp:46 config.cpp:48 config.cpp:335 config.cpp:380
+#: config.cpp:46 config.cpp:48 config.cpp:340 config.cpp:385
 #: configdialog/configgeneralpage.cpp:44 configdialog/configgeneralpage.cpp:59
 #: configdialog/configgeneralpage.cpp:190
 #: configdialog/configgeneralpage.cpp:192
 #: configdialog/configgeneralpage.cpp:196
 #: configdialog/configgeneralpage.cpp:201
 #: configdialog/configgeneralpage.cpp:206 options.cpp:47 options.cpp:66
-#: optionsdetailed.cpp:356
+#: optionsdetailed.cpp:358
 msgid "Last used"
 msgstr "Últimos usados"
 
-#: config.cpp:47 config.cpp:339 config.cpp:346 config.cpp:352
+#: config.cpp:47 config.cpp:344 config.cpp:351 config.cpp:357
 #: configdialog/configgeneralpage.cpp:63
 #: configdialog/configgeneralpage.cpp:194 options.cpp:76
-#: optionsdetailed.cpp:352 optionssimple.cpp:155 optionssimple.cpp:195
-#: optionssimple.cpp:282
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:149
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
+#: optionsdetailed.cpp:354 optionssimple.cpp:156 optionssimple.cpp:196
+#: optionssimple.cpp:283
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:210
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:219
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:172
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:213
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:219
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:242
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:305
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:310
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:367
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:154
@@ -217,15 +219,16 @@ msgstr "Alta"
 msgid "Try internal"
 msgstr "Tente interno"
 
-#: config.cpp:336 config.cpp:352 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:349
-#: optionssimple.cpp:152 optionssimple.cpp:177 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:137
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:162
+#: config.cpp:341 config.cpp:357 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:351
+#: optionssimple.cpp:153 optionssimple.cpp:178 optionssimple.cpp:283
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:168
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:192
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:160
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:184
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:207
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:230
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:255
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:298
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:322
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:142
@@ -244,15 +247,16 @@ msgstr "Tente interno"
 msgid "Very low"
 msgstr "Muito baixa"
 
-#: config.cpp:337 config.cpp:352 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:350
-#: optionssimple.cpp:153 optionssimple.cpp:183 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:141
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:170
+#: config.cpp:342 config.cpp:357 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:352
+#: optionssimple.cpp:154 optionssimple.cpp:184 optionssimple.cpp:283
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:172
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:201
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:164
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:194
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:211
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:234
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:272
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:302
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:338
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:146
@@ -271,15 +275,16 @@ msgstr "Muito baixa"
 msgid "Low"
 msgstr "Baixa"
 
-#: config.cpp:338 config.cpp:352 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:351
-#: optionssimple.cpp:154 optionssimple.cpp:189 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:145
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:178
+#: config.cpp:343 config.cpp:357 configdialog/configgeneralpage.cpp:62
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:353
+#: optionssimple.cpp:155 optionssimple.cpp:190 optionssimple.cpp:283
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:202
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:176
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:210
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:168
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:204
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:215
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:238
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:289
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:306
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:353
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:150
@@ -298,15 +303,16 @@ msgstr "Baixa"
 msgid "Medium"
 msgstr "Média"
 
-#: config.cpp:340 config.cpp:352 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:353
-#: optionssimple.cpp:156 optionssimple.cpp:201 optionssimple.cpp:282
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:153
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
+#: config.cpp:345 config.cpp:357 configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:355
+#: optionssimple.cpp:157 optionssimple.cpp:202 optionssimple.cpp:283
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:218
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:184
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:228
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:176
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:222
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:223
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:246
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:321
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:314
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:381
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:158
@@ -325,12 +331,12 @@ msgstr "Média"
 msgid "Very high"
 msgstr "Muito alta"
 
-#: config.cpp:341 config.cpp:356 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:199 optionsdetailed.cpp:354
-#: optionssimple.cpp:157 optionssimple.cpp:207 optionssimple.cpp:286
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:133
+#: config.cpp:346 config.cpp:361 configdialog/configgeneralpage.cpp:65
+#: configdialog/configgeneralpage.cpp:199 optionsdetailed.cpp:356
+#: optionssimple.cpp:158 optionssimple.cpp:208 optionssimple.cpp:287
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:156
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:201
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:87
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:92
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:144
@@ -356,18 +362,18 @@ msgstr "Muito alta"
 msgid "Lossless"
 msgstr "Sem perdas"
 
-#: config.cpp:342 config.cpp:360 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:204 optionsdetailed.cpp:355
-#: optionssimple.cpp:213 optionssimple.cpp:290 soundkonverterview.cpp:454
+#: config.cpp:347 config.cpp:365 configdialog/configgeneralpage.cpp:66
+#: configdialog/configgeneralpage.cpp:204 optionsdetailed.cpp:357
+#: optionssimple.cpp:214 optionssimple.cpp:291 soundkonverterview.cpp:454
 #: soundkonverterview.cpp:456
 msgid "Hybrid"
 msgstr "Híbrido"
 
-#: config.cpp:364 optionsdetailed.cpp:358 optionssimple.cpp:160
-#: optionssimple.cpp:219 optionssimple.cpp:294 optionssimple.cpp:363
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:156
+#: config.cpp:369 optionsdetailed.cpp:360 optionssimple.cpp:161
+#: optionssimple.cpp:220 optionssimple.cpp:295 optionssimple.cpp:364
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:179
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:250
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:39
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:317
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:161
@@ -380,11 +386,11 @@ msgstr "Híbrido"
 msgid "User defined"
 msgstr "Definido pelo usuário"
 
-#: config.cpp:518
+#: config.cpp:523
 msgid "Convert with soundKonverter"
 msgstr "Converter com soundKonverter"
 
-#: config.cpp:552
+#: config.cpp:557
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Adicionar Replay Gain com soundKonverter"
 
@@ -463,7 +469,7 @@ msgstr "Codificador"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1105 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:498
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
@@ -605,7 +611,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Apenas pastas"
 
-#: convert.cpp:163 convert.cpp:1088
+#: convert.cpp:163 convert.cpp:1089
 msgid "Getting file"
 msgstr "Obtendo arquivo"
 
@@ -617,13 +623,13 @@ msgstr ""
 msgid "No more backends left to try :("
 msgstr "Sem mais backends para tentar :("
 
-#: convert.cpp:235 convert.cpp:271 convert.cpp:1092 filelist.cpp:508
+#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:508
 #: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
 #: soundkonverter.cpp:288
 msgid "Converting"
 msgstr "Convertendo"
 
-#: convert.cpp:286 convert.cpp:1096
+#: convert.cpp:286 convert.cpp:1097
 msgid "Decoding"
 msgstr "Decodificando"
 
@@ -633,7 +639,7 @@ msgid ""
 "properly."
 msgstr ""
 
-#: convert.cpp:354 convert.cpp:1101
+#: convert.cpp:354 convert.cpp:1102
 msgid "Encoding"
 msgstr "Codificando"
 
@@ -703,7 +709,7 @@ msgstr "Obteve registro ID: %1"
 msgid "Track number: %1, device: %2"
 msgstr ""
 
-#: convert.cpp:890
+#: convert.cpp:890 optionseditor.cpp:333
 msgid "Possible conversion strategies:"
 msgstr ""
 
@@ -711,7 +717,7 @@ msgstr ""
 msgid "File system type: %1"
 msgstr ""
 
-#: convert.cpp:954
+#: convert.cpp:955
 #, fuzzy
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
@@ -720,68 +726,68 @@ msgstr ""
 "Ocorreu um erro. O tamanho do arquivo de saída é menor que 1% do tamanho do "
 "arquivo de entrada"
 
-#: convert.cpp:958
+#: convert.cpp:959
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "Falha na conversão, tentando novamente. Código de saída: -2 (1%)"
 
-#: convert.cpp:967
+#: convert.cpp:968
 #, fuzzy
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Saída normal"
 
-#: convert.cpp:969
+#: convert.cpp:970
 #, fuzzy
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Cancelado pelo usuário"
 
-#: convert.cpp:971
+#: convert.cpp:972
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr ""
 
-#: convert.cpp:973
+#: convert.cpp:974
 #, fuzzy
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Ocorreu um erro"
 
-#: convert.cpp:986
+#: convert.cpp:987
 msgid "Executing command: \"%1\""
 msgstr "Executando o comando: \"%1\""
 
-#: convert.cpp:1002
+#: convert.cpp:1003
 msgid "Removing partially converted output file"
 msgstr "Removendo o arquivo de saída convertido parcialmente"
 
-#: convert.cpp:1007
+#: convert.cpp:1008
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Removendo o arquivo da lista de conversão. Código de saída %1 (%2)"
 
-#: convert.cpp:1009
+#: convert.cpp:1010
 msgid "Conversion time"
 msgstr "Tempo de conversão"
 
-#: convert.cpp:1010
+#: convert.cpp:1011
 msgid "Output file size"
 msgstr "Tamanho do arquivo de saída"
 
-#: convert.cpp:1011
+#: convert.cpp:1012
 msgid "File size ratio"
 msgstr "O tamanho do arquivo ratio"
 
-#: convert.cpp:1080
+#: convert.cpp:1081
 #, fuzzy
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: convert.cpp:1097 filelist.cpp:503
+#: convert.cpp:1098 filelist.cpp:503
 msgid "Ripping"
 msgstr "Extraindo"
 
-#: convert.cpp:1114
+#: convert.cpp:1115
 msgid "Progress: %1"
 msgstr ""
 
@@ -997,8 +1003,8 @@ msgstr "Saída"
 
 #: filelist.cpp:51 optionssimple.cpp:37
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:31
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:76
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:105
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:100
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:129
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:31
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:98
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:132
@@ -1135,27 +1141,37 @@ msgstr "ID de log"
 msgid "Finished logging"
 msgstr "Log concluído"
 
-#: logviewer.cpp:22
+#: logviewer.cpp:24
 msgid "Log Viewer"
 msgstr "Visualizador de log"
 
-#: logviewer.cpp:25
+#: logviewer.cpp:27
 msgid "Update"
 msgstr "Atualização"
 
-#: logviewer.cpp:28
+#: logviewer.cpp:30
 msgid "Save to file..."
 msgstr "Salvar em arquivo ..."
 
-#: logviewer.cpp:98
+#: logviewer.cpp:42
+#, fuzzy
+msgid "Log file:"
+msgstr "Salvar arquivo log"
+
+#: logviewer.cpp:77
+#, fuzzy
+msgid "soundKonverter application log"
+msgstr "Iniciar soundKonverter invisível"
+
+#: logviewer.cpp:117
 msgid "Save log file"
 msgstr "Salvar arquivo log"
 
-#: logviewer.cpp:103
+#: logviewer.cpp:124
 msgid "File already exists. Do you really want to overwrite it?"
 msgstr "O arquivo já existe. Você realmente deseja substituí-lo?"
 
-#: logviewer.cpp:107
+#: logviewer.cpp:129
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
@@ -1576,27 +1592,27 @@ msgstr "1. Digite url"
 msgid "The Url you entered is invalid. Please try again."
 msgstr "A Url que você digitou é inválida. Por favor, tente novamente"
 
-#: optionsdetailed.cpp:45 optionssimple.cpp:55
+#: optionsdetailed.cpp:41 optionssimple.cpp:55
 msgid "Output format"
 msgstr "Formato de saída"
 
-#: optionsdetailed.cpp:55
+#: optionsdetailed.cpp:51
 msgid "Use Plugin"
 msgstr "Utilize Plugin"
 
-#: optionsdetailed.cpp:89 optionssimple.cpp:92
+#: optionsdetailed.cpp:85 optionssimple.cpp:93
 msgid "Calculate Replay Gain tags"
 msgstr "Calcule Replay Gain"
 
-#: optionsdetailed.cpp:103
+#: optionsdetailed.cpp:100
 msgid "Save current options as a profile"
 msgstr "Salvar opções atuais como um perfil"
 
-#: optionsdetailed.cpp:111
+#: optionsdetailed.cpp:108
 msgid "Load saved profiles"
 msgstr "Carregar perfil salvo"
 
-#: optionsdetailed.cpp:258
+#: optionsdetailed.cpp:257
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
@@ -1604,7 +1620,7 @@ msgstr ""
 "Replay Gain não tem suporte para o %1 formato de arquivo.\n"
 "As soluções possíveis são listadas abaixo."
 
-#: optionsdetailed.cpp:262
+#: optionsdetailed.cpp:261
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Please check your distribution's package manager in order to install an "
@@ -1614,30 +1630,30 @@ msgstr ""
 "Por favor verifique seu gerenciador de pacotes da distribuiçãopara instalar "
 "um plugin adicional Replay Gain."
 
-#: optionsdetailed.cpp:283 optionssimple.cpp:383
+#: optionsdetailed.cpp:282 optionssimple.cpp:384
 msgid ""
 "Using the current conversion options will create files with approximately %1 "
 "per minute."
 msgstr ""
 "Usando as opções de conversão irá criar arquivos com cerca de 1%por minuto."
 
-#: optionsdetailed.cpp:344
+#: optionsdetailed.cpp:346
 msgid "New profile"
 msgstr "Novo perfil"
 
-#: optionsdetailed.cpp:344
+#: optionsdetailed.cpp:346
 msgid "Enter a name for the new profile:"
 msgstr "Digite um nome para o novo perfil:"
 
-#: optionsdetailed.cpp:361
+#: optionsdetailed.cpp:363
 msgid "You cannot overwrite the built-in profiles."
 msgstr "Você não pode substituir o built-in de perfis."
 
-#: optionsdetailed.cpp:361 optionsdetailed.cpp:381
+#: optionsdetailed.cpp:363 optionsdetailed.cpp:383
 msgid "Profile already exists"
 msgstr "Perfil já existe"
 
-#: optionsdetailed.cpp:381
+#: optionsdetailed.cpp:383
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
@@ -1685,11 +1701,11 @@ msgstr "Editar etiquetas"
 msgid "Infos"
 msgstr "Informações"
 
-#: optionseditor.cpp:298
+#: optionseditor.cpp:299
 msgid "No file selected"
 msgstr "Nenhum arquivo foi selecionado"
 
-#: optionseditor.cpp:349
+#: optionseditor.cpp:353
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1703,7 +1719,7 @@ msgstr ""
 "Se você quiser editar as etiquetas, você pode clicar no botão abaixo,mas "
 "depois o soundKonverter não vai tentar ler as tags após o download."
 
-#: optionseditor.cpp:358
+#: optionseditor.cpp:363
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1719,11 +1735,11 @@ msgstr ""
 "depois o soundKonverter não vai tentar\n"
 "ler as etiquetas uma segunda vez."
 
-#: optionseditor.cpp:378
+#: optionseditor.cpp:385
 msgid "%1 Files"
 msgstr "%1 arquivos"
 
-#: optionseditor.cpp:393
+#: optionseditor.cpp:402
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
@@ -1731,7 +1747,7 @@ msgstr ""
 "Você selecionou vários arquivos com diversas opções de conversão.\n"
 "Você pode mudar as opções de todos os arquivos clicando no botão abaixo."
 
-#: optionseditor.cpp:399
+#: optionseditor.cpp:410
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1767,11 +1783,11 @@ msgstr "Informações sobre o formato de arquivo selecionado"
 msgid "More"
 msgstr ""
 
-#: optionssimple.cpp:89
+#: optionssimple.cpp:90
 msgid "Optional:"
 msgstr "Opcional:"
 
-#: optionssimple.cpp:180
+#: optionssimple.cpp:181
 msgid ""
 "This produces sound files of a very low quality.\n"
 "That can be useful if you have a mobile device where your storage space is "
@@ -1783,13 +1799,13 @@ msgstr ""
 "armazenamento é limitada.Não é recomendado para salvar a sua música nesta "
 "qualidade,sem uma cópia de maior qualidade."
 
-#: optionssimple.cpp:181 optionssimple.cpp:187 optionssimple.cpp:193
-#: optionssimple.cpp:199 optionssimple.cpp:205 optionssimple.cpp:211
-#: optionssimple.cpp:217 optionssimple.cpp:223 optionssimple.cpp:229
+#: optionssimple.cpp:182 optionssimple.cpp:188 optionssimple.cpp:194
+#: optionssimple.cpp:200 optionssimple.cpp:206 optionssimple.cpp:212
+#: optionssimple.cpp:218 optionssimple.cpp:224 optionssimple.cpp:230
 msgid "Profile info for %1"
 msgstr "Perfil de informação para %1"
 
-#: optionssimple.cpp:186
+#: optionssimple.cpp:187
 msgid ""
 "This produces sound files of a low quality.\n"
 "That can be useful if you have a mobile device where your storage space is "
@@ -1801,7 +1817,7 @@ msgstr ""
 "armazenamento é limitada.Não é recomendado para salvar a sua música nesta "
 "qualidade,sem uma cópia de maior qualidade."
 
-#: optionssimple.cpp:192
+#: optionssimple.cpp:193
 msgid ""
 "This produces sound files of a medium quality.\n"
 "If your disc space is limited, you can use this to save your music."
@@ -1810,7 +1826,7 @@ msgstr ""
 "Se o seu espaço de disco é limitado, você pode usar isso para salvar a sua "
 "música."
 
-#: optionssimple.cpp:198
+#: optionssimple.cpp:199
 msgid ""
 "This produces sound files of a high quality.\n"
 "If you have enough disc space available, you can use this to save your music."
@@ -1819,7 +1835,7 @@ msgstr ""
 "Se você tem espaço em disco suficiente disponível, você pode usar isso para "
 "salvar a sua música."
 
-#: optionssimple.cpp:204
+#: optionssimple.cpp:205
 msgid ""
 "This produces sound files of a very high quality.\n"
 "You should only use this, if you are a quality freak and have enough disc "
@@ -1829,7 +1845,7 @@ msgstr ""
 "Você só deve usar isso, se você é obcecado por qualidade eespaço disponível "
 "suficiente no disco."
 
-#: optionssimple.cpp:210
+#: optionssimple.cpp:211
 msgid ""
 "This produces files, that have exact the same quality as the input files.\n"
 "This files are very big and definitely only for quality freaks."
@@ -1839,7 +1855,7 @@ msgstr ""
 "Estes arquivos são muito grandes e, definitivamente, só para loucos por "
 "qualidade."
 
-#: optionssimple.cpp:216
+#: optionssimple.cpp:217
 msgid ""
 "This produces two files. One lossy compressed playable file and one "
 "correction file.\n"
@@ -1850,27 +1866,27 @@ msgstr ""
 "Ambos os arquivos juntos resultam em um arquivo que é equivalente ao arquivo "
 "de entrada."
 
-#: optionssimple.cpp:222
+#: optionssimple.cpp:223
 msgid "You can define your own profile in the \"detailed\" tab."
 msgstr "Você pode definir seu próprio perfil na guia \"detalhada\"."
 
-#: optionssimple.cpp:228
+#: optionssimple.cpp:229
 msgid "This is a user defined profile."
 msgstr "Este é um perfil definido pelo usuário."
 
-#: optionssimple.cpp:235
+#: optionssimple.cpp:236
 msgid "Do you really want to remove the profile: %1"
 msgstr "Você realmente deseja remover o perfil: 1%"
 
-#: optionssimple.cpp:235
+#: optionssimple.cpp:236
 msgid "Remove profile?"
 msgstr "Remover o perfil?"
 
-#: optionssimple.cpp:259
+#: optionssimple.cpp:260
 msgid "Format info for %1"
 msgstr "Informação formato para 1%"
 
-#: optionssimple.cpp:269
+#: optionssimple.cpp:270
 msgid "Sorry, no format information available."
 msgstr "Desculpe, não há informações disponíveis sobre o formato."
 
@@ -1992,7 +2008,7 @@ msgid "Mode"
 msgstr "Modo"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:32
-#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:111
+#: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:135
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:32
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:138
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:31
@@ -2021,7 +2037,7 @@ msgstr "Simple Stereo"
 msgid "Automatic"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:55
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:80
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:143
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:58
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:67
@@ -2029,7 +2045,7 @@ msgstr ""
 msgid "Channels"
 msgstr "Canais"
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:60
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:85
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:147
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:63
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:71
@@ -2037,7 +2053,7 @@ msgstr "Canais"
 msgid "Mono"
 msgstr "Mono"
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:66
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:91
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:159
 #: plugins/soundkonverter_codec_mplayer/mplayercodecwidget.cpp:69
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:82
@@ -2045,7 +2061,7 @@ msgstr "Mono"
 msgid "Resample"
 msgstr "Refazer amostragem"
 
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:92
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:117
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:185
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:94
@@ -2055,26 +2071,26 @@ msgstr "Refazer amostragem"
 msgid "Additional encoder arguments"
 msgstr "Argumentos adicionais do codificador"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:273
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:278
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:285
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
 msgid "Compile ffmpeg with %1 support."
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:342
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:339
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:66
 msgid "Configure %1"
 msgstr "Configurar %1"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:347
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:344
 msgid "Enable experimental codecs"
 msgstr ""
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:373
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
 #, fuzzy
 msgid "Please restart soundKonverter in order to activate the changes."
 msgstr "Por favor, selecione pelo menos uma faixa para prosseguir."

@@ -2,9 +2,11 @@
 #include "logviewer.h"
 #include "logger.h"
 
+#include <QLayout>
+#include <QLabel>
+
 #include <KLocale>
 #include <KIcon>
-#include <QLayout>
 #include <KPushButton>
 #include <KComboBox>
 #include <KTextEdit>
@@ -35,8 +37,14 @@ LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
     setMainWidget( widget );
     QVBoxLayout *box = new QVBoxLayout( widget );
 
+    QHBoxLayout *topBox = new QHBoxLayout( widget );
+    box->addLayout( topBox );
+    QLabel *lItem = new QLabel( i18n("Log file:") );
+    topBox->addWidget( lItem );
+    topBox->setStretchFactor( lItem, 0 );
     cItem = new KComboBox( this );
-    box->addWidget( cItem );
+    topBox->addWidget( cItem );
+    topBox->setStretchFactor( cItem, 1 );
     connect( cItem, SIGNAL(activated(int)), this, SLOT(itemChanged()) );
 
     kLog = new KTextEdit( this );

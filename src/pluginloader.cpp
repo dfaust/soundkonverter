@@ -115,13 +115,9 @@ void PluginLoader::load()
 {
     QTime overallTime;
     overallTime.start();
-    QTime time;
-    QTime subTime;
+    QTime createInstanceTime;
 
-    int createInstanceTime = 0;
-    int scanForBackendsTime = 0;
-    int gettingcodecTableTime = 0;
-    int addFormatInfoTime = 0;
+    int createInstanceTimeSum = 0;
 
     KService::List offers;
 
@@ -133,8 +129,7 @@ void PluginLoader::load()
     {
         for( int i=0; i<offers.size(); i++ )
         {
-            time.start();
-            subTime.start();
+            createInstanceTime.start();
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
@@ -142,14 +137,12 @@ void PluginLoader::load()
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
-                createInstanceTime += subTime.restart();
+                createInstanceTimeSum += createInstanceTime.elapsed();
                 codecPlugins.append( plugin );
                 plugin->scanForBackends();
-                scanForBackendsTime += subTime.restart();
                 QMap<QString,bool> encodeCodecs;
                 QMap<QString,bool> decodeCodecs;
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
-                gettingcodecTableTime += subTime.restart();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {
                     codecTable[j].plugin = plugin;
@@ -162,7 +155,6 @@ void PluginLoader::load()
                     addFormatInfo( codecTable.at(j).codecFrom, plugin );
                     addFormatInfo( codecTable.at(j).codecTo, plugin );
                 }
-                addFormatInfoTime += subTime.restart();
                 if( encodeCodecs.count() > 0 )
                 {
                     logger->log( 1000, "\t\tencode:" );
@@ -181,7 +173,6 @@ void PluginLoader::load()
                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(decodeCodecs.keys().at(j)).arg(tabs).arg(decodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     }
                 }
-//                 logger->log( 1000, QString("\tloading of plugin %1 took %2 ms").arg(plugin->name()).arg(time.elapsed()) );
                 logger->log( 1000, "" );
             }
             else
@@ -197,7 +188,7 @@ void PluginLoader::load()
     {
         for( int i=0; i<offers.size(); i++ )
         {
-            time.start();
+            createInstanceTime.start();
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
@@ -205,6 +196,7 @@ void PluginLoader::load()
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
+                createInstanceTimeSum += createInstanceTime.elapsed();
                 replaygainPlugins.append( plugin );
                 plugin->scanForBackends();
                 QList<ReplayGainPipe> codecTable = plugin->codecTable();
@@ -217,7 +209,6 @@ void PluginLoader::load()
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(codecTable.at(j).codecName).arg(tabs).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     addFormatInfo( codecTable.at(j).codecName, plugin );
                 }
-//                 logger->log( 1000, QString("\tloading of plugin %1 took %2 ms").arg(plugin->name()).arg(time.elapsed()) );
                 logger->log( 1000, "" );
             }
             else
@@ -233,7 +224,7 @@ void PluginLoader::load()
     {
         for( int i=0; i<offers.size(); i++ )
         {
-            time.start();
+            createInstanceTime.start();
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
@@ -241,6 +232,7 @@ void PluginLoader::load()
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
+                createInstanceTimeSum += createInstanceTime.elapsed();
                 ripperPlugins.append( plugin );
                 plugin->scanForBackends();
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
@@ -252,7 +244,6 @@ void PluginLoader::load()
                     const QString tabs = codecTable.at(j).codecTo.length() >= 6 ? "\t" : "\t\t";
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3, %4)").arg(codecTable.at(j).codecTo).arg(tabs).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>").arg(codecTable.at(j).data.canRipEntireCd ? "<span style=\"color:green\">can rip to single file</span>" : "<span style=\"color:red\">can't rip to single file</span>") + "</pre>" );
                 }
-//                 logger->log( 1000, QString("\tloading of plugin %1 took %2 ms").arg(plugin->name()).arg(time.elapsed()) );
                 logger->log( 1000, "" );
             }
             else
@@ -262,11 +253,7 @@ void PluginLoader::load()
         }
     }
 
-    logger->log( 1000, QString("... all plugins loaded (took %1 ms)").arg(overallTime.elapsed()) + "\n" );
-    logger->log( 1000, QString("\tcreateInstanceTime: %1").arg(createInstanceTime) );
-    logger->log( 1000, QString("\tscanForBackendsTime: %1").arg(scanForBackendsTime) );
-    logger->log( 1000, QString("\tgettingcodecTableTime: %1").arg(gettingcodecTableTime) );
-    logger->log( 1000, QString("\taddFormatInfoTime: %1").arg(addFormatInfoTime) );
+    logger->log( 1000, QString("... all plugins loaded (took %1 ms, creating instances: %2 ms)").arg(overallTime.elapsed()).arg(createInstanceTimeSum) + "\n" );
 }
 
 QStringList PluginLoader::formatList( Possibilities possibilities, CompressionType compressionType )
@@ -519,17 +506,20 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
 QString PluginLoader::getCodecFromFile( const KUrl& filename )
 {
     QString codec = "";
-    QString mimeType = KMimeType::findByUrl(filename)->name();
+    const QString mimeType = KMimeType::findByUrl(filename)->name();
 
     for( int i=0; i<codecPlugins.count(); i++ )
     {
         codec = codecPlugins.at(i)->getCodecFromFile( filename, mimeType );
-        if( codec != "" ) return codec;
+        if( codec != "" )
+            return codec;
     }
+
     for( int i=0; i<replaygainPlugins.count(); i++ )
     {
         codec = codecPlugins.at(i)->getCodecFromFile( filename, mimeType );
-        if( codec != "" ) return codec;
+        if( codec != "" )
+            return codec;
     }
 
     return mimeType;

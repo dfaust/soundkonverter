@@ -1,10 +1,10 @@
 1.1.90 (1.2.0 rc1):
--Add: Make it possible to use experimental codecs with ffmpeg
--Add: Make it possible to use user defined arguments with ffmpeg
--Add: Re-add aac/m4a encoding to the ffmpeg plugin
 -Add: Aften plugin
 -Add: Speex plugin
 -Add: Plugin info dialog
+-Add: Make it possible to use experimental codecs with ffmpeg
+-Add: Make it possible to use user defined arguments with ffmpeg
+-Add: Re-add aac/m4a encoding to the ffmpeg plugin
 -Change: Query ffmpeg for supported codecs
 
 1.1.0:

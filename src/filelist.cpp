@@ -103,20 +103,6 @@ FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
 FileList::~FileList()
 {
     // NOTE no cleanup needed since it all gets cleand up in other classes
-  /*
-    FileListItem *item;
-    for( int i=0; i<topLevelItemCount(); i++ )
-    {
-        item = topLevelItem( i );
-        if( !item->converting )
-        {
-            config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-            delete item;
-            i--;
-        }
-        // TODO else stop item first
-    }
-    }*/
 
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml") );
     listFile.remove();
@@ -148,7 +134,8 @@ void FileList::dropEvent( QDropEvent *event )
         else
         {
             fileName = KUrl(q_urls.at(i)).pathOrUrl();
-            if( codecName.isEmpty() ) codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+            if( codecName.isEmpty() )
+                codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
             if( problems.value(codecName).count() < 2 )
             {
                 problems[codecName] += QStringList();
@@ -238,18 +225,14 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
 
-//     entryListTime.start();
-    QStringList list = dir.entryList();
-//     entryListTimeCount += entryListTime.elapsed();
+    const QStringList list = dir.entryList();
 
     for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
     {
         if( *it == "." || *it == ".." )
             continue;
 
-//         fileInfoTime.start();
         QFileInfo fileInfo( directory + "/" + *it );
-//         fileInfoTimeCount += fileInfoTime.elapsed();
 
         if( fileInfo.isDir() && recursive )
         {
@@ -265,22 +248,16 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
             }
             else
             {
-//                 getCodecFromFileTime.start();
                 codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + *it );
-//                 getCodecFromFileTimeCount += getCodecFromFileTime.elapsed();
 
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
-//                     addFilesTime.start();
                     addFiles( KUrl(directory + "/" + *it), 0, "", codecName, conversionOptionsId );
-//                     addFilesTimeCount += addFilesTime.elapsed();
-//                     pScanStatusTime.start();
                     if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
                     {
                         pScanStatus->setValue( count );
                         tScanStatus.start();
                     }
-//                     pScanStatusTimeCount += pScanStatusTime.elapsed();
                 }
             }
         }
@@ -330,10 +307,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             }
         }
 
-//         newItemTime.start();
         FileListItem *newItem = new FileListItem( this, lastListItem );
-//         newItemTimeCount += newItemTime.elapsed();
-//         addConversionOptionsTime.start();
         if( conversionOptionsId == -1 )
         {
             if( i == 0 )
@@ -349,15 +323,12 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         {
             newItem->conversionOptionsId = config->conversionOptionsManager()->increaseReferences( conversionOptionsId );
         }
-//         addConversionOptionsTimeCount += addConversionOptionsTime.elapsed();
         lastListItem = newItem;
         newItem->codecName = codecName;
         newItem->track = -1;
         newItem->url = fileList.at(i);
         newItem->local = ( newItem->url.isLocalFile() || newItem->url.protocol() == "file" );
-//         readTagsTime.start();
         newItem->tags = tagEngine->readTags( newItem->url );
-//         readTagsTimeCount += readTagsTime.elapsed();
         if( !newItem->tags && newItem->codecName == "wav" && newItem->local )
         {
             QFile file( newItem->url.toLocalFile() );
@@ -368,15 +339,9 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             newItem->length = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
         }
         newItem->notifyCommand = command;
-//         addTopLevelItemTime.start();
         addTopLevelItem( newItem );
-//         addTopLevelItemTimeCount += addTopLevelItemTime.elapsed();
-//         updateItemTime.start();
         updateItem( newItem );
-//         updateItemTimeCount += updateItemTime.elapsed();
-//         timeChangedTime.start();
         emit timeChanged( newItem->length );
-//         timeChangedTimeCount += timeChangedTime.elapsed();
     }
 
     emit fileCountChanged( topLevelItemCount() );

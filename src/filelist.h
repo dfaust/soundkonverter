@@ -44,6 +44,8 @@ public:
     virtual ~FileList();
 
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
+//     FileListItem *itemAbove( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemAbove(item) ); }
+//     FileListItem *itemBelow( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemBelow(item) ); }
 
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 
@@ -114,6 +116,8 @@ private slots:
     void selectPreviousItem();
     void selectNextItem();
 
+    void checkWaitingForAlbumGain();
+
 public slots:
     // connected to soundKonverterView
     void addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1, FileListItem *after = 0, bool enabled = false );
@@ -135,6 +139,7 @@ public slots:
      * 101 = disc is full
      */
     void itemFinished( FileListItem*, int );
+    void replaygainFinished( QList<FileListItem*>, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );
 
@@ -154,6 +159,7 @@ signals:
     // connected to Convert
     void convertItem( FileListItem* );
     void killItem( FileListItem* );
+    void replaygainItems( QList<FileListItem*> );
 
     // connected to OptionsEditor
     void editItems( QList<FileListItem*> );

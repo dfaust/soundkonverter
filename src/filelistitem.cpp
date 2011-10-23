@@ -55,22 +55,33 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
     {
         if( option.state & QStyle::State_Selected )
         {
-            backgroundColor = QColor(215,62,62);
+            backgroundColor = QColor(215,62,62);   // hsv: 182,   0, 215
         }
         else
         {
-            backgroundColor = QColor(255,234,234);
+            backgroundColor = QColor(255,234,234); // hsv:   0,  21, 255
         }
     }
     else if( item->state == FileListItem::Failed )
     {
         if( option.state & QStyle::State_Selected )
         {
-            backgroundColor = QColor(235,139,49);
+            backgroundColor = QColor(235,139,49);  // hsv:  29, 202, 235
         }
         else
         {
-            backgroundColor = QColor(255,157,65);
+            backgroundColor = QColor(255,157,65);  // hsv:  29, 190, 255
+        }
+    }
+    else if( item->state == FileListItem::WaitingForAlbumGain )
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = QColor(255,255,184); // hsv:  60,  28, 100
+        }
+        else
+        {
+            backgroundColor = QColor(255,255,234); // hsv:  60,   8, 100
         }
     }
     else

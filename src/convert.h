@@ -50,14 +50,18 @@ public:
         //remove_temp       = 0x0400  // Remove the downloaded temp file
     };
 
-    /** Constructor, @p item A pointer to the file list item */
+    /** Constructor, @p item a pointer to the file list item */
     ConvertItem( FileListItem *item );
+    /** Constructor, @p itema a list of pointers to the file list items */
+    ConvertItem( QList<FileListItem*> items );
 
     /** Destructor */
     virtual ~ConvertItem();
 
-    /** a reference to the file list item */
+    /** a reference to the file list item, in case it's a convert item */
     FileListItem *fileListItem;
+    /** a reference to the file list items, in case it's an album gain item */
+    QList<FileListItem*> fileListItems;
 
     /** a list of conversion pipes that are suitable for this item */
     QList<ConversionPipe> conversionPipes;
@@ -175,6 +179,9 @@ private:
     /** holds all active files */
     QList<ConvertItem*> items;
 
+    /** holds all active album gain items */
+    QList<ConvertItem*> albumGainItems;
+
     Config *config;
     CDManager* cdManager;
     FileList *fileList;
@@ -218,6 +225,8 @@ public slots:
     void add( FileListItem *item );
     /** Stop the item with the file list item @p item in the item list and remove it */
     void kill( FileListItem *item );
+    /** Apply replaygain to all items */
+    void replaygain( QList<FileListItem*> items );
 
     /** Change the process priorities */
 //     void priorityChanged( int );
@@ -233,6 +242,7 @@ signals:
      * 101 = disc is full
      */
     void finished( FileListItem *item, int state );
+    void replaygainFinished( QList<FileListItem*> items, int state );
     /** The next track from the device can be ripped while the track is being encoded */
     void rippingFinished( const QString& device );
 

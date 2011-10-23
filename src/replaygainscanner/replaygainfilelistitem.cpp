@@ -95,7 +95,6 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
     {
         if( option.state & QStyle::State_Selected )
         {
-//             backgroundColor = QColor(195,255,206); // hsv: 131,  60, 255
             backgroundColor = QColor(79,200,101);  // hsv: 131, 154, 200
         }
         else

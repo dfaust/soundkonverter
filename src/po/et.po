@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-09-28 15:33+0200\n"
-"PO-Revision-Date: 2011-09-06 09:19+0000\n"
+"POT-Creation-Date: 2011-10-23 11:57+0200\n"
+"PO-Revision-Date: 2011-10-18 10:48+0000\n"
 "Last-Translator: V6lur <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
 "team/et/)\n"
@@ -22,51 +22,47 @@ msgstr ""
 
 #: aboutplugins.cpp:19
 msgid "About plugins"
-msgstr ""
+msgstr "Pluginate info"
 
 #: aboutplugins.cpp:33
 msgid "Installed plugins:"
-msgstr ""
+msgstr "Paigaldatud pluginad:"
 
 #: aboutplugins.cpp:112
 msgid "About plugin %1:"
-msgstr ""
+msgstr "Plugina \"%1\" info:"
 
 #: aboutplugins.cpp:114
 msgid "Plugin type: %1"
-msgstr ""
+msgstr "Plugina tüüp: %1"
 
 #: aboutplugins.cpp:120
-#, fuzzy
 msgid "Backend binaries:"
-msgstr "Taustprogrammid"
+msgstr "Taustprogrammid:"
 
 #: aboutplugins.cpp:125
 msgid "%1 (found at: %2)"
-msgstr ""
+msgstr "%1 (leitud: %2)"
 
 #: aboutplugins.cpp:127
 msgid "%1 (not found)"
-msgstr ""
+msgstr "%1 (ei leitud)"
 
 #: aboutplugins.cpp:148 aboutplugins.cpp:179
-#, fuzzy
 msgid "Supported codecs:"
-msgstr "Kõik toetatud failid"
+msgstr "Toetatud koodekid:"
 
 #: aboutplugins.cpp:156
-#, fuzzy
 msgid "Encode: %1"
-msgstr "Kooder"
+msgstr "Kodeerimine: %1"
 
 #: aboutplugins.cpp:164
-#, fuzzy
 msgid "Decode: %1"
-msgstr "Dekooder"
+msgstr "Dekodeerimine: %1"
 
 #: aboutplugins.cpp:189
 msgid "Configure %1 ..."
-msgstr ""
+msgstr "%1 seadistamine..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
@@ -106,7 +102,7 @@ msgstr "Eira"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr ""
+msgstr "Paranda"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -114,15 +110,15 @@ msgid ""
 "Maybe you need to install an additional plugin via the package manager of "
 "your distribution."
 msgstr ""
+"soundKonverter ei leidnud puuduvaid pakette.\n"
+"Võimalik, et distro paketihalduris tuleks paigaldada veel mõni plugin."
 
 #: codecproblems.cpp:33
-#, fuzzy
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Mõned paigaldatud pluginad ei tööta, kuna vajalikud lisaprogrammid "
-"puuduvad.\n"
+"Mõned paigaldatud pluginad ei tööta.\n"
 "Võimalikud lahendused on toodud allpool."
 
 #: codecproblems.cpp:38
@@ -138,7 +134,7 @@ msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Helitugevuse parandus pole mõnede failide puhul toetatud.\n"
+"Helitugevuse parandusteave pole mõnede failide puhul toetatud.\n"
 "Võimalikud lahendused on toodud allpool."
 
 #: codecproblems.cpp:48
@@ -168,7 +164,7 @@ msgstr "Võimalikud lahendused: %1"
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:307
 msgctxt "like in either or"
 msgid "or"
-msgstr ""
+msgstr "või"
 
 #: codecproblems.cpp:72
 msgid "Affected files:"
@@ -474,7 +470,7 @@ msgstr "Kooder"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:463
 msgid "Replay Gain"
 msgstr "Helitugevuse parandus"
 
@@ -525,7 +521,7 @@ msgstr "Üldine"
 
 #: configdialog/configdialog.cpp:41
 msgid "Advanced"
-msgstr ""
+msgstr "Lisaseaded"
 
 #: configdialog/configdialog.cpp:46 main.cpp:29
 msgid "Backends"
@@ -617,13 +613,13 @@ msgstr "Faili hankimine"
 
 #: convert.cpp:193
 msgid "Copying \"%1\" to \"%2\""
-msgstr ""
+msgstr "Kopeerimine: \"%1\" -> \"%2\""
 
 #: convert.cpp:225 convert.cpp:371
 msgid "No more backends left to try :("
 msgstr "Pole enam ühtki taustprogrammi proovida :("
 
-#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:508
+#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:473
 #: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
 #: soundkonverter.cpp:288
 msgid "Converting"
@@ -674,10 +670,9 @@ msgid "Unable to read tags"
 msgstr "Siltide lugemine pole võimalik"
 
 #: convert.cpp:560 convert.cpp:565
-#, fuzzy
 msgctxt "removing file"
 msgid "Removing: %1"
-msgstr "Vana faili eemaldamine: %1"
+msgstr "Eemaldamine: %1"
 
 #: convert.cpp:574
 msgid "An error accured. Error code: %1 (%2)"
@@ -688,13 +683,11 @@ msgid "Conversion failed. Exit code: %1"
 msgstr "Teisendamine ebaõnnestus. Lõpetamise olek %1"
 
 #: convert.cpp:838
-#, fuzzy
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
-msgstr "CD rada %1"
+msgstr "CD rada %1: %2 - %3"
 
 #: convert.cpp:842
-#, fuzzy
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "CD rada %1"
@@ -709,15 +702,15 @@ msgstr "Logi-ID käes: %1"
 
 #: convert.cpp:885
 msgid "Track number: %1, device: %2"
-msgstr ""
+msgstr "Raja number: %1, seade: %2"
 
 #: convert.cpp:890 optionseditor.cpp:333
 msgid "Possible conversion strategies:"
-msgstr ""
+msgstr "Võimalikud teisenduskavad:"
 
 #: convert.cpp:903
 msgid "File system type: %1"
-msgstr ""
+msgstr "Failisüsteemi tüüp: %1"
 
 #: convert.cpp:955
 msgid ""
@@ -779,83 +772,96 @@ msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Teadmata"
 
-#: convert.cpp:1098 filelist.cpp:503
+#: convert.cpp:1098 filelist.cpp:468
 msgid "Ripping"
 msgstr "Rippimine"
 
 #: convert.cpp:1115
 msgid "Progress: %1"
-msgstr ""
+msgstr "Edenemine: %1"
 
 #: core/backendplugin.cpp:37
 msgid "Wave won't compress the audio stream."
-msgstr ""
+msgstr "Wave helivoogu kokku ei paki."
 
 #: core/backendplugin.cpp:45
 msgid ""
 "Advanced Audio Coding is a lossy and popular audio format. It is widely used "
 "by Apple Inc."
 msgstr ""
+"Advanced Audio Coding on populaarne kadudega helivorming. Kasutatakse laialt "
+"Apple'i toodetes."
 
 #: core/backendplugin.cpp:52
 msgid ""
 "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
 msgstr ""
+"m4a-failid kodeeritakse AAC-koodekiga. Kasutatakse laialt Apple'i toodetes."
 
 #: core/backendplugin.cpp:71
 msgid ""
 "Ogg Vorbis is a free and lossy high quality audio codec.\n"
 "For more information see: http://www.xiph.org/vorbis/"
 msgstr ""
+"Ogg Vorbis on vaba ja kõrgekvaliteetne kadudega helikoodek.\n"
+"Lisainfo: http://www.xiph.org/vorbis/"
 
 #: core/backendplugin.cpp:83
 msgid ""
 "MP3 is the most popular lossy audio codec. It's supported by all audio "
 "players."
 msgstr ""
+"MP3 on populaarseim kadudega helikoodek. Seda toetavad kõik audiomängijad."
 
 #: core/backendplugin.cpp:92
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it's name says, it compresses without any loss of quality."
 msgstr ""
+"FLAC (\"Free Lossless Audio Codec\") on vaba kadudeta helikoodek.\n"
+"Nagu nimi ütleb, pakib see heli ilma kvaliteedikadudeta."
 
 #: core/backendplugin.cpp:102
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
-msgstr ""
+msgstr "Windows Media Audio on Microsofti omanduslik helikoodek."
 
 #: core/backendplugin.cpp:109
 msgid "Dolby Digital-Audio"
-msgstr ""
+msgstr "Dolby Digital heli"
 
 #: core/backendplugin.cpp:123
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
-msgstr ""
+msgstr "Apple Lossless Audio Codec on Apple'i kadudeta helivorming."
 
 #: core/backendplugin.cpp:132
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
-msgstr ""
+msgstr "MPEG-1 Audio Layer II on vana kadudega helivorming."
 
 #: core/backendplugin.cpp:154
 msgid "MPEG-4 Audio Lossless Coding"
-msgstr ""
+msgstr "MPEG-4 Audio Lossless Coding (kaduteta helivorming)"
 
 #: core/backendplugin.cpp:161
 msgid ""
 "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech "
 "compression in mobile communication."
 msgstr ""
+"Adaptive Multi-Rate Narrow-Band põhineb 3GP-l ja seda kasutatakse peamiselt "
+"kõne pakkimisel mobiilsides."
 
 #: core/backendplugin.cpp:170
 msgid ""
 "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a "
 "higher data rate resulting in a higher quality."
 msgstr ""
+"Adaptive Multi-Rate Wide-Band on AMR NB täiuslikum versioon, mis kasutab "
+"suuremat andmekiirust ja seega pakub kõrgemat kvaliteeti."
 
 #: core/backendplugin.cpp:178
 msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
 msgstr ""
+"Monkey’s Audio on kiire ja tõhus, kuid omanduslik kaduteta helivorming."
 
 #: core/backendplugin.cpp:187
 msgid ""
@@ -863,44 +869,53 @@ msgid ""
 "encoding.\n"
 "For more information see: http://www.speex.org"
 msgstr ""
+"Speex on vaba kadudega helikoodek, mis loodi kõne madalakvaliteediliseks "
+"kodeerimiseks.\n"
+"Lisainfo: http://www.speex.org"
 
 #: core/backendplugin.cpp:195
 msgid "MPEG-1 Audio Layer I very old and lossy file format."
-msgstr ""
+msgstr "MPEG-1 Audio Layer I on väga vana kadudega helivorming."
 
 #: core/backendplugin.cpp:202
 msgid ""
 "Musepack is a free and lossy file format based on mp2 and optimized for high "
 "quality."
 msgstr ""
+"Musepack on vaba kadudega failivorming, mis põhineb MP2-l ja on optimeeritud "
+"kõrge kvaliteedi jaoks."
 
 #: core/backendplugin.cpp:212
 msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
+"Shorten on vaba kadudeta helikoodek.\n"
+"Lisainfo: http://etree.org/shnutils/shorten/"
 
 #: core/backendplugin.cpp:240
 msgid "True Audio is a free lossless audio format."
-msgstr ""
+msgstr "True Audio on vaba kadudeta helivorming."
 
 #: core/backendplugin.cpp:247
 msgid ""
 "WavPack is a free and lossless audio codec.\n"
 "For more information see: http://www.wavpack.com"
 msgstr ""
+"WavPack on vaba kadudeta helikoodek.\n"
+"Lisainfo: http://www.wavpack.com"
 
 #: core/backendplugin.cpp:255
 msgid "Real Media Audio is a propritary and lossy codec."
-msgstr ""
+msgstr "Real Media Audio on omanduslik kadudega koodek."
 
 #: core/backendplugin.cpp:263
 msgid "3GP is a audio/video container format for mobile devices."
-msgstr ""
+msgstr "3GP on audio/video-konteinervorming mobiilseadmete jaoks."
 
 #: core/backendplugin.cpp:278
 msgid "Real Media is a propritary and lossy codec."
-msgstr ""
+msgstr "Real Media on omanduslik kadudega koodek."
 
 #: core/backendplugin.cpp:355
 msgid ""
@@ -1014,53 +1029,56 @@ msgstr "Peata teisendamine"
 msgid "Remove"
 msgstr "Eemalda"
 
-#: filelist.cpp:164 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: filelist.cpp:151 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
 #: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:360
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
 "You should have a look at your distribution's package manager for this."
 msgstr ""
+"See failitüüp on soundKonverterile tundmatu.\n"
+"Võimalik, et tuleks paigaldada veel mõni soundKonverteri plugin.\n"
+"Otsi seda oma distro paketihaldurist."
 
-#: filelist.cpp:202 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: filelist.cpp:189 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
 #: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:398
 msgid "... and %1 more files"
 msgstr "...ja veel %1 faili"
 
-#: filelist.cpp:483
+#: filelist.cpp:448
 msgid "Will be skipped"
 msgstr "Jäetakse vahele"
 
-#: filelist.cpp:487 soundkonverter.cpp:126 soundkonverter.cpp:130
+#: filelist.cpp:452 soundkonverter.cpp:126 soundkonverter.cpp:130
 msgid "Waiting"
 msgstr "Ootel"
 
-#: filelist.cpp:493
+#: filelist.cpp:458
 msgid "Waiting for Replay Gain"
 msgstr "Helitugevuse paranduse ootamine"
 
-#: filelist.cpp:513
+#: filelist.cpp:478
 msgid "Stopped"
 msgstr "Peatatud"
 
-#: filelist.cpp:518
+#: filelist.cpp:483
 msgid "Backend not configured"
 msgstr "Taustprogramm seadistamata"
 
-#: filelist.cpp:523
+#: filelist.cpp:488
 msgid "Disc full"
 msgstr "Ketas täis"
 
-#: filelist.cpp:528
+#: filelist.cpp:493
 msgid "Failed"
 msgstr "Ebaõnnestus"
 
-#: filelist.cpp:545
+#: filelist.cpp:510
 msgid "CD track %1"
 msgstr "CD rada %1"
 
-#: filelist.cpp:1025
+#: filelist.cpp:990
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1110,21 +1128,19 @@ msgstr "Logi"
 
 #: logviewer.cpp:27
 msgid "Update"
-msgstr ""
+msgstr "Uuenda"
 
 #: logviewer.cpp:30
 msgid "Save to file..."
 msgstr "Salvesta failiks..."
 
 #: logviewer.cpp:42
-#, fuzzy
 msgid "Log file:"
-msgstr "Logifaili salvestamine"
+msgstr "Logifail:"
 
 #: logviewer.cpp:77
-#, fuzzy
 msgid "soundKonverter application log"
-msgstr "soundKonverter"
+msgstr "soundKonverteri rakenduselogi"
 
 #: logviewer.cpp:117
 msgid "Save log file"
@@ -1307,7 +1323,7 @@ msgstr "Stiil:"
 #: opener/cdopener.cpp:231
 msgctxt "column title"
 msgid "Rip"
-msgstr "Ripi"
+msgstr "Ripitav"
 
 #: opener/cdopener.cpp:232 opener/cdopener.cpp:1009
 #: replaygainscanner/replaygainfilelist.cpp:37
@@ -1332,7 +1348,7 @@ msgstr "Pikkus"
 
 #: opener/cdopener.cpp:237
 msgid "Player"
-msgstr ""
+msgstr "Mängija"
 
 #: opener/cdopener.cpp:253
 msgid "No track selected"
@@ -1357,11 +1373,11 @@ msgstr "Salvesta cue-fail..."
 
 #: opener/cdopener.cpp:392
 msgid "Request CDDB"
-msgstr ""
+msgstr "CDDB päring"
 
 #: opener/cdopener.cpp:397
 msgid "Rip entire CD to one file"
-msgstr ""
+msgstr "Kogu CD rippimine üheks failiks"
 
 #: opener/cdopener.cpp:408
 msgid ""
@@ -1369,6 +1385,8 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
+"Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
+"Võimalikud lahendused on toodud allpool.\n"
 
 #: opener/cdopener.cpp:412
 msgid ""
@@ -1377,6 +1395,8 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin wich supports ripping to one file."
 msgstr ""
+"Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
+"Vaata, kas distro paketihalduris on saadaval rippimisplugin, mis seda toetab."
 
 #: opener/cdopener.cpp:419 opener/diropener.cpp:37 opener/urlopener.cpp:85
 msgid "Proceed"
@@ -1395,7 +1415,7 @@ msgstr "Loobu"
 
 #: opener/cdopener.cpp:475
 msgid "Select CD-ROM drive"
-msgstr ""
+msgstr "CD-seadme valimine"
 
 #: opener/cdopener.cpp:475
 msgid "Multiple CD-ROM drives where found. Please select one:"
@@ -1428,11 +1448,11 @@ msgstr "Teadmata"
 
 #: opener/cdopener.cpp:704
 msgid "Please wait, trying to download CDDB data ..."
-msgstr ""
+msgstr "Palun oota, CDDB-st andmete allalaadimine..."
 
 #: opener/cdopener.cpp:749
 msgid "Select CDDB Entry"
-msgstr ""
+msgstr "CDDB kirje valimine"
 
 #: opener/cdopener.cpp:749
 msgid "Multiple CDDB entries where found. Please select one:"
@@ -1448,7 +1468,7 @@ msgstr "Rajad"
 
 #: opener/cdopener.cpp:1185
 msgid "Please select at least one track in order to proceed."
-msgstr ""
+msgstr "Jätkamiseks vali mõni rada."
 
 #: opener/cdopener.cpp:1261 opener/diropener.cpp:198 opener/fileopener.cpp:182
 #: opener/playlistopener.cpp:217 opener/urlopener.cpp:137 optionslayer.cpp:133
@@ -1487,9 +1507,8 @@ msgstr "Lisatakse ainult järgmistes vormingutes failid:"
 
 #: opener/diropener.cpp:117 opener/fileopener.cpp:73
 #: replaygainscanner/replaygainscanner.cpp:136
-#, fuzzy
 msgid "Are you missing some file formats?"
-msgstr "<a href=\"format-help\">Mõni failivorming puudu?</a>"
+msgstr "Mõni failivorming puudu?"
 
 #: opener/diropener.cpp:125
 msgid "Select all"
@@ -1530,11 +1549,11 @@ msgstr "Esitusloendi lisamine"
 
 #: opener/playlistopener.cpp:195
 msgid "The following files couldn't be found:\n"
-msgstr ""
+msgstr "Järgmisi faile ei leitud:\n"
 
 #: opener/playlistopener.cpp:198
 msgid "Files not found"
-msgstr ""
+msgstr "Leidmata failid"
 
 #: opener/urlopener.cpp:35
 msgid "Add url"
@@ -1566,13 +1585,15 @@ msgstr "Salvesta need seaded profiilina"
 
 #: optionsdetailed.cpp:108
 msgid "Load saved profiles"
-msgstr ""
+msgstr "Salvestatud profiilide laadimine"
 
 #: optionsdetailed.cpp:257
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
 msgstr ""
+"%1-vormingu puhul helitugevuse parandusteavet ei toetata.\n"
+"Võimalikud lahendused on toodud allpool."
 
 #: optionsdetailed.cpp:261
 msgid ""
@@ -1580,6 +1601,8 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional Replay Gain plugin."
 msgstr ""
+"%1-vormingu puhul helitugevuse parandusteavet ei toetata.\n"
+"Otsi vajalikku pluginat oma distro paketihaldurist."
 
 #: optionsdetailed.cpp:282 optionssimple.cpp:384
 msgid ""
@@ -1615,11 +1638,11 @@ msgstr ""
 
 #: optionseditor.cpp:40
 msgid "Previous"
-msgstr ""
+msgstr "Eelmine"
 
 #: optionseditor.cpp:42
 msgid "Next"
-msgstr ""
+msgstr "Järgmine"
 
 #. i18n: file: soundkonverterui.rc:14
 #. i18n: ectx: Menu (conversion)
@@ -1729,7 +1752,7 @@ msgstr "Info valitud failivormingu kohta"
 
 #: optionssimple.cpp:68
 msgid "More"
-msgstr ""
+msgstr "Rohkem"
 
 #: optionssimple.cpp:90
 msgid "Optional:"
@@ -1884,7 +1907,6 @@ msgid "Unknown Title"
 msgstr "Pealkiri teadmata"
 
 #: outputdirectory.cpp:345
-#, fuzzy
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
@@ -2011,26 +2033,26 @@ msgstr "Lisaargumendid kooderile"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:278
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
-msgstr ""
+msgstr "Luba ffmpeg seadistusdialoogis katsejärgus koodekite kasutamine."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
 msgid "Compile ffmpeg with %1 support."
-msgstr ""
+msgstr "Kompileeri ffmpeg %1 toega."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:339
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:73
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:66
 msgid "Configure %1"
-msgstr ""
+msgstr "%1i seadistamine"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:344
 msgid "Enable experimental codecs"
-msgstr ""
+msgstr "Katsejärgus koodekite lubamine"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
 msgid "Please restart soundKonverter in order to activate the changes."
-msgstr ""
+msgstr "Muudatuste rakendamiseks käivita soundKonverter uuesti."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
@@ -2226,13 +2248,15 @@ msgstr "Kvaliteeditase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet."
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:126
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:92
 msgid "About %1"
-msgstr ""
+msgstr "%1i info"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:131
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
+"LAME on vaba kõrgekvaliteetne MP3-kooder.\n"
+"Saad selle aadressilt http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:293
@@ -2244,7 +2268,7 @@ msgstr "Telefon"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:298
 msgctxt "Backend profile"
 msgid "Thumb"
-msgstr ""
+msgstr "Pöial"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:303
@@ -2260,7 +2284,7 @@ msgstr "Ajusurnud"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
-msgstr ""
+msgstr "Kasutada võib MusePacki eelseadeid või omamääratud seadeid."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:296
 msgid "low quality (~60 kbps abr)."
@@ -2303,10 +2327,12 @@ msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
 msgstr ""
+"TwoLame on vaba MP2-kooder.\n"
+"Saad selle aadressilt http://www.twolame.org"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:72
 msgid "Joint"
-msgstr ""
+msgstr "Liitstereo"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:73
 msgid "Stereo"
@@ -2314,7 +2340,7 @@ msgstr "Stereo"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:74
 msgid "Dual"
-msgstr ""
+msgstr "Kaks kanalit"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:385
 msgid "Quality level from -50 to 50."
@@ -2450,7 +2476,7 @@ msgstr "Helitugevuse parandustööriist..."
 
 #: soundkonverter.cpp:168
 msgid "About plugins..."
-msgstr ""
+msgstr "Pluginate info..."
 
 #: soundkonverter.cpp:183 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
@@ -2500,7 +2526,7 @@ msgstr "CD-seadet ei leitud"
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:6
 msgid "Tools"
-msgstr ""
+msgstr "Tööriistad"
 
 #: rc.cpp:7
 msgctxt "NAME OF TRANSLATORS"
@@ -2514,15 +2540,8 @@ msgstr "mihhkel@gmail.com"
 
 #: rc.cpp:9
 msgid "An audio file converter"
-msgstr ""
+msgstr "Helifailide teisendaja"
 
 #: rc.cpp:10
-#, fuzzy
 msgid "Rip Audio CD with soundKonverter"
-msgstr "Lisa helitugevuse parandusteave..."
-
-#~ msgid "<a href=\"format-help\">More</a>"
-#~ msgstr "<a href=\"format-help\">Rohkem</a>"
-
-#~ msgid "CD track"
-#~ msgstr "CD rada"
+msgstr "Ripi audio-CD soundKonverteriga"

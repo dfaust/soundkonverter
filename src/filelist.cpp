@@ -225,7 +225,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
 
-    const QStringList list = dir.entryList();
+    QStringList list = dir.entryList();
 
     for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
     {

@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-09-28 15:33+0200\n"
-"PO-Revision-Date: 2011-09-09 20:45+0000\n"
+"POT-Creation-Date: 2011-10-23 11:57+0200\n"
+"PO-Revision-Date: 2011-10-08 13:17+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/"
 "team/hu/)\n"
@@ -23,55 +23,47 @@ msgstr ""
 
 #: aboutplugins.cpp:19
 msgid "About plugins"
-msgstr ""
+msgstr "A bővítményekről"
 
 #: aboutplugins.cpp:33
 msgid "Installed plugins:"
-msgstr ""
+msgstr "Telepített bővítmények:"
 
 #: aboutplugins.cpp:112
-#, fuzzy
 msgid "About plugin %1:"
-msgstr "Névjegy: %1"
+msgstr "A(z) %1 beépülő névjegye:"
 
 #: aboutplugins.cpp:114
 msgid "Plugin type: %1"
-msgstr ""
+msgstr "Bővítménytípus: %1"
 
 #: aboutplugins.cpp:120
-#, fuzzy
 msgid "Backend binaries:"
-msgstr "Háttérprogramok"
+msgstr "Háttérprogramok:"
 
 #: aboutplugins.cpp:125
-#, fuzzy
 msgid "%1 (found at: %2)"
-msgstr "A fájlok nem találhatók"
+msgstr "%1 (itt található: %2)"
 
 #: aboutplugins.cpp:127
-#, fuzzy
 msgid "%1 (not found)"
-msgstr "A fájlok nem találhatók"
+msgstr "%1 (nem található)"
 
 #: aboutplugins.cpp:148 aboutplugins.cpp:179
-#, fuzzy
 msgid "Supported codecs:"
-msgstr "Minden támogatott fájl"
+msgstr "Támogatott kodekek:"
 
 #: aboutplugins.cpp:156
-#, fuzzy
 msgid "Encode: %1"
-msgstr "Kóder"
+msgstr "Kóder: %1"
 
 #: aboutplugins.cpp:164
-#, fuzzy
 msgid "Decode: %1"
-msgstr "Dekóder"
+msgstr "Dekóder: %1"
 
 #: aboutplugins.cpp:189
-#, fuzzy
 msgid "Configure %1 ..."
-msgstr "Beállítás %1"
+msgstr "Beállítás %1 ..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
@@ -93,7 +85,7 @@ msgstr ""
 #: codecoptimizations.cpp:55
 msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
 msgstr ""
-"Audió CD-k beolvasásához a(z) '%1' háttérprogram lecserélhető erre: '%2'. "
+"Audio CD-k beolvasásához a(z) '%1' háttérprogram lecserélhető erre: '%2'. "
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
@@ -124,17 +116,15 @@ msgid ""
 "your distribution."
 msgstr ""
 "A soundKonverter nem talál hiányzó csomagokat.\n"
-"Lehet, hogy további csomago(ka)t kell telepítenie a csomagkezelője "
+"Lehet, hogy kiegészítő bővítményt kell telepítenie a csomagkezelője "
 "segítségével."
 
 #: codecproblems.cpp:33
-#, fuzzy
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Némelyik bővítmény nem működik, mert működéséhez további programok "
-"szükségesek.\n"
+"Némelyik bővítmény nem működik\n"
 "A lehetséges megoldások lentebb láthatók."
 
 #: codecproblems.cpp:38
@@ -178,7 +168,7 @@ msgstr "Lehetséges megoldások ehhez: %1"
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:307
 msgctxt "like in either or"
 msgid "or"
-msgstr ""
+msgstr "vagy"
 
 #: codecproblems.cpp:72
 msgid "Affected files:"
@@ -440,7 +430,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:75
 msgid "Remove partially converted files if a conversion fails"
-msgstr "Részben konvertált fájlok eltávolítása, ha a konverzió meghiúsul"
+msgstr "Részben konvertált fájlok eltávolítása, ha a konvertálás meghiúsul"
 
 #: configdialog/configadvancedpage.cpp:76
 msgid ""
@@ -487,7 +477,7 @@ msgstr "Kóder"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:463
 msgid "Replay Gain"
 msgstr "Hangerő-korrekció"
 
@@ -630,13 +620,13 @@ msgstr "Fájl megszerzése"
 
 #: convert.cpp:193
 msgid "Copying \"%1\" to \"%2\""
-msgstr ""
+msgstr "\"%1\" másolása ide: \"%2\""
 
 #: convert.cpp:225 convert.cpp:371
 msgid "No more backends left to try :("
 msgstr "Nincs több kipróbálható háttérprogram :("
 
-#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:508
+#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:473
 #: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
 #: soundkonverter.cpp:288
 msgid "Converting"
@@ -687,10 +677,9 @@ msgid "Unable to read tags"
 msgstr "A címkék beolvasása nem sikerült"
 
 #: convert.cpp:560 convert.cpp:565
-#, fuzzy
 msgctxt "removing file"
 msgid "Removing: %1"
-msgstr "Régi fájl eltávolítása: %1"
+msgstr "eltávolítás: %1"
 
 #: convert.cpp:574
 msgid "An error accured. Error code: %1 (%2)"
@@ -701,13 +690,11 @@ msgid "Conversion failed. Exit code: %1"
 msgstr "A konvertálás meghiúsult. Hibakód: %1"
 
 #: convert.cpp:838
-#, fuzzy
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
-msgstr "CD-szám %1"
+msgstr "CD-szám %1: %2 - %3"
 
 #: convert.cpp:842
-#, fuzzy
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "CD-szám %1"
@@ -722,15 +709,15 @@ msgstr "Napló azonosító: %1"
 
 #: convert.cpp:885
 msgid "Track number: %1, device: %2"
-msgstr ""
+msgstr "Szám: %1, eszköz: %2"
 
 #: convert.cpp:890 optionseditor.cpp:333
 msgid "Possible conversion strategies:"
-msgstr ""
+msgstr "Lehetséges konvertálási stratégiák:"
 
 #: convert.cpp:903
 msgid "File system type: %1"
-msgstr ""
+msgstr "Fájlrendszer típusa: %1"
 
 #: convert.cpp:955
 msgid ""
@@ -793,13 +780,13 @@ msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: convert.cpp:1098 filelist.cpp:503
+#: convert.cpp:1098 filelist.cpp:468
 msgid "Ripping"
 msgstr "Beolvasás"
 
 #: convert.cpp:1115
 msgid "Progress: %1"
-msgstr ""
+msgstr "Folyamat: %1"
 
 #: core/backendplugin.cpp:37
 msgid "Wave won't compress the audio stream."
@@ -811,7 +798,7 @@ msgid ""
 "by Apple Inc."
 msgstr ""
 "Az Advanced Audio Coding egy veszteségesen tömörítő és népszerű "
-"audióformátum. Az Apple széles körben használja."
+"audioformátum. Az Apple széles körben használja."
 
 #: core/backendplugin.cpp:52
 msgid ""
@@ -826,7 +813,7 @@ msgid ""
 "For more information see: http://www.xiph.org/vorbis/"
 msgstr ""
 "Az Ogg Vorbis egy ingyenes és veszteségesen tömörítő, kiváló minőségű "
-"audiókodek.\n"
+"audiokodek.\n"
 "Több információkért látogassa meg a http://www.xiph.org/vorbis weboldalt."
 
 #: core/backendplugin.cpp:83
@@ -835,19 +822,19 @@ msgid ""
 "players."
 msgstr ""
 "Az MP3 a legnépszerűbb veszteségesen tömörítő audiókodek. Minden "
-"audiólejátszó támogatja."
+"audiolejátszó támogatja."
 
 #: core/backendplugin.cpp:92
 msgid ""
 "Flac is the free lossless audio codec.\n"
 "As it's name says, it compresses without any loss of quality."
 msgstr ""
-"Az flac egy ingyenes, veszteségmentesen tömörítő audiókodek.\n"
+"Az flac egy ingyenes, veszteségmentesen tömörítő audiokodek.\n"
 "Ahogy a neve is mutatja, veszteségmentesen tömörít."
 
 #: core/backendplugin.cpp:102
 msgid "Windows Media Audio is a propritary audio codec from Microsoft."
-msgstr "A Windows Media Audio A Microsoft saját audiókodeke."
+msgstr "A Windows Media Audio A Microsoft saját audiokodeke."
 
 #: core/backendplugin.cpp:109
 msgid "Dolby Digital-Audio"
@@ -856,16 +843,16 @@ msgstr "Dolby Digital Audio"
 #: core/backendplugin.cpp:123
 msgid "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
 msgstr ""
-"Az Apple Lossless Audio Codec egy veszteségmentesen tömörítő audióformátum "
+"Az Apple Lossless Audio Codec egy veszteségmentesen tömörítő audioformátum "
 "az Apple-től."
 
 #: core/backendplugin.cpp:132
 msgid "MPEG-1 Audio Layer II is an old lossy audio format."
-msgstr "Az MPEG-1 Audio Layer egy régi, veszteségesen tömörítő audióformátum."
+msgstr "Az MPEG-1 Audio Layer egy régi, veszteségesen tömörítő audioformátum."
 
 #: core/backendplugin.cpp:154
 msgid "MPEG-4 Audio Lossless Coding"
-msgstr "MPEG-4 Audio Veszteségmentesen tömörítő Kódolás"
+msgstr "MPEG-4 Audio veszteségmentesen tömörítő kódolás"
 
 #: core/backendplugin.cpp:161
 msgid ""
@@ -889,7 +876,7 @@ msgid ""
 "Monkey’s Audio is a fast and efficient but propritary lossless audio format."
 msgstr ""
 "A Monkey's Audio egy gyors és hatékony, veszteségmentesen tömörítő "
-"audióformátum."
+"audioformátum."
 
 #: core/backendplugin.cpp:187
 msgid ""
@@ -897,7 +884,7 @@ msgid ""
 "encoding.\n"
 "For more information see: http://www.speex.org"
 msgstr ""
-"A Speex egy ingyenes és veszteségesen tömörítő audiókodek gyenge minőségű "
+"A Speex egy ingyenes és veszteségesen tömörítő audiokodek gyenge minőségű "
 "beszéd kódolásához.\n"
 "További információkért látogassa meg a http://www.speex.org weboldalt."
 
@@ -919,20 +906,20 @@ msgid ""
 "Shorten is a free and lossless audio codec.\n"
 "For more information see: http://etree.org/shnutils/shorten/"
 msgstr ""
-"A Shorten egy ingyenes és veszteségmentesen tömörítő audiókodek.\n"
+"A Shorten egy ingyenes és veszteségmentesen tömörítő audiokodek.\n"
 "További információért látogassa meg a http://etree.org/shnutils/shorten/ "
 "weboldalt."
 
 #: core/backendplugin.cpp:240
 msgid "True Audio is a free lossless audio format."
-msgstr "A True Audio egy ingyenes és veszteségmentesen tömörítő audióformátum."
+msgstr "A True Audio egy ingyenes és veszteségmentesen tömörítő audioformátum."
 
 #: core/backendplugin.cpp:247
 msgid ""
 "WavPack is a free and lossless audio codec.\n"
 "For more information see: http://www.wavpack.com"
 msgstr ""
-"A WavPack egy ingyenes és veszteségmentesen tömörítő audiókodek.\n"
+"A WavPack egy ingyenes és veszteségmentesen tömörítő audiokodek.\n"
 "További információkért látogassa meg a http://www.wavpack.com weboldalt."
 
 #: core/backendplugin.cpp:255
@@ -942,7 +929,7 @@ msgstr ""
 
 #: core/backendplugin.cpp:263
 msgid "3GP is a audio/video container format for mobile devices."
-msgstr "A 3GP egy audió/videó konténer formátum hordozható eszközökhöz."
+msgstr "A 3GP egy audio/video konténer formátum hordozható eszközökhöz."
 
 #: core/backendplugin.cpp:278
 msgid "Real Media is a propritary and lossy codec."
@@ -1065,7 +1052,7 @@ msgstr "Konvertálás leállítása"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: filelist.cpp:164 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: filelist.cpp:151 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
 #: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:360
 msgid ""
 "This file type is unknown to soundKonverter.\n"
@@ -1076,45 +1063,45 @@ msgstr ""
 "Lehet, hogy kiegészítő bővítményeket kell telepítenie.\n"
 "Nézzen körül disztribúciója csomagkezelőjében."
 
-#: filelist.cpp:202 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: filelist.cpp:189 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
 #: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:398
 msgid "... and %1 more files"
 msgstr "... és %1 fájl"
 
-#: filelist.cpp:483
+#: filelist.cpp:448
 msgid "Will be skipped"
 msgstr "Ki lesz hagyva"
 
-#: filelist.cpp:487 soundkonverter.cpp:126 soundkonverter.cpp:130
+#: filelist.cpp:452 soundkonverter.cpp:126 soundkonverter.cpp:130
 msgid "Waiting"
 msgstr "Várakozás"
 
-#: filelist.cpp:493
+#: filelist.cpp:458
 msgid "Waiting for Replay Gain"
 msgstr "Várakozás a hangerő-korrekcióra"
 
-#: filelist.cpp:513
+#: filelist.cpp:478
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: filelist.cpp:518
+#: filelist.cpp:483
 msgid "Backend not configured"
 msgstr "A háttérprogram nincs beállítva"
 
-#: filelist.cpp:523
+#: filelist.cpp:488
 msgid "Disc full"
 msgstr "A lemez megtelt"
 
-#: filelist.cpp:528
+#: filelist.cpp:493
 msgid "Failed"
 msgstr "Meghiúsult"
 
-#: filelist.cpp:545
+#: filelist.cpp:510
 msgid "CD track %1"
 msgstr "CD-szám %1"
 
-#: filelist.cpp:1025
+#: filelist.cpp:990
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1171,14 +1158,12 @@ msgid "Save to file..."
 msgstr "Mentés fájlba..."
 
 #: logviewer.cpp:42
-#, fuzzy
 msgid "Log file:"
-msgstr "Naplófájl mentése"
+msgstr "Naplófájl:"
 
 #: logviewer.cpp:77
-#, fuzzy
 msgid "soundKonverter application log"
-msgstr "soundKonverter"
+msgstr "A soundKonverter alkalmazás naplója"
 
 #: logviewer.cpp:117
 msgid "Save log file"
@@ -1204,7 +1189,7 @@ msgid ""
 "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
-"A soundKonverter audiókonverterek, hangerő-korrekciós eszközök és CD-másolók "
+"A soundKonverter audiokonverterek, hangerő-korrekciós eszközök és CD-másolók "
 "felülete.\n"
 "\n"
 "Hibabejelentés a https://bugs.launchpad.net/soundkonverter weboldalon vagy a "
@@ -1306,7 +1291,7 @@ msgstr ""
 
 #: main.cpp:43
 msgid "Audio file(s) to append to the file list"
-msgstr "Audiófájlok hozzáfűzése a fájllistához"
+msgstr "Audiofájlok hozzáfűzése a fájllistához"
 
 #: opener/cdopener.cpp:114
 msgid "Add CD tracks"
@@ -1546,9 +1531,8 @@ msgstr "Csak az alábbi fájlformátumok hozzáadása:"
 
 #: opener/diropener.cpp:117 opener/fileopener.cpp:73
 #: replaygainscanner/replaygainscanner.cpp:136
-#, fuzzy
 msgid "Are you missing some file formats?"
-msgstr "<a href=\"format-help\">Hiányol néhány fájlformátumot?</a>"
+msgstr "Hiányol néhány fájlformátumot?"
 
 #: opener/diropener.cpp:125
 msgid "Select all"
@@ -1798,7 +1782,7 @@ msgstr "Információ a kiválasztott fájlformátumról"
 
 #: optionssimple.cpp:68
 msgid "More"
-msgstr ""
+msgstr "További információ"
 
 #: optionssimple.cpp:90
 msgid "Optional:"
@@ -1953,7 +1937,6 @@ msgid "Unknown Title"
 msgstr "Ismeretlen cím"
 
 #: outputdirectory.cpp:345
-#, fuzzy
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
@@ -2081,11 +2064,11 @@ msgstr "További kódolási paraméterek"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:278
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
-msgstr ""
+msgstr "Kísérleti kodekek engedélyezése az ffmpeg párbeszédablakában."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:282
 msgid "Compile ffmpeg with %1 support."
-msgstr ""
+msgstr "ffmpeg fordítás %1 támogatással."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:339
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
@@ -2096,12 +2079,11 @@ msgstr "Beállítás %1"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:344
 msgid "Enable experimental codecs"
-msgstr ""
+msgstr "Kísérleti kodekek engedélyezése"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
-#, fuzzy
 msgid "Please restart soundKonverter in order to activate the changes."
-msgstr "Válasszon ki legalább egy fájlt a folytatáshoz."
+msgstr "Indítsa újra a soundKonvertert a változtatások véglegesítéséhez."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
@@ -2525,7 +2507,7 @@ msgstr "Hangerő-korrekciós eszköz..."
 
 #: soundkonverter.cpp:168
 msgid "About plugins..."
-msgstr ""
+msgstr "A bővítményekről..."
 
 #: soundkonverter.cpp:183 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
@@ -2575,7 +2557,7 @@ msgstr "Nem található CD-meghajtó"
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:6
 msgid "Tools"
-msgstr ""
+msgstr "Eszközök"
 
 #: rc.cpp:7
 msgctxt "NAME OF TRANSLATORS"
@@ -2589,15 +2571,8 @@ msgstr "E-mail"
 
 #: rc.cpp:9
 msgid "An audio file converter"
-msgstr ""
+msgstr "Egy audiofájl-konverter"
 
 #: rc.cpp:10
-#, fuzzy
 msgid "Rip Audio CD with soundKonverter"
-msgstr "A hangerő-korrekció hozzáadása a soundKonverterhez"
-
-#~ msgid "<a href=\"format-help\">More</a>"
-#~ msgstr "<a href=\"format-help\">Tovább</a>"
-
-#~ msgid "CD track"
-#~ msgstr "CD-szám"
+msgstr "Audio CD beolvasása a soundKonverterrel"

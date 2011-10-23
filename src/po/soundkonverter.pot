@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-09-28 15:33+0200\n"
+"POT-Creation-Date: 2011-10-23 11:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -442,7 +442,7 @@ msgstr ""
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:463
 msgid "Replay Gain"
 msgstr ""
 
@@ -584,7 +584,7 @@ msgstr ""
 msgid "No more backends left to try :("
 msgstr ""
 
-#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:508
+#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:473
 #: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
 #: soundkonverter.cpp:288
 msgid "Converting"
@@ -734,7 +734,7 @@ msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr ""
 
-#: convert.cpp:1098 filelist.cpp:503
+#: convert.cpp:1098 filelist.cpp:468
 msgid "Ripping"
 msgstr ""
 
@@ -964,7 +964,7 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: filelist.cpp:164 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: filelist.cpp:151 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
 #: replaygainscanner/replaygainfilelist.cpp:208 soundkonverterview.cpp:360
 msgid ""
 "This file type is unknown to soundKonverter.\n"
@@ -972,45 +972,45 @@ msgid ""
 "You should have a look at your distribution's package manager for this."
 msgstr ""
 
-#: filelist.cpp:202 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: filelist.cpp:189 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
 #: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:246
 #: soundkonverterview.cpp:398
 msgid "... and %1 more files"
 msgstr ""
 
-#: filelist.cpp:483
+#: filelist.cpp:448
 msgid "Will be skipped"
 msgstr ""
 
-#: filelist.cpp:487 soundkonverter.cpp:126 soundkonverter.cpp:130
+#: filelist.cpp:452 soundkonverter.cpp:126 soundkonverter.cpp:130
 msgid "Waiting"
 msgstr ""
 
-#: filelist.cpp:493
+#: filelist.cpp:458
 msgid "Waiting for Replay Gain"
 msgstr ""
 
-#: filelist.cpp:513
+#: filelist.cpp:478
 msgid "Stopped"
 msgstr ""
 
-#: filelist.cpp:518
+#: filelist.cpp:483
 msgid "Backend not configured"
 msgstr ""
 
-#: filelist.cpp:523
+#: filelist.cpp:488
 msgid "Disc full"
 msgstr ""
 
-#: filelist.cpp:528
+#: filelist.cpp:493
 msgid "Failed"
 msgstr ""
 
-#: filelist.cpp:545
+#: filelist.cpp:510
 msgid "CD track %1"
 msgstr ""
 
-#: filelist.cpp:1025
+#: filelist.cpp:990
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"

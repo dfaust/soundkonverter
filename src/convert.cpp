@@ -403,20 +403,7 @@ void Convert::replaygain( ConvertItem *item )
         }
         else
         {
-            emit replaygainFinished( item->fileListItems, -1 );
-
-            logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)",-1,i18nc("Conversion exit status","An error occured")) );
-            logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
-
-            emit timeFinished( item->finishedTime );
-            emit finished( item->fileListItem, -1 ); // send signal to FileList
-            emit finishedProcess( item->logID, -1 ); // send signal to Logger
-
-            albumGainItems.removeAll(item);
-            delete item;
-
-            if( items.size() == 0 && albumGainItems.size() == 0 )
-                updateTimer.stop();
+            removeAlbumGainItem( item, -1 );
         }
 
         return;
@@ -841,27 +828,14 @@ void Convert::pluginProcessFinished( int id, int exitCode )
 
             if( albumGainItems.at(i)->killed )
             {
-                remove( albumGainItems.at(i), 1 );
+                removeAlbumGainItem( albumGainItems.at(i), 1 );
                 return;
             }
 
             if( exitCode == 0 )
             {
-                emit replaygainFinished( albumGainItems.at(i)->fileListItems, 0 );
-
-                logger->log( albumGainItems.at(i)->logID, i18n("Removing file from conversion list. Exit code %1 (%2)",0,i18nc("Conversion exit status","Normal exit")) );
-                logger->log( albumGainItems.at(i)->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(albumGainItems.at(i)->progressedTime.elapsed(),"ms") );
-
-                emit timeFinished( albumGainItems.at(i)->finishedTime );
-                emit finished( albumGainItems.at(i)->fileListItem, 0 ); // send signal to FileList
-                emit finishedProcess( albumGainItems.at(i)->logID, 0 ); // send signal to Logger
-
-                delete albumGainItems[i];
-                albumGainItems.removeAt(i);
-
-                if( items.size() == 0 && albumGainItems.size() == 0 )
-                    updateTimer.stop();
-
+                items.at(i)->finishedTime += items.at(i)->replaygainTime;
+                removeAlbumGainItem( albumGainItems.at(i), 0 );
                 return;
             }
             else
@@ -1102,7 +1076,7 @@ void Convert::remove( ConvertItem *item, int state )
         item->fileListItem->url = item->outputUrl;
     }
 
-    if( !item->fileListItem->notifyCommand.isEmpty() )
+    if( !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
     {
         QString command = item->fileListItem->notifyCommand;
 //         command.replace( "%u", item->fileListItem->url );
@@ -1153,6 +1127,53 @@ void Convert::remove( ConvertItem *item, int state )
         updateTimer.stop();
 }
 
+void Convert::removeAlbumGainItem( ConvertItem *item, int state )
+{
+    // TODO "remove" (re-add) the times to the progress indicator
+    //emit uncountTime( item->getTime + item->getCorrectionTime + item->ripTime +
+    //                  item->decodeTime + item->encodeTime + item->replaygainTime );
+
+    QString exitMessage;
+
+    if( state == 0 )
+        exitMessage = i18nc("Conversion exit status","Normal exit");
+    else if( state == 1 )
+        exitMessage = i18nc("Conversion exit status","Aborted by the user");
+    else if( state == 100 )
+        exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+    else
+        exitMessage = i18nc("Conversion exit status","An error occured");
+
+    for( int i=0; i<item->fileListItems.count(); i++ )
+    {
+        if( !item->fileListItems.at(i)->notifyCommand.isEmpty() )
+        {
+            QString command = item->fileListItems.at(i)->notifyCommand;
+//             command.replace( "%u", item->fileListItems.at(i)->url );
+            command.replace( "%i", item->fileListItems.at(i)->url.toLocalFile() );
+            command.replace( "%o", item->fileListItems.at(i)->outputUrl.toLocalFile() );
+            logger->log( item->logID, i18n("Executing command: \"%1\"",command) );
+
+            QProcess::startDetached( command );
+        }
+    }
+
+    logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)",state,exitMessage) );
+
+    logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
+
+    emit timeFinished( item->finishedTime );
+
+    emit replaygainFinished( item->fileListItems, state ); // send signal to FileList
+    emit finishedProcess( item->logID, state );            // send signal to Logger
+
+    albumGainItems.removeAll( item );
+    delete item;
+
+    if( items.size() == 0 && albumGainItems.size() == 0 )
+        updateTimer.stop();
+}
+
 void Convert::kill( FileListItem *item )
 {
     for( int i=0; i<items.size(); i++ )
@@ -1160,16 +1181,43 @@ void Convert::kill( FileListItem *item )
         if( items.at(i)->fileListItem == item )
         {
             items.at(i)->killed = true;
+
             if( items.at(i)->convertID != -1 && items.at(i)->convertPlugin )
+            {
                 items.at(i)->convertPlugin->kill( items.at(i)->convertID );
+            }
             else if( items.at(i)->replaygainID != -1 && items.at(i)->replaygainPlugin )
+            {
                 items.at(i)->replaygainPlugin->kill( items.at(i)->replaygainID );
+            }
             else if( items.at(i)->process.data() != 0 )
+            {
                 items.at(i)->process.data()->kill();
+            }
             else if( items.at(i)->kioCopyJob.data() != 0 )
+            {
                 items.at(i)->kioCopyJob.data()->kill( KJob::EmitResult );
+            }
         }
     }
+
+//     for( int i=0; i<albumGainItems.size(); i++ )
+//     {
+//         for( int j=0; j<albumGainItems.at(i)->fileListItems.count(); j++ )
+//         {
+//             if( albumGainItems.at(i)->fileListItems.at(j) == item && !albumGainItems.at(i)->killed )
+//             {
+//                 albumGainItems.at(i)->killed = true;
+//
+//                 if( albumGainItems.at(i)->replaygainID != -1 && albumGainItems.at(i)->replaygainPlugin )
+//                 {
+//                     albumGainItems.at(i)->replaygainPlugin->kill( albumGainItems.at(i)->replaygainID );
+//                 }
+//
+//                 break;
+//             }
+//         }
+//     }
 }
 
 void Convert::replaygain( QList<FileListItem*> items )

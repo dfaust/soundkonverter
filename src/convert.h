@@ -176,6 +176,9 @@ private:
     /** Remove item @p item and emit the state @p state */
     void remove( ConvertItem *item, int state = 0 );
 
+    /** Remove item @p item and emit the state @p state */
+    void removeAlbumGainItem( ConvertItem *item, int state = 0 );
+
     /** holds all active files */
     QList<ConvertItem*> items;
 

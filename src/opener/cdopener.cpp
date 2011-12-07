@@ -489,7 +489,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     if( !success )
     {
-        KMessageBox::information(this,"success = false, couldn't open audio device");
+        KMessageBox::information(this,"success = false, couldn't open audio device.\nplease report this bug.");
         noCdFound = true;
         return;
     }

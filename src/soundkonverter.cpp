@@ -80,6 +80,21 @@ soundKonverter::soundKonverter()
         }
     }
 
+    // clean up log directory
+    QDir dir( KStandardDirs::locateLocal("data","soundkonverter/log/") );
+    dir.setFilter( QDir::Files | QDir::Writable );
+
+    QStringList list = dir.entryList();
+
+    for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+    {
+        if( *it != "1000.log" && (*it).endsWith(".log") )
+        {
+            QFile::remove( dir.absolutePath() + "/" + (*it) );
+            logger->log( 1000, i18n("Removing old file: %1").arg(dir.absolutePath()+"/"+(*it)) );
+        }
+    }
+
     // Check if new backends got installed and the backend settings can be optimized
     QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations();
     if( !optimizationList.isEmpty() )

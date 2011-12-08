@@ -181,15 +181,24 @@ QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile,
 
 float soundkonverter_codec_mplayer::parseOutput( const QString& output )
 {
-    // decoding - new ???
-    // A: 921.7 (15:21.7) of 2260.0 (37:40.0)  0.4% [J
+    // decoding audio
+    // A: 921.7 (15:21.7) of 2260.0 (37:40.0)  0.4%
+    // decoding video
+    // A:19743.6 V:19743.6 A-V:  0.016 ct: -0.506 491/491  0%  0%  0.6% 237 0
 
-    QString data = output;
-
-    QRegExp reg("A:\\s+(\\d+\\.\\d)\\s+\\(.*\\)\\s+of\\s+(\\d+\\.\\d)\\s+\\(.*\\)");
-    if( data.contains(reg) )
+    QRegExp regAudio("A:\\s+(\\d+\\.\\d)\\s+\\(.*\\)\\s+of\\s+(\\d+\\.\\d)\\s+\\(.*\\)");
+    if( output.contains(regAudio) )
     {
-        return reg.cap(1).toFloat()/reg.cap(2).toFloat()*100.0f;
+        return regAudio.cap(1).toFloat()/regAudio.cap(2).toFloat()*100.0f;
+    }
+    QRegExp regVideo("A:\\s*\\d+\\.\\d\\s+V:\\s*\\d+\\.\\d");
+    if( output.contains(regVideo) )
+    {
+        return 0;
+    }
+    if( output.contains("Too many buffered pts") )
+    {
+        return 0;
     }
 
     // no encoding

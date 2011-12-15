@@ -325,11 +325,8 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
     return count;
 }
 
-void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _codecName, ReplayGainFileListItem *after, bool enabled )
+void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _codecName )
 {
-    ReplayGainFileListItem *lastListItem;
-    if( !after && !enabled ) lastListItem = topLevelItem( topLevelItemCount()-1 );
-    else lastListItem = after;
     ReplayGainFileListItem *newAlbumItem, *newItem;
     QString codecName;
     QString filePathName;

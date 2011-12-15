@@ -19,6 +19,7 @@
 #include <KPushButton>
 #include <KFileDialog>
 #include <KIntSpinBox>
+#include <KStandardDirs>
 
 #include <QLayout>
 #include <QLabel>
@@ -142,6 +143,16 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     createActionsMenuBox->addWidget( cCreateActionsMenu );
     connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
+    box->addSpacing( 5 );
+
+    QHBoxLayout *writeLogFilesBox = new QHBoxLayout( 0 );
+    box->addLayout( writeLogFilesBox );
+    cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
+    cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",KStandardDirs::locateLocal("data","soundkonverter/log/")) );
+    cWriteLogFiles->setChecked( config->data.general.writeLogFiles );
+    writeLogFilesBox->addWidget( cWriteLogFiles );
+    connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+
     box->addSpacing( 20 );
 
     QHBoxLayout *replayGainGroupingBox = new QHBoxLayout( 0 );
@@ -173,6 +184,7 @@ void ConfigGeneralPage::resetDefaults()
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
     cWaitForAlbumGain->setChecked( true );
     cCreateActionsMenu->setChecked( true );
+    cWriteLogFiles->setChecked( false );
     cReplayGainGrouping->setCurrentIndex( 0 );
 
     emit configChanged( true );
@@ -188,6 +200,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.waitForAlbumGain = cWaitForAlbumGain->isChecked();
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
+    config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
 }
 

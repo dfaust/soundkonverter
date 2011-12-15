@@ -15,6 +15,8 @@ Config::Config( Logger *_logger, QObject *parent )
     : QObject( parent ),
     logger( _logger )
 {
+    connect( this, SIGNAL(updateWriteLogFilesSetting(bool)), logger, SLOT(updateWriteSetting(bool)) );
+
     pPluginLoader = new PluginLoader( logger, this );
     pTagEngine = new TagEngine();
     pConversionOptionsManager = new ConversionOptionsManager( pPluginLoader );
@@ -55,6 +57,7 @@ void Config::load()
     data.general.lastNormalOutputDirectoryPaths = group.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
     data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", true );
     data.general.useVFATNames = group.readEntry( "useVFATNames", false );
+    data.general.writeLogFiles = group.readEntry( "writeLogFiles", false );
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
 //     data.general.priority = group.readEntry( "priority", 10 );
     data.general.numFiles = group.readEntry( "numFiles", 0 );
@@ -440,6 +443,7 @@ void Config::save()
     group.writeEntry( "lastNormalOutputDirectoryPaths", data.general.lastNormalOutputDirectoryPaths );
     group.writeEntry( "waitForAlbumGain", data.general.waitForAlbumGain );
     group.writeEntry( "useVFATNames", data.general.useVFATNames );
+    group.writeEntry( "writeLogFiles", data.general.writeLogFiles );
     group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
 //     group.writeEntry( "priority", data.general.priority );
     group.writeEntry( "numFiles", data.general.numFiles );
@@ -493,6 +497,8 @@ void Config::save()
     }
 
     writeServiceMenu();
+
+    emit updateWriteLogFilesSetting( data.general.writeLogFiles );
 }
 
 void Config::writeServiceMenu()

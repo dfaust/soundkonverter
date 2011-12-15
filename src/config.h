@@ -59,6 +59,7 @@ public:
 //             int priority;
             bool waitForAlbumGain;
             bool useVFATNames;
+            bool writeLogFiles;
             enum ConflictHandling
             {
                 NewFileName = 0,
@@ -128,6 +129,10 @@ public:
 public slots:
     /// Optimize backend settings according to the user input
     void doOptimizations( const QList<CodecOptimizations::Optimization>& optimizationList );
+
+signals:
+    /// connected to logger
+    void updateWriteLogFilesSetting( bool writeLogFiles );
 
 private:
     Logger *logger;

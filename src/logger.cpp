@@ -1,8 +1,9 @@
 
 #include "logger.h"
 
-#include <klocale.h>
-#include <kstandarddirs.h>
+#include <KLocale>
+#include <KStandardDirs>
+#include <KConfigGroup>
 
 #include <cstdlib>
 #include <ctime>
@@ -18,15 +19,23 @@ LoggerItem::~LoggerItem()
 Logger::Logger( QObject *parent)
     : QObject( parent )
 {
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+    group = conf->group( "General" );
+    writeLogFiles = group.readEntry( "writeLogFiles", false );
+
     LoggerItem *item = new LoggerItem();
     item->filename = KUrl("soundKonverter");
     item->id = 1000;
     item->completed = true;
     item->state = 1;
     item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
-    // TODO error handling
-    item->file.open( QIODevice::WriteOnly );
-    item->textStream.setDevice( &(item->file) );
+    if( writeLogFiles )
+    {
+        // TODO error handling
+        item->file.open( QIODevice::WriteOnly );
+        item->textStream.setDevice( &(item->file) );
+    }
 
     processes.append( item );
 
@@ -37,8 +46,12 @@ Logger::~Logger()
 {
     for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
     {
-        (*it)->file.close();
-        (*it)->file.remove();
+        if( (*it)->file.isOpen() )
+            (*it)->file.close();
+
+        if( (*it)->file.exists() )
+            (*it)->file.remove();
+
         delete *it;
     }
 }
@@ -60,15 +73,17 @@ Logger::~Logger()
 
 int Logger::registerProcess( const KUrl& filename )
 {
-    // NOTE ok, it works now, but why prepend() and not append()?
     LoggerItem *item = new LoggerItem();
     item->filename = filename;
     item->id = getNewID();
     item->completed = false;
     item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
-    // TODO error handling
-    item->file.open( QIODevice::WriteOnly );
-    item->textStream.setDevice( &(item->file) );
+    if( writeLogFiles )
+    {
+        // TODO error handling
+        item->file.open( QIODevice::WriteOnly );
+        item->textStream.setDevice( &(item->file) );
+    }
 
     processes.append( item );
 
@@ -87,11 +102,19 @@ void Logger::log( int id, const QString& data )
         if( (*it)->id == id )
         {
             (*it)->data.append( data );
-            if( (*it)->data.count() > 10000 ) (*it)->data.removeFirst();
-            (*it)->textStream << data;
-            (*it)->textStream << "\n";
-            (*it)->textStream.flush(); // TODO make file saving configureable
-            if( id == 1000 ) emit updateProcess( id );
+
+            if( (*it)->data.count() > 10000 )
+                (*it)->data.removeFirst();
+
+            if( writeLogFiles && (*it)->file.isOpen() )
+            {
+                (*it)->textStream << data;
+                (*it)->textStream << "\n";
+                (*it)->textStream.flush();
+            }
+            if( id == 1000 )
+                emit updateProcess( id );
+
             return;
         }
     }
@@ -108,7 +131,8 @@ int Logger::getNewID()
 
         for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
         {
-            if( (*it)->id == id ) ok = false;
+            if( (*it)->id == id )
+                ok = false;
         }
 
     } while( !ok );
@@ -120,7 +144,8 @@ LoggerItem* Logger::getLog( int id )
 {
     for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
     {
-        if( (*it)->id == id ) return *it;
+        if( (*it)->id == id )
+            return *it;
     }
 
     return 0;
@@ -155,8 +180,12 @@ void Logger::processCompleted( int id, int state )
             processes.at(i)->state = state;
             processes.at(i)->completed = true;
             processes.at(i)->time = processes.at(i)->time.currentTime();
-            processes.at(i)->textStream << i18n("Finished logging");
-            processes.at(i)->file.close();
+            processes.at(i)->data.append( i18n("Finished logging") );
+            if( processes.at(i)->file.isOpen() )
+            {
+                processes.at(i)->textStream << i18n("Finished logging");
+                processes.at(i)->file.close();
+            }
             emit updateProcess( id );
         }
     }
@@ -164,9 +193,15 @@ void Logger::processCompleted( int id, int state )
     if( removeItem && processes.count() > 11 )
     {
         emit removedProcess( removeItem->id );
-        removeItem->file.remove();
+        if( removeItem->file.exists() )
+            removeItem->file.remove();
         processes.removeAt( processes.indexOf(removeItem) );
         delete removeItem;
     }
+}
+
+void Logger::updateWriteSetting( bool _writeLogFiles )
+{
+    writeLogFiles = _writeLogFiles;
 }
 

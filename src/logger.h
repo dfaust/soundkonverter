@@ -72,11 +72,15 @@ private:
     /** the list of all logger items */
     QList<LoggerItem*> processes;
 
+    bool writeLogFiles;
+
     /** returns an unused random id */
     int getNewID();
 
 public slots:
     void processCompleted( int id, int state );
+    /// connected to config
+    void updateWriteSetting( bool _writeLogFiles );
 
 signals:
     void removedProcess( int id );

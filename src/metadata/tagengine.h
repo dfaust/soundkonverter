@@ -6,8 +6,26 @@
 #include <QString>
 #include <QStringList>
 #include <KUrl>
+#include <qimage.h>
 
 // #include <MediaInfo/MediaInfo.h>
+
+class CoverData : public QObject
+{
+public:
+    enum Role {
+        Other,
+        Front,
+        Back
+    };
+
+    CoverData( const QByteArray& _data = QByteArray(), const QString& _mimyType = QString::null, Role _role = Other, QObject *parent = 0 );
+    virtual ~CoverData();
+
+    QByteArray data;
+    QString mimeType;
+    Role role;
+};
 
 /**
  * @short All metainformation can be stored in this class
@@ -41,6 +59,10 @@ public:
     float track_gain;
     float album_gain;
 
+    /** Covers */
+    QList<CoverData*> covers;
+    bool coversRead;
+
     /** The technical information */
     int length;
     int fileSize;
@@ -70,6 +92,9 @@ public:
 
     TagData* readTags( const KUrl& fileName );
     bool writeTags( const KUrl& fileName, TagData *tagData );
+
+    QList<CoverData*> readCovers( const KUrl& fileName );
+    bool writeCovers( const KUrl& fileName, QList<CoverData*> covers );
 
 //     bool canWrite( QString format ); // NOTE no const because this string is being modyfied
 };

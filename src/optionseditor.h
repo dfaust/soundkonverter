@@ -14,6 +14,7 @@
 
 // #include <KPageWidget>
 #include <KPageDialog>
+#include <qlayout.h>
 
 class Options;
 class Config;
@@ -49,6 +50,10 @@ private:
     Options *options;
 
 
+    /** A list of all covers */
+    QLabel* lCoversLabel;
+    QHBoxLayout *bCovers;
+    QList<QLabel*> lCovers;
     /** A lineedit for entering the title of track */
     QLabel* lTitleLabel;
     KLineEdit* lTitle;

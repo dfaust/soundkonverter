@@ -433,11 +433,23 @@ void Convert::writeTags( ConvertItem *item )
 {
     logger->log( item->logID, i18n("Writing tags") );
 //     item->state = ConvertItem::write_tags;
-
-    config->tagEngine()->writeTags( item->outputUrl, item->fileListItem->tags );
 //     item->fileListItem->setText( 0, i18n("Writing tags")+"... 00 %" );
 
-//     executeNextStep( item );
+    config->tagEngine()->writeTags( item->outputUrl, item->fileListItem->tags );
+
+    KUrl inputUrl;
+    if( !item->tempInputUrl.toLocalFile().isEmpty() )
+        inputUrl = item->tempInputUrl;
+    else
+        inputUrl = item->inputUrl;
+
+    if( !item->fileListItem->tags->coversRead )
+    {
+        item->fileListItem->tags->covers = config->tagEngine()->readCovers( inputUrl );
+        item->fileListItem->tags->coversRead = true;
+    }
+
+    config->tagEngine()->writeCovers( item->outputUrl, item->fileListItem->tags->covers );
 }
 
 void Convert::put( ConvertItem *item )

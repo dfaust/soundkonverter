@@ -402,7 +402,16 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
                 QLabel *label = new QLabel();
                 label->setFrameShape( QFrame::StyledPanel );
                 label->setFrameShadow( QFrame::Raised );
-                label->setToolTip( i18nc("cover tooltip","%1\n%2 x %3 pixels\n%4","Cover (front)",pixmap.width(),pixmap.height(),Global::prettyNumber(cover->data.size(),"B")) );
+                QString toolTip;
+                toolTip += "<span style='white-space:pre'><table>";
+                toolTip += "<tr><td>" + i18nc("cover tooltip","Cover type:") + "</td><td>" + CoverData::roleName(cover->role) + "</td></tr>";
+                if( !cover->description.isEmpty() )
+                    toolTip += "<tr><td>" + i18nc("cover tooltip","Description:") + "</td><td>" + cover->description + "</td></tr>";
+                toolTip += "<tr><td>" + i18nc("cover tooltip","Size:") + "</td><td>" + i18nc("cover tooltip","%1 x %2 pixels (%3)",pixmap.width(),pixmap.height(),Global::prettyNumber(cover->data.size(),"B")) + "</td></tr>";
+                if( !cover->mimeType.isEmpty() )
+                    toolTip += "<tr><td>" + i18nc("cover tooltip","Mime type:") + "</td><td>" + cover->mimeType + "</td></tr>";
+                toolTip += "</table></span>";
+                label->setToolTip( toolTip );
                 bCovers->addWidget( label );
                 lCovers.append( label );
 

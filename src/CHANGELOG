@@ -1,5 +1,6 @@
 1.2.90 (1.3.0 rc1):
 -Add: Option to apply album gain to converted files
+-Add: Copy embedded covers; reading of Ogg (only the first one), Flac and Mp3 covers; writing of Mp3 covers
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though
 
 1.2.1:

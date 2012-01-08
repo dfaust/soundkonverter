@@ -6,6 +6,7 @@
 #include <QBuffer>
 // #include <KDebug>
 
+#include <KLocale>
 
 #include <fileref.h>
 #include <id3v1genres.h> //used to load genre list
@@ -66,17 +67,69 @@
 #endif
 
 
-CoverData::CoverData( const QByteArray& _data, const QString& _mimyType, Role _role, QObject *parent )
+CoverData::CoverData( const QByteArray& _data, const QString& _mimyType, Role _role, const QString& _description, QObject *parent )
         : QObject( parent )
 {
     data = _data;
     mimeType = _mimyType;
     role = _role;
+    description = _description;
 }
 
 CoverData::~CoverData()
+{}
+
+QString CoverData::roleName( Role role )
 {
+    switch( role )
+    {
+        case Other:
+            return i18nc("cover type","Unclassified");
+        case FileIcon:
+            return i18nc("cover type","32x32 PNG file icon");
+        case OtherFileIcon:
+            return i18nc("cover type","File icon");
+        case FrontCover:
+            return i18nc("cover type","Front cover");
+        case BackCover:
+            return i18nc("cover type","Back cover");
+        case LeafletPage:
+            return i18nc("cover type","Leaflet page");
+        case Media:
+            return i18nc("cover type","CD photo");
+        case LeadArtist:
+            return i18nc("cover type","Lead artist picture");
+        case Artist:
+            return i18nc("cover type","Artist picture");
+        case Conductor:
+            return i18nc("cover type","Conductor picture");
+        case Band:
+            return i18nc("cover type","Band picture");
+        case Composer:
+            return i18nc("cover type","Composer picture");
+        case Lyricist:
+            return i18nc("cover type","Lyricist picture");
+        case RecordingLocation:
+            return i18nc("cover type","Picture of the recording location");
+        case DuringRecording:
+            return i18nc("cover type","Picture of the artists during recording");
+        case DuringPerformance:
+            return i18nc("cover type","Picture of the artists during performance");
+        case MovieScreenCapture:
+            return i18nc("cover type","Picture from a video");
+        case ColouredFish:
+            return i18nc("cover type","Picture of a large, coloured fish");
+        case Illustration:
+            return i18nc("cover type","Illustration related to the track");
+        case BandLogo:
+            return i18nc("cover type","Band logo");
+        case PublisherLogo:
+            return i18nc("cover type","Publisher logo");
+    }
+
+    return QString();
 }
+
 
 TagData::TagData( const QString& _artist, const QString& _composer,
              const QString& _album, const QString& _title,
@@ -229,19 +282,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 //
 //                 if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
 //                     album_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
-
-//                 TagLib::Ogg::FieldListMap map = file->tag()->fieldListMap();
-//
-//                 // Ogg lacks a definitive standard for embedding cover art, but it seems
-//                 // b64 encoding a field called COVERART is the general convention
-//                 if( map.contains("COVERART") )
-//                 {
-//                     QByteArray image_data_b64(map["COVERART"].toString().toCString());
-//                     QByteArray image_data = QByteArray::fromBase64(image_data_b64);
-//
-//                     if( !tagData->cover.loadFromData( image_data ) )
-//                         tagData->cover.loadFromData( image_data_b64 );
-//                 }
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
@@ -259,21 +299,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 //
 //                 if ( !file->xiphComment()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
 //                     album_gain = TStringToQString( file->xiphComment()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
-
-//                 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
-//                 TagLib::List<TagLib::FLAC::Picture*> pics = file->pictureList();
-//                 if( !pics.isEmpty() )
-//                 {
-//                     // Use the first picture in the file - this could be made cleverer and
-//                     // pick the front cover if it's present.
-//
-//                     std::list<TagLib::FLAC::Picture*>::iterator it = pics.begin();
-//                     TagLib::FLAC::Picture* picture = *it;
-//
-//                     QByteArray image_data( picture->data().data(), picture->data().size() );
-//                     tagData->cover.loadFromData( image_data );
-//                 }
-//                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
 
             /*if ( file->tag() )
@@ -488,32 +513,6 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 file->xiphComment()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
 
                 file->xiphComment()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
-
-                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
-//                 char data[] = { 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x09, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x70, 0x6E, 0x67, 0x00, 0x00, 0x00, 0x08, 0x41, 0x20, 0x70, 0x69, 0x78, 0x65, 0x6C, 0x2E, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96, 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x08, 0x02, 0x00, 0x00, 0x00, 0x90, 0x77, 0x53, 0xDE, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 0x00, 0x00, 0x0B, 0x13, 0x00, 0x00, 0x0B, 0x13, 0x01, 0x00, 0x9A, 0x9C, 0x18, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4D, 0x45, 0x07, 0xD6, 0x0B, 0x1C, 0x0A, 0x36, 0x06, 0x08, 0x44, 0x3D, 0x32, 0x00, 0x00, 0x00, 0x1D, 0x74, 0x45, 0x58, 0x74, 0x43, 0x6F, 0x6D, 0x6D, 0x65, 0x6E, 0x74, 0x00, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x54, 0x68, 0x65, 0x20, 0x47, 0x49, 0x4D, 0x50, 0xEF, 0x64, 0x25, 0x6E, 0x00, 0x00, 0x00, 0x0C, 0x49, 0x44, 0x41, 0x54, 0x08, 0xD7, 0x63, 0xF8, 0xFF, 0xFF, 0x3F, 0x00, 0x05, 0xFE, 0x02, 0xFE, 0xDC, 0xCC, 0x59, 0xE7, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82 };
-//                 TagLib::FLAC::Picture pic(TagLib::ByteVector(data, 199));
-//                 file->addPicture( &pic );
-//                 file->save();
-
-
-//                 QImage cover = tagData->cover;
-//
-//                 QByteArray bytes;
-//                 QBuffer buffer( &bytes );
-//
-//                 buffer.open( QIODevice::WriteOnly );
-//
-//                 if( cover.save( &buffer, "JPEG" ) )
-//                 {
-//
-//                     TagLib::FLAC::Picture newPicture( TagLib::ByteVector(bytes.data()) );
-// //                     newPicture.setMimeType( "image/jpeg" );
-// //                     newPicture.setType( TagLib::FLAC::Picture::FrontCover );
-//                     file->addPicture( &newPicture );
-//                 }
-//
-//                 buffer.close();
-                #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
         }
         /*else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
@@ -589,7 +588,7 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                             dynamic_cast< TagLib::ID3v2::AttachedPictureFrame * >( *iter );
 
                     QByteArray image_data( pic->picture().data(), pic->picture().size() );
-                    CoverData *newCover = new CoverData( image_data, QString(), CoverData::Front );
+                    CoverData *newCover = new CoverData( image_data, TStringToQString(pic->mimeType()), CoverData::Role(pic->type()), TStringToQString(pic->description()) );
                     covers.append( newCover );
                 }
             }
@@ -604,16 +603,43 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
             {
                 TagLib::Ogg::FieldListMap map = file->tag()->fieldListMap();
 
+                QString mimeType;
+                QString description;
+
                 // Ogg lacks a definitive standard for embedding cover art, but it seems
                 // b64 encoding a field called COVERART is the general convention
-                if( map.contains("COVERART") )
+//                 for( TagLib::Ogg::FieldListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
+//                 {
+//                     const TagLib::String key = it->first;
+//                     const TagLib::StringList value = it->second;
+//                     if( key == TagLib::String("COVERARTMIME") )
+//                     {
+//                         mimeType = TStringToQString( value.toString() );
+//                     }
+//                     else if( key == TagLib::String("COVERARTDESCRIPTION") )
+//                     {
+//                         description = TStringToQString( value.toString() );
+//                     }
+//                     else if( key == TagLib::String("COVERART") )
+//                     {
+//                         QByteArray image_data_b64(value.toString().toCString());
+//                         QByteArray image_data = QByteArray::fromBase64(image_data_b64);
+//
+//                         CoverData *newCover = new CoverData( image_data, mimeType, CoverData::FrontCover, description );
+//                         covers.append( newCover );
+//
+//                         mimeType.clear();
+//                         description.clear();
+//                     }
+//                 }
+                if( map.contains("COVERART") )//COVERARTMIME,COVERARTDESCRIPTION
                 {
                     QByteArray image_data_b64(map["COVERART"].toString().toCString());
                     QByteArray image_data = QByteArray::fromBase64(image_data_b64);
 
 //                     if( !tagData->cover.loadFromData( image_data ) )
 //                         tagData->cover.loadFromData( image_data_b64 );
-                    CoverData *newCover = new CoverData( image_data, QString(), CoverData::Front );
+                    CoverData *newCover = new CoverData( image_data, QString(), CoverData::FrontCover );
                     covers.append( newCover );
                 }
             }
@@ -624,23 +650,13 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
             {
                 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
 
-//                 for( std::list<TagLib::FLAC::Picture*>::const_iterator it = file->pictureList().begin(); it != file->pictureList().end(); ++it )
-//                 {
-//                     TagLib::FLAC::Picture* picture = *it;
-//
-//                     QByteArray image_data( picture->data().data(), picture->data().size() );
-//                     CoverData *newCover = new CoverData( image_data, QString(), CoverData::Front );
-//                     covers.append( newCover );
-//                 }
-
-                TagLib::List<TagLib::FLAC::Picture*> pics = file->pictureList();
-                if( !pics.isEmpty() )
+                const TagLib::List<TagLib::FLAC::Picture*> picturelist = file->pictureList();
+                for( TagLib::List<TagLib::FLAC::Picture*>::ConstIterator it = picturelist.begin(); it != picturelist.end(); it++ )
                 {
-                    std::list<TagLib::FLAC::Picture*>::iterator it = pics.begin();
-                    TagLib::FLAC::Picture* picture = *it;
+                    const TagLib::FLAC::Picture *picture = *it;
 
                     QByteArray image_data( picture->data().data(), picture->data().size() );
-                    CoverData *newCover = new CoverData( image_data, QString(), CoverData::Front );
+                    CoverData *newCover = new CoverData( image_data, TStringToQString(picture->mimeType()), CoverData::Role(picture->type()), TStringToQString(picture->description()) );
                     covers.append( newCover );
                 }
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
@@ -660,34 +676,52 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
 
     if ( !fileref.isNull() )
     {
-        if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
+        if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
+        {
+            // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
+            // TBPM : BPM
+            // TPE2 : Album artist
+            // TCMP : Compilation (true,1 vs. false,0)
+            // POPM : rating, playcount
+            // APIC : TagLib::ID3v2::AttachedPictureFrame
+            // UFID : TagLib::ID3v2::UniqueFileIdentifierFrame
+
+            if ( file->ID3v2Tag() )
+            {
+                foreach( CoverData *cover, covers )
+                {
+                    TagLib::ID3v2::AttachedPictureFrame *frame = 0;
+                    frame = new TagLib::ID3v2::AttachedPictureFrame( "APIC" );
+                    file->ID3v2Tag()->addFrame( frame );
+
+                    if( !cover->mimeType.isEmpty() )
+                        frame->setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
+                    if( !cover->description.isEmpty() )
+                        frame->setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
+
+                    frame->setType( TagLib::ID3v2::AttachedPictureFrame::Type( cover->role ) );
+                    frame->setPicture( TagLib::ByteVector( cover->data.data(), cover->data.count() ) );
+                }
+            }
+        }
+        else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
         {
             if ( file->xiphComment() )
             {
                 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
-//                 char data[] = { 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x09, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x2F, 0x70, 0x6E, 0x67, 0x00, 0x00, 0x00, 0x08, 0x41, 0x20, 0x70, 0x69, 0x78, 0x65, 0x6C, 0x2E, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x96, 0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A, 0x00, 0x00, 0x00, 0x0D, 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x08, 0x02, 0x00, 0x00, 0x00, 0x90, 0x77, 0x53, 0xDE, 0x00, 0x00, 0x00, 0x09, 0x70, 0x48, 0x59, 0x73, 0x00, 0x00, 0x0B, 0x13, 0x00, 0x00, 0x0B, 0x13, 0x01, 0x00, 0x9A, 0x9C, 0x18, 0x00, 0x00, 0x00, 0x07, 0x74, 0x49, 0x4D, 0x45, 0x07, 0xD6, 0x0B, 0x1C, 0x0A, 0x36, 0x06, 0x08, 0x44, 0x3D, 0x32, 0x00, 0x00, 0x00, 0x1D, 0x74, 0x45, 0x58, 0x74, 0x43, 0x6F, 0x6D, 0x6D, 0x65, 0x6E, 0x74, 0x00, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x64, 0x20, 0x77, 0x69, 0x74, 0x68, 0x20, 0x54, 0x68, 0x65, 0x20, 0x47, 0x49, 0x4D, 0x50, 0xEF, 0x64, 0x25, 0x6E, 0x00, 0x00, 0x00, 0x0C, 0x49, 0x44, 0x41, 0x54, 0x08, 0xD7, 0x63, 0xF8, 0xFF, 0xFF, 0x3F, 0x00, 0x05, 0xFE, 0x02, 0xFE, 0xDC, 0xCC, 0x59, 0xE7, 0x00, 0x00, 0x00, 0x00, 0x49, 0x45, 0x4E, 0x44, 0xAE, 0x42, 0x60, 0x82 };
-//                 TagLib::FLAC::Picture pic(TagLib::ByteVector(data, 199));
-//                 file->addPicture( &pic );
-//                 file->save();
-
-
-//                 QImage cover = tagData->cover;
-//
-//                 QByteArray bytes;
-//                 QBuffer buffer( &bytes );
-//
-//                 buffer.open( QIODevice::WriteOnly );
-//
-//                 if( cover.save( &buffer, "JPEG" ) )
+//                 NOTE crashes
+//                 foreach( CoverData *cover, covers )
 //                 {
+//                     TagLib::FLAC::Picture newPicture( TagLib::ByteVector( cover->data.data(), cover->data.count() ) );
+//                     newPicture.setType( TagLib::FLAC::Picture::Type( cover->role ) );
 //
-//                     TagLib::FLAC::Picture newPicture( TagLib::ByteVector(bytes.data()) );
-// //                     newPicture.setMimeType( "image/jpeg" );
-// //                     newPicture.setType( TagLib::FLAC::Picture::FrontCover );
+//                     if( !cover->mimeType.isEmpty() )
+//                         newPicture.setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
+//                     if( !cover->description.isEmpty() )
+//                         newPicture.setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
+//
 //                     file->addPicture( &newPicture );
 //                 }
-//
-//                 buffer.close();
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
         }

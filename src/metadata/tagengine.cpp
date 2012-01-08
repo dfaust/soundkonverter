@@ -690,17 +690,15 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
             {
                 foreach( CoverData *cover, covers )
                 {
-                    TagLib::ID3v2::AttachedPictureFrame *frame = 0;
-                    frame = new TagLib::ID3v2::AttachedPictureFrame( "APIC" );
-                    file->ID3v2Tag()->addFrame( frame );
-
+                    TagLib::ID3v2::AttachedPictureFrame *frame = new TagLib::ID3v2::AttachedPictureFrame( "APIC" );
+                    frame->setPicture( TagLib::ByteVector( cover->data.data(), cover->data.size() ) );
+                    frame->setType( TagLib::ID3v2::AttachedPictureFrame::Type( cover->role ) );
                     if( !cover->mimeType.isEmpty() )
                         frame->setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
                     if( !cover->description.isEmpty() )
                         frame->setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
 
-                    frame->setType( TagLib::ID3v2::AttachedPictureFrame::Type( cover->role ) );
-                    frame->setPicture( TagLib::ByteVector( cover->data.data(), cover->data.count() ) );
+                    file->ID3v2Tag()->addFrame( frame );
                 }
             }
         }
@@ -709,19 +707,18 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
             if ( file->xiphComment() )
             {
                 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
-//                 NOTE crashes
-//                 foreach( CoverData *cover, covers )
-//                 {
-//                     TagLib::FLAC::Picture newPicture( TagLib::ByteVector( cover->data.data(), cover->data.count() ) );
-//                     newPicture.setType( TagLib::FLAC::Picture::Type( cover->role ) );
-//
-//                     if( !cover->mimeType.isEmpty() )
-//                         newPicture.setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
-//                     if( !cover->description.isEmpty() )
-//                         newPicture.setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
-//
-//                     file->addPicture( &newPicture );
-//                 }
+                foreach( CoverData *cover, covers )
+                {
+                    TagLib::FLAC::Picture *newPicture = new TagLib::FLAC::Picture();
+                    newPicture->setData( TagLib::ByteVector( cover->data.data(), cover->data.size() ) );
+                    newPicture->setType( TagLib::FLAC::Picture::Type( cover->role ) );
+                    if( !cover->mimeType.isEmpty() )
+                        newPicture->setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
+                    if( !cover->description.isEmpty() )
+                        newPicture->setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
+
+                    file->addPicture( newPicture );
+                }
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
         }

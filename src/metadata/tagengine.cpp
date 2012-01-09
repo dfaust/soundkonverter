@@ -655,7 +655,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
             if ( file->xiphComment() )
             {
                 #ifdef TAGLIB_HAS_FLAC_PICTURELIST
-
                 const TagLib::List<TagLib::FLAC::Picture*> picturelist = file->pictureList();
                 for( TagLib::List<TagLib::FLAC::Picture*>::ConstIterator it = picturelist.begin(); it != picturelist.end(); it++ )
                 {

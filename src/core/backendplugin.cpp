@@ -591,6 +591,7 @@ QString BackendPlugin::standardMessage(const QString& type, const QString& argum
 /// see http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_03.html
 QString BackendPlugin::escapeUrl( const KUrl& url )
 {
+    // if no file name is given, assume we are using pipes
     if( url.isEmpty() )
         return "-";
 

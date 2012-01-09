@@ -9,40 +9,39 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#ifndef CONFIGADVANCEDPAGE_H
-#define CONFIGADVANCEDPAGE_H
+#ifndef CONFIGCOVERARTPAGE_H
+#define CONFIGCOVERARTPAGE_H
 
 #include "configpagebase.h"
 
 class Config;
-class QCheckBox;
-class KIntSpinBox;
-class KComboBox;
+class QRadioButton;
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>
  */
-class ConfigAdvancedPage : public ConfigPageBase
+class ConfigCoverArtPage : public ConfigPageBase
 {
     Q_OBJECT
 public:
     /**
      * Default Constructor
      */
-    ConfigAdvancedPage( Config *_config, QWidget *parent=0 );
+    ConfigCoverArtPage( Config *_config, QWidget *parent=0 );
 
     /**
      * Default Destructor
      */
-    virtual ~ConfigAdvancedPage();
+    virtual ~ConfigCoverArtPage();
 
 private:
-    KComboBox *cPreferredOggVorbisExtension;
-    KIntSpinBox *iUpdateDelay;
-    QCheckBox *cUseVFATNames;
-    QCheckBox *cRemoveFailedFiles;
-    QCheckBox *cUseSharedMemoryForTempFiles;
-    KIntSpinBox *iMaxSizeForSharedMemoryTempFiles;
+    QRadioButton *rWriteCoversAlways;
+    QRadioButton *rWriteCoversAuto;
+    QRadioButton *rWriteCoversNever;
+
+//     QCheckBox *cCopyCover;
+//     QCheckBox *cEmbedCover;
+//     QListView *lCoverList;
 
     Config *config;
 

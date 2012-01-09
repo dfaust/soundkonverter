@@ -3,6 +3,7 @@
 #include "MetaReplayGain.h"
 
 #include <QFile>
+#include <QDir>
 #include <QBuffer>
 // #include <KDebug>
 
@@ -53,6 +54,7 @@
 #else
 #include "metadata/m4a/mp4file.h"
 #include "metadata/m4a/mp4itunestag.h"
+#include <QDir>
 #endif*/
 
 // TODO COMPILATION tag
@@ -705,6 +707,8 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
                     file->ID3v2Tag()->addFrame( frame );
                 }
             }
+
+            return fileref.save();
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
         {
@@ -725,10 +729,61 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
                 }
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
+
+            return fileref.save();
+        }
+    }
+
+    return false;
+}
+
+bool TagEngine::writeCoversToDirectory( const QString& directoryName, QList<CoverData*> covers )
+{
+    if( covers.isEmpty() )
+        return true;
+
+    QDir dir( directoryName );
+
+    if( directoryName.isEmpty() || !dir.exists() )
+        return false;
+
+
+    int i = covers.count() > 1 ? 1 : 0;
+
+    foreach( CoverData *cover, covers )
+    {
+        QString fileName = cover->description;
+        if( fileName.isEmpty() )
+        {
+            fileName = i18nc("cover file name","cover");
+
+            if( i > 0 )
+                fileName += QString::number(i);
+        }
+        QString extension;
+        if( cover->mimeType == "image/jpeg" )
+        {
+            extension = ".jpg";
+            if( fileName.toLower().endsWith(".jpg") )
+                fileName = fileName.left( fileName.count() - 4 );
+            if( fileName.toLower().endsWith(".jpeg") )
+                fileName = fileName.left( fileName.count() - 5 );
+        }
+        else if( cover->mimeType == "image/png" )
+        {
+            extension = ".png";
+            if( fileName.toLower().endsWith(".png") )
+                fileName = fileName.left( fileName.count() - 4 );
         }
 
-        return fileref.save();
+        QFile file( directoryName + "/" + fileName + extension );
+        file.open( QIODevice::WriteOnly );
+        file.write( cover->data.data(), cover->data.size() );
+        file.close();
+
+        i++;
     }
+
     return false;
 }
 

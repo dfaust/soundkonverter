@@ -97,6 +97,9 @@ void Config::load()
     }
     data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 2 );
 
+    group = conf->group( "CoverArt" );
+    data.coverArt.writeCovers = group.readEntry( "writeCovers", 1 );
+
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
     formats = group.readEntry( "formats", QStringList() );
@@ -459,6 +462,9 @@ void Config::save()
     group = conf->group( "Advanced" );
     group.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );
     group.writeEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.maxSizeForSharedMemoryTempFiles );
+
+    group = conf->group( "CoverArt" );
+    group.writeEntry( "writeCovers", data.coverArt.writeCovers );
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );

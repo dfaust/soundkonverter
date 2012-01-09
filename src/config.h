@@ -89,6 +89,11 @@ public:
             int sharedMemorySize; // the size of the tmpfs [MiB]
         } advanced;
 
+        struct CoverArt
+        {
+            int writeCovers;
+        } coverArt;
+
         struct Backends
         {
             QStringList rippers;

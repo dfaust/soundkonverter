@@ -141,6 +141,7 @@ public:
 
     QList<CoverData*> readCovers( const KUrl& fileName );
     bool writeCovers( const KUrl& fileName, QList<CoverData*> covers );
+    bool writeCoversToDirectory( const QString& directoryName, QList<CoverData*> covers );
 
 //     bool canWrite( QString format ); // NOTE no const because this string is being modyfied
 };

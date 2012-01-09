@@ -20,8 +20,6 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <KComboBox>
-// #include <QGroupBox>
-// #include <QListView>
 
 
 ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
@@ -101,40 +99,6 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     connect( cUseSharedMemoryForTempFiles, SIGNAL(toggled(bool)), iMaxSizeForSharedMemoryTempFiles, SLOT(setEnabled(bool)) );
     useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
     useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
-
-//     QGroupBox *coverGroup = new QGroupBox( i18n("CD covers"), this );
-//     box->addWidget( coverGroup );
-//     QVBoxLayout *coverBox = new QVBoxLayout( 0 ); // TODO destroy
-//
-//     cCopyCover = new QCheckBox( i18n("Copy covers from the source directoy to output directoy"), this );
-//     coverBox->addWidget( cCopyCover );
-//     connect( cCopyCover, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
-//
-//     cEmbedCover = new QCheckBox( i18n("Embed covers from the source directoy into meta tags if possible"), this );
-//     coverBox->addWidget( cEmbedCover );
-//     connect( cEmbedCover, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
-//
-//     lCoverList = new QListView( this );
-//     coverBox->addWidget( lCoverList );
-//
-//     coverGroup->setLayout( coverBox );
-//
-//     QHBoxLayout *startTabBox = new QHBoxLayout( 0 ); // TODO destroy
-//     box->addLayout( startTabBox );
-//
-//     box->addSpacing( 5 );
-//
-//     QGroupBox *userScriptGroup = new QGroupBox( i18n("User scripts"), this );
-//     box->addWidget( userScriptGroup );
-//     QVBoxLayout *userScriptBox = new QVBoxLayout( 0 ); // TODO destroy
-//
-//     QLabel *lUserScript = new QLabel( i18n("Check all scripts that should be executed after a conversion has finished"), this );
-//     userScriptBox->addWidget( lUserScript );
-//
-//     QListView *lUserScriptList = new QListView( this );
-//     userScriptBox->addWidget( lUserScriptList );
-//
-//     userScriptGroup->setLayout( userScriptBox );
 
     box->addStretch();
 }

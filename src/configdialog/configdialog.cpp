@@ -14,6 +14,7 @@
 #include "../config.h"
 #include "configgeneralpage.h"
 #include "configadvancedpage.h"
+#include "configcoverartpage.h"
 #include "configbackendspage.h"
 
 #include <KLocale>
@@ -41,6 +42,11 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     advancedPage = addPage( (QWidget*)configAdvancedPage, i18n("Advanced") );
     advancedPage->setIcon( KIcon("preferences-desktop-gaming") );
     connect( configAdvancedPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
+
+    configCoverArtPage = new ConfigCoverArtPage( config, this );
+    coverArtPage = addPage( (QWidget*)configCoverArtPage, i18n("Cover art") );
+    coverArtPage->setIcon( KIcon("image-x-generic") );
+    connect( configCoverArtPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configBackendsPage = new ConfigBackendsPage( config, this );
     backendsPage = addPage( (QWidget*)configBackendsPage, i18n("Backends") );
@@ -78,6 +84,7 @@ void ConfigDialog::okClicked()
 {
     configGeneralPage->saveSettings();
     configAdvancedPage->saveSettings();
+    configCoverArtPage->saveSettings();
     configBackendsPage->saveSettings();
     config->save();
 
@@ -96,6 +103,10 @@ void ConfigDialog::defaultClicked()
     else if( currentPage() == advancedPage )
     {
         configAdvancedPage->resetDefaults();
+    }
+    else if( currentPage() == coverArtPage )
+    {
+        configCoverArtPage->resetDefaults();
     }
     else if( currentPage() == backendsPage )
     {

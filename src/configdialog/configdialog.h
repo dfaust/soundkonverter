@@ -17,6 +17,7 @@
 class Config;
 class ConfigGeneralPage;
 class ConfigAdvancedPage;
+class ConfigCoverArtPage;
 class ConfigBackendsPage;
 
 /**
@@ -37,6 +38,8 @@ private:
     ConfigGeneralPage *configGeneralPage;
     KPageWidgetItem *advancedPage;
     ConfigAdvancedPage *configAdvancedPage;
+    KPageWidgetItem *coverArtPage;
+    ConfigCoverArtPage *configCoverArtPage;
     KPageWidgetItem *backendsPage;
     ConfigBackendsPage *configBackendsPage;
 

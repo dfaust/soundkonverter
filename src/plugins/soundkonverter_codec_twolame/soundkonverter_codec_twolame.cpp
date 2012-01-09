@@ -152,7 +152,7 @@ QStringList soundkonverter_codec_twolame::convertCommand( const KUrl& inputFile,
     if( outputCodec == "mp2" )
     {
         command += binaries["twolame"];
-        if( inputFile.toLocalFile() == "-" )
+        if( inputFile.isEmpty() )
         {
             command += "-r";
         }

@@ -3,6 +3,7 @@
 -Add: Copy embedded covers for Ogg (only reading), Mp3 and Flac files
 -Add: Option to copy embedded covers to the output directory
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though
+-Fix: Conversion problems when using pipes with newer KDE/Qt versions
 
 1.2.1:
 -Add: French translation

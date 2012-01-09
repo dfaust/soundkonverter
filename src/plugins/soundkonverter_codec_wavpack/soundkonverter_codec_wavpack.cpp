@@ -147,7 +147,7 @@ QStringList soundkonverter_codec_wavpack::convertCommand( const KUrl& inputFile,
             }
             command += conversionOptions->cmdArguments;
         }
-        if( inputFile.toLocalFile() == "-" )
+        if( inputFile.isEmpty() )
         {
             command += "--raw-pcm";
         }

@@ -283,15 +283,15 @@ void Convert::convert( ConvertItem *item )
         QStringList command1, command2;
         if( plugin1->type() == "codec" )
         {
-            command1 = qobject_cast<CodecPlugin*>(plugin1)->convertCommand( inputUrl, KUrl("-"), item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );
+            command1 = qobject_cast<CodecPlugin*>(plugin1)->convertCommand( inputUrl, KUrl(), item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );
         }
         else if( plugin1->type() == "ripper" )
         {
             item->fileListItem->state = FileListItem::Ripping;
-            command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl("-") );
+            command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl() );
         }
         const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-        command2 = plugin2->convertCommand( KUrl("-"), item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+        command2 = plugin2->convertCommand( KUrl(), item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
         if( !command1.isEmpty() && !command2.isEmpty() )
         {
             // both plugins support pipes

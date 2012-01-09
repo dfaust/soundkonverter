@@ -175,7 +175,7 @@ QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFi
     if( soundFontFile.isEmpty() )
         return QStringList();
 
-    if( outputFile == "-" )
+    if( outputFile.isEmpty() )
         return QStringList();
 
     QStringList command;

@@ -159,7 +159,7 @@ QStringList soundkonverter_codec_mplayer::convertCommand( const KUrl& inputFile,
     Q_UNUSED(tags)
     Q_UNUSED(replayGain)
 
-    if( outputFile == "-" )
+    if( outputFile.isEmpty() )
         return QStringList();
 
     QStringList command;

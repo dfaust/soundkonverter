@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2011-10-23 11:57+0200\n"
+"POT-Creation-Date: 2012-01-10 20:27+0100\n"
 "PO-Revision-Date: 2011-10-04 18:20+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
@@ -173,20 +173,20 @@ msgstr "nebo"
 msgid "Affected files:"
 msgstr "Ovlivněné soubory:"
 
-#: config.cpp:46 config.cpp:48 config.cpp:340 config.cpp:385
-#: configdialog/configgeneralpage.cpp:44 configdialog/configgeneralpage.cpp:59
-#: configdialog/configgeneralpage.cpp:190
-#: configdialog/configgeneralpage.cpp:192
-#: configdialog/configgeneralpage.cpp:196
-#: configdialog/configgeneralpage.cpp:201
-#: configdialog/configgeneralpage.cpp:206 options.cpp:47 options.cpp:66
+#: config.cpp:48 config.cpp:50 config.cpp:346 config.cpp:391
+#: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:216
+#: configdialog/configgeneralpage.cpp:218
+#: configdialog/configgeneralpage.cpp:222
+#: configdialog/configgeneralpage.cpp:227
+#: configdialog/configgeneralpage.cpp:232 options.cpp:47 options.cpp:66
 #: optionsdetailed.cpp:358
 msgid "Last used"
 msgstr "Naposledy použitý"
 
-#: config.cpp:47 config.cpp:344 config.cpp:351 config.cpp:357
-#: configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:194 options.cpp:76
+#: config.cpp:49 config.cpp:350 config.cpp:357 config.cpp:363
+#: configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:220 options.cpp:76
 #: optionsdetailed.cpp:354 optionssimple.cpp:156 optionssimple.cpp:196
 #: optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
@@ -214,12 +214,12 @@ msgstr "Naposledy použitý"
 msgid "High"
 msgstr "Vysoká kvalita"
 
-#: config.cpp:254 config.cpp:277 config.cpp:279
+#: config.cpp:260 config.cpp:283 config.cpp:285
 msgid "Try internal"
 msgstr "Zkusit vnitřní"
 
-#: config.cpp:341 config.cpp:357 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:351
+#: config.cpp:347 config.cpp:363 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:351
 #: optionssimple.cpp:153 optionssimple.cpp:178 optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
@@ -246,8 +246,8 @@ msgstr "Zkusit vnitřní"
 msgid "Very low"
 msgstr "Velmi nízká kvalita"
 
-#: config.cpp:342 config.cpp:357 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:352
+#: config.cpp:348 config.cpp:363 configdialog/configgeneralpage.cpp:62
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:352
 #: optionssimple.cpp:154 optionssimple.cpp:184 optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
@@ -274,8 +274,8 @@ msgstr "Velmi nízká kvalita"
 msgid "Low"
 msgstr "Nízká kvalita"
 
-#: config.cpp:343 config.cpp:357 configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:353
+#: config.cpp:349 config.cpp:363 configdialog/configgeneralpage.cpp:63
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:353
 #: optionssimple.cpp:155 optionssimple.cpp:190 optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:202
@@ -302,8 +302,8 @@ msgstr "Nízká kvalita"
 msgid "Medium"
 msgstr "Střední kvalita"
 
-#: config.cpp:345 config.cpp:357 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:194 optionsdetailed.cpp:355
+#: config.cpp:351 config.cpp:363 configdialog/configgeneralpage.cpp:65
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:355
 #: optionssimple.cpp:157 optionssimple.cpp:202 optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:218
@@ -330,8 +330,8 @@ msgstr "Střední kvalita"
 msgid "Very high"
 msgstr "Velmi vysoká kvalita"
 
-#: config.cpp:346 config.cpp:361 configdialog/configgeneralpage.cpp:65
-#: configdialog/configgeneralpage.cpp:199 optionsdetailed.cpp:356
+#: config.cpp:352 config.cpp:367 configdialog/configgeneralpage.cpp:66
+#: configdialog/configgeneralpage.cpp:225 optionsdetailed.cpp:356
 #: optionssimple.cpp:158 optionssimple.cpp:208 optionssimple.cpp:287
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
@@ -361,14 +361,14 @@ msgstr "Velmi vysoká kvalita"
 msgid "Lossless"
 msgstr "Bezztrátová kvalita"
 
-#: config.cpp:347 config.cpp:365 configdialog/configgeneralpage.cpp:66
-#: configdialog/configgeneralpage.cpp:204 optionsdetailed.cpp:357
+#: config.cpp:353 config.cpp:371 configdialog/configgeneralpage.cpp:67
+#: configdialog/configgeneralpage.cpp:230 optionsdetailed.cpp:357
 #: optionssimple.cpp:214 optionssimple.cpp:291 soundkonverterview.cpp:454
 #: soundkonverterview.cpp:456
 msgid "Hybrid"
 msgstr "Smíšená kvalita"
 
-#: config.cpp:369 optionsdetailed.cpp:360 optionssimple.cpp:161
+#: config.cpp:375 optionsdetailed.cpp:360 optionssimple.cpp:161
 #: optionssimple.cpp:220 optionssimple.cpp:295 optionssimple.cpp:364
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
@@ -385,37 +385,37 @@ msgstr "Smíšená kvalita"
 msgid "User defined"
 msgstr "Stanoveno uživatelem"
 
-#: config.cpp:523
+#: config.cpp:536
 msgid "Convert with soundKonverter"
 msgstr "Převést pomocí soundKonverteru"
 
-#: config.cpp:557
+#: config.cpp:570
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Přidat vyrovnání hlasitosti skladeb pomocí soundKonverteru"
 
-#: configdialog/configadvancedpage.cpp:35
+#: configdialog/configadvancedpage.cpp:33
 msgid "Preferred extension for ogg vorbis files"
 msgstr "Upřednostňovaná přípona pro soubory Ogg Vorbis"
 
-#: configdialog/configadvancedpage.cpp:50
+#: configdialog/configadvancedpage.cpp:48
 msgid "Status update delay"
 msgstr "Zpoždění obnovy informace o stavu"
 
-#: configdialog/configadvancedpage.cpp:53
+#: configdialog/configadvancedpage.cpp:51
 msgid "Update the progress bar in this interval (time in milliseconds)"
 msgstr "Obnovit pruh s průběhem v tomto časovém úseku (čas v milisekundách)"
 
-#: configdialog/configadvancedpage.cpp:54 global.cpp:82 global.cpp:83
+#: configdialog/configadvancedpage.cpp:52 global.cpp:82 global.cpp:83
 #: global.cpp:84 global.cpp:85
 msgctxt "milliseconds"
 msgid "ms"
 msgstr " ms"
 
-#: configdialog/configadvancedpage.cpp:65
+#: configdialog/configadvancedpage.cpp:63
 msgid "Always use FAT compatible output file names"
 msgstr "Vždy použít názvy pro výstupní soubory slučitelné s FAT"
 
-#: configdialog/configadvancedpage.cpp:66
+#: configdialog/configadvancedpage.cpp:64
 msgid ""
 "Replaces some special characters like '?' by '_'.\n"
 "If the output directoy is on a FAT file system FAT compatible file names "
@@ -425,11 +425,11 @@ msgstr ""
 "Pokud je výstupní adresář na souborovém systému FAT, použijí se s FAT "
 "slučitelné názvy souborů automaticky nezávisle na této volbě."
 
-#: configdialog/configadvancedpage.cpp:75
+#: configdialog/configadvancedpage.cpp:73
 msgid "Remove partially converted files if a conversion fails"
 msgstr "Odstranit zčásti převedené soubory, pokud převod selže"
 
-#: configdialog/configadvancedpage.cpp:76
+#: configdialog/configadvancedpage.cpp:74
 msgid ""
 "Disable this for debugging or if you are sure the files get converted "
 "correctly."
@@ -437,12 +437,12 @@ msgstr ""
 "Toto zakažte pro ladění, nebo pokud si jste jistý, že soubory byly převedeny "
 "správně."
 
-#: configdialog/configadvancedpage.cpp:85
+#: configdialog/configadvancedpage.cpp:83
 msgid "Store temporary files in memory unless the estimted size is more than"
 msgstr ""
 "uchovávat dočasné soubory v paměti, dokud není odhadovaná velikost větší než"
 
-#: configdialog/configadvancedpage.cpp:89
+#: configdialog/configadvancedpage.cpp:87
 msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
@@ -450,12 +450,12 @@ msgstr ""
 "Neuchovávat soubory, u nichž se očekává, že budou větší než tato hodnota, v "
 "paměti kvůli vyhnutí se prohazování (swapping)"
 
-#: configdialog/configadvancedpage.cpp:90
+#: configdialog/configadvancedpage.cpp:88
 msgctxt "mega in bytes"
 msgid "MiB"
 msgstr "MiB"
 
-#: configdialog/configadvancedpage.cpp:97
+#: configdialog/configadvancedpage.cpp:95
 msgid "It seems there's no filesystem mounted on /dev/shm"
 msgstr "Zdá se, že na /dev/shm není připojen žádný souborový systém"
 
@@ -473,7 +473,8 @@ msgstr "Kodér"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1106 filelist.cpp:463
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1324 convert.cpp:1359
+#: filelist.cpp:463
 msgid "Replay Gain"
 msgstr "Vyrovnávání hlasitosti skladeb"
 
@@ -513,63 +514,84 @@ msgstr "%1 nastavení"
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr "Zdá se, že všechna nastavení jádra jsou ta nejlepší. Není tu co dělat."
 
-#: configdialog/configdialog.cpp:28
+#: configdialog/configcoverartpage.cpp:30
+#, fuzzy
+msgid "Save embedded covers to output directory"
+msgstr "Určit výstupní adresář"
+
+#: configdialog/configcoverartpage.cpp:32
+msgid "Always"
+msgstr ""
+
+#: configdialog/configcoverartpage.cpp:34
+msgid "Only if embedding the covers into the output files is not possible"
+msgstr ""
+
+#: configdialog/configcoverartpage.cpp:36
+msgid "Never"
+msgstr ""
+
+#: configdialog/configdialog.cpp:29
 msgid "Settings"
 msgstr "Nastavení"
 
-#: configdialog/configdialog.cpp:36
+#: configdialog/configdialog.cpp:37
 msgid "General"
 msgstr "Obecné"
 
-#: configdialog/configdialog.cpp:41
+#: configdialog/configdialog.cpp:42
 msgid "Advanced"
 msgstr "Pokročilé"
 
-#: configdialog/configdialog.cpp:46 main.cpp:29
+#: configdialog/configdialog.cpp:47
+msgid "Cover art"
+msgstr ""
+
+#: configdialog/configdialog.cpp:52 main.cpp:29
 msgid "Backends"
 msgstr "Jádra"
 
-#: configdialog/configgeneralpage.cpp:41
+#: configdialog/configgeneralpage.cpp:42
 msgid "Start in Mode"
 msgstr "Spustit v režimu"
 
-#: configdialog/configgeneralpage.cpp:45 options.cpp:89
+#: configdialog/configgeneralpage.cpp:46 options.cpp:89
 msgid "Simple"
 msgstr "Jednoduché volby"
 
-#: configdialog/configgeneralpage.cpp:46 options.cpp:90
+#: configdialog/configgeneralpage.cpp:47 options.cpp:90
 msgid "Detailed"
 msgstr "Podrobné volby"
 
-#: configdialog/configgeneralpage.cpp:55
+#: configdialog/configgeneralpage.cpp:56
 msgid "Default profile"
 msgstr "Výchozí profil"
 
-#: configdialog/configgeneralpage.cpp:73
+#: configdialog/configgeneralpage.cpp:74
 msgid "Default format"
 msgstr "Výchozí formát"
 
-#: configdialog/configgeneralpage.cpp:99
+#: configdialog/configgeneralpage.cpp:100
 msgid "Conflict handling"
 msgstr "Zvládání střetů"
 
-#: configdialog/configgeneralpage.cpp:102
+#: configdialog/configgeneralpage.cpp:103
 msgid "Generate new file name"
 msgstr "Vytvořit nový název souboru"
 
-#: configdialog/configgeneralpage.cpp:103
+#: configdialog/configgeneralpage.cpp:104
 msgid "Skip file"
 msgstr "Přeskočit soubor"
 
-#: configdialog/configgeneralpage.cpp:105
+#: configdialog/configgeneralpage.cpp:106
 msgid "Do that if the output file already exists"
 msgstr "Toto dělejte, pokud výstupní soubor již existuje"
 
-#: configdialog/configgeneralpage.cpp:114
+#: configdialog/configgeneralpage.cpp:115
 msgid "Number of files to convert at once"
 msgstr "Počet souborů, které se mají převést současně"
 
-#: configdialog/configgeneralpage.cpp:118
+#: configdialog/configgeneralpage.cpp:119
 msgid ""
 "You shouldn't set this number higher than the amount of installed processor "
 "cores.\n"
@@ -579,11 +601,21 @@ msgstr ""
 "procesorových jader.\n"
 "Byla zjištěna %1 procesorová jádra."
 
-#: configdialog/configgeneralpage.cpp:129
+#: configdialog/configgeneralpage.cpp:130
+msgid "Apply album gain to converted files"
+msgstr ""
+
+#: configdialog/configgeneralpage.cpp:131
+msgid ""
+"Keep songs of the same album waiting in file list in order to apply album "
+"gain to all files."
+msgstr ""
+
+#: configdialog/configgeneralpage.cpp:140
 msgid "Create actions menus for the file manager"
 msgstr "Vytvořit nabídky činností pro správce souborů"
 
-#: configdialog/configgeneralpage.cpp:130
+#: configdialog/configgeneralpage.cpp:141
 msgid ""
 "These service menus won't get removed if you uninstall soundKonverter.\n"
 "But you can remove them by diableing this option."
@@ -592,48 +624,60 @@ msgstr ""
 "odstraněny.\n"
 "Ale můžete je odstranit zakázáním této volby."
 
-#: configdialog/configgeneralpage.cpp:139
+#: configdialog/configgeneralpage.cpp:150
+msgid "Write log files to disc"
+msgstr ""
+
+#: configdialog/configgeneralpage.cpp:151
+msgid ""
+"Write log files to the hard drive while converting.\n"
+"This can be useful if a crash occurs and you can't access the log file using "
+"the log viewer.\n"
+"Log files will be written to %1"
+msgstr ""
+
+#: configdialog/configgeneralpage.cpp:160
 msgid "Group files in the Replay Gain tool by"
 msgstr "Soubory v nástroji na vyrovnávání hlasitosti seskupit podle"
 
-#: configdialog/configgeneralpage.cpp:142
+#: configdialog/configgeneralpage.cpp:163
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
 msgstr "Značky alb a adresáře"
 
-#: configdialog/configgeneralpage.cpp:143
+#: configdialog/configgeneralpage.cpp:164
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
 msgstr "Pouze značky alb"
 
-#: configdialog/configgeneralpage.cpp:144
+#: configdialog/configgeneralpage.cpp:165
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Pouze adresáře"
 
-#: convert.cpp:163 convert.cpp:1089
+#: convert.cpp:190 convert.cpp:1307
 msgid "Getting file"
 msgstr "Přijímá se soubor"
 
-#: convert.cpp:193
+#: convert.cpp:220
 msgid "Copying \"%1\" to \"%2\""
 msgstr "Kopíruje se \"%1\" to \"%2\""
 
-#: convert.cpp:225 convert.cpp:371
+#: convert.cpp:252 convert.cpp:398
 msgid "No more backends left to try :("
 msgstr "Nezbyla žádná další jádra k vyzkoušení : -("
 
-#: convert.cpp:235 convert.cpp:271 convert.cpp:1093 filelist.cpp:473
-#: soundkonverter.cpp:257 soundkonverter.cpp:259 soundkonverter.cpp:286
-#: soundkonverter.cpp:288
+#: convert.cpp:262 convert.cpp:298 convert.cpp:1311 filelist.cpp:473
+#: soundkonverter.cpp:272 soundkonverter.cpp:274 soundkonverter.cpp:301
+#: soundkonverter.cpp:303
 msgid "Converting"
 msgstr "Provádí se převod"
 
-#: convert.cpp:286 convert.cpp:1097
+#: convert.cpp:313 convert.cpp:1315
 msgid "Decoding"
 msgstr "Dekóduje se"
 
-#: convert.cpp:338
+#: convert.cpp:365
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
@@ -641,82 +685,87 @@ msgstr ""
 "Převod se nezdařil. Alespoň jedno z použitých jader je potřeba nastavit "
 "správně."
 
-#: convert.cpp:354 convert.cpp:1102
+#: convert.cpp:381 convert.cpp:1320
 msgid "Encoding"
 msgstr "Kóduje se"
 
-#: convert.cpp:367
+#: convert.cpp:394
 msgid "Applying Replay Gain"
 msgstr "Přidává se vyrovnání hlasitosti skladeb"
 
-#: convert.cpp:386
+#: convert.cpp:434
 msgid "Writing tags"
 msgstr "Zapisují se značky"
 
-#: convert.cpp:397
+#: convert.cpp:461
 msgid "Moving file to destination"
 msgstr "Přesunuje se soubor do cíle"
 
-#: convert.cpp:404
+#: convert.cpp:468
 msgid "Running user script"
 msgstr "Provádí se uživatelský skript"
 
-#: convert.cpp:429
+#: convert.cpp:493
 msgid "Executing next step"
 msgstr "Provádí se další krok"
 
-#: convert.cpp:544
+#: convert.cpp:608
 msgid "Read tags sucessfully"
 msgstr "Značky úspěšně přečteny"
 
-#: convert.cpp:548
+#: convert.cpp:612
 msgid "Unable to read tags"
 msgstr "Nelze přečíst značky"
 
-#: convert.cpp:560 convert.cpp:565
+#: convert.cpp:624 convert.cpp:629
 msgctxt "removing file"
 msgid "Removing: %1"
 msgstr "Odstraňuje se: %1"
 
-#: convert.cpp:574
+#: convert.cpp:638
 msgid "An error accured. Error code: %1 (%2)"
 msgstr "Vyskytla se chyba. Kód chyby: %1 (%2)"
 
-#: convert.cpp:697 convert.cpp:769
+#: convert.cpp:761 convert.cpp:833
 msgid "Conversion failed. Exit code: %1"
 msgstr "Převod se nezdařil. Kód ukončení %1"
 
-#: convert.cpp:838
+#: convert.cpp:859
+#, fuzzy
+msgid "Calculating Replay Gain failed. Exit code: %1"
+msgstr "Převod se nezdařil. Kód ukončení %1"
+
+#: convert.cpp:952
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
 msgstr "Stopa na CD %1: %2 - %3"
 
-#: convert.cpp:842
+#: convert.cpp:956
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "Stopa na CD %1"
 
-#: convert.cpp:849
+#: convert.cpp:963 convert.cpp:1246
 msgid "Adding new item to conversion list: '%1'"
 msgstr "Do seznamu s převody se přidává nová položka: '%1'"
 
-#: convert.cpp:857
+#: convert.cpp:970 convert.cpp:1253
 msgid "Got log ID: %1"
 msgstr "Nové ID zápisu: %1"
 
-#: convert.cpp:885
+#: convert.cpp:998
 msgid "Track number: %1, device: %2"
 msgstr "Stopa číslo: %1, zařízení: %2"
 
-#: convert.cpp:890 optionseditor.cpp:333
+#: convert.cpp:1003 optionseditor.cpp:353
 msgid "Possible conversion strategies:"
 msgstr "Možné strategie převodu:"
 
-#: convert.cpp:903
+#: convert.cpp:1016
 msgid "File system type: %1"
 msgstr "Typ souborového systému: %1"
 
-#: convert.cpp:955
+#: convert.cpp:1068
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
 "file size"
@@ -724,64 +773,73 @@ msgstr ""
 "Vyskytla se chyba. Velikost výstupního souboru je menší než jedno procento "
 "velikosti vstupního souboru"
 
-#: convert.cpp:959
+#: convert.cpp:1072
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "Převod se nezdařil. Kód ukončení: -2 (%1)"
 
-#: convert.cpp:968
+#: convert.cpp:1081 convert.cpp:1155
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Obvyklé ukončení"
 
-#: convert.cpp:970
+#: convert.cpp:1083 convert.cpp:1157
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Zrušeno uživatelem"
 
-#: convert.cpp:972
+#: convert.cpp:1085 convert.cpp:1159
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr "Jádro potřebuje nastavení"
 
-#: convert.cpp:974
+#: convert.cpp:1087 convert.cpp:1161
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Vyskytla se chyba"
 
-#: convert.cpp:987
+#: convert.cpp:1101 convert.cpp:1171
 msgid "Executing command: \"%1\""
 msgstr "Provádí se příkaz: \"%1\""
 
-#: convert.cpp:1003
+#: convert.cpp:1118
 msgid "Removing partially converted output file"
 msgstr "Odstraňuje se částečně převedený výstupní soubor"
 
-#: convert.cpp:1008
+#: convert.cpp:1123 convert.cpp:1177
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Probíhá odstraňování souboru ze seznamu převodů. Kód ukončení %1 (%2)"
 
-#: convert.cpp:1010
+#: convert.cpp:1125 convert.cpp:1179
 msgid "Conversion time"
 msgstr "Doba převodu"
 
-#: convert.cpp:1011
+#: convert.cpp:1126
 msgid "Output file size"
 msgstr "Velikost výstupního souboru"
 
-#: convert.cpp:1012
+#: convert.cpp:1127
 msgid "File size ratio"
 msgstr "Poměr velikosti souboru"
 
-#: convert.cpp:1081
+#: convert.cpp:1244 outputdirectory.cpp:234
+msgid "Unknown Album"
+msgstr "Neznámé album"
+
+#: convert.cpp:1246 convert.cpp:1252
+#, fuzzy
+msgid "Replay Gain for album: %1"
+msgstr "Nástroj pro vyrovnání hlasitosti skladeb"
+
+#: convert.cpp:1299 convert.cpp:1353
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Neznámá"
 
-#: convert.cpp:1098 filelist.cpp:468
+#: convert.cpp:1316 filelist.cpp:468
 msgid "Ripping"
 msgstr "Vytahuje se"
 
-#: convert.cpp:1115
+#: convert.cpp:1333 convert.cpp:1363
 msgid "Progress: %1"
 msgstr "Postup: %1"
 
@@ -1065,7 +1123,7 @@ msgstr "... a %1 další soubory"
 msgid "Will be skipped"
 msgstr "Bude přeskočeno"
 
-#: filelist.cpp:452 soundkonverter.cpp:126 soundkonverter.cpp:130
+#: filelist.cpp:452 soundkonverter.cpp:141 soundkonverter.cpp:145
 msgid "Waiting"
 msgstr "Čeká se"
 
@@ -1093,7 +1151,7 @@ msgstr "Nepodařilo se"
 msgid "CD track %1"
 msgstr "Stopa na CD %1"
 
-#: filelist.cpp:990
+#: filelist.cpp:1113
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1125,15 +1183,15 @@ msgctxt "seconds"
 msgid "s"
 msgstr "s"
 
-#: logger.cpp:75
+#: logger.cpp:90
 msgid "Filename"
 msgstr "Název souboru"
 
-#: logger.cpp:76
+#: logger.cpp:91
 msgid "Log ID"
 msgstr "ID zápisu"
 
-#: logger.cpp:158
+#: logger.cpp:183 logger.cpp:186
 msgid "Finished logging"
 msgstr "Zápis ukončen"
 
@@ -1290,6 +1348,120 @@ msgstr ""
 msgid "Audio file(s) to append to the file list"
 msgstr "Zvukový soubor(y) pro přidání do seznamu souborů"
 
+#: metadata/tagengine.cpp:89
+msgctxt "cover type"
+msgid "Unclassified"
+msgstr ""
+
+#: metadata/tagengine.cpp:91
+msgctxt "cover type"
+msgid "32x32 PNG file icon"
+msgstr ""
+
+#: metadata/tagengine.cpp:93
+#, fuzzy
+msgctxt "cover type"
+msgid "File icon"
+msgstr "Soubor"
+
+#: metadata/tagengine.cpp:95
+msgctxt "cover type"
+msgid "Front cover"
+msgstr ""
+
+#: metadata/tagengine.cpp:97
+msgctxt "cover type"
+msgid "Back cover"
+msgstr ""
+
+#: metadata/tagengine.cpp:99
+msgctxt "cover type"
+msgid "Leaflet page"
+msgstr ""
+
+#: metadata/tagengine.cpp:101
+msgctxt "cover type"
+msgid "CD photo"
+msgstr ""
+
+#: metadata/tagengine.cpp:103
+msgctxt "cover type"
+msgid "Lead artist picture"
+msgstr ""
+
+#: metadata/tagengine.cpp:105
+#, fuzzy
+msgctxt "cover type"
+msgid "Artist picture"
+msgstr "Umělec"
+
+#: metadata/tagengine.cpp:107
+#, fuzzy
+msgctxt "cover type"
+msgid "Conductor picture"
+msgstr "Kopírovat strukturu adresářů"
+
+#: metadata/tagengine.cpp:109
+msgctxt "cover type"
+msgid "Band picture"
+msgstr ""
+
+#: metadata/tagengine.cpp:111
+#, fuzzy
+msgctxt "cover type"
+msgid "Composer picture"
+msgstr "Skladatel"
+
+#: metadata/tagengine.cpp:113
+msgctxt "cover type"
+msgid "Lyricist picture"
+msgstr ""
+
+#: metadata/tagengine.cpp:115
+msgctxt "cover type"
+msgid "Picture of the recording location"
+msgstr ""
+
+#: metadata/tagengine.cpp:117
+msgctxt "cover type"
+msgid "Picture of the artists during recording"
+msgstr ""
+
+#: metadata/tagengine.cpp:119
+msgctxt "cover type"
+msgid "Picture of the artists during performance"
+msgstr ""
+
+#: metadata/tagengine.cpp:121
+msgctxt "cover type"
+msgid "Picture from a video"
+msgstr ""
+
+#: metadata/tagengine.cpp:123
+msgctxt "cover type"
+msgid "Picture of a large, coloured fish"
+msgstr ""
+
+#: metadata/tagengine.cpp:125
+msgctxt "cover type"
+msgid "Illustration related to the track"
+msgstr ""
+
+#: metadata/tagengine.cpp:127
+msgctxt "cover type"
+msgid "Band logo"
+msgstr ""
+
+#: metadata/tagengine.cpp:129
+msgctxt "cover type"
+msgid "Publisher logo"
+msgstr ""
+
+#: metadata/tagengine.cpp:757
+msgctxt "cover file name"
+msgid "cover"
+msgstr ""
+
 #: opener/cdopener.cpp:114
 msgid "Add CD tracks"
 msgstr "Přidat skladby na CD"
@@ -1302,7 +1474,7 @@ msgstr "1. Vybrat stopy na CD"
 msgid "2. Set conversion options"
 msgstr "2. Nastavit převodní volby"
 
-#: opener/cdopener.cpp:161 opener/cdopener.cpp:291 optionseditor.cpp:113
+#: opener/cdopener.cpp:161 opener/cdopener.cpp:291 optionseditor.cpp:123
 msgid "Artist:"
 msgstr "Umělec:"
 
@@ -1312,7 +1484,7 @@ msgstr "Umělec:"
 msgid "Various Artists"
 msgstr "Různí umělci"
 
-#: opener/cdopener.cpp:173 opener/cdopener.cpp:302 optionseditor.cpp:124
+#: opener/cdopener.cpp:173 opener/cdopener.cpp:302 optionseditor.cpp:134
 msgid "Composer:"
 msgstr "Skladatel:"
 
@@ -1322,19 +1494,19 @@ msgstr "Skladatel:"
 msgid "Various Composer"
 msgstr "Různí skladatelé"
 
-#: opener/cdopener.cpp:186 optionseditor.cpp:140
+#: opener/cdopener.cpp:186 optionseditor.cpp:150
 msgid "Album:"
 msgstr "Album:"
 
-#: opener/cdopener.cpp:194 optionseditor.cpp:156
+#: opener/cdopener.cpp:194 optionseditor.cpp:166
 msgid "Disc No.:"
 msgstr "Číslo disku:"
 
-#: opener/cdopener.cpp:202 optionseditor.cpp:168
+#: opener/cdopener.cpp:202 optionseditor.cpp:178
 msgid "Year:"
 msgstr "Rok:"
 
-#: opener/cdopener.cpp:210 optionseditor.cpp:180
+#: opener/cdopener.cpp:210 optionseditor.cpp:190
 msgid "Genre:"
 msgstr "Žánr:"
 
@@ -1372,11 +1544,11 @@ msgstr "Přehrávač"
 msgid "No track selected"
 msgstr "Nejsou vybrány žádné skladby"
 
-#: opener/cdopener.cpp:276 optionseditor.cpp:86
+#: opener/cdopener.cpp:276 optionseditor.cpp:96
 msgid "Title:"
 msgstr "Název:"
 
-#: opener/cdopener.cpp:317 optionseditor.cpp:201
+#: opener/cdopener.cpp:317 optionseditor.cpp:211
 msgid "Comment:"
 msgstr "Poznámka:"
 
@@ -1686,23 +1858,28 @@ msgstr "Upravit převodní volby"
 msgid "Tags"
 msgstr "Značky"
 
-#: optionseditor.cpp:97
+#: optionseditor.cpp:86
+#, fuzzy
+msgid "Covers:"
+msgstr "Převod"
+
+#: optionseditor.cpp:107
 msgid "Track No.:"
 msgstr "Číslo skladby:"
 
-#: optionseditor.cpp:218
+#: optionseditor.cpp:228
 msgid "Edit tags"
 msgstr "Upravit značky"
 
-#: optionseditor.cpp:227
+#: optionseditor.cpp:237
 msgid "Infos"
 msgstr "Informace"
 
-#: optionseditor.cpp:299
+#: optionseditor.cpp:318
 msgid "No file selected"
 msgstr "Nevybrán žádný soubor"
 
-#: optionseditor.cpp:353
+#: optionseditor.cpp:373
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1716,7 +1893,7 @@ msgstr ""
 "Pokud chcete značky upravit, můžete stisknout tlačítko níže.\n"
 "Ale pak se soundKonverter značky po stažení už nebude pokoušet přečíst."
 
-#: optionseditor.cpp:363
+#: optionseditor.cpp:383
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1730,11 +1907,36 @@ msgstr ""
 "Pokud chcete značky upravit, můžete stisknout tlačítko níže.\n"
 "Ale pak se soundKonverter podruhé už značky nebude pokoušet přečíst."
 
-#: optionseditor.cpp:385
+#: optionseditor.cpp:407
+msgctxt "cover tooltip"
+msgid "Cover type:"
+msgstr ""
+
+#: optionseditor.cpp:409
+msgctxt "cover tooltip"
+msgid "Description:"
+msgstr ""
+
+#: optionseditor.cpp:410
+msgctxt "cover tooltip"
+msgid "Size:"
+msgstr ""
+
+#: optionseditor.cpp:410
+msgctxt "cover tooltip"
+msgid "%1 x %2 pixels (%3)"
+msgstr ""
+
+#: optionseditor.cpp:412
+msgctxt "cover tooltip"
+msgid "Mime type:"
+msgstr ""
+
+#: optionseditor.cpp:434
 msgid "%1 Files"
 msgstr "%1 Soubory"
 
-#: optionseditor.cpp:402
+#: optionseditor.cpp:451
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
@@ -1742,7 +1944,7 @@ msgstr ""
 "Vybral jste více souborů s různými volbami pro převod.\n"
 "Volby všech souborů můžete upravit klepnutím na dolní tlačítko."
 
-#: optionseditor.cpp:410
+#: optionseditor.cpp:459
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1910,10 +2112,6 @@ msgstr "Otevřít výstupní adresář v programu Dolphin"
 #: outputdirectory.cpp:230
 msgid "Unknown Artist"
 msgstr "Neznámý umělec"
-
-#: outputdirectory.cpp:234
-msgid "Unknown Album"
-msgstr "Neznámé album"
 
 #: outputdirectory.cpp:238
 msgid "No Comment"
@@ -2434,7 +2632,7 @@ msgid "Remaining time"
 msgstr "Zbývající čas"
 
 #: progressindicator.cpp:84 replaygainscanner/replaygainscanner.cpp:222
-#: soundkonverter.cpp:272 soundkonverter.cpp:274
+#: soundkonverter.cpp:287 soundkonverter.cpp:289
 msgid "Finished"
 msgstr "Hotovo"
 
@@ -2454,7 +2652,7 @@ msgstr "Složit vše"
 msgid "Expand all"
 msgstr "Rozbalit vše"
 
-#: replaygainscanner/replaygainfilelist.cpp:451
+#: replaygainscanner/replaygainfilelist.cpp:448
 msgid "The following files could not be added:"
 msgstr "Následující soubory se nepodařilo přidat:"
 
@@ -2464,12 +2662,12 @@ msgstr "Následující soubory se nepodařilo přidat:"
 msgid "Replay Gain tool"
 msgstr "Nástroj pro vyrovnání hlasitosti skladeb"
 
-#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:178
+#: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:193
 #: soundkonverterview.cpp:83
 msgid "Add folder..."
 msgstr "Přidat složku..."
 
-#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:173
+#: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:188
 #: soundkonverterview.cpp:82
 msgid "Add files..."
 msgstr "Přidat soubory..."
@@ -2494,39 +2692,39 @@ msgstr "Zavřít"
 msgid "This is soundKonverter %1"
 msgstr "Toto je soundKonverter %1"
 
-#: soundkonverter.cpp:74 soundkonverter.cpp:79
+#: soundkonverter.cpp:74 soundkonverter.cpp:79 soundkonverter.cpp:94
 msgid "Removing old file: %1"
 msgstr "Odstraňuje se starý soubor: %1"
 
-#: soundkonverter.cpp:158
+#: soundkonverter.cpp:173
 msgid "View logs..."
 msgstr "Zobrazit zápisy..."
 
-#: soundkonverter.cpp:163
+#: soundkonverter.cpp:178
 msgid "Replay Gain tool..."
 msgstr "Nástroj pro vyrovnání hlasitosti skladeb..."
 
-#: soundkonverter.cpp:168
+#: soundkonverter.cpp:183
 msgid "About plugins..."
 msgstr "O přídavných modulech..."
 
-#: soundkonverter.cpp:183 soundkonverterview.cpp:84
+#: soundkonverter.cpp:198 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
 msgstr "Přidat stopy na CD..."
 
-#: soundkonverter.cpp:188 soundkonverterview.cpp:85
+#: soundkonverter.cpp:203 soundkonverterview.cpp:85
 msgid "Add url..."
 msgstr "Přidat adresu (URL)..."
 
-#: soundkonverter.cpp:193 soundkonverterview.cpp:86
+#: soundkonverter.cpp:208 soundkonverterview.cpp:86
 msgid "Add playlist..."
 msgstr "Přidat seznam skladeb..."
 
-#: soundkonverter.cpp:198
+#: soundkonverter.cpp:213
 msgid "Load file list"
 msgstr "Nahrát seznam se soubory"
 
-#: soundkonverter.cpp:203
+#: soundkonverter.cpp:218
 msgid "Save file list"
 msgstr "Uložit seznam se soubory"
 

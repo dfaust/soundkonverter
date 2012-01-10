@@ -776,9 +776,12 @@ bool TagEngine::writeCoversToDirectory( const QString& directoryName, QList<Cove
         }
 
         QFile file( directoryName + "/" + fileName + extension );
-        file.open( QIODevice::WriteOnly );
-        file.write( cover->data.data(), cover->data.size() );
-        file.close();
+        if( !file.exists() )
+        {
+            file.open( QIODevice::WriteOnly );
+            file.write( cover->data.data(), cover->data.size() );
+            file.close();
+        }
 
         i++;
     }

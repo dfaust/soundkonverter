@@ -709,6 +709,8 @@ void FileList::itemFinished( FileListItem *item, int state )
             {
                 config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
                 emit itemRemoved( item );
+                if( item->tags )
+                    delete item->tags;
                 delete item;
     //         itemsSelected();
             }
@@ -852,6 +854,8 @@ void FileList::replaygainFinished( QList<FileListItem*> items, int state )
         {
             config->conversionOptionsManager()->removeConversionOptions( items.at(i)->conversionOptionsId );
             emit itemRemoved( items.at(i) );
+            if( items.at(i)->tags )
+                delete items.at(i)->tags;
             delete items.at(i);
 //             itemsSelected();
         }
@@ -1026,6 +1030,8 @@ void FileList::removeSelectedItems()
             emit timeChanged( -item->length );
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             emit itemRemoved( item );
+            if( item->tags )
+                delete item->tags;
             delete item;
         }
     }
@@ -1120,6 +1126,8 @@ void FileList::load( bool user )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
                     emit itemRemoved( item );
+                    if( item->tags )
+                        delete item->tags;
                     delete item;
                     i--;
                 }

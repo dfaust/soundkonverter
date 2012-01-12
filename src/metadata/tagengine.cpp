@@ -438,51 +438,63 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if ( file->ID3v2Tag() )
             {
-                if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
+                if( tagData->disc > 0 )
                 {
-                    file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
-                }
-                else
-                {
-                    TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPOS", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                    frame->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
-                    file->ID3v2Tag()->addFrame( frame );
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
+                    {
+                        file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
+                    }
+                    else
+                    {
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPOS", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->addFrame( frame );
+                    }
                 }
 
-                if ( !file->ID3v2Tag()->frameListMap()[ "TCOM" ].isEmpty() )
+                if( !tagData->composer.isEmpty() )
                 {
-                    file->ID3v2Tag()->frameListMap()[ "TCOM" ].front()->setText( TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8) );
-                }
-                else
-                {
-                    TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCOM", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                    frame->setText( TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8) );
-                    file->ID3v2Tag()->addFrame( frame );
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TCOM" ].isEmpty() )
+                    {
+                        file->ID3v2Tag()->frameListMap()[ "TCOM" ].front()->setText( TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8) );
+                    }
+                    else
+                    {
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCOM", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->addFrame( frame );
+                    }
                 }
 
                 // TODO check if hacks are neccessary for taglib 1.5
                 // HACK sets the id3v2 genre tag as string
-                if ( !file->ID3v2Tag()->frameListMap()[ "TCON" ].isEmpty() )
+                if( !tagData->genre.isEmpty() )
                 {
-                    file->ID3v2Tag()->frameListMap()[ "TCON" ].front()->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
-                }
-                else
-                {
-                    TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCON", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                    frame->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
-                    file->ID3v2Tag()->addFrame( frame );
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TCON" ].isEmpty() )
+                    {
+                        file->ID3v2Tag()->frameListMap()[ "TCON" ].front()->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                    }
+                    else
+                    {
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCON", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->addFrame( frame );
+                    }
                 }
 
                 // HACK sets the id3v2 year tag
-                if ( !file->ID3v2Tag()->frameListMap()[ "TYER" ].isEmpty() )
+                if( tagData->year > 0 )
                 {
-                    file->ID3v2Tag()->frameListMap()[ "TYER" ].front()->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
-                }
-                else
-                {
-                    TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TYER", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                    frame->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
-                    file->ID3v2Tag()->addFrame( frame );
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TYER" ].isEmpty() )
+                    {
+                        file->ID3v2Tag()->frameListMap()[ "TYER" ].front()->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                    }
+                    else
+                    {
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TYER", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->addFrame( frame );
+                    }
                 }
             }
         }
@@ -490,18 +502,22 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if ( file->tag() )
             {
-                file->tag()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
+                if( !tagData->composer.isEmpty() )
+                    file->tag()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
 
-                file->tag()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                if( tagData->disc > 0 )
+                    file->tag()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
         {
             if ( file->xiphComment() )
             {
-                file->xiphComment()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
+                if( !tagData->composer.isEmpty() )
+                    file->xiphComment()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
 
-                file->xiphComment()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                if( tagData->disc > 0 )
+                    file->xiphComment()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
             }
         }
         /*else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )

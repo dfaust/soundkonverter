@@ -26,6 +26,8 @@
 #include <attachedpictureframe.h>
 #include <xiphcomment.h>
 #include <mpcfile.h>
+#include <mp4tag.h>
+#include <mp4file.h>
 
 
 /*//#include <taglib/attachedpictureframe.h>
@@ -48,14 +50,13 @@
 // #include "wavpack/wvfile.h"
 // // #include "trueaudio/ttafile.h"
 */
-/*#ifdef HAVE_MP4V2
-#include "metadata/mp4/mp4file.h"
-#include "metadata/mp4/mp4tag.h"
-#else
-#include "metadata/m4a/mp4file.h"
-#include "metadata/m4a/mp4itunestag.h"
-#include <QDir>
-#endif*/
+// #ifdef HAVE_MP4V2
+// #include "metadata/mp4/mp4file.h"
+// #include "metadata/mp4/mp4tag.h"
+// #else
+// #include "metadata/m4a/mp4file.h"
+// #include "metadata/m4a/mp4itunestag.h"
+// #endif
 
 // TODO COMPILATION tag
 // FIXME BPM tag
@@ -312,7 +313,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
                     album_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
             }*/
         }
-        /*else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
+        else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
         {
             // \xA9wrt : Composer
             // aART : Album artist
@@ -323,34 +324,20 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
             if( mp4tag )
             {
-                tagData->composer = TStringToQString( mp4tag->composer() );
-
-                disc = QString::number( mp4tag->disk() );
-
                 TagLib::MP4::ItemListMap map = mp4tag->itemListMap();
-                TagLib::String name = fieldName( Meta::valHasCover );
-
-                TagLib::ByteVector coverData;
-                bool foundCover = false;
-                quint64 maxSize = 1024;
                 for( TagLib::MP4::ItemListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
                 {
-                    if( it->first == name )
+                    if( it->first == "\xA9wrt" )
                     {
-                        TagLib::MP4::CoverArtList coverList = it->second.toCoverArtList();
-                        for( TagLib::MP4::CoverArtList::Iterator cover = coverList.begin(); cover != coverList.end(); ++cover )
-                            if( cover->data().size() > maxSize )
-                            {
-                                maxSize = cover->data().size();
-                                foundCover = true;
-                                coverData = cover->data();
-                            }
+                        tagData->composer = TStringToQString( it->second.toStringList().front() );
+                    }
+                    else if( it->first == "disk" )
+                    {
+                        disc = QString::number(it->second.toIntPair().first);
                     }
                 }
-
-                return foundCover ? QImage::fromData( ( uchar * ) coverData.data(), coverData.size() ) : QImage();
             }
-        }*/
+        }
         /*else if ( TagLib::MPC::File *file = dynamic_cast<TagLib::MPC::File *>( fileref.file() ) )
         {
             if ( file->APETag() )
@@ -665,6 +652,27 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                     covers.append( newCover );
                 }
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
+            }
+        }
+        else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
+        {
+            TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
+            if( mp4tag )
+            {
+                TagLib::MP4::ItemListMap map = mp4tag->itemListMap();
+                for( TagLib::MP4::ItemListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
+                {
+                    if( it->first == "covr" )
+                    {
+                        TagLib::MP4::CoverArtList coverList = it->second.toCoverArtList();
+                        for( TagLib::MP4::CoverArtList::Iterator cover = coverList.begin(); cover != coverList.end(); ++cover )
+                        {
+                            QByteArray image_data( cover->data().data(), cover->data().size() );
+                            CoverData *newCover = new CoverData( image_data, QString(), CoverData::FrontCover );
+                            covers.append( newCover );
+                        }
+                    }
+                }
             }
         }
     }

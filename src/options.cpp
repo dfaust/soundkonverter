@@ -44,7 +44,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
 
     QString format;
     const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid));
-    if( config->data.general.defaultFormat == i18n("Last used") )
+    if( config->data.general.defaultFormat == i18n("Last used") || config->data.general.defaultFormat == "Last used" )
     {
         format = config->data.general.lastFormat;
     }
@@ -53,17 +53,19 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
         format = config->data.general.defaultFormat;
     }
     if( !formats.contains(format) )
-    {
         format.clear();
-    }
+
     if( format.isEmpty() && formats.count() > 0 )
     {
-        format = formats.at(0);
+        if( formats.contains(config->data.general.lastFormat) )
+            format = config->data.general.lastFormat;
+        else
+            format = formats.at(0);
     }
     optionsDetailed->setCurrentFormat( format );
 
     QString profile;
-    if( config->data.general.defaultProfile == i18n("Last used") )
+    if( config->data.general.defaultProfile == i18n("Last used") || config->data.general.defaultProfile == "Last used" )
     {
         profile = config->data.general.lastProfile;
     }
@@ -72,9 +74,8 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
         profile = config->data.general.defaultProfile;
     }
     if( profile.isEmpty() )
-    {
         profile = i18n("High");
-    }
+
     if( config->customProfiles().indexOf(profile) != -1 )
     {
         optionsDetailed->loadCustomProfile( profile );
@@ -109,13 +110,16 @@ bool Options::setCurrentConversionOptions( ConversionOptions *options )
 
 void Options::simpleOutputDirectoryModeChanged( const int mode )
 {
-    if(optionsDetailed && optionsDetailed->outputDirectory) optionsDetailed->outputDirectory->setMode( (OutputDirectory::Mode)mode );
+    if(optionsDetailed && optionsDetailed->outputDirectory)
+        optionsDetailed->outputDirectory->setMode( (OutputDirectory::Mode)mode );
+
     config->data.general.lastOutputDirectoryMode = mode;
 }
 
 void Options::simpleOutputDirectoryChanged( const QString& directory )
 {
-    if(optionsDetailed && optionsDetailed->outputDirectory)  optionsDetailed->outputDirectory->setDirectory( directory );
+    if(optionsDetailed && optionsDetailed->outputDirectory)
+        optionsDetailed->outputDirectory->setDirectory( directory );
 }
 
 void Options::simpleOptionsChanged()

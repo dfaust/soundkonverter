@@ -133,9 +133,9 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         plugins.at(i)->deleteCodecWidget( widgets.at(i) );
     }
 */
-// seems to cause "ghost widgets" but isn't necessary anyway
-//     cFormat->setCurrentIndex( 0 );
-//     formatChanged( cFormat->currentText() );
+    // seems to cause "ghost widgets"
+    cFormat->setCurrentIndex( 0 );
+    formatChanged( cFormat->currentText() );
 }
 
 

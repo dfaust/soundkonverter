@@ -335,6 +335,10 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
                     {
                         disc = QString::number(it->second.toIntPair().first);
                     }
+//                     else if( it->first == "\xA9lyr" )
+//                     {
+//                         tagData->comment = TStringToQString( it->second.toStringList().front() );
+//                     }
                 }
             }
         }
@@ -684,7 +688,8 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                         for( TagLib::MP4::CoverArtList::Iterator cover = coverList.begin(); cover != coverList.end(); ++cover )
                         {
                             QByteArray image_data( cover->data().data(), cover->data().size() );
-                            CoverData *newCover = new CoverData( image_data, QString(), CoverData::FrontCover );
+                            const QString mimeType = cover->format() == TagLib::MP4::CoverArt::PNG ? "image/png" : "image/jpeg";
+                            CoverData *newCover = new CoverData( image_data, mimeType, CoverData::FrontCover );
                             covers.append( newCover );
                         }
                     }
@@ -707,14 +712,6 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
     {
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
         {
-            // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
-            // TBPM : BPM
-            // TPE2 : Album artist
-            // TCMP : Compilation (true,1 vs. false,0)
-            // POPM : rating, playcount
-            // APIC : TagLib::ID3v2::AttachedPictureFrame
-            // UFID : TagLib::ID3v2::UniqueFileIdentifierFrame
-
             if ( file->ID3v2Tag() )
             {
                 foreach( CoverData *cover, covers )
@@ -751,6 +748,23 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
                     file->addPicture( newPicture );
                 }
                 #endif // TAGLIB_HAS_FLAC_PICTURELIST
+            }
+
+            return fileref.save();
+        }
+        else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
+        {
+            TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
+            if( mp4tag )
+            {
+                TagLib::MP4::CoverArtList coversList;
+                foreach( CoverData *cover, covers )
+                {
+                    const TagLib::MP4::CoverArt::Format format = cover->mimeType == "image/png" ? TagLib::MP4::CoverArt::PNG : TagLib::MP4::CoverArt::JPEG;
+
+                    coversList.append( TagLib::MP4::CoverArt( format, TagLib::ByteVector( cover->data.data(), cover->data.size() ) ) );
+                }
+                mp4tag->itemListMap()["covr"] = TagLib::MP4::Item( coversList );
             }
 
             return fileref.save();

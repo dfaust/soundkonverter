@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-01-10 20:27+0100\n"
+"POT-Creation-Date: 2012-01-13 12:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,14 +156,14 @@ msgstr ""
 #: configdialog/configgeneralpage.cpp:218
 #: configdialog/configgeneralpage.cpp:222
 #: configdialog/configgeneralpage.cpp:227
-#: configdialog/configgeneralpage.cpp:232 options.cpp:47 options.cpp:66
+#: configdialog/configgeneralpage.cpp:232 options.cpp:47 options.cpp:68
 #: optionsdetailed.cpp:358
 msgid "Last used"
 msgstr ""
 
 #: config.cpp:49 config.cpp:350 config.cpp:357 config.cpp:363
 #: configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:220 options.cpp:76
+#: configdialog/configgeneralpage.cpp:220 options.cpp:77
 #: optionsdetailed.cpp:354 optionssimple.cpp:156 optionssimple.cpp:196
 #: optionssimple.cpp:283
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
@@ -521,11 +521,11 @@ msgstr ""
 msgid "Start in Mode"
 msgstr ""
 
-#: configdialog/configgeneralpage.cpp:46 options.cpp:89
+#: configdialog/configgeneralpage.cpp:46 options.cpp:90
 msgid "Simple"
 msgstr ""
 
-#: configdialog/configgeneralpage.cpp:47 options.cpp:90
+#: configdialog/configgeneralpage.cpp:47 options.cpp:91
 msgid "Detailed"
 msgstr ""
 
@@ -714,7 +714,7 @@ msgstr ""
 msgid "Track number: %1, device: %2"
 msgstr ""
 
-#: convert.cpp:1003 optionseditor.cpp:353
+#: convert.cpp:1003 optionseditor.cpp:368
 msgid "Possible conversion strategies:"
 msgstr ""
 
@@ -1242,112 +1242,112 @@ msgstr ""
 msgid "Audio file(s) to append to the file list"
 msgstr ""
 
-#: metadata/tagengine.cpp:89
+#: metadata/tagengine.cpp:90
 msgctxt "cover type"
 msgid "Unclassified"
 msgstr ""
 
-#: metadata/tagengine.cpp:91
+#: metadata/tagengine.cpp:92
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
 msgstr ""
 
-#: metadata/tagengine.cpp:93
+#: metadata/tagengine.cpp:94
 msgctxt "cover type"
 msgid "File icon"
 msgstr ""
 
-#: metadata/tagengine.cpp:95
+#: metadata/tagengine.cpp:96
 msgctxt "cover type"
 msgid "Front cover"
 msgstr ""
 
-#: metadata/tagengine.cpp:97
+#: metadata/tagengine.cpp:98
 msgctxt "cover type"
 msgid "Back cover"
 msgstr ""
 
-#: metadata/tagengine.cpp:99
+#: metadata/tagengine.cpp:100
 msgctxt "cover type"
 msgid "Leaflet page"
 msgstr ""
 
-#: metadata/tagengine.cpp:101
+#: metadata/tagengine.cpp:102
 msgctxt "cover type"
 msgid "CD photo"
 msgstr ""
 
-#: metadata/tagengine.cpp:103
+#: metadata/tagengine.cpp:104
 msgctxt "cover type"
 msgid "Lead artist picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:105
+#: metadata/tagengine.cpp:106
 msgctxt "cover type"
 msgid "Artist picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:107
+#: metadata/tagengine.cpp:108
 msgctxt "cover type"
 msgid "Conductor picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:109
+#: metadata/tagengine.cpp:110
 msgctxt "cover type"
 msgid "Band picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:111
+#: metadata/tagengine.cpp:112
 msgctxt "cover type"
 msgid "Composer picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:113
+#: metadata/tagengine.cpp:114
 msgctxt "cover type"
 msgid "Lyricist picture"
 msgstr ""
 
-#: metadata/tagengine.cpp:115
+#: metadata/tagengine.cpp:116
 msgctxt "cover type"
 msgid "Picture of the recording location"
 msgstr ""
 
-#: metadata/tagengine.cpp:117
+#: metadata/tagengine.cpp:118
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
 msgstr ""
 
-#: metadata/tagengine.cpp:119
+#: metadata/tagengine.cpp:120
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
 msgstr ""
 
-#: metadata/tagengine.cpp:121
+#: metadata/tagengine.cpp:122
 msgctxt "cover type"
 msgid "Picture from a video"
 msgstr ""
 
-#: metadata/tagengine.cpp:123
+#: metadata/tagengine.cpp:124
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
 msgstr ""
 
-#: metadata/tagengine.cpp:125
+#: metadata/tagengine.cpp:126
 msgctxt "cover type"
 msgid "Illustration related to the track"
 msgstr ""
 
-#: metadata/tagengine.cpp:127
+#: metadata/tagengine.cpp:128
 msgctxt "cover type"
 msgid "Band logo"
 msgstr ""
 
-#: metadata/tagengine.cpp:129
+#: metadata/tagengine.cpp:130
 msgctxt "cover type"
 msgid "Publisher logo"
 msgstr ""
 
-#: metadata/tagengine.cpp:757
+#: metadata/tagengine.cpp:833
 msgctxt "cover file name"
 msgid "cover"
 msgstr ""
@@ -1392,11 +1392,11 @@ msgstr ""
 msgid "Disc No.:"
 msgstr ""
 
-#: opener/cdopener.cpp:202 optionseditor.cpp:178
+#: opener/cdopener.cpp:202 optionseditor.cpp:189
 msgid "Year:"
 msgstr ""
 
-#: opener/cdopener.cpp:210 optionseditor.cpp:190
+#: opener/cdopener.cpp:210 optionseditor.cpp:201
 msgid "Genre:"
 msgstr ""
 
@@ -1438,7 +1438,7 @@ msgstr ""
 msgid "Title:"
 msgstr ""
 
-#: opener/cdopener.cpp:317 optionseditor.cpp:211
+#: opener/cdopener.cpp:317 optionseditor.cpp:222
 msgid "Comment:"
 msgstr ""
 
@@ -1736,19 +1736,24 @@ msgstr ""
 msgid "Track No.:"
 msgstr ""
 
-#: optionseditor.cpp:228
+#: optionseditor.cpp:177
+msgctxt "Disc No. x of y"
+msgid "of"
+msgstr ""
+
+#: optionseditor.cpp:239
 msgid "Edit tags"
 msgstr ""
 
-#: optionseditor.cpp:237
+#: optionseditor.cpp:248
 msgid "Infos"
 msgstr ""
 
-#: optionseditor.cpp:318
+#: optionseditor.cpp:333
 msgid "No file selected"
 msgstr ""
 
-#: optionseditor.cpp:373
+#: optionseditor.cpp:388
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1758,7 +1763,7 @@ msgid ""
 "to read the tags after downloading."
 msgstr ""
 
-#: optionseditor.cpp:383
+#: optionseditor.cpp:398
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1768,42 +1773,42 @@ msgid ""
 "to read the tags a second time."
 msgstr ""
 
-#: optionseditor.cpp:407
+#: optionseditor.cpp:422
 msgctxt "cover tooltip"
 msgid "Cover type:"
 msgstr ""
 
-#: optionseditor.cpp:409
+#: optionseditor.cpp:424
 msgctxt "cover tooltip"
 msgid "Description:"
 msgstr ""
 
-#: optionseditor.cpp:410
+#: optionseditor.cpp:425
 msgctxt "cover tooltip"
 msgid "Size:"
 msgstr ""
 
-#: optionseditor.cpp:410
+#: optionseditor.cpp:425
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
 msgstr ""
 
-#: optionseditor.cpp:412
+#: optionseditor.cpp:427
 msgctxt "cover tooltip"
 msgid "Mime type:"
 msgstr ""
 
-#: optionseditor.cpp:434
+#: optionseditor.cpp:450
 msgid "%1 Files"
 msgstr ""
 
-#: optionseditor.cpp:451
+#: optionseditor.cpp:468
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
 msgstr ""
 
-#: optionseditor.cpp:459
+#: optionseditor.cpp:476
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "

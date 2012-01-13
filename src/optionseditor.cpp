@@ -174,6 +174,17 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pDiscEdit->hide();
     albumdataBox->addWidget( pDiscEdit );
     connect( pDiscEdit, SIGNAL(clicked()), this, SLOT(editDiscClicked()) );
+    lDiscTotalLabel = new QLabel( i18nc("Disc No. x of y","of"), tagsWidget );
+    albumdataBox->addWidget( lDiscTotalLabel );
+    iDiscTotal = new KIntSpinBox( 0, 99, 1, 1, tagsWidget );
+    albumdataBox->addWidget( iDiscTotal );
+//     connect( iDisc, SIGNAL(valueChanged(int)), this, SLOT(discChanged(int)) );
+    pDiscTotalEdit = new KPushButton( " ", tagsWidget );
+    pDiscTotalEdit->setIcon( KIcon("edit-rename") );
+    pDiscTotalEdit->setFixedSize( iDisc->sizeHint().height(), iDisc->sizeHint().height() );
+    pDiscTotalEdit->hide();
+    albumdataBox->addWidget( pDiscTotalEdit );
+    connect( pDiscTotalEdit, SIGNAL(clicked()), this, SLOT(editDiscTotalClicked()) );
     albumdataBox->addStretch();
     lYearLabel = new QLabel( i18n("Year:"), tagsWidget );
     albumdataBox->addWidget( lYearLabel );
@@ -265,6 +276,8 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
     pAlbumEdit->hide();
     lDiscLabel->setEnabled( enabled );
     iDisc->setEnabled( enabled );
+    lDiscTotalLabel->setEnabled( enabled );
+    iDiscTotal->setEnabled( enabled );
     pDiscEdit->hide();
     lYearLabel->setEnabled( enabled );
     iYear->setEnabled( enabled );
@@ -277,13 +290,15 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
     tComment->setReadOnly( !enabled );
     pCommentEdit->hide();
 
-    if( !enabled ) {
+    if( !enabled )
+    {
         lTitle->setText( "" );
         iNumber->setValue( 0 );
         lArtist->setText( "" );
         lComposer->setText( "" );
         lAlbum->setText( "" );
         iDisc->setValue( 0 );
+        iDiscTotal->setValue( 0 );
         iYear->setValue( 0 );
         cGenre->setEditText( "" );
         tComment->setText( "" );
@@ -424,6 +439,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
             lComposer->setText( items.first()->tags->composer );
             lAlbum->setText( items.first()->tags->album );
             iDisc->setValue( items.first()->tags->disc );
+            iDiscTotal->setValue( items.first()->tags->discTotal );
             iYear->setValue( items.first()->tags->year );
             cGenre->setEditText( items.first()->tags->genre );
             tComment->setText( items.first()->tags->comment );
@@ -440,6 +456,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         const QString composer = ( (*it)->tags == 0 ) ? "" : (*it)->tags->composer;
         const QString album = ( (*it)->tags == 0 ) ? "" : (*it)->tags->album;
         const int disc = ( (*it)->tags == 0 ) ? 0 : (*it)->tags->disc;
+        const int discTotal = ( (*it)->tags == 0 ) ? 0 : (*it)->tags->discTotal;
         const int year = ( (*it)->tags == 0 ) ? 0 : (*it)->tags->year;
         const QString genre = ( (*it)->tags == 0 ) ? "" : (*it)->tags->genre;
         const QString comment = ( (*it)->tags == 0 ) ? "" : (*it)->tags->comment;
@@ -502,6 +519,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
                 iDisc->setValue( 1 );
                 pDiscEdit->show();
             }
+            if( discTotal != (*it)->tags->discTotal && iDiscTotal->isEnabled() )
+            {
+                iDiscTotal->setEnabled( false );
+                iDiscTotal->setValue( 1 );
+                pDiscTotalEdit->show();
+            }
             if( year != (*it)->tags->year && iYear->isEnabled() )
             {
                 iYear->setEnabled( false );
@@ -552,6 +575,9 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
         if( iDisc->isEnabled() )
             iDisc->setValue( disc );
+
+        if( iDiscTotal->isEnabled() )
+            iDiscTotal->setValue( discTotal );
 
         if( iYear->isEnabled() )
             iYear->setValue( year );
@@ -622,6 +648,9 @@ void OptionsEditor::applyChanges()
             if( iDisc->isEnabled() )
                 selectedItems.at(i)->tags->disc = iDisc->value();
 
+            if( iDiscTotal->isEnabled() )
+                selectedItems.at(i)->tags->discTotal= iDiscTotal->value();
+
             if( iYear->isEnabled() )
                 selectedItems.at(i)->tags->year = iYear->value();
 
@@ -667,6 +696,7 @@ void OptionsEditor::editTagsClicked()
     editComposerClicked();
     editAlbumClicked();
     editDiscClicked();
+    editDiscTotalClicked();
     editYearClicked();
     editGenreClicked();
     editCommentClicked();
@@ -741,6 +771,18 @@ void OptionsEditor::editDiscClicked()
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
         iDisc->setValue( selectedItems.first()->tags->disc );
+    }
+}
+
+void OptionsEditor::editDiscTotalClicked()
+{
+    iDiscTotal->setEnabled( true );
+    iDiscTotal->setFocus();
+    pDiscTotalEdit->hide();
+
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        iDiscTotal->setValue( selectedItems.first()->tags->discTotal );
     }
 }
 

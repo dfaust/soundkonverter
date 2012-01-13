@@ -83,11 +83,12 @@ class TagData : public QObject
     Q_OBJECT
 public:
     /** Constructor */
-    TagData( const QString& _artist = QString::null, const QString& _composer = QString::null,
-             const QString& _album = QString::null, const QString& _title = QString::null,
-             const QString& _genre = QString::null, const QString& _comment = QString::null,
-             int _track = 0, int _disc = 0, int _year = 0,
-             int _length = 0, int _fileSize = 0, int _bitrate = 0, int _samplingRate = 0 );
+//     TagData( const QString& _artist = QString::null, const QString& _composer = QString::null,
+//              const QString& _album = QString::null, const QString& _title = QString::null,
+//              const QString& _genre = QString::null, const QString& _comment = QString::null,
+//              int _track = 0, int _disc = 0, int _discTotal = 0, int _year = 0,
+//              int _length = 0, int _fileSize = 0, int _bitrate = 0, int _samplingRate = 0 );
+    TagData();
 
     /** Destructor */
     virtual ~TagData();
@@ -101,6 +102,7 @@ public:
     QString comment;
     int track;
     int disc;
+    int discTotal;
     int year;
     float track_gain;
     float album_gain;

@@ -2,6 +2,7 @@
 -Add: Option to apply album gain to converted files
 -Add: Copy embedded covers for Ogg (only reading), Mp3, Mp4 and Flac files
 -Add: Option to copy embedded covers to the output directory
+-Add: Honor total disc numbers
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though
 -Fix: Conversion problems when using pipes with newer KDE/Qt versions
 -Fix: Don't write empty tags

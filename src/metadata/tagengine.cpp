@@ -134,25 +134,45 @@ QString CoverData::roleName( Role role )
 }
 
 
-TagData::TagData( const QString& _artist, const QString& _composer,
-             const QString& _album, const QString& _title,
-             const QString& _genre, const QString& _comment,
-             int _track, int _disc, int _year,
-             int _length, int _fileSize, int _bitrate, int _samplingRate )
+// TagData::TagData( const QString& _artist, const QString& _composer,
+//              const QString& _album, const QString& _title,
+//              const QString& _genre, const QString& _comment,
+//              int _track, int _disc, int _discTotal, int _year,
+//              int _length, int _fileSize, int _bitrate, int _samplingRate )
+// {
+//     artist = _artist;
+//     composer = _composer;
+//     album = _album;
+//     title = _title;
+//     genre = _genre;
+//     comment = _comment;
+//     track = _track;
+//     disc = _disc;
+//     discTotal = _discTotal;
+//     year = _year;
+//     length = _length;
+//     fileSize = _fileSize;
+//     bitrate = _bitrate;
+//     samplingRate = _samplingRate;
+//     coversRead = false;
+// }
+
+TagData::TagData()
 {
-    artist = _artist;
-    composer = _composer;
-    album = _album;
-    title = _title;
-    genre = _genre;
-    comment = _comment;
-    track = _track;
-    disc = _disc;
-    year = _year;
-    length = _length;
-    fileSize = _fileSize;
-    bitrate = _bitrate;
-    samplingRate = _samplingRate;
+    artist = QString();
+    composer = QString();
+    album = QString();
+    title = QString();
+    genre = QString();
+    comment = QString();
+    track = 0;
+    disc = 0;
+    discTotal = 0;
+    year = 0;
+    length = 0;
+    fileSize = 0;
+    bitrate = 0;
+    samplingRate = 0;
     coversRead = false;
 }
 
@@ -333,7 +353,8 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
                     }
                     else if( it->first == "disk" )
                     {
-                        disc = QString::number(it->second.toIntPair().first);
+                        tagData->disc = it->second.toIntPair().first;
+                        tagData->discTotal = it->second.toIntPair().second;
                     }
 //                     else if( it->first == "\xA9lyr" )
 //                     {
@@ -380,10 +401,15 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
         {
             int i = disc.indexOf('/');
             if( i != -1 )
-                // disc.right( i ).toInt() is total number of discs, we don't use this at the moment
+            {
                 tagData->disc = disc.left( i ).toInt();
+                tagData->discTotal = disc.right( disc.count() - i - 1 ).toInt();
+            }
             else
+            {
                 tagData->disc = disc.toInt();
+                tagData->discTotal = 0;
+            }
         }
 
 //         if( !track_gain.isEmpty() )
@@ -438,20 +464,30 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             return false;
         }
 
+        QString disc;
+        if( tagData->disc > 0 )
+        {
+            disc = QString::number(tagData->disc);
+            if( tagData->discTotal > 0 )
+            {
+                disc += "/" + QString::number(tagData->discTotal);
+            }
+        }
+
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
         {
             if ( file->ID3v2Tag() )
             {
-                if( tagData->disc > 0 )
+                if( !disc.isEmpty() )
                 {
                     if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
                     {
-                        file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
                     }
                     else
                     {
                         TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPOS", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                        frame->setText( TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8) );
+                        frame->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
                         file->ID3v2Tag()->addFrame( frame );
                     }
                 }
@@ -509,8 +545,8 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 if( !tagData->composer.isEmpty() )
                     file->tag()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
 
-                if( tagData->disc > 0 )
-                    file->tag()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                if( !disc.isEmpty() )
+                    file->tag()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
@@ -520,21 +556,23 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 if( !tagData->composer.isEmpty() )
                     file->xiphComment()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
 
-                if( tagData->disc > 0 )
-                    file->xiphComment()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                if( !disc.isEmpty() )
+                    file->xiphComment()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
             }
         }
-        /*else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
+        else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
         {
             TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
             if( mp4tag )
             {
-                mp4tag->setComposer( QStringToTString( tagData->composer ) );
+                if( !tagData->composer.isEmpty() )
+                    mp4tag->itemListMap()["\xA9wrt"] = TagLib::StringList(TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8));
 
-                mp4tag->setDisk( QString::number(tagData->disc) );
+                if( tagData->disc > 0 )
+                    mp4tag->itemListMap()["disk"] = TagLib::MP4::Item( tagData->disc, tagData->discTotal );
             }
         }
-        if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not
+        /*if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not
         {
             if ( file->ID3v2Tag() )
             {

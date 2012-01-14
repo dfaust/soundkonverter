@@ -103,13 +103,15 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     QLabel *lInfo = new QLabel( text, this );
     grid->addWidget( lInfo, 4, 0, Qt::AlignVCenter | Qt::AlignCenter );
     grid->setRowStretch( 4, 1 );
-
-    updateProfiles();
 }
-
 
 OptionsSimple::~OptionsSimple()
 {}
+
+void OptionsSimple::init()
+{
+    updateProfiles();
+}
 
 void OptionsSimple::setReplayGainEnabled( bool enabled, const QString& toolTip )
 {
@@ -146,7 +148,7 @@ bool OptionsSimple::isReplayGainChecked()
 
 void OptionsSimple::updateProfiles()
 {
-    QString lastProfile = cProfile->currentText();
+    const QString lastProfile = cProfile->currentText();
     QStringList sProfile;
     cProfile->clear();
 
@@ -273,8 +275,8 @@ void OptionsSimple::formatInfo()
 
 void OptionsSimple::profileChanged()
 {
-    QString profile = cProfile->currentText();
-    QString lastFormat = cFormat->currentText();
+    const QString profile = cProfile->currentText();
+    const QString lastFormat = cFormat->currentText();
     cFormat->clear();
 
     pProfileRemove->hide();
@@ -319,10 +321,6 @@ void OptionsSimple::profileChanged()
     {
         cFormat->setCurrentIndex( cFormat->findText(lastFormat) );
     }
-//     else
-//     {
-//         formatChanged();
-//     }
 
     somethingChanged();
 }

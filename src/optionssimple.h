@@ -35,6 +35,8 @@ public:
     /** Detructor */
     virtual ~OptionsSimple();
 
+    void init();
+
     /** Set the current options */
 //     void setCurrentOptions( const ConversionOptions& );
 

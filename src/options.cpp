@@ -29,7 +29,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     gridLayout->addWidget( tab, 0, 0 );
     connect( tab, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)) );
 
-    optionsSimple = new OptionsSimple( config, /*optionsDetailed,*/ text, this );
+    optionsSimple = new OptionsSimple( config, text, this );
     connect( optionsSimple, SIGNAL(optionsChanged()), this, SLOT(simpleOptionsChanged()) );
     connect( optionsSimple->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(simpleOutputDirectoryModeChanged(int)) );
     connect( optionsSimple->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(simpleOutputDirectoryChanged(const QString&)) );
@@ -41,6 +41,9 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
 
     connect( optionsDetailed, SIGNAL(customProfilesEdited()), optionsSimple, SLOT(updateProfiles()) );
     connect( optionsSimple, SIGNAL(customProfilesEdited()), optionsDetailed, SLOT(updateProfiles()) );
+
+    optionsSimple->init();
+    optionsDetailed->init();
 
     QString format;
     const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid));
@@ -124,9 +127,6 @@ void Options::simpleOutputDirectoryChanged( const QString& directory )
 
 void Options::simpleOptionsChanged()
 {
-    config->data.general.lastProfile = optionsSimple->currentProfile();
-    config->data.general.lastFormat = optionsSimple->currentFormat();
-
     optionsDetailed->setCurrentFormat( optionsSimple->currentFormat() );
     if( config->customProfiles().contains(optionsSimple->currentProfile()) )
     {

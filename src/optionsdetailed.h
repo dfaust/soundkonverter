@@ -28,6 +28,8 @@ public:
     OptionsDetailed( Config *_config, QWidget *parent=0 );
     ~OptionsDetailed();
 
+    void init();
+
     /** Return the current options */
     ConversionOptions *currentConversionOptions();
     /** Set the current options */
@@ -47,7 +49,7 @@ public:
     CodecPlugin *getCurrentPlugin();
 
     OutputDirectory *outputDirectory; // this way it's easier to sync simple and detailed options
-    
+
 //     QSize sizeHint();
 
 private:
@@ -64,7 +66,7 @@ private:
     Config *config;
 
     CodecPlugin *currentPlugin;
-    
+
 //     QSize size_hint;
 
 public slots:

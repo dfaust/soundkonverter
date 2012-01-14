@@ -106,7 +106,6 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     pProfileLoad->setPopupMode( QToolButton::InstantPopup );
     pProfileLoad->setFixedWidth( pProfileLoad->height() );
     pProfileLoad->setToolTip( i18n("Load saved profiles") );
-    updateProfiles();
 //     connect( pProfileLoad, SIGNAL(clicked()), this, SLOT(saveProfile()) );
 
 /*
@@ -133,14 +132,18 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         plugins.at(i)->deleteCodecWidget( widgets.at(i) );
     }
 */
-    // seems to cause "ghost widgets"
-    cFormat->setCurrentIndex( 0 );
-    formatChanged( cFormat->currentText() );
 }
-
 
 OptionsDetailed::~OptionsDetailed()
 {}
+
+void OptionsDetailed::init()
+{
+    updateProfiles();
+
+    cFormat->setCurrentIndex( 0 );
+    formatChanged( cFormat->currentText() );
+}
 
 // QSize OptionsDetailed::sizeHint()
 // {
@@ -177,16 +180,14 @@ CodecPlugin *OptionsDetailed::getCurrentPlugin()
 void OptionsDetailed::updateProfiles()
 {
     QMenu *menu = new QMenu( this );
-    QStringList profiles = config->customProfiles();
-    int numProfiles = 0;
+    const QStringList profiles = config->customProfiles();
     for( int i=0; i<profiles.count(); i++ )
     {
         menu->addAction( profiles.at(i), this, SLOT(loadCustomProfileButtonClicked()) );
-        numProfiles++;
     }
 
     pProfileLoad->setMenu( menu );
-    pProfileLoad->setShown( numProfiles>0 );
+    pProfileLoad->setShown( profiles.count() > 0 );
 }
 
 void OptionsDetailed::formatChanged( const QString& format )
@@ -310,10 +311,11 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
             options->outputFilesystem = outputDirectory->filesystem();
             options->replaygain = cReplayGain->isChecked();
 //             options->bpm = cBpm->isChecked();
+
+            config->data.general.lastProfile = currentProfile();
+            config->data.general.lastFormat = cFormat->currentText();
         }
     }
-
-    config->data.general.lastFormat = cFormat->currentText();
 
     return options;
 }
@@ -444,7 +446,6 @@ void OptionsDetailed::loadCustomProfileButtonClicked()
 {
     const QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&","");
     loadCustomProfile( profile );
-    config->data.general.lastProfile = profile;
 }
 
 bool OptionsDetailed::loadCustomProfile( const QString& profile )

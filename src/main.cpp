@@ -20,7 +20,7 @@ static const char version[] = SOUNDKONVERTER_VERSION_STRING;
 
 int main(int argc, char **argv)
 {
-    KAboutData about("soundkonverter", 0, ki18n("soundKonverter"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2010 Daniel Faust"), KLocalizedString(), 0, "hessijames@gmail.com");
+    KAboutData about("soundkonverter", 0, ki18n("soundKonverter"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2005-2012 Daniel Faust"), KLocalizedString(), 0, "hessijames@gmail.com");
     about.addAuthor( ki18n("Daniel Faust"), KLocalizedString(), "hessijames@gmail.com" );
     about.addCredit( ki18n("David Vignoni"), ki18n("Nuvola icon theme"), 0, "http://www.icon-king.com" );
     about.addCredit( ki18n("Scott Wheeler"), ki18n("TagLib"), "wheeler@kde.org", "http://ktown.kde.org/~wheeler" );
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     options.add( "command <command>", ki18n("Execute <command> after each file has been converted (%i=input file, %o=output file)") );
     options.add( "+[files]", ki18n("Audio file(s) to append to the file list") );
     KCmdLineArgs::addCmdLineOptions(options);
-    
+
     soundKonverterApp::addCmdLineOptions();
     if( !soundKonverterApp::start() )
     {

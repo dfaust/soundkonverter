@@ -62,7 +62,6 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     optionsLayer = new OptionsLayer( config, this );
     fileList->setOptionsLayer( optionsLayer );
     optionsLayer->hide();
-//     optionsLayer->fadeIn();
     gridLayout->addWidget( optionsLayer, 1, 0 );
     connect( optionsLayer, SIGNAL(done(const KUrl::List&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*,const QString&)) );
 

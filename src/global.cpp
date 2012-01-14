@@ -12,6 +12,7 @@
 #include "global.h"
 
 #include <KLocale>
+#include <KGlobal>
 #include <KDebug>
 
 Global::Global()
@@ -32,6 +33,9 @@ QString Global::prettyNumber( double num, QString unit, short digits )
             prettyString.sprintf("%.1f %%",num);
         else
             prettyString.sprintf("%.0f %%",num);
+
+        if( KGlobal::locale()->decimalSymbol() != "." )
+            prettyString.replace(".",KGlobal::locale()->decimalSymbol());
     }
     else if( unit == "%" && digits == 2 )
     {
@@ -39,6 +43,9 @@ QString Global::prettyNumber( double num, QString unit, short digits )
             prettyString.sprintf("%.1f %%",num);
         else
             prettyString.sprintf("%.0f %%",num);
+
+        if( KGlobal::locale()->decimalSymbol() != "." )
+            prettyString.replace(".",KGlobal::locale()->decimalSymbol());
     }
     else if( unit == "B" )
     {
@@ -65,6 +72,9 @@ QString Global::prettyNumber( double num, QString unit, short digits )
             prettyString = QString::number(num).left(3);
 
         prettyString = prettyString + " " + unit;
+
+        if( KGlobal::locale()->decimalSymbol() != "." )
+            prettyString.replace(".",KGlobal::locale()->decimalSymbol());
     }
     else if( unit == "ms" )
     {

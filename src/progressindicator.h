@@ -8,7 +8,6 @@
 
 class QProgressBar;
 class QLabel;
-class KSystemTrayIcon;
 
 /**
  * @short Displays the current progress
@@ -22,7 +21,7 @@ public:
     /**
      * Constructor
      */
-    ProgressIndicator( /*KSystemTray* _systemTray,*/ QWidget* parent = 0 );
+    ProgressIndicator( QWidget* parent = 0 );
 
     /**
      * Destructor
@@ -32,7 +31,6 @@ public:
 public slots:
     void timeChanged( float time );
     void timeFinished( float time );
-//     void setTime( float time );
     void finished( float time );
 
     void update( float time );
@@ -43,7 +41,6 @@ private:
     QProgressBar* pBar;
     QLabel* lSpeed;
     QLabel* lTime;
-    KSystemTrayIcon* systemTrayIcon;
 
     QTime elapsedTime;
     QTime speedTime;

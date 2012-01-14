@@ -1,6 +1,6 @@
 1.2.90 (1.3.0 rc1):
 -Add: Option to apply album gain to converted files
--Add: Copy embedded covers for Ogg (only reading), Mp3, Mp4 and Flac files
+-Add: Copy embedded covers for ogg (only reading), mp3, mp4 and flac files
 -Add: Option to copy embedded covers to the output directory
 -Add: Honor total disc numbers
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though

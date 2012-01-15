@@ -9,6 +9,7 @@
 #include "outputdirectory.h"
 #include "codecproblems.h"
 
+#include <KApplication>
 #include <KLocale>
 #include <KIcon>
 #include <KAction>
@@ -104,8 +105,11 @@ FileList::~FileList()
 {
     // NOTE no cleanup needed since it all gets cleand up in other classes
 
-    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml") );
-    listFile.remove();
+    if( !KApplication::kApplication()->sessionSaving() )
+    {
+        QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml") );
+        listFile.remove();
+    }
 }
 
 void FileList::dragEnterEvent( QDragEnterEvent *event )

@@ -45,14 +45,15 @@ public:
 
     /** Destructor */
     virtual ~soundKonverterView();
-    
+
     void addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
 
     KAction *start() { return startAction; }
     KActionMenu *stopMenu() { return stopActionMenu; }
-    
+
     void startConversion();
-    
+    void killConversion();
+
 signals:
     /** Use this signal to change the content of the statusbar */
 //     void signalChangeStatusbar(const QString& text);
@@ -82,7 +83,7 @@ private slots:
     void conversionStopped( int state );
     /** Conversion will continue/stop after current files have been converted */
     void queueModeChanged( bool enabled );
-    
+
 private:
     Config *config;
     Logger *logger;

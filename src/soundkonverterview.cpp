@@ -520,6 +520,11 @@ void soundKonverterView::startConversion()
     fileList->startConversion();
 }
 
+void soundKonverterView::killConversion()
+{
+    fileList->killConversion();
+}
+
 void soundKonverterView::fileCountChanged( int count )
 {
     pStart->setEnabled( count > 0 );

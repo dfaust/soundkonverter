@@ -3,6 +3,7 @@
 -Add: Copy embedded covers for ogg (only reading), mp3, mp4 and flac files
 -Add: Option to copy embedded covers to the output directory
 -Add: Honor total disc numbers
+-Add: Session management
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though
 -Fix: Conversion problems when using pipes with newer KDE/Qt versions
 -Fix: Don't write empty tags

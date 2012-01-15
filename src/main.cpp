@@ -50,10 +50,6 @@ int main(int argc, char **argv)
     }
 
     soundKonverterApp app;
-    if( app.isSessionRestored() )
-    {
-        kRestoreMainWindows< soundKonverter >();
-    }
 
     // mainWin has WDestructiveClose flag by default, so it will delete itself.
     return app.exec();

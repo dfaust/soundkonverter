@@ -119,14 +119,9 @@ void soundKonverter::saveProperties( KConfigGroup& configGroup )
 {
     Q_UNUSED(configGroup)
 
+    m_view->killConversion();
+
     m_view->saveFileList( false );
-}
-
-void soundKonverter::readProperties( const KConfigGroup& configGroup )
-{
-    Q_UNUSED(configGroup)
-
-    m_view->loadFileList( false );
 }
 
 void soundKonverter::showSystemTray()

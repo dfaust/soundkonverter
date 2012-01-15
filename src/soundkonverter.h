@@ -45,6 +45,8 @@ public:
     /** Default Destructor */
     virtual ~soundKonverter();
 
+    virtual void saveProperties( KConfigGroup& configGroup );
+
     void showSystemTray();
     void addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand );
     void addReplayGainFiles( const KUrl::List& urls );
@@ -85,10 +87,6 @@ private:
 //     KToggleAction *m_toolbarAction;
 
     void setupActions();
-
-public:
-    virtual void saveProperties( KConfigGroup& configGroup );
-    virtual void readProperties( const KConfigGroup& configGroup );
 
 };
 

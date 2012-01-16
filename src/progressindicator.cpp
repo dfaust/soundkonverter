@@ -32,15 +32,14 @@ ProgressIndicator::ProgressIndicator( QWidget* parent )
     QLabel *lSpeedText = new QLabel( i18n("Speed")+":", this );
     statusChildGrid->addWidget( lSpeedText, 0, 0, Qt::AlignVCenter );
 
-    lSpeed = new QLabel( " 0.0x", this );
-    lSpeed->setFont( QFont( "Courier" ) );
+    lSpeed = new QLabel( "<pre> 0.0x</pre>", this );
     statusChildGrid->addWidget( lSpeed, 0, 1, Qt::AlignVCenter | Qt::AlignRight );
     speedTime.setHMS( 24, 0, 0 );
 
     QLabel *lTimeText = new QLabel( i18n("Remaining time")+":", this );
     statusChildGrid->addWidget( lTimeText, 1, 0, Qt::AlignVCenter );
 
-    lTime = new QLabel( " 0s", this );
+    lTime = new QLabel( "<pre> 0s</pre>", this );
     lTime->setFont( QFont( "Courier" ) );
     statusChildGrid->addWidget( lTime, 1, 1, Qt::AlignVCenter | Qt::AlignRight );
     elapsedTime.setHMS( 24, 0, 0 );
@@ -72,9 +71,9 @@ void ProgressIndicator::finished( float time )
     pBar->setRange( 0, (totalTime>0) ? (int)totalTime : 1 );
     pBar->setValue( (totalTime>0) ? 0 : 1 );
     elapsedTime.setHMS( 24, 0, 0 );
-    lTime->setText( " 0s" );
+    lTime->setText( "<pre> 0s</pre>" );
     speedTime.setHMS( 24, 0, 0 );
-    lSpeed->setText( " 0.0x" );
+    lSpeed->setText( "<pre> 0.0x</pre>" );
     emit progressChanged( i18n("Finished") );
 }
 
@@ -100,7 +99,7 @@ void ProgressIndicator::update( float time )
         if( fPercent > 1.0f )
         {
             int tim = (int)( elapsedTime.elapsed()/1000/fPercent*(100-fPercent) + 1 );
-            lTime->setText( Global::prettyNumber(tim,"s") );
+            lTime->setText( "<pre>" + Global::prettyNumber(tim,"s") + "</pre>" );
         }
 
         int tim = speedTime.restart() / 1000;
@@ -117,7 +116,7 @@ void ProgressIndicator::update( float time )
             if( KGlobal::locale()->decimalSymbol() != "." )
                 actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
 
-            lSpeed->setText( actSpeed );
+            lSpeed->setText( "<pre>" + actSpeed + "</pre>" );
         }
     }
 

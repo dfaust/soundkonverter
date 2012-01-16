@@ -1208,6 +1208,10 @@ void FileList::load( bool user )
 
 void FileList::save( bool user )
 {
+    // assume it's a misclick if there's nothing to save
+    if( user && topLevelItemCount() == 0 )
+        return;
+
     QTime time;
     time.start();
 
@@ -1268,7 +1272,7 @@ void FileList::save( bool user )
         }
     }
 
-    QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
+    const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
     if( listFile.open( QIODevice::WriteOnly ) )
     {

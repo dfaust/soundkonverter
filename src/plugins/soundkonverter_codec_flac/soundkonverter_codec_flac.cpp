@@ -118,6 +118,9 @@ QStringList soundkonverter_codec_flac::convertCommand( const KUrl& inputFile, co
     if( !_conversionOptions )
         return QStringList();
 
+    if( inputFile.isEmpty() )
+        return QStringList();
+
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 

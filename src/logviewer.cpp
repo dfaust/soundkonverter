@@ -60,7 +60,7 @@ LogViewer::~LogViewer()
 
 void LogViewer::refillLogs()
 {
-    const QString currentProcess = cItem->currentText();
+    const int currentProcess = cItem->itemData(cItem->currentIndex()).toInt();
 
     cItem->clear();
 
@@ -72,15 +72,14 @@ void LogViewer::refillLogs()
         if( name.length() > 73 )
             name = name.left(35) + "..." + name.right(35);
 
-//         cItem->addItem( name + " - " + QString::number((*a)->id), QVariant((*a)->id) );
         if( (*a)->id == 1000 )
             cItem->addItem( i18n("soundKonverter application log"), QVariant((*a)->id) );
         else
             cItem->addItem( name, QVariant((*a)->id) );
     }
 
-    if( cItem->findText(currentProcess) != -1 )
-        cItem->setCurrentIndex( cItem->findText(currentProcess) );
+    if( cItem->findData(currentProcess) != -1 )
+        cItem->setCurrentIndex( cItem->findData(currentProcess) );
     else
         cItem->setCurrentIndex( 0 );
 

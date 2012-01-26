@@ -698,6 +698,8 @@ int FileList::convertingCount()
 
 void FileList::itemFinished( FileListItem *item, int state )
 {
+    bool calculatingAlbumGain = false;
+
     if( item )
     {
         if( state == 0 )
@@ -707,7 +709,7 @@ void FileList::itemFinished( FileListItem *item, int state )
             {
                 item->state = FileListItem::WaitingForAlbumGain;
                 updateItem( item );
-                checkWaitingForAlbumGain();
+                calculatingAlbumGain = checkWaitingForAlbumGain();
             }
             else
             {
@@ -748,7 +750,7 @@ void FileList::itemFinished( FileListItem *item, int state )
     {
         convertNextItem();
     }
-    else if( convertingCount() == 0 )
+    else if( convertingCount() == 0 && !calculatingAlbumGain )
     {
         queue = false;
         save( false );
@@ -766,7 +768,7 @@ void FileList::itemFinished( FileListItem *item, int state )
     }
 }
 
-void FileList::checkWaitingForAlbumGain()
+bool FileList::checkWaitingForAlbumGain()
 {
     QString albumName;
     QString codecName;
@@ -846,7 +848,15 @@ void FileList::checkWaitingForAlbumGain()
             updateItem( items.at(i) );
         }
         emit replaygainItems( items );
+        return true;
     }
+    else
+    {
+        // tigger conversion of the next item
+        itemFinished( 0, 0 );
+    }
+
+    return false;
 }
 
 void FileList::replaygainFinished( QList<FileListItem*> items, int state )
@@ -1026,6 +1036,7 @@ void FileList::removeSelectedItems()
         item = (FileListItem*)items.at(i);
         if( item && item->isSelected() &&
             ( item->state == FileListItem::WaitingForConversion ||
+              item->state == FileListItem::WaitingForAlbumGain ||
               item->state == FileListItem::Stopped ||
               item->state == FileListItem::Failed
             )
@@ -1122,6 +1133,7 @@ void FileList::load( bool user )
             {
                 item = topLevelItem(i);
                 if( item->state == FileListItem::WaitingForConversion ||
+                    item->state == FileListItem::WaitingForAlbumGain ||
                     item->state == FileListItem::Stopped ||
                     item->state == FileListItem::BackendNeedsConfiguration ||
                     item->state == FileListItem::DiscFull ||
@@ -1166,6 +1178,8 @@ void FileList::load( bool user )
                     FileListItem *item = new FileListItem( this );
                     item->url = KUrl(file.attribute("url"));
                     item->outputUrl = KUrl(file.attribute("outputUrl"));
+                    if( item->url == item->outputUrl )
+                        item->state = FileListItem::WaitingForAlbumGain;
                     item->codecName = file.attribute("codecName");
                     item->conversionOptionsId = conversionOptionsIds[file.attribute("conversionOptionsId").toInt()];
                     item->local = file.attribute("local").toInt();

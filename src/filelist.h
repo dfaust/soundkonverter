@@ -116,7 +116,7 @@ private slots:
     void selectPreviousItem();
     void selectNextItem();
 
-    void checkWaitingForAlbumGain();
+    bool checkWaitingForAlbumGain();
 
 public slots:
     // connected to soundKonverterView

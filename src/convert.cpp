@@ -850,7 +850,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
 
             if( exitCode == 0 )
             {
-                items.at(i)->finishedTime += items.at(i)->replaygainTime;
+                albumGainItems.at(i)->finishedTime += albumGainItems.at(i)->replaygainTime;
                 removeAlbumGainItem( albumGainItems.at(i), 0 );
                 return;
             }

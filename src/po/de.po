@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-01-16 14:37+0100\n"
-"PO-Revision-Date: 2012-01-14 11:48+0000\n"
+"POT-Creation-Date: 2012-01-26 15:39+0100\n"
+"PO-Revision-Date: 2012-01-17 16:31+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/"
 "team/de/)\n"
@@ -175,8 +175,8 @@ msgstr "oder"
 msgid "Affected files:"
 msgstr "Betroffene Dateien:"
 
-#: config.cpp:48 config.cpp:50 config.cpp:346 config.cpp:391
-#: configdialog/configgeneralpage.cpp:45 configdialog/configgeneralpage.cpp:60
+#: config.cpp:48 config.cpp:50 config.cpp:347 config.cpp:392
+#: configdialog/configgeneralpage.cpp:44 configdialog/configgeneralpage.cpp:59
 #: configdialog/configgeneralpage.cpp:216
 #: configdialog/configgeneralpage.cpp:218
 #: configdialog/configgeneralpage.cpp:222
@@ -186,8 +186,8 @@ msgstr "Betroffene Dateien:"
 msgid "Last used"
 msgstr "Zuletzt benutzt"
 
-#: config.cpp:49 config.cpp:350 config.cpp:357 config.cpp:363
-#: configdialog/configgeneralpage.cpp:64
+#: config.cpp:49 config.cpp:351 config.cpp:358 config.cpp:364
+#: configdialog/configgeneralpage.cpp:63
 #: configdialog/configgeneralpage.cpp:220 options.cpp:80
 #: optionsdetailed.cpp:356 optionssimple.cpp:158 optionssimple.cpp:198
 #: optionssimple.cpp:285
@@ -216,11 +216,11 @@ msgstr "Zuletzt benutzt"
 msgid "High"
 msgstr "Hoch"
 
-#: config.cpp:260 config.cpp:283 config.cpp:285
+#: config.cpp:261 config.cpp:284 config.cpp:286
 msgid "Try internal"
 msgstr "Intern probieren"
 
-#: config.cpp:347 config.cpp:363 configdialog/configgeneralpage.cpp:61
+#: config.cpp:348 config.cpp:364 configdialog/configgeneralpage.cpp:60
 #: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:353
 #: optionssimple.cpp:155 optionssimple.cpp:180 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
@@ -248,7 +248,7 @@ msgstr "Intern probieren"
 msgid "Very low"
 msgstr "Sehr niedrig"
 
-#: config.cpp:348 config.cpp:363 configdialog/configgeneralpage.cpp:62
+#: config.cpp:349 config.cpp:364 configdialog/configgeneralpage.cpp:61
 #: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:354
 #: optionssimple.cpp:156 optionssimple.cpp:186 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
@@ -276,7 +276,7 @@ msgstr "Sehr niedrig"
 msgid "Low"
 msgstr "Niedrig"
 
-#: config.cpp:349 config.cpp:363 configdialog/configgeneralpage.cpp:63
+#: config.cpp:350 config.cpp:364 configdialog/configgeneralpage.cpp:62
 #: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:355
 #: optionssimple.cpp:157 optionssimple.cpp:192 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
@@ -304,7 +304,7 @@ msgstr "Niedrig"
 msgid "Medium"
 msgstr "Mittel"
 
-#: config.cpp:351 config.cpp:363 configdialog/configgeneralpage.cpp:65
+#: config.cpp:352 config.cpp:364 configdialog/configgeneralpage.cpp:64
 #: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:357
 #: optionssimple.cpp:159 optionssimple.cpp:204 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
@@ -332,7 +332,7 @@ msgstr "Mittel"
 msgid "Very high"
 msgstr "Sehr hoch"
 
-#: config.cpp:352 config.cpp:367 configdialog/configgeneralpage.cpp:66
+#: config.cpp:353 config.cpp:368 configdialog/configgeneralpage.cpp:65
 #: configdialog/configgeneralpage.cpp:225 optionsdetailed.cpp:358
 #: optionssimple.cpp:160 optionssimple.cpp:210 optionssimple.cpp:289
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
@@ -363,14 +363,14 @@ msgstr "Sehr hoch"
 msgid "Lossless"
 msgstr "Verlustfrei"
 
-#: config.cpp:353 config.cpp:371 configdialog/configgeneralpage.cpp:67
+#: config.cpp:354 config.cpp:372 configdialog/configgeneralpage.cpp:66
 #: configdialog/configgeneralpage.cpp:230 optionsdetailed.cpp:359
 #: optionssimple.cpp:216 optionssimple.cpp:293 soundkonverterview.cpp:453
 #: soundkonverterview.cpp:455
 msgid "Hybrid"
 msgstr "Hybrid"
 
-#: config.cpp:375 optionsdetailed.cpp:362 optionssimple.cpp:163
+#: config.cpp:376 optionsdetailed.cpp:362 optionssimple.cpp:163
 #: optionssimple.cpp:222 optionssimple.cpp:297 optionssimple.cpp:362
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
@@ -387,11 +387,11 @@ msgstr "Hybrid"
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: config.cpp:536
+#: config.cpp:537
 msgid "Convert with soundKonverter"
 msgstr "Mit soundKonverter konvertieren"
 
-#: config.cpp:570
+#: config.cpp:571
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Replay Gain mit soundKonverter hinzufügen"
 
@@ -558,47 +558,47 @@ msgstr "Cover-Bilder"
 msgid "Backends"
 msgstr "Backends"
 
-#: configdialog/configgeneralpage.cpp:42
+#: configdialog/configgeneralpage.cpp:41
 msgid "Start in Mode"
 msgstr "Starte im Modus"
 
-#: configdialog/configgeneralpage.cpp:46 options.cpp:93
+#: configdialog/configgeneralpage.cpp:45 options.cpp:93
 msgid "Simple"
 msgstr "Einfach"
 
-#: configdialog/configgeneralpage.cpp:47 options.cpp:94
+#: configdialog/configgeneralpage.cpp:46 options.cpp:94
 msgid "Detailed"
 msgstr "Detailiert"
 
-#: configdialog/configgeneralpage.cpp:56
+#: configdialog/configgeneralpage.cpp:55
 msgid "Default profile"
 msgstr "Standardprofil"
 
-#: configdialog/configgeneralpage.cpp:74
+#: configdialog/configgeneralpage.cpp:73
 msgid "Default format"
 msgstr "Standardformat"
 
-#: configdialog/configgeneralpage.cpp:100
+#: configdialog/configgeneralpage.cpp:99
 msgid "Conflict handling"
 msgstr "Konfliktbehandlung"
 
-#: configdialog/configgeneralpage.cpp:103
+#: configdialog/configgeneralpage.cpp:102
 msgid "Generate new file name"
 msgstr "Neue Dateinamen generieren"
 
-#: configdialog/configgeneralpage.cpp:104
+#: configdialog/configgeneralpage.cpp:103
 msgid "Skip file"
 msgstr "Datei überspringen"
 
-#: configdialog/configgeneralpage.cpp:106
+#: configdialog/configgeneralpage.cpp:105
 msgid "Do that if the output file already exists"
 msgstr "Tue dies, wenn die Ausgabe-Datei bereits existiert"
 
-#: configdialog/configgeneralpage.cpp:115
+#: configdialog/configgeneralpage.cpp:114
 msgid "Number of files to convert at once"
 msgstr "Anzahl von gleichzeitig zu konvertierenden Dateien"
 
-#: configdialog/configgeneralpage.cpp:119
+#: configdialog/configgeneralpage.cpp:118
 msgid ""
 "You shouldn't set this number higher than the amount of installed processor "
 "cores.\n"
@@ -608,11 +608,11 @@ msgstr ""
 "Prozessorkernen.\n"
 "Es wurden %1 Prozessorkerne gefunden."
 
-#: configdialog/configgeneralpage.cpp:130
+#: configdialog/configgeneralpage.cpp:129
 msgid "Apply album gain to converted files"
 msgstr "Album Gain zu konvertierten Dateien hinzufügen"
 
-#: configdialog/configgeneralpage.cpp:131
+#: configdialog/configgeneralpage.cpp:130
 msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
@@ -1163,7 +1163,7 @@ msgstr "Fehlgeschlagen"
 msgid "CD track %1"
 msgstr "CD-Stück %1"
 
-#: filelist.cpp:1117
+#: filelist.cpp:1128
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1223,19 +1223,19 @@ msgstr "In Datei speichern..."
 msgid "Log file:"
 msgstr "Log-Datei:"
 
-#: logviewer.cpp:77
+#: logviewer.cpp:76
 msgid "soundKonverter application log"
 msgstr "soundKonverter Protokoll"
 
-#: logviewer.cpp:117
+#: logviewer.cpp:116
 msgid "Save log file"
 msgstr "Log-Datei speichern"
 
-#: logviewer.cpp:124
+#: logviewer.cpp:123
 msgid "File already exists. Do you really want to overwrite it?"
 msgstr "Datei existiert bereits. Möchten Sie diese wirklich überschreiben?"
 
-#: logviewer.cpp:129
+#: logviewer.cpp:128
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
@@ -1263,9 +1263,8 @@ msgid "soundKonverter"
 msgstr "soundKonverter"
 
 #: main.cpp:23
-#, fuzzy
 msgid "(C) 2005-2012 Daniel Faust"
-msgstr "(C) 2010 Daniel Faust"
+msgstr "(C) 2005-2012 Daniel Faust"
 
 #: main.cpp:24
 msgid "Daniel Faust"

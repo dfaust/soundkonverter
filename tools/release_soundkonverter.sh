@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="1.2.0"
+VERSION="1.2.90"
 
 if [ -e "../release/soundkonverter-"$VERSION".tar.gz" ]; then
   echo "release already exists; exiting"

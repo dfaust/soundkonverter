@@ -1,3 +1,6 @@
+1.3.0:
+-Add: Update translations
+
 1.2.90 (1.3.0 rc1):
 -Add: Copy embedded covers for ogg (only reading), mp3, mp4 and flac files
 -Add: Option to copy embedded covers to the output directory
@@ -6,7 +9,7 @@
 -Change: By default log files won't be written to the hard drive anymore, it can be activated in the config dialog though
 -Fix: Conversion problems when using pipes with newer KDE/Qt versions
 -Fix: Don't write empty tags
--Fix: Fix initial loading of conversion profiles
+-Fix: Initial loading of conversion profiles
 
 1.2.1:
 -Add: French translation

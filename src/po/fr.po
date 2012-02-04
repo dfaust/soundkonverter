@@ -4,14 +4,14 @@
 #
 # Translators:
 # , 2011.
-# Yannick ERNULT <yannick.ernult@gmail.com>, 2011.
+# Yannick ERNULT <yannick.ernult@gmail.com>, 2011, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-01-26 15:39+0100\n"
-"PO-Revision-Date: 2012-01-17 08:28+0000\n"
+"POT-Creation-Date: 2012-02-04 10:09+0100\n"
+"PO-Revision-Date: 2012-01-28 12:22+0000\n"
 "Last-Translator: Yannick ERNULT <yannick.ernult@gmail.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/soundkonverter/"
 "team/fr/)\n"
@@ -520,19 +520,19 @@ msgstr ""
 
 #: configdialog/configcoverartpage.cpp:30
 msgid "Save embedded covers to output directory"
-msgstr ""
+msgstr "Sauvegarder les jaquettes dans un dossier"
 
 #: configdialog/configcoverartpage.cpp:32
 msgid "Always"
-msgstr ""
+msgstr "Toujours"
 
 #: configdialog/configcoverartpage.cpp:34
 msgid "Only if embedding the covers into the output files is not possible"
-msgstr ""
+msgstr "Seulement si les jaquettes ne peuvent pas être intégrées aux fichiers"
 
 #: configdialog/configcoverartpage.cpp:36
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -548,7 +548,7 @@ msgstr "Avancé"
 
 #: configdialog/configdialog.cpp:47
 msgid "Cover art"
-msgstr ""
+msgstr "Jaquette"
 
 #: configdialog/configdialog.cpp:52 main.cpp:29
 msgid "Backends"
@@ -606,13 +606,15 @@ msgstr ""
 
 #: configdialog/configgeneralpage.cpp:129
 msgid "Apply album gain to converted files"
-msgstr ""
+msgstr "Appliquer le gain par album aux fichiers convertis"
 
 #: configdialog/configgeneralpage.cpp:130
 msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
 msgstr ""
+"Garder les chansons du même album dans une file d'attente afin d'appliquer "
+"le gain par album sur tous les fichiers."
 
 #: configdialog/configgeneralpage.cpp:140
 msgid "Create actions menus for the file manager"
@@ -628,7 +630,7 @@ msgstr ""
 
 #: configdialog/configgeneralpage.cpp:150
 msgid "Write log files to disc"
-msgstr ""
+msgstr "Écrire les fichiers log sur le disque"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid ""
@@ -637,6 +639,10 @@ msgid ""
 "the log viewer.\n"
 "Log files will be written to %1"
 msgstr ""
+"Écrire les fichiers log sur le disque dur pendant la conversion.\n"
+"Ceci peut être utile si un plantage survient et que vous n'avez pas accès au "
+"fichier de log par la visionneuse des fichiers log.\n"
+"Les fichiers log seront écrits sur %1"
 
 #: configdialog/configgeneralpage.cpp:160
 msgid "Group files in the Replay Gain tool by"
@@ -734,7 +740,7 @@ msgstr "La conversion a échoué. Code de sortie : %1"
 
 #: convert.cpp:859
 msgid "Calculating Replay Gain failed. Exit code: %1"
-msgstr ""
+msgstr "Le calcul du Replay Gain a échoué. Code de sortie : %1"
 
 #: convert.cpp:952
 msgctxt "identificator for the logger"
@@ -829,7 +835,7 @@ msgstr "Album inconnu"
 
 #: convert.cpp:1246 convert.cpp:1252
 msgid "Replay Gain for album: %1"
-msgstr ""
+msgstr "Replay Gain pour l'album : %1"
 
 #: convert.cpp:1299 convert.cpp:1353
 msgctxt "The conversion progress can't be determined"
@@ -1250,7 +1256,7 @@ msgstr "soundKonverter"
 
 #: main.cpp:23
 msgid "(C) 2005-2012 Daniel Faust"
-msgstr ""
+msgstr "(C) 2005-2012 Daniel Faust"
 
 #: main.cpp:24
 msgid "Daniel Faust"
@@ -1346,112 +1352,112 @@ msgstr "Fichier(s) audio(s) à ajouter à la liste"
 #: metadata/tagengine.cpp:90
 msgctxt "cover type"
 msgid "Unclassified"
-msgstr ""
+msgstr "Non classé"
 
 #: metadata/tagengine.cpp:92
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
-msgstr ""
+msgstr "icône de fichier PNG 32x32"
 
 #: metadata/tagengine.cpp:94
 msgctxt "cover type"
 msgid "File icon"
-msgstr ""
+msgstr "Fichier icône"
 
 #: metadata/tagengine.cpp:96
 msgctxt "cover type"
 msgid "Front cover"
-msgstr ""
+msgstr "Jaquette frontale"
 
 #: metadata/tagengine.cpp:98
 msgctxt "cover type"
 msgid "Back cover"
-msgstr ""
+msgstr "Jaquette arrière"
 
 #: metadata/tagengine.cpp:100
 msgctxt "cover type"
 msgid "Leaflet page"
-msgstr ""
+msgstr "Page du livret"
 
 #: metadata/tagengine.cpp:102
 msgctxt "cover type"
 msgid "CD photo"
-msgstr ""
+msgstr "CD photo"
 
 #: metadata/tagengine.cpp:104
 msgctxt "cover type"
 msgid "Lead artist picture"
-msgstr ""
+msgstr "Image de l'artiste"
 
 #: metadata/tagengine.cpp:106
 msgctxt "cover type"
 msgid "Artist picture"
-msgstr ""
+msgstr "Image de l'artiste"
 
 #: metadata/tagengine.cpp:108
 msgctxt "cover type"
 msgid "Conductor picture"
-msgstr ""
+msgstr "Image du chef d'orchestre"
 
 #: metadata/tagengine.cpp:110
 msgctxt "cover type"
 msgid "Band picture"
-msgstr ""
+msgstr "Image du groupe"
 
 #: metadata/tagengine.cpp:112
 msgctxt "cover type"
 msgid "Composer picture"
-msgstr ""
+msgstr "Image du compositeur"
 
 #: metadata/tagengine.cpp:114
 msgctxt "cover type"
 msgid "Lyricist picture"
-msgstr ""
+msgstr "Image du parolier"
 
 #: metadata/tagengine.cpp:116
 msgctxt "cover type"
 msgid "Picture of the recording location"
-msgstr ""
+msgstr "Image du lieu d'enregistrement"
 
 #: metadata/tagengine.cpp:118
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
-msgstr ""
+msgstr "Image des artistes pendant l'enregistrement"
 
 #: metadata/tagengine.cpp:120
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
-msgstr ""
+msgstr "Image des artistes sur scène"
 
 #: metadata/tagengine.cpp:122
 msgctxt "cover type"
 msgid "Picture from a video"
-msgstr ""
+msgstr "Image d'une vidéo"
 
 #: metadata/tagengine.cpp:124
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
-msgstr ""
+msgstr "Image d'un grand poisson coloré"
 
 #: metadata/tagengine.cpp:126
 msgctxt "cover type"
 msgid "Illustration related to the track"
-msgstr ""
+msgstr "Illustration relative à la piste"
 
 #: metadata/tagengine.cpp:128
 msgctxt "cover type"
 msgid "Band logo"
-msgstr ""
+msgstr "Logo du groupe"
 
 #: metadata/tagengine.cpp:130
 msgctxt "cover type"
 msgid "Publisher logo"
-msgstr ""
+msgstr "Logo du distributeur"
 
 #: metadata/tagengine.cpp:833
 msgctxt "cover file name"
 msgid "cover"
-msgstr ""
+msgstr "couverture"
 
 #: opener/cdopener.cpp:114
 msgid "Add CD tracks"
@@ -1854,7 +1860,7 @@ msgstr "Tags"
 
 #: optionseditor.cpp:86
 msgid "Covers:"
-msgstr ""
+msgstr "Couvertures :"
 
 #: optionseditor.cpp:107
 msgid "Track No.:"
@@ -1863,7 +1869,7 @@ msgstr "Piste numéro :"
 #: optionseditor.cpp:177
 msgctxt "Disc No. x of y"
 msgid "of"
-msgstr ""
+msgstr "sur"
 
 #: optionseditor.cpp:239
 msgid "Edit tags"
@@ -1912,27 +1918,27 @@ msgstr ""
 #: optionseditor.cpp:422
 msgctxt "cover tooltip"
 msgid "Cover type:"
-msgstr ""
+msgstr "Type de couverture :"
 
 #: optionseditor.cpp:424
 msgctxt "cover tooltip"
 msgid "Description:"
-msgstr ""
+msgstr "Description :"
 
 #: optionseditor.cpp:425
 msgctxt "cover tooltip"
 msgid "Size:"
-msgstr ""
+msgstr "Taille :"
 
 #: optionseditor.cpp:425
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
-msgstr ""
+msgstr "%1 x %2 pixels (%3)"
 
 #: optionseditor.cpp:427
 msgctxt "cover tooltip"
 msgid "Mime type:"
-msgstr ""
+msgstr "Type MIME :"
 
 #: optionseditor.cpp:450
 msgid "%1 Files"

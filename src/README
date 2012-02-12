@@ -11,10 +11,10 @@ soundKonverter currently supports the following plugins and file formats:
 Encoders/Decoders:
                 Encode:                                                 Decode:
 faac            (aac,m4a)                                               (aac,m4a)
-ffmpeg          (ogg vorbis,mp3,flac,wma,aac,m4a,ac3,alac,mp2,amr nb)   (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,mpc,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
+ffmpeg          (ogg vorbis,mp3,flac,wma,aac,m4a,ac3,alac,mp2,amr nb)   (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
 flac            (flac)                                                  (flac)
 lame            (mp3)                                                   (mp2,mp3)
-mplayer                                                                 (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,mpc,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
+mplayer                                                                 (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
 neroaac         (m4a)                                                   (m4a)
 timidity                                                                (midi,mod)
 fluidsynth                                                              (midi,mod)

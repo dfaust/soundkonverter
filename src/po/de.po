@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-02-04 10:09+0100\n"
+"POT-Creation-Date: 2012-02-11 09:56+0100\n"
 "PO-Revision-Date: 2012-01-17 16:31+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/"
@@ -480,7 +480,7 @@ msgstr "Kodierer"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1324 convert.cpp:1359
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1327 convert.cpp:1362
 #: filelist.cpp:467
 msgid "Replay Gain"
 msgstr "Replay Gain"
@@ -668,7 +668,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Nur Verzeichnissen"
 
-#: convert.cpp:190 convert.cpp:1307
+#: convert.cpp:190 convert.cpp:1310
 msgid "Getting file"
 msgstr "Hole Datei"
 
@@ -680,13 +680,13 @@ msgstr "Kopiere \"%1\" nach \"%2\""
 msgid "No more backends left to try :("
 msgstr "Keine weiteren Backends zum Ausprobieren übrig :("
 
-#: convert.cpp:262 convert.cpp:298 convert.cpp:1311 filelist.cpp:477
+#: convert.cpp:262 convert.cpp:298 convert.cpp:1314 filelist.cpp:477
 #: soundkonverter.cpp:265 soundkonverter.cpp:267 soundkonverter.cpp:294
 #: soundkonverter.cpp:296
 msgid "Converting"
 msgstr "Konvertiere"
 
-#: convert.cpp:313 convert.cpp:1315
+#: convert.cpp:313 convert.cpp:1318
 msgid "Decoding"
 msgstr "Dekodiere"
 
@@ -698,7 +698,7 @@ msgstr ""
 "Konvertierung fehlgeschlagen. Mindestens ein Backend muss erst noch "
 "eingerichtet werden."
 
-#: convert.cpp:381 convert.cpp:1320
+#: convert.cpp:381 convert.cpp:1323
 msgid "Encoding"
 msgstr "Kodiere"
 
@@ -706,78 +706,78 @@ msgstr "Kodiere"
 msgid "Applying Replay Gain"
 msgstr "Bereche Replay Gain"
 
-#: convert.cpp:434
+#: convert.cpp:437
 msgid "Writing tags"
 msgstr "Schreibe Metadaten"
 
-#: convert.cpp:461
+#: convert.cpp:464
 msgid "Moving file to destination"
 msgstr "Verschiebe Datei zum Ziel"
 
-#: convert.cpp:468
+#: convert.cpp:471
 msgid "Running user script"
 msgstr "Führe Benutzer-Skript aus"
 
-#: convert.cpp:493
+#: convert.cpp:496
 msgid "Executing next step"
 msgstr "Führe nächsten Schritt aus"
 
-#: convert.cpp:608
+#: convert.cpp:611
 msgid "Read tags sucessfully"
 msgstr "Metadaten erfolgreich gelesen"
 
-#: convert.cpp:612
+#: convert.cpp:615
 msgid "Unable to read tags"
 msgstr "Metadaten konnten nicht gelesen werden"
 
-#: convert.cpp:624 convert.cpp:629
+#: convert.cpp:627 convert.cpp:632
 msgctxt "removing file"
 msgid "Removing: %1"
 msgstr "Entferne: %1"
 
-#: convert.cpp:638
+#: convert.cpp:641
 msgid "An error accured. Error code: %1 (%2)"
 msgstr "Es trat ein Fehler auf. Fehlercode: %1 (%2)"
 
-#: convert.cpp:761 convert.cpp:833
+#: convert.cpp:764 convert.cpp:836
 msgid "Conversion failed. Exit code: %1"
 msgstr "Konvertierung fehlgeschlagen. Beendigungscode: %1"
 
-#: convert.cpp:859
+#: convert.cpp:862
 msgid "Calculating Replay Gain failed. Exit code: %1"
 msgstr "Berechnung von Replay Gain gescheitert. Beendigungscode: %1"
 
-#: convert.cpp:952
+#: convert.cpp:955
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
 msgstr "CD Stück %1: %2 - %3"
 
-#: convert.cpp:956
+#: convert.cpp:959
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "CD Stück %1"
 
-#: convert.cpp:963 convert.cpp:1246
+#: convert.cpp:966 convert.cpp:1249
 msgid "Adding new item to conversion list: '%1'"
 msgstr "Füge neues Element zur Konvertierungsliste hinzu: '%1'"
 
-#: convert.cpp:970 convert.cpp:1253
+#: convert.cpp:973 convert.cpp:1256
 msgid "Got log ID: %1"
 msgstr "Log-ID: %1"
 
-#: convert.cpp:998
+#: convert.cpp:1001
 msgid "Track number: %1, device: %2"
 msgstr "Stücknummer: %1, Gerät: %2"
 
-#: convert.cpp:1003 optionseditor.cpp:368
+#: convert.cpp:1006 optionseditor.cpp:368
 msgid "Possible conversion strategies:"
 msgstr "Mögliche Konvertierungsstrategien:"
 
-#: convert.cpp:1016
+#: convert.cpp:1019
 msgid "File system type: %1"
 msgstr "Dateisystem-Typ: %1"
 
-#: convert.cpp:1068
+#: convert.cpp:1071
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
 "file size"
@@ -785,73 +785,73 @@ msgstr ""
 "Es trat ein Fehler auf, die Ausgabedatei ist weniger als ein Prozent der "
 "Eingabedatei groß"
 
-#: convert.cpp:1072
+#: convert.cpp:1075
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr ""
 "Konvertierung fehlgeschlagen, versuche es erneut. Beendigungscode: -2 (%1)"
 
-#: convert.cpp:1081 convert.cpp:1155
+#: convert.cpp:1084 convert.cpp:1158
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Normale Beendigung"
 
-#: convert.cpp:1083 convert.cpp:1157
+#: convert.cpp:1086 convert.cpp:1160
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Vom Benutzer abgebrochen"
 
-#: convert.cpp:1085 convert.cpp:1159
+#: convert.cpp:1088 convert.cpp:1162
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr "Backend muss konfiguriert werden"
 
-#: convert.cpp:1087 convert.cpp:1161
+#: convert.cpp:1090 convert.cpp:1164
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Es trat ein Fehler auf"
 
-#: convert.cpp:1101 convert.cpp:1171
+#: convert.cpp:1104 convert.cpp:1174
 msgid "Executing command: \"%1\""
 msgstr "Führe Befehl aus: \"%1\""
 
-#: convert.cpp:1118
+#: convert.cpp:1121
 msgid "Removing partially converted output file"
 msgstr "Entferne teilweise konvertierte Ausgabedateien"
 
-#: convert.cpp:1123 convert.cpp:1177
+#: convert.cpp:1126 convert.cpp:1180
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Entferne Datei von der Konvertierungsliste. Beendigungscode %1 (%2)"
 
-#: convert.cpp:1125 convert.cpp:1179
+#: convert.cpp:1128 convert.cpp:1182
 msgid "Conversion time"
 msgstr "Konvertierungszeit"
 
-#: convert.cpp:1126
+#: convert.cpp:1129
 msgid "Output file size"
 msgstr "Ausgabe-Dateigröße"
 
-#: convert.cpp:1127
+#: convert.cpp:1130
 msgid "File size ratio"
 msgstr "Dateigrößen-Quotient"
 
-#: convert.cpp:1244 outputdirectory.cpp:234
+#: convert.cpp:1247 outputdirectory.cpp:234
 msgid "Unknown Album"
 msgstr "Unbekanntes Album"
 
-#: convert.cpp:1246 convert.cpp:1252
+#: convert.cpp:1249 convert.cpp:1255
 msgid "Replay Gain for album: %1"
 msgstr "Replay Gain für Album: %1"
 
-#: convert.cpp:1299 convert.cpp:1353
+#: convert.cpp:1302 convert.cpp:1356
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: convert.cpp:1316 filelist.cpp:472
+#: convert.cpp:1319 filelist.cpp:472
 msgid "Ripping"
 msgstr "Rippe"
 
-#: convert.cpp:1333 convert.cpp:1363
+#: convert.cpp:1336 convert.cpp:1366
 msgid "Progress: %1"
 msgstr "Fortschritt: %1"
 

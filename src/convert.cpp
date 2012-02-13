@@ -431,7 +431,7 @@ void Convert::replaygain( ConvertItem *item )
 
 void Convert::writeTags( ConvertItem *item )
 {
-    if( !item )
+    if( !item || !item->fileListItem || !item->fileListItem->tags )
         return;
 
     logger->log( item->logID, i18n("Writing tags") );
@@ -446,13 +446,13 @@ void Convert::writeTags( ConvertItem *item )
     else
         inputUrl = item->inputUrl;
 
-    if( item->fileListItem->tags && !item->fileListItem->tags->coversRead )
+    if( !item->fileListItem->tags->coversRead )
     {
         item->fileListItem->tags->covers = config->tagEngine()->readCovers( inputUrl );
         item->fileListItem->tags->coversRead = true;
     }
 
-    bool success = config->tagEngine()->writeCovers( item->outputUrl, item->fileListItem->tags->covers );
+    const bool success = config->tagEngine()->writeCovers( item->outputUrl, item->fileListItem->tags->covers );
     if( config->data.coverArt.writeCovers == 0 || ( config->data.coverArt.writeCovers == 1 && !success ) )
     {
         config->tagEngine()->writeCoversToDirectory( item->outputUrl.directory(), item->fileListItem->tags->covers );

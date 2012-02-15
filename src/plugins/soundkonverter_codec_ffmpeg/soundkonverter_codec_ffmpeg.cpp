@@ -483,17 +483,7 @@ QStringList soundkonverter_codec_ffmpeg::convertCommand( const KUrl& inputFile, 
     Q_UNUSED(tags)
     Q_UNUSED(replayGain)
 
-    QStringList command;
-
-    if( outputCodec == "wav" )
-    {
-        command += binaries["ffmpeg"];
-        command += "-i";
-        command += "\"" + escapeUrl(inputFile) + "\"";
-        command += "\"" + escapeUrl(outputFile) + "\"";
-    }
-
-    return command;
+    return QStringList();
 }
 
 float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *length )

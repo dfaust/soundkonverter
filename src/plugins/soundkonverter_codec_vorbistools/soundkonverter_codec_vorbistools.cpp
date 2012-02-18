@@ -178,7 +178,10 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
     else
     {
         command += binaries["oggdec"];
-        command += "-Q";
+        if( outputFile.isEmpty() )
+        {
+            command += "-Q";
+        }
         command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";
         command += "\"" + escapeUrl(outputFile) + "\"";

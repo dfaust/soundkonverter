@@ -1,4 +1,6 @@
 1.3.3:
+-Change: Piping is disabled by default, it can be activated in the config dialog though
+-Fix: Some piping bugs with vorbistools and ffmpeg
 -Fix: Crash when adding a directory
 
 1.3.2:

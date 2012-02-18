@@ -20,6 +20,7 @@
 #include <QLabel>
 #include <QCheckBox>
 #include <KComboBox>
+#include <KStandardDirs>
 
 
 ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
@@ -66,6 +67,16 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useVFATNamesBox->addWidget( cUseVFATNames );
     connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
+    box->addSpacing( 20 );
+
+    QHBoxLayout *writeLogFilesBox = new QHBoxLayout( 0 );
+    box->addLayout( writeLogFilesBox );
+    cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
+    cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",KStandardDirs::locateLocal("data","soundkonverter/log/")) );
+    cWriteLogFiles->setChecked( config->data.general.writeLogFiles );
+    writeLogFilesBox->addWidget( cWriteLogFiles );
+    connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+
     box->addSpacing( 5 );
 
     QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
@@ -76,7 +87,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     removeFailedFilesBox->addWidget( cRemoveFailedFiles );
     connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
-    box->addSpacing( 5 );
+    box->addSpacing( 20 );
 
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout( 0 );
     box->addLayout( useSharedMemoryForTempFilesBox );
@@ -100,6 +111,16 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
     useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
 
+    box->addSpacing( 5 );
+
+    QHBoxLayout *usePipesBox = new QHBoxLayout( 0 );
+    box->addLayout( usePipesBox );
+    cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );
+    cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.") );
+    cUsePipes->setChecked( config->data.advanced.usePipes );
+    usePipesBox->addWidget( cUsePipes );
+    connect( cUsePipes, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+
     box->addStretch();
 }
 
@@ -111,9 +132,11 @@ void ConfigAdvancedPage::resetDefaults()
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
     iUpdateDelay->setValue( 100 );
     cUseVFATNames->setChecked( false );
+    cWriteLogFiles->setChecked( false );
     cRemoveFailedFiles->setChecked( true );
     cUseSharedMemoryForTempFiles->setChecked( false );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 2 );
+    cUsePipes->setChecked( false );
 
     emit configChanged( true );
 }
@@ -123,8 +146,10 @@ void ConfigAdvancedPage::saveSettings()
     config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
     config->data.general.updateDelay = iUpdateDelay->value();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
+    config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
     config->data.advanced.maxSizeForSharedMemoryTempFiles = iMaxSizeForSharedMemoryTempFiles->value();
+    config->data.advanced.usePipes = cUsePipes->isChecked();
 }
 

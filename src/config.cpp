@@ -97,6 +97,7 @@ void Config::load()
         chkdf.remove();
     }
     data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 2 );
+    data.advanced.usePipes = group.readEntry( "usePipes", false );
 
     group = conf->group( "CoverArt" );
     data.coverArt.writeCovers = group.readEntry( "writeCovers", 1 );
@@ -463,6 +464,7 @@ void Config::save()
     group = conf->group( "Advanced" );
     group.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );
     group.writeEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.maxSizeForSharedMemoryTempFiles );
+    group.writeEntry( "usePipes", data.advanced.usePipes );
 
     group = conf->group( "CoverArt" );
     group.writeEntry( "writeCovers", data.coverArt.writeCovers );

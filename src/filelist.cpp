@@ -225,6 +225,7 @@ void FileList::resizeEvent( QResizeEvent *event )
 int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
 {
     QString codecName;
+    KUrl::List fileList;
 
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
@@ -254,7 +255,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
-                    addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
+                    fileList += KUrl(directory + "/" + fileName);
                     if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
                     {
                         pScanStatus->setValue( count );
@@ -264,6 +265,9 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
             }
         }
     }
+
+    if( fileList.count() > 0 )
+        addFiles( fileList, 0, "", codecName, conversionOptionsId );
 
     return count;
 }
@@ -280,6 +284,8 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     QString filePathName;
     QString device;
 
+    bool optionsLayerHidden = false; // shouldn't be necessary
+
     if( !conversionOptions && conversionOptionsId == -1 )
     {
         logger->log( 1000, "@addFiles: No conversion options given" );
@@ -292,6 +298,15 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         QFileInfo fileInfo( fileName.toLocalFile() );
         if( fileInfo.isDir() )
         {
+            if( !optionsLayerHidden && QObject::sender() == optionsLayer )
+            {
+                optionsLayerHidden = true;
+                optionsLayer->hide();
+                kapp->processEvents();
+            }
+
+            logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
+
             addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
             continue;
         }
@@ -347,6 +362,9 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
         emit timeChanged( newItem->length );
 
         batchNumber++;
+
+        if( batchNumber % 50 == 0 )
+            kapp->processEvents();
     }
 
     emit fileCountChanged( topLevelItemCount() );
@@ -374,8 +392,9 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     tScanStatus.start();
 
     Time.start();
-    listDir( directory.path(), codecList, recursive, conversionOptionsId, true );
-    listDir( directory.path(), codecList, recursive, conversionOptionsId );
+    listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId, true );
+    kapp->processEvents();
+    listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId );
     TimeCount += Time.elapsed();
 
     pScanStatus->hide(); // hide the status bar, when the scan is done

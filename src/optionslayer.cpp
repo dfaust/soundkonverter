@@ -13,6 +13,7 @@
 #include <KPushButton>
 #include <KIcon>
 #include <KMessageBox>
+#include <KApplication>
 
 
 OptionsLayer::OptionsLayer( Config *config, QWidget *parent )
@@ -71,6 +72,9 @@ OptionsLayer::~OptionsLayer()
 
 void OptionsLayer::fadeIn()
 {
+    pOk->setDisabled( false );
+    pCancel->setDisabled( false );
+
     fadeTimer.start( 50 );
     fadeMode = 1;
     QPalette newPalette = palette();
@@ -86,7 +90,7 @@ void OptionsLayer::fadeIn()
 void OptionsLayer::fadeOut()
 {
     urls.clear();
-    
+
     fadeTimer.start( 50 );
     fadeMode = 2;
     frame->hide();
@@ -125,12 +129,15 @@ void OptionsLayer::ok()
     if( options->currentConversionOptions() )
     {
         options->accepted();
+        pOk->setDisabled( true );
+        pCancel->setDisabled( true );
+        kapp->processEvents();
         emit done( urls, options->currentConversionOptions(), command );
         fadeOut();
     }
     else
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        KMessageBox::error( this, i18n("No conversion options selected.") ); // possibly unneeded i18n string
     }
 }
 

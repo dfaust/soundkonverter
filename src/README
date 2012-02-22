@@ -76,21 +76,21 @@ Then execute one of the following commands:
 
 sudo xargs rm < install_manifest.txt
 or
-make uninstall
+sudo make uninstall
 
 In order to remove the soundKonverter configuration and kde integration, run the following commands:
+
+rm `kde-config --localprefix`share/config/soundkonverterrc
+rm -r `kde-config --localprefix`share/apps/soundkonverter
+rm `kde-config --localprefix`share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop
+rm `kde-config --localprefix`share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
+
+this will - depending on the location of your local kde directory - result in something like:
 
 rm ~/.kde4/share/config/soundkonverterrc
 rm -r ~/.kde4/share/apps/soundkonverter
 rm ~/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop
 rm ~/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
-
-or (depending on the location of your local kde directory)
-
-rm ~/.kde/share/config/soundkonverterrc
-rm -r ~/.kde/share/apps/soundkonverter
-rm ~/.kde/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop
-rm ~/.kde/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
 
 
 

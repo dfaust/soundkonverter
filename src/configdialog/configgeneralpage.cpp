@@ -62,7 +62,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     sDefaultProfile += i18n("High");
     sDefaultProfile += i18n("Very high");
     sDefaultProfile += i18n("Lossless");
-    sDefaultProfile += i18n("Hybrid");
+//     sDefaultProfile += i18n("Hybrid"); // currently unused
     sDefaultProfile += config->customProfiles();
     cDefaultProfile->addItems( sDefaultProfile );
     cDefaultProfile->setCurrentIndex( cDefaultProfile->findText(config->data.general.defaultProfile) );

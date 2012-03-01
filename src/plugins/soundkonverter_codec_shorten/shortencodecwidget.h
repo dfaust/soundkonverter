@@ -4,9 +4,6 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
-class QSlider;
-class QSpinBox;
 class QCheckBox;
 class KLineEdit;
 

@@ -4,12 +4,7 @@
 #include "shortencodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-
-
 #include <QLayout>
-#include <QLabel>
-#include <QSpinBox>
-#include <QSlider>
 #include <QCheckBox>
 #include <KLineEdit>
 #include <KLocale>
@@ -45,24 +40,32 @@ ConversionOptions *ShortenCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
     options->qualityMode = ConversionOptions::Lossless;
-    if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
-    else options->cmdArguments = "";
+    if( cCmdArguments->isChecked() )
+        options->cmdArguments = lCmdArguments->text();
+    else
+        options->cmdArguments = "";
+
     return options;
 }
 
 bool ShortenCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name ) return false;
+    if( !_options || _options->pluginName != global_plugin_name )
+        return false;
 
     ConversionOptions *options = _options;
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
-    if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
+    if( !options->cmdArguments.isEmpty() )
+        lCmdArguments->setText( options->cmdArguments );
+
     return true;
 }
 
 void ShortenCodecWidget::setCurrentFormat( const QString& format )
 {
-    if( currentFormat == format ) return;
+    if( currentFormat == format )
+        return;
+
     currentFormat = format;
     setEnabled( currentFormat != "wav" );
 }

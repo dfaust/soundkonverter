@@ -116,7 +116,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *usePipesBox = new QHBoxLayout( 0 );
     box->addLayout( usePipesBox );
     cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );
-    cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.") );
+    cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.\nBut some backends cause errors in this mode so be cautious.") );
     cUsePipes->setChecked( config->data.advanced.usePipes );
     usePipesBox->addWidget( cUsePipes );
     connect( cUsePipes, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );

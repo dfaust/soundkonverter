@@ -1,7 +1,7 @@
 //
 // C++ Implementation: opener
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -30,19 +30,19 @@ PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setCaption( i18n("Add playlist") );
     setWindowIcon( KIcon("view-media-playlist") );
     setButtons( 0 );
-    
+
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
         resize( parent->width() - 10, sizeHint().height() );
-    
+
     QWidget *widget = new QWidget();
     setMainWidget( widget );
 
     QGridLayout *mainGrid = new QGridLayout( widget );
-    
+
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
     mainGrid->addWidget( options, 1, 0 );
-    
+
     // add a horizontal box layout for the control elements
     QHBoxLayout *controlBox = new QHBoxLayout( 0 );
     mainGrid->addLayout( controlBox, 2, 0 );
@@ -54,7 +54,7 @@ PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     pCancel = new KPushButton( KIcon("dialog-cancel"), i18n("Cancel"), widget );
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
-    
+
     fileDialog = new KFileDialog( KUrl(QDir::homePath()), "*.m3u", this );
     fileDialog->setWindowTitle( i18n("Add Files") );
     fileDialog->setMode( KFile::File | KFile::ExistingOnly );
@@ -74,7 +74,7 @@ void PlaylistOpener::fileDialogAccepted()
 //     QStringList messageList;
     QString fileName;
     QStringList filesNotFound;
-  
+
     urls.clear();
     KUrl playlistUrl = fileDialog->selectedUrl();
     QFile playlistFile( playlistUrl.toLocalFile() );
@@ -164,13 +164,13 @@ void PlaylistOpener::fileDialogAccepted()
 //             messageList += "<b>Possible solutions for " + codecName + "</b>:\n" + problems.value(codecName).at(1).join("\n<b>or</b>\n") + i18n("\n\nAffected files:\n") + affectedFiles.join("\n");
         }
     }
-    
+
     if( problemList.count() > 0 )
     {
         CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Decode, problemList, this );
         problemsDialog->exec();
     }
-    
+
 //     if( !messageList.isEmpty() )
 //     {
 //         messageList.prepend( i18n("Some files can't be decoded.\nPossible solutions are listed below.") );
@@ -181,7 +181,7 @@ void PlaylistOpener::fileDialogAccepted()
 //         messageBox->setTextFormat( Qt::RichText );
 //         messageBox->exec();
 //     }
-    
+
     if( !filesNotFound.isEmpty() )
     {
         int filesNotFoundCount = filesNotFound.count();
@@ -206,10 +206,11 @@ void PlaylistOpener::fileDialogAccepted()
 
 void PlaylistOpener::okClickedSlot()
 {
-    if( options->currentConversionOptions() )
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    if( conversionOptions )
     {
         options->accepted();
-        emit open( urls, options->currentConversionOptions() );
+        emit open( urls, conversionOptions );
         accept();
     }
     else

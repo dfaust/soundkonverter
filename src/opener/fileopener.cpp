@@ -171,10 +171,11 @@ void FileOpener::fileDialogAccepted()
 
 void FileOpener::okClickedSlot()
 {
-    if( options->currentConversionOptions() )
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    if( conversionOptions )
     {
         options->accepted();
-        emit open( urls, options->currentConversionOptions() );
+        emit open( urls, conversionOptions );
         accept();
     }
     else

@@ -186,11 +186,12 @@ void DirOpener::addClicked()
 //     emit accept();
     if( mode == Convert )
     {
-        if( options->currentConversionOptions() )
+        ConversionOptions *conversionOptions = options->currentConversionOptions();
+        if( conversionOptions )
         {
             hide();
             options->accepted();
-            emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, options->currentConversionOptions() );
+            emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, conversionOptions );
             accept();
         }
         else

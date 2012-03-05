@@ -88,6 +88,9 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
         optionsDetailed->setCurrentProfile( profile );
     }
 
+    if( config->data.general.defaultProfile == i18n("Last used") || config->data.general.defaultProfile == "Last used" ) // in this case defaultFormat can only be "Last used"
+        optionsDetailed->loadCustomProfile( "soundkonverter_last_used" );
+
     const int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
 
     tab->addTab( optionsSimple, i18n("Simple") );

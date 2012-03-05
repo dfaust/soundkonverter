@@ -1208,7 +1208,8 @@ void CDOpener::proceedClicked()
 
 void CDOpener::addClicked()
 {
-    if( options->currentConversionOptions() )
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    if( conversionOptions )
     {
         QList<int> tracks;
         QList<TagData*> tagList;
@@ -1252,7 +1253,7 @@ void CDOpener::addClicked()
 
         options->accepted();
 
-        emit addTracks( device, tracks, trackCount, tagList, options->currentConversionOptions() );
+        emit addTracks( device, tracks, trackCount, tagList, conversionOptions );
 
         accept();
     }

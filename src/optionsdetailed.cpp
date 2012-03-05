@@ -313,6 +313,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
 //             options->bpm = cBpm->isChecked();
 
             config->data.general.lastProfile = currentProfile();
+            saveCustomProfile( true );
             config->data.general.lastFormat = cFormat->currentText();
         }
     }
@@ -340,14 +341,22 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
         return false;
 }
 
-bool OptionsDetailed::saveCustomProfile()
+bool OptionsDetailed::saveCustomProfile( bool lastUsed )
 {
     if( wPlugin && currentPlugin )
     {
-        bool ok;
-        const QString profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
-        if( !ok )
-            return false;
+        QString profileName;
+        if( lastUsed )
+        {
+            profileName = "soundkonverter_last_used";
+        }
+        else
+        {
+            bool ok;
+            QString profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
+            if( !ok )
+                return false;
+        }
 
         QStringList profiles;
         profiles += i18n("Very low");
@@ -360,6 +369,9 @@ bool OptionsDetailed::saveCustomProfile()
         profiles += i18n("Last used");
         profiles += "Last used";
         profiles += i18n("User defined");
+        if( !lastUsed )
+            profiles += "soundkonverter_last_used";
+
         if( profiles.contains(profileName) )
         {
             KMessageBox::information( this, i18n("You cannot overwrite the built-in profiles."), i18n("Profile already exists") );
@@ -382,7 +394,15 @@ bool OptionsDetailed::saveCustomProfile()
         {
             if( config->data.profiles.at(i).profileName == profileName )
             {
-                const int ret = KMessageBox::questionYesNo( this, i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?"), i18n("Profile already exists") );
+                int ret;
+                if( lastUsed )
+                {
+                    ret = KMessageBox::Yes;
+                }
+                else
+                {
+                    ret = KMessageBox::questionYesNo( this, i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?"), i18n("Profile already exists") );
+                }
                 if( ret == KMessageBox::Yes )
                 {
                     config->data.profiles[i].pluginName = currentPlugin->name();
@@ -468,8 +488,11 @@ bool OptionsDetailed::loadCustomProfile( const QString& profile )
                 }
                 QDomElement root = config->data.profiles.at(i).data.documentElement();
                 QDomElement outputOptions = root.elementsByTagName("outputOptions").at(0).toElement();
-                outputDirectory->setMode( (OutputDirectory::Mode)outputOptions.attribute("mode").toInt() );
-                outputDirectory->setDirectory( outputOptions.attribute("directory") );
+                if( profile != "soundkonverter_last_used" )
+                {
+                    outputDirectory->setMode( (OutputDirectory::Mode)outputOptions.attribute("mode").toInt() );
+                    outputDirectory->setDirectory( outputOptions.attribute("directory") );
+                }
                 QDomElement features = root.elementsByTagName("features").at(0).toElement();
                 cReplayGain->setChecked( features.attribute("replaygain").toInt() );
                 return qobject_cast<CodecWidget*>(wPlugin)->setCustomProfile( profile, config->data.profiles.at(i).data );

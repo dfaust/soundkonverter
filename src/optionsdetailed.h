@@ -72,7 +72,7 @@ private:
 public slots:
     void somethingChanged();
     void loadCustomProfileButtonClicked();
-    bool saveCustomProfile();
+    bool saveCustomProfile( bool lastUsed = false );
     void updateProfiles();
 
 private slots:

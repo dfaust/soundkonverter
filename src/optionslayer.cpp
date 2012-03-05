@@ -3,8 +3,6 @@
 #include "options.h"
 #include "config.h"
 
-#include "optionseditor.h"
-
 #include <QLayout>
 #include <QFrame>
 
@@ -126,13 +124,14 @@ void OptionsLayer::abort()
 
 void OptionsLayer::ok()
 {
-    if( options->currentConversionOptions() )
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    if( conversionOptions )
     {
         options->accepted();
         pOk->setDisabled( true );
         pCancel->setDisabled( true );
         kapp->processEvents();
-        emit done( urls, options->currentConversionOptions(), command );
+        emit done( urls, conversionOptions, command );
         fadeOut();
     }
     else

@@ -598,6 +598,9 @@ QStringList Config::customProfiles()
 
     for( int i=0; i<data.profiles.count(); i++ )
     {
+        if( data.profiles.at(i).profileName == "soundkonverter_last_used" )
+            continue;
+
         QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( data.profiles.at(i).codecName );
 
         for( int j=0; j<plugins.count(); j++ )

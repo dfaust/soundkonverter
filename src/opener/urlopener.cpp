@@ -1,7 +1,7 @@
 //
 // C++ Implementation: opener
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -35,7 +35,7 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setCaption( i18n("Add url") );
     setWindowIcon( KIcon("network-workgroup") );
     setButtons( 0 );
-    
+
     page = FileOpenPage;
 
     QWidget *widget = new QWidget();
@@ -75,8 +75,8 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
         resize( parent->width() - 10, sizeHint().height() );
-    
-    
+
+
     // add a horizontal box layout for the control elements
     QHBoxLayout *controlBox = new QHBoxLayout( 0 );
     mainGrid->addLayout( controlBox, 5, 0 );
@@ -106,9 +106,9 @@ void UrlOpener::proceedClickedSlot()
             KMessageBox::information( this, i18n("The Url you entered is invalid. Please try again.") );
             return;
         }
-        
+
         urls = urlRequester->url();
-      
+
         urlRequester->hide();
         options->show();
         page = ConversionOptionsPage;
@@ -126,10 +126,11 @@ void UrlOpener::okClickedSlot()
 {
     if( page == ConversionOptionsPage )
     {
-        if( options->currentConversionOptions() )
+        ConversionOptions *conversionOptions = options->currentConversionOptions();
+        if( conversionOptions )
         {
             options->accepted();
-            emit open( urls, options->currentConversionOptions() );
+            emit open( urls, conversionOptions );
             accept();
         }
         else

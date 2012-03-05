@@ -48,6 +48,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "tta";
     fromCodecs += "wavpack";
     fromCodecs += "ra";
+    fromCodecs += "sad";
     /// containers
     fromCodecs += "3gp";
     fromCodecs += "rm";

@@ -371,6 +371,12 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.extensions.append( "ult" );
         info.extensions.append( "uni" );
     }
+    else if( codecName == "sad" )
+    {
+        info.lossless = false;
+//         info.description = i18n("Black & White audio files where used for the game Black & White and contain an MP2 stream.");
+        info.extensions.append( "sad" );
+    }
 
     return info;
 }

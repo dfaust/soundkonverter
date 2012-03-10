@@ -151,6 +151,8 @@ QStringList soundkonverter_codec_speex::convertCommand( const KUrl& inputFile, c
 
 float soundkonverter_codec_speex::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // no output
 
     return -1;

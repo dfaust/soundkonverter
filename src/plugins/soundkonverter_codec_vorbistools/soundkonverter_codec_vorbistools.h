@@ -32,7 +32,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( vorbistools, soundkonverter_codec_vorbistools );
+K_EXPORT_SOUNDKONVERTER_CODEC( vorbistools, soundkonverter_codec_vorbistools )
 
 
 #endif // SOUNDKONVERTER_CODEC_VORBISTOOLS_H

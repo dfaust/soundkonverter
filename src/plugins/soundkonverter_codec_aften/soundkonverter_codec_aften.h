@@ -33,7 +33,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( aften, soundkonverter_codec_aften );
+K_EXPORT_SOUNDKONVERTER_CODEC( aften, soundkonverter_codec_aften )
 
 
 #endif // _SOUNDKONVERTER_CODEC_AFTEN_H_

@@ -20,12 +20,12 @@ public:
     QString name();
 
     QList<ConversionPipeTrunk> codecTable();
-    
+
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
-    
+
     QWidget *newCodecWidget();
 
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
@@ -38,7 +38,7 @@ private slots:
     void processOutput();
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( neroaac, soundkonverter_codec_neroaac );
+K_EXPORT_SOUNDKONVERTER_CODEC( neroaac, soundkonverter_codec_neroaac )
 
 
 #endif // _SOUNDKONVERTER_CODEC_NEROAAC_H_

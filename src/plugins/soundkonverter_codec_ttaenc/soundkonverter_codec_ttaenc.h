@@ -33,7 +33,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( ttaenc, soundkonverter_codec_ttaenc );
+K_EXPORT_SOUNDKONVERTER_CODEC( ttaenc, soundkonverter_codec_ttaenc )
 
 
 #endif // _SOUNDKONVERTER_CODEC_TTAENC_H_

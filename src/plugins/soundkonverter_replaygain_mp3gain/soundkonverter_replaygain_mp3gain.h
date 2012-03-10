@@ -50,8 +50,7 @@ private slots:
 
 };
 
-// K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_mp3gain, KGenericFactory<soundkonverter_replaygain_mp3gain> );
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( mp3gain, soundkonverter_replaygain_mp3gain );
+K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( mp3gain, soundkonverter_replaygain_mp3gain )
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_MP3GAIN_H_

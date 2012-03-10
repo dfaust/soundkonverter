@@ -77,7 +77,7 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg );
+K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg )
 
 
 #endif // _SOUNDKONVERTER_CODEC_FFMPEG_H_

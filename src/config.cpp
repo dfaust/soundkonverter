@@ -117,8 +117,6 @@ void Config::load()
 
     pPluginLoader->load();
 
-    QList<CodecPlugin*> codecPlugins;
-    QList<ReplayGainPlugin*> replaygainPlugins;
     QString pluginName;
     bool found;
     QStringList enabledPlugins;

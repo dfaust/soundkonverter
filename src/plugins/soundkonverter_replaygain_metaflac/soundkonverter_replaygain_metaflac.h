@@ -30,11 +30,10 @@ public:
 
     int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
-    
+
 };
 
-// K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_metaflac, KGenericFactory<soundkonverter_replaygain_metaflac> );
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( metaflac, soundkonverter_replaygain_metaflac );
+K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( metaflac, soundkonverter_replaygain_metaflac )
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_METAFLAC_H_

@@ -150,6 +150,8 @@ QStringList soundkonverter_codec_ttaenc::convertCommand( const KUrl& inputFile, 
 
 float soundkonverter_codec_ttaenc::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // no output provided
 
     return -1;

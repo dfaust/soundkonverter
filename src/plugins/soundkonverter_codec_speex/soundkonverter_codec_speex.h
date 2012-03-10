@@ -32,7 +32,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( speex, soundkonverter_codec_speex );
+K_EXPORT_SOUNDKONVERTER_CODEC( speex, soundkonverter_codec_speex )
 
 
 #endif // SOUNDKONVERTER_CODEC_SPEEX_H

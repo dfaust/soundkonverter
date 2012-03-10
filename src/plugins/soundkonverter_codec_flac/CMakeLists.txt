@@ -10,10 +10,7 @@ set(soundkonverter_codec_flac_SRCS
 
 kde4_add_plugin(soundkonverter_codec_flac ${soundkonverter_codec_flac_SRCS})
 
-# kde4_add_library(soundkonverter_codec_flac SHARED ${soundkonverter_codec_flac_SRCS})
-
 target_link_libraries(soundkonverter_codec_flac ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
-#target_link_libraries(soundkonverter_codec_flac ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

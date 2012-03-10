@@ -46,7 +46,7 @@ private slots:
 
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( fluidsynth, soundkonverter_codec_fluidsynth );
+K_EXPORT_SOUNDKONVERTER_CODEC( fluidsynth, soundkonverter_codec_fluidsynth )
 
 
 #endif // SOUNDKONVERTER_CODEC_FLUIDSYNTH_H

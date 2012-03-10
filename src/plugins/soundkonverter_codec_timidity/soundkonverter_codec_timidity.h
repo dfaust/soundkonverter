@@ -32,7 +32,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( timidity, soundkonverter_codec_timidity );
+K_EXPORT_SOUNDKONVERTER_CODEC( timidity, soundkonverter_codec_timidity )
 
 
 #endif // SOUNDKONVERTER_CODEC_TIMIDITY_H

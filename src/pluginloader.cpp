@@ -47,12 +47,12 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
     }
 
     return rating1 > rating2;
-};
+}
 
 bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& pipe2 )
 {
     return pipe1.rating > pipe2.rating;
-};
+}
 
 //
 // class PluginLoader

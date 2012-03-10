@@ -9,10 +9,7 @@ set(soundkonverter_replaygain_mp3gain_SRCS
 
 kde4_add_plugin(soundkonverter_replaygain_mp3gain ${soundkonverter_replaygain_mp3gain_SRCS})
 
-# kde4_add_library(soundkonverter_replaygain_mp3gain SHARED ${soundkonverter_replaygain_mp3gain_SRCS})
-
 target_link_libraries(soundkonverter_replaygain_mp3gain ${KDE4_KDEUI_LIBS} soundkonvertercore )
-#target_link_libraries(soundkonverter_replaygain_mp3gain ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

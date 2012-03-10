@@ -35,7 +35,7 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( musepack, soundkonverter_codec_musepack );
+K_EXPORT_SOUNDKONVERTER_CODEC( musepack, soundkonverter_codec_musepack )
 
 
 #endif // SOUNDKONVERTER_CODEC_MUSEPACK_H

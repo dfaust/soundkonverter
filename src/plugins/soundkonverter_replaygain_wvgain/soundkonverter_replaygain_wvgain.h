@@ -33,8 +33,7 @@ public:
 
 };
 
-// K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_wvgain, KGenericFactory<soundkonverter_replaygain_wvgain> );
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( wvgain, soundkonverter_replaygain_wvgain );
+K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( wvgain, soundkonverter_replaygain_wvgain )
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_WVGAIN_H_

@@ -36,8 +36,7 @@ public:
 
 };
 
-// K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_replaygain, KGenericFactory<soundkonverter_replaygain_replaygain> );
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( musepackgain, soundkonverter_replaygain_musepackgain );
+K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( musepackgain, soundkonverter_replaygain_musepackgain )
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_MUSEPACKGAIN_H_

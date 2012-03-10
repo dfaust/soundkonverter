@@ -9,10 +9,7 @@ set(soundkonverter_ripper_cdparanoia_SRCS
 
 kde4_add_plugin(soundkonverter_ripper_cdparanoia ${soundkonverter_ripper_cdparanoia_SRCS})
 
-# kde4_add_library(soundkonverter_ripper_cdparanoia SHARED ${soundkonverter_ripper_cdparanoia_SRCS})
-
 target_link_libraries(soundkonverter_ripper_cdparanoia ${KDE4_KDEUI_LIBS} soundkonvertercore )
-#target_link_libraries(soundkonverter_ripper_cdparanoia ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

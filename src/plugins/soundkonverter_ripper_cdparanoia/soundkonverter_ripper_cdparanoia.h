@@ -38,7 +38,7 @@ private slots:
     void processOutput();
 };
 
-K_EXPORT_SOUNDKONVERTER_RIPPER( cdparanoia, soundkonverter_ripper_cdparanoia );
+K_EXPORT_SOUNDKONVERTER_RIPPER( cdparanoia, soundkonverter_ripper_cdparanoia )
 
 
 #endif // SOUNDKONVERTER_RIPPER_CDPARANOIA_H

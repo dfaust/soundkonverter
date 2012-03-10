@@ -6,42 +6,15 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 find_package(Cdparanoia REQUIRED)
-# macro_log_feature(CDPARANOIA_FOUND "cdparanoia" "Reads digital audio directly from a CD, then writes the data to a file or pipe in several different formats" "http://www.xiph.org/paranoia/" FALSE "" "Required for building soundKonverter.")
 
 set(TAGLIB_MIN_VERSION "1.4")
 find_package(Taglib REQUIRED)
 
-# # Check if TagLib is built with ASF and MP4 support
-# include(CheckCXXSourceCompiles)
-# set(CMAKE_REQUIRED_INCLUDES "${TAGLIB_INCLUDES}")
-# set(CMAKE_REQUIRED_LIBRARIES "${TAGLIB_LIBRARIES}")
-#
-# check_cxx_source_compiles("#include <asftag.h>
-# int main() { TagLib::ASF::Tag tag; return 0;}" TAGLIB_ASF_FOUND)
-# if( NOT TAGLIB_ASF_FOUND )
-#     message(FATAL_ERROR "TagLib does not have ASF support compiled in.")
-# endif( NOT TAGLIB_ASF_FOUND )
-#
-# check_cxx_source_compiles("#include <mp4tag.h>
-# int main() { TagLib::MP4::Tag tag(0, 0); return 0;}" TAGLIB_MP4_FOUND)
-# if( NOT TAGLIB_MP4_FOUND )
-#     message(FATAL_ERROR "TagLib does not have MP4 support compiled in.")
-# endif( NOT TAGLIB_MP4_FOUND )
-#
-# set(CMAKE_REQUIRED_INCLUDES)
-# set(CMAKE_REQUIRED_LIBRARIES)
-#
-# set(TAGLIB-EXTRAS_MIN_VERSION "1.0")
-# find_package(Taglib-Extras REQUIRED)
-#
-# include(CheckTagLibFileName)
-#
-# check_taglib_filename(COMPLEX_TAGLIB_FILENAME)
-#
-#
-
 
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
+
+
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
 
 
 add_subdirectory(plugins)

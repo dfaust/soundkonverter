@@ -9,10 +9,7 @@ set(soundkonverter_replaygain_wvgain_SRCS
 
 kde4_add_plugin(soundkonverter_replaygain_wvgain ${soundkonverter_replaygain_wvgain_SRCS})
 
-# kde4_add_library(soundkonverter_replaygain_wvgain SHARED ${soundkonverter_replaygain_wvgain_SRCS})
-
 target_link_libraries(soundkonverter_replaygain_wvgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
-#target_link_libraries(soundkonverter_replaygain_wvgain ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

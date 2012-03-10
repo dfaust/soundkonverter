@@ -9,10 +9,7 @@ set(soundkonverter_replaygain_musepackgain_SRCS
 
 kde4_add_plugin(soundkonverter_replaygain_musepackgain ${soundkonverter_replaygain_musepackgain_SRCS})
 
-# kde4_add_library(soundkonverter_replaygain_replaygain SHARED ${soundkonverter_replaygain_replaygain_SRCS})
-
 target_link_libraries(soundkonverter_replaygain_musepackgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
-#target_link_libraries(soundkonverter_replaygain_musepackgain ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

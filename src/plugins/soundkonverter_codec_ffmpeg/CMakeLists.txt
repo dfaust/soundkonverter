@@ -10,10 +10,7 @@ set(soundkonverter_codec_ffmpeg_SRCS
 
 kde4_add_plugin(soundkonverter_codec_ffmpeg ${soundkonverter_codec_ffmpeg_SRCS})
 
-# kde4_add_library(soundkonverter_codec_ffmpeg SHARED ${soundkonverter_codec_ffmpeg_SRCS})
-
 target_link_libraries(soundkonverter_codec_ffmpeg ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
-#target_link_libraries(soundkonverter_codec_ffmpeg ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

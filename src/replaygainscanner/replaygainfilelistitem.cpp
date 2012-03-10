@@ -13,7 +13,7 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
     take = 0;
     processId = -1;
 }
-    ;
+
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding )
     : QTreeWidgetItem( parent, preceding )
 {

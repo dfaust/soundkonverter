@@ -10,10 +10,7 @@ set(soundkonverter_codec_vorbistools_SRCS
 
 kde4_add_plugin(soundkonverter_codec_vorbistools ${soundkonverter_codec_vorbistools_SRCS})
 
-# kde4_add_library(soundkonverter_codec_vorbistools SHARED ${soundkonverter_codec_vorbistools_SRCS})
-
 target_link_libraries(soundkonverter_codec_vorbistools ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
-#target_link_libraries(soundkonverter_codec_vorbistools ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

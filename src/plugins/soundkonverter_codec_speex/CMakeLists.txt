@@ -10,10 +10,7 @@ set(soundkonverter_codec_speex_SRCS
 
 kde4_add_plugin(soundkonverter_codec_speex ${soundkonverter_codec_speex_SRCS})
 
-# kde4_add_library(soundkonverter_codec_speex SHARED ${soundkonverter_codec_speex_SRCS})
-
 target_link_libraries(soundkonverter_codec_speex ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
-#target_link_libraries(soundkonverter_codec_speex ${KDE4_KIO_LIBS} )
 
 ########### install files ###############
 

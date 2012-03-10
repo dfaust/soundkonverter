@@ -38,8 +38,7 @@ private slots:
 
 };
 
-// K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_vorbisgain, KGenericFactory<soundkonverter_replaygain_vorbisgain> );
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( vorbisgain, soundkonverter_replaygain_vorbisgain );
+K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( vorbisgain, soundkonverter_replaygain_vorbisgain )
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_VORBISGAIN_H_

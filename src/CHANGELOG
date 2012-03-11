@@ -2,6 +2,7 @@
 -Add: TTA Enc plugin
 -Add: sad (Black & White audio file) support
 -Add: Improved saving of the last used conversion profile
+-Fix: Files added with "add directory" could fail
 
 1.3.3:
 -Change: Piping is disabled by default, it can be activated in the config dialog though

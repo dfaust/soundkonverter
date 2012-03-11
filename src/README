@@ -11,10 +11,10 @@ soundKonverter currently supports the following plugins and file formats:
 Encoders/Decoders:
                 Encode:                                                 Decode:
 faac            (aac,m4a)                                               (aac,m4a)
-ffmpeg          (ogg vorbis,mp3,flac,wma,aac,m4a,ac3,alac,mp2,amr nb)   (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv,sad)
+ffmpeg          (ogg vorbis,mp3,flac,wma,aac,m4a,ac3,alac,mp2,amr nb)   (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,sad,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
 flac            (flac)                                                  (flac)
 lame            (mp3)                                                   (mp2,mp3)
-mplayer                                                                 (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv,sad)
+mplayer                                                                 (ogg vorbis,mp3,flac,wma,aac,ac3,alac,mp2,sad,als,amr nb,amr wb,ape,speex,m4a,mp1,musepack,shorten,tta,wavpack,ra,3gp,rm,avi,mkv,ogv,mpeg,mov,mp4,flv,wmv,rv)
 neroaac         (m4a)                                                   (m4a)
 timidity                                                                (midi,mod)
 fluidsynth                                                              (midi,mod)
@@ -151,7 +151,7 @@ Click "Help" in the menu bar and select "About soundKonverter...", a new window 
 If you have problems converting a file, please follow these steps:
 1. Try to convert the file.
 2. Then open the "Log Viewer" by clicking on "Conversion" in the menu bar and selecting "View logs...".
-... The Log Viewer will now open in a new window.
+The Log Viewer will now open in a new window.
 3. By default the Log Viewer will show the log of the soundKonverter application, sending me this log won't hurt.
 4. But the more important log is the log for the file you just tried to convert in step 1. To see that log, click on the combo box (drop down box) at the top of the Log Viewer window and select the file.
 5. To save a log to a file, click on the "Save to file..." button on the bottom of the Log Viewer.
@@ -164,12 +164,14 @@ You will see three stars at the top right corner indicating how useful the crash
 If all three stars are filled your crash report is very useful otherwise it might not help.
 If you don't have three filled stars you can install some additional developer information.
 a) If you are running openSUSE you can install soundKonverter via the open build service.
-   It is available at the KDE:Extra and the home:HessiJames repository but only the home:HessiJames repository provides the additional developer information.
-   Those are included in the package soundkonverter-debuginfo package which you have to install.
-   If your currently installed soundKonverter version is already from the home:HessiJames you can go back to the crash handler window and click on the "reload" button.
-   Otherwise you will have to close the crash handler window and try to reproduce the crash.
+   It is available at the KDE:Extra and the home:HessiJames repositories. In addition to the soundkonverter package these repositories also contain
+   a soundkonverter-debuginfo package which you have to install. It contains additional developer information.
+   After installing the soundkonverter-debuginfo package you can go back to the crash handler window and click on the "reload" button.
+   All these steps should actually happen automatically after hitting the "install missting debug symbols" button.
 b) If you have installed soundKonverter from its sources you will have to compile it with debug information enabled. Have a look at the "Installation" section above.
    After you installed soundKonverter with debug information enabled you will have to close the crash handler window and try to reproduce the crash.
+c) If you are running an operating system other than openSUSE and have installed soundKonverter via a software repository chances are you can simply click on the "install missting debug symbols" button
+   and the additional developer information get installed automatically. But I haven't tested it.
 In order to reproduce a crash try doing the exact same thing you did when the crash occured.
 If you managed to get a useful crash report you can either directly send it to me by clicking on the "Report problems or wishes" button
 or even better you can copy the generated information and create a new bug report at https://bugs.launchpad.net/soundkonverter and paste them there.

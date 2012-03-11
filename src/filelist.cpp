@@ -225,7 +225,6 @@ void FileList::resizeEvent( QResizeEvent *event )
 int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
 {
     QString codecName;
-    KUrl::List fileList;
 
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
@@ -255,7 +254,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
-                    fileList += KUrl(directory + "/" + fileName);
+                    addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
                     if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
                     {
                         pScanStatus->setValue( count );
@@ -265,9 +264,6 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
             }
         }
     }
-
-    if( fileList.count() > 0 )
-        addFiles( fileList, 0, "", codecName, conversionOptionsId );
 
     return count;
 }
@@ -320,9 +316,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             codecName = config->pluginLoader()->getCodecFromFile( fileName );
 
             if( !config->pluginLoader()->canDecode(codecName) )
-            {
                 continue;
-            }
         }
 
         FileListItem *newItem = new FileListItem( this, lastListItem );

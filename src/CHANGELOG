@@ -2,6 +2,7 @@
 -Add: TTA Enc plugin
 -Add: sad (Black & White audio file) support
 -Add: Improved saving of the last used conversion profile
+-Change: Reduce amount of alerts when dropping unsupported file types (like images) on the file list
 -Fix: Files added with "add directory" could fail
 
 1.3.3:

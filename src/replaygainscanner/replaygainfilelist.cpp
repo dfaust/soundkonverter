@@ -191,6 +191,20 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
             }
             else
             {
+                if( !codecName.startsWith("audio") && !codecName.startsWith("video") && !codecName.startsWith("application") )
+                    continue;
+
+                if( codecName == "application/x-ole-storage" || // Thumbs.db
+                    codecName == "application/x-wine-extension-ini" ||
+                    codecName == "application/x-cue" ||
+                    codecName == "application/x-k3b" ||
+                    codecName == "application/pdf" ||
+                    codecName.startsWith("application/vnd.oasis.opendocument") ||
+                    codecName.startsWith("application/vnd.openxmlformats-officedocument") ||
+                    codecName.startsWith("application/vnd.sun.xml")
+                )
+                    continue;
+
                 fileName = KUrl(q_urls.at(i)).pathOrUrl();
                 if( codecName.isEmpty() ) codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
                 if( problems.value(codecName).count() < 2 )

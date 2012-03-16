@@ -53,6 +53,7 @@ public:
     void ripCd( const QString& device );
     void setAutoClose( bool enabled ) { autoclose = enabled; }
     void startConversion();
+    void loadAutosaveFileList();
 
 private slots:
     void showConfigDialog();

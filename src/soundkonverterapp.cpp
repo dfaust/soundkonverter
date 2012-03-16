@@ -14,8 +14,11 @@
 // #include <kstandarddirs.h>
 #include <stdio.h>
 #include <KMessageBox>
+#include <KStandardDirs>
 
 #include <kurl.h>
+
+#include <QFile>
 
 
 soundKonverterApp::soundKonverterApp()
@@ -37,13 +40,13 @@ int soundKonverterApp::newInstance()
     bool autoclose = false;
     bool autostart = false;
     bool activateMainWindow = true;
-    
+
     const QString device = args->getOption( "rip" );
     if( !device.isEmpty() )
     {
         mainWindow->ripCd( device );
     }
-    
+
     autoclose = args->isSet( "autoclose" );
     autostart = args->isSet( "autostart" );
 
@@ -59,7 +62,13 @@ int soundKonverterApp::newInstance()
         mainWindow->show();
 
     mainWindow->setAutoClose( autoclose );
-    
+
+    if( QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
+    {
+        kapp->processEvents();
+        mainWindow->loadAutosaveFileList();
+    }
+
     const QString profile = args->getOption( "profile" );
     const QString format = args->getOption( "format" );
     const QString directory = args->getOption( "output" );
@@ -89,18 +98,18 @@ int soundKonverterApp::newInstance()
             mainWindow->addConvertFiles( urls, profile, format, directory, notifyCommand );
     }
     args->clear();
-    
+
     if( activateMainWindow )
         mainWindow->activateWindow();
-    
+
     if( autostart )
         mainWindow->startConversion();
 
     return 0;
 
-    
-    
-/*    
+
+
+/*
         // no session.. just start up normally
         KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 

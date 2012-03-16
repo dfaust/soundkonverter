@@ -257,6 +257,11 @@ void soundKonverter::startConversion()
     m_view->startConversion();
 }
 
+void soundKonverter::loadAutosaveFileList()
+{
+    m_view->loadAutosaveFileList();
+}
+
 void soundKonverter::conversionStarted()
 {
     if( systemTray )

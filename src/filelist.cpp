@@ -1201,6 +1201,8 @@ void FileList::load( bool user )
                     conversionOptionsIds[conversionOptions.at(i).toElement().attribute("id").toInt()] = config->conversionOptionsManager()->addConversionOptions( plugin->conversionOptionsFromXml(conversionOptions.at(i).toElement()) );
                 }
                 QDomNodeList files = root.elementsByTagName("file");
+                pScanStatus->setRange( 0, files.count() );
+                pScanStatus->show();
                 for( int i=0; i<files.count(); i++ )
                 {
                     QDomElement file = files.at(i).toElement();
@@ -1241,11 +1243,13 @@ void FileList::load( bool user )
                     addTopLevelItem( item );
                     updateItem( item );
                     emit timeChanged( item->length );
+                    pScanStatus->setValue( i );
                 }
             }
         }
         listFile.close();
         emit fileCountChanged( topLevelItemCount() );
+        pScanStatus->hide();
     }
 }
 

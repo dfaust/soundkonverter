@@ -26,7 +26,6 @@
 #include <KMenu>
 #include <KAction>
 #include <KActionMenu>
-#include <KStandardDirs>
 
 #include <QLabel>
 #include <QLayout>
@@ -130,9 +129,6 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     Convert *convert = new Convert( config, fileList, logger );
     connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
-
-    if( QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
-        fileList->load( false );
 }
 
 soundKonverterView::~soundKonverterView()
@@ -513,6 +509,11 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
     }
 
     fileList->save( false );
+}
+
+void soundKonverterView::loadAutosaveFileList()
+{
+    fileList->load( false );
 }
 
 void soundKonverterView::startConversion()

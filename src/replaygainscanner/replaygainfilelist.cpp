@@ -199,6 +199,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
                     codecName == "application/x-cue" ||
                     codecName == "application/x-k3b" ||
                     codecName == "application/pdf" ||
+                    codecName == "application/x-trash" ||
                     codecName.startsWith("application/vnd.oasis.opendocument") ||
                     codecName.startsWith("application/vnd.openxmlformats-officedocument") ||
                     codecName.startsWith("application/vnd.sun.xml")

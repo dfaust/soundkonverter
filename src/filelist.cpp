@@ -1245,11 +1245,11 @@ void FileList::load( bool user )
                     emit timeChanged( item->length );
                     pScanStatus->setValue( i );
                 }
+                pScanStatus->hide();
             }
         }
         listFile.close();
         emit fileCountChanged( topLevelItemCount() );
-        pScanStatus->hide();
     }
 }
 

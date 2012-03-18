@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-03-13 16:00+0100\n"
-"PO-Revision-Date: 2012-02-19 12:10+0000\n"
+"POT-Creation-Date: 2012-03-18 11:54+0100\n"
+"PO-Revision-Date: 2012-03-15 12:44+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.net/projects/p/"
 "soundkonverter/language/pt/)\n"
@@ -213,7 +213,7 @@ msgstr "Último utilizado"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:267
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:207
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:254
-#: soundkonverterview.cpp:438 soundkonverterview.cpp:440
+#: soundkonverterview.cpp:434 soundkonverterview.cpp:436
 msgid "High"
 msgstr "Alta"
 
@@ -245,7 +245,7 @@ msgstr "Interna"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:231
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:195
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:219
-#: soundkonverterview.cpp:423 soundkonverterview.cpp:425
+#: soundkonverterview.cpp:419 soundkonverterview.cpp:421
 msgid "Very low"
 msgstr "Muito baixa"
 
@@ -273,7 +273,7 @@ msgstr "Muito baixa"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:244
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:199
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:231
-#: soundkonverterview.cpp:428 soundkonverterview.cpp:430
+#: soundkonverterview.cpp:424 soundkonverterview.cpp:426
 msgid "Low"
 msgstr "Baixa"
 
@@ -301,7 +301,7 @@ msgstr "Baixa"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:256
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:203
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:243
-#: soundkonverterview.cpp:433 soundkonverterview.cpp:435
+#: soundkonverterview.cpp:429 soundkonverterview.cpp:431
 msgid "Medium"
 msgstr "Média"
 
@@ -329,7 +329,7 @@ msgstr "Média"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:278
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:211
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:265
-#: soundkonverterview.cpp:443 soundkonverterview.cpp:445
+#: soundkonverterview.cpp:439 soundkonverterview.cpp:441
 msgid "Very high"
 msgstr "Muito alta"
 
@@ -362,13 +362,13 @@ msgstr "Muito alta"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:191
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:92
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:97
-#: soundkonverterview.cpp:448 soundkonverterview.cpp:450
+#: soundkonverterview.cpp:444 soundkonverterview.cpp:446
 msgid "Lossless"
 msgstr "Sem perda"
 
 #: config.cpp:353 config.cpp:371 configdialog/configgeneralpage.cpp:217
 #: optionsdetailed.cpp:368 optionssimple.cpp:216 optionssimple.cpp:293
-#: soundkonverterview.cpp:453 soundkonverterview.cpp:455
+#: soundkonverterview.cpp:449 soundkonverterview.cpp:451
 msgid "Hybrid"
 msgstr "Híbrido"
 
@@ -486,14 +486,15 @@ msgid "Use pipes when possible"
 msgstr "Se possível, utilizar canais"
 
 #: configdialog/configadvancedpage.cpp:119
-#, fuzzy
 msgid ""
 "Pipes make it unnecessary to use temporary files, therefore increasing the "
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
-"Com os canais, já não são necessários ficheiros temporários o que melhora o "
-"desempenho."
+"Os canais inviabilizam a utilização de ficheiros temporários, melhorando o "
+"desempenho.\n"
+"No entanto, algumas infraestruturas podem gerar erros, logo utilize com "
+"precaução."
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -510,7 +511,7 @@ msgstr "Codificador"
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
 #: configdialog/configbackendspage.cpp:239 convert.cpp:1330 convert.cpp:1365
-#: filelist.cpp:495
+#: filelist.cpp:496
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
@@ -693,9 +694,9 @@ msgstr "A copiar \"%1\" para \"%2\""
 msgid "No more backends left to try :("
 msgstr "Já não existem mais infraestruturas para testar"
 
-#: convert.cpp:262 convert.cpp:301 convert.cpp:1317 filelist.cpp:505
-#: soundkonverter.cpp:265 soundkonverter.cpp:267 soundkonverter.cpp:294
-#: soundkonverter.cpp:296
+#: convert.cpp:262 convert.cpp:301 convert.cpp:1317 filelist.cpp:506
+#: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
+#: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "A converter"
 
@@ -858,7 +859,7 @@ msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: convert.cpp:1322 filelist.cpp:500
+#: convert.cpp:1322 filelist.cpp:501
 msgid "Ripping"
 msgstr "A extrair"
 
@@ -1133,8 +1134,8 @@ msgstr "Parar conversão"
 msgid "Remove"
 msgstr "Remover"
 
-#: filelist.cpp:169 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
-#: replaygainscanner/replaygainfilelist.cpp:222 soundkonverterview.cpp:359
+#: filelist.cpp:170 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: replaygainscanner/replaygainfilelist.cpp:223 soundkonverterview.cpp:355
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -1144,45 +1145,45 @@ msgstr ""
 "É possível que tenha que instalar um \"plugin\" adicional.\n"
 "Verifique se o plugin existe no gestor de pacotes da sua distribuição."
 
-#: filelist.cpp:207 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
-#: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:260
-#: soundkonverterview.cpp:397
+#: filelist.cpp:208 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:261
+#: soundkonverterview.cpp:393
 msgid "... and %1 more files"
 msgstr "... e mais %1 ficheiro(s)"
 
-#: filelist.cpp:480
+#: filelist.cpp:481
 msgid "Will be skipped"
 msgstr "Serão ignoradas"
 
-#: filelist.cpp:484 soundkonverter.cpp:134 soundkonverter.cpp:138
+#: filelist.cpp:485 soundkonverter.cpp:134 soundkonverter.cpp:138
 msgid "Waiting"
 msgstr "Em espera"
 
-#: filelist.cpp:490
+#: filelist.cpp:491
 msgid "Waiting for Replay Gain"
 msgstr "À espera de Replay Gain"
 
-#: filelist.cpp:510
+#: filelist.cpp:511
 msgid "Stopped"
 msgstr "Parado"
 
-#: filelist.cpp:515
+#: filelist.cpp:516
 msgid "Backend not configured"
 msgstr "Infraestrutura não configurada"
 
-#: filelist.cpp:520
+#: filelist.cpp:521
 msgid "Disc full"
 msgstr "O disco está cheio"
 
-#: filelist.cpp:525
+#: filelist.cpp:526
 msgid "Failed"
 msgstr "Falhou"
 
-#: filelist.cpp:542
+#: filelist.cpp:543
 msgid "CD track %1"
 msgstr "%1ª faixa do CD "
 
-#: filelist.cpp:1156
+#: filelist.cpp:1157
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -2649,7 +2650,7 @@ msgid "Remaining time"
 msgstr "Tempo restante"
 
 #: progressindicator.cpp:77 replaygainscanner/replaygainscanner.cpp:222
-#: soundkonverter.cpp:280 soundkonverter.cpp:282
+#: soundkonverter.cpp:285 soundkonverter.cpp:287
 msgid "Finished"
 msgstr "Terminado"
 
@@ -2669,7 +2670,7 @@ msgstr "Recolher tudo"
 msgid "Expand all"
 msgstr "Expandir tudo"
 
-#: replaygainscanner/replaygainfilelist.cpp:461
+#: replaygainscanner/replaygainfilelist.cpp:462
 msgid "The following files could not be added:"
 msgstr "Estes ficheiros não foram adicionados:"
 
@@ -2680,12 +2681,12 @@ msgid "Replay Gain tool"
 msgstr "Replay Gain"
 
 #: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:186
-#: soundkonverterview.cpp:82
+#: soundkonverterview.cpp:81
 msgid "Add folder..."
 msgstr "Adicionar pasta..."
 
 #: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:181
-#: soundkonverterview.cpp:81
+#: soundkonverterview.cpp:80
 msgid "Add files..."
 msgstr "Adicionar ficheiros..."
 
@@ -2725,15 +2726,15 @@ msgstr "Replay Gain..."
 msgid "About plugins..."
 msgstr "Sobre os \"plugins\"..."
 
-#: soundkonverter.cpp:191 soundkonverterview.cpp:83
+#: soundkonverter.cpp:191 soundkonverterview.cpp:82
 msgid "Add CD tracks..."
 msgstr "Adicionar faixas de CD..."
 
-#: soundkonverter.cpp:196 soundkonverterview.cpp:84
+#: soundkonverter.cpp:196 soundkonverterview.cpp:83
 msgid "Add url..."
 msgstr "Adicionar url..."
 
-#: soundkonverter.cpp:201 soundkonverterview.cpp:85
+#: soundkonverter.cpp:201 soundkonverterview.cpp:84
 msgid "Add playlist..."
 msgstr "Adicionar lista de reprodução..."
 
@@ -2745,27 +2746,27 @@ msgstr "Abrir lista de ficheiros"
 msgid "Save file list"
 msgstr "Gravar lista de ficheiros"
 
-#: soundkonverterview.cpp:93 soundkonverterview.cpp:96
+#: soundkonverterview.cpp:92 soundkonverterview.cpp:95
 msgid "Start"
 msgstr "Iniciar"
 
-#: soundkonverterview.cpp:103 soundkonverterview.cpp:115
+#: soundkonverterview.cpp:102 soundkonverterview.cpp:114
 msgid "Stop"
 msgstr "Parar"
 
-#: soundkonverterview.cpp:104
+#: soundkonverterview.cpp:103
 msgid "Stop imediatelly"
 msgstr "Parar agora"
 
-#: soundkonverterview.cpp:107
+#: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"
 msgstr "Parar depois de terminar as conversões atuais"
 
-#: soundkonverterview.cpp:110
+#: soundkonverterview.cpp:109
 msgid "Continue after current conversions are completed"
 msgstr "Continuar após terminar as conversões atuais"
 
-#: soundkonverterview.cpp:283
+#: soundkonverterview.cpp:279
 msgid "No CD device found"
 msgstr "Nenhum dispositivo encontrado"
 

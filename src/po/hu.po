@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-03-13 16:00+0100\n"
-"PO-Revision-Date: 2012-02-19 10:54+0000\n"
+"POT-Creation-Date: 2012-03-18 11:54+0100\n"
+"PO-Revision-Date: 2012-03-17 18:19+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/"
 "language/hu/)\n"
@@ -211,7 +211,7 @@ msgstr "Utoljára használt"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:267
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:207
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:254
-#: soundkonverterview.cpp:438 soundkonverterview.cpp:440
+#: soundkonverterview.cpp:434 soundkonverterview.cpp:436
 msgid "High"
 msgstr "Jó"
 
@@ -243,7 +243,7 @@ msgstr "Próbálja a belsőt"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:231
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:195
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:219
-#: soundkonverterview.cpp:423 soundkonverterview.cpp:425
+#: soundkonverterview.cpp:419 soundkonverterview.cpp:421
 msgid "Very low"
 msgstr "Nagyon gyenge"
 
@@ -271,7 +271,7 @@ msgstr "Nagyon gyenge"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:244
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:199
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:231
-#: soundkonverterview.cpp:428 soundkonverterview.cpp:430
+#: soundkonverterview.cpp:424 soundkonverterview.cpp:426
 msgid "Low"
 msgstr "Gyenge"
 
@@ -299,7 +299,7 @@ msgstr "Gyenge"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:256
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:203
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:243
-#: soundkonverterview.cpp:433 soundkonverterview.cpp:435
+#: soundkonverterview.cpp:429 soundkonverterview.cpp:431
 msgid "Medium"
 msgstr "Megfelelő"
 
@@ -327,7 +327,7 @@ msgstr "Megfelelő"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:278
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:211
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:265
-#: soundkonverterview.cpp:443 soundkonverterview.cpp:445
+#: soundkonverterview.cpp:439 soundkonverterview.cpp:441
 msgid "Very high"
 msgstr "Nagyon jó"
 
@@ -360,13 +360,13 @@ msgstr "Nagyon jó"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:191
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:92
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:97
-#: soundkonverterview.cpp:448 soundkonverterview.cpp:450
+#: soundkonverterview.cpp:444 soundkonverterview.cpp:446
 msgid "Lossless"
 msgstr "Veszteségmentes"
 
 #: config.cpp:353 config.cpp:371 configdialog/configgeneralpage.cpp:217
 #: optionsdetailed.cpp:368 optionssimple.cpp:216 optionssimple.cpp:293
-#: soundkonverterview.cpp:453 soundkonverterview.cpp:455
+#: soundkonverterview.cpp:449 soundkonverterview.cpp:451
 msgid "Hybrid"
 msgstr "Keverék"
 
@@ -485,14 +485,14 @@ msgid "Use pipes when possible"
 msgstr "Adatcsatornák használata, ha lehetséges"
 
 #: configdialog/configadvancedpage.cpp:119
-#, fuzzy
 msgid ""
 "Pipes make it unnecessary to use temporary files, therefore increasing the "
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
 "Az adatcsatornák használatával nélkülözhetők az ideiglenes fájlok, így "
-"növelhető a teljesítmény."
+"növelhető a teljesítmény.\n"
+"Néhány háttérprogram hibát okozhat ebben a módban. Legyen óvatos!"
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -509,7 +509,7 @@ msgstr "Kóder"
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
 #: configdialog/configbackendspage.cpp:239 convert.cpp:1330 convert.cpp:1365
-#: filelist.cpp:495
+#: filelist.cpp:496
 msgid "Replay Gain"
 msgstr "Hangerő-korrekció"
 
@@ -690,9 +690,9 @@ msgstr "\"%1\" másolása ide: \"%2\""
 msgid "No more backends left to try :("
 msgstr "Nincs több kipróbálható háttérprogram :("
 
-#: convert.cpp:262 convert.cpp:301 convert.cpp:1317 filelist.cpp:505
-#: soundkonverter.cpp:265 soundkonverter.cpp:267 soundkonverter.cpp:294
-#: soundkonverter.cpp:296
+#: convert.cpp:262 convert.cpp:301 convert.cpp:1317 filelist.cpp:506
+#: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
+#: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "Konvertálás"
 
@@ -856,7 +856,7 @@ msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: convert.cpp:1322 filelist.cpp:500
+#: convert.cpp:1322 filelist.cpp:501
 msgid "Ripping"
 msgstr "Beolvasás"
 
@@ -1128,8 +1128,8 @@ msgstr "Konvertálás leállítása"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: filelist.cpp:169 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
-#: replaygainscanner/replaygainfilelist.cpp:222 soundkonverterview.cpp:359
+#: filelist.cpp:170 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
+#: replaygainscanner/replaygainfilelist.cpp:223 soundkonverterview.cpp:355
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -1139,45 +1139,45 @@ msgstr ""
 "Lehet, hogy kiegészítő bővítményeket kell telepítenie.\n"
 "Nézzen körül disztribúciója csomagkezelőjében."
 
-#: filelist.cpp:207 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
-#: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:260
-#: soundkonverterview.cpp:397
+#: filelist.cpp:208 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
+#: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:261
+#: soundkonverterview.cpp:393
 msgid "... and %1 more files"
 msgstr "... és %1 fájl"
 
-#: filelist.cpp:480
+#: filelist.cpp:481
 msgid "Will be skipped"
 msgstr "Ki lesz hagyva"
 
-#: filelist.cpp:484 soundkonverter.cpp:134 soundkonverter.cpp:138
+#: filelist.cpp:485 soundkonverter.cpp:134 soundkonverter.cpp:138
 msgid "Waiting"
 msgstr "Várakozás"
 
-#: filelist.cpp:490
+#: filelist.cpp:491
 msgid "Waiting for Replay Gain"
 msgstr "Várakozás a hangerő-korrekcióra"
 
-#: filelist.cpp:510
+#: filelist.cpp:511
 msgid "Stopped"
 msgstr "Leállítva"
 
-#: filelist.cpp:515
+#: filelist.cpp:516
 msgid "Backend not configured"
 msgstr "A háttérprogram nincs beállítva"
 
-#: filelist.cpp:520
+#: filelist.cpp:521
 msgid "Disc full"
 msgstr "A lemez megtelt"
 
-#: filelist.cpp:525
+#: filelist.cpp:526
 msgid "Failed"
 msgstr "Meghiúsult"
 
-#: filelist.cpp:542
+#: filelist.cpp:543
 msgid "CD track %1"
 msgstr "CD-szám %1"
 
-#: filelist.cpp:1156
+#: filelist.cpp:1157
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -2650,7 +2650,7 @@ msgid "Remaining time"
 msgstr "Hátralévő idő"
 
 #: progressindicator.cpp:77 replaygainscanner/replaygainscanner.cpp:222
-#: soundkonverter.cpp:280 soundkonverter.cpp:282
+#: soundkonverter.cpp:285 soundkonverter.cpp:287
 msgid "Finished"
 msgstr "Befejezve"
 
@@ -2670,7 +2670,7 @@ msgstr "Az összes összecsukása"
 msgid "Expand all"
 msgstr "Az összes kibontása"
 
-#: replaygainscanner/replaygainfilelist.cpp:461
+#: replaygainscanner/replaygainfilelist.cpp:462
 msgid "The following files could not be added:"
 msgstr "Az alábbi fájlok nem adhatók hozzá:"
 
@@ -2681,12 +2681,12 @@ msgid "Replay Gain tool"
 msgstr "Hangerő-korrekciós eszköz"
 
 #: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:186
-#: soundkonverterview.cpp:82
+#: soundkonverterview.cpp:81
 msgid "Add folder..."
 msgstr "Mappa hozzáadása..."
 
 #: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:181
-#: soundkonverterview.cpp:81
+#: soundkonverterview.cpp:80
 msgid "Add files..."
 msgstr "Fájlok hozzáadása..."
 
@@ -2726,15 +2726,15 @@ msgstr "Hangerő-korrekciós eszköz..."
 msgid "About plugins..."
 msgstr "A bővítményekről..."
 
-#: soundkonverter.cpp:191 soundkonverterview.cpp:83
+#: soundkonverter.cpp:191 soundkonverterview.cpp:82
 msgid "Add CD tracks..."
 msgstr "CD-számok hozzáadása..."
 
-#: soundkonverter.cpp:196 soundkonverterview.cpp:84
+#: soundkonverter.cpp:196 soundkonverterview.cpp:83
 msgid "Add url..."
 msgstr "Url hozzáadása..."
 
-#: soundkonverter.cpp:201 soundkonverterview.cpp:85
+#: soundkonverter.cpp:201 soundkonverterview.cpp:84
 msgid "Add playlist..."
 msgstr "Lejátszólista hozzáadása..."
 
@@ -2746,27 +2746,27 @@ msgstr "Fájllista betöltése"
 msgid "Save file list"
 msgstr "Fájllista mentése"
 
-#: soundkonverterview.cpp:93 soundkonverterview.cpp:96
+#: soundkonverterview.cpp:92 soundkonverterview.cpp:95
 msgid "Start"
 msgstr "Indítás"
 
-#: soundkonverterview.cpp:103 soundkonverterview.cpp:115
+#: soundkonverterview.cpp:102 soundkonverterview.cpp:114
 msgid "Stop"
 msgstr "Leállítás"
 
-#: soundkonverterview.cpp:104
+#: soundkonverterview.cpp:103
 msgid "Stop imediatelly"
 msgstr "Azonnali leállítás"
 
-#: soundkonverterview.cpp:107
+#: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"
 msgstr "Leállítás a jelenlegi konvertálások után"
 
-#: soundkonverterview.cpp:110
+#: soundkonverterview.cpp:109
 msgid "Continue after current conversions are completed"
 msgstr "Folytatás a jelenlegi konvertálások után"
 
-#: soundkonverterview.cpp:283
+#: soundkonverterview.cpp:279
 msgid "No CD device found"
 msgstr "Nem található CD-meghajtó"
 

@@ -682,17 +682,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                     CoverData *newCover = new CoverData( image_data, TStringToQString(mimeTypeValue[i]), CoverData::FrontCover, TStringToQString(descriptionValue[i]) );
                     covers.append( newCover );
                 }
-
-//                 if( map.contains("COVERART") )//COVERARTMIME,COVERARTDESCRIPTION
-//                 {
-//                     QByteArray image_data_b64(map["COVERART"].toString().toCString());
-//                     QByteArray image_data = QByteArray::fromBase64(image_data_b64);
-//
-// //                     if( !tagData->cover.loadFromData( image_data ) )
-// //                         tagData->cover.loadFromData( image_data_b64 );
-//                     CoverData *newCover = new CoverData( image_data, QString(), CoverData::FrontCover );
-//                     covers.append( newCover );
-//                 }
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )

@@ -155,7 +155,7 @@ The Log Viewer will now open in a new window.
 3. By default the Log Viewer will show the log of the soundKonverter application, sending me this log won't hurt.
 4. But the more important log is the log for the file you just tried to convert in step 1. To see that log, click on the combo box (drop down box) at the top of the Log Viewer window and select the file.
 5. To save a log to a file, click on the "Save to file..." button on the bottom of the Log Viewer.
-6. Attache latter or both log files to your bug report.
+6. Attach latter or both log files to your bug report.
 
 In case of a crash:
 After soundKonverter has crashed a new window should appear. It's KDE's crash handler and it has two tabs.

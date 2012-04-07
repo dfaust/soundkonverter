@@ -239,6 +239,12 @@ void FileList::resizeEvent( QResizeEvent *event )
 
 int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
 {
+//     debug
+//     if( fast )
+//         logger->log( 1000, "@listDir fast: " + directory );
+//     else
+//         logger->log( 1000, "@listDir: " + directory );
+
     QString codecName;
 
     QDir dir( directory );
@@ -316,7 +322,8 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
                 kapp->processEvents();
             }
 
-            logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
+//             debug
+//             logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
 
             addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
             continue;
@@ -377,13 +384,13 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     }
 
     emit fileCountChanged( topLevelItemCount() );
-
-    if( QObject::sender() == optionsLayer )
-        save( false );
 }
 
 void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
 {
+//     debug
+//     logger->log( 1000, "@addDir: " + directory.toLocalFile() );
+
     TimeCount = 0;
 
     if( !conversionOptions )

@@ -132,6 +132,7 @@ void OptionsLayer::ok()
         pCancel->setDisabled( true );
         kapp->processEvents();
         emit done( urls, conversionOptions, command );
+        emit saveFileList();
         fadeOut();
     }
     else

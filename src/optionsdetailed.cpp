@@ -358,6 +358,12 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
                 return false;
         }
 
+        if( profileName.isEmpty() )
+        {
+            KMessageBox::information( this, i18n("You cannot save a profile without a name."), i18n("Profile name is empty") );
+            return false;
+        }
+
         QStringList profiles;
         profiles += i18n("Very low");
         profiles += i18n("Low");

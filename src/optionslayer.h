@@ -1,7 +1,7 @@
 //
 // C++ Interface: optionslayer
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -50,7 +50,7 @@ private:
     QTimer fadeTimer;
     float fadeAlpha;
     int fadeMode; // 1 = fade in, 2 = fade out
-    
+
     KUrl::List urls;
     QString command;
 
@@ -61,7 +61,7 @@ private:
         brush.setColor( color );
         return brush;
     }
-    
+
 public slots:
     /** Set the current profile */
     void setProfile( const QString& profile );
@@ -79,9 +79,10 @@ private slots:
     void fadeAnim();
     void abort();
     void ok();
-    
+
 signals:
     void done( const KUrl::List& urls, ConversionOptions *options, const QString& command );
+    void saveFileList();
 
 };
 

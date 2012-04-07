@@ -50,7 +50,6 @@ public:
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 
     void load( bool user = false );
-    void save( bool user = false );
     void updateAllItems();
     void updateItem( FileListItem *item );
 
@@ -128,6 +127,8 @@ public slots:
     void killConversion();
     void stopConversion();
     void continueConversion();
+
+    void save( bool user = false );
 
     // connected to Convert
     /**

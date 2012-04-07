@@ -150,7 +150,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         for( int i=0; i<encodeCodecs.count(); i++ )
         {
             const QString codecName = encodeCodecs.keys().at(i);
-            problemInfos["encode-"+codecName] = config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
+            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
             list += encodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
         }
         codecsString += i18n("Encode: %1",list.join(", "));
@@ -158,7 +158,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         for( int i=0; i<decodeCodecs.count(); i++ )
         {
             const QString codecName = decodeCodecs.keys().at(i);
-            problemInfos["decode-"+codecName] = config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
+            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
             list += decodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
         }
         codecsString += i18n("Decode: %1",list.join(", "));
@@ -173,7 +173,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         for( int i=0; i<codecTable.count(); i++ )
         {
             const QString codecName = codecTable.at(i).codecName;
-            problemInfos["replaygain-"+codecName] = config->pluginLoader()->pluginReplayGainProblems( pluginName, codecName );
+            problemInfos["replaygain-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginReplayGainProblems( pluginName, codecName );
             codecs += codecTable.at(i).enabled ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"replaygain-"+codecName+"\">" + codecName + "</a>";
         }
         info += QString( i18n("Supported codecs:") + "<br>" + codecs.join(", ") );

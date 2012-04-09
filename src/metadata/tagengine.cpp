@@ -39,6 +39,7 @@
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
 # define TAGLIB_HAS_FLAC_PICTURELIST
+# define TAGLIB_HAS_ASF_PICTURE
 #endif
 
 
@@ -735,6 +736,7 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
             TagLib::ASF::Tag *asftag = dynamic_cast< TagLib::ASF::Tag * >( file->tag() );
             if( asftag )
             {
+                #ifdef TAGLIB_HAS_ASF_PICTURE
                 TagLib::ASF::AttributeListMap map = asftag->attributeListMap();
                 for( TagLib::ASF::AttributeListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
                 {
@@ -756,6 +758,7 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                         }
                     }
                 }
+                #endif // TAGLIB_HAS_ASF_PICTURE
             }
         }
     }
@@ -836,6 +839,7 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
             TagLib::ASF::Tag *asftag = dynamic_cast< TagLib::ASF::Tag * >( file->tag() );
             if( asftag )
             {
+                #ifdef TAGLIB_HAS_ASF_PICTURE
                 foreach( CoverData *cover, covers )
                 {
                     TagLib::ASF::Picture *newPicture = new TagLib::ASF::Picture();
@@ -848,6 +852,7 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
 
                     asftag->addAttribute( TagLib::String("WM/Picture"), TagLib::ASF::Attribute( newPicture->render() ) );
                 }
+                #endif // TAGLIB_HAS_ASF_PICTURE
             }
 
             return fileref.save();

@@ -6,6 +6,7 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 find_package(Cdparanoia REQUIRED)
+find_package(Kcddb REQUIRED)
 
 set(TAGLIB_MIN_VERSION "1.4")
 find_package(Taglib REQUIRED)

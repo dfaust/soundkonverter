@@ -329,6 +329,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
 
     audioOutput = new Phonon::AudioOutput( Phonon::MusicCategory, this );
+    audioOutput->setVolume( 0.5 );
     mediaObject = new Phonon::MediaObject( this );
     mediaObject->setTickInterval( 500 );
 

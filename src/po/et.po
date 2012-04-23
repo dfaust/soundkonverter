@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-03-18 11:54+0100\n"
+"POT-Creation-Date: 2012-04-23 11:58+0200\n"
 "PO-Revision-Date: 2012-03-17 18:19+0000\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -52,6 +52,10 @@ msgstr "%1 (ei leitud)"
 #: aboutplugins.cpp:148 aboutplugins.cpp:179
 msgid "Supported codecs:"
 msgstr "Toetatud koodekid:"
+
+#: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
+msgid "Currently deactivated."
+msgstr ""
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -171,21 +175,21 @@ msgstr "või"
 msgid "Affected files:"
 msgstr "Mõjutatud failid:"
 
-#: config.cpp:48 config.cpp:50 config.cpp:346 config.cpp:391
+#: config.cpp:48 config.cpp:50 config.cpp:345 config.cpp:390
 #: configdialog/configgeneralpage.cpp:43 configdialog/configgeneralpage.cpp:58
-#: configdialog/configgeneralpage.cpp:203
-#: configdialog/configgeneralpage.cpp:205
-#: configdialog/configgeneralpage.cpp:209
-#: configdialog/configgeneralpage.cpp:214
-#: configdialog/configgeneralpage.cpp:219 options.cpp:50 options.cpp:71
-#: options.cpp:91 optionsdetailed.cpp:369
+#: configdialog/configgeneralpage.cpp:202
+#: configdialog/configgeneralpage.cpp:204
+#: configdialog/configgeneralpage.cpp:208
+#: configdialog/configgeneralpage.cpp:213
+#: configdialog/configgeneralpage.cpp:218 options.cpp:50 options.cpp:71
+#: options.cpp:91 optionsdetailed.cpp:375
 msgid "Last used"
 msgstr "Viimati kasutatud"
 
-#: config.cpp:49 config.cpp:350 config.cpp:357 config.cpp:363
+#: config.cpp:49 config.cpp:349 config.cpp:356 config.cpp:362
 #: configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:207 options.cpp:80
-#: optionsdetailed.cpp:365 optionssimple.cpp:158 optionssimple.cpp:198
+#: configdialog/configgeneralpage.cpp:206 options.cpp:80
+#: optionsdetailed.cpp:371 optionssimple.cpp:158 optionssimple.cpp:198
 #: optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:210
@@ -208,16 +212,16 @@ msgstr "Viimati kasutatud"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:267
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:207
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:254
-#: soundkonverterview.cpp:434 soundkonverterview.cpp:436
+#: soundkonverterview.cpp:435 soundkonverterview.cpp:437
 msgid "High"
 msgstr "Kõrge"
 
-#: config.cpp:260 config.cpp:283 config.cpp:285
+#: config.cpp:259 config.cpp:282 config.cpp:284
 msgid "Try internal"
 msgstr "Proovitakse sisemist"
 
-#: config.cpp:347 config.cpp:363 configdialog/configgeneralpage.cpp:59
-#: configdialog/configgeneralpage.cpp:207 optionsdetailed.cpp:362
+#: config.cpp:346 config.cpp:362 configdialog/configgeneralpage.cpp:59
+#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:368
 #: optionssimple.cpp:155 optionssimple.cpp:180 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
@@ -240,12 +244,12 @@ msgstr "Proovitakse sisemist"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:231
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:195
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:219
-#: soundkonverterview.cpp:419 soundkonverterview.cpp:421
+#: soundkonverterview.cpp:420 soundkonverterview.cpp:422
 msgid "Very low"
 msgstr "Väga madal"
 
-#: config.cpp:348 config.cpp:363 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:207 optionsdetailed.cpp:363
+#: config.cpp:347 config.cpp:362 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:369
 #: optionssimple.cpp:156 optionssimple.cpp:186 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
@@ -268,12 +272,12 @@ msgstr "Väga madal"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:244
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:199
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:231
-#: soundkonverterview.cpp:424 soundkonverterview.cpp:426
+#: soundkonverterview.cpp:425 soundkonverterview.cpp:427
 msgid "Low"
 msgstr "Madal"
 
-#: config.cpp:349 config.cpp:363 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:207 optionsdetailed.cpp:364
+#: config.cpp:348 config.cpp:362 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:370
 #: optionssimple.cpp:157 optionssimple.cpp:192 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:202
@@ -296,12 +300,12 @@ msgstr "Madal"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:256
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:203
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:243
-#: soundkonverterview.cpp:429 soundkonverterview.cpp:431
+#: soundkonverterview.cpp:430 soundkonverterview.cpp:432
 msgid "Medium"
 msgstr "Keskmine"
 
-#: config.cpp:351 config.cpp:363 configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:207 optionsdetailed.cpp:366
+#: config.cpp:350 config.cpp:362 configdialog/configgeneralpage.cpp:63
+#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:372
 #: optionssimple.cpp:159 optionssimple.cpp:204 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:218
@@ -324,12 +328,12 @@ msgstr "Keskmine"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:278
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:211
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:265
-#: soundkonverterview.cpp:439 soundkonverterview.cpp:441
+#: soundkonverterview.cpp:440 soundkonverterview.cpp:442
 msgid "Very high"
 msgstr "Väga kõrge"
 
-#: config.cpp:352 config.cpp:367 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:212 optionsdetailed.cpp:367
+#: config.cpp:351 config.cpp:366 configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:211 optionsdetailed.cpp:373
 #: optionssimple.cpp:160 optionssimple.cpp:210 optionssimple.cpp:289
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
@@ -357,17 +361,17 @@ msgstr "Väga kõrge"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:191
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:92
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:97
-#: soundkonverterview.cpp:444 soundkonverterview.cpp:446
+#: soundkonverterview.cpp:445 soundkonverterview.cpp:447
 msgid "Lossless"
 msgstr "Kadudeta"
 
-#: config.cpp:353 config.cpp:371 configdialog/configgeneralpage.cpp:217
-#: optionsdetailed.cpp:368 optionssimple.cpp:216 optionssimple.cpp:293
-#: soundkonverterview.cpp:449 soundkonverterview.cpp:451
+#: config.cpp:352 config.cpp:370 configdialog/configgeneralpage.cpp:216
+#: optionsdetailed.cpp:374 optionssimple.cpp:216 optionssimple.cpp:293
+#: soundkonverterview.cpp:450 soundkonverterview.cpp:452
 msgid "Hybrid"
 msgstr "Hübriid"
 
-#: config.cpp:375 optionsdetailed.cpp:371 optionssimple.cpp:163
+#: config.cpp:374 optionsdetailed.cpp:377 optionssimple.cpp:163
 #: optionssimple.cpp:222 optionssimple.cpp:297 optionssimple.cpp:362
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
@@ -384,11 +388,11 @@ msgstr "Hübriid"
 msgid "User defined"
 msgstr "Kasutajamääratud"
 
-#: config.cpp:537
+#: config.cpp:536
 msgid "Convert with soundKonverter"
 msgstr "Teisenda soundKonverteriga..."
 
-#: config.cpp:571
+#: config.cpp:570
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Lisa helitugevuse parandusteave..."
 
@@ -502,8 +506,8 @@ msgstr "Kooder"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1330 convert.cpp:1365
-#: filelist.cpp:496
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1257 filelist.cpp:498
+#: filelist.cpp:508
 msgid "Replay Gain"
 msgstr "Helitugevuse parandus"
 
@@ -641,11 +645,11 @@ msgstr ""
 "Märkimisel hoitakse sama albumi lugusid faililoendis ootel, et neisse albumi "
 "helitugevuse parandusteave lisada."
 
-#: configdialog/configgeneralpage.cpp:139
+#: configdialog/configgeneralpage.cpp:138
 msgid "Create actions menus for the file manager"
 msgstr "Failihalduri toimingumenüüsse kirjete loomine"
 
-#: configdialog/configgeneralpage.cpp:140
+#: configdialog/configgeneralpage.cpp:139
 msgid ""
 "These service menus won't get removed if you uninstall soundKonverter.\n"
 "But you can remove them by diableing this option."
@@ -653,48 +657,48 @@ msgstr ""
 "soundKonverteri eemaldamisel jäävad teenusmenüü kirjeid alles.\n"
 "Selle valiku keelamisel nad kustutatakse."
 
-#: configdialog/configgeneralpage.cpp:149
+#: configdialog/configgeneralpage.cpp:148
 msgid "Group files in the Replay Gain tool by"
 msgstr "Failide rühmitamise alus helitugevuse parandustööriistas"
 
-#: configdialog/configgeneralpage.cpp:152
+#: configdialog/configgeneralpage.cpp:151
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
 msgstr "Albumi sildid ja kataloogid"
 
-#: configdialog/configgeneralpage.cpp:153
+#: configdialog/configgeneralpage.cpp:152
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
 msgstr "Ainult albumi sildid"
 
-#: configdialog/configgeneralpage.cpp:154
+#: configdialog/configgeneralpage.cpp:153
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Ainult kataloogid"
 
-#: convert.cpp:190 convert.cpp:1313
+#: convert.cpp:180 convert.cpp:1240
 msgid "Getting file"
 msgstr "Faili hankimine"
 
-#: convert.cpp:220
+#: convert.cpp:210
 msgid "Copying \"%1\" to \"%2\""
 msgstr "Kopeerimine: \"%1\" -> \"%2\""
 
-#: convert.cpp:252 convert.cpp:401
+#: convert.cpp:242 convert.cpp:410
 msgid "No more backends left to try :("
 msgstr "Pole enam ühtki taustprogrammi proovida :("
 
-#: convert.cpp:262 convert.cpp:301 convert.cpp:1317 filelist.cpp:506
+#: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
 #: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "Teisendamine"
 
-#: convert.cpp:316 convert.cpp:1321
+#: convert.cpp:306 convert.cpp:1248
 msgid "Decoding"
 msgstr "Dekodeerimine"
 
-#: convert.cpp:368
+#: convert.cpp:358
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
@@ -702,158 +706,150 @@ msgstr ""
 "Teisendamine ebaõnnestus. Vähemalt üks kasutatud taustprogrammidest vajab "
 "seadistamist."
 
-#: convert.cpp:384 convert.cpp:1326
+#: convert.cpp:374 convert.cpp:1253
 msgid "Encoding"
 msgstr "Kodeerimine"
 
-#: convert.cpp:397
+#: convert.cpp:391
+msgid "Skipping Replay Gain, Album Gain will be calculated later"
+msgstr ""
+
+#: convert.cpp:406
 msgid "Applying Replay Gain"
 msgstr "Helitugevuse paranduse rakendamine"
 
-#: convert.cpp:440
+#: convert.cpp:439
 msgid "Writing tags"
 msgstr "Metaandmete kirjutamine"
 
-#: convert.cpp:467
+#: convert.cpp:466
 msgid "Moving file to destination"
 msgstr "Faili liigutamine sihtkohta"
 
-#: convert.cpp:474
+#: convert.cpp:473
 msgid "Running user script"
 msgstr "Kasutajaskripti käivitamine"
 
-#: convert.cpp:499
+#: convert.cpp:498
 msgid "Executing next step"
 msgstr "Järgmise sammu alustamine"
 
-#: convert.cpp:614
+#: convert.cpp:619
 msgid "Read tags sucessfully"
 msgstr "Metaandmed edukalt loetud"
 
-#: convert.cpp:618
+#: convert.cpp:623
 msgid "Unable to read tags"
 msgstr "Siltide lugemine pole võimalik"
 
-#: convert.cpp:630 convert.cpp:635
+#: convert.cpp:635 convert.cpp:640
 msgctxt "removing file"
 msgid "Removing: %1"
 msgstr "Eemaldamine: %1"
 
-#: convert.cpp:644
+#: convert.cpp:649
 msgid "An error accured. Error code: %1 (%2)"
 msgstr "Ilmnes viga. Veakood: %1 (%2)"
 
-#: convert.cpp:767 convert.cpp:839
+#: convert.cpp:780 convert.cpp:860
 msgid "Conversion failed. Exit code: %1"
 msgstr "Teisendamine ebaõnnestus. Lõpetamise olek: %1"
 
-#: convert.cpp:865
-msgid "Calculating Replay Gain failed. Exit code: %1"
-msgstr "Helitugevuse parandusteabe arvutamine ebaõnnestus. Lõpetamise olek: %1"
-
-#: convert.cpp:958
+#: convert.cpp:929
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
 msgstr "CD rada %1: %2 - %3"
 
-#: convert.cpp:962
+#: convert.cpp:933
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "CD rada %1"
 
-#: convert.cpp:969 convert.cpp:1252
+#: convert.cpp:940
 msgid "Adding new item to conversion list: '%1'"
 msgstr "Uue üksuse lisamine teisendusloendisse: \"%1\""
 
-#: convert.cpp:976 convert.cpp:1259
+#: convert.cpp:947
 msgid "Got log ID: %1"
 msgstr "Logi-ID käes: %1"
 
-#: convert.cpp:1004
+#: convert.cpp:975
 msgid "Track number: %1, device: %2"
 msgstr "Raja number: %1, seade: %2"
 
-#: convert.cpp:1009 optionseditor.cpp:368
+#: convert.cpp:980 optionseditor.cpp:368
 msgid "Possible conversion strategies:"
 msgstr "Võimalikud teisenduskavad:"
 
-#: convert.cpp:1022
+#: convert.cpp:993
 msgid "File system type: %1"
 msgstr "Failisüsteemi tüüp: %1"
 
-#: convert.cpp:1074
+#: convert.cpp:1050
 msgid ""
 "An error occured, the output file size is less than one percent of the input "
 "file size"
 msgstr ""
 "Ilmnes viga, väljundfaili suurus on alla ühe protsendi sisendfaili suurusest"
 
-#: convert.cpp:1078
+#: convert.cpp:1054
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr "Teisendamine ebaõnnestus, proovitakse uuesti. Lõpetamise olek: -2 (%1)"
 
-#: convert.cpp:1087 convert.cpp:1161
+#: convert.cpp:1063
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Tavaline väljumine"
 
-#: convert.cpp:1089 convert.cpp:1163
+#: convert.cpp:1065
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Kasutaja katkestas"
 
-#: convert.cpp:1091 convert.cpp:1165
+#: convert.cpp:1067
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr "Taustprogrammid tahavad seadistamist"
 
-#: convert.cpp:1093 convert.cpp:1167
+#: convert.cpp:1069
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Ilmnes viga"
 
-#: convert.cpp:1107 convert.cpp:1177
+#: convert.cpp:1091
 msgid "Executing command: \"%1\""
 msgstr "Käivitamine: \"%1\""
 
-#: convert.cpp:1124
+#: convert.cpp:1109
 msgid "Removing partially converted output file"
 msgstr "Pooleldi teisendatud väljundfaili kustutamine"
 
-#: convert.cpp:1129 convert.cpp:1183
+#: convert.cpp:1114
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Faili eemaldamine teisendusloendist. Lõpetamise olek: %1 (%2)"
 
-#: convert.cpp:1131 convert.cpp:1185
+#: convert.cpp:1116
 msgid "Conversion time"
 msgstr "Teisendusaeg"
 
-#: convert.cpp:1132
+#: convert.cpp:1117
 msgid "Output file size"
 msgstr "Väljundfaili maht"
 
-#: convert.cpp:1133
+#: convert.cpp:1118
 msgid "File size ratio"
 msgstr "Failisuuruse suhe"
 
-#: convert.cpp:1250 outputdirectory.cpp:234
-msgid "Unknown Album"
-msgstr "Album teadmata"
-
-#: convert.cpp:1252 convert.cpp:1258
-msgid "Replay Gain for album: %1"
-msgstr "Albumi helitugevuse parandus: %1"
-
-#: convert.cpp:1305 convert.cpp:1359
+#: convert.cpp:1232
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Teadmata"
 
-#: convert.cpp:1322 filelist.cpp:501
+#: convert.cpp:1249 filelist.cpp:513
 msgid "Ripping"
 msgstr "Rippimine"
 
-#: convert.cpp:1339 convert.cpp:1369
+#: convert.cpp:1262
 msgid "Progress: %1"
 msgstr "Edenemine: %1"
 
@@ -1111,7 +1107,7 @@ msgid "Remove"
 msgstr "Eemalda"
 
 #: filelist.cpp:170 opener/fileopener.cpp:117 opener/playlistopener.cpp:121
-#: replaygainscanner/replaygainfilelist.cpp:223 soundkonverterview.cpp:355
+#: replaygainscanner/replaygainfilelist.cpp:223 soundkonverterview.cpp:356
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -1123,43 +1119,43 @@ msgstr ""
 
 #: filelist.cpp:208 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
 #: opener/playlistopener.cpp:193 replaygainscanner/replaygainfilelist.cpp:261
-#: soundkonverterview.cpp:393
+#: soundkonverterview.cpp:394
 msgid "... and %1 more files"
 msgstr "...ja veel %1 faili"
 
-#: filelist.cpp:481
+#: filelist.cpp:488
 msgid "Will be skipped"
 msgstr "Jäetakse vahele"
 
-#: filelist.cpp:485 soundkonverter.cpp:134 soundkonverter.cpp:138
+#: filelist.cpp:492 soundkonverter.cpp:134 soundkonverter.cpp:138
 msgid "Waiting"
 msgstr "Ootel"
 
-#: filelist.cpp:491
+#: filelist.cpp:503
 msgid "Waiting for Replay Gain"
 msgstr "Helitugevuse paranduse ootamine"
 
-#: filelist.cpp:511
+#: filelist.cpp:523
 msgid "Stopped"
 msgstr "Peatatud"
 
-#: filelist.cpp:516
+#: filelist.cpp:528
 msgid "Backend not configured"
 msgstr "Taustprogramm seadistamata"
 
-#: filelist.cpp:521
+#: filelist.cpp:533
 msgid "Disc full"
 msgstr "Ketas täis"
 
-#: filelist.cpp:526
+#: filelist.cpp:538
 msgid "Failed"
 msgstr "Ebaõnnestus"
 
-#: filelist.cpp:543
+#: filelist.cpp:555
 msgid "CD track %1"
 msgstr "CD rada %1"
 
-#: filelist.cpp:1157
+#: filelist.cpp:1264
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1353,112 +1349,112 @@ msgstr ""
 msgid "Audio file(s) to append to the file list"
 msgstr "Nimekirja lisatav(ad) helifail(id)"
 
-#: metadata/tagengine.cpp:90
+#: metadata/tagengine.cpp:63
 msgctxt "cover type"
 msgid "Unclassified"
 msgstr "Määratlemata"
 
-#: metadata/tagengine.cpp:92
+#: metadata/tagengine.cpp:65
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
 msgstr "32x32 px PNG-vormingus faili ikoon"
 
-#: metadata/tagengine.cpp:94
+#: metadata/tagengine.cpp:67
 msgctxt "cover type"
 msgid "File icon"
 msgstr "Faili ikoon"
 
-#: metadata/tagengine.cpp:96
+#: metadata/tagengine.cpp:69
 msgctxt "cover type"
 msgid "Front cover"
 msgstr "Karbi esikülg"
 
-#: metadata/tagengine.cpp:98
+#: metadata/tagengine.cpp:71
 msgctxt "cover type"
 msgid "Back cover"
 msgstr "Karbi tagakülg"
 
-#: metadata/tagengine.cpp:100
+#: metadata/tagengine.cpp:73
 msgctxt "cover type"
 msgid "Leaflet page"
 msgstr "Voldiku lehekülg"
 
-#: metadata/tagengine.cpp:102
+#: metadata/tagengine.cpp:75
 msgctxt "cover type"
 msgid "CD photo"
 msgstr "CD foto"
 
-#: metadata/tagengine.cpp:104
+#: metadata/tagengine.cpp:77
 msgctxt "cover type"
 msgid "Lead artist picture"
 msgstr "Pilt peaesinejast"
 
-#: metadata/tagengine.cpp:106
+#: metadata/tagengine.cpp:79
 msgctxt "cover type"
 msgid "Artist picture"
 msgstr "Pilt esitajast"
 
-#: metadata/tagengine.cpp:108
+#: metadata/tagengine.cpp:81
 msgctxt "cover type"
 msgid "Conductor picture"
 msgstr "Pilt dirigendist"
 
-#: metadata/tagengine.cpp:110
+#: metadata/tagengine.cpp:83
 msgctxt "cover type"
 msgid "Band picture"
 msgstr "Pilt bändist"
 
-#: metadata/tagengine.cpp:112
+#: metadata/tagengine.cpp:85
 msgctxt "cover type"
 msgid "Composer picture"
 msgstr "Pilt heliloojast"
 
-#: metadata/tagengine.cpp:114
+#: metadata/tagengine.cpp:87
 msgctxt "cover type"
 msgid "Lyricist picture"
 msgstr "Pilt sõnade autorist"
 
-#: metadata/tagengine.cpp:116
+#: metadata/tagengine.cpp:89
 msgctxt "cover type"
 msgid "Picture of the recording location"
 msgstr "Pilt lindistuskohast"
 
-#: metadata/tagengine.cpp:118
+#: metadata/tagengine.cpp:91
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
 msgstr "Pilt muusikutest lindistamise ajal"
 
-#: metadata/tagengine.cpp:120
+#: metadata/tagengine.cpp:93
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
 msgstr "Pilt muusikutest esituse ajal"
 
-#: metadata/tagengine.cpp:122
+#: metadata/tagengine.cpp:95
 msgctxt "cover type"
 msgid "Picture from a video"
 msgstr "Kaader filmist/videost"
 
-#: metadata/tagengine.cpp:124
+#: metadata/tagengine.cpp:97
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
 msgstr "Pilt suurest värvilisest kalast"
 
-#: metadata/tagengine.cpp:126
+#: metadata/tagengine.cpp:99
 msgctxt "cover type"
 msgid "Illustration related to the track"
 msgstr "Looga seotud illustratsioon"
 
-#: metadata/tagengine.cpp:128
+#: metadata/tagengine.cpp:101
 msgctxt "cover type"
 msgid "Band logo"
 msgstr "Bändi logo"
 
-#: metadata/tagengine.cpp:130
+#: metadata/tagengine.cpp:103
 msgctxt "cover type"
 msgid "Publisher logo"
 msgstr "Väljaandja logo"
 
-#: metadata/tagengine.cpp:833
+#: metadata/tagengine.cpp:883
 msgctxt "cover file name"
 msgid "cover"
 msgstr "kaanepilt"
@@ -1479,9 +1475,9 @@ msgstr "2. Määra teisendusvalikud"
 msgid "Artist:"
 msgstr "Esitaja:"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:793 opener/cdopener.cpp:961
-#: opener/cdopener.cpp:965 opener/cdopener.cpp:1015 opener/cdopener.cpp:1044
-#: opener/cdopener.cpp:1239
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:794 opener/cdopener.cpp:962
+#: opener/cdopener.cpp:966 opener/cdopener.cpp:1016 opener/cdopener.cpp:1045
+#: opener/cdopener.cpp:1240
 msgid "Various Artists"
 msgstr "Mitu esitajat"
 
@@ -1489,9 +1485,9 @@ msgstr "Mitu esitajat"
 msgid "Composer:"
 msgstr "Helilooja:"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:796 opener/cdopener.cpp:975
-#: opener/cdopener.cpp:979 opener/cdopener.cpp:1025 opener/cdopener.cpp:1050
-#: opener/cdopener.cpp:1240
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:797 opener/cdopener.cpp:976
+#: opener/cdopener.cpp:980 opener/cdopener.cpp:1026 opener/cdopener.cpp:1051
+#: opener/cdopener.cpp:1241
 msgid "Various Composer"
 msgstr "Mitu heliloojat"
 
@@ -1516,7 +1512,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Ripitav"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1009
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1010
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Lugu"
@@ -1553,24 +1549,24 @@ msgstr "Pealkiri:"
 msgid "Comment:"
 msgstr "Kommentaar:"
 
-#: opener/cdopener.cpp:366 opener/diropener.cpp:143 opener/fileopener.cpp:57
+#: opener/cdopener.cpp:367 opener/diropener.cpp:143 opener/fileopener.cpp:57
 #: opener/playlistopener.cpp:43 opener/urlopener.cpp:70 optionslayer.cpp:42
 msgid "Select your desired output options and click on \"Ok\"."
 msgstr "Vali soovitud väljundseaded ja klõpsa \"OK\"."
 
-#: opener/cdopener.cpp:387
+#: opener/cdopener.cpp:388
 msgid "Save cue sheet..."
 msgstr "Salvesta cue-fail..."
 
-#: opener/cdopener.cpp:392
+#: opener/cdopener.cpp:393
 msgid "Request CDDB"
 msgstr "CDDB päring"
 
-#: opener/cdopener.cpp:397
+#: opener/cdopener.cpp:398
 msgid "Rip entire CD to one file"
 msgstr "Kogu CD rippimine üheks failiks"
 
-#: opener/cdopener.cpp:408
+#: opener/cdopener.cpp:409
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1579,7 +1575,7 @@ msgstr ""
 "Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
 "Võimalikud lahendused on toodud allpool.\n"
 
-#: opener/cdopener.cpp:412
+#: opener/cdopener.cpp:413
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1589,84 +1585,84 @@ msgstr ""
 "Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
 "Vaata, kas distro paketihalduris on saadaval rippimisplugin, mis seda toetab."
 
-#: opener/cdopener.cpp:419 opener/diropener.cpp:37 opener/urlopener.cpp:85
+#: opener/cdopener.cpp:420 opener/diropener.cpp:37 opener/urlopener.cpp:85
 msgid "Proceed"
 msgstr "Jätka"
 
-#: opener/cdopener.cpp:422 opener/fileopener.cpp:65
+#: opener/cdopener.cpp:423 opener/fileopener.cpp:65
 #: opener/playlistopener.cpp:51 opener/urlopener.cpp:88 optionslayer.cpp:50
 msgid "Ok"
 msgstr "OK"
 
-#: opener/cdopener.cpp:426 opener/fileopener.cpp:68
+#: opener/cdopener.cpp:427 opener/fileopener.cpp:68
 #: opener/playlistopener.cpp:54 opener/urlopener.cpp:92 optionslayer.cpp:53
 #: replaygainscanner/replaygainscanner.cpp:91
 msgid "Cancel"
 msgstr "Loobu"
 
-#: opener/cdopener.cpp:475
+#: opener/cdopener.cpp:476
 msgid "Select CD-ROM drive"
 msgstr "CD-seadme valimine"
 
-#: opener/cdopener.cpp:475
+#: opener/cdopener.cpp:476
 msgid "Multiple CD-ROM drives where found. Please select one:"
 msgstr "Leiti mitu CD-seadet. Vali üks:"
 
-#: opener/cdopener.cpp:580
+#: opener/cdopener.cpp:581
 msgid "DVD Recorder"
 msgstr "DVD-kirjuti"
 
-#: opener/cdopener.cpp:582 opener/cdopener.cpp:586
+#: opener/cdopener.cpp:583 opener/cdopener.cpp:587
 msgid "CD Recorder"
 msgstr "CD-kirjuti"
 
-#: opener/cdopener.cpp:582 opener/cdopener.cpp:584
+#: opener/cdopener.cpp:583 opener/cdopener.cpp:585
 msgid "DVD Player"
 msgstr "DVD-lugeja"
 
-#: opener/cdopener.cpp:588
+#: opener/cdopener.cpp:589
 msgid "CD Player"
 msgstr "CD-lugeja"
 
-#: opener/cdopener.cpp:589
+#: opener/cdopener.cpp:590
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): audio-CD %3 rajaga"
 
-#: opener/cdopener.cpp:645 opener/cdopener.cpp:646 opener/cdopener.cpp:649
-#: opener/cdopener.cpp:656 opener/cdopener.cpp:657
+#: opener/cdopener.cpp:646 opener/cdopener.cpp:647 opener/cdopener.cpp:650
+#: opener/cdopener.cpp:657 opener/cdopener.cpp:658
 msgid "Unknown"
 msgstr "Teadmata"
 
-#: opener/cdopener.cpp:704
+#: opener/cdopener.cpp:705
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Palun oota, CDDB-st andmete allalaadimine..."
 
-#: opener/cdopener.cpp:749
+#: opener/cdopener.cpp:750
 msgid "Select CDDB Entry"
 msgstr "CDDB kirje valimine"
 
-#: opener/cdopener.cpp:749
+#: opener/cdopener.cpp:750
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Leiti mitu CDDB-kirjet. Vali üks:"
 
-#: opener/cdopener.cpp:923
+#: opener/cdopener.cpp:924
 msgid "All tracks"
 msgstr "Kõik rajad"
 
-#: opener/cdopener.cpp:927
+#: opener/cdopener.cpp:928
 msgid "Tracks"
 msgstr "Rajad"
 
-#: opener/cdopener.cpp:1185
+#: opener/cdopener.cpp:1186
 msgid "Please select at least one track in order to proceed."
 msgstr "Jätkamiseks vali mõni rada."
 
-#: opener/cdopener.cpp:1262 opener/diropener.cpp:199 opener/fileopener.cpp:183
-#: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:139
+#: opener/cdopener.cpp:1263 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "Teisendusvalikud on määramata."
 
-#: opener/cdopener.cpp:1276
+#: opener/cdopener.cpp:1277
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1676,7 +1672,7 @@ msgstr ""
 "\n"
 "Kas tahad olemasoleva üle kirjutada?"
 
-#: opener/cdopener.cpp:1277
+#: opener/cdopener.cpp:1278
 msgid "File already exists"
 msgstr "Fail on juba olemas"
 
@@ -1809,15 +1805,24 @@ msgstr "Uus profiil"
 msgid "Enter a name for the new profile:"
 msgstr "Sisesta uue profiili nimi:"
 
-#: optionsdetailed.cpp:377
+#: optionsdetailed.cpp:363
+msgid "You cannot save a profile without a name."
+msgstr ""
+
+#: optionsdetailed.cpp:363
+#, fuzzy
+msgid "Profile name is empty"
+msgstr "Profiil on juba olemas"
+
+#: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
 msgstr "Sisse-ehitatud profiile pole võimalik üle kirjutada."
 
-#: optionsdetailed.cpp:377 optionsdetailed.cpp:404
+#: optionsdetailed.cpp:383 optionsdetailed.cpp:410
 msgid "Profile already exists"
 msgstr "Profiil on juba olemas"
 
-#: optionsdetailed.cpp:404
+#: optionsdetailed.cpp:410
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
@@ -2110,6 +2115,10 @@ msgstr "Ava väljundkataloog Dolphinis"
 #: outputdirectory.cpp:230
 msgid "Unknown Artist"
 msgstr "Esitaja teadmata"
+
+#: outputdirectory.cpp:234
+msgid "Unknown Album"
+msgstr "Album teadmata"
 
 #: outputdirectory.cpp:238
 msgid "No Comment"
@@ -2655,12 +2664,12 @@ msgid "Replay Gain tool"
 msgstr "Helitugevuse parandustööriist"
 
 #: replaygainscanner/replaygainscanner.cpp:50 soundkonverter.cpp:186
-#: soundkonverterview.cpp:81
+#: soundkonverterview.cpp:82
 msgid "Add folder..."
 msgstr "Lisa kataloog..."
 
 #: replaygainscanner/replaygainscanner.cpp:51 soundkonverter.cpp:181
-#: soundkonverterview.cpp:80
+#: soundkonverterview.cpp:81
 msgid "Add files..."
 msgstr "Lisa faile..."
 
@@ -2700,15 +2709,15 @@ msgstr "Helitugevuse parandustööriist..."
 msgid "About plugins..."
 msgstr "Pluginate info..."
 
-#: soundkonverter.cpp:191 soundkonverterview.cpp:82
+#: soundkonverter.cpp:191 soundkonverterview.cpp:83
 msgid "Add CD tracks..."
 msgstr "Lisa CD-radu..."
 
-#: soundkonverter.cpp:196 soundkonverterview.cpp:83
+#: soundkonverter.cpp:196 soundkonverterview.cpp:84
 msgid "Add url..."
 msgstr "Lisa URL..."
 
-#: soundkonverter.cpp:201 soundkonverterview.cpp:84
+#: soundkonverter.cpp:201 soundkonverterview.cpp:85
 msgid "Add playlist..."
 msgstr "Lisa esitusloend..."
 
@@ -2720,27 +2729,27 @@ msgstr "Laadi faililoend"
 msgid "Save file list"
 msgstr "Salvesta faililoend"
 
-#: soundkonverterview.cpp:92 soundkonverterview.cpp:95
+#: soundkonverterview.cpp:93 soundkonverterview.cpp:96
 msgid "Start"
 msgstr "Alusta"
 
-#: soundkonverterview.cpp:102 soundkonverterview.cpp:114
+#: soundkonverterview.cpp:103 soundkonverterview.cpp:115
 msgid "Stop"
 msgstr "Katkesta"
 
-#: soundkonverterview.cpp:103
+#: soundkonverterview.cpp:104
 msgid "Stop imediatelly"
 msgstr "Katkesta kohe"
 
-#: soundkonverterview.cpp:106
+#: soundkonverterview.cpp:107
 msgid "Stop after current conversions are completed"
 msgstr "Katkesta pärast praeguste teisenduste valmimist"
 
-#: soundkonverterview.cpp:109
+#: soundkonverterview.cpp:110
 msgid "Continue after current conversions are completed"
 msgstr "Jätka pärast praeguste teisenduste valmimist"
 
-#: soundkonverterview.cpp:279
+#: soundkonverterview.cpp:280
 msgid "No CD device found"
 msgstr "CD-seadet ei leitud"
 
@@ -2767,3 +2776,10 @@ msgstr "Helifailide teisendaja"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripi audio-CD soundKonverteriga"
+
+#~ msgid "Calculating Replay Gain failed. Exit code: %1"
+#~ msgstr ""
+#~ "Helitugevuse parandusteabe arvutamine ebaõnnestus. Lõpetamise olek: %1"
+
+#~ msgid "Replay Gain for album: %1"
+#~ msgstr "Albumi helitugevuse parandus: %1"

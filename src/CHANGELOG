@@ -1,6 +1,8 @@
+1.4.90 (1.5.0 rc1):
+-Add: Copy embedded covers for wma files
+
 1.4.0:
 -Add: Show progress bar when loading file lists
--Add: Copy embedded covers for wma files
 
 1.3.90 (1.4.0 rc1):
 -Add: TTA Enc plugin

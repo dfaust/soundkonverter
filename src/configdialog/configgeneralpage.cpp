@@ -123,16 +123,15 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( 5 );
 
-//     QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout( 0 );
-//     box->addLayout( waitForAlbumGainBox );
+    QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout( 0 );
+    box->addLayout( waitForAlbumGainBox );
     cWaitForAlbumGain = new QCheckBox( i18n("Apply album gain to converted files"), this );
     cWaitForAlbumGain->setToolTip( i18n("Keep songs of the same album waiting in file list in order to apply album gain to all files.") );
     cWaitForAlbumGain->setChecked( config->data.general.waitForAlbumGain );
-    cWaitForAlbumGain->hide();
-//     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
-//     connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+    waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
+    connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
 
-//     box->addSpacing( 5 );
+    box->addSpacing( 5 );
 
     QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
     box->addLayout( createActionsMenuBox );

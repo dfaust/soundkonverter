@@ -51,7 +51,45 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
 
     QStyleOptionViewItem _option = option;
 
-    if( item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
+    bool isWaiting = false;
+    bool isConverting = false;
+    bool isFailed = false;
+    if( item )
+    {
+        switch( item->state )
+        {
+            case FileListItem::WaitingForConversion:
+                break;
+            case FileListItem::Ripping:
+                isConverting = true;
+                break;
+            case FileListItem::Converting:
+                isConverting = true;
+                break;
+            case FileListItem::ApplyingReplayGain:
+                isConverting = true;
+                break;
+            case FileListItem::WaitingForAlbumGain:
+                isWaiting = true;
+                break;
+            case FileListItem::ApplyingAlbumGain:
+                isConverting = true;
+                break;
+            case FileListItem::Stopped:
+                break;
+            case FileListItem::BackendNeedsConfiguration:
+                isFailed = true;
+                break;
+            case FileListItem::DiscFull:
+                isFailed = true;
+                break;
+            case FileListItem::Failed:
+                isFailed = true;
+                break;
+        }
+    }
+
+    if( isConverting )
     {
         if( option.state & QStyle::State_Selected )
         {
@@ -62,7 +100,7 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
             backgroundColor = QColor(255,234,234); // hsv:   0,  21, 255
         }
     }
-    else if( item->state == FileListItem::Failed )
+    else if( isFailed )
     {
         if( option.state & QStyle::State_Selected )
         {
@@ -73,7 +111,7 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
             backgroundColor = QColor(255,157,65);  // hsv:  29, 190, 255
         }
     }
-    else if( item->state == FileListItem::WaitingForAlbumGain )
+    else if( isWaiting )
     {
         if( option.state & QStyle::State_Selected )
         {

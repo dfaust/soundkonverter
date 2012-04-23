@@ -53,6 +53,8 @@ public:
     void updateAllItems();
     void updateItem( FileListItem *item );
 
+    bool waitForAlbumGain( FileListItem *item );
+
 private:
     /** Lists all file in a directory and adds them to the file list, if fast is false. The number of listed files is returned */
     int listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast = false, int count = 0 );
@@ -115,7 +117,7 @@ private slots:
     void selectPreviousItem();
     void selectNextItem();
 
-    bool checkWaitingForAlbumGain();
+//     bool checkWaitingForAlbumGain();
 
 public slots:
     // connected to soundKonverterView
@@ -138,9 +140,10 @@ public slots:
      * 1   = aborted
      * 100 = backend needs configuration
      * 101 = disc is full
+     * 102 = waiting for album gain
      */
     void itemFinished( FileListItem*, int );
-    void replaygainFinished( QList<FileListItem*>, int );
+//     void replaygainFinished( QList<FileListItem*>, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );
 

@@ -103,7 +103,7 @@ FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
 
 FileList::~FileList()
 {
-    // NOTE no cleanup needed since it all gets cleand up in other classes
+    // NOTE no cleanup needed since it all gets cleaned up in other classes
 
     if( !KApplication::kApplication()->sessionSaving() )
     {
@@ -341,7 +341,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
                 continue;
         }
 
-        FileListItem *newItem = new FileListItem( this, lastListItem );
+        FileListItem * const newItem = new FileListItem( this, lastListItem );
         if( conversionOptionsId == -1 )
         {
             if( batchNumber == 0 )
@@ -493,12 +493,17 @@ void FileList::updateItem( FileListItem *item )
             }
             break;
         }
+        case FileListItem::ApplyingReplayGain:
+        {
+            item->setText( Column_State, i18n("Replay Gain") );
+            break;
+        }
         case FileListItem::WaitingForAlbumGain:
         {
             item->setText( Column_State, i18n("Waiting for Replay Gain") );
             break;
         }
-        case FileListItem::ApplyingReplayGain:
+        case FileListItem::ApplyingAlbumGain:
         {
             item->setText( Column_State, i18n("Replay Gain") );
             break;
@@ -585,11 +590,38 @@ void FileList::startConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Stopped ||
-            item->state == FileListItem::BackendNeedsConfiguration ||
-            item->state == FileListItem::DiscFull ||
-            item->state == FileListItem::Failed
-          )
+        bool isStopped = false;
+        if( item )
+        {
+            switch( item->state )
+            {
+                case FileListItem::WaitingForConversion:
+                    break;
+                case FileListItem::Ripping:
+                    break;
+                case FileListItem::Converting:
+                    break;
+                case FileListItem::ApplyingReplayGain:
+                    break;
+                case FileListItem::WaitingForAlbumGain:
+                    break;
+                case FileListItem::ApplyingAlbumGain:
+                    break;
+                case FileListItem::Stopped:
+                    isStopped = true;
+                    break;
+                case FileListItem::BackendNeedsConfiguration:
+                    isStopped = true;
+                    break;
+                case FileListItem::DiscFull:
+                    isStopped = true;
+                    break;
+                case FileListItem::Failed:
+                    isStopped = true;
+                    break;
+            }
+        }
+        if( isStopped )
         {
             item->state = FileListItem::WaitingForConversion;
             updateItem( item );
@@ -611,13 +643,38 @@ void FileList::killConversion()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Ripping ||
-            item->state == FileListItem::Converting ||
-            item->state == FileListItem::ApplyingReplayGain
-          )
+        bool canKill = false;
+        if( item )
         {
-            emit killItem( item );
+            switch( item->state )
+            {
+                case FileListItem::WaitingForConversion:
+                    break;
+                case FileListItem::Ripping:
+                    canKill = true;
+                    break;
+                case FileListItem::Converting:
+                    canKill = true;
+                    break;
+                case FileListItem::ApplyingReplayGain:
+                    canKill = true;
+                    break;
+                case FileListItem::WaitingForAlbumGain:
+                    break;
+                case FileListItem::ApplyingAlbumGain:
+                    break;
+                case FileListItem::Stopped:
+                    break;
+                case FileListItem::BackendNeedsConfiguration:
+                    break;
+                case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Failed:
+                    break;
+            }
         }
+        if( canKill )
+            emit killItem( item );
     }
 }
 
@@ -699,14 +756,39 @@ int FileList::convertingCount()
 {
     int count = 0;
     FileListItem *item;
+    QString albumName;
 
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem( i );
-        if( item->state == FileListItem::Ripping ||
-            item->state == FileListItem::Converting ||
-            item->state == FileListItem::ApplyingReplayGain
-          )
+        bool isConverting = false;
+        switch( item->state )
+        {
+            case FileListItem::WaitingForConversion:
+                break;
+            case FileListItem::Ripping:
+                isConverting = true;
+                break;
+            case FileListItem::Converting:
+                isConverting = true;
+                break;
+            case FileListItem::ApplyingReplayGain:
+                isConverting = true;
+                break;
+            case FileListItem::WaitingForAlbumGain:
+                break;
+            case FileListItem::ApplyingAlbumGain:
+                break;
+            case FileListItem::Stopped:
+                break;
+            case FileListItem::BackendNeedsConfiguration:
+                break;
+            case FileListItem::DiscFull:
+                break;
+            case FileListItem::Failed:
+                break;
+        }
+        if( isConverting )
             count++;
     }
 
@@ -734,50 +816,39 @@ int FileList::convertingCount()
 
 void FileList::itemFinished( FileListItem *item, int state )
 {
-    bool calculatingAlbumGain = false;
-
     if( item )
     {
         if( state == 0 )
         {
-            ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
-            if( conversionOptions && conversionOptions->replaygain && config->data.general.waitForAlbumGain )
-            {
-                item->state = FileListItem::WaitingForAlbumGain;
-                updateItem( item );
-                calculatingAlbumGain = checkWaitingForAlbumGain();
-            }
-            else
-            {
-                config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-                emit itemRemoved( item );
-                if( item->tags )
-                    delete item->tags;
-                delete item;
-    //         itemsSelected();
-            }
+            config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
+            emit itemRemoved( item );
+            delete item;
+            item = 0;
         }
         else if( state == 1 )
         {
             item->state = FileListItem::Stopped;
-            updateItem( item );
         }
         else if( state == 100 )
         {
             item->state = FileListItem::BackendNeedsConfiguration;
-            updateItem( item );
         }
         else if( state == 101 )
         {
             item->state = FileListItem::DiscFull;
-            updateItem( item );
+        }
+        else if( state == 102 )
+        {
+            item->state = FileListItem::WaitingForAlbumGain;
         }
         else
         {
             item->state = FileListItem::Failed;
-            updateItem( item );
         }
     }
+
+    if( item )
+        updateItem( item );
 
     // FIXME disabled until saving gets faster
 //     save( false );
@@ -786,7 +857,7 @@ void FileList::itemFinished( FileListItem *item, int state )
     {
         convertNextItem();
     }
-    else if( convertingCount() == 0 && !calculatingAlbumGain )
+    else if( convertingCount() == 0 )
     {
         queue = false;
         save( false );
@@ -804,134 +875,52 @@ void FileList::itemFinished( FileListItem *item, int state )
     }
 }
 
-bool FileList::checkWaitingForAlbumGain()
+bool FileList::waitForAlbumGain( FileListItem *item ) // TODO was ist wenn die datei unten drunter schon fertig ist, was ist wenn eine datei oben drpber noch nicht fertig ist
 {
-    QString albumName;
-    QString codecName;
-    QList<FileListItem*> items;
+    if( !config->data.general.waitForAlbumGain )
+        return false;
 
-    for( int i=0; i<topLevelItemCount(); i++ )
+    if( !item || !item->tags )
+        return false;
+
+    if( item->tags->album.isEmpty() )
+        return false;
+
+    FileListItem *nextItem;
+
+    nextItem = item;
+    while( ( nextItem = (FileListItem*)itemAbove(nextItem) ) )
     {
-        FileListItem *item = topLevelItem( i );
-        if( item->state == FileListItem::WaitingForAlbumGain )
+        if( nextItem && nextItem->tags && nextItem->tags->album == item->tags->album )
         {
-            ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
-
-            if( item->tags )
+            if( nextItem->state != FileListItem::WaitingForAlbumGain )
             {
-                if( albumName.isEmpty() )
-                    albumName = item->tags.data()->album;
-
-                if( codecName.isEmpty() )
-                    codecName = conversionOptions->codecName;
-
-                if( item->tags.data()->album == albumName && conversionOptions->codecName == codecName )
-                {
-                    items.append( item );
-                }
-                else
-                {
-                    break;
-                }
+                return true;
             }
-            else
-            {
-                items.append( item );
-                break;
-            }
-        }
-        else if( item->state == FileListItem::WaitingForConversion || item->state == FileListItem::Ripping || item->state == FileListItem::Converting || item->state == FileListItem::ApplyingReplayGain )
-        {
-            if( item->tags )
-            {
-                ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
-
-                if( items.isEmpty() )
-                {
-                    continue;
-                }
-                else if( item->tags.data()->album == albumName && conversionOptions->codecName == codecName )
-                {
-                    albumName.clear();
-                    codecName.clear();
-                    items.clear();
-                    break; // NOTE this way album gain will be worked off in the order of the file list, not which album finishes conversion first but it is faster with big file lists
-                }
-                else
-                {
-                    break;
-                }
-            }
-            else
-            {
-                if( albumName.isEmpty() )
-                {
-                    continue;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-    }
-
-    if( items.count() > 0 )
-    {
-        for( int i=0; i<items.count(); i++ )
-        {
-            items[i]->state = FileListItem::ApplyingReplayGain;
-            updateItem( items.at(i) );
-        }
-        emit replaygainItems( items );
-        return true;
-    }
-    else
-    {
-        // tigger conversion of the next item
-        itemFinished( 0, 0 );
-    }
-
-    return false;
-}
-
-void FileList::replaygainFinished( QList<FileListItem*> items, int state )
-{
-    // TODO check for errors
-    for( int i=0; i<items.count(); i++ )
-    {
-        if( state == 0 )
-        {
-            config->conversionOptionsManager()->removeConversionOptions( items.at(i)->conversionOptionsId );
-            emit itemRemoved( items.at(i) );
-            if( items.at(i)->tags )
-                delete items.at(i)->tags;
-            delete items.at(i);
-//             itemsSelected();
-        }
-        else if( state == 1 )
-        {
-            items[i]->state = FileListItem::Stopped;
-            updateItem( items.at(i) );
-        }
-        else if( state == 100 )
-        {
-            items[i]->state = FileListItem::BackendNeedsConfiguration;
-            updateItem( items.at(i) );
-        }
-        else if( state == 101 )
-        {
-            items[i]->state = FileListItem::DiscFull;
-            updateItem( items.at(i) );
         }
         else
         {
-            items[i]->state = FileListItem::Failed;
-            updateItem( items.at(i) );
+            break;
         }
     }
 
-    checkWaitingForAlbumGain();
+    nextItem = item;
+    while( ( nextItem = (FileListItem*)itemBelow(nextItem) ) )
+    {
+        if( nextItem && nextItem->tags && nextItem->tags->album == item->tags->album )
+        {
+            if( nextItem->state != FileListItem::WaitingForAlbumGain )
+            {
+                return true;
+            }
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    return false;
 }
 
 void FileList::rippingFinished( const QString& device )
@@ -958,7 +947,7 @@ void FileList::rippingFinished( const QString& device )
 
 void FileList::showContextMenu( const QPoint& point )
 {
-    FileListItem *item = (FileListItem*)itemAt( point );
+    const FileListItem * const item = (FileListItem*)itemAt( point );
 
     // if item is null, we can abort here
     if( !item )
@@ -972,12 +961,50 @@ void FileList::showContextMenu( const QPoint& point )
     contextMenu->clear();
 
     // is this file (of our item) beeing converted at the moment?
-    if( item->state == FileListItem::WaitingForConversion ||
-        item->state == FileListItem::Stopped ||
-        item->state == FileListItem::BackendNeedsConfiguration ||
-        item->state == FileListItem::DiscFull ||
-        item->state == FileListItem::Failed
-      )
+    bool isConverting = false;
+    if( item )
+    {
+        switch( item->state )
+        {
+            case FileListItem::WaitingForConversion:
+                break;
+            case FileListItem::Ripping:
+                isConverting = true;
+                break;
+            case FileListItem::Converting:
+                isConverting = true;
+                break;
+            case FileListItem::ApplyingReplayGain:
+                isConverting = true;
+                break;
+            case FileListItem::WaitingForAlbumGain:
+                break;
+            case FileListItem::ApplyingAlbumGain:
+                break;
+            case FileListItem::Stopped:
+                break;
+            case FileListItem::BackendNeedsConfiguration:
+                break;
+            case FileListItem::DiscFull:
+                break;
+            case FileListItem::Failed:
+                break;
+        }
+    }
+    if( item->state == FileListItem::ApplyingAlbumGain )
+    {
+    }
+    if( item->state == FileListItem::WaitingForAlbumGain )
+    {
+        contextMenu->addAction( removeAction );
+    }
+    else if( isConverting )
+    {
+        //contextMenu->addAction( paste );
+        //contextMenu->addSeparator();
+        contextMenu->addAction( stopAction );
+    }
+    else
     {
         contextMenu->addAction( editAction );
         contextMenu->addSeparator();
@@ -985,12 +1012,6 @@ void FileList::showContextMenu( const QPoint& point )
         //contextMenu->addAction( paste );
         contextMenu->addSeparator();
         contextMenu->addAction( startAction );
-    }
-    else
-    {
-        //contextMenu->addAction( paste );
-        //contextMenu->addSeparator();
-        contextMenu->addAction( stopAction );
     }
 
     // show the popup menu
@@ -1021,7 +1042,7 @@ void FileList::showOptionsEditorDialog()
 
 void FileList::selectPreviousItem()
 {
-    QTreeWidgetItem *item = itemAbove( selectedItems().first() );
+    QTreeWidgetItem * const item = itemAbove( selectedItems().first() );
 
     if( !item )
         return;
@@ -1043,7 +1064,7 @@ void FileList::selectPreviousItem()
 
 void FileList::selectNextItem()
 {
-    QTreeWidgetItem *item = itemBelow( selectedItems().last() );
+    QTreeWidgetItem * const item = itemBelow( selectedItems().last() );
 
     if( !item )
         return;
@@ -1070,20 +1091,45 @@ void FileList::removeSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item && item->isSelected() &&
-            ( item->state == FileListItem::WaitingForConversion ||
-              item->state == FileListItem::WaitingForAlbumGain ||
-              item->state == FileListItem::Stopped ||
-              item->state == FileListItem::Failed
-            )
-          )
+        bool canRemove = false;
+        if( item && item->isSelected() )
         {
-            emit timeChanged( -item->length );
-            config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-            emit itemRemoved( item );
-            if( item->tags )
-                delete item->tags;
-            delete item;
+            switch( item->state )
+            {
+                case FileListItem::WaitingForConversion:
+                    canRemove = true;
+                    break;
+                case FileListItem::Ripping:
+                    break;
+                case FileListItem::Converting:
+                    break;
+                case FileListItem::ApplyingReplayGain:
+                    break;
+                case FileListItem::WaitingForAlbumGain:
+                    canRemove = true;
+                    break;
+                case FileListItem::ApplyingAlbumGain:
+                    break;
+                case FileListItem::Stopped:
+                    canRemove = true;
+                    break;
+                case FileListItem::BackendNeedsConfiguration:
+                    canRemove = true;
+                    break;
+                case FileListItem::DiscFull:
+                    canRemove = true;
+                    break;
+                case FileListItem::Failed:
+                    canRemove = true;
+                    break;
+            }
+            if( canRemove )
+            {
+                emit timeChanged( -item->length );
+                config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
+                emit itemRemoved( item );
+                delete item;
+            }
         }
     }
     emit fileCountChanged( topLevelItemCount() );
@@ -1099,12 +1145,39 @@ void FileList::convertSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->state == FileListItem::WaitingForConversion ||
-            item->state == FileListItem::Stopped ||
-            item->state == FileListItem::BackendNeedsConfiguration ||
-            item->state == FileListItem::DiscFull ||
-            item->state == FileListItem::Failed
-          )
+        bool canConvert = false;
+        if( item )
+        {
+            switch( item->state )
+            {
+                case FileListItem::WaitingForConversion:
+                    canConvert = true;
+                    break;
+                case FileListItem::Ripping:
+                    break;
+                case FileListItem::Converting:
+                    break;
+                case FileListItem::ApplyingReplayGain:
+                    break;
+                case FileListItem::WaitingForAlbumGain:
+                    break;
+                case FileListItem::ApplyingAlbumGain:
+                    break;
+                case FileListItem::Stopped:
+                    canConvert = true;
+                    break;
+                case FileListItem::BackendNeedsConfiguration:
+                    canConvert = true;
+                    break;
+                case FileListItem::DiscFull:
+                    canConvert = true;
+                    break;
+                case FileListItem::Failed:
+                    canConvert = true;
+                    break;
+            }
+        }
+        if( canConvert )
         {
             // emit conversionStarted first because in case the plugin reports an error the conversion stop immediately
             // and the itemFinished slot gets called. If conversionStarted was emitted at the end of this function
@@ -1125,10 +1198,37 @@ void FileList::killSelectedItems()
     for( int i=0; i<items.size(); i++ )
     {
         item = (FileListItem*)items.at(i);
-        if( item->state == FileListItem::Converting ||
-            item->state == FileListItem::Ripping ||
-            item->state == FileListItem::ApplyingReplayGain
-          )
+        bool canKill = false;
+        if( item )
+        {
+            switch( item->state )
+            {
+                case FileListItem::WaitingForConversion:
+                    break;
+                case FileListItem::Ripping:
+                    canKill = true;
+                    break;
+                case FileListItem::Converting:
+                    canKill = true;
+                    break;
+                case FileListItem::ApplyingReplayGain:
+                    canKill = true;
+                    break;
+                case FileListItem::WaitingForAlbumGain:
+                    break;
+                case FileListItem::ApplyingAlbumGain:
+                    break;
+                case FileListItem::Stopped:
+                    break;
+                case FileListItem::BackendNeedsConfiguration:
+                    break;
+                case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Failed:
+                    break;
+            }
+        }
+        if( canKill )
             emit killItem( item );
     }
 }
@@ -1168,18 +1268,42 @@ void FileList::load( bool user )
             for( int i=0; i<topLevelItemCount(); i++ )
             {
                 item = topLevelItem(i);
-                if( item->state == FileListItem::WaitingForConversion ||
-                    item->state == FileListItem::WaitingForAlbumGain ||
-                    item->state == FileListItem::Stopped ||
-                    item->state == FileListItem::BackendNeedsConfiguration ||
-                    item->state == FileListItem::DiscFull ||
-                    item->state == FileListItem::Failed
-                  )
+                bool canRemove = false;
+                if( item )
+                {
+                    switch( item->state )
+                    {
+                        case FileListItem::WaitingForConversion:
+                            canRemove = true;
+                            break;
+                        case FileListItem::Ripping:
+                            break;
+                        case FileListItem::Converting:
+                            break;
+                        case FileListItem::ApplyingReplayGain:
+                            break;
+                        case FileListItem::WaitingForAlbumGain:
+                            break;
+                        case FileListItem::ApplyingAlbumGain:
+                            break;
+                        case FileListItem::Stopped:
+                            canRemove = true;
+                            break;
+                        case FileListItem::BackendNeedsConfiguration:
+                            canRemove = true;
+                            break;
+                        case FileListItem::DiscFull:
+                            canRemove = true;
+                            break;
+                        case FileListItem::Failed:
+                            canRemove = true;
+                            break;
+                    }
+                }
+                if( canRemove )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
                     emit itemRemoved( item );
-                    if( item->tags )
-                        delete item->tags;
                     delete item;
                     i--;
                 }

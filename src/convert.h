@@ -43,7 +43,7 @@ public:
         decode            = 0x0008, // Decode the file
         encode            = 0x0010, // Encode the file
         replaygain        = 0x0020, // Apply replaygain
-        bpm               = 0x0040, // Apply replaygain
+        //bpm               = 0x0040, // Apply bpm
         write_tags        = 0x0080, // Write the tags to the file
         put               = 0x0100, // Copy the file to the destination directory
         execute_userscript= 0x0200 // Run the user script
@@ -115,7 +115,6 @@ public:
     float decodeTime;
     float encodeTime;
     float replaygainTime;
-    float bpmTime;
 
     float finishedTime; // the time of the finished conversion steps
 
@@ -176,14 +175,11 @@ private:
     /** Remove item @p item and emit the state @p state */
     void remove( ConvertItem *item, int state = 0 );
 
-    /** Remove item @p item and emit the state @p state */
-    void removeAlbumGainItem( ConvertItem *item, int state = 0 );
-
     /** holds all active files */
     QList<ConvertItem*> items;
 
-    /** holds all active album gain items */
-    QList<ConvertItem*> albumGainItems;
+    /** holds all items that are waiting for album gain QMap< album name,convert items list > */
+    QMap< QString, QList<ConvertItem*> > albumGainItems;
 
     Config *config;
     CDManager* cdManager;
@@ -228,8 +224,8 @@ public slots:
     void add( FileListItem *item );
     /** Stop the item with the file list item @p item in the item list and remove it */
     void kill( FileListItem *item );
-    /** Apply replaygain to all items */
-    void replaygain( QList<FileListItem*> items );
+    /** the file list item @p item will get removed */
+    void itemRemoved( FileListItem *item );
 
     /** Change the process priorities */
 //     void priorityChanged( int );
@@ -243,9 +239,9 @@ signals:
      * 1   = aborted
      * 100 = backend needs configuration
      * 101 = disc is full
+     * 102 = waiting for album gain
      */
     void finished( FileListItem *item, int state );
-    void replaygainFinished( QList<FileListItem*> items, int state );
     /** The next track from the device can be ripped while the track is being encoded */
     void rippingFinished( const QString& device );
 

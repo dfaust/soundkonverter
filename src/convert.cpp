@@ -24,7 +24,7 @@ ConvertItem::ConvertItem( FileListItem *item )
 {
     fileListItem = item;
     fileListItems.clear();
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = bpmTime = 0.0f;
+    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
     encodePlugin = 0;
     convertID = -1;
     replaygainID = -1;
@@ -36,7 +36,7 @@ ConvertItem::ConvertItem( QList<FileListItem*> items )
 {
     fileListItem = 0;
     fileListItems = items;
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = bpmTime = 0.0f;
+    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
     encodePlugin = 0;
     convertID = -1;
     replaygainID = -1;
@@ -81,9 +81,8 @@ void ConvertItem::updateTimes()
         encodeTime = ( mode & ConvertItem::encode ) ? 0.4f : 0.0f;
     }
     replaygainTime = ( mode & ConvertItem::replaygain ) ? 0.2f : 0.0f;
-    bpmTime = ( mode & ConvertItem::bpm ) ? 0.2f : 0.0f;
 
-    const float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime + bpmTime;
+    const float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime;
 
     float length = 0;
     if( fileListItem )
@@ -102,7 +101,6 @@ void ConvertItem::updateTimes()
     decodeTime *= length/sum;
     encodeTime *= length/sum;
     replaygainTime *= length/sum;
-    bpmTime *= length/sum;
 
     finishedTime = 0.0f;
     switch( state )
@@ -123,13 +121,6 @@ void ConvertItem::updateTimes()
             if( mode & ConvertItem::decode ) finishedTime += decodeTime;
             if( mode & ConvertItem::encode ) finishedTime += encodeTime;
             break;
-        case ConvertItem::bpm:
-            if( mode & ConvertItem::get ) finishedTime += getTime;
-            if( mode & ConvertItem::convert ) finishedTime += convertTime;
-            if( mode & ConvertItem::decode ) finishedTime += decodeTime;
-            if( mode & ConvertItem::encode ) finishedTime += encodeTime;
-            if( mode & ConvertItem::replaygain ) finishedTime += replaygainTime;
-            break;
         default:
             break;
     }
@@ -146,9 +137,8 @@ Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
 {
     connect( fileList, SIGNAL(convertItem(FileListItem*)), this, SLOT(add(FileListItem*)) );
     connect( fileList, SIGNAL(killItem(FileListItem*)), this, SLOT(kill(FileListItem*)) );
-    connect( fileList, SIGNAL(replaygainItems(QList<FileListItem*>)), this, SLOT(replaygain(QList<FileListItem*>)) );
+    connect( fileList, SIGNAL(itemRemoved(FileListItem*)), this, SLOT(itemRemoved(FileListItem*)) );
     connect( this, SIGNAL(finished(FileListItem*,int)), fileList, SLOT(itemFinished(FileListItem*,int)) );
-    connect( this, SIGNAL(replaygainFinished(QList<FileListItem*>,int)), fileList, SLOT(replaygainFinished(QList<FileListItem*>,int)) );
     connect( this, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
     connect( this, SIGNAL(finishedProcess(int,int)), logger, SLOT(processCompleted(int,int)) );
 
@@ -394,39 +384,48 @@ void Convert::replaygain( ConvertItem *item )
     if( !item )
         return;
 
+    const QString albumName = item->fileListItem->tags ? item->fileListItem->tags->album : "";
+
+    if( fileList->waitForAlbumGain(item->fileListItem) )
+    {
+        logger->log( item->logID, i18n("Skipping Replay Gain, Album Gain will be calculated later") );
+
+        albumGainItems[albumName].append( item );
+
+        item->state = ConvertItem::replaygain;
+        executeNextStep( item );
+        return;
+    }
+
+    QList<ConvertItem*> albumItems;
+    if( !albumName.isEmpty() )
+        albumItems = albumGainItems[albumName];
+
+    albumItems.append( item );
+
     logger->log( item->logID, i18n("Applying Replay Gain") );
 
     if( item->take > item->replaygainPipes.count() - 1 )
     {
         logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );
 
-        if( item->fileListItem )
-        {
-            remove( item, -1 );
-        }
-        else
-        {
-            removeAlbumGainItem( item, -1 );
-        }
-
+        remove( item, -1 );
         return;
     }
 
     item->state = ConvertItem::replaygain;
     item->replaygainPlugin = item->replaygainPipes.at(item->take).plugin;
-    if( item->fileListItem ) // normal conversion item
+    KUrl::List urlList;
+    for( int i=0; i<albumItems.count(); i++ )
     {
-        item->replaygainID = item->replaygainPlugin->apply( item->outputUrl );
-    }
-    else // album gain item
-    {
-        KUrl::List fileList;
-        for( int i=0; i<items.count(); i++ )
+        urlList.append( albumItems.at(i)->outputUrl );
+        if( albumItems.at(i) != item )
         {
-            fileList.append( items.at(i)->outputUrl );
+            albumItems.at(i)->fileListItem->state = FileListItem::ApplyingAlbumGain;
+            fileList->updateItem( albumItems.at(i)->fileListItem );
         }
-        item->replaygainID = item->replaygainPlugin->apply( fileList );
     }
+    item->replaygainID = item->replaygainPlugin->apply( urlList );
 
     if( !updateTimer.isActive() )
         updateTimer.start( config->data.general.updateDelay );
@@ -505,37 +504,46 @@ void Convert::executeNextStep( ConvertItem *item )
     switch( item->state )
     {
         case ConvertItem::get:
-            if( item->mode & ConvertItem::convert ) convert(item);
-            else remove( item, 0 );
+            if( item->mode & ConvertItem::convert )
+                convert(item);
+            else
+                remove( item, 0 );
             break;
         case ConvertItem::convert:
-            if( item->mode & ConvertItem::replaygain ) replaygain(item);
-//             else if( item->mode & ConvertItem::bpm ) bpm(item);
-            else remove( item, 0 );
+            if( item->mode & ConvertItem::replaygain )
+                replaygain(item);
+            else
+                remove( item, 0 );
             break;
         case ConvertItem::decode:
-            if( item->mode & ConvertItem::encode ) { item->take = item->lastTake; encode(item); }
-            else if( item->mode & ConvertItem::replaygain ) replaygain(item);
-//             else if( item->mode & ConvertItem::bpm ) bpm(item);
-            else remove( item, 0 );
+            if( item->mode & ConvertItem::encode )
+            {
+                item->take = item->lastTake;
+                encode(item);
+            }
+            else if( item->mode & ConvertItem::replaygain )
+                replaygain(item);
+            else
+                remove( item, 0 );
             break;
         case ConvertItem::encode:
-            if( item->mode & ConvertItem::replaygain ) replaygain(item);
-//             else if( item->mode & ConvertItem::bpm ) bpm(item);
-            else remove( item, 0 );
+            if( item->mode & ConvertItem::replaygain )
+                replaygain(item);
+            else
+                remove( item, 0 );
             break;
         case ConvertItem::replaygain:
-//             if( item->mode & ConvertItem::bpm ) bpm(item);
-            /*else*/ remove( item, 0 );
-            break;
-        case ConvertItem::bpm:
             remove( item, 0 );
             break;
         default:
-            if( item->mode & ConvertItem::get ) get(item);
-            else if( item->mode & ConvertItem::convert ) convert(item);
-            else if( item->mode & ConvertItem::replaygain ) replaygain(item);
-            else remove( item, 0 );
+            if( item->mode & ConvertItem::get )
+                get(item);
+            else if( item->mode & ConvertItem::convert )
+                convert(item);
+            else if( item->mode & ConvertItem::replaygain )
+                replaygain(item);
+            else
+                remove( item, 0 );
             break;
     }
 }
@@ -562,9 +570,6 @@ void Convert::executeSameStep( ConvertItem *item )
         case ConvertItem::replaygain:
             replaygain(item);
             return;
-//         case ConvertItem::bpm:
-//             bpm(item);
-//             return;
         default:
             break;
     }
@@ -716,12 +721,20 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                 float fileTime;
                 switch( items.at(i)->state )
                 {
-                    case ConvertItem::convert: fileTime = items.at(i)->convertTime; break;
-                    case ConvertItem::decode: fileTime = items.at(i)->decodeTime; break;
-                    case ConvertItem::encode: fileTime = items.at(i)->encodeTime; break;
-                    case ConvertItem::replaygain: fileTime = items.at(i)->replaygainTime; break;
-                    case ConvertItem::bpm: fileTime = items.at(i)->bpmTime; break;
-                    default: fileTime = 0.0f;
+                    case ConvertItem::convert:
+                        fileTime = items.at(i)->convertTime;
+                        break;
+                    case ConvertItem::decode:
+                        fileTime = items.at(i)->decodeTime;
+                        break;
+                    case ConvertItem::encode:
+                        fileTime = items.at(i)->encodeTime;
+                        break;
+                    case ConvertItem::replaygain:
+                        fileTime = items.at(i)->replaygainTime;
+                        break;
+                    default:
+                        fileTime = 0.0f;
                 }
                 items.at(i)->finishedTime += fileTime;
                 /*if( items.at(i)->state == ConvertItem::get )
@@ -799,12 +812,20 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 float fileTime;
                 switch( items.at(i)->state )
                 {
-                    case ConvertItem::convert: fileTime = items.at(i)->convertTime; break;
-                    case ConvertItem::decode: fileTime = items.at(i)->decodeTime; break;
-                    case ConvertItem::encode: fileTime = items.at(i)->encodeTime; break;
-                    case ConvertItem::replaygain: fileTime = items.at(i)->replaygainTime; break;
-                    case ConvertItem::bpm: fileTime = items.at(i)->bpmTime; break;
-                    default: fileTime = 0.0f;
+                    case ConvertItem::convert:
+                        fileTime = items.at(i)->convertTime;
+                        break;
+                    case ConvertItem::decode:
+                        fileTime = items.at(i)->decodeTime;
+                        break;
+                    case ConvertItem::encode:
+                        fileTime = items.at(i)->encodeTime;
+                        break;
+                    case ConvertItem::replaygain:
+                        fileTime = items.at(i)->replaygainTime;
+                        break;
+                    default:
+                        fileTime = 0.0f;
                 }
                 items.at(i)->finishedTime += fileTime;
                 if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
@@ -841,32 +862,6 @@ void Convert::pluginProcessFinished( int id, int exitCode )
             }
         }
     }
-
-    for( int i=0; i<albumGainItems.size(); i++ )
-    {
-        if( albumGainItems.at(i)->replaygainPlugin && albumGainItems.at(i)->replaygainPlugin == QObject::sender() && albumGainItems.at(i)->replaygainID == id )
-        {
-            albumGainItems.at(i)->replaygainID = -1;
-
-            if( albumGainItems.at(i)->killed )
-            {
-                removeAlbumGainItem( albumGainItems.at(i), 1 );
-                return;
-            }
-
-            if( exitCode == 0 )
-            {
-                albumGainItems.at(i)->finishedTime += albumGainItems.at(i)->replaygainTime;
-                removeAlbumGainItem( albumGainItems.at(i), 0 );
-                return;
-            }
-            else
-            {
-                logger->log( albumGainItems.at(i)->logID, "\t" + i18n("Calculating Replay Gain failed. Exit code: %1",exitCode) );
-                executeSameStep( albumGainItems.at(i) );
-            }
-        }
-    }
 }
 
 void Convert::pluginLog( int id, const QString& message )
@@ -888,20 +883,6 @@ void Convert::pluginLog( int id, const QString& message )
                 break;
             }
         }
-
-        for( int j=0; j<albumGainItems.size(); j++ )
-        {
-            if( albumGainItems.at(j)->replaygainPlugin && albumGainItems.at(j)->replaygainPlugin == pluginLogQueue.at(i).plugin && albumGainItems.at(j)->replaygainID == pluginLogQueue.at(i).id )
-            {
-                for( int k=0; k<pluginLogQueue.at(i).messages.size(); k++ )
-                {
-                    logger->log( albumGainItems.at(j)->logID, "\t" + pluginLogQueue.at(i).messages.at(k).trimmed().replace("\n","\n\t") );
-                }
-                pluginLogQueue.removeAt(i);
-                i--;
-                break;
-            }
-        }
     }
 
     if( message.trimmed().isEmpty() )
@@ -914,16 +895,6 @@ void Convert::pluginLog( int id, const QString& message )
             ( items.at(i)->replaygainPlugin && items.at(i)->replaygainPlugin == QObject::sender() && items.at(i)->replaygainID == id ) )
         {
             logger->log( items.at(i)->logID, "\t" + message.trimmed().replace("\n","\n\t") );
-            return;
-        }
-    }
-
-    // search the matching process
-    for( int i=0; i<albumGainItems.size(); i++ )
-    {
-        if( albumGainItems.at(i)->replaygainPlugin && albumGainItems.at(i)->replaygainPlugin == QObject::sender() && albumGainItems.at(i)->replaygainID == id )
-        {
-            logger->log( albumGainItems.at(i)->logID, "\t" + message.trimmed().replace("\n","\n\t") );
             return;
         }
     }
@@ -1023,7 +994,7 @@ void Convert::add( FileListItem* item )
 
     newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::convert );
 
-    if( conversionOptions->replaygain && !config->data.general.waitForAlbumGain )
+    if( conversionOptions->replaygain )
     {
         newItem->replaygainPipes = config->pluginLoader()->getReplayGainPipes( conversionOptions->codecName );
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::replaygain );
@@ -1051,6 +1022,11 @@ void Convert::remove( ConvertItem *item, int state )
     //                  item->decodeTime + item->encodeTime + item->replaygainTime );
 
     QString exitMessage;
+
+    bool waitForAlbumGain = false;
+    const QString albumName = item->fileListItem->tags ? item->fileListItem->tags->album : "";
+    if( !albumName.isEmpty() )
+        waitForAlbumGain = albumGainItems[albumName].contains( item );
 
     QFileInfo outputFileInfo( item->outputUrl.toLocalFile() );
     float fileRatio = outputFileInfo.size();
@@ -1095,18 +1071,27 @@ void Convert::remove( ConvertItem *item, int state )
     if( state == 0 )
     {
         writeTags( item );
-        item->fileListItem->url = item->outputUrl;
+//         item->fileListItem->url = item->outputUrl;
     }
 
-    if( !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
+    if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
     {
-        QString command = item->fileListItem->notifyCommand;
-//         command.replace( "%u", item->fileListItem->url );
-        command.replace( "%i", item->inputUrl.toLocalFile() );
-        command.replace( "%o", item->outputUrl.toLocalFile() );
-        logger->log( item->logID, i18n("Executing command: \"%1\"",command) );
+        QList<ConvertItem*> albumItems;
+        if( !albumName.isEmpty() )
+            albumItems = albumGainItems[albumName];
 
-        QProcess::startDetached( command );
+        albumItems.append( item );
+
+        for( int i=0; i<albumItems.count(); i++ )
+        {
+            QString command = albumItems.at(i)->fileListItem->notifyCommand;
+            // command.replace( "%u", albumItems.at(i)->fileListItem->url );
+            command.replace( "%i", albumItems.at(i)->inputUrl.toLocalFile() );
+            command.replace( "%o", albumItems.at(i)->outputUrl.toLocalFile() );
+            logger->log( item->logID, i18n("Executing command: \"%1\"",command) );
+
+            QProcess::startDetached( command );
+        }
     }
 
     // remove temp/failed files
@@ -1139,58 +1124,25 @@ void Convert::remove( ConvertItem *item, int state )
     if( item->kioCopyJob.data() )
         item->kioCopyJob.data()->deleteLater();
 
-    emit finished( item->fileListItem, state ); // send signal to FileList
-    emit finishedProcess( item->logID, state ); // send signal to Logger
+    if( !waitForAlbumGain && !albumName.isEmpty() )
+    {
+        QList<ConvertItem*> albumItems = albumGainItems[albumName];
+
+        for( int i=0; i<albumItems.count(); i++ )
+        {
+            emit finished( albumItems.at(i)->fileListItem, 0 ); // send signal to FileList
+        }
+        qDeleteAll(albumItems);
+
+        albumGainItems.remove( albumName );
+    }
+    emit finished( item->fileListItem, ( state == 0 && waitForAlbumGain ) ? 102 : state ); // send signal to FileList
+    emit finishedProcess( item->logID, ( state == 0 && waitForAlbumGain ) ? 102 : state ); // send signal to Logger
 
     items.removeAll( item );
-    delete item;
 
-    if( items.size() == 0 && albumGainItems.size() == 0 )
-        updateTimer.stop();
-}
-
-void Convert::removeAlbumGainItem( ConvertItem *item, int state )
-{
-    // TODO "remove" (re-add) the times to the progress indicator
-    //emit uncountTime( item->getTime + item->getCorrectionTime + item->ripTime +
-    //                  item->decodeTime + item->encodeTime + item->replaygainTime );
-
-    QString exitMessage;
-
-    if( state == 0 )
-        exitMessage = i18nc("Conversion exit status","Normal exit");
-    else if( state == 1 )
-        exitMessage = i18nc("Conversion exit status","Aborted by the user");
-    else if( state == 100 )
-        exitMessage = i18nc("Conversion exit status","Backend needs configuration");
-    else
-        exitMessage = i18nc("Conversion exit status","An error occured");
-
-    for( int i=0; i<item->fileListItems.count(); i++ )
-    {
-        if( !item->fileListItems.at(i)->notifyCommand.isEmpty() )
-        {
-            QString command = item->fileListItems.at(i)->notifyCommand;
-//             command.replace( "%u", item->fileListItems.at(i)->url );
-            command.replace( "%i", item->fileListItems.at(i)->url.toLocalFile() );
-            command.replace( "%o", item->fileListItems.at(i)->outputUrl.toLocalFile() );
-            logger->log( item->logID, i18n("Executing command: \"%1\"",command) );
-
-            QProcess::startDetached( command );
-        }
-    }
-
-    logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)",state,exitMessage) );
-
-    logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
-
-    emit timeFinished( item->finishedTime );
-
-    emit replaygainFinished( item->fileListItems, state ); // send signal to FileList
-    emit finishedProcess( item->logID, state );            // send signal to Logger
-
-    albumGainItems.removeAll( item );
-    delete item;
+    if( !waitForAlbumGain )
+        delete item;
 
     if( items.size() == 0 && albumGainItems.size() == 0 )
         updateTimer.stop();
@@ -1222,53 +1174,28 @@ void Convert::kill( FileListItem *item )
             }
         }
     }
-
-//     for( int i=0; i<albumGainItems.size(); i++ )
-//     {
-//         for( int j=0; j<albumGainItems.at(i)->fileListItems.count(); j++ )
-//         {
-//             if( albumGainItems.at(i)->fileListItems.at(j) == item && !albumGainItems.at(i)->killed )
-//             {
-//                 albumGainItems.at(i)->killed = true;
-//
-//                 if( albumGainItems.at(i)->replaygainID != -1 && albumGainItems.at(i)->replaygainPlugin )
-//                 {
-//                     albumGainItems.at(i)->replaygainPlugin->kill( albumGainItems.at(i)->replaygainID );
-//                 }
-//
-//                 break;
-//             }
-//         }
-//     }
 }
 
-void Convert::replaygain( QList<FileListItem*> items )
+void Convert::itemRemoved( FileListItem *item )
 {
-    if( items.isEmpty() )
+    if( !item )
         return;
 
-    const QString albumName = items.at(0)->tags ? items.at(0)->tags->album : i18n("Unknown Album");
+    const QString albumName = item->tags ? item->tags->album : "";
 
-    logger->log( 1000, i18n("Adding new item to conversion list: '%1'",i18n("Replay Gain for album: %1",albumName)) );
+    if( !albumName.isEmpty() )
+    {
+        QList<ConvertItem*> albumItems = albumGainItems[albumName];
 
-    ConvertItem *newItem = new ConvertItem( items );
-    albumGainItems.append( newItem );
-
-    // register at the logger
-    newItem->logID = logger->registerProcess( KUrl(i18n("Replay Gain for album: %1",albumName)) );
-    logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
-
-    // set some variables to default values
-    newItem->mode = ConvertItem::replaygain;
-    newItem->state = (ConvertItem::Mode)0x0000;
-    newItem->updateTimes();
-
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( items.at(0)->conversionOptionsId );
-    newItem->replaygainPipes = config->pluginLoader()->getReplayGainPipes( conversionOptions->codecName );
-
-    newItem->progressedTime.start();
-
-    replaygain( newItem );
+        for( int i=0; i<albumItems.count(); i++ )
+        {
+            if( albumItems.at(i)->fileListItem == item )
+            {
+                albumGainItems[albumName].removeAll( albumItems.at(i) );
+                break;
+            }
+        }
+    }
 }
 
 void Convert::updateProgress()
@@ -1329,44 +1256,10 @@ void Convert::updateProgress()
                 fileTime = items.at(i)->replaygainTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
-//             case ConvertItem::bpm:
-//                 items.at(i)->fileListItem->setText( 0, i18n("Calculating BPM")+"... "+Global::prettyNumber(fileProgress,"%") );
-//                 fileTime = items.at(i)->bpmTime;
-//                 break;
             default: fileTime = 0.0f;
         }
         time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
         logger->log( items.at(i)->logID, i18n("Progress: %1",fileProgress) );
-    }
-
-    for( int i=0; i<albumGainItems.size(); i++ )
-    {
-        if( albumGainItems.at(i)->replaygainID != -1 && albumGainItems.at(i)->replaygainPlugin )
-        {
-            fileProgress = albumGainItems.at(i)->replaygainPlugin->progress( albumGainItems.at(i)->replaygainID );
-        }
-        else
-        {
-            fileProgress = albumGainItems.at(i)->progress;
-        }
-
-        if( fileProgress >= 0 )
-        {
-            fileProgressString = Global::prettyNumber(fileProgress,"%");
-        }
-        else
-        {
-            fileProgressString = i18nc("The conversion progress can't be determined","Unknown");
-            fileProgress = 0; // make it a valid value so the calculations below work
-        }
-
-        for( int j=0; j<albumGainItems.at(i)->fileListItems.count(); j++ )
-        {
-            albumGainItems.at(i)->fileListItems[j]->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
-        }
-
-        time += albumGainItems.at(i)->finishedTime + fileProgress * albumGainItems.at(i)->replaygainTime / 100.0f;
-        logger->log( albumGainItems.at(i)->logID, i18n("Progress: %1",fileProgress) );
     }
 
     emit updateTime( time );

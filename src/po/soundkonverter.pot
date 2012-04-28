@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"POT-Creation-Date: 2012-04-28 17:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2577,7 +2577,7 @@ msgid "Your emails"
 msgstr ""
 
 #: rc.cpp:9
-msgid "An audio file converter"
+msgid "Audio file converter, CD ripper and Replay Gain tool"
 msgstr ""
 
 #: rc.cpp:10

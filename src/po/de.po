@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"POT-Creation-Date: 2012-04-28 17:18+0200\n"
 "PO-Revision-Date: 2012-03-16 08:02+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/"
@@ -2823,12 +2823,16 @@ msgid "Your emails"
 msgstr "hessijames@gmail.com"
 
 #: rc.cpp:9
-msgid "An audio file converter"
-msgstr "Ein Audio-Datei-Konverter"
+#, fuzzy
+msgid "Audio file converter, CD ripper and Replay Gain tool"
+msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Audio-CD mit soundKonverter auslesen"
+
+#~ msgid "An audio file converter"
+#~ msgstr "Ein Audio-Datei-Konverter"
 
 #~ msgid "Calculating Replay Gain failed. Exit code: %1"
 #~ msgstr "Berechnung von Replay Gain gescheitert. Beendigungscode: %1"

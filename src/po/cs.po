@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"POT-Creation-Date: 2012-04-28 17:18+0200\n"
 "PO-Revision-Date: 2012-03-15 11:34+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
@@ -2798,12 +2798,16 @@ msgid "Your emails"
 msgstr "fripohled.blogspot.com"
 
 #: rc.cpp:9
-msgid "An audio file converter"
-msgstr "Převodník zvukových souborů"
+#, fuzzy
+msgid "Audio file converter, CD ripper and Replay Gain tool"
+msgstr "Soubory v nástroji na vyrovnávání hlasitosti seskupit podle"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Vytáhněte skladby z CD za pomoci soundKonverteru"
+
+#~ msgid "An audio file converter"
+#~ msgstr "Převodník zvukových souborů"
 
 #~ msgid "Calculating Replay Gain failed. Exit code: %1"
 #~ msgstr "Spočítání vyrovnání hlasitosti se nezdařilo. Kód ukončení: %1"

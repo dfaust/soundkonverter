@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"POT-Creation-Date: 2012-04-28 17:18+0200\n"
 "PO-Revision-Date: 2012-03-17 18:19+0000\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -2770,12 +2770,16 @@ msgid "Your emails"
 msgstr "mihhkel@gmail.com"
 
 #: rc.cpp:9
-msgid "An audio file converter"
-msgstr "Helifailide teisendaja"
+#, fuzzy
+msgid "Audio file converter, CD ripper and Replay Gain tool"
+msgstr "Failide rühmitamise alus helitugevuse parandustööriistas"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripi audio-CD soundKonverteriga"
+
+#~ msgid "An audio file converter"
+#~ msgstr "Helifailide teisendaja"
 
 #~ msgid "Calculating Replay Gain failed. Exit code: %1"
 #~ msgstr ""

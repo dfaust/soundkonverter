@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"POT-Creation-Date: 2012-04-28 17:18+0200\n"
 "PO-Revision-Date: 2012-04-24 08:18+0000\n"
 "Last-Translator: A Kanashiro <akana_sfe@yahoo.com.ar>\n"
 "Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/"
@@ -2800,9 +2800,13 @@ msgid "Your emails"
 msgstr "Tus emails"
 
 #: rc.cpp:9
-msgid "An audio file converter"
-msgstr "Un conversor de archivos de audio"
+#, fuzzy
+msgid "Audio file converter, CD ripper and Replay Gain tool"
+msgstr "Agrupar archivos en la herramienta Replay Gain por"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extrear CD de audio con soundKonverter"
+
+#~ msgid "An audio file converter"
+#~ msgstr "Un conversor de archivos de audio"

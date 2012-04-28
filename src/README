@@ -53,8 +53,9 @@ If you prefer to use precompiled packages have a look at the corresponding secti
 First you should make sure that all dependences are installed.
 soundKonverter will need the follwing packages to compile:
 kde development packages version 4.4 or higher
-taglib development packages version 1.4 or higher
-cdparanoia development packages
+taglib development package version 1.4 or higher
+cdparanoia development package
+libkcddb (sometimes kdemultimedia) development package
 All dependences - and whether they are fulfilled - should be shown when running cmake.
 
 Then open a console and change to the soundKonverter source directory and execute the following commands:
@@ -127,11 +128,11 @@ Git repository:
 For everybody who is interested, there is a git repository at http://gitorious.org/soundkonverter/soundkonverter
 In order to obtain the source code from the git repository you need to install 'git' and execute the following commands:
 
-initialize local git repository
+initialize local git repository:
 
 git clone git://gitorious.org/soundkonverter/soundkonverter.git
 
-update repository
+update repository:
 
 git pull
 
@@ -156,6 +157,9 @@ The Log Viewer will now open in a new window.
 4. But the more important log is the log for the file you just tried to convert in step 1. To see that log, click on the combo box (drop down box) at the top of the Log Viewer window and select the file.
 5. To save a log to a file, click on the "Save to file..." button on the bottom of the Log Viewer.
 6. Attach latter or both log files to your bug report.
+
+In case soundKonverter crashes and you can't save the conversion log file, you can make soundKonverter write log files directly to the hard drive.
+You can find this option in the advanced tab of the configuration dialog.
 
 In case of a crash:
 After soundKonverter has crashed a new window should appear. It's KDE's crash handler and it has two tabs.

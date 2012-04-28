@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-23 11:58+0200\n"
+"POT-Creation-Date: 2012-04-28 14:16+0200\n"
 "PO-Revision-Date: 2012-03-15 12:44+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.net/projects/p/"
@@ -1497,9 +1497,9 @@ msgstr "2. Definir as opções de conversão"
 msgid "Artist:"
 msgstr "Artista:"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:794 opener/cdopener.cpp:962
-#: opener/cdopener.cpp:966 opener/cdopener.cpp:1016 opener/cdopener.cpp:1045
-#: opener/cdopener.cpp:1240
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
+#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
+#: opener/cdopener.cpp:1237
 msgid "Various Artists"
 msgstr "Diversos artistas"
 
@@ -1507,9 +1507,9 @@ msgstr "Diversos artistas"
 msgid "Composer:"
 msgstr "Compositor:"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:797 opener/cdopener.cpp:976
-#: opener/cdopener.cpp:980 opener/cdopener.cpp:1026 opener/cdopener.cpp:1051
-#: opener/cdopener.cpp:1241
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
+#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
+#: opener/cdopener.cpp:1238
 msgid "Various Composer"
 msgstr "Diversos compositores"
 
@@ -1534,7 +1534,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Extrair"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1010
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Faixa"
@@ -1631,61 +1631,61 @@ msgstr "Selecione a unidade de CD"
 msgid "Multiple CD-ROM drives where found. Please select one:"
 msgstr "Foram encontradas várias unidades. Escolha apenas uma:"
 
-#: opener/cdopener.cpp:581
+#: opener/cdopener.cpp:576
 msgid "DVD Recorder"
 msgstr "Gravador de DVD"
 
-#: opener/cdopener.cpp:583 opener/cdopener.cpp:587
+#: opener/cdopener.cpp:578 opener/cdopener.cpp:582
 msgid "CD Recorder"
 msgstr "Gravador de CD"
 
-#: opener/cdopener.cpp:583 opener/cdopener.cpp:585
+#: opener/cdopener.cpp:578 opener/cdopener.cpp:580
 msgid "DVD Player"
 msgstr "Reprodutor de DVD"
 
-#: opener/cdopener.cpp:589
+#: opener/cdopener.cpp:584
 msgid "CD Player"
 msgstr "Reprodutor de CD"
 
-#: opener/cdopener.cpp:590
+#: opener/cdopener.cpp:585
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): CD áudio CD com %3 faixas"
 
-#: opener/cdopener.cpp:646 opener/cdopener.cpp:647 opener/cdopener.cpp:650
-#: opener/cdopener.cpp:657 opener/cdopener.cpp:658
+#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: opener/cdopener.cpp:705
+#: opener/cdopener.cpp:699
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Aguarde enquanto se estabelece a ligação à CDDB..."
 
-#: opener/cdopener.cpp:750
+#: opener/cdopener.cpp:747
 msgid "Select CDDB Entry"
 msgstr "Selecione a entrada CDDB"
 
-#: opener/cdopener.cpp:750
+#: opener/cdopener.cpp:747
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Foram encontradas diversas entradas. Escolha apenas uma:"
 
-#: opener/cdopener.cpp:924
+#: opener/cdopener.cpp:921
 msgid "All tracks"
 msgstr "Todas as faixas"
 
-#: opener/cdopener.cpp:928
+#: opener/cdopener.cpp:925
 msgid "Tracks"
 msgstr "Faixas"
 
-#: opener/cdopener.cpp:1186
+#: opener/cdopener.cpp:1183
 msgid "Please select at least one track in order to proceed."
 msgstr "Para prosseguir, deve escolher pelo menos uma faixa."
 
-#: opener/cdopener.cpp:1263 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "Nenhuma opção selecionada."
 
-#: opener/cdopener.cpp:1277
+#: opener/cdopener.cpp:1274
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1695,7 +1695,7 @@ msgstr ""
 "\n"
 "Pretende substituir o ficheiro existente?"
 
-#: opener/cdopener.cpp:1278
+#: opener/cdopener.cpp:1275
 msgid "File already exists"
 msgstr "O ficheiro já existe"
 

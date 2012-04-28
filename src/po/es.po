@@ -10,12 +10,12 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-23 11:58+0200\n"
-"PO-Revision-Date: 2012-02-22 00:31+0000\n"
+"POT-Creation-Date: 2012-04-28 14:16+0200\n"
+"PO-Revision-Date: 2012-04-24 08:18+0000\n"
 "Last-Translator: A Kanashiro <akana_sfe@yahoo.com.ar>\n"
-"Language-Team: Spanish (Argentina) (http://www.transifex.net/projects/p/"
-"soundkonverter/language/es_AR/)\n"
-"Language: es_AR\n"
+"Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/"
+"soundkonverter/language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -39,7 +39,7 @@ msgstr "Tipo de complemento: %1"
 
 #: aboutplugins.cpp:120
 msgid "Backend binaries:"
-msgstr "Binarios de infraestructura:"
+msgstr "Binarios de módulo:"
 
 #: aboutplugins.cpp:125
 msgid "%1 (found at: %2)"
@@ -71,29 +71,29 @@ msgstr "Configurar %1"
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr "Soluciones para problemas de soporte"
+msgstr "Soluciones para problemas de módulos"
 
 #: codecoptimizations.cpp:27
 msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
-"Ha instalado o eliminado soportes y las configuraciones de soundKonverter "
+"Ha instalado o eliminado módulos y las configuraciones de soundKonverter "
 "pueden optimizarse."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para codificar archivos %1 el soporte '%2' puede ser reemplazado por el '%3'."
+"Para codificar archivos %1 el módulo '%2' puede ser reemplazado por el '%3'."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
-msgstr "Para extraer CDs de audio el backend '%1' puede reemplazarse con '%2'."
+msgstr "Para extraer CDs de audio el módulo '%1' puede reemplazarse con '%2'."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para decodificar archivos %1 el soporte'%2' puede ser reemplazado por el "
+"Para decodificar archivos %1 el módulo '%2' puede ser reemplazado por el "
 "'%3'."
 
 #: codecoptimizations.cpp:63
@@ -101,7 +101,7 @@ msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
-"Para aplicar Replay Gain a archivos %1 el soporte'%2' puede ser reemplazado "
+"Para aplicar Replay Gain a archivos %1 el módulo '%2' puede ser reemplazado "
 "por el '%3'."
 
 #: codecoptimizations.cpp:66
@@ -154,7 +154,7 @@ msgid ""
 msgstr ""
 "La extracción de audio CD no está soportada por ningún plugin.\n"
 "Por favor fíjese en su administrador de paquetes de su distribución para "
-"bajar un plugin para soundKonverter."
+"bajar un complemento para soundKonverter."
 
 #: codecproblems.cpp:52
 msgid ""
@@ -162,7 +162,7 @@ msgid ""
 "Possible solutions are listed below."
 msgstr ""
 "La extracción de audio CD no está soportada actualmente porque no se "
-"encuentra backend.\n"
+"encuentra el módulo.\n"
 "Las posibles soluciones están listadas debajo."
 
 #: codecproblems.cpp:68 codecproblems.cpp:72
@@ -489,14 +489,14 @@ msgid "Use pipes when possible"
 msgstr "Usar tuberías (pipes) cuando sea posible"
 
 #: configdialog/configadvancedpage.cpp:119
-#, fuzzy
 msgid ""
 "Pipes make it unnecessary to use temporary files, therefore increasing the "
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
-"Las tuberías hacen que sea innecesario usar archivos temporales, "
-"incrementando el rendimiento."
+"Las tuberías hacen que sea innecesario usar archivos temporales, por eso "
+"incrementan el rendimiento.\n"
+"Algunos módulos pueden causar errores en este modo, úselo con cuidado."
 
 #: configdialog/configbackendspage.cpp:131
 #: configdialog/configbackendspage.cpp:170
@@ -523,7 +523,7 @@ msgstr "Extractor de CD"
 
 #: configdialog/configbackendspage.cpp:207
 msgid "Backend"
-msgstr "Soporte (backend)"
+msgstr "Módulo"
 
 #: configdialog/configbackendspage.cpp:218
 msgid "Format"
@@ -552,7 +552,7 @@ msgstr "configuraciones de %1"
 #: configdialog/configbackendspage.cpp:386
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
-"Todas las configuraciones de backend parecen ser optimas, no hay nada que "
+"Todas las configuraciones de módulos parecen ser óptimas, no hay nada que "
 "hacer."
 
 #: configdialog/configcoverartpage.cpp:30
@@ -589,7 +589,7 @@ msgstr "Arte de tapa"
 
 #: configdialog/configdialog.cpp:52 main.cpp:29
 msgid "Backends"
-msgstr "Soporte"
+msgstr "Módulos"
 
 #: configdialog/configgeneralpage.cpp:40
 msgid "Start in Mode"
@@ -694,7 +694,7 @@ msgstr "Copiando \"%1\" a \"%2\""
 
 #: convert.cpp:242 convert.cpp:410
 msgid "No more backends left to try :("
-msgstr "No hay más soporte para probar :("
+msgstr "No hay más módulos para probar :("
 
 #: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
@@ -711,7 +711,7 @@ msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
-"Falló la conversión. Al menos un backend debería estar configurado "
+"Falló la conversión. Al menos un módulo debería estar configurado "
 "apropiadamente."
 
 #: convert.cpp:374 convert.cpp:1253
@@ -818,7 +818,7 @@ msgstr "Abortado por usuario"
 #: convert.cpp:1067
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "Backend necesita configuración"
+msgstr "Módulo necesita configuración"
 
 #: convert.cpp:1069
 msgctxt "Conversion exit status"
@@ -1126,7 +1126,7 @@ msgid ""
 "You should have a look at your distribution's package manager for this."
 msgstr ""
 "Este tipo de archivo es desconocido para soundKonverter.\n"
-"Tal vez deba instalar algún plugin adicional para soundKonverter.\n"
+"Tal vez deba instalar algún complemento adicional para soundKonverter.\n"
 "Debería fijarse en el administrador de paquetes de su distribución."
 
 #: filelist.cpp:208 opener/fileopener.cpp:157 opener/playlistopener.cpp:161
@@ -1153,7 +1153,7 @@ msgstr "Detenido"
 
 #: filelist.cpp:528
 msgid "Backend not configured"
-msgstr "Backend no está sonfigurado"
+msgstr "Módulo no está sonfigurado"
 
 #: filelist.cpp:533
 msgid "Disc full"
@@ -1487,9 +1487,9 @@ msgstr "2. Establecer opciones de conversión"
 msgid "Artist:"
 msgstr "Artista:"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:794 opener/cdopener.cpp:962
-#: opener/cdopener.cpp:966 opener/cdopener.cpp:1016 opener/cdopener.cpp:1045
-#: opener/cdopener.cpp:1240
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
+#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
+#: opener/cdopener.cpp:1237
 msgid "Various Artists"
 msgstr "Artistas Varios"
 
@@ -1497,9 +1497,9 @@ msgstr "Artistas Varios"
 msgid "Composer:"
 msgstr "Compositor:"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:797 opener/cdopener.cpp:976
-#: opener/cdopener.cpp:980 opener/cdopener.cpp:1026 opener/cdopener.cpp:1051
-#: opener/cdopener.cpp:1241
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
+#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
+#: opener/cdopener.cpp:1238
 msgid "Various Composer"
 msgstr "Compositores Varios"
 
@@ -1524,7 +1524,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Extraer"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1010
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Pista"
@@ -1584,7 +1584,7 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
-"Extraer un cd entero a un solo archivo no está soportado por los programas "
+"Extraer un cd entero a un solo archivo no está soportado por los módulos "
 "instalados.\n"
 "Las posibles soluciones están listadas debajo.\n"
 
@@ -1595,7 +1595,7 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin wich supports ripping to one file."
 msgstr ""
-"Extraer un cd entero a un solo archivo no está soportado por los programas "
+"Extraer un cd entero a un solo archivo no está soportado por los módulos "
 "instalados.\n"
 "Por favor fíjese en su administrador de paquetes para instalar un extractor "
 "adicional que soporte extracción a un archivo."
@@ -1623,61 +1623,61 @@ msgstr "Elegir unidad de CD-ROM"
 msgid "Multiple CD-ROM drives where found. Please select one:"
 msgstr "Existen múltiples unidades de CD-ROM. Por favor elija una:"
 
-#: opener/cdopener.cpp:581
+#: opener/cdopener.cpp:576
 msgid "DVD Recorder"
 msgstr "Grabadora de DVD"
 
-#: opener/cdopener.cpp:583 opener/cdopener.cpp:587
+#: opener/cdopener.cpp:578 opener/cdopener.cpp:582
 msgid "CD Recorder"
 msgstr "Grabadora de CD"
 
-#: opener/cdopener.cpp:583 opener/cdopener.cpp:585
+#: opener/cdopener.cpp:578 opener/cdopener.cpp:580
 msgid "DVD Player"
 msgstr "Reproductor de DVD"
 
-#: opener/cdopener.cpp:589
+#: opener/cdopener.cpp:584
 msgid "CD Player"
 msgstr "Reproductor de CD"
 
-#: opener/cdopener.cpp:590
+#: opener/cdopener.cpp:585
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): CD de audio con %3 pistas"
 
-#: opener/cdopener.cpp:646 opener/cdopener.cpp:647 opener/cdopener.cpp:650
-#: opener/cdopener.cpp:657 opener/cdopener.cpp:658
+#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: opener/cdopener.cpp:705
+#: opener/cdopener.cpp:699
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Por favor espere mientras se baja le información CDDB"
 
-#: opener/cdopener.cpp:750
+#: opener/cdopener.cpp:747
 msgid "Select CDDB Entry"
 msgstr "Elegir ítem CDDB"
 
-#: opener/cdopener.cpp:750
+#: opener/cdopener.cpp:747
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Se han encontrado varios ítems CDDB. Por favor elija uno:"
 
-#: opener/cdopener.cpp:924
+#: opener/cdopener.cpp:921
 msgid "All tracks"
 msgstr "Todas las pistas"
 
-#: opener/cdopener.cpp:928
+#: opener/cdopener.cpp:925
 msgid "Tracks"
 msgstr "Pistas"
 
-#: opener/cdopener.cpp:1186
+#: opener/cdopener.cpp:1183
 msgid "Please select at least one track in order to proceed."
-msgstr "Por favor seleccione al menos una pista para continuar"
+msgstr "Por favor elija al menos una pista para continuar"
 
-#: opener/cdopener.cpp:1263 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "No hay opciones de conversión seleccionada."
 
-#: opener/cdopener.cpp:1277
+#: opener/cdopener.cpp:1274
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1685,9 +1685,9 @@ msgid ""
 msgstr ""
 "Un archivo ya existe con este nombre.\n"
 "\n"
-"¿Desea sobreescribri el existente?"
+"¿Desea sobreescribir el existente?"
 
-#: opener/cdopener.cpp:1278
+#: opener/cdopener.cpp:1275
 msgid "File already exists"
 msgstr "Archivo ya existe"
 
@@ -1776,7 +1776,7 @@ msgstr "Formato de salida"
 
 #: optionsdetailed.cpp:51
 msgid "Use Plugin"
-msgstr "Usar plug-in"
+msgstr "Usar complemento"
 
 #: optionsdetailed.cpp:85 optionssimple.cpp:93
 msgid "Calculate Replay Gain tags"
@@ -1829,9 +1829,8 @@ msgid "You cannot save a profile without a name."
 msgstr ""
 
 #: optionsdetailed.cpp:363
-#, fuzzy
 msgid "Profile name is empty"
-msgstr "El perfil ya existe"
+msgstr ""
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2738,7 +2737,7 @@ msgstr "Herramienta Replay Gain..."
 
 #: soundkonverter.cpp:176
 msgid "About plugins..."
-msgstr "Sobre los plugins..."
+msgstr "Sobre los complementos..."
 
 #: soundkonverter.cpp:191 soundkonverterview.cpp:83
 msgid "Add CD tracks..."
@@ -2807,9 +2806,3 @@ msgstr "Un conversor de archivos de audio"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extrear CD de audio con soundKonverter"
-
-#~ msgid "Calculating Replay Gain failed. Exit code: %1"
-#~ msgstr "Falló el cálculo de Ganancia. Código de salida: %1"
-
-#~ msgid "Replay Gain for album: %1"
-#~ msgstr "Ganancia para el álbum: %1"

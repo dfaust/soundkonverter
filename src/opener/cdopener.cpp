@@ -704,6 +704,9 @@ void CDOpener::requestCddb( bool autoRequest )
     KCDDB::TrackOffsetList offsets;
     for( int i=1; i<=cdda_tracks(cdDrive); i++ )
     {
+        if( !(IS_AUDIO(cdDrive,i-1)) )
+            break;
+
         offsets.append( cdda_track_firstsector(cdDrive,i) + 150 );
     }
     offsets.append( cdda_disc_lastsector(cdDrive) + 150 );

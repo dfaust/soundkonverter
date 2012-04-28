@@ -1,6 +1,7 @@
 1.4.90 (1.5.0 rc1):
 -Add: Copy embedded covers for wma files
 -Add: Calculate Album Gain for albums in the conversion list
+-Fix: Cdrom drive detection would fail with Ubuntu 12.04 (patch by Eike Thaden)
 
 1.4.0:
 -Add: Show progress bar when loading file lists

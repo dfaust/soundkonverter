@@ -567,29 +567,23 @@ QMap<QString,QString> CDOpener::cdDevices()
 
     for( int i=0; i<deviceList.count(); i++ )
     {
-        if( deviceList.at(i).contains("sr") || deviceList.at(i).contains("hd") )
+        deviceList[i] = "/dev/"+deviceList.at(i);
+        cdDrive = cdda_identify( deviceList.at(i).toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
+        if( cdDrive && cdda_open(cdDrive) == 0 )
         {
-            if( deviceList.at(i).contains("sr") )
-                deviceList[i] = deviceList.at(i).right( deviceList.at(i).length() - deviceList.at(i).indexOf("r") - 1 );
-
-            deviceList[i] = "/dev/scd"+deviceList.at(i);
-            cdDrive = cdda_identify( deviceList.at(i).toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-            if( cdDrive && cdda_open(cdDrive) == 0 )
-            {
-                QString type;
-                if( dvdBurnList.at(i) == "1" )
-                    type = i18n("DVD Recorder");
-                else if( dvdPlayList.at(i) == "1" && cdBurnList.at(i) == "1" )
-                    type = i18n("CD Recorder") + "/" + i18n("DVD Player");
-                else if( dvdPlayList.at(i) == "1" )
-                    type = i18n("DVD Player");
-                else if( cdBurnList.at(i) == "1" )
-                    type = i18n("CD Recorder");
-                else
-                    type = i18n("CD Player");
-                const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(type).arg(deviceList.at(i)).arg(cdda_tracks(cdDrive));
-                devices.insert( deviceList.at(i), desc );
-            }
+            QString type;
+            if( dvdBurnList.at(i) == "1" )
+                type = i18n("DVD Recorder");
+            else if( dvdPlayList.at(i) == "1" && cdBurnList.at(i) == "1" )
+                type = i18n("CD Recorder") + "/" + i18n("DVD Player");
+            else if( dvdPlayList.at(i) == "1" )
+                type = i18n("DVD Player");
+            else if( cdBurnList.at(i) == "1" )
+                type = i18n("CD Recorder");
+            else
+                type = i18n("CD Player");
+            const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(type).arg(deviceList.at(i)).arg(cdda_tracks(cdDrive));
+            devices.insert( deviceList.at(i), desc );
         }
     }
 

@@ -5,6 +5,7 @@
 -Fix: Cdrom drive detection would fail with Ubuntu 12.04 (patch by Eike Thaden)
 -Fix: Musicbrainz lookup not working if data track present (patch by Eike Thaden)
 -Fix: Don't show data tracks in the CD ripper UI (patch by Eike Thaden)
+-Fix: Musicbrainz lookup would only work through the freedb gateway (patch by Eike Thaden)
 
 1.4.0:
 -Add: Show progress bar when loading file lists

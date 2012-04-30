@@ -720,7 +720,7 @@ void CDOpener::requestCddb( bool autoRequest )
 
         offsets.append( cdda_track_firstsector(cdDrive,i) + 150 );
     }
-    offsets.append( cdda_disc_lastsector(cdDrive) + 150 );
+    offsets.append( cdda_disc_lastsector(cdDrive) + 150 + 1 );
 
     cddb->config().reparse();
     cddb->setBlockingMode( false );

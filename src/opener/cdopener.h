@@ -106,6 +106,7 @@ private:
     /** returns a list of devices holding audio cds plus a short description (track count) */
     QMap<QString,QString> cdDevices();
     bool openCdDevice( const QString& _device );
+    int cdda_audio_tracks( cdrom_drive *cdDrive ) const;
 
     /** the widget for selecting and editing the cd tracks */
     QWidget *cdOpenerWidget;

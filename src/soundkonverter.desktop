@@ -5,5 +5,7 @@ Exec=soundkonverter %i -caption "%c"
 Icon=soundkonverter
 Type=Application
 GenericName=Audio file converter, CD ripper and Replay Gain tool
+GenericName[cs]=Převaděč zvukových souborů, vytahovač stop z CD a nástroj na vyrovnání hlasitosti přehrávaných skladeb
+GenericName[de]=Audio-Datei Konverter, CD Ripper und Replay Gain Werkzeug
 Terminal=false
 Categories=AudioVideo;Audio;AudioVideoEditing;KDE;

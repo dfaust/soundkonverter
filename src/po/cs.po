@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 17:18+0200\n"
-"PO-Revision-Date: 2012-03-15 11:34+0000\n"
+"POT-Creation-Date: 2012-05-01 19:46+0200\n"
+"PO-Revision-Date: 2012-04-30 18:48+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
 "language/cs/)\n"
@@ -58,7 +58,7 @@ msgstr "Podporované kodeky:"
 
 #: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
 msgid "Currently deactivated."
-msgstr ""
+msgstr "Nyní vypnuto."
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -717,6 +717,7 @@ msgstr "Kóduje se"
 #: convert.cpp:391
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
 msgstr ""
+"Přeskakuje se vyrovnání hlasitosti, zesílení alba bude spočítáno později"
 
 #: convert.cpp:406
 msgid "Applying Replay Gain"
@@ -1489,9 +1490,9 @@ msgstr "2. Nastavit převodní volby"
 msgid "Artist:"
 msgstr "Umělec:"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
-#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
-#: opener/cdopener.cpp:1237
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:802 opener/cdopener.cpp:970
+#: opener/cdopener.cpp:974 opener/cdopener.cpp:1024 opener/cdopener.cpp:1053
+#: opener/cdopener.cpp:1248
 msgid "Various Artists"
 msgstr "Různí umělci"
 
@@ -1499,9 +1500,9 @@ msgstr "Různí umělci"
 msgid "Composer:"
 msgstr "Skladatel:"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
-#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
-#: opener/cdopener.cpp:1238
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:805 opener/cdopener.cpp:984
+#: opener/cdopener.cpp:988 opener/cdopener.cpp:1034 opener/cdopener.cpp:1059
+#: opener/cdopener.cpp:1249
 msgid "Various Composer"
 msgstr "Různí skladatelé"
 
@@ -1526,7 +1527,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Získat"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1018
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Skladba"
@@ -1646,41 +1647,41 @@ msgstr "Přehrávač CD"
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): Audio CD s %3 stopami"
 
-#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
-#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652 opener/cdopener.cpp:655
+#: opener/cdopener.cpp:662 opener/cdopener.cpp:663
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: opener/cdopener.cpp:699
+#: opener/cdopener.cpp:710
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Počkejte, prosím, probíhá pokus o stažení dat CDDB..."
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Select CDDB Entry"
 msgstr "Vybrat záznam CDDB"
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Nalezeno více záznamů v CDDB. Vyberte, prosím, jeden:"
 
-#: opener/cdopener.cpp:921
+#: opener/cdopener.cpp:932
 msgid "All tracks"
 msgstr "Všechny skladby"
 
-#: opener/cdopener.cpp:925
+#: opener/cdopener.cpp:936
 msgid "Tracks"
 msgstr "Skladby"
 
-#: opener/cdopener.cpp:1183
+#: opener/cdopener.cpp:1194
 msgid "Please select at least one track in order to proceed."
 msgstr "Vyberte, prosím, alespoň jednu skladbu, aby se mohlo pokračovat."
 
-#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1271 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "Nevybrány žádné převodní volby."
 
-#: opener/cdopener.cpp:1274
+#: opener/cdopener.cpp:1285
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1690,7 +1691,7 @@ msgstr ""
 "\n"
 "Chcete jej přepsat?"
 
-#: opener/cdopener.cpp:1275
+#: opener/cdopener.cpp:1286
 msgid "File already exists"
 msgstr "Soubor již existuje"
 
@@ -1827,12 +1828,11 @@ msgstr "Zadejte název pro nový profil:"
 
 #: optionsdetailed.cpp:363
 msgid "You cannot save a profile without a name."
-msgstr ""
+msgstr "Nelze uložit profil bez názvu."
 
 #: optionsdetailed.cpp:363
-#, fuzzy
 msgid "Profile name is empty"
-msgstr "Profil již existuje"
+msgstr "Název profilu je prázdný"
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2798,19 +2798,11 @@ msgid "Your emails"
 msgstr "fripohled.blogspot.com"
 
 #: rc.cpp:9
-#, fuzzy
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr "Soubory v nástroji na vyrovnávání hlasitosti seskupit podle"
+msgstr ""
+"Převaděč zvukových souborů, vytahovač stop z CD a nástroj na vyrovnání "
+"hlasitosti přehrávaných skladeb"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Vytáhněte skladby z CD za pomoci soundKonverteru"
-
-#~ msgid "An audio file converter"
-#~ msgstr "Převodník zvukových souborů"
-
-#~ msgid "Calculating Replay Gain failed. Exit code: %1"
-#~ msgstr "Spočítání vyrovnání hlasitosti se nezdařilo. Kód ukončení: %1"
-
-#~ msgid "Replay Gain for album: %1"
-#~ msgstr "Vyrovnání hlasitosti pro album: %1"

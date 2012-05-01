@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 17:18+0200\n"
+"POT-Creation-Date: 2012-05-01 19:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1376,9 +1376,9 @@ msgstr ""
 msgid "Artist:"
 msgstr ""
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
-#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
-#: opener/cdopener.cpp:1237
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:802 opener/cdopener.cpp:970
+#: opener/cdopener.cpp:974 opener/cdopener.cpp:1024 opener/cdopener.cpp:1053
+#: opener/cdopener.cpp:1248
 msgid "Various Artists"
 msgstr ""
 
@@ -1386,9 +1386,9 @@ msgstr ""
 msgid "Composer:"
 msgstr ""
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
-#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
-#: opener/cdopener.cpp:1238
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:805 opener/cdopener.cpp:984
+#: opener/cdopener.cpp:988 opener/cdopener.cpp:1034 opener/cdopener.cpp:1059
+#: opener/cdopener.cpp:1249
 msgid "Various Composer"
 msgstr ""
 
@@ -1413,7 +1413,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr ""
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1018
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr ""
@@ -1525,48 +1525,48 @@ msgstr ""
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr ""
 
-#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
-#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652 opener/cdopener.cpp:655
+#: opener/cdopener.cpp:662 opener/cdopener.cpp:663
 msgid "Unknown"
 msgstr ""
 
-#: opener/cdopener.cpp:699
+#: opener/cdopener.cpp:710
 msgid "Please wait, trying to download CDDB data ..."
 msgstr ""
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Select CDDB Entry"
 msgstr ""
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr ""
 
-#: opener/cdopener.cpp:921
+#: opener/cdopener.cpp:932
 msgid "All tracks"
 msgstr ""
 
-#: opener/cdopener.cpp:925
+#: opener/cdopener.cpp:936
 msgid "Tracks"
 msgstr ""
 
-#: opener/cdopener.cpp:1183
+#: opener/cdopener.cpp:1194
 msgid "Please select at least one track in order to proceed."
 msgstr ""
 
-#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1271 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr ""
 
-#: opener/cdopener.cpp:1274
+#: opener/cdopener.cpp:1285
 msgid ""
 "A file with this name already exists.\n"
 "\n"
 "Do you want to overwrite the existing one?"
 msgstr ""
 
-#: opener/cdopener.cpp:1275
+#: opener/cdopener.cpp:1286
 msgid "File already exists"
 msgstr ""
 

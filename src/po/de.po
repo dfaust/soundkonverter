@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 17:18+0200\n"
-"PO-Revision-Date: 2012-03-16 08:02+0000\n"
+"POT-Creation-Date: 2012-05-01 19:46+0200\n"
+"PO-Revision-Date: 2012-04-29 10:26+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/"
 "language/de/)\n"
@@ -55,7 +55,7 @@ msgstr "Unterstützte Codecs:"
 
 #: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
 msgid "Currently deactivated."
-msgstr ""
+msgstr "Momentan deaktiviert."
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -724,7 +724,7 @@ msgstr "Kodiere"
 
 #: convert.cpp:391
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
-msgstr ""
+msgstr "Überspringe Replay Gain, Album Gain wird später berechnet"
 
 #: convert.cpp:406
 msgid "Applying Replay Gain"
@@ -1489,15 +1489,15 @@ msgstr "1. Wähle CD-Stücke"
 
 #: opener/cdopener.cpp:128 opener/diropener.cpp:56 opener/urlopener.cpp:53
 msgid "2. Set conversion options"
-msgstr "2. Wähle Convertierungsoptionen"
+msgstr "2. Wähle Konvertierungsoptionen"
 
 #: opener/cdopener.cpp:161 opener/cdopener.cpp:291 optionseditor.cpp:123
 msgid "Artist:"
 msgstr "Interpret:"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
-#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
-#: opener/cdopener.cpp:1237
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:802 opener/cdopener.cpp:970
+#: opener/cdopener.cpp:974 opener/cdopener.cpp:1024 opener/cdopener.cpp:1053
+#: opener/cdopener.cpp:1248
 msgid "Various Artists"
 msgstr "Verschiedene Interpreten"
 
@@ -1505,9 +1505,9 @@ msgstr "Verschiedene Interpreten"
 msgid "Composer:"
 msgstr "Komponist:"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
-#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
-#: opener/cdopener.cpp:1238
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:805 opener/cdopener.cpp:984
+#: opener/cdopener.cpp:988 opener/cdopener.cpp:1034 opener/cdopener.cpp:1059
+#: opener/cdopener.cpp:1249
 msgid "Various Composer"
 msgstr "Verschiedene Komponisten"
 
@@ -1532,7 +1532,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Rippen"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1018
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Stück"
@@ -1652,41 +1652,41 @@ msgstr "CD-Player"
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): Audio CD mit %3 Stücken"
 
-#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
-#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652 opener/cdopener.cpp:655
+#: opener/cdopener.cpp:662 opener/cdopener.cpp:663
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: opener/cdopener.cpp:699
+#: opener/cdopener.cpp:710
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Bitte warten, versuche CDDB-Daten herunterzuladen ..."
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Select CDDB Entry"
 msgstr "Wähle CDDB Eintrag"
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Es wurden mehrere CDDB Einträge gefunden. Bitte wählen Sie einen aus:"
 
-#: opener/cdopener.cpp:921
+#: opener/cdopener.cpp:932
 msgid "All tracks"
 msgstr "Alle Stücke"
 
-#: opener/cdopener.cpp:925
+#: opener/cdopener.cpp:936
 msgid "Tracks"
 msgstr "Stücke"
 
-#: opener/cdopener.cpp:1183
+#: opener/cdopener.cpp:1194
 msgid "Please select at least one track in order to proceed."
 msgstr "Bitte wählen Sie mindestens ein Stück, um fortzufahren."
 
-#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1271 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "Keine Konvertierungsoptionen ausgewählt."
 
-#: opener/cdopener.cpp:1274
+#: opener/cdopener.cpp:1285
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1696,7 +1696,7 @@ msgstr ""
 "\n"
 "Wollen Sie diese überschreiben?"
 
-#: opener/cdopener.cpp:1275
+#: opener/cdopener.cpp:1286
 msgid "File already exists"
 msgstr "Datei existiert bereits"
 
@@ -1835,12 +1835,11 @@ msgstr "Geben Sie den Namen des neuen Profils ein:"
 
 #: optionsdetailed.cpp:363
 msgid "You cannot save a profile without a name."
-msgstr ""
+msgstr "Sie können kein Profil ohne Namen abspeichern."
 
 #: optionsdetailed.cpp:363
-#, fuzzy
 msgid "Profile name is empty"
-msgstr "Profil existiert bereits"
+msgstr "Profilname ist leer"
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2823,19 +2822,9 @@ msgid "Your emails"
 msgstr "hessijames@gmail.com"
 
 #: rc.cpp:9
-#, fuzzy
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von"
+msgstr "Audio-Datei Konverter, CD Ripper und Replay Gain Werkzeug"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Audio-CD mit soundKonverter auslesen"
-
-#~ msgid "An audio file converter"
-#~ msgstr "Ein Audio-Datei-Konverter"
-
-#~ msgid "Calculating Replay Gain failed. Exit code: %1"
-#~ msgstr "Berechnung von Replay Gain gescheitert. Beendigungscode: %1"
-
-#~ msgid "Replay Gain for album: %1"
-#~ msgstr "Replay Gain für Album: %1"

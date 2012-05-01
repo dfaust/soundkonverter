@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-04-28 17:18+0200\n"
-"PO-Revision-Date: 2012-03-17 17:52+0000\n"
+"POT-Creation-Date: 2012-05-01 19:46+0200\n"
+"PO-Revision-Date: 2012-04-29 08:19+0000\n"
 "Last-Translator: Yannick ERNULT <yannick.ernult@gmail.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/soundkonverter/"
 "language/fr/)\n"
@@ -1486,9 +1486,9 @@ msgstr "2. Options de conversion"
 msgid "Artist:"
 msgstr "Artiste :"
 
-#: opener/cdopener.cpp:166 opener/cdopener.cpp:791 opener/cdopener.cpp:959
-#: opener/cdopener.cpp:963 opener/cdopener.cpp:1013 opener/cdopener.cpp:1042
-#: opener/cdopener.cpp:1237
+#: opener/cdopener.cpp:166 opener/cdopener.cpp:802 opener/cdopener.cpp:970
+#: opener/cdopener.cpp:974 opener/cdopener.cpp:1024 opener/cdopener.cpp:1053
+#: opener/cdopener.cpp:1248
 msgid "Various Artists"
 msgstr "Artistes divers"
 
@@ -1496,9 +1496,9 @@ msgstr "Artistes divers"
 msgid "Composer:"
 msgstr "Compositeur :"
 
-#: opener/cdopener.cpp:179 opener/cdopener.cpp:794 opener/cdopener.cpp:973
-#: opener/cdopener.cpp:977 opener/cdopener.cpp:1023 opener/cdopener.cpp:1048
-#: opener/cdopener.cpp:1238
+#: opener/cdopener.cpp:179 opener/cdopener.cpp:805 opener/cdopener.cpp:984
+#: opener/cdopener.cpp:988 opener/cdopener.cpp:1034 opener/cdopener.cpp:1059
+#: opener/cdopener.cpp:1249
 msgid "Various Composer"
 msgstr "Compositeurs divers"
 
@@ -1523,7 +1523,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Extraction"
 
-#: opener/cdopener.cpp:232 opener/cdopener.cpp:1007
+#: opener/cdopener.cpp:232 opener/cdopener.cpp:1018
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Track"
 msgstr "Piste"
@@ -1644,41 +1644,41 @@ msgstr "Lecteur de CD"
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2) : CD audio avec %3 pistes"
 
-#: opener/cdopener.cpp:640 opener/cdopener.cpp:641 opener/cdopener.cpp:644
-#: opener/cdopener.cpp:651 opener/cdopener.cpp:652
+#: opener/cdopener.cpp:651 opener/cdopener.cpp:652 opener/cdopener.cpp:655
+#: opener/cdopener.cpp:662 opener/cdopener.cpp:663
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: opener/cdopener.cpp:699
+#: opener/cdopener.cpp:710
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Merci de patienter, téléchargement des données CDDB en cours..."
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Select CDDB Entry"
 msgstr "Sélectionner l'entrée CDDB"
 
-#: opener/cdopener.cpp:747
+#: opener/cdopener.cpp:758
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Plusieurs entrées CDDB ont été trouvées. Merci d'en choisir une :"
 
-#: opener/cdopener.cpp:921
+#: opener/cdopener.cpp:932
 msgid "All tracks"
 msgstr "Toutes les pistes"
 
-#: opener/cdopener.cpp:925
+#: opener/cdopener.cpp:936
 msgid "Tracks"
 msgstr "Pistes"
 
-#: opener/cdopener.cpp:1183
+#: opener/cdopener.cpp:1194
 msgid "Please select at least one track in order to proceed."
 msgstr "Merci de choisir au moins une piste pour continuer."
 
-#: opener/cdopener.cpp:1260 opener/diropener.cpp:199 opener/fileopener.cpp:183
+#: opener/cdopener.cpp:1271 opener/diropener.cpp:199 opener/fileopener.cpp:183
 #: opener/playlistopener.cpp:218 opener/urlopener.cpp:138 optionslayer.cpp:140
 msgid "No conversion options selected."
 msgstr "Aucune option de conversion sélectionnée."
 
-#: opener/cdopener.cpp:1274
+#: opener/cdopener.cpp:1285
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1688,7 +1688,7 @@ msgstr ""
 "\n"
 "Voulez-vous écraser le fichier existant ?"
 
-#: opener/cdopener.cpp:1275
+#: opener/cdopener.cpp:1286
 msgid "File already exists"
 msgstr "Le fichier existe déjà"
 
@@ -1830,9 +1830,8 @@ msgid "You cannot save a profile without a name."
 msgstr ""
 
 #: optionsdetailed.cpp:363
-#, fuzzy
 msgid "Profile name is empty"
-msgstr "Le profile existe déjà"
+msgstr ""
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2811,19 +2810,9 @@ msgid "Your emails"
 msgstr "Vos courriels"
 
 #: rc.cpp:9
-#, fuzzy
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr "Grouper les fichiers dans l'outil Replay Gain par"
+msgstr ""
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripper des CDs audio avec soundKonverter"
-
-#~ msgid "An audio file converter"
-#~ msgstr "Un convertisseur de fichier audio"
-
-#~ msgid "Calculating Replay Gain failed. Exit code: %1"
-#~ msgstr "Le calcul du Replay Gain a échoué. Code de sortie : %1"
-
-#~ msgid "Replay Gain for album: %1"
-#~ msgstr "Replay Gain pour l'album : %1"

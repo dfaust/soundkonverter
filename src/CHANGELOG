@@ -1,6 +1,7 @@
 1.4.90 (1.5.0 rc1):
 -Add: Copy embedded covers for wma files
 -Add: Calculate Album Gain for albums in the conversion list
+-Add: Russian translation
 -Change: Replace Spanish Argentinan translation (es_AR) with Spanish (es) since KDE isn't able to use es_AR translations
 -Fix: Cdrom drive detection would fail with Ubuntu 12.04 (patch by Eike Thaden)
 -Fix: Musicbrainz lookup not working if data track present (patch by Eike Thaden)

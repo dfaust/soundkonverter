@@ -73,7 +73,7 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
     {
         if( option.state & QStyle::State_Selected )
         {
-            backgroundColor = QColor(215,62,62);   // hsv: 182,   0, 215
+            backgroundColor = QColor(215,102,102); // hsv:   0, 134, 215
         }
         else
         {
@@ -84,18 +84,18 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
     {
         if( option.state & QStyle::State_Selected )
         {
-            backgroundColor = QColor(235,139,49);  // hsv:  29, 202, 235
+            backgroundColor = QColor(235,154, 49); // hsv:  34, 202, 235
         }
         else
         {
-            backgroundColor = QColor(255,157,65);  // hsv:  29, 190, 255
+            backgroundColor = QColor(255,204,156); // hsv:  29,  99, 255
         }
     }
     else if( item->state == ReplayGainFileListItem::Processed )
     {
         if( option.state & QStyle::State_Selected )
         {
-            backgroundColor = QColor(79,200,101);  // hsv: 131, 154, 200
+            backgroundColor = QColor(125,205,139); // hsv: 131, 100, 205
         }
         else
         {

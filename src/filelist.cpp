@@ -231,9 +231,9 @@ void FileList::resizeEvent( QResizeEvent *event )
     if( event->size().width() < 500 )
         return;
 
-    setColumnWidth( Column_State, 140 );
-    setColumnWidth( Column_Input, (event->size().width()-260)/2 );
-    setColumnWidth( Column_Output, (event->size().width()-260)/2 );
+    setColumnWidth( Column_State, 150 );
+    setColumnWidth( Column_Input, (event->size().width()-270)/2 );
+    setColumnWidth( Column_Output, (event->size().width()-270)/2 );
     setColumnWidth( Column_Quality, 120 );
 }
 

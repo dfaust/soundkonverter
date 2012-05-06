@@ -1071,7 +1071,6 @@ void Convert::remove( ConvertItem *item, int state )
     if( state == 0 )
     {
         writeTags( item );
-//         item->fileListItem->url = item->outputUrl;
     }
 
     if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )

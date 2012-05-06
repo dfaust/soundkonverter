@@ -1340,8 +1340,6 @@ void FileList::load( bool user )
                     FileListItem *item = new FileListItem( this );
                     item->url = KUrl(file.attribute("url"));
                     item->outputUrl = KUrl(file.attribute("outputUrl"));
-                    if( item->url == item->outputUrl )
-                        item->state = FileListItem::WaitingForAlbumGain;
                     item->codecName = file.attribute("codecName");
                     item->conversionOptionsId = conversionOptionsIds[file.attribute("conversionOptionsId").toInt()];
                     item->local = file.attribute("local").toInt();

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-01 19:46+0200\n"
+"POT-Creation-Date: 2012-05-09 17:18+0200\n"
 "PO-Revision-Date: 2012-04-30 18:48+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
@@ -509,7 +509,7 @@ msgstr "Kodér"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1257 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1256 filelist.cpp:498
 #: filelist.cpp:508
 msgid "Replay Gain"
 msgstr "Vyrovnávání hlasitosti skladeb"
@@ -680,7 +680,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Pouze adresáře"
 
-#: convert.cpp:180 convert.cpp:1240
+#: convert.cpp:180 convert.cpp:1239
 msgid "Getting file"
 msgstr "Přijímá se soubor"
 
@@ -692,13 +692,13 @@ msgstr "Kopíruje se \"%1\" to \"%2\""
 msgid "No more backends left to try :("
 msgstr "Nezbyla žádná další jádra k vyzkoušení : -("
 
-#: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
+#: convert.cpp:252 convert.cpp:291 convert.cpp:1243 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
 #: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "Převádí se"
 
-#: convert.cpp:306 convert.cpp:1248
+#: convert.cpp:306 convert.cpp:1247
 msgid "Decoding"
 msgstr "Dekóduje se"
 
@@ -710,7 +710,7 @@ msgstr ""
 "Převod se nezdařil. Alespoň jedno z použitých jader je potřeba nastavit "
 "správně."
 
-#: convert.cpp:374 convert.cpp:1253
+#: convert.cpp:374 convert.cpp:1252
 msgid "Encoding"
 msgstr "Kóduje se"
 
@@ -822,40 +822,40 @@ msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Vyskytla se chyba"
 
-#: convert.cpp:1091
+#: convert.cpp:1090
 msgid "Executing command: \"%1\""
 msgstr "Vykonává se příkaz: \"%1\""
 
-#: convert.cpp:1109
+#: convert.cpp:1108
 msgid "Removing partially converted output file"
 msgstr "Odstraňuje se částečně převedený výstupní soubor"
 
-#: convert.cpp:1114
+#: convert.cpp:1113
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Probíhá odstraňování souboru ze seznamu převodů. Kód ukončení %1 (%2)"
 
-#: convert.cpp:1116
+#: convert.cpp:1115
 msgid "Conversion time"
 msgstr "Doba převodu"
 
-#: convert.cpp:1117
+#: convert.cpp:1116
 msgid "Output file size"
 msgstr "Velikost výstupního souboru"
 
-#: convert.cpp:1118
+#: convert.cpp:1117
 msgid "File size ratio"
 msgstr "Poměr velikosti souboru"
 
-#: convert.cpp:1232
+#: convert.cpp:1231
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Neznámá"
 
-#: convert.cpp:1249 filelist.cpp:513
+#: convert.cpp:1248 filelist.cpp:513
 msgid "Ripping"
 msgstr "Vytahuje se"
 
-#: convert.cpp:1262
+#: convert.cpp:1261
 msgid "Progress: %1"
 msgstr "Postup: %1"
 

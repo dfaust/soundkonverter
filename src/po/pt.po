@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-01 19:46+0200\n"
-"PO-Revision-Date: 2012-04-29 08:19+0000\n"
+"POT-Creation-Date: 2012-05-09 17:18+0200\n"
+"PO-Revision-Date: 2012-05-09 10:41+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.net/projects/p/"
 "soundkonverter/language/pt/)\n"
@@ -54,7 +54,7 @@ msgstr "Codificadores suportados:"
 
 #: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
 msgid "Currently deactivated."
-msgstr ""
+msgstr "Atualmente inativo."
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -83,7 +83,7 @@ msgstr ""
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para codificar %1 ficheiros, a infraestrutura \"%2\" pode ser substituída "
+"Para codificar ficheiros %1, a infraestrutura \"%2\" pode ser substituída "
 "por \"%3\"."
 
 #: codecoptimizations.cpp:55
@@ -94,7 +94,7 @@ msgstr ""
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para descodificar %1 ficheiros, a infraestrutura \"%2\" pode ser substituída "
+"Para descodificar ficheiros %1, a infraestrutura \"%2\" pode ser substituída "
 "por \"%3\"."
 
 #: codecoptimizations.cpp:63
@@ -102,7 +102,7 @@ msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
-"Para aplicar Replay Gain a %1 ficheiros, a infraestrutura \"%2\" pode ser "
+"Para aplicar Replay Gain a ficheiros %1, a infraestrutura \"%2\" pode ser "
 "substituída por \"%3\"."
 
 #: codecoptimizations.cpp:66
@@ -514,7 +514,7 @@ msgstr "Codificador"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1257 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1256 filelist.cpp:498
 #: filelist.cpp:508
 msgid "Replay Gain"
 msgstr "Replay Gain"
@@ -627,7 +627,7 @@ msgstr "Ignorar ficheiro"
 
 #: configdialog/configgeneralpage.cpp:104
 msgid "Do that if the output file already exists"
-msgstr "Ação se o ficheiro de destino já existir"
+msgstr "O que fazer se o ficheiro de destino já existir"
 
 #: configdialog/configgeneralpage.cpp:113
 msgid "Number of files to convert at once"
@@ -686,7 +686,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Só diretórios"
 
-#: convert.cpp:180 convert.cpp:1240
+#: convert.cpp:180 convert.cpp:1239
 msgid "Getting file"
 msgstr "A obter ficheiro"
 
@@ -698,13 +698,13 @@ msgstr "A copiar \"%1\" para \"%2\""
 msgid "No more backends left to try :("
 msgstr "Já não existem mais infraestruturas para testar"
 
-#: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
+#: convert.cpp:252 convert.cpp:291 convert.cpp:1243 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
 #: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "A converter"
 
-#: convert.cpp:306 convert.cpp:1248
+#: convert.cpp:306 convert.cpp:1247
 msgid "Decoding"
 msgstr "A descodificar"
 
@@ -715,13 +715,13 @@ msgid ""
 msgstr ""
 "Falha ao converter. Existe, pelo menos, uma infraestrutura por configurar."
 
-#: convert.cpp:374 convert.cpp:1253
+#: convert.cpp:374 convert.cpp:1252
 msgid "Encoding"
 msgstr "A codificar"
 
 #: convert.cpp:391
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
-msgstr ""
+msgstr "Ignorar Replay Gain. Mais tarde, será utilizado o Album Gain."
 
 #: convert.cpp:406
 msgid "Applying Replay Gain"
@@ -776,7 +776,7 @@ msgstr "Faixa de CD %1"
 
 #: convert.cpp:940
 msgid "Adding new item to conversion list: '%1'"
-msgstr "Adicionando novo ficheiro à lista: \"%1\""
+msgstr "A adicionar novo ficheiro à lista: \"%1\""
 
 #: convert.cpp:947
 msgid "Got log ID: %1"
@@ -819,47 +819,47 @@ msgstr "Abortado pelo utilizador"
 #: convert.cpp:1067
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "Precisa configurar a infraestrutura"
+msgstr "Tem que configurar a infraestrutura"
 
 #: convert.cpp:1069
 msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Ocorreu um erro"
 
-#: convert.cpp:1091
+#: convert.cpp:1090
 msgid "Executing command: \"%1\""
 msgstr "A executar o comando: \"%1\""
 
-#: convert.cpp:1109
+#: convert.cpp:1108
 msgid "Removing partially converted output file"
 msgstr "A remover os ficheiros parciais"
 
-#: convert.cpp:1114
+#: convert.cpp:1113
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr "A remover ficheiro da lista de conversão. Código %1 (%2)"
+msgstr "A remover o ficheiro da lista de conversão. Código %1 (%2)"
 
-#: convert.cpp:1116
+#: convert.cpp:1115
 msgid "Conversion time"
 msgstr "Duração da conversão"
 
-#: convert.cpp:1117
+#: convert.cpp:1116
 msgid "Output file size"
 msgstr "Tamanho do ficheiro de destino"
 
-#: convert.cpp:1118
+#: convert.cpp:1117
 msgid "File size ratio"
 msgstr "Rácio de tamanho"
 
-#: convert.cpp:1232
+#: convert.cpp:1231
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: convert.cpp:1249 filelist.cpp:513
+#: convert.cpp:1248 filelist.cpp:513
 msgid "Ripping"
 msgstr "A extrair"
 
-#: convert.cpp:1262
+#: convert.cpp:1261
 msgid "Progress: %1"
 msgstr "Progresso: %1"
 
@@ -1036,22 +1036,22 @@ msgstr "A terminar o processo a pedido do utilizador"
 
 #: core/backendplugin.cpp:522
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr "Para codificar %1 ficheiro(s), precisa de instalar \"%2\"."
+msgstr "Para codificar ficheiros %1, tem que instalar \"%2\"."
 
 #: core/backendplugin.cpp:529
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr "Para descodificar %1 ficheiro(s), precisa de instalar \"%2\"."
+msgstr "Para descodificar ficheiros %1, tem que instalar \"%2\"."
 
 #: core/backendplugin.cpp:536
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr "Para converter %1 ficheiro(s), precisa de instalar \"%2\"."
+msgstr "Para converter ficheiros %1, tem que instalar \"%2\"."
 
 #: core/backendplugin.cpp:543
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
-"Para calcular as \"tags\" Replay Gain de %1 ficheiro(s), precisa de instalar "
+"Para calcular as \"tags\" Replay Gain de %1 ficheiro(s), tem que instalar "
 "\"%2\"."
 
 #: core/backendplugin.cpp:550
@@ -1323,7 +1323,7 @@ msgstr "Todos os programadores dos codificadores"
 
 #: main.cpp:33
 msgid "Open the Replay Gain tool an add all given files"
-msgstr "Abra a ferramenta Replay Gain e adicione os ficheiros"
+msgstr "Abrir a ferramenta Replay Gain e adicionar os ficheiros"
 
 #: main.cpp:35
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1833,11 +1833,11 @@ msgstr "Indique o nome do novo perfil:"
 
 #: optionsdetailed.cpp:363
 msgid "You cannot save a profile without a name."
-msgstr ""
+msgstr "Não pode gravar um perfil sem nome."
 
 #: optionsdetailed.cpp:363
 msgid "Profile name is empty"
-msgstr ""
+msgstr "O nome do perfil está vazio."
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2796,7 +2796,7 @@ msgstr "smarquespt@gmail.com"
 
 #: rc.cpp:9
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr ""
+msgstr "Conversor de áudio, extração de CD e análise Replay Gain"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"

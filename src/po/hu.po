@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-01 19:46+0200\n"
+"POT-Creation-Date: 2012-05-09 17:18+0200\n"
 "PO-Revision-Date: 2012-04-29 08:19+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -512,7 +512,7 @@ msgstr "Kóder"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1257 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1256 filelist.cpp:498
 #: filelist.cpp:508
 msgid "Replay Gain"
 msgstr "Hangerő-korrekció"
@@ -682,7 +682,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Csak könyvtárak"
 
-#: convert.cpp:180 convert.cpp:1240
+#: convert.cpp:180 convert.cpp:1239
 msgid "Getting file"
 msgstr "Fájl megszerzése"
 
@@ -694,13 +694,13 @@ msgstr "\"%1\" másolása ide: \"%2\""
 msgid "No more backends left to try :("
 msgstr "Nincs több kipróbálható háttérprogram :("
 
-#: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
+#: convert.cpp:252 convert.cpp:291 convert.cpp:1243 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
 #: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "Konvertálás"
 
-#: convert.cpp:306 convert.cpp:1248
+#: convert.cpp:306 convert.cpp:1247
 msgid "Decoding"
 msgstr "Dekódolás"
 
@@ -712,7 +712,7 @@ msgstr ""
 "A konvertálás meghiúsult. A használt háttérprogramok közül legalább egyet "
 "megfelelően be kell állítani."
 
-#: convert.cpp:374 convert.cpp:1253
+#: convert.cpp:374 convert.cpp:1252
 msgid "Encoding"
 msgstr "Kódolás"
 
@@ -823,40 +823,40 @@ msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Hiba történt"
 
-#: convert.cpp:1091
+#: convert.cpp:1090
 msgid "Executing command: \"%1\""
 msgstr "Parancs futtatása: \"%1\""
 
-#: convert.cpp:1109
+#: convert.cpp:1108
 msgid "Removing partially converted output file"
 msgstr "A részben konvertált kimeneti fájl eltávolítása"
 
-#: convert.cpp:1114
+#: convert.cpp:1113
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Fájl eltávolítása a konvertálási listából. Hibakód: %1 (%2)"
 
-#: convert.cpp:1116
+#: convert.cpp:1115
 msgid "Conversion time"
 msgstr "Konvertálási idő"
 
-#: convert.cpp:1117
+#: convert.cpp:1116
 msgid "Output file size"
 msgstr "Kimeneti fájl mérete"
 
-#: convert.cpp:1118
+#: convert.cpp:1117
 msgid "File size ratio"
 msgstr "Fájlméret aránya"
 
-#: convert.cpp:1232
+#: convert.cpp:1231
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Ismeretlen"
 
-#: convert.cpp:1249 filelist.cpp:513
+#: convert.cpp:1248 filelist.cpp:513
 msgid "Ripping"
 msgstr "Beolvasás"
 
-#: convert.cpp:1262
+#: convert.cpp:1261
 msgid "Progress: %1"
 msgstr "Folyamat: %1"
 

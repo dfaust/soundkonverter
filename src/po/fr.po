@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-01 19:46+0200\n"
-"PO-Revision-Date: 2012-04-29 08:19+0000\n"
+"POT-Creation-Date: 2012-05-09 17:18+0200\n"
+"PO-Revision-Date: 2012-05-03 04:55+0000\n"
 "Last-Translator: Yannick ERNULT <yannick.ernult@gmail.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/soundkonverter/"
 "language/fr/)\n"
@@ -55,7 +55,7 @@ msgstr "Codecs supportés :"
 
 #: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
 msgid "Currently deactivated."
-msgstr ""
+msgstr "Actuellement désactivé."
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -511,7 +511,7 @@ msgstr "Encodeur"
 
 #: configdialog/configbackendspage.cpp:135
 #: configdialog/configbackendspage.cpp:174
-#: configdialog/configbackendspage.cpp:239 convert.cpp:1257 filelist.cpp:498
+#: configdialog/configbackendspage.cpp:239 convert.cpp:1256 filelist.cpp:498
 #: filelist.cpp:508
 msgid "Replay Gain"
 msgstr "Replay Gain"
@@ -682,7 +682,7 @@ msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Dossiers seulement"
 
-#: convert.cpp:180 convert.cpp:1240
+#: convert.cpp:180 convert.cpp:1239
 msgid "Getting file"
 msgstr "Obtention du fichier en cours"
 
@@ -694,13 +694,13 @@ msgstr "Copie de \"%1\" vers \"%2\" en cours"
 msgid "No more backends left to try :("
 msgstr "Il n'y a plus de module à essayer :("
 
-#: convert.cpp:252 convert.cpp:291 convert.cpp:1244 filelist.cpp:518
+#: convert.cpp:252 convert.cpp:291 convert.cpp:1243 filelist.cpp:518
 #: soundkonverter.cpp:270 soundkonverter.cpp:272 soundkonverter.cpp:299
 #: soundkonverter.cpp:301
 msgid "Converting"
 msgstr "Conversion en cours"
 
-#: convert.cpp:306 convert.cpp:1248
+#: convert.cpp:306 convert.cpp:1247
 msgid "Decoding"
 msgstr "Décodage en cours"
 
@@ -712,13 +712,13 @@ msgstr ""
 "La conversion a échouée. Au moins un des modules a besoin d'être configuré "
 "correctement."
 
-#: convert.cpp:374 convert.cpp:1253
+#: convert.cpp:374 convert.cpp:1252
 msgid "Encoding"
 msgstr "Encodage en cours"
 
 #: convert.cpp:391
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
-msgstr ""
+msgstr "Passer Replay Gain, Album Gain sera calculé plus tard"
 
 #: convert.cpp:406
 msgid "Applying Replay Gain"
@@ -823,41 +823,41 @@ msgctxt "Conversion exit status"
 msgid "An error occured"
 msgstr "Une erreur s'est produite"
 
-#: convert.cpp:1091
+#: convert.cpp:1090
 msgid "Executing command: \"%1\""
 msgstr "Exécution de la commande : \"%1\""
 
-#: convert.cpp:1109
+#: convert.cpp:1108
 msgid "Removing partially converted output file"
 msgstr "Suppression du fichier partiellement converti"
 
-#: convert.cpp:1114
+#: convert.cpp:1113
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr ""
 "Suppression du fichier de la liste de conversion. Code de sortie %1 (%2)"
 
-#: convert.cpp:1116
+#: convert.cpp:1115
 msgid "Conversion time"
 msgstr "Temps de conversion"
 
-#: convert.cpp:1117
+#: convert.cpp:1116
 msgid "Output file size"
 msgstr "Taille du fichier de destination"
 
-#: convert.cpp:1118
+#: convert.cpp:1117
 msgid "File size ratio"
 msgstr "Ratio de la taille du fichier"
 
-#: convert.cpp:1232
+#: convert.cpp:1231
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: convert.cpp:1249 filelist.cpp:513
+#: convert.cpp:1248 filelist.cpp:513
 msgid "Ripping"
 msgstr "Extraction en cours"
 
-#: convert.cpp:1262
+#: convert.cpp:1261
 msgid "Progress: %1"
 msgstr "Progression : %1"
 
@@ -1827,11 +1827,11 @@ msgstr "Entrer un nom pour le nouveau profile :"
 
 #: optionsdetailed.cpp:363
 msgid "You cannot save a profile without a name."
-msgstr ""
+msgstr "Vous ne pouvez pas enregistrer un profil sans nom."
 
 #: optionsdetailed.cpp:363
 msgid "Profile name is empty"
-msgstr ""
+msgstr "Le profil n'a pas de nom"
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2812,6 +2812,7 @@ msgstr "Vos courriels"
 #: rc.cpp:9
 msgid "Audio file converter, CD ripper and Replay Gain tool"
 msgstr ""
+"Convertisseur de fichiers audio, extracteur de CD et outil de Replay Gain"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"

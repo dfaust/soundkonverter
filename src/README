@@ -6,7 +6,9 @@ The key features are:
 - Replay Gain calculation
 - CD ripping
 
-soundKonverter currently supports the following plugins and file formats:
+Reading and writing tags and covers is supported for many formats, so they are preserved when converting files.
+
+The following backends and formats are supported:
 
 Encoders/Decoders:
                 Encode:                                                 Decode:
@@ -38,6 +40,8 @@ mpcgain         (musepack)
 
 CD rippers:
 cdparanoia
+
+If you try to convert a file that is not supported, soundKonverter will tell you which backend you need to install.
 
 soundKonverter has nothing to do with the soundconverter project, the very similar name is just an unfortunate coincident.
 

@@ -99,7 +99,7 @@ int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;
@@ -168,10 +168,17 @@ void soundkonverter_ripper_cdparanoia::processOutput()
         {
             QString output = backendItems.at(i)->process->readAllStandardOutput().data();
             pluginItem = qobject_cast<RipperPluginItem*>(backendItems.at(i));
+
             progress = parseOutput( output, &pluginItem->data.fromSector, &pluginItem->data.toSector );
-            if( progress == -1 && !output.simplified().isEmpty() ) emit log( backendItems.at(i)->id, output );
+
+            if( progress == -1 && !output.simplified().isEmpty() )
+                logOutput( backendItems.at(i)->id, output );
+
             progress = (progress-pluginItem->data.fromSector) * 100 / (pluginItem->data.toSector-pluginItem->data.fromSector);
-            if( progress > backendItems.at(i)->progress ) backendItems.at(i)->progress = progress;
+
+            if( progress > backendItems.at(i)->progress )
+                backendItems.at(i)->progress = progress;
+
             return;
         }
     }

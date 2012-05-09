@@ -99,6 +99,9 @@ public:
     /** returns the url as a string with all special characters escaped so the bash can find the files */
     QString escapeUrl( const KUrl& url );
 
+    void logCommand( int id, const QString& message );
+    void logOutput( int id, const QString& message );
+
 protected:
     QList<BackendPluginItem*> backendItems;
     int lastId;
@@ -106,7 +109,7 @@ protected:
 //     int priority;
 
 signals:
-    void log( int id, const QString& message, const QStringList& arguments = QStringList() );
+    void log( int id, const QString& message );
     void jobFinished( int id, int exitCode );
 
 private slots:

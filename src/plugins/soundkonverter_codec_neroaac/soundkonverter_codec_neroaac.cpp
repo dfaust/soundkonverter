@@ -117,7 +117,7 @@ int soundkonverter_codec_neroaac::convert( const KUrl& inputFile, const KUrl& ou
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;
@@ -208,7 +208,7 @@ void soundkonverter_codec_neroaac::processOutput()
             pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
             progress = parseOutput( output, pluginItem->data.length );
             if( progress == -1 && !output.simplified().isEmpty() )
-                emit log( backendItems.at(i)->id, output );
+                logOutput( backendItems.at(i)->id, output );
             if( progress > backendItems.at(i)->progress )
                 backendItems.at(i)->progress = progress;
             return;

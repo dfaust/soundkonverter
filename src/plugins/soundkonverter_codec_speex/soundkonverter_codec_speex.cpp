@@ -104,7 +104,7 @@ int soundkonverter_codec_speex::convert( const KUrl& inputFile, const KUrl& outp
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

@@ -104,7 +104,7 @@ int soundkonverter_codec_wavpack::convert( const KUrl& inputFile, const KUrl& ou
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

@@ -290,7 +290,7 @@ void Convert::convert( ConvertItem *item )
             // both plugins support pipes
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
-            logger->log( item->logID, "\t" + command1.join(" ") + " | " + command2.join(" ") );
+            logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command1.join(" ") + " | " + command2.join(" ") + "</span></pre>" );
             item->process = new KProcess();
             item->process.data()->setOutputChannelMode( KProcess::MergedChannels );
             connect( item->process.data(), SIGNAL(readyRead()), this, SLOT(processOutput()) );
@@ -495,7 +495,7 @@ void Convert::executeUserScript( ConvertItem *item )
 
 void Convert::executeNextStep( ConvertItem *item )
 {
-    logger->log( item->logID, i18n("Executing next step") );
+    logger->log( item->logID, "<br>" +  i18n("Executing next step") );
 
     item->lastTake = item->take;
     item->take = 0;
@@ -667,10 +667,16 @@ void Convert::processOutput()
             {
                 BackendPlugin *plugin1;
                 plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
+
                 output = items.at(i)->process.data()->readAllStandardOutput().data();
+
                 progress1 = plugin1->parseOutput( output );
-                if( progress1 > items.at(i)->progress ) items[i]->progress = progress1;
-                if( progress1 == -1 && !output.simplified().isEmpty() ) logger->log( items.at(i)->logID, "\t" + output.trimmed() );
+
+                if( progress1 > items.at(i)->progress )
+                    items[i]->progress = progress1;
+
+                if( progress1 == -1 && !output.simplified().isEmpty() )
+                    logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#C00000\">" + output.trimmed().replace("\n","<br>\t") + "</span></pre>" );
             }
             else if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.count() == 2 )
             {
@@ -678,11 +684,17 @@ void Convert::processOutput()
                 BackendPlugin *plugin1, *plugin2;
                 plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
                 plugin2 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(1).plugin;
+
                 output = items.at(i)->process.data()->readAllStandardOutput().data();
+
                 progress1 = plugin1->parseOutput( output );
                 progress2 = plugin2->parseOutput( output );
-                if( progress1 > items.at(i)->progress ) items[i]->progress = progress1;
-                if( progress1 == -1 && progress2 == -1 && !output.simplified().isEmpty() ) logger->log( items.at(i)->logID, "\t" + output.trimmed() );
+
+                if( progress1 > items.at(i)->progress )
+                    items[i]->progress = progress1;
+
+                if( progress1 == -1 && progress2 == -1 && !output.simplified().isEmpty() )
+                    logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#C00000\">" + output.trimmed().replace("\n","<br>\t") + "</span></pre>" );
             }
 
             return;
@@ -876,7 +888,7 @@ void Convert::pluginLog( int id, const QString& message )
             {
                 for( int k=0; k<pluginLogQueue.at(i).messages.size(); k++ )
                 {
-                    logger->log( items.at(j)->logID, "\t" + pluginLogQueue.at(i).messages.at(k).trimmed().replace("\n","\n\t") );
+                    logger->log( items.at(j)->logID, pluginLogQueue.at(i).messages.at(k) );
                 }
                 pluginLogQueue.removeAt(i);
                 i--;
@@ -894,7 +906,7 @@ void Convert::pluginLog( int id, const QString& message )
         if( ( items.at(i)->convertPlugin && items.at(i)->convertPlugin == QObject::sender() && items.at(i)->convertID == id ) ||
             ( items.at(i)->replaygainPlugin && items.at(i)->replaygainPlugin == QObject::sender() && items.at(i)->replaygainID == id ) )
         {
-            logger->log( items.at(i)->logID, "\t" + message.trimmed().replace("\n","\n\t") );
+            logger->log( items.at(i)->logID, message );
             return;
         }
     }
@@ -1110,7 +1122,7 @@ void Convert::remove( ConvertItem *item, int state )
 
     usedOutputNames.remove( item->logID );
 
-    logger->log( item->logID, i18n("Removing file from conversion list. Exit code %1 (%2)",state,exitMessage) );
+    logger->log( item->logID, "<br>" +  i18n("Removing file from conversion list. Exit code %1 (%2)",state,exitMessage) );
 
     logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
     logger->log( item->logID, "\t" + i18n("Output file size") + ": " + Global::prettyNumber(outputFileInfo.size(),"B") );
@@ -1258,7 +1270,7 @@ void Convert::updateProgress()
             default: fileTime = 0.0f;
         }
         time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
-        logger->log( items.at(i)->logID, i18n("Progress: %1",fileProgress) );
+        logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
     }
 
     emit updateTime( time );

@@ -471,7 +471,7 @@ int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& out
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;
@@ -529,7 +529,7 @@ void soundkonverter_codec_ffmpeg::processOutput()
 
             float progress = parseOutput( output, &pluginItem->data.length );
             if( progress == -1 && !output.simplified().isEmpty() )
-                emit log( backendItems.at(i)->id, output );
+                logOutput( backendItems.at(i)->id, output );
 
             progress = progress * 100 / pluginItem->data.length;
             if( progress > backendItems.at(i)->progress )

@@ -444,7 +444,7 @@ bool BackendPlugin::kill( int id )
         if( backendItems.at(i)->id == id && backendItems.at(i)->process != 0 )
         {
             backendItems.at(i)->process->kill();
-            emit log( id, i18n("Killing process on user request") );
+            emit log( id, "<pre>\t" + i18n("Killing process on user request") + "</pre>" );
             return true;
         }
     }
@@ -487,7 +487,7 @@ void BackendPlugin::processOutput()
                 backendItems.at(i)->progress = progress;
 
             if( progress == -1 )
-                emit log( backendItems.at(i)->id, output );
+                logOutput( backendItems.at(i)->id, output );
 
             return;
         }
@@ -602,5 +602,15 @@ QString BackendPlugin::escapeUrl( const KUrl& url )
         return "-";
 
     return url.toLocalFile().replace("\"","\\\"").replace("$","\\$").replace("`","\\`");
+}
+
+void BackendPlugin::logOutput( int id, const QString& message )
+{
+    emit log( id, "<pre>\t<span style=\"color:#C00000\">" + message.trimmed().replace("\n","<br>\t") + "</span></pre>" );
+}
+
+void BackendPlugin::logCommand( int id, const QString& message )
+{
+    emit log( id, "<pre>\t<span style=\"color:#DC6300\">" + message.trimmed().replace("\n","<br>\t") + "</span></pre>" );
 }
 

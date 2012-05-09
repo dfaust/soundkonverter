@@ -104,7 +104,7 @@ int soundkonverter_codec_timidity::convert( const KUrl& inputFile, const KUrl& o
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
 
-    emit log( newItem->id, command.join(" ") );
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

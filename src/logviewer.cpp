@@ -148,4 +148,13 @@ void LogViewer::updateProcess( int id )
     refillLogs();
 }
 
+void LogViewer::showLog( int id )
+{
+    if( cItem->findData(QVariant(id)) != -1 )
+        cItem->setCurrentIndex( cItem->findData(QVariant(id)) );
+    else
+        cItem->setCurrentIndex( 0 );
+
+    itemChanged();
+}
 

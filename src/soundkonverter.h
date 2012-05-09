@@ -57,7 +57,7 @@ public:
 
 private slots:
     void showConfigDialog();
-    void showLogViewer();
+    void showLogViewer( const int logId = 0 );
     void showReplayGainScanner();
     void showAboutPlugins();
     void progressChanged( const QString& progress );

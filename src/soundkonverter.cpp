@@ -49,6 +49,7 @@ soundKonverter::soundKonverter()
     connect( m_view, SIGNAL(signalConversionStarted()), this, SLOT(conversionStarted()) );
     connect( m_view, SIGNAL(signalConversionStopped(int)), this, SLOT(conversionStopped(int)) );
     connect( m_view, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(QString)) );
+    connect( m_view, SIGNAL(showLog(int)), this, SLOT(showLogViewer(int)) );
 
     // tell the KXmlGuiWindow that this is indeed the main widget
     setCentralWidget( m_view );
@@ -227,10 +228,13 @@ void soundKonverter::showConfigDialog()
     delete dialog;
 }
 
-void soundKonverter::showLogViewer()
+void soundKonverter::showLogViewer( const int logId )
 {
     if( !logViewer )
         logViewer = new LogViewer( logger, 0 );
+
+    if( logId )
+        logViewer->showLog( logId );
 
     logViewer->show();
     logViewer->raise();

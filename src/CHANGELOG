@@ -1,3 +1,6 @@
+1.5.90:
+-Add: Make the 'Failed' status clickable and open the log if clicked
+
 1.5.0:
 -Add: Update translations
 

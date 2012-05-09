@@ -20,6 +20,7 @@ FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     state = WaitingForConversion;
     length = 0;
     tags = 0;
+    logId = 0;
 }
 
 FileListItem::FileListItem( QTreeWidget *parent )
@@ -28,12 +29,16 @@ FileListItem::FileListItem( QTreeWidget *parent )
     state = WaitingForConversion;
     length = 0;
     tags = 0;
+    logId = 0;
 }
 
 FileListItem::~FileListItem()
 {
     if( tags )
         delete tags;
+
+    if( lInfo )
+        delete lInfo;
 }
 
 FileListItemDelegate::FileListItemDelegate( QObject *parent )

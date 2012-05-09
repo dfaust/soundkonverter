@@ -479,6 +479,15 @@ void FileList::updateItem( FileListItem *item )
 //     }
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
+    removeItemWidget( item, Column_State );
+    if( item->lInfo )
+    {
+        disconnect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, 0 );
+        delete item->lInfo;
+    }
+    item->setText( Column_State, "" );
+    item->setToolTip( Column_State, "" );
+
     switch( item->state )
     {
         case FileListItem::WaitingForConversion:
@@ -535,7 +544,10 @@ void FileList::updateItem( FileListItem *item )
         }
         case FileListItem::Failed:
         {
-            item->setText( Column_State, i18n("Failed") );
+            item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
+            connect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
+            setItemWidget( item, Column_State, item->lInfo );
+            item->setToolTip( Column_State, i18n("The conversion has failed.\nSee the log for more information.") );
             break;
         }
     }
@@ -565,6 +577,16 @@ void FileList::updateItem( FileListItem *item )
     update( indexFromItem( item, 1 ) );
     update( indexFromItem( item, 2 ) );
     update( indexFromItem( item, 3 ) );
+}
+
+void FileList::showLogClicked( const QString& logIdString )
+{
+    const int logId = logIdString.toInt();
+
+    if( !logId )
+        return;
+
+    emit showLog( logId );
 }
 
 void FileList::updateItems( QList<FileListItem*> items )

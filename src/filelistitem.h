@@ -17,8 +17,11 @@
 #include <QTreeWidgetItem>
 #include <QItemDelegate>
 #include <QPointer>
+#include <QLabel>
 
 #include <KUrl>
+
+// class QLabel;
 
 
 /**
@@ -64,6 +67,10 @@ public:
 
     float length;               // the length of the track, used for the calculation of the progress bar
     QString notifyCommand;      // execute this command, when the file is converted (%i=input file, %o=output file)
+
+    int logId;                  // the id the item is registered at the logger with, 0 if the conversion hasn't started yet
+
+    QPointer<QLabel> lInfo;// a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
 };
 
 class FileListItemDelegate : public QItemDelegate

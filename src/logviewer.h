@@ -40,6 +40,8 @@ private slots:
 public slots:
     /** get notification when a job has been removed */
     void processRemoved( int id );
+    /** show the corresponding log */
+    void showLog( int id );
 };
 
 #endif // LOGVIEWER_H

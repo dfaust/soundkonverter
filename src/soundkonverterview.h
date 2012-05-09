@@ -116,6 +116,7 @@ signals:
     void progressChanged( const QString& progress );
     void signalConversionStarted();
     void signalConversionStopped( int state );
+    void showLog( const int logId );
 };
 
 #endif // _soundKonverterVIEW_H_

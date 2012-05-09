@@ -57,6 +57,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( fileList, SIGNAL(conversionStarted()), this, SLOT(conversionStarted()) );
     connect( fileList, SIGNAL(conversionStopped(int)), this, SLOT(conversionStopped(int)) );
     connect( fileList, SIGNAL(queueModeChanged(bool)), this, SLOT(queueModeChanged(bool)) );
+    connect( fileList, SIGNAL(showLog(int)), this, SIGNAL(showLog(int)) );
 
     optionsLayer = new OptionsLayer( config, this );
     fileList->setOptionsLayer( optionsLayer );

@@ -958,6 +958,9 @@ void Convert::add( FileListItem* item )
     newItem->logID = logger->registerProcess( fileName );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
 
+    // TODO remove redundancy, logID is needed in the fileListItem
+    newItem->fileListItem->logId = newItem->logID;
+
 //     logger->log( newItem->logID, "Mime Type: " + newItem->fileListItem->mimeType );
 //     if( newItem->fileListItem->tags ) logger->log( newItem->logID, i18n("Tags successfully read") );
 //     else logger->log( newItem->logID, i18n("Reading tags failed") );

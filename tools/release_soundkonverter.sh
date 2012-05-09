@@ -16,7 +16,7 @@ cd "../release"
 cp -a "../src" "./tmp"
 mv "./tmp" "./soundkonverter-"$VERSION
 
-tar --exclude="*~" --exclude=".git" --exclude=".kdev4" -czf "./soundkonverter-"$VERSION".tar.gz" "./soundkonverter-"$VERSION
+tar --exclude="*~" --exclude=".git" --exclude=".kdev4" --exclude="TODO" -czf "./soundkonverter-"$VERSION".tar.gz" "./soundkonverter-"$VERSION
 echo "new release written to: release/soundkonverter-"$VERSION".tar.gz"
 
 rm -rf "./soundkonverter-"$VERSION

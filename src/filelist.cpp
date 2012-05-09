@@ -492,6 +492,9 @@ void FileList::updateItem( FileListItem *item )
     }
     item->setText( Column_State, "" );
     item->setToolTip( Column_State, "" );
+    item->setToolTip( Column_Input, "" );
+    item->setToolTip( Column_Output, "" );
+    item->setToolTip( Column_Quality, "" );
 
     switch( item->state )
     {
@@ -552,7 +555,11 @@ void FileList::updateItem( FileListItem *item )
             item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
             connect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
             setItemWidget( item, Column_State, item->lInfo );
-            item->setToolTip( Column_State, i18n("The conversion has failed.\nSee the log for more information.") );
+            const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
+            item->setToolTip( Column_State, toolTip );
+            item->setToolTip( Column_Input, toolTip );
+            item->setToolTip( Column_Output, toolTip );
+            item->setToolTip( Column_Quality, toolTip );
             break;
         }
     }

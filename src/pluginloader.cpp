@@ -503,30 +503,39 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
     return list;
 }
 
-QString PluginLoader::getCodecFromFile( const KUrl& filename )
+QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType )
 {
     QString codec = "";
-    const QString mimeType = KMimeType::findByUrl(filename)->name();
+    const QString mime = KMimeType::findByUrl(filename)->name();
+
+    if( mimeType )
+        *mimeType = mime;
+
+    if( mime == "inode/directory" )
+        return codec;
 
     for( int i=0; i<codecPlugins.count(); i++ )
     {
-        codec = codecPlugins.at(i)->getCodecFromFile( filename, mimeType );
+        codec = codecPlugins.at(i)->getCodecFromFile( filename, mime );
         if( codec != "" )
             return codec;
     }
 
     for( int i=0; i<replaygainPlugins.count(); i++ )
     {
-        codec = codecPlugins.at(i)->getCodecFromFile( filename, mimeType );
+        codec = codecPlugins.at(i)->getCodecFromFile( filename, mime );
         if( codec != "" )
             return codec;
     }
 
-    return mimeType;
+    return codec;
 }
 
 bool PluginLoader::canDecode( const QString& codecName, QStringList *errorList )
 {
+    if( codecName.isEmpty() )
+        return false;
+
     for( int i=0; i<conversionPipeTrunks.size(); i++ )
     {
         if( conversionPipeTrunks.at(i).codecFrom == codecName && conversionPipeTrunks.at(i).enabled )
@@ -554,6 +563,9 @@ bool PluginLoader::canDecode( const QString& codecName, QStringList *errorList )
 
 bool PluginLoader::canReplayGain( const QString& codecName, CodecPlugin *plugin, QStringList *errorList )
 {
+    if( codecName.isEmpty() )
+        return false;
+
     for( int i=0; i<replaygainPipes.count(); i++ )
     {
         if( replaygainPipes.at(i).codecName == codecName && replaygainPipes.at(i).enabled )

@@ -332,7 +332,8 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
 
     for( int i=0; i<urls.size(); i++ )
     {
-        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i) );
+        QString mimeType;
+        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType );
 
         if( codecName == "inode/directory" || config->pluginLoader()->canDecode(codecName,&errorList) )
         {
@@ -341,7 +342,12 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         else
         {
             fileName = urls.at(i).pathOrUrl();
-            if( codecName.isEmpty() ) codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+
+            if( codecName.isEmpty() )
+                codecName = mimeType;
+            if( codecName.isEmpty() )
+                codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+
             if( problems.value(codecName).count() < 2 )
             {
                 problems[codecName] += QStringList();

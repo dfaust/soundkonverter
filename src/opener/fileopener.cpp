@@ -96,12 +96,18 @@ void FileOpener::fileDialogAccepted()
 
     for( int i=0; i<urls.count(); i++ )
     {
-        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i) );
+        QString mimeType;
+        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType );
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {
             fileName = urls.at(i).pathOrUrl();
-            if( codecName.isEmpty() ) codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+
+            if( codecName.isEmpty() )
+                codecName = mimeType;
+            if( codecName.isEmpty() )
+                codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+
             if( problems.value(codecName).count() < 2 )
             {
                 problems[codecName] += QStringList();

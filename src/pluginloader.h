@@ -68,7 +68,7 @@ public:
     //** returns a list of possible rippers */
 //     QList<RipperInfo> getRipperInfos( bool mustRipEntireCd = false, const QString& preferredPlugin = "" );
 
-    QString getCodecFromFile( const KUrl& filename );
+    QString getCodecFromFile( const KUrl& filename, QString *mimeType = 0 );
 
     bool canDecode( const QString& codecName, QStringList *errorList = 0 );
     bool canReplayGain( const QString& codecName, CodecPlugin *plugin, QStringList *errorList = 0 );

@@ -4,6 +4,7 @@
 
 #include <QLayout>
 #include <QLabel>
+#include <QApplication>
 
 #include <KLocale>
 #include <KIcon>
@@ -88,21 +89,24 @@ void LogViewer::refillLogs()
 
 void LogViewer::itemChanged()
 {
+    // HACK avoid Qt bug? changing the color of 'uncolored' text when switching the log file
+    QTextCursor cursor = kLog->textCursor();
+    cursor.setPosition( 0 );
+    kLog->setTextCursor( cursor );
+
     kLog->clear();
     LoggerItem* item = logger->getLog( cItem->itemData(cItem->currentIndex()).toInt() );
 
     if( !item )
         return;
 
-    for( QStringList::Iterator b = item->data.begin(); b != item->data.end(); ++b )
-    {
-        kLog->append( *b );
-    }
+    foreach( const QString line, item->data )
+        kLog->append( line );
 
     QPalette currentPalette = kLog->palette();
     if( item->completed )
     {
-        currentPalette.setColor( QPalette::Base, QColor(255,255,255) );
+        currentPalette.setColor( QPalette::Base, QApplication::palette().base().color() );
     }
     else
     {

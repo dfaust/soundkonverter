@@ -25,11 +25,10 @@ CodecProblems::CodecProblems( Mode mode, const QList<Problem>& problemList, QWid
     {
         if( problemList.isEmpty() )
         {
-            message = i18n("soundKonverter couldn't find any missing packages.\nMaybe you need to install an additional plugin via the package manager of your distribution.");
+            message = i18n("soundKonverter couldn't find any missing packages.\nIf you are missing some file formats you might need to install an additional plugin via the package manager of your distribution.");
         }
         else
         {
-//             message = i18n("Some of the installed plugins aren't working because they are missing additional programs.\nPossible solutions are listed below.");
             message = i18n("Some of the installed plugins aren't working.\nPossible solutions are listed below.");
         }
     }

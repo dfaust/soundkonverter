@@ -1259,8 +1259,10 @@ void Convert::updateProgress()
                 break;
             case ConvertItem::decode:
                 fileTime = items.at(i)->decodeTime;
-                if( items.at(i)->convertPlugin->type() == "convert" ) items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
-                else if( items.at(i)->convertPlugin->type() == "ripper" ) items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
+                if( items.at(i)->convertPlugin->type() == "codec" )
+                    items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
+                else if( items.at(i)->convertPlugin->type() == "ripper" )
+                    items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
                 break;
             case ConvertItem::encode:
                 fileTime = items.at(i)->encodeTime;
@@ -1270,7 +1272,8 @@ void Convert::updateProgress()
                 fileTime = items.at(i)->replaygainTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
-            default: fileTime = 0.0f;
+            default:
+                fileTime = 0.0f;
         }
         time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
         logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );

@@ -1,6 +1,7 @@
 1.5.90:
 -Add: Make the 'Failed' status clickable and open the log if clicked
 -Fix: Problem dialog wasn't shown when dropping unsupported files on the soundKonverter or ReplayGain tool window
+-Fix: Show progress when decoding properly
 
 1.5.0:
 -Add: Update translations

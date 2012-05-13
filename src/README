@@ -55,17 +55,19 @@ Feature list:
 - Convert the audio stream from video files to audio files
 - Convert multiple files at once
 - Calculate ReplayGain for many formats
+- ReplayGain tool for calculating and removing ReplayGain tags
 - Conversion and ReplayGain calculation is very scalable, the conversion of 100000 files or more is not a problem
-- Copy tags and covers when converting files
+- Copy tags and covers when converting files (note: for flac and asf/wma files, taglib 1.7 is needed, writing ogg covers is not supported, yet.)
 - Rip multiple audio CDs at once
-- Retreive audio CD informations from CDDB and MusicBrainz
-- Easy to use, just chose a file format and a quaily level
-- Detailed control, if you want to choose the conversion settings in more detail, simply switch to 'detailed' tab
+- Retrieve audio CD information from CDDB and MusicBrainz
+- Easy to use, just chose a file format and a quality level
+- Detailed control, if you want to choose the conversion settings in more detail, simply switch to the 'detailed' tab
+- Manage your preferred conversion options with profiles
 - Contextual help, e.g. if you don't know what the speex format is, just click on the 'info' button next to it.
   Or if you want to add a file that isn't supported, soundKonverter will tell you how to enable the format if possible.
-- Possibility to configure which backend shall be used for which codec - or let soundKonverter optimize that on his own.
+- Possibility to configure which backend shall be used for which codec - or let soundKonverter optimize that for you.
   Every time you install or remove backends soundKonverter will suggest optimizations if possible.
-- Possibility integrate soundKonverter in other appliations or scripts by unsing it's command line features
+- Possibility to integrate soundKonverter in other appliations or scripts by unsing it's command line features
 
 
 

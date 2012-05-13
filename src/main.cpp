@@ -13,7 +13,6 @@
 
 
 static const char description[] =
-    //I18N_NOOP("soundKonverter is a frontend to various audio encoders and decoders.\n\nsoundKonverter needs other programs that are converting the files in the background called backends.\n\nIf you find a bug, please don't hesitate to report it to me.\nYou can either report it at https://bugs.launchpad.net/soundkonverter or you can send me an email to hessijames@gmail.com.\nPlease keep in mind that it may take some time until I get to fix it.");
     I18N_NOOP("soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n\nPlease file bug reports at https://bugs.launchpad.net/soundkonverter\nor simply send me a mail to hessijames@gmail.com");
 
 static const char version[] = SOUNDKONVERTER_VERSION_STRING;
@@ -31,7 +30,6 @@ int main(int argc, char **argv)
 
     KCmdLineOptions options;
     options.add( "replaygain", ki18n("Open the Replay Gain tool an add all given files") );
-//     options.add( "repair", ki18n("Open the repair files tool an add all given files") );
     options.add( "rip <device>", ki18n("List all tracks on the cd drive <device>, 'auto' will search for a cd") );
     options.add( "profile <profile>", ki18n("Add all files using the given profile") );
     options.add( "format <format>", ki18n("Add all files using the given format") );

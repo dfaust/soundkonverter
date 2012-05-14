@@ -104,8 +104,6 @@ private:
     KPushButton* pEditTags;
 
 
-    QLabel *lPipes;
-
     QList<FileListItem*> selectedItems;
 
     Config *config;

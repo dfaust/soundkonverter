@@ -241,15 +241,6 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     tagsGridLayout->addWidget( pEditTags, 7, 1, Qt::AlignHCenter );
     pEditTags->hide();
     connect( pEditTags, SIGNAL(clicked()), this, SLOT(editTagsClicked()) );
-
-
-
-    QWidget *infoWidget = new QWidget( this );
-    KPageWidgetItem *infoPage = addPage( infoWidget, i18n("Infos") );
-    infoPage->setIcon( KIcon( "dialog-information" ) );
-    QGridLayout *infoGridLayout = new QGridLayout( infoWidget );
-    lPipes = new QLabel( "", infoWidget );
-    infoGridLayout->addWidget( lPipes, 0, 0 );
 }
 
 
@@ -359,28 +350,6 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         const bool success = options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(selectedItems.first()->conversionOptionsId) );
         options->setEnabled( success );
         // TODO show error message
-
-        // info tab
-        ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(items.first()->conversionOptionsId);
-        QString pipes_text;
-        if( conversionOptions )
-        {
-            pipes_text = i18n("Possible conversion strategies:");
-            const QString inputCodec = config->pluginLoader()->getCodecFromFile( items.first()->url );
-            QList<ConversionPipe> conversionPipes = config->pluginLoader()->getConversionPipes( inputCodec, conversionOptions->codecName, conversionOptions->pluginName );
-            for( int i=0; i<conversionPipes.size(); i++ )
-            {
-                QStringList pipe_str;
-
-                for( int j=0; j<conversionPipes.at(i).trunks.size(); j++ )
-                {
-                    pipe_str += QString("%1 %2 %3 (%4)").arg(conversionPipes.at(i).trunks.at(j).codecFrom).arg("->").arg(conversionPipes.at(i).trunks.at(j).codecTo).arg(conversionPipes.at(i).trunks.at(j).plugin->name());
-                }
-
-                pipes_text += "\n" + pipe_str.join(", ");
-            }
-        }
-        lPipes->setText( pipes_text );
 
         if( items.first()->tags == 0 && !items.first()->local )
         {

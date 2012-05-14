@@ -93,6 +93,8 @@ public:
         struct CoverArt
         {
             int writeCovers;
+            int writeCoverName;
+            QString writeCoverDefaultName;
         } coverArt;
 
         struct Backends

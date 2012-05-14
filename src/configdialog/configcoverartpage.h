@@ -16,6 +16,9 @@
 
 class Config;
 class QRadioButton;
+class QLabel;
+class QAbstractButton;
+class KLineEdit;
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>
@@ -39,11 +42,21 @@ private:
     QRadioButton *rWriteCoversAuto;
     QRadioButton *rWriteCoversNever;
 
+    QLabel       *lWriteCoverName;
+    QRadioButton *rWriteCoverNameTitle;
+    QRadioButton *rWriteCoverNameDefault;
+    QLabel       *lWriteCoverNameDefaultLabel;
+    KLineEdit    *lWriteCoverNameDefaultEdit;
+
 //     QCheckBox *cCopyCover;
 //     QCheckBox *cEmbedCover;
 //     QListView *lCoverList;
 
     Config *config;
+
+private slots:
+    void writeCoversChanged( QAbstractButton *button );
+    void writeCoverNameChanged( QAbstractButton *button );
 
 public slots:
     void resetDefaults();

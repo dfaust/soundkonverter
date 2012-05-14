@@ -1,11 +1,11 @@
 
 #include "tagengine.h"
 #include "MetaReplayGain.h"
+#include "config.h"
 
 #include <QFile>
 #include <QDir>
 #include <QBuffer>
-// #include <KDebug>
 
 #include <KLocale>
 
@@ -31,10 +31,8 @@
 #include <mp4file.h>
 
 // TODO COMPILATION tag
-// FIXME BPM tag
+// TODO BPM tag
 
-//using namespace std;
-//using namespace MediaInfoLib;
 
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
@@ -153,7 +151,8 @@ TagData::~TagData()
 {}
 
 
-TagEngine::TagEngine()
+TagEngine::TagEngine( Config *_config )
+    : config( _config )
 {
     TagLib::StringList genres = TagLib::ID3v1::genreList();
     for( TagLib::StringList::ConstIterator it = genres.begin(), end = genres.end(); it != end; ++it )
@@ -862,8 +861,13 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
     return false;
 }
 
-bool TagEngine::writeCoversToDirectory( const QString& directoryName, QList<CoverData*> covers )
+bool TagEngine::writeCoversToDirectory( const QString& directoryName, TagData *tags )
 {
+    if( !tags )
+        return false;
+
+    QList<CoverData*> covers = tags->covers;
+
     if( covers.isEmpty() )
         return true;
 
@@ -878,9 +882,20 @@ bool TagEngine::writeCoversToDirectory( const QString& directoryName, QList<Cove
     foreach( CoverData *cover, covers )
     {
         QString fileName = cover->description;
-        if( fileName.isEmpty() )
+        if( fileName.isEmpty() || config->data.coverArt.writeCoverName == 1 )
         {
-            fileName = i18nc("cover file name","cover");
+            fileName = config->data.coverArt.writeCoverDefaultName;
+
+            fileName.replace( "%a", "$replace_by_artist$" );
+            fileName.replace( "%b", "$replace_by_album$" );
+
+            QString artist = tags->artist;
+            artist.replace("/",",");
+            fileName.replace( "$replace_by_artist$", artist );
+
+            QString album = tags->album;
+            album.replace("/",",");
+            fileName.replace( "$replace_by_album$", album );
 
             if( i > 0 )
                 fileName += QString::number(i);
@@ -914,26 +929,3 @@ bool TagEngine::writeCoversToDirectory( const QString& directoryName, QList<Cove
 
     return false;
 }
-
-// bool TagEngine::canWrite( QString format )
-// {
-//     format = format.lower();
-//
-//     if( format == "ogg" ||
-//         format == "flac" || format == "fla" ||
-//         format == "mp3" || // TODO mp2 ?
-//         format == "mpc" ||
-//         format == "aac" ||
-//         format == "ape" || format == "mac" ||
-//         format == "aa" ||
-//         format == "m4a" || format == "m4b" || format == "m4p" || format == "mp4" || format == "m4v" || format == "mp4v" ||
-//         format == "ra" || format == "rv" || format == "rm" || format == "rmj" || format == "rmvb" ||
-//         format == "wma" || format == "asf" )
-//     {
-//         return true;
-//     }
-//     else {
-//         return false;
-//     }
-// }
-

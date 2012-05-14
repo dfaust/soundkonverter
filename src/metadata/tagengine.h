@@ -9,7 +9,7 @@
 #include <QStringList>
 #include <QImage>
 
-// #include <MediaInfo/MediaInfo.h>
+class Config;
 
 class CoverData : public QObject
 {
@@ -124,7 +124,7 @@ class TagEngine
 {
 public:
     /** Constructor */
-    TagEngine();
+    TagEngine( Config *_config );
 
     /** Destructor */
     virtual ~TagEngine();
@@ -132,16 +132,15 @@ public:
     /** A list of all genre */
     QStringList genreList;
 
-//     MediaInfoLib::MediaInfo* MI;
-
     TagData* readTags( const KUrl& fileName );
     bool writeTags( const KUrl& fileName, TagData *tagData );
 
     QList<CoverData*> readCovers( const KUrl& fileName );
     bool writeCovers( const KUrl& fileName, QList<CoverData*> covers );
-    bool writeCoversToDirectory( const QString& directoryName, QList<CoverData*> covers );
+    bool writeCoversToDirectory( const QString& directoryName, TagData *tags );
 
-//     bool canWrite( QString format ); // NOTE no const because this string is being modyfied
+private:
+    Config *config;
 };
 
 #endif // TAGENGINE_H

@@ -56,9 +56,9 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 
     lWriteCoverName = new QLabel( i18n("File name for the cover"), this );
     box->addWidget( lWriteCoverName );
-    rWriteCoverNameTitle = new QRadioButton( i18n("Use the embedded cover description"), this );
+    rWriteCoverNameTitle = new QRadioButton( i18n("The embedded cover description"), this );
     box->addWidget( rWriteCoverNameTitle );
-    rWriteCoverNameDefault = new QRadioButton( i18n("Use the default cover file name"), this );
+    rWriteCoverNameDefault = new QRadioButton( i18n("The default cover file name"), this );
     box->addWidget( rWriteCoverNameDefault );
 
     QHBoxLayout *writeCoverNameTextBox = new QHBoxLayout( this );

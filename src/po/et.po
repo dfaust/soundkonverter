@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-13 22:25+0200\n"
+"POT-Creation-Date: 2012-05-15 20:56+0200\n"
 "PO-Revision-Date: 2012-05-01 20:38+0000\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -176,7 +176,7 @@ msgstr "või"
 msgid "Affected files:"
 msgstr "Mõjutatud failid:"
 
-#: config.cpp:48 config.cpp:50 config.cpp:345 config.cpp:390
+#: config.cpp:48 config.cpp:50 config.cpp:347 config.cpp:392
 #: configdialog/configgeneralpage.cpp:43 configdialog/configgeneralpage.cpp:58
 #: configdialog/configgeneralpage.cpp:202
 #: configdialog/configgeneralpage.cpp:204
@@ -187,7 +187,7 @@ msgstr "Mõjutatud failid:"
 msgid "Last used"
 msgstr "Viimati kasutatud"
 
-#: config.cpp:49 config.cpp:349 config.cpp:356 config.cpp:362
+#: config.cpp:49 config.cpp:351 config.cpp:358 config.cpp:364
 #: configdialog/configgeneralpage.cpp:62
 #: configdialog/configgeneralpage.cpp:206 options.cpp:80
 #: optionsdetailed.cpp:371 optionssimple.cpp:158 optionssimple.cpp:198
@@ -217,11 +217,16 @@ msgstr "Viimati kasutatud"
 msgid "High"
 msgstr "Kõrge"
 
-#: config.cpp:259 config.cpp:282 config.cpp:284
+#: config.cpp:104 configdialog/configcoverartpage.cpp:129
+msgctxt "cover file name"
+msgid "cover"
+msgstr "kaanepilt"
+
+#: config.cpp:261 config.cpp:284 config.cpp:286
 msgid "Try internal"
 msgstr "Proovitakse sisemist"
 
-#: config.cpp:346 config.cpp:362 configdialog/configgeneralpage.cpp:59
+#: config.cpp:348 config.cpp:364 configdialog/configgeneralpage.cpp:59
 #: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:368
 #: optionssimple.cpp:155 optionssimple.cpp:180 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
@@ -249,7 +254,7 @@ msgstr "Proovitakse sisemist"
 msgid "Very low"
 msgstr "Väga madal"
 
-#: config.cpp:347 config.cpp:362 configdialog/configgeneralpage.cpp:60
+#: config.cpp:349 config.cpp:364 configdialog/configgeneralpage.cpp:60
 #: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:369
 #: optionssimple.cpp:156 optionssimple.cpp:186 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
@@ -277,7 +282,7 @@ msgstr "Väga madal"
 msgid "Low"
 msgstr "Madal"
 
-#: config.cpp:348 config.cpp:362 configdialog/configgeneralpage.cpp:61
+#: config.cpp:350 config.cpp:364 configdialog/configgeneralpage.cpp:61
 #: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:370
 #: optionssimple.cpp:157 optionssimple.cpp:192 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
@@ -305,7 +310,7 @@ msgstr "Madal"
 msgid "Medium"
 msgstr "Keskmine"
 
-#: config.cpp:350 config.cpp:362 configdialog/configgeneralpage.cpp:63
+#: config.cpp:352 config.cpp:364 configdialog/configgeneralpage.cpp:63
 #: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:372
 #: optionssimple.cpp:159 optionssimple.cpp:204 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
@@ -333,7 +338,7 @@ msgstr "Keskmine"
 msgid "Very high"
 msgstr "Väga kõrge"
 
-#: config.cpp:351 config.cpp:366 configdialog/configgeneralpage.cpp:64
+#: config.cpp:353 config.cpp:368 configdialog/configgeneralpage.cpp:64
 #: configdialog/configgeneralpage.cpp:211 optionsdetailed.cpp:373
 #: optionssimple.cpp:160 optionssimple.cpp:210 optionssimple.cpp:289
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
@@ -366,13 +371,13 @@ msgstr "Väga kõrge"
 msgid "Lossless"
 msgstr "Kadudeta"
 
-#: config.cpp:352 config.cpp:370 configdialog/configgeneralpage.cpp:216
+#: config.cpp:354 config.cpp:372 configdialog/configgeneralpage.cpp:216
 #: optionsdetailed.cpp:374 optionssimple.cpp:216 optionssimple.cpp:293
 #: soundkonverterview.cpp:457 soundkonverterview.cpp:459
 msgid "Hybrid"
 msgstr "Hübriid"
 
-#: config.cpp:374 optionsdetailed.cpp:377 optionssimple.cpp:163
+#: config.cpp:376 optionsdetailed.cpp:377 optionssimple.cpp:163
 #: optionssimple.cpp:222 optionssimple.cpp:297 optionssimple.cpp:362
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
@@ -389,11 +394,11 @@ msgstr "Hübriid"
 msgid "User defined"
 msgstr "Kasutajamääratud"
 
-#: config.cpp:536
+#: config.cpp:540
 msgid "Convert with soundKonverter"
 msgstr "Teisenda soundKonverteriga..."
 
-#: config.cpp:570
+#: config.cpp:574
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Lisa helitugevuse parandusteave..."
 
@@ -549,21 +554,65 @@ msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
 "Taustprogrammide seaded näivad olevat optimaalsed, pole vaja midagi teha."
 
-#: configdialog/configcoverartpage.cpp:30
+#: configdialog/configcoverartpage.cpp:32
 msgid "Save embedded covers to output directory"
 msgstr "Põimitud kaanepiltide salvestamine väljundkataloogi"
 
-#: configdialog/configcoverartpage.cpp:32
+#: configdialog/configcoverartpage.cpp:34
 msgid "Always"
 msgstr "Alati"
 
-#: configdialog/configcoverartpage.cpp:34
+#: configdialog/configcoverartpage.cpp:36
 msgid "Only if embedding the covers into the output files is not possible"
 msgstr "Ainult siis, kui põimimine väljundfailidesse pole võimalik"
 
-#: configdialog/configcoverartpage.cpp:36
+#: configdialog/configcoverartpage.cpp:38
 msgid "Never"
 msgstr "Mitte kunagi"
+
+#: configdialog/configcoverartpage.cpp:57
+#, fuzzy
+msgid "File name for the cover"
+msgstr "Sisesta uue profiili nimi:"
+
+#: configdialog/configcoverartpage.cpp:59
+#, fuzzy
+msgid "The embedded cover description"
+msgstr "Põimitud kaanepiltide salvestamine väljundkataloogi"
+
+#: configdialog/configcoverartpage.cpp:61
+#, fuzzy
+msgid "The default cover file name"
+msgstr "Faili nimele lisatakse \"uus\""
+
+#: configdialog/configcoverartpage.cpp:65
+#, fuzzy
+msgid "Default cover file name:"
+msgstr "Vaikeprofiil"
+
+#: configdialog/configcoverartpage.cpp:68
+#, fuzzy
+msgid ""
+"The following strings are wildcards that will be replaced\n"
+"by the information in the meta data:\n"
+"\n"
+"%a - Artist\n"
+"%b - Album\n"
+"%d - Cover description\n"
+"%r - Cover role"
+msgstr ""
+"Järgnevad stringid on metamärgid, mis asendatakse\n"
+"vastava infoga faili metaandmetest:\n"
+"\n"
+"%a - esitaja\n"
+"%b - album\n"
+"%c - kommentaar\n"
+"%d - plaadi number\n"
+"%g - stiil%n - loo number\n"
+"%p - helilooja\n"
+"%t - pealkiri\n"
+"%y - aasta\n"
+"%f - algne failinimi"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -779,7 +828,7 @@ msgstr "Logi-ID käes: %1"
 msgid "Track number: %1, device: %2"
 msgstr "Raja number: %1, seade: %2"
 
-#: convert.cpp:995 optionseditor.cpp:368
+#: convert.cpp:995
 msgid "Possible conversion strategies:"
 msgstr "Võimalikud teisenduskavad:"
 
@@ -1357,115 +1406,110 @@ msgstr ""
 msgid "Audio file(s) to append to the file list"
 msgstr "Nimekirja lisatav(ad) helifail(id)"
 
-#: metadata/tagengine.cpp:63
+#: metadata/tagengine.cpp:61
 msgctxt "cover type"
 msgid "Unclassified"
 msgstr "Määratlemata"
 
-#: metadata/tagengine.cpp:65
+#: metadata/tagengine.cpp:63
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
 msgstr "32x32 px PNG-vormingus faili ikoon"
 
-#: metadata/tagengine.cpp:67
+#: metadata/tagengine.cpp:65
 msgctxt "cover type"
 msgid "File icon"
 msgstr "Faili ikoon"
 
-#: metadata/tagengine.cpp:69
+#: metadata/tagengine.cpp:67
 msgctxt "cover type"
 msgid "Front cover"
 msgstr "Karbi esikülg"
 
-#: metadata/tagengine.cpp:71
+#: metadata/tagengine.cpp:69
 msgctxt "cover type"
 msgid "Back cover"
 msgstr "Karbi tagakülg"
 
-#: metadata/tagengine.cpp:73
+#: metadata/tagengine.cpp:71
 msgctxt "cover type"
 msgid "Leaflet page"
 msgstr "Voldiku lehekülg"
 
-#: metadata/tagengine.cpp:75
+#: metadata/tagengine.cpp:73
 msgctxt "cover type"
 msgid "CD photo"
 msgstr "CD foto"
 
-#: metadata/tagengine.cpp:77
+#: metadata/tagengine.cpp:75
 msgctxt "cover type"
 msgid "Lead artist picture"
 msgstr "Pilt peaesinejast"
 
-#: metadata/tagengine.cpp:79
+#: metadata/tagengine.cpp:77
 msgctxt "cover type"
 msgid "Artist picture"
 msgstr "Pilt esitajast"
 
-#: metadata/tagengine.cpp:81
+#: metadata/tagengine.cpp:79
 msgctxt "cover type"
 msgid "Conductor picture"
 msgstr "Pilt dirigendist"
 
-#: metadata/tagengine.cpp:83
+#: metadata/tagengine.cpp:81
 msgctxt "cover type"
 msgid "Band picture"
 msgstr "Pilt bändist"
 
-#: metadata/tagengine.cpp:85
+#: metadata/tagengine.cpp:83
 msgctxt "cover type"
 msgid "Composer picture"
 msgstr "Pilt heliloojast"
 
-#: metadata/tagengine.cpp:87
+#: metadata/tagengine.cpp:85
 msgctxt "cover type"
 msgid "Lyricist picture"
 msgstr "Pilt sõnade autorist"
 
-#: metadata/tagengine.cpp:89
+#: metadata/tagengine.cpp:87
 msgctxt "cover type"
 msgid "Picture of the recording location"
 msgstr "Pilt lindistuskohast"
 
-#: metadata/tagengine.cpp:91
+#: metadata/tagengine.cpp:89
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
 msgstr "Pilt muusikutest lindistamise ajal"
 
-#: metadata/tagengine.cpp:93
+#: metadata/tagengine.cpp:91
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
 msgstr "Pilt muusikutest esituse ajal"
 
-#: metadata/tagengine.cpp:95
+#: metadata/tagengine.cpp:93
 msgctxt "cover type"
 msgid "Picture from a video"
 msgstr "Kaader filmist/videost"
 
-#: metadata/tagengine.cpp:97
+#: metadata/tagengine.cpp:95
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
 msgstr "Pilt suurest värvilisest kalast"
 
-#: metadata/tagengine.cpp:99
+#: metadata/tagengine.cpp:97
 msgctxt "cover type"
 msgid "Illustration related to the track"
 msgstr "Looga seotud illustratsioon"
 
-#: metadata/tagengine.cpp:101
+#: metadata/tagengine.cpp:99
 msgctxt "cover type"
 msgid "Band logo"
 msgstr "Bändi logo"
 
-#: metadata/tagengine.cpp:103
+#: metadata/tagengine.cpp:101
 msgctxt "cover type"
 msgid "Publisher logo"
 msgstr "Väljaandja logo"
-
-#: metadata/tagengine.cpp:883
-msgctxt "cover file name"
-msgid "cover"
-msgstr "kaanepilt"
 
 #: opener/cdopener.cpp:114
 msgid "Add CD tracks"
@@ -1882,15 +1926,11 @@ msgstr "/"
 msgid "Edit tags"
 msgstr "Redigeeri silte"
 
-#: optionseditor.cpp:248
-msgid "Infos"
-msgstr "Info"
-
-#: optionseditor.cpp:333
+#: optionseditor.cpp:324
 msgid "No file selected"
 msgstr "Ühtegi faili pole valitud"
 
-#: optionseditor.cpp:388
+#: optionseditor.cpp:357
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1906,7 +1946,7 @@ msgstr ""
 "pärast faili allalaadimist\n"
 "silte uuesti lugeda ei proovita."
 
-#: optionseditor.cpp:398
+#: optionseditor.cpp:367
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1920,36 +1960,36 @@ msgstr ""
 "Kui tahad silte käsitsi redigeerida, klõpsa alloleval nupul. Sel juhul silte "
 "uuesti lugeda ei proovita."
 
-#: optionseditor.cpp:422
+#: optionseditor.cpp:391
 msgctxt "cover tooltip"
 msgid "Cover type:"
 msgstr "Pildi tüüp:"
 
-#: optionseditor.cpp:424
+#: optionseditor.cpp:393
 msgctxt "cover tooltip"
 msgid "Description:"
 msgstr "Kirjeldus:"
 
-#: optionseditor.cpp:425
+#: optionseditor.cpp:394
 msgctxt "cover tooltip"
 msgid "Size:"
 msgstr "Suurus:"
 
-#: optionseditor.cpp:425
+#: optionseditor.cpp:394
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
 msgstr "%1 x %2 pikslit (%3)"
 
-#: optionseditor.cpp:427
+#: optionseditor.cpp:396
 msgctxt "cover tooltip"
 msgid "Mime type:"
 msgstr "MIME-tüüp:"
 
-#: optionseditor.cpp:450
+#: optionseditor.cpp:419
 msgid "%1 Files"
 msgstr "%1 faili"
 
-#: optionseditor.cpp:468
+#: optionseditor.cpp:437
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
@@ -1957,7 +1997,7 @@ msgstr ""
 "Valitud on mitu erinevate teisendusvalikutega faili.\n"
 "Kõikide failide valikute ühtseks muutmiseks klõpsa alloleval nupul."
 
-#: optionseditor.cpp:476
+#: optionseditor.cpp:445
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -2793,3 +2833,6 @@ msgstr "Helifailide teisendaja, CD-rippija ja helitugevuse parandustööriist"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripi audio-CD soundKonverteriga"
+
+#~ msgid "Infos"
+#~ msgstr "Info"

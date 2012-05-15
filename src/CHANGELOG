@@ -1,7 +1,7 @@
 1.5.90:
 -Add: Make the 'Failed' status clickable and open the log if clicked
 -Add: Make the file name of covers written to the output directory configureable
--Change: Remove info tab from the options editor
+-Change: Remove the info tab from the options editor
 -Fix: Problem dialog wasn't shown when dropping unsupported files on the soundKonverter or ReplayGain tool window
 -Fix: Show progress when decoding properly
 

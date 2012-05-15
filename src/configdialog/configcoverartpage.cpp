@@ -56,16 +56,16 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 
     lWriteCoverName = new QLabel( i18n("File name for the cover"), this );
     box->addWidget( lWriteCoverName );
-    rWriteCoverNameTitle = new QRadioButton( i18n("Use embedded cover title"), this );
+    rWriteCoverNameTitle = new QRadioButton( i18n("Use the embedded cover description"), this );
     box->addWidget( rWriteCoverNameTitle );
-    rWriteCoverNameDefault = new QRadioButton( i18n("Use the default name"), this );
+    rWriteCoverNameDefault = new QRadioButton( i18n("Use the default cover file name"), this );
     box->addWidget( rWriteCoverNameDefault );
 
     QHBoxLayout *writeCoverNameTextBox = new QHBoxLayout( this );
-    lWriteCoverNameDefaultLabel = new QLabel( i18n("Default cover name:"), this );
+    lWriteCoverNameDefaultLabel = new QLabel( i18n("Default cover file name:"), this );
     writeCoverNameTextBox->addWidget( lWriteCoverNameDefaultLabel );
     lWriteCoverNameDefaultEdit = new KLineEdit( this );
-    lWriteCoverNameDefaultEdit->setToolTip( i18n("The following strings are wildcards, that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album") );
+    lWriteCoverNameDefaultEdit->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album\n%d - Cover description\n%r - Cover role") );
     writeCoverNameTextBox->addWidget( lWriteCoverNameDefaultEdit );
     writeCoverNameTextBox->addStretch();
     box->addLayout( writeCoverNameTextBox );

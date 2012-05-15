@@ -888,6 +888,8 @@ bool TagEngine::writeCoversToDirectory( const QString& directoryName, TagData *t
 
             fileName.replace( "%a", "$replace_by_artist$" );
             fileName.replace( "%b", "$replace_by_album$" );
+            fileName.replace( "%d", "$replace_by_description$" );
+            fileName.replace( "%r", "$replace_by_role$" );
 
             QString artist = tags->artist;
             artist.replace("/",",");
@@ -896,6 +898,14 @@ bool TagEngine::writeCoversToDirectory( const QString& directoryName, TagData *t
             QString album = tags->album;
             album.replace("/",",");
             fileName.replace( "$replace_by_album$", album );
+
+            QString description = cover->description;
+            description.replace("/",",");
+            fileName.replace( "$replace_by_description$", description );
+
+            QString role = cover->roleName( cover->role );
+            role.replace("/",",");
+            fileName.replace( "$replace_by_role$", role );
 
             if( i > 0 )
                 fileName += QString::number(i);

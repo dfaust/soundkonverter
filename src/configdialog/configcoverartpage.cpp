@@ -43,6 +43,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     writeCoversGroup->addButton( rWriteCoversNever );
 
     connect( writeCoversGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(writeCoversChanged(QAbstractButton*)) );
+    connect( writeCoversGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(configChanged()) );
 
     if( config->data.coverArt.writeCovers == 0 )
         rWriteCoversAlways->setChecked( true );
@@ -68,12 +69,14 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     writeCoverNameTextBox->addWidget( lWriteCoverNameDefaultEdit );
     writeCoverNameTextBox->addStretch();
     box->addLayout( writeCoverNameTextBox );
+    connect( lWriteCoverNameDefaultEdit, SIGNAL(textChanged(QString)), this, SIGNAL(configChanged()) );
 
     QButtonGroup *writeCoverNameGroup = new QButtonGroup( this );
     writeCoverNameGroup->addButton( rWriteCoverNameTitle );
     writeCoverNameGroup->addButton( rWriteCoverNameDefault );
 
     connect( writeCoverNameGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(writeCoverNameChanged(QAbstractButton*)) );
+    connect( writeCoverNameGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(configChanged()) );
 
     if( config->data.coverArt.writeCoverName == 0 )
         rWriteCoverNameTitle->setChecked( true );

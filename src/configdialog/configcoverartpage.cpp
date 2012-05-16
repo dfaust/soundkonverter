@@ -14,7 +14,6 @@
 #include "../config.h"
 
 #include <KLocale>
-// #include <KIntSpinBox>
 #include <KLineEdit>
 
 #include <QLayout>

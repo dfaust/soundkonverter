@@ -732,6 +732,7 @@ void FileList::convertNextItem()
         return;
 
     int count = convertingCount();
+    bool callItemsSelected = false;
     QStringList devices;
     FileListItem *item;
 
@@ -756,16 +757,21 @@ void FileList::convertNextItem()
                 count++;
                 devices += item->device;
                 emit convertItem( item );
+                if( selectedFiles.contains(item) )
+                    callItemsSelected = true;
             }
             else if( item->track < 0 )
             {
                 count++;
                 emit convertItem( item );
+                if( selectedFiles.contains(item) )
+                    callItemsSelected = true;
             }
         }
     }
 
-//     itemsSelected();
+    if( callItemsSelected )
+        itemsSelected();
 
     if( count == 0 )
         itemFinished( 0, 0 );
@@ -855,7 +861,8 @@ void FileList::itemFinished( FileListItem *item, int state )
         if( state == 0 )
         {
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-            emit itemRemoved( item );
+            if( selectedFiles.contains(item) )
+                itemsSelected();
             delete item;
             item = 0;
         }
@@ -972,6 +979,8 @@ void FileList::rippingFinished( const QString& device )
                 if( item->track >= 0 && item->device == device )
                 {
                     emit convertItem( item );
+                    if( selectedFiles.contains(item) )
+                        itemsSelected();
                     return;
                 }
             }
@@ -1161,7 +1170,6 @@ void FileList::removeSelectedItems()
             {
                 emit timeChanged( -item->length );
                 config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-                emit itemRemoved( item );
                 delete item;
             }
         }
@@ -1174,6 +1182,7 @@ void FileList::removeSelectedItems()
 void FileList::convertSelectedItems()
 {
     bool started = false;
+    bool callItemsSelected = false;
     FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
@@ -1219,10 +1228,17 @@ void FileList::convertSelectedItems()
             if( !started )
                 emit conversionStarted();
 
-            emit convertItem( (FileListItem*)items.at(i) );
+            emit convertItem( item );
+
+            if( selectedFiles.contains(item) )
+                callItemsSelected = true;
+
             started = true;
         }
     }
+
+    if( callItemsSelected )
+        itemsSelected();
 }
 
 void FileList::killSelectedItems()
@@ -1272,9 +1288,9 @@ void FileList::itemsSelected()
     selectedFiles.clear();
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    for( int i=0; i<items.size(); i++ )
+    foreach( QTreeWidgetItem* item, items )
     {
-        selectedFiles.append( (FileListItem*)items.at(i) );
+        selectedFiles.append( (FileListItem*)item );
     }
 
     if( selectedFiles.count() > 0 )
@@ -1337,11 +1353,12 @@ void FileList::load( bool user )
                 if( canRemove )
                 {
                     config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-                    emit itemRemoved( item );
                     delete item;
                     i--;
                 }
             }
+
+            itemsSelected();
         }
     }
 

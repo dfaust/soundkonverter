@@ -42,13 +42,8 @@ public:
 private:
     void setTagInputEnabled( bool enabled );
 
-
-    TagEngine *tagEngine;
-
-
     /** The widget, where we can set our output options */
     Options *options;
-
 
     /** A list of all covers */
     QLabel* lCoversLabel;
@@ -103,16 +98,16 @@ private:
     QLabel* lEditTags;
     KPushButton* pEditTags;
 
-
     QList<FileListItem*> selectedItems;
 
     Config *config;
+    TagEngine *tagEngine;
+
 public slots:
     // connected to FileList
     void itemsSelected( QList<FileListItem*> );
     void setPreviousEnabled( bool );
     void setNextEnabled( bool );
-    void itemRemoved( FileListItem* );
 
 private slots:
     void applyChanges();

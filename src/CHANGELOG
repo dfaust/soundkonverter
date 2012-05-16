@@ -5,6 +5,7 @@
 -Change: Discard changes in the options editor when selecting a different file in file list
 -Fix: Problem dialog wasn't shown when dropping unsupported files on the soundKonverter or ReplayGain tool window
 -Fix: Show progress when decoding properly
+-Fix: Crash when in options editor opened items finished
 
 1.5.0:
 -Add: Update translations

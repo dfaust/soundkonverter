@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-15 20:56+0200\n"
+"POT-Creation-Date: 2012-05-17 09:28+0200\n"
 "PO-Revision-Date: 2012-04-30 18:48+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
@@ -220,7 +220,7 @@ msgstr "Naposledy použitý"
 msgid "High"
 msgstr "Vysoká kvalita"
 
-#: config.cpp:104 configdialog/configcoverartpage.cpp:129
+#: config.cpp:104 configdialog/configcoverartpage.cpp:131
 msgctxt "cover file name"
 msgid "cover"
 msgstr "Obal"
@@ -556,19 +556,19 @@ msgstr "%1 nastavení"
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr "Zdá se, že všechna nastavení jádra jsou ta nejlepší. Není tu co dělat."
 
-#: configdialog/configcoverartpage.cpp:32
+#: configdialog/configcoverartpage.cpp:31
 msgid "Save embedded covers to output directory"
 msgstr "Uložit vložené obaly do výstupního adresáře"
 
-#: configdialog/configcoverartpage.cpp:34
+#: configdialog/configcoverartpage.cpp:33
 msgid "Always"
 msgstr "Vždy"
 
-#: configdialog/configcoverartpage.cpp:36
+#: configdialog/configcoverartpage.cpp:35
 msgid "Only if embedding the covers into the output files is not possible"
 msgstr "Jen tehdy, když není možné vložení obalů do výstupních souborů"
 
-#: configdialog/configcoverartpage.cpp:38
+#: configdialog/configcoverartpage.cpp:37
 msgid "Never"
 msgstr "Nikdy"
 
@@ -1224,7 +1224,7 @@ msgstr ""
 msgid "CD track %1"
 msgstr "Stopa na CD %1"
 
-#: filelist.cpp:1298
+#: filelist.cpp:1314
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1947,11 +1947,11 @@ msgstr "z"
 msgid "Edit tags"
 msgstr "Upravit značky"
 
-#: optionseditor.cpp:324
+#: optionseditor.cpp:349
 msgid "No file selected"
 msgstr "Nevybrán žádný soubor"
 
-#: optionseditor.cpp:357
+#: optionseditor.cpp:380
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1965,7 +1965,7 @@ msgstr ""
 "Pokud chcete značky upravit, můžete stisknout tlačítko níže.\n"
 "Ale pak se soundKonverter značky po stažení už nebude pokoušet přečíst."
 
-#: optionseditor.cpp:367
+#: optionseditor.cpp:390
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1979,36 +1979,36 @@ msgstr ""
 "Pokud chcete značky upravit, můžete stisknout tlačítko níže.\n"
 "Ale pak se soundKonverter podruhé už značky nebude pokoušet přečíst."
 
-#: optionseditor.cpp:391
+#: optionseditor.cpp:414
 msgctxt "cover tooltip"
 msgid "Cover type:"
 msgstr "Typ obalu:"
 
-#: optionseditor.cpp:393
+#: optionseditor.cpp:416
 msgctxt "cover tooltip"
 msgid "Description:"
 msgstr "Popis:"
 
-#: optionseditor.cpp:394
+#: optionseditor.cpp:417
 msgctxt "cover tooltip"
 msgid "Size:"
 msgstr "Velikost:"
 
-#: optionseditor.cpp:394
+#: optionseditor.cpp:417
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
 msgstr "%1 x %2 pixelů (%3)"
 
-#: optionseditor.cpp:396
+#: optionseditor.cpp:419
 msgctxt "cover tooltip"
 msgid "Mime type:"
 msgstr "Typ MIME:"
 
-#: optionseditor.cpp:419
+#: optionseditor.cpp:442
 msgid "%1 Files"
 msgstr "%1 Soubory"
 
-#: optionseditor.cpp:437
+#: optionseditor.cpp:462
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
@@ -2016,7 +2016,7 @@ msgstr ""
 "Vybral jste více souborů s různými volbami pro převod.\n"
 "Volby všech souborů můžete upravit klepnutím na dolní tlačítko."
 
-#: optionseditor.cpp:445
+#: optionseditor.cpp:470
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -2215,9 +2215,10 @@ msgstr "Nový"
 msgid "Name all converted files according to the specified pattern"
 msgstr "Pojmenovat všechny převedené soubory podle zadaného vzoru"
 
-#: outputdirectory.cpp:527
+#: outputdirectory.cpp:526
+#, fuzzy
 msgid ""
-"The following strings are wildcards, that will be replaced\n"
+"The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
 "\n"
 "%a - Artist\n"
@@ -2229,7 +2230,11 @@ msgid ""
 "%p - Composer\n"
 "%t - Title\n"
 "%y - Year\n"
-"%f - Original file name"
+"%f - Original file name\n"
+"\n"
+"You may parenthesize these wildcards and surrounding characters with squared "
+"brackets ('[' and ']')\n"
+"so they will be ignored if the replacement value is empty."
 msgstr ""
 "Následující řetězce jsou zástupnými symboly, které budou nahrazeny\n"
 "údaji obsaženými ve značkách:\n"
@@ -2245,19 +2250,19 @@ msgstr ""
 "%y - Rok\n"
 "%f - Původní název souboru"
 
-#: outputdirectory.cpp:536
+#: outputdirectory.cpp:537
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr ""
 "Provést výstup všech převedených souborů do téhož adresáře, kde jsou původní "
 "soubory"
 
-#: outputdirectory.cpp:548
+#: outputdirectory.cpp:549
 msgid "Output all converted files into the specified output directory"
 msgstr ""
 "Provést výstup všech převedených souborů do zadaného výstupního adresáře"
 
-#: outputdirectory.cpp:560
+#: outputdirectory.cpp:561
 msgid "Copy the whole directory structure for all converted files"
 msgstr "Kopírovat úplnou strukturu adresářů pro všechny převedené soubory"
 

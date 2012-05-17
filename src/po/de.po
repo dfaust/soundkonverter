@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-15 20:56+0200\n"
+"POT-Creation-Date: 2012-05-17 09:28+0200\n"
 "PO-Revision-Date: 2012-04-29 10:26+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.net/projects/p/soundkonverter/"
@@ -221,7 +221,7 @@ msgstr "Zuletzt benutzt"
 msgid "High"
 msgstr "Hoch"
 
-#: config.cpp:104 configdialog/configcoverartpage.cpp:129
+#: config.cpp:104 configdialog/configcoverartpage.cpp:131
 msgctxt "cover file name"
 msgid "cover"
 msgstr "cover"
@@ -564,19 +564,19 @@ msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
 "Alle Backend-Einstellungen scheinen optimal zu sein, es gibt nichts zu tun."
 
-#: configdialog/configcoverartpage.cpp:32
+#: configdialog/configcoverartpage.cpp:31
 msgid "Save embedded covers to output directory"
 msgstr "Eingebette Cover im Ausgabeverzeichnis speichern"
 
-#: configdialog/configcoverartpage.cpp:34
+#: configdialog/configcoverartpage.cpp:33
 msgid "Always"
 msgstr "Immer"
 
-#: configdialog/configcoverartpage.cpp:36
+#: configdialog/configcoverartpage.cpp:35
 msgid "Only if embedding the covers into the output files is not possible"
 msgstr "Nur, wenn das Einbetten der Cover nicht möglich ist"
 
-#: configdialog/configcoverartpage.cpp:38
+#: configdialog/configcoverartpage.cpp:37
 msgid "Never"
 msgstr "Niemals"
 
@@ -1232,7 +1232,7 @@ msgstr ""
 msgid "CD track %1"
 msgstr "CD-Stück %1"
 
-#: filelist.cpp:1298
+#: filelist.cpp:1314
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1955,11 +1955,11 @@ msgstr "von"
 msgid "Edit tags"
 msgstr "Metadaten bearbeiten"
 
-#: optionseditor.cpp:324
+#: optionseditor.cpp:349
 msgid "No file selected"
 msgstr "Keine Datei ausgewählt"
 
-#: optionseditor.cpp:357
+#: optionseditor.cpp:380
 msgid ""
 "The tags could not be read, because this is not a local file.\n"
 "soundKonverter will try to read the tags, when it is about to convert the "
@@ -1976,7 +1976,7 @@ msgstr ""
 "Aber dann wird soundKonverter nichtmehr versuchen die Metadaten nach dem "
 "Herunterladen einzulesen."
 
-#: optionseditor.cpp:367
+#: optionseditor.cpp:390
 msgid ""
 "Reading the tags of this file failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -1993,36 +1993,36 @@ msgstr ""
 "Aber dann wird soundKonverter nichtmehr versuchen die Metadaten erneut "
 "einzulesen."
 
-#: optionseditor.cpp:391
+#: optionseditor.cpp:414
 msgctxt "cover tooltip"
 msgid "Cover type:"
 msgstr "Cover-Typ:"
 
-#: optionseditor.cpp:393
+#: optionseditor.cpp:416
 msgctxt "cover tooltip"
 msgid "Description:"
 msgstr "Beschreibung:"
 
-#: optionseditor.cpp:394
+#: optionseditor.cpp:417
 msgctxt "cover tooltip"
 msgid "Size:"
 msgstr "Größe:"
 
-#: optionseditor.cpp:394
+#: optionseditor.cpp:417
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
 msgstr "%1 x %2 Pixel (%3)"
 
-#: optionseditor.cpp:396
+#: optionseditor.cpp:419
 msgctxt "cover tooltip"
 msgid "Mime type:"
 msgstr "Mime-Typ:"
 
-#: optionseditor.cpp:419
+#: optionseditor.cpp:442
 msgid "%1 Files"
 msgstr "%1 Dateien"
 
-#: optionseditor.cpp:437
+#: optionseditor.cpp:462
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
@@ -2032,7 +2032,7 @@ msgstr ""
 "Sie können die Konvertierungsoptionen von allen Dateien bearbeiten, indem "
 "Sie den Button unten anklicken."
 
-#: optionseditor.cpp:445
+#: optionseditor.cpp:470
 msgid ""
 "Reading the tags of one or more files failed.\n"
 "soundKonverter will try to read the tags a second time, when it is about to "
@@ -2233,9 +2233,10 @@ msgstr "neu"
 msgid "Name all converted files according to the specified pattern"
 msgstr "Benenne alle konvertierten Dateien mit Hilfe der Platzhalter"
 
-#: outputdirectory.cpp:527
+#: outputdirectory.cpp:526
+#, fuzzy
 msgid ""
-"The following strings are wildcards, that will be replaced\n"
+"The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
 "\n"
 "%a - Artist\n"
@@ -2247,7 +2248,11 @@ msgid ""
 "%p - Composer\n"
 "%t - Title\n"
 "%y - Year\n"
-"%f - Original file name"
+"%f - Original file name\n"
+"\n"
+"You may parenthesize these wildcards and surrounding characters with squared "
+"brackets ('[' and ']')\n"
+"so they will be ignored if the replacement value is empty."
 msgstr ""
 "Die folgenden Zeichenketten sind Platzhalter, sie werden durch die "
 "nformationen in den Metadaten ersetzt:\n"
@@ -2263,17 +2268,17 @@ msgstr ""
 "%y - Jahr\n"
 "%f - Original Dateiname"
 
-#: outputdirectory.cpp:536
+#: outputdirectory.cpp:537
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr ""
 "Gebe alle Dateien in das selbe Verzeichnis, wie die Originaldateien aus"
 
-#: outputdirectory.cpp:548
+#: outputdirectory.cpp:549
 msgid "Output all converted files into the specified output directory"
 msgstr "Gebe alle Dateien in das angegebene Verzeichnis aus"
 
-#: outputdirectory.cpp:560
+#: outputdirectory.cpp:561
 msgid "Copy the whole directory structure for all converted files"
 msgstr ""
 "Kopiere die komplette Verzeichnisstruktur für alle konvertierten Dateien"

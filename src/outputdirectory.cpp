@@ -523,8 +523,9 @@ void OutputDirectory::updateMode( Mode mode )
         pDirSelect->setEnabled( true );
         pDirGoto->setEnabled( true );
         cMode->setToolTip( i18n("Name all converted files according to the specified pattern") );
-//         cDir->setToolTip( i18n("<p>The following strings are wildcards, that will be replaced by the information in the meta data:</p><p>%a - Artist<br>%b - Album<br>%c - Comment<br>%d - Disc number<br>%g - Genre<br>%n - Track number<br>%p - Composer<br>%t - Title<br>%y - Year<br>%f - Original file name<p>") );
-        cDir->setToolTip( i18n("The following strings are wildcards, that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name") );
+        cDir->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
+                "%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n\n"
+                "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.") );
     }
     else if( mode == Source )
     {

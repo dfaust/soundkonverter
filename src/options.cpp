@@ -243,7 +243,7 @@ void Options::accepted()
         const QString path = config->data.general.specifyOutputDirectory;
         if( config->data.general.lastNormalOutputDirectoryPaths.contains(path) )
             config->data.general.lastNormalOutputDirectoryPaths.removeAll( path );
-        else if( !config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
+        else if( config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
             config->data.general.lastNormalOutputDirectoryPaths.removeLast();
         config->data.general.lastNormalOutputDirectoryPaths.prepend( path );
     }
@@ -252,7 +252,7 @@ void Options::accepted()
         const QString path = config->data.general.copyStructureOutputDirectory;
         if( config->data.general.lastNormalOutputDirectoryPaths.contains(path) )
             config->data.general.lastNormalOutputDirectoryPaths.removeAll( path );
-        else if( !config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
+        else if( config->data.general.lastNormalOutputDirectoryPaths.size() >= 5 )
             config->data.general.lastNormalOutputDirectoryPaths.removeLast();
         config->data.general.lastNormalOutputDirectoryPaths.prepend( path );
     }

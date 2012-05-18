@@ -75,6 +75,10 @@ void Config::load()
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
     data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
 
+    // due to a bug lastNormalOutputDirectoryPaths could have more than 5 items
+    while( data.general.lastNormalOutputDirectoryPaths.count() > 5 )
+        data.general.lastNormalOutputDirectoryPaths.takeLast();
+
     group = conf->group( "Advanced" );
     data.advanced.useSharedMemoryForTempFiles = group.readEntry( "useSharedMemoryForTempFiles", false );
     data.advanced.sharedMemorySize = 0;

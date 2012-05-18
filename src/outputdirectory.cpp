@@ -175,6 +175,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         path = options->outputDirectory;
 
         // TODO a little bit redundant, adding %f if file name wasn't set properly
+        // TODO these restrictions could be a little bit over the top
         if( path.right(1) == "/" )
             path += "%f";
         else if( path.lastIndexOf(QRegExp("%[abcdfgnpty]")) < path.lastIndexOf("/") )
@@ -186,6 +187,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         {
             path = path.left( fileNameBegin ) + "/%f";
         }
+
+        path.replace( "\\[", "$quared_bracket_open$" );
+        path.replace( "\\]", "$quared_bracket_close$" );
 
         QRegExp reg( "\\[(.*)%([abcdfgnpty])(.*)\\]" );
         reg.setMinimal( true );
@@ -212,6 +216,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
                 path.replace( reg, "" );
             }
         }
+
+        path.replace( "$quared_bracket_open$", "[" );
+        path.replace( "$quared_bracket_close$", "]" );
 
         while( path.contains("//") )
             path.replace( "//", "/" );
@@ -525,7 +532,8 @@ void OutputDirectory::updateMode( Mode mode )
         cMode->setToolTip( i18n("Name all converted files according to the specified pattern") );
         cDir->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
                 "%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n\n"
-                "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.") );
+                "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.\n"
+                "In order to use squared brackets you will have to escape them with a backslash ('\\[' and '\\]').") );
     }
     else if( mode == Source )
     {

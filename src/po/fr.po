@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-17 09:28+0200\n"
+"POT-Creation-Date: 2012-05-18 12:08+0200\n"
 "PO-Revision-Date: 2012-05-03 04:55+0000\n"
 "Last-Translator: Yannick ERNULT <yannick.ernult@gmail.com>\n"
 "Language-Team: French (http://www.transifex.net/projects/p/soundkonverter/"
@@ -2181,7 +2181,7 @@ msgstr "Dossier de destination"
 msgid "Copy directory structure"
 msgstr "Copier la structure du dossier"
 
-#: outputdirectory.cpp:58 outputdirectory.cpp:475
+#: outputdirectory.cpp:58 outputdirectory.cpp:482
 msgid "Choose an output directory"
 msgstr "Choisissez un dossier de destination"
 
@@ -2189,41 +2189,41 @@ msgstr "Choisissez un dossier de destination"
 msgid "Open the output directory with Dolphin"
 msgstr "Ouvrir le dossier de destination avec Dolphin"
 
-#: outputdirectory.cpp:230
+#: outputdirectory.cpp:237
 msgid "Unknown Artist"
 msgstr "Artiste inconnu"
 
-#: outputdirectory.cpp:234
+#: outputdirectory.cpp:241
 msgid "Unknown Album"
 msgstr "Album inconnu"
 
-#: outputdirectory.cpp:238
+#: outputdirectory.cpp:245
 msgid "No Comment"
 msgstr "Pas de commentaire"
 
-#: outputdirectory.cpp:245
+#: outputdirectory.cpp:252
 msgid "Unknown Genre"
 msgstr "Genre inconnu"
 
-#: outputdirectory.cpp:252
+#: outputdirectory.cpp:259
 msgid "Unknown Composer"
 msgstr "Compositeur inconnu"
 
-#: outputdirectory.cpp:256
+#: outputdirectory.cpp:263
 msgid "Unknown Title"
 msgstr "Titre inconnu"
 
-#: outputdirectory.cpp:345
+#: outputdirectory.cpp:352
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
 msgstr "Nouveau"
 
-#: outputdirectory.cpp:525
+#: outputdirectory.cpp:532
 msgid "Name all converted files according to the specified pattern"
 msgstr "Nommer tous les fichiers convertis selon le modèle spécifié"
 
-#: outputdirectory.cpp:526
+#: outputdirectory.cpp:533
 #, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
@@ -2242,7 +2242,9 @@ msgid ""
 "\n"
 "You may parenthesize these wildcards and surrounding characters with squared "
 "brackets ('[' and ']')\n"
-"so they will be ignored if the replacement value is empty."
+"so they will be ignored if the replacement value is empty.\n"
+"In order to use squared brackets you will have to escape them with a "
+"backslash ('\\[' and '\\]')."
 msgstr ""
 "Les caractères suivants sont des variables qui seront remplacées\n"
 "par les informations contenues dans les meta-données :\n"
@@ -2258,19 +2260,19 @@ msgstr ""
 "%y - Année\n"
 "%f - Nom de fichier original"
 
-#: outputdirectory.cpp:537
+#: outputdirectory.cpp:545
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr ""
 "Enregistrer tous les fichiers convertis dans le même dossier que les "
 "fichiers sources"
 
-#: outputdirectory.cpp:549
+#: outputdirectory.cpp:557
 msgid "Output all converted files into the specified output directory"
 msgstr ""
 "Enregistrer tous les fichiers convertis dans le dossier de destination choisi"
 
-#: outputdirectory.cpp:561
+#: outputdirectory.cpp:569
 msgid "Copy the whole directory structure for all converted files"
 msgstr "Copier toute la structure des dossiers de tous les fichiers convertis"
 

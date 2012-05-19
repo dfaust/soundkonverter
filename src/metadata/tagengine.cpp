@@ -686,7 +686,10 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
                     QByteArray image_data_b64(coverArtValue[i].toCString());
                     QByteArray image_data = QByteArray::fromBase64(image_data_b64);
 
-                    CoverData *newCover = new CoverData( image_data, TStringToQString(mimeTypeValue[i]), CoverData::FrontCover, TStringToQString(descriptionValue[i]) );
+                    const TagLib::String mimeType = ( mimeTypeValue.size() > i ) ? mimeTypeValue[i] : "";
+                    const TagLib::String description = ( descriptionValue.size() > i ) ? descriptionValue[i] : "";
+
+                    CoverData *newCover = new CoverData( image_data, TStringToQString(mimeType), CoverData::FrontCover, TStringToQString(description) );
                     covers.append( newCover );
                 }
             }

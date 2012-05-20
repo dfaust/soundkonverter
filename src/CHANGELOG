@@ -1,4 +1,4 @@
-1.5.90:
+1.5.90 (1.6.0 rc1):
 -Add: Make the 'Failed' status clickable and open the log if clicked
 -Add: Make the file name of covers written to the output directory configureable
 -Change: Remove the info tab from the options editor

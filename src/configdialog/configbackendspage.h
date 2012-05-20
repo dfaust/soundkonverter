@@ -100,10 +100,10 @@ private:
     QString currentFormat;
 
 private slots:
+    void somethingChanged();
     void formatChanged( const QString& format, bool ignoreChanges = false );
 //     void encoderChanged( const QString& encoder );
 //     void configureEncoder();
-//     void orderChanged();
     void showOptimizations();
 
 public slots:

@@ -56,6 +56,7 @@ public slots:
     void saveSettings();
 
 private slots:
+    void somethingChanged();
 //     void selectDir();
     void profileChanged();
 

@@ -52,6 +52,9 @@ public slots:
     void resetDefaults();
     void saveSettings();
 
+private slots:
+    void somethingChanged();
+
 };
 
 #endif

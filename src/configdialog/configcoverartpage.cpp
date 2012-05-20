@@ -43,7 +43,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     writeCoversGroup->addButton( rWriteCoversNever );
 
     connect( writeCoversGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(writeCoversChanged(QAbstractButton*)) );
-    connect( writeCoversGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(configChanged()) );
+    connect( writeCoversGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(somethingChanged()) );
 
     if( config->data.coverArt.writeCovers == 0 )
         rWriteCoversAlways->setChecked( true );
@@ -69,14 +69,13 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     writeCoverNameTextBox->addWidget( lWriteCoverNameDefaultEdit );
     writeCoverNameTextBox->addStretch();
     box->addLayout( writeCoverNameTextBox );
-    connect( lWriteCoverNameDefaultEdit, SIGNAL(textChanged(QString)), this, SIGNAL(configChanged()) );
+    connect( lWriteCoverNameDefaultEdit, SIGNAL(textChanged(QString)), this, SLOT(somethingChanged()) );
 
     QButtonGroup *writeCoverNameGroup = new QButtonGroup( this );
     writeCoverNameGroup->addButton( rWriteCoverNameTitle );
     writeCoverNameGroup->addButton( rWriteCoverNameDefault );
 
-    connect( writeCoverNameGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(writeCoverNameChanged(QAbstractButton*)) );
-    connect( writeCoverNameGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SIGNAL(configChanged()) );
+    connect( writeCoverNameGroup, SIGNAL(buttonClicked(QAbstractButton*)), this, SLOT(somethingChanged()) );
 
     if( config->data.coverArt.writeCoverName == 0 )
         rWriteCoverNameTitle->setChecked( true );
@@ -150,6 +149,18 @@ void ConfigCoverArtPage::saveSettings()
     config->data.coverArt.writeCoverDefaultName = lWriteCoverNameDefaultEdit->text();
 }
 
+void ConfigCoverArtPage::somethingChanged()
+{
+    const bool changed = ( rWriteCoversAlways->isChecked() && config->data.coverArt.writeCovers != 0 ) ||
+                         ( rWriteCoversAuto->isChecked() && config->data.coverArt.writeCovers != 1 ) ||
+                         ( rWriteCoversNever->isChecked() && config->data.coverArt.writeCovers != 2 ) ||
+                         ( rWriteCoverNameTitle->isChecked() && config->data.coverArt.writeCoverName != 0 ) ||
+                         ( rWriteCoverNameDefault->isChecked() && config->data.coverArt.writeCoverName != 1 ) ||
+                         lWriteCoverNameDefaultEdit->text() != config->data.coverArt.writeCoverDefaultName;
+
+    emit configChanged( changed );
+}
+
 void ConfigCoverArtPage::writeCoversChanged( QAbstractButton *button )
 {
     if( button == rWriteCoversNever )
@@ -170,7 +181,3 @@ void ConfigCoverArtPage::writeCoversChanged( QAbstractButton *button )
     }
 }
 
-void ConfigCoverArtPage::writeCoverNameChanged( QAbstractButton *button )
-{
-    Q_UNUSED( button );
-}

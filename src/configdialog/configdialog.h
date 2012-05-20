@@ -46,6 +46,11 @@ private:
     bool lastUseVFATNames;
     int lastConflictHandling;
 
+    bool generalPageChanged;
+    bool advancedlPageChanged;
+    bool coverArtPageChanged;
+    bool backendsPageChanged;
+
 private slots:
     void pageChanged( KPageWidgetItem *current, KPageWidgetItem *before );
     void configChanged( bool state );

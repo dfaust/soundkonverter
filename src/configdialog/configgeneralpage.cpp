@@ -45,7 +45,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cStartTab->addItem( i18n("Detailed") );
     cStartTab->setCurrentIndex( config->data.general.startTab );
     startTabBox->addWidget( cStartTab );
-    connect( cStartTab, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cStartTab, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
     box->addSpacing( 5 );
 
@@ -68,13 +68,13 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cDefaultProfile->setCurrentIndex( cDefaultProfile->findText(config->data.general.defaultProfile) );
     defaultProfileBox->addWidget( cDefaultProfile );
     connect( cDefaultProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
-    connect( cDefaultProfile, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cDefaultProfile, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     QLabel *lDefaultFormat = new QLabel( i18n("Default format")+":", this );
     defaultProfileBox->addWidget( lDefaultFormat );
     cDefaultFormat = new KComboBox( this );
     cDefaultFormat->setCurrentIndex( cDefaultFormat->findText(config->data.general.defaultFormat) );
     defaultProfileBox->addWidget( cDefaultFormat );
-    connect( cDefaultFormat, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cDefaultFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     profileChanged();
 
     box->addSpacing( 5 );
@@ -104,7 +104,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cConflictHandling->setToolTip( i18n("Do that if the output file already exists") );
     cConflictHandling->setCurrentIndex( (int)config->data.general.conflictHandling );
     conflictHandlingBox->addWidget( cConflictHandling );
-    connect( cConflictHandling, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cConflictHandling, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
     box->addSpacing( 5 );
 
@@ -117,7 +117,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processors.count()) );
     iNumFiles->setValue( config->data.general.numFiles );
     numFilesBox->addWidget( iNumFiles );
-    connect( iNumFiles, SIGNAL(valueChanged(int)), this, SIGNAL(configChanged()) );
+    connect( iNumFiles, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()) );
     numFilesBox->setStretch( 0, 3 );
     numFilesBox->setStretch( 1, 1 );
 
@@ -129,7 +129,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cWaitForAlbumGain->setToolTip( i18n("Keep songs of the same album waiting in file list in order to apply album gain to all files.") );
     cWaitForAlbumGain->setChecked( config->data.general.waitForAlbumGain );
     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
-    connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+    connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
     box->addSpacing( 5 );
 
@@ -139,7 +139,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by diableing this option.") );
     cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
     createActionsMenuBox->addWidget( cCreateActionsMenu );
-    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SIGNAL(configChanged()) );
+    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
     box->addSpacing( 20 );
 
@@ -153,7 +153,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Directories only") );
     cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
-    connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
     box->addStretch();
 }
@@ -188,6 +188,20 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.waitForAlbumGain = cWaitForAlbumGain->isChecked();
     config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
+}
+
+void ConfigGeneralPage::somethingChanged()
+{
+    const bool changed = cStartTab->currentIndex() != config->data.general.startTab ||
+                         cDefaultProfile->currentText() != config->data.general.defaultProfile ||
+                         cDefaultFormat->currentText() != config->data.general.defaultFormat ||
+                         cConflictHandling->currentIndex() != (int)config->data.general.conflictHandling ||
+                         iNumFiles->value() != config->data.general.numFiles ||
+                         cWaitForAlbumGain->isChecked() != config->data.general.waitForAlbumGain ||
+                         cCreateActionsMenu->isChecked() != config->data.general.createActionsMenu ||
+                         cReplayGainGrouping->currentIndex() != (int)config->data.general.replayGainGrouping;
+
+    emit configChanged( changed );
 }
 
 void ConfigGeneralPage::profileChanged()

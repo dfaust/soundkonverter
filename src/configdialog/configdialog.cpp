@@ -27,7 +27,12 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
 {
     setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
     setCaption( i18n("Settings") );
-    configChanged(false);
+
+    generalPageChanged = false;
+    advancedlPageChanged = false;
+    coverArtPageChanged = false;
+    backendsPageChanged = false;
+    button(KDialog::Apply)->setEnabled( false );
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
@@ -71,13 +76,37 @@ void ConfigDialog::pageChanged( KPageWidgetItem *current, KPageWidgetItem *befor
 
 void ConfigDialog::configChanged( bool state )
 {
-    button(KDialog::Apply)->setEnabled(state);
+    if( QObject::sender() == configGeneralPage )
+    {
+        generalPageChanged = state;
+    }
+    else if( QObject::sender() == configAdvancedPage )
+    {
+        advancedlPageChanged = state;
+    }
+    else if( QObject::sender() == configCoverArtPage )
+    {
+        coverArtPageChanged = state;
+    }
+    else if( QObject::sender() == configBackendsPage )
+    {
+        backendsPageChanged = state;
+    }
+
+    const bool changed = ( generalPageChanged || advancedlPageChanged || coverArtPageChanged || backendsPageChanged );
+
+    button(KDialog::Apply)->setEnabled( changed );
 }
 
 void ConfigDialog::applyClicked()
 {
     okClicked();
-    configChanged(false);
+
+    generalPageChanged = false;
+    advancedlPageChanged = false;
+    coverArtPageChanged = false;
+    backendsPageChanged = false;
+    button(KDialog::Apply)->setEnabled( false );
 }
 
 void ConfigDialog::okClicked()

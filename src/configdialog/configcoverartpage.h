@@ -55,8 +55,8 @@ private:
     Config *config;
 
 private slots:
+    void somethingChanged();
     void writeCoversChanged( QAbstractButton *button );
-    void writeCoverNameChanged( QAbstractButton *button );
 
 public slots:
     void resetDefaults();

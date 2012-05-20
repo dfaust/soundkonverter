@@ -209,7 +209,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     cRipper = new KComboBox( this );
     cRipper->addItems( config->data.backends.rippers );
     ripperBox->addWidget( cRipper );
-    connect( cRipper, SIGNAL(activated(int)), this, SIGNAL(configChanged()) );
+    connect( cRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
     box->addSpacing( 11 );
 
@@ -232,13 +232,13 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatGroup->setLayout( formatBox );
     decoderList = new BackendsListWidget( i18n("Decoder"), config, this );
     formatBox->addWidget( decoderList );
-    connect( decoderList, SIGNAL(orderChanged()), this, SIGNAL(configChanged()) );
+    connect( decoderList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
     encoderList = new BackendsListWidget( i18n("Encoder"), config, this );
     formatBox->addWidget( encoderList );
-    connect( encoderList, SIGNAL(orderChanged()), this, SIGNAL(configChanged()) );
+    connect( encoderList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
     replaygainList = new BackendsListWidget( i18n("Replay Gain"), config, this );
     formatBox->addWidget( replaygainList );
-    connect( replaygainList, SIGNAL(orderChanged()), this, SIGNAL(configChanged()) );
+    connect( replaygainList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
 
     QHBoxLayout *optimizationsBox = new QHBoxLayout( 0 );
     box->addLayout( optimizationsBox );
@@ -304,6 +304,8 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
     decoderList->resetOrder();
     encoderList->resetOrder();
     replaygainList->resetOrder();
+
+    emit configChanged( false );
 }
 
 void ConfigBackendsPage::resetDefaults()
@@ -367,10 +369,12 @@ void ConfigBackendsPage::saveSettings()
     config->data.backendOptimizationsIgnoreList.optimizationList = optimizationList;
 }
 
-// void ConfigBackendsPage::orderChanged()
-// {
-//     emit configChanged( decoderList->changed() || encoderList->changed() || replaygainList->changed() );
-// }
+void ConfigBackendsPage::somethingChanged()
+{
+    const bool changed = decoderList->changed() || encoderList->changed() || replaygainList->changed();
+
+    emit configChanged( changed );
+}
 
 void ConfigBackendsPage::showOptimizations()
 {

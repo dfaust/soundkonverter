@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-18 12:08+0200\n"
+"POT-Creation-Date: 2012-05-22 09:17+0200\n"
 "PO-Revision-Date: 2012-05-01 20:38+0000\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -176,20 +176,20 @@ msgstr "või"
 msgid "Affected files:"
 msgstr "Mõjutatud failid:"
 
-#: config.cpp:48 config.cpp:50 config.cpp:347 config.cpp:392
+#: config.cpp:48 config.cpp:50 config.cpp:351 config.cpp:396
 #: configdialog/configgeneralpage.cpp:43 configdialog/configgeneralpage.cpp:58
-#: configdialog/configgeneralpage.cpp:202
-#: configdialog/configgeneralpage.cpp:204
-#: configdialog/configgeneralpage.cpp:208
-#: configdialog/configgeneralpage.cpp:213
-#: configdialog/configgeneralpage.cpp:218 options.cpp:50 options.cpp:71
+#: configdialog/configgeneralpage.cpp:216
+#: configdialog/configgeneralpage.cpp:218
+#: configdialog/configgeneralpage.cpp:222
+#: configdialog/configgeneralpage.cpp:227
+#: configdialog/configgeneralpage.cpp:232 options.cpp:50 options.cpp:71
 #: options.cpp:91 optionsdetailed.cpp:375
 msgid "Last used"
 msgstr "Viimati kasutatud"
 
-#: config.cpp:49 config.cpp:351 config.cpp:358 config.cpp:364
+#: config.cpp:49 config.cpp:355 config.cpp:362 config.cpp:368
 #: configdialog/configgeneralpage.cpp:62
-#: configdialog/configgeneralpage.cpp:206 options.cpp:80
+#: configdialog/configgeneralpage.cpp:220 options.cpp:80
 #: optionsdetailed.cpp:371 optionssimple.cpp:158 optionssimple.cpp:198
 #: optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
@@ -217,17 +217,17 @@ msgstr "Viimati kasutatud"
 msgid "High"
 msgstr "Kõrge"
 
-#: config.cpp:104 configdialog/configcoverartpage.cpp:131
+#: config.cpp:108 configdialog/configcoverartpage.cpp:130
 msgctxt "cover file name"
 msgid "cover"
 msgstr "kaanepilt"
 
-#: config.cpp:261 config.cpp:284 config.cpp:286
+#: config.cpp:265 config.cpp:288 config.cpp:290
 msgid "Try internal"
 msgstr "Proovitakse sisemist"
 
-#: config.cpp:348 config.cpp:364 configdialog/configgeneralpage.cpp:59
-#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:368
+#: config.cpp:352 config.cpp:368 configdialog/configgeneralpage.cpp:59
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:368
 #: optionssimple.cpp:155 optionssimple.cpp:180 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
@@ -254,8 +254,8 @@ msgstr "Proovitakse sisemist"
 msgid "Very low"
 msgstr "Väga madal"
 
-#: config.cpp:349 config.cpp:364 configdialog/configgeneralpage.cpp:60
-#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:369
+#: config.cpp:353 config.cpp:368 configdialog/configgeneralpage.cpp:60
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:369
 #: optionssimple.cpp:156 optionssimple.cpp:186 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
@@ -282,8 +282,8 @@ msgstr "Väga madal"
 msgid "Low"
 msgstr "Madal"
 
-#: config.cpp:350 config.cpp:364 configdialog/configgeneralpage.cpp:61
-#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:370
+#: config.cpp:354 config.cpp:368 configdialog/configgeneralpage.cpp:61
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:370
 #: optionssimple.cpp:157 optionssimple.cpp:192 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:202
@@ -310,8 +310,8 @@ msgstr "Madal"
 msgid "Medium"
 msgstr "Keskmine"
 
-#: config.cpp:352 config.cpp:364 configdialog/configgeneralpage.cpp:63
-#: configdialog/configgeneralpage.cpp:206 optionsdetailed.cpp:372
+#: config.cpp:356 config.cpp:368 configdialog/configgeneralpage.cpp:63
+#: configdialog/configgeneralpage.cpp:220 optionsdetailed.cpp:372
 #: optionssimple.cpp:159 optionssimple.cpp:204 optionssimple.cpp:285
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:218
@@ -338,8 +338,8 @@ msgstr "Keskmine"
 msgid "Very high"
 msgstr "Väga kõrge"
 
-#: config.cpp:353 config.cpp:368 configdialog/configgeneralpage.cpp:64
-#: configdialog/configgeneralpage.cpp:211 optionsdetailed.cpp:373
+#: config.cpp:357 config.cpp:372 configdialog/configgeneralpage.cpp:64
+#: configdialog/configgeneralpage.cpp:225 optionsdetailed.cpp:373
 #: optionssimple.cpp:160 optionssimple.cpp:210 optionssimple.cpp:289
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:164
@@ -371,13 +371,13 @@ msgstr "Väga kõrge"
 msgid "Lossless"
 msgstr "Kadudeta"
 
-#: config.cpp:354 config.cpp:372 configdialog/configgeneralpage.cpp:216
+#: config.cpp:358 config.cpp:376 configdialog/configgeneralpage.cpp:230
 #: optionsdetailed.cpp:374 optionssimple.cpp:216 optionssimple.cpp:293
 #: soundkonverterview.cpp:457 soundkonverterview.cpp:459
 msgid "Hybrid"
 msgstr "Hübriid"
 
-#: config.cpp:376 optionsdetailed.cpp:377 optionssimple.cpp:163
+#: config.cpp:380 optionsdetailed.cpp:377 optionssimple.cpp:163
 #: optionssimple.cpp:222 optionssimple.cpp:297 optionssimple.cpp:362
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
@@ -394,11 +394,11 @@ msgstr "Hübriid"
 msgid "User defined"
 msgstr "Kasutajamääratud"
 
-#: config.cpp:540
+#: config.cpp:544
 msgid "Convert with soundKonverter"
 msgstr "Teisenda soundKonverteriga..."
 
-#: config.cpp:574
+#: config.cpp:578
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Lisa helitugevuse parandusteave..."
 
@@ -484,11 +484,11 @@ msgstr "MiB"
 msgid "It seems there's no filesystem mounted on /dev/shm"
 msgstr "Paistab, et /dev/shm'i ei ole ühendatud ühtegi failisüsteemi"
 
-#: configdialog/configadvancedpage.cpp:118
+#: configdialog/configadvancedpage.cpp:119
 msgid "Use pipes when possible"
 msgstr "Võimalusel toru kasutamine"
 
-#: configdialog/configadvancedpage.cpp:119
+#: configdialog/configadvancedpage.cpp:120
 msgid ""
 "Pipes make it unnecessary to use temporary files, therefore increasing the "
 "performance.\n"
@@ -549,7 +549,7 @@ msgstr "Seadistusi on muudetud"
 msgid "%1 settings"
 msgstr "Vormingu \"%1\" seaded"
 
-#: configdialog/configbackendspage.cpp:386
+#: configdialog/configbackendspage.cpp:390
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
 "Taustprogrammide seaded näivad olevat optimaalsed, pole vaja midagi teha."
@@ -618,19 +618,19 @@ msgstr ""
 msgid "Settings"
 msgstr "Seadistused"
 
-#: configdialog/configdialog.cpp:37
+#: configdialog/configdialog.cpp:42
 msgid "General"
 msgstr "Üldine"
 
-#: configdialog/configdialog.cpp:42
+#: configdialog/configdialog.cpp:47
 msgid "Advanced"
 msgstr "Lisaseaded"
 
-#: configdialog/configdialog.cpp:47
+#: configdialog/configdialog.cpp:52
 msgid "Cover art"
 msgstr "Kaanepilt"
 
-#: configdialog/configdialog.cpp:52 main.cpp:28
+#: configdialog/configdialog.cpp:57 main.cpp:28
 msgid "Backends"
 msgstr "Taustprogrammid"
 

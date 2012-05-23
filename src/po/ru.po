@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-22 09:17+0200\n"
+"POT-Creation-Date: 2012-05-23 19:07+0200\n"
 "PO-Revision-Date: 2012-05-01 19:37+0000\n"
 "Last-Translator: bizdelnick <bizdelnick@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/soundkonverter/"
@@ -2478,7 +2478,8 @@ msgstr "Переменный"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-msgid "Avarage"
+#, fuzzy
+msgid "Average"
 msgstr "Средний"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:114

@@ -323,7 +323,7 @@ void FaacCodecWidget::modeChanged( int mode )
 //         qualitySpinBoxChanged( dQuality->value() );
 
 //         cBitrateMode->clear();
-//         cBitrateMode->addItem( i18n("Avarage") );
+//         cBitrateMode->addItem( i18n("Average") );
 //         cBitrateMode->addItem( i18n("Constant") );
 //         cBitrateMode->setEnabled( true );
     }

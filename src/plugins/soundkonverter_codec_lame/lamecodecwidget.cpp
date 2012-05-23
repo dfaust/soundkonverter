@@ -110,7 +110,7 @@ LameCodecWidget::LameCodecWidget()
     userdefinedTopBox->addWidget( lBitrateMode );
     cBitrateMode = new KComboBox( this );
     cBitrateMode->addItem( i18n("Variable") );
-    cBitrateMode->addItem( i18n("Avarage") );
+    cBitrateMode->addItem( i18n("Average") );
     cBitrateMode->addItem( i18n("Constant") );
     cBitrateMode->setFixedWidth( cBitrateMode->sizeHint().width() );
     connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
@@ -231,7 +231,7 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Bitrate;
         options->bitrate = iQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
-        options->bitrateMode = ( cBitrateMode->currentText()==i18n("Avarage") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
+        options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
         options->bitrateMin = 0;
         options->bitrateMax = 0;
     }
@@ -267,7 +267,7 @@ bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         cMode->setCurrentIndex( cMode->findText(i18n("Bitrate")) );
         modeChanged( cMode->currentIndex() );
         iQuality->setValue( options->bitrate );
-        if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Avarage")) );
+        if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Average")) );
         else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
     chSamplerate->setChecked( options->samplingRate != 0 );
@@ -612,7 +612,7 @@ void LameCodecWidget::modeChanged( int mode )
         iQuality->setToolTip( i18n("Bitrate") );
 
         cBitrateMode->clear();
-        cBitrateMode->addItem( i18n("Avarage") );
+        cBitrateMode->addItem( i18n("Average") );
         cBitrateMode->addItem( i18n("Constant") );
         cBitrateMode->setEnabled( true );
     }

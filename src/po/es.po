@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-22 09:17+0200\n"
+"POT-Creation-Date: 2012-05-23 19:07+0200\n"
 "PO-Revision-Date: 2012-04-29 08:19+0000\n"
 "Last-Translator: A Kanashiro <akana_sfe@yahoo.com.ar>\n"
 "Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/"
@@ -2492,7 +2492,8 @@ msgstr "Variable"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-msgid "Avarage"
+#, fuzzy
+msgid "Average"
 msgstr "Media"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:114

@@ -5,6 +5,8 @@
 #include "../../core/conversionoptions.h"
 #include "normalizefilterwidget.h"
 
+#include <QFile>
+
 
 soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *parent, const QStringList& args  )
     : FilterPlugin( parent )
@@ -21,7 +23,6 @@ QString soundkonverter_filter_normalize::name()
 {
     return global_plugin_name;
 }
-
 
 bool soundkonverter_filter_normalize::isConfigSupported( ActionType action, const QString& codecName )
 {
@@ -85,19 +86,20 @@ int soundkonverter_filter_normalize::filter( const KUrl& inputFile, const KUrl& 
 
 QStringList soundkonverter_filter_normalize::filterCommand( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions )
 {
-    Q_UNUSED( outputFile );
-
     if( !_filterOptions )
         return QStringList();
 
-    if( inputFile.isEmpty() )
+    if( inputFile.isEmpty() || outputFile.isEmpty() )
         return QStringList();
 
     QStringList command;
-//     FilterOptions *filterOptions = _filterOptions;
+//     NormalizeFilterOptions *filterOptions = _filterOptions;
 
     command += binaries["normalize"];
     command += "\"" + escapeUrl(inputFile) + "\"";
+
+    if( !command.isEmpty() )
+        QFile::copy( inputFile.toLocalFile(), outputFile.toLocalFile() );
 
     return command;
 }
@@ -120,3 +122,4 @@ float soundkonverter_filter_normalize::parseOutput( const QString& output )
 
 
 #include "soundkonverter_filter_normalize.moc"
+

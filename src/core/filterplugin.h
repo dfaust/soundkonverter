@@ -17,10 +17,10 @@ public:
     FilterPluginItem( QObject *parent=0 );
     ~FilterPluginItem();
 
-    struct Data {
+//     struct Data {
 //         enum Mode { Enc, Dec } mode;
 //         int length;
-    } data;
+//     } data;
 };
 
 

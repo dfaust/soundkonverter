@@ -5,6 +5,7 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 set(soundkonverter_filter_normalize_SRCS
    soundkonverter_filter_normalize.cpp
+   normalizefilteroptions.cpp
    normalizefilterwidget.cpp
  )
 

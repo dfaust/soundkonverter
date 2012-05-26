@@ -3,6 +3,7 @@
 
 #include "lameconversionoptions.h"
 
+
 LameConversionOptions::LameConversionOptions()
     : ConversionOptions()
 {
@@ -14,10 +15,11 @@ LameConversionOptions::~LameConversionOptions()
 
 bool LameConversionOptions::equals( ConversionOptions *_other )
 {
-    if( !_other || _other->pluginName!=pluginName ) return false;
-  
+    if( !_other || _other->pluginName!=pluginName )
+        return false;
+
     LameConversionOptions *other = dynamic_cast<LameConversionOptions*>(_other);
-    
+
     if( data.preset==other->data.preset && data.preset==Data::UserDefined )
     {
         return ConversionOptions::equals(_other);
@@ -59,6 +61,7 @@ bool LameConversionOptions::fromXml( QDomElement conversionOptions )
     LameConversionOptions::data.presetBitrate = data.attribute("presetBitrate").toInt();
     LameConversionOptions::data.presetBitrateCbr = data.attribute("presetBitrateCbr").toInt();
     LameConversionOptions::data.presetFast = data.attribute("presetFast").toInt();
+
     return true;
 }
 

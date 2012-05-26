@@ -2,14 +2,11 @@
 #include "normalizefilterglobal.h"
 
 #include "normalizefilterwidget.h"
-#include "../../core/conversionoptions.h"
+#include "normalizefilteroptions.h"
 
-
-
-#include <QLayout>
 #include <KLocale>
 #include <QCheckBox>
-
+#include <QLayout>
 
 NormalizeFilterWidget::NormalizeFilterWidget()
     : FilterWidget()
@@ -37,11 +34,18 @@ NormalizeFilterWidget::NormalizeFilterWidget()
 NormalizeFilterWidget::~NormalizeFilterWidget()
 {}
 
-FilterOptions *NormalizeFilterWidget::currentFilterOptions()
+FilterOptions* NormalizeFilterWidget::currentFilterOptions()
 {
-    FilterOptions *options = new FilterOptions();
-//     options->compressionLevel = iCompressionLevel->value(); TODO
-    return options;
+    if( cNormalize->isChecked() )
+    {
+        NormalizeFilterOptions *options = new NormalizeFilterOptions();
+        options->data.normalize = cNormalize->isChecked();
+        return options;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 bool NormalizeFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
@@ -49,8 +53,9 @@ bool NormalizeFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-//     FilterOptions *options = _options;
-//     iCompressionLevel->setValue( options->compressionLevel ); TODO
+    NormalizeFilterOptions *options = dynamic_cast<NormalizeFilterOptions*>(_options);
+    cNormalize->setChecked( options->data.normalize );
+
     return true;
 }
 

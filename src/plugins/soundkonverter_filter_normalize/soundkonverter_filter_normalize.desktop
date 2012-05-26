@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=soundKonverter normalize Plugin
+X-KDE-Library=soundkonverter_filter_normalize
+ServiceTypes=soundKonverter/FilterPlugin
+X-KDE-PluginInfo-Author=Daniel Faust
+X-KDE-PluginInfo-Email=hessijames@gmail.com
+X-KDE-PluginInfo-Name=soundkonverter_filter_normalize
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL

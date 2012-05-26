@@ -27,9 +27,10 @@ macro_optional_add_subdirectory( po )
 
 set(soundkonvertercore_SRCS
    core/backendplugin.cpp
-   core/codecplugin.cpp
-   core/codecwidget.cpp
    core/conversionoptions.cpp
+   core/codecwidget.cpp
+   core/codecplugin.cpp
+   core/filterplugin.cpp
    core/replaygainplugin.cpp
    core/ripperplugin.cpp
 )
@@ -89,6 +90,7 @@ install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
 
 install(FILES soundkonverter_codecplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
+install(FILES soundkonverter_filterplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_replaygainplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_ripperplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter-rip-audiocd.desktop DESTINATION ${DATA_INSTALL_DIR}/solid/actions)

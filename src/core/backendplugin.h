@@ -49,11 +49,12 @@ class KDE_EXPORT BackendPlugin : public QObject
 public:
     enum ActionType
     {
-        Decoder = 0,
-        Encoder = 1,
-        ReplayGain = 2,
-        Ripper = 3,
-        General = 4
+        Decoder,
+        Encoder,
+        Filter,
+        ReplayGain,
+        Ripper,
+        General
     };
 
     struct FormatInfo
@@ -61,7 +62,7 @@ public:
         QString codecName;      // the internal name of this codec
         bool lossless;          // for calculating a possible conversion pipe
         QString description;    // description for the simple tab
-        QStringList mimeTypes;  // TODO this is obsolete - delete - really? what's with dolphin's actions context menu
+        QStringList mimeTypes;  // TODO this might be obsolete - what's with dolphin's actions context menu?
         QStringList extensions;
     };
 

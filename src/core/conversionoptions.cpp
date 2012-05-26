@@ -2,6 +2,33 @@
 #include "conversionoptions.h"
 
 
+FilterOptions::FilterOptions()
+{}
+
+FilterOptions::~FilterOptions()
+{}
+
+bool FilterOptions::equals( FilterOptions *_other )
+{
+    Q_UNUSED( _other );
+    return false;
+}
+
+QDomElement FilterOptions::toXml( QDomDocument document )
+{
+    QDomElement conversionOptions = document.createElement("filterOptions");
+    conversionOptions.setAttribute("pluginName",pluginName);
+
+    return conversionOptions;
+}
+
+bool FilterOptions::fromXml( QDomElement filterOptions )
+{
+    pluginName = filterOptions.attribute("pluginName");
+    return true;
+}
+
+
 ConversionOptions::ConversionOptions()
 {}
 
@@ -13,8 +40,15 @@ bool ConversionOptions::equals( ConversionOptions *_other )
     if( !_other )
         return false;
 
-    return ( equalsBasics(_other) && qualityMode==_other->qualityMode && quality==_other->quality && bitrate==_other->bitrate && bitrateMode==_other->bitrateMode &&
-             bitrateMin==_other->bitrateMin && bitrateMax==_other->bitrateMax && samplingRate==_other->samplingRate && channels==_other->channels );
+    return ( equalsBasics(_other) &&
+             qualityMode ==_other->qualityMode &&
+             quality ==_other->quality &&
+             bitrate ==_other->bitrate &&
+             bitrateMode ==_other->bitrateMode &&
+             bitrateMin ==_other->bitrateMin &&
+             bitrateMax ==_other->bitrateMax &&
+             samplingRate ==_other->samplingRate &&
+             channels ==_other->channels );
 }
 
 bool ConversionOptions::equalsBasics( ConversionOptions *_other )
@@ -22,9 +56,13 @@ bool ConversionOptions::equalsBasics( ConversionOptions *_other )
     if( !_other )
         return false;
 
-    return ( pluginName==_other->pluginName && profile==_other->profile && codecName==_other->codecName &&
-             outputDirectoryMode==_other->outputDirectoryMode && outputDirectory==_other->outputDirectory &&
-             replaygain==_other->replaygain && cmdArguments==_other->cmdArguments ); // && bpm==_other->bpm
+    return ( pluginName ==_other->pluginName &&
+             profile ==_other->profile &&
+             codecName ==_other->codecName &&
+             outputDirectoryMode ==_other->outputDirectoryMode &&
+             outputDirectory ==_other->outputDirectory &&
+             replaygain ==_other->replaygain &&
+             cmdArguments ==_other->cmdArguments );
 }
 
 QDomElement ConversionOptions::toXml( QDomDocument document )

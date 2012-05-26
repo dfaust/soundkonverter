@@ -8,7 +8,29 @@
 #include <KGenericFactory>
 #include <QDomDocument>
 
+class FilterOptions;
 class ConversionOptions;
+
+
+/**
+ * @short The plugin specific widget for detailed options
+ * @author Daniel Faust <hessijames@gmail.com>
+ * @version 1.0
+ */
+class KDE_EXPORT FilterWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    FilterWidget();
+    virtual ~FilterWidget();
+
+    virtual FilterOptions *currentFilterOptions() = 0;
+    virtual bool setCurrentFilterOptions( FilterOptions *_options ) = 0; // returns false if options are invalid (eg. different plugin)
+
+signals:
+    void optionsChanged();
+};
+
 
 /**
  * @short The plugin specific widget for detailed options

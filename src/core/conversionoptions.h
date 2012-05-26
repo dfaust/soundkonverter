@@ -8,6 +8,31 @@
 #include <QString>
 #include <QDomElement>
 
+
+/**
+ * @short The options for the filter process can be stored here
+ * @author Daniel Faust <hessijames@gmail.com>
+ * @version 1.0
+ */
+class KDE_EXPORT FilterOptions
+{
+public:
+    FilterOptions();
+    virtual ~FilterOptions();
+
+    virtual bool equals( FilterOptions *_other ); // checks if the other FilterOptions is equal to this
+
+    virtual QDomElement toXml( QDomDocument document );
+
+    virtual bool fromXml( QDomElement filterOptions );
+
+    QString pluginName;             // an identificator to see which plugin created the FilterOptions
+                                    // NOTE this must be unique for each plugin!
+
+    QString cmdArguments;           // user defined command line arguments
+};
+
+
 /**
  * @short The options for the conversion process can be stored here
  * @author Daniel Faust <hessijames@gmail.com>
@@ -26,7 +51,7 @@ public:
 
     virtual bool fromXml( QDomElement conversionOptions );
 
-    QString pluginName;             // an idetificator to see which plugin created the ConversionOptions
+    QString pluginName;             // an identificator to see which plugin created the ConversionOptions
                                     // NOTE this must be unique for each plugin!
 
     // plugin must ensure that these values are set, so an alternative plugin can be used
@@ -52,7 +77,8 @@ public:
     QString outputFilesystem;       // the filesystem of the output directory
 
     bool replaygain;
-    bool bpm;
+
+    QList<FilterOptions> filterOptions;
 };
 
 #endif // CONVERSIONOPTIONS_H

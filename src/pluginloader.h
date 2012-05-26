@@ -13,6 +13,7 @@
 #define PLUGINLOADER_H
 
 #include "core/codecplugin.h"
+#include "core/filterplugin.h"
 #include "core/replaygainplugin.h"
 #include "core/ripperplugin.h"
 
@@ -103,6 +104,8 @@ private:
 
     /** holds all known codec plugins */
     QList<CodecPlugin*> codecPlugins;
+    /** holds all known filter plugins */
+    QList<FilterPlugin*> filterPlugins;
     /** holds all known replay gain plugins */
     QList<ReplayGainPlugin*> replaygainPlugins;
     /** holds all known ripper plugins */

@@ -182,6 +182,41 @@ void PluginLoader::load()
         }
     }
 
+    offers = KServiceTypeTrader::self()->query("soundKonverter/FilterPlugin");
+
+    if( !offers.isEmpty() )
+    {
+        for( int i=0; i<offers.size(); i++ )
+        {
+            createInstanceTime.start();
+            QVariantList allArgs;
+            allArgs << offers.at(i)->storageId() << "";
+            QString error;
+            FilterPlugin *plugin = KService::createInstance<FilterPlugin>( offers.at(i), 0, allArgs, &error );
+            if( plugin )
+            {
+                logger->log( 1000, "\tloading plugin: " + plugin->name() );
+                createInstanceTimeSum += createInstanceTime.elapsed();
+                filterPlugins.append( plugin );
+                plugin->scanForBackends();
+//                 if(  )
+//                 {
+//                     logger->log( 1000, "\t\tfeatures:" );
+//                     for( int j=0; j<encodeCodecs.count(); j++ )
+//                     {
+//                         const QString tabs = encodeCodecs.keys().at(j).length() >= 6 ? "\t" : "\t\t";
+//                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(tabs).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
+//                     }
+//                 }
+                logger->log( 1000, "" );
+            }
+            else
+            {
+                logger->log( 1000, "<pre>\t<span style=\"color:red\">failed to load plugin: " + offers.at(i)->library() + "</span></pre>" );
+            }
+        }
+    }
+
     offers = KServiceTypeTrader::self()->query("soundKonverter/ReplayGainPlugin");
 
     if( !offers.isEmpty() )

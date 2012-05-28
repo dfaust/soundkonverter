@@ -20,7 +20,7 @@ NormalizeFilterWidget::NormalizeFilterWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QCheckBox *cNormalize = new QCheckBox( i18n("Normalize"), this );
+    cNormalize = new QCheckBox( i18n("Normalize"), this );
     connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     topBox->addWidget( cNormalize );
 

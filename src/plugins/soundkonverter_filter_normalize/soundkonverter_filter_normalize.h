@@ -19,16 +19,24 @@ public:
 
     QString name();
 
+    QList<ConversionPipeTrunk> codecTable();
+
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
 
-    QWidget *newFilterWidget();
+    QWidget *newCodecWidget();
+    FilterWidget *newFilterWidget();
 
-    int filter( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions );
-    QStringList filterCommand( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions );
+    int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
+
+    FilterOptions *filterOptionsFromXml( QDomElement filterOptions )
+    {
+        return FilterPlugin::filterOptionsFromXmlDefault( filterOptions );
+    }
 };
 
 K_EXPORT_SOUNDKONVERTER_FILTER( normalize, soundkonverter_filter_normalize )

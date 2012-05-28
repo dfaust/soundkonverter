@@ -3,6 +3,7 @@
 
 #include "soundkonverter_filter_normalize.h"
 #include "../../core/conversionoptions.h"
+#include "normalizefilteroptions.h"
 #include "normalizefilterwidget.h"
 
 #include <QFile>
@@ -14,6 +15,8 @@ soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *paren
     Q_UNUSED(args)
 
     binaries["normalize"] = "";
+
+    allCodecs += "wav";
 }
 
 soundkonverter_filter_normalize::~soundkonverter_filter_normalize()
@@ -22,6 +25,22 @@ soundkonverter_filter_normalize::~soundkonverter_filter_normalize()
 QString soundkonverter_filter_normalize::name()
 {
     return global_plugin_name;
+}
+
+QList<ConversionPipeTrunk> soundkonverter_filter_normalize::codecTable()
+{
+    QList<ConversionPipeTrunk> table;
+    ConversionPipeTrunk newTrunk;
+
+    newTrunk.codecFrom = "wav";
+    newTrunk.codecTo = "wav";
+    newTrunk.rating = 100;
+    newTrunk.enabled = ( binaries["normalize"] != "" );
+    newTrunk.problemInfo = standardMessage( "filter,backend", "normalize", "normalize" ) + "\n" + standardMessage( "install_opensource_backend", "normalize" );
+    newTrunk.data.hasInternalReplayGain = false;
+    table.append( newTrunk );
+
+    return table;
 }
 
 bool soundkonverter_filter_normalize::isConfigSupported( ActionType action, const QString& codecName )
@@ -49,7 +68,7 @@ void soundkonverter_filter_normalize::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_filter_normalize::newFilterWidget()
+FilterWidget *soundkonverter_filter_normalize::newFilterWidget()
 {
     NormalizeFilterWidget *widget = new NormalizeFilterWidget();
     if( lastUsedFilterOptions )
@@ -58,12 +77,25 @@ QWidget *soundkonverter_filter_normalize::newFilterWidget()
         delete lastUsedFilterOptions;
         lastUsedFilterOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<FilterWidget*>(widget);
 }
 
-int soundkonverter_filter_normalize::filter( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions )
+QWidget *soundkonverter_filter_normalize::newCodecWidget()
 {
-    QStringList command = filterCommand( inputFile, outputFile, _filterOptions );
+//     CodecWidget *widget = new CodecWidget();
+//     if( lastUsedConversionOptions )
+//     {
+//         widget->setCurrentConversionOptions( lastUsedConversionOptions );
+//         delete lastUsedConversionOptions;
+//         lastUsedConversionOptions = 0;
+//     }
+//     return qobject_cast<QWidget*>(widget);
+return 0;
+}
+
+int soundkonverter_filter_normalize::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+{
+    QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
         return -1;
 
@@ -84,22 +116,36 @@ int soundkonverter_filter_normalize::filter( const KUrl& inputFile, const KUrl& 
     return newItem->id;
 }
 
-QStringList soundkonverter_filter_normalize::filterCommand( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions )
+QStringList soundkonverter_filter_normalize::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    if( !_filterOptions )
+    Q_UNUSED( inputCodec );
+    Q_UNUSED( outputCodec );
+    Q_UNUSED( tags );
+    Q_UNUSED( replayGain );
+
+    if( !_conversionOptions )
         return QStringList();
 
     if( inputFile.isEmpty() || outputFile.isEmpty() )
         return QStringList();
 
     QStringList command;
-//     NormalizeFilterOptions *filterOptions = _filterOptions;
 
-    command += binaries["normalize"];
-    command += "\"" + escapeUrl(inputFile) + "\"";
+    foreach( FilterOptions *_filterOptions,_conversionOptions->filterOptions )
+    {
+        if( _filterOptions->pluginName == global_plugin_name )
+        {
+            NormalizeFilterOptions *filterOptions = dynamic_cast<NormalizeFilterOptions*>(_filterOptions);
+            if( filterOptions->data.normalize )
+            {
+                command += binaries["normalize"];
+                command += "\"" + escapeUrl(outputFile) + "\"";
 
-    if( !command.isEmpty() )
-        QFile::copy( inputFile.toLocalFile(), outputFile.toLocalFile() );
+                if( !command.isEmpty() )
+                    QFile::copy( inputFile.toLocalFile(), outputFile.toLocalFile() );
+            }
+        }
+    }
 
     return command;
 }

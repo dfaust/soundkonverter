@@ -33,7 +33,7 @@ public:
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
-    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions );
+    static ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( lame, soundkonverter_codec_lame )

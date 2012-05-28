@@ -1373,14 +1373,42 @@ void FileList::load( bool user )
             QDomElement root = list.documentElement();
             if( root.nodeName() == "soundkonverter" && root.attribute("type") == "filelist" )
             {
-                QDomNodeList conversionOptions = root.elementsByTagName("conversionOptions");
-                for( int i=0; i<conversionOptions.count(); i++ )
+                QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
+                for( int i=0; i<conversionOptionsElements.count(); i++ )
                 {
-                    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( conversionOptions.at(i).toElement().attribute("pluginName") );
-                    if( !plugin )
-                        continue;
-
-                    conversionOptionsIds[conversionOptions.at(i).toElement().attribute("id").toInt()] = config->conversionOptionsManager()->addConversionOptions( plugin->conversionOptionsFromXml(conversionOptions.at(i).toElement()) );
+                    ConversionOptions *conversionOptions = 0;
+                    QList<QDomElement> filterOptionsElements;
+                    const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
+                    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( pluginName );
+                    if( plugin )
+                    {
+                        conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                    }
+                    else
+                    {
+                        conversionOptions = CodecPlugin::conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                    }
+                    if( conversionOptions )
+                    {
+                        foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                        {
+                            FilterOptions *filterOptions = 0;
+                            const QString filterPluginName = filterOptionsElement.attribute("pluginName");
+//                             FilterPlugin *filterPlugin = (FilterPlugin*)config->pluginLoader()->backendPluginByName( filterPluginName );
+                            FilterPlugin *filterPlugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(filterPluginName));
+                            if( filterPlugin )
+                            {
+                                filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
+                            }
+                            else
+                            {
+                                filterOptions = FilterPlugin::filterOptionsFromXmlDefault( filterOptionsElement );
+                            }
+                            conversionOptions->filterOptions.append( filterOptions );
+                        }
+                    }
+                    const int id = conversionOptionsElements.at(i).toElement().attribute("id").toInt();
+                    conversionOptionsIds[id] = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
                 }
                 QDomNodeList files = root.elementsByTagName("file");
                 pScanStatus->setRange( 0, files.count() );

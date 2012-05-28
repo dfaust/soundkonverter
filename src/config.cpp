@@ -215,6 +215,18 @@ void Config::load()
                 }
             }
         }
+        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->filterPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            {
+                pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                enabledPlugins += pluginName;
+                if( !data.backends.codecs.at(codecIndex).encoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
+                {
+                    newPlugins += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
         for( int j=0; j<data.backends.codecs.at(codecIndex).encoders.count(); j++ )
         {
             if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).encoders.at(j)) )
@@ -241,6 +253,18 @@ void Config::load()
                 if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
                     newPlugins += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->filterPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            {
+                pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                enabledPlugins += pluginName;
+                if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
+                {
+                    newPlugins += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }

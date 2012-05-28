@@ -22,7 +22,7 @@ public:
 
     virtual bool equals( FilterOptions *_other ); // checks if the other FilterOptions is equal to this
 
-    virtual QDomElement toXml( QDomDocument document );
+    virtual QDomElement toXml( QDomElement filterOptions );
 
     virtual bool fromXml( QDomElement filterOptions );
 
@@ -49,7 +49,7 @@ public:
 
     virtual QDomElement toXml( QDomDocument document );
 
-    virtual bool fromXml( QDomElement conversionOptions );
+    virtual bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
     QString pluginName;             // an identificator to see which plugin created the ConversionOptions
                                     // NOTE this must be unique for each plugin!
@@ -78,7 +78,7 @@ public:
 
     bool replaygain;
 
-    QList<FilterOptions> filterOptions;
+    QList<FilterOptions*> filterOptions;
 };
 
 #endif // CONVERSIONOPTIONS_H

@@ -25,6 +25,11 @@ struct ConversionPipeTrunk
         bool hasInternalReplayGain;
         bool canRipEntireCd;
     } data;
+
+    bool operator==( const ConversionPipeTrunk& other )
+    {
+        return plugin == other.plugin;
+    }
 };
 
 

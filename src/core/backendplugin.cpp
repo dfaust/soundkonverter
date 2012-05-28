@@ -563,6 +563,20 @@ QString BackendPlugin::standardMessage( const QString& type, const QStringList& 
 
         return i18n( "You can download '%1' at %2", arguments.at(0), arguments.at(1) );
     }
+    if( type == "filter,backend" )
+    {
+        if( arguments.count() != 3 )
+            return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
+
+        if( arguments.at(1) == "single" )
+        {
+            return i18n( "In order to use the filter %1, you need to install '%2'.", arguments.at(0), arguments.at(2) );
+        }
+        else
+        {
+            return i18n( "In order to use the filters %1, you need to install '%2'.", arguments.at(0), arguments.at(2) );
+        }
+    }
 
     return QString();
 }

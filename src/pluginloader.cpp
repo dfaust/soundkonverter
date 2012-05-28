@@ -63,10 +63,7 @@ PluginLoader::PluginLoader( Logger *_logger, Config *parent )
     : QObject( parent ),
     logger( _logger ),
     config( parent )
-{
-    codecPlugins.clear();
-    conversionPipeTrunks.clear();
-}
+{}
 
 PluginLoader::~PluginLoader()
 {}
@@ -147,7 +144,6 @@ void PluginLoader::load()
                 {
                     codecTable[j].plugin = plugin;
                     conversionPipeTrunks.append( codecTable.at(j) );
-//                     logger->log( 1000, "\t\tfrom " + codecTable.at(j).codecFrom + " to " + codecTable.at(j).codecTo + " (rating: " + QString::number(codecTable.at(j).rating) + ", enabled: " + QString::number(codecTable.at(j).enabled) + ", hasInternalReplayGain: " + QString::number(codecTable.at(j).data.hasInternalReplayGain) + ")" );
                     if( codecTable.at(j).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(j).codecTo) || !encodeCodecs[codecTable.at(j).codecTo] ) )
                         encodeCodecs[codecTable.at(j).codecTo] = codecTable.at(j).enabled;
                     if( codecTable.at(j).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(j).codecFrom) || !decodeCodecs[codecTable.at(j).codecFrom] ) )
@@ -199,15 +195,39 @@ void PluginLoader::load()
                 createInstanceTimeSum += createInstanceTime.elapsed();
                 filterPlugins.append( plugin );
                 plugin->scanForBackends();
-//                 if(  )
-//                 {
-//                     logger->log( 1000, "\t\tfeatures:" );
-//                     for( int j=0; j<encodeCodecs.count(); j++ )
-//                     {
-//                         const QString tabs = encodeCodecs.keys().at(j).length() >= 6 ? "\t" : "\t\t";
-//                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(tabs).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
-//                     }
-//                 }
+                QMap<QString,bool> encodeCodecs;
+                QMap<QString,bool> decodeCodecs;
+                QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
+                for( int j = 0; j < codecTable.count(); j++ )
+                {
+                    codecTable[j].plugin = plugin;
+                    filterPipeTrunks.append( codecTable.at(j) );
+                    if( codecTable.at(j).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(j).codecTo) || !encodeCodecs[codecTable.at(j).codecTo] ) )
+                        encodeCodecs[codecTable.at(j).codecTo] = codecTable.at(j).enabled;
+                    if( codecTable.at(j).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(j).codecFrom) || !decodeCodecs[codecTable.at(j).codecFrom] ) )
+                        decodeCodecs[codecTable.at(j).codecFrom] = codecTable.at(j).enabled;
+                    addFormatInfo( codecTable.at(j).codecFrom, plugin );
+                    addFormatInfo( codecTable.at(j).codecTo, plugin );
+                }
+                if( encodeCodecs.count() > 0 )
+                {
+                    logger->log( 1000, "\t\tencode:" );
+                    for( int j=0; j<encodeCodecs.count(); j++ )
+                    {
+                        const QString tabs = encodeCodecs.keys().at(j).length() >= 6 ? "\t" : "\t\t";
+                        logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(tabs).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
+                    }
+                }
+                if( decodeCodecs.count() > 0 )
+                {
+                    logger->log( 1000, "\t\tdecode:" );
+                    for( int j=0; j<decodeCodecs.count(); j++ )
+                    {
+                        const QString tabs = decodeCodecs.keys().at(j).length() >= 6 ? "\t" : "\t\t";
+                        logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(decodeCodecs.keys().at(j)).arg(tabs).arg(decodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
+                    }
+                }
+                // TODO filters
                 logger->log( 1000, "" );
             }
             else
@@ -239,7 +259,6 @@ void PluginLoader::load()
                 {
                     codecTable[j].plugin = plugin;
                     replaygainPipes.append( codecTable.at(j) );
-//                     logger->log( 1000, "\t\t" + codecTable.at(j).codecName + " (rating: " + QString::number(codecTable.at(j).rating) + ", enabled: " + QString::number(codecTable.at(j).enabled) + ")" );
                     const QString tabs = codecTable.at(j).codecName.length() >= 6 ? "\t" : "\t\t";
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(codecTable.at(j).codecName).arg(tabs).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     addFormatInfo( codecTable.at(j).codecName, plugin );
@@ -275,7 +294,6 @@ void PluginLoader::load()
                 {
                     codecTable[j].plugin = plugin;
                     conversionPipeTrunks.append( codecTable.at(j) );
-//                     logger->log( 1000, "\t\tfrom " + codecTable.at(j).codecFrom + " to " + codecTable.at(j).codecTo + " (rating: " + QString::number(codecTable.at(j).rating) + ", enabled: " + QString::number(codecTable.at(j).enabled) + ", canRipEntireCd: " + QString::number(codecTable.at(j).data.canRipEntireCd) + ")" );
                     const QString tabs = codecTable.at(j).codecTo.length() >= 6 ? "\t" : "\t\t";
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3, %4)").arg(codecTable.at(j).codecTo).arg(tabs).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>").arg(codecTable.at(j).data.canRipEntireCd ? "<span style=\"color:green\">can rip to single file</span>" : "<span style=\"color:red\">can't rip to single file</span>") + "</pre>" );
                 }
@@ -287,6 +305,8 @@ void PluginLoader::load()
             }
         }
     }
+
+    conversionFilterPipeTrunks = conversionPipeTrunks + filterPipeTrunks;
 
     logger->log( 1000, QString("... all plugins loaded (took %1 ms, creating instances: %2 ms)").arg(overallTime.elapsed()).arg(createInstanceTimeSum) + "\n" );
 }
@@ -303,15 +323,46 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
 
         if( possibilities & Encode )
         {
-            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecTo) ) set += conversionPipeTrunks.at(i).codecTo;
-            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecTo) ) set += conversionPipeTrunks.at(i).codecTo;
-            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecTo) ) set += conversionPipeTrunks.at(i).codecTo;
+            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecTo) )
+                set += conversionPipeTrunks.at(i).codecTo;
+            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecTo) )
+                set += conversionPipeTrunks.at(i).codecTo;
+            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecTo) )
+                set += conversionPipeTrunks.at(i).codecTo;
         }
         if( possibilities & Decode )
         {
-            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecFrom) ) set += conversionPipeTrunks.at(i).codecFrom;
-            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecFrom) ) set += conversionPipeTrunks.at(i).codecFrom;
-            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecFrom) ) set += conversionPipeTrunks.at(i).codecFrom;
+            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecFrom) )
+                set += conversionPipeTrunks.at(i).codecFrom;
+            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecFrom) )
+                set += conversionPipeTrunks.at(i).codecFrom;
+            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecFrom) )
+                set += conversionPipeTrunks.at(i).codecFrom;
+        }
+    }
+
+    for( int i=0; i<filterPipeTrunks.count(); i++ )
+    {
+        if( !filterPipeTrunks.at(i).enabled )
+            continue;
+
+        if( possibilities & Encode )
+        {
+            if( compressionType & Lossy && !isCodecLossless(filterPipeTrunks.at(i).codecTo) )
+                set += filterPipeTrunks.at(i).codecTo;
+            if( compressionType & Lossless && isCodecLossless(filterPipeTrunks.at(i).codecTo) )
+                set += filterPipeTrunks.at(i).codecTo;
+            if( compressionType & Hybrid && isCodecHybrid(filterPipeTrunks.at(i).codecTo) )
+                set += filterPipeTrunks.at(i).codecTo;
+        }
+        if( possibilities & Decode )
+        {
+            if( compressionType & Lossy && !isCodecLossless(filterPipeTrunks.at(i).codecFrom) )
+                set += filterPipeTrunks.at(i).codecFrom;
+            if( compressionType & Lossless && isCodecLossless(filterPipeTrunks.at(i).codecFrom) )
+                set += filterPipeTrunks.at(i).codecFrom;
+            if( compressionType & Hybrid && isCodecHybrid(filterPipeTrunks.at(i).codecFrom) )
+                set += filterPipeTrunks.at(i).codecFrom;
         }
     }
 
@@ -363,6 +414,14 @@ QList<CodecPlugin*> PluginLoader::encodersForCodec( const QString& codecName )
         }
     }
 
+    for( int i=0; i<filterPipeTrunks.count(); i++ )
+    {
+        if( filterPipeTrunks.at(i).codecTo == codecName && filterPipeTrunks.at(i).enabled && filterPipeTrunks.at(i).plugin->type() == "filter" )
+        {
+            encoders += qobject_cast<CodecPlugin*>(filterPipeTrunks.at(i).plugin);
+        }
+    }
+
     return encoders.toList();
 }
 
@@ -375,6 +434,14 @@ QList<CodecPlugin*> PluginLoader::decodersForCodec( const QString& codecName )
         if( conversionPipeTrunks.at(i).codecFrom == codecName && conversionPipeTrunks.at(i).enabled && conversionPipeTrunks.at(i).plugin->type() == "codec" )
         {
             decoders += qobject_cast<CodecPlugin*>(conversionPipeTrunks.at(i).plugin);
+        }
+    }
+
+    for( int i=0; i<filterPipeTrunks.count(); i++ )
+    {
+        if( filterPipeTrunks.at(i).codecFrom == codecName && filterPipeTrunks.at(i).enabled && filterPipeTrunks.at(i).plugin->type() == "filter" )
+        {
+            decoders += qobject_cast<CodecPlugin*>(filterPipeTrunks.at(i).plugin);
         }
     }
 
@@ -396,6 +463,21 @@ QList<ReplayGainPlugin*> PluginLoader::replaygainForCodec( const QString& codecN
     return replaygain.toList();
 }
 
+QList<FilterPlugin*> PluginLoader::filters()
+{
+    QSet<FilterPlugin*> filters;
+
+    for( int i=0; i<filterPipeTrunks.count(); i++ )
+    {
+        if( filterPipeTrunks.at(i).enabled )
+        {
+            filters += qobject_cast<FilterPlugin*>(filterPipeTrunks.at(i).plugin);
+        }
+    }
+
+    return filters.toList();
+}
+
 BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
 {
     for( int i=0; i<codecPlugins.count(); i++ )
@@ -403,6 +485,13 @@ BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
         if( codecPlugins.at(i)->name() == name )
         {
             return codecPlugins.at(i);
+        }
+    }
+    for( int i=0; i<filterPlugins.count(); i++ )
+    {
+        if( filterPlugins.at(i)->name() == name )
+        {
+            return filterPlugins.at(i);
         }
     }
     for( int i=0; i<replaygainPlugins.count(); i++ )
@@ -423,7 +512,7 @@ BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
     return 0;
 }
 
-QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom, const QString& codecTo, const QString& preferredPlugin )
+QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom, const QString& codecTo, QList<FilterOptions*> filterOptions, const QString& preferredPlugin )
 {
     QList<ConversionPipe> list;
 
@@ -448,50 +537,160 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
         encoders.prepend( preferredPlugin );
     }
 
-    // build all possible pipes
-    for( int i=0; i<conversionPipeTrunks.count(); i++ )
+    QList<FilterPlugin*> filterPlugins;
+    foreach( FilterOptions *filter, filterOptions )
     {
-        if( conversionPipeTrunks.at(i).codecFrom == codecFrom && conversionPipeTrunks.at(i).codecTo == codecTo && conversionPipeTrunks.at(i).enabled )
-        {
-            ConversionPipe newPipe;
-            newPipe.trunks += conversionPipeTrunks.at(i);
-            if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
-            {
-                // add rating depending on the position in the list ordered by the user, decoders don't count much
-                newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
-            }
-            if( encoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
-            {
-                // add rating depending on the position in the list ordered by the user, encoders do count much
-                newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000000;
-            }
-            list += newPipe;
-        }
-        else if( conversionPipeTrunks.at(i).codecFrom == codecFrom && conversionPipeTrunks.at(i).codecTo == "wav" /*isCodecLossless(conversionPipeTrunks.at(i).codecTo)*/ && conversionPipeTrunks.at(i).enabled )
-        {
-            for( int j = 0; j < conversionPipeTrunks.count(); j++ )
-            {
-                if( i == j )
-                    continue;
+        filterPlugins.append( qobject_cast<FilterPlugin*>(backendPluginByName(filter->pluginName)) );
+    }
 
-                if( conversionPipeTrunks.at(j).codecFrom == conversionPipeTrunks.at(i).codecTo && conversionPipeTrunks.at(j).codecTo == codecTo && conversionPipeTrunks.at(j).enabled )
+    // build all possible pipes
+    for( int i=0; i<conversionFilterPipeTrunks.count(); i++ )
+    {
+        if( conversionFilterPipeTrunks.at(i).codecFrom == codecFrom && conversionFilterPipeTrunks.at(i).enabled )
+        {
+            if( codecFrom == "wav" && conversionFilterPipeTrunks.at(i).codecTo == codecTo )
+            {
+                ConversionPipe newPipe;
+
+                foreach( FilterPlugin *plugin, filterPlugins )
+                {
+                    if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(i).plugin) )
+                        continue;
+
+                    foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                    {
+                        if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
+                        {
+                            newPipe.trunks += trunk;
+                            break;
+                        }
+                    }
+                }
+                newPipe.trunks += conversionFilterPipeTrunks.at(i);
+
+                if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
+                {
+                    // add rating depending on the position in the list ordered by the user, encoders do count much
+                    const int rating = ( encoders.count() - encoders.indexOf(newPipe.trunks.last().plugin->name()) ) * 1000000;
+                    for( int i=0; i<newPipe.trunks.count(); i++ )
+                    {
+                        newPipe.trunks[i].rating += rating;
+                    }
+                }
+
+                list += newPipe;
+            }
+            else if( codecTo == "wav" && conversionFilterPipeTrunks.at(i).codecTo == codecTo )
+            {
+                ConversionPipe newPipe;
+
+                newPipe.trunks += conversionFilterPipeTrunks.at(i);
+                foreach( FilterPlugin *plugin, filterPlugins )
+                {
+                    if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(i).plugin) )
+                        continue;
+
+                    foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                    {
+                        if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
+                        {
+                            newPipe.trunks += trunk;
+                            break;
+                        }
+                    }
+                }
+
+                if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                {
+                    // add rating depending on the position in the list ordered by the user, decoders don't count much
+                    const int rating = ( decoders.count() - decoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000;
+                    for( int i=0; i<newPipe.trunks.count(); i++ )
+                    {
+                        newPipe.trunks[i].rating += rating;
+                    }
+                }
+
+                list += newPipe;
+            }
+            else if( conversionFilterPipeTrunks.at(i).codecTo == codecTo )
+            {
+                if( filterPlugins.count() == 0 || ( filterPlugins.count() == 1 && filterPlugins.first() == conversionFilterPipeTrunks.at(i).plugin ) )
                 {
                     ConversionPipe newPipe;
-                    newPipe.trunks += conversionPipeTrunks.at(i);
-                    newPipe.trunks += conversionPipeTrunks.at(j);
+
+                    newPipe.trunks += conversionFilterPipeTrunks.at(i);
                     if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
                     {
                         // add rating depending on the position in the list ordered by the user, decoders don't count much
                         newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
-                        newPipe.trunks[1].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
                     }
-                    if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
+                    if( encoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
                     {
                         // add rating depending on the position in the list ordered by the user, encoders do count much
-                        newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(1).plugin->name()) ) * 1000000;
-                        newPipe.trunks[1].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(1).plugin->name()) ) * 1000000;
+                        newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000000;
                     }
+
                     list += newPipe;
+                }
+            }
+            else if( conversionFilterPipeTrunks.at(i).codecTo == "wav" )
+            {
+                if( conversionFilterPipeTrunks.at(i).codecFrom == conversionFilterPipeTrunks.at(i).codecTo )
+                    continue;
+
+                for( int j = 0; j < conversionFilterPipeTrunks.count(); j++ )
+                {
+                    if( i == j )
+                        continue;
+
+                    if( conversionFilterPipeTrunks.at(j).codecFrom == conversionFilterPipeTrunks.at(j).codecTo )
+                        continue;
+
+                    if( conversionFilterPipeTrunks.at(j).codecFrom == conversionFilterPipeTrunks.at(i).codecTo && conversionFilterPipeTrunks.at(j).codecTo == codecTo && conversionFilterPipeTrunks.at(j).enabled )
+                    {
+                        ConversionPipe newPipe;
+
+                        newPipe.trunks += conversionFilterPipeTrunks.at(i);
+                        foreach( FilterPlugin *plugin, filterPlugins )
+                        {
+                            if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(i).plugin) )
+                                continue;
+
+                            if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(j).plugin) )
+                                continue;
+
+                            foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                            {
+                                if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
+                                {
+                                    newPipe.trunks += trunk;
+                                    break;
+                                }
+                            }
+                        }
+                        newPipe.trunks += conversionFilterPipeTrunks.at(j);
+
+                        if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                        {
+                            // add rating depending on the position in the list ordered by the user, decoders don't count much
+                            const int rating = ( decoders.count() - decoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000;
+                            for( int i=0; i<newPipe.trunks.count(); i++ )
+                            {
+                                newPipe.trunks[i].rating += rating;
+                            }
+                        }
+                        if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
+                        {
+                            // add rating depending on the position in the list ordered by the user, encoders do count much
+                            const int rating = ( encoders.count() - encoders.indexOf(newPipe.trunks.last().plugin->name()) ) * 1000000;
+                            for( int i=0; i<newPipe.trunks.count(); i++ )
+                            {
+                                newPipe.trunks[i].rating += rating;
+                            }
+                        }
+
+                        list += newPipe;
+                    }
                 }
             }
         }

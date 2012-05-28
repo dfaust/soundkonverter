@@ -2,22 +2,23 @@
 #ifndef OPTIONSDETAILED_H
 #define OPTIONSDETAILED_H
 
-#include <QWidget>
 #include <QCheckBox>
 #include <QDomDocument>
+#include <QMap>
+#include <QWidget>
 
-class Config;
-class OutputDirectory;
 class CodecPlugin;
+class Config;
 class ConversionOptions;
-// class CodecWidget;
+class FilterPlugin;
+class OutputDirectory;
+class FilterWidget;
 
-class QGridLayout;
-class QLabel;
 class KComboBox;
 class KPushButton;
+class QGridLayout;
+class QLabel;
 class QToolButton;
-
 /**
 	@author Daniel Faust <hessijames@gmail.com>
 */
@@ -56,7 +57,8 @@ private:
     QGridLayout *grid;
     KComboBox *cFormat;
     KComboBox *cPlugin;
-    QWidget *wPlugin;
+    QWidget *wPlugin; // TODO convert to CodecWidget
+    QMap<FilterWidget*,FilterPlugin*> wFilter;
     QCheckBox *cReplayGain;
 //     QCheckBox *cBpm;
     QLabel *lEstimSize;

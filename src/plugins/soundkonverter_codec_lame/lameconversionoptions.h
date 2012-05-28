@@ -12,7 +12,7 @@ public:
 
     bool equals( ConversionOptions *_other );
     QDomElement toXml( QDomDocument document );
-    bool fromXml( QDomElement conversionOptions );
+    bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
     struct Data {
         enum Preset {

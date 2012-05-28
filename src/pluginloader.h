@@ -28,7 +28,22 @@ class Config;
 struct ConversionPipe
 {
     QList<ConversionPipeTrunk> trunks;
-//     QString tempCodec;
+
+    bool operator==( const ConversionPipe& other )
+    {
+        if( trunks.count() != other.trunks.count() )
+            return false;
+
+        for( int i=0; i<trunks.count(); i++ )
+        {
+            ConversionPipeTrunk a = trunks.at(i);
+            ConversionPipeTrunk b = other.trunks.at(i);
+            if( !(a == b) )
+                return false;
+        }
+
+        return true;
+    }
 };
 
 
@@ -59,11 +74,13 @@ public:
     QList<CodecPlugin*> decodersForCodec( const QString& codecName );
     QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
 
+    QList<FilterPlugin*> filters();
+
     /** returns the codec plugin with the specified name */
     BackendPlugin *backendPluginByName( const QString& name );
 
-    /** returns a list of possible conversion pipes (TODO sorted by user and automatic rating) */
-    QList<ConversionPipe> getConversionPipes( const QString& codecFrom, const QString& codecTo, const QString& preferredPlugin = "" ); // TODO change name
+    /** returns a list of possible conversion pipes */
+    QList<ConversionPipe> getConversionPipes( const QString& codecFrom, const QString& codecTo, QList<FilterOptions*> filterOptions = QList<FilterOptions*>(), const QString& preferredPlugin = "" ); // TODO change name ?
     /** returns a list of possible replay gain pipes for the codec */
     QList<ReplayGainPipe> getReplayGainPipes( const QString& codecName, const QString& preferredPlugin = "" );
     //** returns a list of possible rippers */
@@ -113,6 +130,10 @@ private:
 
     /** holds all known conversion pipe trunks */
     QList<ConversionPipeTrunk> conversionPipeTrunks;
+    /** holds all known filter items */
+    QList<ConversionPipeTrunk> filterPipeTrunks;
+    /** holds all known conversion pipe trunks and filter items */
+    QList<ConversionPipeTrunk> conversionFilterPipeTrunks;
     /** holds all known replay gain items */
     QList<ReplayGainPipe> replaygainPipes;
 

@@ -239,12 +239,5 @@ float soundkonverter_codec_twolame::parseOutput( const QString& output )
     return -1;
 }
 
-ConversionOptions *soundkonverter_codec_twolame::conversionOptionsFromXml( QDomElement conversionOptions )
-{
-    ConversionOptions *options = new ConversionOptions();
-    options->fromXml( conversionOptions );
-    return options;
-}
-
 
 #include "soundkonverter_codec_twolame.moc"

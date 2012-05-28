@@ -368,10 +368,10 @@ float soundkonverter_codec_lame::parseOutput( const QString& output )
     return -1;
 }
 
-ConversionOptions *soundkonverter_codec_lame::conversionOptionsFromXml( QDomElement conversionOptions )
+ConversionOptions *soundkonverter_codec_lame::conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
 {
     LameConversionOptions *options = new LameConversionOptions();
-    options->fromXml( conversionOptions );
+    options->fromXml( conversionOptions, filterOptionsElements );
     return options;
 }
 

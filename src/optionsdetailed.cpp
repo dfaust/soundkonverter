@@ -31,12 +31,13 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     : QWidget( parent ),
     config( _config )
 {
+    int gridRow = 0;
     grid = new QGridLayout( this );
 //     grid->setContentsMargins( 6, 6, 6, 6 );
 //     grid->setSpacing( 6 );
 
     QHBoxLayout *topBox = new QHBoxLayout();
-    grid->addLayout( topBox, 0, 0 );
+    grid->addLayout( topBox, gridRow++, 0 );
 
     QLabel *lFormat = new QLabel( i18n("Output format")+":", this );
     topBox->addWidget( lFormat );
@@ -60,27 +61,51 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QFrame *lineFrame = new QFrame( this );
     lineFrame->setFrameShape( QFrame::HLine );
     lineFrame->setFrameShadow( QFrame::Sunken );
-    grid->addWidget( lineFrame, 1, 0 );
+    grid->addWidget( lineFrame, gridRow++, 0 );
 
     // prepare the plugin widget
     wPlugin = 0;
-    grid->setRowStretch( 2, 1 );
+    grid->setRowStretch( gridRow++, 1 );
 
     // draw a horizontal line
     lineFrame = new QFrame( this );
     lineFrame->setFrameShape( QFrame::HLine );
     lineFrame->setFrameShadow( QFrame::Sunken );
-    grid->addWidget( lineFrame, 3, 0 );
+    grid->addWidget( lineFrame, gridRow++, 0 );
+
+    int filterCount = 0;
+    QList<FilterPlugin*> plugins = config->pluginLoader()->filters();
+    foreach( FilterPlugin *plugin, plugins )
+    {
+        FilterWidget *widget = plugin->newFilterWidget();
+        if( widget )
+        {
+            wFilter.insert( widget, plugin );
+            connect( widget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
+            grid->addWidget( widget, gridRow++, 0 );
+            widget->show();
+            filterCount++;
+        }
+    }
+
+    if( filterCount > 0 )
+    {
+        // draw a horizontal line
+        lineFrame = new QFrame( this );
+        lineFrame->setFrameShape( QFrame::HLine );
+        lineFrame->setFrameShadow( QFrame::Sunken );
+        grid->addWidget( lineFrame, gridRow++, 0 );
+    }
 
     // the output directory
     QHBoxLayout *middleBox = new QHBoxLayout( );
-    grid->addLayout( middleBox, 4, 0 );
+    grid->addLayout( middleBox, gridRow++, 0 );
 
     outputDirectory = new OutputDirectory( config, this );
     middleBox->addWidget( outputDirectory );
 
     QHBoxLayout *bottomBox = new QHBoxLayout();
-    grid->addLayout( bottomBox, 5, 0 );
+    grid->addLayout( bottomBox, gridRow++, 0 );
 
     cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
     bottomBox->addWidget( cReplayGain );
@@ -310,11 +335,30 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
             options->outputDirectory = outputDirectory->directory();
             options->outputFilesystem = outputDirectory->filesystem();
             options->replaygain = cReplayGain->isChecked();
-//             options->bpm = cBpm->isChecked();
 
             config->data.general.lastProfile = currentProfile();
             saveCustomProfile( true );
             config->data.general.lastFormat = cFormat->currentText();
+        }
+    }
+
+    for( int i=0; i<wFilter.size(); i++ )
+    {
+        FilterWidget *widget = wFilter.keys().at(i);
+        FilterPlugin *plugin = wFilter.values().at(i);
+        if( widget && plugin )
+        {
+            FilterOptions *filterOptions = widget->currentFilterOptions();
+            if( filterOptions )
+            {
+                filterOptions->pluginName = plugin->name();
+
+//                 config->data.general.lastProfile = currentProfile();
+//                 saveCustomProfile( true );
+//                 config->data.general.lastFormat = cFormat->currentText();
+
+                options->filterOptions.append( filterOptions );
+            }
         }
     }
 

@@ -1,6 +1,8 @@
 
 #include "conversionoptions.h"
 
+#include "filterplugin.h"
+
 
 FilterOptions::FilterOptions()
 {}
@@ -14,12 +16,11 @@ bool FilterOptions::equals( FilterOptions *_other )
     return false;
 }
 
-QDomElement FilterOptions::toXml( QDomDocument document )
+QDomElement FilterOptions::toXml( QDomElement filterOptions )
 {
-    QDomElement conversionOptions = document.createElement("filterOptions");
-    conversionOptions.setAttribute("pluginName",pluginName);
+    filterOptions.setAttribute("pluginName",pluginName);
 
-    return conversionOptions;
+    return filterOptions;
 }
 
 bool FilterOptions::fromXml( QDomElement filterOptions )
@@ -33,9 +34,11 @@ ConversionOptions::ConversionOptions()
 {}
 
 ConversionOptions::~ConversionOptions()
-{}
+{
+    qDeleteAll( filterOptions );
+}
 
-bool ConversionOptions::equals( ConversionOptions *_other )
+bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter options
 {
     if( !_other )
         return false;
@@ -51,7 +54,7 @@ bool ConversionOptions::equals( ConversionOptions *_other )
              channels ==_other->channels );
 }
 
-bool ConversionOptions::equalsBasics( ConversionOptions *_other )
+bool ConversionOptions::equalsBasics( ConversionOptions *_other ) // TODO filter options
 {
     if( !_other )
         return false;
@@ -92,10 +95,18 @@ QDomElement ConversionOptions::toXml( QDomDocument document )
     features.setAttribute("replaygain",replaygain);
     conversionOptions.appendChild(features);
 
+    int i = 0;
+    foreach( FilterOptions *filter, filterOptions )
+    {
+        QDomElement filterOptionsElement = document.createElement("filterOptions"+QString::number(i++));
+        filterOptionsElement = filter->toXml(filterOptionsElement);
+        conversionOptions.appendChild(filterOptionsElement);
+    }
+
     return conversionOptions;
 }
 
-bool ConversionOptions::fromXml( QDomElement conversionOptions )
+bool ConversionOptions::fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
 {
     pluginName = conversionOptions.attribute("pluginName");
     profile = conversionOptions.attribute("profile");
@@ -117,6 +128,16 @@ bool ConversionOptions::fromXml( QDomElement conversionOptions )
     outputFilesystem = outputOptions.attribute("outputFilesystem");
     QDomElement features = conversionOptions.elementsByTagName("features").at(0).toElement();
     replaygain = features.attribute("replaygain").toInt();
+
+    if( filterOptionsElements )
+    {
+        for( QDomNode node = conversionOptions.firstChild(); !node.isNull(); node = node.nextSibling() )
+        {
+            if( node.nodeName().startsWith("filterOptions") )
+                filterOptionsElements->append( node.toElement() );
+        }
+    }
+
     return true;
 }
 

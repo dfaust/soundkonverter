@@ -52,9 +52,9 @@ QDomElement LameConversionOptions::toXml( QDomDocument document )
     return conversionOptions;
 }
 
-bool LameConversionOptions::fromXml( QDomElement conversionOptions )
+bool LameConversionOptions::fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
 {
-    ConversionOptions::fromXml( conversionOptions );
+    ConversionOptions::fromXml( conversionOptions, filterOptionsElements );
     QDomElement encodingOptions = conversionOptions.elementsByTagName("encodingOptions").at(0).toElement();
     QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
     LameConversionOptions::data.preset = (Data::Preset)data.attribute("preset").toInt();

@@ -15,9 +15,9 @@ MusePackConversionOptions::~MusePackConversionOptions()
 bool MusePackConversionOptions::equals( ConversionOptions *_other )
 {
     if( !_other || _other->pluginName!=pluginName ) return false;
-  
+
     MusePackConversionOptions *other = dynamic_cast<MusePackConversionOptions*>(_other);
-    
+
     if( data.preset==other->data.preset && data.preset==Data::UserDefined )
     {
         return ConversionOptions::equals(_other);
@@ -43,9 +43,9 @@ QDomElement MusePackConversionOptions::toXml( QDomDocument document )
     return conversionOptions;
 }
 
-bool MusePackConversionOptions::fromXml( QDomElement conversionOptions )
+bool MusePackConversionOptions::fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
 {
-    ConversionOptions::fromXml( conversionOptions );
+    ConversionOptions::fromXml( conversionOptions, filterOptionsElements );
     QDomElement encodingOptions = conversionOptions.elementsByTagName("encodingOptions").at(0).toElement();
     QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
     MusePackConversionOptions::data.preset = (Data::Preset)data.attribute("preset").toInt();

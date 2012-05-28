@@ -990,7 +990,7 @@ void Convert::add( FileListItem* item )
         logger->log( newItem->logID, "\t" + i18n("Track number: %1, device: %2",QString::number(item->track),item->device) );
     }
 
-    newItem->conversionPipes = config->pluginLoader()->getConversionPipes( item->codecName, conversionOptions->codecName, conversionOptions->pluginName );
+    newItem->conversionPipes = config->pluginLoader()->getConversionPipes( item->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );
 
     logger->log( newItem->logID, "\t" + i18n("Possible conversion strategies:") );
     for( int i=0; i<newItem->conversionPipes.size(); i++ )
@@ -999,7 +999,7 @@ void Convert::add( FileListItem* item )
 
         for( int j=0; j<newItem->conversionPipes.at(i).trunks.size(); j++ )
         {
-            pipe_str += QString("%1 %2 %3 (%4)").arg(newItem->conversionPipes.at(i).trunks.at(j).codecFrom).arg("->").arg(newItem->conversionPipes.at(i).trunks.at(j).codecTo).arg(newItem->conversionPipes.at(i).trunks.at(j).plugin->name());
+            pipe_str += QString("%1 %2 %3 (%4)").arg(newItem->conversionPipes.at(i).trunks.at(j).codecFrom).arg(QChar(10141)).arg(newItem->conversionPipes.at(i).trunks.at(j).codecTo).arg(newItem->conversionPipes.at(i).trunks.at(j).plugin->name());
         }
 
         logger->log( newItem->logID, "\t\t" + pipe_str.join(", ") );

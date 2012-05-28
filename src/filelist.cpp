@@ -1386,7 +1386,7 @@ void FileList::load( bool user )
                     }
                     else
                     {
-                        conversionOptions = CodecPlugin::conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        conversionOptions = CodecPlugin::conversionOptionsFromXmlDefault( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
                     }
                     if( conversionOptions )
                     {
@@ -1394,8 +1394,7 @@ void FileList::load( bool user )
                         {
                             FilterOptions *filterOptions = 0;
                             const QString filterPluginName = filterOptionsElement.attribute("pluginName");
-//                             FilterPlugin *filterPlugin = (FilterPlugin*)config->pluginLoader()->backendPluginByName( filterPluginName );
-                            FilterPlugin *filterPlugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(filterPluginName));
+                            FilterPlugin *filterPlugin = (FilterPlugin*)config->pluginLoader()->backendPluginByName( filterPluginName );
                             if( filterPlugin )
                             {
                                 filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );

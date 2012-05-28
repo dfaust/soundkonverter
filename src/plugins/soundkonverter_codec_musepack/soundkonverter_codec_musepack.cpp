@@ -244,5 +244,12 @@ float soundkonverter_codec_musepack::parseOutput( const QString& output )
     return -1;
 }
 
+ConversionOptions *soundkonverter_codec_musepack::conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
+{
+    MusePackConversionOptions *options = new MusePackConversionOptions();
+    options->fromXml( conversionOptions, filterOptionsElements );
+    return options;
+}
+
 
 #include "soundkonverter_codec_musepack.moc"

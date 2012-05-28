@@ -53,6 +53,11 @@ public:
     float parseOutput( const QString& output, int *length );
     float parseOutput( const QString& output );
 
+    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions )
+    {
+        return CodecPlugin::conversionOptionsFromXmlDefault( conversionOptions );
+    }
+
 private:
     QList<CodecData> codecList;
     QWeakPointer<KProcess> infoProcess;

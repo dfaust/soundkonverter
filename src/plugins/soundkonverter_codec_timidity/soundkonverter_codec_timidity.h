@@ -30,6 +30,11 @@ public:
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
+
+    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions )
+    {
+        return CodecPlugin::conversionOptionsFromXmlDefault( conversionOptions );
+    }
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( timidity, soundkonverter_codec_timidity )

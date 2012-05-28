@@ -31,6 +31,11 @@ public:
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
+    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions )
+    {
+        return CodecPlugin::conversionOptionsFromXmlDefault( conversionOptions );
+    }
+
 private:
    QStringList fromCodecs;
    QStringList toCodecs;

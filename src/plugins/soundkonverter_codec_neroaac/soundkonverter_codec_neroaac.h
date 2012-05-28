@@ -33,6 +33,11 @@ public:
     float parseOutput( const QString& output, int length );
     float parseOutput( const QString& output );
 
+    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions )
+    {
+        return CodecPlugin::conversionOptionsFromXmlDefault( conversionOptions );
+    }
+
 private slots:
     /** Get the process' output */
     void processOutput();

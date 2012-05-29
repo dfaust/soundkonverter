@@ -1,134 +1,22 @@
 
 #include "convert.h"
+#include "convertitem.h"
 #include "config.h"
-#include "logger.h"
-#include "filelist.h"
-#include "core/conversionoptions.h"
 #include "core/codecplugin.h"
-#include "outputdirectory.h"
+#include "core/conversionoptions.h"
+#include "filelist.h"
 #include "global.h"
+#include "logger.h"
+#include "outputdirectory.h"
+
+#include <kio/jobclasses.h>
+#include <kio/job.h>
 
 #include <KLocale>
-#include <KGlobal>
-#include <KTemporaryFile>
-#include <KStandardDirs>
 #include <KMessageBox>
-#include <KComponentData>
-
 #include <QFile>
 #include <QFileInfo>
-#include <QTimer>
 
-
-ConvertItem::ConvertItem( FileListItem *item )
-{
-    fileListItem = item;
-    fileListItems.clear();
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
-    encodePlugin = 0;
-    convertID = -1;
-    replaygainID = -1;
-    take = 0;
-    killed = false;
-}
-
-ConvertItem::ConvertItem( QList<FileListItem*> items )
-{
-    fileListItem = 0;
-    fileListItems = items;
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
-    encodePlugin = 0;
-    convertID = -1;
-    replaygainID = -1;
-    take = 0;
-    killed = false;
-}
-
-ConvertItem::~ConvertItem()
-{}
-
-KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension, bool useSharedMemory )
-{
-    QString tempUrl;
-    int i=0;
-    do {
-        if( useSharedMemory )
-        {
-            tempUrl = "/dev/shm/" + QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
-        }
-        else
-        {
-            tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
-        }
-        i++;
-    } while( QFile::exists(tempUrl) );
-
-    return KUrl(tempUrl);
-}
-
-void ConvertItem::updateTimes()
-{
-    getTime = ( mode & ConvertItem::get ) ? 0.8f : 0.0f;            // TODO file size? connection speed?
-    convertTime = ( mode & ConvertItem::convert ) ? 1.4f : 0.0f;    // NOTE either convert OR decode & encode is used --- or only replay gain
-    if( fileListItem && fileListItem->track == -1 )
-    {
-        decodeTime = ( mode & ConvertItem::decode ) ? 0.4f : 0.0f;
-        encodeTime = ( mode & ConvertItem::encode ) ? 1.0f : 0.0f;
-    }
-    else
-    {
-        decodeTime = ( mode & ConvertItem::decode ) ? 1.0f : 0.0f;  // TODO drive speed?
-        encodeTime = ( mode & ConvertItem::encode ) ? 0.4f : 0.0f;
-    }
-    replaygainTime = ( mode & ConvertItem::replaygain ) ? 0.2f : 0.0f;
-
-    const float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime;
-
-    float length = 0;
-    if( fileListItem )
-    {
-        length = fileListItem->length;
-    }
-    else if( fileListItems.count() > 0 )
-    {
-        for( int i=0; i<fileListItems.count(); i++ )
-        {
-            length += fileListItems.at(i)->length;
-        }
-    }
-    getTime *= length/sum;
-    convertTime *= length/sum;
-    decodeTime *= length/sum;
-    encodeTime *= length/sum;
-    replaygainTime *= length/sum;
-
-    finishedTime = 0.0f;
-    switch( state )
-    {
-        case ConvertItem::convert:
-            if( mode & ConvertItem::get ) finishedTime += getTime;
-            break;
-        case ConvertItem::decode:
-            if( mode & ConvertItem::get ) finishedTime += getTime;
-            break;
-        case ConvertItem::encode:
-            if( mode & ConvertItem::get ) finishedTime += getTime;
-            if( mode & ConvertItem::decode ) finishedTime += decodeTime;
-            break;
-        case ConvertItem::replaygain:
-            if( mode & ConvertItem::get ) finishedTime += getTime;
-            if( mode & ConvertItem::convert ) finishedTime += convertTime;
-            if( mode & ConvertItem::decode ) finishedTime += decodeTime;
-            if( mode & ConvertItem::encode ) finishedTime += encodeTime;
-            break;
-        default:
-            break;
-    }
-}
-
-// =============
-// class Convert
-// =============
 
 Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
     : config( _config ),
@@ -149,6 +37,12 @@ Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
     {
         connect( codecPlugins.at(i), SIGNAL(jobFinished(int,int)), this, SLOT(pluginProcessFinished(int,int)) );
         connect( codecPlugins.at(i), SIGNAL(log(int,const QString&)), this, SLOT(pluginLog(int,const QString&)) );
+    }
+    QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
+    for( int i=0; i<filterPlugins.size(); i++ )
+    {
+        connect( filterPlugins.at(i), SIGNAL(jobFinished(int,int)), this, SLOT(pluginProcessFinished(int,int)) );
+        connect( filterPlugins.at(i), SIGNAL(log(int,const QString&)), this, SLOT(pluginLog(int,const QString&)) );
     }
     QList<ReplayGainPlugin*> replaygainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
     for( int i=0; i<replaygainPlugins.size(); i++ )
@@ -361,6 +255,24 @@ void Convert::convert( ConvertItem *item )
     }
 }
 
+void Convert::filter( ConvertItem *item )
+{
+//     // file has been decoded by plugin1 last time this function was executed
+//     if( !item || !item->encodePlugin )
+//         return;
+//
+//     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
+//     if( !conversionOptions )
+//         return;
+//
+//     logger->log( item->logID, i18n("Applying filter") );
+//     item->state = ConvertItem::filter;
+//     item->convertPlugin = item->encodePlugin;
+//     item->encodePlugin = 0;
+//     const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+//     item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( item->tempConvertUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+}
+
 void Convert::encode( ConvertItem *item )
 {
     // file has been decoded by plugin1 last time this function was executed
@@ -461,13 +373,6 @@ void Convert::writeTags( ConvertItem *item )
     }
 }
 
-void Convert::put( ConvertItem *item )
-{
-    logger->log( item->logID, i18n("Moving file to destination") );
-    item->state = ConvertItem::put;
-
-}
-
 void Convert::executeUserScript( ConvertItem *item )
 {
     logger->log( item->logID, i18n("Running user script") );
@@ -504,47 +409,67 @@ void Convert::executeNextStep( ConvertItem *item )
     switch( item->state )
     {
         case ConvertItem::get:
+        {
             if( item->mode & ConvertItem::convert )
-                convert(item);
+                convert( item );
             else
                 remove( item, 0 );
             break;
+        }
         case ConvertItem::convert:
+        {
             if( item->mode & ConvertItem::replaygain )
-                replaygain(item);
+                replaygain( item );
             else
                 remove( item, 0 );
             break;
+        }
         case ConvertItem::decode:
-            if( item->mode & ConvertItem::encode )
+        {
+            if( item->mode & ConvertItem::filter )
+            {
+                filter( item );
+            }
+            else if( item->mode & ConvertItem::encode )
             {
                 item->take = item->lastTake;
-                encode(item);
+                encode( item );
             }
             else if( item->mode & ConvertItem::replaygain )
-                replaygain(item);
+            {
+                replaygain( item );
+            }
             else
+            {
                 remove( item, 0 );
+            }
             break;
+        }
         case ConvertItem::encode:
+        {
             if( item->mode & ConvertItem::replaygain )
-                replaygain(item);
+                replaygain( item );
             else
                 remove( item, 0 );
             break;
+        }
         case ConvertItem::replaygain:
+        {
             remove( item, 0 );
             break;
+        }
         default:
+        {
             if( item->mode & ConvertItem::get )
-                get(item);
+                get( item );
             else if( item->mode & ConvertItem::convert )
-                convert(item);
+                convert( item );
             else if( item->mode & ConvertItem::replaygain )
-                replaygain(item);
+                replaygain( item );
             else
                 remove( item, 0 );
             break;
+        }
     }
 }
 
@@ -556,19 +481,19 @@ void Convert::executeSameStep( ConvertItem *item )
     switch( item->state )
     {
         case ConvertItem::get:
-            get(item);
+            get( item );
             return;
         case ConvertItem::convert:
-            convert(item);
+            convert( item );
             return;
         case ConvertItem::decode:
-            convert(item);
+            convert( item );
             return;
         case ConvertItem::encode: // TODO try next encoder instead of decoding again (not so easy at the moment)
-            convert(item);
+            convert( item );
             return;
         case ConvertItem::replaygain:
-            replaygain(item);
+            replaygain( item );
             return;
         default:
             break;
@@ -971,12 +896,6 @@ void Convert::add( FileListItem* item )
 
     newItem->inputUrl = item->url;
 
-    // connect moveProcess of our new item with the slots of Convert
-//     newItem->process = new KProcess();
-//     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
-//     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
-//     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
-
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
     if( !conversionOptions )
     {
@@ -1018,6 +937,9 @@ void Convert::add( FileListItem* item )
     if( !newItem->inputUrl.isLocalFile() && item->track == -1 )
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
 //     if( (!newItem->inputUrl.isLocalFile() && item->track == -1) || newItem->inputUrl.url().toAscii() != newItem->inputUrl.url() ) newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
+
+    if( conversionOptions->filterOptions.count() > 0 )
+        newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::filter );
 
     newItem->updateTimes();
 

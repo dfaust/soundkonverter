@@ -67,6 +67,7 @@ set(soundkonverter_SRCS
    config.cpp
    conversionoptionsmanager.cpp
    convert.cpp
+   convertitem.cpp
    filelist.cpp
    filelistitem.cpp
    logger.cpp

@@ -107,6 +107,8 @@ public:
     /** returns a list of all plugins e.g. for connecting their signals */
     QList<CodecPlugin*> getAllCodecPlugins() { return codecPlugins; }
     /** returns a list of all plugins e.g. for connecting their signals */
+    QList<FilterPlugin*> getAllFilterPlugins() { return filterPlugins; }
+    /** returns a list of all plugins e.g. for connecting their signals */
     QList<ReplayGainPlugin*> getAllReplayGainPlugins() { return replaygainPlugins; }
     /** returns a list of all plugins e.g. for connecting their signals */
     QList<RipperPlugin*> getAllRipperPlugins() { return ripperPlugins; }

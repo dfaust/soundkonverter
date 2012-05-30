@@ -1,4 +1,5 @@
 1.6.0:
+-Add: Update translations
 -Fix: When loading file lists some options were ignored
 
 1.5.90 (1.6.0 rc1):

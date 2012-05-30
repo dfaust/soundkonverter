@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-05-01 19:37+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-24 08:15+0000\n"
 "Last-Translator: bizdelnick <bizdelnick@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.net/projects/p/soundkonverter/"
 "language/ru/)\n"
@@ -111,15 +111,14 @@ msgid "Fix"
 msgstr "Исправить"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter не смог найти недостающие пакеты.\n"
-"Возможно вам нужно установить дополнительный плагин через менеджер пакетов "
-"дистрибутива."
+"soundKonverter не нашёл отсутствующих пакетов.\n"
+"Если вам не хватает каких-либо форматов, вам, вероятно, нужно установить "
+"плагин с помощью пакетного менеджера."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -574,27 +573,22 @@ msgid "Never"
 msgstr "Никогда"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Введите имя для нового профиля:"
+msgstr "Имя файла обложки"
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "Сохранять встроенные обложки в каталог назначения"
+msgstr "Описание встроенной обложки"
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Генерировать новое имя файла"
+msgstr "Имя файла обложки по умолчанию"
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Профиль по умолчанию"
+msgstr "Имя файла обложки по умолчанию:"
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -604,19 +598,13 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Следующие строки - шаблоны, которые будут заменены\n"
-"на информацию, содержащуюся в метаданных\n"
+"Следующие шаблоны будут заменены\n"
+"на сведения из метаданных:\n"
 "\n"
 "%a - Исполнитель\n"
 "%b - Альбом\n"
-"%c - Комментарий\n"
-"%d - Номер диска\n"
-"%g - Жанр\n"
-"%n - Номер дорожки\n"
-"%p - Композитор\n"
-"%t - Название\n"
-"%y - Год\n"
-"%f - Оригинальное имя файла"
+"%d - Описание обложки\n"
+"%r - Назначение обложки"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -1217,6 +1205,8 @@ msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
+"Преобразование не удалось.\n"
+"Ищите подробности в журнале."
 
 #: filelist.cpp:579
 msgid "CD track %1"
@@ -2212,7 +2202,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Именовать все преобразованные файлы в соответствии с заданным шаблоном"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2234,8 +2223,8 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Следующие строки - шаблоны, которые будут заменены\n"
-"на информацию, содержащуюся в метаданных\n"
+"Следующие шаблоны будут заменены\n"
+"на сведения из метаданных:\n"
 "\n"
 "%a - Исполнитель\n"
 "%b - Альбом\n"
@@ -2246,7 +2235,13 @@ msgstr ""
 "%p - Композитор\n"
 "%t - Название\n"
 "%y - Год\n"
-"%f - Оригинальное имя файла"
+"%f - Оригинальное имя файла\n"
+"\n"
+"Вы можете заключать эти шаблоны и близлежащие символы в квадратные скобки "
+"('[' и ']'),\n"
+"тогда они будут проигнорированы вместо подстановки пустой строки.\n"
+"Для использования квадратных скобок их следует экранировать обратной косой "
+"чертой ('\\[' и '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2478,7 +2473,6 @@ msgstr "Переменный"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Средний"
 
@@ -2772,13 +2766,15 @@ msgstr "Это soundKonverter %1"
 
 #: soundkonverter.cpp:47
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "Собрано с TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:49
 msgid ""
 "Reading/writing covers is not supported for flac and asf/wma files. TagLib "
 "1.7 is needed for that."
 msgstr ""
+"Чтение/запись обложек не поддерживается для flac и asf/wma. Для этого "
+"требуется TagLib 1.7."
 
 #: soundkonverter.cpp:80 soundkonverter.cpp:85 soundkonverter.cpp:100
 msgid "Removing old file: %1"
@@ -2871,6 +2867,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Используйте soundKonverter для CD-риппинга"
-
-#~ msgid "Infos"
-#~ msgstr "Информация"

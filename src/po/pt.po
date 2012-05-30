@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-05-09 10:41+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-24 08:15+0000\n"
 "Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.net/projects/p/"
 "soundkonverter/language/pt/)\n"
@@ -114,15 +114,14 @@ msgid "Fix"
 msgstr "Corrigir"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"O soundKonverter não consegue encontrar os pacotes em falta.\n"
-"O mais provável é que precise de os instalar através do gestor de pacotes da "
-"sua distribuição."
+"O soundKonverter não detetou que faltassem pacotes\n"
+"Se precisar de converter para outros formatos, tem que instalar os plugins "
+"através do gestor de pacotes da sua distribuição"
 
 #: codecproblems.cpp:32
 msgid ""
@@ -580,27 +579,22 @@ msgid "Never"
 msgstr "Nunca"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Indique o nome do novo perfil:"
+msgstr "O nome da capa"
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "Gravar capas de álbum incorporadas no diretório de destino"
+msgstr "A descrição da capa"
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Gerar novo nome de ficheiro"
+msgstr "O nome pré-definido da capa"
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Perfil pré-definido"
+msgstr "Nome pré-definido da capa:"
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -610,19 +604,13 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Estas opções são os caracteres que serão substituídos pela\n"
-"informação nos detalhes das músicas:\n"
+"As linhas abaixo mostram os caracteres especiais que serão substituídos "
+"pelas informações que existirem nos detalhes dos ficheiros:\n"
 "\n"
 "%a - Artista\n"
 "%b - Álbum\n"
-"%c - Comentário\n"
-"%d - Número de disco\n"
-"%g - Género\n"
-"%n - Número da faixa\n"
-"%p - Compositor\n"
-"%t - Título\n"
-"%y - Ano\n"
-"%f - Nome de ficheiro original"
+"%d - Descrição da capa\n"
+"%r - Tipo de capa"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -1231,6 +1219,8 @@ msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
+"Ocorreu um erro durante a conversão\n"
+"Consulte o registo para mais informações"
 
 #: filelist.cpp:579
 msgid "CD track %1"
@@ -2220,7 +2210,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Dar nome aos ficheiros de acordo com o padrão indicado"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2242,19 +2231,25 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Estas opções são os caracteres que serão substituídos pela\n"
-"informação nos detalhes das músicas:\n"
+"As linhas abaixo mostram os caracteres especiais que serão substituídos "
+"pelas informações que existirem nos detalhes dos ficheiros:\n"
 "\n"
 "%a - Artista\n"
 "%b - Álbum\n"
 "%c - Comentário\n"
-"%d - Número de disco\n"
+"%d - Número do disco\n"
 "%g - Género\n"
 "%n - Número da faixa\n"
 "%p - Compositor\n"
 "%t - Título\n"
 "%y - Ano\n"
-"%f - Nome de ficheiro original"
+"%f - Nome do ficheiro original\n"
+"\n"
+"Pode colocar os caracteres entre parênteses retos e simpes ('[' and ']')\n"
+"de modo a que os caracteres sejam ignorados se o valor de substituição "
+"estiver vazio\n"
+"Para poder utilizar os parênteses retos tem que os escrever na seguinte "
+"forma ('\\[' and '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2483,7 +2478,6 @@ msgstr "Variável"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Média"
 
@@ -2776,13 +2770,15 @@ msgstr "Este é o soundKonverter %1"
 
 #: soundkonverter.cpp:47
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "Compilado com TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:49
 msgid ""
 "Reading/writing covers is not supported for flac and asf/wma files. TagLib "
 "1.7 is needed for that."
 msgstr ""
+"O carregamento e/ou leitura das capas não é suportado para ficheiros .flac, ."
+"asf e .wma. Para tal ser possível, tem que instalar a TagLib 1.7"
 
 #: soundkonverter.cpp:80 soundkonverter.cpp:85 soundkonverter.cpp:100
 msgid "Removing old file: %1"
@@ -2867,6 +2863,3 @@ msgstr "Conversor de áudio, extração de CD e análise Replay Gain"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extrair um CD áudio com o soundKonverter"
-
-#~ msgid "Infos"
-#~ msgstr "Informações"

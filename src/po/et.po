@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-05-01 20:38+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-24 08:15+0000\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.net/projects/p/soundkonverter/"
 "language/et/)\n"
@@ -110,14 +110,14 @@ msgid "Fix"
 msgstr "Paranda"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
 "soundKonverter ei leidnud puuduvaid pakette.\n"
-"Võimalik, et distro paketihalduris tuleks paigaldada veel mõni plugin."
+"Kui tunned mõnest failivormingust puudust, võib olla vaja paigaldada mõni "
+"lisaplugin distro paketihalduri abil."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -571,27 +571,22 @@ msgid "Never"
 msgstr "Mitte kunagi"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Sisesta uue profiili nimi:"
+msgstr "Kaanepildi failinimi"
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "Põimitud kaanepiltide salvestamine väljundkataloogi"
+msgstr "Põimitud kaanepildi kirjeldus"
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Faili nimele lisatakse \"uus\""
+msgstr "Kaanepildi vaikimisi failinimi"
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Vaikeprofiil"
+msgstr "Kaanepildi vaikimisi failinimi:"
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -601,18 +596,13 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Järgnevad stringid on metamärgid, mis asendatakse\n"
+"Järgnevad stringid on muutujad, mis asendatakse\n"
 "vastava infoga faili metaandmetest:\n"
 "\n"
 "%a - esitaja\n"
 "%b - album\n"
-"%c - kommentaar\n"
-"%d - plaadi number\n"
-"%g - stiil%n - loo number\n"
-"%p - helilooja\n"
-"%t - pealkiri\n"
-"%y - aasta\n"
-"%f - algne failinimi"
+"%d - kaanepildi kirjeldus\n"
+"%r - kaanepildi roll"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -1207,6 +1197,8 @@ msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
+"Teisendus ebaõnnestus.\n"
+"Lisainfot leiab logist."
 
 #: filelist.cpp:579
 msgid "CD track %1"
@@ -2194,7 +2186,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Teisendatud failid nimetatakse määratud mustri järgi."
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2216,18 +2207,25 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Järgnevad stringid on metamärgid, mis asendatakse\n"
+"Järgnevad stringid on muutujad, mis asendatakse\n"
 "vastava infoga faili metaandmetest:\n"
 "\n"
 "%a - esitaja\n"
 "%b - album\n"
 "%c - kommentaar\n"
 "%d - plaadi number\n"
-"%g - stiil%n - loo number\n"
+"%g - stiil\n"
+"%n - loonumber\n"
 "%p - helilooja\n"
 "%t - pealkiri\n"
 "%y - aasta\n"
-"%f - algne failinimi"
+"%f - algne failinimi\n"
+"\n"
+"Kui panna muutujad (vajadusel koos neid ümbritsevate\n"
+"märkidega) nurksulgudesse (s.t \"[\" ja \"]\" vahele), siis neid\n"
+"eiratakse, kui vastava muutuja asendusväärtus on tühi.\n"
+"Et failinimedes nurksulge endid kasutada, tuleb nende ette\n"
+"panna kurakaldkriips (niiviisi: \"\\[\" ja \"\\]\")."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2457,7 +2455,6 @@ msgstr "Varieeruv"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Keskmine"
 
@@ -2750,13 +2747,15 @@ msgstr "See on soundKonverter %1"
 
 #: soundkonverter.cpp:47
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "Kompiilitud TagLib'i versiooniga %1.%2.%3"
 
 #: soundkonverter.cpp:49
 msgid ""
 "Reading/writing covers is not supported for flac and asf/wma files. TagLib "
 "1.7 is needed for that."
 msgstr ""
+"Kaanepiltide lugemist-kirjutamist ei toetata FLAC- ja ASF/WMA-failide puhul. "
+"Selleks on vaja TagLib'i versiooni 1.7."
 
 #: soundkonverter.cpp:80 soundkonverter.cpp:85 soundkonverter.cpp:100
 msgid "Removing old file: %1"
@@ -2841,6 +2840,3 @@ msgstr "Helifailide teisendaja, CD-rippija ja helitugevuse parandustööriist"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripi audio-CD soundKonverteriga"
-
-#~ msgid "Infos"
-#~ msgstr "Info"

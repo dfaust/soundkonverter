@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-04-29 08:19+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-24 08:15+0000\n"
 "Last-Translator: A Kanashiro <akana_sfe@yahoo.com.ar>\n"
 "Language-Team: Spanish (Castilian) (http://www.transifex.net/projects/p/"
 "soundkonverter/language/es/)\n"
@@ -113,15 +113,11 @@ msgid "Fix"
 msgstr "Corregir"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter no pudo encontrar los paquetes faltantes.\n"
-"Tal vez deba instalar un plugin adicional a través del administrador de "
-"paquetes de su distribución."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -578,27 +574,22 @@ msgid "Never"
 msgstr "Nunca"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Ingrese el nombre del nuevo perfil:"
+msgstr ""
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "Guardar tapas embebidas en el directorio de salida"
+msgstr ""
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Generar nuevo nombre de archivo"
+msgstr ""
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Perfil por defecto"
+msgstr ""
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -608,19 +599,6 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Las siguientes cadenas son comodines que serán reemplazados\n"
-"por la información en los metadtos:\n"
-"\n"
-"%a - Artista\n"
-"%b - Álbum\n"
-"%c - Comentario\n"
-"%d - Número de disco\n"
-"%g - Género\n"
-"%n - Número de pista\n"
-"%p - Compositor\n"
-"%t - Título\n"
-"%y - Año\n"
-"%f - Nombre de archivo original"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -2221,7 +2199,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Nombrar todos los archivos convertidos de acuerdo al siguiente patrón"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2243,19 +2220,6 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Las siguientes cadenas son comodines que serán reemplazados\n"
-"por la información en los metadtos:\n"
-"\n"
-"%a - Artista\n"
-"%b - Álbum\n"
-"%c - Comentario\n"
-"%d - Número de disco\n"
-"%g - Género\n"
-"%n - Número de pista\n"
-"%p - Compositor\n"
-"%t - Título\n"
-"%y - Año\n"
-"%f - Nombre de archivo original"
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2492,7 +2456,6 @@ msgstr "Variable"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Media"
 
@@ -2872,6 +2835,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extrear CD de audio con soundKonverter"
-
-#~ msgid "Infos"
-#~ msgstr "Información"

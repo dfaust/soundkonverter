@@ -146,7 +146,7 @@ void Convert::convert( ConvertItem *item )
         logger->log( item->logID, i18n("Converting") );
         item->state = ConvertItem::convert;
         item->convertPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
-        if( item->convertPlugin->type() == "codec" )
+        if( item->convertPlugin->type() == "codec" || item->convertPlugin->type() == "filter" )
         {
             const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
             item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
@@ -157,7 +157,7 @@ void Convert::convert( ConvertItem *item )
             item->convertID = qobject_cast<RipperPlugin*>(item->convertPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
         }
     }
-    else if( item->conversionPipes.at(item->take).trunks.count() == 2 ) // conversion needs two plugins
+    else // conversion needs two plugins or more
     {
         BackendPlugin *plugin1;
         CodecPlugin *plugin2;
@@ -936,9 +936,11 @@ void Convert::add( FileListItem* item )
 
     if( !newItem->inputUrl.isLocalFile() && item->track == -1 )
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
-//     if( (!newItem->inputUrl.isLocalFile() && item->track == -1) || newItem->inputUrl.url().toAscii() != newItem->inputUrl.url() ) newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
+//     if( (!newItem->inputUrl.isLocalFile() && item->track == -1) || newItem->inputUrl.url().toAscii() != newItem->inputUrl.url() )
+//         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
 
-    if( conversionOptions->filterOptions.count() > 0 )
+    newItem->filterCount = conversionOptions->filterOptions.count();
+    if( newItem->filterCount > 0 )
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::filter );
 
     newItem->updateTimes();

@@ -9,24 +9,13 @@
 ConvertItem::ConvertItem( FileListItem *item )
 {
     fileListItem = item;
-    fileListItems.clear();
     getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
     encodePlugin = 0;
     convertID = -1;
     replaygainID = -1;
     take = 0;
-    killed = false;
-}
-
-ConvertItem::ConvertItem( QList<FileListItem*> items )
-{
-    fileListItem = 0;
-    fileListItems = items;
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
-    encodePlugin = 0;
-    convertID = -1;
-    replaygainID = -1;
-    take = 0;
+    lastTake = 0;
+    filterNumber = 0;
     killed = false;
 }
 
@@ -67,7 +56,7 @@ void ConvertItem::updateTimes()
         encodeTime = ( mode & ConvertItem::encode ) ? 0.4f : 0.0f;
     }
     float filterSum = 0.0f;
-    for( int i=0; i<filterCount(); i++ )
+    for( int i=0; i<filterCount; i++ )
     {
         filterTimes.append( 0.6f );
         filterSum += 0.6f;
@@ -76,18 +65,7 @@ void ConvertItem::updateTimes()
 
     const float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime + filterSum;
 
-    float length = 0;
-    if( fileListItem )
-    {
-        length = fileListItem->length;
-    }
-    else if( fileListItems.count() > 0 )
-    {
-        for( int i=0; i<fileListItems.count(); i++ )
-        {
-            length += fileListItems.at(i)->length;
-        }
-    }
+    const float length = fileListItem ? fileListItem->length : 0;
     getTime *= length/sum;
     convertTime *= length/sum;
     decodeTime *= length/sum;
@@ -141,7 +119,7 @@ void ConvertItem::updateTimes()
             }
             if( mode & ConvertItem::filter )
             {
-                for( int i=0; i<currentFilter; i++ )
+                for( int i=0; i<filterNumber; i++ )
                 {
                     finishedTime += filterTimes.at(i);
                 }
@@ -164,7 +142,7 @@ void ConvertItem::updateTimes()
             }
             if( mode & ConvertItem::filter )
             {
-                for( int i=0; i<currentFilter; i++ )
+                for( int i=0; i<filterNumber; i++ )
                 {
                     finishedTime += filterTimes.at(i);
                 }

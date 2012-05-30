@@ -38,34 +38,26 @@ public:
 
     /** Constructor, @p item a pointer to the file list item */
     ConvertItem( FileListItem *item );
-    /** Constructor, @p itema a list of pointers to the file list items */
-    ConvertItem( QList<FileListItem*> items );
 
     /** Destructor */
     virtual ~ConvertItem();
 
     /** a reference to the file list item, in case it's a convert item */
     FileListItem *fileListItem;
-    /** a reference to the file list items, in case it's an album gain item */
-    QList<FileListItem*> fileListItems;
 
     /** a list of conversion pipes that are suitable for this item */
     QList<ConversionPipe> conversionPipes;
-    /** a list of conversion pipes that are suitable for this item */
+    /** a list of replaygain pipes that are suitable for this item */
     QList<ReplayGainPipe> replaygainPipes;
     /** number of the current attempt to convert the file/add replaygain (for the pipes lists) */
     int take;
     /** number of the last try in case the conversion wasn't successful in the end */
     int lastTake;
 
-    /** number of the current filter in use */
-    int currentFilter;
-
     /** number of filters to be used */
-    int filterCount()
-    {
-        return tempFilterUrls.count();
-    }
+    int filterCount;
+    /** number of the current filter in use */
+    int filterNumber;
 
     /** for the conversion and moving the file to a temporary place */
     QWeakPointer<KProcess> process;

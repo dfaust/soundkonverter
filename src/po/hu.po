@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-04-29 08:19+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-29 21:21+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.net/projects/p/soundkonverter/"
 "language/hu/)\n"
@@ -55,7 +55,7 @@ msgstr "Támogatott kodekek:"
 
 #: aboutplugins.cpp:153 aboutplugins.cpp:161 aboutplugins.cpp:176
 msgid "Currently deactivated."
-msgstr ""
+msgstr "Pillanatnyilag kikapcsolva."
 
 #: aboutplugins.cpp:156
 msgid "Encode: %1"
@@ -114,15 +114,14 @@ msgid "Fix"
 msgstr "Rögzítés"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"A soundKonverter nem talál hiányzó csomagokat.\n"
-"Lehet, hogy további csomago(ka)t kell telepítenie a csomagkezelője "
-"segítségével."
+"A soundKonverter nem talált hiányzó csomagokat.\n"
+"Amennyiben hiányol néhány fájlformátumot, kiegészítő bővítményeket kell "
+"telepítenie a csomagkezelője segítségével."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -576,27 +575,22 @@ msgid "Never"
 msgstr "Soha"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Írjon be egy nevet az új profilnak:"
+msgstr "A borító fájlneve"
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "A beágyazott borítók mentése a kimeneti könyvtárba"
+msgstr "A beágyazott borító leírása"
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Új fájlnév előállítása"
+msgstr "Az alapértelmezett borító fájlneve"
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Alapértelmezett profil"
+msgstr "Az alapértelmezett borító fájlneve:"
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -606,19 +600,12 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Az alábbi karakterláncok helyettesítő karakterek, amik a\n"
-"megfelelő információval lesznek helyettesítve a metaadatban:\n"
+"Az alábbi karakterláncok helyettesítő karakterek a metaadatban:\n"
 "\n"
-"%a - Előadó\n"
-"%b - Album\n"
-"%c - Megjegyzés\n"
-"%d - Lemez száma\n"
-"%g - Műfaj\n"
-"%n - Szám\n"
-"%p - Zeneszerző\n"
-"%t - Cím\n"
-"%y - Év\n"
-"%f - Eredeti fájlnév"
+"%a - előadó\n"
+"%b - album\n"
+"%d - borító leírása\n"
+"%r - cover role"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -770,6 +757,7 @@ msgstr "Kódolás"
 #: convert.cpp:391
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
 msgstr ""
+"Hangerő-korrekció kihagyása, az album hangereje később lesz meghatározva"
 
 #: convert.cpp:406
 msgid "Applying Replay Gain"
@@ -1225,6 +1213,8 @@ msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
+"A konvertálás meghiúsult.\n"
+"További részletek a naplófájlban."
 
 #: filelist.cpp:579
 msgid "CD track %1"
@@ -1879,11 +1869,11 @@ msgstr "Írjon be egy nevet az új profilnak:"
 
 #: optionsdetailed.cpp:363
 msgid "You cannot save a profile without a name."
-msgstr ""
+msgstr "Nem mentheti a profilt név nélkül."
 
 #: optionsdetailed.cpp:363
 msgid "Profile name is empty"
-msgstr ""
+msgstr "A profilnév üres"
 
 #: optionsdetailed.cpp:383
 msgid "You cannot overwrite the built-in profiles."
@@ -2219,7 +2209,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Minden konvertált fájl átnevezése a megadott minta alapján"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2241,19 +2230,22 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Az alábbi karakterláncok helyettesítő karakterek, amik a\n"
-"megfelelő információval lesznek helyettesítve a metaadatban:\n"
+"Az alábbi karakterláncok helyettesítő karakterek a metaadatban:\n"
 "\n"
-"%a - Előadó\n"
-"%b - Album\n"
-"%c - Megjegyzés\n"
-"%d - Lemez száma\n"
-"%g - Műfaj\n"
-"%n - Szám\n"
-"%p - Zeneszerző\n"
-"%t - Cím\n"
-"%y - Év\n"
-"%f - Eredeti fájlnév"
+"%a - előadó\n"
+"%b - album\n"
+"%c - megjegyzés\n"
+"%d - lemez száma\n"
+"%g - műfaj\n"
+"%n - szám\n"
+"%p - szerző\n"
+"%t - cím\n"
+"%y - év\n"
+"%f - eredeti fájlnév\n"
+"\n"
+"A helyettesítő karaktereket szögletes zárójelbe teheti ('['és ']')\n"
+"így mellőzve lesznek, ha a mező üres.\n"
+"Szögletes zárójel írásához használja a backslash-t ('\\[' and '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2485,7 +2477,6 @@ msgstr "Változó"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Átlagos"
 
@@ -2776,13 +2767,15 @@ msgstr "Ez a soundKonverter %1"
 
 #: soundkonverter.cpp:47
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "TagLib-bel fordítva %1.%2.%3"
 
 #: soundkonverter.cpp:49
 msgid ""
 "Reading/writing covers is not supported for flac and asf/wma files. TagLib "
 "1.7 is needed for that."
 msgstr ""
+"A borítók olvasása/írása nem támogatott a flac és az asf/wma fájlok esetén. "
+"Ehhez a TagLib 1.7 szükséges."
 
 #: soundkonverter.cpp:80 soundkonverter.cpp:85 soundkonverter.cpp:100
 msgid "Removing old file: %1"
@@ -2862,11 +2855,8 @@ msgstr "E-mail"
 
 #: rc.cpp:9
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr ""
+msgstr "Audiofájl-konverter, CD-beolvasó és hangerő-korrekciós eszköz"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Audio CD beolvasása a soundKonverterrel"
-
-#~ msgid "Infos"
-#~ msgstr "Információk"

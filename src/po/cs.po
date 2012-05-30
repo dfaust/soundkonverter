@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-05-23 19:07+0200\n"
-"PO-Revision-Date: 2012-04-30 18:48+0000\n"
+"POT-Creation-Date: 2012-05-30 10:29+0200\n"
+"PO-Revision-Date: 2012-05-24 08:15+0000\n"
 "Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.net/projects/p/soundkonverter/"
 "language/cs/)\n"
@@ -111,15 +111,14 @@ msgid "Fix"
 msgstr "Opravit"
 
 #: codecproblems.cpp:28
-#, fuzzy
 msgid ""
 "soundKonverter couldn't find any missing packages.\n"
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"SoundKonverteru se nepodařilo nalézt žádné chybějící balíčky.\n"
-"Možná potřebujete přes správce balíčků své distribuce nainstalovat nějaký "
-"dodatečný přídavný modul ."
+"soundKonverter se nepodařilo zkopírovat žádné chybějící balíčky.\n"
+"Pokud postrádáte některé formáty souborů, budete možná muset nainstalovat "
+"dodatečný přídavný modul za použití správce balíčků pro vaši distribuci."
 
 #: codecproblems.cpp:32
 msgid ""
@@ -573,27 +572,22 @@ msgid "Never"
 msgstr "Nikdy"
 
 #: configdialog/configcoverartpage.cpp:57
-#, fuzzy
 msgid "File name for the cover"
-msgstr "Zadejte název pro nový profil:"
+msgstr "Název souboru pro obal"
 
 #: configdialog/configcoverartpage.cpp:59
-#, fuzzy
 msgid "The embedded cover description"
-msgstr "Uložit vložené obaly do výstupního adresáře"
+msgstr "Popis vloženého obalu"
 
 #: configdialog/configcoverartpage.cpp:61
-#, fuzzy
 msgid "The default cover file name"
-msgstr "Vytvořit nový název souboru"
+msgstr "Výchozí název pro soubor s obalem"
 
 #: configdialog/configcoverartpage.cpp:65
-#, fuzzy
 msgid "Default cover file name:"
-msgstr "Výchozí profil"
+msgstr "Výchozí název pro soubor s obalem:"
 
 #: configdialog/configcoverartpage.cpp:68
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -603,19 +597,13 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Následující řetězce jsou zástupnými symboly, které budou nahrazeny\n"
-"údaji obsaženými ve značkách:\n"
+"Následující řetězce jsou zástupnými znaky, které budou nahrazeny\n"
+"údaji v popisných datech:\n"
 "\n"
 "%a - Umělec\n"
 "%b - Album\n"
-"%c - Poznámka\n"
-"%d - Číslo disku\n"
-"%g - Žánr\n"
-"%n - Číslo skladby\n"
-"%p - Skladatel\n"
-"%t - Název\n"
-"%y - Rok\n"
-"%f - Původní název souboru"
+"%d - Popis obalu\n"
+"%r - Úloha obalu"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
@@ -1219,6 +1207,8 @@ msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
+"Převod se nezdařil.\n"
+"Podívejte se na zápis, kde najdete více informací."
 
 #: filelist.cpp:579
 msgid "CD track %1"
@@ -2216,7 +2206,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Pojmenovat všechny převedené soubory podle zadaného vzoru"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2238,8 +2227,8 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Následující řetězce jsou zástupnými symboly, které budou nahrazeny\n"
-"údaji obsaženými ve značkách:\n"
+"Následující řetězce jsou zástupnými znaky, které budou nahrazeny\n"
+"údaji v popisných datech:\n"
 "\n"
 "%a - Umělec\n"
 "%b - Album\n"
@@ -2250,7 +2239,13 @@ msgstr ""
 "%p - Skladatel\n"
 "%t - Název\n"
 "%y - Rok\n"
-"%f - Původní název souboru"
+"%f - Původní název souboru\n"
+"\n"
+"Tyto zástupné znaky můžete dát do kulatých závorek a okolní znaky do "
+"hranatých závorek ('[' a ']'),\n"
+"takže se budou, pokud bude nahrazovací hodnota prázdná, přehlížet.\n"
+"Aby se použily hranaté závorky, budete je muset nechat utéct pomocí zpětného "
+"lomítka ('\\[' a '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2485,7 +2480,6 @@ msgstr "Proměnlivý"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:140
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:384
-#, fuzzy
 msgid "Average"
 msgstr "Průměrný"
 
@@ -2779,13 +2773,15 @@ msgstr "Toto je soundKonverter %1"
 
 #: soundkonverter.cpp:47
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "Sestaveno s TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:49
 msgid ""
 "Reading/writing covers is not supported for flac and asf/wma files. TagLib "
 "1.7 is needed for that."
 msgstr ""
+"Čtení/Zápis obalů není pro soubory flac a asf/wma podporován. Je na to "
+"potřeba TagLib 1.7."
 
 #: soundkonverter.cpp:80 soundkonverter.cpp:85 soundkonverter.cpp:100
 msgid "Removing old file: %1"
@@ -2872,6 +2868,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Vytáhněte skladby z CD za pomoci soundKonverteru"
-
-#~ msgid "Infos"
-#~ msgstr "Informace"

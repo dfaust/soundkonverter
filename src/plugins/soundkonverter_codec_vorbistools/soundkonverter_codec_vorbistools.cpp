@@ -125,10 +125,10 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
     if( outputCodec == "ogg vorbis" )
     {
         command += binaries["oggenc"];
-        if( inputFile.isEmpty() )
-        {
-            command += "--raw";
-        }
+//         if( inputFile.isEmpty() )
+//         {
+//             command += "--raw";
+//         }
         if( conversionOptions->qualityMode == ConversionOptions::Quality )
         {
             command += "-q";

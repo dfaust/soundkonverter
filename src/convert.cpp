@@ -160,37 +160,74 @@ void Convert::convert( ConvertItem *item )
     else // conversion needs two plugins or more
     {
         BackendPlugin *plugin1;
+        QList<FilterPlugin*> pluginFilters;
         CodecPlugin *plugin2;
-        plugin1 = item->conversionPipes.at(item->take).trunks.at(0).plugin;
-        plugin2 = qobject_cast<CodecPlugin*>(item->conversionPipes.at(item->take).trunks.at(1).plugin);
+        plugin1 = item->conversionPipes.at(item->take).trunks.first().plugin;
+        plugin2 = qobject_cast<CodecPlugin*>(item->conversionPipes.at(item->take).trunks.last().plugin);
+        foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
+        {
+            if( trunk.plugin == plugin1 || trunk.plugin == plugin2 )
+                continue;
 
+            pluginFilters.append( qobject_cast<FilterPlugin*>(trunk.plugin) );
+        }
+
+        bool usePipes = false;
         QStringList command1, command2;
+        QList<QStringList> commandFilters;
         if( config->data.advanced.usePipes )
         {
-            if( plugin1->type() == "codec" )
+            usePipes = true;
+
+            if( plugin1->type() == "codec" || plugin1->type() == "filter" )
             {
-                command1 = qobject_cast<CodecPlugin*>(plugin1)->convertCommand( inputUrl, KUrl(), item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );
+                command1 = qobject_cast<CodecPlugin*>(plugin1)->convertCommand( inputUrl, KUrl(), item->conversionPipes.at(item->take).trunks.first().codecFrom, item->conversionPipes.at(item->take).trunks.first().codecTo, conversionOptions, item->fileListItem->tags );
             }
             else if( plugin1->type() == "ripper" )
             {
                 item->fileListItem->state = FileListItem::Ripping;
                 command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl() );
             }
-            const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-            command2 = plugin2->convertCommand( KUrl(), item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+            if( command1.isEmpty() )
+                usePipes = false;
+
+            int i = 1;
+            foreach( FilterPlugin *plugin, pluginFilters )
+            {
+                const QStringList command = plugin->convertCommand( KUrl(), KUrl(), item->conversionPipes.at(item->take).trunks.at(i).codecFrom, item->conversionPipes.at(item->take).trunks.at(i).codecTo, conversionOptions );
+                commandFilters.append( command );
+                i++;
+                if( command.isEmpty() )
+                    usePipes = false;
+            }
+
+            const bool replaygain = ( item->conversionPipes.at(item->take).trunks.last().data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+            command2 = plugin2->convertCommand( KUrl(), item->outputUrl, item->conversionPipes.at(item->take).trunks.last().codecFrom, item->conversionPipes.at(item->take).trunks.last().codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+            if( command2.isEmpty() )
+                usePipes = false;
         }
-        if( !command1.isEmpty() && !command2.isEmpty() )
+        if( usePipes )
         {
             // both plugins support pipes
+            QString command;
+            command += command1.join(" ");
+            command += " | ";
+            foreach( const QStringList commandFilter, commandFilters )
+            {
+                command += commandFilter.join(" ");
+                command += " | ";
+            }
+            command += command2.join(" ");
+
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
-            logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command1.join(" ") + " | " + command2.join(" ") + "</span></pre>" );
+            logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command + "</span></pre>" );
             item->process = new KProcess();
             item->process.data()->setOutputChannelMode( KProcess::MergedChannels );
             connect( item->process.data(), SIGNAL(readyRead()), this, SLOT(processOutput()) );
             connect( item->process.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
             item->process.data()->clearProgram();
-            item->process.data()->setShellCommand( command1.join(" ") + " | " + command2.join(" ") );
+            item->process.data()->setShellCommand( command );
             item->process.data()->start();
         }
         else
@@ -229,7 +266,7 @@ void Convert::convert( ConvertItem *item )
             }
             const bool useSharedMemory = config->data.advanced.useSharedMemoryForTempFiles && estimatedFileSize > 0 && estimatedFileSize < config->data.advanced.maxSizeForSharedMemoryTempFiles;
             item->tempConvertUrl = item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(0).codecTo).first(), useSharedMemory );
-            if( plugin1->type() == "codec" )
+            if( plugin1->type() == "codec" || plugin1->type() == "filter" )
             {
                 item->convertID = qobject_cast<CodecPlugin*>(plugin1)->convert( inputUrl, item->tempConvertUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );
             }

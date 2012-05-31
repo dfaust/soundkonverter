@@ -568,7 +568,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                 }
                 newPipe.trunks += conversionFilterPipeTrunks.at(i);
 
-                if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
+                if( encoders.indexOf(newPipe.trunks.last().plugin->name()) != -1 )
                 {
                     // add rating depending on the position in the list ordered by the user, encoders do count much
                     const int rating = ( encoders.count() - encoders.indexOf(newPipe.trunks.last().plugin->name()) ) * 1000000;
@@ -600,7 +600,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                     }
                 }
 
-                if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                if( decoders.indexOf(newPipe.trunks.first().plugin->name()) != -1 )
                 {
                     // add rating depending on the position in the list ordered by the user, decoders don't count much
                     const int rating = ( decoders.count() - decoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000;
@@ -619,15 +619,15 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                     ConversionPipe newPipe;
 
                     newPipe.trunks += conversionFilterPipeTrunks.at(i);
-                    if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                    if( decoders.indexOf(newPipe.trunks.first().plugin->name()) != -1 )
                     {
                         // add rating depending on the position in the list ordered by the user, decoders don't count much
-                        newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000;
+                        newPipe.trunks[0].rating += ( decoders.count() - decoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000;
                     }
-                    if( encoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                    if( encoders.indexOf(newPipe.trunks.first().plugin->name()) != -1 )
                     {
                         // add rating depending on the position in the list ordered by the user, encoders do count much
-                        newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.at(0).plugin->name()) ) * 1000000;
+                        newPipe.trunks[0].rating += ( encoders.count() - encoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000000;
                     }
 
                     list += newPipe;
@@ -670,7 +670,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                         }
                         newPipe.trunks += conversionFilterPipeTrunks.at(j);
 
-                        if( decoders.indexOf(newPipe.trunks.at(0).plugin->name()) != -1 )
+                        if( decoders.indexOf(newPipe.trunks.first().plugin->name()) != -1 )
                         {
                             // add rating depending on the position in the list ordered by the user, decoders don't count much
                             const int rating = ( decoders.count() - decoders.indexOf(newPipe.trunks.first().plugin->name()) ) * 1000;
@@ -679,7 +679,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                                 newPipe.trunks[i].rating += rating;
                             }
                         }
-                        if( encoders.indexOf(newPipe.trunks.at(1).plugin->name()) != -1 )
+                        if( encoders.indexOf(newPipe.trunks.last().plugin->name()) != -1 )
                         {
                             // add rating depending on the position in the list ordered by the user, encoders do count much
                             const int rating = ( encoders.count() - encoders.indexOf(newPipe.trunks.last().plugin->name()) ) * 1000000;

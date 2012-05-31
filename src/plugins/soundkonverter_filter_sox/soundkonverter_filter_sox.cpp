@@ -128,15 +128,10 @@ int soundkonverter_filter_sox::convert( const KUrl& inputFile, const KUrl& outpu
 
 QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
-    Q_UNUSED( inputCodec );
-    Q_UNUSED( outputCodec );
     Q_UNUSED( tags );
     Q_UNUSED( replayGain );
 
     if( !_conversionOptions )
-        return QStringList();
-
-    if( inputFile.isEmpty() || outputFile.isEmpty() )
         return QStringList();
 
     QStringList command;
@@ -149,8 +144,18 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
             if( filterOptions->data.normalize )
             {
                 command += binaries["sox"];
-                command += "−−norm=" + QString::number(filterOptions->data.normalizeVolume);
+                command += "--norm=" + QString::number(filterOptions->data.normalizeVolume);
+                if( inputFile.isEmpty() )
+                {
+                    command += "-t";
+                    command += inputCodec;
+                }
                 command += "\"" + escapeUrl(inputFile) + "\"";
+                if( outputFile.isEmpty() )
+                {
+                    command += "-t";
+                    command += outputCodec;
+                }
                 command += "\"" + escapeUrl(outputFile) + "\"";
             }
         }

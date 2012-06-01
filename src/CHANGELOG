@@ -1,3 +1,6 @@
+1.6.1:
+-Fix: Don't try to restore the file list when calling soundKonverter while it is running
+
 1.6.0:
 -Add: Update translations
 -Fix: When loading file lists some options were ignored

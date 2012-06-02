@@ -7,8 +7,6 @@
 #include "soxfilterwidget.h"
 #include "soxcodecwidget.h"
 
-#include <KMessageBox>
-
 soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QStringList& args  )
     : FilterPlugin( parent )
 {
@@ -182,7 +180,6 @@ float soundkonverter_filter_sox::parseOutput( const QString& output )
 
 FilterOptions *soundkonverter_filter_sox::filterOptionsFromXml( QDomElement filterOptions )
 {
-    KMessageBox::information(0,"soundkonverter_filter_sox::filterOptionsFromXml");
     SoxFilterOptions *options = new SoxFilterOptions();
     options->fromXml( filterOptions );
     return options;

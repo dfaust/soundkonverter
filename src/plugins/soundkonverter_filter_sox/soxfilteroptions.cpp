@@ -4,8 +4,6 @@
 #include "soxfilteroptions.h"
 #include "../../core/conversionoptions.h"
 
-#include <KMessageBox>
-
 
 SoxFilterOptions::SoxFilterOptions()
 {
@@ -39,8 +37,6 @@ bool SoxFilterOptions::fromXml( QDomElement filterOptions )
     FilterOptions::fromXml( filterOptions );
     data.normalize = filterOptions.attribute("normalize").toInt();
     data.normalizeVolume = filterOptions.attribute("normalizeVolume").toDouble();
-
-    KMessageBox::information(0,QString("data.normalize: "+filterOptions.attribute("normalize")+"\ndata.normalizeVolume: "+filterOptions.attribute("normalizeVolume")));
 
     return true;
 }

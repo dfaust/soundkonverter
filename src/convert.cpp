@@ -131,8 +131,25 @@ void Convert::convert( ConvertItem *item )
         item->backendPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
         if( item->backendPlugin->type() == "codec" || item->backendPlugin->type() == "filter" )
         {
-            const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-            item->backendID = qobject_cast<CodecPlugin*>(item->backendPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+            bool useInternalReplayGain = false;
+            if( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
+            {
+                foreach( Config::CodecData codecData, config->data.backends.codecs )
+                {
+                    if( codecData.codecName == item->conversionPipes.at(item->take).trunks.at(0).codecTo )
+                    {
+                        if( codecData.replaygain.first() == i18n("Try internal") )
+                            useInternalReplayGain = true;
+
+                        break;
+                    }
+                }
+            }
+            if( useInternalReplayGain )
+            {
+                item->internalReplayGainUsed = true;
+            }
+            item->backendID = qobject_cast<CodecPlugin*>(item->backendPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, useInternalReplayGain );
         }
         else if( item->backendPlugin->type() == "ripper" )
         {
@@ -143,14 +160,13 @@ void Convert::convert( ConvertItem *item )
     else // conversion needs two plugins or more
     {
         bool usePipes = false;
+        bool useInternalReplayGain = false;
         QStringList commandList;
         if( config->data.advanced.usePipes )
         {
             usePipes = true;
 
-            const bool replaygain = ( item->conversionPipes.at(item->take).trunks.last().data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
             const int stepCount = item->conversionPipes.at(item->take).trunks.count() - 1;
-
             int step = 0;
             foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
             {
@@ -160,7 +176,20 @@ void Convert::convert( ConvertItem *item )
                 const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : KUrl();
                 if( plugin->type() == "codec" || plugin->type() == "filter" )
                 {
-                    command = qobject_cast<CodecPlugin*>(plugin)->convertCommand( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+                    if( step == stepCount && trunk.data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
+                    {
+                        foreach( Config::CodecData codecData, config->data.backends.codecs )
+                        {
+                            if( codecData.codecName == trunk.codecTo )
+                            {
+                                if( codecData.replaygain.first() == i18n("Try internal") )
+                                    useInternalReplayGain = true;
+
+                                break;
+                            }
+                        }
+                    }
+                    command = qobject_cast<CodecPlugin*>(plugin)->convertCommand( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, useInternalReplayGain );
                 }
                 else if( plugin->type() == "ripper" )
                 {
@@ -179,6 +208,9 @@ void Convert::convert( ConvertItem *item )
         {
             // both plugins support pipes
             const QString command = commandList.join(" | ");
+
+            if( useInternalReplayGain )
+                item->internalReplayGainUsed = true;
 
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
@@ -261,8 +293,6 @@ void Convert::convertNextBackend( ConvertItem *item )
     const KUrl inUrl = ( step == 0 ) ? inputUrl : item->tempConvertUrls.at(step - 1);
     const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : item->tempConvertUrls.at(step);
 
-    const bool replaygain = ( item->conversionPipes.at(item->take).trunks.last().data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-
     if( step == 0 )
     {
         if( plugin->type() == "ripper" )
@@ -303,7 +333,25 @@ void Convert::convertNextBackend( ConvertItem *item )
     item->backendPlugin = plugin;
     if( plugin->type() == "codec" || plugin->type() == "filter" )
     {
-        item->backendID = qobject_cast<CodecPlugin*>(plugin)->convert( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+        bool useInternalReplayGain = false;
+        if( step == stepCount && item->conversionPipes.at(item->take).trunks.at(step).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
+        {
+            foreach( Config::CodecData codecData, config->data.backends.codecs )
+            {
+                if( codecData.codecName == item->conversionPipes.at(item->take).trunks.at(step).codecTo )
+                {
+                    if( codecData.replaygain.first() == i18n("Try internal") )
+                        useInternalReplayGain = true;
+
+                    break;
+                }
+            }
+        }
+        if( useInternalReplayGain )
+        {
+            item->internalReplayGainUsed = true;
+        }
+        item->backendID = qobject_cast<CodecPlugin*>(plugin)->convert( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, useInternalReplayGain );
     }
     else if( plugin->type() == "ripper" )
     {
@@ -487,6 +535,12 @@ void Convert::executeSameStep( ConvertItem *item )
 {
     item->take++;
     item->progress = 0.0f;
+
+    if( item->internalReplayGainUsed )
+    {
+        item->mode = ConvertItem::Mode( item->mode | ConvertItem::replaygain );
+        item->internalReplayGainUsed = false;
+    }
 
     switch( item->state )
     {
@@ -678,10 +732,9 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
 
-                // TODO check
-                if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
+                if( items.at(i)->internalReplayGainUsed )
                 {
-                    items.at(i)->mode = ConvertItem::Mode( items[i]->mode ^ ConvertItem::replaygain );
+                    items.at(i)->mode = ConvertItem::Mode( items.at(i)->mode ^ ConvertItem::replaygain );
                 }
 
                 switch( items.at(i)->state )
@@ -763,8 +816,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
 
-                // TODO check
-                if( items.at(i)->conversionPipes.count() > items.at(i)->take && items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
+                if( items.at(i)->internalReplayGainUsed )
                 {
                     items.at(i)->mode = ConvertItem::Mode( items.at(i)->mode ^ ConvertItem::replaygain );
                 }

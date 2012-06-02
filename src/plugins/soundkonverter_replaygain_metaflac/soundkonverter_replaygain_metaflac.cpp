@@ -73,20 +73,26 @@ int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, Repla
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    (*newItem->process) << binaries["metaflac"];
+    QStringList command;
+    command += binaries["metaflac"];
     if( mode == ReplayGainPlugin::Add || mode == ReplayGainPlugin::Force )
     {
-        (*newItem->process) << "--add-replay-gain";
+        command += "--add-replay-gain";
     }
     else
     {
-        (*newItem->process) << "--remove-replay-gain";
+        command += "--remove-replay-gain";
     }
-    for( int i=0; i<fileList.count(); i++ )
+    foreach( const KUrl file, fileList )
     {
-        (*newItem->process) << fileList.at(i).toLocalFile();
+        command += "\"" + escapeUrl(file) + "\"";
     }
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
+
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

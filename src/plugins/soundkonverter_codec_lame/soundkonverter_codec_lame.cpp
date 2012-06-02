@@ -201,7 +201,7 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
             command += "-q";
             command += "2";
         }
-//         if( replayGain )
+//         if( conversionOptions->replaygain && replayGain )
 //         {
 //             command += "--replaygain-accurate";
 //         }

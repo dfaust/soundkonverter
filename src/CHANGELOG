@@ -1,3 +1,6 @@
+1.9.80 (2.0.0 beta1):
+-Fix: Handle internal ReplayGain calculation properly
+
 1.6.1:
 -Fix: Don't try to restore the file list when calling soundKonverter while it is running
 

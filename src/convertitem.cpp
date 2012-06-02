@@ -20,6 +20,7 @@ ConvertItem::ConvertItem( FileListItem *item )
     conversionPipesStep = -1;
 
     killed = false;
+    internalReplayGainUsed = false;
 }
 
 ConvertItem::~ConvertItem()

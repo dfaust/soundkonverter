@@ -113,7 +113,6 @@ QStringList soundkonverter_codec_flac::convertCommand( const KUrl& inputFile, co
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)
-    Q_UNUSED(replayGain)
 
     if( !_conversionOptions )
         return QStringList();
@@ -132,7 +131,7 @@ QStringList soundkonverter_codec_flac::convertCommand( const KUrl& inputFile, co
         {
             command += "--compression-level-"+QString::number((int)conversionOptions->compressionLevel);
         }
-        if( conversionOptions->replaygain )
+        if( conversionOptions->replaygain && replayGain )
         {
             command += "--replay-gain";
         }

@@ -65,8 +65,10 @@ public:
     int backendID;
     /** the current conversion step */
     int conversionPipesStep;
-    /** holds if the process has been killed on purpose  */
+    /** has the process been killed on purpose? */
     bool killed;
+    /** has the internal replaygain been used in this conversion take? */
+    bool internalReplayGainUsed;
 
     /** the url from fileListItem or the download temp file */
     KUrl inputUrl;

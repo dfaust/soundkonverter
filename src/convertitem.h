@@ -55,11 +55,6 @@ public:
     /** number of the last try in case the conversion wasn't successful in the end */
     int lastTake;
 
-    /** number of filters to be used */
-    int filterCount; // TODO remove if possible
-    /** number of the current filter in use */
-    int filterNumber; // TODO remove if possible
-
     /** for the conversion and moving the file to a temporary place */
     QWeakPointer<KProcess> process;
     /** for moving the file to the temporary directory */
@@ -95,10 +90,6 @@ public:
     /** the time from the file list item splitted up */
     float getTime;
     QList<float> convertTimes;
-//     float convertTime;
-//     float decodeTime;
-//     QList<float> filterTimes;
-//     float encodeTime;
     float replaygainTime;
 
     float finishedTime; // the time of the finished conversion steps

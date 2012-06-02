@@ -928,8 +928,6 @@ void Convert::add( FileListItem* item )
 //     if( (!newItem->inputUrl.isLocalFile() && item->track == -1) || newItem->inputUrl.url().toAscii() != newItem->inputUrl.url() )
 //         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
 
-    newItem->filterCount = conversionOptions->filterOptions.count();
-
     newItem->updateTimes();
 
     // (visual) feedback

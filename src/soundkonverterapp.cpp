@@ -2,22 +2,9 @@
 #include "soundkonverterapp.h"
 #include "soundkonverter.h"
 
-// #include <qstringlist.h>
-// #include <qfile.h>
-// #include <qmovie.h>
-
-#include <kglobal.h>
-// #include <kstartupinfo.h>
-#include <kcmdlineargs.h>
-// #include <dcopclient.h>
-// #include <ksystemtray.h>
-// #include <kstandarddirs.h>
-#include <stdio.h>
-#include <KMessageBox>
+#include <KCmdLineArgs>
 #include <KStandardDirs>
-
-#include <kurl.h>
-
+#include <KUrl>
 #include <QFile>
 
 
@@ -25,7 +12,6 @@ soundKonverterApp::soundKonverterApp()
     : KUniqueApplication()
 {
     mainWindow = new soundKonverter();
-//     mainWindow->show();
     setActiveWindow( mainWindow );
 }
 
@@ -34,8 +20,8 @@ soundKonverterApp::~soundKonverterApp()
 
 int soundKonverterApp::newInstance()
 {
-    //KCmdLineArgs::setCwd(QDir::currentPath().toUtf8());
     KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    static bool first = true;
     bool visible = true;
     bool autoclose = false;
     bool autostart = false;
@@ -63,7 +49,7 @@ int soundKonverterApp::newInstance()
 
     mainWindow->setAutoClose( autoclose );
 
-    if( QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
+    if( first && QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
     {
         kapp->processEvents();
         mainWindow->loadAutosaveFileList();
@@ -97,6 +83,7 @@ int soundKonverterApp::newInstance()
         if( !urls.isEmpty() )
             mainWindow->addConvertFiles( urls, profile, format, directory, notifyCommand );
     }
+    first = false;
     args->clear();
 
     if( activateMainWindow )
@@ -106,37 +93,5 @@ int soundKonverterApp::newInstance()
         mainWindow->startConversion();
 
     return 0;
-
-
-
-/*
-        // no session.. just start up normally
-        KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
-
-        if( !mainWidget() )
-        {
-            soundKonverter *widget = new soundKonverter();
-            setMainWidget(widget);
-            //widget->show();
-        }
-        else
-            KStartupInfo::setNewStartupId( mainWidget(), kapp->startupId());
-
-        soundKonverter *widget = ::qt_cast<soundKonverter*>( mainWidget() );
-
-        widget->increaseInstances();
-
-        QCString device = args->getOption( "rip" );
-        if( device ) {
-            if( !args->isSet( "invisible" ) ) {
-                widget->visible = true;
-                widget->show();
-                widget->systemTray->hide();
-                widget->systemTray->setPixmap( 0 );
-            }
-            widget->device = device;
-            widget->showCdDialog( false );
-        }
-*/
 }
 

@@ -7,15 +7,18 @@
 
 
 ConvertItem::ConvertItem( FileListItem *item )
+    : fileListItem( item )
 {
-    fileListItem = item;
-    getTime = convertTime = decodeTime = encodeTime = replaygainTime = 0.0f;
-    encodePlugin = 0;
-    convertID = -1;
-    replaygainID = -1;
+    getTime = replaygainTime = 0.0f;
+
+    backendPlugin = 0;
+    backendID = -1;
+
     take = 0;
     lastTake = 0;
-    filterNumber = 0;
+
+    conversionPipesStep = -1;
+
     killed = false;
 }
 
@@ -43,118 +46,40 @@ KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extensio
 
 void ConvertItem::updateTimes()
 {
-    getTime = ( mode & ConvertItem::get ) ? 0.8f : 0.0f;            // TODO file size? connection speed?
-    convertTime = ( mode & ConvertItem::convert ) ? 1.4f : 0.0f;    // NOTE either convert OR decode & encode is used --- or only replay gain
-    if( fileListItem && fileListItem->track == -1 )
+    float totalTime = 0.0f;
+    getTime = ( mode & ConvertItem::get ) ? 0.8f : 0.0f;                        // TODO file size? connection speed?
+    totalTime += getTime;
+    foreach( const ConversionPipeTrunk trunk, conversionPipes.at(take).trunks )
     {
-        decodeTime = ( mode & ConvertItem::decode ) ? 0.4f : 0.0f;
-        encodeTime = ( mode & ConvertItem::encode ) ? 1.0f : 0.0f;
-    }
-    else
-    {
-        decodeTime = ( mode & ConvertItem::decode ) ? 1.0f : 0.0f;  // TODO drive speed?
-        encodeTime = ( mode & ConvertItem::encode ) ? 0.4f : 0.0f;
-    }
-    float filterSum = 0.0f;
-    for( int i=0; i<filterCount; i++ )
-    {
-        filterTimes.append( 0.6f );
-        filterSum += 0.6f;
+        float time = 0.0f;
+
+        if( trunk.codecFrom == "audio cd" )
+            time += 1.0f;
+        else if( trunk.codecFrom != "wav" )
+            time += 0.4f;
+
+        if( trunk.codecTo != "wav" )
+            time += 1.0f;
+
+        if( trunk.codecFrom == "wav" && trunk.codecTo == "wav" )
+            time += 0.4f;
+
+        totalTime += time;
+
+        convertTimes.append( time );
     }
     replaygainTime = ( mode & ConvertItem::replaygain ) ? 0.2f : 0.0f;
-
-    const float sum = getTime + convertTime + decodeTime + encodeTime + replaygainTime + filterSum;
+    totalTime += replaygainTime;
 
     const float length = fileListItem ? fileListItem->length : 0;
-    getTime *= length/sum;
-    convertTime *= length/sum;
-    decodeTime *= length/sum;
-    encodeTime *= length/sum;
-    replaygainTime *= length/sum;
-    for( int i=0; i<filterTimes.count(); i++ )
+
+    getTime *= length/totalTime;
+    for( int i=0; i<convertTimes.count(); i++ )
     {
-        filterTimes[i] *= length/sum;
+        convertTimes[i] *= length/totalTime;
     }
+    replaygainTime *= length/totalTime;
 
     finishedTime = 0.0f;
-    switch( state )
-    {
-        case ConvertItem::convert:
-        {
-            if( mode & ConvertItem::get )
-            {
-                finishedTime += getTime;
-            }
-            break;
-        }
-        case ConvertItem::decode:
-        {
-            if( mode & ConvertItem::get )
-            {
-                finishedTime += getTime;
-            }
-            break;
-        }
-        case ConvertItem::filter:
-        {
-            if( mode & ConvertItem::get )
-            {
-                finishedTime += getTime;
-            }
-            if( mode & ConvertItem::decode )
-            {
-                finishedTime += decodeTime;
-            }
-            break;
-        }
-        case ConvertItem::encode:
-        {
-            if( mode & ConvertItem::get )
-            {
-                finishedTime += getTime;
-            }
-            if( mode & ConvertItem::decode )
-            {
-                finishedTime += decodeTime;
-            }
-            if( mode & ConvertItem::filter )
-            {
-                for( int i=0; i<filterNumber; i++ )
-                {
-                    finishedTime += filterTimes.at(i);
-                }
-            }
-            break;
-        }
-        case ConvertItem::replaygain:
-        {
-            if( mode & ConvertItem::get )
-            {
-                finishedTime += getTime;
-            }
-            if( mode & ConvertItem::convert )
-            {
-                finishedTime += convertTime;
-            }
-            if( mode & ConvertItem::decode )
-            {
-                finishedTime += decodeTime;
-            }
-            if( mode & ConvertItem::filter )
-            {
-                for( int i=0; i<filterNumber; i++ )
-                {
-                    finishedTime += filterTimes.at(i);
-                }
-            }
-            if( mode & ConvertItem::encode )
-            {
-                finishedTime += encodeTime;
-            }
-            break;
-        }
-        default:
-            break;
-    }
 }
 

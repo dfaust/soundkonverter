@@ -27,11 +27,12 @@ public:
      */
     enum Mode {
         get                = 0x0001, // Copy the file to tmp
-        convert            = 0x0002, // Convert the file (includes ripping)
-        decode             = 0x0004, // Decode the file (includes ripping)
-        filter             = 0x0008, // Apply filters
-        encode             = 0x0010, // Encode the file
-        replaygain         = 0x0020, // Apply replaygain
+        convert            = 0x0002, // Convert the file
+        rip                = 0x0004, // Ripping the file (only for the current state)
+        decode             = 0x0008, // Decoding the file (only for the current state)
+        filter             = 0x0010, // Applying filters (only for the current state)
+        encode             = 0x0020, // Encoding the file (only for the current state)
+        replaygain         = 0x0040, // Apply replaygain
         write_tags         = 0x0080, // Write the tags to the file
         execute_userscript = 0x0100  // Run the user script
     };
@@ -55,24 +56,20 @@ public:
     int lastTake;
 
     /** number of filters to be used */
-    int filterCount;
+    int filterCount; // TODO remove if possible
     /** number of the current filter in use */
-    int filterNumber;
+    int filterNumber; // TODO remove if possible
 
     /** for the conversion and moving the file to a temporary place */
     QWeakPointer<KProcess> process;
     /** for moving the file to the temporary directory */
     QWeakPointer<KIO::FileCopyJob> kioCopyJob;
-    /** the id from the plugin (-1 if false) */
-    int convertID;
-    /** the id from the plugin (-1 if false) */
-    int replaygainID;
     /** the active plugin */
-    BackendPlugin *convertPlugin;
-    /** if the item gets decoded first, cache for 2nd conversion step */
-    CodecPlugin *encodePlugin;
-    /** the replay gain plugin */
-    ReplayGainPlugin *replaygainPlugin;
+    BackendPlugin *backendPlugin;
+    /** the id from the active plugin (-1 if false) */
+    int backendID;
+    /** the current conversion step */
+    int conversionPipesStep;
     /** holds if the process has been killed on purpose  */
     bool killed;
 
@@ -82,10 +79,8 @@ public:
     KUrl outputUrl;
     /** the downloaded input file */
     KUrl tempInputUrl;
-    /** the temp file for the conversion */
-    KUrl tempConvertUrl;
-    /** the temp files for the filters */
-    QList<KUrl> tempFilterUrls;
+    /** the temp files for the conversion */
+    QList<KUrl> tempConvertUrls;
 
     KUrl generateTempUrl( const QString& prefix, const QString& extension, bool useSharedMemory = false );
 
@@ -99,10 +94,11 @@ public:
 
     /** the time from the file list item splitted up */
     float getTime;
-    float convertTime;
-    float decodeTime;
-    QList<float> filterTimes;
-    float encodeTime;
+    QList<float> convertTimes;
+//     float convertTime;
+//     float decodeTime;
+//     QList<float> filterTimes;
+//     float encodeTime;
     float replaygainTime;
 
     float finishedTime; // the time of the finished conversion steps

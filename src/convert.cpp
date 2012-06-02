@@ -79,28 +79,6 @@ void Convert::get( ConvertItem *item )
     if( !updateTimer.isActive() )
         updateTimer.start( config->data.general.updateDelay );
 
-/*    if( item->inputUrl.isLocalFile() && item->tempInputUrl.isLocalFile() )
-    {
-        item->process.data()->clearProgram();
-
-        *(item->process.data()) << "cp";
-        *(item->process.data()) << item->inputUrl.toLocalFile();
-        *(item->process.data()) << item->tempInputUrl.toLocalFile();
-
-        logger->log( item->logID, "cp \"" + item->inputUrl.toLocalFile() + "\" \"" + item->tempInputUrl.toLocalFile() + "\"" );
-
-//         item->process.data()->setPriority( config->data.general.priority );
-        item->process.data()->start();
-    }
-    else
-    {
-        logger->log( item->logID, "copying \"" + item->inputUrl.pathOrUrl() + "\" to \"" + item->tempInputUrl.toLocalFile() + "\"" );
-
-        item->kioCopyJob.data() = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
-        connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
-        connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
-    }*/
-
     logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",item->inputUrl.pathOrUrl(),item->tempInputUrl.toLocalFile()) );
 
     item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
@@ -138,6 +116,11 @@ void Convert::convert( ConvertItem *item )
         return;
     }
 
+    if( item->take > 0 )
+        item->updateTimes();
+
+    item->conversionPipesStep = -1;
+
     if( !updateTimer.isActive() )
         updateTimer.start( config->data.general.updateDelay );
 
@@ -145,79 +128,57 @@ void Convert::convert( ConvertItem *item )
     {
         logger->log( item->logID, i18n("Converting") );
         item->state = ConvertItem::convert;
-        item->convertPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
-        if( item->convertPlugin->type() == "codec" || item->convertPlugin->type() == "filter" )
+        item->backendPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
+        if( item->backendPlugin->type() == "codec" || item->backendPlugin->type() == "filter" )
         {
             const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-            item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+            item->backendID = qobject_cast<CodecPlugin*>(item->backendPlugin)->convert( inputUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
         }
-        else if( item->convertPlugin->type() == "ripper" )
+        else if( item->backendPlugin->type() == "ripper" )
         {
             item->fileListItem->state = FileListItem::Ripping;
-            item->convertID = qobject_cast<RipperPlugin*>(item->convertPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
+            item->backendID = qobject_cast<RipperPlugin*>(item->backendPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
         }
     }
     else // conversion needs two plugins or more
     {
-        BackendPlugin *plugin1;
-        QList<FilterPlugin*> pluginFilters;
-        CodecPlugin *plugin2;
-        plugin1 = item->conversionPipes.at(item->take).trunks.first().plugin;
-        plugin2 = qobject_cast<CodecPlugin*>(item->conversionPipes.at(item->take).trunks.last().plugin);
-        foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
-        {
-            if( trunk.plugin == plugin1 || trunk.plugin == plugin2 )
-                continue;
-
-            pluginFilters.append( qobject_cast<FilterPlugin*>(trunk.plugin) );
-        }
-
         bool usePipes = false;
-        QStringList command1, command2;
-        QList<QStringList> commandFilters;
+        QStringList commandList;
         if( config->data.advanced.usePipes )
         {
             usePipes = true;
 
-            if( plugin1->type() == "codec" || plugin1->type() == "filter" )
-            {
-                command1 = qobject_cast<CodecPlugin*>(plugin1)->convertCommand( inputUrl, KUrl(), item->conversionPipes.at(item->take).trunks.first().codecFrom, item->conversionPipes.at(item->take).trunks.first().codecTo, conversionOptions, item->fileListItem->tags );
-            }
-            else if( plugin1->type() == "ripper" )
-            {
-                item->fileListItem->state = FileListItem::Ripping;
-                command1 = qobject_cast<RipperPlugin*>(plugin1)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, KUrl() );
-            }
-            if( command1.isEmpty() )
-                usePipes = false;
-
-            int i = 1;
-            foreach( FilterPlugin *plugin, pluginFilters )
-            {
-                const QStringList command = plugin->convertCommand( KUrl(), KUrl(), item->conversionPipes.at(item->take).trunks.at(i).codecFrom, item->conversionPipes.at(item->take).trunks.at(i).codecTo, conversionOptions );
-                commandFilters.append( command );
-                i++;
-                if( command.isEmpty() )
-                    usePipes = false;
-            }
-
             const bool replaygain = ( item->conversionPipes.at(item->take).trunks.last().data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-            command2 = plugin2->convertCommand( KUrl(), item->outputUrl, item->conversionPipes.at(item->take).trunks.last().codecFrom, item->conversionPipes.at(item->take).trunks.last().codecTo, conversionOptions, item->fileListItem->tags, replaygain );
-            if( command2.isEmpty() )
-                usePipes = false;
+            const int stepCount = item->conversionPipes.at(item->take).trunks.count() - 1;
+
+            int step = 0;
+            foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
+            {
+                BackendPlugin *plugin = trunk.plugin;
+                QStringList command;
+                const KUrl inUrl = ( step == 0 ) ? inputUrl : KUrl();
+                const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : KUrl();
+                if( plugin->type() == "codec" || plugin->type() == "filter" )
+                {
+                    command = qobject_cast<CodecPlugin*>(plugin)->convertCommand( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+                }
+                else if( plugin->type() == "ripper" )
+                {
+                    command = qobject_cast<RipperPlugin*>(plugin)->ripCommand( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, outUrl );
+                }
+                if( command.isEmpty() )
+                {
+                    usePipes = false;
+                    break;
+                }
+                commandList.append( command.join(" ") );
+                step++;
+            }
         }
         if( usePipes )
         {
             // both plugins support pipes
-            QString command;
-            command += command1.join(" ");
-            command += " | ";
-            foreach( const QStringList commandFilter, commandFilters )
-            {
-                command += commandFilter.join(" ");
-                command += " | ";
-            }
-            command += command2.join(" ");
+            const QString command = commandList.join(" | ");
 
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
@@ -233,16 +194,10 @@ void Convert::convert( ConvertItem *item )
         else
         {
             // at least on plugins doesn't support pipes
-            // decode with plugin1
-            logger->log( item->logID, i18n("Decoding") );
-            item->state = ConvertItem::decode;
-            item->mode = ConvertItem::Mode( item->mode ^ ConvertItem::convert );
-            item->mode = ConvertItem::Mode( item->mode | ConvertItem::decode | ConvertItem::encode );
-            item->updateTimes();
-            item->convertPlugin = plugin1;
-            item->encodePlugin = plugin2;
+
+            // estimated size of the wav file
             int estimatedFileSize = 0;
-            if( item->fileListItem->state == FileListItem::Ripping && item->fileListItem->tags )
+            if( item->conversionPipes.at(item->take).trunks.first().plugin->type() == "ripper" && item->fileListItem->tags )
             {
                 estimatedFileSize = item->fileListItem->tags->length * 44100*16*2/8/1024/1024;
             }
@@ -265,67 +220,105 @@ void Convert::convert( ConvertItem *item )
                 estimatedFileSize /= 1024*1024;
             }
             const bool useSharedMemory = config->data.advanced.useSharedMemoryForTempFiles && estimatedFileSize > 0 && estimatedFileSize < config->data.advanced.maxSizeForSharedMemoryTempFiles;
-            item->tempConvertUrl = item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(0).codecTo).first(), useSharedMemory );
-            if( plugin1->type() == "codec" || plugin1->type() == "filter" )
-            {
-                item->convertID = qobject_cast<CodecPlugin*>(plugin1)->convert( inputUrl, item->tempConvertUrl, item->conversionPipes.at(item->take).trunks.at(0).codecFrom, item->conversionPipes.at(item->take).trunks.at(0).codecTo, conversionOptions, item->fileListItem->tags );
-            }
-            else if( plugin1->type() == "ripper" )
-            {
-                item->fileListItem->state = FileListItem::Ripping;
-                item->convertID = qobject_cast<RipperPlugin*>(plugin1)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->tempConvertUrl );
-            }
-        }
-    }
 
-    if( !item->process.data() )
-    {
-        if( item->convertID == -1 )
-        {
-            executeSameStep( item );
-        }
-        else if( item->convertID == -100 )
-        {
-            logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
-            remove( item, 100 );
+            for( int i=0; i<item->conversionPipes.at(item->take).trunks.count()-1; i++ )
+            {
+                item->tempConvertUrls += item->generateTempUrl( "convert_"+QString::number(i), config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(i).codecTo).first(), useSharedMemory );
+            }
+
+            convertNextBackend( item );
         }
     }
 }
 
-void Convert::filter( ConvertItem *item )
+void Convert::convertNextBackend( ConvertItem *item )
 {
-//     // file has been decoded by plugin1 last time this function was executed
-//     if( !item || !item->encodePlugin )
-//         return;
-//
-//     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
-//     if( !conversionOptions )
-//         return;
-//
-//     logger->log( item->logID, i18n("Applying filter") );
-//     item->state = ConvertItem::filter;
-//     item->convertPlugin = item->encodePlugin;
-//     item->encodePlugin = 0;
-//     const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-//     item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( item->tempConvertUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
-}
-
-void Convert::encode( ConvertItem *item )
-{
-    // file has been decoded by plugin1 last time this function was executed
-    if( !item || !item->encodePlugin )
+    if( !item )
         return;
 
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( !conversionOptions )
         return;
 
-    logger->log( item->logID, i18n("Encoding") );
-    item->state = ConvertItem::encode;
-    item->convertPlugin = item->encodePlugin;
-    item->encodePlugin = 0;
-    const bool replaygain = ( item->conversionPipes.at(item->take).trunks.at(1).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
-    item->convertID = qobject_cast<CodecPlugin*>(item->convertPlugin)->convert( item->tempConvertUrl, item->outputUrl, item->conversionPipes.at(item->take).trunks.at(1).codecFrom, item->conversionPipes.at(item->take).trunks.at(1).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+    const int stepCount = item->conversionPipes.at(item->take).trunks.count() - 1;
+    const int step = ++item->conversionPipesStep;
+
+    if( step > stepCount )
+    {
+        executeNextStep( item );
+    }
+
+    BackendPlugin *plugin = item->conversionPipes.at(item->take).trunks.at(step).plugin;
+    if( !plugin )
+        return;
+
+    KUrl inputUrl;
+    if( !item->tempInputUrl.toLocalFile().isEmpty() )
+        inputUrl = item->tempInputUrl;
+    else
+        inputUrl = item->inputUrl;
+
+    const KUrl inUrl = ( step == 0 ) ? inputUrl : item->tempConvertUrls.at(step - 1);
+    const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : item->tempConvertUrls.at(step);
+
+    const bool replaygain = ( item->conversionPipes.at(item->take).trunks.last().data.hasInternalReplayGain && item->mode & ConvertItem::replaygain );
+
+    if( step == 0 )
+    {
+        if( plugin->type() == "ripper" )
+        {
+            item->state = ConvertItem::rip;
+            logger->log( item->logID, i18n("Ripping") );
+        }
+        else if( plugin->type() == "codec" || ( plugin->type() == "filter" && item->conversionPipes.at(item->take).trunks.at(step).codecFrom != "wav" ) )
+        {
+            item->state = ConvertItem::decode;
+            logger->log( item->logID, i18n("Decoding") );
+        }
+        else if( plugin->type() == "filter" )
+        {
+            item->state = ConvertItem::filter;
+            logger->log( item->logID, i18n("Applying filter") );
+        }
+    }
+    else if( step == stepCount )
+    {
+        if( plugin->type() == "codec" || ( plugin->type() == "filter" && item->conversionPipes.at(item->take).trunks.at(step).codecTo != "wav" ) )
+        {
+            item->state = ConvertItem::encode;
+            logger->log( item->logID, i18n("Encoding") );
+        }
+        else if( plugin->type() == "filter" )
+        {
+            item->state = ConvertItem::filter;
+            logger->log( item->logID, i18n("Applying filter") );
+        }
+    }
+    else
+    {
+        item->state = ConvertItem::filter;
+        logger->log( item->logID, i18n("Applying filter") );
+    }
+
+    item->backendPlugin = plugin;
+    if( plugin->type() == "codec" || plugin->type() == "filter" )
+    {
+        item->backendID = qobject_cast<CodecPlugin*>(plugin)->convert( inUrl, outUrl, item->conversionPipes.at(item->take).trunks.at(step).codecFrom, item->conversionPipes.at(item->take).trunks.at(step).codecTo, conversionOptions, item->fileListItem->tags, replaygain );
+    }
+    else if( plugin->type() == "ripper" )
+    {
+        item->backendID = qobject_cast<RipperPlugin*>(plugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, outUrl );
+    }
+
+    if( item->backendID == -1 )
+    {
+        executeSameStep( item );
+    }
+    else if( item->backendID == -100 )
+    {
+        logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+        remove( item, 100 );
+    }
 }
 
 void Convert::replaygain( ConvertItem *item )
@@ -363,7 +356,7 @@ void Convert::replaygain( ConvertItem *item )
     }
 
     item->state = ConvertItem::replaygain;
-    item->replaygainPlugin = item->replaygainPipes.at(item->take).plugin;
+    item->backendPlugin = item->replaygainPipes.at(item->take).plugin;
     KUrl::List urlList;
     for( int i=0; i<albumItems.count(); i++ )
     {
@@ -374,7 +367,7 @@ void Convert::replaygain( ConvertItem *item )
             fileList->updateItem( albumItems.at(i)->fileListItem );
         }
     }
-    item->replaygainID = item->replaygainPlugin->apply( urlList );
+    item->backendID = qobject_cast<ReplayGainPlugin*>(item->backendPlugin)->apply( urlList );
 
     if( !updateTimer.isActive() )
         updateTimer.start( config->data.general.updateDelay );
@@ -454,40 +447,20 @@ void Convert::executeNextStep( ConvertItem *item )
             break;
         }
         case ConvertItem::convert:
-        {
-            if( item->mode & ConvertItem::replaygain )
-                replaygain( item );
-            else
-                remove( item, 0 );
-            break;
-        }
-        case ConvertItem::decode:
-        {
-            if( item->mode & ConvertItem::filter )
-            {
-                filter( item );
-            }
-            else if( item->mode & ConvertItem::encode )
-            {
-                item->take = item->lastTake;
-                encode( item );
-            }
-            else if( item->mode & ConvertItem::replaygain )
-            {
-                replaygain( item );
-            }
-            else
-            {
-                remove( item, 0 );
-            }
-            break;
-        }
         case ConvertItem::encode:
         {
             if( item->mode & ConvertItem::replaygain )
                 replaygain( item );
             else
                 remove( item, 0 );
+            break;
+        }
+        case ConvertItem::rip:
+        case ConvertItem::decode:
+        case ConvertItem::filter:
+        {
+            item->take = item->lastTake;
+            convertNextBackend( item );
             break;
         }
         case ConvertItem::replaygain:
@@ -518,20 +491,28 @@ void Convert::executeSameStep( ConvertItem *item )
     switch( item->state )
     {
         case ConvertItem::get:
+        {
             get( item );
             return;
+        }
         case ConvertItem::convert:
+        {
             convert( item );
             return;
+        }
+        case ConvertItem::rip:
         case ConvertItem::decode:
-            convert( item );
-            return;
+        case ConvertItem::filter:
         case ConvertItem::encode: // TODO try next encoder instead of decoding again (not so easy at the moment)
+        {
             convert( item );
             return;
+        }
         case ConvertItem::replaygain:
+        {
             replaygain( item );
             return;
+        }
         default:
             break;
     }
@@ -566,13 +547,14 @@ void Convert::kioJobFinished( KJob *job )
                 float fileTime;
                 switch( items.at(i)->state )
                 {
-                    case ConvertItem::get: fileTime = items.at(i)->getTime; break;
-                    default: fileTime = 0.0f;
+                    case ConvertItem::get:
+                        fileTime = items.at(i)->getTime;
+                        break;
+                    default:
+                        fileTime = 0.0f;
                 }
                 if( items.at(i)->state == ConvertItem::get )
                 {
-//                     items.at(i)->tempInputUrl = items.at(i)->tempConvertUrl;
-//                     items.at(i)->tempConvertUrl = KUrl();
                     if( !items.at(i)->fileListItem->tags )
                     {
                         items.at(i)->fileListItem->tags = config->tagEngine()->readTags( items.at(i)->tempInputUrl );
@@ -618,48 +600,28 @@ void Convert::kioJobFinished( KJob *job )
 
 void Convert::processOutput()
 {
-    QString output;
-    float progress1, progress2;
-
     for( int i=0; i<items.size(); i++ )
     {
         if( items.at(i)->process.data() == QObject::sender() )
         {
-            if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.count() == 1 )
+            const QString output = items.at(i)->process.data()->readAllStandardOutput().data();
+
+            bool logOutput = false;
+            foreach( const ConversionPipeTrunk trunk, items.at(i)->conversionPipes.at(items.at(i)->take).trunks )
             {
-                BackendPlugin *plugin1;
-                plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
+                const float progress = trunk.plugin->parseOutput( output );
 
-                output = items.at(i)->process.data()->readAllStandardOutput().data();
+                if( progress > items.at(i)->progress )
+                    items[i]->progress = progress;
 
-                progress1 = plugin1->parseOutput( output );
-
-                if( progress1 > items.at(i)->progress )
-                    items[i]->progress = progress1;
-
-                if( progress1 == -1 && !output.simplified().isEmpty() )
-                    logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#C00000\">" + output.trimmed().replace("\n","<br>\t") + "</span></pre>" );
-            }
-            else if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.count() == 2 )
-            {
-                // NOTE we can only use the decoder's progress because the encoder encodes a stream (with to the encoder unknown length)
-                BackendPlugin *plugin1, *plugin2;
-                plugin1 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).plugin;
-                plugin2 = items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(1).plugin;
-
-                output = items.at(i)->process.data()->readAllStandardOutput().data();
-
-                progress1 = plugin1->parseOutput( output );
-                progress2 = plugin2->parseOutput( output );
-
-                if( progress1 > items.at(i)->progress )
-                    items[i]->progress = progress1;
-
-                if( progress1 == -1 && progress2 == -1 && !output.simplified().isEmpty() )
-                    logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#C00000\">" + output.trimmed().replace("\n","<br>\t") + "</span></pre>" );
+                if( progress == -1 )
+                    logOutput = true;
             }
 
-            return;
+            if( logOutput && !output.simplified().isEmpty() )
+                logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#C00000\">" + output.trimmed().replace("\n","<br>\t") + "</span></pre>" );
+
+            break;
         }
     }
 }
@@ -696,13 +658,11 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                 switch( items.at(i)->state )
                 {
                     case ConvertItem::convert:
-                        fileTime = items.at(i)->convertTime;
-                        break;
+                    case ConvertItem::rip:
                     case ConvertItem::decode:
-                        fileTime = items.at(i)->decodeTime;
-                        break;
+                    case ConvertItem::filter:
                     case ConvertItem::encode:
-                        fileTime = items.at(i)->encodeTime;
+                        fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                         break;
                     case ConvertItem::replaygain:
                         fileTime = items.at(i)->replaygainTime;
@@ -711,46 +671,44 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                         fileTime = 0.0f;
                 }
                 items.at(i)->finishedTime += fileTime;
-                /*if( items.at(i)->state == ConvertItem::get )
-                {
-                    items.at(i)->tempInputUrl = items.at(i)->tempConvertUrl;
-                    items.at(i)->tempConvertUrl = KUrl();
-                }
-                else*/ if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
+
+                if( items.at(i)->state == ConvertItem::rip )
                 {
                     items.at(i)->fileListItem->state = FileListItem::Converting;
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
+
+                // TODO check
                 if( items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
                 {
                     items.at(i)->mode = ConvertItem::Mode( items[i]->mode ^ ConvertItem::replaygain );
                 }
-                if( items.at(i)->state == ConvertItem::decode )
+
+                switch( items.at(i)->state )
                 {
-                    encode( items.at(i) );
-                }
-                else
-                {
-                    executeNextStep( items.at(i) );
+                    case ConvertItem::rip:
+                    case ConvertItem::decode:
+                    case ConvertItem::filter:
+                        convertNextBackend( items.at(i) );
+                        break;
+                    default:
+                        executeNextStep( items.at(i) );
                 }
             }
             else
             {
-                if( items.at(i)->state == ConvertItem::convert && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                foreach( const KUrl url, items.at(i)->tempConvertUrls )
                 {
-                    QFile::remove(items.at(i)->outputUrl.toLocalFile());
+                    if( QFile::exists(url.toLocalFile()) )
+                    {
+                        QFile::remove( url.toLocalFile() );
+                    }
                 }
-                else if( items.at(i)->state == ConvertItem::decode && QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                 {
-                    QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
+                    QFile::remove( items.at(i)->outputUrl.toLocalFile() );
                 }
-                else if( items.at(i)->state == ConvertItem::encode )
-                {
-                    if( QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
-                        QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
-                    if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
-                        QFile::remove(items.at(i)->outputUrl.toLocalFile());
-                }
+
                 logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1",exitCode) );
                 executeSameStep( items.at(i) );
             }
@@ -769,11 +727,9 @@ void Convert::pluginProcessFinished( int id, int exitCode )
 
     for( int i=0; i<items.size(); i++ )
     {
-        if( ( items.at(i)->convertPlugin && items.at(i)->convertPlugin == QObject::sender() && items.at(i)->convertID == id ) ||
-            ( items.at(i)->replaygainPlugin && items.at(i)->replaygainPlugin == QObject::sender() && items.at(i)->replaygainID == id ) )
+        if( items.at(i)->backendPlugin && items.at(i)->backendPlugin == QObject::sender() && items.at(i)->backendID == id )
         {
-            items.at(i)->convertID = -1;
-            items.at(i)->replaygainID = -1;
+            items.at(i)->backendID = -1;
 
             if( items.at(i)->killed )
             {
@@ -787,13 +743,11 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 switch( items.at(i)->state )
                 {
                     case ConvertItem::convert:
-                        fileTime = items.at(i)->convertTime;
-                        break;
+                    case ConvertItem::rip:
                     case ConvertItem::decode:
-                        fileTime = items.at(i)->decodeTime;
-                        break;
+                    case ConvertItem::filter:
                     case ConvertItem::encode:
-                        fileTime = items.at(i)->encodeTime;
+                        fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                         break;
                     case ConvertItem::replaygain:
                         fileTime = items.at(i)->replaygainTime;
@@ -802,33 +756,33 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                         fileTime = 0.0f;
                 }
                 items.at(i)->finishedTime += fileTime;
-                if( items.at(i)->state == ConvertItem::decode && items.at(i)->convertPlugin->type() == "ripper" )
+
+                if( items.at(i)->state == ConvertItem::rip )
                 {
                     items.at(i)->fileListItem->state = FileListItem::Converting;
                     emit rippingFinished( items.at(i)->fileListItem->device );
                 }
+
+                // TODO check
                 if( items.at(i)->conversionPipes.count() > items.at(i)->take && items.at(i)->conversionPipes.at(items.at(i)->take).trunks.at(0).data.hasInternalReplayGain && items.at(i)->mode & ConvertItem::replaygain )
                 {
                     items.at(i)->mode = ConvertItem::Mode( items.at(i)->mode ^ ConvertItem::replaygain );
                 }
+
                 executeNextStep( items.at(i) );
             }
             else
             {
-                if( items.at(i)->state == ConvertItem::convert && config->data.general.removeFailedFiles && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
+                foreach( const KUrl url, items.at(i)->tempConvertUrls )
                 {
-                    QFile::remove(items.at(i)->outputUrl.toLocalFile());
+                    if( QFile::exists(url.toLocalFile()) )
+                    {
+                        QFile::remove( url.toLocalFile() );
+                    }
                 }
-                else if( items.at(i)->state == ConvertItem::decode && QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
+                if( QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
                 {
-                    QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
-                }
-                else if( items.at(i)->state == ConvertItem::encode )
-                {
-                    if( QFile::exists(items.at(i)->tempConvertUrl.toLocalFile()) )
-                        QFile::remove(items.at(i)->tempConvertUrl.toLocalFile());
-                    if( config->data.general.removeFailedFiles && QFile::exists(items.at(i)->outputUrl.toLocalFile()) )
-                        QFile::remove(items.at(i)->outputUrl.toLocalFile());
+                    QFile::remove( items.at(i)->outputUrl.toLocalFile() );
                 }
 
                 logger->log( items.at(i)->logID, "\t" + i18n("Conversion failed. Exit code: %1",exitCode) );
@@ -845,8 +799,7 @@ void Convert::pluginLog( int id, const QString& message )
     {
         for( int j=0; j<items.size(); j++ )
         {
-            if( ( items.at(j)->convertPlugin && items.at(j)->convertPlugin == pluginLogQueue.at(i).plugin && items.at(j)->convertID == pluginLogQueue.at(i).id ) ||
-                ( items.at(j)->replaygainPlugin && items.at(j)->replaygainPlugin == pluginLogQueue.at(i).plugin && items.at(j)->replaygainID == pluginLogQueue.at(i).id ) )
+            if( items.at(j)->backendPlugin && items.at(j)->backendPlugin == pluginLogQueue.at(i).plugin && items.at(j)->backendID == pluginLogQueue.at(i).id )
             {
                 for( int k=0; k<pluginLogQueue.at(i).messages.size(); k++ )
                 {
@@ -865,8 +818,7 @@ void Convert::pluginLog( int id, const QString& message )
     // search the matching process
     for( int i=0; i<items.size(); i++ )
     {
-        if( ( items.at(i)->convertPlugin && items.at(i)->convertPlugin == QObject::sender() && items.at(i)->convertID == id ) ||
-            ( items.at(i)->replaygainPlugin && items.at(i)->replaygainPlugin == QObject::sender() && items.at(i)->replaygainID == id ) )
+        if( items.at(i)->backendPlugin && items.at(i)->backendPlugin == QObject::sender() && items.at(i)->backendID == id )
         {
             logger->log( items.at(i)->logID, message );
             return;
@@ -977,8 +929,6 @@ void Convert::add( FileListItem* item )
 //         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
 
     newItem->filterCount = conversionOptions->filterOptions.count();
-    if( newItem->filterCount > 0 )
-        newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::filter );
 
     newItem->updateTimes();
 
@@ -1074,11 +1024,14 @@ void Convert::remove( ConvertItem *item, int state )
     {
         QFile::remove(item->tempInputUrl.toLocalFile());
     }
-    if( QFile::exists(item->tempConvertUrl.toLocalFile()) )
+    foreach( const KUrl url, item->tempConvertUrls )
     {
-        QFile::remove(item->tempConvertUrl.toLocalFile());
+        if( QFile::exists(url.toLocalFile()) )
+        {
+            QFile::remove( url.toLocalFile() );
+        }
     }
-    if( state != 0 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
+    if( state != 0 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) ) // FIXME gets removed when failed anyway
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );
@@ -1131,13 +1084,9 @@ void Convert::kill( FileListItem *item )
         {
             items.at(i)->killed = true;
 
-            if( items.at(i)->convertID != -1 && items.at(i)->convertPlugin )
+            if( items.at(i)->backendID != -1 && items.at(i)->backendPlugin )
             {
-                items.at(i)->convertPlugin->kill( items.at(i)->convertID );
-            }
-            else if( items.at(i)->replaygainID != -1 && items.at(i)->replaygainPlugin )
-            {
-                items.at(i)->replaygainPlugin->kill( items.at(i)->replaygainID );
+                items.at(i)->backendPlugin->kill( items.at(i)->backendID );
             }
             else if( items.at(i)->process.data() != 0 )
             {
@@ -1185,13 +1134,9 @@ void Convert::updateProgress()
 
     for( int i=0; i<items.size(); i++ )
     {
-        if( items.at(i)->convertID != -1 && items.at(i)->convertPlugin )
+        if( items.at(i)->backendID != -1 && items.at(i)->backendPlugin )
         {
-            fileProgress = items.at(i)->convertPlugin->progress( items.at(i)->convertID );
-        }
-        else if( items.at(i)->replaygainID != -1 && items.at(i)->replaygainPlugin )
-        {
-            fileProgress = items.at(i)->replaygainPlugin->progress( items.at(i)->replaygainID );
+            fileProgress = items.at(i)->backendPlugin->progress( items.at(i)->backendID );
         }
         else
         {
@@ -1215,18 +1160,23 @@ void Convert::updateProgress()
                 items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
                 break;
             case ConvertItem::convert:
-                fileTime = items.at(i)->convertTime;
+                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
                 break;
+            case ConvertItem::rip:
+                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
+                items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
+                break;
             case ConvertItem::decode:
-                fileTime = items.at(i)->decodeTime;
-                if( items.at(i)->convertPlugin->type() == "codec" )
-                    items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
-                else if( items.at(i)->convertPlugin->type() == "ripper" )
-                    items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
+                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
+                items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
+                break;
+            case ConvertItem::filter:
+                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
+                items.at(i)->fileListItem->setText( 0, i18n("Filter")+"... "+fileProgressString );
                 break;
             case ConvertItem::encode:
-                fileTime = items.at(i)->encodeTime;
+                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
             case ConvertItem::replaygain:

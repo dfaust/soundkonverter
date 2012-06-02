@@ -47,10 +47,7 @@ private:
     void convert( ConvertItem *item );
 
     /** Apply a filter to the file after it has been decoded in convert() */
-    void filter( ConvertItem *item );
-
-    /** Encode the file after it has been decoded in convert() (and maybe filtered in filter()) */
-    void encode( ConvertItem *item );
+    void convertNextBackend( ConvertItem *item );
 
     /** Calculate replaygain tags of the file with the convert item @p item */
     void replaygain( ConvertItem *item );

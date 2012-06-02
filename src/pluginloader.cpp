@@ -24,27 +24,25 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
     int rating1 = 0;
     int rating2 = 0;
 
-    if( pipe1.trunks.count() == 1 )
+    int minimumRating1 = 0;
+    foreach( const ConversionPipeTrunk trunk, pipe1.trunks )
     {
-        rating1 = pipe1.trunks.at(0).rating + 10;
-    }
-    else
-    {
-        rating1 = ( pipe1.trunks.at(0).rating < pipe1.trunks.at(1).rating ) ? pipe1.trunks.at(0).rating : pipe1.trunks.at(1).rating;
-        if( pipe1.trunks.at(0).codecTo == "wav" )
-            rating1 += 5;
-    }
+        if( minimumRating1 == 0 || trunk.rating < minimumRating1 )
+            minimumRating1 = trunk.rating;
 
-    if( pipe2.trunks.count() == 1 )
-    {
-        rating2 = pipe2.trunks.at(0).rating + 10;
+        rating1 -= 10;
     }
-    else
+    rating1 += minimumRating1;
+
+    int minimumRating2 = 0;
+    foreach( const ConversionPipeTrunk trunk, pipe2.trunks )
     {
-        rating2 = ( pipe2.trunks.at(0).rating < pipe2.trunks.at(1).rating ) ? pipe2.trunks.at(0).rating : pipe2.trunks.at(1).rating;
-        if( pipe2.trunks.at(0).codecTo == "wav" )
-            rating2 += 5;
+        if( minimumRating2 == 0 || trunk.rating < minimumRating2 )
+            minimumRating2 = trunk.rating;
+
+        rating1 -= 10;
     }
+    rating2 += minimumRating2;
 
     return rating1 > rating2;
 }
@@ -54,10 +52,6 @@ bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& 
     return pipe1.rating > pipe2.rating;
 }
 
-//
-// class PluginLoader
-//
-////////////////////
 
 PluginLoader::PluginLoader( Logger *_logger, Config *parent )
     : QObject( parent ),
@@ -67,10 +61,6 @@ PluginLoader::PluginLoader( Logger *_logger, Config *parent )
 
 PluginLoader::~PluginLoader()
 {}
-
-//
-// private
-//
 
 void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugin )
 {
@@ -103,10 +93,6 @@ void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugi
 
     formatInfos.append( info );
 }
-
-//
-// public
-//
 
 void PluginLoader::load()
 {

@@ -73,25 +73,31 @@ int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayG
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    (*newItem->process) << binaries["wvgain"];
+    QStringList command;
+    command += binaries["wvgain"];
     if( mode == ReplayGainPlugin::Add )
     {
-        (*newItem->process) << "-a";
-        (*newItem->process) << "-n";
+        command += "-a";
+        command += "-n";
     }
     else if( mode == ReplayGainPlugin::Force )
     {
-        (*newItem->process) << "-a";
+        command += "-a";
     }
     else
     {
-        (*newItem->process) << "-c";
+        command += "-c";
     }
-    for( int i=0; i<fileList.count(); i++ )
+    foreach( const KUrl file, fileList )
     {
-        (*newItem->process) << fileList.at(i).toLocalFile();
+        command += "\"" + escapeUrl(file) + "\"";
     }
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
+
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

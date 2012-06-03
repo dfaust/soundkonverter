@@ -103,12 +103,18 @@ int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, R
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    (*newItem->process) << binaries["replaygain"];
-    for( int i=0; i<fileList.count(); i++ )
+    QStringList command;
+    command += binaries["replaygain"];
+    foreach( const KUrl file, fileList )
     {
-        (*newItem->process) << fileList.at(i).toLocalFile();
+        command += "\"" + escapeUrl(file) + "\"";
     }
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
+
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

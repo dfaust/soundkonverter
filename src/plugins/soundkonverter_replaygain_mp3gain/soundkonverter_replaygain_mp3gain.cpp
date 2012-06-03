@@ -128,40 +128,51 @@ int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, Replay
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
 
-    (*newItem->process) << binaries["mp3gain"];
-    (*newItem->process) << "-k";
+    QStringList command;
+    command += binaries["mp3gain"];
+    command += "-k";
     if( mode == ReplayGainPlugin::Add )
     {
-        (*newItem->process) << "-a";
+        command += "-a";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
     }
     else if( mode == ReplayGainPlugin::Force )
     {
-        (*newItem->process) << "-s";
-        (*newItem->process) << "r";
+        command += "-s";
+        command += "r";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
     }
     else
     {
-        (*newItem->process) << "-u";
+        command += "-u";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(undoProcessExit(int,QProcess::ExitStatus)) );
         undoFileList = fileList;
     }
-    if( tagMode == 0 )
+    if( mode == ReplayGainPlugin::Add || mode == ReplayGainPlugin::Force )
     {
-        (*newItem->process) << "-s";
-        (*newItem->process) << "a";
+        if( tagMode == 0 )
+        {
+            // APE tags
+            command += "-s";
+            command += "a";
+        }
+        else
+        {
+            // ID3v2 tags
+            command += "-s";
+            command += "i";
+        }
     }
-    else
+    foreach( const KUrl file, fileList )
     {
-        (*newItem->process) << "-s";
-        (*newItem->process) << "i";
+        command += "\"" + escapeUrl(file) + "\"";
     }
-    for( int i=0; i<fileList.count(); i++ )
-    {
-        (*newItem->process) << fileList.at(i).toLocalFile();
-    }
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
+
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;
@@ -197,24 +208,20 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    (*item->process) << binaries["mp3gain"];
-    (*item->process) << "-s";
-    (*item->process) << "d";
-    if( tagMode == 0 )
+    QStringList command;
+    command += binaries["mp3gain"];
+    command += "-s";
+    command += "d";
+    foreach( const KUrl file, undoFileList )
     {
-        (*item->process) << "-s";
-        (*item->process) << "a";
+        command += "\"" + escapeUrl(file) + "\"";
     }
-    else
-    {
-        (*item->process) << "-s";
-        (*item->process) << "i";
-    }
-    for( int i=0; i<undoFileList.count(); i++ )
-    {
-        (*item->process) << undoFileList.at(i).toLocalFile();
-    }
+
+    item->process->clearProgram();
+    item->process->setShellCommand( command.join(" ") );
     item->process->start();
+
+    logCommand( item->id, command.join(" ") );
 }
 
 float soundkonverter_replaygain_mp3gain::parseOutput( const QString& output )

@@ -75,25 +75,31 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
 
     newItem->data.fileCount = fileList.count();
 
-    (*newItem->process) << binaries["vorbisgain"];
+    QStringList command;
+    command += binaries["vorbisgain"];
     if( mode == ReplayGainPlugin::Add )
     {
-        (*newItem->process) << "--album";
-        (*newItem->process) << "--fast";
+        command += "--album";
+        command += "--fast";
     }
     else if( mode == ReplayGainPlugin::Force )
     {
-        (*newItem->process) << "--album";
+        command += "--album";
     }
     else
     {
-        (*newItem->process) << "--clean";
+        command += "--clean";
     }
-    for( int i=0; i<fileList.count(); i++ )
+    foreach( const KUrl file, fileList )
     {
-        (*newItem->process) << fileList.at(i).toLocalFile();
+        command += "\"" + escapeUrl(file) + "\"";
     }
+
+    newItem->process->clearProgram();
+    newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
+
+    logCommand( newItem->id, command.join(" ") );
 
     backendItems.append( newItem );
     return newItem->id;

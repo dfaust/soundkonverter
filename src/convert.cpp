@@ -255,7 +255,7 @@ void Convert::convert( ConvertItem *item )
 
             for( int i=0; i<item->conversionPipes.at(item->take).trunks.count()-1; i++ )
             {
-                item->tempConvertUrls += item->generateTempUrl( "convert_"+QString::number(i), config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(i).codecTo).first(), useSharedMemory );
+                item->tempConvertUrls += item->generateTempUrl( "convert", config->pluginLoader()->codecExtensions(item->conversionPipes.at(item->take).trunks.at(i).codecTo).first(), useSharedMemory );
             }
 
             convertNextBackend( item );

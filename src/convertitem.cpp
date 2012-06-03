@@ -40,7 +40,7 @@ KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extensio
             tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
         }
         i++;
-    } while( QFile::exists(tempUrl) );
+    } while( tempConvertUrls.contains(KUrl(tempUrl)) || QFile::exists(tempUrl) );
 
     return KUrl(tempUrl);
 }

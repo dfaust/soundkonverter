@@ -120,7 +120,6 @@ void OptionsSimple::setReplayGainEnabled( bool enabled, const QString& toolTip )
     if( !enabled )
     {
         QPalette notificationPalette = cReplayGain->palette();
-//         notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(181,96,101) );
         notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
         cReplayGain->setPalette( notificationPalette );
     }

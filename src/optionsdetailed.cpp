@@ -33,11 +33,9 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 {
     int gridRow = 0;
     grid = new QGridLayout( this );
-//     grid->setContentsMargins( 6, 6, 6, 6 );
-//     grid->setSpacing( 6 );
 
     QHBoxLayout *topBox = new QHBoxLayout();
-    grid->addLayout( topBox, gridRow++, 0 );
+    grid->addLayout( topBox, 0, 0 );
 
     QLabel *lFormat = new QLabel( i18n("Output format")+":", this );
     topBox->addWidget( lFormat );
@@ -49,7 +47,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 
     topBox->addStretch();
 
-    QLabel *lPlugin = new QLabel( i18n("Use Plugin")+":", this );
+    lPlugin = new QLabel( i18n("Use Plugin")+":", this );
     topBox->addWidget( lPlugin );
     cPlugin = new KComboBox( this );
     topBox->addWidget( cPlugin );
@@ -61,11 +59,13 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QFrame *lineFrame = new QFrame( this );
     lineFrame->setFrameShape( QFrame::HLine );
     lineFrame->setFrameShadow( QFrame::Sunken );
-    grid->addWidget( lineFrame, gridRow++, 0 );
+    grid->addWidget( lineFrame, 1, 0 );
 
     // prepare the plugin widget
     wPlugin = 0;
-    grid->setRowStretch( gridRow++, 1 );
+    grid->setRowStretch( 2, 1 );
+    grid->setRowMinimumHeight( 2, 20 );
+    gridRow = 3;
 
     // draw a horizontal line
     lineFrame = new QFrame( this );
@@ -110,11 +110,6 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
     bottomBox->addWidget( cReplayGain );
     //connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-    bottomBox->addSpacing( 12 );
-//     cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
-//     cBpm->hide();
-//     bottomBox->addWidget( cBpm );
-    //connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     bottomBox->addStretch();
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
@@ -229,7 +224,6 @@ void OptionsDetailed::formatChanged( const QString& format )
         }
     }
     cPlugin->setCurrentIndex( 0 );
-//     cPlugin->setEnabled( format != "wav" );
 
     if( cPlugin->currentText() != oldEncoder )
     {
@@ -238,6 +232,34 @@ void OptionsDetailed::formatChanged( const QString& format )
     else if( wPlugin )
     {
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+    }
+
+    lPlugin->setShown( format != "wav" );
+    cPlugin->setShown( format != "wav" );
+    if( wPlugin )
+        wPlugin->setShown( format != "wav" );
+
+    QStringList errorList;
+    cReplayGain->setEnabled( config->pluginLoader()->canReplayGain(cFormat->currentText(),currentPlugin,&errorList) );
+    if( !cReplayGain->isEnabled() )
+    {
+        QPalette notificationPalette = cReplayGain->palette();
+        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
+        cReplayGain->setPalette( notificationPalette );
+
+        if( !errorList.isEmpty() )
+        {
+            errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",cFormat->currentText()) );
+        }
+        else
+        {
+            errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",cFormat->currentText());
+        }
+        cReplayGain->setToolTip( errorList.join("\n\n") );
+    }
+    else
+    {
+        cReplayGain->setToolTip( "" );
     }
 
     somethingChanged();
@@ -265,32 +287,6 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
         connect( wPlugin, SIGNAL(somethingChanged()), this, SLOT(somethingChanged()) );
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
         grid->addWidget( wPlugin, 2, 0 );
-        wPlugin->show();
-//         wPlugin->setVisible( cFormat->currentText() != "wav" );
-    }
-
-    QStringList errorList;
-    cReplayGain->setEnabled( config->pluginLoader()->canReplayGain(cFormat->currentText(),currentPlugin,&errorList) );
-    if( !cReplayGain->isEnabled() )
-    {
-        QPalette notificationPalette = cReplayGain->palette();
-//         notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(181,96,101) );
-        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
-        cReplayGain->setPalette( notificationPalette );
-
-        if( !errorList.isEmpty() )
-        {
-            errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",cFormat->currentText()) );
-        }
-        else
-        {
-            errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",cFormat->currentText());
-        }
-        cReplayGain->setToolTip( errorList.join("\n\n") );
-    }
-    else
-    {
-        cReplayGain->setToolTip( "" );
     }
 }
 

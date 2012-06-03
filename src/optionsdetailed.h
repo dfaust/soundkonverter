@@ -56,6 +56,7 @@ public:
 private:
     QGridLayout *grid;
     KComboBox *cFormat;
+    QLabel *lPlugin;
     KComboBox *cPlugin;
     QWidget *wPlugin; // TODO convert to CodecWidget
     QMap<FilterWidget*,FilterPlugin*> wFilter;

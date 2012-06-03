@@ -103,7 +103,7 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(item->fileListItem->outputUrl) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config,"",false),usedOutputNames.values()) );
+        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(OutputDirectory::uniqueFileName(item->fileListItem->outputUrl)) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config,"",false),usedOutputNames.values()) );
         item->fileListItem->outputUrl = item->outputUrl;
         fileList->updateItem( item->fileListItem );
     }

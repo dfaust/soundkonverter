@@ -5,8 +5,8 @@
 #include "backendplugin.h"
 #include "conversionoptions.h"
 
-class QWidget;
 class CodecPlugin;
+class CodecWidget;
 class TagData;
 
 
@@ -35,8 +35,8 @@ public:
     virtual QString type();
 
     virtual QList<ConversionPipeTrunk> codecTable() = 0;
-    virtual QWidget *newCodecWidget() = 0;
-    virtual QWidget *deleteCodecWidget( QWidget *codecWidget );
+    virtual CodecWidget *newCodecWidget() = 0;
+    virtual CodecWidget *deleteCodecWidget( CodecWidget *codecWidget );
 
     /**
      * starts the conversion and returns either a conversion id or an error code:

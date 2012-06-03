@@ -25,7 +25,7 @@ public:
     void showConfigDialog( ActionType action, const QString& format, QWidget *parent );
     bool hasInfo();
     void showInfo( QWidget *parent );
-    QWidget *newCodecWidget();
+    CodecWidget *newCodecWidget();
 
     int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );

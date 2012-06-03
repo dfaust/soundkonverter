@@ -231,7 +231,7 @@ void OptionsDetailed::formatChanged( const QString& format )
     }
     else if( wPlugin )
     {
-        qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+        wPlugin->setCurrentFormat( cFormat->currentText() );
     }
 
     lPlugin->setShown( format != "wav" );
@@ -278,13 +278,13 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
     if( wPlugin )
     {
         grid->removeWidget( wPlugin );
-        disconnect( wPlugin, SIGNAL(somethingChanged()), 0, 0 );
+        disconnect( wPlugin, SIGNAL(optionsChanged()), 0, 0 );
         wPlugin = plugin->deleteCodecWidget( wPlugin );
     }
     wPlugin = plugin->newCodecWidget();
     if( wPlugin )
     {
-        connect( wPlugin, SIGNAL(somethingChanged()), this, SLOT(somethingChanged()) );
+        connect( wPlugin, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
         grid->addWidget( wPlugin, 2, 0 );
     }
@@ -295,7 +295,7 @@ void OptionsDetailed::somethingChanged()
     int dataRate = 0;
 
     if( wPlugin )
-        dataRate = qobject_cast<CodecWidget*>(wPlugin)->currentDataRate();
+        dataRate = wPlugin->currentDataRate();
 
     if( dataRate > 0 )
     {
@@ -318,7 +318,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
 
     if( wPlugin && currentPlugin )
     {
-        options = qobject_cast<CodecWidget*>(wPlugin)->currentConversionOptions();
+        options = wPlugin->currentConversionOptions();
         if( options )
         {
             options->codecName = cFormat->currentText();
@@ -326,7 +326,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
                 options->pluginName = currentPlugin->name();
             else
                 options->pluginName = "";
-            options->profile = qobject_cast<CodecWidget*>(wPlugin)->currentProfile();
+            options->profile = wPlugin->currentProfile();
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();
             options->outputFilesystem = outputDirectory->filesystem();
@@ -376,7 +376,7 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
 //     cBpm->setChecked( options->bpm );
 
     if( wPlugin )
-        return qobject_cast<CodecWidget*>(wPlugin)->setCurrentConversionOptions( options );
+        return wPlugin->setCurrentConversionOptions( options );
     else
         return false;
 }
@@ -424,7 +424,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
             return false;
         }
 
-        QDomDocument data = qobject_cast<CodecWidget*>(wPlugin)->customProfile();
+        QDomDocument data = wPlugin->customProfile();
         QDomElement root = data.documentElement();
         root.setAttribute("pluginName",currentPlugin->name());
         root.setAttribute("profileName",profileName);
@@ -541,7 +541,7 @@ bool OptionsDetailed::loadCustomProfile( const QString& profile )
                 }
                 QDomElement features = root.elementsByTagName("features").at(0).toElement();
                 cReplayGain->setChecked( features.attribute("replaygain").toInt() );
-                return qobject_cast<CodecWidget*>(wPlugin)->setCustomProfile( profile, config->data.profiles.at(i).data );
+                return wPlugin->setCustomProfile( profile, config->data.profiles.at(i).data );
             }
         }
     }
@@ -552,7 +552,7 @@ bool OptionsDetailed::loadCustomProfile( const QString& profile )
 QString OptionsDetailed::currentProfile()
 {
     if( wPlugin )
-        return qobject_cast<CodecWidget*>(wPlugin)->currentProfile();
+        return wPlugin->currentProfile();
     else
         return "";
 }
@@ -562,7 +562,7 @@ void OptionsDetailed::setCurrentProfile( const QString& profile )
     if( !wPlugin )
         return;
 
-    if( !qobject_cast<CodecWidget*>(wPlugin)->setCurrentProfile(profile) )
+    if( !wPlugin->setCurrentProfile(profile) )
     {
         // TODO find a plugin that supports the profile (eg. hybrid)
     }

@@ -136,7 +136,7 @@ void soundkonverter_codec_lame::showInfo( QWidget *parent )
     dialog->show();
 }
 
-QWidget *soundkonverter_codec_lame::newCodecWidget()
+CodecWidget *soundkonverter_codec_lame::newCodecWidget()
 {
     LameCodecWidget *widget = new LameCodecWidget();
     if( lastUsedConversionOptions )
@@ -145,7 +145,7 @@ QWidget *soundkonverter_codec_lame::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_lame::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

@@ -80,7 +80,7 @@ FilterWidget *soundkonverter_filter_normalize::newFilterWidget()
     return qobject_cast<FilterWidget*>(widget);
 }
 
-QWidget *soundkonverter_filter_normalize::newCodecWidget()
+CodecWidget *soundkonverter_filter_normalize::newCodecWidget()
 {
 //     CodecWidget *widget = new CodecWidget();
 //     if( lastUsedConversionOptions )
@@ -89,7 +89,7 @@ QWidget *soundkonverter_filter_normalize::newCodecWidget()
 //         delete lastUsedConversionOptions;
 //         lastUsedConversionOptions = 0;
 //     }
-//     return qobject_cast<QWidget*>(widget);
+//     return qobject_cast<CodecWidget*>(widget);
 return 0;
 }
 

@@ -89,7 +89,7 @@ FilterWidget *soundkonverter_filter_sox::newFilterWidget()
     return qobject_cast<FilterWidget*>(widget);
 }
 
-QWidget *soundkonverter_filter_sox::newCodecWidget()
+CodecWidget *soundkonverter_filter_sox::newCodecWidget()
 {
     SoxCodecWidget *widget = new SoxCodecWidget();
     if( lastUsedConversionOptions )
@@ -98,7 +98,7 @@ QWidget *soundkonverter_filter_sox::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_filter_sox::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

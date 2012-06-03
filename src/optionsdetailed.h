@@ -12,6 +12,7 @@ class Config;
 class ConversionOptions;
 class FilterPlugin;
 class OutputDirectory;
+class CodecWidget;
 class FilterWidget;
 
 class KComboBox;
@@ -19,6 +20,8 @@ class KPushButton;
 class QGridLayout;
 class QLabel;
 class QToolButton;
+
+
 /**
 	@author Daniel Faust <hessijames@gmail.com>
 */
@@ -58,10 +61,9 @@ private:
     KComboBox *cFormat;
     QLabel *lPlugin;
     KComboBox *cPlugin;
-    QWidget *wPlugin; // TODO convert to CodecWidget
+    CodecWidget *wPlugin;
     QMap<FilterWidget*,FilterPlugin*> wFilter;
     QCheckBox *cReplayGain;
-//     QCheckBox *cBpm;
     QLabel *lEstimSize;
     KPushButton *pProfileSave;
     QToolButton *pProfileLoad;

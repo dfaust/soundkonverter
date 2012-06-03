@@ -87,7 +87,7 @@ void soundkonverter_codec_neroaac::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_codec_neroaac::newCodecWidget()
+CodecWidget *soundkonverter_codec_neroaac::newCodecWidget()
 {
     NeroaacCodecWidget *widget = new NeroaacCodecWidget();
     if( lastUsedConversionOptions )
@@ -96,7 +96,7 @@ QWidget *soundkonverter_codec_neroaac::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_neroaac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

@@ -75,7 +75,7 @@ void soundkonverter_codec_timidity::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_codec_timidity::newCodecWidget()
+CodecWidget *soundkonverter_codec_timidity::newCodecWidget()
 {
     TimidityCodecWidget *widget = new TimidityCodecWidget();
     if( lastUsedConversionOptions )
@@ -84,7 +84,7 @@ QWidget *soundkonverter_codec_timidity::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_timidity::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

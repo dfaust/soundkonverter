@@ -102,7 +102,7 @@ void soundkonverter_codec_twolame::showInfo( QWidget *parent )
     dialog->show();
 }
 
-QWidget *soundkonverter_codec_twolame::newCodecWidget()
+CodecWidget *soundkonverter_codec_twolame::newCodecWidget()
 {
     TwoLameCodecWidget *widget = new TwoLameCodecWidget();
     if( lastUsedConversionOptions )
@@ -111,7 +111,7 @@ QWidget *soundkonverter_codec_twolame::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_twolame::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

@@ -74,7 +74,7 @@ void soundkonverter_codec_flac::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_codec_flac::newCodecWidget()
+CodecWidget *soundkonverter_codec_flac::newCodecWidget()
 {
     FlacCodecWidget *widget = new FlacCodecWidget();
     if( lastUsedConversionOptions )
@@ -83,7 +83,7 @@ QWidget *soundkonverter_codec_flac::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_flac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

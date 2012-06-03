@@ -67,7 +67,7 @@ void soundkonverter_codec_flake::showInfo( QWidget *parent )
 //         info.description = i18n("Flake is an alternative flac encoder.\nFor more information see: http://flake-enc.sourceforge.net");
 }
 
-QWidget *soundkonverter_codec_flake::newCodecWidget()
+CodecWidget *soundkonverter_codec_flake::newCodecWidget()
 {
     FlakeCodecWidget *widget = new FlakeCodecWidget();
     if( lastUsedConversionOptions )
@@ -76,7 +76,7 @@ QWidget *soundkonverter_codec_flake::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_flake::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

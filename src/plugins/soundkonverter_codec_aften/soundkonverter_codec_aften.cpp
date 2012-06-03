@@ -74,7 +74,7 @@ void soundkonverter_codec_aften::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_codec_aften::newCodecWidget()
+CodecWidget *soundkonverter_codec_aften::newCodecWidget()
 {
     AftenCodecWidget *widget = new AftenCodecWidget();
     if( lastUsedConversionOptions )
@@ -83,7 +83,7 @@ QWidget *soundkonverter_codec_aften::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_aften::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

@@ -75,7 +75,7 @@ void soundkonverter_codec_wavpack::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-QWidget *soundkonverter_codec_wavpack::newCodecWidget()
+CodecWidget *soundkonverter_codec_wavpack::newCodecWidget()
 {
     WavPackCodecWidget *widget = new WavPackCodecWidget();
     if( lastUsedConversionOptions )
@@ -84,7 +84,7 @@ QWidget *soundkonverter_codec_wavpack::newCodecWidget()
         delete lastUsedConversionOptions;
         lastUsedConversionOptions = 0;
     }
-    return qobject_cast<QWidget*>(widget);
+    return qobject_cast<CodecWidget*>(widget);
 }
 
 int soundkonverter_codec_wavpack::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

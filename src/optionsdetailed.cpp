@@ -368,14 +368,18 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
 
     cFormat->setCurrentIndex( cFormat->findText(options->codecName) );
     formatChanged( cFormat->currentText() );
-    cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
-    encoderChanged( cPlugin->currentText() );
+    if( options->codecName != "wav" )
+    {
+        cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
+        encoderChanged( cPlugin->currentText() );
+    }
     outputDirectory->setMode( (OutputDirectory::Mode)options->outputDirectoryMode );
     outputDirectory->setDirectory( options->outputDirectory );
     cReplayGain->setChecked( options->replaygain );
-//     cBpm->setChecked( options->bpm );
 
-    if( wPlugin )
+    if( options->codecName == "wav" )
+        return true;
+    else if( wPlugin )
         return wPlugin->setCurrentConversionOptions( options );
     else
         return false;

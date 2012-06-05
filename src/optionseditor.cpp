@@ -101,6 +101,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pTitleEdit = new KPushButton( " ", tagsWidget );
     pTitleEdit->setIcon( KIcon("edit-rename") );
     pTitleEdit->setFixedSize( lTitle->sizeHint().height(), lTitle->sizeHint().height() );
+    pTitleEdit->setToolTip( i18n("Edit") );
     pTitleEdit->hide();
     titleBox->addWidget( pTitleEdit );
     connect( pTitleEdit, SIGNAL(clicked()), this, SLOT(editTitleClicked()) );
@@ -112,6 +113,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pNumberEdit = new KPushButton( " ", tagsWidget );
     pNumberEdit->setIcon( KIcon("edit-rename") );
     pNumberEdit->setFixedSize( iNumber->sizeHint().height(), iNumber->sizeHint().height() );
+    pNumberEdit->setToolTip( i18n("Edit") );
     pNumberEdit->hide();
     titleBox->addWidget( pNumberEdit );
     connect( pNumberEdit, SIGNAL(clicked()), this, SLOT(editNumberClicked()) );
@@ -128,6 +130,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pArtistEdit = new KPushButton( " ", tagsWidget );
     pArtistEdit->setIcon( KIcon("edit-rename") );
     pArtistEdit->setFixedSize( lArtist->sizeHint().height(), lArtist->sizeHint().height() );
+    pArtistEdit->setToolTip( i18n("Edit") );
     pArtistEdit->hide();
     artistBox->addWidget( pArtistEdit );
     connect( pArtistEdit, SIGNAL(clicked()), this, SLOT(editArtistClicked()) );
@@ -139,6 +142,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pComposerEdit = new KPushButton( " ", tagsWidget );
     pComposerEdit->setIcon( KIcon("edit-rename") );
     pComposerEdit->setFixedSize( lComposer->sizeHint().height(), lComposer->sizeHint().height() );
+    pComposerEdit->setToolTip( i18n("Edit") );
     pComposerEdit->hide();
     artistBox->addWidget( pComposerEdit );
     connect( pComposerEdit, SIGNAL(clicked()), this, SLOT(editComposerClicked()) );
@@ -155,6 +159,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pAlbumEdit = new KPushButton( " ", tagsWidget );
     pAlbumEdit->setIcon( KIcon("edit-rename") );
     pAlbumEdit->setFixedSize( lAlbum->sizeHint().height(), lAlbum->sizeHint().height() );
+    pAlbumEdit->setToolTip( i18n("Edit") );
     pAlbumEdit->hide();
     albumBox->addWidget( pAlbumEdit );
     connect( pAlbumEdit, SIGNAL(clicked()), this, SLOT(editAlbumClicked()) );
@@ -171,6 +176,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pDiscEdit = new KPushButton( " ", tagsWidget );
     pDiscEdit->setIcon( KIcon("edit-rename") );
     pDiscEdit->setFixedSize( iDisc->sizeHint().height(), iDisc->sizeHint().height() );
+    pDiscEdit->setToolTip( i18n("Edit") );
     pDiscEdit->hide();
     albumdataBox->addWidget( pDiscEdit );
     connect( pDiscEdit, SIGNAL(clicked()), this, SLOT(editDiscClicked()) );
@@ -182,6 +188,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pDiscTotalEdit = new KPushButton( " ", tagsWidget );
     pDiscTotalEdit->setIcon( KIcon("edit-rename") );
     pDiscTotalEdit->setFixedSize( iDisc->sizeHint().height(), iDisc->sizeHint().height() );
+    pDiscTotalEdit->setToolTip( i18n("Edit") );
     pDiscTotalEdit->hide();
     albumdataBox->addWidget( pDiscTotalEdit );
     connect( pDiscTotalEdit, SIGNAL(clicked()), this, SLOT(editDiscTotalClicked()) );
@@ -194,6 +201,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pYearEdit = new KPushButton( " ", tagsWidget );
     pYearEdit->setIcon( KIcon("edit-rename") );
     pYearEdit->setFixedSize( iYear->sizeHint().height(), iYear->sizeHint().height() );
+    pYearEdit->setToolTip( i18n("Edit") );
     pYearEdit->hide();
     albumdataBox->addWidget( pYearEdit );
     connect( pYearEdit, SIGNAL(clicked()), this, SLOT(editYearClicked()) );
@@ -211,6 +219,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pGenreEdit = new KPushButton( " ", tagsWidget );
     pGenreEdit->setIcon( KIcon("edit-rename") );
     pGenreEdit->setFixedSize( cGenre->sizeHint().height(), cGenre->sizeHint().height() );
+    pGenreEdit->setToolTip( i18n("Edit") );
     pGenreEdit->hide();
     albumdataBox->addWidget( pGenreEdit );
     connect( pGenreEdit, SIGNAL(clicked()), this, SLOT(editGenreClicked()) );
@@ -227,6 +236,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pCommentEdit = new KPushButton( " ", tagsWidget );
     pCommentEdit->setIcon( KIcon("edit-rename") );
     pCommentEdit->setFixedSize( lTitle->sizeHint().height(), lTitle->sizeHint().height() );
+    pCommentEdit->setToolTip( i18n("Edit") );
     pCommentEdit->hide();
     commentBox->addWidget( pCommentEdit );
     connect( pCommentEdit, SIGNAL(clicked()), this, SLOT(editCommentClicked()) );

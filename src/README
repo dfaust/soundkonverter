@@ -100,6 +100,9 @@ cmake -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=debugfull 
 make
 sudo make install
 
+Note: `kde-config --prefix` should return the installation path of kde. On some systems you might need to use kde4-config.
+Or you can just use define a path by yourself, "/usr" will be fine for most systems.
+
 For installing soundKonverter to your home directory see Building Amarok Locally at: http://amarok.kde.org/wiki/2.0_Development_HowTo
 
 

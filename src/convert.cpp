@@ -128,6 +128,7 @@ void Convert::convert( ConvertItem *item )
     {
         logger->log( item->logID, i18n("Converting") );
         item->state = ConvertItem::convert;
+        item->conversionPipesStep = 0;
         item->backendPlugin = item->conversionPipes.at(item->take).trunks.at(0).plugin;
         if( item->backendPlugin->type() == "codec" || item->backendPlugin->type() == "filter" )
         {
@@ -214,6 +215,7 @@ void Convert::convert( ConvertItem *item )
 
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
+            item->conversionPipesStep = 0;
             logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command + "</span></pre>" );
             item->process = new KProcess();
             item->process.data()->setOutputChannelMode( KProcess::MergedChannels );

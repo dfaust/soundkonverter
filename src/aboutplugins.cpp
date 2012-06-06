@@ -47,6 +47,15 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     pluginsList->addItems( pluginNames );
 
     pluginNames.clear();
+    QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
+    for( int i=0; i<filterPlugins.count(); i++ )
+    {
+        pluginNames += filterPlugins.at(i)->name();
+    }
+    pluginNames.sort();
+    pluginsList->addItems( pluginNames );
+
+    pluginNames.clear();
     QList<ReplayGainPlugin*> replaygainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
     for( int i=0; i<replaygainPlugins.count(); i++ )
     {
@@ -163,6 +172,9 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         }
         codecsString += i18n("Decode: %1",list.join(", "));
         info += codecsString.join("<br>");
+    }
+    else if( currentPlugin->type() == "filter" )
+    {
     }
     else if( currentPlugin->type() == "replaygain" )
     {

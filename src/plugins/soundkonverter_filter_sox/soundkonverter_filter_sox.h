@@ -1,10 +1,14 @@
 
-#ifndef SOUNDKONVERTER_FILTER_Sox_H
-#define SOUNDKONVERTER_FILTER_Sox_H
+#ifndef SOUNDKONVERTER_FILTER_SOX_H
+#define SOUNDKONVERTER_FILTER_SOX_H
 
 #include "../../core/filterplugin.h"
 
+#include <QWeakPointer>
+
 class FilterOptions;
+class KDialog;
+class KComboBox;
 
 
 class soundkonverter_filter_sox : public FilterPlugin
@@ -39,11 +43,23 @@ public:
     }
 
     FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
+
+private:
+    QWeakPointer<KDialog> configDialog;
+    KComboBox *configDialogSamplingRateQualityComboBox;
+
+    int configVersion;
+    int samplingRateQuality;
+
+private slots:
+    void configDialogSave();
+    void configDialogDefault();
+
 };
 
 K_EXPORT_SOUNDKONVERTER_FILTER( sox, soundkonverter_filter_sox )
 
 
-#endif // SOUNDKONVERTER_FILTER_Sox_H
+#endif // SOUNDKONVERTER_FILTER_SOX_H
 
 

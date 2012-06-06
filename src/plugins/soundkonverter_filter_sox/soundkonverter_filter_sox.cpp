@@ -7,12 +7,25 @@
 #include "soxfilterwidget.h"
 #include "soxcodecwidget.h"
 
+#include <KDialog>
+#include <QHBoxLayout>
+#include <KComboBox>
+#include <QLabel>
+
+
 soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QStringList& args  )
     : FilterPlugin( parent )
 {
     Q_UNUSED(args)
 
     binaries["sox"] = "";
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    configVersion = group.readEntry( "configVersion", 0 );
+    samplingRateQuality = group.readEntry( "samplingRateQuality", 3 );
 
     allCodecs += "wav";
 }
@@ -57,14 +70,62 @@ bool soundkonverter_filter_sox::isConfigSupported( ActionType action, const QStr
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    return false;
+    return true;
 }
 
 void soundkonverter_filter_sox::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
     Q_UNUSED(action)
     Q_UNUSED(codecName)
-    Q_UNUSED(parent)
+
+    if( !configDialog.data() )
+    {
+        configDialog = new KDialog( parent );
+        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+
+        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
+        QLabel *configDialogSamplingRateQualityLabel = new QLabel( i18n("Sample rate change quality:"), configDialogWidget );
+        configDialogBox->addWidget( configDialogSamplingRateQualityLabel );
+        configDialogSamplingRateQualityComboBox = new KComboBox( configDialogWidget );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Quick") );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Low") );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Medium") );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("High") );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Very high") );
+        configDialogBox->addWidget( configDialogSamplingRateQualityComboBox );
+
+        configDialog.data()->setMainWidget( configDialogWidget );
+        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+    }
+    configDialogSamplingRateQualityComboBox->setCurrentIndex( samplingRateQuality );
+    configDialog.data()->show();
+}
+
+void soundkonverter_filter_sox::configDialogSave()
+{
+    if( configDialog.data() )
+    {
+        samplingRateQuality = configDialogSamplingRateQualityComboBox->currentIndex();
+
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "samplingRateQuality", samplingRateQuality );
+
+        configDialog.data()->deleteLater();
+    }
+}
+
+void soundkonverter_filter_sox::configDialogDefault()
+{
+    if( configDialog.data() )
+    {
+        configDialogSamplingRateQualityComboBox->setCurrentIndex( 3 );
+    }
 }
 
 bool soundkonverter_filter_sox::hasInfo()
@@ -139,22 +200,32 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
         if( _filterOptions->pluginName == global_plugin_name )
         {
             SoxFilterOptions *filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
+            command += binaries["sox"];
             if( filterOptions->data.normalize )
             {
-                command += binaries["sox"];
                 command += "--norm=" + QString::number(filterOptions->data.normalizeVolume);
-                if( inputFile.isEmpty() )
-                {
-                    command += "-t";
-                    command += inputCodec;
-                }
-                command += "\"" + escapeUrl(inputFile) + "\"";
-                if( outputFile.isEmpty() )
-                {
-                    command += "-t";
-                    command += outputCodec;
-                }
-                command += "\"" + escapeUrl(outputFile) + "\"";
+            }
+            if( inputFile.isEmpty() )
+            {
+                command += "-t";
+                command += inputCodec;
+            }
+            command += "\"" + escapeUrl(inputFile) + "\"";
+            if( filterOptions->data.sampleSize )
+            {
+                command += "-b";
+                command += QString::number(filterOptions->data.sampleSize);
+            }
+            if( outputFile.isEmpty() )
+            {
+                command += "-t";
+                command += outputCodec;
+            }
+            command += "\"" + escapeUrl(outputFile) + "\"";
+            if( filterOptions->data.sampleRate )
+            {
+                command += "rate";
+                command += QString::number(filterOptions->data.sampleRate);
             }
         }
     }

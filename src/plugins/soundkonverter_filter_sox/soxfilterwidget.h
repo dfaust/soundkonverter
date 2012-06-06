@@ -6,6 +6,7 @@
 
 class QCheckBox;
 class QDoubleSpinBox;
+class KComboBox;
 
 class SoxFilterWidget : public FilterWidget
 {
@@ -18,6 +19,12 @@ public:
     bool setCurrentFilterOptions( FilterOptions *_options );
 
 private:
+    QCheckBox *chSampleSize;
+    KComboBox *cSampleSize;
+    QCheckBox *chSampleRate;
+    KComboBox *cSampleRate;
+    QCheckBox *chChannels;
+    KComboBox *cChannels;
     QCheckBox *cNormalize;
     QDoubleSpinBox *dNormalizeVolume;
 

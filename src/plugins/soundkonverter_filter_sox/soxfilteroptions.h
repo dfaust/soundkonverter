@@ -16,6 +16,9 @@ public:
     bool fromXml( QDomElement filterOptions );
 
     struct Data {
+        int sampleRate;
+        int sampleSize;
+        short channels;
         bool normalize;
         double normalizeVolume;
     } data;

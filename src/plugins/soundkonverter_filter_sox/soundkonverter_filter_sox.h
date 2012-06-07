@@ -49,7 +49,7 @@ private:
     KComboBox *configDialogSamplingRateQualityComboBox;
 
     int configVersion;
-    int samplingRateQuality;
+    QString samplingRateQuality;
 
 private slots:
     void configDialogSave();

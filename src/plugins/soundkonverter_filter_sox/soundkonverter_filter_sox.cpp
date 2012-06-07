@@ -25,7 +25,7 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
 
     group = conf->group( "Plugin-"+name() );
     configVersion = group.readEntry( "configVersion", 0 );
-    samplingRateQuality = group.readEntry( "samplingRateQuality", 3 );
+    samplingRateQuality = group.readEntry( "samplingRateQuality", "high" );
 
     allCodecs += "wav";
 }
@@ -89,18 +89,18 @@ void soundkonverter_filter_sox::showConfigDialog( ActionType action, const QStri
         QLabel *configDialogSamplingRateQualityLabel = new QLabel( i18n("Sample rate change quality:"), configDialogWidget );
         configDialogBox->addWidget( configDialogSamplingRateQualityLabel );
         configDialogSamplingRateQualityComboBox = new KComboBox( configDialogWidget );
-        configDialogSamplingRateQualityComboBox->addItem( i18n("Quick") );
-        configDialogSamplingRateQualityComboBox->addItem( i18n("Low") );
-        configDialogSamplingRateQualityComboBox->addItem( i18n("Medium") );
-        configDialogSamplingRateQualityComboBox->addItem( i18n("High") );
-        configDialogSamplingRateQualityComboBox->addItem( i18n("Very high") );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Quick"), "quick" );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Low"), "low" );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Medium"), "medium" );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("High"), "high" );
+        configDialogSamplingRateQualityComboBox->addItem( i18n("Very high"), "very high" );
         configDialogBox->addWidget( configDialogSamplingRateQualityComboBox );
 
         configDialog.data()->setMainWidget( configDialogWidget );
         connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
         connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
-    configDialogSamplingRateQualityComboBox->setCurrentIndex( samplingRateQuality );
+    configDialogSamplingRateQualityComboBox->setCurrentIndex( configDialogSamplingRateQualityComboBox->findData(samplingRateQuality) );
     configDialog.data()->show();
 }
 
@@ -108,7 +108,7 @@ void soundkonverter_filter_sox::configDialogSave()
 {
     if( configDialog.data() )
     {
-        samplingRateQuality = configDialogSamplingRateQualityComboBox->currentIndex();
+        samplingRateQuality = configDialogSamplingRateQualityComboBox->itemData( configDialogSamplingRateQualityComboBox->currentIndex() ).toString();
 
         KSharedConfig::Ptr conf = KGlobal::config();
         KConfigGroup group;
@@ -124,7 +124,7 @@ void soundkonverter_filter_sox::configDialogDefault()
 {
     if( configDialog.data() )
     {
-        configDialogSamplingRateQualityComboBox->setCurrentIndex( 3 );
+        configDialogSamplingRateQualityComboBox->setCurrentIndex( configDialogSamplingRateQualityComboBox->findData("high") );
     }
 }
 
@@ -225,6 +225,16 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
             if( filterOptions->data.sampleRate )
             {
                 command += "rate";
+                if( samplingRateQuality == "quick" )
+                    command += "-q";
+                else if( samplingRateQuality == "low" )
+                    command += "-l";
+                else if( samplingRateQuality == "medium" )
+                    command += "-m";
+                else if( samplingRateQuality == "high" )
+                    command += "-h";
+                else if( samplingRateQuality == "very high" )
+                    command += "-v";
                 command += QString::number(filterOptions->data.sampleRate);
             }
         }

@@ -42,7 +42,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     preferredOggVorbisExtensionBox->setStretch( 0, 3 );
     preferredOggVorbisExtensionBox->setStretch( 1, 1 );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *updateDelayBox = new QHBoxLayout( 0 );
     box->addLayout( updateDelayBox );
@@ -57,7 +57,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     updateDelayBox->setStretch( 0, 3 );
     updateDelayBox->setStretch( 1, 1 );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
     box->addLayout( useVFATNamesBox );
@@ -67,7 +67,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useVFATNamesBox->addWidget( cUseVFATNames );
     connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 20 );
+    box->addSpacing( ConfigDialogSpacingBig );
 
     QHBoxLayout *writeLogFilesBox = new QHBoxLayout( 0 );
     box->addLayout( writeLogFilesBox );
@@ -77,7 +77,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     writeLogFilesBox->addWidget( cWriteLogFiles );
     connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
     box->addLayout( removeFailedFilesBox );
@@ -87,7 +87,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     removeFailedFilesBox->addWidget( cRemoveFailedFiles );
     connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 20 );
+    box->addSpacing( ConfigDialogSpacingBig );
 
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout( 0 );
     box->addLayout( useSharedMemoryForTempFilesBox );
@@ -112,7 +112,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
     useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *usePipesBox = new QHBoxLayout( 0 );
     box->addLayout( usePipesBox );

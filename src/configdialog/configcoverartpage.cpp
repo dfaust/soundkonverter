@@ -52,7 +52,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     else if( config->data.coverArt.writeCovers == 2 )
         rWriteCoversNever->setChecked( true );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingMedium );
 
     lWriteCoverName = new QLabel( i18n("File name for the cover"), this );
     box->addWidget( lWriteCoverName );

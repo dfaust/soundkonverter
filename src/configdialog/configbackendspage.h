@@ -24,7 +24,6 @@ class QToolButton;
 class QListWidgetItem;
 
 
-
 /**
 	@author Daniel Faust <hessijames@gmail.com>
  */
@@ -87,23 +86,26 @@ public:
 private:
     Config *config;
 
-    QGroupBox *formatGroup;
     KComboBox *cRipper;
+    KComboBox *cSelectorFilter;
     KComboBox *cSelectorFormat;
 
     BackendsListWidget *decoderList;
     BackendsListWidget *encoderList;
     BackendsListWidget *replaygainList;
 
+    KPushButton *pConfigureFilter;
     KPushButton *pShowOptimizations;
 
     QString currentFormat;
 
 private slots:
     void somethingChanged();
+    void filterChanged( const QString& pluginName );
     void formatChanged( const QString& format, bool ignoreChanges = false );
 //     void encoderChanged( const QString& encoder );
 //     void configureEncoder();
+    void configureFilter();
     void showOptimizations();
 
 public slots:

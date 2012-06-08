@@ -1,7 +1,7 @@
 //
 // C++ Interface: configpagebase
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
@@ -15,6 +15,10 @@
 #include <QWidget>
 
 class Config;
+
+#define ConfigDialogSpacingSmall 5
+#define ConfigDialogSpacingMedium 10
+#define ConfigDialogSpacingBig 20
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>

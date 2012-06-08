@@ -13,16 +13,16 @@
 #include "../config.h"
 #include "../core/codecplugin.h"
 
-#include <QLayout>
-#include <QLabel>
 #include <KComboBox>
+#include <KIcon>
 #include <KLocale>
+#include <KMessageBox>
 #include <KPushButton>
 #include <QCheckBox>
-#include <KIcon>
+#include <QLabel>
+#include <QLayout>
 #include <QListWidget>
 #include <QToolButton>
-#include <KMessageBox>
 
 
 BackendsListWidget::BackendsListWidget( const QString& _name, Config *_config, QWidget *parent )
@@ -211,10 +211,37 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     ripperBox->addWidget( cRipper );
     connect( cRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 11 );
+    box->addSpacing( ConfigDialogSpacingMedium );
+
+    QGroupBox *filterGroup = new QGroupBox( i18n("Filter backends"), this );
+    box->addWidget( filterGroup );
+    QHBoxLayout *filterBox = new QHBoxLayout( 0 );
+    filterGroup->setLayout( filterBox );
+    QLabel *lSelectorFilter = new QLabel( i18n("Backend")+":", this );
+    filterBox->addWidget( lSelectorFilter );
+    filterBox->addSpacing( 5 );
+    cSelectorFilter = new KComboBox( this );
+    QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
+    foreach( FilterPlugin *plugin, filterPlugins )
+    {
+        cSelectorFilter->addItem( plugin->name() );
+    }
+    filterBox->addWidget( cSelectorFilter );
+    connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(QString)) );
+    pConfigureFilter = new KPushButton( KIcon("configure"), "", this );
+    filterBox->addWidget( pConfigureFilter );
+    connect( pConfigureFilter, SIGNAL(clicked()), this, SLOT(configureFilter()) );
+    filterBox->addStretch();
+
+    box->addSpacing( ConfigDialogSpacingMedium );
+
+    QGroupBox *formatGroup = new QGroupBox( i18n("Codec backends"), this );
+    box->addWidget( formatGroup );
+    QVBoxLayout *formatBox = new QVBoxLayout( 0 );
+    formatGroup->setLayout( formatBox );
 
     QHBoxLayout *formatSelectorBox = new QHBoxLayout( 0 );
-    box->addLayout( formatSelectorBox );
+    formatBox->addLayout( formatSelectorBox );
     QLabel *lSelectorFormat = new QLabel( i18n("Format")+":", this );
     formatSelectorBox->addWidget( lSelectorFormat );
     formatSelectorBox->addSpacing( 5 );
@@ -226,22 +253,20 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( cSelectorFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
     formatSelectorBox->addStretch();
 
-    formatGroup = new QGroupBox( this );
-    box->addWidget( formatGroup );
-    QHBoxLayout *formatBox = new QHBoxLayout( 0 );
-    formatGroup->setLayout( formatBox );
+    QHBoxLayout *formatBackendsBox = new QHBoxLayout( 0 );
+    formatBox->addLayout( formatBackendsBox );
     decoderList = new BackendsListWidget( i18n("Decoder"), config, this );
-    formatBox->addWidget( decoderList );
+    formatBackendsBox->addWidget( decoderList );
     connect( decoderList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
     encoderList = new BackendsListWidget( i18n("Encoder"), config, this );
-    formatBox->addWidget( encoderList );
+    formatBackendsBox->addWidget( encoderList );
     connect( encoderList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
     replaygainList = new BackendsListWidget( i18n("Replay Gain"), config, this );
-    formatBox->addWidget( replaygainList );
+    formatBackendsBox->addWidget( replaygainList );
     connect( replaygainList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
 
     QHBoxLayout *optimizationsBox = new QHBoxLayout( 0 );
-    box->addLayout( optimizationsBox );
+    formatBox->addLayout( optimizationsBox );
     optimizationsBox->addStretch();
     pShowOptimizations = new KPushButton( KIcon("games-solve"), i18n("Show possible optimizations"), this );
     optimizationsBox->addWidget( pShowOptimizations );
@@ -250,12 +275,29 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 
     box->addStretch();
 
+    filterChanged( cSelectorFilter->currentText() );
     formatChanged( cSelectorFormat->currentText() );
 }
 
 
 ConfigBackendsPage::~ConfigBackendsPage()
 {}
+
+void ConfigBackendsPage::filterChanged( const QString& pluginName )
+{
+    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(cSelectorFilter->currentText()));
+
+    if( plugin )
+    {
+        pConfigureFilter->setText( i18n("Configure %1 ...",pluginName) );
+        pConfigureFilter->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
+        pConfigureFilter->show();
+    }
+    else
+    {
+        pConfigureFilter->hide();
+    }
+}
 
 void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChanges )
 {
@@ -279,8 +321,6 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
     decoderList->setFormat( format );
     encoderList->setFormat( format );
     replaygainList->setFormat( format );
-
-    formatGroup->setTitle( i18n("%1 settings",format) );
 
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
@@ -374,6 +414,16 @@ void ConfigBackendsPage::somethingChanged()
     const bool changed = decoderList->changed() || encoderList->changed() || replaygainList->changed();
 
     emit configChanged( changed );
+}
+
+void ConfigBackendsPage::configureFilter()
+{
+    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(cSelectorFilter->currentText()));
+
+    if( plugin )
+    {
+        plugin->showConfigDialog( BackendPlugin::General, "", this );
+    }
 }
 
 void ConfigBackendsPage::showOptimizations()

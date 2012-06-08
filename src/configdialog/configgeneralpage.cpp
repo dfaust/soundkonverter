@@ -47,7 +47,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     startTabBox->addWidget( cStartTab );
     connect( cStartTab, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *defaultProfileBox = new QHBoxLayout( 0 );
     box->addLayout( defaultProfileBox );
@@ -77,7 +77,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     connect( cDefaultFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     profileChanged();
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
 //     QHBoxLayout *priorityBox = new QHBoxLayout( 0 );
 //     box->addLayout( priorityBox );
@@ -106,7 +106,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     conflictHandlingBox->addWidget( cConflictHandling );
     connect( cConflictHandling, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *numFilesBox = new QHBoxLayout( 0 );
     box->addLayout( numFilesBox );
@@ -121,7 +121,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     numFilesBox->setStretch( 0, 3 );
     numFilesBox->setStretch( 1, 1 );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout( 0 );
     box->addLayout( waitForAlbumGainBox );
@@ -131,7 +131,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
     connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 5 );
+    box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
     box->addLayout( createActionsMenuBox );
@@ -141,7 +141,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     createActionsMenuBox->addWidget( cCreateActionsMenu );
     connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( 20 );
+    box->addSpacing( ConfigDialogSpacingBig );
 
     QHBoxLayout *replayGainGroupingBox = new QHBoxLayout( 0 );
     box->addLayout( replayGainGroupingBox );

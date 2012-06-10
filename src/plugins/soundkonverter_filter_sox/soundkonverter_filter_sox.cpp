@@ -10,7 +10,9 @@
 #include <KDialog>
 #include <QHBoxLayout>
 #include <KComboBox>
+#include <KMessageBox>
 #include <QLabel>
+#include <QFileInfo>
 
 
 soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QStringList& args  )
@@ -26,8 +28,61 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
     group = conf->group( "Plugin-"+name() );
     configVersion = group.readEntry( "configVersion", 0 );
     samplingRateQuality = group.readEntry( "samplingRateQuality", "high" );
+    experimentalEffectsEnabled = group.readEntry( "experimentalEffectsEnabled", false );
+    soxLastModified = group.readEntry( "soxLastModified", QDateTime() );
+    soxCodecList = group.readEntry( "soxCodecList", QStringList() ).toSet();
 
-    allCodecs += "wav";
+    SoxCodecData data;
+
+    // 8svx aif aifc aiff aiffc al amb amr-nb amr-wb anb au avr awb caf cdda cdr cvs cvsd cvu dat dvms f32 f4 f64 f8 fap flac fssd gsm gsrt hcom htk ima ircam la lpc lpc10 lu mat mat4 mat5 maud mp2 mp3 nist ogg paf prc pvf raw s1 s16 s2 s24 s3 s32 s4 s8 sb sd2 sds sf sl sln smp snd sndfile sndr sndt sou sox sph sw txw u1 u16 u2 u24 u3 u32 u4 u8 ub ul uw vms voc vorbis vox w64 wav wavpcm wv wve xa xi
+
+    data.codecName = "wav";
+    data.soxCodecName = "wav";
+    data.external = false;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "flac";
+    data.soxCodecName = "flac";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "ogg vorbis";
+    data.soxCodecName = "vorbis";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "mp3";
+    data.soxCodecName = "mp3";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "amr nb";
+    data.soxCodecName = "amr-nb";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "amr wb";
+    data.soxCodecName = "amr-wb";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    for( int i=0; i<codecList.count(); i++ )
+    {
+        if( !codecList.at(i).external && ( !codecList.at(i).experimental || experimentalEffectsEnabled ) )
+        {
+            codecList[i].enabled = true;
+        }
+        else
+        {
+            codecList[i].enabled = false;
+        }
+    }
 }
 
 soundkonverter_filter_sox::~soundkonverter_filter_sox()
@@ -38,29 +93,105 @@ QString soundkonverter_filter_sox::name()
     return global_plugin_name;
 }
 
+int soundkonverter_filter_sox::version()
+{
+    return global_plugin_version;
+}
+
 QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
 {
     QList<ConversionPipeTrunk> table;
-    ConversionPipeTrunk newTrunk;
+    QStringList codecs;
 
-    QStringList filter;
-    filter += "normalize";
+    if( !binaries["sox"].isEmpty() )
+    {
+        QFileInfo soxInfo( binaries["sox"] );
+        if( soxInfo.lastModified() > soxLastModified || configVersion < version() )
+        {
+            infoProcess = new KProcess();
+            infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
-    newTrunk.codecFrom = "wav";
-    newTrunk.codecTo = "wav";
-    newTrunk.rating = 100;
-    newTrunk.enabled = ( binaries["sox"] != "" );
-    newTrunk.problemInfo = standardMessage( "filter,backend", filter.join(", "), "multiple", "sox" ) + "\n" + standardMessage( "install_opensource_backend", "sox" );
-    newTrunk.data.hasInternalReplayGain = false;
-    table.append( newTrunk );
+            QStringList command;
+            command += binaries["sox"];
+            command += "--help";
+            infoProcess.data()->clearProgram();
+            infoProcess.data()->setShellCommand( command.join(" ") );
+            infoProcess.data()->start();
 
-    newTrunk.codecFrom = "wav";
-    newTrunk.codecTo = "flac";
-    newTrunk.rating = 100;
-    newTrunk.enabled = ( binaries["sox"] != "" );
-    newTrunk.problemInfo = standardMessage( "filter,backend", filter.join(", "), "multiple", "sox" ) + "\n" + standardMessage( "install_opensource_backend", "sox" );
-    newTrunk.data.hasInternalReplayGain = false;
-    table.append( newTrunk );
+            infoProcess.data()->waitForFinished( 3000 );
+        }
+    }
+
+    for( int i=0; i<codecList.count(); i++ )
+    {
+        if( ( !codecList.at(i).experimental || experimentalEffectsEnabled ) && soxCodecList.contains(codecList.at(i).soxCodecName) )
+        {
+            codecList[i].enabled = true;
+        }
+        else
+        {
+            codecList[i].enabled = false;
+        }
+        codecs += codecList.at(i).codecName;
+    }
+
+    foreach( const QString fromCodec, codecs )
+    {
+        foreach( const QString toCodec, codecs )
+        {
+            if( fromCodec == "wav" && toCodec == "wav" )
+                continue;
+
+            bool codecEnabled = false;
+            QStringList soxProblemInfo;
+            foreach( const SoxCodecData data, codecList )
+            {
+                if( data.codecName == toCodec )
+                {
+                    if( data.enabled ) // everything should work, lets exit
+                    {
+                        codecEnabled = true;
+                        break;
+                    }
+                    if( data.experimental && !experimentalEffectsEnabled )
+                    {
+                        soxProblemInfo.append( i18n("Enable experimental codecs in the sox configuration dialog.") );
+                    }
+                    if( data.external )
+                    {
+                        soxProblemInfo.append( i18n("Compile sox with %1 support.",data.soxCodecName) );
+                    }
+                }
+            }
+
+            ConversionPipeTrunk newTrunk;
+            newTrunk.codecFrom = fromCodec;
+            newTrunk.codecTo = toCodec;
+            newTrunk.rating = 80;
+            newTrunk.enabled = ( binaries["sox"] != "" ) && codecEnabled;
+            if( binaries["sox"] == "" )
+            {
+                if( toCodec == "wav" )
+                {
+                    newTrunk.problemInfo = standardMessage( "decode_codec,backend", fromCodec, "sox" ) + "\n" + standardMessage( "install_patented_backend", "sox" );
+                }
+                else if( fromCodec == "wav" )
+                {
+                    newTrunk.problemInfo = standardMessage( "encode_codec,backend", toCodec, "sox" ) + "\n" + standardMessage( "install_patented_backend", "sox" );
+                }
+            }
+            else
+            {
+                newTrunk.problemInfo = soxProblemInfo.join("\n"+i18nc("like in either or","or")+"\n");
+            }
+            newTrunk.data.hasInternalReplayGain = false;
+            table.append( newTrunk );
+        }
+    }
+
+    allCodecs = codecs;
 
     return table;
 }
@@ -193,33 +324,73 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
     if( !_conversionOptions )
         return QStringList();
 
+    ConversionOptions *conversionOptions = _conversionOptions;
+
     QStringList command;
 
-    foreach( FilterOptions *_filterOptions,_conversionOptions->filterOptions )
+    foreach( FilterOptions *_filterOptions,conversionOptions->filterOptions )
     {
         if( _filterOptions->pluginName == global_plugin_name )
         {
             SoxFilterOptions *filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
             command += binaries["sox"];
+            command += "--no-glob";
             if( filterOptions->data.normalize )
             {
                 command += "--norm=" + QString::number(filterOptions->data.normalizeVolume);
             }
             if( inputFile.isEmpty() )
             {
-                command += "-t";
-                command += inputCodec;
+                command += "--type";
+                command += soxCodecName(inputCodec);
             }
             command += "\"" + escapeUrl(inputFile) + "\"";
             if( filterOptions->data.sampleSize )
             {
-                command += "-b";
+                command += "--bits";
                 command += QString::number(filterOptions->data.sampleSize);
+            }
+            if( outputCodec == "flac" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "FLAC" ) )
+            {
+                command += "--compression";
+                command += QString::number(conversionOptions->compressionLevel);
+            }
+            else if( outputCodec == "ogg vorbis" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "Vorbis Tools" ) )
+            {
+                command += "--compression";
+                command += QString::number(conversionOptions->quality);
+            }
+            else if( outputCodec == "mp3" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "lame" ) )
+            {
+                command += "--compression";
+
+                QString compressionLevel = QString::number(conversionOptions->compressionLevel);
+                if( compressionLevel == "0" )
+                    compressionLevel = "01";
+
+                if( conversionOptions->qualityMode == ConversionOptions::Quality )
+                {
+                    command += "-" + QString::number(conversionOptions->quality) + "." + compressionLevel;
+                }
+                else if( conversionOptions->qualityMode == ConversionOptions::Bitrate )
+                {
+                    command += QString::number(conversionOptions->bitrate) + "." + compressionLevel;
+                }
+            }
+            else if( outputCodec == "amr nb" && conversionOptions->pluginName == global_plugin_name )
+            {
+                command += "--compression";
+                command += QString::number(conversionOptions->quality);
+            }
+            else if( outputCodec == "amr wb" && conversionOptions->pluginName == global_plugin_name )
+            {
+                command += "--compression";
+                command += QString::number(conversionOptions->quality);
             }
             if( outputFile.isEmpty() )
             {
-                command += "-t";
-                command += outputCodec;
+                command += "--type";
+                command += soxCodecName(outputCodec);
             }
             command += "\"" + escapeUrl(outputFile) + "\"";
             if( filterOptions->data.sampleRate )
@@ -265,6 +436,59 @@ FilterOptions *soundkonverter_filter_sox::filterOptionsFromXml( QDomElement filt
     options->fromXml( filterOptions );
     return options;
 }
+
+QString soundkonverter_filter_sox::soxCodecName( const QString& codecName )
+{
+    foreach( SoxCodecData data, codecList )
+    {
+        if( data.codecName == codecName )
+            return data.soxCodecName;
+    }
+
+    return codecName;
+}
+
+void soundkonverter_filter_sox::infoProcessOutput()
+{
+    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+}
+
+void soundkonverter_filter_sox::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
+{
+    Q_UNUSED(exitStatus)
+    Q_UNUSED(exitCode)
+
+    QRegExp formatsReg("AUDIO FILE FORMATS: ([^\n]*)");
+    if( infoProcessOutputData.contains(formatsReg) )
+    {
+        const QStringList formats = formatsReg.cap(1).split(" ",QString::SkipEmptyParts);
+
+        soxCodecList.clear();
+
+        for( int i=0; i<codecList.count(); i++ )
+        {
+            if( formats.contains(codecList.at(i).soxCodecName) )
+            {
+                soxCodecList += codecList.at(i).soxCodecName;
+            }
+        }
+
+        QFileInfo soxInfo( binaries["sox"] );
+        soxLastModified = soxInfo.lastModified();
+
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "configVersion", version() );
+        group.writeEntry( "soxLastModified", soxLastModified );
+        group.writeEntry( "codecList", soxCodecList.toList() );
+    }
+
+    infoProcessOutputData.clear();
+    infoProcess.data()->deleteLater();
+}
+
 
 
 #include "soundkonverter_filter_sox.moc"

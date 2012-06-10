@@ -11,6 +11,7 @@
 #include <QLabel>
 
 #include <KComboBox>
+#include <KPushButton>
 
 SoxFilterWidget::SoxFilterWidget()
     : FilterWidget()
@@ -76,6 +77,7 @@ SoxFilterWidget::SoxFilterWidget()
 
     box1->addStretch();
 
+
     QHBoxLayout *box2 = new QHBoxLayout();
     grid->addLayout( box2, gridRow++, 0 );
 
@@ -95,6 +97,95 @@ SoxFilterWidget::SoxFilterWidget()
     cNormalize->setChecked( false );
     dNormalizeVolume->setValue( 0 );
     dNormalizeVolume->setPrefix( "+" );
+
+
+    QHBoxLayout *effectBox1 = new QHBoxLayout();
+    grid->addLayout( effectBox1, gridRow++, 0 );
+
+    QLabel *lEffect1 = new QLabel( i18n("Effect:") );
+    effectBox1->addWidget( lEffect1 );
+
+    KComboBox *cEffect1 = new KComboBox( this );
+//     connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    cEffect1->addItem( i18n("Disabled") );
+    cEffect1->addItem( "allpass" );
+    cEffect1->addItem( "band" );
+    cEffect1->addItem( "bandpass" );
+    cEffect1->addItem( "bandreject" );
+    cEffect1->addItem( "bass" );
+    cEffect1->addItem( "bend" );
+    cEffect1->addItem( "biquad" );
+    cEffect1->addItem( "chorus" );
+    cEffect1->addItem( "channels" );
+    cEffect1->addItem( "compand" );
+    cEffect1->addItem( "contrast" );
+    cEffect1->addItem( "dcshift" );
+    cEffect1->addItem( "deemph" );
+    cEffect1->addItem( "delay" );
+    cEffect1->addItem( "dither" );
+//     cEffect1->addItem( "divide" ); // experimental
+    cEffect1->addItem( "downsample" );
+    cEffect1->addItem( "earwax" );
+    cEffect1->addItem( "echo" );
+    cEffect1->addItem( "echos" );
+    cEffect1->addItem( "equalizer" );
+    cEffect1->addItem( "fade" );
+    cEffect1->addItem( "fir" );
+//     cEffect1->addItem( "firfit" ); // experimental
+    cEffect1->addItem( "flanger" );
+    cEffect1->addItem( "gain" );
+    cEffect1->addItem( "highpass" );
+    cEffect1->addItem( "hilbert" );
+//     cEffect1->addItem( "input" ); // libSoX-only
+    cEffect1->addItem( "ladspa" );
+    cEffect1->addItem( "loudness" );
+    cEffect1->addItem( "lowpass" );
+    cEffect1->addItem( "mcompand" );
+//     cEffect1->addItem( "mixer" ); // deprecated
+    cEffect1->addItem( "noiseprof" );
+    cEffect1->addItem( "noisered" );
+    cEffect1->addItem( "norm" );
+    cEffect1->addItem( "oops" );
+//     cEffect1->addItem( "output" ); // libSoX-only
+    cEffect1->addItem( "overdrive" );
+    cEffect1->addItem( "pad" );
+    cEffect1->addItem( "phaser" );
+    cEffect1->addItem( "pitch" );
+    cEffect1->addItem( "rate" );
+    cEffect1->addItem( "remix" );
+    cEffect1->addItem( "repeat" );
+    cEffect1->addItem( "reverb" );
+    cEffect1->addItem( "reverse" );
+    cEffect1->addItem( "riaa" );
+    cEffect1->addItem( "silence" );
+    cEffect1->addItem( "sinc" );
+    cEffect1->addItem( "spectrogram" );
+    cEffect1->addItem( "speed" );
+    cEffect1->addItem( "splice" );
+    cEffect1->addItem( "stat" );
+    cEffect1->addItem( "stats" );
+    cEffect1->addItem( "stretch" );
+    cEffect1->addItem( "swap" );
+    cEffect1->addItem( "synth" );
+    cEffect1->addItem( "tempo" );
+    cEffect1->addItem( "treble" );
+    cEffect1->addItem( "tremolo" );
+    cEffect1->addItem( "trim" );
+    cEffect1->addItem( "upsample" );
+    cEffect1->addItem( "vad" );
+    cEffect1->addItem( "vol" );
+    effectBox1->addWidget( cEffect1 );
+
+    effectBox1->addStretch();
+
+    KPushButton *pEffect1Remove = new KPushButton( KIcon("list-remove"), i18n("Remove"), this );
+    pEffect1Remove->setToolTip( i18n("Remove this effect") );
+    effectBox1->addWidget( pEffect1Remove );
+
+    KPushButton *pEffect1Add = new KPushButton( KIcon("list-add"), i18n("Add"), this );
+    pEffect1Add->setToolTip( i18n("Add another effect") );
+    effectBox1->addWidget( pEffect1Add );
+
 }
 
 SoxFilterWidget::~SoxFilterWidget()

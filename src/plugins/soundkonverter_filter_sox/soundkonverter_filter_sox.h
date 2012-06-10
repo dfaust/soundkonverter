@@ -5,6 +5,7 @@
 #include "../../core/filterplugin.h"
 
 #include <QWeakPointer>
+#include <QDateTime>
 
 class FilterOptions;
 class KDialog;
@@ -15,6 +16,15 @@ class soundkonverter_filter_sox : public FilterPlugin
 {
     Q_OBJECT
 public:
+    struct SoxCodecData
+    {
+        QString codecName;
+        QString soxCodecName;
+        bool external;
+        bool experimental;
+        bool enabled;
+    };
+
     /** Default Constructor */
     soundkonverter_filter_sox( QObject *parent, const QStringList& args );
 
@@ -22,6 +32,7 @@ public:
     virtual ~soundkonverter_filter_sox();
 
     QString name();
+    int version();
 
     QList<ConversionPipeTrunk> codecTable();
 
@@ -45,16 +56,27 @@ public:
     FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 
 private:
+    QList<SoxCodecData> codecList;
+    QWeakPointer<KProcess> infoProcess;
+    QString infoProcessOutputData;
+
     QWeakPointer<KDialog> configDialog;
     KComboBox *configDialogSamplingRateQualityComboBox;
 
     int configVersion;
     QString samplingRateQuality;
+    bool experimentalEffectsEnabled;
+    QDateTime soxLastModified;
+    QSet<QString> soxCodecList;
+
+    QString soxCodecName( const QString& codecName );
 
 private slots:
     void configDialogSave();
     void configDialogDefault();
 
+    void infoProcessOutput();
+    void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
 K_EXPORT_SOUNDKONVERTER_FILTER( sox, soundkonverter_filter_sox )

@@ -9,8 +9,8 @@
 -Fix: When loading file lists some options were ignored
 
 1.5.90 (1.6.0 rc1):
--Add: Make the 'Failed' status clickable and open the log if clicked
--Add: Make the file name of covers written to the output directory configureable
+-Add: Make the 'Failed' status click-able and open the log if clicked
+-Add: Make the file name of covers written to the output directory configureble
 -Change: Remove the info tab from the options editor
 -Change: Discard changes in the options editor when selecting a different file in file list
 -Fix: Problem dialog wasn't shown when dropping unsupported files on the soundKonverter or ReplayGain tool window

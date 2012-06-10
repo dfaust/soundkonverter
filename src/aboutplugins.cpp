@@ -175,6 +175,38 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     }
     else if( currentPlugin->type() == "filter" )
     {
+        CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
+
+        QStringList codecsString;
+        QMap<QString,bool> encodeCodecs;
+        QMap<QString,bool> decodeCodecs;
+        QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
+        for( int i=0; i<codecTable.count(); i++ )
+        {
+            if( codecTable.at(i).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(i).codecTo) || !encodeCodecs[codecTable.at(i).codecTo] ) )
+                encodeCodecs[codecTable.at(i).codecTo] = codecTable.at(i).enabled;
+
+            if( codecTable.at(i).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(i).codecFrom) || !decodeCodecs[codecTable.at(i).codecFrom] ) )
+                decodeCodecs[codecTable.at(i).codecFrom] = codecTable.at(i).enabled;
+        }
+        codecsString += i18n("Supported codecs:");
+        QStringList list;
+        for( int i=0; i<encodeCodecs.count(); i++ )
+        {
+            const QString codecName = encodeCodecs.keys().at(i);
+            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
+            list += encodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
+        }
+        codecsString += i18n("Encode: %1",list.join(", "));
+        list.clear();
+        for( int i=0; i<decodeCodecs.count(); i++ )
+        {
+            const QString codecName = decodeCodecs.keys().at(i);
+            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
+            list += decodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
+        }
+        codecsString += i18n("Decode: %1",list.join(", "));
+        info += codecsString.join("<br>");
     }
     else if( currentPlugin->type() == "replaygain" )
     {

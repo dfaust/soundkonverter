@@ -662,16 +662,16 @@ void Convert::processOutput()
         {
             const QString output = items.at(i)->process.data()->readAllStandardOutput().data();
 
-            bool logOutput = false;
+            bool logOutput = true;
             foreach( const ConversionPipeTrunk trunk, items.at(i)->conversionPipes.at(items.at(i)->take).trunks )
             {
                 const float progress = trunk.plugin->parseOutput( output );
 
                 if( progress > items.at(i)->progress )
+                {
                     items[i]->progress = progress;
-
-                if( progress == -1 )
-                    logOutput = true;
+                    logOutput = false;
+                }
             }
 
             if( logOutput && !output.simplified().isEmpty() )

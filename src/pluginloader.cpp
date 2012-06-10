@@ -857,20 +857,20 @@ QMap<QString,QStringList> PluginLoader::decodeProblems( bool detailed )
 
     if( !detailed )
     {
-        for( int i=0; i<conversionPipeTrunks.size(); i++ )
+        for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
         {
-            if( conversionPipeTrunks.at(i).enabled )
+            if( conversionFilterPipeTrunks.at(i).enabled )
             {
-                enabledCodecs += conversionPipeTrunks.at(i).codecFrom;
+                enabledCodecs += conversionFilterPipeTrunks.at(i).codecFrom;
             }
         }
     }
 
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
     {
-        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && !problems.value(conversionPipeTrunks.at(i).codecFrom).contains(conversionPipeTrunks.at(i).problemInfo) && !enabledCodecs.contains(conversionPipeTrunks.at(i).codecFrom) )
+        if( !conversionFilterPipeTrunks.at(i).enabled && !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && !problems.value(conversionFilterPipeTrunks.at(i).codecFrom).contains(conversionFilterPipeTrunks.at(i).problemInfo) && !enabledCodecs.contains(conversionFilterPipeTrunks.at(i).codecFrom) )
         {
-            problems[conversionPipeTrunks.at(i).codecFrom] += conversionPipeTrunks.at(i).problemInfo;
+            problems[conversionFilterPipeTrunks.at(i).codecFrom] += conversionFilterPipeTrunks.at(i).problemInfo;
         }
     }
 
@@ -885,20 +885,20 @@ QMap<QString,QStringList> PluginLoader::encodeProblems( bool detailed )
 
     if( !detailed )
     {
-        for( int i=0; i<conversionPipeTrunks.size(); i++ )
+        for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
         {
-            if( conversionPipeTrunks.at(i).enabled )
+            if( conversionFilterPipeTrunks.at(i).enabled )
             {
-                enabledCodecs += conversionPipeTrunks.at(i).codecTo;
+                enabledCodecs += conversionFilterPipeTrunks.at(i).codecTo;
             }
         }
     }
 
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
     {
-        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && !problems.value(conversionPipeTrunks.at(i).codecTo).contains(conversionPipeTrunks.at(i).problemInfo) && !enabledCodecs.contains(conversionPipeTrunks.at(i).codecTo) )
+        if( !conversionFilterPipeTrunks.at(i).enabled && !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && !problems.value(conversionFilterPipeTrunks.at(i).codecTo).contains(conversionFilterPipeTrunks.at(i).problemInfo) && !enabledCodecs.contains(conversionFilterPipeTrunks.at(i).codecTo) )
         {
-              problems[conversionPipeTrunks.at(i).codecTo] += conversionPipeTrunks.at(i).problemInfo;
+              problems[conversionFilterPipeTrunks.at(i).codecTo] += conversionFilterPipeTrunks.at(i).problemInfo;
         }
     }
 
@@ -935,11 +935,11 @@ QMap<QString,QStringList> PluginLoader::replaygainProblems( bool detailed )
 
 QString PluginLoader::pluginDecodeProblems( const QString& pluginName, const QString& codecName )
 {
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
     {
-        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && conversionPipeTrunks.at(i).plugin->name() == pluginName && conversionPipeTrunks.at(i).codecFrom == codecName )
+        if( !conversionFilterPipeTrunks.at(i).enabled && !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && conversionFilterPipeTrunks.at(i).plugin->name() == pluginName && conversionFilterPipeTrunks.at(i).codecFrom == codecName )
         {
-              return conversionPipeTrunks.at(i).problemInfo;
+              return conversionFilterPipeTrunks.at(i).problemInfo;
         }
     }
 
@@ -948,11 +948,11 @@ QString PluginLoader::pluginDecodeProblems( const QString& pluginName, const QSt
 
 QString PluginLoader::pluginEncodeProblems( const QString& pluginName, const QString& codecName )
 {
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
     {
-        if( !conversionPipeTrunks.at(i).enabled && !conversionPipeTrunks.at(i).problemInfo.isEmpty() && conversionPipeTrunks.at(i).plugin->name() == pluginName && conversionPipeTrunks.at(i).codecTo == codecName )
+        if( !conversionFilterPipeTrunks.at(i).enabled && !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && conversionFilterPipeTrunks.at(i).plugin->name() == pluginName && conversionFilterPipeTrunks.at(i).codecTo == codecName )
         {
-              return conversionPipeTrunks.at(i).problemInfo;
+              return conversionFilterPipeTrunks.at(i).problemInfo;
         }
     }
 

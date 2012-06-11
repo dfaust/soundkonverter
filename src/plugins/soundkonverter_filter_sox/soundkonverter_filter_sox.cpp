@@ -30,7 +30,7 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
     samplingRateQuality = group.readEntry( "samplingRateQuality", "high" );
     experimentalEffectsEnabled = group.readEntry( "experimentalEffectsEnabled", false );
     soxLastModified = group.readEntry( "soxLastModified", QDateTime() );
-    soxCodecList = group.readEntry( "soxCodecList", QStringList() ).toSet();
+    soxCodecList = group.readEntry( "codecList", QStringList() ).toSet();
 
     SoxCodecData data;
 

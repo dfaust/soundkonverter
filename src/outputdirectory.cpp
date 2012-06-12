@@ -125,7 +125,7 @@ QString OutputDirectory::filesystemForDirectory( const QString& dir )
     return mp->mountType();
 }
 
-KUrl OutputDirectory::calcPath( FileListItem *fileListItem, const QStringList& usedOutputNames, Config *config, QString extension, bool fast )
+KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames )
 {
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
@@ -134,7 +134,8 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, const QStringList& u
     QString path;
     KUrl url;
 
-    if( extension.isEmpty() && config->pluginLoader()->codecExtensions(options->codecName).count() > 0 )
+    QString extension;
+    if( config->pluginLoader()->codecExtensions(options->codecName).count() > 0 )
         extension = config->pluginLoader()->codecExtensions(options->codecName).first();
 
     if( extension.isEmpty() )
@@ -312,14 +313,6 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, const QStringList& u
     else // SourceDirectory
     {
         path = fileListItem->url.toLocalFile();
-
-        const QString outputFilesystem = fast ? "" : filesystemForDirectory(path);
-
-        if( config->data.general.useVFATNames || outputFilesystem == "vfat" )
-            path = vfatPath( path );
-
-        if( outputFilesystem == "ntfs" )
-            path = ntfsPath( path );
 
         url = changeExtension( KUrl(path), extension );
 

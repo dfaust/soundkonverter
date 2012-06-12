@@ -231,7 +231,7 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, usedOutputNames.values(), config, "", false );
+        item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
         if( QFile::exists(item->outputUrl.toLocalFile()) )
         {
             logger->log( item->logID, "\tOutput file already exists" );
@@ -1013,7 +1013,8 @@ void Convert::add( FileListItem* item )
         logger->log( newItem->logID, "\t\t" + pipe_str.join(", ") );
     }
 
-    logger->log( newItem->logID, i18n("File system type: %1",conversionOptions->outputFilesystem) );
+    if( conversionOptions->outputDirectoryMode != OutputDirectory::Source )
+        logger->log( newItem->logID, i18n("File system type: %1",conversionOptions->outputFilesystem) );
 
     newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::convert );
 

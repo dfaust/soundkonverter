@@ -473,7 +473,7 @@ void FileList::updateItem( FileListItem *item )
     }
     else
     {
-        outputUrl = OutputDirectory::calcPath( item, QStringList(), config );
+        outputUrl = OutputDirectory::calcPath( item, config );
     }
 //     if( QFile::exists(outputUrl.toLocalFile()) )
 //     {

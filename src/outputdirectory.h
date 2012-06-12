@@ -41,7 +41,7 @@ public:
     void setDirectory( const QString& directory );
     QString filesystem();
 
-    static KUrl calcPath( FileListItem *fileListItem, const QStringList& usedOutputNames, Config *config, QString extension = "", bool fast = true );
+    static KUrl calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames = QStringList() );
     static KUrl changeExtension( const KUrl& url, const QString& extension );
     static KUrl uniqueFileName( const KUrl& url, const QStringList& usedOutputNames );
     static KUrl makePath( const KUrl& url );

@@ -35,7 +35,7 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 
     data.ffmpegCodecList.clear();
     data.codecName = "wav";
-    ffmpegData.name = "pcm_s16le";
+    ffmpegData.name = "wav";
     ffmpegData.external = false;
     ffmpegData.experimental = false;
     data.ffmpegCodecList.append( ffmpegData );

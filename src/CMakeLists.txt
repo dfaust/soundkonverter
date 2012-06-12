@@ -15,7 +15,12 @@ find_package(Taglib REQUIRED)
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
 
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -pedantic")
+# all the warnings about constructions
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+# strict ISO C and ISO C++
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
+# implicit conversions
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion")
 
 
 add_subdirectory(plugins)

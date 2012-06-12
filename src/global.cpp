@@ -13,14 +13,13 @@
 
 #include <KLocale>
 #include <KGlobal>
-#include <KDebug>
+
 
 Global::Global()
 {}
 
 Global::~Global()
 {}
-
 
 QString Global::prettyNumber( double num, QString unit, short digits )
 {
@@ -55,16 +54,26 @@ QString Global::prettyNumber( double num, QString unit, short digits )
             num /= 1024;
             pow++;
         }
-        if( pow == 0 ) unit = "B";
-        else if( pow == 1 ) unit = "KiB";
-        else if( pow == 2 ) unit = "MiB";
-        else if( pow == 3 ) unit = "GiB";
-        else if( pow == 4 ) unit = "TiB";
-        else if( pow == 5 ) unit = "PiB";
-        else if( pow == 6 ) unit = "EiB";
-        else if( pow == 7 ) unit = "ZiB";
-        else if( pow == 8 ) unit = "YiB";
-        else unit = "Nan";
+        if( pow == 0 )
+            unit = "B";
+        else if( pow == 1 )
+            unit = "KiB";
+        else if( pow == 2 )
+            unit = "MiB";
+        else if( pow == 3 )
+            unit = "GiB";
+        else if( pow == 4 )
+            unit = "TiB";
+        else if( pow == 5 )
+            unit = "PiB";
+        else if( pow == 6 )
+            unit = "EiB";
+        else if( pow == 7 )
+            unit = "ZiB";
+        else if( pow == 8 )
+            unit = "YiB";
+        else
+            unit = "Nan";
 
         if( num < 100 || num > 999 )
             prettyString = QString::number(num).left(4);
@@ -84,15 +93,24 @@ QString Global::prettyNumber( double num, QString unit, short digits )
         short seconds = (int)(num/1000.0f)%60;
         short milliseconds = (int)num%1000;
 
-        if( days >= 10 ) prettyString = QString("%1%2").arg(days).arg(i18nc("days","d"));
-        else if( days >= 1 ) prettyString = QString("%1%2 %3%4").arg(days).arg(i18nc("days","d")).arg(hours).arg(i18nc("hours","h"));
-        else if( hours >= 1 ) prettyString = QString("%1%2 %3%4").arg(hours).arg(i18nc("hours","h")).arg(minutes).arg(i18nc("minutes","m"));
-        else if( minutes >= 1 && seconds < 10 ) prettyString = QString("%1%2 0%3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
-        else if( minutes >= 1 ) prettyString = QString("%1%2 %3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
-        else if( seconds >= 1 && milliseconds < 10 ) prettyString = QString("%1%2 00%3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
-        else if( seconds >= 1 && milliseconds < 100 ) prettyString = QString("%1%2 0%3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
-        else if( seconds >= 1 ) prettyString = QString("%1%2 %3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
-        else if( milliseconds >= 1 ) prettyString = QString("%1%2").arg(milliseconds).arg(i18nc("milliseconds","ms"));
+        if( days >= 10 )
+            prettyString = QString("%1%2").arg(days).arg(i18nc("days","d"));
+        else if( days >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(days).arg(i18nc("days","d")).arg(hours).arg(i18nc("hours","h"));
+        else if( hours >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(hours).arg(i18nc("hours","h")).arg(minutes).arg(i18nc("minutes","m"));
+        else if( minutes >= 1 && seconds < 10 )
+            prettyString = QString("%1%2 0%3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
+        else if( minutes >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
+        else if( seconds >= 1 && milliseconds < 10 )
+            prettyString = QString("%1%2 00%3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
+        else if( seconds >= 1 && milliseconds < 100 )
+            prettyString = QString("%1%2 0%3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
+        else if( seconds >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(seconds).arg(i18nc("seconds","s")).arg(milliseconds).arg(i18nc("milliseconds","ms"));
+        else if( milliseconds >= 1 )
+            prettyString = QString("%1%2").arg(milliseconds).arg(i18nc("milliseconds","ms"));
     }
     else if( unit == "s" )
     {
@@ -101,12 +119,18 @@ QString Global::prettyNumber( double num, QString unit, short digits )
         short minutes = (int)(num/60)%60;
         short seconds = (int)(num)%60;
 
-        if( days >= 10 ) prettyString = QString("%1%2").arg(days).arg(i18nc("days","d"));
-        else if( days >= 1 ) prettyString = QString("%1%2 %3%4").arg(days).arg(i18nc("days","d")).arg(hours).arg(i18nc("hours","h"));
-        else if( hours >= 1 ) prettyString = QString("%1%2 %3%4").arg(hours).arg(i18nc("hours","h")).arg(minutes).arg(i18nc("minutes","m"));
-        else if( minutes >= 1 && seconds < 10 ) prettyString = QString("%1%2 0%3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
-        else if( minutes >= 1 ) prettyString = QString("%1%2 %3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
-        else if( seconds >= 1 ) prettyString = QString("%1%2").arg(seconds).arg(i18nc("seconds","s"));
+        if( days >= 10 )
+            prettyString = QString("%1%2").arg(days).arg(i18nc("days","d"));
+        else if( days >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(days).arg(i18nc("days","d")).arg(hours).arg(i18nc("hours","h"));
+        else if( hours >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(hours).arg(i18nc("hours","h")).arg(minutes).arg(i18nc("minutes","m"));
+        else if( minutes >= 1 && seconds < 10 )
+            prettyString = QString("%1%2 0%3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
+        else if( minutes >= 1 )
+            prettyString = QString("%1%2 %3%4").arg(minutes).arg(i18nc("minutes","m")).arg(seconds).arg(i18nc("seconds","s"));
+        else if( seconds >= 1 )
+            prettyString = QString("%1%2").arg(seconds).arg(i18nc("seconds","s"));
     }
     return prettyString;
 }

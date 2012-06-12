@@ -51,6 +51,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     iCompressionLevel->setValue( 5 );
 
+
     // mp3 and ogg vorbis
 
     lMode = new QLabel( i18n("Mode")+":", this );
@@ -262,7 +263,7 @@ bool SoxCodecWidget::setCustomProfile( const QString& profile, const QDomDocumen
     return true;
 }
 
-int SoxCodecWidget::currentDataRate()
+int SoxCodecWidget::currentDataRate() // TODO
 {
     int dataRate;
 
@@ -328,6 +329,7 @@ void SoxCodecWidget::qualitySliderChanged( int quality )
         value = 9 - quality;
     else
         value = quality;
+
     dQuality->setValue( value );
 }
 

@@ -353,7 +353,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
         else
         {
             bool ok;
-            QString profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
+            profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
             if( !ok )
                 return false;
         }

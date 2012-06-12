@@ -125,7 +125,7 @@ QString OutputDirectory::filesystemForDirectory( const QString& dir )
     return mp->mountType();
 }
 
-KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QString extension, bool fast )
+KUrl OutputDirectory::calcPath( FileListItem *fileListItem, const QStringList& usedOutputNames, Config *config, QString extension, bool fast )
 {
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
@@ -166,7 +166,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         url = changeExtension( KUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
-            url = uniqueFileName( url );
+            url = uniqueFileName( url, usedOutputNames );
 
         return url;
     }
@@ -280,7 +280,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         url = KUrl( path + "." + extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
-            url = uniqueFileName( url );
+            url = uniqueFileName( url, usedOutputNames );
 
         return url;
     }
@@ -305,7 +305,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         url = changeExtension( KUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
-            url = uniqueFileName( url );
+            url = uniqueFileName( url, usedOutputNames );
 
         return url;
     }
@@ -324,7 +324,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, QStr
         url = changeExtension( KUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
-            url = uniqueFileName( url );
+            url = uniqueFileName( url, usedOutputNames );
 
         return url;
     }

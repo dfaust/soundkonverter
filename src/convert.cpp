@@ -231,7 +231,15 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(item->fileListItem->outputUrl) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config,"",false),usedOutputNames.values()) );
+        item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, usedOutputNames.values(), config, "", false );
+        if( QFile::exists(item->outputUrl.toLocalFile()) )
+        {
+            logger->log( item->logID, "\tOutput file already exists" );
+            item->outputUrl = KUrl();
+            remove( item, 103 );
+            return;
+        }
+        OutputDirectory::makePath( item->outputUrl );
         item->fileListItem->outputUrl = item->outputUrl;
         fileList->updateItem( item->fileListItem );
     }
@@ -1080,6 +1088,8 @@ void Convert::remove( ConvertItem *item, int state )
         exitMessage = i18nc("Conversion exit status","Aborted by the user");
     else if( state == 100 )
         exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+    else if( state == 103 )
+        exitMessage = i18nc("Conversion exit status","File already exists");
     else
         exitMessage = i18nc("Conversion exit status","An error occured");
 
@@ -1117,7 +1127,7 @@ void Convert::remove( ConvertItem *item, int state )
     {
         QFile::remove(item->tempConvertUrl.toLocalFile());
     }
-    if( state != 0 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
+    if( state != 0 && state != 103 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );

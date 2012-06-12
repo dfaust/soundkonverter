@@ -473,7 +473,7 @@ void FileList::updateItem( FileListItem *item )
     }
     else
     {
-        outputUrl = OutputDirectory::calcPath( item, config );
+        outputUrl = OutputDirectory::calcPath( item, QStringList(), config );
     }
 //     if( QFile::exists(outputUrl.toLocalFile()) )
 //     {
@@ -548,6 +548,11 @@ void FileList::updateItem( FileListItem *item )
         case FileListItem::DiscFull:
         {
             item->setText( Column_State, i18n("Disc full") );
+            break;
+        }
+        case FileListItem::Skipped:
+        {
+            item->setText( Column_State, i18n("Will be skipped") );
             break;
         }
         case FileListItem::Failed:
@@ -650,6 +655,9 @@ void FileList::startConversion()
                 case FileListItem::DiscFull:
                     isStopped = true;
                     break;
+                case FileListItem::Skipped:
+                    isStopped = true;
+                    break;
                 case FileListItem::Failed:
                     isStopped = true;
                     break;
@@ -702,6 +710,8 @@ void FileList::killConversion()
                 case FileListItem::BackendNeedsConfiguration:
                     break;
                 case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Skipped:
                     break;
                 case FileListItem::Failed:
                     break;
@@ -825,6 +835,8 @@ int FileList::convertingCount()
                 break;
             case FileListItem::DiscFull:
                 break;
+            case FileListItem::Skipped:
+                break;
             case FileListItem::Failed:
                 break;
         }
@@ -881,6 +893,10 @@ void FileList::itemFinished( FileListItem *item, int state )
         else if( state == 102 )
         {
             item->state = FileListItem::WaitingForAlbumGain;
+        }
+        else if( state == 103 )
+        {
+            item->state = FileListItem::Skipped;
         }
         else
         {
@@ -1030,6 +1046,8 @@ void FileList::showContextMenu( const QPoint& point )
                 break;
             case FileListItem::DiscFull:
                 break;
+            case FileListItem::Skipped:
+                break;
             case FileListItem::Failed:
                 break;
         }
@@ -1162,6 +1180,9 @@ void FileList::removeSelectedItems()
                 case FileListItem::DiscFull:
                     canRemove = true;
                     break;
+                case FileListItem::Skipped:
+                    canRemove = true;
+                    break;
                 case FileListItem::Failed:
                     canRemove = true;
                     break;
@@ -1213,6 +1234,9 @@ void FileList::convertSelectedItems()
                     canConvert = true;
                     break;
                 case FileListItem::DiscFull:
+                    canConvert = true;
+                    break;
+                case FileListItem::Skipped:
                     canConvert = true;
                     break;
                 case FileListItem::Failed:
@@ -1273,6 +1297,8 @@ void FileList::killSelectedItems()
                 case FileListItem::BackendNeedsConfiguration:
                     break;
                 case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Skipped:
                     break;
                 case FileListItem::Failed:
                     break;
@@ -1343,6 +1369,9 @@ void FileList::load( bool user )
                             canRemove = true;
                             break;
                         case FileListItem::DiscFull:
+                            canRemove = true;
+                            break;
+                        case FileListItem::Skipped:
                             canRemove = true;
                             break;
                         case FileListItem::Failed:

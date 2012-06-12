@@ -1,3 +1,6 @@
+1.6.2:
+-Fix: Skip files that ought to be skipped instead of generating a new file name
+
 1.6.1:
 -Fix: Don't try to restore the file list when calling soundKonverter while it is running
 

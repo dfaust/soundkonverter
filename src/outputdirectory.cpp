@@ -1,16 +1,12 @@
 
 #include "outputdirectory.h"
-// #include "filelist.h"
 #include "filelistitem.h"
 #include "core/conversionoptions.h"
-// #include "tagengine.h"
 #include "config.h"
 
 #include <QLayout>
-#include <QToolTip>
 #include <QDir>
 #include <QFileInfo>
-#include <QRegExp>
 #include <QString>
 #include <QStringList>
 #include <QLabel>
@@ -18,7 +14,6 @@
 #include <QProcess>
 
 #include <KLocale>
-#include <KMessageBox>
 #include <KFileDialog>
 #include <KComboBox>
 #include <KLineEdit>
@@ -147,13 +142,6 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     else
         fileName =  QString().sprintf("%02i",fileListItem->tags->track) + " - " + fileListItem->tags->artist + " - " + fileListItem->tags->title + "." + extension;
 
-    // if the user wants to change the output directory/file name per file! TODO
-//     if( !fileListItem->options.outputFilePathName.isEmpty() ) {
-//         path = uniqueFileName( changeExtension(fileListItem->options.outputFilePathName,extension) );
-//         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" ) path = vfatPath( path );
-//         return path;
-//     }
-
     if( options->outputDirectoryMode == Specify )
     {
         path = options->outputDirectory+"/"+fileName;
@@ -181,10 +169,12 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
             path += "%f";
         else if( path.lastIndexOf(QRegExp("%[abcdfgnpty]")) < path.lastIndexOf("/") )
             path += "/%f";
-//         else if( path.lastIndexOf(QRegExp("%[aAbBcCdDfFgGnNpPtTyY]{1,1}")) < path.lastIndexOf("/") ) path += "/%f";
 
         const int fileNameBegin = path.lastIndexOf("/");
-        if( fileListItem->tags == 0 || ( path.mid(fileNameBegin).contains("%n") && fileListItem->tags->track == 0 ) || ( path.mid(fileNameBegin).contains("%t") && fileListItem->tags->title.isEmpty() ) )
+        if( fileListItem->tags == 0 ||
+            ( path.mid(fileNameBegin).contains("%n") && fileListItem->tags->track == 0 ) ||
+            ( path.mid(fileNameBegin).contains("%t") && fileListItem->tags->title.isEmpty() )
+          )
         {
             path = path.left( fileNameBegin ) + "/%f";
         }
@@ -515,7 +505,6 @@ void OutputDirectory::updateMode( Mode mode )
 {
     if( mode == MetaData )
     {
-//         if( config->data.general.metaDataOutputDirectory.isEmpty() ) config->data.general.metaDataOutputDirectory = QDir::homeDirPath() + "/soundKonverter/%b/%d - %n - %a - %t";
         cDir->clear();
         cDir->addItems( config->data.general.lastMetaDataOutputDirectoryPaths );
         cDir->setEditText( config->data.general.metaDataOutputDirectory );
@@ -540,7 +529,6 @@ void OutputDirectory::updateMode( Mode mode )
     }
     else if( mode == Specify )
     {
-//         if( config->data.general.specifyOutputDirectory.isEmpty() ) config->data.general.specifyOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
         cDir->clear();
         cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
         cDir->setEditText( config->data.general.specifyOutputDirectory );
@@ -552,7 +540,6 @@ void OutputDirectory::updateMode( Mode mode )
     }
     else if( mode == CopyStructure )
     {
-//         if( config->data.general.copyStructureOutputDirectory.isEmpty() ) config->data.general.copyStructureOutputDirectory = QDir::homeDirPath() + "/soundKonverter";
         cDir->clear();
         cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
         cDir->setEditText( config->data.general.copyStructureOutputDirectory );
@@ -625,12 +612,5 @@ void OutputDirectory::directoryChangedSlot( const QString& directory )
             i18n("This mode (%s) doesn't exist.", sModeString),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
-}*/
-
-/*void OutputDirectory::dirInfo()
-{
-    KMessageBox::information( this,
-        i18n("<p>The following strings are space holders, that will be replaced by the information in the metatags.</p><p>%a - Artist<br>%b - Album<br>%c - Comment<br>%d - Disc number<br>%g - Genre<br>%n - Track number<br>%p - Composer<br>%t - Title<br>%y - Year<br>%f - Original file name<p>"),
-        QString(i18n("Legend")) );
 }*/
 

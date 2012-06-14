@@ -466,7 +466,6 @@ void FileList::updateItem( FileListItem *item )
         return;
 
     KUrl outputUrl;
-
     if( !item->outputUrl.toLocalFile().isEmpty() )
     {
         outputUrl = item->outputUrl;
@@ -475,13 +474,6 @@ void FileList::updateItem( FileListItem *item )
     {
         outputUrl = OutputDirectory::calcPath( item, config );
     }
-//     if( QFile::exists(outputUrl.toLocalFile()) )
-//     {
-//         if( config->data.general.conflictHandling == Config::Data::General::ConflictHandling::NewFileName )
-//         {
-//             outputUrl = OutputDirectory::uniqueFileName( outputUrl );
-//         }
-//     }
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
     removeItemWidget( item, Column_State );
@@ -587,7 +579,6 @@ void FileList::updateItem( FileListItem *item )
     else
     {
         item->setText( Column_Input, item->url.pathOrUrl() );
-        //if( options ) item->setToolTip( 0, i18n("The file %1 will be converted from %2 to %3 using the %4 profile.\nIt will be saved to: %5").arg(item->url.pathOrUrl()).arg(item->codecName).arg(options->codecName).arg(options->profile).arg(outputUrl.toLocalFile()) );
     }
 
     update( indexFromItem( item, 0 ) );

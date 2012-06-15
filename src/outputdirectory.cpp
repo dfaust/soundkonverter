@@ -58,7 +58,6 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     pDirGoto->setToolTip( i18n("Open the output directory with Dolphin") );
     connect( pDirGoto, SIGNAL(clicked()), this, SLOT(gotoDir()) );
 
-    modeJustChanged = false;
     setMode( (OutputDirectory::Mode)config->data.general.lastOutputDirectoryMode );
 }
 
@@ -492,13 +491,15 @@ void OutputDirectory::gotoDir()
 
 void OutputDirectory::modeChangedSlot( int mode )
 {
-    modeJustChanged = true;
+    config->data.general.lastOutputDirectoryMode = mode;
+
+    disconnect( cDir, SIGNAL(editTextChanged(const QString&)), 0, 0 );
 
     updateMode( (Mode)mode );
 
-    emit modeChanged( mode );
+    connect( cDir, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
-    modeJustChanged = false;
+    emit modeChanged( mode );
 }
 
 void OutputDirectory::updateMode( Mode mode )
@@ -557,22 +558,14 @@ void OutputDirectory::updateMode( Mode mode )
 
 void OutputDirectory::directoryChangedSlot( const QString& directory )
 {
-    if( modeJustChanged ) {
-        modeJustChanged = false;
-        return;
-    }
-
     Mode mode = (Mode)cMode->currentIndex();
 
-    if( mode == MetaData ) {
+    if( mode == MetaData )
         config->data.general.metaDataOutputDirectory = directory;
-    }
-    else if( mode == Specify ) {
+    else if( mode == Specify )
         config->data.general.specifyOutputDirectory = directory;
-    }
-    else if( mode == CopyStructure ) {
+    else if( mode == CopyStructure )
         config->data.general.copyStructureOutputDirectory = directory;
-    }
 
     emit directoryChanged( directory );
 }

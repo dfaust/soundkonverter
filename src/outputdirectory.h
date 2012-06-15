@@ -69,8 +69,6 @@ private:
     KPushButton *pDirSelect;
     KPushButton *pDirGoto;
 
-    bool modeJustChanged;
-
     Config *config;
 
 signals:

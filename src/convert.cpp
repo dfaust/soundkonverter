@@ -1225,7 +1225,7 @@ void Convert::itemRemoved( FileListItem *item )
 
 void Convert::updateProgress()
 {
-    float time = 0;
+    float time = 0.0f;
     float fileTime;
     float fileProgress;
     QString fileProgressString;
@@ -1258,33 +1258,51 @@ void Convert::updateProgress()
             fileProgress = 0; // make it a valid value so the calculations below work
         }
 
+        fileTime = 0.0f;
         switch( items.at(i)->state )
         {
             case ConvertItem::get:
+            {
                 fileTime = items.at(i)->getTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::convert:
+            {
                 fileTime = items.at(i)->convertTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::decode:
+            {
                 fileTime = items.at(i)->decodeTime;
                 if( items.at(i)->convertPlugin->type() == "codec" )
                     items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
                 else if( items.at(i)->convertPlugin->type() == "ripper" )
                     items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::encode:
+            {
                 fileTime = items.at(i)->encodeTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::replaygain:
-                fileTime = items.at(i)->replaygainTime;
+            {
+                const QString albumName = items.at(i)->fileListItem->tags ? items.at(i)->fileListItem->tags->album : "";
+                QList<ConvertItem*> albumItems;
+                if( !albumName.isEmpty() )
+                    albumItems = albumGainItems[albumName];
+                else
+                    albumItems.append( items.at(i) );
+                for( int j=0; j<albumItems.count(); j++ )
+                {
+                    fileTime += albumItems.at(j)->replaygainTime;
+                }
                 items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
-            default:
-                fileTime = 0.0f;
+            }
         }
         time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
         logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );

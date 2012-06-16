@@ -103,7 +103,15 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = ( !item->fileListItem->outputUrl.url().isEmpty() ) ? OutputDirectory::makePath(OutputDirectory::uniqueFileName(item->fileListItem->outputUrl)) : OutputDirectory::makePath(OutputDirectory::uniqueFileName(OutputDirectory::calcPath(item->fileListItem,config,"",false),usedOutputNames.values()) );
+        item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
+        if( QFile::exists(item->outputUrl.toLocalFile()) )
+        {
+            logger->log( item->logID, "\tOutput file already exists" );
+            item->outputUrl = KUrl();
+            remove( item, 103 );
+            return;
+        }
+        OutputDirectory::makePath( item->outputUrl );
         item->fileListItem->outputUrl = item->outputUrl;
         fileList->updateItem( item->fileListItem );
     }
@@ -967,7 +975,8 @@ void Convert::add( FileListItem* item )
         logger->log( newItem->logID, "\t\t" + pipe_str.join(", ") );
     }
 
-    logger->log( newItem->logID, i18n("File system type: %1",conversionOptions->outputFilesystem) );
+    if( conversionOptions->outputDirectoryMode != OutputDirectory::Source )
+        logger->log( newItem->logID, i18n("File system type: %1",conversionOptions->outputFilesystem) );
 
     newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::convert );
 
@@ -1043,6 +1052,8 @@ void Convert::remove( ConvertItem *item, int state )
         exitMessage = i18nc("Conversion exit status","Aborted by the user");
     else if( state == 100 )
         exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+    else if( state == 103 )
+        exitMessage = i18nc("Conversion exit status","File already exists");
     else
         exitMessage = i18nc("Conversion exit status","An error occured");
 
@@ -1083,7 +1094,7 @@ void Convert::remove( ConvertItem *item, int state )
             QFile::remove( url.toLocalFile() );
         }
     }
-    if( state != 0 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) ) // FIXME gets removed when failed anyway
+    if( state != 0 && state != 103 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );
@@ -1176,7 +1187,7 @@ void Convert::itemRemoved( FileListItem *item )
 
 void Convert::updateProgress()
 {
-    float time = 0;
+    float time = 0.0f;
     float fileTime;
     float fileProgress;
     QString fileProgressString;
@@ -1205,38 +1216,60 @@ void Convert::updateProgress()
             fileProgress = 0; // make it a valid value so the calculations below work
         }
 
+        fileTime = 0.0f;
         switch( items.at(i)->state )
         {
             case ConvertItem::get:
+            {
                 fileTime = items.at(i)->getTime;
                 items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::convert:
+            {
                 fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::rip:
+            {
                 fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::decode:
+            {
                 fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::filter:
+            {
                 fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Filter")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::encode:
+            {
                 fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
                 items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
+            }
             case ConvertItem::replaygain:
-                fileTime = items.at(i)->replaygainTime;
+            {
+                const QString albumName = items.at(i)->fileListItem->tags ? items.at(i)->fileListItem->tags->album : "";
+                QList<ConvertItem*> albumItems;
+                if( !albumName.isEmpty() )
+                    albumItems = albumGainItems[albumName];
+                if( !albumItems.contains(items.at(i)) )
+                    albumItems.append( items.at(i) );
+                for( int j=0; j<albumItems.count(); j++ )
+                {
+                    fileTime += albumItems.at(j)->replaygainTime;
+                }
                 items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
-            default:
-                fileTime = 0.0f;
+            }
         }
         time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
         logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );

@@ -336,6 +336,9 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
                 case FileListItem::DiscFull:
                     canEdit = true;
                     break;
+                case FileListItem::Skipped:
+                    canEdit = true;
+                    break;
                 case FileListItem::Failed:
                     canEdit = true;
                     break;

@@ -466,7 +466,6 @@ void FileList::updateItem( FileListItem *item )
         return;
 
     KUrl outputUrl;
-
     if( !item->outputUrl.toLocalFile().isEmpty() )
     {
         outputUrl = item->outputUrl;
@@ -475,13 +474,6 @@ void FileList::updateItem( FileListItem *item )
     {
         outputUrl = OutputDirectory::calcPath( item, config );
     }
-//     if( QFile::exists(outputUrl.toLocalFile()) )
-//     {
-//         if( config->data.general.conflictHandling == Config::Data::General::ConflictHandling::NewFileName )
-//         {
-//             outputUrl = OutputDirectory::uniqueFileName( outputUrl );
-//         }
-//     }
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
     removeItemWidget( item, Column_State );
@@ -550,6 +542,11 @@ void FileList::updateItem( FileListItem *item )
             item->setText( Column_State, i18n("Disc full") );
             break;
         }
+        case FileListItem::Skipped:
+        {
+            item->setText( Column_State, i18n("Will be skipped") );
+            break;
+        }
         case FileListItem::Failed:
         {
             item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
@@ -582,7 +579,6 @@ void FileList::updateItem( FileListItem *item )
     else
     {
         item->setText( Column_Input, item->url.pathOrUrl() );
-        //if( options ) item->setToolTip( 0, i18n("The file %1 will be converted from %2 to %3 using the %4 profile.\nIt will be saved to: %5").arg(item->url.pathOrUrl()).arg(item->codecName).arg(options->codecName).arg(options->profile).arg(outputUrl.toLocalFile()) );
     }
 
     update( indexFromItem( item, 0 ) );
@@ -650,6 +646,9 @@ void FileList::startConversion()
                 case FileListItem::DiscFull:
                     isStopped = true;
                     break;
+                case FileListItem::Skipped:
+                    isStopped = true;
+                    break;
                 case FileListItem::Failed:
                     isStopped = true;
                     break;
@@ -702,6 +701,8 @@ void FileList::killConversion()
                 case FileListItem::BackendNeedsConfiguration:
                     break;
                 case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Skipped:
                     break;
                 case FileListItem::Failed:
                     break;
@@ -825,6 +826,8 @@ int FileList::convertingCount()
                 break;
             case FileListItem::DiscFull:
                 break;
+            case FileListItem::Skipped:
+                break;
             case FileListItem::Failed:
                 break;
         }
@@ -881,6 +884,10 @@ void FileList::itemFinished( FileListItem *item, int state )
         else if( state == 102 )
         {
             item->state = FileListItem::WaitingForAlbumGain;
+        }
+        else if( state == 103 )
+        {
+            item->state = FileListItem::Skipped;
         }
         else
         {
@@ -1030,6 +1037,8 @@ void FileList::showContextMenu( const QPoint& point )
                 break;
             case FileListItem::DiscFull:
                 break;
+            case FileListItem::Skipped:
+                break;
             case FileListItem::Failed:
                 break;
         }
@@ -1162,6 +1171,9 @@ void FileList::removeSelectedItems()
                 case FileListItem::DiscFull:
                     canRemove = true;
                     break;
+                case FileListItem::Skipped:
+                    canRemove = true;
+                    break;
                 case FileListItem::Failed:
                     canRemove = true;
                     break;
@@ -1213,6 +1225,9 @@ void FileList::convertSelectedItems()
                     canConvert = true;
                     break;
                 case FileListItem::DiscFull:
+                    canConvert = true;
+                    break;
+                case FileListItem::Skipped:
                     canConvert = true;
                     break;
                 case FileListItem::Failed:
@@ -1273,6 +1288,8 @@ void FileList::killSelectedItems()
                 case FileListItem::BackendNeedsConfiguration:
                     break;
                 case FileListItem::DiscFull:
+                    break;
+                case FileListItem::Skipped:
                     break;
                 case FileListItem::Failed:
                     break;
@@ -1343,6 +1360,9 @@ void FileList::load( bool user )
                             canRemove = true;
                             break;
                         case FileListItem::DiscFull:
+                            canRemove = true;
+                            break;
+                        case FileListItem::Skipped:
                             canRemove = true;
                             break;
                         case FileListItem::Failed:

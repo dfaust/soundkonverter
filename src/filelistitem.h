@@ -40,6 +40,7 @@ public:
         Stopped,
         BackendNeedsConfiguration,
         DiscFull,
+        Skipped,
         Failed
     };
 

@@ -61,7 +61,7 @@ public slots:
     /** Set the current output directory */
     void setOutputDirectory( const QString& directory );
 
-    /** Should be called if the conversion options have benn accepted by the user */
+    /** Should be called if the conversion options have been accepted by the user */
     void accepted();
 
 private:

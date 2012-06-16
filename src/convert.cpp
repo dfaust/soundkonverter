@@ -1294,7 +1294,7 @@ void Convert::updateProgress()
                 QList<ConvertItem*> albumItems;
                 if( !albumName.isEmpty() )
                     albumItems = albumGainItems[albumName];
-                else
+                if( !albumItems.contains(items.at(i)) )
                     albumItems.append( items.at(i) );
                 for( int j=0; j<albumItems.count(); j++ )
                 {

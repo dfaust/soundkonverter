@@ -16,6 +16,8 @@
 
 class Config;
 
+#define ConfigDialogOffset 20
+
 #define ConfigDialogSpacingSmall 5
 #define ConfigDialogSpacingMedium 10
 #define ConfigDialogSpacingBig 20

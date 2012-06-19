@@ -35,7 +35,17 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 {
     QVBoxLayout *box = new QVBoxLayout( this );
 
+    QFont groupFont;
+    groupFont.setBold( true );
+
+    QLabel *lGeneral = new QLabel( i18n("Conversion"), this );
+    lGeneral->setFont( groupFont );
+    box->addWidget( lGeneral );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *startTabBox = new QHBoxLayout( 0 ); // TODO destroy
+    startTabBox->addSpacing( ConfigDialogOffset );
     box->addLayout( startTabBox );
     QLabel *lStartTab = new QLabel( i18n("Start in Mode")+":", this );
     startTabBox->addWidget( lStartTab );
@@ -50,6 +60,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *defaultProfileBox = new QHBoxLayout( 0 );
+    defaultProfileBox->addSpacing( ConfigDialogOffset );
     box->addLayout( defaultProfileBox );
     QLabel *lDefaultProfile = new QLabel( i18n("Default profile")+":", this );
     defaultProfileBox->addWidget( lDefaultProfile );
@@ -94,6 +105,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //     box->addSpacing( 5 );
 
     QHBoxLayout *conflictHandlingBox = new QHBoxLayout( 0 );
+    conflictHandlingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( conflictHandlingBox );
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling")+":", this );
     conflictHandlingBox->addWidget( lConflictHandling );
@@ -109,6 +121,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *numFilesBox = new QHBoxLayout( 0 );
+    numFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( numFilesBox );
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once")+":", this );
     numFilesBox->addWidget( lNumFiles );
@@ -124,6 +137,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout( 0 );
+    waitForAlbumGainBox->addSpacing( ConfigDialogOffset );
     box->addLayout( waitForAlbumGainBox );
     cWaitForAlbumGain = new QCheckBox( i18n("Apply album gain to converted files"), this );
     cWaitForAlbumGain->setToolTip( i18n("Keep songs of the same album waiting in file list in order to apply album gain to all files.") );
@@ -131,19 +145,16 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
     connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
-
-    QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
-    box->addLayout( createActionsMenuBox );
-    cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
-    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by diableing this option.") );
-    cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
-    createActionsMenuBox->addWidget( cCreateActionsMenu );
-    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
     box->addSpacing( ConfigDialogSpacingBig );
 
+    QLabel *lReplayGainTool = new QLabel( i18n("ReplayGain tool settings"), this );
+    lReplayGainTool->setFont( groupFont );
+    box->addWidget( lReplayGainTool );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *replayGainGroupingBox = new QHBoxLayout( 0 );
+    replayGainGroupingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( replayGainGroupingBox );
     QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by")+":", this );
     replayGainGroupingBox->addWidget( lReplayGainGrouping );
@@ -154,6 +165,23 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     cReplayGainGrouping->setCurrentIndex( (int)config->data.general.replayGainGrouping );
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+
+    box->addSpacing( ConfigDialogSpacingBig );
+
+    QLabel *lKdeIntegration = new QLabel( i18n("KDE integration"), this );
+    lKdeIntegration->setFont( groupFont );
+    box->addWidget( lKdeIntegration );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
+    createActionsMenuBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( createActionsMenuBox );
+    cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
+    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by diableing this option.") );
+    cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
+    createActionsMenuBox->addWidget( cCreateActionsMenu );
+    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
     box->addStretch();
 }

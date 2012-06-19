@@ -28,14 +28,29 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 {
     QVBoxLayout *box = new QVBoxLayout( this );
 
+    QFont groupFont;
+    groupFont.setBold( true );
+
+    QLabel *lCoverSaving = new QLabel( i18n("Saving to output directory"), this );
+    lCoverSaving->setFont( groupFont );
+    box->addWidget( lCoverSaving );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *coverSavingBox = new QHBoxLayout( 0 );
+    coverSavingBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( coverSavingBox );
+    QVBoxLayout *writeCoversBox = new QVBoxLayout( 0 );
+    coverSavingBox->addLayout( writeCoversBox );
+
     QLabel *lWriteCovers = new QLabel( i18n("Save embedded covers to output directory"), this );
-    box->addWidget( lWriteCovers );
+    writeCoversBox->addWidget( lWriteCovers );
     rWriteCoversAlways = new QRadioButton( i18n("Always"), this );
-    box->addWidget( rWriteCoversAlways );
+    writeCoversBox->addWidget( rWriteCoversAlways );
     rWriteCoversAuto = new QRadioButton( i18n("Only if embedding the covers into the output files is not possible"), this );
-    box->addWidget( rWriteCoversAuto );
+    writeCoversBox->addWidget( rWriteCoversAuto );
     rWriteCoversNever = new QRadioButton( i18n("Never"), this );
-    box->addWidget( rWriteCoversNever );
+    writeCoversBox->addWidget( rWriteCoversNever );
 
     QButtonGroup *writeCoversGroup = new QButtonGroup( this );
     writeCoversGroup->addButton( rWriteCoversAlways );
@@ -52,14 +67,14 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     else if( config->data.coverArt.writeCovers == 2 )
         rWriteCoversNever->setChecked( true );
 
-    box->addSpacing( ConfigDialogSpacingMedium );
+    writeCoversBox->addSpacing( ConfigDialogSpacingMedium );
 
     lWriteCoverName = new QLabel( i18n("File name for the cover"), this );
-    box->addWidget( lWriteCoverName );
+    writeCoversBox->addWidget( lWriteCoverName );
     rWriteCoverNameTitle = new QRadioButton( i18n("The embedded cover description"), this );
-    box->addWidget( rWriteCoverNameTitle );
+    writeCoversBox->addWidget( rWriteCoverNameTitle );
     rWriteCoverNameDefault = new QRadioButton( i18n("The default cover file name"), this );
-    box->addWidget( rWriteCoverNameDefault );
+    writeCoversBox->addWidget( rWriteCoverNameDefault );
 
     QHBoxLayout *writeCoverNameTextBox = new QHBoxLayout( this );
     lWriteCoverNameDefaultLabel = new QLabel( i18n("Default cover file name:"), this );
@@ -68,7 +83,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     lWriteCoverNameDefaultEdit->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n%a - Artist\n%b - Album\n%d - Cover description\n%r - Cover role") );
     writeCoverNameTextBox->addWidget( lWriteCoverNameDefaultEdit );
     writeCoverNameTextBox->addStretch();
-    box->addLayout( writeCoverNameTextBox );
+    writeCoversBox->addLayout( writeCoverNameTextBox );
     connect( lWriteCoverNameDefaultEdit, SIGNAL(textChanged(QString)), this, SLOT(somethingChanged()) );
 
     QButtonGroup *writeCoverNameGroup = new QButtonGroup( this );
@@ -84,7 +99,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     lWriteCoverNameDefaultEdit->setText( config->data.coverArt.writeCoverDefaultName );
 
 //     QGroupBox *coverGroup = new QGroupBox( i18n("CD covers"), this );
-//     box->addWidget( coverGroup );
+//     writeCoversBox->addWidget( coverGroup );
 //     QVBoxLayout *coverBox = new QVBoxLayout( 0 ); // TODO destroy
 //
 //     cCopyCover = new QCheckBox( i18n("Copy covers from the source directoy to output directoy"), this );
@@ -101,12 +116,12 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 //     coverGroup->setLayout( coverBox );
 //
 //     QHBoxLayout *startTabBox = new QHBoxLayout( 0 ); // TODO destroy
-//     box->addLayout( startTabBox );
+//     writeCoversBox->addLayout( startTabBox );
 //
-//     box->addSpacing( 5 );
+//     writeCoversBox->addSpacing( 5 );
 //
 //     QGroupBox *userScriptGroup = new QGroupBox( i18n("User scripts"), this );
-//     box->addWidget( userScriptGroup );
+//     writeCoversBox->addWidget( userScriptGroup );
 //     QVBoxLayout *userScriptBox = new QVBoxLayout( 0 ); // TODO destroy
 //
 //     QLabel *lUserScript = new QLabel( i18n("Check all scripts that should be executed after a conversion has finished"), this );

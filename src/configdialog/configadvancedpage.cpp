@@ -29,7 +29,17 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 {
     QVBoxLayout *box = new QVBoxLayout( this );
 
+    QFont groupFont;
+    groupFont.setBold( true );
+
+    QLabel *lAdvanced = new QLabel( i18n("Advanced"), this );
+    lAdvanced->setFont( groupFont );
+    box->addWidget( lAdvanced );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout( 0 );
+    preferredOggVorbisExtensionBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredOggVorbisExtensionBox );
     QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred extension for ogg vorbis files")+":", this );
     preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
@@ -45,6 +55,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *updateDelayBox = new QHBoxLayout( 0 );
+    updateDelayBox->addSpacing( ConfigDialogOffset );
     box->addLayout( updateDelayBox );
     QLabel* lUpdateDelay = new QLabel( i18n("Status update delay")+":", this );
     updateDelayBox->addWidget( lUpdateDelay );
@@ -60,6 +71,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
+    useVFATNamesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useVFATNamesBox );
     cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
     cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
@@ -69,7 +81,14 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingBig );
 
+    QLabel *lDebug = new QLabel( i18n("Debug"), this );
+    lDebug->setFont( groupFont );
+    box->addWidget( lDebug );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *writeLogFilesBox = new QHBoxLayout( 0 );
+    writeLogFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( writeLogFilesBox );
     cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
     cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",KStandardDirs::locateLocal("data","soundkonverter/log/")) );
@@ -80,6 +99,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
+    removeFailedFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( removeFailedFilesBox );
     cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files if a conversion fails"), this );
     cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files get converted correctly.") );
@@ -89,7 +109,14 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingBig );
 
+    QLabel *lExperimental = new QLabel( i18n("Experimental"), this );
+    lExperimental->setFont( groupFont );
+    box->addWidget( lExperimental );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout( 0 );
+    useSharedMemoryForTempFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useSharedMemoryForTempFilesBox );
     cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimted size is more than")+":", this );
     cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
@@ -115,6 +142,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QHBoxLayout *usePipesBox = new QHBoxLayout( 0 );
+    usePipesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( usePipesBox );
     cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );
     cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.\nBut some backends cause errors in this mode so be cautious.") );

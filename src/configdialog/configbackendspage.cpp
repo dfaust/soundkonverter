@@ -200,26 +200,39 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QVBoxLayout *box = new QVBoxLayout( this );
     box->setSpacing( 0 );
 
-    QGroupBox *ripperGroup = new QGroupBox( i18n("CD ripper"), this );
-    box->addWidget( ripperGroup );
+    QFont groupFont;
+    groupFont.setBold( true );
+
+    QLabel *lCdRipper = new QLabel( i18n("CD ripper"), this );
+    lCdRipper->setFont( groupFont );
+    box->addWidget( lCdRipper );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *ripperBox = new QHBoxLayout( 0 );
-    ripperGroup->setLayout( ripperBox );
-    QLabel *lRipper = new QLabel( i18n("Backend")+":", this );
+    ripperBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( ripperBox );
+    QLabel *lRipper = new QLabel( i18n("Plugin")+":", this );
     ripperBox->addWidget( lRipper );
     cRipper = new KComboBox( this );
     cRipper->addItems( config->data.backends.rippers );
     ripperBox->addWidget( cRipper );
     connect( cRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingMedium );
+    box->addSpacing( ConfigDialogSpacingBig );
 
-    QGroupBox *filterGroup = new QGroupBox( i18n("Filter backends"), this );
-    box->addWidget( filterGroup );
+    QLabel *lFilters = new QLabel( i18n("Filters"), this );
+    lFilters->setFont( groupFont );
+    box->addWidget( lFilters );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QHBoxLayout *filterBox = new QHBoxLayout( 0 );
-    filterGroup->setLayout( filterBox );
-    QLabel *lSelectorFilter = new QLabel( i18n("Backend")+":", this );
+    filterBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( filterBox );
+    QLabel *lSelectorFilter = new QLabel( i18n("Plugin")+":", this );
     filterBox->addWidget( lSelectorFilter );
-    filterBox->addSpacing( 5 );
+    filterBox->setStretchFactor( lSelectorFilter, 2 );
     cSelectorFilter = new KComboBox( this );
     QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
     foreach( FilterPlugin *plugin, filterPlugins )
@@ -227,20 +240,26 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
         cSelectorFilter->addItem( plugin->name() );
     }
     filterBox->addWidget( cSelectorFilter );
+    filterBox->setStretchFactor( cSelectorFilter, 1 );
     connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(QString)) );
     pConfigureFilter = new KPushButton( KIcon("configure"), "", this );
     filterBox->addWidget( pConfigureFilter );
+    filterBox->setStretchFactor( pConfigureFilter, 1 );
     connect( pConfigureFilter, SIGNAL(clicked()), this, SLOT(configureFilter()) );
-    filterBox->addStretch();
 
-    box->addSpacing( ConfigDialogSpacingMedium );
+    box->addSpacing( ConfigDialogSpacingBig );
 
-    QGroupBox *formatGroup = new QGroupBox( i18n("Codec backends"), this );
-    box->addWidget( formatGroup );
+    QLabel *lPriorities = new QLabel( i18n("Priorities"), this );
+    lPriorities->setFont( groupFont );
+    box->addWidget( lPriorities );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
     QVBoxLayout *formatBox = new QVBoxLayout( 0 );
-    formatGroup->setLayout( formatBox );
+    box->addLayout( formatBox );
 
     QHBoxLayout *formatSelectorBox = new QHBoxLayout( 0 );
+    formatSelectorBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatSelectorBox );
     QLabel *lSelectorFormat = new QLabel( i18n("Format")+":", this );
     formatSelectorBox->addWidget( lSelectorFormat );
@@ -254,6 +273,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatSelectorBox->addStretch();
 
     QHBoxLayout *formatBackendsBox = new QHBoxLayout( 0 );
+    formatBackendsBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatBackendsBox );
     decoderList = new BackendsListWidget( i18n("Decoder"), config, this );
     formatBackendsBox->addWidget( decoderList );
@@ -266,6 +286,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( replaygainList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
 
     QHBoxLayout *optimizationsBox = new QHBoxLayout( 0 );
+    optimizationsBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( optimizationsBox );
     optimizationsBox->addStretch();
     pShowOptimizations = new KPushButton( KIcon("games-solve"), i18n("Show possible optimizations"), this );

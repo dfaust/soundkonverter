@@ -4,7 +4,7 @@
 1.6.2:
 -Fix: Skip files that ought to be skipped instead of generating a new file name
 -Fix: Make saving custom profiles work again
--Fix: Don't mix up the output directoy history for metadata and normal mode
+-Fix: Don't mix up the output directory history for metadata and normal mode
 -Fix: Show proper progress when applying album gain
 
 1.6.1:

@@ -28,51 +28,56 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     config( _config )
 {
     QGridLayout *grid = new QGridLayout( this );
-    grid->setContentsMargins( 6, 6, 6, 6 );
-    grid->setSpacing( 6 );
-
-    QHBoxLayout *topBox = new QHBoxLayout();
-    grid->addLayout( topBox, 0, 0 );
+    grid->setMargin( 10 );
+    grid->setSpacing( 10 );
 
     QLabel *lQuality = new QLabel( i18n("Quality")+":", this );
-    topBox->addWidget( lQuality );
+    grid->addWidget( lQuality, 0, 0 );
+
+    QHBoxLayout *topBoxQuality = new QHBoxLayout();
+    grid->addLayout( topBoxQuality, 0, 1 );
     cProfile = new KComboBox( this );
-    topBox->addWidget( cProfile );
+    topBoxQuality->addWidget( cProfile );
     connect( cProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
-    topBox->addSpacing( 3 );
+    topBoxQuality->addSpacing( 3 );
     pProfileRemove = new KPushButton( KIcon("edit-delete"), i18n("Remove"), this );
-    topBox->addWidget( pProfileRemove );
+    topBoxQuality->addWidget( pProfileRemove );
     pProfileRemove->setToolTip( i18n("Remove the selected profile") );
     pProfileRemove->hide();
     connect( pProfileRemove, SIGNAL(clicked()), this, SLOT(profileRemove()) );
     pProfileInfo = new KPushButton( KIcon("dialog-information"), i18n("Info"), this );
-    topBox->addWidget( pProfileInfo );
+    topBoxQuality->addWidget( pProfileInfo );
     pProfileInfo->setToolTip( i18n("Information about the selected profile") );
 //     cProfile->setFixedHeight( pProfileInfo->minimumSizeHint().height() );
     connect( pProfileInfo, SIGNAL(clicked()), this, SLOT(profileInfo()) );
-    topBox->addSpacing( 18 );
+    topBoxQuality->addStretch( );
 
     QLabel *lFormat = new QLabel( i18n("Output format")+":", this );
-    topBox->addWidget( lFormat );
+    grid->addWidget( lFormat, 0, 2 );
+
+    QHBoxLayout *topBoxFormat = new QHBoxLayout();
+    grid->addLayout( topBoxFormat, 0, 3 );
     cFormat = new KComboBox( this );
-    topBox->addWidget( cFormat );
+    topBoxFormat->addWidget( cFormat );
 //     connect( cFormat, SIGNAL(activated(int)), this, SLOT(formatChanged()) );
     connect( cFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    topBox->addSpacing( 3 );
+    topBoxFormat->addSpacing( 3 );
     pFormatInfo = new KPushButton( KIcon("dialog-information"), i18n("Info"), this );
-    topBox->addWidget( pFormatInfo );
+    topBoxFormat->addWidget( pFormatInfo );
     pFormatInfo->setToolTip( i18n("Information about the selected file format") );
 //     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
     connect( pFormatInfo, SIGNAL(clicked()), this, SLOT(formatInfo()) );
-    topBox->addSpacing( 3 );
+    topBoxFormat->addSpacing( 3 );
     QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More") + "</a>", this );
-    topBox->addWidget( formatHelp );
+    topBoxFormat->addWidget( formatHelp );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
-    topBox->addStretch( );
+    topBoxFormat->addStretch( );
 
-    QHBoxLayout *middleBox = new QHBoxLayout( );
-    grid->addLayout( middleBox, 1, 0 );
+    QLabel *lOutput = new QLabel( i18n("Output")+":", this );
+    grid->addWidget( lOutput, 1, 0 );
 
+    QHBoxLayout *middleBox = new QHBoxLayout();
+    grid->addLayout( middleBox, 1, 1, 1, 3 );
     outputDirectory = new OutputDirectory( config, this );
     middleBox->addWidget( outputDirectory );
     connect( outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(outputDirectoryChanged()) );
@@ -85,24 +90,22 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
     estimSizeBox->addWidget( lEstimSize );
 
-    QHBoxLayout *optionalBox = new QHBoxLayout();
-    grid->addLayout( optionalBox, 3, 0 );
     QLabel *lOptional = new QLabel( i18n("Optional:") );
-    optionalBox->addWidget( lOptional );
-    optionalBox->addSpacing( 12 );
+    grid->addWidget( lOptional, 3, 0 );
+
+    QHBoxLayout *optionalBox = new QHBoxLayout();
+    grid->addLayout( optionalBox, 3, 1 );
     cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
     optionalBox->addWidget( cReplayGain );
     connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-    optionalBox->addSpacing( 12 );
-//     cBpm = new QCheckBox( i18n("Calculate BPM tags"), this );
-//     cBpm->hide();
-//     optionalBox->addWidget( cBpm );
-//     connect( cBpm, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     optionalBox->addStretch();
 
     QLabel *lInfo = new QLabel( text, this );
-    grid->addWidget( lInfo, 4, 0, Qt::AlignVCenter | Qt::AlignCenter );
+    grid->addWidget( lInfo, 4, 0, 1, 4, Qt::AlignVCenter | Qt::AlignCenter );
     grid->setRowStretch( 4, 1 );
+
+    grid->setColumnStretch( 1, 1 );
+    grid->setColumnStretch( 3, 1 );
 }
 
 OptionsSimple::~OptionsSimple()

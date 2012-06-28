@@ -101,6 +101,8 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QHBoxLayout *middleBox = new QHBoxLayout( );
     grid->addLayout( middleBox, gridRow++, 0 );
 
+    QLabel *lOutput = new QLabel( i18n("Output")+":", this );
+    middleBox->addWidget( lOutput );
     outputDirectory = new OutputDirectory( config, this );
     middleBox->addWidget( outputDirectory );
 

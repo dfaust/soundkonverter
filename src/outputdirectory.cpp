@@ -27,13 +27,10 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     config( _config )
 {
     QGridLayout *grid = new QGridLayout( this );
-    grid->setContentsMargins( 0, 0, 0, 0 );
+    grid->setMargin( 0 );
 
     QHBoxLayout *box = new QHBoxLayout( );
     grid->addLayout( box, 0, 0 );
-
-    QLabel *lOutput = new QLabel( i18n("Output")+":", this );
-    box->addWidget( lOutput );
 
     cMode = new KComboBox( this );
     cMode->addItem( i18n("By meta data") );

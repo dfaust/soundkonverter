@@ -18,6 +18,7 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     : QWidget( parent )
 {
     QHBoxLayout *box = new QHBoxLayout( this );
+    box->setMargin( 0 );
 
     QLabel *lEffect = new QLabel( i18n("Effect:") );
     box->addWidget( lEffect );
@@ -93,7 +94,7 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     cEffect->addItem( "vol" );
     box->addWidget( cEffect );
 
-    widgetsBox = new QHBoxLayout( 0 );
+    widgetsBox = new QHBoxLayout();
     box->addLayout( widgetsBox );
 
     box->addStretch();
@@ -176,6 +177,7 @@ SoxFilterWidget::SoxFilterWidget()
 {
     int gridRow = 0;
     QGridLayout *grid = new QGridLayout( this );
+    grid->setMargin( 0 );
 
     // set up filter options selection
 
@@ -253,8 +255,7 @@ SoxFilterWidget::SoxFilterWidget()
 //     dNormalizeVolume->setValue( 0 );
 //     dNormalizeVolume->setPrefix( "+" );
 
-    effectWidgetsBox = new QVBoxLayout( 0 );
-    effectWidgetsBox->setSpacing( 0 );
+    effectWidgetsBox = new QVBoxLayout();
     grid->addLayout( effectWidgetsBox, gridRow++, 0 );
 
     SoxEffectWidget *effectWidget = new SoxEffectWidget( this );

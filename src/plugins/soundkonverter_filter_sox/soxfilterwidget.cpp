@@ -93,7 +93,7 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     cEffect->addItem( "vol" );
     box->addWidget( cEffect );
 
-    widgetsBox = new QHBoxLayout( this );
+    widgetsBox = new QHBoxLayout( 0 );
     box->addLayout( widgetsBox );
 
     box->addStretch();
@@ -101,14 +101,26 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     pRemove = new KPushButton( KIcon("list-remove"), i18n("Remove"), this );
     pRemove->setToolTip( i18n("Remove this effect") );
     box->addWidget( pRemove );
+    connect( pRemove, SIGNAL(clicked()), this, SLOT(removeClicked()) );
 
     pAdd = new KPushButton( KIcon("list-add"), i18n("Add"), this );
     pAdd->setToolTip( i18n("Add another effect") );
     box->addWidget( pAdd );
+    connect( pAdd, SIGNAL(clicked()), SIGNAL(addEffectWidgetClicked()) );
 }
 
 SoxEffectWidget::~SoxEffectWidget()
 {}
+
+void SoxEffectWidget::setAddButtonShown( bool shown )
+{
+    pAdd->setShown( shown );
+}
+
+void SoxEffectWidget::setRemoveButtonShown( bool shown )
+{
+    pRemove->setShown( shown );
+}
 
 void SoxEffectWidget::effectChanged( int index )
 {
@@ -153,15 +165,17 @@ void SoxEffectWidget::normalizeVolumeChanged( double value )
         dNormalizeVolume->setPrefix( "" );
 }
 
+void SoxEffectWidget::removeClicked()
+{
+    emit removeEffectWidgetClicked( this );
+}
+
 
 SoxFilterWidget::SoxFilterWidget()
     : FilterWidget()
 {
-    QGridLayout *grid = new QGridLayout( this );
-    grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
-
     int gridRow = 0;
+    QGridLayout *grid = new QGridLayout( this );
 
     // set up filter options selection
 
@@ -239,9 +253,17 @@ SoxFilterWidget::SoxFilterWidget()
 //     dNormalizeVolume->setValue( 0 );
 //     dNormalizeVolume->setPrefix( "+" );
 
+    effectWidgetsBox = new QVBoxLayout( 0 );
+    effectWidgetsBox->setSpacing( 0 );
+    grid->addLayout( effectWidgetsBox, gridRow++, 0 );
 
-    SoxEffectWidget *effectWidget1 = new SoxEffectWidget( this );
-    grid->addWidget( effectWidget1, gridRow++, 0 );
+    SoxEffectWidget *effectWidget = new SoxEffectWidget( this );
+    effectWidget->setAddButtonShown( true );
+    effectWidget->setRemoveButtonShown( false );
+    connect( effectWidget, SIGNAL(addEffectWidgetClicked()), this, SLOT(addEffectWidgetClicked()) );
+    connect( effectWidget, SIGNAL(removeEffectWidgetClicked(SoxEffectWidget*)), this, SLOT(removeEffectWidgetClicked(SoxEffectWidget*)) );
+    effectWidgetsBox->addWidget( effectWidget );
+    effectWidgets.append( effectWidget );
 
 }
 
@@ -318,5 +340,43 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     return true;
 }
 
+void SoxFilterWidget::addEffectWidgetClicked()
+{
+    if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
+    {
+        effectWidgets.last()->setAddButtonShown( false );
+        effectWidgets.last()->setRemoveButtonShown( true );
+    }
+
+    SoxEffectWidget *effectWidget = new SoxEffectWidget( this );
+    effectWidget->setAddButtonShown( true );
+    effectWidget->setRemoveButtonShown( true );
+    connect( effectWidget, SIGNAL(addEffectWidgetClicked()), this, SLOT(addEffectWidgetClicked()) );
+    connect( effectWidget, SIGNAL(removeEffectWidgetClicked(SoxEffectWidget*)), this, SLOT(removeEffectWidgetClicked(SoxEffectWidget*)) );
+    effectWidgetsBox->addWidget( effectWidget );
+    effectWidgets.append( effectWidget );
+}
+
+void SoxFilterWidget::removeEffectWidgetClicked( SoxEffectWidget *widget )
+{
+    if( !widget )
+        return;
+
+    const int index = effectWidgets.indexOf( widget );
+
+    if( index != -1 )
+    {
+        effectWidgetsBox->removeWidget( widget );
+        widget->deleteLater();
+        effectWidgets.removeAt( index );
+    }
+
+    if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
+    {
+        effectWidgets.last()->setAddButtonShown( true );
+        if( effectWidgets.count() == 1 )
+            effectWidgets.last()->setRemoveButtonShown( false );
+    }
+}
 
 

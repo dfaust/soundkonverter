@@ -119,39 +119,12 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     pProfileSave->setFixedWidth( pProfileSave->height() );
     pProfileSave->setToolTip( i18n("Save current options as a profile") );
     connect( pProfileSave, SIGNAL(clicked()), this, SLOT(saveCustomProfile()) );
-//     pProfileLoad = new KPushButton( KIcon("document-open"), "", this );
     pProfileLoad = new QToolButton( this );
     bottomBox->addWidget( pProfileLoad );
     pProfileLoad->setIcon( KIcon("document-open") );
     pProfileLoad->setPopupMode( QToolButton::InstantPopup );
     pProfileLoad->setFixedWidth( pProfileLoad->height() );
     pProfileLoad->setToolTip( i18n("Load saved profiles") );
-//     connect( pProfileLoad, SIGNAL(clicked()), this, SLOT(saveProfile()) );
-
-/*
-    QList<CodecPlugin*> plugins = config->pluginLoader()->getAllCodecPlugins();
-    QList<QWidget*> widgets;
-    QWidget *newWidget;
-    for( int i=0; i<plugins.count(); i++ )
-    {
-        newWidget = plugins.at(i)->newCodecWidget();
-        if( newWidget )
-        {
-            grid->addWidget( newWidget, 2, 0 );
-            newWidget->show();
-        }
-        widgets += newWidget;
-    }
-
-    adjustSize();
-    size_hint = sizeHint();
-
-    for( int i=0; i<plugins.count(); i++ )
-    {
-        grid->removeWidget( widgets.at(i) );
-        plugins.at(i)->deleteCodecWidget( widgets.at(i) );
-    }
-*/
 }
 
 OptionsDetailed::~OptionsDetailed()

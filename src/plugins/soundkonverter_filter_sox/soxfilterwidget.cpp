@@ -13,6 +13,147 @@
 #include <KComboBox>
 #include <KPushButton>
 
+
+SoxEffectWidget::SoxEffectWidget( QWidget *parent )
+    : QWidget( parent )
+{
+    QHBoxLayout *box = new QHBoxLayout( this );
+
+    QLabel *lEffect = new QLabel( i18n("Effect:") );
+    box->addWidget( lEffect );
+
+    cEffect = new KComboBox( this );
+    connect( cEffect, SIGNAL(activated(int)), this, SLOT(effectChanged(int)) );
+    cEffect->addItem( i18n("Disabled") );
+    cEffect->addItem( "allpass" );
+    cEffect->addItem( "band" );
+    cEffect->addItem( "bandpass" );
+    cEffect->addItem( "bandreject" );
+    cEffect->addItem( "bass" );
+    cEffect->addItem( "bend" );
+    cEffect->addItem( "biquad" );
+    cEffect->addItem( "chorus" );
+    cEffect->addItem( "channels" );
+    cEffect->addItem( "compand" );
+    cEffect->addItem( "contrast" );
+    cEffect->addItem( "dcshift" );
+    cEffect->addItem( "deemph" );
+    cEffect->addItem( "delay" );
+    cEffect->addItem( "dither" );
+//     cEffect1->addItem( "divide" ); // experimental
+    cEffect->addItem( "downsample" );
+    cEffect->addItem( "earwax" );
+    cEffect->addItem( "echo" );
+    cEffect->addItem( "echos" );
+    cEffect->addItem( "equalizer" );
+    cEffect->addItem( "fade" );
+    cEffect->addItem( "fir" );
+//     cEffect1->addItem( "firfit" ); // experimental
+    cEffect->addItem( "flanger" );
+    cEffect->addItem( "gain" );
+    cEffect->addItem( "highpass" );
+    cEffect->addItem( "hilbert" );
+//     cEffect1->addItem( "input" ); // libSoX-only
+    cEffect->addItem( "ladspa" );
+    cEffect->addItem( "loudness" );
+    cEffect->addItem( "lowpass" );
+    cEffect->addItem( "mcompand" );
+//     cEffect1->addItem( "mixer" ); // deprecated
+    cEffect->addItem( "noiseprof" );
+    cEffect->addItem( "noisered" );
+    cEffect->addItem( "norm" );
+    cEffect->addItem( "oops" );
+//     cEffect1->addItem( "output" ); // libSoX-only
+    cEffect->addItem( "overdrive" );
+    cEffect->addItem( "pad" );
+    cEffect->addItem( "phaser" );
+    cEffect->addItem( "pitch" );
+    cEffect->addItem( "rate" );
+    cEffect->addItem( "remix" );
+    cEffect->addItem( "repeat" );
+    cEffect->addItem( "reverb" );
+    cEffect->addItem( "reverse" );
+    cEffect->addItem( "riaa" );
+    cEffect->addItem( "silence" );
+    cEffect->addItem( "sinc" );
+    cEffect->addItem( "spectrogram" );
+    cEffect->addItem( "speed" );
+    cEffect->addItem( "splice" );
+    cEffect->addItem( "stat" );
+    cEffect->addItem( "stats" );
+    cEffect->addItem( "stretch" );
+    cEffect->addItem( "swap" );
+    cEffect->addItem( "synth" );
+    cEffect->addItem( "tempo" );
+    cEffect->addItem( "treble" );
+    cEffect->addItem( "tremolo" );
+    cEffect->addItem( "trim" );
+    cEffect->addItem( "upsample" );
+    cEffect->addItem( "vad" );
+    cEffect->addItem( "vol" );
+    box->addWidget( cEffect );
+
+    widgetsBox = new QHBoxLayout( this );
+    box->addLayout( widgetsBox );
+
+    box->addStretch();
+
+    pRemove = new KPushButton( KIcon("list-remove"), i18n("Remove"), this );
+    pRemove->setToolTip( i18n("Remove this effect") );
+    box->addWidget( pRemove );
+
+    pAdd = new KPushButton( KIcon("list-add"), i18n("Add"), this );
+    pAdd->setToolTip( i18n("Add another effect") );
+    box->addWidget( pAdd );
+}
+
+SoxEffectWidget::~SoxEffectWidget()
+{}
+
+void SoxEffectWidget::effectChanged( int index )
+{
+    const QString effect = cEffect->itemText( index );
+
+    foreach( QWidget *widget, widgets )
+    {
+        widgetsBox->removeWidget( widget );
+        widget->deleteLater();
+    }
+    widgets.clear();
+
+    if( effect == "norm" )
+    {
+        QDoubleSpinBox *dNormalizeVolume = new QDoubleSpinBox( this );
+        dNormalizeVolume->setRange( -99, 99 );
+        dNormalizeVolume->setSuffix( " " + i18nc("decibel","dB") );
+        connect( dNormalizeVolume, SIGNAL(valueChanged(double)), this, SLOT(normalizeVolumeChanged(double)) );
+        connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        widgetsBox->addWidget( dNormalizeVolume );
+
+        dNormalizeVolume->setValue( 0 );
+        dNormalizeVolume->setPrefix( "+" );
+
+        widgets.append( (QWidget*)dNormalizeVolume );
+    }
+}
+
+void SoxEffectWidget::normalizeVolumeChanged( double value )
+{
+    if( widgets.isEmpty() )
+        return;
+
+    QDoubleSpinBox *dNormalizeVolume = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+
+    if( !dNormalizeVolume )
+        return;
+
+    if( value >= 0 )
+        dNormalizeVolume->setPrefix( "+" );
+    else
+        dNormalizeVolume->setPrefix( "" );
+}
+
+
 SoxFilterWidget::SoxFilterWidget()
     : FilterWidget()
 {
@@ -78,113 +219,29 @@ SoxFilterWidget::SoxFilterWidget()
     box1->addStretch();
 
 
-    QHBoxLayout *box2 = new QHBoxLayout();
-    grid->addLayout( box2, gridRow++, 0 );
-
-    cNormalize = new QCheckBox( i18n("Normalize:"), this );
-    connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    box2->addWidget( cNormalize );
-
-    dNormalizeVolume = new QDoubleSpinBox( this );
-    dNormalizeVolume->setRange( -99, 99 );
-    dNormalizeVolume->setSuffix( " " + i18nc("decibel","dB") );
-    connect( dNormalizeVolume, SIGNAL(valueChanged(double)), this, SLOT(normalizeVolumeChanged(double)) );
-    connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
-    box2->addWidget( dNormalizeVolume );
-
-    box2->addStretch();
-
-    cNormalize->setChecked( false );
-    dNormalizeVolume->setValue( 0 );
-    dNormalizeVolume->setPrefix( "+" );
-
-
-    QHBoxLayout *effectBox1 = new QHBoxLayout();
-    grid->addLayout( effectBox1, gridRow++, 0 );
-
-    QLabel *lEffect1 = new QLabel( i18n("Effect:") );
-    effectBox1->addWidget( lEffect1 );
-
-    KComboBox *cEffect1 = new KComboBox( this );
+//     QHBoxLayout *box2 = new QHBoxLayout();
+//     grid->addLayout( box2, gridRow++, 0 );
+//
+//     cNormalize = new QCheckBox( i18n("Normalize:"), this );
 //     connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    cEffect1->addItem( i18n("Disabled") );
-    cEffect1->addItem( "allpass" );
-    cEffect1->addItem( "band" );
-    cEffect1->addItem( "bandpass" );
-    cEffect1->addItem( "bandreject" );
-    cEffect1->addItem( "bass" );
-    cEffect1->addItem( "bend" );
-    cEffect1->addItem( "biquad" );
-    cEffect1->addItem( "chorus" );
-    cEffect1->addItem( "channels" );
-    cEffect1->addItem( "compand" );
-    cEffect1->addItem( "contrast" );
-    cEffect1->addItem( "dcshift" );
-    cEffect1->addItem( "deemph" );
-    cEffect1->addItem( "delay" );
-    cEffect1->addItem( "dither" );
-//     cEffect1->addItem( "divide" ); // experimental
-    cEffect1->addItem( "downsample" );
-    cEffect1->addItem( "earwax" );
-    cEffect1->addItem( "echo" );
-    cEffect1->addItem( "echos" );
-    cEffect1->addItem( "equalizer" );
-    cEffect1->addItem( "fade" );
-    cEffect1->addItem( "fir" );
-//     cEffect1->addItem( "firfit" ); // experimental
-    cEffect1->addItem( "flanger" );
-    cEffect1->addItem( "gain" );
-    cEffect1->addItem( "highpass" );
-    cEffect1->addItem( "hilbert" );
-//     cEffect1->addItem( "input" ); // libSoX-only
-    cEffect1->addItem( "ladspa" );
-    cEffect1->addItem( "loudness" );
-    cEffect1->addItem( "lowpass" );
-    cEffect1->addItem( "mcompand" );
-//     cEffect1->addItem( "mixer" ); // deprecated
-    cEffect1->addItem( "noiseprof" );
-    cEffect1->addItem( "noisered" );
-    cEffect1->addItem( "norm" );
-    cEffect1->addItem( "oops" );
-//     cEffect1->addItem( "output" ); // libSoX-only
-    cEffect1->addItem( "overdrive" );
-    cEffect1->addItem( "pad" );
-    cEffect1->addItem( "phaser" );
-    cEffect1->addItem( "pitch" );
-    cEffect1->addItem( "rate" );
-    cEffect1->addItem( "remix" );
-    cEffect1->addItem( "repeat" );
-    cEffect1->addItem( "reverb" );
-    cEffect1->addItem( "reverse" );
-    cEffect1->addItem( "riaa" );
-    cEffect1->addItem( "silence" );
-    cEffect1->addItem( "sinc" );
-    cEffect1->addItem( "spectrogram" );
-    cEffect1->addItem( "speed" );
-    cEffect1->addItem( "splice" );
-    cEffect1->addItem( "stat" );
-    cEffect1->addItem( "stats" );
-    cEffect1->addItem( "stretch" );
-    cEffect1->addItem( "swap" );
-    cEffect1->addItem( "synth" );
-    cEffect1->addItem( "tempo" );
-    cEffect1->addItem( "treble" );
-    cEffect1->addItem( "tremolo" );
-    cEffect1->addItem( "trim" );
-    cEffect1->addItem( "upsample" );
-    cEffect1->addItem( "vad" );
-    cEffect1->addItem( "vol" );
-    effectBox1->addWidget( cEffect1 );
+//     box2->addWidget( cNormalize );
+//
+//     dNormalizeVolume = new QDoubleSpinBox( this );
+//     dNormalizeVolume->setRange( -99, 99 );
+//     dNormalizeVolume->setSuffix( " " + i18nc("decibel","dB") );
+//     connect( dNormalizeVolume, SIGNAL(valueChanged(double)), this, SLOT(normalizeVolumeChanged(double)) );
+//     connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+//     box2->addWidget( dNormalizeVolume );
+//
+//     box2->addStretch();
+//
+//     cNormalize->setChecked( false );
+//     dNormalizeVolume->setValue( 0 );
+//     dNormalizeVolume->setPrefix( "+" );
 
-    effectBox1->addStretch();
 
-    KPushButton *pEffect1Remove = new KPushButton( KIcon("list-remove"), i18n("Remove"), this );
-    pEffect1Remove->setToolTip( i18n("Remove this effect") );
-    effectBox1->addWidget( pEffect1Remove );
-
-    KPushButton *pEffect1Add = new KPushButton( KIcon("list-add"), i18n("Add"), this );
-    pEffect1Add->setToolTip( i18n("Add another effect") );
-    effectBox1->addWidget( pEffect1Add );
+    SoxEffectWidget *effectWidget1 = new SoxEffectWidget( this );
+    grid->addWidget( effectWidget1, gridRow++, 0 );
 
 }
 
@@ -227,17 +284,17 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
         options->data.channels = 0;
     }
 
-    if( cNormalize->isChecked() )
-    {
-        options->data.normalize = true;
-        options->data.normalizeVolume = dNormalizeVolume->value();
-        valid = true;
-    }
-    else
-    {
-        options->data.normalize = false;
-        options->data.normalizeVolume = 0;
-    }
+//     if( cNormalize->isChecked() )
+//     {
+//         options->data.normalize = true;
+//         options->data.normalizeVolume = dNormalizeVolume->value();
+//         valid = true;
+//     }
+//     else
+//     {
+//         options->data.normalize = false;
+//         options->data.normalizeVolume = 0;
+//     }
 
     if( valid )
     {
@@ -255,18 +312,10 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
         return false;
 
     SoxFilterOptions *options = dynamic_cast<SoxFilterOptions*>(_options);
-    cNormalize->setChecked( options->data.normalize );
-    dNormalizeVolume->setValue( options->data.normalizeVolume );
+//     cNormalize->setChecked( options->data.normalize );
+//     dNormalizeVolume->setValue( options->data.normalizeVolume );
 
     return true;
-}
-
-void SoxFilterWidget::normalizeVolumeChanged( double value )
-{
-    if( value >= 0 )
-        dNormalizeVolume->setPrefix( "+" );
-    else
-        dNormalizeVolume->setPrefix( "" );
 }
 
 

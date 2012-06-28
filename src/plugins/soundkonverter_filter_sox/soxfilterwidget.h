@@ -7,6 +7,31 @@
 class QCheckBox;
 class QDoubleSpinBox;
 class KComboBox;
+class KPushButton;
+class QHBoxLayout;
+
+
+class SoxEffectWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    SoxEffectWidget( QWidget *parent = 0 );
+    ~SoxEffectWidget();
+
+private:
+    KComboBox *cEffect;
+    QHBoxLayout *widgetsBox;
+    QList<QWidget*> widgets;
+    KPushButton *pRemove;
+    KPushButton *pAdd;
+
+private slots:
+    void effectChanged( int index );
+
+    void normalizeVolumeChanged( double value );
+
+};
+
 
 class SoxFilterWidget : public FilterWidget
 {
@@ -25,11 +50,8 @@ private:
     KComboBox *cSampleRate;
     QCheckBox *chChannels;
     KComboBox *cChannels;
-    QCheckBox *cNormalize;
-    QDoubleSpinBox *dNormalizeVolume;
-
-private slots:
-    void normalizeVolumeChanged( double value );
+//     QCheckBox *cNormalize;
+//     QDoubleSpinBox *dNormalizeVolume;
 
 signals:
     void somethingChanged();

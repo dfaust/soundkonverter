@@ -8,6 +8,7 @@ set(soundkonverter_filter_sox_SRCS
    soxfilteroptions.cpp
    soxcodecwidget.cpp
    soxfilterwidget.cpp
+   soxeffectwidget.cpp
  )
 
 kde4_add_plugin(soundkonverter_filter_sox ${soundkonverter_filter_sox_SRCS})

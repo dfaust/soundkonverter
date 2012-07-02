@@ -25,6 +25,7 @@
 
 PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
+    dialogAborted( false ),
     config( _config )
 {
     setCaption( i18n("Add playlist") );
@@ -60,7 +61,9 @@ PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     fileDialog->setMode( KFile::File | KFile::ExistingOnly );
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
     connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
-    fileDialog->show();
+    const int dialogReturnCode = fileDialog->exec();
+    if( dialogReturnCode == QDialog::Rejected )
+        dialogAborted = true;
 }
 
 PlaylistOpener::~PlaylistOpener()

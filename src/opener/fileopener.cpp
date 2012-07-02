@@ -25,6 +25,7 @@
 
 FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
+    dialogAborted( false ),
     config( _config )
 {
     setCaption( i18n("Add Files") );
@@ -78,7 +79,9 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     fileDialog->setMode( KFile::Files | KFile::ExistingOnly );
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
     connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
-    fileDialog->show();
+    const int dialogReturnCode = fileDialog->exec();
+    if( dialogReturnCode == QDialog::Rejected )
+        dialogAborted = true;
 }
 
 FileOpener::~FileOpener()
@@ -172,7 +175,8 @@ void FileOpener::fileDialogAccepted()
         problemsDialog->exec();
     }
 
-    if( urls.count() <= 0 ) reject();
+    if( urls.count() <= 0 )
+        reject();
 }
 
 void FileOpener::okClickedSlot()

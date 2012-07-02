@@ -19,6 +19,7 @@
 
 DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
+    dialogAborted( false ),
     config( _config ),
     mode( _mode )
 {
@@ -150,9 +151,11 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
         resize( parent->width() - 10, sizeHint().height() );
 
 
-    KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
-    if( !url.isEmpty() ) uDirectory->setUrl( url );
-    else emit reject(); // TODO reject properly
+    const KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
+    if( !url.isEmpty() )
+        uDirectory->setUrl( url );
+    else
+        dialogAborted = true;
 }
 
 DirOpener::~DirOpener()
@@ -183,7 +186,6 @@ void DirOpener::addClicked()
             selectedCodecs += fileTypes->item(i)->text();
     }
 
-//     emit accept();
     if( mode == Convert )
     {
         ConversionOptions *conversionOptions = options->currentConversionOptions();

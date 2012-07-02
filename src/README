@@ -76,19 +76,19 @@ Installation:
 This section describes install soundKonverter from its sources.
 If you prefer to use precompiled packages have a look at the corresponding section below.
 
-First you should make sure that all dependences are installed.
-soundKonverter will need the follwing packages to compile:
+First you should make sure that all dependencies are installed.
+soundKonverter will need the following packages to compile:
 kde development packages version 4.4 or higher
 taglib development package version 1.4 or higher
 cdparanoia development package
 libkcddb (sometimes kdemultimedia) development package
-All dependences - and whether they are fulfilled - should be shown when running cmake.
+All dependencies - and whether they are fulfilled - should be shown when running cmake.
 
 Then open a console and change to the soundKonverter source directory and execute the following commands:
 
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` ..
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ..
 make
 sudo make install
 
@@ -96,9 +96,12 @@ In order to compile soundKonverter with debug information the commands will look
 
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=`kde-config --prefix` -DCMAKE_BUILD_TYPE=debugfull ..
+cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` -DCMAKE_BUILD_TYPE=debugfull ..
 make
 sudo make install
+
+Note: `kde4-config --prefix` should return the installation path of kde. On some systems you might need to use kde-config.
+Or you can just use define a path by yourself, "/usr" will be fine for most systems.
 
 For installing soundKonverter to your home directory see Building Amarok Locally at: http://amarok.kde.org/wiki/2.0_Development_HowTo
 
@@ -132,20 +135,30 @@ rm ~/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
 
 Precompiled packages:
 =====================
+You can find soundKonverter packages for various distributions with a nice download interface and some instructions here:
+http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
+
 openSUSE users should either add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
 eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_11.3 for openSUSE 11.3.
-Or add the KDE:Extra repository.
+Or add the KDE:Extra repository (includes a lot more KDE applications).
 eg.: http://download.opensuse.org/repositories/KDE:/Extra/openSUSE_11.4 for openSUSE 11.4
 More information about openSUSE KDE repositories: http://en.opensuse.org/KDE_repositories
 
-Ubuntu/Debain Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
-Packages for non openSUSE distributions are not tested, so please tell me if something is wrong with the packages.
+Ubuntu/Debian Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
+The packages in the xUbuntu repositories are suitable for Ubuntu as well as for all its derivatives (like Kubuntu).
+Quick installation guide:
+Open the application launcher, start a terminal and enter the following commands (each line is one command, execute them by hitting [enter]):
+sudo -i
+wget http://download.opensuse.org/repositories/home:HessiJames/xUbuntu_12.04/Release.key
+apt-key add - < Release.key
+rm Release.key
+echo 'deb http://download.opensuse.org/repositories/home:HessiJames/xUbuntu_12.04/ /' >> /etc/apt/sources.list
+apt-get update
+apt-get install soundkonverter
 
-Here is another download interface with some instructions (please check if the version number is up-to-date):
-http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter-1.1.0
-
+Packages for distributions other than openSUSE and Ubuntu are not tested, so please tell me if something is wrong with them.
 If your distribution is not listed here, you should start an internet search, there might be precompiled packages for your distribution provided by somebody else.
-(But make sure the source is trustworthy of cause...)
+But make sure the source is trustworthy of course...!
 
 
 
@@ -184,12 +197,12 @@ The Log Viewer will now open in a new window.
 5. To save a log to a file, click on the "Save to file..." button on the bottom of the Log Viewer.
 6. Attach latter or both log files to your bug report.
 
-In case soundKonverter crashes and you can't save the conversion log file, you can make soundKonverter write log files directly to the hard drive.
+In case soundKonverter crashes and you can't save the conversion log file, you can make soundKonverter write log files directly to the hard drive. (disabled by default for performance reasons.)
 You can find this option in the advanced tab of the configuration dialog.
 
 In case of a crash:
 After soundKonverter has crashed a new window should appear. It's KDE's crash handler and it has two tabs.
-Click on the tab "Developer information" and wait a few seconds until the crash has been analized.
+Click on the tab "Developer information" and wait a few seconds until the crash has been analyzed.
 You will see three stars at the top right corner indicating how useful the crash report is.
 If all three stars are filled your crash report is very useful otherwise it might not help.
 If you don't have three filled stars you can install some additional developer information.
@@ -200,9 +213,9 @@ a) If you are running openSUSE you can install soundKonverter via the open build
    All these steps should actually happen automatically after hitting the "install missting debug symbols" button.
 b) If you have installed soundKonverter from its sources you will have to compile it with debug information enabled. Have a look at the "Installation" section above.
    After you installed soundKonverter with debug information enabled you will have to close the crash handler window and try to reproduce the crash.
-c) If you are running an operating system other than openSUSE and have installed soundKonverter via a software repository chances are you can simply click on the "install missting debug symbols" button
+c) If you are running an operating system other than openSUSE and have installed soundKonverter via a software repository chances are you can simply click on the "install missing debug symbols" button
    and the additional developer information get installed automatically. But I haven't tested it.
-In order to reproduce a crash try doing the exact same thing you did when the crash occured.
+In order to reproduce a crash try doing the exact same thing you did when the crash occurred.
 If you managed to get a useful crash report you can either directly send it to me by clicking on the "Report problems or wishes" button
 or even better you can copy the generated information and create a new bug report at https://bugs.launchpad.net/soundkonverter and paste them there.
 

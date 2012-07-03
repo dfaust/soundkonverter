@@ -11,6 +11,7 @@ GenericName[et]=Helifailide teisendaja, CD-rippija ja helitugevuse parandustöö
 GenericName[fr]=Convertisseur de fichiers audio, extracteur de CD et outil de Replay Gain
 GenericName[hu]=Audiofájl-konverter, CD-beolvasó és hangerő-korrekciós eszköz
 GenericName[pt]=Conversor de áudio, extração de CD e análise Replay Gain
+GenericName[pt_BR]=Conversor de arquivo de áudio, extração de CD e ferramenta Replay Gain
 GenericName[ru]=Утилита для преобразования аудиоформатов, риппинга CD и выравнивания громкости
 Terminal=false
 Categories=AudioVideo;Audio;AudioVideoEditing;KDE;

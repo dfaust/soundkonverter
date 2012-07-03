@@ -13,6 +13,7 @@ Name[et]=Ripi audio-CD soundKonverteriga
 Name[fr]=Ripper des CDs audio avec soundKonverter
 Name[hu]=Audio CD beolvasása a soundKonverterrel
 Name[pt]=Extrair um CD áudio com o soundKonverter
+Name[pt_BR]=Extrair um CD de áudio com o soundKonverter
 Name[ru]=Используйте soundKonverter для CD-риппинга
 Icon=soundkonverter
 Exec=soundkonverter --rip %d

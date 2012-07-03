@@ -624,7 +624,7 @@ void Convert::kioJobFinished( KJob *job )
                         items.at(i)->fileListItem->tags = config->tagEngine()->readTags( items.at(i)->tempInputUrl );
                         if( items.at(i)->fileListItem->tags )
                         {
-                            logger->log( items.at(i)->logID, i18n("Read tags sucessfully") );
+                            logger->log( items.at(i)->logID, i18n("Read tags successfully") );
                         }
                         else
                         {
@@ -654,7 +654,7 @@ void Convert::kioJobFinished( KJob *job )
                 }
                 else
                 {
-                    logger->log( items.at(i)->logID, i18n("An error accured. Error code: %1 (%2)",job->error(),job->errorString()) );
+                    logger->log( items.at(i)->logID, i18n("An error occurred. Error code: %1 (%2)",job->error(),job->errorString()) );
                     remove( items.at(i), -1 );
                 }
             }
@@ -1071,7 +1071,7 @@ void Convert::remove( ConvertItem *item, int state )
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 && ( !conversionOptions || conversionOptions->codecName != "speex" ) )
     {
-        exitMessage = i18n("An error occured, the output file size is less than one percent of the input file size");
+        exitMessage = i18n("An error occurred, the output file size is less than one percent of the input file size");
 
         if( state == 0 )
         {
@@ -1092,7 +1092,7 @@ void Convert::remove( ConvertItem *item, int state )
     else if( state == 103 )
         exitMessage = i18nc("Conversion exit status","File already exists");
     else
-        exitMessage = i18nc("Conversion exit status","An error occured");
+        exitMessage = i18nc("Conversion exit status","An error occurred");
 
     if( state == 0 )
     {

@@ -62,7 +62,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
     box->addLayout( useVFATNamesBox );
     cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
-    cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directoy is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
+    cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directory is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
     cUseVFATNames->setChecked( config->data.general.useVFATNames );
     useVFATNamesBox->addWidget( cUseVFATNames );
     connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
@@ -91,7 +91,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout( 0 );
     box->addLayout( useSharedMemoryForTempFilesBox );
-    cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimted size is more than")+":", this );
+    cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than")+":", this );
     cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
     useSharedMemoryForTempFilesBox->addWidget( cUseSharedMemoryForTempFiles );
     iMaxSizeForSharedMemoryTempFiles = new KIntSpinBox( 1, config->data.advanced.sharedMemorySize, 1, config->data.advanced.sharedMemorySize / 2, this );

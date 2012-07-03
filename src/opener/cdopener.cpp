@@ -410,7 +410,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         }
         else
         {
-            errorList += i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPlease check your distribution's package manager in order to install an additional ripper plugin wich supports ripping to one file.");
+            errorList += i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPlease check your distribution's package manager in order to install an additional ripper plugin which supports ripping to one file.");
         }
         cEntireCd->setToolTip( errorList.join("\n") );
     }

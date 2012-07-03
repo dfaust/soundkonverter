@@ -99,7 +99,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "wma" )
     {
         info.lossless = false;
-        info.description = i18n("Windows Media Audio is a propritary audio codec from Microsoft.");
+        info.description = i18n("Windows Media Audio is a proprietary audio codec from Microsoft.");
         info.mimeTypes.append( "audio/x-ms-wma" );
         info.extensions.append( "wma" );
     }
@@ -175,7 +175,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "ape" )
     {
         info.lossless = true;
-        info.description = i18n("Monkey’s Audio is a fast and efficient but propritary lossless audio format.");
+        info.description = i18n("Monkey’s Audio is a fast and efficient but proprietary lossless audio format.");
         info.mimeTypes.append( "audio/x-ape" );
         info.extensions.append( "ape" );
         info.extensions.append( "mac" );
@@ -252,7 +252,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "ra" )
     {
         info.lossless = false;
-        info.description = i18n("Real Media Audio is a propritary and lossy codec.");
+        info.description = i18n("Real Media Audio is a proprietary and lossy codec.");
         info.mimeTypes.append( "audio/vnd.rn-realaudio" );
         info.extensions.append( "ra" );
         info.extensions.append( "rax" );
@@ -275,7 +275,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "rm" )
     {
         info.lossless = false;
-        info.description = i18n("Real Media is a propritary and lossy codec.");
+        info.description = i18n("Real Media is a proprietary and lossy codec.");
         info.mimeTypes.append( "application/vnd.rn-realmedia" );
         info.extensions.append( "rm" );
         info.extensions.append( "rmj" );
@@ -554,7 +554,7 @@ QString BackendPlugin::standardMessage( const QString& type, const QStringList& 
         if( arguments.count() != 1 )
             return "BackendPlugin::standardMessage (type: '"+type+"') called with wrong 'arguments' count!";
 
-        return i18n( "Since '%1' inludes patented codecs, it may not be included in the default installation of your distribution. Many distributions offer '%1' in an additional software repository.", arguments.at(0) );
+        return i18n( "Since '%1' includes patented codecs, it may not be included in the default installation of your distribution. Many distributions offer '%1' in an additional software repository.", arguments.at(0) );
     }
     if( type == "install_website_backend,url" )
     {

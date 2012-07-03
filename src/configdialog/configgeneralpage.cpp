@@ -136,7 +136,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
     box->addLayout( createActionsMenuBox );
     cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
-    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by diableing this option.") );
+    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by disabling this option.") );
     cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
     createActionsMenuBox->addWidget( cCreateActionsMenu );
     connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );

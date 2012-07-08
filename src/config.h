@@ -72,6 +72,8 @@ public:
 //             bool showToolBar;
 //             int outputFilePermissions;
             bool createActionsMenu;
+            QStringList actionMenuConvertMimeTypes;
+            QStringList actionMenuReplayGainMimeTypes;
             enum ReplayGainGrouping
             {
                 AlbumDirectory = 0,

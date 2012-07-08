@@ -71,6 +71,8 @@ void Config::load()
 //     data.general.showToolBar = group.readEntry( "showToolBar", false );
 //     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
     data.general.createActionsMenu = group.readEntry( "createActionsMenu", true );
+    data.general.actionMenuConvertMimeTypes = group.readEntry( "actionMenuConvertMimeTypes", QStringList() );
+    data.general.actionMenuReplayGainMimeTypes = group.readEntry( "actionMenuReplayGainMimeTypes", QStringList() );
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
     data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
 
@@ -452,8 +454,7 @@ void Config::load()
 
 void Config::save()
 {
-    QString format;
-    QStringList formats;
+    writeServiceMenu();
 
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group;
@@ -483,6 +484,8 @@ void Config::save()
 //     group.writeEntry( "showToolBar", data.general.showToolBar );
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
     group.writeEntry( "createActionsMenu", data.general.createActionsMenu );
+    group.writeEntry( "actionMenuConvertMimeTypes", data.general.actionMenuConvertMimeTypes );
+    group.writeEntry( "actionMenuReplayGainMimeTypes", data.general.actionMenuReplayGainMimeTypes );
     group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
     group.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
 
@@ -498,9 +501,10 @@ void Config::save()
 
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );
+    QStringList formats;
     for( int i=0; i<data.backends.codecs.count(); i++ )
     {
-        format = data.backends.codecs.at(i).codecName;
+        const QString format = data.backends.codecs.at(i).codecName;
         group.writeEntry( format + "_encoders", data.backends.codecs.at(i).encoders );
         group.writeEntry( format + "_decoders", data.backends.codecs.at(i).decoders );
         group.writeEntry( format + "_replaygain", data.backends.codecs.at(i).replaygain );
@@ -531,8 +535,6 @@ void Config::save()
         backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).betterBackend;
         group.writeEntry( QString("ignore_%1").arg(i), backendOptimization );
     }
-
-    writeServiceMenu();
 
     emit updateWriteLogFilesSetting( data.general.writeLogFiles );
 }
@@ -567,7 +569,7 @@ void Config::writeServiceMenu()
         content += "Icon=soundkonverter\n";
         content += "Exec=soundkonverter %F\n";
 
-        if( mimeTypes.count() > 0 )
+        if( data.general.actionMenuConvertMimeTypes != mimeTypes && mimeTypes.count() > 0 )
         {
             QFile convertActionFile( KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" ) );
             if( convertActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
@@ -576,6 +578,7 @@ void Config::writeServiceMenu()
                 convertActionStream << content;
                 convertActionFile.close();
             }
+            data.general.actionMenuConvertMimeTypes = mimeTypes;
         }
 
         content = "";
@@ -601,7 +604,7 @@ void Config::writeServiceMenu()
         content += "Icon=soundkonverter-replaygain\n";
         content += "Exec=soundkonverter --replaygain %F\n";
 
-        if( mimeTypes.count() > 0 )
+        if( data.general.actionMenuReplayGainMimeTypes != mimeTypes && mimeTypes.count() > 0 )
         {
             QFile replaygainActionFile( KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" ) );
             if( replaygainActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
@@ -610,6 +613,7 @@ void Config::writeServiceMenu()
                 replaygainActionStream << content;
                 replaygainActionFile.close();
             }
+            data.general.actionMenuReplayGainMimeTypes = mimeTypes;
         }
     }
     else

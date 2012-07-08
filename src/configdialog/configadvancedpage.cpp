@@ -96,17 +96,6 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     writeLogFilesBox->addWidget( cWriteLogFiles );
     connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
-
-    QHBoxLayout *removeFailedFilesBox = new QHBoxLayout( 0 );
-    removeFailedFilesBox->addSpacing( ConfigDialogOffset );
-    box->addLayout( removeFailedFilesBox );
-    cRemoveFailedFiles = new QCheckBox( i18n("Remove partially converted files if a conversion fails"), this );
-    cRemoveFailedFiles->setToolTip( i18n("Disable this for debugging or if you are sure the files get converted correctly.") );
-    cRemoveFailedFiles->setChecked( config->data.general.removeFailedFiles );
-    removeFailedFilesBox->addWidget( cRemoveFailedFiles );
-    connect( cRemoveFailedFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
     box->addSpacing( ConfigDialogSpacingBig );
 
     QLabel *lExperimental = new QLabel( i18n("Experimental"), this );
@@ -162,7 +151,6 @@ void ConfigAdvancedPage::resetDefaults()
     iUpdateDelay->setValue( 100 );
     cUseVFATNames->setChecked( false );
     cWriteLogFiles->setChecked( false );
-    cRemoveFailedFiles->setChecked( true );
     cUseSharedMemoryForTempFiles->setChecked( false );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 2 );
     cUsePipes->setChecked( false );
@@ -176,7 +164,6 @@ void ConfigAdvancedPage::saveSettings()
     config->data.general.updateDelay = iUpdateDelay->value();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
-    config->data.general.removeFailedFiles = cRemoveFailedFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
     config->data.advanced.maxSizeForSharedMemoryTempFiles = iMaxSizeForSharedMemoryTempFiles->value();
     config->data.advanced.usePipes = cUsePipes->isChecked();
@@ -188,7 +175,6 @@ void ConfigAdvancedPage::somethingChanged()
                          iUpdateDelay->value() != config->data.general.updateDelay ||
                          cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
                          cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
-                         cRemoveFailedFiles->isChecked() != config->data.general.removeFailedFiles ||
                          cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||
                          iMaxSizeForSharedMemoryTempFiles->value() != config->data.advanced.maxSizeForSharedMemoryTempFiles ||
                          cUsePipes->isChecked() != config->data.advanced.usePipes;

@@ -41,7 +41,6 @@ private:
     KIntSpinBox *iUpdateDelay;
     QCheckBox *cUseVFATNames;
     QCheckBox *cWriteLogFiles;
-    QCheckBox *cRemoveFailedFiles;
     QCheckBox *cUseSharedMemoryForTempFiles;
     KIntSpinBox *iMaxSizeForSharedMemoryTempFiles;
     QCheckBox *cUsePipes;

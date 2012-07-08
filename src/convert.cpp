@@ -1094,7 +1094,7 @@ void Convert::remove( ConvertItem *item, int state )
             QFile::remove( url.toLocalFile() );
         }
     }
-    if( state != 0 && state != 103 && config->data.general.removeFailedFiles && QFile::exists(item->outputUrl.toLocalFile()) )
+    if( state != 0 && state != 103 && QFile::exists(item->outputUrl.toLocalFile()) )
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );

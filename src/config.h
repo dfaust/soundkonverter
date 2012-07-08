@@ -72,7 +72,6 @@ public:
 //             bool showToolBar;
 //             int outputFilePermissions;
             bool createActionsMenu;
-            bool removeFailedFiles;
             enum ReplayGainGrouping
             {
                 AlbumDirectory = 0,

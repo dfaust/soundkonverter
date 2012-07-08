@@ -40,6 +40,9 @@ public:
     /** Destructor */
     virtual ~DirOpener();
 
+    /** true if the file dialog was aborted (don't execute the dialog) */
+    bool dialogAborted;
+
 private slots:
     void proceedClicked();
     void addClicked();

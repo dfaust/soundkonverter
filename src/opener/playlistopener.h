@@ -32,6 +32,9 @@ public:
     PlaylistOpener( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
     ~PlaylistOpener();
 
+    /** true if the file dialog was aborted (don't execute the dialog) */
+    bool dialogAborted;
+
 private:
     Config *config;
 

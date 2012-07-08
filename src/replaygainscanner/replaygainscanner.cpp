@@ -124,7 +124,8 @@ void ReplayGainScanner::showFileDialog()
     for( int i=0; i<formats.count(); i++ )
     {
         QString extensionFilter = config->pluginLoader()->codecExtensions(formats.at(i)).join(" *.");
-        if( extensionFilter.length() == 0 ) continue;
+        if( extensionFilter.length() == 0 )
+            continue;
         extensionFilter = "*." + extensionFilter;
         allFilter += extensionFilter;
         filterList += extensionFilter + "|" + i18n("%1 files",formats.at(i));
@@ -140,9 +141,7 @@ void ReplayGainScanner::showFileDialog()
     fileDialog->setWindowTitle( i18n("Add Files") );
     fileDialog->setMode( KFile::Files | KFile::ExistingOnly );
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
-    fileDialog->show();
-
-//     lList->addFiles( KFileDialog::getOpenUrls( KUrl(QDir::homePath()), filterList.join("\n"), this, i18n("Open files") ) );
+    fileDialog->exec();
 }
 
 void ReplayGainScanner::fileDialogAccepted()
@@ -173,11 +172,14 @@ void ReplayGainScanner::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::ReplayGain, this );
 
-    connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
+    if( !dialog->dialogAborted )
+    {
+        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
 
-    dialog->exec();
+        dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), 0, 0 );
+    }
 
     delete dialog;
 }

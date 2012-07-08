@@ -60,7 +60,7 @@ LameCodecWidget::LameCodecWidget()
     cPresetFast = new QCheckBox( i18n("Fast encoding"), this );
     connect( cPresetFast, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     presetBox->addWidget( cPresetFast );
-    cPresetFast->setToolTip( i18n("Use a faster encoding alogrithm (results in a slightly lower output quality).") );
+    cPresetFast->setToolTip( i18n("Use a faster encoding algorithm (results in a slightly lower output quality).") );
 
     presetBox->addStretch();
 
@@ -591,7 +591,7 @@ void LameCodecWidget::modeChanged( int mode )
         iQuality->setValue( 5 );
 //         dQuality->setValue( qualityForBitrate(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
-        iQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highes quality.") );
+        iQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.") );
 
         cBitrateMode->clear();
         cBitrateMode->addItem( i18n("Variable") );

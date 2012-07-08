@@ -1,6 +1,10 @@
 1.9.80 (2.0.0 beta1):
 -Fix: Handle internal ReplayGain calculation properly
 
+1.6.3:
+-Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)
+-Fix: Make sure the file chooser dialog won't get overlayed by the options dialog in non-KDE environments
+
 1.6.2:
 -Fix: Skip files that ought to be skipped instead of generating a new file name
 -Fix: Make saving custom profiles work again

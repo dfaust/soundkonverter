@@ -165,30 +165,36 @@ void soundKonverterView::showFileDialog()
     FileOpener *dialog = new FileOpener( config, this );
 //     dialog->resize( size().width() - 10, size().height() );
 
-    connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    if( !dialog->dialogAborted )
+    {
+        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
 
-    dialog->exec();
+        dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+
+        fileList->save( false );
+    }
 
     delete dialog;
-
-    fileList->save( false );
 }
 
 void soundKonverterView::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::Convert, this );
 
-    connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
+    if( !dialog->dialogAborted )
+    {
+        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
 
-    dialog->exec();
+        dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
+
+        fileList->save( false );
+    }
 
     delete dialog;
-
-    fileList->save( false );
 }
 
 void soundKonverterView::showCdDialog( const QString& device, bool intern )
@@ -274,10 +280,11 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
         dialog->exec();
 
         disconnect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*)), 0, 0 );
+
+        fileList->save( false );
     }
     else
     {
-//         KMessageBox::information( this, i18n("No audio CD found.") );
         KMessageBox::error( this, i18n("No CD device found") );
     }
 
@@ -287,8 +294,6 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
 
     options->setCurrentOptions( conversionOptions );
 */
-
-    fileList->save( false );
 }
 
 void soundKonverterView::showUrlDialog()
@@ -311,15 +316,18 @@ void soundKonverterView::showPlaylistDialog()
     PlaylistOpener *dialog = new PlaylistOpener( config, this );
 //     dialog->resize( size().width() - 10, size().height() );
 
-    connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    if( !dialog->dialogAborted )
+    {
+        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
 
-    dialog->exec();
+        dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+
+        fileList->save( false );
+    }
 
     delete dialog;
-
-    fileList->save( false );
 }
 
 void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )

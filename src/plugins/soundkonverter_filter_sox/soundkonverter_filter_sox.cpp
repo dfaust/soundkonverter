@@ -141,9 +141,6 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
     {
         foreach( const QString toCodec, codecs )
         {
-            if( fromCodec == "wav" && toCodec == "wav" )
-                continue;
-
             bool codecEnabled = false;
             QStringList soxProblemInfo;
             foreach( const SoxCodecData data, codecList )

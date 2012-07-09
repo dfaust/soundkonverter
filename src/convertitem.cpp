@@ -50,24 +50,27 @@ void ConvertItem::updateTimes()
     float totalTime = 0.0f;
     getTime = ( mode & ConvertItem::get ) ? 0.8f : 0.0f;                        // TODO file size? connection speed?
     totalTime += getTime;
-    foreach( const ConversionPipeTrunk trunk, conversionPipes.at(take).trunks )
+    if( conversionPipes.count() > take )
     {
-        float time = 0.0f;
+        foreach( const ConversionPipeTrunk trunk, conversionPipes.at(take).trunks )
+        {
+            float time = 0.0f;
 
-        if( trunk.codecFrom == "audio cd" )
-            time += 1.0f;
-        else if( trunk.codecFrom != "wav" )
-            time += 0.4f;
+            if( trunk.codecFrom == "audio cd" )
+                time += 1.0f;
+            else if( trunk.codecFrom != "wav" )
+                time += 0.4f;
 
-        if( trunk.codecTo != "wav" )
-            time += 1.0f;
+            if( trunk.codecTo != "wav" )
+                time += 1.0f;
 
-        if( trunk.codecFrom == "wav" && trunk.codecTo == "wav" )
-            time += 0.4f;
+            if( trunk.codecFrom == "wav" && trunk.codecTo == "wav" )
+                time += 0.4f;
 
-        totalTime += time;
+            totalTime += time;
 
-        convertTimes.append( time );
+            convertTimes.append( time );
+        }
     }
     replaygainTime = ( mode & ConvertItem::replaygain ) ? 0.2f : 0.0f;
     totalTime += replaygainTime;

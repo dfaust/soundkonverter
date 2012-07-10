@@ -36,7 +36,7 @@ PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeW
     track( _track ),
     m_treeWidgetItem( _treeWidgetItem )
 {
-    QHBoxLayout *trackPlayerBox = new QHBoxLayout( 0 );
+    QHBoxLayout *trackPlayerBox = new QHBoxLayout();
     setLayout( trackPlayerBox );
 
     pStartPlayback = new KPushButton( KIcon("media-playback-start"), "", this );
@@ -116,7 +116,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     QWidget *widget = new QWidget( this );
     QGridLayout *mainGrid = new QGridLayout( widget );
-    QGridLayout *topGrid = new QGridLayout( 0 );
+    QGridLayout *topGrid = new QGridLayout();
     mainGrid->addLayout( topGrid, 0, 0 );
     setMainWidget( widget );
 
@@ -144,7 +144,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     QGridLayout *gridLayout = new QGridLayout( cdOpenerWidget );
 
     // the box for the cover and artist/album grid
-    QHBoxLayout *topBoxLayout = new QHBoxLayout( 0 );
+    QHBoxLayout *topBoxLayout = new QHBoxLayout();
     gridLayout->addLayout( topBoxLayout, 0, 0 );
 
     // the album cover
@@ -154,7 +154,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     lAlbumCover->setContentsMargins( 0, 0, 6, 0 );
 
     // the grid for the artist and album input
-    QGridLayout *topGridLayout = new QGridLayout( 0 );
+    QGridLayout *topGridLayout = new QGridLayout();
     topBoxLayout->addLayout( topGridLayout );
 
     // set up the first row at the top
@@ -167,7 +167,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     cArtist->setEditText( "" );
     connect( cArtist, SIGNAL(textChanged(const QString&)), this, SLOT(artistChanged(const QString&)) );
     // add a horizontal box layout for the composer
-    QHBoxLayout *artistBox = new QHBoxLayout( 0 );
+    QHBoxLayout *artistBox = new QHBoxLayout();
     topGridLayout->addLayout( artistBox, 0, 3 );
     // and fill it up
     QLabel *lComposerLabel = new QLabel( i18n("Composer:"), cdOpenerWidget );
@@ -188,7 +188,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     lAlbum = new KLineEdit( cdOpenerWidget );
     topGridLayout->addWidget( lAlbum, 1, 1 );
     // add a horizontal box layout for the disc number
-    QHBoxLayout *albumBox = new QHBoxLayout( 0 );
+    QHBoxLayout *albumBox = new QHBoxLayout();
     topGridLayout->addLayout( albumBox, 1, 3 );
     // and fill it up
     QLabel *lDiscLabel = new QLabel( i18n("Disc No.:"), cdOpenerWidget );
@@ -202,7 +202,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     QLabel *lYearLabel = new QLabel( i18n("Year:"), cdOpenerWidget );
     topGridLayout->addWidget( lYearLabel, 2, 0 );
     // add a horizontal box layout for the year and genre
-    QHBoxLayout *yearBox = new QHBoxLayout( 0 );
+    QHBoxLayout *yearBox = new QHBoxLayout();
     topGridLayout->addLayout( yearBox, 2, 1 );
     // and fill it up
     iYear = new KIntSpinBox( 0, 99999, 1, QDate::currentDate().year(), cdOpenerWidget );
@@ -270,7 +270,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     // add the inputs
     // add a horizontal box layout for the title
-    QHBoxLayout *trackTitleBox = new QHBoxLayout( 0 );
+    QHBoxLayout *trackTitleBox = new QHBoxLayout();
     tagGridLayout->addLayout( trackTitleBox, 0, 2 );
     // and fill it up
     QLabel *lTrackTitleLabel = new QLabel( i18n("Title:"), tagGroupBox );
@@ -285,7 +285,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     trackTitleBox->addWidget( pTrackTitleEdit );
     connect( pTrackTitleEdit, SIGNAL(clicked()), this, SLOT(editTrackTitleClicked()) );
     // add a horizontal box layout for the composer
-    QHBoxLayout *trackArtistBox = new QHBoxLayout( 0 );
+    QHBoxLayout *trackArtistBox = new QHBoxLayout();
     tagGridLayout->addLayout( trackArtistBox, 1, 2 );
     // and fill it up
     QLabel *lTrackArtistLabel = new QLabel( i18n("Artist:"), tagGroupBox );
@@ -311,7 +311,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     trackArtistBox->addWidget( pTrackComposerEdit );
     connect( pTrackComposerEdit, SIGNAL(clicked()), this, SLOT(editTrackComposerClicked()) );
     // add a horizontal box layout for the comment
-    QHBoxLayout *trackCommentBox = new QHBoxLayout( 0 );
+    QHBoxLayout *trackCommentBox = new QHBoxLayout();
     tagGridLayout->addLayout( trackCommentBox, 2, 2 );
     // and fill it up
     QLabel *lTrackCommentLabel = new QLabel( i18n("Comment:"), tagGroupBox );
@@ -381,7 +381,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     mainGrid->addWidget( buttonLineFrame, 4, 0 );
 
     // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout( 0 );
+    QHBoxLayout *controlBox = new QHBoxLayout();
     mainGrid->addLayout( controlBox, 5, 0 );
 
     // add the control elements

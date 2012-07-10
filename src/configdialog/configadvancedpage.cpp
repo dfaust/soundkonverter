@@ -38,7 +38,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout( 0 );
+    QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout();
     preferredOggVorbisExtensionBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredOggVorbisExtensionBox );
     QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred extension for ogg vorbis files")+":", this );
@@ -54,7 +54,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *updateDelayBox = new QHBoxLayout( 0 );
+    QHBoxLayout *updateDelayBox = new QHBoxLayout();
     updateDelayBox->addSpacing( ConfigDialogOffset );
     box->addLayout( updateDelayBox );
     QLabel* lUpdateDelay = new QLabel( i18n("Status update delay")+":", this );
@@ -70,7 +70,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *useVFATNamesBox = new QHBoxLayout( 0 );
+    QHBoxLayout *useVFATNamesBox = new QHBoxLayout();
     useVFATNamesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useVFATNamesBox );
     cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
@@ -87,7 +87,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *writeLogFilesBox = new QHBoxLayout( 0 );
+    QHBoxLayout *writeLogFilesBox = new QHBoxLayout();
     writeLogFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( writeLogFilesBox );
     cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
@@ -104,7 +104,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout( 0 );
+    QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout();
     useSharedMemoryForTempFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useSharedMemoryForTempFilesBox );
     cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than")+":", this );
@@ -130,7 +130,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *usePipesBox = new QHBoxLayout( 0 );
+    QHBoxLayout *usePipesBox = new QHBoxLayout();
     usePipesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( usePipesBox );
     cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );

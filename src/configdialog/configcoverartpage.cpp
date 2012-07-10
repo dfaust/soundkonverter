@@ -37,10 +37,10 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *coverSavingBox = new QHBoxLayout( 0 );
+    QHBoxLayout *coverSavingBox = new QHBoxLayout();
     coverSavingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( coverSavingBox );
-    QVBoxLayout *writeCoversBox = new QVBoxLayout( 0 );
+    QVBoxLayout *writeCoversBox = new QVBoxLayout();
     coverSavingBox->addLayout( writeCoversBox );
 
     QLabel *lWriteCovers = new QLabel( i18n("Save embedded covers to output directory"), this );
@@ -100,7 +100,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 
 //     QGroupBox *coverGroup = new QGroupBox( i18n("CD covers"), this );
 //     writeCoversBox->addWidget( coverGroup );
-//     QVBoxLayout *coverBox = new QVBoxLayout( 0 ); // TODO destroy
+//     QVBoxLayout *coverBox = new QVBoxLayout();
 //
 //     cCopyCover = new QCheckBox( i18n("Copy covers from the source directoy to output directoy"), this );
 //     coverBox->addWidget( cCopyCover );
@@ -115,14 +115,14 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 //
 //     coverGroup->setLayout( coverBox );
 //
-//     QHBoxLayout *startTabBox = new QHBoxLayout( 0 ); // TODO destroy
+//     QHBoxLayout *startTabBox = new QHBoxLayout();
 //     writeCoversBox->addLayout( startTabBox );
 //
 //     writeCoversBox->addSpacing( 5 );
 //
 //     QGroupBox *userScriptGroup = new QGroupBox( i18n("User scripts"), this );
 //     writeCoversBox->addWidget( userScriptGroup );
-//     QVBoxLayout *userScriptBox = new QVBoxLayout( 0 ); // TODO destroy
+//     QVBoxLayout *userScriptBox = new QVBoxLayout();
 //
 //     QLabel *lUserScript = new QLabel( i18n("Check all scripts that should be executed after a conversion has finished"), this );
 //     userScriptBox->addWidget( lUserScript );

@@ -45,7 +45,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
 
     QWidget *widget = new QWidget();
     QGridLayout *mainGrid = new QGridLayout( widget );
-    QGridLayout *topGrid = new QGridLayout( 0 );
+    QGridLayout *topGrid = new QGridLayout();
     mainGrid->addLayout( topGrid, 0, 0 );
     setMainWidget( widget );
 

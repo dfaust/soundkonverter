@@ -44,7 +44,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *startTabBox = new QHBoxLayout( 0 ); // TODO destroy
+    QHBoxLayout *startTabBox = new QHBoxLayout();
     startTabBox->addSpacing( ConfigDialogOffset );
     box->addLayout( startTabBox );
     QLabel *lStartTab = new QLabel( i18n("Start in Mode")+":", this );
@@ -59,7 +59,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *defaultProfileBox = new QHBoxLayout( 0 );
+    QHBoxLayout *defaultProfileBox = new QHBoxLayout();
     defaultProfileBox->addSpacing( ConfigDialogOffset );
     box->addLayout( defaultProfileBox );
     QLabel *lDefaultProfile = new QLabel( i18n("Default profile")+":", this );
@@ -90,7 +90,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-//     QHBoxLayout *priorityBox = new QHBoxLayout( 0 );
+//     QHBoxLayout *priorityBox = new QHBoxLayout();
 //     box->addLayout( priorityBox );
 //     QLabel *lPriority = new QLabel( i18n("Process priority of the backends")+":", this );
 //     priorityBox->addWidget( lPriority );
@@ -104,7 +104,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //
 //     box->addSpacing( 5 );
 
-    QHBoxLayout *conflictHandlingBox = new QHBoxLayout( 0 );
+    QHBoxLayout *conflictHandlingBox = new QHBoxLayout();
     conflictHandlingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( conflictHandlingBox );
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling")+":", this );
@@ -120,7 +120,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *numFilesBox = new QHBoxLayout( 0 );
+    QHBoxLayout *numFilesBox = new QHBoxLayout();
     numFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( numFilesBox );
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once")+":", this );
@@ -136,7 +136,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout( 0 );
+    QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout();
     waitForAlbumGainBox->addSpacing( ConfigDialogOffset );
     box->addLayout( waitForAlbumGainBox );
     cWaitForAlbumGain = new QCheckBox( i18n("Apply album gain to converted files"), this );
@@ -153,7 +153,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *replayGainGroupingBox = new QHBoxLayout( 0 );
+    QHBoxLayout *replayGainGroupingBox = new QHBoxLayout();
     replayGainGroupingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( replayGainGroupingBox );
     QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by")+":", this );
@@ -174,7 +174,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *createActionsMenuBox = new QHBoxLayout( 0 );
+    QHBoxLayout *createActionsMenuBox = new QHBoxLayout();
     createActionsMenuBox->addSpacing( ConfigDialogOffset );
     box->addLayout( createActionsMenuBox );
     cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );

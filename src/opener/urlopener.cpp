@@ -59,7 +59,7 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     lineFrame->setFrameShadow( QFrame::Sunken );
     mainGrid->addWidget( lineFrame, 1, 0 );
 
-    QVBoxLayout *urlBox = new QVBoxLayout( 0 );
+    QVBoxLayout *urlBox = new QVBoxLayout();
     mainGrid->addLayout( urlBox, 2, 0 );
     urlBox->addSpacing( 60 );
     urlRequester = new KUrlRequester( widget );
@@ -78,7 +78,7 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
 
     // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout( 0 );
+    QHBoxLayout *controlBox = new QHBoxLayout();
     mainGrid->addLayout( controlBox, 5, 0 );
     controlBox->addStretch();
 

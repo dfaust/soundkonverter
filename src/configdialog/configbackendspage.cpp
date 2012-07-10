@@ -30,14 +30,14 @@ BackendsListWidget::BackendsListWidget( const QString& _name, Config *_config, Q
     config( _config ),
     name( _name )
 {
-    QVBoxLayout *box = new QVBoxLayout( 0 );
+    QVBoxLayout *box = new QVBoxLayout();
     setLayout( box );
 
     lBackends = new QListWidget( this );
     connect( lBackends, SIGNAL(currentRowChanged(int)), this, SLOT(itemSelected(int)) );
     box->addWidget( lBackends );
 
-    QHBoxLayout *arrowBox = new QHBoxLayout( 0 );
+    QHBoxLayout *arrowBox = new QHBoxLayout();
     box->addLayout( arrowBox );
 
     pUp = new QToolButton( this );
@@ -209,7 +209,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *ripperBox = new QHBoxLayout( 0 );
+    QHBoxLayout *ripperBox = new QHBoxLayout();
     ripperBox->addSpacing( ConfigDialogOffset );
     box->addLayout( ripperBox );
     QLabel *lRipper = new QLabel( i18n("Plugin")+":", this );
@@ -227,7 +227,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *filterBox = new QHBoxLayout( 0 );
+    QHBoxLayout *filterBox = new QHBoxLayout();
     filterBox->addSpacing( ConfigDialogOffset );
     box->addLayout( filterBox );
     QLabel *lSelectorFilter = new QLabel( i18n("Plugin")+":", this );
@@ -255,10 +255,10 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QVBoxLayout *formatBox = new QVBoxLayout( 0 );
+    QVBoxLayout *formatBox = new QVBoxLayout();
     box->addLayout( formatBox );
 
-    QHBoxLayout *formatSelectorBox = new QHBoxLayout( 0 );
+    QHBoxLayout *formatSelectorBox = new QHBoxLayout();
     formatSelectorBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatSelectorBox );
     QLabel *lSelectorFormat = new QLabel( i18n("Format")+":", this );
@@ -272,7 +272,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( cSelectorFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
     formatSelectorBox->addStretch();
 
-    QHBoxLayout *formatBackendsBox = new QHBoxLayout( 0 );
+    QHBoxLayout *formatBackendsBox = new QHBoxLayout();
     formatBackendsBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatBackendsBox );
     decoderList = new BackendsListWidget( i18n("Decoder"), config, this );
@@ -285,7 +285,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatBackendsBox->addWidget( replaygainList );
     connect( replaygainList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
 
-    QHBoxLayout *optimizationsBox = new QHBoxLayout( 0 );
+    QHBoxLayout *optimizationsBox = new QHBoxLayout();
     optimizationsBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( optimizationsBox );
     optimizationsBox->addStretch();

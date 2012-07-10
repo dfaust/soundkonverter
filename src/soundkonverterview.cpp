@@ -68,7 +68,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
 
     // add a horizontal box layout for the add combobutton to the grid
-    QHBoxLayout *addBox = new QHBoxLayout( 0 ); // TODO destroy
+    QHBoxLayout *addBox = new QHBoxLayout();
     addBox->setContentsMargins( 0, 0, 0, 0 );
 //     addBox->setSpacing( 0 );
     gridLayout->addLayout( addBox, 3, 0 );

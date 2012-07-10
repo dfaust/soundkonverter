@@ -59,7 +59,7 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     mainGrid->addWidget( options, 1, 0 );
 
     // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout( 0 );
+    QHBoxLayout *controlBox = new QHBoxLayout();
     mainGrid->addLayout( controlBox, 2, 0 );
     controlBox->addStretch();
 

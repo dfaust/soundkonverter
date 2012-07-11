@@ -79,17 +79,26 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
                 isConverting = true;
                 break;
             case FileListItem::Stopped:
-                break;
-            case FileListItem::BackendNeedsConfiguration:
-                isFailed = true;
-                break;
-            case FileListItem::DiscFull:
-                isFailed = true;
-                break;
-            case FileListItem::Skipped:
-                break;
-            case FileListItem::Failed:
-                isFailed = true;
+                switch( item->returnCode )
+                {
+                    case FileListItem::Succeeded:
+                        break;
+                    case FileListItem::SucceededWithProblems:
+                        break;
+                    case FileListItem::StoppedByUser:
+                        break;
+                    case FileListItem::BackendNeedsConfiguration:
+                        isFailed = true;
+                        break;
+                    case FileListItem::DiscFull:
+                        isFailed = true;
+                        break;
+                    case FileListItem::Skipped:
+                        break;
+                    case FileListItem::Failed:
+                        isFailed = true;
+                        break;
+                }
                 break;
         }
     }

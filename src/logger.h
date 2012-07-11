@@ -3,7 +3,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-// #include <qobject.h>
+#include "filelistitem.h"
+
 #include <QStringList>
 #include <QTime>
 #include <QFile>
@@ -14,7 +15,6 @@
 /**
  * @short An item for every process that is logged
  * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
  */
 class LoggerItem
 {
@@ -29,7 +29,7 @@ public:
     int id;
     QStringList data;
     bool completed;
-    int state; // 0 = ok, -1 = failed, 1 = other (soundKonverter)
+    FileListItem::ReturnCode returnCode;
     QTime time;
     QFile file;
     QTextStream textStream;
@@ -39,7 +39,6 @@ public:
 /**
  * @short All data about the processes are collected here
  * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
  */
 class Logger : public QObject
 {
@@ -78,7 +77,7 @@ private:
     int getNewID();
 
 public slots:
-    void processCompleted( int id, int state );
+    void processCompleted( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain );
     /// connected to config
     void updateWriteSetting( bool _writeLogFiles );
 

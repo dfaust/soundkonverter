@@ -54,7 +54,7 @@ soundKonverter::soundKonverter()
 
     m_view = new soundKonverterView( logger, config, cdManager, this );
     connect( m_view, SIGNAL(signalConversionStarted()), this, SLOT(conversionStarted()) );
-    connect( m_view, SIGNAL(signalConversionStopped(int)), this, SLOT(conversionStopped(int)) );
+    connect( m_view, SIGNAL(signalConversionStopped(bool)), this, SLOT(conversionStopped(bool)) );
     connect( m_view, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(QString)) );
     connect( m_view, SIGNAL(showLog(int)), this, SLOT(showLogViewer(int)) );
 
@@ -285,9 +285,9 @@ void soundKonverter::conversionStarted()
     }
 }
 
-void soundKonverter::conversionStopped( int state )
+void soundKonverter::conversionStopped( bool failed )
 {
-    if( autoclose && state != 1 /*&& !m_view->isVisible()*/ )
+    if( autoclose && !failed /*&& !m_view->isVisible()*/ )
         KApplication::kApplication()->quit(); // close app on conversion stop unless the conversion was stopped by the user or the window is shown
 
     if( systemTray )

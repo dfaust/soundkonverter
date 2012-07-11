@@ -65,7 +65,7 @@ private slots:
     /** The conversion has started */
     void conversionStarted();
     /** The conversion has stopped */
-    void conversionStopped( int state );
+    void conversionStopped( bool failed );
 
 private:
     Config *config;
@@ -84,8 +84,6 @@ private:
 
     /// exit soundkonverter after all files have been converted
     bool autoclose;
-
-//     KToggleAction *m_toolbarAction;
 
     void setupActions();
 

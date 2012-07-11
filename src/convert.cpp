@@ -26,9 +26,9 @@ Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
     connect( fileList, SIGNAL(convertItem(FileListItem*)), this, SLOT(add(FileListItem*)) );
     connect( fileList, SIGNAL(killItem(FileListItem*)), this, SLOT(kill(FileListItem*)) );
     connect( fileList, SIGNAL(itemRemoved(FileListItem*)), this, SLOT(itemRemoved(FileListItem*)) );
-    connect( this, SIGNAL(finished(FileListItem*,int)), fileList, SLOT(itemFinished(FileListItem*,int)) );
+    connect( this, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
     connect( this, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
-    connect( this, SIGNAL(finishedProcess(int,int)), logger, SLOT(processCompleted(int,int)) );
+    connect( this, SIGNAL(finishedProcess(int,FileListItem::ReturnCode,bool)), logger, SLOT(processCompleted(int,FileListItem::ReturnCode,bool)) );
 
     connect( &updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress()) );
 
@@ -69,7 +69,7 @@ void Convert::cleanUp()
 void Convert::get( ConvertItem *item )
 {
     if( item->take > 0 )
-        remove( item, -1 );
+        remove( item, FileListItem::Failed );
 
     logger->log( item->logID, i18n("Getting file") );
     item->state = ConvertItem::get;
@@ -108,7 +108,7 @@ void Convert::convert( ConvertItem *item )
         {
             logger->log( item->logID, "\tOutput file already exists" );
             item->outputUrl = KUrl();
-            remove( item, 103 );
+            remove( item, FileListItem::Skipped );
             return;
         }
         OutputDirectory::makePath( item->outputUrl );
@@ -120,7 +120,7 @@ void Convert::convert( ConvertItem *item )
     if( item->take > item->conversionPipes.count() - 1 )
     {
         logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );
-        remove( item, -1 );
+        remove( item, FileListItem::Failed );
         return;
     }
 
@@ -375,7 +375,7 @@ void Convert::convertNextBackend( ConvertItem *item )
     else if( item->backendID == -100 )
     {
         logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
-        remove( item, 100 );
+        remove( item, FileListItem::BackendNeedsConfiguration );
     }
 }
 
@@ -409,7 +409,7 @@ void Convert::replaygain( ConvertItem *item )
     {
         logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );
 
-        remove( item, -1 );
+        remove( item, FileListItem::Failed );
         return;
     }
 
@@ -501,7 +501,7 @@ void Convert::executeNextStep( ConvertItem *item )
             if( item->mode & ConvertItem::convert )
                 convert( item );
             else
-                remove( item, 0 );
+                remove( item, FileListItem::Succeeded );
             break;
         }
         case ConvertItem::convert:
@@ -510,7 +510,7 @@ void Convert::executeNextStep( ConvertItem *item )
             if( item->mode & ConvertItem::replaygain )
                 replaygain( item );
             else
-                remove( item, 0 );
+                remove( item, FileListItem::Succeeded );
             break;
         }
         case ConvertItem::rip:
@@ -523,7 +523,7 @@ void Convert::executeNextStep( ConvertItem *item )
         }
         case ConvertItem::replaygain:
         {
-            remove( item, 0 );
+            remove( item, FileListItem::Succeeded );
             break;
         }
         default:
@@ -535,7 +535,7 @@ void Convert::executeNextStep( ConvertItem *item )
             else if( item->mode & ConvertItem::replaygain )
                 replaygain( item );
             else
-                remove( item, 0 );
+                remove( item, FileListItem::Succeeded );
             break;
         }
     }
@@ -581,7 +581,7 @@ void Convert::executeSameStep( ConvertItem *item )
             break;
     }
 
-    remove( item, -1 ); // shouldn't be possible
+    remove( item, FileListItem::Failed ); // shouldn't be possible
 }
 
 void Convert::kioJobProgress( KJob *job, unsigned long percent )
@@ -650,12 +650,12 @@ void Convert::kioJobFinished( KJob *job )
 
                 if( job->error() == 1 )
                 {
-                    remove( items.at(i), 1 );
+                    remove( items.at(i), FileListItem::StoppedByUser );
                 }
                 else
                 {
                     logger->log( items.at(i)->logID, i18n("An error occurred. Error code: %1 (%2)",job->error(),job->errorString()) );
-                    remove( items.at(i), -1 );
+                    remove( items.at(i), FileListItem::Failed );
                 }
             }
         }
@@ -712,7 +712,7 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
             if( items.at(i)->killed )
             {
                 // TODO clean up temp files, pipes, etc.
-                remove( items.at(i), 1 );
+                remove( items.at(i), FileListItem::StoppedByUser );
                 return;
             }
 
@@ -796,7 +796,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
 
             if( items.at(i)->killed )
             {
-                remove( items.at(i), 1 );
+                remove( items.at(i), FileListItem::StoppedByUser );
                 return;
             }
 
@@ -951,7 +951,7 @@ void Convert::add( FileListItem* item )
     if( !conversionOptions )
     {
         logger->log( 1000, "Convert::add(...) no ConversionOptions found" );
-        remove( newItem, -1 );
+        remove( newItem, FileListItem::Failed );
         return;
     }
 
@@ -1002,7 +1002,7 @@ void Convert::add( FileListItem* item )
     executeNextStep( newItem );
 }
 
-void Convert::remove( ConvertItem *item, int state )
+void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
 {
     // TODO "remove" (re-add) the times to the progress indicator
     //emit uncountTime( item->getTime + item->getCorrectionTime + item->ripTime +
@@ -1032,11 +1032,11 @@ void Convert::remove( ConvertItem *item, int state )
         fileRatio /= inputFileInfo.size();
     }
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
-    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && state != 1 && ( !conversionOptions || conversionOptions->codecName != "speex" ) )
+    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && returnCode != FileListItem::StoppedByUser && ( !conversionOptions || conversionOptions->codecName != "speex" ) )
     {
         exitMessage = i18n("An error occurred, the output file size is less than one percent of the input file size");
 
-        if( state == 0 )
+        if( returnCode == FileListItem::Succeeded )
         {
             logger->log( item->logID, i18n("Conversion failed, trying again. Exit code: -2 (%1)",exitMessage) );
             item->take = item->lastTake;
@@ -1046,21 +1046,27 @@ void Convert::remove( ConvertItem *item, int state )
         }
     }
 
-    if( state == 0 )
-        exitMessage = i18nc("Conversion exit status","Normal exit");
-    else if( state == 1 )
-        exitMessage = i18nc("Conversion exit status","Aborted by the user");
-    else if( state == 100 )
-        exitMessage = i18nc("Conversion exit status","Backend needs configuration");
-    else if( state == 103 )
-        exitMessage = i18nc("Conversion exit status","File already exists");
-    else
-        exitMessage = i18nc("Conversion exit status","An error occurred");
+    if( returnCode == FileListItem::Succeeded && item->lastTake > 0 )
+        returnCode = FileListItem::SucceededWithProblems;
 
-    if( state == 0 )
+    switch( returnCode )
     {
-        writeTags( item );
+        case FileListItem::Succeeded:
+            exitMessage = i18nc("Conversion exit status","Normal exit");
+        case FileListItem::SucceededWithProblems:
+            exitMessage = i18nc("Conversion exit status","Succeeded but problems occured");
+        case FileListItem::StoppedByUser:
+            exitMessage = i18nc("Conversion exit status","Aborted by the user");
+        case FileListItem::BackendNeedsConfiguration:
+            exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+        case FileListItem::Skipped:
+            exitMessage = i18nc("Conversion exit status","File already exists");
+        case FileListItem::Failed:
+            exitMessage = i18nc("Conversion exit status","An error occurred");
     }
+
+    if( returnCode == FileListItem::Succeeded )
+        writeTags( item );
 
     if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
     {
@@ -1094,7 +1100,7 @@ void Convert::remove( ConvertItem *item, int state )
             QFile::remove( url.toLocalFile() );
         }
     }
-    if( state != 0 && state != 103 && QFile::exists(item->outputUrl.toLocalFile()) )
+    if( returnCode != FileListItem::Succeeded && returnCode != FileListItem::Skipped && QFile::exists(item->outputUrl.toLocalFile()) )
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );
@@ -1102,7 +1108,7 @@ void Convert::remove( ConvertItem *item, int state )
 
     usedOutputNames.remove( item->logID );
 
-    logger->log( item->logID, "<br>" +  i18n("Removing file from conversion list. Exit code %1 (%2)",state,exitMessage) );
+    logger->log( item->logID, "<br>" +  i18n("Removing file from conversion list. Exit code %1 (%2)",returnCode,exitMessage) );
 
     logger->log( item->logID, "\t" + i18n("Conversion time") + ": " + Global::prettyNumber(item->progressedTime.elapsed(),"ms") );
     logger->log( item->logID, "\t" + i18n("Output file size") + ": " + Global::prettyNumber(outputFileInfo.size(),"B") );
@@ -1121,14 +1127,14 @@ void Convert::remove( ConvertItem *item, int state )
 
         for( int i=0; i<albumItems.count(); i++ )
         {
-            emit finished( albumItems.at(i)->fileListItem, 0 ); // send signal to FileList
+            emit finished( albumItems.at(i)->fileListItem, FileListItem::Succeeded ); // send signal to FileList
         }
         qDeleteAll(albumItems);
 
         albumGainItems.remove( albumName );
     }
-    emit finished( item->fileListItem, ( state == 0 && waitForAlbumGain ) ? 102 : state ); // send signal to FileList
-    emit finishedProcess( item->logID, ( state == 0 && waitForAlbumGain ) ? 102 : state ); // send signal to Logger
+    emit finished( item->fileListItem, returnCode, waitForAlbumGain ); // send signal to FileList
+    emit finishedProcess( item->logID, returnCode, waitForAlbumGain ); // send signal to Logger
 
     items.removeAll( item );
 

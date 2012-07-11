@@ -81,7 +81,7 @@ private slots:
     /** The conversion has started */
     void conversionStarted();
     /** The conversion has stopped */
-    void conversionStopped( int state );
+    void conversionStopped( bool failed );
     /** Conversion will continue/stop after current files have been converted */
     void queueModeChanged( bool enabled );
 
@@ -115,7 +115,7 @@ private:
 signals:
     void progressChanged( const QString& progress );
     void signalConversionStarted();
-    void signalConversionStopped( int state );
+    void signalConversionStopped( bool failed );
     void showLog( const int logId );
 };
 

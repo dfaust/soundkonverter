@@ -1,14 +1,4 @@
-//
-// C++ Interface: filelistitem
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef FILELISTITEM_H
 #define FILELISTITEM_H
 
@@ -20,8 +10,6 @@
 #include <QLabel>
 
 #include <KUrl>
-
-// class QLabel;
 
 
 /**
@@ -37,20 +25,21 @@ public:
         ApplyingReplayGain,
         WaitingForAlbumGain,
         ApplyingAlbumGain,
-        Stopped,
+        Stopped
+    };
+
+    enum ReturnCode {
+        StoppedByUser,
         BackendNeedsConfiguration,
         DiscFull,
         Skipped,
+        Succeeded,
+        SucceededWithProblems,
         Failed
     };
 
-    /** Constructor */
     FileListItem( QTreeWidget *parent );
-
-    /** Constructor */
     FileListItem( QTreeWidget *parent, QTreeWidgetItem *after );
-
-    /** Destructor */
     virtual ~FileListItem();
 
     int conversionOptionsId;
@@ -60,6 +49,7 @@ public:
     KUrl outputUrl;             // if the user wants to change the output directory/file name per file! - also this is used as the actual output url when calculating album gain
     QString codecName;          // the codec name of the input file
     State state;                // is this item being converted or ripper or etc.
+    ReturnCode returnCode;      // what's the return code of the conversion
     bool local;                 // is this a local file?
     int track;                  // the number of the track, if it is on an audio cd
                                 // if it is lower than 0, it isn't an audio cd track at all
@@ -71,7 +61,7 @@ public:
 
     int logId;                  // the id the item is registered at the logger with, 0 if the conversion hasn't started yet
 
-    QPointer<QLabel> lInfo;// a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
+    QPointer<QLabel> lInfo;     // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
 };
 
 class FileListItemDelegate : public QItemDelegate

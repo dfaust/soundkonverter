@@ -529,34 +529,46 @@ void FileList::updateItem( FileListItem *item )
         }
         case FileListItem::Stopped:
         {
-            item->setText( Column_State, i18n("Stopped") );
-            break;
-        }
-        case FileListItem::BackendNeedsConfiguration:
-        {
-            item->setText( Column_State, i18n("Backend not configured") );
-            break;
-        }
-        case FileListItem::DiscFull:
-        {
-            item->setText( Column_State, i18n("Disc full") );
-            break;
-        }
-        case FileListItem::Skipped:
-        {
-            item->setText( Column_State, i18n("Will be skipped") );
-            break;
-        }
-        case FileListItem::Failed:
-        {
-            item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
-            connect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
-            setItemWidget( item, Column_State, item->lInfo );
-            const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
-            item->setToolTip( Column_State, toolTip );
-            item->setToolTip( Column_Input, toolTip );
-            item->setToolTip( Column_Output, toolTip );
-            item->setToolTip( Column_Quality, toolTip );
+            switch( item->returnCode )
+            {
+                case FileListItem::Succeeded:
+                case FileListItem::SucceededWithProblems:
+                {
+                    break;
+                }
+                case FileListItem::StoppedByUser:
+                {
+                    item->setText( Column_State, i18n("Stopped") );
+                    break;
+                }
+                case FileListItem::BackendNeedsConfiguration:
+                {
+                    item->setText( Column_State, i18n("Backend not configured") );
+                    break;
+                }
+                case FileListItem::DiscFull:
+                {
+                    item->setText( Column_State, i18n("Disc full") );
+                    break;
+                }
+                case FileListItem::Skipped:
+                {
+                    item->setText( Column_State, i18n("Will be skipped") );
+                    break;
+                }
+                case FileListItem::Failed:
+                {
+                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
+                    connect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
+                    setItemWidget( item, Column_State, item->lInfo );
+                    const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
+                    item->setToolTip( Column_State, toolTip );
+                    item->setToolTip( Column_Input, toolTip );
+                    item->setToolTip( Column_Output, toolTip );
+                    item->setToolTip( Column_Quality, toolTip );
+                    break;
+                }
+            }
             break;
         }
     }
@@ -640,18 +652,6 @@ void FileList::startConversion()
                 case FileListItem::Stopped:
                     isStopped = true;
                     break;
-                case FileListItem::BackendNeedsConfiguration:
-                    isStopped = true;
-                    break;
-                case FileListItem::DiscFull:
-                    isStopped = true;
-                    break;
-                case FileListItem::Skipped:
-                    isStopped = true;
-                    break;
-                case FileListItem::Failed:
-                    isStopped = true;
-                    break;
             }
         }
         if( isStopped )
@@ -697,14 +697,6 @@ void FileList::killConversion()
                 case FileListItem::ApplyingAlbumGain:
                     break;
                 case FileListItem::Stopped:
-                    break;
-                case FileListItem::BackendNeedsConfiguration:
-                    break;
-                case FileListItem::DiscFull:
-                    break;
-                case FileListItem::Skipped:
-                    break;
-                case FileListItem::Failed:
                     break;
             }
         }
@@ -775,7 +767,7 @@ void FileList::convertNextItem()
         itemsSelected();
 
     if( count == 0 )
-        itemFinished( 0, 0 );
+        itemFinished( 0, FileListItem::Succeeded );
 }
 
 int FileList::waitingCount()
@@ -822,14 +814,6 @@ int FileList::convertingCount()
                 break;
             case FileListItem::Stopped:
                 break;
-            case FileListItem::BackendNeedsConfiguration:
-                break;
-            case FileListItem::DiscFull:
-                break;
-            case FileListItem::Skipped:
-                break;
-            case FileListItem::Failed:
-                break;
         }
         if( isConverting )
             count++;
@@ -857,11 +841,13 @@ int FileList::convertingCount()
 //     return mBSize - mBUsed;
 // }
 
-void FileList::itemFinished( FileListItem *item, int state )
+void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain )
 {
     if( item )
     {
-        if( state == 0 )
+        item->returnCode = returnCode;
+
+        if( returnCode == FileListItem::Succeeded )
         {
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             if( selectedFiles.contains(item) )
@@ -869,34 +855,17 @@ void FileList::itemFinished( FileListItem *item, int state )
             delete item;
             item = 0;
         }
-        else if( state == 1 )
-        {
-            item->state = FileListItem::Stopped;
-        }
-        else if( state == 100 )
-        {
-            item->state = FileListItem::BackendNeedsConfiguration;
-        }
-        else if( state == 101 )
-        {
-            item->state = FileListItem::DiscFull;
-        }
-        else if( state == 102 )
-        {
-            item->state = FileListItem::WaitingForAlbumGain;
-        }
-        else if( state == 103 )
-        {
-            item->state = FileListItem::Skipped;
-        }
-        else
-        {
-            item->state = FileListItem::Failed;
-        }
     }
 
     if( item )
+    {
+        if( waitingForAlbumGain )
+            item->state = FileListItem::WaitingForAlbumGain;
+        else
+            item->state = FileListItem::Stopped;
+
         updateItem( item );
+    }
 
     // FIXME disabled until saving gets faster
 //     save( false );
@@ -918,7 +887,7 @@ void FileList::itemFinished( FileListItem *item, int state )
             time += temp_item->length;
         }
         emit finished( time );
-        emit conversionStopped( state );
+        emit conversionStopped( returnCode != FileListItem::Succeeded );
         emit fileCountChanged( topLevelItemCount() );
     }
 }
@@ -1032,14 +1001,6 @@ void FileList::showContextMenu( const QPoint& point )
             case FileListItem::ApplyingAlbumGain:
                 break;
             case FileListItem::Stopped:
-                break;
-            case FileListItem::BackendNeedsConfiguration:
-                break;
-            case FileListItem::DiscFull:
-                break;
-            case FileListItem::Skipped:
-                break;
-            case FileListItem::Failed:
                 break;
         }
     }
@@ -1165,18 +1126,6 @@ void FileList::removeSelectedItems()
                 case FileListItem::Stopped:
                     canRemove = true;
                     break;
-                case FileListItem::BackendNeedsConfiguration:
-                    canRemove = true;
-                    break;
-                case FileListItem::DiscFull:
-                    canRemove = true;
-                    break;
-                case FileListItem::Skipped:
-                    canRemove = true;
-                    break;
-                case FileListItem::Failed:
-                    canRemove = true;
-                    break;
             }
             if( canRemove )
             {
@@ -1219,18 +1168,6 @@ void FileList::convertSelectedItems()
                 case FileListItem::ApplyingAlbumGain:
                     break;
                 case FileListItem::Stopped:
-                    canConvert = true;
-                    break;
-                case FileListItem::BackendNeedsConfiguration:
-                    canConvert = true;
-                    break;
-                case FileListItem::DiscFull:
-                    canConvert = true;
-                    break;
-                case FileListItem::Skipped:
-                    canConvert = true;
-                    break;
-                case FileListItem::Failed:
                     canConvert = true;
                     break;
             }
@@ -1284,14 +1221,6 @@ void FileList::killSelectedItems()
                 case FileListItem::ApplyingAlbumGain:
                     break;
                 case FileListItem::Stopped:
-                    break;
-                case FileListItem::BackendNeedsConfiguration:
-                    break;
-                case FileListItem::DiscFull:
-                    break;
-                case FileListItem::Skipped:
-                    break;
-                case FileListItem::Failed:
                     break;
             }
         }
@@ -1354,18 +1283,6 @@ void FileList::load( bool user )
                         case FileListItem::ApplyingAlbumGain:
                             break;
                         case FileListItem::Stopped:
-                            canRemove = true;
-                            break;
-                        case FileListItem::BackendNeedsConfiguration:
-                            canRemove = true;
-                            break;
-                        case FileListItem::DiscFull:
-                            canRemove = true;
-                            break;
-                        case FileListItem::Skipped:
-                            canRemove = true;
-                            break;
-                        case FileListItem::Failed:
                             canRemove = true;
                             break;
                     }

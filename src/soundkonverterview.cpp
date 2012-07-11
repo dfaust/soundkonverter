@@ -26,6 +26,7 @@
 #include <KMenu>
 #include <KAction>
 #include <KActionMenu>
+#include <KMessageBox>
 
 #include <QLabel>
 #include <QLayout>
@@ -33,8 +34,7 @@
 #include <QFont>
 #include <QTreeView>
 #include <QToolButton>
-// #include <QMessageBox>
-#include <KMessageBox>
+
 
 soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDManager *_cdManager, QWidget *parent )
     : QWidget( parent ),
@@ -42,20 +42,18 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
       logger( _logger ),
       cdManager( _cdManager )
 {
-//     resize( 600, 400 );
     setAcceptDrops( true );
 
     // the grid for all widgets in the main window
     QGridLayout* gridLayout = new QGridLayout( this );
     gridLayout->setContentsMargins( 6, 6, 6, 6 );
-//     gridLayout->setSpacing( 0 );
 
     fileList = new FileList( logger, config, this );
     gridLayout->addWidget( fileList, 1, 0 );
     gridLayout->setRowStretch( 1, 1 );
     connect( fileList, SIGNAL(fileCountChanged(int)), this, SLOT(fileCountChanged(int)) );
     connect( fileList, SIGNAL(conversionStarted()), this, SLOT(conversionStarted()) );
-    connect( fileList, SIGNAL(conversionStopped(int)), this, SLOT(conversionStopped(int)) );
+    connect( fileList, SIGNAL(conversionStopped(bool)), this, SLOT(conversionStopped(bool)) );
     connect( fileList, SIGNAL(queueModeChanged(bool)), this, SLOT(queueModeChanged(bool)) );
     connect( fileList, SIGNAL(showLog(int)), this, SIGNAL(showLog(int)) );
 
@@ -70,7 +68,6 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     // add a horizontal box layout for the add combobutton to the grid
     QHBoxLayout *addBox = new QHBoxLayout();
     addBox->setContentsMargins( 0, 0, 0, 0 );
-//     addBox->setSpacing( 0 );
     gridLayout->addLayout( addBox, 3, 0 );
 
     // create the combobutton for adding files to the file list
@@ -557,13 +554,13 @@ void soundKonverterView::conversionStarted()
     emit signalConversionStarted();
 }
 
-void soundKonverterView::conversionStopped( int state )
+void soundKonverterView::conversionStopped( bool failed )
 {
     pStart->show();
     startAction->setEnabled( true );
     pStop->hide();
     stopActionMenu->setEnabled( false );
-    emit signalConversionStopped( state );
+    emit signalConversionStopped( failed );
 }
 
 void soundKonverterView::queueModeChanged( bool enabled )

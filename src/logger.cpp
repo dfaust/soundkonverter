@@ -28,7 +28,7 @@ Logger::Logger( QObject *parent)
     item->filename = KUrl("soundKonverter");
     item->id = 1000;
     item->completed = true;
-    item->state = 1;
+    item->returnCode = FileListItem::Succeeded;
     item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
     if( writeLogFiles )
     {
@@ -163,21 +163,23 @@ QList<LoggerItem*> Logger::getLogs()
     return processes;
 }
 
-void Logger::processCompleted( int id, int state )
+void Logger::processCompleted( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain )
 {
+    Q_UNUSED( waitingForAlbumGain )
+
     LoggerItem* removeItem = 0;
     QTime time = QTime::currentTime();
 
     for( int i=0; i<processes.count(); i++ )
     {
-        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->state == 0 )
+        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->returnCode == FileListItem::Succeeded )
         {
             time = processes.at(i)->time;
             removeItem = processes.at(i);
         }
         else if( processes.at(i)->id == id )
         {
-            processes.at(i)->state = state;
+            processes.at(i)->returnCode = returnCode;
             processes.at(i)->completed = true;
             processes.at(i)->time = processes.at(i)->time.currentTime();
             processes.at(i)->data.append( i18n("Finished logging") );

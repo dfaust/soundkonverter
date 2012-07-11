@@ -3,6 +3,8 @@
 #ifndef CONVERT_H
 #define CONVERT_H
 
+#include "filelistitem.h"
+
 #include <KProcess>
 #include <QList>
 #include <QMap>
@@ -31,10 +33,7 @@ class Convert : public QObject
 {
     Q_OBJECT
 public:
-    /** Constructor */
     Convert( Config *_config, FileList *_fileList, Logger *_logger );
-
-    /** Destructor */
     virtual ~Convert();
 
     void cleanUp();
@@ -65,7 +64,7 @@ private:
     void executeSameStep( ConvertItem *item );
 
     /** Remove item @p item and emit the state @p state */
-    void remove( ConvertItem *item, int state = 0 );
+    void remove( ConvertItem *item, FileListItem::ReturnCode returnCode = FileListItem::Succeeded );
 
     /** holds all active files */
     QList<ConvertItem*> items;
@@ -102,7 +101,7 @@ private slots:
     /** The process has exited */
     void processExit( int exitCode, QProcess::ExitStatus exitStatus );
 
-    /** A plugin has finished convertin a file */
+    /** A plugin has finished converting a file */
     void pluginProcessFinished( int id, int exitCode );
     /** A plugin has something to log */
     void pluginLog( int id, const QString& message );
@@ -124,22 +123,14 @@ public slots:
 
 signals:
     // connected to FileList
-    /**
-     * The conversion of an item has finished and the state is reported:
-     * 0   = ok
-     * -1  = error
-     * 1   = aborted
-     * 100 = backend needs configuration
-     * 101 = disc is full
-     * 102 = waiting for album gain
-     */
-    void finished( FileListItem *item, int state );
+    /** The conversion of an item has finished and the state is reported */
+    void finished( FileListItem *item, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
     /** The next track from the device can be ripped while the track is being encoded */
     void rippingFinished( const QString& device );
 
     // connected to Logger
     /** Tell the logger that the process has finished */
-    void finishedProcess( int id, int state );
+    void finishedProcess( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
 
     // connected to ProgressIndicator
     void updateTime( float );

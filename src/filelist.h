@@ -133,16 +133,8 @@ public slots:
     void save( bool user = false );
 
     // connected to Convert
-    /**
-     * The conversion of an item has finished and the state is reported:
-     * 0   = ok
-     * -1  = error
-     * 1   = aborted
-     * 100 = backend needs configuration
-     * 101 = disc is full
-     * 102 = waiting for album gain
-     */
-    void itemFinished( FileListItem*, int );
+    /** The conversion of an item has finished and the state is reported */
+    void itemFinished( FileListItem *item, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
 //     void replaygainFinished( QList<FileListItem*>, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );
@@ -154,7 +146,7 @@ signals:
     // connected to soundKonverterView
     void fileCountChanged( int count );
     void conversionStarted();
-    void conversionStopped( int state );
+    void conversionStopped( bool failed );
     void queueModeChanged( bool enabled );
     void showLog( const int logId );
 

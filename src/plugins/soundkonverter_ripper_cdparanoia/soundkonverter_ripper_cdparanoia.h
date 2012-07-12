@@ -28,7 +28,7 @@ public:
     bool hasInfo();
     void showInfo( QWidget *parent );
 
-    int rip( const QString& device, int track, int tracks, const KUrl& outputFile );
+    unsigned int rip( const QString& device, int track, int tracks, const KUrl& outputFile );
     QStringList ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile );
     float parseOutput( const QString& output, int *fromSector, int *toSector );
     float parseOutput( const QString& output );

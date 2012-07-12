@@ -124,10 +124,10 @@ void soundkonverter_replaygain_aacgain::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
+unsigned int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
     if( fileList.count() <= 0 )
-        return -1;
+        return BackendPlugin::UnknownError;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;

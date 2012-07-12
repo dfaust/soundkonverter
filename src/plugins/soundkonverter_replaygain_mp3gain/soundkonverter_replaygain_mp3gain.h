@@ -30,7 +30,7 @@ public:
     bool hasInfo();
     void showInfo( QWidget *parent );
 
-    int apply( const KUrl::List& fileList, ApplyMode mode = Add );
+    unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
 
 private:

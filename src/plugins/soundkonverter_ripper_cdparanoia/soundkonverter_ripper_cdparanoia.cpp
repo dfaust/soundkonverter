@@ -70,7 +70,7 @@ void soundkonverter_ripper_cdparanoia::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
+unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
 {
     QStringList command;
 

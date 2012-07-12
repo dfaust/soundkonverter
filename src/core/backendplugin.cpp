@@ -9,7 +9,7 @@ BackendPluginItem::BackendPluginItem( QObject *parent )
     : QObject( parent )
 {
     process = 0;
-    id = -1;
+    id = 0;
     progress = -1;
 }
 
@@ -20,7 +20,7 @@ BackendPluginItem::~BackendPluginItem()
 BackendPlugin::BackendPlugin( QObject *parent )
     : QObject( parent )
 {
-    lastId = 0;
+    lastId = 100;
 }
 
 BackendPlugin::~BackendPlugin()

@@ -86,14 +86,14 @@ CodecWidget *soundkonverter_codec_mac::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)
     Q_UNUSED(replayGain)
 
     if( !_conversionOptions )
-        return -1;
+        return BackendPlugin::UnknownError;
 
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
@@ -117,7 +117,7 @@ int soundkonverter_codec_mac::convert( const KUrl& inputFile, const KUrl& output
     }
 
     if( command.isEmpty() )
-        return -1;
+        return BackendPlugin::UnknownError;
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;

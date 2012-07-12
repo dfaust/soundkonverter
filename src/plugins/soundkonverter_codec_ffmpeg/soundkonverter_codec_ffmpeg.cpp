@@ -404,7 +404,7 @@ CodecWidget *soundkonverter_codec_ffmpeg::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)

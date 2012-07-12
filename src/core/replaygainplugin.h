@@ -55,8 +55,8 @@ public:
 
     virtual QList<ReplayGainPipe> codecTable() = 0;
 
-    /** converts a file; TODO notify Conversion when the process has been finished */
-    virtual int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
+    /** adds replaygain to one or more files */
+    virtual unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
 
 protected:
     int lastId;

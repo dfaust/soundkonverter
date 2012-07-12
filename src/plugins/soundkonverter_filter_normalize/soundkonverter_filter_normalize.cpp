@@ -93,11 +93,11 @@ CodecWidget *soundkonverter_filter_normalize::newCodecWidget()
 return 0;
 }
 
-int soundkonverter_filter_normalize::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_filter_normalize::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
-        return -1;
+        return BackendPlugin::UnknownError;
 
     FilterPluginItem *newItem = new FilterPluginItem( this );
     newItem->id = lastId++;

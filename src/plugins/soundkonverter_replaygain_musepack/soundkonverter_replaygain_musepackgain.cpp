@@ -88,13 +88,13 @@ void soundkonverter_replaygain_musepackgain::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
+unsigned int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
     if( fileList.count() <= 0 )
-        return -1;
+        return BackendPlugin::UnknownError;
 
     if( mode == ReplayGainPlugin::Remove )
-        return -1;
+        return BackendPlugin::FeatureNotSupported;
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;

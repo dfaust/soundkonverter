@@ -62,6 +62,13 @@ public:
         General
     };
 
+    enum ErrorCode
+    {
+        UnknownError,
+        BackendNeedsConfiguration,
+        FeatureNotSupported
+    };
+
     struct FormatInfo
     {
         QString codecName;      // the internal name of this codec

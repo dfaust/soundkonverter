@@ -368,14 +368,29 @@ void Convert::convertNextBackend( ConvertItem *item )
         item->backendID = qobject_cast<RipperPlugin*>(plugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, outUrl );
     }
 
-    if( item->backendID == -1 )
+    if( item->backendID < 100 )
     {
-        executeSameStep( item );
-    }
-    else if( item->backendID == -100 )
-    {
-        logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
-        remove( item, FileListItem::BackendNeedsConfiguration );
+        switch( item->backendID )
+        {
+            case BackendPlugin::BackendNeedsConfiguration:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+                remove( item, FileListItem::BackendNeedsConfiguration );
+                break;
+            }
+            case BackendPlugin::FeatureNotSupported:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                executeSameStep( item );
+                break;
+            }
+            case BackendPlugin::UnknownError:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. Unknown Error.") );
+                executeSameStep( item );
+                break;
+            }
+        }
     }
 }
 
@@ -1059,6 +1074,8 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             exitMessage = i18nc("Conversion exit status","Aborted by the user");
         case FileListItem::BackendNeedsConfiguration:
             exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+        case FileListItem::DiscFull:
+            exitMessage = i18nc("Conversion exit status","Not enough space on the output device");
         case FileListItem::Skipped:
             exitMessage = i18nc("Conversion exit status","File already exists");
         case FileListItem::Failed:

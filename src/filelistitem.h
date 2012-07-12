@@ -29,12 +29,12 @@ public:
     };
 
     enum ReturnCode {
-        StoppedByUser,
-        BackendNeedsConfiguration,
-        DiscFull,
-        Skipped,
         Succeeded,
         SucceededWithProblems,
+        StoppedByUser,
+        Skipped,
+        BackendNeedsConfiguration,
+        DiscFull,
         Failed
     };
 

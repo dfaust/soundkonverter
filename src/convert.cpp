@@ -620,8 +620,7 @@ void Convert::kioJobFinished( KJob *job )
         {
             items.at(i)->kioCopyJob.data()->deleteLater();
 
-            // copy was successful
-            if( job->error() == 0 )
+            if( job->error() == 0 ) // copy was successful
             {
                 float fileTime;
                 switch( items.at(i)->state )
@@ -652,6 +651,7 @@ void Convert::kioJobFinished( KJob *job )
             }
             else
             {
+                // remove temp/failed files
                 if( QFile::exists(items.at(i)->tempInputUrl.toLocalFile()) )
                 {
                     QFile::remove(items.at(i)->tempInputUrl.toLocalFile());
@@ -721,12 +721,10 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     {
         if( items.at(i)->process.data() == QObject::sender() )
         {
-            // FIXME crash discovered here - but no solution yet - maybe fixed by using deleteLater
-            items.at(i)->process.data()->deleteLater();
+            items.at(i)->process.data()->deleteLater(); // NOTE crash discovered here - probably fixed by using deleteLater
 
             if( items.at(i)->killed )
             {
-                // TODO clean up temp files, pipes, etc.
                 remove( items.at(i), FileListItem::StoppedByUser );
                 return;
             }
@@ -775,6 +773,7 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
             }
             else
             {
+                // remove temp/failed files
                 foreach( const KUrl url, items.at(i)->tempConvertUrls )
                 {
                     if( QFile::exists(url.toLocalFile()) )
@@ -850,6 +849,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
             }
             else
             {
+                // remove temp/failed files
                 foreach( const KUrl url, items.at(i)->tempConvertUrls )
                 {
                     if( QFile::exists(url.toLocalFile()) )

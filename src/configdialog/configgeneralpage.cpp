@@ -38,9 +38,9 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QFont groupFont;
     groupFont.setBold( true );
 
-    QLabel *lGeneral = new QLabel( i18n("Conversion"), this );
-    lGeneral->setFont( groupFont );
-    box->addWidget( lGeneral );
+    QLabel *lUserInterface = new QLabel( i18n("User interface"), this );
+    lUserInterface->setFont( groupFont );
+    box->addWidget( lUserInterface );
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
@@ -87,6 +87,12 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     defaultProfileBox->addWidget( cDefaultFormat );
     connect( cDefaultFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     profileChanged();
+
+    box->addSpacing( ConfigDialogSpacingBig );
+
+    QLabel *lConversion = new QLabel( i18n("Conversion"), this );
+    lConversion->setFont( groupFont );
+    box->addWidget( lConversion );
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
@@ -147,7 +153,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingBig );
 
-    QLabel *lReplayGainTool = new QLabel( i18n("ReplayGain tool settings"), this );
+    QLabel *lReplayGainTool = new QLabel( i18n("ReplayGain tool"), this );
     lReplayGainTool->setFont( groupFont );
     box->addWidget( lReplayGainTool );
 

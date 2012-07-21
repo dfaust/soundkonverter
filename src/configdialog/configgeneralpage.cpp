@@ -166,23 +166,6 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingBig );
-
-    QLabel *lKdeIntegration = new QLabel( i18n("KDE integration"), this );
-    lKdeIntegration->setFont( groupFont );
-    box->addWidget( lKdeIntegration );
-
-    box->addSpacing( ConfigDialogSpacingSmall );
-
-    QHBoxLayout *createActionsMenuBox = new QHBoxLayout();
-    createActionsMenuBox->addSpacing( ConfigDialogOffset );
-    box->addLayout( createActionsMenuBox );
-    cCreateActionsMenu = new QCheckBox( i18n("Create actions menus for the file manager"), this );
-    cCreateActionsMenu->setToolTip( i18n("These service menus won't get removed if you uninstall soundKonverter.\nBut you can remove them by disabling this option.") );
-    cCreateActionsMenu->setChecked( config->data.general.createActionsMenu );
-    createActionsMenuBox->addWidget( cCreateActionsMenu );
-    connect( cCreateActionsMenu, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
     box->addStretch();
 }
 
@@ -199,7 +182,6 @@ void ConfigGeneralPage::resetDefaults()
     QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
     iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
     cWaitForAlbumGain->setChecked( true );
-    cCreateActionsMenu->setChecked( true );
     cReplayGainGrouping->setCurrentIndex( 0 );
 
     emit configChanged( true );
@@ -214,7 +196,6 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.waitForAlbumGain = cWaitForAlbumGain->isChecked();
-    config->data.general.createActionsMenu = cCreateActionsMenu->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
 }
 
@@ -226,7 +207,6 @@ void ConfigGeneralPage::somethingChanged()
                          cConflictHandling->currentIndex() != (int)config->data.general.conflictHandling ||
                          iNumFiles->value() != config->data.general.numFiles ||
                          cWaitForAlbumGain->isChecked() != config->data.general.waitForAlbumGain ||
-                         cCreateActionsMenu->isChecked() != config->data.general.createActionsMenu ||
                          cReplayGainGrouping->currentIndex() != (int)config->data.general.replayGainGrouping;
 
     emit configChanged( changed );

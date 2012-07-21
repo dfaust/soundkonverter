@@ -70,7 +70,6 @@ void Config::load()
 //     data.general.executeUserScript = group.readEntry( "executeUserScript", false );
 //     data.general.showToolBar = group.readEntry( "showToolBar", false );
 //     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
-    data.general.createActionsMenu = group.readEntry( "createActionsMenu", true );
     data.general.actionMenuConvertMimeTypes = group.readEntry( "actionMenuConvertMimeTypes", QStringList() );
     data.general.actionMenuReplayGainMimeTypes = group.readEntry( "actionMenuReplayGainMimeTypes", QStringList() );
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
@@ -483,7 +482,6 @@ void Config::save()
 //     group.writeEntry( "executeUserScript", data.general.executeUserScript );
 //     group.writeEntry( "showToolBar", data.general.showToolBar );
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
-    group.writeEntry( "createActionsMenu", data.general.createActionsMenu );
     group.writeEntry( "actionMenuConvertMimeTypes", data.general.actionMenuConvertMimeTypes );
     group.writeEntry( "actionMenuReplayGainMimeTypes", data.general.actionMenuReplayGainMimeTypes );
     group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
@@ -541,85 +539,79 @@ void Config::save()
 
 void Config::writeServiceMenu()
 {
-    if( data.general.createActionsMenu )
+    QString content;
+    QStringList mimeTypes;
+
+    content = "";
+    content += "[Desktop Entry]\n";
+    content += "Type=Service\n";
+    content += "Encoding=UTF-8\n";
+
+    const QStringList convertFormats = pPluginLoader->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+
+    mimeTypes.clear();
+    foreach( const QString format, convertFormats )
     {
-        QString content;
-        QStringList mimeTypes;
-
-        content = "";
-        content += "[Desktop Entry]\n";
-        content += "Type=Service\n";
-        content += "Encoding=UTF-8\n";
-
-        const QStringList convertFormats = pPluginLoader->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-
-        mimeTypes.clear();
-        foreach( const QString format, convertFormats )
-        {
-            mimeTypes += pPluginLoader->codecMimeTypes( format );
-        }
-
-        content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
-
-        content += "Icon=soundkonverter\n";
-        content += "Actions=ConvertWithSoundkonverter;\n\n";
-
-        content += "[Desktop Action ConvertWithSoundkonverter]\n";
-        content += "Name="+i18n("Convert with soundKonverter")+"\n";
-        content += "Icon=soundkonverter\n";
-        content += "Exec=soundkonverter %F\n";
-
-        if( data.general.actionMenuConvertMimeTypes != mimeTypes && mimeTypes.count() > 0 )
-        {
-            QFile convertActionFile( KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" ) );
-            if( convertActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
-            {
-                QTextStream convertActionStream( &convertActionFile );
-                convertActionStream << content;
-                convertActionFile.close();
-            }
-            data.general.actionMenuConvertMimeTypes = mimeTypes;
-        }
-
-        content = "";
-        content += "[Desktop Entry]\n";
-        content += "Type=Service\n";
-        content += "Encoding=UTF-8\n";
-
-        const QStringList replaygainFormats = pPluginLoader->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-
-        mimeTypes.clear();
-        foreach( const QString format, replaygainFormats )
-        {
-            mimeTypes += pPluginLoader->codecMimeTypes( format );
-        }
-
-        content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
-
-        content += "Icon=soundkonverter_replaygain\n";
-        content += "Actions=AddReplayGainWithSoundkonverter;\n\n";
-
-        content += "[Desktop Action AddReplayGainWithSoundkonverter]\n";
-        content += "Name="+i18n("Add Replay Gain with soundKonverter")+"\n";
-        content += "Icon=soundkonverter-replaygain\n";
-        content += "Exec=soundkonverter --replaygain %F\n";
-
-        if( data.general.actionMenuReplayGainMimeTypes != mimeTypes && mimeTypes.count() > 0 )
-        {
-            QFile replaygainActionFile( KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" ) );
-            if( replaygainActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
-            {
-                QTextStream replaygainActionStream( &replaygainActionFile );
-                replaygainActionStream << content;
-                replaygainActionFile.close();
-            }
-            data.general.actionMenuReplayGainMimeTypes = mimeTypes;
-        }
+        mimeTypes += pPluginLoader->codecMimeTypes( format );
     }
-    else
+
+    content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
+
+    content += "Icon=soundkonverter\n";
+    content += "Actions=ConvertWithSoundkonverter;\n\n";
+
+    content += "[Desktop Action ConvertWithSoundkonverter]\n";
+    content += "Name="+i18n("Convert with soundKonverter")+"\n";
+    content += "Icon=soundkonverter\n";
+    content += "Exec=soundkonverter %F\n";
+
+    const QString convertActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" );
+    if( ( data.general.actionMenuConvertMimeTypes != mimeTypes || QFile::exists(convertActionFileName) ) && mimeTypes.count() > 0 )
     {
-        QFile::remove( KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" ) );
-        QFile::remove( KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" ) );
+        QFile convertActionFile( convertActionFileName );
+        if( convertActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
+        {
+            QTextStream convertActionStream( &convertActionFile );
+            convertActionStream << content;
+            convertActionFile.close();
+        }
+        data.general.actionMenuConvertMimeTypes = mimeTypes;
+    }
+
+    content = "";
+    content += "[Desktop Entry]\n";
+    content += "Type=Service\n";
+    content += "Encoding=UTF-8\n";
+
+    const QStringList replaygainFormats = pPluginLoader->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+
+    mimeTypes.clear();
+    foreach( const QString format, replaygainFormats )
+    {
+        mimeTypes += pPluginLoader->codecMimeTypes( format );
+    }
+
+    content += "ServiceTypes=KonqPopupMenu/Plugin," + mimeTypes.join(",") + "\n";
+
+    content += "Icon=soundkonverter_replaygain\n";
+    content += "Actions=AddReplayGainWithSoundkonverter;\n\n";
+
+    content += "[Desktop Action AddReplayGainWithSoundkonverter]\n";
+    content += "Name="+i18n("Add Replay Gain with soundKonverter")+"\n";
+    content += "Icon=soundkonverter-replaygain\n";
+    content += "Exec=soundkonverter --replaygain %F\n";
+
+    const QString replaygainActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" );
+    if( ( data.general.actionMenuReplayGainMimeTypes != mimeTypes || QFile::exists(replaygainActionFileName) ) && mimeTypes.count() > 0 )
+    {
+        QFile replaygainActionFile( replaygainActionFileName );
+        if( replaygainActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
+        {
+            QTextStream replaygainActionStream( &replaygainActionFile );
+            replaygainActionStream << content;
+            replaygainActionFile.close();
+        }
+        data.general.actionMenuReplayGainMimeTypes = mimeTypes;
     }
 }
 

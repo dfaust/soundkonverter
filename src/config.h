@@ -71,7 +71,6 @@ public:
 //             bool executeUserScript;
 //             bool showToolBar;
 //             int outputFilePermissions;
-            bool createActionsMenu;
             QStringList actionMenuConvertMimeTypes;
             QStringList actionMenuReplayGainMimeTypes;
             enum ReplayGainGrouping

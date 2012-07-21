@@ -143,8 +143,7 @@ void PluginLoader::load()
                     for( int j=0; j<encodeCodecs.count(); j++ )
                     {
                         QString spaces;
-                        for( int k=0; k<12 - encodeCodecs.keys().at(j).length(); k++ )
-                            spaces += " ";
+                        spaces.fill( ' ', 12 - encodeCodecs.keys().at(j).length() );
                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(spaces).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     }
                 }
@@ -154,8 +153,7 @@ void PluginLoader::load()
                     for( int j=0; j<decodeCodecs.count(); j++ )
                     {
                         QString spaces;
-                        for( int k=0; k<12 - decodeCodecs.keys().at(j).length(); k++ )
-                            spaces += " ";
+                        spaces.fill( ' ', 12 - decodeCodecs.keys().at(j).length() );
                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(decodeCodecs.keys().at(j)).arg(spaces).arg(decodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     }
                 }
@@ -205,8 +203,7 @@ void PluginLoader::load()
                     for( int j=0; j<encodeCodecs.count(); j++ )
                     {
                         QString spaces;
-                        for( int k=0; k<12 - encodeCodecs.keys().at(j).length(); k++ )
-                            spaces += " ";
+                        spaces.fill( ' ', 12 - encodeCodecs.keys().at(j).length() );
                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(spaces).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     }
                 }
@@ -216,8 +213,7 @@ void PluginLoader::load()
                     for( int j=0; j<decodeCodecs.count(); j++ )
                     {
                         QString spaces;
-                        for( int k=0; k<12 - decodeCodecs.keys().at(j).length(); k++ )
-                            spaces += " ";
+                        spaces.fill( ' ', 12 - decodeCodecs.keys().at(j).length() );
                         logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(decodeCodecs.keys().at(j)).arg(spaces).arg(decodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     }
                 }
@@ -254,8 +250,7 @@ void PluginLoader::load()
                     codecTable[j].plugin = plugin;
                     replaygainPipes.append( codecTable.at(j) );
                     QString spaces;
-                    for( int k=0; k<12 - codecTable.at(j).codecName.length(); k++ )
-                        spaces += " ";
+                    spaces.fill( ' ', 12 - codecTable.at(j).codecName.length() );
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(codecTable.at(j).codecName).arg(spaces).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
                     addFormatInfo( codecTable.at(j).codecName, plugin );
                 }
@@ -291,8 +286,7 @@ void PluginLoader::load()
                     codecTable[j].plugin = plugin;
                     conversionPipeTrunks.append( codecTable.at(j) );
                     QString spaces;
-                    for( int k=0; k<12 - codecTable.at(j).codecTo.length(); k++ )
-                        spaces += " ";
+                    spaces.fill( ' ', 12 - codecTable.at(j).codecTo.length() );
                     logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3, %4)").arg(codecTable.at(j).codecTo).arg(spaces).arg(codecTable.at(j).enabled ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>").arg(codecTable.at(j).data.canRipEntireCd ? "<span style=\"color:green\">can rip to single file</span>" : "<span style=\"color:red\">can't rip to single file</span>") + "</pre>" );
                 }
                 logger->log( 1000, "" );

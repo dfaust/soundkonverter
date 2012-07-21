@@ -119,10 +119,10 @@ sudo make uninstall
 
 In order to remove the soundKonverter configuration and kde integration, run the following commands:
 
-rm `kde-config --localprefix`share/config/soundkonverterrc
-rm -r `kde-config --localprefix`share/apps/soundkonverter
-rm `kde-config --localprefix`share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop
-rm `kde-config --localprefix`share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
+rm `kde4-config --localprefix`share/config/soundkonverterrc
+rm -r `kde4-config --localprefix`share/apps/soundkonverter
+rm `kde4-config --localprefix`share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop
+rm `kde4-config --localprefix`share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
 
 this will - depending on the location of your local kde directory - result in something like:
 
@@ -135,7 +135,7 @@ rm ~/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop
 
 Precompiled packages:
 =====================
-You can find soundKonverter packages for various distributions with a nice download interface and some instructions here:
+You can find soundKonverter packages for various distributions with a nice download interface and some instructions at:
 http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
 
 openSUSE users should either add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>

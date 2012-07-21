@@ -5,15 +5,16 @@
 # Translators:
 # Alexey Ivanov <alexey.ivanes@gmail.com>, 2011.
 #   <bizdelnick@gmail.com>, 2012.
+#   <hessijames@gmail.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2012-07-03 14:18+0200\n"
-"PO-Revision-Date: 2012-05-24 08:15+0000\n"
+"POT-Creation-Date: 2012-07-21 10:45+0200\n"
+"PO-Revision-Date: 2012-07-03 16:48+0000\n"
 "Last-Translator: bizdelnick <bizdelnick@gmail.com>\n"
-"Language-Team: Russian (http://www.transifex.net/projects/p/soundkonverter/"
+"Language-Team: Russian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/ru/)\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -624,7 +625,7 @@ msgstr "Обложки"
 
 #: configdialog/configdialog.cpp:57 main.cpp:28
 msgid "Backends"
-msgstr "Механизмы обработки"
+msgstr "Бекенды"
 
 #: configdialog/configgeneralpage.cpp:40
 msgid "Start in Mode"
@@ -857,7 +858,6 @@ msgid "Backend needs configuration"
 msgstr "Требуется настроить бекенд"
 
 #: convert.cpp:1093
-#, fuzzy
 msgctxt "Conversion exit status"
 msgid "File already exists"
 msgstr "Файл уже существует"

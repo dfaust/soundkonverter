@@ -332,7 +332,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
                     addFiles( KUrl(directory + "/" + fileName), codecName );
-                    if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
+                    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
                     {
                         pScanStatus->setValue( count );
                         tScanStatus.start();
@@ -635,7 +635,7 @@ void ReplayGainFileList::calcAllReplayGain( bool force )
         }
     }
     processedTime = 0;
-    updateTimer.start( config->data.general.updateDelay );
+    updateTimer.start( ConfigUpdateDelay );
     processNextFile();
 }
 
@@ -674,7 +674,7 @@ void ReplayGainFileList::removeAllReplayGain()
         }
     }
     processedTime = 0;
-    updateTimer.start( config->data.general.updateDelay );
+    updateTimer.start( ConfigUpdateDelay );
     processNextFile();
 }
 

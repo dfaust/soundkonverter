@@ -77,7 +77,7 @@ void Convert::get( ConvertItem *item )
     item->tempInputUrl = item->generateTempUrl( "download", item->inputUrl.fileName().mid(item->inputUrl.fileName().lastIndexOf(".")+1) );
 
     if( !updateTimer.isActive() )
-        updateTimer.start( config->data.general.updateDelay );
+        updateTimer.start( ConfigUpdateDelay );
 
     logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",item->inputUrl.pathOrUrl(),item->tempInputUrl.toLocalFile()) );
 
@@ -130,7 +130,7 @@ void Convert::convert( ConvertItem *item )
     item->conversionPipesStep = -1;
 
     if( !updateTimer.isActive() )
-        updateTimer.start( config->data.general.updateDelay );
+        updateTimer.start( ConfigUpdateDelay );
 
     if( item->conversionPipes.at(item->take).trunks.count() == 1 ) // conversion can be done by one plugin alone
     {
@@ -443,7 +443,7 @@ void Convert::replaygain( ConvertItem *item )
     item->backendID = qobject_cast<ReplayGainPlugin*>(item->backendPlugin)->apply( urlList );
 
     if( !updateTimer.isActive() )
-        updateTimer.start( config->data.general.updateDelay );
+        updateTimer.start( ConfigUpdateDelay );
 }
 
 void Convert::writeTags( ConvertItem *item )

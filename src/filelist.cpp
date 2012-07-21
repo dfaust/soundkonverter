@@ -281,7 +281,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
                     addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
-                    if( tScanStatus.elapsed() > config->data.general.updateDelay * 10 )
+                    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
                     {
                         pScanStatus->setValue( count );
                         tScanStatus.start();

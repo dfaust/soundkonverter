@@ -20,8 +20,6 @@ Config::Config( Logger *_logger, QObject *parent )
     pPluginLoader = new PluginLoader( logger, this );
     pTagEngine = new TagEngine( this );
     pConversionOptionsManager = new ConversionOptionsManager( pPluginLoader );
-
-    data.general.updateDelay = 100;
 }
 
 Config::~Config()
@@ -66,7 +64,6 @@ void Config::load()
         QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
         data.general.numFiles = ( processors.count() > 0 ) ? processors.count() : 1;
     }
-    data.general.updateDelay = group.readEntry( "updateDelay", 100 );
 //     data.general.executeUserScript = group.readEntry( "executeUserScript", false );
 //     data.general.showToolBar = group.readEntry( "showToolBar", false );
 //     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
@@ -478,7 +475,6 @@ void Config::save()
     group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
 //     group.writeEntry( "priority", data.general.priority );
     group.writeEntry( "numFiles", data.general.numFiles );
-    group.writeEntry( "updateDelay", data.general.updateDelay );
 //     group.writeEntry( "executeUserScript", data.general.executeUserScript );
 //     group.writeEntry( "showToolBar", data.general.showToolBar );
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );

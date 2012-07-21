@@ -14,7 +14,10 @@
 
 #include <QDomDocument>
 
+#define ConfigUpdateDelay 100
+
 class Logger;
+
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>
@@ -67,7 +70,6 @@ public:
                 Overwrite = 2
             } conflictHandling;
             int numFiles;
-            int updateDelay;
 //             bool executeUserScript;
 //             bool showToolBar;
 //             int outputFilePermissions;

@@ -38,7 +38,6 @@ public:
 
 private:
     KComboBox *cPreferredOggVorbisExtension;
-    KIntSpinBox *iUpdateDelay;
     QCheckBox *cUseVFATNames;
     QCheckBox *cWriteLogFiles;
     QCheckBox *cUseSharedMemoryForTempFiles;

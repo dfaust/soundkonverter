@@ -54,22 +54,6 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *updateDelayBox = new QHBoxLayout();
-    updateDelayBox->addSpacing( ConfigDialogOffset );
-    box->addLayout( updateDelayBox );
-    QLabel* lUpdateDelay = new QLabel( i18n("Status update delay")+":", this );
-    updateDelayBox->addWidget( lUpdateDelay );
-    iUpdateDelay = new KIntSpinBox( 50, 1000, 50, 100, this );
-    iUpdateDelay->setToolTip( i18n("Update the progress bar in this interval (time in milliseconds)") );
-    iUpdateDelay->setSuffix( " " + i18nc("milliseconds","ms") );
-    iUpdateDelay->setValue( config->data.general.updateDelay );
-    updateDelayBox->addWidget( iUpdateDelay );
-    connect( iUpdateDelay, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()) );
-    updateDelayBox->setStretch( 0, 3 );
-    updateDelayBox->setStretch( 1, 1 );
-
-    box->addSpacing( ConfigDialogSpacingSmall );
-
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout();
     useVFATNamesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useVFATNamesBox );
@@ -148,7 +132,6 @@ ConfigAdvancedPage::~ConfigAdvancedPage()
 void ConfigAdvancedPage::resetDefaults()
 {
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
-    iUpdateDelay->setValue( 100 );
     cUseVFATNames->setChecked( false );
     cWriteLogFiles->setChecked( false );
     cUseSharedMemoryForTempFiles->setChecked( false );
@@ -161,7 +144,6 @@ void ConfigAdvancedPage::resetDefaults()
 void ConfigAdvancedPage::saveSettings()
 {
     config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
-    config->data.general.updateDelay = iUpdateDelay->value();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
@@ -172,7 +154,6 @@ void ConfigAdvancedPage::saveSettings()
 void ConfigAdvancedPage::somethingChanged()
 {
     const bool changed = cPreferredOggVorbisExtension->currentText() != config->data.general.preferredOggVorbisExtension ||
-                         iUpdateDelay->value() != config->data.general.updateDelay ||
                          cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
                          cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
                          cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||

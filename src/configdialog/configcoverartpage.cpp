@@ -1,14 +1,4 @@
-//
-// C++ Implementation: configgeneralpage
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "configcoverartpage.h"
 
 #include "../config.h"
@@ -31,7 +21,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     QFont groupFont;
     groupFont.setBold( true );
 
-    QLabel *lCoverSaving = new QLabel( i18n("Saving to output directory"), this );
+    QLabel *lCoverSaving = new QLabel( i18n("Saving covers to output directory"), this );
     lCoverSaving->setFont( groupFont );
     box->addWidget( lCoverSaving );
 

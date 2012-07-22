@@ -89,6 +89,10 @@ void BackendsListWidget::clear()
     pDown->setEnabled( false );
     pConfigure->setEnabled( false );
     pInfo->setEnabled( false );
+    pUp->setToolTip( "" );
+    pDown->setToolTip( "" );
+    pConfigure->setToolTip( "" );
+    pInfo->setToolTip( "" );
     originalOrder.clear();
 }
 
@@ -136,6 +140,28 @@ void BackendsListWidget::itemSelected( int row )
             pConfigure->setEnabled( plugin->isConfigSupported(CodecPlugin::ReplayGain,format) );
 
         pInfo->setEnabled( plugin->hasInfo() );
+
+        const QString pluginName = plugin->name();
+
+        if( pUp->isEnabled() )
+            pUp->setToolTip( i18n("Move %1 one position up",pluginName) );
+        else
+            pUp->setToolTip( "" );
+
+        if( pDown->isEnabled() )
+            pDown->setToolTip( i18n("Move %1 one position down",pluginName) );
+        else
+            pDown->setToolTip( "" );
+
+        if( pInfo->isEnabled() )
+            pInfo->setToolTip( i18n("About %1 ...",pluginName) );
+        else
+            pInfo->setToolTip( "" );
+
+        if( pConfigure->isEnabled() )
+            pConfigure->setToolTip( i18n("Configure %1 ...",pluginName) );
+        else
+            pConfigure->setToolTip( "" );
     }
 }
 
@@ -212,12 +238,20 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QHBoxLayout *ripperBox = new QHBoxLayout();
     ripperBox->addSpacing( ConfigDialogOffset );
     box->addLayout( ripperBox );
-    QLabel *lRipper = new QLabel( i18n("Plugin")+":", this );
-    ripperBox->addWidget( lRipper );
-    cRipper = new KComboBox( this );
-    cRipper->addItems( config->data.backends.rippers );
-    ripperBox->addWidget( cRipper );
-    connect( cRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    QLabel *lSelectorRipper = new QLabel( i18n("Use plugin:"), this );
+    ripperBox->addWidget( lSelectorRipper );
+    ripperBox->setStretchFactor( lSelectorRipper, 2 );
+    cSelectorRipper = new KComboBox( this );
+    cSelectorRipper->addItems( config->data.backends.rippers );
+    ripperBox->addWidget( cSelectorRipper );
+    ripperBox->setStretchFactor( cSelectorRipper, 1 );
+    connect( cSelectorRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    connect( cSelectorRipper, SIGNAL(activated(const QString&)), this, SLOT(ripperChanged(const QString&)) );
+    pConfigureRipper = new KPushButton( KIcon("configure"), "", this );
+    pConfigureRipper->setFixedSize( cSelectorRipper->sizeHint().height(), cSelectorRipper->sizeHint().height() );
+    ripperBox->addWidget( pConfigureRipper );
+    ripperBox->setStretchFactor( pConfigureRipper, 1 );
+    connect( pConfigureRipper, SIGNAL(clicked()), this, SLOT(configureRipper()) );
 
     box->addSpacing( ConfigDialogSpacingBig );
 
@@ -230,7 +264,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QHBoxLayout *filterBox = new QHBoxLayout();
     filterBox->addSpacing( ConfigDialogOffset );
     box->addLayout( filterBox );
-    QLabel *lSelectorFilter = new QLabel( i18n("Plugin")+":", this );
+    QLabel *lSelectorFilter = new QLabel( i18n("Use plugin:"), this );
     filterBox->addWidget( lSelectorFilter );
     filterBox->setStretchFactor( lSelectorFilter, 2 );
     cSelectorFilter = new KComboBox( this );
@@ -241,8 +275,9 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     }
     filterBox->addWidget( cSelectorFilter );
     filterBox->setStretchFactor( cSelectorFilter, 1 );
-    connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(QString)) );
+    connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(const QString&)) );
     pConfigureFilter = new KPushButton( KIcon("configure"), "", this );
+    pConfigureFilter->setFixedSize( cSelectorFilter->sizeHint().height(), cSelectorFilter->sizeHint().height() );
     filterBox->addWidget( pConfigureFilter );
     filterBox->setStretchFactor( pConfigureFilter, 1 );
     connect( pConfigureFilter, SIGNAL(clicked()), this, SLOT(configureFilter()) );
@@ -256,12 +291,12 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     box->addSpacing( ConfigDialogSpacingSmall );
 
     QVBoxLayout *formatBox = new QVBoxLayout();
-    box->addLayout( formatBox );
+    box->addLayout( formatBox, 1 );
 
     QHBoxLayout *formatSelectorBox = new QHBoxLayout();
     formatSelectorBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatSelectorBox );
-    QLabel *lSelectorFormat = new QLabel( i18n("Format")+":", this );
+    QLabel *lSelectorFormat = new QLabel( i18n("Configure format:"), this );
     formatSelectorBox->addWidget( lSelectorFormat );
     formatSelectorBox->addSpacing( 5 );
     cSelectorFormat = new KComboBox( this );
@@ -294,8 +329,9 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( pShowOptimizations, SIGNAL(clicked()), this, SLOT(showOptimizations()) );
     optimizationsBox->addStretch();
 
-    box->addStretch();
+    box->addStretch( 2 );
 
+    ripperChanged( cSelectorRipper->currentText() );
     filterChanged( cSelectorFilter->currentText() );
     formatChanged( cSelectorFormat->currentText() );
 }
@@ -304,20 +340,42 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
 ConfigBackendsPage::~ConfigBackendsPage()
 {}
 
-void ConfigBackendsPage::filterChanged( const QString& pluginName )
+void ConfigBackendsPage::ripperChanged( const QString& pluginName )
 {
-    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(cSelectorFilter->currentText()));
+    RipperPlugin *plugin = qobject_cast<RipperPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
 
     if( plugin )
     {
-        pConfigureFilter->setText( i18n("Configure %1 ...",pluginName) );
-        pConfigureFilter->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
-        pConfigureFilter->show();
+        pConfigureRipper->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
     }
     else
     {
-        pConfigureFilter->hide();
+        pConfigureRipper->setEnabled( false );
     }
+
+    if( pConfigureRipper->isEnabled() )
+        pConfigureRipper->setToolTip( i18n("Configure %1 ...",pluginName) );
+    else
+        pConfigureRipper->setToolTip( "" );
+}
+
+void ConfigBackendsPage::filterChanged( const QString& pluginName )
+{
+    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
+
+    if( plugin )
+    {
+        pConfigureFilter->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
+    }
+    else
+    {
+        pConfigureFilter->setEnabled( false );
+    }
+
+    if( pConfigureFilter->isEnabled() )
+        pConfigureFilter->setToolTip( i18n("Configure %1 ...",pluginName) );
+    else
+        pConfigureFilter->setToolTip( "" );
 }
 
 void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChanges )
@@ -435,6 +493,16 @@ void ConfigBackendsPage::somethingChanged()
     const bool changed = decoderList->changed() || encoderList->changed() || replaygainList->changed();
 
     emit configChanged( changed );
+}
+
+void ConfigBackendsPage::configureRipper()
+{
+    RipperPlugin *plugin = qobject_cast<RipperPlugin*>(config->pluginLoader()->backendPluginByName(cSelectorRipper->currentText()));
+
+    if( plugin )
+    {
+        plugin->showConfigDialog( BackendPlugin::General, "", this );
+    }
 }
 
 void ConfigBackendsPage::configureFilter()

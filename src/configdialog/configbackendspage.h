@@ -86,7 +86,7 @@ public:
 private:
     Config *config;
 
-    KComboBox *cRipper;
+    KComboBox *cSelectorRipper;
     KComboBox *cSelectorFilter;
     KComboBox *cSelectorFormat;
 
@@ -94,6 +94,7 @@ private:
     BackendsListWidget *encoderList;
     BackendsListWidget *replaygainList;
 
+    KPushButton *pConfigureRipper;
     KPushButton *pConfigureFilter;
     KPushButton *pShowOptimizations;
 
@@ -101,10 +102,10 @@ private:
 
 private slots:
     void somethingChanged();
+    void ripperChanged( const QString& pluginName );
     void filterChanged( const QString& pluginName );
     void formatChanged( const QString& format, bool ignoreChanges = false );
-//     void encoderChanged( const QString& encoder );
-//     void configureEncoder();
+    void configureRipper();
     void configureFilter();
     void showOptimizations();
 

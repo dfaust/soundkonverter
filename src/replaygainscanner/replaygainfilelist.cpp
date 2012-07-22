@@ -16,11 +16,10 @@
 
 
 ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent )
-    : QTreeWidget( parent )
+    : QTreeWidget( parent ),
+    config( _config ),
+    logger( _logger )
 {
-    config = _config;
-    logger = _logger;
-
     queue = false;
     killed = false;
 
@@ -82,7 +81,7 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     setContextMenuPolicy( Qt::CustomContextMenu );
     connect( this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)) );
 
-    QList<ReplayGainPlugin*> replayGainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
+    const QList<ReplayGainPlugin*> replayGainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
     for( int i=0; i<replayGainPlugins.size(); i++ )
     {
         connect( replayGainPlugins.at(i), SIGNAL(jobFinished(int,int)), this, SLOT(pluginProcessFinished(int,int)) );
@@ -103,7 +102,7 @@ void ReplayGainFileList::dragEnterEvent( QDragEnterEvent *event )
 
 void ReplayGainFileList::dragMoveEvent( QDragMoveEvent *event )
 {
-    if( itemAt(event->pos()) && itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type!=ReplayGainFileListItem::Track )
+    if( itemAt(event->pos()) && itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type != ReplayGainFileListItem::Track )
         QTreeWidget::dragMoveEvent(event);
 }
 
@@ -120,7 +119,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
     {
         QTreeWidgetItem *destination = itemAt(event->pos());
 
-        if( !destination || static_cast<ReplayGainFileListItem*>(destination)->type!=ReplayGainFileListItem::Track )
+        if( !destination || static_cast<ReplayGainFileListItem*>(destination)->type != ReplayGainFileListItem::Track )
         {
 //             QList<QTreeWidgetItem*> parents;
 //             QList<QTreeWidgetItem*> children = selectedItems();
@@ -313,11 +312,12 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
     {
         QFileInfo fileInfo( directory + "/" + fileName );
 
-        if( fileInfo.isDir() && recursive )
+        const bool isDir = fileInfo.isDir(); // NOTE checking for isFile might not work with all file names
+        if( isDir && recursive )
         {
             count = listDir( directory + "/" + fileName, filter, recursive, fast, count );
         }
-        else if( !fileInfo.isDir() ) // NOTE checking for isFile may not work with all file names
+        else if( !isDir )
         {
             count++;
 
@@ -908,7 +908,7 @@ void ReplayGainFileList::pluginProcessFinished( int id, int exitCode )
 
 void ReplayGainFileList::pluginLog( int id, const QString& message )
 {
-    Q_UNUSED(id)
+    Q_UNUSED( id )
 
     logger->log( 1000, "\t" + message.trimmed().replace("\n","\n\t") );
 }

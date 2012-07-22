@@ -262,11 +262,12 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     {
         QFileInfo fileInfo( directory + "/" + fileName );
 
-        if( fileInfo.isDir() && recursive )
+        const bool isDir = fileInfo.isDir(); // NOTE checking for isFile might not work with all file names
+        if( isDir && recursive )
         {
             count = listDir( directory + "/" + fileName, filter, recursive, conversionOptionsId, fast, count );
         }
-        else if( !fileInfo.isDir() ) // NOTE checking for isFile may not work with all file names
+        else if( !isDir )
         {
             count++;
 

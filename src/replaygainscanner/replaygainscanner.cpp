@@ -8,31 +8,26 @@
 #include "opener/diropener.h"
 #include "codecproblems.h"
 
-#include <qlayout.h>
-#include <qstringlist.h>
-#include <qlabel.h>
-#include <qcheckbox.h>
-#include <qtooltip.h>
-
-#include <klocale.h>
-#include <kfiledialog.h>
-#include <kpushbutton.h>
-
-#include <QProgressBar>
+#include <KFileDialog>
 #include <KIcon>
-#include <QTreeWidget>
-#include <QMessageBox>
+#include <KLocale>
+#include <KPushButton>
+
+#include <QCheckBox>
+#include <QLabel>
+#include <QLayout>
+#include <QProgressBar>
+#include <QStringList>
 
 // FIXME file name encoding !!!
 
 
 ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f )
+    : KDialog( parent, f ),
+    config( _config ),
+    logger( _logger )
 {
     setButtons( 0 );
-
-    config = _config;
-    logger = _logger;
 
     setCaption( i18n("Replay Gain tool") );
     resize( 600, 400 );
@@ -55,16 +50,11 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     filterBox->addStretch();
 
     cForce = new QCheckBox( i18n("Force recalculation"), this );
-//     QToolTip::add( cForce, i18n("Recalculate Replay Gain tag for files that already have a Replay Gain tag set.") );
+    cForce->setToolTip( i18n("Recalculate ReplayGain tags for files that already have ReplayGain tags set.") );
     filterBox->addWidget( cForce );
 
     lList = new ReplayGainFileList( config, logger, widget );
     grid->addWidget( lList, 1, 0 );
-//     connect( this, SIGNAL(addFile(const QString&)), lList, SLOT(addFile(const QString&)) );
-//     connect( this, SIGNAL(addDir(const QString&,const QStringList&,bool)), lList, SLOT(addDir(const QString&,const QStringList&,bool)) );
-//     connect( this, SIGNAL(calcAllReplayGain(bool)), lList, SLOT(calcAllReplayGain(bool)) );
-//     connect( this, SIGNAL(removeAllReplayGain()), lList, SLOT(removeAllReplayGain()) );
-//     connect( this, SIGNAL(cancelProcess()), lList, SLOT(cancelProcess()) );
     connect( lList, SIGNAL(processStarted()), this, SLOT(processStarted()) );
     connect( lList, SIGNAL(processStopped()), this, SLOT(processStopped()) );
     connect( lList, SIGNAL(updateProgress(int,int)), this, SLOT(updateProgress(int,int)) );
@@ -79,12 +69,12 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     grid->addLayout( buttonBox, 3, 0 );
 
     pTagVisible = new KPushButton( KIcon("list-add"), i18n("Tag untagged"), widget );
-//     QToolTip::add( pTagVisible, i18n("Calculate Replay Gain tag for all files in the file list without Replay Gain tag.") );
+    pTagVisible->setToolTip( i18n("Calculate ReplayGain tags for all files in the file list without ReplayGain tags.") );
     buttonBox->addWidget( pTagVisible );
     connect( pTagVisible, SIGNAL(clicked()), this, SLOT(calcReplayGainClicked()) );
 
     pRemoveTag = new KPushButton( KIcon("list-remove"), i18n("Untag tagged"), widget );
-//     QToolTip::add( pRemoveTag, i18n("Remove the Replay Gain tag from all files in the file list.") );
+    pRemoveTag->setToolTip( i18n("Remove the ReplayGain tags from all files in the file list.") );
     buttonBox->addWidget( pRemoveTag );
     connect( pRemoveTag, SIGNAL(clicked()), this, SLOT(removeReplayGainClicked()) );
 
@@ -120,7 +110,7 @@ void ReplayGainScanner::showFileDialog()
 {
     QStringList filterList;
     QStringList allFilter;
-    QStringList formats = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    const QStringList formats = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     for( int i=0; i<formats.count(); i++ )
     {
         QString extensionFilter = config->pluginLoader()->codecExtensions(formats.at(i)).join(" *.");
@@ -152,7 +142,7 @@ void ReplayGainScanner::fileDialogAccepted()
 void ReplayGainScanner::showHelp()
 {
     QList<CodecProblems::Problem> problemList;
-    QMap<QString,QStringList> problems = config->pluginLoader()->replaygainProblems();
+    const QMap<QString,QStringList> problems = config->pluginLoader()->replaygainProblems();
     for( int i=0; i<problems.count(); i++ )
     {
         CodecProblems::Problem problem;
@@ -191,19 +181,16 @@ void ReplayGainScanner::addFiles( KUrl::List urls )
 
 void ReplayGainScanner::calcReplayGainClicked()
 {
-//     emit calcAllReplayGain( cForce->isChecked() );
     lList->calcAllReplayGain( cForce->isChecked() );
 }
 
 void ReplayGainScanner::removeReplayGainClicked()
 {
-//     emit removeAllReplayGain();
     lList->removeAllReplayGain();
 }
 
 void ReplayGainScanner::cancelClicked()
 {
-//     emit cancelProcess();
     lList->cancelProcess();
 }
 

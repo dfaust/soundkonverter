@@ -1,11 +1,8 @@
 
-
 #ifndef REPLAYGAINSCANNER_H
 #define REPLAYGAINSCANNER_H
 
-#include <kdialog.h>
-
-// #include "replaygainfilelist.h"
+#include <KDialog>
 
 class Config;
 class Logger;
@@ -22,17 +19,13 @@ class KFileDialog;
 /**
  * @short The Replay Gain Tool
  * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
  */
 class ReplayGainScanner : public KDialog
 {
     Q_OBJECT
 public:
-    /** Constructor */
     ReplayGainScanner( Config*, Logger*, QWidget *parent=0, Qt::WFlags f=0 );
-
-    /** Destructor */
-    virtual ~ReplayGainScanner();
+    ~ReplayGainScanner();
 
     void addFiles( KUrl::List urls );
 
@@ -50,21 +43,18 @@ private slots:
     void updateProgress( int progress, int totalSteps );
 
 private:
-    ComboButton* cAdd;
-    QCheckBox* cForce;
-    ReplayGainFileList* lList;
-    QProgressBar* pProgressBar;
-    KPushButton* pTagVisible;
-    KPushButton* pRemoveTag;
-    KPushButton* pCancel;
-    KPushButton* pClose;
+    ComboButton *cAdd;
+    QCheckBox *cForce;
+    ReplayGainFileList *lList;
+    QProgressBar *pProgressBar;
+    KPushButton *pTagVisible;
+    KPushButton *pRemoveTag;
+    KPushButton *pCancel;
+    KPushButton *pClose;
     KFileDialog *fileDialog;
 
-//     TagEngine* tagEngine;
-    Config* config;
-    Logger* logger;
-
-    QTime elapsedTime;
+    Config *config;
+    Logger *logger;
 
 signals:
     void addFile( const QString& );

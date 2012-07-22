@@ -5,22 +5,18 @@
 
 #include "filelistitem.h"
 
-#include <KProcess>
+#include <QProcess>
 #include <QList>
 #include <QMap>
 #include <QObject>
 #include <QTimer>
-#include <QWeakPointer>
 
 class BackendPlugin;
 class CDManager;
 class Config;
 class ConvertItem;
 class FileList;
-class FileListItem;
 class Logger;
-class ReplayGain;
-class TagEngine;
 
 class KJob;
 

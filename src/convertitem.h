@@ -53,7 +53,7 @@ public:
     /** number of the current attempt to convert the file/add replaygain (for the pipes lists) */
     int take;
     /** number of the last try in case the conversion wasn't successful in the end */
-    int lastTake;
+    int lastTake; // TODO use cleaner solution
 
     /** for the conversion and moving the file to a temporary place */
     QWeakPointer<KProcess> process;

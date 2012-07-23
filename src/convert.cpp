@@ -442,6 +442,31 @@ void Convert::replaygain( ConvertItem *item )
     }
     item->backendID = qobject_cast<ReplayGainPlugin*>(item->backendPlugin)->apply( urlList );
 
+    if( item->backendID < 100 )
+    {
+        switch( item->backendID )
+        {
+            case BackendPlugin::BackendNeedsConfiguration:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+                remove( item, FileListItem::BackendNeedsConfiguration );
+                break;
+            }
+            case BackendPlugin::FeatureNotSupported:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                executeSameStep( item );
+                break;
+            }
+            case BackendPlugin::UnknownError:
+            {
+                logger->log( item->logID, "\t" + i18n("Conversion failed. Unknown Error.") );
+                executeSameStep( item );
+                break;
+            }
+        }
+    }
+
     if( !updateTimer.isActive() )
         updateTimer.start( ConfigUpdateDelay );
 }
@@ -922,27 +947,27 @@ void Convert::pluginLog( int id, const QString& message )
 //     logger->log( 1000, qobject_cast<BackendPlugin*>(QObject::sender())->name() + ": " + message.trimmed().replace("\n","\n\t") );
 }
 
-void Convert::add( FileListItem* item )
+void Convert::add( FileListItem *fileListItem )
 {
     KUrl fileName;
-    if( item->track >= 0 )
+    if( fileListItem->track >= 0 )
     {
-        if( item->tags )
+        if( fileListItem->tags )
         {
-            fileName = KUrl( i18nc("identificator for the logger","CD track %1: %2 - %3",QString().sprintf("%02i",item->tags->track),item->tags->artist,item->tags->title) );
+            fileName = KUrl( i18nc("identificator for the logger","CD track %1: %2 - %3",QString().sprintf("%02i",fileListItem->tags->track),fileListItem->tags->artist,fileListItem->tags->title) );
         }
         else // shouldn't be possible
         {
-            fileName = KUrl( i18nc("identificator for the logger","CD track %1",item->track) );
+            fileName = KUrl( i18nc("identificator for the logger","CD track %1",fileListItem->track) );
         }
     }
     else
     {
-        fileName = item->url;
+        fileName = fileListItem->url;
     }
     logger->log( 1000, i18n("Adding new item to conversion list: '%1'",fileName.pathOrUrl()) );
 
-    ConvertItem *newItem = new ConvertItem( item );
+    ConvertItem *newItem = new ConvertItem( fileListItem );
     items.append( newItem );
 
     // register at the logger
@@ -960,9 +985,9 @@ void Convert::add( FileListItem* item )
     newItem->mode = (ConvertItem::Mode)0x0000;
     newItem->state = (ConvertItem::Mode)0x0000;
 
-    newItem->inputUrl = item->url;
+    newItem->inputUrl = fileListItem->url;
 
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
+    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !conversionOptions )
     {
         logger->log( 1000, "Convert::add(...) no ConversionOptions found" );
@@ -970,12 +995,12 @@ void Convert::add( FileListItem* item )
         return;
     }
 
-    if( item->track >= 0 )
+    if( fileListItem->track >= 0 )
     {
-        logger->log( newItem->logID, "\t" + i18n("Track number: %1, device: %2",QString::number(item->track),item->device) );
+        logger->log( newItem->logID, "\t" + i18n("Track number: %1, device: %2",QString::number(fileListItem->track),fileListItem->device) );
     }
 
-    newItem->conversionPipes = config->pluginLoader()->getConversionPipes( item->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );
+    newItem->conversionPipes = config->pluginLoader()->getConversionPipes( fileListItem->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );
 
     logger->log( newItem->logID, "\t" + i18n("Possible conversion strategies:") );
     for( int i=0; i<newItem->conversionPipes.size(); i++ )
@@ -1001,7 +1026,7 @@ void Convert::add( FileListItem* item )
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::replaygain );
     }
 
-    if( !newItem->inputUrl.isLocalFile() && item->track == -1 )
+    if( !newItem->inputUrl.isLocalFile() && fileListItem->track == -1 )
         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
 //     if( (!newItem->inputUrl.isLocalFile() && item->track == -1) || newItem->inputUrl.url().toAscii() != newItem->inputUrl.url() )
 //         newItem->mode = ConvertItem::Mode( newItem->mode | ConvertItem::get );
@@ -1009,7 +1034,7 @@ void Convert::add( FileListItem* item )
     newItem->updateTimes();
 
     // (visual) feedback
-    item->state = FileListItem::Converting;
+    fileListItem->state = FileListItem::Converting;
 
     newItem->progressedTime.start();
 
@@ -1162,11 +1187,11 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
         updateTimer.stop();
 }
 
-void Convert::kill( FileListItem *item )
+void Convert::kill( FileListItem *fileListItem )
 {
     for( int i=0; i<items.size(); i++ )
     {
-        if( items.at(i)->fileListItem == item )
+        if( items.at(i)->fileListItem == fileListItem )
         {
             items.at(i)->killed = true;
 
@@ -1186,12 +1211,12 @@ void Convert::kill( FileListItem *item )
     }
 }
 
-void Convert::itemRemoved( FileListItem *item )
+void Convert::itemRemoved( FileListItem *fileListItem )
 {
-    if( !item )
+    if( !fileListItem )
         return;
 
-    const QString albumName = item->tags ? item->tags->album : "";
+    const QString albumName = fileListItem->tags ? fileListItem->tags->album : "";
 
     if( !albumName.isEmpty() )
     {
@@ -1199,7 +1224,7 @@ void Convert::itemRemoved( FileListItem *item )
 
         for( int i=0; i<albumItems.count(); i++ )
         {
-            if( albumItems.at(i)->fileListItem == item )
+            if( albumItems.at(i)->fileListItem == fileListItem )
             {
                 albumGainItems[albumName].removeAll( albumItems.at(i) );
                 break;

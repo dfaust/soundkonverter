@@ -108,11 +108,11 @@ private slots:
 public slots:
     // connected to FileList
     /** Add a new @p item to the item list and start */
-    void add( FileListItem *item );
+    void add( FileListItem *fileListItem );
     /** Stop the item with the file list item @p item in the item list and remove it */
-    void kill( FileListItem *item );
+    void kill( FileListItem *fileListItem );
     /** the file list item @p item will get removed */
-    void itemRemoved( FileListItem *item );
+    void itemRemoved( FileListItem *fileListItem );
 
     /** Change the process priorities */
 //     void priorityChanged( int );
@@ -120,7 +120,7 @@ public slots:
 signals:
     // connected to FileList
     /** The conversion of an item has finished and the state is reported */
-    void finished( FileListItem *item, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
+    void finished( FileListItem *fileListItem, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
     /** The next track from the device can be ripped while the track is being encoded */
     void rippingFinished( const QString& device );
 

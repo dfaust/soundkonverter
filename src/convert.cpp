@@ -1237,7 +1237,6 @@ void Convert::updateProgress()
 {
     float time = 0.0f;
     float fileTime;
-    float fileProgress;
     QString fileProgressString;
 
     // trigger flushing of the logger cache
@@ -1245,6 +1244,8 @@ void Convert::updateProgress()
 
     for( int i=0; i<items.size(); i++ )
     {
+        float fileProgress = 0.0f;
+
         if( items.at(i)->backendID != -1 && items.at(i)->backendPlugin )
         {
             fileProgress = items.at(i)->backendPlugin->progress( items.at(i)->backendID );

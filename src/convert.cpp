@@ -717,7 +717,7 @@ void Convert::processOutput()
 
                 if( progress > item->progress )
                 {
-                    items[i]->progress = progress;
+                    item->progress = progress;
                     logOutput = false;
                 }
             }

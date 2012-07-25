@@ -29,11 +29,11 @@ public:
     virtual ~ProgressIndicator();
 
 public slots:
-    void timeChanged( float time );
-    void timeFinished( float time );
-    void finished( float time );
+    void timeChanged( float timeDelta );
+    void timeFinished( float timeDelta );
+    void finished( bool reset );
 
-    void update( float time );
+    void update( float timeProgress );
 
 //private slots:
 

@@ -43,6 +43,8 @@ public:
     /** the id with that the item is registered at the logger */
     int logID;
 
+    int time;
+
     QTime progressedTime;
 };
 
@@ -104,8 +106,8 @@ signals:
     void finishedProcess( int id, ReplayGainFileListItem::ReturnCode returnCode );
 
     // connected to ProgressIndicator
-    void updateTime( float );
-    void timeFinished( float );
+    void updateTime( float timeProgress );
+    void timeFinished( float timeDelta );
 };
 
 #endif // REPLAYGAINPROCESSOR_H

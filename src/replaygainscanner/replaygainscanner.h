@@ -8,6 +8,7 @@ class Config;
 class Logger;
 class ComboButton;
 class ReplayGainFileList;
+class ProgressIndicator;
 
 class QCheckBox;
 class KPushButton;
@@ -40,13 +41,14 @@ private slots:
     void cancelClicked();
     void processStarted();
     void processStopped();
-    void updateProgress( int progress, int totalSteps );
+//     void updateProgress( int progress, int totalSteps );
 
 private:
     ComboButton *cAdd;
     QCheckBox *cForce;
     ReplayGainFileList *fileList;
-    QProgressBar *pProgressBar;
+//     QProgressBar *pProgressBar;
+    ProgressIndicator *progressIndicator;
     KPushButton *pTagVisible;
     KPushButton *pRemoveTag;
     KPushButton *pCancel;

@@ -48,9 +48,9 @@ ProgressIndicator::ProgressIndicator( QWidget* parent )
 ProgressIndicator::~ProgressIndicator()
 {}
 
-void ProgressIndicator::timeChanged( float time )
+void ProgressIndicator::timeChanged( float timeDelta )
 {
-    totalTime += time;
+    totalTime += timeDelta;
 
     if( totalTime > 0 )
         pBar->setRange( 0, (int)totalTime );
@@ -58,28 +58,37 @@ void ProgressIndicator::timeChanged( float time )
         pBar->setRange( 0, 1 );
 }
 
-void ProgressIndicator::timeFinished( float time )
+void ProgressIndicator::timeFinished( float timeDelta )
 {
-    processedTime += time;
+    processedTime += timeDelta;
     pBar->setValue( (int)processedTime );
 }
 
-void ProgressIndicator::finished( float time )
+void ProgressIndicator::finished( bool reset )
 {
-    totalTime = time;
-    processedTime = 0;
-    pBar->setRange( 0, (totalTime>0) ? (int)totalTime : 1 );
-    pBar->setValue( (totalTime>0) ? 0 : 1 );
+    if( reset )
+    {
+        totalTime -= processedTime;
+        if( totalTime < 0 )
+            totalTime = 0.0f;
+    }
+
+    processedTime = 0.0f;
+
+    pBar->setRange( 0, totalTime > 0 ? (int)totalTime : 1 );
+    pBar->setValue( totalTime > 0 ? 0 : 1 );
+
     elapsedTime.setHMS( 24, 0, 0 );
     lTime->setText( "<pre> 0s</pre>" );
     speedTime.setHMS( 24, 0, 0 );
     lSpeed->setText( "<pre> 0.0x</pre>" );
+
     emit progressChanged( i18n("Finished") );
 }
 
-void ProgressIndicator::update( float time )
+void ProgressIndicator::update( float timeProgress )
 {
-    pBar->setValue( (int)(processedTime + time) );
+    pBar->setValue( (int)(processedTime + timeProgress) );
 
     float fPercent;
 
@@ -103,8 +112,8 @@ void ProgressIndicator::update( float time )
         }
 
         int tim = speedTime.restart() / 1000;
-        float speed = ( processedTime + time - speedProcessedTime ) / tim;
-        speedProcessedTime = processedTime + time;
+        float speed = ( processedTime + timeProgress - speedProcessedTime ) / tim;
+        speedProcessedTime = processedTime + timeProgress;
         if( speed >= 0.0f && speed < 100000.0f )
         {
             QString actSpeed;

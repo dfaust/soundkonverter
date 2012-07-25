@@ -129,8 +129,8 @@ signals:
     void finishedProcess( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
 
     // connected to ProgressIndicator
-    void updateTime( float );
-    void timeFinished( float );
+    void updateTime( float timeProgress );
+    void timeFinished( float timeDelta );
 };
 
 #endif // CONVERT_H

@@ -880,14 +880,15 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
         queue = false;
         save( false );
         emit queueModeChanged( queue );
-        float time = 0;
-        for( int i=0; i<topLevelItemCount(); i++ )
-        {
-            FileListItem *temp_item = topLevelItem( i );
-            updateItem( temp_item ); // TODO why?
-            time += temp_item->length;
-        }
-        emit finished( time );
+//         float time = 0;
+//         for( int i=0; i<topLevelItemCount(); i++ )
+//         {
+//             FileListItem *temp_item = topLevelItem( i );
+//             updateItem( temp_item ); // TODO why?
+//             time += temp_item->length;
+//         }
+//         emit finished( time );
+        emit finished( true );
         emit conversionStopped( returnCode != FileListItem::Succeeded );
         emit fileCountChanged( topLevelItemCount() );
     }

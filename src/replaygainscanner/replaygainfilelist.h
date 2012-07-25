@@ -7,7 +7,7 @@
 
 #include <KUrl>
 #include <QTime>
-#include <QTimer>
+// #include <QTimer>
 
 class Config;
 class Logger;
@@ -55,7 +55,7 @@ private:
     Config *config;
     Logger *logger;
 
-    QTimer updateTimer;
+//     QTimer updateTimer;
 
     /** Lists all file in a directory and adds them to the file list, if fast is false. The number of listed files is returned */
     int listDir( const QString& directory, const QStringList& filter, bool recursive, bool fast = false, int count = 0 );
@@ -79,8 +79,8 @@ private:
 //     int currentId;
 //     int currentTime;
 
-    int totalTime;
-    int processedTime;
+//     int totalTime;
+//     int processedTime;
 
 //     QList<ReplayGainFileListItem*> processedItems;
 
@@ -107,16 +107,20 @@ public slots:
 private slots:
     void removeSelectedItems();
     void showContextMenu( const QPoint& point );
-    void updateProgress();
+//     void updateProgress();
 
     // connected to ReplayGainProcessor
     void itemFinished( ReplayGainFileListItem *item, ReplayGainFileListItem::ReturnCode returnCode );
 
 signals:
+    // connected to ProgressIndicator
+    void timeChanged( float timeDelta );
+    void finished( bool reset );
+
     // connected to ReplayGainScanner
     void processStarted();
     void processStopped();
-    void updateProgress( int progress, int totalSteps );
+//     void updateProgress( int progress, int totalSteps );
 
     // connected to ReplayGainProcessor
     void processItem( ReplayGainFileListItem *item, ReplayGainPlugin::ApplyMode mode );

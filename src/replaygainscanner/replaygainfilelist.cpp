@@ -88,7 +88,7 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
         connect( replayGainPlugins.at(i), SIGNAL(log(int,const QString&)), this, SLOT(pluginLog(int,const QString&)) );
     }
 
-    connect( &updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress()) );
+//     connect( &updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress()) );
 }
 
 ReplayGainFileList::~ReplayGainFileList()
@@ -453,11 +453,11 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
             newTrackItem->time = 200;
         }
 
-        totalTime += newTrackItem->time;
+//         totalTime += newTrackItem->time;
 
         updateItem( newTrackItem );
 
-//         emit timeChanged( newItem->time );
+        emit timeChanged( newTrackItem->time );
     }
 
 //     emit fileCountChanged( topLevelItemCount() );
@@ -488,7 +488,7 @@ void ReplayGainFileList::removeSelectedItems()
         item = topLevelItem(i);
         if( item->type == ReplayGainFileListItem::Track && item->isSelected() && item->state != ReplayGainFileListItem::Processing )
         {
-            totalTime -= item->time;
+            emit timeChanged( -item->time );
             delete item;
             i--;
         }
@@ -499,7 +499,7 @@ void ReplayGainFileList::removeSelectedItems()
                 child = (ReplayGainFileListItem*)item->child(j);
                 if( child->type == ReplayGainFileListItem::Track && ( child->isSelected() || item->isSelected() ) && child->state != ReplayGainFileListItem::Processing )
                 {
-                    totalTime -= child->time;
+                    emit timeChanged( -child->time );
                     delete child;
                     j--;
                 }
@@ -956,6 +956,7 @@ void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainF
 //             time += temp_item->length;
 //         }
 //         emit finished( time );
+        emit finished( false );
         emit processStopped();
 //         emit fileCountChanged( topLevelItemCount() );
     }
@@ -999,9 +1000,9 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
     contextMenu->popup( viewport()->mapToGlobal(point) );
 }
 
-void ReplayGainFileList::updateProgress()
-{
+// void ReplayGainFileList::updateProgress()
+// {
 //     float progress = currentPlugin->progress( currentId );
 //     progress /= 100;
 //     emit updateProgress( processedTime + progress*currentTime, totalTime );
-}
+// }

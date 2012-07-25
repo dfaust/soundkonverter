@@ -124,7 +124,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     addBox->addWidget( progressIndicator );
     connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SIGNAL(progressChanged(const QString&)) );
     connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
-    connect( fileList, SIGNAL(finished(float)), progressIndicator, SLOT(finished(float)) );
+    connect( fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );
 
     Convert *convert = new Convert( config, fileList, logger );
     connect( fileList, SIGNAL(convertItem(FileListItem*)), convert, SLOT(add(FileListItem*)) );

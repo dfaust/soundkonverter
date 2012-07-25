@@ -22,6 +22,8 @@ ReplayGainProcessorItem::ReplayGainProcessorItem( ReplayGainFileListItem *_fileL
     take = 0;
 
     killed = false;
+
+    time = 0;
 }
 
 ReplayGainProcessorItem::~ReplayGainProcessorItem()
@@ -211,6 +213,19 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
     newItem->logID = logger->registerProcess( fileListItem->url.toLocalFile() );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
 
+    if( fileListItem->type == ReplayGainFileListItem::Track )
+    {
+        newItem->time = fileListItem->time;
+    }
+    else
+    {
+        for( int j=0; j<newItem->fileListItem->childCount(); j++ )
+        {
+            ReplayGainFileListItem *child = (ReplayGainFileListItem*)newItem->fileListItem->child(j);
+            newItem->time += child->time;
+        }
+    }
+
     newItem->replaygainPipes = config->pluginLoader()->getReplayGainPipes( fileListItem->codecName );
 
     logger->log( newItem->logID, "\t" + i18n("Possible ReplayGain backends:") );
@@ -230,8 +245,6 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
 
 void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileListItem::ReturnCode returnCode )
 {
-    pluginLog( 0, "" );
-
     QString exitMessage;
 
     if( returnCode == ReplayGainFileListItem::Succeeded && item->take > 0 )
@@ -255,7 +268,7 @@ void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileL
 
     logger->log( item->logID, "<br>" +  i18n("Removing file from conversion list. Exit code %1 (%2)",returnCode,exitMessage) );
 
-    emit timeFinished( item->fileListItem->time );
+    emit timeFinished( (float)item->time );
 
     emit finished( item->fileListItem, returnCode ); // send signal to FileList
     emit finishedProcess( item->logID, returnCode ); // send signal to Logger
@@ -287,6 +300,9 @@ void ReplayGainProcessor::updateProgress()
 {
     float time = 0.0f;
 
+    // trigger flushing of the logger cache
+    pluginLog( 0, "" );
+
     foreach( ReplayGainProcessorItem *item, items )
     {
         float fileProgress = 0.0f;
@@ -296,7 +312,8 @@ void ReplayGainProcessor::updateProgress()
             fileProgress = item->backendPlugin->progress( item->backendID );
         }
 
-        time += (float)item->fileListItem->time * fileProgress / 100.0f;
+        time += (float)item->time * fileProgress / 100.0f;
+        logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
     }
 
     emit updateTime( time );

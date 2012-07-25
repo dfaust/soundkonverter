@@ -141,8 +141,8 @@ public slots:
 
 signals:
     // connected to ProgressIndicator
-    void timeChanged( float time );
-    void finished( float time );
+    void timeChanged( float timeDelta );
+    void finished( bool );
     // connected to soundKonverterView
     void fileCountChanged( int count );
     void conversionStarted();

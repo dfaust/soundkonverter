@@ -1234,17 +1234,17 @@ void Convert::updateProgress()
     // trigger flushing of the logger cache
     pluginLog( 0, "" );
 
-    for( int i=0; i<items.size(); i++ )
+    foreach( ConvertItem *item, items )
     {
         float fileProgress = 0.0f;
 
-        if( items.at(i)->backendID != -1 && items.at(i)->backendPlugin )
+        if( item->backendID != -1 && item->backendPlugin )
         {
-            fileProgress = items.at(i)->backendPlugin->progress( items.at(i)->backendID );
+            fileProgress = item->backendPlugin->progress( item->backendID );
         }
         else
         {
-            fileProgress = items.at(i)->progress;
+            fileProgress = item->progress;
         }
 
         if( fileProgress >= 0 )
@@ -1258,62 +1258,62 @@ void Convert::updateProgress()
         }
 
         fileTime = 0.0f;
-        switch( items.at(i)->state )
+        switch( item->state )
         {
             case ConvertItem::get:
             {
-                fileTime = items.at(i)->getTime;
-                items.at(i)->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
+                fileTime = item->getTime;
+                item->fileListItem->setText( 0, i18n("Getting file")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::convert:
             {
-                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
-                items.at(i)->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
+                fileTime = item->convertTimes.at(item->conversionPipesStep);
+                item->fileListItem->setText( 0, i18n("Converting")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::rip:
             {
-                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
-                items.at(i)->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
+                fileTime = item->convertTimes.at(item->conversionPipesStep);
+                item->fileListItem->setText( 0, i18n("Ripping")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::decode:
             {
-                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
-                items.at(i)->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
+                fileTime = item->convertTimes.at(item->conversionPipesStep);
+                item->fileListItem->setText( 0, i18n("Decoding")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::filter:
             {
-                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
-                items.at(i)->fileListItem->setText( 0, i18n("Filter")+"... "+fileProgressString );
+                fileTime = item->convertTimes.at(item->conversionPipesStep);
+                item->fileListItem->setText( 0, i18n("Filter")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::encode:
             {
-                fileTime = items.at(i)->convertTimes.at(items.at(i)->conversionPipesStep);
-                items.at(i)->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
+                fileTime = item->convertTimes.at(item->conversionPipesStep);
+                item->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
             }
             case ConvertItem::replaygain:
             {
-                const QString albumName = items.at(i)->fileListItem->tags ? items.at(i)->fileListItem->tags->album : "";
+                const QString albumName = item->fileListItem->tags ? item->fileListItem->tags->album : "";
                 QList<ConvertItem*> albumItems;
                 if( !albumName.isEmpty() )
                     albumItems = albumGainItems[albumName];
-                if( !albumItems.contains(items.at(i)) )
-                    albumItems.append( items.at(i) );
+                if( !albumItems.contains(item) )
+                    albumItems.append( item );
                 foreach( ConvertItem *albumItem, albumItems )
                 {
                     fileTime += albumItem->replaygainTime;
                 }
-                items.at(i)->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
+                item->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
             }
         }
-        time += items.at(i)->finishedTime + fileProgress * fileTime / 100.0f;
-        logger->log( items.at(i)->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
+        time += item->finishedTime + fileProgress * fileTime / 100.0f;
+        logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
     }
 
     emit updateTime( time );

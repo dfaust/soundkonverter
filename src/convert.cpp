@@ -23,13 +23,6 @@ Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
     fileList( _fileList ),
     logger( _logger )
 {
-    connect( fileList, SIGNAL(convertItem(FileListItem*)), this, SLOT(add(FileListItem*)) );
-    connect( fileList, SIGNAL(killItem(FileListItem*)), this, SLOT(kill(FileListItem*)) );
-    connect( fileList, SIGNAL(itemRemoved(FileListItem*)), this, SLOT(itemRemoved(FileListItem*)) );
-    connect( this, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
-    connect( this, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
-    connect( this, SIGNAL(finishedProcess(int,FileListItem::ReturnCode,bool)), logger, SLOT(processCompleted(int,FileListItem::ReturnCode,bool)) );
-
     connect( &updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress()) );
 
     QList<CodecPlugin*> codecPlugins = config->pluginLoader()->getAllCodecPlugins();
@@ -423,7 +416,6 @@ void Convert::replaygain( ConvertItem *item )
     if( item->take > item->replaygainPipes.count() - 1 )
     {
         logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );
-
         remove( item, FileListItem::Failed );
         return;
     }
@@ -454,7 +446,7 @@ void Convert::replaygain( ConvertItem *item )
             }
             case BackendPlugin::FeatureNotSupported:
             {
-                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a necessary feature.") );
                 executeSameStep( item );
                 break;
             }

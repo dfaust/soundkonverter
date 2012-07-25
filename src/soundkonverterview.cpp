@@ -10,6 +10,7 @@
 #include "progressindicator.h"
 #include "optionslayer.h"
 #include "config.h"
+#include "logger.h"
 #include "opener/fileopener.h"
 #include "opener/diropener.h"
 #include "opener/cdopener.h"
@@ -126,6 +127,14 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( fileList, SIGNAL(finished(float)), progressIndicator, SLOT(finished(float)) );
 
     Convert *convert = new Convert( config, fileList, logger );
+    connect( fileList, SIGNAL(convertItem(FileListItem*)), convert, SLOT(add(FileListItem*)) );
+    connect( fileList, SIGNAL(killItem(FileListItem*)), convert, SLOT(kill(FileListItem*)) );
+    connect( fileList, SIGNAL(itemRemoved(FileListItem*)), convert, SLOT(itemRemoved(FileListItem*)) );
+    connect( convert, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
+    connect( convert, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
+
+    connect( convert, SIGNAL(finishedProcess(int,FileListItem::ReturnCode,bool)), logger, SLOT(processCompleted(int,FileListItem::ReturnCode,bool)) );
+
     connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 }

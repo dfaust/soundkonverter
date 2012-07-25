@@ -21,7 +21,6 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     logger( _logger )
 {
     queue = false;
-//     killed = false;
 
     lastAlbumItem = 0;
 
@@ -87,8 +86,6 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
         connect( replayGainPlugins.at(i), SIGNAL(jobFinished(int,int)), this, SLOT(pluginProcessFinished(int,int)) );
         connect( replayGainPlugins.at(i), SIGNAL(log(int,const QString&)), this, SLOT(pluginLog(int,const QString&)) );
     }
-
-//     connect( &updateTimer, SIGNAL(timeout()), this, SLOT(updateProgress()) );
 }
 
 ReplayGainFileList::~ReplayGainFileList()
@@ -349,8 +346,6 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
 {
     ReplayGainFileListItem *newAlbumItem, *newTrackItem;
     QString codecName;
-//     QString filePathName;
-//     QString device;
     QStringList unsupportedList;
 
     foreach( KUrl url, fileList )
@@ -453,8 +448,6 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
             newTrackItem->time = 200;
         }
 
-//         totalTime += newTrackItem->time;
-
         updateItem( newTrackItem );
 
         emit timeChanged( newTrackItem->time );
@@ -548,57 +541,6 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
     update( indexFromItem( item, 2 ) );
 }
 
-// void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )
-// {
-//     ReplayGainFileListItem *parent = 0;
-//
-//     if( itemList.count() <= 0 )
-//         return;
-//
-//     QList<ReplayGainPipe> pipes = config->pluginLoader()->getReplayGainPipes( itemList.at(0)->codecName );
-//
-//     if( itemList.at(0)->take >= pipes.count() )
-//     {
-//         for( int i=0; i<itemList.count(); i++ )
-//         {
-//             itemList.at(i)->state = ReplayGainFileListItem::Stopped;
-//             itemList.at(i)->returnCode = ReplayGainFileListItem::Failed;
-//             updateItem( itemList.at(i) );
-//         }
-//         processNextItem();
-//         return;
-//     }
-//
-//     currentPlugin = pipes.at(itemList.at(0)->take).plugin;
-//
-//     if( !currentPlugin )
-//         return;
-//
-//     KUrl::List urls;
-//     for( int i=0; i<itemList.count(); i++ )
-//     {
-//         urls += itemList.at(i)->url;
-//     }
-//
-//     currentId = currentPlugin->apply( urls, mode );
-//
-//     currentTime = 0;
-//     for( int i=0; i<itemList.count(); i++ )
-//     {
-//         itemList.at(i)->processId = currentId;
-//         itemList.at(i)->take++;
-//         itemList.at(i)->state = ReplayGainFileListItem::Processing;
-//         updateItem( itemList.at(i) );
-//         currentTime += itemList.at(i)->time;
-//         parent = (ReplayGainFileListItem*)itemList.at(i)->parent();
-//         if( parent )
-//         {
-//             parent->state = ReplayGainFileListItem::Processing;
-//             updateItem( parent );
-//         }
-//     }
-// }
-
 void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )
 {
     // iterate through all items and set the state to "Waiting"
@@ -689,7 +631,6 @@ void ReplayGainFileList::cancelProcess()
 {
     queue = false;
 //     emit queueModeChanged( queue );
-//     killed = true;
 
     ReplayGainFileListItem *item, *child;
     for( int i=0; i<topLevelItemCount(); i++ )
@@ -999,10 +940,3 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
     // show the popup menu
     contextMenu->popup( viewport()->mapToGlobal(point) );
 }
-
-// void ReplayGainFileList::updateProgress()
-// {
-//     float progress = currentPlugin->progress( currentId );
-//     progress /= 100;
-//     emit updateProgress( processedTime + progress*currentTime, totalTime );
-// }

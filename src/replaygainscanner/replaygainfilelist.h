@@ -7,7 +7,6 @@
 
 #include <KUrl>
 #include <QTime>
-// #include <QTimer>
 
 class Config;
 class Logger;
@@ -55,8 +54,6 @@ private:
     Config *config;
     Logger *logger;
 
-//     QTimer updateTimer;
-
     /** Lists all file in a directory and adds them to the file list, if fast is false. The number of listed files is returned */
     int listDir( const QString& directory, const QStringList& filter, bool recursive, bool fast = false, int count = 0 );
     /** A progressbar, that is shown, when a directory is added recursive */
@@ -70,19 +67,8 @@ private:
 
     void resizeEvent( QResizeEvent *event );
 
-//     bool processing;        // true, if the progress is active (hide some options in the context menu)
-
     bool queue;             // NOTE currently always true
-//     bool killed;
     ReplayGainPlugin::ApplyMode mode;
-//     ReplayGainPlugin *currentPlugin;
-//     int currentId;
-//     int currentTime;
-
-//     int totalTime;
-//     int processedTime;
-
-//     QList<ReplayGainFileListItem*> processedItems;
 
     QTreeWidgetItem *lastAlbumItem;
 
@@ -98,7 +84,6 @@ private:
     void processNextItem();
     int waitingCount();
     int processingCount();
-//     void processItems( const QList<ReplayGainFileListItem*>& itemList );
     void updateItem( ReplayGainFileListItem *item );
 
 public slots:
@@ -107,7 +92,6 @@ public slots:
 private slots:
     void removeSelectedItems();
     void showContextMenu( const QPoint& point );
-//     void updateProgress();
 
     // connected to ReplayGainProcessor
     void itemFinished( ReplayGainFileListItem *item, ReplayGainFileListItem::ReturnCode returnCode );
@@ -120,7 +104,6 @@ signals:
     // connected to ReplayGainScanner
     void processStarted();
     void processStopped();
-//     void updateProgress( int progress, int totalSteps );
 
     // connected to ReplayGainProcessor
     void processItem( ReplayGainFileListItem *item, ReplayGainPlugin::ApplyMode mode );

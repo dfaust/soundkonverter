@@ -2,12 +2,13 @@
 #ifndef REPLAYGAINFILELISTITEM_H
 #define REPLAYGAINFILELISTITEM_H
 
+#include "core/replaygainplugin.h"
+#include "metadata/tagengine.h"
+
 #include <QTreeWidget>
 #include <QItemDelegate>
 #include <QPointer>
 #include <KUrl>
-
-#include "metadata/tagengine.h"
 
 
 class ReplayGainFileListItem : public QTreeWidgetItem
@@ -15,7 +16,6 @@ class ReplayGainFileListItem : public QTreeWidgetItem
 public:
     ReplayGainFileListItem( QTreeWidget *parent );
     ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding );
-
     ReplayGainFileListItem( QTreeWidgetItem *parent );
 
     ~ReplayGainFileListItem();
@@ -28,9 +28,17 @@ public:
     enum State {
         Waiting,
         Processing,
-        Processed,
-        Failed
+        Stopped
     } state;
+
+    enum ReturnCode {
+        Succeeded,
+        SucceededWithProblems,
+        StoppedByUser,
+        Skipped,
+        BackendNeedsConfiguration,
+        Failed
+    } returnCode;
 
     KUrl url;
     QString albumName;
@@ -40,8 +48,8 @@ public:
 
     int time;
 
-    int processId;
-    int take;
+//     int processId;
+//     int take;
 
 // private:
 //     void dragEnterEvent( QDragEnterEvent *event );

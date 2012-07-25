@@ -59,10 +59,15 @@ void Config::load()
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
 //     data.general.priority = group.readEntry( "priority", 10 );
     data.general.numFiles = group.readEntry( "numFiles", 0 );
-    if( data.general.numFiles == 0 )
+    data.general.numReplayGainFiles = group.readEntry( "numReplayGainFiles", 0 );
+    if( data.general.numFiles == 0 || data.general.numReplayGainFiles == 0 )
     {
         QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
-        data.general.numFiles = ( processors.count() > 0 ) ? processors.count() : 1;
+        const int num = processors.count() > 0 ? processors.count() : 1;
+        if( data.general.numFiles == 0 )
+            data.general.numFiles = num;
+        if( data.general.numReplayGainFiles == 0 )
+            data.general.numReplayGainFiles = num;
     }
 //     data.general.executeUserScript = group.readEntry( "executeUserScript", false );
 //     data.general.showToolBar = group.readEntry( "showToolBar", false );
@@ -475,6 +480,7 @@ void Config::save()
     group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
 //     group.writeEntry( "priority", data.general.priority );
     group.writeEntry( "numFiles", data.general.numFiles );
+    group.writeEntry( "numReplayGainFiles", data.general.numReplayGainFiles );
 //     group.writeEntry( "executeUserScript", data.general.executeUserScript );
 //     group.writeEntry( "showToolBar", data.general.showToolBar );
 //     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );

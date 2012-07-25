@@ -1,6 +1,6 @@
 
 #include "replaygainfilelistitem.h"
-#include <QResizeEvent> // NOTE needed by drag'n'drop events - but why?
+// #include <QResizeEvent> // NOTE needed by drag'n'drop events - but why?
 #include <QPainter>
 
 
@@ -10,8 +10,8 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-    take = 0;
-    processId = -1;
+//     take = 0;
+//     processId = -1;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding )
@@ -20,8 +20,8 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidget
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-    take = 0;
-    processId = -1;
+//     take = 0;
+//     processId = -1;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
@@ -30,8 +30,8 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-    take = 0;
-    processId = -1;
+//     take = 0;
+//     processId = -1;
 }
 
 ReplayGainFileListItem::~ReplayGainFileListItem()
@@ -69,7 +69,41 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
 
     QStyleOptionViewItem _option = option;
 
-    if( item->state == ReplayGainFileListItem::Processing )
+    bool isProcessing = false;
+    bool isSucceeded = false;
+    bool isFailed = false;
+    if( item )
+    {
+        switch( item->state )
+        {
+            case ReplayGainFileListItem::Waiting:
+                break;
+            case ReplayGainFileListItem::Processing:
+                isProcessing = true;
+                break;
+            case ReplayGainFileListItem::Stopped:
+                switch( item->returnCode )
+                {
+                    case ReplayGainFileListItem::Succeeded:
+                        isSucceeded = true;
+                        break;
+                    case ReplayGainFileListItem::SucceededWithProblems:
+                        isSucceeded = true;
+                        break;
+                    case ReplayGainFileListItem::StoppedByUser:
+                        break;
+                    case ReplayGainFileListItem::BackendNeedsConfiguration:
+                        isFailed = true;
+                        break;
+                    case ReplayGainFileListItem::Failed:
+                        isFailed = true;
+                        break;
+                }
+                break;
+        }
+    }
+
+    if( isProcessing )
     {
         if( option.state & QStyle::State_Selected )
         {
@@ -80,18 +114,7 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
             backgroundColor = QColor(255,234,234); // hsv:   0,  21, 255
         }
     }
-    else if( item->state == ReplayGainFileListItem::Failed )
-    {
-        if( option.state & QStyle::State_Selected )
-        {
-            backgroundColor = QColor(235,154, 49); // hsv:  34, 202, 235
-        }
-        else
-        {
-            backgroundColor = QColor(255,204,156); // hsv:  29,  99, 255
-        }
-    }
-    else if( item->state == ReplayGainFileListItem::Processed )
+    else if( isSucceeded )
     {
         if( option.state & QStyle::State_Selected )
         {
@@ -100,6 +123,17 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
         else
         {
             backgroundColor = QColor(234,255,238); // hsv: 131,  21, 255
+        }
+    }
+    else if( isFailed )
+    {
+        if( option.state & QStyle::State_Selected )
+        {
+            backgroundColor = QColor(235,154, 49); // hsv:  34, 202, 235
+        }
+        else
+        {
+            backgroundColor = QColor(255,204,156); // hsv:  29,  99, 255
         }
     }
     else

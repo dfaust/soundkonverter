@@ -786,7 +786,7 @@ int FileList::waitingCount()
     return count;
 }
 
-int FileList::convertingCount()
+int FileList::convertingCount() // TODO use Convert
 {
     int count = 0;
     FileListItem *item;

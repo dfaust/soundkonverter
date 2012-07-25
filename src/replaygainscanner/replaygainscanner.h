@@ -45,7 +45,7 @@ private slots:
 private:
     ComboButton *cAdd;
     QCheckBox *cForce;
-    ReplayGainFileList *lList;
+    ReplayGainFileList *fileList;
     QProgressBar *pProgressBar;
     KPushButton *pTagVisible;
     KPushButton *pRemoveTag;

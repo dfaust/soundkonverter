@@ -2,6 +2,7 @@
 #include "replaygainscanner.h"
 
 #include "replaygainfilelist.h"
+#include "replaygainprocessor.h"
 #include "config.h"
 #include "logger.h"
 #include "combobutton.h"
@@ -53,11 +54,11 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     cForce->setToolTip( i18n("Recalculate ReplayGain tags for files that already have ReplayGain tags set.") );
     filterBox->addWidget( cForce );
 
-    lList = new ReplayGainFileList( config, logger, widget );
-    grid->addWidget( lList, 1, 0 );
-    connect( lList, SIGNAL(processStarted()), this, SLOT(processStarted()) );
-    connect( lList, SIGNAL(processStopped()), this, SLOT(processStopped()) );
-    connect( lList, SIGNAL(updateProgress(int,int)), this, SLOT(updateProgress(int,int)) );
+    fileList = new ReplayGainFileList( config, logger, widget );
+    grid->addWidget( fileList, 1, 0 );
+    connect( fileList, SIGNAL(processStarted()), this, SLOT(processStarted()) );
+    connect( fileList, SIGNAL(processStopped()), this, SLOT(processStopped()) );
+    connect( fileList, SIGNAL(updateProgress(int,int)), this, SLOT(updateProgress(int,int)) );
 
     QHBoxLayout* progressBox = new QHBoxLayout();
     grid->addLayout( progressBox, 2, 0 );
@@ -89,6 +90,14 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     pClose->setFocus();
     buttonBox->addWidget( pClose );
     connect( pClose, SIGNAL(clicked()), this, SLOT(accept()) );
+
+    ReplayGainProcessor *replayGainProcessor = new ReplayGainProcessor( config, fileList, logger );
+    connect( fileList, SIGNAL(processItem(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)), replayGainProcessor, SLOT(add(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)) );
+    connect( fileList, SIGNAL(killItem(ReplayGainFileListItem*)), replayGainProcessor, SLOT(kill(ReplayGainFileListItem*)) );
+    connect( replayGainProcessor, SIGNAL(finished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)), fileList, SLOT(itemFinished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)) );
+
+//     connect( replayGainProcessor, SIGNAL(updateTime(float)), this, SLOT(updateTime(float)) );
+//     connect( replayGainProcessor, SIGNAL(timeFinished(float)), this, SLOT(timeFinished(float)) );
 }
 
 ReplayGainScanner::~ReplayGainScanner()
@@ -136,7 +145,7 @@ void ReplayGainScanner::showFileDialog()
 
 void ReplayGainScanner::fileDialogAccepted()
 {
-    lList->addFiles( fileDialog->selectedUrls() );
+    fileList->addFiles( fileDialog->selectedUrls() );
 }
 
 void ReplayGainScanner::showHelp()
@@ -164,7 +173,7 @@ void ReplayGainScanner::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), lList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
+        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
 
         dialog->exec();
 
@@ -176,22 +185,22 @@ void ReplayGainScanner::showDirDialog()
 
 void ReplayGainScanner::addFiles( KUrl::List urls )
 {
-    lList->addFiles( urls );
+    fileList->addFiles( urls );
 }
 
 void ReplayGainScanner::calcReplayGainClicked()
 {
-    lList->calcAllReplayGain( cForce->isChecked() );
+    fileList->startProcessing( cForce->isChecked() ? ReplayGainPlugin::Force : ReplayGainPlugin::Add );
 }
 
 void ReplayGainScanner::removeReplayGainClicked()
 {
-    lList->removeAllReplayGain();
+    fileList->startProcessing( ReplayGainPlugin::Remove );
 }
 
 void ReplayGainScanner::cancelClicked()
 {
-    lList->cancelProcess();
+    fileList->cancelProcess();
 }
 
 void ReplayGainScanner::processStarted()

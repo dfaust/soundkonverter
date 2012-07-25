@@ -70,6 +70,7 @@ public:
                 Overwrite = 2
             } conflictHandling;
             int numFiles;
+            int numReplayGainFiles;
 //             bool executeUserScript;
 //             bool showToolBar;
 //             int outputFilePermissions;

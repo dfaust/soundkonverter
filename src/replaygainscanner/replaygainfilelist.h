@@ -47,7 +47,7 @@ public:
 
     void addFiles( const KUrl::List& fileList, const QString& _codecName = "" );
 
-    void calcAllReplayGain( bool force = false );
+    void startProcessing( ReplayGainPlugin::ApplyMode _mode );
     void removeAllReplayGain();
     void cancelProcess();
 
@@ -73,11 +73,11 @@ private:
 //     bool processing;        // true, if the progress is active (hide some options in the context menu)
 
     bool queue;             // NOTE currently always true
-    bool killed;
+//     bool killed;
     ReplayGainPlugin::ApplyMode mode;
-    ReplayGainPlugin *currentPlugin;
-    int currentId;
-    int currentTime;
+//     ReplayGainPlugin *currentPlugin;
+//     int currentId;
+//     int currentTime;
 
     int totalTime;
     int processedTime;
@@ -95,9 +95,10 @@ private:
 //     KAction* paste;
     KAction *newAction;
 
-    void processNextFile();
+    void processNextItem();
+    int waitingCount();
     int processingCount();
-    void processItems( const QList<ReplayGainFileListItem*>& itemList );
+//     void processItems( const QList<ReplayGainFileListItem*>& itemList );
     void updateItem( ReplayGainFileListItem *item );
 
 public slots:
@@ -106,14 +107,20 @@ public slots:
 private slots:
     void removeSelectedItems();
     void showContextMenu( const QPoint& point );
-    void pluginProcessFinished( int id, int exitCode );
-    void pluginLog( int id, const QString& message );
     void updateProgress();
 
+    // connected to ReplayGainProcessor
+    void itemFinished( ReplayGainFileListItem *item, ReplayGainFileListItem::ReturnCode returnCode );
+
 signals:
+    // connected to ReplayGainScanner
     void processStarted();
     void processStopped();
     void updateProgress( int progress, int totalSteps );
+
+    // connected to ReplayGainProcessor
+    void processItem( ReplayGainFileListItem *item, ReplayGainPlugin::ApplyMode mode );
+    void killItem( ReplayGainFileListItem *item );
 };
 
 #endif // REPLAYGAINFILELIST_H

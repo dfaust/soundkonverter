@@ -63,6 +63,7 @@ set(soundkonverter_SRCS
    replaygainscanner/replaygainscanner.cpp
    replaygainscanner/replaygainfilelist.cpp
    replaygainscanner/replaygainfilelistitem.cpp
+   replaygainscanner/replaygainprocessor.cpp
    global.cpp
    main.cpp
    soundkonverter.cpp

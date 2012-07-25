@@ -21,7 +21,7 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     logger( _logger )
 {
     queue = false;
-    killed = false;
+//     killed = false;
 
     lastAlbumItem = 0;
 
@@ -347,15 +347,13 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
 
 void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _codecName )
 {
-    ReplayGainFileListItem *newAlbumItem, *newItem;
+    ReplayGainFileListItem *newAlbumItem, *newTrackItem;
     QString codecName;
-    QString filePathName;
-    QString device;
+//     QString filePathName;
+//     QString device;
     QStringList unsupportedList;
-    int samplingRate;
-    KUrl url;
 
-    for( int i=0; i<fileList.count(); i++ )
+    foreach( KUrl url, fileList )
     {
         if( !_codecName.isEmpty() )
         {
@@ -363,23 +361,23 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
         }
         else
         {
-            codecName = config->pluginLoader()->getCodecFromFile( fileList.at(i) );
+            codecName = config->pluginLoader()->getCodecFromFile( url );
 
             if( !config->pluginLoader()->canReplayGain(codecName,0) )
             {
-                unsupportedList.append( fileList.at(i).pathOrUrl() );
+                unsupportedList.append( url.pathOrUrl() );
                 continue;
             }
         }
 
-        TagData *tags = config->tagEngine()->readTags( fileList.at(i) );
+        TagData *tags = config->tagEngine()->readTags( url );
 
-        if( tags && tags->album.simplified() != "" )
+        if( tags && !tags->album.simplified().isEmpty() )
         {
+            const int samplingRate = tags->samplingRate;
+
             newAlbumItem = 0;
-            newItem = 0;
-            samplingRate = tags->samplingRate;
-            url = fileList.at(i);
+            newTrackItem = 0;
 
             // search for an existing album
             for( int j=0; j<topLevelItemCount(); j++ )
@@ -402,18 +400,18 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                     )
                   )
                 {
-                    newItem = new ReplayGainFileListItem( topLevelItem(j) );
-                    newItem->type = ReplayGainFileListItem::Track;
-                    newItem->codecName = codecName;
-                    newItem->url = url;
-                    newItem->tags = tags;
-                    newItem->time = tags->length;
+                    newTrackItem = new ReplayGainFileListItem( topLevelItem(j) );
+                    newTrackItem->type = ReplayGainFileListItem::Track;
+                    newTrackItem->codecName = codecName;
+                    newTrackItem->url = url;
+                    newTrackItem->tags = tags;
+                    newTrackItem->time = tags->length;
                     break;
                 }
             }
 
             // no existing album found
-            if( !newItem )
+            if( !newTrackItem )
             {
                 // create album element
                 newAlbumItem = new ReplayGainFileListItem( this, lastAlbumItem );
@@ -427,37 +425,37 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                 lastAlbumItem = newAlbumItem;
                 updateItem( newAlbumItem );
                 // create track element
-                newItem = new ReplayGainFileListItem( newAlbumItem );
-                newItem->type = ReplayGainFileListItem::Track;
-                newItem->codecName = codecName;
-                newItem->samplingRate = samplingRate;
-                newItem->url = url;
-                newItem->tags = tags;
-                newItem->time = tags->length;
+                newTrackItem = new ReplayGainFileListItem( newAlbumItem );
+                newTrackItem->type = ReplayGainFileListItem::Track;
+                newTrackItem->codecName = codecName;
+                newTrackItem->samplingRate = samplingRate;
+                newTrackItem->url = url;
+                newTrackItem->tags = tags;
+                newTrackItem->time = tags->length;
             }
         }
         else if( tags )
         {
-            newItem = new ReplayGainFileListItem( this );
-            newItem->type = ReplayGainFileListItem::Track;
-            newItem->codecName = codecName;
-            newItem->samplingRate = tags->samplingRate;
-            newItem->url = fileList.at(i);
-            newItem->tags = tags;
-            newItem->time = tags->length;
+            newTrackItem = new ReplayGainFileListItem( this );
+            newTrackItem->type = ReplayGainFileListItem::Track;
+            newTrackItem->codecName = codecName;
+            newTrackItem->samplingRate = tags->samplingRate;
+            newTrackItem->url = url;
+            newTrackItem->tags = tags;
+            newTrackItem->time = tags->length;
         }
         else
         {
-            newItem = new ReplayGainFileListItem( this );
-            newItem->type = ReplayGainFileListItem::Track;
-            newItem->codecName = codecName;
-            newItem->url = fileList.at(i);
-            newItem->time = 200;
+            newTrackItem = new ReplayGainFileListItem( this );
+            newTrackItem->type = ReplayGainFileListItem::Track;
+            newTrackItem->codecName = codecName;
+            newTrackItem->url = url;
+            newTrackItem->time = 200;
         }
 
-        totalTime += newItem->time;
+        totalTime += newTrackItem->time;
 
-        updateItem( newItem );
+        updateItem( newTrackItem );
 
 //         emit timeChanged( newItem->time );
     }
@@ -550,252 +548,343 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
     update( indexFromItem( item, 2 ) );
 }
 
-void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )
+// void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )
+// {
+//     ReplayGainFileListItem *parent = 0;
+//
+//     if( itemList.count() <= 0 )
+//         return;
+//
+//     QList<ReplayGainPipe> pipes = config->pluginLoader()->getReplayGainPipes( itemList.at(0)->codecName );
+//
+//     if( itemList.at(0)->take >= pipes.count() )
+//     {
+//         for( int i=0; i<itemList.count(); i++ )
+//         {
+//             itemList.at(i)->state = ReplayGainFileListItem::Stopped;
+//             itemList.at(i)->returnCode = ReplayGainFileListItem::Failed;
+//             updateItem( itemList.at(i) );
+//         }
+//         processNextItem();
+//         return;
+//     }
+//
+//     currentPlugin = pipes.at(itemList.at(0)->take).plugin;
+//
+//     if( !currentPlugin )
+//         return;
+//
+//     KUrl::List urls;
+//     for( int i=0; i<itemList.count(); i++ )
+//     {
+//         urls += itemList.at(i)->url;
+//     }
+//
+//     currentId = currentPlugin->apply( urls, mode );
+//
+//     currentTime = 0;
+//     for( int i=0; i<itemList.count(); i++ )
+//     {
+//         itemList.at(i)->processId = currentId;
+//         itemList.at(i)->take++;
+//         itemList.at(i)->state = ReplayGainFileListItem::Processing;
+//         updateItem( itemList.at(i) );
+//         currentTime += itemList.at(i)->time;
+//         parent = (ReplayGainFileListItem*)itemList.at(i)->parent();
+//         if( parent )
+//         {
+//             parent->state = ReplayGainFileListItem::Processing;
+//             updateItem( parent );
+//         }
+//     }
+// }
+
+void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )
 {
-    ReplayGainFileListItem *parent = 0;
-
-    if( itemList.count() <= 0 )
-        return;
-
-    QList<ReplayGainPipe> pipes = config->pluginLoader()->getReplayGainPipes( itemList.at(0)->codecName );
-
-    if( itemList.at(0)->take >= pipes.count() )
-    {
-        for( int i=0; i<itemList.count(); i++ )
-        {
-            itemList.at(i)->state = ReplayGainFileListItem::Failed;
-            updateItem( itemList.at(i) );
-        }
-        processNextFile();
-        return;
-    }
-
-    currentPlugin = pipes.at(itemList.at(0)->take).plugin;
-
-    if( !currentPlugin )
-        return;
-
-    KUrl::List urls;
-    for( int i=0; i<itemList.count(); i++ )
-    {
-        urls += itemList.at(i)->url;
-    }
-
-    currentId = currentPlugin->apply( urls, mode );
-
-    currentTime = 0;
-    for( int i=0; i<itemList.count(); i++ )
-    {
-        itemList.at(i)->processId = currentId;
-        itemList.at(i)->take++;
-        itemList.at(i)->state = ReplayGainFileListItem::Processing;
-        updateItem( itemList.at(i) );
-        currentTime += itemList.at(i)->time;
-        parent = (ReplayGainFileListItem*)itemList.at(i)->parent();
-        if( parent )
-        {
-            parent->state = ReplayGainFileListItem::Processing;
-            updateItem( parent );
-        }
-    }
-}
-
-void ReplayGainFileList::calcAllReplayGain( bool force )
-{
+    // iterate through all items and set the state to "Waiting"
     ReplayGainFileListItem *item, *child;
-
-    emit processStarted();
-
-    queue = true;
-    killed = false;
-    totalTime = 0;
-    mode = force ? ReplayGainPlugin::Force : ReplayGainPlugin::Add;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem(i);
+        item = topLevelItem( i );
         if( item->type == ReplayGainFileListItem::Track )
         {
-            item->state = ReplayGainFileListItem::Waiting;
-            item->take = 0;
-            updateItem( item );
-            totalTime += item->time;
+            bool isStopped = false;
+            if( item )
+            {
+                switch( item->state )
+                {
+                    case ReplayGainFileListItem::Waiting:
+                        break;
+                    case ReplayGainFileListItem::Processing:
+                        break;
+                    case ReplayGainFileListItem::Stopped:
+                        isStopped = true;
+                        break;
+                }
+            }
+            if( isStopped )
+            {
+                item->state = ReplayGainFileListItem::Waiting;
+                updateItem( item );
+            }
         }
         else
         {
             for( int j=0; j<item->childCount(); j++ )
             {
                 child = (ReplayGainFileListItem*)item->child(j);
-                child->state = ReplayGainFileListItem::Waiting;
-                child->take = 0;
-                updateItem( child );
-                totalTime += child->time;
+                bool isStopped = false;
+                if( child )
+                {
+                    switch( child->state )
+                    {
+                        case ReplayGainFileListItem::Waiting:
+                            break;
+                        case ReplayGainFileListItem::Processing:
+                            break;
+                        case ReplayGainFileListItem::Stopped:
+                            isStopped = true;
+                            break;
+                    }
+                }
+                if( isStopped )
+                {
+                    child->state = ReplayGainFileListItem::Waiting;
+                    updateItem( child );
+                }
             }
-            item->state = ReplayGainFileListItem::Waiting;
-            updateItem( item );
+            bool isStopped = false;
+            if( item )
+            {
+                switch( item->state )
+                {
+                    case ReplayGainFileListItem::Waiting:
+                        break;
+                    case ReplayGainFileListItem::Processing:
+                        break;
+                    case ReplayGainFileListItem::Stopped:
+                        isStopped = true;
+                        break;
+                }
+            }
+            if( isStopped )
+            {
+                item->state = ReplayGainFileListItem::Waiting;
+                updateItem( item );
+            }
         }
+
     }
-    processedTime = 0;
-    updateTimer.start( ConfigUpdateDelay );
-    processNextFile();
-}
 
-void ReplayGainFileList::removeAllReplayGain()
-{
-    ReplayGainFileListItem *item, *child;
+    mode = _mode;
+    queue = true;
 
+//     emit queueModeChanged( queue );
     emit processStarted();
 
-    queue = true;
-    killed = false;
-    totalTime = 0;
-    mode = ReplayGainPlugin::Remove;
-    for( int i=0; i<topLevelItemCount(); i++ )
-    {
-        item = topLevelItem(i);
-        if( item->type == ReplayGainFileListItem::Track )
-        {
-            item->state = ReplayGainFileListItem::Waiting;
-            item->take = 0;
-            updateItem( item );
-            totalTime += item->time;
-        }
-        else
-        {
-            for( int j=0; j<item->childCount(); j++ )
-            {
-                child = (ReplayGainFileListItem*)item->child(j);
-                child->state = ReplayGainFileListItem::Waiting;
-                child->take = 0;
-                updateItem( child );
-                totalTime += child->time;
-            }
-            item->state = ReplayGainFileListItem::Waiting;
-            updateItem( item );
-        }
-    }
-    processedTime = 0;
-    updateTimer.start( ConfigUpdateDelay );
-    processNextFile();
+    processNextItem();
 }
 
 void ReplayGainFileList::cancelProcess()
 {
-    ReplayGainFileListItem *item, *child;
+    queue = false;
+//     emit queueModeChanged( queue );
+//     killed = true;
 
+    ReplayGainFileListItem *item, *child;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem(i);
+        item = topLevelItem( i );
         if( item->type == ReplayGainFileListItem::Track )
         {
-            if( item->state == ReplayGainFileListItem::Processing )
+            bool canKill = false;
+            if( item )
             {
-                currentPlugin->kill( item->processId );
+                switch( item->state )
+                {
+                    case ReplayGainFileListItem::Waiting:
+                        break;
+                    case ReplayGainFileListItem::Processing:
+                        canKill = true;
+                        break;
+                    case ReplayGainFileListItem::Stopped:
+                        break;
+                }
             }
+            if( canKill )
+                emit killItem( item );
         }
         else
         {
-            child = (ReplayGainFileListItem*)item->child(0);
-            if( child->state == ReplayGainFileListItem::Processing )
+            bool canKill = false;
+            if( item )
             {
-                currentPlugin->kill( child->processId );
+                switch( item->state )
+                {
+                    case ReplayGainFileListItem::Waiting:
+                        break;
+                    case ReplayGainFileListItem::Processing:
+                        canKill = true;
+                        break;
+                    case ReplayGainFileListItem::Stopped:
+                        break;
+                }
+            }
+            if( canKill )
+            {
+                emit killItem( item );
+            }
+            else
+            {
+                for( int j=0; j<item->childCount(); j++ )
+                {
+                    child = (ReplayGainFileListItem*)item->child(j);
+                    bool canKill = false;
+                    if( child )
+                    {
+                        switch( child->state )
+                        {
+                            case ReplayGainFileListItem::Waiting:
+                                break;
+                            case ReplayGainFileListItem::Processing:
+                                canKill = true;
+                                break;
+                            case ReplayGainFileListItem::Stopped:
+                                break;
+                        }
+                    }
+                    if( canKill )
+                        emit killItem( child );
+                }
             }
         }
+
+        bool canKill = false;
+        if( item )
+        {
+            switch( item->state )
+            {
+                case ReplayGainFileListItem::Waiting:
+                    break;
+                case ReplayGainFileListItem::Processing:
+                    canKill = true;
+                    break;
+                case ReplayGainFileListItem::Stopped:
+                    break;
+            }
+        }
+        if( canKill )
+            emit killItem( item );
     }
-    killed = true;
-    queue = false;
 }
 
-void ReplayGainFileList::processNextFile()
+void ReplayGainFileList::processNextItem()
 {
+    if( !queue )
+        return;
+
     int count = processingCount();
 
-    if( !queue )
-    {
-        if( count <= 0 )
-        {
-            updateTimer.stop();
-            emit processStopped();
-        }
-        return;
-    }
-
-    QList<ReplayGainFileListItem*> itemList;
-    bool calcGain;
-
-    for( int i=0; i<topLevelItemCount() && count<config->data.general.numFiles; i++ )
+    // look for waiting files
+    for( int i=0; i<topLevelItemCount() && count < config->data.general.numReplayGainFiles; i++ )
     {
         ReplayGainFileListItem *item = topLevelItem(i);
 
-        calcGain = false;
-        itemList.clear();
+        bool calcGain = false;
 
         if( item->state != ReplayGainFileListItem::Waiting )
             continue;
 
         if( item->type == ReplayGainFileListItem::Track )
         {
-            itemList += item;
             if( mode == ReplayGainPlugin::Force || mode == ReplayGainPlugin::Remove || !item->tags || item->tags->track_gain == 210588 || item->tags->album_gain == 210588 )
                 calcGain = true;
         }
         else
         {
+            bool albumGainDifferent = false;
+            bool childProcessing = false;
+
             float albumGain = 210588;
             for( int j=0; j<item->childCount(); j++ )
             {
                 ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
                 if( child->state != ReplayGainFileListItem::Waiting )
-                    continue;
+                {
+                    childProcessing = true;
+                    break;
+                }
 
                 if( j == 0 && child->tags )
                     albumGain = child->tags->album_gain;
 
-                itemList += child;
-                if( mode == ReplayGainPlugin::Force || mode == ReplayGainPlugin::Remove || !child->tags || child->tags->album_gain != albumGain || child->tags->album_gain == 210588 )
-                    calcGain = true;
-//                 if( child->state == ReplayGainFileListItem::Processing ) { itemList.clear(); break; } // NOTE this would be possible if per file calaculation would be possible
+                if( !child->tags || child->tags->album_gain != albumGain || child->tags->album_gain == 210588 )
+                {
+                    albumGainDifferent = true;
+                    break;
+                }
             }
-        }
 
-//         // why?
-//         if( !calcGain )
-//         {
-//             for( int j=0; j<item->childCount(); j++ )
-//             {
-//                 ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
-//                 child->state = ReplayGainFileListItem::Processed;
-//                 updateItem( child );
-//                 processedTime += child->time;
-//             }
-//             item->state = ReplayGainFileListItem::Processed;
-//             updateItem( item );
-//             if( item->type == ReplayGainFileListItem::Track )
-//                 processedTime += item->time;
-//         }
-//         else
-//         {
-//             count++;
-//             processItems( itemList );
-//             return;
-//         }
+            if( mode == ReplayGainPlugin::Force || mode == ReplayGainPlugin::Remove || ( !childProcessing && albumGainDifferent ) )
+                calcGain = true;
+        }
 
         if( calcGain )
         {
+            if( item->type == ReplayGainFileListItem::Album )
+            {
+                for( int j=0; j<item->childCount(); j++ )
+                {
+                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                    child->state = ReplayGainFileListItem::Processing;
+                    updateItem( child );
+                }
+            }
+            item->state = ReplayGainFileListItem::Processing;
+            updateItem( item );
+
             count++;
-            processItems( itemList );
-            return;
+            emit processItem( item, mode );
+        }
+        else
+        {
+            if( item->type == ReplayGainFileListItem::Album )
+            {
+                for( int j=0; j<item->childCount(); j++ )
+                {
+                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                    if( child->state == ReplayGainFileListItem::Waiting )
+                    {
+                        child->state = ReplayGainFileListItem::Stopped;
+                        child->returnCode = ReplayGainFileListItem::Skipped;
+                    }
+                }
+            }
+            item->state = ReplayGainFileListItem::Stopped;
+            item->returnCode = ReplayGainFileListItem::Skipped;
         }
     }
 
-    if( count <= 0 )
-    {
-        queue = false;
-        updateTimer.stop();
-        emit processStopped();
-    }
+    if( count == 0 )
+        itemFinished( 0, ReplayGainFileListItem::Succeeded );
 }
 
-int ReplayGainFileList::processingCount()
+int ReplayGainFileList::waitingCount()
+{
+    int count = 0;
+    ReplayGainFileListItem *item;
+
+    for( int i=0; i<topLevelItemCount(); i++ )
+    {
+        item = topLevelItem( i );
+        if( item->state == ReplayGainFileListItem::Waiting )
+            count++;
+    }
+
+    return count;
+}
+
+int ReplayGainFileList::processingCount() // TODO use ReplayGainProcessor
 {
     ReplayGainFileListItem *item, *child;
     int count = 0;
@@ -803,19 +892,27 @@ int ReplayGainFileList::processingCount()
     for( int i=0; i<topLevelItemCount(); i++ )
     {
         item = topLevelItem(i);
-        if( item->type == ReplayGainFileListItem::Track && item->state == ReplayGainFileListItem::Processing )
+        if( item->type == ReplayGainFileListItem::Track )
         {
-            count++;
+            if( item->state == ReplayGainFileListItem::Processing )
+                count++;
         }
         else if( item->type == ReplayGainFileListItem::Album )
         {
-            for( int j=0; j<item->childCount(); j++ )
+            if( item->state == ReplayGainFileListItem::Processing )
             {
-                child = (ReplayGainFileListItem*)item->child(j);
-                if( child->state == ReplayGainFileListItem::Processing )
+                count++;
+            }
+            else
+            {
+                for( int j=0; j<item->childCount(); j++ )
                 {
-                    count++;
-                    break;
+                    child = (ReplayGainFileListItem*)item->child(j);
+                    if( child->state == ReplayGainFileListItem::Processing )
+                    {
+                        count++;
+                        break;
+                    }
                 }
             }
         }
@@ -824,101 +921,49 @@ int ReplayGainFileList::processingCount()
     return count;
 }
 
-void ReplayGainFileList::pluginProcessFinished( int id, int exitCode )
+void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainFileListItem::ReturnCode returnCode )
 {
-    ReplayGainFileListItem *item, *child;
-//     int processedCount;
-
-    for( int i=0; i<topLevelItemCount(); i++ )
+    if( item )
     {
-        item = topLevelItem(i);
-        if( item->type == ReplayGainFileListItem::Track && item->processId == id )
+        item->state = ReplayGainFileListItem::Stopped;
+        item->returnCode = returnCode;
+        updateItem( item );
+        if( item->type == ReplayGainFileListItem::Album )
         {
-            item->processId = -1;
-            if( killed )
-            {
-                item->state = ReplayGainFileListItem::Waiting;
-            }
-            else if( exitCode == 0 )
-            {
-                item->state = ReplayGainFileListItem::Processed;
-            }
-            else
-            {
-                item->state = ReplayGainFileListItem::Waiting;
-            }
-            item->tags = config->tagEngine()->readTags( item->url );
-            updateItem( item );
-            processedTime += item->time;
-            break;
-        }
-        else if( item->type == ReplayGainFileListItem::Album )
-        {
-//             processedCount = 0;
-            bool updateParent = false;
             for( int j=0; j<item->childCount(); j++ )
             {
-                child = (ReplayGainFileListItem*)item->child(j);
-                if( child->processId == id )
-                {
-                    child->processId = -1;
-                    if( killed )
-                    {
-                        child->state = ReplayGainFileListItem::Waiting;
-                    }
-                    else if( exitCode == 0 )
-                    {
-                        child->state = ReplayGainFileListItem::Processed;
-//                         item->state = ReplayGainFileListItem::Processed;
-                    }
-                    else
-                    {
-                        child->state = ReplayGainFileListItem::Waiting;
-//                         item->state = ReplayGainFileListItem::Waiting;
-                    }
-                    child->tags = config->tagEngine()->readTags( child->url );
-                    updateItem( child );
-                    processedTime += child->time;
-//                     processedCount++;
-                    updateParent = true;
-                }
-            }
-//             if( processedCount == item->childCount() )
-            if( updateParent )
-            {
-                if( killed )
-                {
-                    item->state = ReplayGainFileListItem::Waiting;
-                }
-                else if( exitCode == 0 )
-                {
-                    item->state = ReplayGainFileListItem::Processed;
-                }
-                else
-                {
-                    item->state = ReplayGainFileListItem::Waiting;
-                }
-                updateItem( item );
-                break;
+                ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                child->state = ReplayGainFileListItem::Stopped;
+                child->returnCode = returnCode;
+                updateItem( child );
             }
         }
     }
-    processNextFile();
-}
 
-void ReplayGainFileList::pluginLog( int id, const QString& message )
-{
-    Q_UNUSED( id )
-
-    logger->log( 1000, "\t" + message.trimmed().replace("\n","\n\t") );
+    if( waitingCount() > 0 && queue )
+    {
+        processNextItem();
+    }
+    else if( processingCount() == 0 )
+    {
+        queue = false;
+//         emit queueModeChanged( queue );
+//         float time = 0;
+//         for( int i=0; i<topLevelItemCount(); i++ )
+//         {
+//             FileListItem *temp_item = topLevelItem( i );
+//             updateItem( temp_item ); // TODO why?
+//             time += temp_item->length;
+//         }
+//         emit finished( time );
+        emit processStopped();
+//         emit fileCountChanged( topLevelItemCount() );
+    }
 }
 
 void ReplayGainFileList::showContextMenu( const QPoint& point )
 {
     ReplayGainFileListItem *item = (ReplayGainFileListItem*)itemAt( point );
-
-    // if item is null, we can abort here
-    //if( !item ) return;
 
     // add a tilte to our context manu
     //contextMenu->insertTitle( static_cast<FileListItem*>(item)->fileName ); // TODO sqeeze or something else
@@ -956,7 +1001,7 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 
 void ReplayGainFileList::updateProgress()
 {
-    float progress = currentPlugin->progress( currentId );
-    progress /= 100;
-    emit updateProgress( processedTime + progress*currentTime, totalTime );
+//     float progress = currentPlugin->progress( currentId );
+//     progress /= 100;
+//     emit updateProgress( processedTime + progress*currentTime, totalTime );
 }

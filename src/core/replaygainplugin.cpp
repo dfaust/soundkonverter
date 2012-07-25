@@ -21,9 +21,7 @@ ReplayGainPluginItem::~ReplayGainPluginItem()
 
 ReplayGainPlugin::ReplayGainPlugin( QObject *parent )
     : BackendPlugin( parent )
-{
-    lastId = 0;
-}
+{}
 
 ReplayGainPlugin::~ReplayGainPlugin()
 {}

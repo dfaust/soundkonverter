@@ -4,6 +4,7 @@
 #define LOGGER_H
 
 #include "filelistitem.h"
+#include "replaygainscanner/replaygainfilelistitem.h"
 
 #include <QStringList>
 #include <QTime>
@@ -78,6 +79,7 @@ private:
 
 public slots:
     void processCompleted( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain );
+    void processCompleted( int id, ReplayGainFileListItem::ReturnCode returnCode ); // TODO combine with slot above
     /// connected to config
     void updateWriteSetting( bool _writeLogFiles );
 

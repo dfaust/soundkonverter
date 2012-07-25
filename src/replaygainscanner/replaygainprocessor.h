@@ -99,6 +99,10 @@ signals:
     /** The conversion of an item has finished and the state is reported */
     void finished( ReplayGainFileListItem *fileListItem, ReplayGainFileListItem::ReturnCode returnCode );
 
+    // connected to Logger
+    /** Tell the logger that the process has finished */
+    void finishedProcess( int id, ReplayGainFileListItem::ReturnCode returnCode );
+
     // connected to ProgressIndicator
     void updateTime( float );
     void timeFinished( float );

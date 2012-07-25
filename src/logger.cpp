@@ -202,6 +202,11 @@ void Logger::processCompleted( int id, FileListItem::ReturnCode returnCode, bool
     }
 }
 
+void Logger::processCompleted( int id, ReplayGainFileListItem::ReturnCode returnCode )
+{
+    processCompleted( id, FileListItem::Succeeded, false );
+}
+
 void Logger::updateWriteSetting( bool _writeLogFiles )
 {
     writeLogFiles = _writeLogFiles;

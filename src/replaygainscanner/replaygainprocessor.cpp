@@ -230,6 +230,8 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
 
 void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileListItem::ReturnCode returnCode )
 {
+    pluginLog( 0, "" );
+
     QString exitMessage;
 
     if( returnCode == ReplayGainFileListItem::Succeeded && item->take > 0 )
@@ -256,6 +258,7 @@ void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileL
     emit timeFinished( item->fileListItem->time );
 
     emit finished( item->fileListItem, returnCode ); // send signal to FileList
+    emit finishedProcess( item->logID, returnCode ); // send signal to Logger
 
     items.removeAll( item );
     delete item;

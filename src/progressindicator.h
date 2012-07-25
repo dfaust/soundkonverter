@@ -18,15 +18,15 @@ class ProgressIndicator : public QWidget
 {
     Q_OBJECT
 public:
-    /**
-     * Constructor
-     */
-    ProgressIndicator( QWidget* parent = 0 );
+    enum Feature
+    {
+        FeatureNone  = 0,
+        FeatureSpeed = 1,
+        FeatureTime  = 2
+    };
 
-    /**
-     * Destructor
-     */
-    virtual ~ProgressIndicator();
+    ProgressIndicator( QWidget *parent = 0, Feature features = FeatureNone );
+    ~ProgressIndicator();
 
 public slots:
     void timeChanged( float timeDelta );
@@ -38,9 +38,9 @@ public slots:
 //private slots:
 
 private:
-    QProgressBar* pBar;
-    QLabel* lSpeed;
-    QLabel* lTime;
+    QProgressBar *pBar;
+    QLabel *lSpeed;
+    QLabel *lTime;
 
     QTime elapsedTime;
     QTime speedTime;

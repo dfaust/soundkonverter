@@ -120,7 +120,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
     addBox->addSpacing( 10 );
 
-    progressIndicator = new ProgressIndicator( /*systemTrayIcon,*/ this );
+    progressIndicator = new ProgressIndicator( this, ProgressIndicator::Feature( ProgressIndicator::FeatureSpeed | ProgressIndicator::FeatureTime ) );
     addBox->addWidget( progressIndicator );
     connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SIGNAL(progressChanged(const QString&)) );
     connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );

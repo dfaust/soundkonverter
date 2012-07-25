@@ -216,6 +216,14 @@ void Convert::convert( ConvertItem *item )
 
             logger->log( item->logID, i18n("Converting") );
             item->state = ConvertItem::convert;
+            // merge all conversion times into one since we are doing everything in one step
+            float time = 0.0f;
+            foreach( float t, item->convertTimes )
+            {
+                time += t;
+            }
+            item->convertTimes.clear();
+            item->convertTimes.append( time );
             item->conversionPipesStep = 0;
             logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command + "</span></pre>" );
             item->process = new KProcess();
@@ -576,6 +584,7 @@ void Convert::executeNextStep( ConvertItem *item )
 void Convert::executeSameStep( ConvertItem *item )
 {
     item->take++;
+    item->updateTimes();
     item->progress = 0.0f;
 
     if( item->internalReplayGainUsed )
@@ -1148,7 +1157,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     logger->log( item->logID, "\t" + i18n("Output file size") + ": " + Global::prettyNumber(outputFileInfo.size(),"B") );
     logger->log( item->logID, "\t" + i18n("File size ratio") + ": " + Global::prettyNumber(fileRatio*100,"%") );
 
-    emit timeFinished( item->finishedTime );
+    emit timeFinished( item->fileListItem->length );
 
     if( item->process.data() )
         item->process.data()->deleteLater();

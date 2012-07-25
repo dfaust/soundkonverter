@@ -18,7 +18,6 @@
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
-#include <QProgressBar>
 #include <QStringList>
 
 // FIXME file name encoding !!!
@@ -59,18 +58,15 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     grid->addWidget( fileList, 1, 0 );
     connect( fileList, SIGNAL(processStarted()), this, SLOT(processStarted()) );
     connect( fileList, SIGNAL(processStopped()), this, SLOT(processStopped()) );
-//     connect( fileList, SIGNAL(updateProgress(int,int)), this, SLOT(updateProgress(int,int)) );
 
     QHBoxLayout* progressBox = new QHBoxLayout();
     grid->addLayout( progressBox, 2, 0 );
 
-//     pProgressBar = new QProgressBar( widget );
-//     progressBox->addWidget( pProgressBar );
-
-    progressIndicator = new ProgressIndicator( /*systemTrayIcon,*/ this );
+    progressIndicator = new ProgressIndicator( this );
     progressBox->addWidget( progressIndicator );
     connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
     connect( fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );
+    connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)) );
 
 
     QHBoxLayout* buttonBox = new QHBoxLayout();
@@ -105,8 +101,6 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
 
     connect( replayGainProcessor, SIGNAL(finishedProcess(int,ReplayGainFileListItem::ReturnCode)), logger, SLOT(processCompleted(int,ReplayGainFileListItem::ReturnCode)) );
 
-//     connect( replayGainProcessor, SIGNAL(updateTime(float)), this, SLOT(updateTime(float)) );
-//     connect( replayGainProcessor, SIGNAL(timeFinished(float)), this, SLOT(timeFinished(float)) );
     connect( replayGainProcessor, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( replayGainProcessor, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 }
@@ -228,17 +222,10 @@ void ReplayGainScanner::processStopped()
     pCancel->hide();
 //     pProgressBar->setMaximum( 100 );
 //     pProgressBar->setValue( 100 );
-    setCaption( i18n("Finished") + " - " + i18n("Replay Gain tool") );
+//     setCaption( i18n("Finished") + " - " + i18n("Replay Gain tool") );
 }
 
-// void ReplayGainScanner::updateProgress( int progress, int totalSteps )
-// {
-//     pProgressBar->setMaximum( totalSteps );
-//     pProgressBar->setValue( progress );
-//     const float fPercent = totalSteps > 0 ? progress * 100 / totalSteps : 0;
-//
-//     QString percent;
-//     percent.sprintf( "%i%%", (int)fPercent );
-//     setCaption( percent + " - " + i18n("Replay Gain tool") );
-// }
-
+void ReplayGainScanner::progressChanged( const QString& progress )
+{
+    setCaption( progress + " - " + i18n("Replay Gain tool") );
+}

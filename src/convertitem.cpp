@@ -75,7 +75,7 @@ void ConvertItem::updateTimes()
     replaygainTime = ( mode & ConvertItem::replaygain ) ? 0.2f : 0.0f;
     totalTime += replaygainTime;
 
-    const float length = fileListItem ? fileListItem->length : 0;
+    const float length = fileListItem ? fileListItem->length : 200.0f;
 
     getTime *= length/totalTime;
     for( int i=0; i<convertTimes.count(); i++ )
@@ -85,5 +85,25 @@ void ConvertItem::updateTimes()
     replaygainTime *= length/totalTime;
 
     finishedTime = 0.0f;
+//     switch( state )
+//     {
+//         case ConvertItem::get:
+//             break;
+//         case ConvertItem::convert:
+//             finishedTime += getTime;
+//             break;
+//         case ConvertItem::rip:
+//             finishedTime += getTime;
+//             break;
+//         case ConvertItem::decode:
+//             finishedTime += getTime;
+//             break;
+//         case ConvertItem::filter:
+//             finishedTime += getTime;
+//             finishedTime += convertTimes.at(0);
+//             break;
+//         case ConvertItem::encode:
+//         case ConvertItem::replaygain:
+//     }
 }
 

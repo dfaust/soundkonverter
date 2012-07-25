@@ -55,7 +55,7 @@ soundKonverter::soundKonverter()
     m_view = new soundKonverterView( logger, config, cdManager, this );
     connect( m_view, SIGNAL(signalConversionStarted()), this, SLOT(conversionStarted()) );
     connect( m_view, SIGNAL(signalConversionStopped(bool)), this, SLOT(conversionStopped(bool)) );
-    connect( m_view, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(QString)) );
+    connect( m_view, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)) );
     connect( m_view, SIGNAL(showLog(int)), this, SLOT(showLogViewer(int)) );
 
     // tell the KXmlGuiWindow that this is indeed the main widget

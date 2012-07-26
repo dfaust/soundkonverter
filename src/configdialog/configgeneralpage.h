@@ -44,6 +44,7 @@ private:
     KIntSpinBox *iNumFiles;
     QCheckBox *cWaitForAlbumGain;
     KComboBox *cReplayGainGrouping;
+    KIntSpinBox *iNumReplayGainFiles;
 
     Config *config;
 

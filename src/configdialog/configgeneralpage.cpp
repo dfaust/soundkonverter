@@ -33,6 +33,8 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     : ConfigPageBase( parent ),
     config( _config )
 {
+    const int processorsCount = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString()).count();
+
     QVBoxLayout *box = new QVBoxLayout( this );
 
     QFont groupFont;
@@ -131,9 +133,9 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( numFilesBox );
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once")+":", this );
     numFilesBox->addWidget( lNumFiles );
-    iNumFiles = new KIntSpinBox( 1, 100, 1, 3, this );
-    QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
-    iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processors.count()) );
+    iNumFiles = new KIntSpinBox( this );
+    iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
+    iNumFiles->setRange( 1, 100 );
     iNumFiles->setValue( config->data.general.numFiles );
     numFilesBox->addWidget( iNumFiles );
     connect( iNumFiles, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()) );
@@ -172,6 +174,22 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *numReplayGainFilesBox = new QHBoxLayout();
+    numReplayGainFilesBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( numReplayGainFilesBox );
+    QLabel *lNumReplayGainFiles = new QLabel( i18n("Number of items to process at once:"), this );
+    numReplayGainFilesBox->addWidget( lNumReplayGainFiles );
+    iNumReplayGainFiles = new KIntSpinBox( this );
+    iNumReplayGainFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
+    iNumReplayGainFiles->setRange( 1, 100 );
+    iNumReplayGainFiles->setValue( config->data.general.numReplayGainFiles );
+    numReplayGainFilesBox->addWidget( iNumReplayGainFiles );
+    connect( iNumReplayGainFiles, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()) );
+    numReplayGainFilesBox->setStretch( 0, 3 );
+    numReplayGainFilesBox->setStretch( 1, 1 );
+
     box->addStretch();
 }
 
@@ -180,15 +198,17 @@ ConfigGeneralPage::~ConfigGeneralPage()
 
 void ConfigGeneralPage::resetDefaults()
 {
+    const int processorsCount = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString()).count();
+
     cStartTab->setCurrentIndex( 0 );
     cDefaultProfile->setCurrentIndex( 0 );
     cDefaultFormat->setCurrentIndex( 0 );
 //     cPriority->setCurrentIndex( 1 );
     cConflictHandling->setCurrentIndex( 0 );
-    QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
-    iNumFiles->setValue( ( processors.count() > 0 ) ? processors.count() : 1 );
+    iNumFiles->setValue( processorsCount > 0 ? processorsCount : 1 );
     cWaitForAlbumGain->setChecked( true );
     cReplayGainGrouping->setCurrentIndex( 0 );
+    iNumReplayGainFiles->setValue( processorsCount > 0 ? processorsCount : 1 );
 
     emit configChanged( true );
 }
@@ -203,6 +223,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.waitForAlbumGain = cWaitForAlbumGain->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
+    config->data.general.numReplayGainFiles = iNumReplayGainFiles->value();
 }
 
 void ConfigGeneralPage::somethingChanged()
@@ -213,7 +234,8 @@ void ConfigGeneralPage::somethingChanged()
                          cConflictHandling->currentIndex() != (int)config->data.general.conflictHandling ||
                          iNumFiles->value() != config->data.general.numFiles ||
                          cWaitForAlbumGain->isChecked() != config->data.general.waitForAlbumGain ||
-                         cReplayGainGrouping->currentIndex() != (int)config->data.general.replayGainGrouping;
+                         cReplayGainGrouping->currentIndex() != (int)config->data.general.replayGainGrouping ||
+                         iNumReplayGainFiles->value() != config->data.general.numReplayGainFiles;
 
     emit configChanged( changed );
 }

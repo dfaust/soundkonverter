@@ -10,8 +10,6 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-//     take = 0;
-//     processId = -1;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding )
@@ -20,8 +18,6 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidget
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-//     take = 0;
-//     processId = -1;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
@@ -30,13 +26,12 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
     state = Waiting;
     tags = 0;
     samplingRate = 0;
-//     take = 0;
-//     processId = -1;
 }
 
 ReplayGainFileListItem::~ReplayGainFileListItem()
 {
-//     if( tags ) delete tags;
+    if( tags )
+        delete tags;
 }
 
 // void ReplayGainFileListItem::dragEnterEvent( QDragEnterEvent *event )

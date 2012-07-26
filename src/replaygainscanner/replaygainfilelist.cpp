@@ -105,10 +105,11 @@ void ReplayGainFileList::dragMoveEvent( QDragMoveEvent *event )
 
 void ReplayGainFileList::dropEvent( QDropEvent *event )
 {
-    QList<QUrl> q_urls = event->mimeData()->urls();
+    const QList<QUrl> q_urls = event->mimeData()->urls();
     KUrl::List k_urls;
     KUrl::List k_urls_dirs;
     QStringList errorList;
+    //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
 
@@ -173,18 +174,18 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
     }
     else
     {
-        for( int i=0; i<q_urls.size(); i++ )
+        foreach( QUrl url, q_urls )
         {
             QString mimeType;
-            QString codecName = config->pluginLoader()->getCodecFromFile( q_urls.at(i), &mimeType );
+            QString codecName = config->pluginLoader()->getCodecFromFile( url, &mimeType );
 
-            if( codecName == "inode/directory" )
+            if( mimeType == "inode/directory" )
             {
-                k_urls_dirs += q_urls.at(i);
+                k_urls_dirs += url;
             }
             else if( config->pluginLoader()->canReplayGain(codecName,0,&errorList) )
             {
-                k_urls += q_urls.at(i);
+                k_urls += url;
             }
             else
             {
@@ -203,7 +204,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
                 )
                     continue;
 
-                fileName = KUrl(q_urls.at(i)).pathOrUrl();
+                fileName = KUrl(url).pathOrUrl();
 
                 if( codecName.isEmpty() )
                     codecName = mimeType;
@@ -276,9 +277,9 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         {
             addFiles( k_urls );
         }
-        for( int i=0; i<k_urls_dirs.count(); i++ )
+        foreach( KUrl url, k_urls_dirs )
         {
-            addDir( k_urls_dirs.at(i), true, config->pluginLoader()->formatList(PluginLoader::ReplayGain,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
+            addDir( url, true, config->pluginLoader()->formatList(PluginLoader::ReplayGain,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
         }
 
         event->acceptProposedAction();

@@ -48,9 +48,6 @@ public:
 
     int time;
 
-//     int processId;
-//     int take;
-
 // private:
 //     void dragEnterEvent( QDragEnterEvent *event );
 //     void dragMoveEvent( QDragMoveEvent *event );

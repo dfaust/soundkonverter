@@ -1,6 +1,7 @@
 1.9.80 (2.0.0 beta1):
 -Add: Parallel ReplayGain calculation in the ReplayGain tool
 -Fix: Handle internal ReplayGain calculation properly
+-Fix: Drop directories onto the ReplayGain tool window
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

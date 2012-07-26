@@ -99,7 +99,7 @@ void ReplayGainFileList::dragEnterEvent( QDragEnterEvent *event )
 
 void ReplayGainFileList::dragMoveEvent( QDragMoveEvent *event )
 {
-    if( itemAt(event->pos()) && itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type != ReplayGainFileListItem::Track )
+    if( itemAt(event->pos()) && static_cast<ReplayGainFileListItem*>(itemAt(event->pos()))->type != ReplayGainFileListItem::Track )
         QTreeWidget::dragMoveEvent(event);
 }
 
@@ -118,47 +118,9 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         QTreeWidgetItem *destination = itemAt(event->pos());
 
         if( !destination || static_cast<ReplayGainFileListItem*>(destination)->type != ReplayGainFileListItem::Track )
-        {
-//             QList<QTreeWidgetItem*> parents;
-//             QList<QTreeWidgetItem*> children = selectedItems();
-//             for( int i=0; i<children.count(); i++ )
-//             {
-//                 if( children.at(i)->parent() && static_cast<ReplayGainFileListItem*>(children.at(i))->parent()->type()==ReplayGainFileListItem::Album )
-//                 {
-//                     parents += children.at(i)->parent();
-//                 }
-//             }
             QTreeWidget::dropEvent(event);
-//             for( int i=0; i<parents.count(); i++ )
-//             {
-//                 if( parents.at(i)->childCount() == 0 )
-//                 {
-//                     delete parents.at(i);
-//                 }
-//             }
-        }
-//         else if( destination && static_cast<ReplayGainFileListItem*>(destination)->type==ReplayGainFileListItem::Track )
-//         {
-//             QList<QTreeWidgetItem*> sources = selectedItems();
-//             for( int i=0; i<sources.count(); i++ )
-//             {
-//                 if( sources.at(i)->parent() && static_cast<ReplayGainFileListItem*>(sources.at(i))->parent()->type()==ReplayGainFileListItem::Album )
-//                 {
-//                     for( int j=0; j<sources.at(i)->parent()->childCount(); j++ )
-//                     {
-//                         if( sources.at(i)->parent()->child(j) == sources.at(i) ) destination->parent()->addChild( sources.at(i)->parent()->takeChild(j) );
-//                     }
-//                 }
-//                 else
-//                 {
-//                     for( int j=0; j<topLevelItemCount(); j++ )
-//                     {
-//                         if( topLevelItem(j) == sources.at(i) ) destination->parent()->addChild( takeTopLevelItem(j) );
-//                     }
-//                 }
-//             }
-//         }
 
+        // remove album, if last child was dragged out of it
         for( int i=0; i<topLevelItemCount(); i++ )
         {
             ReplayGainFileListItem *item = topLevelItem(i);
@@ -514,8 +476,8 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
 
     if( item->type == ReplayGainFileListItem::Album )
     {
-        const QString identificator = config->data.general.replayGainGrouping == Config::Data::General::Directory ? item->url.pathOrUrl().right(item->url.pathOrUrl().length()-item->url.pathOrUrl().lastIndexOf("/")-1) : item->albumName;
-        item->setText( Column_File, identificator + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
+        const QString identifier = config->data.general.replayGainGrouping == Config::Data::General::Directory ? item->url.pathOrUrl().right(item->url.pathOrUrl().length()-item->url.pathOrUrl().lastIndexOf("/")-1) : item->albumName;
+        item->setText( Column_File, identifier + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
     }
     else
     {

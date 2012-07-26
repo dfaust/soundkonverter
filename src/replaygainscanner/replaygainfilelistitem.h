@@ -47,12 +47,6 @@ public:
     QPointer<TagData> tags;
 
     int time;
-
-// private:
-//     void dragEnterEvent( QDragEnterEvent *event );
-//     void dragMoveEvent( QDragMoveEvent *event );
-//     void dropEvent( QDropEvent *event );
-
 };
 
 class ReplayGainFileListItemDelegate : public QItemDelegate

@@ -65,18 +65,17 @@ void LogViewer::refillLogs()
 
     cItem->clear();
 
-    QList<LoggerItem*> logs = logger->getLogs();
-    for( QList<LoggerItem*>::Iterator a = logs.begin(); a != logs.end(); ++a )
+    foreach( LoggerItem *log, logger->getLogs() )
     {
-        QString name = (*a)->filename.pathOrUrl();
+        QString name = log->identifier;
         // TODO make the string width dependend on the window width
         if( name.length() > 73 )
             name = name.left(35) + "..." + name.right(35);
 
-        if( (*a)->id == 1000 )
-            cItem->addItem( i18n("soundKonverter application log"), QVariant((*a)->id) );
+        if( log->id == 1000 )
+            cItem->addItem( i18n("soundKonverter application log"), QVariant(log->id) );
         else
-            cItem->addItem( name, QVariant((*a)->id) );
+            cItem->addItem( name, QVariant(log->id) );
     }
 
     if( cItem->findData(currentProcess) != -1 )

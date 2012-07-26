@@ -34,20 +34,6 @@ ReplayGainFileListItem::~ReplayGainFileListItem()
         delete tags;
 }
 
-// void ReplayGainFileListItem::dragEnterEvent( QDragEnterEvent *event )
-// {
-//     if( event->mimeData()->hasFormat("text/uri-list") ) event->acceptProposedAction();
-// }
-//
-// void ReplayGainFileListItem::dragMoveEvent( QDragMoveEvent *event )
-// {
-//     if( 1 ) event->acceptProposedAction();
-// }
-//
-// void ReplayGainFileListItem::dropEvent( QDropEvent *event )
-// {
-//     event->acceptProposedAction();
-// }
 
 ReplayGainFileListItemDelegate::ReplayGainFileListItemDelegate( QObject *parent )
     : QItemDelegate( parent )

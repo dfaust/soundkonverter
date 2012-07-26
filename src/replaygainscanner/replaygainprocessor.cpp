@@ -202,7 +202,16 @@ void ReplayGainProcessor::pluginLog( int id, const QString& message )
 
 void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainPlugin::ApplyMode mode )
 {
-    logger->log( 1000, i18n("Adding new item to ReplayGain processing list: '%1'",fileListItem->url.toLocalFile()) );
+    QString identifier;
+    if( fileListItem->type == ReplayGainFileListItem::Track )
+    {
+        identifier = fileListItem->url.toLocalFile();
+    }
+    else
+    {
+        identifier = config->data.general.replayGainGrouping == Config::Data::General::Directory ? fileListItem->url.pathOrUrl().right(fileListItem->url.pathOrUrl().length()-fileListItem->url.pathOrUrl().lastIndexOf("/")-1) : fileListItem->albumName;
+    }
+    logger->log( 1000, i18n("Adding new item to ReplayGain processing list: '%1'",identifier) );
 
     ReplayGainProcessorItem *newItem = new ReplayGainProcessorItem( fileListItem );
     items.append( newItem );
@@ -210,7 +219,7 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
     newItem->mode = mode;
 
     // register at the logger
-    newItem->logID = logger->registerProcess( fileListItem->url.toLocalFile() );
+    newItem->logID = logger->registerProcess( i18n("ReplayGain for %1",identifier) );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
 
     if( fileListItem->type == ReplayGainFileListItem::Track )

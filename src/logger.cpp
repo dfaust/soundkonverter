@@ -25,7 +25,7 @@ Logger::Logger( QObject *parent)
     writeLogFiles = group.readEntry( "writeLogFiles", false );
 
     LoggerItem *item = new LoggerItem();
-    item->filename = KUrl("soundKonverter");
+    item->identifier = "soundKonverter";
     item->id = 1000;
     item->completed = true;
     item->succeeded = true;
@@ -71,10 +71,10 @@ Logger::~Logger()
 //     processes.clear();
 // }
 
-int Logger::registerProcess( const KUrl& filename )
+int Logger::registerProcess( const QString& identifier )
 {
     LoggerItem *item = new LoggerItem();
-    item->filename = filename;
+    item->identifier = identifier;
     item->id = getNewID();
     item->completed = false;
     item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
@@ -87,7 +87,7 @@ int Logger::registerProcess( const KUrl& filename )
 
     processes.append( item );
 
-    log( item->id, i18n("Filename") + ": " + item->filename.pathOrUrl() );
+    log( item->id, i18n("Identifier") + ": " + item->identifier );
     log( item->id, i18n("Log ID") + ": " + QString::number(item->id) );
 
     emit updateProcess( item->id );

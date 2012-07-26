@@ -20,7 +20,7 @@ public:
     LoggerItem();
     ~LoggerItem();
 
-    KUrl filename;
+    QString identifier;
     int id;
     QStringList data;
     bool completed;
@@ -43,7 +43,7 @@ public:
     ~Logger();
 
     /** Creates a new logger item and returns the id of it, @p filename is added to the new logger item */
-    int registerProcess( const KUrl& filename );
+    int registerProcess( const QString& identifier );
 
     /** Adds the string @p data to the data of the logger item with id @p id */
     void log( int id, const QString& data );

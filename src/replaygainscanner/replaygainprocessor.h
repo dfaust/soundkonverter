@@ -103,7 +103,7 @@ signals:
 
     // connected to Logger
     /** Tell the logger that the process has finished */
-    void finishedProcess( int id, ReplayGainFileListItem::ReturnCode returnCode );
+    void finishedProcess( int id, bool succeeded );
 
     // connected to ProgressIndicator
     void updateTime( float timeProgress );

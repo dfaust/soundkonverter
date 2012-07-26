@@ -25,7 +25,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
     box->addWidget( pBar );
     pBar->setRange( 0, 1 );
     pBar->setValue( 0 );
-//     pBar->setFormat( "%v / %m" );
+    pBar->setFormat( "%v / %m" );
 
     if( features != 0 )
     {

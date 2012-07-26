@@ -28,7 +28,7 @@ Logger::Logger( QObject *parent)
     item->filename = KUrl("soundKonverter");
     item->id = 1000;
     item->completed = true;
-    item->returnCode = FileListItem::Succeeded;
+    item->succeeded = true;
     item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
     if( writeLogFiles )
     {
@@ -163,7 +163,7 @@ QList<LoggerItem*> Logger::getLogs()
     return processes;
 }
 
-void Logger::processCompleted( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain )
+void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain )
 {
     Q_UNUSED( waitingForAlbumGain )
 
@@ -172,14 +172,14 @@ void Logger::processCompleted( int id, FileListItem::ReturnCode returnCode, bool
 
     for( int i=0; i<processes.count(); i++ )
     {
-        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->returnCode == FileListItem::Succeeded )
+        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->succeeded )
         {
             time = processes.at(i)->time;
             removeItem = processes.at(i);
         }
         else if( processes.at(i)->id == id )
         {
-            processes.at(i)->returnCode = returnCode;
+            processes.at(i)->succeeded = succeeded;
             processes.at(i)->completed = true;
             processes.at(i)->time = processes.at(i)->time.currentTime();
             processes.at(i)->data.append( i18n("Finished logging") );
@@ -200,11 +200,6 @@ void Logger::processCompleted( int id, FileListItem::ReturnCode returnCode, bool
         processes.removeAt( processes.indexOf(removeItem) );
         delete removeItem;
     }
-}
-
-void Logger::processCompleted( int id, ReplayGainFileListItem::ReturnCode returnCode )
-{
-    processCompleted( id, FileListItem::Succeeded, false );
 }
 
 void Logger::updateWriteSetting( bool _writeLogFiles )

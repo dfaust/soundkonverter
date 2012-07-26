@@ -3,9 +3,6 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "filelistitem.h"
-#include "replaygainscanner/replaygainfilelistitem.h"
-
 #include <QStringList>
 #include <QTime>
 #include <QFile>
@@ -20,17 +17,14 @@
 class LoggerItem
 {
 public:
-    /** Constructor */
     LoggerItem();
-
-    /** Destructor */
-    virtual ~LoggerItem();
+    ~LoggerItem();
 
     KUrl filename;
     int id;
     QStringList data;
     bool completed;
-    FileListItem::ReturnCode returnCode;
+    bool succeeded;
     QTime time;
     QFile file;
     QTextStream textStream;
@@ -45,13 +39,8 @@ class Logger : public QObject
 {
     Q_OBJECT
 public:
-    /** Constructor */
     Logger( QObject *parent );
-
-    /** Destructor */
-    virtual ~Logger();
-
-//     void cleanUp();
+    ~Logger();
 
     /** Creates a new logger item and returns the id of it, @p filename is added to the new logger item */
     int registerProcess( const KUrl& filename );
@@ -78,9 +67,8 @@ private:
     int getNewID();
 
 public slots:
-    void processCompleted( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain );
-    void processCompleted( int id, ReplayGainFileListItem::ReturnCode returnCode ); // TODO combine with slot above
-    /// connected to config
+    void processCompleted( int id, bool succeeded, bool waitingForAlbumGain = false );
+    // connected to config
     void updateWriteSetting( bool _writeLogFiles );
 
 signals:

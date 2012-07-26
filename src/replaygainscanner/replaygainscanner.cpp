@@ -99,7 +99,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     connect( fileList, SIGNAL(killItem(ReplayGainFileListItem*)), replayGainProcessor, SLOT(kill(ReplayGainFileListItem*)) );
     connect( replayGainProcessor, SIGNAL(finished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)), fileList, SLOT(itemFinished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)) );
 
-    connect( replayGainProcessor, SIGNAL(finishedProcess(int,ReplayGainFileListItem::ReturnCode)), logger, SLOT(processCompleted(int,ReplayGainFileListItem::ReturnCode)) );
+    connect( replayGainProcessor, SIGNAL(finishedProcess(int,bool)), logger, SLOT(processCompleted(int,bool)) );
 
     connect( replayGainProcessor, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( replayGainProcessor, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );

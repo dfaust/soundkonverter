@@ -254,16 +254,22 @@ void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileL
     {
         case ReplayGainFileListItem::Succeeded:
             exitMessage = i18nc("Conversion exit status","Normal exit");
+            break;
         case ReplayGainFileListItem::SucceededWithProblems:
             exitMessage = i18nc("Conversion exit status","Succeeded but problems occured");
+            break;
         case ReplayGainFileListItem::StoppedByUser:
             exitMessage = i18nc("Conversion exit status","Aborted by the user");
+            break;
         case ReplayGainFileListItem::BackendNeedsConfiguration:
             exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+            break;
         case ReplayGainFileListItem::Skipped:
             exitMessage = i18nc("Conversion exit status","Skipped");
+            break;
         case ReplayGainFileListItem::Failed:
             exitMessage = i18nc("Conversion exit status","An error occurred");
+            break;
     }
 
     logger->log( item->logID, "<br>" +  i18n("Removing file from conversion list. Exit code %1 (%2)",returnCode,exitMessage) );
@@ -271,7 +277,7 @@ void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileL
     emit timeFinished( (float)item->time );
 
     emit finished( item->fileListItem, returnCode ); // send signal to FileList
-    emit finishedProcess( item->logID, returnCode ); // send signal to Logger
+    emit finishedProcess( item->logID, returnCode == ReplayGainFileListItem::Succeeded ); // send signal to Logger
 
     items.removeAll( item );
     delete item;

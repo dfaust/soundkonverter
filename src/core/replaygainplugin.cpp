@@ -14,11 +14,6 @@ ReplayGainPluginItem::~ReplayGainPluginItem()
 {}
 
 
-//
-// class ReplayGainPlugin
-//
-////////////////////
-
 ReplayGainPlugin::ReplayGainPlugin( QObject *parent )
     : BackendPlugin( parent )
 {}

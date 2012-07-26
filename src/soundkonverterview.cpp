@@ -133,7 +133,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( convert, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
     connect( convert, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
 
-    connect( convert, SIGNAL(finishedProcess(int,FileListItem::ReturnCode,bool)), logger, SLOT(processCompleted(int,FileListItem::ReturnCode,bool)) );
+    connect( convert, SIGNAL(finishedProcess(int,bool,bool)), logger, SLOT(processCompleted(int,bool,bool)) );
 
     connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );

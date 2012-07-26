@@ -1094,18 +1094,25 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     {
         case FileListItem::Succeeded:
             exitMessage = i18nc("Conversion exit status","Normal exit");
+            break;
         case FileListItem::SucceededWithProblems:
             exitMessage = i18nc("Conversion exit status","Succeeded but problems occured");
+            break;
         case FileListItem::StoppedByUser:
             exitMessage = i18nc("Conversion exit status","Aborted by the user");
+            break;
         case FileListItem::BackendNeedsConfiguration:
             exitMessage = i18nc("Conversion exit status","Backend needs configuration");
+            break;
         case FileListItem::DiscFull:
             exitMessage = i18nc("Conversion exit status","Not enough space on the output device");
+            break;
         case FileListItem::Skipped:
             exitMessage = i18nc("Conversion exit status","File already exists");
+            break;
         case FileListItem::Failed:
             exitMessage = i18nc("Conversion exit status","An error occurred");
+            break;
     }
 
     if( returnCode == FileListItem::Succeeded )
@@ -1177,7 +1184,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
         albumGainItems.remove( albumName );
     }
     emit finished( item->fileListItem, returnCode, waitForAlbumGain ); // send signal to FileList
-    emit finishedProcess( item->logID, returnCode, waitForAlbumGain ); // send signal to Logger
+    emit finishedProcess( item->logID, returnCode == FileListItem::Succeeded, waitForAlbumGain ); // send signal to Logger
 
     items.removeAll( item );
 

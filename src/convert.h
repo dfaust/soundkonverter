@@ -126,7 +126,7 @@ signals:
 
     // connected to Logger
     /** Tell the logger that the process has finished */
-    void finishedProcess( int id, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
+    void finishedProcess( int id, bool succeeded, bool waitingForAlbumGain = false );
 
     // connected to ProgressIndicator
     void updateTime( float timeProgress );

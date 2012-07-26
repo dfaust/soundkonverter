@@ -3,11 +3,6 @@
 #include "codecwidget.h"
 
 
-//
-// class CodecPluginItem
-//
-////////////////////
-
 CodecPluginItem::CodecPluginItem( QObject *parent )
     : BackendPluginItem( parent )
 {}
@@ -15,11 +10,6 @@ CodecPluginItem::CodecPluginItem( QObject *parent )
 CodecPluginItem::~CodecPluginItem()
 {}
 
-
-//
-// class CodecPlugin
-//
-////////////////////
 
 CodecPlugin::CodecPlugin( QObject *parent )
     : BackendPlugin( parent )

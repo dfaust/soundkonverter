@@ -75,11 +75,11 @@ private:
     QMenu *contextMenu;
     KAction *collapseAction;
     KAction *expandAction;
-//     KAction *startAction;
-//     KAction *stopAction;
+//     KAction *processAddAction;
+//     KAction *processRemoveAction;
+//     KAction *killAction;
     KAction *removeAction;
-//     KAction* paste;
-    KAction *newAction;
+//     KAction *newAction;
 
     void processNextItem();
     int waitingCount();
@@ -90,8 +90,11 @@ public slots:
     void addDir( const KUrl& directory, bool recursive, const QStringList& codecList );
 
 private slots:
-    void removeSelectedItems();
     void showContextMenu( const QPoint& point );
+//     void processAddSelectedItems();
+//     void processRemoveSelectedItems();
+//     void killSelectedItems();
+    void removeSelectedItems();
 
     // connected to ReplayGainProcessor
     void itemFinished( ReplayGainFileListItem *item, ReplayGainFileListItem::ReturnCode returnCode );

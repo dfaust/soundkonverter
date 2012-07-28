@@ -63,17 +63,16 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     expandAction->setShortcut( Qt::CTRL | Qt::Key_Plus );
     connect( expandAction, SIGNAL(triggered()), this, SLOT(expandAll()) );
     addAction( expandAction );
-//     startAction = new KAction( KIcon("system-run"), i18n("Calculate Replay Gain"), this );
-//     connect( startAction, SIGNAL(triggered()), this, SLOT(convertSelectedItems()) );
-//     stopAction = new KAction( KIcon("process-stop"), i18n("Stop Calculation"), this );
-//     connect( stopAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
+//     processAddAction = new KAction( KIcon("list-add"), i18n("Calculate ReplayGain"), this );
+//     connect( processAddAction, SIGNAL(triggered()), this, SLOT(processAddSelectedItems()) );
+//     processRemoveAction = new KAction( KIcon("list-remove"), i18n("Remove ReplayGain"), this );
+//     connect( processRemoveAction, SIGNAL(triggered()), this, SLOT(processRemoveSelectedItems()) );
+//     killAction = new KAction( KIcon("process-stop"), i18n("Stop calculation"), this );
+//     connect( killAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
     removeAction = new KAction( KIcon("edit-delete"), i18n("Remove"), this );
     removeAction->setShortcut( QKeySequence::Delete );
     connect( removeAction, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
     addAction( removeAction );
-//     paste = new KAction( i18n("Paste"), "editpaste", 0, this, 0, actionCollection, "paste" );  // TODO paste
-//     newAction = new KAction( KIcon("file-new"), i18n("New album"), this );
-//     connect( newAction, SIGNAL(triggered()), this, SLOT(newAlbum()) );
 
     contextMenu = new QMenu( this );
 
@@ -433,40 +432,6 @@ void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QS
     listDir( directory.path(), codecList, recursive );
 
     pScanStatus->hide(); // hide the status bar, when the scan is done
-}
-
-void ReplayGainFileList::removeSelectedItems()
-{
-    ReplayGainFileListItem *item, *child;
-
-    for( int i=0; i<topLevelItemCount(); i++ )
-    {
-        item = topLevelItem(i);
-        if( item->type == ReplayGainFileListItem::Track && item->isSelected() && item->state != ReplayGainFileListItem::Processing )
-        {
-            emit timeChanged( -item->time );
-            delete item;
-            i--;
-        }
-        else if( item->type == ReplayGainFileListItem::Album )
-        {
-            for( int j=0; j<item->childCount(); j++ )
-            {
-                child = (ReplayGainFileListItem*)item->child(j);
-                if( child->type == ReplayGainFileListItem::Track && ( child->isSelected() || item->isSelected() ) && child->state != ReplayGainFileListItem::Processing )
-                {
-                    emit timeChanged( -child->time );
-                    delete child;
-                    j--;
-                }
-            }
-            if( item->childCount() == 0 )
-            {
-                delete item;
-                i--;
-            }
-        }
-    }
 }
 
 void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
@@ -868,38 +833,165 @@ void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainF
 
 void ReplayGainFileList::showContextMenu( const QPoint& point )
 {
-    ReplayGainFileListItem *item = (ReplayGainFileListItem*)itemAt( point );
+    QList<QTreeWidgetItem*> q_items = selectedItems();
+    bool canRemove = q_items.count() > 0;
+    bool canStart = q_items.count() > 0;
+    bool canKill = q_items.count() > 0;
 
-    // add a tilte to our context manu
-    //contextMenu->insertTitle( static_cast<FileListItem*>(item)->fileName ); // TODO sqeeze or something else
+    foreach( QTreeWidgetItem *q_item, q_items )
+    {
+        ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
 
-    // TODO implement pasting, etc.
+        if( item->type == ReplayGainFileListItem::Track )
+        {
+            switch( item->state )
+            {
+                case ReplayGainFileListItem::Waiting:
+                    canKill = false;
+                    break;
+                case ReplayGainFileListItem::Processing:
+                    canRemove = false;
+                    canStart = false;
+                    break;
+                case ReplayGainFileListItem::Stopped:
+                    canKill = false;
+                    break;
+            }
+        }
+        else
+        {
+            if( item->state == ReplayGainFileListItem::Processing )
+            {
+                canRemove = false;
+                canStart = false;
+            }
+            else
+            {
+                for( int j=0; j<item->childCount(); j++ )
+                {
+                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+
+                    switch( child->state )
+                    {
+                        case ReplayGainFileListItem::Waiting:
+                            canKill = false;
+                            break;
+                        case ReplayGainFileListItem::Processing:
+                            canRemove = false;
+                            canStart = false;
+                            break;
+                        case ReplayGainFileListItem::Stopped:
+                            canKill = false;
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
     contextMenu->clear();
 
-    // is this file (of our item) beeing converted at the moment?
-    if( item && item->state != ReplayGainFileListItem::Processing )
+    contextMenu->addAction( collapseAction );
+    contextMenu->addAction( expandAction );
+//     if( canStart || canKill )
+//     {
+//         contextMenu->addSeparator();
+//     }
+//     if( canStart )
+//     {
+//         contextMenu->addAction( processAddAction );
+//         contextMenu->addAction( processRemoveAction );
+//     }
+//     if( canKill )
+//     {
+//         contextMenu->addAction( killAction );
+//     }
+    if( canRemove )
     {
-        contextMenu->addAction( collapseAction );
-        contextMenu->addAction( expandAction );
         contextMenu->addSeparator();
         contextMenu->addAction( removeAction );
-        //contextMenu->addAction( paste );
-//         contextMenu->addAction( newAction );
-        //contextMenu->addSeparator();
-        //contextMenu->addAction( startAction );
-    }
-    else
-    {
-        contextMenu->addAction( collapseAction );
-        contextMenu->addAction( expandAction );
-//         contextMenu->addSeparator();
-        //contextMenu->addAction( paste );
-//         contextMenu->addAction( newAction );
-        //contextMenu->addSeparator();
-        //contextMenu->addAction( stopAction );
     }
 
-    // show the popup menu
     contextMenu->popup( viewport()->mapToGlobal(point) );
 }
+
+// void ReplayGainFileList::processAddSelectedItems()
+// {
+//     foreach( QTreeWidgetItem *q_item, selectedItems() )
+//     {
+//         ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+//
+//         if( item->type == ReplayGainFileListItem::Track )
+//         {
+//             if( item->state != ReplayGainFileListItem::Processing )
+//             {
+//             }
+//         }
+//         else
+//         {
+//             if( item->state != ReplayGainFileListItem::Processing )
+//             {
+//             }
+//             else
+//             {
+//                 for( int j=0; j<item->childCount(); j++ )
+//                 {
+//                     ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+//
+//                 }
+//             }
+//         }
+//         emit processItem( item, ReplayGainPlugin::Force );
+//     }
+// }
+
+// void ReplayGainFileList::processRemoveSelectedItems()
+// {
+//     foreach( QTreeWidgetItem *q_item, selectedItems() )
+//     {
+//         ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+//
+//         emit processItem( item, ReplayGainPlugin::Remove );
+//     }
+// }
+
+// void ReplayGainFileList::killSelectedItems()
+// {
+//
+// }
+
+void ReplayGainFileList::removeSelectedItems()
+{
+    ReplayGainFileListItem *item, *child;
+
+    for( int i=0; i<topLevelItemCount(); i++ )
+    {
+        item = topLevelItem(i);
+        if( item->type == ReplayGainFileListItem::Track && item->isSelected() && item->state != ReplayGainFileListItem::Processing )
+        {
+            emit timeChanged( -item->time );
+            delete item;
+            i--;
+        }
+        else if( item->type == ReplayGainFileListItem::Album )
+        {
+            for( int j=0; j<item->childCount(); j++ )
+            {
+                child = (ReplayGainFileListItem*)item->child(j);
+                if( child->type == ReplayGainFileListItem::Track && ( child->isSelected() || item->isSelected() ) && child->state != ReplayGainFileListItem::Processing )
+                {
+                    emit timeChanged( -child->time );
+                    delete child;
+                    j--;
+                }
+            }
+            if( item->childCount() == 0 )
+            {
+                delete item;
+                i--;
+            }
+        }
+    }
+}
+
+

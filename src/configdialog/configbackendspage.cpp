@@ -425,43 +425,49 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
 
 void ConfigBackendsPage::resetDefaults()
 {
-//     KMessageBox::questionYesNo( this, i18n("This will choose the best backends for all formats and save the new preferences immediately.\n\nDo you want to continue?") );
-//
-//     QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations( true );
-//     for( int i=0; i<optimizationList.count(); i++ )
-//     {
-//         for( int j=0; j<config->data.backends.codecs.count(); j++ )
-//         {
-//             if( config->data.backends.codecs.at(j).codecName == optimizationList.at(i).codecName )
-//             {
-//                 if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Decode && config->data.backends.codecs.at(j).decoders.contains(optimizationList.at(i).betterBackend) )
-//                 {
-//                     config->data.backends.codecs[j].decoders.removeAll( optimizationList.at(i).betterBackend );
-//                     config->data.backends.codecs[j].decoders.prepend( optimizationList.at(i).betterBackend );
-//                 }
-//                 if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Encode && config->data.backends.codecs.at(j).encoders.contains(optimizationList.at(i).betterBackend) )
-//                 {
-//                     config->data.backends.codecs[j].encoders.removeAll( optimizationList.at(i).betterBackend );
-//                     config->data.backends.codecs[j].encoders.prepend( optimizationList.at(i).betterBackend );
-//                 }
-//                 if( optimizationList.at(i).mode == CodecOptimizations::Optimization::ReplayGain && config->data.backends.codecs.at(j).replaygain.contains(optimizationList.at(i).betterBackend) )
-//                 {
-//                     config->data.backends.codecs[j].replaygain.removeAll( optimizationList.at(i).betterBackend );
-//                     config->data.backends.codecs[j].replaygain.prepend( optimizationList.at(i).betterBackend );
-//                 }
-//             }
-//         }
-//     }
-//     config->data.backendOptimizationsIgnoreList.optimizationList.clear();
-//
-//     formatChanged( cSelectorFormat->currentText(), true );
+    // TODO reset rippers/filters
 
-    emit configChanged( false );
+    const int answer = KMessageBox::questionYesNo( this, i18n("This will choose the best backends for all formats and save the new preferences immediately.\n\nDo you want to continue?") );
+
+    if( answer == KMessageBox::Yes )
+    {
+        QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations( true );
+        for( int i=0; i<optimizationList.count(); i++ )
+        {
+            for( int j=0; j<config->data.backends.codecs.count(); j++ )
+            {
+                if( config->data.backends.codecs.at(j).codecName == optimizationList.at(i).codecName )
+                {
+                    if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Decode && config->data.backends.codecs.at(j).decoders.contains(optimizationList.at(i).betterBackend) )
+                    {
+                        config->data.backends.codecs[j].decoders.removeAll( optimizationList.at(i).betterBackend );
+                        config->data.backends.codecs[j].decoders.prepend( optimizationList.at(i).betterBackend );
+                    }
+                    if( optimizationList.at(i).mode == CodecOptimizations::Optimization::Encode && config->data.backends.codecs.at(j).encoders.contains(optimizationList.at(i).betterBackend) )
+                    {
+                        config->data.backends.codecs[j].encoders.removeAll( optimizationList.at(i).betterBackend );
+                        config->data.backends.codecs[j].encoders.prepend( optimizationList.at(i).betterBackend );
+                    }
+                    if( optimizationList.at(i).mode == CodecOptimizations::Optimization::ReplayGain && config->data.backends.codecs.at(j).replaygain.contains(optimizationList.at(i).betterBackend) )
+                    {
+                        config->data.backends.codecs[j].replaygain.removeAll( optimizationList.at(i).betterBackend );
+                        config->data.backends.codecs[j].replaygain.prepend( optimizationList.at(i).betterBackend );
+                    }
+                }
+            }
+        }
+        config->data.backendOptimizationsIgnoreList.optimizationList.clear();
+
+        formatChanged( cSelectorFormat->currentText(), true );
+
+        emit configChanged( false );
+    }
 }
 
 void ConfigBackendsPage::saveSettings()
 {
-    // TODO save rippers/filet
+    // TODO save rippers/filters
+
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
         if( config->data.backends.codecs.at(i).codecName == currentFormat )

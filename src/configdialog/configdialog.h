@@ -1,14 +1,4 @@
-//
-// C++ Interface: configdialog
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef CONFIGDIALOG_H
 #define CONFIGDIALOG_H
 
@@ -28,7 +18,6 @@ class ConfigDialog : public KPageDialog
     Q_OBJECT
 public:
     ConfigDialog( Config *_config, QWidget *parent = 0/*, Page startPage = GeneralPage*/ );
-
     ~ConfigDialog();
 
 private:
@@ -52,7 +41,6 @@ private:
     bool backendsPageChanged;
 
 private slots:
-    void pageChanged( KPageWidgetItem *current, KPageWidgetItem *before );
     void configChanged( bool state );
     void okClicked();
     void applyClicked();

@@ -693,7 +693,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
     int codecIndex;
     bool ignore;
 
-    QStringList formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    const QStringList formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     for( int i=0; i<formats.count(); i++ )
     {
         if( formats.at(i) == "wav" )
@@ -721,6 +721,17 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
                 {
                     tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->filterPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            {
+                const QString pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+                {
+                    tempPluginList += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
@@ -789,6 +800,17 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
                 {
                     tempPluginList += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                }
+            }
+        }
+        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        {
+            if( pPluginLoader->filterPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            {
+                const QString pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+                {
+                    tempPluginList += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }

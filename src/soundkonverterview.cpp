@@ -47,7 +47,6 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
     // the grid for all widgets in the main window
     QGridLayout* gridLayout = new QGridLayout( this );
-    gridLayout->setContentsMargins( 6, 6, 6, 6 );
 
     fileList = new FileList( logger, config, this );
     gridLayout->addWidget( fileList, 1, 0 );
@@ -68,7 +67,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
     // add a horizontal box layout for the add combobutton to the grid
     QHBoxLayout *addBox = new QHBoxLayout();
-    addBox->setContentsMargins( 0, 0, 0, 0 );
+    addBox->setContentsMargins( 1, 2, 1, 0 ); // determined by experiments
     gridLayout->addLayout( addBox, 3, 0 );
 
     // create the combobutton for adding files to the file list
@@ -83,7 +82,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     cAdd->insertItem( KIcon("network-workgroup"), i18n("Add url...") );
     cAdd->insertItem( KIcon("view-media-playlist"), i18n("Add playlist...") );
     cAdd->increaseHeight( 6 );
-    addBox->addWidget( cAdd );
+    addBox->addWidget( cAdd, 0, Qt::AlignVCenter );
     connect( cAdd, SIGNAL(clicked(int)), this, SLOT(addClicked(int)) );
     cAdd->setFocus();
 
@@ -96,7 +95,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     pStart->setFixedHeight( pStart->size().height() );
     pStart->setEnabled( false );
     startAction->setEnabled( false );
-    addBox->addWidget( pStart );
+    addBox->addWidget( pStart, 0, Qt::AlignVCenter );
     connect( pStart, SIGNAL(clicked()), fileList, SLOT(startConversion()) );
 
     stopActionMenu = new KActionMenu( KIcon("process-stop"), i18n("Stop"), this );
@@ -116,12 +115,12 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     pStop->hide();
     stopActionMenu->setEnabled( false );
     pStop->setMenu( stopActionMenu->menu() );
-    addBox->addWidget( pStop );
+    addBox->addWidget( pStop, 0, Qt::AlignVCenter );
 
     addBox->addSpacing( 10 );
 
     progressIndicator = new ProgressIndicator( this, ProgressIndicator::Feature( ProgressIndicator::FeatureSpeed | ProgressIndicator::FeatureTime ) );
-    addBox->addWidget( progressIndicator );
+    addBox->addWidget( progressIndicator, 0, Qt::AlignVCenter );
     connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SIGNAL(progressChanged(const QString&)) );
     connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
     connect( fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );

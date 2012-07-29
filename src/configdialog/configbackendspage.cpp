@@ -224,7 +224,6 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     config( _config )
 {
     QVBoxLayout *box = new QVBoxLayout( this );
-    box->setSpacing( 0 );
 
     QFont groupFont;
     groupFont.setBold( true );
@@ -294,7 +293,6 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatBox->addLayout( formatSelectorBox );
     QLabel *lSelectorFormat = new QLabel( i18n("Configure format:"), this );
     formatSelectorBox->addWidget( lSelectorFormat );
-    formatSelectorBox->addSpacing( 5 );
     cSelectorFormat = new KComboBox( this );
     cSelectorFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain),PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
     cSelectorFormat->removeItem( cSelectorFormat->findText("wav") );

@@ -22,7 +22,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
     box->setContentsMargins( 0, 0, 0, 0 );
 
     pBar = new QProgressBar( this );
-    box->addWidget( pBar );
+    box->addWidget( pBar, 0, Qt::AlignVCenter );
     pBar->setRange( 0, 1 );
     pBar->setValue( 0 );
     pBar->setFormat( "%v / %m" );
@@ -34,6 +34,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
         QGridLayout *statusChildGrid = new QGridLayout();
         statusChildGrid->setContentsMargins( 0, 0, 0, 0 );
         box->addLayout( statusChildGrid );
+        box->setAlignment( statusChildGrid, Qt::AlignVCenter );
 
         if( features & FeatureSpeed )
         {

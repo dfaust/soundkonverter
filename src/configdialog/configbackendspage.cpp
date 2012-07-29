@@ -268,11 +268,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     filterBox->addWidget( lSelectorFilter );
     filterBox->setStretchFactor( lSelectorFilter, 2 );
     cSelectorFilter = new KComboBox( this );
-    QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
-    foreach( FilterPlugin *plugin, filterPlugins )
-    {
-        cSelectorFilter->addItem( plugin->name() );
-    }
+    cSelectorFilter->addItems( config->data.backends.filters );
     filterBox->addWidget( cSelectorFilter );
     filterBox->setStretchFactor( cSelectorFilter, 1 );
     connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(const QString&)) );
@@ -465,6 +461,7 @@ void ConfigBackendsPage::resetDefaults()
 
 void ConfigBackendsPage::saveSettings()
 {
+    // TODO save rippers/filet
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
         if( config->data.backends.codecs.at(i).codecName == currentFormat )

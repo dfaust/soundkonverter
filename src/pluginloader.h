@@ -74,8 +74,6 @@ public:
     QList<CodecPlugin*> decodersForCodec( const QString& codecName );
     QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
 
-    QList<FilterPlugin*> filters();
-
     /** returns the codec plugin with the specified name */
     BackendPlugin *backendPluginByName( const QString& name );
 

@@ -455,21 +455,6 @@ QList<ReplayGainPlugin*> PluginLoader::replaygainForCodec( const QString& codecN
     return replaygain.toList();
 }
 
-QList<FilterPlugin*> PluginLoader::filters()
-{
-    QSet<FilterPlugin*> filters;
-
-    for( int i=0; i<filterPipeTrunks.count(); i++ )
-    {
-        if( filterPipeTrunks.at(i).enabled )
-        {
-            filters += qobject_cast<FilterPlugin*>(filterPipeTrunks.at(i).plugin);
-        }
-    }
-
-    return filters.toList();
-}
-
 BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
 {
     for( int i=0; i<codecPlugins.count(); i++ )

@@ -104,6 +104,7 @@ public:
         {
             QStringList rippers;
             QList<CodecData> codecs;
+            QStringList filters;
         } backends;
 
         struct BackendOptimizationsIgnoreList

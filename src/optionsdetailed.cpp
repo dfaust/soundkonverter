@@ -76,20 +76,23 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     grid->addWidget( lineFrame, gridRow++, 0 );
 
     int filterCount = 0;
-    QList<FilterPlugin*> plugins = config->pluginLoader()->filters();
-    foreach( FilterPlugin *plugin, plugins )
+    foreach( QString pluginName, config->data.backends.filters )
     {
-        FilterWidget *widget = plugin->newFilterWidget();
-        if( widget )
-        {
-            wFilter.insert( widget, plugin );
-            connect( widget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
-            grid->addWidget( widget, gridRow++, 0 );
-            widget->show();
-            filterCount++;
-        }
-    }
+        FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
+        if( !plugin )
+            continue;
 
+        FilterWidget *widget = plugin->newFilterWidget();
+        if( !widget )
+            continue;
+
+        wFilter.insert( widget, plugin );
+        connect( widget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
+        grid->addWidget( widget, gridRow++, 0 );
+        widget->show();
+        filterCount++;
+        break; // show only one widget at the moment
+    }
     if( filterCount > 0 )
     {
         // draw a horizontal line

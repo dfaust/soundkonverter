@@ -121,6 +121,7 @@ void Config::load()
         codecData.replaygain = group.readEntry( formats.at(i) + "_replaygain", QStringList() );
         data.backends.codecs += codecData;
     }
+    data.backends.filters = group.readEntry( "filters", QStringList() );
 
     pPluginLoader->load();
 
@@ -134,7 +135,7 @@ void Config::load()
 
     // build default backend priority list
 
-    // ripper
+    // rippers
     enabledPlugins.clear();
     newPlugins.clear();
     QList<RipperPlugin*> ripperPlugins = pPluginLoader->getAllRipperPlugins();
@@ -320,6 +321,41 @@ void Config::load()
         {
             data.backends.codecs[codecIndex].replaygain += newPlugins.at(j).right(newPlugins.at(j).length()-8);
         }
+    }
+
+    // filters
+    enabledPlugins.clear();
+    newPlugins.clear();
+    QList<FilterPlugin*> filterPlugins = pPluginLoader->getAllFilterPlugins();
+    for( int i=0; i<filterPlugins.count(); i++ )
+    {
+        pluginName = filterPlugins.at(i)->name();
+        QList<ConversionPipeTrunk> codecTable = filterPlugins.at(i)->codecTable();
+        for( int j = 0; j < codecTable.count(); j++ )
+        {
+            if( codecTable.at(j).enabled && codecTable.at(j).codecFrom == "wav" && codecTable.at(j).codecTo == "wav" )
+            {
+                enabledPlugins += pluginName;
+                if( !data.backends.filters.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
+                {
+                    newPlugins += QString::number(codecTable.at(j).rating).rightJustified(8,'0') + pluginName;
+                    break;
+                }
+            }
+        }
+    }
+    for( int j=0; j<data.backends.filters.count(); j++ )
+    {
+        if( !enabledPlugins.contains(data.backends.filters.at(j)) )
+        {
+            data.backends.filters.removeAt(j);
+            j--;
+        }
+    }
+    newPlugins.sort();
+    for( int i=0; i<newPlugins.count(); i++ )
+    {
+        data.backends.filters += newPlugins.at(i).right(newPlugins.at(i).length()-8);
     }
 
     // load profiles
@@ -511,6 +547,7 @@ void Config::save()
         formats += format;
     }
     group.writeEntry( "formats", formats );
+    group.writeEntry( "filters", data.backends.filters );
 
     group = conf->group( "BackendOptimizationsIgnoreList" );
     group.writeEntry( "count", data.backendOptimizationsIgnoreList.optimizationList.count() );

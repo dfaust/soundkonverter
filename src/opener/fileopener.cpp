@@ -32,10 +32,6 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setWindowIcon( KIcon("audio-x-generic") );
     setButtons( 0 );
 
-    // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        resize( parent->width() - 10, sizeHint().height() );
-
     QWidget *widget = new QWidget();
     setMainWidget( widget );
 
@@ -82,10 +78,21 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     const int dialogReturnCode = fileDialog->exec();
     if( dialogReturnCode == QDialog::Rejected )
         dialogAborted = true;
+
+    // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "FileOpener" );
+    restoreDialogSize( group );
 }
 
 FileOpener::~FileOpener()
-{}
+{
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "FileOpener" );
+    saveDialogSize( group );
+}
 
 void FileOpener::fileDialogAccepted()
 {

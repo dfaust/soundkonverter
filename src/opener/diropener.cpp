@@ -146,20 +146,27 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     adjustSize();
     options->hide();
 
-    // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        resize( parent->width() - 10, sizeHint().height() );
-
 
     const KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
     if( !url.isEmpty() )
         uDirectory->setUrl( url );
     else
         dialogAborted = true;
+
+        // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "DirOpener" );
+    restoreDialogSize( group );
 }
 
 DirOpener::~DirOpener()
-{}
+{
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "DirOpener" );
+    saveDialogSize( group );
+}
 
 void DirOpener::proceedClicked()
 {

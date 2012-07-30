@@ -21,8 +21,6 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     setButtons( KDialog::Close );
     setButtonFocus( KDialog::Close );
 
-    resize( 500, 300 );
-
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
     QHBoxLayout *box = new QHBoxLayout( widget );
@@ -103,10 +101,19 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     {
         currentPluginChanged( currentItem->text() );
     }
+
+    setInitialSize( QSize(500,300) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "AboutPlugins" );
+    restoreDialogSize( group );
 }
 
 AboutPlugins::~AboutPlugins()
-{}
+{
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "AboutPlugins" );
+    saveDialogSize( group );
+}
 
 void AboutPlugins::currentPluginChanged( const QString& pluginName )
 {

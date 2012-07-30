@@ -32,7 +32,6 @@ LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
     setButtonIcon( KDialog::User2, KIcon("document-save") );
     connect( this, SIGNAL(user2Clicked()), this, SLOT(save()) );
     setButtonFocus( KDialog::Close );
-    resize( 600, 390 );
 
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
@@ -54,10 +53,19 @@ LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
     kLog->setTextInteractionFlags( Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard );
 
     refillLogs();
+
+    setInitialSize( QSize(600,390) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "LogViewer" );
+    restoreDialogSize( group );
 }
 
 LogViewer::~LogViewer()
-{}
+{
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "LogViewer" );
+    saveDialogSize( group );
+}
 
 void LogViewer::refillLogs()
 {

@@ -494,10 +494,22 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         noCdFound = true;
         return;
     }
+
+
+        // Prevent the dialog from beeing too wide because of the directory history
+    if( parent && width() > parent->width() )
+        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "CDOpener" );
+    restoreDialogSize( group );
 }
 
 CDOpener::~CDOpener()
 {
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "CDOpener" );
+    saveDialogSize( group );
+
     if( cdParanoia )
     {
         paranoia_free( cdParanoia );

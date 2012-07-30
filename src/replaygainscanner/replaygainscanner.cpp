@@ -20,8 +20,6 @@
 #include <QLayout>
 #include <QStringList>
 
-// FIXME file name encoding !!!
-
 
 ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
@@ -31,7 +29,6 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     setButtons( 0 );
 
     setCaption( i18n("Replay Gain tool") );
-    resize( 600, 400 );
     setWindowIcon( KIcon("soundkonverter-replaygain") );
 
     QWidget *widget = new QWidget( this );
@@ -103,10 +100,20 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
 
     connect( replayGainProcessor, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
     connect( replayGainProcessor, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
+
+
+    setInitialSize( QSize(600,400) );
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "ReplayGainTool" );
+    restoreDialogSize( group );
 }
 
 ReplayGainScanner::~ReplayGainScanner()
-{}
+{
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group = conf->group( "ReplayGainTool" );
+    saveDialogSize( group );
+}
 
 void ReplayGainScanner::addClicked( int index )
 {
@@ -220,9 +227,6 @@ void ReplayGainScanner::processStopped()
     pTagVisible->show();
     pRemoveTag->show();
     pCancel->hide();
-//     pProgressBar->setMaximum( 100 );
-//     pProgressBar->setValue( 100 );
-//     setCaption( i18n("Finished") + " - " + i18n("Replay Gain tool") );
 }
 
 void ReplayGainScanner::progressChanged( const QString& progress )

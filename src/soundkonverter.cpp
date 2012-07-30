@@ -69,7 +69,7 @@ soundKonverter::soundKonverter()
     // It also applies the saved mainwindow settings, if any, and ask the
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
-    setupGUI( ToolBar | Keys | Save | Create );
+    setupGUI( QSize(700,400), ToolBar | Keys | Save | Create );
 
     // clean up old files from previous soundKonverter versions
     if( config->data.app.configVersion < 1001 )

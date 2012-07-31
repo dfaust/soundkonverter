@@ -11,6 +11,18 @@ class ConversionOptions;
 class KDialog;
 class QComboBox;
 
+
+class Mp3GainPluginItem : public ReplayGainPluginItem
+{
+    Q_OBJECT
+public:
+    Mp3GainPluginItem( QObject *parent=0 );
+    virtual ~Mp3GainPluginItem();
+
+    KUrl::List undoFileList;
+};
+
+
 class soundkonverter_replaygain_mp3gain : public ReplayGainPlugin
 {
     Q_OBJECT
@@ -34,8 +46,6 @@ public:
     float parseOutput( const QString& output );
 
 private:
-    KUrl::List undoFileList;
-
     QWeakPointer<KDialog> configDialog;
     QComboBox *configDialogTagLabelComboBox;
 

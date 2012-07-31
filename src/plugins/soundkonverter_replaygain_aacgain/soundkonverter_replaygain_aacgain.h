@@ -13,6 +13,17 @@ class KDialog;
 class QComboBox;
 
 
+class AacGainPluginItem : public ReplayGainPluginItem
+{
+    Q_OBJECT
+public:
+    AacGainPluginItem( QObject *parent=0 );
+    virtual ~AacGainPluginItem();
+
+    KUrl::List undoFileList;
+};
+
+
 class soundkonverter_replaygain_aacgain : public ReplayGainPlugin
 {
     Q_OBJECT
@@ -36,8 +47,6 @@ public:
     float parseOutput( const QString& output );
 
 private:
-    KUrl::List undoFileList;
-
     QWeakPointer<KDialog> configDialog;
     QComboBox *configDialogTagLabelComboBox;
 

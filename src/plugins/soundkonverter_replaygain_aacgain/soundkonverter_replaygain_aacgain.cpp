@@ -9,6 +9,14 @@
 #include <QLabel>
 
 
+AacGainPluginItem::AacGainPluginItem( QObject *parent )
+    : ReplayGainPluginItem( parent )
+{}
+
+AacGainPluginItem::~AacGainPluginItem()
+{}
+
+
 soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args  )
     : ReplayGainPlugin( parent )
 {
@@ -129,7 +137,7 @@ unsigned int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileLis
     if( fileList.count() <= 0 )
         return BackendPlugin::UnknownError;
 
-    ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
+    AacGainPluginItem *newItem = new AacGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new KProcess( newItem );
     newItem->process->setOutputChannelMode( KProcess::MergedChannels );
@@ -153,7 +161,7 @@ unsigned int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileLis
     {
         command += "-u";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(undoProcessExit(int,QProcess::ExitStatus)) );
-        undoFileList = fileList;
+        newItem->undoFileList = fileList;
     }
     if( mode == ReplayGainPlugin::Add || mode == ReplayGainPlugin::Force )
     {
@@ -190,21 +198,21 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
     Q_UNUSED(exitCode)
     Q_UNUSED(exitStatus)
 
-    if( undoFileList.count() <= 0 )
-        return;
-
-    ReplayGainPluginItem *item = 0;
+    AacGainPluginItem *item = 0;
 
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            item = (ReplayGainPluginItem*)backendItems.at(i);
+            item = (AacGainPluginItem*)backendItems.at(i);
             break;
         }
     }
 
     if( !item )
+        return;
+
+    if( item->undoFileList.count() <= 0 )
         return;
 
     if( item->process )
@@ -219,7 +227,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
     command += binaries["aacgain"];
     command += "-s";
     command += "d";
-    foreach( const KUrl file, undoFileList )
+    foreach( const KUrl file, item->undoFileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

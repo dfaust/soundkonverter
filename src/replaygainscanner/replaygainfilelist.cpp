@@ -823,6 +823,8 @@ void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainF
     {
         item->state = ReplayGainFileListItem::Stopped;
         item->returnCode = returnCode;
+        if( item->type == ReplayGainFileListItem::Track )
+            item->tags = config->tagEngine()->readTags( item->url );
         updateItem( item );
         if( item->type == ReplayGainFileListItem::Album )
         {
@@ -831,6 +833,7 @@ void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainF
                 ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
                 child->state = ReplayGainFileListItem::Stopped;
                 child->returnCode = returnCode;
+                child->tags = config->tagEngine()->readTags( child->url );
                 updateItem( child );
             }
         }

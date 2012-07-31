@@ -119,30 +119,34 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         ReplayGainFileListItem *destination = static_cast<ReplayGainFileListItem*>(itemAt(event->pos()));
 
         if( !destination )
-            QTreeWidget::dropEvent(event);
-
-        bool canDrop = true;
-        if( destination->type == ReplayGainFileListItem::Album )
-        {
-            QList<QTreeWidgetItem*> q_items = selectedItems();
-            foreach( QTreeWidgetItem *q_item, q_items )
-            {
-                ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
-
-                if( item->codecName != destination->codecName || item->samplingRate != destination->samplingRate )
-                {
-                    canDrop = false;
-                    break;
-                }
-            }
-        }
-        if( canDrop )
         {
             QTreeWidget::dropEvent(event);
         }
         else
         {
-            KMessageBox::error( this, i18n("Some tracks can't be added to the album because either the codec or the sampling rate is different.") );
+            bool canDrop = true;
+            if( destination->type == ReplayGainFileListItem::Album )
+            {
+                QList<QTreeWidgetItem*> q_items = selectedItems();
+                foreach( QTreeWidgetItem *q_item, q_items )
+                {
+                    ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+
+                    if( item->codecName != destination->codecName || item->samplingRate != destination->samplingRate )
+                    {
+                        canDrop = false;
+                        break;
+                    }
+                }
+            }
+            if( canDrop )
+            {
+                QTreeWidget::dropEvent(event);
+            }
+            else
+            {
+                KMessageBox::error( this, i18n("Some tracks can't be added to the album because either the codec or the sampling rate is different.") );
+            }
         }
 
         // remove album, if last child was dragged out of it

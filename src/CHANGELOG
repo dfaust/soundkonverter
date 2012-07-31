@@ -1,5 +1,6 @@
 1.9.80 (2.0.0 beta1):
 -Add: Parallel ReplayGain calculation in the ReplayGain tool
+-Add: Move tracks to new Album via context menu in the ReplayGain tool
 -Change: Remember dimensions of the sub-windows and dialogs
 -Fix: Handle internal ReplayGain calculation properly
 -Fix: Drop directories onto the ReplayGain tool window

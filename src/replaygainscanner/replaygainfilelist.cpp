@@ -69,6 +69,8 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
 //     connect( processRemoveAction, SIGNAL(triggered()), this, SLOT(processRemoveSelectedItems()) );
 //     killAction = new KAction( KIcon("process-stop"), i18n("Stop calculation"), this );
 //     connect( killAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
+    moveAction = new KAction( KIcon ("folder-new"), i18n("Move to new Album"), this );
+    connect( moveAction, SIGNAL(triggered()), this, SLOT(moveSelectedItems()) );
     removeAction = new KAction( KIcon("edit-delete"), i18n("Remove"), this );
     removeAction->setShortcut( QKeySequence::Delete );
     connect( removeAction, SIGNAL(triggered()), this, SLOT(removeSelectedItems()) );
@@ -360,6 +362,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                     newTrackItem = new ReplayGainFileListItem( topLevelItem(j) );
                     newTrackItem->type = ReplayGainFileListItem::Track;
                     newTrackItem->codecName = codecName;
+                    newTrackItem->samplingRate = samplingRate;
                     newTrackItem->url = url;
                     newTrackItem->tags = tags;
                     newTrackItem->time = tags->length;
@@ -836,6 +839,7 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
     QList<QTreeWidgetItem*> q_items = selectedItems();
     bool canRemove = q_items.count() > 0;
     bool canStart = q_items.count() > 0;
+    bool canMove = q_items.count() > 0;
     bool canKill = q_items.count() > 0;
 
     foreach( QTreeWidgetItem *q_item, q_items )
@@ -852,6 +856,7 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
                 case ReplayGainFileListItem::Processing:
                     canRemove = false;
                     canStart = false;
+                    canMove = false;
                     break;
                 case ReplayGainFileListItem::Stopped:
                     canKill = false;
@@ -860,6 +865,7 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
         }
         else
         {
+            canMove = false;
             if( item->state == ReplayGainFileListItem::Processing )
             {
                 canRemove = false;
@@ -906,6 +912,11 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 //     {
 //         contextMenu->addAction( killAction );
 //     }
+    if( canMove )
+    {
+        contextMenu->addSeparator();
+        contextMenu->addAction( moveAction );
+    }
     if( canRemove )
     {
         contextMenu->addSeparator();
@@ -959,6 +970,50 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 // {
 //
 // }
+
+void ReplayGainFileList::moveSelectedItems()
+{
+    QList<QTreeWidgetItem*> q_items = selectedItems();
+
+    ReplayGainFileListItem *newAlbumItem = 0;
+
+    if( q_items.count() > 0 )
+    {
+        newAlbumItem = new ReplayGainFileListItem( this );
+        newAlbumItem->type = ReplayGainFileListItem::Album;
+        newAlbumItem->codecName = QString();
+        newAlbumItem->samplingRate = 0;
+        newAlbumItem->url = KUrl();
+        newAlbumItem->albumName = i18n("New album");
+        newAlbumItem->setExpanded( true );
+        newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
+    }
+
+    foreach( QTreeWidgetItem *q_item, q_items )
+    {
+        ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+
+        if( newAlbumItem->codecName.isEmpty() )
+        {
+            newAlbumItem->codecName = item->codecName;
+            newAlbumItem->samplingRate = item->samplingRate;
+            newAlbumItem->url = KUrl(item->url.directory());
+        }
+
+        if( item->codecName == newAlbumItem->codecName && item->samplingRate == newAlbumItem->samplingRate )
+        {
+            if( item->parent() )
+                item->parent()->takeChild( item->parent()->indexOfChild(q_item) );
+            else
+                takeTopLevelItem( indexOfTopLevelItem(q_item) );
+
+            newAlbumItem->addChild( q_item );
+        }
+    }
+
+    if( newAlbumItem )
+        updateItem( newAlbumItem );
+}
 
 void ReplayGainFileList::removeSelectedItems()
 {

@@ -78,8 +78,8 @@ private:
 //     KAction *processAddAction;
 //     KAction *processRemoveAction;
 //     KAction *killAction;
+    KAction *moveAction;
     KAction *removeAction;
-//     KAction *newAction;
 
     void processNextItem();
     int waitingCount();
@@ -94,6 +94,7 @@ private slots:
 //     void processAddSelectedItems();
 //     void processRemoveSelectedItems();
 //     void killSelectedItems();
+    void moveSelectedItems();
     void removeSelectedItems();
 
     // connected to ReplayGainProcessor

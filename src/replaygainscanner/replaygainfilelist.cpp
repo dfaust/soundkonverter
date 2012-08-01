@@ -407,7 +407,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                 newAlbumItem->codecName = codecName;
                 newAlbumItem->samplingRate = samplingRate;
                 newAlbumItem->url = url.directory();
-                newAlbumItem->albumName = tags->album;
+                newAlbumItem->albumName = config->data.general.replayGainGrouping == Config::Data::General::Directory ? url.directory() : tags->album;
                 newAlbumItem->setExpanded( true );
                 newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
                 lastAlbumItem = newAlbumItem;
@@ -472,8 +472,7 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
 
     if( item->type == ReplayGainFileListItem::Album )
     {
-        const QString identifier = config->data.general.replayGainGrouping == Config::Data::General::Directory ? item->url.pathOrUrl().right(item->url.pathOrUrl().length()-item->url.pathOrUrl().lastIndexOf("/")-1) : item->albumName;
-        item->setText( Column_File, identifier + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
+        item->setText( Column_File, item->albumName + " (" + item->codecName + ", " + QString::number(item->samplingRate) + " Hz)" );
     }
     else
     {

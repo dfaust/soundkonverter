@@ -407,7 +407,19 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                 newAlbumItem->codecName = codecName;
                 newAlbumItem->samplingRate = samplingRate;
                 newAlbumItem->url = url.directory();
-                newAlbumItem->albumName = config->data.general.replayGainGrouping == Config::Data::General::Directory ? url.directory() : tags->album;
+                if( config->data.general.replayGainGrouping == Config::Data::General::AlbumDirectory )
+                {
+                    newAlbumItem->albumName = tags->album;
+                    newAlbumItem->setToolTip( Column_File, url.directory() );
+                }
+                else if( config->data.general.replayGainGrouping == Config::Data::General::Album )
+                {
+                    newAlbumItem->albumName = tags->album;
+                }
+                else
+                {
+                    newAlbumItem->albumName = url.directory();
+                }
                 newAlbumItem->setExpanded( true );
                 newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
                 lastAlbumItem = newAlbumItem;
@@ -476,7 +488,11 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
     }
     else
     {
-        item->setText( Column_File, item->url.pathOrUrl() );
+        if( config->data.general.replayGainGrouping == Config::Data::General::Album )
+            item->setText( Column_File, item->url.pathOrUrl() );
+        else
+            item->setText( Column_File, item->url.fileName() );
+
         if( item->tags && item->tags->track_gain != 210588 )
         {
             item->setText( Column_Track, QString().sprintf("%+.2f dB",item->tags->track_gain) );

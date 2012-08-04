@@ -148,17 +148,10 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
         options->data.channels = 0;
     }
 
-//     if( cNormalize->isChecked() )
-//     {
-//         options->data.normalize = true;
-//         options->data.normalizeVolume = dNormalizeVolume->value();
-//         valid = true;
-//     }
-//     else
-//     {
-//         options->data.normalize = false;
-//         options->data.normalizeVolume = 0;
-//     }
+    foreach( SoxEffectWidget *effectWidget, effectWidgets )
+    {
+        options->data.effects.append( effectWidget->currentEffectOptions() );
+    }
 
     if( valid )
     {

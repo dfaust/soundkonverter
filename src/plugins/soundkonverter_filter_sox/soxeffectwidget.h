@@ -3,6 +3,7 @@
 #define SOXEFFECTWIDGET_H
 
 #include "../../core/codecwidget.h"
+#include "soxfilteroptions.h"
 
 class KComboBox;
 class KPushButton;
@@ -18,6 +19,8 @@ public:
 
     void setRemoveButtonShown( bool shown );
     void setAddButtonShown( bool shown );
+
+    SoxFilterOptions::EffectData currentEffectOptions();
 
 private:
     KComboBox *cEffect;

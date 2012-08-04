@@ -24,72 +24,72 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     cEffect = new KComboBox( this );
     connect( cEffect, SIGNAL(activated(int)), this, SLOT(effectChanged(int)) );
     cEffect->addItem( i18n("Disabled") );
-    cEffect->addItem( "allpass" );
-    cEffect->addItem( "band" );
-    cEffect->addItem( "bandpass" );
-    cEffect->addItem( "bandreject" );
+//     cEffect->addItem( "allpass" );
+//     cEffect->addItem( "band" );
+//     cEffect->addItem( "bandpass" );
+//     cEffect->addItem( "bandreject" );
     cEffect->addItem( "bass" );
-    cEffect->addItem( "bend" );
-    cEffect->addItem( "biquad" );
-    cEffect->addItem( "chorus" );
-    cEffect->addItem( "channels" );
-    cEffect->addItem( "compand" );
-    cEffect->addItem( "contrast" );
-    cEffect->addItem( "dcshift" );
-    cEffect->addItem( "deemph" );
-    cEffect->addItem( "delay" );
-    cEffect->addItem( "dither" );
-//     cEffect1->addItem( "divide" ); // experimental
-    cEffect->addItem( "downsample" );
-    cEffect->addItem( "earwax" );
-    cEffect->addItem( "echo" );
-    cEffect->addItem( "echos" );
-    cEffect->addItem( "equalizer" );
-    cEffect->addItem( "fade" );
-    cEffect->addItem( "fir" );
-//     cEffect1->addItem( "firfit" ); // experimental
-    cEffect->addItem( "flanger" );
-    cEffect->addItem( "gain" );
-    cEffect->addItem( "highpass" );
-    cEffect->addItem( "hilbert" );
-//     cEffect1->addItem( "input" ); // libSoX-only
-    cEffect->addItem( "ladspa" );
-    cEffect->addItem( "loudness" );
-    cEffect->addItem( "lowpass" );
-    cEffect->addItem( "mcompand" );
-//     cEffect1->addItem( "mixer" ); // deprecated
-    cEffect->addItem( "noiseprof" );
-    cEffect->addItem( "noisered" );
+//     cEffect->addItem( "bend" );
+//     cEffect->addItem( "biquad" );
+//     cEffect->addItem( "chorus" );
+//     cEffect->addItem( "channels" );
+//     cEffect->addItem( "compand" );
+//     cEffect->addItem( "contrast" );
+//     cEffect->addItem( "dcshift" );
+//     cEffect->addItem( "deemph" );
+//     cEffect->addItem( "delay" );
+//     cEffect->addItem( "dither" );
+// //     cEffect1->addItem( "divide" ); // experimental
+//     cEffect->addItem( "downsample" );
+//     cEffect->addItem( "earwax" );
+//     cEffect->addItem( "echo" );
+//     cEffect->addItem( "echos" );
+//     cEffect->addItem( "equalizer" );
+//     cEffect->addItem( "fade" );
+//     cEffect->addItem( "fir" );
+// //     cEffect1->addItem( "firfit" ); // experimental
+//     cEffect->addItem( "flanger" );
+//     cEffect->addItem( "gain" );
+//     cEffect->addItem( "highpass" );
+//     cEffect->addItem( "hilbert" );
+// //     cEffect1->addItem( "input" ); // libSoX-only
+//     cEffect->addItem( "ladspa" );
+//     cEffect->addItem( "loudness" );
+//     cEffect->addItem( "lowpass" );
+//     cEffect->addItem( "mcompand" );
+// //     cEffect1->addItem( "mixer" ); // deprecated
+//     cEffect->addItem( "noiseprof" );
+//     cEffect->addItem( "noisered" );
     cEffect->addItem( "norm" );
-    cEffect->addItem( "oops" );
-//     cEffect1->addItem( "output" ); // libSoX-only
-    cEffect->addItem( "overdrive" );
-    cEffect->addItem( "pad" );
-    cEffect->addItem( "phaser" );
-    cEffect->addItem( "pitch" );
-    cEffect->addItem( "rate" );
-    cEffect->addItem( "remix" );
-    cEffect->addItem( "repeat" );
-    cEffect->addItem( "reverb" );
-    cEffect->addItem( "reverse" );
-    cEffect->addItem( "riaa" );
-    cEffect->addItem( "silence" );
-    cEffect->addItem( "sinc" );
-    cEffect->addItem( "spectrogram" );
-    cEffect->addItem( "speed" );
-    cEffect->addItem( "splice" );
-    cEffect->addItem( "stat" );
-    cEffect->addItem( "stats" );
-    cEffect->addItem( "stretch" );
-    cEffect->addItem( "swap" );
-    cEffect->addItem( "synth" );
-    cEffect->addItem( "tempo" );
+//     cEffect->addItem( "oops" );
+// //     cEffect1->addItem( "output" ); // libSoX-only
+//     cEffect->addItem( "overdrive" );
+//     cEffect->addItem( "pad" );
+//     cEffect->addItem( "phaser" );
+//     cEffect->addItem( "pitch" );
+//     cEffect->addItem( "rate" );
+//     cEffect->addItem( "remix" );
+//     cEffect->addItem( "repeat" );
+//     cEffect->addItem( "reverb" );
+//     cEffect->addItem( "reverse" );
+//     cEffect->addItem( "riaa" );
+//     cEffect->addItem( "silence" );
+//     cEffect->addItem( "sinc" );
+//     cEffect->addItem( "spectrogram" );
+//     cEffect->addItem( "speed" );
+//     cEffect->addItem( "splice" );
+//     cEffect->addItem( "stat" );
+//     cEffect->addItem( "stats" );
+//     cEffect->addItem( "stretch" );
+//     cEffect->addItem( "swap" );
+//     cEffect->addItem( "synth" );
+//     cEffect->addItem( "tempo" );
     cEffect->addItem( "treble" );
-    cEffect->addItem( "tremolo" );
-    cEffect->addItem( "trim" );
-    cEffect->addItem( "upsample" );
-    cEffect->addItem( "vad" );
-    cEffect->addItem( "vol" );
+//     cEffect->addItem( "tremolo" );
+//     cEffect->addItem( "trim" );
+//     cEffect->addItem( "upsample" );
+//     cEffect->addItem( "vad" );
+//     cEffect->addItem( "vol" );
     box->addWidget( cEffect );
 
     widgetsBox = new QHBoxLayout();
@@ -157,9 +157,76 @@ void SoxEffectWidget::effectChanged( int index )
     }
     else if( effect == "bass" )
     {
-        cEffect->setToolTip( i18n("Bass:\nAmplify the bass") );
+        cEffect->setToolTip( i18n("Bass:\nAmplify the low frequencies") );
 
+        QDoubleSpinBox *dBassGain = new QDoubleSpinBox( this );
+        dBassGain->setRange( -99, 99 );
+        dBassGain->setSuffix( " " + i18nc("decibel","dB") );
+        connect( dBassGain, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        widgetsBox->addWidget( dBassGain );
+
+        dBassGain->setValue( 0 );
+
+        widgets.append( (QWidget*)dBassGain );
     }
+    else if( effect == "treble" )
+    {
+        cEffect->setToolTip( i18n("Treble:\nAmplify the high frequencies") );
+
+        QDoubleSpinBox *dTrebleGain = new QDoubleSpinBox( this );
+        dTrebleGain->setRange( -99, 99 );
+        dTrebleGain->setSuffix( " " + i18nc("decibel","dB") );
+        connect( dTrebleGain, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        widgetsBox->addWidget( dTrebleGain );
+
+        dTrebleGain->setValue( 0 );
+
+        widgets.append( (QWidget*)dTrebleGain );
+    }
+}
+
+SoxFilterOptions::EffectData SoxEffectWidget::currentEffectOptions()
+{
+    SoxFilterOptions::EffectData data;
+
+    const QString effect = cEffect->currentText();
+    data.effectName = effect;
+
+    if( effect == "norm" )
+    {
+        if( widgets.isEmpty() )
+            return data;
+
+        QDoubleSpinBox *dNormalizeVolume = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dNormalizeVolume )
+            return data;
+
+        data.data.append( dNormalizeVolume->value() );
+    }
+    else if( effect == "bass" )
+    {
+        if( widgets.isEmpty() )
+            return data;
+
+        QDoubleSpinBox *dBassGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dBassGain )
+            return data;
+
+        data.data.append( dBassGain->value() );
+    }
+    else if( effect == "treble" )
+    {
+        if( widgets.isEmpty() )
+            return data;
+
+        QDoubleSpinBox *dTrebleGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dTrebleGain )
+            return data;
+
+        data.data.append( dTrebleGain->value() );
+    }
+
+    return data;
 }
 
 void SoxEffectWidget::normalizeVolumeChanged( double value )

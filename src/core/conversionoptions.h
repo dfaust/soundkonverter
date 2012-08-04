@@ -20,9 +20,10 @@ public:
     FilterOptions();
     virtual ~FilterOptions();
 
+    bool equalsBasics( FilterOptions *_other );
     virtual bool equals( FilterOptions *_other ); // checks if the other FilterOptions is equal to this
 
-    virtual QDomElement toXml( QDomElement filterOptions );
+    virtual QDomElement toXml( QDomDocument document, const QString elementName );
 
     virtual bool fromXml( QDomElement filterOptions );
 

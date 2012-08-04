@@ -332,10 +332,6 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
             SoxFilterOptions *filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
             command += binaries["sox"];
             command += "--no-glob";
-            if( filterOptions->data.normalize )
-            {
-                command += "--norm=" + QString::number(filterOptions->data.normalizeVolume);
-            }
             if( inputFile.isEmpty() )
             {
                 command += "--type";

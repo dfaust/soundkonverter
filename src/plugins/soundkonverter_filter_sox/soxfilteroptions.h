@@ -12,7 +12,7 @@ public:
     ~SoxFilterOptions();
 
     bool equals( FilterOptions *_other );
-    QDomElement toXml( QDomElement _filterOptions );
+    QDomElement toXml( QDomDocument document, const QString elementName );
     bool fromXml( QDomElement filterOptions );
 
     struct EffectData {
@@ -21,11 +21,12 @@ public:
     };
 
     struct Data {
+        bool sampleRateEnabled;
         int sampleRate;
+        bool sampleSizeEnabled;
         int sampleSize;
+        bool channelsEnabled;
         short channels;
-        bool normalize;
-        double normalizeVolume;
         QList<EffectData> effects;
     } data;
 };

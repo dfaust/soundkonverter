@@ -12,13 +12,27 @@ FilterOptions::~FilterOptions()
 
 bool FilterOptions::equals( FilterOptions *_other )
 {
-    Q_UNUSED( _other );
-    return false;
+    if( !_other )
+        return false;
+
+    return ( equalsBasics(_other) );
 }
 
-QDomElement FilterOptions::toXml( QDomElement filterOptions )
+bool FilterOptions::equalsBasics( FilterOptions *_other )
 {
+    if( !_other )
+        return false;
+
+    return ( pluginName ==_other->pluginName &&
+             cmdArguments ==_other->cmdArguments );
+}
+
+QDomElement FilterOptions::toXml( QDomDocument document, const QString elementName )
+{
+    QDomElement filterOptions = document.createElement(elementName);
+
     filterOptions.setAttribute("pluginName",pluginName);
+    filterOptions.setAttribute("cmdArguments",cmdArguments);
 
     return filterOptions;
 }
@@ -98,8 +112,7 @@ QDomElement ConversionOptions::toXml( QDomDocument document )
     int i = 0;
     foreach( FilterOptions *filter, filterOptions )
     {
-        QDomElement filterOptionsElement = document.createElement("filterOptions"+QString::number(i++));
-        filterOptionsElement = filter->toXml(filterOptionsElement);
+        QDomElement filterOptionsElement = filter->toXml(document,"filterOptions"+QString::number(i++));
         conversionOptions.appendChild(filterOptionsElement);
     }
 

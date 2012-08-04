@@ -3,7 +3,7 @@ soundKonverter is a frontend to various audio converters.
 
 The key features are:
 - Audio conversion
-- Replay Gain calculation
+- ReplayGain calculation
 - CD ripping
 
 Reading and writing tags and covers is supported for many formats, so they are preserved when converting files.
@@ -30,7 +30,7 @@ wavpack         (wavpack)                                               (wavpack
 ttaenc          (tta)                                                   (tta)
 speex           (speex)                                                 (speex)
 
-Replay Gain calculators:
+ReplayGain calculators:
 aacgain         (aac,mp3)
 metaflac        (flac)
 mp3gain         (mp3)
@@ -56,18 +56,19 @@ Feature list:
 - Convert multiple files at once
 - Calculate ReplayGain for many formats
 - ReplayGain tool for calculating and removing ReplayGain tags
+- Calculate ReplayGain for multiple files or file stets at once
 - Conversion and ReplayGain calculation is very scalable, the conversion of 100000 files or more is not a problem
 - Copy tags and covers when converting files (note: for flac and asf/wma files, taglib 1.7 is needed, writing ogg covers is not supported, yet.)
 - Rip multiple audio CDs at once
 - Retrieve audio CD information from CDDB and MusicBrainz
 - Easy to use, just choose a file format and a quality level
-- Detailed control, if you want to choose the conversion settings in more detail, simply switch to the 'detailed' tab
+- Detailed control, if you want to choose the conversion settings in more detail, simply switch to the "detailed" tab
 - Manage your preferred conversion options with profiles
-- Contextual help, e.g. if you don't know what the speex format is, just click on the 'info' button next to it.
+- Contextual help, e.g. if you don't know what the speex format is, just click on the "info" button next to it.
   Or if you want to add a file that isn't supported, soundKonverter will tell you how to enable the format if possible.
 - Possibility to configure which backend shall be used for which codec - or let soundKonverter optimize that for you.
   Every time you install or remove backends soundKonverter will suggest optimizations if possible.
-- Possibility to integrate soundKonverter in other applications or scripts by using its command line features
+- Possibility to integrate soundKonverter in other applications or scripts by using its command line interface
 
 
 
@@ -110,7 +111,7 @@ For installing soundKonverter to your home directory see Building Amarok Locally
 Un-Installation:
 ================
 For uninstalling soundKonverter, open a console and change to the soundKonverter build directory.
-(If you followed the instructions above it's the directory named 'build' in the soundKonverter source directory.)
+(If you followed the instructions above it's the directory named "build" in the soundKonverter source directory.)
 Then execute one of the following commands:
 
 sudo xargs rm < install_manifest.txt
@@ -165,7 +166,7 @@ But make sure the source is trustworthy of course...!
 Git repository:
 ===============
 For everybody who is interested, there is a git repository at http://gitorious.org/soundkonverter/soundkonverter
-In order to obtain the source code from the git repository you need to install 'git' and execute the following commands:
+In order to obtain the source code from the git repository you need to install "git" and execute the following commands:
 
 initialize local git repository:
 

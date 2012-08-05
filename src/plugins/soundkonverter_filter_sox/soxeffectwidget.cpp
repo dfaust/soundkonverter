@@ -187,46 +187,92 @@ void SoxEffectWidget::effectChanged( int index )
 
 SoxFilterOptions::EffectData SoxEffectWidget::currentEffectOptions()
 {
-    SoxFilterOptions::EffectData data;
+    SoxFilterOptions::EffectData effectData;
 
     const QString effect = cEffect->currentText();
-    data.effectName = effect;
+    effectData.effectName = effect;
 
     if( effect == "norm" )
     {
         if( widgets.isEmpty() )
-            return data;
+            return effectData;
 
         QDoubleSpinBox *dNormalizeVolume = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
         if( !dNormalizeVolume )
-            return data;
+            return effectData;
 
-        data.data.append( dNormalizeVolume->value() );
+        effectData.data.append( dNormalizeVolume->value() );
     }
     else if( effect == "bass" )
     {
         if( widgets.isEmpty() )
-            return data;
+            return effectData;
 
         QDoubleSpinBox *dBassGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
         if( !dBassGain )
-            return data;
+            return effectData;
 
-        data.data.append( dBassGain->value() );
+        effectData.data.append( dBassGain->value() );
     }
     else if( effect == "treble" )
     {
         if( widgets.isEmpty() )
-            return data;
+            return effectData;
 
         QDoubleSpinBox *dTrebleGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
         if( !dTrebleGain )
-            return data;
+            return effectData;
 
-        data.data.append( dTrebleGain->value() );
+        effectData.data.append( dTrebleGain->value() );
     }
 
-    return data;
+    return effectData;
+}
+
+bool SoxEffectWidget::setEffectOptions( SoxFilterOptions::EffectData effectData )
+{
+    const int index = cEffect->findText( effectData.effectName );
+    if( index == -1 )
+        return false;
+
+    cEffect->setCurrentIndex( index );
+    effectChanged( index );
+
+    if( effectData.effectName == "norm" )
+    {
+        if( widgets.isEmpty() )
+            return false;
+
+        QDoubleSpinBox *dNormalizeVolume = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dNormalizeVolume )
+            return false;
+
+        dNormalizeVolume->setValue( effectData.data.at(0).toDouble() );
+    }
+    else if( effectData.effectName == "bass" )
+    {
+        if( widgets.isEmpty() )
+            return false;
+
+        QDoubleSpinBox *dBassGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dBassGain )
+            return false;
+
+        dBassGain->setValue( effectData.data.at(0).toDouble() );
+    }
+    else if( effectData.effectName == "treble" )
+    {
+        if( widgets.isEmpty() )
+            return false;
+
+        QDoubleSpinBox *dTrebleGain = qobject_cast<QDoubleSpinBox*>(widgets.at(0));
+        if( !dTrebleGain )
+            return false;
+
+        dTrebleGain->setValue( effectData.data.at(0).toDouble() );
+    }
+
+    return true;
 }
 
 void SoxEffectWidget::normalizeVolumeChanged( double value )

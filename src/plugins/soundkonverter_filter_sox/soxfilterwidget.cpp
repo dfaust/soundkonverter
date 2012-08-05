@@ -170,25 +170,26 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
 
 bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
 {
+    // reset effect widgets
+    for( int i=1; i<effectWidgets.count(); i++ )
+    {
+        effectWidgetsBox->removeWidget( effectWidgets.at(i) );
+        effectWidgets.at(i)->deleteLater();
+        effectWidgets.removeAt( i );
+        i--;
+    }
+    if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
+    {
+        effectWidgets.last()->setAddButtonShown( true );
+        if( effectWidgets.count() == 1 )
+            effectWidgets.last()->setRemoveButtonShown( false );
+    }
+
     if( !_options )
     {
         chSampleRate->setChecked( false );
         chSampleSize->setChecked( false );
         chChannels->setChecked( false );
-
-        for( int i=1; i<effectWidgets.count(); i++ )
-        {
-            effectWidgetsBox->removeWidget( effectWidgets.at(i) );
-            effectWidgets.at(i)->deleteLater();
-            effectWidgets.removeAt( i );
-        }
-
-        if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
-        {
-            effectWidgets.last()->setAddButtonShown( true );
-            if( effectWidgets.count() == 1 )
-                effectWidgets.last()->setRemoveButtonShown( false );
-        }
 
         return true;
     }
@@ -212,6 +213,15 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     if( options->data.channels > 0 )
     {
         cChannels->setCurrentIndex( options->data.channels - 1 );
+    }
+
+    bool first = true;
+    foreach( const SoxFilterOptions::EffectData effectData, options->data.effects )
+    {
+        if( !first )
+            addEffectWidgetClicked();
+        effectWidgets.last()->setEffectOptions( effectData );
+        first = false;
     }
 
     return true;

@@ -21,6 +21,7 @@ public:
     void setAddButtonShown( bool shown );
 
     SoxFilterOptions::EffectData currentEffectOptions();
+    bool setEffectOptions( SoxFilterOptions::EffectData effectData );
 
 private:
     KComboBox *cEffect;

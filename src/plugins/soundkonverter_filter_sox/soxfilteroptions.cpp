@@ -82,25 +82,25 @@ QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString elemen
         if( effectData.effectName == i18n("Disabled") )
             continue;
 
-        QDomElement effect = document.createElement("effect"+QString::number(i++));
-        effect.setAttribute("name",effectData.effectName);
+        QDomElement effectElement = document.createElement("effect"+QString::number(i++));
+        effectElement.setAttribute("name",effectData.effectName);
 
         if( effectData.effectName == "norm" )
         {
             if( !effectData.data.isEmpty() )
-                effect.setAttribute("normalizeVolume",effectData.data.at(0).toDouble());
+                effectElement.setAttribute("normalizeVolume",effectData.data.at(0).toDouble());
         }
         else if( effectData.effectName == "bass" )
         {
             if( !effectData.data.isEmpty() )
-                effect.setAttribute("bassGain",effectData.data.at(0).toDouble());
+                effectElement.setAttribute("bassGain",effectData.data.at(0).toDouble());
         }
         else if( effectData.effectName == "treble" )
         {
             if( !effectData.data.isEmpty() )
-                effect.setAttribute("trebleGain",effectData.data.at(0).toDouble());
+                effectElement.setAttribute("trebleGain",effectData.data.at(0).toDouble());
         }
-        filterOptions.appendChild(effect);
+        filterOptions.appendChild(effectElement);
     }
 
     return filterOptions;
@@ -112,6 +112,30 @@ bool SoxFilterOptions::fromXml( QDomElement filterOptions )
     data.sampleRate = filterOptions.attribute("sampleRate").toInt();
     data.sampleSize = filterOptions.attribute("sampleSize").toInt();
     data.channels = filterOptions.attribute("channels").toInt();
+
+    for( QDomNode node = filterOptions.firstChild(); !node.isNull(); node = node.nextSibling() )
+    {
+        if( node.nodeName().startsWith("effect") )
+        {
+            QDomElement effectElement = node.toElement();
+            SoxFilterOptions::EffectData effectData;
+            effectData.effectName = effectElement.attribute("name");
+
+            if( effectData.effectName == "norm" )
+            {
+                effectData.data.append( effectElement.attribute("normalizeVolume").toDouble() );
+            }
+            else if( effectData.effectName == "bass" )
+            {
+                effectData.data.append( effectElement.attribute("bassGain").toDouble() );
+            }
+            else if( effectData.effectName == "treble" )
+            {
+                effectData.data.append( effectElement.attribute("trebleGain").toDouble() );
+            }
+            data.effects.append( effectData );
+        }
+    }
 
     return true;
 }

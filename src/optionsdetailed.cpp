@@ -358,12 +358,49 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
     outputDirectory->setDirectory( options->outputDirectory );
     cReplayGain->setChecked( options->replaygain );
 
+    bool succeeded = true;
+
     if( options->codecName == "wav" )
-        return true;
+        succeeded = true;
     else if( wPlugin )
-        return wPlugin->setCurrentConversionOptions( options );
+        succeeded = wPlugin->setCurrentConversionOptions( options );
     else
-        return false;
+        succeeded = false;
+
+    QStringList usedFilter;
+    foreach( FilterOptions *filterOptions, options->filterOptions )
+    {
+        bool filterSucceeded = false;
+        for( int i=0; i<wFilter.size(); i++ )
+        {
+            FilterWidget *widget = wFilter.keys().at(i);
+            FilterPlugin *plugin = wFilter.values().at(i);
+            if( widget && plugin && filterOptions->pluginName == plugin->name() )
+            {
+                filterSucceeded = widget->setCurrentFilterOptions( filterOptions );
+                usedFilter.append( filterOptions->pluginName );
+                break;
+            }
+        }
+        if( !filterSucceeded )
+            succeeded = false;
+    }
+    // if a filter is disabled, its FilterOptions is 0 thus it won't be added to ConversionOptions, but we need to update the widget so it won't show false data
+    if( usedFilter.count() != options->filterOptions.count() )
+    {
+        for( int i=0; i<wFilter.size(); i++ )
+        {
+            FilterWidget *widget = wFilter.keys().at(i);
+            FilterPlugin *plugin = wFilter.values().at(i);
+            if( widget && plugin && !usedFilter.contains(plugin->name()) )
+            {
+                widget->setCurrentFilterOptions( 0 );
+                break;
+            }
+        }
+    }
+
+    return succeeded;
 }
 
 bool OptionsDetailed::saveCustomProfile( bool lastUsed )

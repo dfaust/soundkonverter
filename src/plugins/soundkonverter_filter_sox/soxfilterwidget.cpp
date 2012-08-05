@@ -166,12 +166,49 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
 
 bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name )
+    if( !_options )
+    {
+        chSampleRate->setChecked( false );
+        chSampleSize->setChecked( false );
+        chChannels->setChecked( false );
+
+        for( int i=1; i<effectWidgets.count(); i++ )
+        {
+            effectWidgetsBox->removeWidget( effectWidgets.at(i) );
+            effectWidgets.at(i)->deleteLater();
+            effectWidgets.removeAt( i );
+        }
+
+        if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
+        {
+            effectWidgets.last()->setAddButtonShown( true );
+            if( effectWidgets.count() == 1 )
+                effectWidgets.last()->setRemoveButtonShown( false );
+        }
+
+        return true;
+    }
+
+    if( _options->pluginName != global_plugin_name )
         return false;
 
     SoxFilterOptions *options = dynamic_cast<SoxFilterOptions*>(_options);
-//     cNormalize->setChecked( options->data.normalize );
-//     dNormalizeVolume->setValue( options->data.normalizeVolume );
+
+    chSampleRate->setChecked( options->data.sampleRate > 0 );
+    if( options->data.sampleRate > 0 )
+    {
+        cSampleRate->setCurrentItem( QString::number(options->data.sampleRate) + " Hz" );
+    }
+    chSampleSize->setChecked( options->data.sampleSize > 0 );
+    if( options->data.sampleSize > 0 )
+    {
+        cSampleSize->setCurrentItem( QString::number(options->data.sampleSize) + " bit" );
+    }
+    chChannels->setChecked( options->data.channels > 0 );
+    if( options->data.channels > 0 )
+    {
+        cChannels->setCurrentIndex( options->data.channels - 1 );
+    }
 
     return true;
 }

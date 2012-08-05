@@ -57,15 +57,61 @@ bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter optio
     if( !_other )
         return false;
 
-    return ( equalsBasics(_other) &&
-             qualityMode ==_other->qualityMode &&
-             quality ==_other->quality &&
-             bitrate ==_other->bitrate &&
-             bitrateMode ==_other->bitrateMode &&
-             bitrateMin ==_other->bitrateMin &&
-             bitrateMax ==_other->bitrateMax &&
-             samplingRate ==_other->samplingRate &&
-             channels ==_other->channels );
+    if( !equalsBasics(_other) )
+        return false;
+
+    if( qualityMode !=_other->qualityMode )
+        return false;
+    if( quality !=_other->quality )
+        return false;
+    if( bitrate !=_other->bitrate )
+        return false;
+    if( bitrateMode !=_other->bitrateMode )
+        return false;
+    if( bitrateMin !=_other->bitrateMin )
+        return false;
+    if( bitrateMax !=_other->bitrateMax )
+        return false;
+    if( samplingRate !=_other->samplingRate )
+        return false;
+    if( channels !=_other->channels )
+        return false;
+
+    QStringList filters;
+    foreach( FilterOptions *filter, filterOptions )
+    {
+        filters.append( filter->pluginName );
+    }
+    filters.sort();
+
+    QStringList other_filters;
+    foreach( FilterOptions *otherFilter, _other->filterOptions )
+    {
+        other_filters.append( otherFilter->pluginName );
+    }
+    other_filters.sort();
+
+    if( filters == other_filters )
+    {
+        foreach( FilterOptions *filter, filterOptions )
+        {
+            foreach( FilterOptions *otherFilter, _other->filterOptions )
+            {
+                if( otherFilter->pluginName == filter->pluginName )
+                {
+                    if( !filter->equals(otherFilter) )
+                        return false;
+                    break;
+                }
+            }
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
 }
 
 bool ConversionOptions::equalsBasics( ConversionOptions *_other ) // TODO filter options

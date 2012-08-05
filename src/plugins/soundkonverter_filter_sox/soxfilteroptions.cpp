@@ -56,6 +56,7 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
                 {
                     if( otherEffectData.data != effectData.data )
                         return false;
+                    break;
                 }
             }
         }

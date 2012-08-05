@@ -1,7 +1,7 @@
 //
 // C++ Implementation: conversionoptionsmanager
 //
-// Description: 
+// Description:
 //
 //
 // Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
@@ -35,7 +35,7 @@ int ConversionOptionsManager::addConversionOptions( ConversionOptions *conversio
         // FIXME error message, null pointer for conversion options
         return -1;
     }
-    
+
     for( int i=0; i<elements.size(); i++ )
     {
         if( elements.at(i).conversionOptions->pluginName == conversionOptions->pluginName )
@@ -107,11 +107,11 @@ int ConversionOptionsManager::updateConversionOptions( int id, ConversionOptions
 QList<int> ConversionOptionsManager::getAllIds()
 {
     QList<int> ids;
-  
+
     for( int i=0; i<elements.size(); i++ )
     {
         ids += elements.at(i).id;
     }
-    
+
     return ids;
 }

@@ -313,29 +313,24 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
             options->outputFilesystem = outputDirectory->filesystem();
             options->replaygain = cReplayGain->isChecked();
 
+            for( int i=0; i<wFilter.size(); i++ )
+            {
+                FilterWidget *widget = wFilter.keys().at(i);
+                FilterPlugin *plugin = wFilter.values().at(i);
+                if( widget && plugin )
+                {
+                    FilterOptions *filterOptions = widget->currentFilterOptions();
+                    if( filterOptions )
+                    {
+                        filterOptions->pluginName = plugin->name();
+                        options->filterOptions.append( filterOptions );
+                    }
+                }
+            }
+
             config->data.general.lastProfile = currentProfile();
             saveCustomProfile( true );
             config->data.general.lastFormat = cFormat->currentText();
-        }
-    }
-
-    for( int i=0; i<wFilter.size(); i++ )
-    {
-        FilterWidget *widget = wFilter.keys().at(i);
-        FilterPlugin *plugin = wFilter.values().at(i);
-        if( widget && plugin )
-        {
-            FilterOptions *filterOptions = widget->currentFilterOptions();
-            if( filterOptions )
-            {
-                filterOptions->pluginName = plugin->name();
-
-//                 config->data.general.lastProfile = currentProfile();
-//                 saveCustomProfile( true );
-//                 config->data.general.lastFormat = cFormat->currentText();
-
-                options->filterOptions.append( filterOptions );
-            }
         }
     }
 

@@ -1302,6 +1302,7 @@ void FileList::load( bool user )
     }
 
     QMap<int,int> conversionOptionsIds;
+    QMap<int,int> conversionOptionsReferences;
     QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
     if( listFile.open( QIODevice::ReadOnly ) )
@@ -1347,6 +1348,7 @@ void FileList::load( bool user )
                     }
                     const int id = conversionOptionsElements.at(i).toElement().attribute("id").toInt();
                     conversionOptionsIds[id] = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
+                    conversionOptionsReferences[conversionOptionsIds[id]] = 0;
                 }
                 QDomNodeList files = root.elementsByTagName("file");
                 pScanStatus->setRange( 0, files.count() );
@@ -1365,7 +1367,9 @@ void FileList::load( bool user )
                     item->device = file.attribute("device");
                     item->length = file.attribute("time").toInt();
                     item->notifyCommand = file.attribute("notifyCommand");
-                    config->conversionOptionsManager()->increaseReferences( item->conversionOptionsId );
+                    if( conversionOptionsReferences[item->conversionOptionsId] != 0 )
+                        config->conversionOptionsManager()->increaseReferences( item->conversionOptionsId );
+                    conversionOptionsReferences[item->conversionOptionsId]++;
                     if( file.elementsByTagName("tags").count() > 0 )
                     {
                         QDomElement tags = file.elementsByTagName("tags").at(0).toElement();

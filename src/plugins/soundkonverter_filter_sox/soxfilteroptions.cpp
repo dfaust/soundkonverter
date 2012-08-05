@@ -25,17 +25,11 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
     if( !other )
         return false;
 
-    if( data.sampleRateEnabled != other->data.sampleRateEnabled )
+    if( data.sampleRate != other->data.sampleRate )
         return false;
-    if( data.sampleRateEnabled && data.sampleRate != other->data.sampleRate )
+    if( data.sampleSize != other->data.sampleSize )
         return false;
-    if( data.sampleSizeEnabled != other->data.sampleSizeEnabled )
-        return false;
-    if( data.sampleSizeEnabled && data.sampleSize != other->data.sampleSize )
-        return false;
-    if( data.channelsEnabled != other->data.channelsEnabled )
-        return false;
-    if( data.channelsEnabled && data.channels != other->data.channels )
+    if( data.channels != other->data.channels )
         return false;
 
     QStringList effects;
@@ -77,11 +71,8 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
 QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString elementName )
 {
     QDomElement filterOptions = FilterOptions::toXml( document, elementName );
-    filterOptions.setAttribute("sampleRateEnabled",data.sampleRateEnabled);
     filterOptions.setAttribute("sampleRate",data.sampleRate);
-    filterOptions.setAttribute("sampleSizeEnabled",data.sampleSizeEnabled);
     filterOptions.setAttribute("sampleSize",data.sampleSize);
-    filterOptions.setAttribute("channelsEnabled",data.channelsEnabled);
     filterOptions.setAttribute("channels",data.channels);
 
     int i = 0;
@@ -114,12 +105,9 @@ QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString elemen
 bool SoxFilterOptions::fromXml( QDomElement filterOptions )
 {
     FilterOptions::fromXml( filterOptions );
-    data.sampleRateEnabled = filterOptions.attribute("sampleRateEnabled").toInt();
-    data.sampleRate = filterOptions.attribute("sampleRate").toDouble();
-    data.sampleSizeEnabled = filterOptions.attribute("sampleSizeEnabled").toInt();
-    data.sampleSize = filterOptions.attribute("sampleSize").toDouble();
-    data.channelsEnabled = filterOptions.attribute("channelsEnabled").toInt();
-    data.channels = filterOptions.attribute("channels").toDouble();
+    data.sampleRate = filterOptions.attribute("sampleRate").toInt();
+    data.sampleSize = filterOptions.attribute("sampleSize").toInt();
+    data.channels = filterOptions.attribute("channels").toInt();
 
     return true;
 }

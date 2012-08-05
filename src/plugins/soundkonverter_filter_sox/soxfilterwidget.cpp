@@ -125,7 +125,7 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
     }
     else
     {
-        options->data.sampleRate = false;
+        options->data.sampleRate = 0;
     }
 
     if( chSampleSize->isChecked() )
@@ -135,7 +135,7 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
     }
     else
     {
-        options->data.sampleSize = false;
+        options->data.sampleSize = 0;
     }
 
     if( chChannels->isChecked() )
@@ -151,6 +151,7 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
     foreach( SoxEffectWidget *effectWidget, effectWidgets )
     {
         options->data.effects.append( effectWidget->currentEffectOptions() );
+        valid = true;
     }
 
     if( valid )

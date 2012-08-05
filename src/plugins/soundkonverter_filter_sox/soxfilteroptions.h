@@ -21,12 +21,9 @@ public:
     };
 
     struct Data {
-        bool sampleRateEnabled;
-        int sampleRate;
-        bool sampleSizeEnabled;
-        int sampleSize;
-        bool channelsEnabled;
-        short channels;
+        int sampleRate; // 0 if disabled
+        int sampleSize; // 0 if disabled
+        short channels; // 0 if disabled
         QList<EffectData> effects;
     } data;
 };

@@ -150,8 +150,12 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
 
     foreach( SoxEffectWidget *effectWidget, effectWidgets )
     {
-        options->data.effects.append( effectWidget->currentEffectOptions() );
-        valid = true;
+        const SoxFilterOptions::EffectData data = effectWidget->currentEffectOptions();
+        if( data.effectName != i18n("Disabled") )
+        {
+            options->data.effects.append( data );
+            valid = true;
+        }
     }
 
     if( valid )

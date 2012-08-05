@@ -79,6 +79,9 @@ QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString elemen
     int i = 0;
     foreach( const EffectData effectData, data.effects )
     {
+        if( effectData.effectName == i18n("Disabled") )
+            continue;
+
         QDomElement effect = document.createElement("effect"+QString::number(i++));
         effect.setAttribute("name",effectData.effectName);
 

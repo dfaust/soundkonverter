@@ -17,19 +17,33 @@
 FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     : QTreeWidgetItem( parent, after )
 {
-    state = WaitingForConversion;
-    length = 0;
+    conversionOptionsId = -1;
     tags = 0;
-    logId = 0;
+
+    state = WaitingForConversion;
+    local = true;
+    track = -1;
+    tracks = 0;
+
+    length = 0;
+
+    logId = -1;
 }
 
 FileListItem::FileListItem( QTreeWidget *parent )
     : QTreeWidgetItem( parent )
 {
-    state = WaitingForConversion;
-    length = 0;
+    conversionOptionsId = -1;
     tags = 0;
-    logId = 0;
+
+    state = WaitingForConversion;
+    local = true;
+    track = -1;
+    tracks = 0;
+
+    length = 0;
+
+    logId = -1;
 }
 
 FileListItem::~FileListItem()

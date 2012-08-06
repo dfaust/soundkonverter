@@ -45,7 +45,22 @@ bool FilterOptions::fromXml( QDomElement filterOptions )
 
 
 ConversionOptions::ConversionOptions()
-{}
+{
+    qualityMode = Quality;
+    quality = 0;
+    bitrate = 0;
+    bitrateMode = Vbr;
+    bitrateMin = 0;
+    bitrateMax = 0;
+    samplingRate = 0;
+    channels = 0;
+
+    compressionLevel = 0;
+
+    outputDirectoryMode = 0;
+
+    replaygain = false;
+}
 
 ConversionOptions::~ConversionOptions()
 {

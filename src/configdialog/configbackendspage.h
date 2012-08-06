@@ -87,15 +87,16 @@ private:
     Config *config;
 
     KComboBox *cSelectorRipper;
-    KComboBox *cSelectorFilter;
     KComboBox *cSelectorFormat;
+
+    QList<QCheckBox*> filterCheckBoxes;
+    QList<KPushButton*> filterConfigButtons;
 
     BackendsListWidget *decoderList;
     BackendsListWidget *encoderList;
     BackendsListWidget *replaygainList;
 
     KPushButton *pConfigureRipper;
-    KPushButton *pConfigureFilter;
     KPushButton *pShowOptimizations;
 
     QString currentFormat;
@@ -103,7 +104,6 @@ private:
 private slots:
     void somethingChanged();
     void ripperChanged( const QString& pluginName );
-    void filterChanged( const QString& pluginName );
     void formatChanged( const QString& format, bool ignoreChanges = false );
     void configureRipper();
     void configureFilter();

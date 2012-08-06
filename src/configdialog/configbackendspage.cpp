@@ -248,6 +248,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( cSelectorRipper, SIGNAL(activated(const QString&)), this, SLOT(ripperChanged(const QString&)) );
     pConfigureRipper = new KPushButton( KIcon("configure"), "", this );
     pConfigureRipper->setFixedSize( cSelectorRipper->sizeHint().height(), cSelectorRipper->sizeHint().height() );
+    pConfigureRipper->setFlat( true );
     ripperBox->addWidget( pConfigureRipper );
     ripperBox->setStretchFactor( pConfigureRipper, 1 );
     connect( pConfigureRipper, SIGNAL(clicked()), this, SLOT(configureRipper()) );
@@ -263,19 +264,49 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QHBoxLayout *filterBox = new QHBoxLayout();
     filterBox->addSpacing( ConfigDialogOffset );
     box->addLayout( filterBox );
-    QLabel *lSelectorFilter = new QLabel( i18n("Use plugin:"), this );
-    filterBox->addWidget( lSelectorFilter );
-    filterBox->setStretchFactor( lSelectorFilter, 2 );
-    cSelectorFilter = new KComboBox( this );
-    cSelectorFilter->addItems( config->data.backends.filters );
-    filterBox->addWidget( cSelectorFilter );
-    filterBox->setStretchFactor( cSelectorFilter, 1 );
-    connect( cSelectorFilter, SIGNAL(activated(const QString&)), this, SLOT(filterChanged(const QString&)) );
-    pConfigureFilter = new KPushButton( KIcon("configure"), "", this );
-    pConfigureFilter->setFixedSize( cSelectorFilter->sizeHint().height(), cSelectorFilter->sizeHint().height() );
-    filterBox->addWidget( pConfigureFilter );
-    filterBox->setStretchFactor( pConfigureFilter, 1 );
-    connect( pConfigureFilter, SIGNAL(clicked()), this, SLOT(configureFilter()) );
+    QGridLayout *filterGrid = new QGridLayout();
+
+    int row = 0;
+    foreach( const QString filterPluginName, config->data.backends.filters )
+    {
+        if( row == 0 )
+        {
+            QLabel *lSelectorFilter = new QLabel( i18n("Enable plugins:"), this );
+            filterGrid->addWidget( lSelectorFilter, row, 0 );
+        }
+
+        QCheckBox *newCheckBox = new QCheckBox( filterPluginName, this );
+        newCheckBox->setChecked( config->data.backends.enabledFilters.contains(filterPluginName) );
+        filterGrid->addWidget( newCheckBox, row, 1 );
+        filterCheckBoxes.append( newCheckBox );
+        connect( newCheckBox, SIGNAL(stateChanged(int)), this, SLOT(somethingChanged()) );
+
+        KPushButton *newConfigButton = new KPushButton( KIcon("configure"), "", this );
+        newConfigButton->setFixedSize( cSelectorRipper->sizeHint().height(), cSelectorRipper->sizeHint().height() );
+        newConfigButton->setFlat( true );
+        filterGrid->addWidget( newConfigButton, row, 2 );
+        connect( newConfigButton, SIGNAL(clicked()), this, SLOT(configureFilter()) );
+        filterConfigButtons.append( newConfigButton );
+
+        FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(filterPluginName));
+        if( plugin )
+        {
+            newConfigButton->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
+        }
+        else
+        {
+            newConfigButton->setEnabled( false );
+        }
+
+        if( newConfigButton->isEnabled() )
+            newConfigButton->setToolTip( i18n("Configure %1 ...",filterPluginName) );
+
+        row++;
+    }
+
+    filterGrid->setColumnStretch( 0, 2 );
+    filterGrid->setColumnStretch( 1, 1 );
+    filterBox->addLayout( filterGrid );
 
     box->addSpacing( ConfigDialogSpacingBig );
 
@@ -291,7 +322,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QHBoxLayout *formatSelectorBox = new QHBoxLayout();
     formatSelectorBox->addSpacing( ConfigDialogOffset );
     formatBox->addLayout( formatSelectorBox );
-    QLabel *lSelectorFormat = new QLabel( i18n("Configure format:"), this );
+    QLabel *lSelectorFormat = new QLabel( i18n("Configure plugin priorities for format:"), this );
     formatSelectorBox->addWidget( lSelectorFormat );
     cSelectorFormat = new KComboBox( this );
     cSelectorFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain),PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
@@ -326,7 +357,6 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     box->addStretch( 2 );
 
     ripperChanged( cSelectorRipper->currentText() );
-    filterChanged( cSelectorFilter->currentText() );
     formatChanged( cSelectorFormat->currentText() );
 }
 
@@ -351,25 +381,6 @@ void ConfigBackendsPage::ripperChanged( const QString& pluginName )
         pConfigureRipper->setToolTip( i18n("Configure %1 ...",pluginName) );
     else
         pConfigureRipper->setToolTip( "" );
-}
-
-void ConfigBackendsPage::filterChanged( const QString& pluginName )
-{
-    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
-
-    if( plugin )
-    {
-        pConfigureFilter->setEnabled( plugin->isConfigSupported(BackendPlugin::General,"") );
-    }
-    else
-    {
-        pConfigureFilter->setEnabled( false );
-    }
-
-    if( pConfigureFilter->isEnabled() )
-        pConfigureFilter->setToolTip( i18n("Configure %1 ...",pluginName) );
-    else
-        pConfigureFilter->setToolTip( "" );
 }
 
 void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChanges )
@@ -423,7 +434,17 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
 
 void ConfigBackendsPage::resetDefaults()
 {
-    // TODO reset rippers/filters
+    // TODO reset rippers
+
+    int i = 0;
+    foreach( QCheckBox *checkBox, filterCheckBoxes )
+    {
+        const QString filterPluginName = config->data.backends.filters.at(i);
+
+        checkBox->setChecked( i == 0 );
+
+        i++;
+    }
 
     const int answer = KMessageBox::questionYesNo( this, i18n("This will choose the best backends for all formats and save the new preferences immediately.\n\nDo you want to continue?") );
 
@@ -444,7 +465,19 @@ void ConfigBackendsPage::resetDefaults()
 
 void ConfigBackendsPage::saveSettings()
 {
-    // TODO save rippers/filters
+    // TODO save rippers
+
+    config->data.backends.enabledFilters.clear();
+    int i = 0;
+    foreach( QCheckBox *checkBox, filterCheckBoxes )
+    {
+        const QString filterPluginName = config->data.backends.filters.at(i);
+
+        if( checkBox->isChecked() )
+            config->data.backends.enabledFilters.append( filterPluginName );
+
+        i++;
+    }
 
     for( int i=0; i<config->data.backends.codecs.count(); i++ )
     {
@@ -471,7 +504,26 @@ void ConfigBackendsPage::saveSettings()
 
 void ConfigBackendsPage::somethingChanged()
 {
-    const bool changed = decoderList->changed() || encoderList->changed() || replaygainList->changed();
+    bool changed = false;
+
+    int i = 0;
+    foreach( QCheckBox *checkBox, filterCheckBoxes )
+    {
+        if( checkBox == QObject::sender() )
+        {
+            const QString filterPluginName = config->data.backends.filters.at(i);
+
+            if( checkBox->isChecked() != config->data.backends.enabledFilters.contains(filterPluginName) )
+            {
+                changed = true;
+                break;
+            }
+        }
+        i++;
+    }
+
+    if( decoderList->changed() || encoderList->changed() || replaygainList->changed() )
+        changed = true;
 
     emit configChanged( changed );
 }
@@ -488,11 +540,20 @@ void ConfigBackendsPage::configureRipper()
 
 void ConfigBackendsPage::configureFilter()
 {
-    FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(cSelectorFilter->currentText()));
-
-    if( plugin )
+    int i = 0;
+    foreach( KPushButton *configButton, filterConfigButtons )
     {
-        plugin->showConfigDialog( BackendPlugin::General, "", this );
+        if( configButton == QObject::sender() )
+        {
+            const QString filterPluginName = config->data.backends.filters.at(i);
+
+            FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(filterPluginName));
+            if( plugin )
+            {
+                plugin->showConfigDialog( BackendPlugin::General, "", this );
+            }
+        }
+        i++;
     }
 }
 

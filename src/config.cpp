@@ -122,6 +122,7 @@ void Config::load()
         data.backends.codecs += codecData;
     }
     data.backends.filters = group.readEntry( "filters", QStringList() );
+    data.backends.enabledFilters = group.readEntry( "enabledFilters", QStringList() );
 
     pPluginLoader->load();
 
@@ -357,6 +358,18 @@ void Config::load()
     {
         data.backends.filters += newPlugins.at(i).right(newPlugins.at(i).length()-8);
     }
+    for( int i=0; i<data.backends.enabledFilters.count(); i++ )
+    {
+        if( !data.backends.filters.contains(data.backends.enabledFilters.at(i)) )
+        {
+            data.backends.enabledFilters.removeAt(i);
+            i--;
+        }
+    }
+    if( data.backends.enabledFilters.isEmpty() && data.backends.filters.count() > 0 )
+    {
+        data.backends.enabledFilters.append( data.backends.filters.first() );
+    }
 
     // load profiles
     QFile profilesFile;
@@ -548,6 +561,7 @@ void Config::save()
     }
     group.writeEntry( "formats", formats );
     group.writeEntry( "filters", data.backends.filters );
+    group.writeEntry( "enabledFilters", data.backends.enabledFilters );
 
     group = conf->group( "BackendOptimizationsIgnoreList" );
     group.writeEntry( "count", data.backendOptimizationsIgnoreList.optimizationList.count() );

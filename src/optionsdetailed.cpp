@@ -76,7 +76,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     grid->addWidget( lineFrame, gridRow++, 0 );
 
     int filterCount = 0;
-    foreach( QString pluginName, config->data.backends.filters )
+    foreach( QString pluginName, config->data.backends.enabledFilters )
     {
         FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
         if( !plugin )

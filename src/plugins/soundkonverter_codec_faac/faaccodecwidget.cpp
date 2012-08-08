@@ -238,42 +238,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument FaacCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
-    encodingOptions.setAttribute("quality",dQuality->value());
-    encodingOptions.setAttribute("samplerateEnabled",cSamplerate->currentIndex() > 0);
-    encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool FaacCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
-    modeChanged( cMode->currentIndex() );
-    sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-    dQuality->setValue( encodingOptions.attribute("quality").toInt() );
-//     cBitrateMode->setCurrentIndex( encodingOptions.attribute("bitrateMode").toInt() );
-//     chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
-    if( encodingOptions.attribute("samplerateEnabled").toInt() )
-        cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
-    else
-        cSamplerate->setCurrentIndex( 0 );
-
-    return true;
-}
-
 int FaacCodecWidget::currentDataRate()
 {
     int dataRate;

@@ -236,37 +236,6 @@ bool MusePackCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument MusePackCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode",i18n("Quality"));
-    encodingOptions.setAttribute("quality",dQuality->value());
-    root.appendChild(encodingOptions);
-    QDomElement data = profile.createElement("data");
-    data.setAttribute("preset",cPreset->currentIndex());
-    encodingOptions.appendChild(data);
-    return profile;
-}
-
-bool MusePackCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
-    cPreset->setCurrentIndex( data.attribute("preset").toInt() );
-    presetChanged( cPreset->currentText() );
-    sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-    dQuality->setValue( encodingOptions.attribute("quality").toDouble() );
-    return true;
-}
-
 int MusePackCodecWidget::currentDataRate()
 {
     int dataRate;

@@ -338,58 +338,6 @@ bool FFmpegCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument FFmpegCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode","1");
-    if( currentFormat == "ac3" )
-    {
-        encodingOptions.setAttribute("quality",cBitrate->currentText().replace(" kbps","").toInt());
-    }
-    else
-    {
-        encodingOptions.setAttribute("quality",iBitrate->value());
-    }
-    encodingOptions.setAttribute("bitrateMode","1");
-    encodingOptions.setAttribute("channelsEnabled",chChannels->isChecked() && chChannels->isEnabled());
-    encodingOptions.setAttribute("channels",cChannels->currentIndex());
-    encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
-    encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
-    encodingOptions.setAttribute("cmdArgumentsEnabled",cCmdArguments->isChecked() && cCmdArguments->isEnabled());
-    encodingOptions.setAttribute("cmdArguments",lCmdArguments->text());
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool FFmpegCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    if( currentFormat == "ac3" )
-    {
-        cBitrate->setCurrentIndex( cBitrate->findText(encodingOptions.attribute("quality")+" kbps") );
-    }
-    else
-    {
-        sBitrate->setValue( encodingOptions.attribute("quality").toInt() );
-        iBitrate->setValue( encodingOptions.attribute("quality").toInt() );
-    }
-    chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
-    cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
-    chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
-    cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
-    cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
-    lCmdArguments->setText( encodingOptions.attribute("cmdArguments") );
-    return true;
-}
-
 int FFmpegCodecWidget::currentDataRate()
 {
     int dataRate;

@@ -396,60 +396,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument LameCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
-    encodingOptions.setAttribute("quality",iQuality->value());
-    encodingOptions.setAttribute("bitrateMode",cBitrateMode->currentIndex());
-    encodingOptions.setAttribute("channelsEnabled",chChannels->isChecked() && chChannels->isEnabled());
-    encodingOptions.setAttribute("channels",cChannels->currentIndex());
-    encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
-    encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
-    encodingOptions.setAttribute("cmdArgumentsEnabled",cCmdArguments->isChecked() && cCmdArguments->isEnabled());
-    encodingOptions.setAttribute("cmdArguments",lCmdArguments->text());
-    root.appendChild(encodingOptions);
-    QDomElement data = profile.createElement("data");
-    data.setAttribute("preset",cPreset->currentIndex());
-    data.setAttribute("presetBitrate",iPresetBitrate->value());
-    data.setAttribute("presetBitrateCbr",cPresetBitrateCbr->isChecked() && cPresetBitrateCbr->isEnabled());
-    data.setAttribute("presetFast",cPresetFast->isChecked() && cPresetFast->isEnabled());
-    encodingOptions.appendChild(data);
-    return profile;
-}
-
-bool LameCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    QDomElement data = encodingOptions.elementsByTagName("data").at(0).toElement();
-    cPreset->setCurrentIndex( data.attribute("preset").toInt() );
-    presetChanged( cPreset->currentText() );
-    iPresetBitrate->setValue( data.attribute("presetBitrate").toInt() );
-    presetBitrateChanged( iPresetBitrate->value() );
-    cPresetBitrateCbr->setChecked( data.attribute("presetBitrateCbr").toInt() );
-    cPresetFast->setChecked( data.attribute("presetFast").toInt() );
-    cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
-    modeChanged( cMode->currentIndex() );
-    sQuality->setValue( 9 - encodingOptions.attribute("quality").toInt() );
-    iQuality->setValue( encodingOptions.attribute("quality").toInt() );
-    cBitrateMode->setCurrentIndex( encodingOptions.attribute("bitrateMode").toInt() );
-    chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
-    cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
-    chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
-    cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
-    cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
-    lCmdArguments->setText( encodingOptions.attribute("cmdArguments") );
-    return true;
-}
-
 int LameCodecWidget::currentDataRate()
 {
     int dataRate = 0;

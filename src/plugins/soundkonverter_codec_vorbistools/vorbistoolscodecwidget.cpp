@@ -277,43 +277,6 @@ bool VorbisToolsCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument VorbisToolsCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
-    encodingOptions.setAttribute("quality",dQuality->value());
-    encodingOptions.setAttribute("bitrateMode",cBitrateMode->currentIndex());
-    encodingOptions.setAttribute("channelsEnabled",chChannels->isChecked() && chChannels->isEnabled());
-    encodingOptions.setAttribute("channels",cChannels->currentIndex());
-    encodingOptions.setAttribute("samplerateEnabled",chSamplerate->isChecked() && chSamplerate->isEnabled());
-    encodingOptions.setAttribute("samplerate",cSamplerate->currentIndex());
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool VorbisToolsCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
-    modeChanged( cMode->currentIndex() );
-    sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-    dQuality->setValue( encodingOptions.attribute("quality").toDouble() );
-    cBitrateMode->setCurrentIndex( encodingOptions.attribute("bitrateMode").toInt() );
-    chChannels->setChecked( encodingOptions.attribute("channelsEnabled").toInt() );
-    cChannels->setCurrentIndex( encodingOptions.attribute("channels").toInt() );
-    chSamplerate->setChecked( encodingOptions.attribute("samplerateEnabled").toInt() );
-    cSamplerate->setCurrentIndex( encodingOptions.attribute("samplerate").toInt() );
-    return true;
-}
-
 int VorbisToolsCodecWidget::currentDataRate()
 {
     int dataRate;

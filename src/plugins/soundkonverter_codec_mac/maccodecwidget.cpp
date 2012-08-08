@@ -95,29 +95,6 @@ bool MacCodecWidget::setCurrentProfile( const QString& profile )
     return profile == i18n("Lossless");
 }
 
-QDomDocument MacCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("compressionLevel",sCompressionLevel->value()*1000);
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool MacCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    sCompressionLevel->setValue( encodingOptions.attribute("compressionLevel").toInt()/1000 );
-    return true;
-}
-
 int MacCodecWidget::currentDataRate()
 {
     int dataRate;

@@ -48,24 +48,6 @@ bool TimidityCodecWidget::setCurrentProfile( const QString& profile )
     return profile == i18n("Lossless");
 }
 
-QDomDocument TimidityCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    return profile;
-}
-
-bool TimidityCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-    Q_UNUSED(document)
-
-    return true;
-}
-
 int TimidityCodecWidget::currentDataRate()
 {
     int dataRate;

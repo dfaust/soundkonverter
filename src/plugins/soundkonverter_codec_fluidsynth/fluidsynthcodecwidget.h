@@ -16,8 +16,6 @@ public:
     void setCurrentFormat( const QString& format );
     QString currentProfile();
     bool setCurrentProfile( const QString& profile );
-    QDomDocument customProfile();
-    bool setCustomProfile( const QString& profile, const QDomDocument& document );
     int currentDataRate();
 
 private:

@@ -49,8 +49,6 @@ public:
     virtual void setCurrentFormat( const QString& format ) = 0;
     virtual QString currentProfile() = 0;
     virtual bool setCurrentProfile( const QString& profile ) = 0; // returns false if options are invalid (eg. plugin doesn't support hybrid)
-    virtual QDomDocument customProfile() = 0;
-    virtual bool setCustomProfile( const QString& profile, const QDomDocument& document ) = 0; // returns false if something goes wrong - whatever
     virtual int currentDataRate() = 0;
 
 signals:

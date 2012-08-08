@@ -227,46 +227,6 @@ bool AftenCodecWidget::setCurrentProfile( const QString& profile )
     return false;
 }
 
-QDomDocument AftenCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("qualityMode",cMode->currentIndex());
-    if( cMode->currentIndex() == 0 )
-    {
-        encodingOptions.setAttribute("quality",dQuality->value());
-    }
-    else
-    {
-        encodingOptions.setAttribute("quality",cBitrate->currentText().replace(" kbps","").toInt());
-    }
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool AftenCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    cMode->setCurrentIndex( encodingOptions.attribute("qualityMode").toInt() );
-    if( encodingOptions.attribute("qualityMode").toInt() == 0 )
-    {
-        sQuality->setValue( (int)(encodingOptions.attribute("quality").toDouble()*100) );
-        dQuality->setValue( encodingOptions.attribute("quality").toInt() );
-    }
-    else
-    {
-        cBitrate->setCurrentIndex( cBitrate->findText(encodingOptions.attribute("quality")+" kbps") );
-    }
-    return true;
-}
-
 int AftenCodecWidget::currentDataRate()
 {
     int dataRate;

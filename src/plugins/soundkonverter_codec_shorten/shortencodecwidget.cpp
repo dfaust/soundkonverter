@@ -80,31 +80,6 @@ bool ShortenCodecWidget::setCurrentProfile( const QString& profile )
     return profile == i18n("Lossless");
 }
 
-QDomDocument ShortenCodecWidget::customProfile()
-{
-    QDomDocument profile("soundkonverter_profile");
-    QDomElement root = profile.createElement("soundkonverter");
-    root.setAttribute("type","profile");
-    root.setAttribute("codecName",currentFormat);
-    profile.appendChild(root);
-    QDomElement encodingOptions = profile.createElement("encodingOptions");
-    encodingOptions.setAttribute("cmdArgumentsEnabled",cCmdArguments->isChecked() && cCmdArguments->isEnabled());
-    encodingOptions.setAttribute("cmdArguments",lCmdArguments->text());
-    root.appendChild(encodingOptions);
-    return profile;
-}
-
-bool ShortenCodecWidget::setCustomProfile( const QString& profile, const QDomDocument& document )
-{
-    Q_UNUSED(profile)
-
-    QDomElement root = document.documentElement();
-    QDomElement encodingOptions = root.elementsByTagName("encodingOptions").at(0).toElement();
-    cCmdArguments->setChecked( encodingOptions.attribute("cmdArgumentsEnabled").toInt() );
-    lCmdArguments->setText( encodingOptions.attribute("cmdArguments") );
-    return true;
-}
-
 int ShortenCodecWidget::currentDataRate()
 {
     int dataRate;

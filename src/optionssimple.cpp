@@ -237,19 +237,46 @@ void OptionsSimple::profileInfo()
 
 void OptionsSimple::profileRemove()
 {
-    int ret = KMessageBox::questionYesNo( this, i18n("Do you really want to remove the profile: %1").arg(cProfile->currentText()), i18n("Remove profile?") );
+    const QString profileName = cProfile->currentText();
+
+    const int ret = KMessageBox::questionYesNo( this, i18n("Do you really want to remove the profile: %1").arg(profileName), i18n("Remove profile?") );
     if( ret == KMessageBox::Yes )
     {
-        for( int i=0; i<config->data.profiles.count(); i++ )
+        QDomDocument list("soundkonverter_profilelist");
+
+        QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+        if( listFile.open( QIODevice::ReadOnly ) )
         {
-            if( config->data.profiles.at(i).profileName == cProfile->currentText() )
+            if( list.setContent( &listFile ) )
             {
-                QFile::remove( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) + config->data.profiles.at(i).fileName );
-                config->data.profiles.removeAt(i);
-                updateProfiles();
-                emit customProfilesEdited();
-                return;
+                QDomElement root = list.documentElement();
+                if( root.nodeName() == "soundkonverter" && root.attribute("type") == "profilelist" )
+                {
+                    QDomElement profileElement;
+                    QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
+                    for( int i=0; i<conversionOptionsElements.count(); i++ )
+                    {
+                        if( conversionOptionsElements.at(i).toElement().attribute("profileName") == profileName )
+                        {
+                            delete config->data.profiles[profileName];
+                            config->data.profiles.remove(profileName);
+                            root.removeChild(conversionOptionsElements.at(i));
+                            break;
+                        }
+                    }
+                }
             }
+            listFile.close();
+        }
+
+        if( listFile.open( QIODevice::WriteOnly ) )
+        {
+            updateProfiles();
+            emit customProfilesEdited();
+
+            QTextStream stream(&listFile);
+            stream << list.toString();
+            listFile.close();
         }
     }
 }
@@ -302,19 +329,21 @@ void OptionsSimple::profileChanged()
     }
     else
     {
-        for( int i=0; i<config->data.profiles.count(); i++ )
+        foreach( const QString profileName, config->data.profiles.keys() )
         {
-            if( config->data.profiles.at(i).profileName == profile )
+            if( profileName == profile )
             {
-                cFormat->addItem( config->data.profiles.at(i).codecName );
-                QDomElement root = config->data.profiles.at(i).data.documentElement();
-                QDomElement outputOptions = root.elementsByTagName("outputOptions").at(0).toElement();
-                outputDirectory->setMode( (OutputDirectory::Mode)outputOptions.attribute("mode").toInt() );
-                outputDirectory->setDirectory( outputOptions.attribute("directory") );
-                QDomElement features = root.elementsByTagName("features").at(0).toElement();
-                cReplayGain->setChecked( features.attribute("replaygain").toInt() );
-                pProfileRemove->show();
-                pProfileInfo->hide();
+                ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+                if( conversionOptions )
+                {
+                    cFormat->addItem( conversionOptions->codecName );
+                    outputDirectory->setMode( (OutputDirectory::Mode)conversionOptions->outputDirectoryMode );
+                    outputDirectory->setDirectory( conversionOptions->outputDirectory );
+                    cReplayGain->setChecked( conversionOptions->replaygain );
+                    pProfileRemove->show();
+                    pProfileInfo->hide();
+                }
+                break;
             }
         }
     }
@@ -351,21 +380,14 @@ void OptionsSimple::profileChanged()
 
 void OptionsSimple::outputDirectoryChanged()
 {
-    if( config->customProfiles().indexOf(cProfile->currentText()) != -1 )
+    const QString profileName = cProfile->currentText();
+    ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+    if( conversionOptions )
     {
-        for( int i=0; i<config->data.profiles.count(); i++ )
+        if( conversionOptions->outputDirectoryMode != outputDirectory->mode() || conversionOptions->outputDirectory != outputDirectory->directory() )
         {
-            if( config->data.profiles.at(i).profileName == cProfile->currentText() )
-            {
-                QDomElement root = config->data.profiles.at(i).data.documentElement();
-                QDomElement outputOptions = root.elementsByTagName("outputOptions").at(0).toElement();
-                if( outputOptions.attribute("mode").toInt() != outputDirectory->mode() || outputOptions.attribute("directory") != outputDirectory->directory() )
-                {
-                    cProfile->setCurrentIndex( cProfile->findText(i18n("User defined")) );
-                    profileChanged();
-                }
-                return;
-            }
+            cProfile->setCurrentIndex( cProfile->findText(i18n("User defined")) );
+            profileChanged();
         }
     }
 }

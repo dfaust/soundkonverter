@@ -293,7 +293,7 @@ void OptionsDetailed::somethingChanged()
     emit currentDataRateChanged( dataRate );
 }
 
-ConversionOptions *OptionsDetailed::currentConversionOptions()
+ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed )
 {
     ConversionOptions *options = 0;
 
@@ -328,9 +328,12 @@ ConversionOptions *OptionsDetailed::currentConversionOptions()
                 }
             }
 
-            config->data.general.lastProfile = currentProfile();
-            saveCustomProfile( true );
-            config->data.general.lastFormat = cFormat->currentText();
+            if( saveLastUsed )
+            {
+                config->data.general.lastProfile = currentProfile();
+                saveCustomProfile( true );
+                config->data.general.lastFormat = cFormat->currentText();
+            }
         }
     }
 
@@ -441,77 +444,77 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
             return false;
         }
 
-        QDomDocument data = wPlugin->customProfile();
-        QDomElement root = data.documentElement();
-        root.setAttribute("pluginName",currentPlugin->name());
-        root.setAttribute("profileName",profileName);
-        QDomElement outputOptions = data.createElement("outputOptions");
-        outputOptions.setAttribute("mode",outputDirectory->mode());
-        outputOptions.setAttribute("directory",outputDirectory->directory());
-        root.appendChild(outputOptions);
-        QDomElement features = data.createElement("features");
-        features.setAttribute("replaygain",cReplayGain->isChecked()&&cReplayGain->isEnabled());
-        root.appendChild(features);
+        QDomDocument list("soundkonverter_profilelist");
+        QDomElement root;
+        bool profileFound = false;
 
-        for( int i=0; i<config->data.profiles.count(); i++ )
+        QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+        if( listFile.open( QIODevice::ReadOnly ) )
         {
-            if( config->data.profiles.at(i).profileName == profileName )
+            if( list.setContent( &listFile ) )
             {
-                int ret;
-                if( lastUsed )
+                root = list.documentElement();
+                if( root.nodeName() == "soundkonverter" && root.attribute("type") == "profilelist" )
                 {
-                    ret = KMessageBox::Yes;
-                }
-                else
-                {
-                    ret = KMessageBox::questionYesNo( this, i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?"), i18n("Profile already exists") );
-                }
-                if( ret == KMessageBox::Yes )
-                {
-                    config->data.profiles[i].pluginName = currentPlugin->name();
-                    config->data.profiles[i].codecName = cFormat->currentText();
-                    config->data.profiles[i].data = data;
-                    QFile profileFile( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) + config->data.profiles.at(i).fileName );
-                    if( profileFile.open( QIODevice::WriteOnly ) )
+                    QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
+                    for( int i=0; i<conversionOptionsElements.count(); i++ )
                     {
-                        QTextStream stream(&profileFile);
-                        stream << data;
-                        profileFile.close();
-                        updateProfiles();
-                        emit customProfilesEdited();
-                        return true;
+                        if( conversionOptionsElements.at(i).toElement().attribute("profileName") == profileName )
+                        {
+                            int ret;
+                            if( lastUsed )
+                                ret = KMessageBox::Yes;
+                            else
+                                ret = KMessageBox::questionYesNo( this, i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?"), i18n("Profile already exists") );
+
+                            if( ret == KMessageBox::Yes )
+                            {
+                                ConversionOptions *conversionOptions = currentConversionOptions( false );
+                                delete config->data.profiles[profileName];
+                                config->data.profiles[profileName] = conversionOptions;
+                                root.removeChild(conversionOptionsElements.at(i));
+                                QDomElement profileElement = conversionOptions->toXml(list);
+                                profileElement.setAttribute("profileName",profileName);
+                                root.appendChild(profileElement);
+                                profileFound = true;
+                                break;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
                     }
-                    else
-                    {
-                        return false;
-                    }
-                }
-                else
-                {
-                    return false;
                 }
             }
+            listFile.close();
         }
 
-        Config::ProfileData profile;
-        int i=1;
-        do {
-            profile.fileName = QString::number(i);
-            i++;
-        } while( QFile::exists( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) + profile.fileName) );
-        profile.pluginName = currentPlugin->name();
-        profile.profileName = profileName;
-        profile.codecName = cFormat->currentText();
-        profile.data = data;
-        config->data.profiles += profile;
-        QFile profileFile( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) + profile.fileName );
-        if( profileFile.open( QIODevice::WriteOnly ) )
+        if( listFile.open( QIODevice::WriteOnly ) )
         {
-            QTextStream stream(&profileFile);
-            stream << data;
-            profileFile.close();
+            if( list.childNodes().isEmpty() )
+            {
+                root = list.createElement("soundkonverter");
+                root.setAttribute("type","profilelist");
+                list.appendChild(root);
+            }
+
+            if( !profileFound )
+            {
+                ConversionOptions *conversionOptions = currentConversionOptions( false );
+                config->data.profiles[profileName] = conversionOptions;
+                QDomElement profileElement = conversionOptions->toXml(list);
+                profileElement.setAttribute("profileName",profileName);
+                root.appendChild(profileElement);
+            }
+
             updateProfiles();
             emit customProfilesEdited();
+
+            QTextStream stream(&listFile);
+            stream << list.toString();
+            listFile.close();
+
             return true;
         }
         else
@@ -533,35 +536,9 @@ void OptionsDetailed::loadCustomProfileButtonClicked()
 
 bool OptionsDetailed::loadCustomProfile( const QString& profile )
 {
-    if( wPlugin && currentPlugin )
-    {
-        for( int i=0; i<config->data.profiles.count(); i++ )
-        {
-            if( config->data.profiles.at(i).profileName == profile && config->data.profiles.at(i).pluginName == currentPlugin->name() )
-            {
-                if( cFormat->currentText() != config->data.profiles.at(i).codecName )
-                {
-                    cFormat->setCurrentIndex( cFormat->findText(config->data.profiles.at(i).codecName) );
-                    formatChanged( cFormat->currentText() );
-                }
-                if( cPlugin->currentText() != config->data.profiles.at(i).pluginName )
-                {
-                    cPlugin->setCurrentIndex( cPlugin->findText(config->data.profiles.at(i).pluginName) );
-                    encoderChanged( cPlugin->currentText() );
-                }
-                QDomElement root = config->data.profiles.at(i).data.documentElement();
-                QDomElement outputOptions = root.elementsByTagName("outputOptions").at(0).toElement();
-                if( profile != "soundkonverter_last_used" )
-                {
-                    outputDirectory->setMode( (OutputDirectory::Mode)outputOptions.attribute("mode").toInt() );
-                    outputDirectory->setDirectory( outputOptions.attribute("directory") );
-                }
-                QDomElement features = root.elementsByTagName("features").at(0).toElement();
-                cReplayGain->setChecked( features.attribute("replaygain").toInt() );
-                return wPlugin->setCustomProfile( profile, config->data.profiles.at(i).data );
-            }
-        }
-    }
+    ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+    if( conversionOptions )
+        return setCurrentConversionOptions( conversionOptions );
 
     return false;
 }

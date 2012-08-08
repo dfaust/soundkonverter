@@ -25,6 +25,8 @@ Config::Config( Logger *_logger, QObject *parent )
 Config::~Config()
 {
     save();
+    qDeleteAll( data.profiles.values() );
+    data.profiles.clear();
     delete pTagEngine;
     delete pConversionOptionsManager;
 }
@@ -371,52 +373,60 @@ void Config::load()
         data.backends.enabledFilters.append( data.backends.filters.first() );
     }
 
-    // load profiles
-    QFile profilesFile;
-
     logger->log( 1000, "\nloading profiles ..." );
-
-    QDir profilesDir( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) );
-    profilesDir.setFilter( QDir::Files | QDir::Dirs | QDir::NoSymLinks | QDir::Readable );
-
-    const QStringList profilesDirList = profilesDir.entryList();
-
-    for( int i=0; i<profilesDirList.count(); i++ )
+    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+    if( listFile.open( QIODevice::ReadOnly ) )
     {
-        if( profilesDirList.at(i) == "." || profilesDirList.at(i) == ".." )
-            continue;
-
-        logger->log( 1000, "\tloading file: " + profilesDirList.at(i) );
-
-        profilesFile.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/profiles/")) + profilesDirList.at(i) );
-        if( profilesFile.open( QIODevice::ReadOnly ) )
+        QDomDocument list("soundkonverter_profilelist");
+        if( list.setContent( &listFile ) )
         {
-            QDomDocument domTree("soundkonverter_profile");
-            if( domTree.setContent( &profilesFile ) )
+            QDomElement root = list.documentElement();
+            if( root.nodeName() == "soundkonverter" && root.attribute("type") == "profilelist" )
             {
-                QDomElement root = domTree.documentElement();
-                if( root.nodeName() == "soundkonverter" && root.attribute("type") == "profile" )
+                QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
+                for( int i=0; i<conversionOptionsElements.count(); i++ )
                 {
-                    ProfileData profile;
-                    profile.fileName = profilesDirList.at(i);
-                    profile.pluginName = root.attribute("pluginName");
-                    profile.profileName = root.attribute("profileName");
-                    profile.codecName = root.attribute("codecName");
-                    profile.data = domTree;
-                    data.profiles += profile;
-                    logger->log( 1000, "\t\tname: " + profile.profileName + ", plugin: " + profile.pluginName );
+                    ConversionOptions *conversionOptions = 0;
+                    QList<QDomElement> filterOptionsElements;
+                    const QString profileName = conversionOptionsElements.at(i).toElement().attribute("profileName");
+                    const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
+                    CodecPlugin *plugin = (CodecPlugin*)pPluginLoader->backendPluginByName( pluginName );
+                    if( plugin )
+                    {
+                        conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                    }
+                    else
+                    {
+                        conversionOptions = CodecPlugin::conversionOptionsFromXmlDefault( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                    }
+                    if( conversionOptions )
+                    {
+                        foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                        {
+                            FilterOptions *filterOptions = 0;
+                            const QString filterPluginName = filterOptionsElement.attribute("pluginName");
+                            FilterPlugin *filterPlugin = (FilterPlugin*)pPluginLoader->backendPluginByName( filterPluginName );
+                            if( filterPlugin )
+                            {
+                                filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
+                            }
+                            else
+                            {
+                                filterOptions = FilterPlugin::filterOptionsFromXmlDefault( filterOptionsElement );
+                            }
+                            conversionOptions->filterOptions.append( filterOptions );
+                        }
+                    }
+                    if( conversionOptions )
+                    {
+                        data.profiles[profileName] = conversionOptions;
+                        if( profileName != "soundkonverter_last_used" )
+                            logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );
+                    }
                 }
             }
-            else
-            {
-                logger->log( 1000, "<pre>\t\t<span style=\"color:red\">failed to load profile: bad file format</span></pre>" );
-            }
-            profilesFile.close();
         }
-        else
-        {
-            logger->log( 1000, "<pre>\t\t<span style=\"color:red\">can't open file for reading</span></pre>" );
-        }
+        listFile.close();
     }
     logger->log( 1000, "... all profiles loaded\n" );
 
@@ -458,13 +468,9 @@ void Config::load()
         }
         else
         {
-            for( int i=0; i<data.profiles.count(); i++ )
-            {
-                if( data.profiles.at(i).profileName == profile )
-                {
-                    sFormat += data.profiles.at(i).codecName;
-                }
-            }
+            ConversionOptions *conversionOptions = data.profiles.value( profile );
+            if( conversionOptions )
+                sFormat += conversionOptions->codecName;
         }
         if( sFormat.indexOf(data.general.defaultFormat) == -1 )
         {
@@ -672,18 +678,17 @@ QStringList Config::customProfiles()
 {
     QStringList profiles;
 
-    for( int i=0; i<data.profiles.count(); i++ )
+    foreach( const QString profileName, data.profiles.keys() )
     {
-        if( data.profiles.at(i).profileName == "soundkonverter_last_used" )
+        if( profileName == "soundkonverter_last_used" )
             continue;
 
-        QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( data.profiles.at(i).codecName );
-
-        for( int j=0; j<plugins.count(); j++ )
+        QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( data.profiles.value(profileName)->codecName );
+        foreach( CodecPlugin *plugin, plugins )
         {
-            if( plugins.at(j) && data.profiles.at(i).pluginName == plugins.at(j)->name() )
+            if( plugin->name() == data.profiles.value(profileName)->pluginName )
             {
-                profiles += data.profiles.at(i).profileName;
+                profiles.append( profileName );
                 break;
             }
         }

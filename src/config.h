@@ -118,7 +118,7 @@ public:
             int configVersion;
         } app;
 
-        QList<ProfileData> profiles;
+        QMap<QString,ConversionOptions*> profiles;
 
     } data;
 

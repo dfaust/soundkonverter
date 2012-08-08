@@ -474,13 +474,12 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         }
         else
         {
-            for( int i=0; i<config->data.profiles.count(); i++ )
+            if( config->data.profiles.contains(_profile) )
             {
-                if( config->data.profiles.at(i).profileName == _profile )
-                {
-                    profile = _profile;
-                    format = config->data.profiles.at(i).codecName;
-                }
+                profile = _profile;
+                ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+                if( conversionOptions )
+                    format += conversionOptions->codecName;
             }
         }
 

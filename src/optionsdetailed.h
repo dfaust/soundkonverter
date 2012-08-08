@@ -35,7 +35,7 @@ public:
     void init();
 
     /** Return the current options */
-    ConversionOptions *currentConversionOptions();
+    ConversionOptions *currentConversionOptions( bool saveLastUsed = true );
     /** Set the current options */
     bool setCurrentConversionOptions( ConversionOptions *options );
 

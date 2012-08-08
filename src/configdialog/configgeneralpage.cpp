@@ -270,13 +270,9 @@ void ConfigGeneralPage::profileChanged()
     }
     else
     {
-        for( int i=0; i<config->data.profiles.count(); i++ )
-        {
-            if( config->data.profiles.at(i).profileName == cDefaultProfile->currentText() )
-            {
-                cDefaultFormat->addItem( config->data.profiles.at(i).codecName );
-            }
-        }
+        ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+        if( conversionOptions )
+            cDefaultFormat->addItem( conversionOptions->codecName );
     }
 
     if( cDefaultFormat->findText(lastFormat) != -1 )

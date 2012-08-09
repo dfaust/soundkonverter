@@ -325,83 +325,83 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
 
     QStringList command;
 
+    SoxFilterOptions *filterOptions = 0;
     foreach( FilterOptions *_filterOptions,conversionOptions->filterOptions )
     {
         if( _filterOptions->pluginName == global_plugin_name )
+            filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
+    }
+
+    command += binaries["sox"];
+    command += "--no-glob";
+    if( inputFile.isEmpty() )
+    {
+        command += "--type";
+        command += soxCodecName(inputCodec);
+    }
+    command += "\"" + escapeUrl(inputFile) + "\"";
+    if( filterOptions && filterOptions->data.sampleSize )
+    {
+        command += "--bits";
+        command += QString::number(filterOptions->data.sampleSize);
+    }
+    if( outputCodec == "flac" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "FLAC" ) )
+    {
+        command += "--compression";
+        command += QString::number(conversionOptions->compressionLevel);
+    }
+    else if( outputCodec == "ogg vorbis" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "Vorbis Tools" ) )
+    {
+        command += "--compression";
+        command += QString::number(conversionOptions->quality);
+    }
+    else if( outputCodec == "mp3" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "lame" ) )
+    {
+        command += "--compression";
+
+        QString compressionLevel = QString::number(conversionOptions->compressionLevel);
+        if( compressionLevel == "0" )
+            compressionLevel = "01";
+
+        if( conversionOptions->qualityMode == ConversionOptions::Quality )
         {
-            SoxFilterOptions *filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
-            command += binaries["sox"];
-            command += "--no-glob";
-            if( inputFile.isEmpty() )
-            {
-                command += "--type";
-                command += soxCodecName(inputCodec);
-            }
-            command += "\"" + escapeUrl(inputFile) + "\"";
-            if( filterOptions->data.sampleSize )
-            {
-                command += "--bits";
-                command += QString::number(filterOptions->data.sampleSize);
-            }
-            if( outputCodec == "flac" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "FLAC" ) )
-            {
-                command += "--compression";
-                command += QString::number(conversionOptions->compressionLevel);
-            }
-            else if( outputCodec == "ogg vorbis" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "Vorbis Tools" ) )
-            {
-                command += "--compression";
-                command += QString::number(conversionOptions->quality);
-            }
-            else if( outputCodec == "mp3" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "lame" ) )
-            {
-                command += "--compression";
-
-                QString compressionLevel = QString::number(conversionOptions->compressionLevel);
-                if( compressionLevel == "0" )
-                    compressionLevel = "01";
-
-                if( conversionOptions->qualityMode == ConversionOptions::Quality )
-                {
-                    command += "-" + QString::number(conversionOptions->quality) + "." + compressionLevel;
-                }
-                else if( conversionOptions->qualityMode == ConversionOptions::Bitrate )
-                {
-                    command += QString::number(conversionOptions->bitrate) + "." + compressionLevel;
-                }
-            }
-            else if( outputCodec == "amr nb" && conversionOptions->pluginName == global_plugin_name )
-            {
-                command += "--compression";
-                command += QString::number(conversionOptions->quality);
-            }
-            else if( outputCodec == "amr wb" && conversionOptions->pluginName == global_plugin_name )
-            {
-                command += "--compression";
-                command += QString::number(conversionOptions->quality);
-            }
-            if( outputFile.isEmpty() )
-            {
-                command += "--type";
-                command += soxCodecName(outputCodec);
-            }
-            command += "\"" + escapeUrl(outputFile) + "\"";
-            if( filterOptions->data.sampleRate )
-            {
-                command += "rate";
-                if( samplingRateQuality == "quick" )
-                    command += "-q";
-                else if( samplingRateQuality == "low" )
-                    command += "-l";
-                else if( samplingRateQuality == "medium" )
-                    command += "-m";
-                else if( samplingRateQuality == "high" )
-                    command += "-h";
-                else if( samplingRateQuality == "very high" )
-                    command += "-v";
-                command += QString::number(filterOptions->data.sampleRate);
-            }
+            command += "-" + QString::number(conversionOptions->quality) + "." + compressionLevel;
         }
+        else if( conversionOptions->qualityMode == ConversionOptions::Bitrate )
+        {
+            command += QString::number(conversionOptions->bitrate) + "." + compressionLevel;
+        }
+    }
+    else if( outputCodec == "amr nb" && conversionOptions->pluginName == global_plugin_name )
+    {
+        command += "--compression";
+        command += QString::number(conversionOptions->quality);
+    }
+    else if( outputCodec == "amr wb" && conversionOptions->pluginName == global_plugin_name )
+    {
+        command += "--compression";
+        command += QString::number(conversionOptions->quality);
+    }
+    if( outputFile.isEmpty() )
+    {
+        command += "--type";
+        command += soxCodecName(outputCodec);
+    }
+    command += "\"" + escapeUrl(outputFile) + "\"";
+    if( filterOptions && filterOptions->data.sampleRate )
+    {
+        command += "rate";
+        if( samplingRateQuality == "quick" )
+            command += "-q";
+        else if( samplingRateQuality == "low" )
+            command += "-l";
+        else if( samplingRateQuality == "medium" )
+            command += "-m";
+        else if( samplingRateQuality == "high" )
+            command += "-h";
+        else if( samplingRateQuality == "very high" )
+            command += "-v";
+        command += QString::number(filterOptions->data.sampleRate);
     }
 
     return command;

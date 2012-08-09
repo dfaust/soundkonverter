@@ -725,16 +725,23 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
     if( mime == "inode/directory" )
         return codec;
 
-    for( int i=0; i<codecPlugins.count(); i++ )
+    foreach( CodecPlugin *plugin, codecPlugins )
     {
-        codec = codecPlugins.at(i)->getCodecFromFile( filename, mime );
+        codec = plugin->getCodecFromFile( filename, mime );
         if( codec != "" )
             return codec;
     }
 
-    for( int i=0; i<replaygainPlugins.count(); i++ )
+    foreach( FilterPlugin *plugin, filterPlugins )
     {
-        codec = codecPlugins.at(i)->getCodecFromFile( filename, mime );
+        codec = plugin->getCodecFromFile( filename, mime );
+        if( codec != "" )
+            return codec;
+    }
+
+    foreach( ReplayGainPlugin *plugin, replaygainPlugins )
+    {
+        codec = plugin->getCodecFromFile( filename, mime );
         if( codec != "" )
             return codec;
     }
@@ -747,9 +754,9 @@ bool PluginLoader::canDecode( const QString& codecName, QStringList *errorList )
     if( codecName.isEmpty() )
         return false;
 
-    for( int i=0; i<conversionPipeTrunks.size(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
     {
-        if( conversionPipeTrunks.at(i).codecFrom == codecName && conversionPipeTrunks.at(i).enabled )
+        if( conversionFilterPipeTrunks.at(i).codecFrom == codecName && conversionFilterPipeTrunks.at(i).enabled )
         {
             return true;
         }
@@ -757,13 +764,13 @@ bool PluginLoader::canDecode( const QString& codecName, QStringList *errorList )
 
     if( errorList )
     {
-        for( int i=0; i<conversionPipeTrunks.size(); i++ )
+        for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
         {
-            if( conversionPipeTrunks.at(i).codecFrom == codecName )
+            if( conversionFilterPipeTrunks.at(i).codecFrom == codecName )
             {
-                if( !conversionPipeTrunks.at(i).problemInfo.isEmpty() && !errorList->contains(conversionPipeTrunks.at(i).problemInfo) )
+                if( !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && !errorList->contains(conversionFilterPipeTrunks.at(i).problemInfo) )
                 {
-                      errorList->append( conversionPipeTrunks.at(i).problemInfo );
+                      errorList->append( conversionFilterPipeTrunks.at(i).problemInfo );
                 }
             }
         }
@@ -786,9 +793,9 @@ bool PluginLoader::canReplayGain( const QString& codecName, CodecPlugin *plugin,
     }
     if( plugin )
     {
-        for( int i=0; i<conversionPipeTrunks.size(); i++ )
+        for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
         {
-            if( conversionPipeTrunks.at(i).plugin == plugin && conversionPipeTrunks.at(i).codecTo == codecName && conversionPipeTrunks.at(i).enabled && conversionPipeTrunks.at(i).data.hasInternalReplayGain )
+            if( conversionFilterPipeTrunks.at(i).plugin == plugin && conversionFilterPipeTrunks.at(i).codecTo == codecName && conversionFilterPipeTrunks.at(i).enabled && conversionFilterPipeTrunks.at(i).data.hasInternalReplayGain )
             {
                 return true;
             }
@@ -815,9 +822,9 @@ bool PluginLoader::canReplayGain( const QString& codecName, CodecPlugin *plugin,
 
 bool PluginLoader::canRipEntireCd( QStringList *errorList )
 {
-    for( int i=0; i<conversionPipeTrunks.count(); i++ )
+    for( int i=0; i<conversionFilterPipeTrunks.count(); i++ )
     {
-        if( conversionPipeTrunks.at(i).plugin->type() == "ripper" && conversionPipeTrunks.at(i).data.canRipEntireCd && conversionPipeTrunks.at(i).enabled )
+        if( conversionFilterPipeTrunks.at(i).plugin->type() == "ripper" && conversionFilterPipeTrunks.at(i).data.canRipEntireCd && conversionFilterPipeTrunks.at(i).enabled )
         {
             return true;
         }
@@ -825,13 +832,13 @@ bool PluginLoader::canRipEntireCd( QStringList *errorList )
 
     if( errorList )
     {
-        for( int i=0; i<conversionPipeTrunks.size(); i++ )
+        for( int i=0; i<conversionFilterPipeTrunks.size(); i++ )
         {
-            if( conversionPipeTrunks.at(i).plugin->type() == "ripper" && conversionPipeTrunks.at(i).data.canRipEntireCd )
+            if( conversionFilterPipeTrunks.at(i).plugin->type() == "ripper" && conversionFilterPipeTrunks.at(i).data.canRipEntireCd )
             {
-                if( !conversionPipeTrunks.at(i).problemInfo.isEmpty() && !errorList->contains(conversionPipeTrunks.at(i).problemInfo) )
+                if( !conversionFilterPipeTrunks.at(i).problemInfo.isEmpty() && !errorList->contains(conversionFilterPipeTrunks.at(i).problemInfo) )
                 {
-                      errorList->append( conversionPipeTrunks.at(i).problemInfo );
+                      errorList->append( conversionFilterPipeTrunks.at(i).problemInfo );
                 }
             }
         }

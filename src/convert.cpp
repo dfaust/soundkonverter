@@ -973,7 +973,7 @@ void Convert::add( FileListItem *fileListItem )
 
     // register at the logger
     newItem->logID = logger->registerProcess( fileName.pathOrUrl() );
-    logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
+    logger->log( 1000, "\t" + i18n("Got log ID: %1",QString::number(newItem->logID)) );
 
     // TODO remove redundancy, logID is needed in the fileListItem
     newItem->fileListItem->logId = newItem->logID;

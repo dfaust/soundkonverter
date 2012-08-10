@@ -224,6 +224,9 @@ void FileList::dropEvent( QDropEvent *event )
 
     if( k_urls.count() > 0 )
     {
+        ConversionOptions *conversionOptions = config->data.profiles.value("soundkonverter_last_used");
+        if( conversionOptions )
+            optionsLayer->setCurrentConversionOptions( conversionOptions );
         optionsLayer->addUrls( k_urls );
         optionsLayer->fadeIn();
     }

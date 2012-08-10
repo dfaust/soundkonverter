@@ -161,3 +161,8 @@ void OptionsLayer::setCommand( const QString& _command )
     command = _command;
 }
 
+void OptionsLayer::setCurrentConversionOptions( ConversionOptions *conversionOptions )
+{
+    options->setCurrentConversionOptions( conversionOptions );
+}
+

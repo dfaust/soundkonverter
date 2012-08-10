@@ -75,6 +75,9 @@ public slots:
     /** Set the command to execute after the conversion is complete */
     void setCommand( const QString& _command );
 
+    /** Set the current conversion options */
+    void setCurrentConversionOptions( ConversionOptions *options );
+
 private slots:
     void fadeAnim();
     void abort();

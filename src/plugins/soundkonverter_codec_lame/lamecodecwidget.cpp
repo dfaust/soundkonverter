@@ -222,9 +222,6 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Quality;
         options->quality = iQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
-        options->bitrateMode = ConversionOptions::Vbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
@@ -232,8 +229,6 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->bitrate = iQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     if( chSamplerate->isChecked() ) options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
     else options->samplingRate = 0;

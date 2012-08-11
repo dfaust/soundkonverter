@@ -33,6 +33,8 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     CodecData data;
     FFmpegCodecData ffmpegData;
 
+    // WARNING enabled codecs need to be rescanned everytime new codecs are added here -> increase plugin version
+
     data.ffmpegCodecList.clear();
     data.codecName = "wav";
     ffmpegData.name = "wav";
@@ -283,6 +285,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
                                 ffmpegProblemInfo.append( i18n("Compile ffmpeg with %1 support.",codecList.at(k).ffmpegCodecList.at(l).name) );
                             }
                         }
+                        break;
                     }
                 }
             }

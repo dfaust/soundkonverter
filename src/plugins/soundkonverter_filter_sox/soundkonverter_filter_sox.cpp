@@ -36,6 +36,11 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
 
     // 8svx aif aifc aiff aiffc al amb amr-nb amr-wb anb au avr awb caf cdda cdr cvs cvsd cvu dat dvms f32 f4 f64 f8 fap flac fssd gsm gsrt hcom htk ima ircam la lpc lpc10 lu mat mat4 mat5 maud mp2 mp3 nist ogg paf prc pvf raw s1 s16 s2 s24 s3 s32 s4 s8 sb sd2 sds sf sl sln smp snd sndfile sndr sndt sou sox sph sw txw u1 u16 u2 u24 u3 u32 u4 u8 ub ul uw vms voc vorbis vox w64 wav wavpcm wv wve xa xi
 
+    // todo
+    // al amb anb au avr awb caf cdda cdr cvs cvsd cvu dat dvms f32 f4 f64 f8 fap fssd gsm gsrt hcom htk ima ircam la lpc lpc10 lu mat mat4 mat5 maud nist ogg paf prc pvf raw s1 s16 s2 s24 s3 s32 s4 s8 sb sd2 sds sf sl sln smp snd sndfile sndr sndt sou sox sph sw txw u1 u16 u2 u24 u3 u32 u4 u8 ub ul uw vms voc vox w64 wavpcm wv wve xa xi
+
+    // WARNING enabled codecs need to be rescanned everytime new codecs are added here -> increase plugin version
+
     data.codecName = "wav";
     data.soxCodecName = "wav";
     data.external = false;
@@ -50,6 +55,12 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
 
     data.codecName = "ogg vorbis";
     data.soxCodecName = "vorbis";
+    data.external = true;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "mp2";
+    data.soxCodecName = "mp2";
     data.external = true;
     data.experimental = false;
     codecList.append( data );
@@ -71,6 +82,25 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
     data.external = true;
     data.experimental = false;
     codecList.append( data );
+
+    data.codecName = "8svx";
+    data.soxCodecName = "8svx";
+    data.external = false;
+    data.experimental = false;
+    codecList.append( data );
+
+    data.codecName = "aiff";
+    data.soxCodecName = "aiff"; // aiff has meta data, aif not
+    data.external = false;
+    data.experimental = false;
+    codecList.append( data );
+
+//     sox only supports uncompressed aiff-c
+//     data.codecName = "aiff-c";
+//     data.soxCodecName = "aifc";
+//     data.external = false;
+//     data.experimental = false;
+//     codecList.append( data );
 
     for( int i=0; i<codecList.count(); i++ )
     {
@@ -101,7 +131,6 @@ int soundkonverter_filter_sox::version()
 QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
 {
     QList<ConversionPipeTrunk> table;
-    QStringList codecs;
 
     if( !binaries["sox"].isEmpty() )
     {
@@ -134,12 +163,12 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
         {
             codecList[i].enabled = false;
         }
-        codecs += codecList.at(i).codecName;
+        allCodecs += codecList.at(i).codecName;
     }
 
-    foreach( const QString fromCodec, codecs )
+    foreach( const QString fromCodec, allCodecs )
     {
-        foreach( const QString toCodec, codecs )
+        foreach( const QString toCodec, allCodecs )
         {
             bool codecEnabled = false;
             QStringList soxProblemInfo;
@@ -160,6 +189,7 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
                     {
                         soxProblemInfo.append( i18n("Compile sox with %1 support.",data.soxCodecName) );
                     }
+                    break;
                 }
             }
 
@@ -187,8 +217,6 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
             table.append( newTrunk );
         }
     }
-
-    allCodecs = codecs;
 
     return table;
 }

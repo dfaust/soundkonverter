@@ -28,7 +28,11 @@ mac             (ape)                                                   (ape)
 shorten         (shorten)                                               (shorten)
 wavpack         (wavpack)                                               (wavpack)
 ttaenc          (tta)                                                   (tta)
+sox
 speex           (speex)                                                 (speex)
+
+Filters:
+sox             (sample rate, sample size, channels, normalize, bass, treble)
 
 ReplayGain calculators:
 aacgain         (aac,mp3)
@@ -52,6 +56,8 @@ Website: http://kde-apps.org/content/show.php?content=29024
 Feature list:
 =============
 - Convert audio files between many formats
+- Change sample rate and sample size during conversion
+- Apply effects like normalize during conversion
 - Convert the audio stream from video files to audio files
 - Convert multiple files at once
 - Calculate ReplayGain for many formats

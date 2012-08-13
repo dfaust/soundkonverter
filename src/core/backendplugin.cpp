@@ -377,6 +377,35 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //         info.description = i18n("Black & White audio files where used for the game Black & White and contain an MP2 stream.");
         info.extensions.append( "sad" );
     }
+    else if( codecName == "8svx" )
+    {
+        info.lossless = false;
+        info.description = i18n("8-Bit Sampled Voice (8SVX) is an audio file format standard developed by Electronic Arts for the Commodore-Amiga computer series.");
+        info.mimeTypes.append( "audio/x-8svx" );
+        info.mimeTypes.append( "audio/8svx" );
+        info.mimeTypes.append( "audio/x-aiff" );
+        info.mimeTypes.append( "audio/aiff" );
+        info.extensions.append( "8svx" );
+        info.extensions.append( "iff" );
+    }
+    else if( codecName == "aiff" )
+    {
+        info.lossless = true;
+        info.description = i18n("Audio Interchange File Format (AIFF) is an audio file format standard used for storing sound data for personal computers and other electronic audio devices.");
+        info.mimeTypes.append( "audio/x-aiff" );
+        info.mimeTypes.append( "audio/aiff" );
+        info.extensions.append( "aiff" ); // aiff has meta data, aif not
+        info.extensions.append( "aif" );
+    }
+//     else if( codecName == "aiff-c" ) // sox only supports uncompressed aiff-c
+//     {
+//         info.lossless = true;
+//         info.description = i18n("AIFF-C is a compressed version of AIFF. There are different compression types available.");
+//         info.mimeTypes.append( "audio/x-aiff" );
+//         info.mimeTypes.append( "audio/aiff" );
+//         info.extensions.append( "aifc" );
+//         info.extensions.append( "aiffc" );
+//     }
 
     return info;
 }

@@ -16,7 +16,7 @@
 
 SoxCodecWidget::SoxCodecWidget()
     : CodecWidget(),
-    currentFormat( "flac" )
+    currentFormat( "" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
@@ -102,8 +102,43 @@ SoxCodecWidget::~SoxCodecWidget()
 ConversionOptions *SoxCodecWidget::currentConversionOptions()
 {
     ConversionOptions *options = new ConversionOptions();
-    options->qualityMode = ConversionOptions::Lossless;
-    options->compressionLevel = iCompressionLevel->value();
+
+    if( currentFormat == "wav" ||
+        currentFormat == "aiff" ||
+        currentFormat == "flac" ||
+        currentFormat == "8svx" )
+    {
+        options->qualityMode = ConversionOptions::Lossless;
+        options->compressionLevel = iCompressionLevel->value();
+    }
+    else if( currentFormat == "mp3" )
+    {
+        if( cMode->currentText() == i18n("Quality") )
+        {
+            options->qualityMode = ConversionOptions::Quality;
+            options->quality = dQuality->value();
+//             options->bitrate = bitrateForQuality( options->quality );
+        }
+        else
+        {
+            options->qualityMode = ConversionOptions::Bitrate;
+            options->bitrate = dQuality->value();
+//             options->quality = qualityForBitrate( options->bitrate );
+            options->bitrateMode = ConversionOptions::Cbr;
+        }
+    }
+    else if( currentFormat == "ogg vorbis" )
+    {
+        options->qualityMode = ConversionOptions::Quality;
+        options->quality = dQuality->value();
+    }
+    else if( currentFormat == "amr nb" ||
+             currentFormat == "amr wb" )
+    {
+        options->qualityMode = ConversionOptions::Quality;
+        options->quality = cBitratePreset->itemData( cBitratePreset->currentIndex() ).toInt();
+    }
+
     return options;
 }
 
@@ -123,7 +158,6 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         return;
 
     currentFormat = format;
-    setEnabled( currentFormat != "wav" );
 
     if( currentFormat == "flac" )
     {
@@ -228,16 +262,194 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         cBitratePreset->addItem( "23.05 kbps", 7 );
         cBitratePreset->addItem( "23.85 kbps", 8 );
     }
+    else if( currentFormat == "wav" ||
+             currentFormat == "8svx" ||
+             currentFormat == "aiff" )
+    {
+        lCompressionLevel->hide();
+        sCompressionLevel->hide();
+        iCompressionLevel->hide();
+
+        lMode->hide();
+        cMode->hide();
+        lQuality->hide();
+        sQuality->hide();
+        dQuality->hide();
+
+        lBitratePreset->hide();
+        cBitratePreset->hide();
+    }
 }
 
 QString SoxCodecWidget::currentProfile()
 {
-    return i18n("Lossless");
+    if( currentFormat == "wav" ||
+        currentFormat == "aiff" ||
+        currentFormat == "flac" )
+    {
+        return i18n("Lossless");
+    }
+    else if( currentFormat == "mp3" )
+    {
+        if( cMode->currentIndex() == 0 && dQuality->value() == 6 )
+        {
+            return i18n("Very low");
+        }
+        else if( cMode->currentIndex() == 0 && dQuality->value() == 5 )
+        {
+            return i18n("Low");
+        }
+        else if( cMode->currentIndex() == 0 && dQuality->value() == 4 )
+        {
+            return i18n("Medium");
+        }
+        else if( cMode->currentIndex() == 0 && dQuality->value() == 3 )
+        {
+            return i18n("High");
+        }
+        else if( cMode->currentIndex() == 0 && dQuality->value() == 2 )
+        {
+            return i18n("Very high");
+        }
+    }
+    else if( currentFormat == "ogg vorbis" )
+    {
+        if( dQuality->value() == 2 )
+        {
+            return i18n("Very low");
+        }
+        else if( dQuality->value() == 3 )
+        {
+            return i18n("Low");
+        }
+        else if( dQuality->value() == 4 )
+        {
+            return i18n("Medium");
+        }
+        else if( dQuality->value() == 5 )
+        {
+            return i18n("High");
+        }
+        else if( dQuality->value() == 6 )
+        {
+            return i18n("Very high");
+        }
+    }
+    else if( currentFormat == "amr nb" ||
+             currentFormat == "amr wb" ||
+             currentFormat == "8svx" )
+    {
+        return i18n("Very low");
+    }
+
+    return i18n("User defined");
 }
 
 bool SoxCodecWidget::setCurrentProfile( const QString& profile )
 {
-    return profile == i18n("Lossless");
+//             cCmdArguments->setChecked( false );
+    if( profile == i18n("Very low") )
+    {
+        if( currentFormat == "mp3" )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            sQuality->setValue( 6 );
+            dQuality->setValue( 6 );
+            return true;
+        }
+        else if( currentFormat == "ogg vorbis" )
+        {
+            sQuality->setValue( 200 );
+            dQuality->setValue( 2 );
+            return true;
+        }
+        else if( currentFormat == "amr nb" ||
+                 currentFormat == "amr wb" ||
+                 currentFormat == "8svx" )
+        {
+            return true;
+        }
+    }
+    else if( profile == i18n("Low") )
+    {
+        if( currentFormat == "mp3" )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            sQuality->setValue( 5 );
+            dQuality->setValue( 5 );
+            return true;
+        }
+        else if( currentFormat == "ogg vorbis" )
+        {
+            sQuality->setValue( 300 );
+            dQuality->setValue( 3 );
+            return true;
+        }
+    }
+    else if( profile == i18n("Medium") )
+    {
+        if( currentFormat == "mp3" )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            sQuality->setValue( 4 );
+            dQuality->setValue( 4 );
+            return true;
+        }
+        else if( currentFormat == "ogg vorbis" )
+        {
+            sQuality->setValue( 400 );
+            dQuality->setValue( 4 );
+            return true;
+        }
+    }
+    else if( profile == i18n("High") )
+    {
+        if( currentFormat == "mp3" )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            sQuality->setValue( 5 );
+            dQuality->setValue( 5 );
+            return true;
+        }
+        else if( currentFormat == "ogg vorbis" )
+        {
+            sQuality->setValue( 600 );
+            dQuality->setValue( 6 );
+            return true;
+        }
+    }
+    else if( profile == i18n("Very high") )
+    {
+        if( currentFormat == "mp3" )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            sQuality->setValue( 2 );
+            dQuality->setValue( 2 );
+            return true;
+        }
+        else if( currentFormat == "ogg vorbis" )
+        {
+            sQuality->setValue( 700 );
+            dQuality->setValue( 7 );
+            return true;
+        }
+    }
+    else if( profile == i18n("Lossless") )
+    {
+        if( currentFormat == "wav" ||
+            currentFormat == "aiff" ||
+            currentFormat == "flac" )
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 int SoxCodecWidget::currentDataRate() // TODO

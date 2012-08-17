@@ -64,7 +64,7 @@ Feature list:
 - ReplayGain tool for calculating and removing ReplayGain tags
 - Calculate ReplayGain for multiple files or file stets at once
 - Conversion and ReplayGain calculation is very scalable, the conversion of 100000 files or more is not a problem
-- Copy tags and covers when converting files (note: for flac and asf/wma files, taglib 1.7 is needed, writing ogg covers is not supported, yet.)
+- Copy tags and covers when converting files (note: for ogg/METADATA_BLOCK_PICTURE, flac and asf/wma files, taglib 1.7 or higher is needed)
 - Rip multiple audio CDs at once
 - Retrieve audio CD information from CDDB and MusicBrainz
 - Easy to use, just choose a file format and a quality level

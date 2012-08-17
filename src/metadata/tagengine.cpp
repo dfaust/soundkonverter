@@ -647,12 +647,31 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
         }
         else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
         {
+            // http://wiki.xiph.org/VorbisComment#Recommended_field_names
             // ALBUMARTIST
             // BPM
             // COMPILATION (1 vs. 0)
 
             if ( file->tag() )
             {
+                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
+                const TagLib::StringList& block = file->tag()->fieldListMap()[ "METADATA_BLOCK_PICTURE" ];
+                for( TagLib::StringList::ConstIterator i = block.begin(); i != block.end(); ++i )
+                {
+                    QByteArray data( QByteArray::fromBase64( i->to8Bit().c_str() ) );
+                    TagLib::ByteVector tdata( data.data(), data.size() );
+                    TagLib::FLAC::Picture picture;
+
+                    if(!picture.parse(tdata))
+                        continue;
+
+                    QByteArray image_data( picture.data().data(), picture.data().size() );
+                    CoverData *newCover = new CoverData( image_data, TStringToQString(picture.mimeType()), CoverData::Role(picture.type()), TStringToQString(picture.description()) );
+                    covers.append( newCover );
+                }
+                #endif // TAGLIB_HAS_FLAC_PICTURELIST
+
+
                 TagLib::Ogg::FieldListMap map = file->tag()->fieldListMap();
 
                 // Ogg lacks a definitive standard for embedding cover art, but it seems
@@ -793,6 +812,32 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
 
                     file->ID3v2Tag()->addFrame( frame );
                 }
+            }
+
+            return fileref.save();
+        }
+        else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
+        {
+            if( file->tag() )
+            {
+                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
+                foreach( CoverData *cover, covers )
+                {
+                    TagLib::FLAC::Picture newPicture;
+                    newPicture.setData( TagLib::ByteVector( cover->data.data(), cover->data.size() ) );
+                    newPicture.setType( TagLib::FLAC::Picture::Type( cover->role ) );
+                    if( !cover->mimeType.isEmpty() )
+                        newPicture.setMimeType( TagLib::ByteVector(cover->mimeType.toUtf8().data()) );
+                    if( !cover->description.isEmpty() )
+                        newPicture.setDescription( TagLib::ByteVector(cover->description.toUtf8().data()) );
+
+                    TagLib::ByteVector t_block = newPicture.render();
+                    QByteArray q_block = QByteArray( t_block.data(), t_block.size() );
+                    QByteArray q_block_b64 = q_block.toBase64();
+                    TagLib::ByteVector t_block_b64 = TagLib::ByteVector( q_block_b64.data(), q_block_b64.size() );
+                    file->tag()->addField( "METADATA_BLOCK_PICTURE", t_block_b64, false );
+                }
+                #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
 
             return fileref.save();

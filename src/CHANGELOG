@@ -3,6 +3,7 @@
 -Add: Move tracks to new Album via context menu in the ReplayGain tool
 -Add: sox plugin with support for some new file formats
 -Add: Convert sample rate and sample size, downmix and apply effects (normalize, bass and treble) using sox
+-Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
 -Change: Remember dimensions of the sub-windows and dialogs
 -Fix: Handle internal ReplayGain calculation properly
 -Fix: Drop directories onto the ReplayGain tool window

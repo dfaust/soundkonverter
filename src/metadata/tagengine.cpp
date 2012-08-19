@@ -105,29 +105,6 @@ QString CoverData::roleName( Role role )
 }
 
 
-// TagData::TagData( const QString& _artist, const QString& _composer,
-//              const QString& _album, const QString& _title,
-//              const QString& _genre, const QString& _comment,
-//              int _track, int _disc, int _discTotal, int _year,
-//              int _length, int _fileSize, int _bitrate, int _samplingRate )
-// {
-//     artist = _artist;
-//     composer = _composer;
-//     album = _album;
-//     title = _title;
-//     genre = _genre;
-//     comment = _comment;
-//     track = _track;
-//     disc = _disc;
-//     discTotal = _discTotal;
-//     year = _year;
-//     length = _length;
-//     fileSize = _fileSize;
-//     bitrate = _bitrate;
-//     samplingRate = _samplingRate;
-//     coversRead = false;
-// }
-
 TagData::TagData()
 {
     artist = QString();
@@ -159,21 +136,10 @@ TagEngine::TagEngine( Config *_config )
         genreList += TStringToQString( (*it) );
 
     genreList.sort();
-
-    //MediaInfo::Options("Info_Version", "0.7.9;soundKonverter;1.0");
-    //MediaInfo::Options("Internet", "No");
-//     MI = new MediaInfoLib::MediaInfo;
-    //MI->Option("Info_Version", "0.7.9;soundKonverter;1.0");
-    //MI->Option("Internet", "No");
 }
 
 TagEngine::~TagEngine()
 {}
-
-// TagData* TagEngine::readTags( const QString& file ) // LibMediaInfo
-// {
-//     return 0;
-// }
 
 TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 {
@@ -221,8 +187,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             tagData->album_gain = replayGainTags[ Meta::ReplayGain_Album_Gain ];
 
         QString disc;
-//         QString track_gain;
-//         QString album_gain;
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
         {
             // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
@@ -240,23 +204,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 
                 if ( !file->ID3v2Tag()->frameListMap()[ "TCOM" ].isEmpty() )
                     tagData->composer = TStringToQString( file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString() );
-
-//                 TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
-//                 if( !apic_frames.isEmpty() )
-//                 {
-//                     TagLib::ID3v2::AttachedPictureFrame* pic = static_cast<TagLib::ID3v2::AttachedPictureFrame*>(apic_frames.front());
-//
-//                     tagData->cover.loadFromData( (const uchar*) pic->picture().data(), pic->picture().size() );
-//                 }
             }
-//             if ( file->APETag() )
-//             {
-//                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-//                     track_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
-//
-//                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-//                     album_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
-//             }
         }
         else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
         {
@@ -271,12 +219,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 
                 if ( !file->tag()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->tag()->fieldListMap()["DISCNUMBER"].front() );
-
-//                 if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-//                     track_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_TRACK_GAIN"].front() );
-//
-//                 if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-//                     album_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
@@ -288,22 +230,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 
                 if ( !file->xiphComment()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->xiphComment()->fieldListMap()["DISCNUMBER"].front() );
-
-//                 if ( !file->xiphComment()->fieldListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-//                     track_gain = TStringToQString( file->xiphComment()->fieldListMap()["REPLAYGAIN_TRACK_GAIN"].front() );
-//
-//                 if ( !file->xiphComment()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-//                     album_gain = TStringToQString( file->xiphComment()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
             }
-
-            /*if ( file->tag() )
-            {
-                if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-                    track_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_TRACK_GAIN"].front() );
-
-                if ( !file->tag()->fieldListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-                    album_gain = TStringToQString( file->tag()->fieldListMap()["REPLAYGAIN_ALBUM_GAIN"].front() );
-            }*/
         }
         else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
         {
@@ -405,24 +332,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
                 tagData->discTotal = 0;
             }
         }
-
-//         if( !track_gain.isEmpty() )
-//         {
-//             int i = track_gain.indexOf(' ');
-//             if( i != -1 )
-//                 tagData->track_gain = track_gain.left( i ).toFloat();
-//             else
-//                 tagData->track_gain = track_gain.toFloat();
-//         }
-//
-//         if( !album_gain.isEmpty() )
-//         {
-//             int i = album_gain.indexOf(' ');
-//             if( i != -1 )
-//                 tagData->album_gain = album_gain.left( i ).toFloat();
-//             else
-//                 tagData->album_gain = album_gain.toFloat();
-//         }
 
         return tagData;
     }

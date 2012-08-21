@@ -41,7 +41,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout();
     preferredOggVorbisExtensionBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredOggVorbisExtensionBox );
-    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred extension for ogg vorbis files")+":", this );
+    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files")+":", this );
     preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
     cPreferredOggVorbisExtension = new KComboBox( this );
     cPreferredOggVorbisExtension->addItem( "ogg" );
@@ -51,6 +51,24 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     connect( cPreferredOggVorbisExtension, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     preferredOggVorbisExtensionBox->setStretch( 0, 3 );
     preferredOggVorbisExtensionBox->setStretch( 1, 1 );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *preferredOggVorbisCommentTagBox = new QHBoxLayout();
+    preferredOggVorbisCommentTagBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( preferredOggVorbisCommentTagBox );
+    QLabel* lPreferredOggVorbisCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files")+":", this );
+    lPreferredOggVorbisCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION, others the field COMMENT.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
+    preferredOggVorbisCommentTagBox->addWidget( lPreferredOggVorbisCommentTag );
+    cPreferredOggVorbisCommentTag = new KComboBox( this );
+    cPreferredOggVorbisCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION, others the field COMMENT.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
+    cPreferredOggVorbisCommentTag->addItem( "COMMENT" );
+    cPreferredOggVorbisCommentTag->addItem( "DESCRIPTION" );
+    cPreferredOggVorbisCommentTag->setCurrentIndex( config->data.general.preferredOggVorbisCommentTag == "COMMENT" ? 0 : 1 );
+    preferredOggVorbisCommentTagBox->addWidget( cPreferredOggVorbisCommentTag );
+    connect( cPreferredOggVorbisCommentTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    preferredOggVorbisCommentTagBox->setStretch( 0, 3 );
+    preferredOggVorbisCommentTagBox->setStretch( 1, 1 );
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
@@ -92,6 +110,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useSharedMemoryForTempFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useSharedMemoryForTempFilesBox );
     cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than")+":", this );
+    cUseSharedMemoryForTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
     cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
     useSharedMemoryForTempFilesBox->addWidget( cUseSharedMemoryForTempFiles );
     iMaxSizeForSharedMemoryTempFiles = new KIntSpinBox( 1, config->data.advanced.sharedMemorySize, 1, config->data.advanced.sharedMemorySize / 2, this );
@@ -132,6 +151,7 @@ ConfigAdvancedPage::~ConfigAdvancedPage()
 void ConfigAdvancedPage::resetDefaults()
 {
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
+    cPreferredOggVorbisCommentTag->setCurrentIndex( 1 );
     cUseVFATNames->setChecked( false );
     cWriteLogFiles->setChecked( false );
     cUseSharedMemoryForTempFiles->setChecked( false );
@@ -144,6 +164,7 @@ void ConfigAdvancedPage::resetDefaults()
 void ConfigAdvancedPage::saveSettings()
 {
     config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
+    config->data.general.preferredOggVorbisCommentTag = cPreferredOggVorbisCommentTag->currentText();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
@@ -154,6 +175,7 @@ void ConfigAdvancedPage::saveSettings()
 void ConfigAdvancedPage::somethingChanged()
 {
     const bool changed = cPreferredOggVorbisExtension->currentText() != config->data.general.preferredOggVorbisExtension ||
+                         cPreferredOggVorbisCommentTag->currentText() != config->data.general.preferredOggVorbisCommentTag ||
                          cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
                          cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
                          cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||

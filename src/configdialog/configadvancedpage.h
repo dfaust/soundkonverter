@@ -38,6 +38,7 @@ public:
 
 private:
     KComboBox *cPreferredOggVorbisExtension;
+    KComboBox *cPreferredOggVorbisCommentTag;
     QCheckBox *cUseVFATNames;
     QCheckBox *cWriteLogFiles;
     QCheckBox *cUseSharedMemoryForTempFiles;

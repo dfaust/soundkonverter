@@ -163,7 +163,28 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
             tagData->artist = TStringToQString( tag->artist() );
             tagData->album = TStringToQString( tag->album() );
             tagData->genre = TStringToQString( tag->genre() );
-            tagData->comment = TStringToQString( tag->comment() );
+            if( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
+            {
+                const QString preferredOggVorbisCommentTag = config->data.general.preferredOggVorbisCommentTag;
+                const QString otherOggVorbisCommentTag = ( preferredOggVorbisCommentTag == "COMMENT" ) ? "DESCRIPTION" : "COMMENT";
+                if( file->tag() && file->tag()->fieldListMap().contains(TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
+                    tagData->comment = TStringToQString( file->tag()->fieldListMap()[TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
+                else if( file->tag() && file->tag()->fieldListMap().contains(TagLib::String(otherOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
+                    tagData->comment = TStringToQString( file->tag()->fieldListMap()[TagLib::String(otherOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
+            }
+            else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
+            {
+                const QString preferredOggVorbisCommentTag = config->data.general.preferredOggVorbisCommentTag;
+                const QString otherOggVorbisCommentTag = ( preferredOggVorbisCommentTag == "COMMENT" ) ? "DESCRIPTION" : "COMMENT";
+                if( file->xiphComment() && file->xiphComment()->fieldListMap().contains(TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
+                    tagData->comment = TStringToQString( file->xiphComment()->fieldListMap()[TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
+                else if( file->xiphComment() && file->xiphComment()->fieldListMap().contains(TagLib::String(otherOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
+                    tagData->comment = TStringToQString( file->xiphComment()->fieldListMap()[TagLib::String(otherOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
+            }
+            else
+            {
+                tagData->comment = TStringToQString( tag->comment() );
+            }
             tagData->track = tag->track();
             tagData->year = tag->year();
         }
@@ -359,7 +380,20 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             tag->setAlbum( TagLib::String(tagData->album.toUtf8().data(), TagLib::String::UTF8) );
             tag->setTrack( tagData->track );
             tag->setYear( tagData->year );
-            tag->setComment( TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8) );
+            if( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
+            {
+                if( !tagData->comment.isEmpty() && file->tag() )
+                    file->tag()->addField( TagLib::String(config->data.general.preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
+            }
+            else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
+            {
+                if( !tagData->comment.isEmpty() && file->xiphComment() )
+                    file->xiphComment()->addField( TagLib::String(config->data.general.preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
+            }
+            else
+            {
+                tag->setComment( TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8) );
+            }
             tag->setGenre( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
         }
         else

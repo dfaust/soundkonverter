@@ -90,6 +90,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     {
         info.lossless = true;
         info.description = i18n("Flac is the free lossless audio codec.\nAs it's name says, it compresses without any loss of quality.");
+        info.mimeTypes.append( "audio/flac" );
         info.mimeTypes.append( "audio/x-flac" );
         info.mimeTypes.append( "audio/x-flac+ogg" );
         info.mimeTypes.append( "audio/x-oggflac" );
@@ -429,25 +430,11 @@ void BackendPlugin::scanForBackends( const QStringList& directoryList )
     }
 }
 
-QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mimeType )
+QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mimeType, short *rating )
 {
-    for( int i=0; i<allCodecs.count(); i++ )
-    {
-        if( formatInfo(allCodecs.at(i)).mimeTypes.indexOf(mimeType) != -1 )
-        {
-            return allCodecs.at(i);
-        }
-    }
-
-    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 );
-
-    for( int i=0; i<allCodecs.count(); i++ )
-    {
-        if( formatInfo(allCodecs.at(i)).extensions.indexOf(extension) != -1 )
-        {
-            return allCodecs.at(i);
-        }
-    }
+    Q_UNUSED(filename)
+    Q_UNUSED(mimeType)
+    Q_UNUSED(rating)
 
     return "";
 }

@@ -9,6 +9,7 @@
 -Fix: Handle internal ReplayGain calculation properly
 -Fix: Drop directories onto the ReplayGain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the ReplayGain tool
+-Fix: Better file type recognition
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

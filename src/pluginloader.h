@@ -71,8 +71,8 @@ public:
     /** returns a list of encoder plugins for the given format (mime type or extension)
         the first value is the default encoder */
     QList<CodecPlugin*> encodersForCodec( const QString& codecName );
-    QList<CodecPlugin*> decodersForCodec( const QString& codecName );
-    QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
+//     QList<CodecPlugin*> decodersForCodec( const QString& codecName );
+//     QList<ReplayGainPlugin*> replaygainForCodec( const QString& codecName );
 
     /** returns the codec plugin with the specified name */
     BackendPlugin *backendPluginByName( const QString& name );

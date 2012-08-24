@@ -398,62 +398,62 @@ QList<CodecPlugin*> PluginLoader::encodersForCodec( const QString& codecName )
 {
     QSet<CodecPlugin*> encoders;
 
-    for( int i=0; i<conversionPipeTrunks.count(); i++ )
+    foreach( const ConversionPipeTrunk pipeTrunk, conversionPipeTrunks )
     {
-        if( conversionPipeTrunks.at(i).codecTo == codecName && conversionPipeTrunks.at(i).enabled && conversionPipeTrunks.at(i).plugin->type() == "codec" )
+        if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled && pipeTrunk.plugin->type() == "codec" )
         {
-            encoders += qobject_cast<CodecPlugin*>(conversionPipeTrunks.at(i).plugin);
+            encoders += qobject_cast<CodecPlugin*>(pipeTrunk.plugin);
         }
     }
 
-    for( int i=0; i<filterPipeTrunks.count(); i++ )
+    foreach( const ConversionPipeTrunk pipeTrunk, filterPipeTrunks )
     {
-        if( filterPipeTrunks.at(i).codecTo == codecName && filterPipeTrunks.at(i).enabled && filterPipeTrunks.at(i).plugin->type() == "filter" )
+        if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled && pipeTrunk.plugin->type() == "filter" )
         {
-            encoders += qobject_cast<CodecPlugin*>(filterPipeTrunks.at(i).plugin);
+            encoders += qobject_cast<CodecPlugin*>(pipeTrunk.plugin);
         }
     }
 
     return encoders.toList();
 }
 
-QList<CodecPlugin*> PluginLoader::decodersForCodec( const QString& codecName )
-{
-    QSet<CodecPlugin*> decoders;
+// QList<CodecPlugin*> PluginLoader::decodersForCodec( const QString& codecName )
+// {
+//     QSet<CodecPlugin*> decoders;
+//
+//     for( int i=0; i<conversionPipeTrunks.count(); i++ )
+//     {
+//         if( conversionPipeTrunks.at(i).codecFrom == codecName && conversionPipeTrunks.at(i).enabled && conversionPipeTrunks.at(i).plugin->type() == "codec" )
+//         {
+//             decoders += qobject_cast<CodecPlugin*>(conversionPipeTrunks.at(i).plugin);
+//         }
+//     }
+//
+//     for( int i=0; i<filterPipeTrunks.count(); i++ )
+//     {
+//         if( filterPipeTrunks.at(i).codecFrom == codecName && filterPipeTrunks.at(i).enabled && filterPipeTrunks.at(i).plugin->type() == "filter" )
+//         {
+//             decoders += qobject_cast<CodecPlugin*>(filterPipeTrunks.at(i).plugin);
+//         }
+//     }
+//
+//     return decoders.toList();
+// }
 
-    for( int i=0; i<conversionPipeTrunks.count(); i++ )
-    {
-        if( conversionPipeTrunks.at(i).codecFrom == codecName && conversionPipeTrunks.at(i).enabled && conversionPipeTrunks.at(i).plugin->type() == "codec" )
-        {
-            decoders += qobject_cast<CodecPlugin*>(conversionPipeTrunks.at(i).plugin);
-        }
-    }
-
-    for( int i=0; i<filterPipeTrunks.count(); i++ )
-    {
-        if( filterPipeTrunks.at(i).codecFrom == codecName && filterPipeTrunks.at(i).enabled && filterPipeTrunks.at(i).plugin->type() == "filter" )
-        {
-            decoders += qobject_cast<CodecPlugin*>(filterPipeTrunks.at(i).plugin);
-        }
-    }
-
-    return decoders.toList();
-}
-
-QList<ReplayGainPlugin*> PluginLoader::replaygainForCodec( const QString& codecName )
-{
-    QSet<ReplayGainPlugin*> replaygain;
-
-    for( int i=0; i<replaygainPipes.count(); i++ )
-    {
-        if( replaygainPipes.at(i).codecName == codecName && replaygainPipes.at(i).enabled )
-        {
-            replaygain += replaygainPipes.at(i).plugin;
-        }
-    }
-
-    return replaygain.toList();
-}
+// QList<ReplayGainPlugin*> PluginLoader::replaygainForCodec( const QString& codecName )
+// {
+//     QSet<ReplayGainPlugin*> replaygain;
+//
+//     for( int i=0; i<replaygainPipes.count(); i++ )
+//     {
+//         if( replaygainPipes.at(i).codecName == codecName && replaygainPipes.at(i).enabled )
+//         {
+//             replaygain += replaygainPipes.at(i).plugin;
+//         }
+//     }
+//
+//     return replaygain.toList();
+// }
 
 BackendPlugin *PluginLoader::backendPluginByName( const QString& name )
 {
@@ -717,6 +717,7 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
 QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType )
 {
     QString codec = "";
+    short rating = 0;
     const QString mime = KMimeType::findByUrl(filename)->name();
 
     if( mimeType )
@@ -725,25 +726,50 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
     if( mime == "inode/directory" )
         return codec;
 
+    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 );
+
+    foreach( const BackendPlugin::FormatInfo info, formatInfos )
+    {
+        short newRating = 0;
+
+        if( info.mimeTypes.contains(mime) )
+            newRating += 50 - info.mimeTypes.indexOf(mime);
+
+        if( info.extensions.contains(extension) )
+            newRating += 50 - info.extensions.indexOf(extension);
+
+        if( newRating == 100 )
+        {
+            return info.codecName;
+        }
+        else if( newRating > rating )
+        {
+            rating = newRating;
+            codec = info.codecName;
+        }
+    }
+
+    QList<BackendPlugin*> allPlugins;
     foreach( CodecPlugin *plugin, codecPlugins )
-    {
-        codec = plugin->getCodecFromFile( filename, mime );
-        if( codec != "" )
-            return codec;
-    }
-
+        allPlugins.append( plugin );
     foreach( FilterPlugin *plugin, filterPlugins )
-    {
-        codec = plugin->getCodecFromFile( filename, mime );
-        if( codec != "" )
-            return codec;
-    }
-
+        allPlugins.append( plugin );
     foreach( ReplayGainPlugin *plugin, replaygainPlugins )
+        allPlugins.append( plugin );
+
+    foreach( BackendPlugin *plugin, allPlugins )
     {
-        codec = plugin->getCodecFromFile( filename, mime );
-        if( codec != "" )
-            return codec;
+        short newRating = 0;
+        const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
+        if( !newCodec.isEmpty() && newRating == 100 )
+        {
+            return newCodec;
+        }
+        else if( !newCodec.isEmpty() && newRating > rating )
+        {
+            rating = newRating;
+            codec = newCodec;
+        }
     }
 
     return codec;

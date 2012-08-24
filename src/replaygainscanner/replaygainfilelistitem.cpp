@@ -71,6 +71,8 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
                     case ReplayGainFileListItem::SucceededWithProblems:
                         isSucceeded = true;
                         break;
+                    case ReplayGainFileListItem::Skipped:
+                        break;
                     case ReplayGainFileListItem::StoppedByUser:
                         break;
                     case ReplayGainFileListItem::BackendNeedsConfiguration:

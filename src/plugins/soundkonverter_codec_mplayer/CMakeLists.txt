@@ -5,7 +5,6 @@ include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 set(soundkonverter_codec_mplayer_SRCS
    soundkonverter_codec_mplayer.cpp
-   mplayercodecwidget.cpp
  )
 
 kde4_add_plugin(soundkonverter_codec_mplayer ${soundkonverter_codec_mplayer_SRCS})

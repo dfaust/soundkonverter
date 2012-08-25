@@ -3,7 +3,6 @@
 
 #include "soundkonverter_codec_mplayer.h"
 #include "../../core/conversionoptions.h"
-#include "mplayercodecwidget.h"
 
 
 soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, const QStringList& args  )
@@ -120,14 +119,7 @@ void soundkonverter_codec_mplayer::showInfo( QWidget *parent )
 
 CodecWidget *soundkonverter_codec_mplayer::newCodecWidget()
 {
-    MPlayerCodecWidget *widget = new MPlayerCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
-    return qobject_cast<CodecWidget*>(widget);
+    return 0;
 }
 
 unsigned int soundkonverter_codec_mplayer::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )

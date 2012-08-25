@@ -4,10 +4,11 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QLabel;
 class QSlider;
 class QSpinBox;
 class QCheckBox;
+class KComboBox;
 class KLineEdit;
 
 class FFmpegCodecWidget : public CodecWidget
@@ -25,6 +26,7 @@ public:
     int currentDataRate();
 
 private:
+    QLabel *lBitrate;
     QSlider *sBitrate;
     QSpinBox *iBitrate;
     KComboBox *cBitrate;

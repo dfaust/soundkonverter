@@ -28,7 +28,7 @@ FFmpegCodecWidget::FFmpegCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lBitrate = new QLabel( i18n("Bitrate")+":", this );
+    lBitrate = new QLabel( i18n("Bitrate")+":", this );
     topBox->addWidget( lBitrate );
 
     sBitrate = new QSlider( Qt::Horizontal, this );
@@ -133,20 +133,42 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
 
     currentFormat = format;
 
-    if( currentFormat == "ac3" )
+    if( currentFormat == "wav" )
     {
+        lBitrate->hide();
+        sBitrate->hide();
+        iBitrate->hide();
+        cBitrate->hide();
+        cCmdArguments->hide();
+        lCmdArguments->hide();
+    }
+    else if( currentFormat == "flac" || currentFormat == "alac" )
+    {
+        lBitrate->hide();
+        sBitrate->hide();
+        iBitrate->hide();
+        cBitrate->hide();
+        cCmdArguments->show();
+        lCmdArguments->show();
+    }
+    else if( currentFormat == "ac3" )
+    {
+        lBitrate->show();
         sBitrate->hide();
         iBitrate->hide();
         cBitrate->show();
+        cCmdArguments->show();
+        lCmdArguments->show();
     }
     else
     {
+        lBitrate->show();
         sBitrate->show();
         iBitrate->show();
         cBitrate->hide();
+        cCmdArguments->show();
+        lCmdArguments->show();
     }
-
-    setEnabled( currentFormat != "wav" && currentFormat != "flac" && currentFormat != "alac" );
 }
 
 QString FFmpegCodecWidget::currentProfile()

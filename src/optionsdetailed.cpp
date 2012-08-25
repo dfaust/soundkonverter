@@ -54,6 +54,12 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     cPlugin->setSizeAdjustPolicy( QComboBox::AdjustToContents );
     connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(encoderChanged(const QString&)) );
     connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
+    pConfigurePlugin = new KPushButton( KIcon("configure"), "", this );
+    pConfigurePlugin->setFixedSize( cPlugin->sizeHint().height(), cPlugin->sizeHint().height() );
+    pConfigurePlugin->setFlat( true );
+    topBox->addWidget( pConfigurePlugin );
+    topBox->setStretchFactor( pConfigurePlugin, 1 );
+    connect( pConfigurePlugin, SIGNAL(clicked()), this, SLOT(configurePlugin()) );
 
     // draw a horizontal line
     QFrame *lineFrame = new QFrame( this );
@@ -217,6 +223,7 @@ void OptionsDetailed::formatChanged( const QString& format )
 
     lPlugin->setShown( format != "wav" );
     cPlugin->setShown( format != "wav" );
+    pConfigurePlugin->setShown( format != "wav" );
     if( wPlugin )
         wPlugin->setShown( format != "wav" );
 
@@ -269,6 +276,13 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
         grid->addWidget( wPlugin, 2, 0 );
     }
+
+    pConfigurePlugin->setEnabled( plugin->isConfigSupported(BackendPlugin::Encoder,"") );
+
+    if( pConfigurePlugin->isEnabled() )
+        pConfigurePlugin->setToolTip( i18n("Configure %1 ...",encoder) );
+    else
+        pConfigurePlugin->setToolTip( "" );
 }
 
 void OptionsDetailed::somethingChanged()
@@ -291,6 +305,16 @@ void OptionsDetailed::somethingChanged()
     }
 
     emit currentDataRateChanged( dataRate );
+}
+
+void OptionsDetailed::configurePlugin()
+{
+    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( cPlugin->currentText() );
+
+    if( plugin )
+    {
+        plugin->showConfigDialog( BackendPlugin::Encoder, "", this );
+    }
 }
 
 ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed )

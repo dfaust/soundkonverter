@@ -61,6 +61,7 @@ private:
     KComboBox *cFormat;
     QLabel *lPlugin;
     KComboBox *cPlugin;
+    KPushButton *pConfigurePlugin;
     CodecWidget *wPlugin;
     QMap<FilterWidget*,FilterPlugin*> wFilter;
     QCheckBox *cReplayGain;
@@ -83,6 +84,7 @@ public slots:
 private slots:
     void formatChanged( const QString& format );
     void encoderChanged( const QString& encoder );
+    void configurePlugin();
 
 signals:
     // connected to optionsSimple

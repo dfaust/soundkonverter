@@ -334,7 +334,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
 //             debug
 //             logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
 
-            addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
+            addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
             continue;
         }
 

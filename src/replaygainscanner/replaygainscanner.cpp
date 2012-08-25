@@ -131,7 +131,7 @@ void ReplayGainScanner::showFileDialog()
 {
     QStringList filterList;
     QStringList allFilter;
-    const QStringList formats = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    const QStringList formats = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     for( int i=0; i<formats.count(); i++ )
     {
         QString extensionFilter = config->pluginLoader()->codecExtensions(formats.at(i)).join(" *.");

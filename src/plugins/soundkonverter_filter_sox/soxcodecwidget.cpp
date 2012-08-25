@@ -105,8 +105,7 @@ ConversionOptions *SoxCodecWidget::currentConversionOptions()
 
     if( currentFormat == "wav" ||
         currentFormat == "aiff" ||
-        currentFormat == "flac" ||
-        currentFormat == "8svx" )
+        currentFormat == "flac" )
     {
         options->qualityMode = ConversionOptions::Lossless;
         options->compressionLevel = iCompressionLevel->value();
@@ -335,13 +334,8 @@ QString SoxCodecWidget::currentProfile()
             return i18n("Very high");
         }
     }
-    else if( currentFormat == "amr nb" ||
-             currentFormat == "amr wb" ||
-             currentFormat == "8svx" )
-    {
-        return i18n("Very low");
-    }
 
+    // amr nb, amr wb, 8svx
     return i18n("User defined");
 }
 
@@ -362,12 +356,6 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
         {
             sQuality->setValue( 200 );
             dQuality->setValue( 2 );
-            return true;
-        }
-        else if( currentFormat == "amr nb" ||
-                 currentFormat == "amr wb" ||
-                 currentFormat == "8svx" )
-        {
             return true;
         }
     }

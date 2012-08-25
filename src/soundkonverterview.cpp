@@ -427,7 +427,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
     {
         QString profile;
         QString format;
-        QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+        QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
         for( int i=0; i<formatList.count(); i++ )
         {
             if( _format == formatList.at(i) || config->pluginLoader()->codecExtensions(formatList.at(i)).contains(_format) )
@@ -486,7 +486,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         if( lossy )
         {
             format = "";
-            QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::Lossy );
+            QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy) );
             for( int i=0; i<formatList.count(); i++ )
             {
                 if( _format == formatList.at(i) || config->pluginLoader()->codecExtensions(formatList.at(i)).contains(_format) )

@@ -46,7 +46,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     optionsDetailed->init();
 
     QString format;
-    const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid));
+    const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid));
     if( config->data.general.defaultFormat == i18n("Last used") || config->data.general.defaultFormat == "Last used" )
     {
         format = config->data.general.lastFormat;

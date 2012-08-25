@@ -134,78 +134,12 @@ void SpeexCodecWidget::setCurrentFormat( const QString& format )
 
 QString SpeexCodecWidget::currentProfile()
 {
-    if( currentFormat == "wav" )
-    {
-        return i18n("Lossless");
-    }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 2.0 )
-    {
-        return i18n("Very low");
-    }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 4.0 )
-    {
-        return i18n("Low");
-    }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 6.0 )
-    {
-        return i18n("Medium");
-    }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 8.0 )
-    {
-        return i18n("High");
-    }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 10.0 )
-    {
-        return i18n("Very high");
-    }
-
     return i18n("User defined");
 }
 
 bool SpeexCodecWidget::setCurrentProfile( const QString& profile )
 {
-    if( profile == i18n("Very low") )
-    {
-        cMode->setCurrentIndex( 0 );
-        modeChanged( 0 );
-        sQuality->setValue( 200 );
-        dQuality->setValue( 2.0 );
-        return true;
-    }
-    else if( profile == i18n("Low") )
-    {
-        cMode->setCurrentIndex( 0 );
-        modeChanged( 0 );
-        sQuality->setValue( 400 );
-        dQuality->setValue( 4.0 );
-        return true;
-    }
-    else if( profile == i18n("Medium") )
-    {
-        cMode->setCurrentIndex( 0 );
-        modeChanged( 0 );
-        sQuality->setValue( 600 );
-        dQuality->setValue( 6.0 );
-        return true;
-    }
-    else if( profile == i18n("High") )
-    {
-        cMode->setCurrentIndex( 0 );
-        modeChanged( 0 );
-        sQuality->setValue( 800 );
-        dQuality->setValue( 8.0 );
-        return true;
-    }
-    else if( profile == i18n("Very high") )
-    {
-        cMode->setCurrentIndex( 0 );
-        modeChanged( 0 );
-        sQuality->setValue( 1000 );
-        dQuality->setValue( 10.0 );
-        return true;
-    }
-
-    return false;
+    return profile == i18n("User defined");
 }
 
 int SpeexCodecWidget::currentDataRate()

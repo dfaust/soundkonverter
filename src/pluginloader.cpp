@@ -308,53 +308,34 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     QSet<QString> set;
     QStringList list;
 
-    for( int i=0; i<conversionPipeTrunks.count(); i++ )
+    foreach( const ConversionPipeTrunk trunk, conversionFilterPipeTrunks )
     {
-        if( !conversionPipeTrunks.at(i).enabled )
+        if( !trunk.enabled )
             continue;
 
         if( possibilities & Encode )
         {
-            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecTo) )
-                set += conversionPipeTrunks.at(i).codecTo;
-            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecTo) )
-                set += conversionPipeTrunks.at(i).codecTo;
-            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecTo) )
-                set += conversionPipeTrunks.at(i).codecTo;
+            const QString codec = trunk.codecTo;
+            const bool isLossless = isCodecLossless(codec);
+            const bool isInferiorQuality = isCodecInferiorQuality(codec);
+//             const bool isHybrid = isCodecHybrid(codec);
+            if( ( compressionType & Lossy && !isLossless || compressionType & Lossless && isLossless ) &&
+                ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+                set += codec;
+//             if( compressionType & Hybrid && isCodecHybrid(codec) && ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+//                 set += codec;
         }
         if( possibilities & Decode )
         {
-            if( compressionType & Lossy && !isCodecLossless(conversionPipeTrunks.at(i).codecFrom) )
-                set += conversionPipeTrunks.at(i).codecFrom;
-            if( compressionType & Lossless && isCodecLossless(conversionPipeTrunks.at(i).codecFrom) )
-                set += conversionPipeTrunks.at(i).codecFrom;
-            if( compressionType & Hybrid && isCodecHybrid(conversionPipeTrunks.at(i).codecFrom) )
-                set += conversionPipeTrunks.at(i).codecFrom;
-        }
-    }
-
-    for( int i=0; i<filterPipeTrunks.count(); i++ )
-    {
-        if( !filterPipeTrunks.at(i).enabled )
-            continue;
-
-        if( possibilities & Encode )
-        {
-            if( compressionType & Lossy && !isCodecLossless(filterPipeTrunks.at(i).codecTo) )
-                set += filterPipeTrunks.at(i).codecTo;
-            if( compressionType & Lossless && isCodecLossless(filterPipeTrunks.at(i).codecTo) )
-                set += filterPipeTrunks.at(i).codecTo;
-            if( compressionType & Hybrid && isCodecHybrid(filterPipeTrunks.at(i).codecTo) )
-                set += filterPipeTrunks.at(i).codecTo;
-        }
-        if( possibilities & Decode )
-        {
-            if( compressionType & Lossy && !isCodecLossless(filterPipeTrunks.at(i).codecFrom) )
-                set += filterPipeTrunks.at(i).codecFrom;
-            if( compressionType & Lossless && isCodecLossless(filterPipeTrunks.at(i).codecFrom) )
-                set += filterPipeTrunks.at(i).codecFrom;
-            if( compressionType & Hybrid && isCodecHybrid(filterPipeTrunks.at(i).codecFrom) )
-                set += filterPipeTrunks.at(i).codecFrom;
+            const QString codec = trunk.codecFrom;
+            const bool isLossless = isCodecLossless(codec);
+            const bool isInferiorQuality = isCodecInferiorQuality(codec);
+//             const bool isHybrid = isCodecHybrid(codec);
+            if( ( compressionType & Lossy && !isLossless || compressionType & Lossless && isLossless ) &&
+                ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+                set += codec;
+//             if( compressionType & Hybrid && isCodecHybrid(codec) && ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+//                 set += codec;
         }
     }
 
@@ -1003,6 +984,18 @@ bool PluginLoader::isCodecLossless( const QString& codecName )
         if( formatInfos.at(i).codecName == codecName )
         {
             return formatInfos.at(i).lossless;
+        }
+    }
+    return false;
+}
+
+bool PluginLoader::isCodecInferiorQuality( const QString& codecName )
+{
+    for( int i=0; i<formatInfos.count(); i++ )
+    {
+        if( formatInfos.at(i).codecName == codecName )
+        {
+            return formatInfos.at(i).inferiorQuality;
         }
     }
     return false;

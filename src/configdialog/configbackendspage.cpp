@@ -325,7 +325,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QLabel *lSelectorFormat = new QLabel( i18n("Configure plugin priorities for format:"), this );
     formatSelectorBox->addWidget( lSelectorFormat );
     cSelectorFormat = new KComboBox( this );
-    cSelectorFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain),PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
+    cSelectorFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain),PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
     cSelectorFormat->removeItem( cSelectorFormat->findText("wav") );
     cSelectorFormat->removeItem( cSelectorFormat->findText("audio cd") );
     formatSelectorBox->addWidget( cSelectorFormat );

@@ -39,7 +39,7 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
     QStringList filterList;
     QStringList allFilter;
-    QStringList formats = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    QStringList formats = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     for( int i=0; i<formats.count(); i++ )
     {
         QString extensionFilter = config->pluginLoader()->codecExtensions(formats.at(i)).join(" *.");

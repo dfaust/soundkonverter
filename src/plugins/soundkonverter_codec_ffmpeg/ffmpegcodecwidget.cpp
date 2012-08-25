@@ -177,6 +177,10 @@ QString FFmpegCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
+    else if( currentFormat == "amr nb" || currentFormat == "speex" )
+    {
+        return i18n("User defined");
+    }
     else if( currentFormat == "ac3" )
     {
         if( cBitrate->currentText() == "64 kbps" )

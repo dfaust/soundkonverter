@@ -30,6 +30,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 {
     BackendPlugin::FormatInfo info;
     info.codecName = codecName;
+    info.inferiorQuality = false;
 
     if( codecName == "wav" )
     {
@@ -159,6 +160,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "amr nb" )
     {
         info.lossless = false;
+        info.inferiorQuality = true;
         info.description = i18n("Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech compression in mobile communication."); // http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec
         info.mimeTypes.append( "audio/amr" );
         info.mimeTypes.append( "audio/3gpp" );
@@ -168,6 +170,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "amr wb" )
     {
         info.lossless = false;
+        info.inferiorQuality = true;
         info.description = i18n("Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a higher data rate resulting in a higher quality."); // http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband
         info.mimeTypes.append( "audio/amr-wb" );
         info.mimeTypes.append( "audio/3gpp" );
@@ -185,6 +188,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "speex" )
     {
         info.lossless = false;
+        info.inferiorQuality = true;
         info.description = i18n("Speex is a free and lossy audio codec designed for low quality speech encoding.\nFor more information see: http://www.speex.org");
         info.mimeTypes.append( "audio/x-speex" );
         info.mimeTypes.append( "audio/x-speex+ogg" );
@@ -381,6 +385,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "8svx" )
     {
         info.lossless = false;
+        info.inferiorQuality = true;
         info.description = i18n("8-Bit Sampled Voice (8SVX) is an audio file format standard developed by Electronic Arts for the Commodore-Amiga computer series.");
         info.mimeTypes.append( "audio/x-8svx" );
         info.mimeTypes.append( "audio/8svx" );

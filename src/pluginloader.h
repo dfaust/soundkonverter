@@ -62,7 +62,7 @@ public:
 //     enum Possibilities { EncAble, DecAble, EncOrDecAble, ReplayGain }; // TODO make or'ed list
 //     enum CompressionType { Lossy, Lossless, Hybrid, LossyOrLossless, LossyOrLosslessOrHybrid }; // TODO make or'ed list
     enum Possibilities { Encode = 1, Decode = 2, ReplayGain = 4 };
-    enum CompressionType { Lossy = 1, Lossless = 2, Hybrid = 4 };
+    enum CompressionType { InferiorQuality = 1, Lossy = 2, Lossless = 4, Hybrid = 8 };
 
     void load();
 
@@ -96,6 +96,7 @@ public:
     QString pluginEncodeProblems( const QString& pluginName, const QString& codecName );
     QString pluginReplayGainProblems( const QString& pluginName, const QString& codecName );
     bool isCodecLossless( const QString& codecName );
+    bool isCodecInferiorQuality( const QString& codecName );
     bool isCodecHybrid( const QString& codecName );
     bool hasCodecInternalReplayGain( const QString& codecName );
     QStringList codecExtensions( const QString& codecName );

@@ -41,7 +41,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     topBox->addWidget( lFormat );
     cFormat = new KComboBox( this );
     topBox->addWidget( cFormat );
-    cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
+    cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
 //     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
 

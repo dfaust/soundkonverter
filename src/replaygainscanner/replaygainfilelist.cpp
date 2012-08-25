@@ -270,7 +270,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         }
         foreach( KUrl url, k_urls_dirs )
         {
-            addDir( url, true, config->pluginLoader()->formatList(PluginLoader::ReplayGain,PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
+            addDir( url, true, config->pluginLoader()->formatList(PluginLoader::ReplayGain,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
         }
 
         event->acceptProposedAction();

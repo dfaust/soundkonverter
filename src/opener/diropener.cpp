@@ -97,11 +97,11 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     fileTypes = new KListWidget( dirOpenerWidget );
     if( mode == Convert )
     {
-        codecList = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+        codecList = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     }
     else if( mode == ReplayGain )
     {
-        codecList = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+        codecList = config->pluginLoader()->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
     }
     for( int i = 0; i < codecList.size(); i++ )
     {

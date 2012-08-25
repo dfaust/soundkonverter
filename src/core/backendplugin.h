@@ -73,6 +73,7 @@ public:
     {
         QString codecName;      // the internal name of this codec
         bool lossless;          // for calculating a possible conversion pipe
+        bool inferiorQuality;   // e.g. 8 bit file types
         QString description;    // description for the simple tab
         QStringList mimeTypes;  // TODO this might be obsolete - what's with dolphin's actions context menu?
         QStringList extensions;

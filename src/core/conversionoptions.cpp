@@ -50,10 +50,6 @@ ConversionOptions::ConversionOptions()
     quality = 0;
     bitrate = 0;
     bitrateMode = Vbr;
-    bitrateMin = 0;
-    bitrateMax = 0;
-    samplingRate = 0;
-    channels = 0;
 
     compressionLevel = 0;
 
@@ -82,14 +78,6 @@ bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter optio
     if( bitrate !=_other->bitrate )
         return false;
     if( bitrateMode !=_other->bitrateMode )
-        return false;
-    if( bitrateMin !=_other->bitrateMin )
-        return false;
-    if( bitrateMax !=_other->bitrateMax )
-        return false;
-    if( samplingRate !=_other->samplingRate )
-        return false;
-    if( channels !=_other->channels )
         return false;
 
     QStringList filters;
@@ -154,10 +142,6 @@ QDomElement ConversionOptions::toXml( QDomDocument document )
     encodingOptions.setAttribute("quality",quality);
     encodingOptions.setAttribute("bitrate",bitrate);
     encodingOptions.setAttribute("bitrateMode",bitrateMode);
-    encodingOptions.setAttribute("bitrateMin",bitrateMin);
-    encodingOptions.setAttribute("bitrateMax",bitrateMax);
-    encodingOptions.setAttribute("samplingRate",samplingRate);
-    encodingOptions.setAttribute("channels",channels);
     encodingOptions.setAttribute("compressionLevel",compressionLevel);
     encodingOptions.setAttribute("cmdArguments",cmdArguments);
     conversionOptions.appendChild(encodingOptions);
@@ -190,10 +174,6 @@ bool ConversionOptions::fromXml( QDomElement conversionOptions, QList<QDomElemen
     quality = encodingOptions.attribute("quality").toDouble();
     bitrate = encodingOptions.attribute("bitrate").toInt();
     bitrateMode = (BitrateMode)encodingOptions.attribute("bitrateMode").toInt();
-    bitrateMin = encodingOptions.attribute("bitrateMin").toInt();
-    bitrateMax = encodingOptions.attribute("bitrateMax").toInt();
-    samplingRate = encodingOptions.attribute("samplingRate").toInt();
-    channels = encodingOptions.attribute("channels").toInt();
     compressionLevel = encodingOptions.attribute("compressionLevel").toDouble();
     cmdArguments = encodingOptions.attribute("cmdArguments");
     QDomElement outputOptions = conversionOptions.elementsByTagName("outputOptions").at(0).toElement();

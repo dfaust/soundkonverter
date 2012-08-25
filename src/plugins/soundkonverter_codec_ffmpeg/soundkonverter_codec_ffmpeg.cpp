@@ -439,15 +439,6 @@ unsigned int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const 
         {
             command += "-ab";
             command += QString::number(conversionOptions->bitrate) + "k";
-            if(  conversionOptions->samplingRate > 0 )
-            {
-                command += "-ar";
-                command += QString::number(conversionOptions->samplingRate);
-            }
-            if( conversionOptions->channels > 0 )
-            {
-                command += "-ac 1";
-            }
         }
         if( conversionOptions->pluginName == name() )
         {

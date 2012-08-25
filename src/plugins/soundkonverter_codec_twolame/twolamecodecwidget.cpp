@@ -59,51 +59,10 @@ TwoLameCodecWidget::TwoLameCodecWidget()
 
     topBox->addStretch();
 
-    // mid box ----------------------------------------
-
-    QHBoxLayout *midBox = new QHBoxLayout();
-    grid->addLayout( midBox, 1, 0 );
-
-    chChannels = new QCheckBox( i18n("Channels")+":", this );
-    connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( chChannels );
-    cChannels = new KComboBox( this );
-    cChannels->addItem( i18n("Mono") );
-    cChannels->addItem( i18n("Joint") );
-    cChannels->addItem( i18n("Stereo") );
-    cChannels->addItem( i18n("Dual") );
-    cChannels->setEnabled( false );
-    connect( cChannels, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( cChannels );
-    connect( chChannels, SIGNAL(toggled(bool)), cChannels, SLOT(setEnabled(bool)) );
-
-    midBox->addSpacing( 12 );
-
-    chSamplerate = new QCheckBox( i18n("Resample")+":", this );
-    connect( chSamplerate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( chSamplerate );
-    cSamplerate = new KComboBox( this );
-    cSamplerate->addItem( "8000 Hz" );
-    cSamplerate->addItem( "11025 Hz" );
-    cSamplerate->addItem( "12000 Hz" );
-    cSamplerate->addItem( "16000 Hz" );
-    cSamplerate->addItem( "22050 Hz" );
-    cSamplerate->addItem( "24000 Hz" );
-    cSamplerate->addItem( "32000 Hz" );
-    cSamplerate->addItem( "44100 Hz" );
-    cSamplerate->addItem( "48000 Hz" );
-    cSamplerate->setCurrentIndex( 4 );
-    cSamplerate->setEnabled( false );
-    connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( cSamplerate );
-    connect( chSamplerate, SIGNAL(toggled(bool)), cSamplerate, SLOT(setEnabled(bool)) );
-
-    midBox->addStretch();
-
     // cmd arguments box
 
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
-    grid->addLayout( cmdArgumentsBox, 2, 0 );
+    grid->addLayout( cmdArgumentsBox, 1, 0 );
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
     cmdArgumentsBox->addWidget( cCmdArguments );
@@ -112,7 +71,7 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
 
-    grid->setRowStretch( 3, 1 );
+    grid->setRowStretch( 2, 1 );
 
     modeChanged( 0 );
 }
@@ -141,8 +100,6 @@ ConversionOptions *TwoLameCodecWidget::currentConversionOptions()
         options->quality = iQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
         options->bitrateMode = ConversionOptions::Vbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
@@ -150,13 +107,7 @@ ConversionOptions *TwoLameCodecWidget::currentConversionOptions()
         options->bitrate = iQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ConversionOptions::Cbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
-    if( chSamplerate->isChecked() ) options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
-    else options->samplingRate = 0;
-    if( chChannels->isChecked() ) options->channels = ( cChannels->currentIndex() != 3 ) ? cChannels->currentIndex() + 1 : 5;
-    else options->channels = 0;
     if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
     else options->cmdArguments = "";
 
@@ -179,10 +130,6 @@ bool TwoLameCodecWidget::setCurrentConversionOptions( ConversionOptions *options
         modeChanged( cMode->currentIndex() );
         iQuality->setValue( options->bitrate );
     }
-    chSamplerate->setChecked( options->samplingRate != 0 );
-    if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-    chChannels->setChecked( options->channels != 0 );
-    if( options->channels != 0 ) cChannels->setCurrentIndex( ( options->channels != 5 ) ? options->channels - 1 : 3 );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
 
@@ -202,23 +149,23 @@ QString TwoLameCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == -25 && chChannels->isChecked() && cChannels->currentIndex() == 0 && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cMode->currentIndex() == 0 && iQuality->value() == -25 )
     {
         return i18n("Very low");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == -10 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cMode->currentIndex() == 0 && iQuality->value() == -10 )
     {
         return i18n("Low");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 5 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && iQuality->value() == 5 )
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 20 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && iQuality->value() == 20 )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && iQuality->value() == 35 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cMode->currentIndex() == 0 && iQuality->value() == 35 )
     {
         return i18n("Very high");
     }
@@ -234,10 +181,6 @@ bool TwoLameCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( -25 );
         iQuality->setValue( -25 );
-        chChannels->setChecked( true );
-        cChannels->setCurrentIndex( 0 );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -247,9 +190,6 @@ bool TwoLameCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( -10 );
         iQuality->setValue( -10 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -259,8 +199,6 @@ bool TwoLameCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 5 );
         iQuality->setValue( 5 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -270,8 +208,6 @@ bool TwoLameCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 20 );
         iQuality->setValue( 20 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -281,8 +217,6 @@ bool TwoLameCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 35 );
         iQuality->setValue( 35 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -307,21 +241,6 @@ int TwoLameCodecWidget::currentDataRate()
         else
         {
             dataRate = iQuality->value()/8*60*1000;
-        }
-        if( chChannels->isChecked() )
-        {
-            if( cChannels->currentIndex() == 0 )
-            {
-                dataRate *= 0.9f;
-            }
-            else if( cChannels->currentIndex() == 3 )
-            {
-                dataRate *= 1.5f;
-            }
-        }
-        if( chSamplerate->isChecked() && cSamplerate->currentText().replace(" Hz","").toInt() <= 22050 )
-        {
-            dataRate *= 0.9f;
         }
     }
 

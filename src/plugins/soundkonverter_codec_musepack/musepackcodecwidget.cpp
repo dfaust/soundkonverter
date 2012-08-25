@@ -98,7 +98,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
 
-    grid->setRowStretch( 2, 1 );
+    grid->setRowStretch( 3, 1 );
 
     presetChanged( cPreset->currentText() );
 }
@@ -126,10 +126,6 @@ ConversionOptions *MusePackCodecWidget::currentConversionOptions()
     options->quality = dQuality->value();
     options->bitrate = bitrateForQuality( options->quality );
     options->bitrateMode = ConversionOptions::Vbr;
-    options->bitrateMin = 0;
-    options->bitrateMax = 0;
-    options->samplingRate = 0;
-    options->channels = 0;
 
     return options;
 }

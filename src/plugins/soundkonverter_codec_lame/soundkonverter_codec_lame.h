@@ -4,9 +4,12 @@
 
 #include "../../core/codecplugin.h"
 
+#include <QWeakPointer>
 #include <KUrl>
 
 class ConversionOptions;
+class KDialog;
+class KComboBox;
 
 
 class soundkonverter_codec_lame : public CodecPlugin
@@ -34,6 +37,18 @@ public:
     float parseOutput( const QString& output );
 
     ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
+
+private:
+    QWeakPointer<KDialog> configDialog;
+    KComboBox *configDialogStereoModeComboBox;
+
+    int configVersion;
+    QString stereoMode;
+
+private slots:
+    void configDialogSave();
+    void configDialogDefault();
+
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( lame, soundkonverter_codec_lame )

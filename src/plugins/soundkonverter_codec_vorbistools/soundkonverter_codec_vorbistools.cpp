@@ -140,20 +140,6 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
             {
                 command += "-b";
                 command += QString::number(conversionOptions->bitrate);
-                if( conversionOptions->bitrateMin > 0 || conversionOptions->bitrateMax > 0 )
-                {
-                    command += "--managed";
-                    if( conversionOptions->bitrateMin > 0 )
-                    {
-                        command += "-m";
-                        command += QString::number(conversionOptions->bitrateMin);
-                    }
-                    if( conversionOptions->bitrateMax > 0 )
-                    {
-                        command += "-M";
-                        command += QString::number(conversionOptions->bitrateMax);
-                    }
-                }
             }
             else if( conversionOptions->bitrateMode == ConversionOptions::Cbr )
             {
@@ -161,15 +147,6 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
                 command += "-b";
                 command += QString::number(conversionOptions->bitrate);
             }
-        }
-        if( conversionOptions->samplingRate > 0 )
-        {
-            command += "--resample";
-            command += QString::number(conversionOptions->samplingRate);
-        }
-        if( conversionOptions->channels > 0 )
-        {
-            command += "--downmix";
         }
         command += "\"" + escapeUrl(inputFile) + "\"";
         command += "-o";

@@ -102,16 +102,12 @@ ConversionOptions *AftenCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Quality;
         options->quality = dQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
         options->qualityMode = ConversionOptions::Bitrate;
         options->bitrate = cBitrate->currentText().replace(" kbps","").toInt();
         options->quality = qualityForBitrate( cBitrate->currentText().replace(" kbps","").toInt() );
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
 
     return options;

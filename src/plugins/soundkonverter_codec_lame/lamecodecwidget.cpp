@@ -89,9 +89,6 @@ LameCodecWidget::LameCodecWidget()
 
     sQuality = new QSlider( Qt::Horizontal, userdefinedBox );
     sQuality->setRange( 8, 320 );
-//     sQuality->setTickInterval( 32 );
-//     sQuality->setTickPosition( QSlider::TicksBelow );
-//     sQuality->setFixedWidth( sQuality->sizeHint().width() );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     userdefinedTopBox->addWidget( sQuality );
@@ -116,66 +113,7 @@ LameCodecWidget::LameCodecWidget()
     connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     userdefinedTopBox->addWidget( cBitrateMode );
 
-    /*
-    QLabel *lBitrateRange = new QLabel( i18n("Bitrate range")+":", userdefinedBox );
-    userdefinedTopBox->addWidget( lBitrateRange );
-    QSpinBox *iMinBitrate = new QSpinBox( userdefinedBox );
-    iMinBitrate->setRange( 8, 320 );
-//     iMinBitrate->setSuffix( " kbps" );
-//     iMinBitrate->setFixedHeight( cMode->minimumSizeHint().height() );
-    userdefinedTopBox->addWidget( iMinBitrate );
-    QLabel *lBitrateRangeTo = new QLabel( "-", userdefinedBox );
-    userdefinedTopBox->addWidget( lBitrateRangeTo );
-    QSpinBox *iMaxBitrate = new QSpinBox( userdefinedBox );
-    iMaxBitrate->setRange( 8, 320 );
-//     iMaxBitrate->setSuffix( " kbps" );
-//     iMaxBitrate->setFixedHeight( cMode->minimumSizeHint().height() );
-    userdefinedTopBox->addWidget( iMaxBitrate );
-    */
-
     userdefinedTopBox->addStretch();
-
-    // mid box ----------------------------------------
-
-    QHBoxLayout *userdefinedMidBox = new QHBoxLayout();
-    userdefinedBoxLayout->addLayout( userdefinedMidBox );
-
-    chChannels = new QCheckBox( i18n("Channels")+":", userdefinedBox );
-    connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    userdefinedMidBox->addWidget( chChannels );
-    cChannels = new KComboBox( userdefinedBox );
-    cChannels->addItem( i18n("Mono") );
-    cChannels->addItem( i18n("Joint Stereo") );
-    cChannels->addItem( i18n("Simple Stereo") );
-    cChannels->addItem( i18n("Forced Joint Stereo") );
-    cChannels->addItem( i18n("Dual Mono") );
-    cChannels->setEnabled( false );
-    connect( cChannels, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-    userdefinedMidBox->addWidget( cChannels );
-    connect( chChannels, SIGNAL(toggled(bool)), cChannels, SLOT(setEnabled(bool)) );
-
-    userdefinedMidBox->addSpacing( 12 );
-
-    chSamplerate = new QCheckBox( i18n("Resample")+":", userdefinedBox );
-    connect( chSamplerate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-    userdefinedMidBox->addWidget( chSamplerate );
-    cSamplerate = new KComboBox( userdefinedBox );
-    cSamplerate->addItem( "8000 Hz" );
-    cSamplerate->addItem( "11025 Hz" );
-    cSamplerate->addItem( "12000 Hz" );
-    cSamplerate->addItem( "16000 Hz" );
-    cSamplerate->addItem( "22050 Hz" );
-    cSamplerate->addItem( "24000 Hz" );
-    cSamplerate->addItem( "32000 Hz" );
-    cSamplerate->addItem( "44100 Hz" );
-    cSamplerate->addItem( "48000 Hz" );
-    cSamplerate->setCurrentIndex( 4 );
-    cSamplerate->setEnabled( false );
-    connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-    userdefinedMidBox->addWidget( cSamplerate );
-    connect( chSamplerate, SIGNAL(toggled(bool)), cSamplerate, SLOT(setEnabled(bool)) );
-
-    userdefinedMidBox->addStretch();
 
     // cmd arguments box
 
@@ -230,10 +168,6 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
     }
-    if( chSamplerate->isChecked() ) options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
-    else options->samplingRate = 0;
-    if( chChannels->isChecked() ) options->channels = cChannels->currentIndex() + 1;
-    else options->channels = 0;
     if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
     else options->cmdArguments = "";
 
@@ -265,10 +199,6 @@ bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Average")) );
         else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
-    chSamplerate->setChecked( options->samplingRate != 0 );
-    if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-    chChannels->setChecked( options->channels != 0 );
-    if( options->channels != 0 ) cChannels->setCurrentIndex( options->channels - 1 );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
 
@@ -288,23 +218,23 @@ QString LameCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 6 && chChannels->isChecked() && cChannels->currentIndex() == 0 && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 6 )
     {
         return i18n("Very low");
     }
-    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 5 && !chChannels->isChecked() && chSamplerate->isChecked() && cSamplerate->currentIndex() == 4 )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 5 )
     {
         return i18n("Low");
     }
-    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 4 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 4 )
     {
         return i18n("Medium");
     }
-    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 3 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 3 )
     {
         return i18n("High");
     }
-    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 2 && !chChannels->isChecked() && !chSamplerate->isChecked() )
+    else if( cPreset->currentIndex() == 5 && cMode->currentIndex() == 0 && iQuality->value() == 2 )
     {
         return i18n("Very high");
     }
@@ -323,10 +253,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 6 );
         iQuality->setValue( 6 );
         cBitrateMode->setCurrentIndex( 0 );
-        chChannels->setChecked( true );
-        cChannels->setCurrentIndex( 0 );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -339,9 +265,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 5 );
         iQuality->setValue( 5 );
         cBitrateMode->setCurrentIndex( 0 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( true );
-        cSamplerate->setCurrentIndex( 4 );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -354,8 +277,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 4 );
         iQuality->setValue( 4 );
         cBitrateMode->setCurrentIndex( 0 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -368,8 +289,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 3 );
         iQuality->setValue( 3 );
         cBitrateMode->setCurrentIndex( 0 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -382,8 +301,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 2 );
         iQuality->setValue( 2 );
         cBitrateMode->setCurrentIndex( 0 );
-        chChannels->setChecked( false );
-        chSamplerate->setChecked( false );
         cCmdArguments->setChecked( false );
         return true;
     }
@@ -430,21 +347,6 @@ int LameCodecWidget::currentDataRate()
             else
             {
                 dataRate = iQuality->value()/8*60*1000;
-            }
-            if( chChannels->isChecked() )
-            {
-                if( cChannels->currentIndex() == 0 )
-                {
-                    dataRate *= 0.9f;
-                }
-                else if( cChannels->currentIndex() == 4 )
-                {
-                    dataRate *= 1.5f;
-                }
-            }
-            if( chSamplerate->isChecked() && cSamplerate->currentText().replace(" Hz","").toInt() <= 22050 )
-            {
-                dataRate *= 0.9f;
             }
         }
         if( cPresetFast->isEnabled() && cPresetFast->isChecked() )

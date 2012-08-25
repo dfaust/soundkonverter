@@ -28,10 +28,6 @@ private:
     QSlider *sBitrate;
     QSpinBox *iBitrate;
     KComboBox *cBitrate;
-    QCheckBox *chChannels;
-    KComboBox *cChannels;
-    QCheckBox *chSamplerate;
-    KComboBox *cSamplerate;
     QCheckBox *cCmdArguments;
     KLineEdit *lCmdArguments;
 
@@ -40,8 +36,6 @@ private:
 private slots:
     void qualitySliderChanged( int bitrate );
     void qualitySpinBoxChanged( int bitrate );
-    void channelsToggled( bool enabled );
-    void samplerateToggled( bool enabled );
 
 signals:
     void somethingChanged();

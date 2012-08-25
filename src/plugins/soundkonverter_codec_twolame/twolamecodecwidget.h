@@ -32,10 +32,6 @@ private:
     KComboBox *cMode;
     QSpinBox *iQuality;
     QSlider *sQuality;
-    QCheckBox *chChannels;
-    KComboBox *cChannels;
-    QCheckBox *chSamplerate;
-    KComboBox *cSamplerate;
     QCheckBox *cCmdArguments;
     KLineEdit *lCmdArguments;
 

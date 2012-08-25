@@ -88,8 +88,6 @@ ConversionOptions *SpeexCodecWidget::currentConversionOptions()
         options->quality = dQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
         options->bitrateMode = ConversionOptions::Vbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
@@ -97,8 +95,6 @@ ConversionOptions *SpeexCodecWidget::currentConversionOptions()
         options->bitrate = dQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ConversionOptions::Abr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
 
     return options;

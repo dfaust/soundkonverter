@@ -161,11 +161,6 @@ QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, co
             command += "-b";
             command += QString::number(conversionOptions->bitrate);
         }
-        if( conversionOptions->samplingRate > 0 )
-        {
-            command += "-c";
-            command += QString::number(conversionOptions->samplingRate);
-        }
         command += "-o";
         command += "\"" + escapeUrl(outputFile) + "\"";
         command += "\"" + escapeUrl(inputFile) + "\"";

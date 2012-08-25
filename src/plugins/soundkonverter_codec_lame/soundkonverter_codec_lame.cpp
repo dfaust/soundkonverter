@@ -27,6 +27,13 @@ soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QSt
     allCodecs += "mp3";
     allCodecs += "mp2";
     allCodecs += "wav";
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    configVersion = group.readEntry( "configVersion", 0 );
+    stereoMode = group.readEntry( "stereoMode", "automatic" );
 }
 
 soundkonverter_codec_lame::~soundkonverter_codec_lame()
@@ -90,29 +97,62 @@ bool soundkonverter_codec_lame::isConfigSupported( ActionType action, const QStr
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    return false;
+    return true;
 }
 
 void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
     Q_UNUSED(action)
     Q_UNUSED(codecName)
-    Q_UNUSED(parent)
 
-/*    KDialog *dialog = new KDialog( parent );
-    dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-    dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
+    if( !configDialog.data() )
+    {
+        configDialog = new KDialog( parent );
+        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
 
-    QWidget *widget = new QWidget( dialog );
+        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
+        QLabel *configDialogStereoModeLabel = new QLabel( i18n("Stereo mode:"), configDialogWidget );
+        configDialogBox->addWidget( configDialogStereoModeLabel );
+        configDialogStereoModeComboBox = new KComboBox( configDialogWidget );
+        configDialogStereoModeComboBox->addItem( i18n("Automatic"), "automatic" );
+        configDialogStereoModeComboBox->addItem( i18n("Joint Stereo"), "joint stereo" );
+        configDialogStereoModeComboBox->addItem( i18n("Simple Stereo"), "simple stereo" );
+        configDialogStereoModeComboBox->addItem( i18n("Forced Joint Stereo"), "forced joint stereo" );
+        configDialogStereoModeComboBox->addItem( i18n("Dual Mono"), "dual mono" );
+        configDialogBox->addWidget( configDialogStereoModeComboBox );
 
+        configDialog.data()->setMainWidget( configDialogWidget );
+        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+    }
+    configDialogStereoModeComboBox->setCurrentIndex( configDialogStereoModeComboBox->findData(stereoMode) );
+    configDialog.data()->show();
+}
 
-    dialog->setMainWidget( widget );
-//     connect( dialog, SIGNAL( applyClicked() ), widget, SLOT( save() ) );
-//     connect( dialog, SIGNAL( okClicked() ), widget, SLOT( save() ) );
-//     connect( widget, SIGNAL( changed( bool ) ), dialog, SLOT( enableButtonApply( bool ) ) );
+void soundkonverter_codec_lame::configDialogSave()
+{
+    if( configDialog.data() )
+    {
+        stereoMode = configDialogStereoModeComboBox->itemData( configDialogStereoModeComboBox->currentIndex() ).toString();
 
-    dialog->enableButtonApply( false );
-    dialog->show();*/
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "stereoMode", stereoMode );
+
+        configDialog.data()->deleteLater();
+    }
+}
+
+void soundkonverter_codec_lame::configDialogDefault()
+{
+    if( configDialog.data() )
+    {
+        configDialogStereoModeComboBox->setCurrentIndex( configDialogStereoModeComboBox->findData("automatic") );
+    }
 }
 
 bool soundkonverter_codec_lame::hasInfo()
@@ -262,19 +302,6 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
                 {
                     command += "--abr";
                     command += QString::number(conversionOptions->bitrate);
-                    if( conversionOptions->bitrateMin > 0 || conversionOptions->bitrateMax > 0 )
-                    {
-                        if( conversionOptions->bitrateMin > 0 )
-                        {
-                            command += "-b";
-                            command += QString::number(conversionOptions->bitrateMin);
-                        }
-                        if( conversionOptions->bitrateMax > 0 )
-                        {
-                            command += "-B";
-                            command += QString::number(conversionOptions->bitrateMax);
-                        }
-                    }
                 }
                 else if( conversionOptions->bitrateMode == ConversionOptions::Cbr )
                 {
@@ -283,31 +310,22 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
                     command += QString::number(conversionOptions->bitrate);
                 }
             }
-            if( conversionOptions->samplingRate > 0 )
-            {
-                command += "--resample";
-                command += QString::number((float)conversionOptions->samplingRate/1000.0f);
-            }
-            if( conversionOptions->channels > 0 )
+            if( stereoMode != "automatic" )
             {
                 command += "-m";
-                if( conversionOptions->channels == 1 )
-                {
-                    command += "m";
-                }
-                else if( conversionOptions->channels == 2 )
+                if( stereoMode == "joint stereo" )
                 {
                     command += "j";
                 }
-                else if( conversionOptions->channels == 3 )
+                else if( stereoMode == "simple stereo" )
                 {
                     command += "s";
                 }
-                else if( conversionOptions->channels == 4 )
+                else if( stereoMode == "forced joint stereo" )
                 {
                     command += "f";
                 }
-                else if( conversionOptions->channels == 5 )
+                else if( stereoMode == "dual mono" )
                 {
                     command += "d";
                 }

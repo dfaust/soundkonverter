@@ -49,29 +49,7 @@ FaacCodecWidget::FaacCodecWidget()
 
     topBox->addStretch();
 
-    QHBoxLayout *midBox = new QHBoxLayout();
-    grid->addLayout( midBox, 1, 0 );
-
-    QLabel *lSamplerate = new QLabel( i18n("Sample rate") + ":", this );
-    midBox->addWidget( lSamplerate );
-
-    cSamplerate = new KComboBox( this );
-    cSamplerate->addItem( i18n("Automatic") );
-    cSamplerate->addItem( "8000 Hz" );
-    cSamplerate->addItem( "11025 Hz" );
-    cSamplerate->addItem( "12000 Hz" );
-    cSamplerate->addItem( "16000 Hz" );
-    cSamplerate->addItem( "22050 Hz" );
-    cSamplerate->addItem( "24000 Hz" );
-    cSamplerate->addItem( "32000 Hz" );
-    cSamplerate->addItem( "44100 Hz" );
-    cSamplerate->addItem( "48000 Hz" );
-    connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-    midBox->addWidget( cSamplerate );
-
-    midBox->addStretch();
-
-    grid->setRowStretch( 2, 1 );
+    grid->setRowStretch( 1, 1 );
 
     modeChanged( 0 );
 }
@@ -100,22 +78,13 @@ ConversionOptions *FaacCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Quality;
         options->quality = dQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
         options->qualityMode = ConversionOptions::Bitrate;
         options->bitrate = dQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
-
-    if( cSamplerate->currentIndex() == 0 )
-        options->samplingRate = 0;
-    else
-        options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
 
     return options;
 }
@@ -140,11 +109,6 @@ bool FaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         dQuality->setValue( options->bitrate );
     }
 
-    if( options->samplingRate == 0 )
-        cSamplerate->setCurrentIndex( 0 );
-    else
-        cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-
     return true;
 }
 
@@ -163,23 +127,23 @@ QString FaacCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 60 && cSamplerate->currentIndex() == 5 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 60 )
     {
         return i18n("Very low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 80 && cSamplerate->currentIndex() == 5 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 80  )
     {
         return i18n("Low");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 100 && cSamplerate->currentIndex() == 0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 100 )
     {
         return i18n("Medium");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 && cSamplerate->currentIndex() == 0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 140 )
     {
         return i18n("High");
     }
-    else if( cMode->currentIndex() == 0 && dQuality->value() == 180 && cSamplerate->currentIndex() == 0 )
+    else if( cMode->currentIndex() == 0 && dQuality->value() == 180 )
     {
         return i18n("Very high");
     }
@@ -195,7 +159,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 60 );
         dQuality->setValue( 60 );
-        cSamplerate->setCurrentIndex( 5 );
         return true;
     }
     else if( profile == i18n("Low") )
@@ -204,7 +167,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 80 );
         dQuality->setValue( 80 );
-        cSamplerate->setCurrentIndex( 5 );
         return true;
     }
     else if( profile == i18n("Medium") )
@@ -213,7 +175,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 100 );
         dQuality->setValue( 100 );
-        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("High") )
@@ -222,7 +183,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 140 );
         dQuality->setValue( 140 );
-        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("Very high") )
@@ -231,7 +191,6 @@ bool FaacCodecWidget::setCurrentProfile( const QString& profile )
         modeChanged( 0 );
         sQuality->setValue( 180 );
         dQuality->setValue( 180 );
-        cSamplerate->setCurrentIndex( 0 );
         return true;
     }
 

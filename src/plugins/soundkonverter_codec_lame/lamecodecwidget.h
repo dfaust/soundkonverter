@@ -39,10 +39,6 @@ private:
     QSpinBox *iQuality;
     QSlider *sQuality;
     KComboBox *cBitrateMode;
-    QCheckBox *chChannels;
-    KComboBox *cChannels;
-    QCheckBox *chSamplerate;
-    KComboBox *cSamplerate;
     QCheckBox *cCmdArguments;
     KLineEdit *lCmdArguments;
 

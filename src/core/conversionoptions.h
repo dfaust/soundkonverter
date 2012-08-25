@@ -60,9 +60,6 @@ public:
     double quality;                 // plugin specific quaily value
     int bitrate;                    // set in order to fall back if the other plugin does not support the quality mode [kbit/s]
     enum BitrateMode { Vbr = 0, Abr = 1, Cbr = 2 } bitrateMode;
-    int bitrateMin, bitrateMax;     // set to 0 to disable, only used when qualityMode==Bitrate and BitrateMode!=Cbr
-    int samplingRate;               // in Hz, set to 0 to disable
-    int channels;                   // number of channels, set to 0 to disable
 
     QString cmdArguments;           // user defined command line arguments
 

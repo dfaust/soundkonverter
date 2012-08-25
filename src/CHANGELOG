@@ -6,6 +6,7 @@
 -Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
 -Add: Option to switch between COMMENT and DESCRIPTION as comment fields for ogg vorbis and flac files
 -Change: Remember dimensions of the sub-windows and dialogs
+-Change: Sampling rate and number of channels can as of now only be changed through a filter plugin (currently only sox)
 -Fix: Handle internal ReplayGain calculation properly
 -Fix: Drop directories onto the ReplayGain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the ReplayGain tool

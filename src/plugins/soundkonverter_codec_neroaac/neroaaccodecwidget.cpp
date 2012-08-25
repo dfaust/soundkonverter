@@ -68,42 +68,7 @@ NeroaacCodecWidget::NeroaacCodecWidget()
 
     topBox->addStretch();
 
-// /*    QHBoxLayout *midBox = new QHBoxLayout();
-//     grid->addLayout( midBox, 1, 0 );*/
-
-//     chChannels = new QCheckBox( i18n("Channels")+":", this );
-//     connect( chChannels, SIGNAL(toggled(bool)), this, SLOT(channelsToggled(bool)) );
-//     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-//     midBox->addWidget( chChannels );
-//     cChannels = new KComboBox( this );
-//     cChannels->addItem( i18n("Mono") );
-//     midBox->addWidget( cChannels );
-//     channelsToggled( false );
-//
-//     midBox->addSpacing( 12 );
-
-//     chSamplerate = new QCheckBox( i18n("Resample")+":", this );
-//     connect( chSamplerate, SIGNAL(toggled(bool)), this, SLOT(samplerateToggled(bool)) );
-//     connect( chSamplerate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-//     midBox->addWidget( chSamplerate );
-//     cSamplerate = new KComboBox( this );
-//     cSamplerate->addItem( "8000 Hz" );
-//     cSamplerate->addItem( "11025 Hz" );
-//     cSamplerate->addItem( "12000 Hz" );
-//     cSamplerate->addItem( "16000 Hz" );
-//     cSamplerate->addItem( "22050 Hz" );
-//     cSamplerate->addItem( "24000 Hz" );
-//     cSamplerate->addItem( "32000 Hz" );
-//     cSamplerate->addItem( "44100 Hz" );
-//     cSamplerate->addItem( "48000 Hz" );
-//     cSamplerate->setCurrentIndex( 4 );
-//     connect( cSamplerate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
-//     midBox->addWidget( cSamplerate );
-//     samplerateToggled( false );
-
-//     midBox->addStretch();
-
-    grid->setRowStretch( 2, 1 );
+    grid->setRowStretch( 1, 1 );
 
     modeChanged( 0 );
 }
@@ -133,8 +98,6 @@ ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
         options->quality = dQuality->value();
         options->bitrate = bitrateForQuality( options->quality );
         options->bitrateMode = ConversionOptions::Vbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
     else
     {
@@ -142,13 +105,7 @@ ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
         options->bitrate = dQuality->value();
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
-        options->bitrateMin = 0;
-        options->bitrateMax = 0;
     }
-//     if( chSamplerate->isChecked() ) options->samplingRate = cSamplerate->currentText().replace(" Hz","").toInt();
-//     else options->samplingRate = 0;
-//     if( chChannels->isChecked() ) options->channels = 1;
-//     else options->channels = 0;
 
     return options;
 }
@@ -174,9 +131,6 @@ bool NeroaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_option
         if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Average")) );
         else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
-//     chSamplerate->setChecked( options->samplingRate != 0 );
-//     if( options->samplingRate != 0 ) cSamplerate->setCurrentIndex( cSamplerate->findText(QString::number(options->samplingRate)+" Hz") );
-//     chChannels->setChecked( options->channels != 0 );
 
     return true;
 }

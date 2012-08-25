@@ -166,31 +166,6 @@ QStringList soundkonverter_codec_twolame::convertCommand( const KUrl& inputFile,
             command += "-b";
             command += QString::number(conversionOptions->bitrate);
         }
-        if( conversionOptions->samplingRate > 0 )
-        {
-            command += "--samplerate";
-            command += QString::number(conversionOptions->samplingRate);
-        }
-        if( conversionOptions->channels > 0 )
-        {
-            command += "-m";
-            if( conversionOptions->channels == 1 )
-            {
-                command += "m";
-            }
-            else if( conversionOptions->channels == 2 )
-            {
-                command += "j";
-            }
-            else if( conversionOptions->channels == 3 )
-            {
-                command += "s";
-            }
-            else if( conversionOptions->channels == 5 )
-            {
-                command += "d";
-            }
-        }
         if( conversionOptions->pluginName == name() )
         {
             command += conversionOptions->cmdArguments;

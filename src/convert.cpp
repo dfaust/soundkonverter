@@ -1073,7 +1073,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
         fileRatio /= inputFileInfo.size();
     }
     ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
-    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && returnCode != FileListItem::StoppedByUser && ( !conversionOptions || conversionOptions->codecName != "speex" ) )
+    if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && returnCode != FileListItem::StoppedByUser && ( !conversionOptions || !config->pluginLoader()->isCodecInferiorQuality(conversionOptions->codecName) ) )
     {
         exitMessage = i18n("An error occurred, the output file size is less than one percent of the input file size");
 

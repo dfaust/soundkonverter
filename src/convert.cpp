@@ -1150,7 +1150,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             QFile::remove( url.toLocalFile() );
         }
     }
-    if( returnCode != FileListItem::Succeeded && returnCode != FileListItem::Skipped && QFile::exists(item->outputUrl.toLocalFile()) )
+    if( returnCode != FileListItem::Succeeded && returnCode != FileListItem::SucceededWithProblems && returnCode != FileListItem::Skipped && QFile::exists(item->outputUrl.toLocalFile()) )
     {
         QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );

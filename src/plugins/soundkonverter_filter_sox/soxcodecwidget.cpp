@@ -30,7 +30,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     // flac
 
-    lCompressionLevel = new QLabel( i18n("Compression level")+":", this );
+    lCompressionLevel = new QLabel( i18n("Compression level:"), this );
     topBox->addWidget( lCompressionLevel );
 
     sCompressionLevel = new QSlider( Qt::Horizontal, this );
@@ -52,9 +52,9 @@ SoxCodecWidget::SoxCodecWidget()
     iCompressionLevel->setValue( 5 );
 
 
-    // mp3 and ogg vorbis
+    // mp2, mp3 and ogg vorbis
 
-    lMode = new QLabel( i18n("Mode")+":", this );
+    lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
     cMode = new KComboBox( this );
     cMode->addItem( i18n("Quality") );
@@ -63,7 +63,7 @@ SoxCodecWidget::SoxCodecWidget()
     connect( cMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( cMode );
 
-    lQuality = new QLabel( i18n("Quality")+":", this );
+    lQuality = new QLabel( i18n("Quality:"), this );
     topBox->addWidget( lQuality );
 
     sQuality = new QSlider( Qt::Horizontal, this );
@@ -82,7 +82,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     // amr nb and amr wb
 
-    lBitratePreset = new QLabel( i18n("Bitrate")+":", this );
+    lBitratePreset = new QLabel( i18n("Bitrate:"), this );
     topBox->addWidget( lBitratePreset );
     cBitratePreset = new KComboBox( this );
     cBitratePreset->addItem( "00.00 kbps" );
@@ -110,19 +110,23 @@ ConversionOptions *SoxCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Lossless;
         options->compressionLevel = iCompressionLevel->value();
     }
+    else if( currentFormat == "mp2" )
+    {
+        options->qualityMode = ConversionOptions::Bitrate;
+        options->bitrate = dQuality->value();
+        options->bitrateMode = ConversionOptions::Cbr;
+    }
     else if( currentFormat == "mp3" )
     {
         if( cMode->currentText() == i18n("Quality") )
         {
             options->qualityMode = ConversionOptions::Quality;
             options->quality = dQuality->value();
-//             options->bitrate = bitrateForQuality( options->quality );
         }
         else
         {
             options->qualityMode = ConversionOptions::Bitrate;
             options->bitrate = dQuality->value();
-//             options->quality = qualityForBitrate( options->bitrate );
             options->bitrateMode = ConversionOptions::Cbr;
         }
     }
@@ -173,6 +177,30 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         lBitratePreset->hide();
         cBitratePreset->hide();
     }
+    else if( currentFormat == "mp2" )
+    {
+        lCompressionLevel->hide();
+        sCompressionLevel->hide();
+        iCompressionLevel->hide();
+
+        lMode->hide();
+        cMode->hide();
+        lQuality->show();
+        lQuality->setText( i18n("Bitrate:") );
+        sQuality->show();
+        dQuality->show();
+        sQuality->setRange( 32, 384 );
+        sQuality->setSingleStep( 8 );
+        dQuality->setRange( 32, 384 );
+        dQuality->setSingleStep( 1 );
+        dQuality->setDecimals( 0 );
+        dQuality->setSuffix( " kbps" );
+        sQuality->setValue( 160 );
+        dQuality->setValue( 160 );
+
+        lBitratePreset->hide();
+        cBitratePreset->hide();
+    }
     else if( currentFormat == "mp3" )
     {
         lCompressionLevel->hide();
@@ -198,6 +226,7 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         lMode->hide();
         cMode->hide();
         lQuality->show();
+        lQuality->setText( i18n("Quality:") );
         sQuality->show();
         dQuality->show();
         sQuality->setRange( -100, 1000 );
@@ -288,6 +317,29 @@ QString SoxCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
+    else if( currentFormat == "mp2" )
+    {
+        if( dQuality->value() == 64 )
+        {
+            return i18n("Very low");
+        }
+        else if( dQuality->value() == 128 )
+        {
+            return i18n("Low");
+        }
+        else if( dQuality->value() == 160 )
+        {
+            return i18n("Medium");
+        }
+        else if( dQuality->value() == 240 )
+        {
+            return i18n("High");
+        }
+        else if( dQuality->value() == 320 )
+        {
+            return i18n("Very high");
+        }
+    }
     else if( currentFormat == "mp3" )
     {
         if( cMode->currentIndex() == 0 && dQuality->value() == 6 )
@@ -344,7 +396,13 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
 //             cCmdArguments->setChecked( false );
     if( profile == i18n("Very low") )
     {
-        if( currentFormat == "mp3" )
+        if( currentFormat == "mp2" )
+        {
+            sQuality->setValue( 64 );
+            dQuality->setValue( 64 );
+            return true;
+        }
+        else if( currentFormat == "mp3" )
         {
             cMode->setCurrentIndex( 0 );
             modeChanged( 0 );
@@ -361,7 +419,13 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Low") )
     {
-        if( currentFormat == "mp3" )
+        if( currentFormat == "mp2" )
+        {
+            sQuality->setValue( 128 );
+            dQuality->setValue( 128 );
+            return true;
+        }
+        else if( currentFormat == "mp3" )
         {
             cMode->setCurrentIndex( 0 );
             modeChanged( 0 );
@@ -378,7 +442,13 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Medium") )
     {
-        if( currentFormat == "mp3" )
+        if( currentFormat == "mp2" )
+        {
+            sQuality->setValue( 160 );
+            dQuality->setValue( 160 );
+            return true;
+        }
+        else if( currentFormat == "mp3" )
         {
             cMode->setCurrentIndex( 0 );
             modeChanged( 0 );
@@ -395,7 +465,13 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("High") )
     {
-        if( currentFormat == "mp3" )
+        if( currentFormat == "mp2" )
+        {
+            sQuality->setValue( 240 );
+            dQuality->setValue( 240 );
+            return true;
+        }
+        else if( currentFormat == "mp3" )
         {
             cMode->setCurrentIndex( 0 );
             modeChanged( 0 );
@@ -412,7 +488,13 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
     }
     else if( profile == i18n("Very high") )
     {
-        if( currentFormat == "mp3" )
+        if( currentFormat == "mp2" )
+        {
+            sQuality->setValue( 320 );
+            dQuality->setValue( 320 );
+            return true;
+        }
+        else if( currentFormat == "mp3" )
         {
             cMode->setCurrentIndex( 0 );
             modeChanged( 0 );

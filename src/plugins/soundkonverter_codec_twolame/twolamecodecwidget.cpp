@@ -19,7 +19,7 @@
 // TODO calibrate quality profiles
 TwoLameCodecWidget::TwoLameCodecWidget()
     : CodecWidget(),
-    currentFormat( "mp3" )
+    currentFormat( "mp2" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
@@ -41,16 +41,13 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
-    sQuality->setRange( 8, 384 );
-//     sQuality->setTickInterval( 32 );
-//     sQuality->setTickPosition( QSlider::TicksBelow );
-//     sQuality->setFixedWidth( sQuality->sizeHint().width() );
+    sQuality->setRange( 32, 384 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
     topBox->addWidget( sQuality );
 
     iQuality = new QSpinBox( this );
-    iQuality->setRange( 8, 384 );
+    iQuality->setRange( 32, 384 );
     iQuality->setSuffix( " kbps" );
     iQuality->setFixedWidth( iQuality->sizeHint().width() );
     connect( iQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
@@ -252,29 +249,23 @@ void TwoLameCodecWidget::modeChanged( int mode )
     if( mode == 0 )
     {
         sQuality->setRange( -50, 50 );
-//         sQuality->setTickInterval( 100 );
         sQuality->setSingleStep( 5 );
         iQuality->setRange( -50, 50 );
         iQuality->setSingleStep( 5 );
         iQuality->setSuffix( "" );
         sQuality->setValue( 5 );
         iQuality->setValue( 5 );
-//         dQuality->setValue( qualityForBitrate(dQuality->value()) );
-//         qualitySpinBoxChanged( dQuality->value() );
         iQuality->setToolTip( i18n("Quality level from -50 to 50.") );
     }
     else
     {
-        sQuality->setRange( 8, 384 );
-//         sQuality->setTickInterval( 800 );
+        sQuality->setRange( 32, 384 );
         sQuality->setSingleStep( 8 );
-        iQuality->setRange( 8, 384 );
+        iQuality->setRange( 32, 384 );
         iQuality->setSingleStep( 8 );
         iQuality->setSuffix( " kbps" );
         sQuality->setValue( 160 );
         iQuality->setValue( 160 );
-//         dQuality->setValue( bitrateForQuality(dQuality->value()) );
-//         qualitySpinBoxChanged( dQuality->value() );
         iQuality->setToolTip( i18n("Bitrate") );
     }
 }

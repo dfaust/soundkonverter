@@ -4,13 +4,12 @@
 
 #include "../../core/codecwidget.h"
 
-// #include <QWeakPointer>
-
 class KComboBox;
 class QSlider;
 class QSpinBox;
 class QDoubleSpinBox;
 class QLabel;
+
 
 class SoxCodecWidget : public CodecWidget
 {
@@ -27,24 +26,11 @@ public:
     int currentDataRate();
 
 private:
-//     // flac
-//     QWeakPointer<QLabel>         lCompressionLevel;
-//     QWeakPointer<QSlider>        sCompressionLevel;
-//     QWeakPointer<QSpinBox>       iCompressionLevel;
-//     // mp3 and ogg vorbis
-//     QWeakPointer<QLabel>         lMode;
-//     QWeakPointer<KComboBox>      cMode;
-//     QWeakPointer<QSlider>        sQuality;
-//     QWeakPointer<QDoubleSpinBox> dQuality;
-//     // amr nb and amr wb
-//     QWeakPointer<QLabel>         lBitratePreset;
-//     QWeakPointer<KComboBox>      cBitratePreset;
-
     // flac
     QLabel         *lCompressionLevel;
     QSlider        *sCompressionLevel;
     QSpinBox       *iCompressionLevel;
-    // mp3 and ogg vorbis
+    // mp2, mp3 and ogg vorbis
     QLabel         *lMode;
     KComboBox      *cMode;
     QLabel         *lQuality;

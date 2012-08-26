@@ -169,6 +169,17 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
         cCmdArguments->show();
         lCmdArguments->show();
     }
+
+    if( currentFormat == "mp2" )
+    {
+        sBitrate->setRange( 32, 384 );
+        iBitrate->setRange( 32, 384 );
+    }
+    else
+    {
+        sBitrate->setRange( 8, 320 );
+        iBitrate->setRange( 8, 320 );
+    }
 }
 
 QString FFmpegCodecWidget::currentProfile()

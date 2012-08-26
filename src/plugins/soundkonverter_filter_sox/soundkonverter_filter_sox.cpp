@@ -383,6 +383,11 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
         command += "--compression";
         command += QString::number(conversionOptions->quality);
     }
+    else if( outputCodec == "mp2" )
+    {
+        command += "--compression";
+        command += QString::number(conversionOptions->bitrate);
+    }
     else if( outputCodec == "mp3" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "lame" ) )
     {
         command += "--compression";

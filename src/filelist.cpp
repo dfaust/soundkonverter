@@ -851,7 +851,7 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
     {
         item->returnCode = returnCode;
 
-        if( returnCode == FileListItem::Succeeded )
+        if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
         {
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             if( selectedFiles.contains(item) )

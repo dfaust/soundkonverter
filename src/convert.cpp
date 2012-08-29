@@ -1077,10 +1077,11 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     {
         exitMessage = i18n("An error occurred, the output file size is less than one percent of the input file size");
 
-        if( returnCode == FileListItem::Succeeded )
+        if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
         {
             logger->log( item->logID, i18n("Conversion failed, trying again. Exit code: -2 (%1)",exitMessage) );
             item->take = item->lastTake;
+            logger->log( item->logID, i18n("Removing partially converted output file") );
             QFile::remove( item->outputUrl.toLocalFile() );
             executeSameStep( item );
             return;
@@ -1115,7 +1116,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             break;
     }
 
-    if( returnCode == FileListItem::Succeeded )
+    if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
         writeTags( item );
 
     if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
@@ -1152,8 +1153,8 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     }
     if( returnCode != FileListItem::Succeeded && returnCode != FileListItem::SucceededWithProblems && returnCode != FileListItem::Skipped && QFile::exists(item->outputUrl.toLocalFile()) )
     {
-        QFile::remove(item->outputUrl.toLocalFile());
         logger->log( item->logID, i18n("Removing partially converted output file") );
+        QFile::remove(item->outputUrl.toLocalFile());
     }
 
     usedOutputNames.remove( item->logID );

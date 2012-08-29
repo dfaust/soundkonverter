@@ -849,9 +849,14 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
 {
     if( item )
     {
-        item->returnCode = returnCode;
+        if( waitingForAlbumGain )
+        {
+            item->state = FileListItem::WaitingForAlbumGain;
 
-        if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
+            item->returnCode = returnCode;
+            updateItem( item );
+        }
+        else if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
         {
             config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
             if( selectedFiles.contains(item) )
@@ -859,16 +864,13 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
             delete item;
             item = 0;
         }
-    }
-
-    if( item )
-    {
-        if( waitingForAlbumGain )
-            item->state = FileListItem::WaitingForAlbumGain;
         else
+        {
             item->state = FileListItem::Stopped;
 
-        updateItem( item );
+            item->returnCode = returnCode;
+            updateItem( item );
+        }
     }
 
     // FIXME disabled until saving gets faster

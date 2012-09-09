@@ -151,7 +151,42 @@ bool SoxCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         return false;
 
     ConversionOptions *options = _options;
-    iCompressionLevel->setValue( options->compressionLevel );
+
+    if( currentFormat == "wav" ||
+        currentFormat == "aiff" ||
+        currentFormat == "flac" )
+    {
+        iCompressionLevel->setValue( options->compressionLevel );
+    }
+    else if( currentFormat == "mp2" )
+    {
+        dQuality->setValue( options->bitrate );
+    }
+    else if( currentFormat == "mp3" )
+    {
+        if( options->qualityMode == ConversionOptions::Quality )
+        {
+            cMode->setCurrentIndex( 0 );
+            modeChanged( 0 );
+            dQuality->setValue( options->quality );
+        }
+        else
+        {
+            cMode->setCurrentIndex( 1 );
+            modeChanged( 1 );
+            dQuality->setValue( options->bitrate );
+        }
+    }
+    else if( currentFormat == "ogg vorbis" )
+    {
+        dQuality->setValue( options->quality );
+    }
+    else if( currentFormat == "amr nb" ||
+             currentFormat == "amr wb" )
+    {
+        cBitratePreset->setCurrentIndex( cBitratePreset->findData(options->quality) );
+    }
+
     return true;
 }
 

@@ -33,7 +33,7 @@ MacCodecWidget::MacCodecWidget()
 
     sCompressionLevel = new QSlider( Qt::Horizontal, this );
     sCompressionLevel->setRange( 1, 5 );
-    sCompressionLevel->setSingleStep( 10 );
+    sCompressionLevel->setSingleStep( 1 );
     sCompressionLevel->setPageStep( 1 );
 //     sQuality->setTickPosition( QSlider::TicksBelow );
 //     sQuality->setFixedWidth( sQuality->sizeHint().width() );

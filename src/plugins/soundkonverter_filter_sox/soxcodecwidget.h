@@ -4,11 +4,13 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QCheckBox;
 class QSlider;
 class QSpinBox;
 class QDoubleSpinBox;
 class QLabel;
+class KComboBox;
+class KLineEdit;
 
 
 class SoxCodecWidget : public CodecWidget
@@ -39,6 +41,9 @@ private:
     // amr nb and amr wb
     QLabel         *lBitratePreset;
     KComboBox      *cBitratePreset;
+
+    QCheckBox *cCmdArguments;
+    KLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

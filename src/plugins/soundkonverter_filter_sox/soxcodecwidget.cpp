@@ -6,12 +6,15 @@
 
 #include <math.h>
 
+#include <QCheckBox>
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
-#include <KLocale>
 #include <QSpinBox>
 #include <QSlider>
 #include <KComboBox>
+#include <KLocale>
+#include <KLineEdit>
 
 
 SoxCodecWidget::SoxCodecWidget()
@@ -91,7 +94,19 @@ SoxCodecWidget::SoxCodecWidget()
 
     topBox->addStretch();
 
-    grid->setRowStretch( 1, 1 );
+    // cmd arguments box
+
+    QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
+    grid->addLayout( cmdArgumentsBox, 1, 0 );
+
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cmdArgumentsBox->addWidget( cCmdArguments );
+    lCmdArguments = new KLineEdit( this );
+    lCmdArguments->setEnabled( false );
+    cmdArgumentsBox->addWidget( lCmdArguments );
+    connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
+
+    grid->setRowStretch( 2, 1 );
 
     modeChanged( 0 );
 }
@@ -141,6 +156,7 @@ ConversionOptions *SoxCodecWidget::currentConversionOptions()
         options->qualityMode = ConversionOptions::Quality;
         options->quality = cBitratePreset->itemData( cBitratePreset->currentIndex() ).toInt();
     }
+    options->cmdArguments = cCmdArguments->isChecked() ? lCmdArguments->text() : "";
 
     return options;
 }
@@ -186,6 +202,12 @@ bool SoxCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
     {
         cBitratePreset->setCurrentIndex( cBitratePreset->findData(options->quality) );
     }
+
+    cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
+    if( !options->cmdArguments.isEmpty() )
+        lCmdArguments->setText( options->cmdArguments );
+    else
+        lCmdArguments->clear();
 
     return true;
 }
@@ -428,7 +450,9 @@ QString SoxCodecWidget::currentProfile()
 
 bool SoxCodecWidget::setCurrentProfile( const QString& profile )
 {
-//             cCmdArguments->setChecked( false );
+    cCmdArguments->setChecked( false );
+    lCmdArguments->clear();
+
     if( profile == i18n("Very low") )
     {
         if( currentFormat == "mp2" )

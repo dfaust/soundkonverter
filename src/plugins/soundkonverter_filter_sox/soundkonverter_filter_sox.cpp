@@ -362,6 +362,10 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
 
     command += binaries["sox"];
     command += "--no-glob";
+    if( conversionOptions->pluginName == name() )
+    {
+        command += conversionOptions->cmdArguments;
+    }
     if( inputFile.isEmpty() )
     {
         command += "--type";

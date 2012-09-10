@@ -5,12 +5,12 @@
 #include "lameconversionoptions.h"
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
 #include <KLocale>
 #include <KComboBox>
 #include <QSpinBox>
-// #include <QSlider>
 
 #include <KLineEdit>
 
@@ -168,15 +168,15 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
     }
-    if( cCmdArguments->isChecked() ) options->cmdArguments = lCmdArguments->text();
-    else options->cmdArguments = "";
+    options->cmdArguments = cCmdArguments->isChecked() ? lCmdArguments->text() : "";
 
     return options;
 }
 
 bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name ) return false;
+    if( !_options || _options->pluginName != global_plugin_name )
+        return false;
 
     LameConversionOptions *options = static_cast<LameConversionOptions*>(_options);
     cPreset->setCurrentIndex( (int)options->data.preset );
@@ -196,18 +196,25 @@ bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         cMode->setCurrentIndex( cMode->findText(i18n("Bitrate")) );
         modeChanged( cMode->currentIndex() );
         iQuality->setValue( options->bitrate );
-        if( options->bitrateMode == ConversionOptions::Abr ) cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Average")) );
-        else cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
+        if( options->bitrateMode == ConversionOptions::Abr )
+            cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Average")) );
+        else
+            cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
-    if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
+    if( !options->cmdArguments.isEmpty() )
+        lCmdArguments->setText( options->cmdArguments );
+    else
+        lCmdArguments->clear();
 
     return true;
 }
 
 void LameCodecWidget::setCurrentFormat( const QString& format )
 {
-    if( currentFormat == format ) return;
+    if( currentFormat == format )
+        return;
+
     currentFormat = format;
     setEnabled( currentFormat != "wav" );
 }
@@ -244,6 +251,9 @@ QString LameCodecWidget::currentProfile()
 
 bool LameCodecWidget::setCurrentProfile( const QString& profile )
 {
+    cCmdArguments->setChecked( false );
+    lCmdArguments->clear();
+
     if( profile == i18n("Very low") )
     {
         cPreset->setCurrentIndex( 5 );
@@ -253,7 +263,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 6 );
         iQuality->setValue( 6 );
         cBitrateMode->setCurrentIndex( 0 );
-        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Low") )
@@ -265,7 +274,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 5 );
         iQuality->setValue( 5 );
         cBitrateMode->setCurrentIndex( 0 );
-        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Medium") )
@@ -277,7 +285,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 4 );
         iQuality->setValue( 4 );
         cBitrateMode->setCurrentIndex( 0 );
-        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("High") )
@@ -289,7 +296,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 3 );
         iQuality->setValue( 3 );
         cBitrateMode->setCurrentIndex( 0 );
-        cCmdArguments->setChecked( false );
         return true;
     }
     else if( profile == i18n("Very high") )
@@ -301,7 +307,6 @@ bool LameCodecWidget::setCurrentProfile( const QString& profile )
         sQuality->setValue( 2 );
         iQuality->setValue( 2 );
         cBitrateMode->setCurrentIndex( 0 );
-        cCmdArguments->setChecked( false );
         return true;
     }
 

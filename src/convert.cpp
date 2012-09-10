@@ -105,7 +105,6 @@ void Convert::convert( ConvertItem *item )
             return;
         }
         OutputDirectory::makePath( item->outputUrl );
-        item->fileListItem->outputUrl = item->outputUrl;
         fileList->updateItem( item->fileListItem );
     }
     usedOutputNames.insert( item->logID, item->outputUrl.toLocalFile() );

@@ -600,16 +600,24 @@ void Convert::executeSameStep( ConvertItem *item )
             get( item );
             return;
         }
-        case ConvertItem::convert:
-        {
-            convert( item );
-            return;
-        }
         case ConvertItem::rip:
+        case ConvertItem::convert:
         case ConvertItem::decode:
         case ConvertItem::filter:
-        case ConvertItem::encode: // TODO try next encoder instead of decoding again (not so easy at the moment)
+        case ConvertItem::encode:
         {
+            // remove temp/failed files
+            foreach( const KUrl url, item->tempConvertUrls )
+            {
+                if( QFile::exists(url.toLocalFile()) )
+                {
+                    QFile::remove( url.toLocalFile() );
+                }
+            }
+            if( QFile::exists(item->outputUrl.toLocalFile()) )
+            {
+                QFile::remove( item->outputUrl.toLocalFile() );
+            }
             convert( item );
             return;
         }
@@ -799,19 +807,6 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
             }
             else
             {
-                // remove temp/failed files
-                foreach( const KUrl url, item->tempConvertUrls )
-                {
-                    if( QFile::exists(url.toLocalFile()) )
-                    {
-                        QFile::remove( url.toLocalFile() );
-                    }
-                }
-                if( QFile::exists(item->outputUrl.toLocalFile()) )
-                {
-                    QFile::remove( item->outputUrl.toLocalFile() );
-                }
-
                 logger->log( item->logID, "\t" + i18n("Conversion failed. Exit code: %1",exitCode) );
                 executeSameStep( item );
             }
@@ -875,19 +870,6 @@ void Convert::pluginProcessFinished( int id, int exitCode )
             }
             else
             {
-                // remove temp/failed files
-                foreach( const KUrl url, item->tempConvertUrls )
-                {
-                    if( QFile::exists(url.toLocalFile()) )
-                    {
-                        QFile::remove( url.toLocalFile() );
-                    }
-                }
-                if( QFile::exists(item->outputUrl.toLocalFile()) )
-                {
-                    QFile::remove( item->outputUrl.toLocalFile() );
-                }
-
                 logger->log( item->logID, "\t" + i18n("Conversion failed. Exit code: %1",exitCode) );
                 executeSameStep( item );
             }

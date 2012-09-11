@@ -319,8 +319,8 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
             const bool isLossless = isCodecLossless(codec);
             const bool isInferiorQuality = isCodecInferiorQuality(codec);
 //             const bool isHybrid = isCodecHybrid(codec);
-            if( ( compressionType & Lossy && !isLossless || compressionType & Lossless && isLossless ) &&
-                ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+            if( ( ( compressionType & Lossy && !isLossless ) || ( compressionType & Lossless && isLossless ) ) &&
+                ( ( compressionType & InferiorQuality && isInferiorQuality ) || !isInferiorQuality ) )
                 set += codec;
 //             if( compressionType & Hybrid && isCodecHybrid(codec) && ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
 //                 set += codec;
@@ -331,8 +331,8 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
             const bool isLossless = isCodecLossless(codec);
             const bool isInferiorQuality = isCodecInferiorQuality(codec);
 //             const bool isHybrid = isCodecHybrid(codec);
-            if( ( compressionType & Lossy && !isLossless || compressionType & Lossless && isLossless ) &&
-                ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
+            if( ( ( compressionType & Lossy && !isLossless ) || ( compressionType & Lossless && isLossless ) ) &&
+                ( ( compressionType & InferiorQuality && isInferiorQuality ) || !isInferiorQuality ) )
                 set += codec;
 //             if( compressionType & Hybrid && isCodecHybrid(codec) && ( compressionType & InferiorQuality && isInferiorQuality || !isInferiorQuality ) )
 //                 set += codec;

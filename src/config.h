@@ -50,7 +50,7 @@ public:
             int startTab;
             int lastTab;
             QString defaultProfile;
-            QString lastProfile;
+            QString lastProfile; // may be obsolete
             QString defaultFormat;
             QString lastFormat;
             int lastOutputDirectoryMode;

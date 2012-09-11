@@ -70,7 +70,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     QString profile;
     if( config->data.general.defaultProfile == i18n("Last used") || config->data.general.defaultProfile == "Last used" )
     {
-        profile = config->data.general.lastProfile;
+        profile = "soundkonverter_last_used";
     }
     else
     {
@@ -79,7 +79,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     if( profile.isEmpty() )
         profile = i18n("High");
 
-    if( config->customProfiles().indexOf(profile) != -1 )
+    if( profile == "soundkonverter_last_used" || config->customProfiles().indexOf(profile) != -1 )
     {
         optionsDetailed->loadCustomProfile( profile );
     }
@@ -87,9 +87,6 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     {
         optionsDetailed->setCurrentProfile( profile );
     }
-
-    if( config->data.general.defaultProfile == i18n("Last used") || config->data.general.defaultProfile == "Last used" ) // in this case defaultFormat can only be "Last used"
-        optionsDetailed->loadCustomProfile( "soundkonverter_last_used" );
 
     const int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
 

@@ -409,17 +409,14 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
             succeeded = false;
     }
     // if a filter is disabled, its FilterOptions is 0 thus it won't be added to ConversionOptions, but we need to update the widget so it won't show false data
-    if( usedFilter.count() != options->filterOptions.count() )
+    for( int i=0; i<wFilter.size(); i++ )
     {
-        for( int i=0; i<wFilter.size(); i++ )
+        FilterWidget *widget = wFilter.keys().at(i);
+        FilterPlugin *plugin = wFilter.values().at(i);
+        if( widget && plugin && !usedFilter.contains(plugin->name()) )
         {
-            FilterWidget *widget = wFilter.keys().at(i);
-            FilterPlugin *plugin = wFilter.values().at(i);
-            if( widget && plugin && !usedFilter.contains(plugin->name()) )
-            {
-                widget->setCurrentFilterOptions( 0 );
-                break;
-            }
+            widget->setCurrentFilterOptions( 0 );
+            break;
         }
     }
 

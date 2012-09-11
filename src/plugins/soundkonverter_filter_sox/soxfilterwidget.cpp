@@ -26,7 +26,6 @@ SoxFilterWidget::SoxFilterWidget()
     grid->addLayout( box1, gridRow++, 0 );
 
     chSampleRate = new QCheckBox( i18n("Sample rate")+":", this );
-//     connect( chSamplerate, SIGNAL(toggled(bool)), this, SLOT(samplerateToggled(bool)) );
     connect( chSampleRate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     box1->addWidget( chSampleRate );
     cSampleRate = new KComboBox( this );
@@ -41,14 +40,14 @@ SoxFilterWidget::SoxFilterWidget()
     cSampleRate->addItem( "48000 Hz" );
     cSampleRate->setCurrentIndex( 7 );
     cSampleRate->setEditable( true );
+    cSampleRate->setEnabled( false );
     connect( cSampleRate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
     box1->addWidget( cSampleRate );
-//     samplerateToggled( false );
+    connect( chSampleRate, SIGNAL(toggled(bool)), cSampleRate, SLOT(setEnabled(bool)) );
 
     box1->addSpacing( 12 );
 
     chSampleSize = new QCheckBox( i18n("Sample size")+":", this );
-//     connect( chSampleSize, SIGNAL(toggled(bool)), this, SLOT(channelsToggled(bool)) );
     connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     box1->addWidget( chSampleSize );
     cSampleSize = new KComboBox( this );
@@ -58,43 +57,23 @@ SoxFilterWidget::SoxFilterWidget()
     cSampleSize->addItem( "32 bit" );
     cSampleSize->setCurrentIndex( 1 );
     cSampleSize->setEditable( true );
+    cSampleSize->setEnabled( false );
     box1->addWidget( cSampleSize );
-//     channelsToggled( false );
+    connect( chSampleSize, SIGNAL(toggled(bool)), cSampleSize, SLOT(setEnabled(bool)) );
 
     box1->addSpacing( 12 );
 
     chChannels = new QCheckBox( i18n("Channels")+":", this );
-//     connect( chChannels, SIGNAL(toggled(bool)), this, SLOT(channelsToggled(bool)) );
     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
     box1->addWidget( chChannels );
     cChannels = new KComboBox( this );
     cChannels->addItem( i18n("Mono") );
     cChannels->addItem( i18n("Stereo") );
+    cChannels->setEnabled( false );
     box1->addWidget( cChannels );
-//     channelsToggled( false );
+    connect( chChannels, SIGNAL(toggled(bool)), cChannels, SLOT(setEnabled(bool)) );
 
     box1->addStretch();
-
-
-//     QHBoxLayout *box2 = new QHBoxLayout();
-//     grid->addLayout( box2, gridRow++, 0 );
-//
-//     cNormalize = new QCheckBox( i18n("Normalize:"), this );
-//     connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
-//     box2->addWidget( cNormalize );
-//
-//     dNormalizeVolume = new QDoubleSpinBox( this );
-//     dNormalizeVolume->setRange( -99, 99 );
-//     dNormalizeVolume->setSuffix( " " + i18nc("decibel","dB") );
-//     connect( dNormalizeVolume, SIGNAL(valueChanged(double)), this, SLOT(normalizeVolumeChanged(double)) );
-//     connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
-//     box2->addWidget( dNormalizeVolume );
-//
-//     box2->addStretch();
-//
-//     cNormalize->setChecked( false );
-//     dNormalizeVolume->setValue( 0 );
-//     dNormalizeVolume->setPrefix( "+" );
 
     effectWidgetsBox = new QVBoxLayout();
     grid->addLayout( effectWidgetsBox, gridRow++, 0 );
@@ -106,7 +85,6 @@ SoxFilterWidget::SoxFilterWidget()
     connect( effectWidget, SIGNAL(removeEffectWidgetClicked(SoxEffectWidget*)), this, SLOT(removeEffectWidgetClicked(SoxEffectWidget*)) );
     effectWidgetsBox->addWidget( effectWidget );
     effectWidgets.append( effectWidget );
-
 }
 
 SoxFilterWidget::~SoxFilterWidget()

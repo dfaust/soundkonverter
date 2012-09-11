@@ -5,6 +5,7 @@
 
 #include <KLocale>
 #include <QLayout>
+#include <QBoxLayout>
 #include <QDoubleSpinBox>
 #include <QLabel>
 
@@ -106,6 +107,7 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     pAdd->setToolTip( i18n("Add another effect") );
     box->addWidget( pAdd );
     connect( pAdd, SIGNAL(clicked()), SIGNAL(addEffectWidgetClicked()) );
+    pAdd->setEnabled( false );
 }
 
 SoxEffectWidget::~SoxEffectWidget()
@@ -183,6 +185,8 @@ void SoxEffectWidget::effectChanged( int index )
 
         widgets.append( (QWidget*)dTrebleGain );
     }
+
+    pAdd->setEnabled( cEffect->currentText() != i18n("Disabled") );
 }
 
 SoxFilterOptions::EffectData SoxEffectWidget::currentEffectOptions()

@@ -6,6 +6,7 @@
 #include "codecproblems.h"
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QString>
 #include <QToolTip>
@@ -97,6 +98,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     grid->addLayout( optionalBox, 3, 1 );
     cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
     optionalBox->addWidget( cReplayGain );
+    cReplayGain->setToolTip( i18n("ReplayGain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
     connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     optionalBox->addStretch();
 

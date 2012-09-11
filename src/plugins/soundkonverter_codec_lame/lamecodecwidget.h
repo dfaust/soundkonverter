@@ -39,6 +39,8 @@ private:
     QSpinBox *iQuality;
     QSlider *sQuality;
     KComboBox *cBitrateMode;
+    QSlider *sCompressionLevel;
+    QSpinBox *iCompressionLevel;
     QCheckBox *cCmdArguments;
     KLineEdit *lCmdArguments;
 
@@ -55,6 +57,8 @@ private slots:
     void modeChanged( int mode );
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( int quality );
+    void compressionLevelSliderChanged( int quality );
+    void compressionLevelSpinBoxChanged( int quality );
 
 signals:
     void somethingChanged();

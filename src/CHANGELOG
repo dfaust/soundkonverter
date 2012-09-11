@@ -5,6 +5,7 @@
 -Add: Convert sample rate and sample size, downmix and apply effects (normalize, bass and treble) using sox
 -Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
 -Add: Option to switch between COMMENT and DESCRIPTION as comment fields for ogg vorbis and flac files
+-Add: Compression level option to the lame plugin
 -Change: Remember dimensions of the sub-windows and dialogs
 -Change: Sampling rate and number of channels can as of now only be changed through a filter plugin (currently only sox)
 -Fix: Handle internal ReplayGain calculation properly

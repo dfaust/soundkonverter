@@ -236,10 +236,10 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
         command += binaries["lame"];
         command += "--nohist";
         command += "--pad-id3v2";
-        if( conversionOptions->pluginName != name() || !conversionOptions->cmdArguments.contains("-q") )
+        if( conversionOptions->pluginName == name() )
         {
             command += "-q";
-            command += "2";
+            command += QString::number((int)conversionOptions->compressionLevel);
         }
 //         if( conversionOptions->replaygain && replayGain )
 //         {

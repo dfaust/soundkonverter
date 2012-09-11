@@ -115,22 +115,46 @@ LameCodecWidget::LameCodecWidget()
 
     userdefinedTopBox->addStretch();
 
-    // cmd arguments box
+    // bottom box
 
-    QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
-    grid->addLayout( cmdArgumentsBox, 2, 0 );
+    QHBoxLayout *bottomBox = new QHBoxLayout();
+    grid->addLayout( bottomBox, 2, 0 );
+
+    QLabel *lCompressionLevel = new QLabel( i18n("Compression level")+":", this );
+    bottomBox->addWidget( lCompressionLevel );
+
+    sCompressionLevel = new QSlider( Qt::Horizontal, this );
+    sCompressionLevel->setRange( 0, 9 );
+    sCompressionLevel->setSingleStep( 1 );
+    sCompressionLevel->setPageStep( 1 );
+    connect( sCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSliderChanged(int)) );
+    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    bottomBox->addWidget( sCompressionLevel );
+    sCompressionLevel->setToolTip( i18n("Compression level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the slower the conversion and vice versa.)\nA value of 2 is recommended.") );
+
+    iCompressionLevel = new QSpinBox( this );
+    iCompressionLevel->setRange( 0, 9 );
+    iCompressionLevel->setSingleStep( 1 );
+    iCompressionLevel->setFixedWidth( iCompressionLevel->sizeHint().width() );
+    connect( iCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSpinBoxChanged(int)) );
+    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    bottomBox->addWidget( iCompressionLevel );
+    iCompressionLevel->setToolTip( i18n("Compression level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the slower the conversion and vice versa.)\nA value of 2 is recommended.") );
+
+    bottomBox->addSpacing( 12 );
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
-    cmdArgumentsBox->addWidget( cCmdArguments );
+    bottomBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );
-    cmdArgumentsBox->addWidget( lCmdArguments );
+    bottomBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );
 
     grid->setRowStretch( 3, 1 );
 
     presetChanged( cPreset->currentText() );
     modeChanged( 0 );
+    iCompressionLevel->setValue( 2 );
 }
 
 LameCodecWidget::~LameCodecWidget()
@@ -168,6 +192,7 @@ ConversionOptions *LameCodecWidget::currentConversionOptions()
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
     }
+    options->compressionLevel = iCompressionLevel->value();
     options->cmdArguments = cCmdArguments->isChecked() ? lCmdArguments->text() : "";
 
     return options;
@@ -201,6 +226,7 @@ bool LameCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
         else
             cBitrateMode->setCurrentIndex( cBitrateMode->findText(i18n("Constant")) );
     }
+    iCompressionLevel->setValue( options->compressionLevel );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() )
         lCmdArguments->setText( options->cmdArguments );
@@ -439,7 +465,8 @@ void LameCodecWidget::modeChanged( int mode )
         iQuality->setValue( 5 );
 //         dQuality->setValue( qualityForBitrate(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
-        iQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.") );
+        sQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the bigger the file size and vice versa.)") );
+        iQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the bigger the file size and vice versa.)") );
 
         cBitrateMode->clear();
         cBitrateMode->addItem( i18n("Variable") );
@@ -488,6 +515,16 @@ void LameCodecWidget::qualitySpinBoxChanged( int quality )
     {
         sQuality->setValue( quality );
     }
+}
+
+void LameCodecWidget::compressionLevelSliderChanged( int quality )
+{
+    iCompressionLevel->setValue( 9 - quality );
+}
+
+void LameCodecWidget::compressionLevelSpinBoxChanged( int quality )
+{
+    sCompressionLevel->setValue( 9 - quality );
 }
 
 

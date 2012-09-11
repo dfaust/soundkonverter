@@ -124,7 +124,6 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 
     cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
     bottomBox->addWidget( cReplayGain );
-    cReplayGain->setToolTip( i18n("ReplayGain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
     //connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
     bottomBox->addStretch();
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
@@ -249,7 +248,7 @@ void OptionsDetailed::formatChanged( const QString& format )
     }
     else
     {
-        cReplayGain->setToolTip( "" );
+        cReplayGain->setToolTip( i18n("ReplayGain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
     }
 
     somethingChanged();

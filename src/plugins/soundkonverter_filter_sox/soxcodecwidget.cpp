@@ -540,8 +540,8 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
         }
         else if( currentFormat == "ogg vorbis" )
         {
-            sQuality->setValue( 600 );
-            dQuality->setValue( 6 );
+            sQuality->setValue( 500 );
+            dQuality->setValue( 5 );
             return true;
         }
     }
@@ -563,8 +563,8 @@ bool SoxCodecWidget::setCurrentProfile( const QString& profile )
         }
         else if( currentFormat == "ogg vorbis" )
         {
-            sQuality->setValue( 700 );
-            dQuality->setValue( 7 );
+            sQuality->setValue( 600 );
+            dQuality->setValue( 6 );
             return true;
         }
     }

@@ -59,7 +59,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
 
     writeCoversBox->addSpacing( ConfigDialogSpacingMedium );
 
-    lWriteCoverName = new QLabel( i18n("File name for the cover"), this );
+    lWriteCoverName = new QLabel( i18n("File name for the cover (when saving to output directory)"), this );
     writeCoversBox->addWidget( lWriteCoverName );
     rWriteCoverNameTitle = new QRadioButton( i18n("The embedded cover description"), this );
     writeCoversBox->addWidget( rWriteCoverNameTitle );

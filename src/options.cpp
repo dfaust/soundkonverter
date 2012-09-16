@@ -7,15 +7,10 @@
 #include "config.h"
 
 #include <QLayout>
-#include <QFile>
 
 #include <KLocale>
 #include <KTabWidget>
-#include <KPushButton>
-#include <KStandardDirs>
 
-
-// FIXME prevent converting wav files to wav
 
 Options::Options( Config *_config, const QString& text, QWidget *parent )
     : QWidget( parent ),
@@ -105,7 +100,7 @@ bool Options::setCurrentConversionOptions( ConversionOptions *options )
 
 void Options::simpleOutputDirectoryModeChanged( const int mode )
 {
-    if(optionsDetailed && optionsDetailed->outputDirectory)
+    if( optionsDetailed && optionsDetailed->outputDirectory )
         optionsDetailed->outputDirectory->setMode( (OutputDirectory::Mode)mode );
 
     config->data.general.lastOutputDirectoryMode = mode;
@@ -113,7 +108,7 @@ void Options::simpleOutputDirectoryModeChanged( const int mode )
 
 void Options::simpleOutputDirectoryChanged( const QString& directory )
 {
-    if(optionsDetailed && optionsDetailed->outputDirectory)
+    if( optionsDetailed && optionsDetailed->outputDirectory )
         optionsDetailed->outputDirectory->setDirectory( directory );
 }
 
@@ -129,37 +124,26 @@ void Options::simpleOptionsChanged()
 
 void Options::detailedOutputDirectoryModeChanged( const int mode )
 {
-//     if(optionsSimple && optionsSimple->outputDirectory) optionsSimple->outputDirectory->setMode( (OutputDirectory::Mode)mode );
     config->data.general.lastOutputDirectoryMode = mode;
-}
-
-void Options::detailedOutputDirectoryChanged( const QString& directory )
-{
-    Q_UNUSED(directory)
-
-//     if(optionsSimple && optionsSimple->outputDirectory) optionsSimple->outputDirectory->setDirectory( directory );
 }
 
 void Options::tabChanged( const int pageIndex )
 {
     if( pageIndex == 0 )
     {
-        // HACK signals are firing back
+        // NOTE prevent signals from firing back
         disconnect( optionsSimple, SIGNAL(optionsChanged()), 0, 0 );
         disconnect( optionsSimple->outputDirectory, SIGNAL(modeChanged(int)), 0, 0 );
         disconnect( optionsSimple->outputDirectory, SIGNAL(directoryChanged(const QString&)), 0, 0 );
 
-        //pAdvancedOptionsToggle->hide();
         optionsSimple->updateProfiles();
         optionsSimple->setCurrentProfile( optionsDetailed->currentProfile() );
         optionsSimple->setCurrentFormat( optionsDetailed->currentFormat() );
         QString toolTip;
         const bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );
         const bool replaygainChecked = optionsDetailed->isReplayGainChecked();
-//         bool bpm = optionsDetailed->isBpmEnabled();
         optionsSimple->setReplayGainEnabled( replaygainEnabled, toolTip );
         optionsSimple->setReplayGainChecked( replaygainChecked );
-//         optionsSimple->setBpmChecked( bpm );
         optionsSimple->setCurrentPlugin( optionsDetailed->getCurrentPlugin() );
 
         optionsSimple->outputDirectory->setMode( optionsDetailed->outputDirectory->mode() );
@@ -189,10 +173,14 @@ void Options::setOutputDirectoryMode( int mode )
 {
     QString directory;
     optionsSimple->setCurrentOutputDirectoryMode( (OutputDirectory::Mode)mode );
-    if( mode == (int)OutputDirectory::Specify ) directory = config->data.general.specifyOutputDirectory;
-    else if( mode == (int)OutputDirectory::Source ) directory = "";
-    else if( mode == (int)OutputDirectory::MetaData ) directory = config->data.general.metaDataOutputDirectory;
-    else if( mode == (int)OutputDirectory::CopyStructure ) directory = config->data.general.copyStructureOutputDirectory;
+    if( mode == (int)OutputDirectory::Specify )
+        directory = config->data.general.specifyOutputDirectory;
+    else if( mode == (int)OutputDirectory::Source )
+        directory = "";
+    else if( mode == (int)OutputDirectory::MetaData )
+        directory = config->data.general.metaDataOutputDirectory;
+    else if( mode == (int)OutputDirectory::CopyStructure )
+        directory = config->data.general.copyStructureOutputDirectory;
     optionsSimple->setCurrentOutputDirectory( directory );
     simpleOutputDirectoryModeChanged( (OutputDirectory::Mode)mode );
     simpleOutputDirectoryChanged( directory );
@@ -238,20 +226,3 @@ void Options::accepted()
         config->data.general.lastNormalOutputDirectoryPaths.prepend( path );
     }
 }
-
-
-// void Options::somethingChanged()
-// {
-//     emit optionsChanged();
-// }
-//
-// // TODO right this way? - seems to work
-// void Options::configChanged()
-// {
-//     optionsDetailed->refill();
-//     /*if( tab->page(tab->currentPageIndex()) == optionsSimple ) {
-//         optionsSimple->refill();
-//     }*/
-//     optionsSimple->refill();
-// }
-

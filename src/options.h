@@ -5,26 +5,12 @@
 
 #include <QWidget>
 
-// #include "conversionoptions.h"
-
 class OptionsSimple;
 class OptionsDetailed;
 class Config;
 class ConversionOptions;
 
-class QStringList;
 class KTabWidget;
-class KPushButton;
-
-
-/**
- * All we need to know about a profile
- */
-// struct ProfileData
-// {
-//     QString name;
-//     ConversionOptions options;
-// };
 
 
 /**
@@ -67,43 +53,19 @@ public slots:
 private:
     Config *config;
 
-    /** Toggle between normal and advanced options in the detailed tab */
-    KPushButton *pAdvancedOptionsToggle;
-
-    //** Notify the user about new plugins */
-//     KPushButton* pPluginsNotify;
-    /** Notify the user about new / lost backends */
-    KPushButton *pBackendsNotify;
-
     KTabWidget *tab;
-
-//     OutputDirectory* outputDirectory;
 
     OptionsSimple *optionsSimple;
     OptionsDetailed *optionsDetailed;
 
-//     Config *config;
-
-    // /** Copy all options from the detailed tab to the simple tab / find the matching profile */
-    //void updateSimpleTab();
-
 
 private slots:
     void tabChanged( const int pageIndex );
-//     void somethingChanged();
-//     void configChanged();
-//     void showConfigDialogBackends();
     void simpleOutputDirectoryModeChanged(const int mode);
     void simpleOutputDirectoryChanged(const QString&);
     void simpleOptionsChanged();
     void detailedOutputDirectoryModeChanged(const int mode);
-    void detailedOutputDirectoryChanged(const QString&);
-//     void detailedOptionsChanged();
 
-signals:
-    void optionsChanged();
-    void showConfigPluginsPage();
-    void showConfigEnvironmentPage();
 };
 
 #endif // OPTIONS_H

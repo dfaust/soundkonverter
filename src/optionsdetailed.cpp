@@ -553,16 +553,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
 void OptionsDetailed::loadCustomProfileButtonClicked()
 {
     const QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&","");
-    loadCustomProfile( profile );
-}
-
-bool OptionsDetailed::loadCustomProfile( const QString& profile )
-{
-    ConversionOptions *conversionOptions = config->data.profiles.value( profile );
-    if( conversionOptions )
-        return setCurrentConversionOptions( conversionOptions );
-
-    return false;
+    setCurrentProfile( profile );
 }
 
 QString OptionsDetailed::currentProfile()
@@ -573,15 +564,20 @@ QString OptionsDetailed::currentProfile()
         return "";
 }
 
-void OptionsDetailed::setCurrentProfile( const QString& profile )
+bool OptionsDetailed::setCurrentProfile( const QString& profile )
 {
-    if( !wPlugin )
-        return;
-
-    if( !wPlugin->setCurrentProfile(profile) )
+    if( config->data.profiles.keys().contains(profile) )
     {
-        // TODO find a plugin that supports the profile (eg. hybrid)
+        ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+        if( conversionOptions )
+            return setCurrentConversionOptions( conversionOptions );
     }
+    else if( wPlugin )
+    {
+        return wPlugin->setCurrentProfile( profile );
+    }
+
+    return false;
 }
 
 QString OptionsDetailed::currentFormat()

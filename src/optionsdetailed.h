@@ -40,16 +40,13 @@ public:
     bool setCurrentConversionOptions( ConversionOptions *options );
 
     QString currentProfile();
-    void setCurrentProfile( const QString& profile );
+    bool setCurrentProfile( const QString& profile );
     QString currentFormat();
     void setCurrentFormat( const QString& format );
-    bool loadCustomProfile( const QString& profile );
     void setReplayGainChecked( bool enabled );
-//     void setBpmEnabled( bool enabled ) { cBpm->setChecked(enabled); }
 
     bool isReplayGainEnabled( QString *toolTip = 0 );
     bool isReplayGainChecked();
-//     bool isBpmEnabled() { return cBpm->isChecked(); }
     CodecPlugin *getCurrentPlugin();
 
     OutputDirectory *outputDirectory; // this way it's easier to sync simple and detailed options

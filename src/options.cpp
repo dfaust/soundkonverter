@@ -78,14 +78,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     if( profile.isEmpty() )
         profile = i18n("High");
 
-    if( profile == "soundkonverter_last_used" || config->customProfiles().indexOf(profile) != -1 )
-    {
-        optionsDetailed->loadCustomProfile( profile );
-    }
-    else
-    {
-        optionsDetailed->setCurrentProfile( profile );
-    }
+    optionsDetailed->setCurrentProfile( profile );
 
     const int startTab = ( config->data.general.startTab == 0 ) ? config->data.general.lastTab : config->data.general.startTab - 1;
 
@@ -127,16 +120,8 @@ void Options::simpleOutputDirectoryChanged( const QString& directory )
 void Options::simpleOptionsChanged()
 {
     optionsDetailed->setCurrentFormat( optionsSimple->currentFormat() );
-    if( config->customProfiles().contains(optionsSimple->currentProfile()) )
-    {
-        optionsDetailed->loadCustomProfile( optionsSimple->currentProfile() );
-    }
-    else
-    {
-        optionsDetailed->setCurrentProfile( optionsSimple->currentProfile() );
-    }
+    optionsDetailed->setCurrentProfile( optionsSimple->currentProfile() );
     optionsDetailed->setReplayGainChecked( optionsSimple->isReplayGainChecked() );
-//     optionsDetailed->setBpmEnabled( optionsSimple->isBpmChecked() );
     QString toolTip;
     const bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );
     optionsSimple->setReplayGainEnabled( replaygainEnabled, toolTip );

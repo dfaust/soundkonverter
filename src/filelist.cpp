@@ -393,6 +393,9 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     }
 
     emit fileCountChanged( topLevelItemCount() );
+
+    if( queue )
+        convertNextItem();
 }
 
 void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
@@ -462,6 +465,9 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
     }
 
     emit fileCountChanged( topLevelItemCount() );
+
+    if( queue )
+        convertNextItem();
 }
 
 void FileList::updateItem( FileListItem *item )
@@ -876,7 +882,7 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
     // FIXME disabled until saving gets faster
 //     save( false );
 
-    if( waitingCount() > 0 && queue )
+    if( queue && waitingCount() > 0 )
     {
         convertNextItem();
     }

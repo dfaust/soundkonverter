@@ -78,6 +78,15 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.extensions.append( "ogg" );
         info.extensions.append( "oga" );
     }
+    else if( codecName == "opus" )
+    {
+        info.lossless = false;
+        info.description = i18n("Opus is a free and lossy low latency audio codec.\nIt was designed for real time communication over the internet.\nFor more information see: http://opus-codec.org");
+        info.mimeTypes.append( "audio/ogg" );
+        info.mimeTypes.append( "audio/opus" );
+        info.extensions.append( "opus" );
+        info.extensions.append( "oga" );
+    }
     else if( codecName == "mp3" )
     {
         info.lossless = false;

@@ -68,6 +68,8 @@ private:
 
     int configVersion;
     bool experimentalCodecsEnabled;
+    int ffmpegVersionMajor;
+    int ffmpegVersionMinor;
     QDateTime ffmpegLastModified;
     QSet<QString> ffmpegCodecList;
 

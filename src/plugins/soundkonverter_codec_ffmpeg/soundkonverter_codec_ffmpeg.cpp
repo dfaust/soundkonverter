@@ -27,6 +27,8 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     group = conf->group( "Plugin-"+name() );
     configVersion = group.readEntry( "configVersion", 0 );
     experimentalCodecsEnabled = group.readEntry( "experimentalCodecsEnabled", false );
+    ffmpegVersionMajor = group.readEntry( "ffmpegVersionMajor", 0 );
+    ffmpegVersionMinor = group.readEntry( "ffmpegVersionMinor", 0 );
     ffmpegLastModified = group.readEntry( "ffmpegLastModified", QDateTime() );
     ffmpegCodecList = group.readEntry( "codecList", QStringList() ).toSet();
 
@@ -54,6 +56,14 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     ffmpegData.experimental = true;
     data.ffmpegCodecList.append( ffmpegData );
     codecList.append( data );
+
+//     data.ffmpegCodecList.clear();
+//     data.codecName = "opus";
+//     ffmpegData.name = "opus";
+//     ffmpegData.external = true;
+//     ffmpegData.experimental = false;
+//     data.ffmpegCodecList.append( ffmpegData );
+//     codecList.append( data );
 
     data.ffmpegCodecList.clear();
     data.codecName = "mp3";
@@ -179,6 +189,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     /// decode
     fromCodecs += "wav";
     fromCodecs += "ogg vorbis";
+//     fromCodecs += "opus";
     fromCodecs += "mp3";
     fromCodecs += "flac";
     fromCodecs += "wma";
@@ -289,6 +300,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
                     }
                 }
             }
+            if( fromCodecs.at(i) == "opus" && ffmpegVersionMajor < 1 )
+                codecEnabled = false;
 
             ConversionPipeTrunk newTrunk;
             newTrunk.codecFrom = fromCodecs.at(i);
@@ -544,6 +557,13 @@ void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitS
     Q_UNUSED(exitStatus)
     Q_UNUSED(exitCode)
 
+    QRegExp regVersion("ffmpeg version (\\d+)\\.(\\d+) ");
+    if( infoProcessOutputData.contains( regVersion ) )
+    {
+        ffmpegVersionMajor = regVersion.cap(1).toInt();
+        ffmpegVersionMinor = regVersion.cap(2).toInt();
+    }
+
     ffmpegCodecList.clear();
 
     for( int i=0; i<codecList.count(); i++ )
@@ -565,6 +585,8 @@ void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitS
 
     group = conf->group( "Plugin-"+name() );
     group.writeEntry( "configVersion", version() );
+    group.writeEntry( "ffmpegVersionMajor", ffmpegVersionMajor );
+    group.writeEntry( "ffmpegVersionMinor", ffmpegVersionMinor );
     group.writeEntry( "ffmpegLastModified", ffmpegLastModified );
     group.writeEntry( "codecList", ffmpegCodecList.toList() );
 

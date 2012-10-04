@@ -310,25 +310,25 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
                     command += QString::number(conversionOptions->bitrate);
                 }
             }
-            if( stereoMode != "automatic" )
+        }
+        if( stereoMode != "automatic" )
+        {
+            command += "-m";
+            if( stereoMode == "joint stereo" )
             {
-                command += "-m";
-                if( stereoMode == "joint stereo" )
-                {
-                    command += "j";
-                }
-                else if( stereoMode == "simple stereo" )
-                {
-                    command += "s";
-                }
-                else if( stereoMode == "forced joint stereo" )
-                {
-                    command += "f";
-                }
-                else if( stereoMode == "dual mono" )
-                {
-                    command += "d";
-                }
+                command += "j";
+            }
+            else if( stereoMode == "simple stereo" )
+            {
+                command += "s";
+            }
+            else if( stereoMode == "forced joint stereo" )
+            {
+                command += "f";
+            }
+            else if( stereoMode == "dual mono" )
+            {
+                command += "d";
             }
         }
         if( conversionOptions->pluginName == name() )

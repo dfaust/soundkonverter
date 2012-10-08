@@ -63,7 +63,7 @@ signals:
 //     void signalChangeCaption( const QString& text );
 
 public slots:
-    void showCdDialog( const QString& device = "", bool intern = true );
+    bool showCdDialog( const QString& device = "", bool intern = true );
     void loadFileList( bool user = true );
     void saveFileList( bool user = true );
     void updateFileList();

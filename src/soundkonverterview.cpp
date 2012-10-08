@@ -202,7 +202,7 @@ void soundKonverterView::showDirDialog()
     delete dialog;
 }
 
-void soundKonverterView::showCdDialog( const QString& device, bool intern )
+bool soundKonverterView::showCdDialog( const QString& device, bool intern )
 {
     Q_UNUSED(intern)
 
@@ -261,6 +261,8 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
     kapp->eventLoop()->exitLoop();
 */
 
+    bool success = false;
+
     QString message;
     QStringList errorList;
     if( !config->pluginLoader()->canDecode("audio cd",&errorList) )
@@ -272,7 +274,7 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
         problemList += problem;
         CodecProblems *problemsDialog = new CodecProblems( CodecProblems::AudioCd, problemList, this );
         problemsDialog->exec();
-        return;
+        return false;
     }
 
     // create a new CDOpener object for letting the user add some tracks from a CD
@@ -286,7 +288,11 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
 
         disconnect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*)), 0, 0 );
 
-        fileList->save( false );
+        if( dialog->result() == QDialog::Accepted )
+        {
+            success = true;
+            fileList->save( false );
+        }
     }
     else
     {
@@ -299,6 +305,8 @@ void soundKonverterView::showCdDialog( const QString& device, bool intern )
 
     options->setCurrentOptions( conversionOptions );
 */
+
+    return success;
 }
 
 void soundKonverterView::showUrlDialog()

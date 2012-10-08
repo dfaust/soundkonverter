@@ -160,9 +160,9 @@ void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
     replayGainScanner->activateWindow();
 }
 
-void soundKonverter::ripCd( const QString& device )
+bool soundKonverter::ripCd( const QString& device )
 {
-    m_view->showCdDialog( device != "auto" ? device : "" );
+    return m_view->showCdDialog( device != "auto" ? device : "" );
 }
 
 void soundKonverter::setupActions()

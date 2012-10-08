@@ -10,6 +10,7 @@
 -Change: Remember dimensions of the sub-windows and dialogs
 -Change: Sampling rate and number of channels can as of now only be changed through a filter plugin (currently only sox)
 -Change: Immediately start converting a file after adding it to the file list if the conversion is running in queue mode
+-Change: Quit soundKonverter when canceling the CD ripper dialog if soundKonverter was started with the --rip option
 -Fix: Handle internal ReplayGain calculation properly
 -Fix: Drop directories onto the ReplayGain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the ReplayGain tool

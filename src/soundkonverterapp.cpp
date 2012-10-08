@@ -30,7 +30,12 @@ int soundKonverterApp::newInstance()
     const QString device = args->getOption( "rip" );
     if( !device.isEmpty() )
     {
-        mainWindow->ripCd( device );
+        const bool success = mainWindow->ripCd( device );
+        if( !success && first )
+        {
+            kapp->quit();
+            return 0;
+        }
     }
 
     autoclose = args->isSet( "autoclose" );

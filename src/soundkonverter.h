@@ -50,7 +50,7 @@ public:
     void showSystemTray();
     void addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand );
     void addReplayGainFiles( const KUrl::List& urls );
-    void ripCd( const QString& device );
+    bool ripCd( const QString& device );
     void setAutoClose( bool enabled ) { autoclose = enabled; }
     void startConversion();
     void loadAutosaveFileList();

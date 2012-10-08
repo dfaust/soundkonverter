@@ -18,11 +18,11 @@
 #include <KInputDialog>
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QGridLayout>
 #include <QLabel>
 #include <QGroupBox>
 #include <QTreeWidget>
-// #include <QList>
 #include <QDateTime>
 #include <QColor>
 #include <QDir>
@@ -496,9 +496,10 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     }
 
 
-        // Prevent the dialog from beeing too wide because of the directory history
+    // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
         setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "CDOpener" );
     restoreDialogSize( group );

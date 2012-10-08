@@ -401,8 +401,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     if( !cEntireCd->isEnabled() )
     {
         QPalette notificationPalette = cEntireCd->palette();
-//         notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(181,96,101) );
-        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
+        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) ); // QColor(181,96,101)
         cEntireCd->setPalette( notificationPalette );
         if( !errorList.isEmpty() )
         {
@@ -433,12 +432,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
 
     cddb = new KCDDB::Client();
-//     if( !cddb )
-//     {
-//         kDebug() << "Unable to create KCDDB object. Low mem?";
-//         error = Error(i18n("Unable to create KCDDB object."), i18n("This is an internal error. Check your hardware. If all okay please make bug report."), Error::ERROR, this);
-//         return;
-//     }
     connect( cddb, SIGNAL(finished(KCDDB::Result)), this, SLOT(lookup_cddb_done(KCDDB::Result)) );
 
 
@@ -746,7 +739,8 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
 
     if( result != KCDDB::Success && result != KCDDB::MultipleRecordFound )
     {
-    //     error = Error(i18n("No entry found in CDDB."), i18n("This means no data found in the CDDB database. Please enter the data manually. Maybe try another CDDB server."), Error::ERROR, this);
+        // TODO error message if request was initiated by the user
+        // Error(i18n("No entry found in CDDB."), i18n("This means no data found in the CDDB database. Please enter the data manually. Maybe try another CDDB server."), Error::ERROR, this);
         fadeOut();
         return;
     }
@@ -760,7 +754,7 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
         QStringList list;
         if( cdTextFound )
         {
-//             list.append( QString("CD Text: %1, %2").arg(compact_disc->discArtist()).arg(compact_disc->discTitle()) );
+            // list.append( QString("CD Text: %1, %2").arg(compact_disc->discArtist()).arg(compact_disc->discTitle()) );
         }
         for( int i=0; i<cddb_info.count(); i++ )
         {
@@ -801,22 +795,30 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
         tags.at(i)->title = info.track(i-1).get(KCDDB::Title).toString();
         tags.at(i)->comment = info.track(i-1).get(KCDDB::Comment).toString();
 
-        if( artist == "" ) artist = tags.at(i)->artist;
-        else if( artist != tags.at(i)->artist ) various_artists = true;
+        if( artist == "" )
+            artist = tags.at(i)->artist;
+        else if( artist != tags.at(i)->artist )
+            various_artists = true;
 
-        if( composer == "" ) composer = tags.at(i)->composer;
-        else if( composer != tags.at(i)->composer ) various_composer = true;
+        if( composer == "" )
+            composer = tags.at(i)->composer;
+        else if( composer != tags.at(i)->composer )
+            various_composer = true;
 
         QTreeWidgetItem *item = trackList->topLevelItem(i-1);
         item->setText( 2, tags.at(i)->artist );
         item->setText( 4, tags.at(i)->title );
     }
 
-    if( various_artists ) tags.at(0)->artist = i18n("Various Artists");
-    else tags.at(0)->artist = artist;
+    if( various_artists )
+        tags.at(0)->artist = i18n("Various Artists");
+    else
+        tags.at(0)->artist = artist;
 
-    if( various_composer ) tags.at(0)->composer = i18n("Various Composer");
-    else tags.at(0)->composer = composer;
+    if( various_composer )
+        tags.at(0)->composer = i18n("Various Composer");
+    else
+        tags.at(0)->composer = composer;
 
     tags.at(0)->album = info.get(KCDDB::Title).toString();
     tags.at(0)->year = info.get(KCDDB::Year).toInt();
@@ -933,11 +935,15 @@ void CDOpener::trackChanged()
     }
     else if( selectedTracks.count() > 1 )
     {
-        if( selectedTracks.first() > 1 ) pTrackUp->setEnabled( true );
-        else pTrackUp->setEnabled( false );
+        if( selectedTracks.first() > 1 )
+            pTrackUp->setEnabled( true );
+        else
+            pTrackUp->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() ) pTrackDown->setEnabled( true );
-        else pTrackDown->setEnabled( false );
+        if( selectedTracks.last() < trackList->topLevelItemCount() )
+            pTrackDown->setEnabled( true );
+        else
+            pTrackDown->setEnabled( false );
 
         QString trackListString = "";
         if( selectedTracks.count() == trackList->topLevelItemCount() )
@@ -964,56 +970,76 @@ void CDOpener::trackChanged()
         bool equalComments = true;
         for( int i=1; i<selectedTracks.count(); i++ )
         {
-            if( title != tags.at(selectedTracks.at(i))->title ) equalTitles = false;
-            if( artist != tags.at(selectedTracks.at(i))->artist ) equalArtists = false;
-            if( composer != tags.at(selectedTracks.at(i))->composer ) equalComposers = false;
-            if( comment != tags.at(selectedTracks.at(i))->comment ) equalComments = false;
+            if( title != tags.at(selectedTracks.at(i))->title )
+                equalTitles = false;
+            if( artist != tags.at(selectedTracks.at(i))->artist )
+                equalArtists = false;
+            if( composer != tags.at(selectedTracks.at(i))->composer )
+                equalComposers = false;
+            if( comment != tags.at(selectedTracks.at(i))->comment )
+                equalComments = false;
         }
 
-        if( equalTitles ) {
+        if( equalTitles )
+        {
             lTrackTitle->setEnabled( true );
             lTrackTitle->setText( title );
             pTrackTitleEdit->hide();
-        } else {
+        }
+        else
+        {
             lTrackTitle->setEnabled( false );
             lTrackTitle->setText( "" );
             pTrackTitleEdit->show();
         }
 
-        if( cArtist->currentText() == i18n("Various Artists") && equalArtists ) {
+        if( cArtist->currentText() == i18n("Various Artists") && equalArtists )
+        {
             lTrackArtist->setEnabled( true );
             lTrackArtist->setText( artist );
             pTrackArtistEdit->hide();
-        } else if( cArtist->currentText() == i18n("Various Artists") ) {
+        }
+        else if( cArtist->currentText() == i18n("Various Artists") )
+        {
             lTrackArtist->setEnabled( false );
             lTrackArtist->setText( "" );
             pTrackArtistEdit->show();
-        } else {
+        }
+        else
+        {
             lTrackArtist->setEnabled( false );
             lTrackArtist->setText( cArtist->currentText() );
             pTrackArtistEdit->hide();
         }
 
-        if( cComposer->currentText() == i18n("Various Composer") && equalComposers ) {
+        if( cComposer->currentText() == i18n("Various Composer") && equalComposers )
+        {
             lTrackComposer->setEnabled( true );
             lTrackComposer->setText( composer );
             pTrackComposerEdit->hide();
-        } else if( cComposer->currentText() == i18n("Various Composer") ) {
+        }
+        else if( cComposer->currentText() == i18n("Various Composer") )
+        {
             lTrackComposer->setEnabled( false );
             lTrackComposer->setText( "" );
             pTrackComposerEdit->show();
-        } else {
+        }
+        else
+        {
             lTrackComposer->setEnabled( false );
             lTrackComposer->setText( cComposer->currentText() );
             pTrackComposerEdit->hide();
         }
 
-        if( equalComments ) {
+        if( equalComments )
+        {
             tTrackComment->setEnabled( true );
             tTrackComment->setReadOnly( false );
             tTrackComment->setText( comment );
             pTrackCommentEdit->hide();
-        } else {
+        }
+        else
+        {
             tTrackComment->setEnabled( false );
             tTrackComment->setReadOnly( true );
             tTrackComment->setText( "" );
@@ -1022,11 +1048,15 @@ void CDOpener::trackChanged()
     }
     else
     {
-        if( selectedTracks.first() > 1 ) pTrackUp->setEnabled( true );
-        else pTrackUp->setEnabled( false );
+        if( selectedTracks.first() > 1 )
+            pTrackUp->setEnabled( true );
+        else
+            pTrackUp->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() ) pTrackDown->setEnabled( true );
-        else pTrackDown->setEnabled( false );
+        if( selectedTracks.last() < trackList->topLevelItemCount() )
+            pTrackDown->setEnabled( true );
+        else
+            pTrackDown->setEnabled( false );
 
         tagGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0)) );
 
@@ -1034,21 +1064,27 @@ void CDOpener::trackChanged()
         lTrackTitle->setText( tags.at(selectedTracks.at(0))->title );
         pTrackTitleEdit->hide();
 
-        if( cArtist->currentText() == i18n("Various Artists") ) {
+        if( cArtist->currentText() == i18n("Various Artists") )
+        {
             lTrackArtist->setEnabled( true );
             lTrackArtist->setText( tags.at(selectedTracks.at(0))->artist );
             pTrackArtistEdit->hide();
-        } else {
+        }
+        else
+        {
             lTrackArtist->setEnabled( false );
             lTrackArtist->setText( cArtist->currentText() );
             pTrackArtistEdit->hide();
         }
 
-        if( cComposer->currentText() == i18n("Various Composer") ) {
+        if( cComposer->currentText() == i18n("Various Composer") )
+        {
             lTrackComposer->setEnabled( true );
             lTrackComposer->setText( tags.at(selectedTracks.at(0))->composer );
             pTrackComposerEdit->hide();
-        } else {
+        }
+        else
+        {
             lTrackComposer->setEnabled( false );
             lTrackComposer->setText( cComposer->currentText() );
             pTrackComposerEdit->hide();
@@ -1176,12 +1212,30 @@ void CDOpener::fadeOut()
 
 void CDOpener::fadeAnim()
 {
-    if( fadeMode == 1 ) fadeAlpha += 255.0f/50.0f*8.0f;
-    else if( fadeMode == 2 ) fadeAlpha -= 255.0f/50.0f*8.0f;
+    if( fadeMode == 1 )
+    {
+        fadeAlpha += 255.0f/50.0f*8.0f;
+    }
+    else if( fadeMode == 2 )
+    {
+        fadeAlpha -= 255.0f/50.0f*8.0f;
+    }
 
-    if( fadeAlpha <= 0.0f ) { fadeAlpha = 0.0f; fadeMode = 0; cdOpenerOverlayWidget->hide(); }
-    else if( fadeAlpha >= 255.0f ) { fadeAlpha = 255.0f; fadeMode = 0; }
-    else { fadeTimer.start( 50 ); }
+    if( fadeAlpha <= 0.0f )
+    {
+        fadeAlpha = 0.0f;
+        fadeMode = 0;
+        cdOpenerOverlayWidget->hide();
+    }
+    else if( fadeAlpha >= 255.0f )
+    {
+        fadeAlpha = 255.0f;
+        fadeMode = 0;
+    }
+    else
+    {
+        fadeTimer.start( 50 );
+    }
 
     QPalette newPalette = cdOpenerOverlayWidget->palette();
     newPalette.setBrush( QPalette::Window, brushSetAlpha( newPalette.window(), 192.0f/255.0f*fadeAlpha ) );
@@ -1258,8 +1312,10 @@ void CDOpener::addClicked()
             {
                 if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
                 {
-                    if( cArtist->currentText() != i18n("Various Artists") ) tags.at(i+1)->artist = cArtist->currentText();
-                    if( cComposer->currentText() != i18n("Various Composer") ) tags.at(i+1)->composer = cComposer->currentText();
+                    if( cArtist->currentText() != i18n("Various Artists") )
+                        tags.at(i+1)->artist = cArtist->currentText();
+                    if( cComposer->currentText() != i18n("Various Composer") )
+                        tags.at(i+1)->composer = cComposer->currentText();
                     tags.at(i+1)->album = lAlbum->text();
                     tags.at(i+1)->disc = iDisc->value();
                     tags.at(i+1)->year = iYear->value();

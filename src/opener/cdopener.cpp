@@ -338,9 +338,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     mediaController = new Phonon::MediaController( mediaObject );
     mediaController->setAutoplayTitles( false );
 
-    mediaSource = new Phonon::MediaSource( Phonon::Cd, _device );
-    mediaObject->setCurrentSource( *mediaSource ); // WARNING doesn't work with phonon-xine
-
     connect( mediaController, SIGNAL(titleChanged(int)), this, SLOT(playbackTitleChanged(int)) );
     connect( mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(playbackStateChanged(Phonon::State,Phonon::State)) );
 
@@ -440,11 +437,10 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     connect( &timeoutTimer, SIGNAL(timeout()), this, SLOT(timeout()) );
 
 
-    bool success = false;
-
+    QString device;
     if( !_device.isEmpty() )
     {
-        success = openCdDevice( _device );
+        device = _device;
     }
     else
     {
@@ -456,7 +452,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         }
         else if( devices.count() == 1 )
         {
-            success = openCdDevice( devices.keys().at(0) );
+            device = devices.keys().at(0);
         }
         else
         {
@@ -471,7 +467,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
             if( ok )
             {
                 // The user selected an item and pressed OK
-                success = openCdDevice( devices.keys().at(list.indexOf(selection)) );
+                device = devices.keys().at(list.indexOf(selection));
             }
             else
             {
@@ -481,12 +477,17 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         }
     }
 
+    const bool success = openCdDevice( device );
     if( !success )
     {
         KMessageBox::information(this,"success = false, couldn't open audio device.\nplease report this bug.");
         noCdFound = true;
         return;
     }
+
+
+    mediaSource = new Phonon::MediaSource( Phonon::Cd, device );
+    mediaObject->setCurrentSource( *mediaSource ); // WARNING doesn't work with phonon-xine
 
 
     // Prevent the dialog from beeing too wide because of the directory history

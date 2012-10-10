@@ -89,6 +89,8 @@ kde development packages version 4.4 or higher
 taglib development package version 1.4 or higher
 cdparanoia development package
 libkcddb (sometimes kdemultimedia) development package
+gettext-tools
+cmake
 All dependencies - and whether they are fulfilled - should be shown when running cmake.
 
 Then open a console and change to the soundKonverter source directory and execute the following commands:

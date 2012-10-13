@@ -582,6 +582,22 @@ void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& ite
     }
 
     currentId = currentPlugin->apply( urls, mode );
+    if( currentId < 0 )
+    {
+        for( int i=0; i<itemList.count(); i++ )
+        {
+            itemList.at(i)->state = ReplayGainFileListItem::Failed;
+            updateItem( itemList.at(i) );
+            parent = (ReplayGainFileListItem*)itemList.at(i)->parent();
+            if( parent )
+            {
+                parent->state = ReplayGainFileListItem::Failed;
+                updateItem( parent );
+            }
+        }
+        processNextFile();
+        return;
+    }
 
     currentTime = 0;
     for( int i=0; i<itemList.count(); i++ )

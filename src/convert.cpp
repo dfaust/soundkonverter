@@ -421,6 +421,9 @@ void Convert::replaygain( ConvertItem *item )
         return;
     }
 
+    if( !updateTimer.isActive() )
+        updateTimer.start( config->data.general.updateDelay );
+
     item->state = ConvertItem::replaygain;
     item->replaygainPlugin = item->replaygainPipes.at(item->take).plugin;
     KUrl::List urlList;
@@ -435,8 +438,14 @@ void Convert::replaygain( ConvertItem *item )
     }
     item->replaygainID = item->replaygainPlugin->apply( urlList );
 
-    if( !updateTimer.isActive() )
-        updateTimer.start( config->data.general.updateDelay );
+    if( item->convertID == -1 )
+    {
+        executeSameStep( item );
+    }
+    else if( item->convertID == -100 )
+    {
+        remove( item, 100 );
+    }
 }
 
 void Convert::writeTags( ConvertItem *item )

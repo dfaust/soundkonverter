@@ -27,9 +27,9 @@ QString soundkonverter_replaygain_musepackgain::name()
 
 void soundkonverter_replaygain_musepackgain::scanForBackends( const QStringList& directoryList )
 {
-    binaries["replaygain"] = KStandardDirs::findExe( "replaygain" );
+    binaries["replaygain"] = KStandardDirs::findExe( "replaygain" ); // sv7
     if( binaries["replaygain"].isEmpty() )
-        binaries["replaygain"] = KStandardDirs::findExe( "mpcgain" );
+        binaries["replaygain"] = KStandardDirs::findExe( "mpcgain" ); // sv8
 
     if( binaries["replaygain"].isEmpty() )
     {
@@ -94,7 +94,7 @@ unsigned int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fi
         return BackendPlugin::UnknownError;
 
     if( mode == ReplayGainPlugin::Remove )
-        return BackendPlugin::FeatureNotSupported;
+        return BackendPlugin::FeatureNotSupported; // NOTE mpc gain does not support removing Replay Gain tags
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;

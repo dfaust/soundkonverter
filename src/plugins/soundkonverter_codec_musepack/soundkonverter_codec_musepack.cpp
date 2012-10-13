@@ -31,9 +31,9 @@ QString soundkonverter_codec_musepack::name()
 
 void soundkonverter_codec_musepack::scanForBackends( const QStringList& directoryList )
 {
-    binaries["mppenc"] = KStandardDirs::findExe( "mppenc" );
+    binaries["mppenc"] = KStandardDirs::findExe( "mppenc" ); // sv7
     if( binaries["mppenc"].isEmpty() )
-        binaries["mppenc"] = KStandardDirs::findExe( "mpcenc" );
+        binaries["mppenc"] = KStandardDirs::findExe( "mpcenc" ); // sv8
 
     if( binaries["mppenc"].isEmpty() )
     {
@@ -52,9 +52,9 @@ void soundkonverter_codec_musepack::scanForBackends( const QStringList& director
         }
     }
 
-    binaries["mppdec"] = KStandardDirs::findExe( "mppdec" );
+    binaries["mppdec"] = KStandardDirs::findExe( "mppdec" ); // sv7
     if( binaries["mppdec"].isEmpty() )
-        binaries["mppdec"] = KStandardDirs::findExe( "mpcdec" );
+        binaries["mppdec"] = KStandardDirs::findExe( "mpcdec" ); // sv8
 
     if( binaries["mppdec"].isEmpty() )
     {
@@ -233,7 +233,18 @@ QStringList soundkonverter_codec_musepack::convertCommand( const KUrl& inputFile
 
 float soundkonverter_codec_musepack::parseOutput( const QString& output )
 {
+    // sv7
     //  47.4  143.7 kbps 23.92x     1:43.3    3:38.1     0:04.3    0:09.1     0:04.8
+
+    // sv8
+    // 37.5
+    // 171.2 kbps
+    // 23.03x
+    // 0:36.1
+    // 1:36.5
+    // 0:01.5
+    // 0:04.1
+    // 0:02.6
 
     QRegExp reg("(\\d+\\.\\d)\\s+\\d+\\.\\d kbps");
     if( output.contains(reg) )

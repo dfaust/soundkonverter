@@ -28,14 +28,15 @@ public:
         Stopped
     };
 
+    // code values will be displayed in the log files
     enum ReturnCode {
-        Succeeded,
-        SucceededWithProblems,
-        StoppedByUser,
-        Skipped,
-        BackendNeedsConfiguration,
-        DiscFull,
-        Failed
+        Succeeded                       = 0,
+        SucceededWithProblems           = 1,
+        StoppedByUser                   = 2,
+        Skipped                         = 3,
+        BackendNeedsConfiguration       = 4,
+        DiscFull                        = 5,
+        Failed                          = 6
     };
 
     FileListItem( QTreeWidget *parent );

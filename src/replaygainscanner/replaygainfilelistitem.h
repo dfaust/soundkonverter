@@ -31,13 +31,14 @@ public:
         Stopped
     } state;
 
+    // code values will be displayed in the log files
     enum ReturnCode {
-        Succeeded,
-        SucceededWithProblems,
-        StoppedByUser,
-        Skipped,
-        BackendNeedsConfiguration,
-        Failed
+        Succeeded                       = 0,
+        SucceededWithProblems           = 1,
+        StoppedByUser                   = 2,
+        Skipped                         = 3,
+        BackendNeedsConfiguration       = 4,
+        Failed                          = 5
     } returnCode;
 
     KUrl url;

@@ -154,8 +154,36 @@ void Convert::convert( ConvertItem *item )
         }
         else if( item->backendPlugin->type() == "ripper" )
         {
-            item->fileListItem->state = FileListItem::Ripping;
             item->backendID = qobject_cast<RipperPlugin*>(item->backendPlugin)->rip( item->fileListItem->device, item->fileListItem->track, item->fileListItem->tracks, item->outputUrl );
+        }
+
+        if( item->backendID < 100 )
+        {
+            switch( item->backendID )
+            {
+                case BackendPlugin::BackendNeedsConfiguration:
+                {
+                    logger->log( item->logID, "\t" + i18n("Conversion failed. At least one of the used backends needs to be configured properly.") );
+                    remove( item, FileListItem::BackendNeedsConfiguration );
+                    break;
+                }
+                case BackendPlugin::FeatureNotSupported:
+                {
+                    logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                    executeSameStep( item );
+                    break;
+                }
+                case BackendPlugin::UnknownError:
+                {
+                    logger->log( item->logID, "\t" + i18n("Conversion failed. Unknown Error.") );
+                    executeSameStep( item );
+                    break;
+                }
+            }
+        }
+        else if( item->fileListItem->track >= 0 )
+        {
+            item->fileListItem->state = FileListItem::Ripping;
         }
     }
     else // conversion needs two plugins or more
@@ -391,6 +419,10 @@ void Convert::convertNextBackend( ConvertItem *item )
                 break;
             }
         }
+    }
+    else if( item->fileListItem->track >= 0 )
+    {
+        item->fileListItem->state = FileListItem::Ripping;
     }
 }
 

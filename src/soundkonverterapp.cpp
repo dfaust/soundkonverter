@@ -27,17 +27,6 @@ int soundKonverterApp::newInstance()
     bool autostart = false;
     bool activateMainWindow = true;
 
-    const QString device = args->getOption( "rip" );
-    if( !device.isEmpty() )
-    {
-        const bool success = mainWindow->ripCd( device );
-        if( !success && first )
-        {
-            kapp->quit();
-            return 0;
-        }
-    }
-
     autoclose = args->isSet( "autoclose" );
     autostart = args->isSet( "autostart" );
 
@@ -49,16 +38,34 @@ int soundKonverterApp::newInstance()
         mainWindow->showSystemTray();
     }
 
+    if( first && QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
+    {
+        if( !visible )
+        {
+            visible = true;
+            autoclose = false;
+            autostart = false;
+            mainWindow->show();
+        }
+        kapp->processEvents();
+        mainWindow->loadAutosaveFileList();
+    }
+
+    const QString device = args->getOption( "rip" );
+    if( !device.isEmpty() )
+    {
+        const bool success = mainWindow->ripCd( device );
+        if( !success && first )
+        {
+            kapp->quit();
+            return 0;
+        }
+    }
+
     if( visible )
         mainWindow->show();
 
     mainWindow->setAutoClose( autoclose );
-
-    if( first && QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
-    {
-        kapp->processEvents();
-        mainWindow->loadAutosaveFileList();
-    }
 
     const QString profile = args->getOption( "profile" );
     const QString format = args->getOption( "format" );

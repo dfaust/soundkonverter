@@ -21,12 +21,12 @@
 #include <KIntSpinBox>
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
 #include <QDir>
 
 #include <solid/device.h>
-#include <solid/storagevolume.h>
 
 
 ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )

@@ -737,12 +737,11 @@ void FileList::convertNextItem()
     int count = convertingCount();
     bool callItemsSelected = false;
     QStringList devices;
-    FileListItem *item;
 
     // look for tracks that are being ripped
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
+        FileListItem *item = topLevelItem( i );
         if( item->state == FileListItem::Ripping )
         {
             devices += item->device;
@@ -752,7 +751,7 @@ void FileList::convertNextItem()
     // look for waiting files
     for( int i=0; i<topLevelItemCount() && count < config->data.general.numFiles; i++ )
     {
-        item = topLevelItem( i );
+        FileListItem *item = topLevelItem( i );
         if( item->state == FileListItem::WaitingForConversion )
         {
             if( item->track >= 0 && !devices.contains(item->device) )

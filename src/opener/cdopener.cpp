@@ -30,6 +30,9 @@
 #include <QCheckBox>
 #include <QHeaderView>
 
+// #include <solid/device.h>
+// #include <solid/block.h>
+
 
 PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
@@ -437,7 +440,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     connect( &timeoutTimer, SIGNAL(timeout()), this, SLOT(timeout()) );
 
 
-    QString device;
     if( !_device.isEmpty() )
     {
         device = _device;
@@ -522,6 +524,13 @@ CDOpener::~CDOpener()
 
 QMap<QString,QString> CDOpener::cdDevices()
 {
+//         QStringList deviceList;
+//         QList<Solid::Device> solidDeviceList = Solid::Device::listFromType(Solid::DeviceInterface::OpticalDrive, QString());
+//         foreach( Solid::Device solidDevice, solidDeviceList )
+//         {
+//             deviceList += solidDevice.as<Solid::Block>()->device();
+//         }
+
     QMap<QString,QString> devices;
 
     QFile *file;
@@ -627,8 +636,6 @@ bool CDOpener::openCdDevice( const QString& _device )
         }
     }
     cdParanoia = paranoia_init( cdDrive );
-
-    device = _device;
 
     // cd text
 

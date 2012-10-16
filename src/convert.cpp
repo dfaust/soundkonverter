@@ -181,7 +181,7 @@ void Convert::convert( ConvertItem *item )
                 }
             }
         }
-        else if( item->fileListItem->track >= 0 )
+        else if( item->backendPlugin->type() == "ripper" )
         {
             item->fileListItem->state = FileListItem::Ripping;
         }
@@ -420,7 +420,7 @@ void Convert::convertNextBackend( ConvertItem *item )
             }
         }
     }
-    else if( item->fileListItem->track >= 0 )
+    else if( item->backendPlugin->type() == "ripper" )
     {
         item->fileListItem->state = FileListItem::Ripping;
     }

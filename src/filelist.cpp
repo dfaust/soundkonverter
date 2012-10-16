@@ -956,12 +956,10 @@ void FileList::rippingFinished( const QString& device )
 {
     if( waitingCount() > 0 && queue )
     {
-        FileListItem *item;
-
         // look for waiting files
         for( int i=0; i<topLevelItemCount(); i++ )
         {
-            item = topLevelItem( i );
+            FileListItem *item = topLevelItem( i );
             if( item->state == FileListItem::WaitingForConversion )
             {
                 if( item->track >= 0 && item->device == device )

@@ -7,7 +7,7 @@
 #include "filelistitem.h"
 
 #include <QTime>
-#include <QDebug>
+// #include <QDebug>
 
 class FileListItem;
 class Config;
@@ -63,14 +63,16 @@ private:
     /** Update timer for the scan status */
     QTime tScanStatus;
 
-    int TimeCount;
-    QTime Time;
+// debug
+//     int TimeCount;
+//     QTime Time;
 
     void convertNextItem();
     int waitingCount();
     int convertingCount();
 
 //     qulonglong spaceLeftForDirectory( const QString& dir );
+//     QStringList fullDiscs; // a list of mount points with volumes that don't have enougth space left
 
     QList<FileListItem*> selectedFiles;
 
@@ -80,15 +82,6 @@ private:
     void resizeEvent( QResizeEvent *event );
 
     bool queue;
-
-//     QStringList fullDiscs; // a list of mount points with volumes that don't have enougth space left
-
-    /**
-     * A command that should be executed after the conversion of a file is complete
-     * %i will be replaced by the input file path
-     * %o "    "  "        "  "   output "   "
-     */
-    QString notifyCommand;
 
     Logger *logger;
     Config *config;
@@ -123,7 +116,6 @@ public slots:
     // connected to soundKonverterView
     void addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1, FileListItem *after = 0, bool enabled = false );
     void addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions );
-//     void addTracks( int cdId, QList< int > trackList, ConversionOptions* conversionOptions );
     void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand = "" );
     void startConversion();
     void killConversion();
@@ -135,7 +127,6 @@ public slots:
     // connected to Convert
     /** The conversion of an item has finished and the state is reported */
     void itemFinished( FileListItem *item, FileListItem::ReturnCode returnCode, bool waitingForAlbumGain = false );
-//     void replaygainFinished( QList<FileListItem*>, int );
     /** The ripping of a track has finished, so the device is free for ripping the next track */
     void rippingFinished( const QString& device );
 

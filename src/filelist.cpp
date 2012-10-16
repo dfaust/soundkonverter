@@ -430,7 +430,7 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     qDebug() << "TimeCount: " << TimeCount;
 }
 
-void FileList::addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions )
+void FileList::addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand )
 {
     FileListItem *lastListItem = 0;
 
@@ -453,7 +453,7 @@ void FileList::addTracks( const QString& device, QList<int> trackList, int track
         }
         lastListItem = newItem;
         newItem->codecName = "audio cd";
-//         newItem->notifyCommand = notifyCommand;
+        newItem->notifyCommand = notifyCommand;
         newItem->track = trackList.at(i);
         newItem->tracks = tracks;
         newItem->device = device;

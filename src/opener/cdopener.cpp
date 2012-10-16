@@ -522,6 +522,26 @@ CDOpener::~CDOpener()
         delete cddb;
 }
 
+void CDOpener::setProfile( const QString& profile )
+{
+    options->setProfile( profile );
+}
+
+void CDOpener::setFormat( const QString& format )
+{
+    options->setFormat( format );
+}
+
+void CDOpener::setOutputDirectory( const QString& directory )
+{
+    options->setOutputDirectory( directory );
+}
+
+void CDOpener::setCommand( const QString& _command )
+{
+    command = _command;
+}
+
 QMap<QString,QString> CDOpener::cdDevices()
 {
 //         QStringList deviceList;
@@ -1339,7 +1359,7 @@ void CDOpener::addClicked()
 
         options->accepted();
 
-        emit addTracks( device, tracks, trackCount, tagList, conversionOptions );
+        emit addTracks( device, tracks, trackCount, tagList, conversionOptions, command );
 
         accept();
     }

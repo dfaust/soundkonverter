@@ -30,6 +30,11 @@ int soundKonverterApp::newInstance()
     autoclose = args->isSet( "autoclose" );
     autostart = args->isSet( "autostart" );
 
+    const QString profile = args->getOption( "profile" );
+    const QString format = args->getOption( "format" );
+    const QString directory = args->getOption( "output" );
+    const QString notifyCommand = args->getOption( "command" );
+
     if( args->isSet( "invisible" ) )
     {
         autoclose = true;
@@ -54,7 +59,7 @@ int soundKonverterApp::newInstance()
     const QString device = args->getOption( "rip" );
     if( !device.isEmpty() )
     {
-        const bool success = mainWindow->ripCd( device );
+        const bool success = mainWindow->ripCd( device, profile, format, directory, notifyCommand );
         if( !success && first )
         {
             kapp->quit();
@@ -66,11 +71,6 @@ int soundKonverterApp::newInstance()
         mainWindow->show();
 
     mainWindow->setAutoClose( autoclose );
-
-    const QString profile = args->getOption( "profile" );
-    const QString format = args->getOption( "format" );
-    const QString directory = args->getOption( "output" );
-    const QString notifyCommand = args->getOption( "command" );
 
     if( args->isSet( "replaygain" ) )
     {

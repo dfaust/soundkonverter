@@ -158,9 +158,9 @@ void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
     replayGainScanner.data()->addFiles( urls );
 }
 
-bool soundKonverter::ripCd( const QString& device )
+bool soundKonverter::ripCd( const QString& device, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
 {
-    return m_view->showCdDialog( device != "auto" ? device : "" );
+    return m_view->showCdDialog( device != "auto" ? device : "", profile, format, directory, notifyCommand );
 }
 
 void soundKonverter::setupActions()

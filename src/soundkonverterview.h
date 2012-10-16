@@ -63,7 +63,7 @@ signals:
 //     void signalChangeCaption( const QString& text );
 
 public slots:
-    bool showCdDialog( const QString& device = "", bool intern = true );
+    bool showCdDialog( const QString& device = "", QString _profile = "", QString _format = "", const QString& directory = "", const QString& notifyCommand = "" );
     void loadFileList( bool user = true );
     void saveFileList( bool user = true );
     void updateFileList();
@@ -111,6 +111,8 @@ private:
 
     /** Displays the current progress */
     ProgressIndicator *progressIndicator;
+
+    void cleanupParameters( QString *profile, QString *format );
 
 signals:
     void progressChanged( const QString& progress );

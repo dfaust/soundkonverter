@@ -202,64 +202,12 @@ void soundKonverterView::showDirDialog()
     delete dialog;
 }
 
-bool soundKonverterView::showCdDialog( const QString& device, bool intern )
+bool soundKonverterView::showCdDialog( const QString& device, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
-    Q_UNUSED(intern)
+    QString profile = _profile;
+    QString format = _format;
 
-    /*
-    ConversionOptions conversionOptions = options->getCurrentOptions();
-
-    if( ( instances <= 1 || config->data.general.askForNewOptions ) && ( profile == "" || format == "" || directory == "" ) && !intern )
-    {
-        OptionsRequester* dialog = new OptionsRequester( config, "", this );
-
-        connect( dialog, SIGNAL(setCurrentOptions(const ConversionOptions&)),
-                 options, SLOT(setCurrentOptions(const ConversionOptions&))
-               );
-//         connect( dialog, SIGNAL(addFiles(QStringList)),
-//                    fileList, SLOT(addFiles(QStringList))
-//                  );
-
-        Q_CHECK_PTR( dialog );
-
-        if( profile != "" ) {
-            dialog->setProfile( profile );
-            profile = "";
-        }
-        if( format != "" ) {
-            dialog->setFormat( format );
-            format = "";
-        }
-        if( directory != "" ) {
-            dialog->setOutputDirectory( directory );
-            directory = "";
-        }
-
-        dialog->exec();
-
-        disconnect( dialog, SIGNAL(setCurrentOptions(const ConversionOptions&)), 0, 0 );
-//         disconnect( dialog, SIGNAL(addFiles(QStringList)), 0, 0 );
-
-        delete dialog;
-    }
-    else
-    {
-        if( profile != "" ) {
-            options->setProfile( profile );
-            profile = "";
-        }
-        if( format != "" ) {
-            options->setFormat( format );
-            format = "";
-        }
-        if( directory != "" ) {
-            options->setOutputDirectory( directory );
-            directory = "";
-        }
-    }
-
-    kapp->eventLoop()->exitLoop();
-*/
+    cleanupParameters( &profile, &format );
 
     bool success = false;
 
@@ -282,11 +230,23 @@ bool soundKonverterView::showCdDialog( const QString& device, bool intern )
 
     if( !dialog->noCdFound )
     {
-        connect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*)), fileList, SLOT(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*)) );
+        if( !profile.isEmpty() )
+            dialog->setProfile( profile );
+
+        if( !format.isEmpty() )
+            dialog->setFormat( format );
+
+        if( !directory.isEmpty() )
+            dialog->setOutputDirectory( directory );
+
+        if( !notifyCommand.isEmpty() )
+            dialog->setCommand( notifyCommand );
+
+        connect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)), fileList, SLOT(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)), 0, 0 );
 
         if( dialog->result() == QDialog::Accepted )
         {
@@ -300,11 +260,6 @@ bool soundKonverterView::showCdDialog( const QString& device, bool intern )
     }
 
     delete dialog;
-/*
-    kapp->eventLoop()->enterLoop();
-
-    options->setCurrentOptions( conversionOptions );
-*/
 
     return success;
 }
@@ -433,77 +388,10 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
 
     if( k_urls.count() > 0 )
     {
-        QString profile;
-        QString format;
-        QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-        for( int i=0; i<formatList.count(); i++ )
-        {
-            if( _format == formatList.at(i) || config->pluginLoader()->codecExtensions(formatList.at(i)).contains(_format) )
-            {
-                format = formatList.at(i);
-                break;
-            }
-        }
-        bool lossy = false;
-        if( _profile.toLower() == i18n("Very low").toLower() || _profile.toLower() == "very low" || _profile.toLower() == "very_low" )
-        {
-            profile = i18n("Very low");
-            lossy = true;
-        }
-        else if( _profile.toLower() == i18n("Low").toLower() || _profile.toLower() == "low" )
-        {
-            profile = i18n("Low");
-            lossy = true;
-        }
-        else if( _profile.toLower() == i18n("Medium").toLower() || _profile.toLower() == "medium" )
-        {
-            profile = i18n("Medium");
-            lossy = true;
-        }
-        else if( _profile.toLower() == i18n("High").toLower() || _profile.toLower() == "high" )
-        {
-            profile = i18n("High");
-            lossy = true;
-        }
-        else if( _profile.toLower() == i18n("Very high").toLower() || _profile.toLower() == "very high" || _profile.toLower() == "very_high" )
-        {
-            profile = i18n("Very high");
-            lossy = true;
-        }
-        else if( _profile.toLower() == i18n("Lossless").toLower() || _profile.toLower() == "lossless" )
-        {
-            profile = i18n("Lossless");
-            format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Lossless).contains(format) ? format : "";
-        }
-        else if( _profile.toLower() == i18n("Hybrid").toLower() || _profile.toLower() == "hybrid" )
-        {
-            profile = i18n("Hybrid");
-            format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Hybrid).contains(format) ? format : "";
-        }
-        else
-        {
-            if( config->data.profiles.contains(_profile) )
-            {
-                profile = _profile;
-                ConversionOptions *conversionOptions = config->data.profiles.value( profile );
-                if( conversionOptions )
-                    format += conversionOptions->codecName;
-            }
-        }
+        QString profile = _profile;
+        QString format = _format;
 
-        if( lossy )
-        {
-            format = "";
-            QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy) );
-            for( int i=0; i<formatList.count(); i++ )
-            {
-                if( _format == formatList.at(i) || config->pluginLoader()->codecExtensions(formatList.at(i)).contains(_format) )
-                {
-                    format = formatList.at(i);
-                    break;
-                }
-            }
-        }
+        cleanupParameters( &profile, &format );
 
         if( !profile.isEmpty() && !format.isEmpty() && !directory.isEmpty() )
         {
@@ -528,10 +416,19 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         else
         {
             optionsLayer->addUrls( k_urls );
-            if( !profile.isEmpty() ) optionsLayer->setProfile( profile );
-            if( !format.isEmpty() ) optionsLayer->setFormat( format );
-            if( !directory.isEmpty() ) optionsLayer->setOutputDirectory( directory );
-            if( !notifyCommand.isEmpty() ) optionsLayer->setCommand( notifyCommand );
+
+            if( !profile.isEmpty() )
+                optionsLayer->setProfile( profile );
+
+            if( !format.isEmpty() )
+                optionsLayer->setFormat( format );
+
+            if( !directory.isEmpty() )
+                optionsLayer->setOutputDirectory( directory );
+
+            if( !notifyCommand.isEmpty() )
+                optionsLayer->setCommand( notifyCommand );
+
             optionsLayer->fadeIn();
         }
     }
@@ -598,5 +495,78 @@ void soundKonverterView::updateFileList()
 {
     fileList->updateAllItems();
 }
+
+void soundKonverterView::cleanupParameters( QString *profile, QString *format )
+{
+    QString old_profile = *profile;
+    QString old_format = *format;
+
+    QString new_profile;
+    QString new_format;
+
+    const QStringList formatList = config->pluginLoader()->formatList( PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    if( formatList.contains(old_format) )
+    {
+        new_format = old_format;
+    }
+    else
+    {
+        foreach( const QString format, formatList )
+        {
+            if( config->pluginLoader()->codecExtensions(format).contains(old_format) )
+            {
+                new_format = format;
+                break;
+            }
+        }
+    }
+
+    if( old_profile.toLower() == i18n("Very low").toLower() || old_profile.toLower() == "very low" || old_profile.toLower() == "very_low" )
+    {
+        new_profile = i18n("Very low");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy)).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("Low").toLower() || old_profile.toLower() == "low" )
+    {
+        new_profile = i18n("Low");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy)).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("Medium").toLower() || old_profile.toLower() == "medium" )
+    {
+        new_profile = i18n("Medium");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy)).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("High").toLower() || old_profile.toLower() == "high" )
+    {
+        new_profile = i18n("High");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy)).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("Very high").toLower() || old_profile.toLower() == "very high" || old_profile.toLower() == "very_high" )
+    {
+        new_profile = i18n("Very high");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy)).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("Lossless").toLower() || old_profile.toLower() == "lossless" )
+    {
+        new_profile = i18n("Lossless");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Lossless).contains(new_format) ? new_format : "";
+    }
+    else if( old_profile.toLower() == i18n("Hybrid").toLower() || old_profile.toLower() == "hybrid" )
+    {
+        new_profile = i18n("Hybrid");
+        new_format = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Hybrid).contains(new_format) ? new_format : "";
+    }
+    else if( config->data.profiles.contains(old_profile) )
+    {
+        new_profile = old_profile;
+        ConversionOptions *conversionOptions = config->data.profiles.value( new_profile );
+        if( conversionOptions )
+            new_format += conversionOptions->codecName;
+    }
+
+    *profile = new_profile;
+    *format = new_format;
+}
+
 
 #include "soundkonverterview.moc"

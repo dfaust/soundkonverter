@@ -102,6 +102,19 @@ public:
     /** true if no CD was found (don't execute the dialog) */
     bool noCdFound;
 
+public slots:
+    /** Set the current profile */
+    void setProfile( const QString& profile );
+
+    /** Set the current format */
+    void setFormat( const QString& format );
+
+    /** Set the current output directory */
+    void setOutputDirectory( const QString& directory );
+
+    /** Set the command to execute after the conversion is complete */
+    void setCommand( const QString& _command );
+
 private:
     /** returns a list of devices holding audio cds plus a short description (track count) */
     QMap<QString,QString> cdDevices();
@@ -203,6 +216,8 @@ private:
     float fadeAlpha;
     int fadeMode; // 1 = fade in, 2 = fade out
 
+    QString command;
+
     inline QBrush brushSetAlpha( QBrush brush, const int alpha )
     {
         QColor color = brush.color();
@@ -247,7 +262,7 @@ private slots:
     void fadeAnim();
 
 signals:
-    void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions );
+    void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& command );
     void addDisc( const QString& device, ConversionOptions *conversionOptions );
     //void openCuesheetEditor( const QString& content );
 };

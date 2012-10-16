@@ -16,6 +16,7 @@
 -Fix: Drop directories onto the ReplayGain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the ReplayGain tool
 -Fix: Better file type recognition
+-Fix: Output options control via command line parameters when ripping audio cds
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

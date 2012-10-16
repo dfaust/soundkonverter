@@ -673,23 +673,6 @@ void ReplayGainFileList::cancelProcess()
                 }
             }
         }
-
-        bool canKill = false;
-        if( item )
-        {
-            switch( item->state )
-            {
-                case ReplayGainFileListItem::Waiting:
-                    break;
-                case ReplayGainFileListItem::Processing:
-                    canKill = true;
-                    break;
-                case ReplayGainFileListItem::Stopped:
-                    break;
-            }
-        }
-        if( canKill )
-            emit killItem( item );
     }
 }
 

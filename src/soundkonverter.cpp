@@ -33,7 +33,6 @@
 
 soundKonverter::soundKonverter()
     : KXmlGuiWindow(),
-      replayGainScanner( 0 ),
       logViewer( 0 ),
       systemTray( 0 ),
       autoclose( false )
@@ -117,7 +116,7 @@ soundKonverter::~soundKonverter()
         delete logViewer;
 
     if( replayGainScanner )
-        delete replayGainScanner;
+        delete replayGainScanner.data();
 
     if( systemTray )
         delete systemTray;
@@ -156,8 +155,7 @@ void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& pro
 void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
 {
     showReplayGainScanner();
-    replayGainScanner->addFiles( urls );
-    replayGainScanner->activateWindow();
+    replayGainScanner.data()->addFiles( urls );
 }
 
 bool soundKonverter::ripCd( const QString& device )
@@ -252,8 +250,11 @@ void soundKonverter::showReplayGainScanner()
     if( !replayGainScanner )
         replayGainScanner = new ReplayGainScanner( config, logger, 0 );
 
-    replayGainScanner->show();
-    replayGainScanner->raise();
+    replayGainScanner.data()->setAttribute( Qt::WA_DeleteOnClose );
+
+    replayGainScanner.data()->show();
+    replayGainScanner.data()->raise();
+    replayGainScanner.data()->activateWindow();
 }
 
 void soundKonverter::showAboutPlugins()

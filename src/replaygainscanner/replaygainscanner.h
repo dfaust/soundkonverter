@@ -38,6 +38,7 @@ private slots:
     void calcReplayGainClicked();
     void removeReplayGainClicked();
     void cancelClicked();
+    void closeClicked();
     void processStarted();
     void processStopped();
     void progressChanged( const QString& progress );

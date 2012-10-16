@@ -14,10 +14,12 @@
 #include <KIcon>
 #include <KLocale>
 #include <KPushButton>
+#include <KMessageBox>
 
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
+#include <QBoxLayout>
 #include <QStringList>
 
 
@@ -89,7 +91,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     pClose = new KPushButton( KIcon("dialog-close"), i18n("Close"), widget );
     pClose->setFocus();
     buttonBox->addWidget( pClose );
-    connect( pClose, SIGNAL(clicked()), this, SLOT(accept()) );
+    connect( pClose, SIGNAL(clicked()), this, SLOT(closeClicked()) );
 
     ReplayGainProcessor *replayGainProcessor = new ReplayGainProcessor( config, fileList, logger );
     connect( fileList, SIGNAL(processItem(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)), replayGainProcessor, SLOT(add(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)) );
@@ -213,6 +215,24 @@ void ReplayGainScanner::removeReplayGainClicked()
 void ReplayGainScanner::cancelClicked()
 {
     fileList->cancelProcess();
+}
+
+void ReplayGainScanner::closeClicked()
+{
+    if( pCancel->isVisible() )
+    {
+        const int ret = KMessageBox::questionYesNo( this, i18n("There are still Replay Gain jobs running.\nDo you really want to cancel them?") );
+        if( ret == KMessageBox::Yes )
+        {
+            fileList->cancelProcess();
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    accept();
 }
 
 void ReplayGainScanner::processStarted()

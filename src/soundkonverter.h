@@ -71,7 +71,7 @@ private:
     Config *config;
     Logger *logger;
     CDManager *cdManager;
-    ReplayGainScanner *replayGainScanner;
+    QWeakPointer<ReplayGainScanner> replayGainScanner;
 
     soundKonverterView *m_view;
     LogViewer *logViewer;

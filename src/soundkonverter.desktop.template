@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=soundKonverter
-Exec=soundkonverter %i -caption "%c"
+Exec=soundkonverter %U
 Icon=soundkonverter
 Type=Application
 _GenericName=Audio file converter, CD ripper and Replay Gain tool

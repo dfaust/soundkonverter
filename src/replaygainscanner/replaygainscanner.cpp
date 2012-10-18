@@ -159,7 +159,93 @@ void ReplayGainScanner::showFileDialog()
 
 void ReplayGainScanner::fileDialogAccepted()
 {
-    fileList->addFiles( fileDialog->selectedUrls() );
+    QStringList errorList;
+    //    codec    @0 files @1 solutions
+    QMap< QString, QList<QStringList> > problems;
+    QString fileName;
+
+    QList<KUrl> urls = fileDialog->selectedUrls();
+
+    for( int i=0; i<urls.count(); i++ )
+    {
+        QString mimeType;
+        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType );
+
+        if( !config->pluginLoader()->canReplayGain(codecName,0,&errorList) )
+        {
+            fileName = urls.at(i).pathOrUrl();
+
+            if( codecName.isEmpty() )
+                codecName = mimeType;
+            if( codecName.isEmpty() )
+                codecName = fileName.right(fileName.length()-fileName.lastIndexOf(".")-1);
+
+            if( problems.value(codecName).count() < 2 )
+            {
+                problems[codecName] += QStringList();
+                problems[codecName] += QStringList();
+            }
+            problems[codecName][0] += fileName;
+            if( !errorList.isEmpty() )
+            {
+                problems[codecName][1] += errorList;
+            }
+            else
+            {
+                problems[codecName][1] += i18n("This file type is unknown to soundKonverter.\nMaybe you need to install an additional soundKonverter plugin.\nYou should have a look at your distribution's package manager for this.");
+            }
+            urls.removeAt(i);
+            i--;
+        }
+    }
+
+    QList<CodecProblems::Problem> problemList;
+    for( int i=0; i<problems.count(); i++ )
+    {
+        CodecProblems::Problem problem;
+        problem.codecName = problems.keys().at(i);
+        if( problem.codecName != "wav" )
+        {
+            #if QT_VERSION >= 0x040500
+            problems[problem.codecName][1].removeDuplicates();
+            #else
+            QStringList found;
+            for( int j=0; j<problems.value(problem.codecName).at(1).count(); j++ )
+            {
+                if( found.contains(problems.value(problem.codecName).at(1).at(j)) )
+                {
+                    problems[problem.codecName][1].removeAt(j);
+                    j--;
+                }
+                else
+                {
+                    found += problems.value(problem.codecName).at(1).at(j);
+                }
+            }
+            #endif
+            problem.solutions = problems.value(problem.codecName).at(1);
+            if( problems.value(problem.codecName).at(0).count() <= 3 )
+            {
+                problem.affectedFiles = problems.value(problem.codecName).at(0);
+            }
+            else
+            {
+                problem.affectedFiles += problems.value(problem.codecName).at(0).at(0);
+                problem.affectedFiles += problems.value(problem.codecName).at(0).at(1);
+                problem.affectedFiles += i18n("... and %1 more files",problems.value(problem.codecName).at(0).count()-2);
+            }
+            problemList += problem;
+        }
+    }
+
+    if( problemList.count() > 0 )
+    {
+        CodecProblems *problemsDialog = new CodecProblems( CodecProblems::ReplayGain, problemList, this );
+        problemsDialog->exec();
+    }
+
+    if( urls.count() > 0 )
+        fileList->addFiles( urls );
 }
 
 void ReplayGainScanner::showHelp()

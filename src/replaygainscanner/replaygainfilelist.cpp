@@ -338,7 +338,6 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
 {
     ReplayGainFileListItem *newAlbumItem, *newTrackItem;
     QString codecName;
-    QStringList unsupportedList;
 
     foreach( KUrl url, fileList )
     {
@@ -351,10 +350,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
             codecName = config->pluginLoader()->getCodecFromFile( url );
 
             if( !config->pluginLoader()->canReplayGain(codecName,0) )
-            {
-                unsupportedList.append( url.pathOrUrl() );
                 continue;
-            }
         }
 
         TagData *tags = config->tagEngine()->readTags( url );
@@ -459,9 +455,6 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
     }
 
 //     emit fileCountChanged( topLevelItemCount() );
-
-    if( unsupportedList.size() > 0 )
-        KMessageBox::errorList( this, i18n("The following files could not be added:"), unsupportedList );
 }
 
 void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList )

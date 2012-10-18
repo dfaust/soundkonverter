@@ -711,15 +711,15 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
 
     foreach( const BackendPlugin::FormatInfo info, formatInfos )
     {
-        short newRating = 0;
+        short newRating = info.priority;
 
         if( info.mimeTypes.contains(mime) )
-            newRating += 50 - info.mimeTypes.indexOf(mime);
+            newRating += 100 - info.mimeTypes.indexOf(mime);
 
         if( info.extensions.contains(extension) )
-            newRating += 50 - info.extensions.indexOf(extension);
+            newRating += 100 - info.extensions.indexOf(extension);
 
-        if( newRating == 100 )
+        if( newRating == 300 )
         {
             return info.codecName;
         }
@@ -742,7 +742,7 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
     {
         short newRating = 0;
         const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
-        if( !newCodec.isEmpty() && newRating == 100 )
+        if( !newCodec.isEmpty() && newRating == 300 )
         {
             return newCodec;
         }

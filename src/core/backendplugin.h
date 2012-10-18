@@ -72,6 +72,7 @@ public:
     struct FormatInfo
     {
         QString codecName;      // the internal name of this codec
+        short priority;         // atm. we have to guess the codec when handling of a container file
         bool lossless;          // for calculating a possible conversion pipe
         bool inferiorQuality;   // e.g. 8 bit file types
         QString description;    // description for the simple tab

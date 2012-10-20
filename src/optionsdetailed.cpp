@@ -248,7 +248,7 @@ void OptionsDetailed::formatChanged( const QString& format )
     }
     else
     {
-        cReplayGain->setToolTip( i18n("ReplayGain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
+        cReplayGain->setToolTip( i18n("Replay Gain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
     }
 
     somethingChanged();

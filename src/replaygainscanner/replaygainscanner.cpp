@@ -50,7 +50,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     filterBox->addStretch();
 
     cForce = new QCheckBox( i18n("Force recalculation"), this );
-    cForce->setToolTip( i18n("Recalculate ReplayGain tags for files that already have ReplayGain tags set.") );
+    cForce->setToolTip( i18n("Recalculate Replay Gain tags for files that already have Replay Gain tags set.") );
     filterBox->addWidget( cForce );
 
     fileList = new ReplayGainFileList( config, logger, widget );
@@ -72,12 +72,12 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     grid->addLayout( buttonBox, 3, 0 );
 
     pTagVisible = new KPushButton( KIcon("list-add"), i18n("Tag untagged"), widget );
-    pTagVisible->setToolTip( i18n("Calculate ReplayGain tags for all files in the file list without ReplayGain tags.") );
+    pTagVisible->setToolTip( i18n("Calculate Replay Gain tags for all files in the file list without Replay Gain tags.") );
     buttonBox->addWidget( pTagVisible );
     connect( pTagVisible, SIGNAL(clicked()), this, SLOT(calcReplayGainClicked()) );
 
     pRemoveTag = new KPushButton( KIcon("list-remove"), i18n("Untag tagged"), widget );
-    pRemoveTag->setToolTip( i18n("Remove the ReplayGain tags from all files in the file list.") );
+    pRemoveTag->setToolTip( i18n("Remove the Replay Gain tags from all files in the file list.") );
     buttonBox->addWidget( pRemoveTag );
     connect( pRemoveTag, SIGNAL(clicked()), this, SLOT(removeReplayGainClicked()) );
 

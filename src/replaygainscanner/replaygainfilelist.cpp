@@ -63,9 +63,9 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
     expandAction->setShortcut( Qt::CTRL | Qt::Key_Plus );
     connect( expandAction, SIGNAL(triggered()), this, SLOT(expandAll()) );
     addAction( expandAction );
-//     processAddAction = new KAction( KIcon("list-add"), i18n("Calculate ReplayGain"), this );
+//     processAddAction = new KAction( KIcon("list-add"), i18n("Calculate Replay Gain"), this );
 //     connect( processAddAction, SIGNAL(triggered()), this, SLOT(processAddSelectedItems()) );
-//     processRemoveAction = new KAction( KIcon("list-remove"), i18n("Remove ReplayGain"), this );
+//     processRemoveAction = new KAction( KIcon("list-remove"), i18n("Remove Replay Gain"), this );
 //     connect( processRemoveAction, SIGNAL(triggered()), this, SLOT(processRemoveSelectedItems()) );
 //     killAction = new KAction( KIcon("process-stop"), i18n("Stop calculation"), this );
 //     connect( killAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );

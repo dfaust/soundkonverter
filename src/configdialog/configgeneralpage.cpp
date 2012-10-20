@@ -155,7 +155,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingBig );
 
-    QLabel *lReplayGainTool = new QLabel( i18n("ReplayGain tool"), this );
+    QLabel *lReplayGainTool = new QLabel( i18n("Replay Gain tool"), this );
     lReplayGainTool->setFont( groupFont );
     box->addWidget( lReplayGainTool );
 

@@ -86,20 +86,20 @@ void ReplayGainProcessor::replaygain( ReplayGainProcessorItem *item )
         {
             case BackendPlugin::BackendNeedsConfiguration:
             {
-                logger->log( item->logID, "\t" + i18n("ReplayGain failed. The used backend needs to be configured properly.") );
+                logger->log( item->logID, "\t" + i18n("Replay Gain failed. The used backend needs to be configured properly.") );
                 remove( item, ReplayGainFileListItem::BackendNeedsConfiguration );
                 break;
             }
             case BackendPlugin::FeatureNotSupported:
             {
-                logger->log( item->logID, "\t" + i18n("ReplayGain failed. The preferred plugin lacks support for a necessary feature.") );
+                logger->log( item->logID, "\t" + i18n("Replay Gain failed. The preferred plugin lacks support for a necessary feature.") );
                 item->take++;
                 replaygain( item );
                 break;
             }
             case BackendPlugin::UnknownError:
             {
-                logger->log( item->logID, "\t" + i18n("ReplayGain failed. Unknown Error.") );
+                logger->log( item->logID, "\t" + i18n("Replay Gain failed. Unknown Error.") );
                 item->take++;
                 replaygain( item );
                 break;
@@ -139,7 +139,7 @@ void ReplayGainProcessor::pluginProcessFinished( int id, int exitCode )
             }
             else
             {
-                logger->log( item->logID, "\t" + i18n("ReplayGain failed. Exit code: %1",exitCode) );
+                logger->log( item->logID, "\t" + i18n("Replay Gain failed. Exit code: %1",exitCode) );
                 item->take++;
                 replaygain( item );
             }
@@ -211,7 +211,7 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
     {
         identifier = config->data.general.replayGainGrouping == Config::Data::General::Directory ? fileListItem->url.pathOrUrl().right(fileListItem->url.pathOrUrl().length()-fileListItem->url.pathOrUrl().lastIndexOf("/")-1) : fileListItem->albumName;
     }
-    logger->log( 1000, i18n("Adding new item to ReplayGain processing list: '%1'",identifier) );
+    logger->log( 1000, i18n("Adding new item to Replay Gain processing list: '%1'",identifier) );
 
     ReplayGainProcessorItem *newItem = new ReplayGainProcessorItem( fileListItem );
     items.append( newItem );
@@ -219,7 +219,7 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
     newItem->mode = mode;
 
     // register at the logger
-    newItem->logID = logger->registerProcess( i18n("ReplayGain for %1",identifier) );
+    newItem->logID = logger->registerProcess( i18n("Replay Gain for %1",identifier) );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",newItem->logID) );
 
     if( fileListItem->type == ReplayGainFileListItem::Track )
@@ -237,7 +237,7 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
 
     newItem->replaygainPipes = config->pluginLoader()->getReplayGainPipes( fileListItem->codecName );
 
-    logger->log( newItem->logID, "\t" + i18n("Possible ReplayGain backends:") );
+    logger->log( newItem->logID, "\t" + i18n("Possible Replay Gain backends:") );
     for( int i=0; i<newItem->replaygainPipes.size(); i++ )
     {
         logger->log( newItem->logID, "\t\t" + newItem->replaygainPipes.at(i).plugin->name() );

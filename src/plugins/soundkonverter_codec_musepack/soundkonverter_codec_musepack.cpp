@@ -213,10 +213,10 @@ QStringList soundkonverter_codec_musepack::convertCommand( const KUrl& inputFile
         {
             command += "--quality";
             command += QString::number(conversionOptions->quality);
-            if( conversionOptions->pluginName == name() )
-            {
-                command += conversionOptions->cmdArguments;
-            }
+        }
+        if( conversionOptions->pluginName == name() )
+        {
+            command += conversionOptions->cmdArguments;
         }
         command += "\"" + escapeUrl(inputFile) + "\"";
         command += "\"" + escapeUrl(outputFile) + "\"";

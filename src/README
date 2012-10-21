@@ -110,7 +110,7 @@ make
 sudo make install
 
 Note: `kde4-config --prefix` should return the installation path of kde. On some systems you might need to use kde-config.
-Or you can just use define a path by yourself, "/usr" will be fine for most systems.
+Or you can just define a path by yourself, "/usr" will be fine for most systems.
 
 For installing soundKonverter to your home directory see Building Amarok Locally at: http://amarok.kde.org/wiki/2.0_Development_HowTo
 
@@ -122,9 +122,9 @@ For uninstalling soundKonverter, open a console and change to the soundKonverter
 (If you followed the instructions above it's the directory named "build" in the soundKonverter source directory.)
 Then execute one of the following commands:
 
-sudo xargs rm < install_manifest.txt
-or
 sudo make uninstall
+or
+sudo xargs rm < install_manifest.txt
 
 In order to remove the soundKonverter configuration and kde integration, run the following commands:
 
@@ -148,9 +148,9 @@ You can find soundKonverter packages for various distributions with a nice downl
 http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
 
 openSUSE users should either add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
-eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_11.3 for openSUSE 11.3.
+eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_12.2 for openSUSE 12.2.
 Or add the KDE:Extra repository (includes a lot more KDE applications).
-eg.: http://download.opensuse.org/repositories/KDE:/Extra/openSUSE_11.4 for openSUSE 11.4
+eg.: http://download.opensuse.org/repositories/KDE:/Extra/openSUSE_12.2 for openSUSE 12.2
 More information about openSUSE KDE repositories: http://en.opensuse.org/KDE_repositories
 
 Ubuntu/Debian Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames

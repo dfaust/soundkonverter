@@ -415,7 +415,8 @@ void Config::load()
                             }
                             else
                             {
-                                filterOptions = FilterPlugin::filterOptionsFromXmlDefault( filterOptionsElement );
+                                logger->log( 1000, "\tcannot load filter for profile: " + profileName );
+                                continue;
                             }
                             conversionOptions->filterOptions.append( filterOptions );
                         }

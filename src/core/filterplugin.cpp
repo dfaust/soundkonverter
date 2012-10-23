@@ -49,7 +49,7 @@ FilterWidget *FilterPlugin::deleteFilterWidget( FilterWidget *filterWidget )
     return 0;
 }
 
-FilterOptions *FilterPlugin::filterOptionsFromXmlDefault( QDomElement filterOptions )
+FilterOptions *FilterPlugin::filterOptionsFromXml( QDomElement filterOptions )
 {
     FilterOptions *options = new FilterOptions();
     options->fromXml( filterOptions );

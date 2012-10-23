@@ -51,8 +51,7 @@ public:
 //     /** returns a command for converting a file through a pipe; "" if pipes aren't supported */
 //     virtual QStringList filterCommand( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions ) = 0;
 
-    static FilterOptions *filterOptionsFromXmlDefault( QDomElement filterOptions );
-    virtual FilterOptions *filterOptionsFromXml( QDomElement filterOptions ) = 0;
+    virtual FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 
 protected:
     FilterOptions *lastUsedFilterOptions;

@@ -32,11 +32,6 @@ public:
     unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
-
-    FilterOptions *filterOptionsFromXml( QDomElement filterOptions )
-    {
-        return FilterPlugin::filterOptionsFromXmlDefault( filterOptions );
-    }
 };
 
 K_EXPORT_SOUNDKONVERTER_FILTER( normalize, soundkonverter_filter_normalize )

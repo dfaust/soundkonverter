@@ -1349,7 +1349,7 @@ void FileList::load( bool user )
                             }
                             else
                             {
-                                filterOptions = FilterPlugin::filterOptionsFromXmlDefault( filterOptionsElement );
+                                continue;
                             }
                             conversionOptions->filterOptions.append( filterOptions );
                         }

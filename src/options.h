@@ -26,7 +26,7 @@ public:
     Options( Config *_config, const QString& text, QWidget *parent=0 );
 
     /** Destructor */
-    virtual ~Options();
+    ~Options();
 
     /** Return the current options */
     ConversionOptions *currentConversionOptions();

@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_faac( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_faac();
+    ~soundkonverter_codec_faac();
 
     QString name();
 

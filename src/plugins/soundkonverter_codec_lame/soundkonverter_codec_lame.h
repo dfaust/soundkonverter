@@ -20,7 +20,7 @@ public:
     soundkonverter_codec_lame( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_lame();
+    ~soundkonverter_codec_lame();
 
     QString name();
 

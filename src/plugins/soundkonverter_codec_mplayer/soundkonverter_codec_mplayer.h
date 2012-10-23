@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_mplayer( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_mplayer();
+    ~soundkonverter_codec_mplayer();
 
     QString name();
 

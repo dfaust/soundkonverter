@@ -17,7 +17,7 @@ class Mp3GainPluginItem : public ReplayGainPluginItem
     Q_OBJECT
 public:
     Mp3GainPluginItem( QObject *parent=0 );
-    virtual ~Mp3GainPluginItem();
+    ~Mp3GainPluginItem();
 
     KUrl::List undoFileList;
 };
@@ -31,7 +31,7 @@ public:
     soundkonverter_replaygain_mp3gain( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_mp3gain();
+    ~soundkonverter_replaygain_mp3gain();
 
     QString name();
 

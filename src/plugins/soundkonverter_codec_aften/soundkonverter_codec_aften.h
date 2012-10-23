@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_aften( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_aften();
+    ~soundkonverter_codec_aften();
 
     QString name();
 

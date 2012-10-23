@@ -44,7 +44,7 @@ public:
     soundKonverterView( Logger *_logger, Config *_config, CDManager *_cdManager, QWidget *parent );
 
     /** Destructor */
-    virtual ~soundKonverterView();
+    ~soundKonverterView();
 
     void addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
     void loadAutosaveFileList();

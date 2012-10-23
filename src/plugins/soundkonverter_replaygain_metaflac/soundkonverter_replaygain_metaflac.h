@@ -17,7 +17,7 @@ public:
     soundkonverter_replaygain_metaflac( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_metaflac();
+    ~soundkonverter_replaygain_metaflac();
 
     QString name();
 

@@ -37,7 +37,7 @@ public:
     CodecOptimizations( const QList<Optimization>& optimizationList, QWidget *parent=0, Qt::WFlags f=0 );
 
     /** Default Destructor */
-    virtual ~CodecOptimizations();
+    ~CodecOptimizations();
 
 private:
     QList<Optimization> optimizationList;

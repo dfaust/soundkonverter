@@ -64,7 +64,7 @@ public:
     };
 
     CoverData( const QByteArray& _data = QByteArray(), const QString& _mimyType = QString::null, Role _role = Other, const QString& _description = QString::null, QObject *parent = 0 );
-    virtual ~CoverData();
+    ~CoverData();
 
     QByteArray data;
     QString mimeType;
@@ -87,7 +87,7 @@ public:
     TagData();
 
     /** Destructor */
-    virtual ~TagData();
+    ~TagData();
 
     /** The tags */
     QString artist;
@@ -127,7 +127,7 @@ public:
     TagEngine( Config *_config );
 
     /** Destructor */
-    virtual ~TagEngine();
+    ~TagEngine();
 
     /** A list of all genre */
     QStringList genreList;

@@ -44,7 +44,7 @@ class PlayerWidget : public QWidget
      Q_OBJECT
 public:
     PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent = 0, Qt::WindowFlags f = 0 );
-    virtual ~PlayerWidget();
+    ~PlayerWidget();
 
     void trackChanged( int track );
     bool isPlaying() { return playing; }
@@ -97,7 +97,7 @@ public:
     CDOpener( Config *_config, const QString& _device, QWidget *parent = 0, Qt::WFlags f=0 );
 
     /** Destructor */
-    virtual ~CDOpener();
+    ~CDOpener();
 
     /** true if no CD was found (don't execute the dialog) */
     bool noCdFound;

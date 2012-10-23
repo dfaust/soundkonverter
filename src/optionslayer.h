@@ -35,7 +35,7 @@ public:
     OptionsLayer( Config *config, QWidget *parent );
 
     /** Destructor */
-    virtual ~OptionsLayer();
+    ~OptionsLayer();
 
     void fadeIn();
     void fadeOut(); // should be private

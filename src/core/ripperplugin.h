@@ -9,18 +9,6 @@
 class RipperPlugin;
 
 
-/*
-struct RipperInfo
-{
-    RipperPlugin *plugin;
-    bool canRipEntireCd;
-    bool enabled; // can we use this plugin? (all needed backends installed?)
-    int rating;
-    QString problemInfo; // howto message, if a backend is missing
-};
-*/
-
-
 class KDE_EXPORT RipperPluginItem : public BackendPluginItem
 {
     Q_OBJECT
@@ -41,11 +29,10 @@ class KDE_EXPORT RipperPlugin : public BackendPlugin
     Q_OBJECT
 public:
     RipperPlugin( QObject *parent=0 );
-    ~RipperPlugin();
+    virtual ~RipperPlugin();
 
     virtual QString type();
 
-//     virtual RipperInfo ripperInfo() = 0;
     virtual QList<ConversionPipeTrunk> codecTable() = 0;
 
     /** rips a track */

@@ -15,7 +15,7 @@ public:
     soundkonverter_filter_normalize( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_filter_normalize();
+    ~soundkonverter_filter_normalize();
 
     QString name();
 

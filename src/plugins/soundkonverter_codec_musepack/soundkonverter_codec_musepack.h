@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_musepack( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_musepack();
+    ~soundkonverter_codec_musepack();
 
     QString name();
 

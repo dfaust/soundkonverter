@@ -32,7 +32,7 @@ public:
     ConfigGeneralPage( Config *_config, QWidget *parent=0 );
 
     /** Default Destructor */
-    virtual ~ConfigGeneralPage();
+    ~ConfigGeneralPage();
 
 private:
     KComboBox *cStartTab;

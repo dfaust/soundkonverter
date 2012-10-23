@@ -20,7 +20,7 @@ public:
     soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_fluidsynth();
+    ~soundkonverter_codec_fluidsynth();
 
     QString name();
 

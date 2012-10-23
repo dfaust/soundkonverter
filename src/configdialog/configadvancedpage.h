@@ -34,7 +34,7 @@ public:
     /**
      * Default Destructor
      */
-    virtual ~ConfigAdvancedPage();
+    ~ConfigAdvancedPage();
 
 private:
     KComboBox *cPreferredOggVorbisExtension;

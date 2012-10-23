@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_neroaac( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_neroaac();
+    ~soundkonverter_codec_neroaac();
 
     QString name();
 

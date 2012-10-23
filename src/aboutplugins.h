@@ -24,7 +24,7 @@ public:
     AboutPlugins( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
 
     /** Default Destructor */
-    virtual ~AboutPlugins();
+    ~AboutPlugins();
 
 private:
     Config *config;

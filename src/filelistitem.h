@@ -41,7 +41,7 @@ public:
 
     FileListItem( QTreeWidget *parent );
     FileListItem( QTreeWidget *parent, QTreeWidgetItem *after );
-    virtual ~FileListItem();
+    ~FileListItem();
 
     int conversionOptionsId;
     QPointer<TagData> tags;     // we need to instruct the tagengine to read the tags from the file!

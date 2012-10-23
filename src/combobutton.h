@@ -31,7 +31,7 @@ public:
     ComboButton( QWidget *parent );
 
     /** Destructor */
-    virtual ~ComboButton();
+    ~ComboButton();
 
     /** Insert a new item with @p text at position @p index */
     void insertItem( const QString &text, int index = -1 );

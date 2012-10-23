@@ -40,7 +40,7 @@ public:
     ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent=0 );
 
     /** Destructor */
-    virtual ~ReplayGainFileList();
+    ~ReplayGainFileList();
 
     ReplayGainFileListItem *topLevelItem( int index ) const { return static_cast<ReplayGainFileListItem*>( QTreeWidget::topLevelItem(index) ); }
 

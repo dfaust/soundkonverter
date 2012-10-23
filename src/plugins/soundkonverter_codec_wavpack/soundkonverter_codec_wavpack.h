@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_wavpack( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_wavpack();
+    ~soundkonverter_codec_wavpack();
 
     QString name();
 

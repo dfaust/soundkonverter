@@ -19,7 +19,7 @@ public:
     soundkonverter_codec_opustools( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_opustools();
+    ~soundkonverter_codec_opustools();
 
     QString name();
 

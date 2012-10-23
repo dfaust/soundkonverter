@@ -18,7 +18,7 @@ class AacGainPluginItem : public ReplayGainPluginItem
     Q_OBJECT
 public:
     AacGainPluginItem( QObject *parent=0 );
-    virtual ~AacGainPluginItem();
+    ~AacGainPluginItem();
 
     KUrl::List undoFileList;
 };
@@ -32,7 +32,7 @@ public:
     soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_aacgain();
+    ~soundkonverter_replaygain_aacgain();
 
     QString name();
 

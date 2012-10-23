@@ -15,10 +15,9 @@ class KDE_EXPORT CodecPluginItem : public BackendPluginItem
     Q_OBJECT
 public:
     CodecPluginItem( QObject *parent=0 );
-    ~CodecPluginItem();
+    virtual ~CodecPluginItem();
 
     struct Data {
-//         enum Mode { Enc, Dec } mode;
         int length;
     } data;
 };

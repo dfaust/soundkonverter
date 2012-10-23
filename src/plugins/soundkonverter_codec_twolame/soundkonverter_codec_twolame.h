@@ -17,7 +17,7 @@ public:
     soundkonverter_codec_twolame( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_twolame();
+    ~soundkonverter_codec_twolame();
 
     QString name();
 

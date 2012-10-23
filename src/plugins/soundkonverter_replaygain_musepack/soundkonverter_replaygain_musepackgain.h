@@ -17,7 +17,7 @@ public:
     soundkonverter_replaygain_musepackgain( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_musepackgain();
+    ~soundkonverter_replaygain_musepackgain();
 
     QString name();
 

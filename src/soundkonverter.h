@@ -43,7 +43,7 @@ public:
     soundKonverter();
 
     /** Default Destructor */
-    virtual ~soundKonverter();
+    ~soundKonverter();
 
     virtual void saveProperties( KConfigGroup& configGroup );
 

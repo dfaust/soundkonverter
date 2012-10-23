@@ -17,7 +17,7 @@ public:
     soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_ripper_cdparanoia();
+    ~soundkonverter_ripper_cdparanoia();
 
     QString name();
 

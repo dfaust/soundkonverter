@@ -24,7 +24,7 @@ public:
     /**
      * Destructor
      */
-    virtual ~TagData();
+    ~TagData();
 
     /** The tags */
     QString artist;

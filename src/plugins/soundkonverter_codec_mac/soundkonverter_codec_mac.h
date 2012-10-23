@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_mac( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_mac();
+    ~soundkonverter_codec_mac();
 
     QString name();
 

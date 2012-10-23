@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_flac( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_flac();
+    ~soundkonverter_codec_flac();
 
     QString name();
 

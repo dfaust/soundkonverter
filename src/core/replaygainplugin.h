@@ -49,7 +49,7 @@ public:
     };
 
     ReplayGainPlugin( QObject *parent=0 );
-    ~ReplayGainPlugin();
+    virtual ~ReplayGainPlugin();
 
     virtual QString type();
 

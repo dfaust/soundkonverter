@@ -32,7 +32,7 @@ public:
     CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent=0, Qt::WFlags f=0 );
 
     /** Default Destructor */
-    virtual ~CodecProblems();
+    ~CodecProblems();
 
 };
 

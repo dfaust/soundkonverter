@@ -41,7 +41,7 @@ public:
     ConvertItem( FileListItem *item );
 
     /** Destructor */
-    virtual ~ConvertItem();
+    ~ConvertItem();
 
     /** a reference to the file list item, in case it's a convert item */
     FileListItem *fileListItem;

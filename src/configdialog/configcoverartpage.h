@@ -35,7 +35,7 @@ public:
     /**
      * Default Destructor
      */
-    virtual ~ConfigCoverArtPage();
+    ~ConfigCoverArtPage();
 
 private:
     QRadioButton *rWriteCoversAlways;

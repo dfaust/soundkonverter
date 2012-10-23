@@ -17,7 +17,7 @@ public:
     soundkonverter_replaygain_vorbisgain( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_vorbisgain();
+    ~soundkonverter_replaygain_vorbisgain();
 
     QString name();
 

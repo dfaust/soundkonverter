@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_ttaenc( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_ttaenc();
+    ~soundkonverter_codec_ttaenc();
 
     QString name();
 

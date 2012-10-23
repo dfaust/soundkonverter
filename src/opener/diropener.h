@@ -38,7 +38,7 @@ public:
     DirOpener( Config *config, Mode _mode, QWidget *parent=0, Qt::WFlags f=0 );
 
     /** Destructor */
-    virtual ~DirOpener();
+    ~DirOpener();
 
     /** true if the file dialog was aborted (don't execute the dialog) */
     bool dialogAborted;

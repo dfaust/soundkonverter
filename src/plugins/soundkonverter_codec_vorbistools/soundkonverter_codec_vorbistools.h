@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_vorbistools( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_vorbistools();
+    ~soundkonverter_codec_vorbistools();
 
     QString name();
 

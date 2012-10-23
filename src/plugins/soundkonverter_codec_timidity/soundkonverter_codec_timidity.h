@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_timidity( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_timidity();
+    ~soundkonverter_codec_timidity();
 
     QString name();
 

@@ -33,7 +33,7 @@ public:
     OptionsSimple( Config *_config, /*OptionsDetailed*,*/ const QString &text, QWidget* parent=0 );
 
     /** Detructor */
-    virtual ~OptionsSimple();
+    ~OptionsSimple();
 
     void init();
 

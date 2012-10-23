@@ -29,14 +29,7 @@ class ConfigPageBase : public QWidget
 {
     Q_OBJECT
 public:
-    /**
-     * Constructor
-     */
     ConfigPageBase( QWidget *parent=0 );
-
-    /**
-     * Destructor
-     */
     virtual ~ConfigPageBase();
 
 public slots:

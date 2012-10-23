@@ -29,7 +29,7 @@ public:
     soundkonverter_filter_sox( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_filter_sox();
+    ~soundkonverter_filter_sox();
 
     QString name();
     int version();

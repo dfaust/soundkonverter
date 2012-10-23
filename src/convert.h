@@ -30,7 +30,7 @@ class Convert : public QObject
     Q_OBJECT
 public:
     Convert( Config *_config, FileList *_fileList, Logger *_logger );
-    virtual ~Convert();
+    ~Convert();
 
     void cleanUp();
 

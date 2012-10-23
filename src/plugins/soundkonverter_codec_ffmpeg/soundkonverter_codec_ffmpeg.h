@@ -34,7 +34,7 @@ public:
     soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_ffmpeg();
+    ~soundkonverter_codec_ffmpeg();
 
     QString name();
     int version();

@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_speex( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_speex();
+    ~soundkonverter_codec_speex();
 
     QString name();
 

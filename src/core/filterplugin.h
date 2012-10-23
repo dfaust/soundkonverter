@@ -24,12 +24,7 @@ class KDE_EXPORT FilterPluginItem : public CodecPluginItem
     Q_OBJECT
 public:
     FilterPluginItem( QObject *parent=0 );
-    ~FilterPluginItem();
-
-//     struct Data {
-//         enum Mode { Enc, Dec } mode;
-//         int length;
-//     } data;
+    virtual ~FilterPluginItem();
 };
 
 

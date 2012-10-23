@@ -21,7 +21,7 @@ public:
     soundKonverterApp();
 
     /** Destructor */
-    virtual ~soundKonverterApp();
+    ~soundKonverterApp();
 
     /** This function is called, when a new instance of soundKonverter should be created */
     virtual int newInstance();

@@ -35,7 +35,7 @@ public:
     BackendsListWidget( const QString& _name, Config *_config, QWidget *parent=0 );
 
     /** Default Destructor*/
-    virtual ~BackendsListWidget();
+    ~BackendsListWidget();
 
     void setFormat( const QString& _format );
     void addItem( const QString& item );
@@ -81,7 +81,7 @@ public:
     ConfigBackendsPage( Config *_config, QWidget *parent=0 );
 
     /** Default Destructor */
-    virtual ~ConfigBackendsPage();
+    ~ConfigBackendsPage();
 
 private:
     Config *config;

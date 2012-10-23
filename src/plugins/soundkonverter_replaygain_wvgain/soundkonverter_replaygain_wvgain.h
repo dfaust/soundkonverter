@@ -17,7 +17,7 @@ public:
     soundkonverter_replaygain_wvgain( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_replaygain_wvgain();
+    ~soundkonverter_replaygain_wvgain();
 
     QString name();
 

@@ -33,7 +33,7 @@ public:
     OutputDirectory( Config *_config, QWidget *parent = 0 );
 
     /** Destructor */
-    virtual ~OutputDirectory();
+    ~OutputDirectory();
 
     Mode mode();
     void setMode( Mode mode );

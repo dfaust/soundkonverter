@@ -41,7 +41,7 @@ public:
     FileList( Logger *_logger, Config *_config, QWidget *parent = 0 );
 
     /** Destructor */
-    virtual ~FileList();
+    ~FileList();
 
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
 //     FileListItem *itemAbove( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemAbove(item) ); }

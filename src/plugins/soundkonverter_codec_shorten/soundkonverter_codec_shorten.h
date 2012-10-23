@@ -15,7 +15,7 @@ public:
     soundkonverter_codec_shorten( QObject *parent, const QStringList& args );
 
     /** Default Destructor */
-    virtual ~soundkonverter_codec_shorten();
+    ~soundkonverter_codec_shorten();
 
     QString name();
 

@@ -23,7 +23,7 @@ public:
     LogViewer( Logger* _logger, QWidget* parent=0, Qt::WFlags f=0 );
 
     /** Default Destructor */
-    virtual ~LogViewer();
+    ~LogViewer();
 
 private:
     Logger* logger;

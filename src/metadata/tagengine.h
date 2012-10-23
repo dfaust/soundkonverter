@@ -5,9 +5,7 @@
 
 #include <KUrl>
 
-#include <QString>
 #include <QStringList>
-#include <QImage>
 
 class Config;
 

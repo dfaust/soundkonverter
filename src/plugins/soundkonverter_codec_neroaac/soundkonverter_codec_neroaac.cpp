@@ -2,9 +2,9 @@
 #include "neroaaccodecglobal.h"
 
 #include "soundkonverter_codec_neroaac.h"
-#include "../../core/conversionoptions.h"
 #include "neroaaccodecwidget.h"
-#include "../../core/tagdata.h"
+#include "../../core/conversionoptions.h"
+#include "../../metadata/tagengine.h"
 
 
 // NeroAAC is a propritary implementation of an aac encoder that claims to reach a better quality then faac.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php

@@ -39,7 +39,7 @@ CodecWidget *CodecPlugin::deleteCodecWidget( CodecWidget *codecWidget )
     return 0;
 }
 
-ConversionOptions *CodecPlugin::conversionOptionsFromXmlDefault( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
+ConversionOptions *CodecPlugin::conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
 {
     ConversionOptions *options = new ConversionOptions();
     options->fromXml( conversionOptions, filterOptionsElements );

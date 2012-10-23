@@ -47,8 +47,7 @@ public:
     /** returns a command for converting a file through a pipe; "" if pipes aren't supported */
     virtual QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false ) = 0;
 
-    static ConversionOptions *conversionOptionsFromXmlDefault( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
-    virtual ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 ) = 0;
+    virtual ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
 protected:
     ConversionOptions *lastUsedConversionOptions;

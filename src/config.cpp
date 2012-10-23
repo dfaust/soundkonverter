@@ -398,7 +398,9 @@ void Config::load()
                     }
                     else
                     {
-                        conversionOptions = CodecPlugin::conversionOptionsFromXmlDefault( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );
+                        logger->log( 1000, "\t\tcannot be loaded beacause the plugin cannot be found" );
+                        continue;
                     }
                     if( conversionOptions )
                     {

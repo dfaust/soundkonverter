@@ -37,11 +37,6 @@ public:
     {
         return FilterPlugin::filterOptionsFromXmlDefault( filterOptions );
     }
-
-    ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 )
-    {
-        return CodecPlugin::conversionOptionsFromXmlDefault( conversionOptions, filterOptionsElements );
-    }
 };
 
 K_EXPORT_SOUNDKONVERTER_FILTER( normalize, soundkonverter_filter_normalize )

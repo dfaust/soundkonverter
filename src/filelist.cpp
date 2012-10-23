@@ -1334,7 +1334,7 @@ void FileList::load( bool user )
                     }
                     else
                     {
-                        conversionOptions = CodecPlugin::conversionOptionsFromXmlDefault( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        continue;
                     }
                     if( conversionOptions )
                     {
@@ -1368,7 +1368,7 @@ void FileList::load( bool user )
                     item->url = KUrl(file.attribute("url"));
                     item->outputUrl = KUrl(file.attribute("outputUrl"));
                     item->codecName = file.attribute("codecName");
-                    item->conversionOptionsId = conversionOptionsIds[file.attribute("conversionOptionsId").toInt()];
+                    item->conversionOptionsId = conversionOptionsIds[file.attribute("conversionOptionsId").toInt()]; // TODO check if id exists
                     item->local = file.attribute("local").toInt();
                     item->track = file.attribute("track").toInt();
                     item->tracks = file.attribute("tracks").toInt();

@@ -63,7 +63,7 @@ ConversionOptions::~ConversionOptions()
     qDeleteAll( filterOptions );
 }
 
-bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter options
+bool ConversionOptions::equals( ConversionOptions *_other )
 {
     if( !_other )
         return false;
@@ -78,6 +78,17 @@ bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter optio
     if( bitrate !=_other->bitrate )
         return false;
     if( bitrateMode !=_other->bitrateMode )
+        return false;
+
+    if( !equalsFilters(_other) )
+        return false;
+
+    return true;
+}
+
+bool ConversionOptions::equalsFilters( ConversionOptions *_other )
+{
+    if( !_other )
         return false;
 
     QStringList filters;
@@ -117,7 +128,7 @@ bool ConversionOptions::equals( ConversionOptions *_other ) // TODO filter optio
     return true;
 }
 
-bool ConversionOptions::equalsBasics( ConversionOptions *_other ) // TODO filter options
+bool ConversionOptions::equalsBasics( ConversionOptions *_other )
 {
     if( !_other )
         return false;

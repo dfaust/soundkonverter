@@ -26,11 +26,11 @@ bool LameConversionOptions::equals( ConversionOptions *_other )
     }
     else if( data.preset==other->data.preset && data.preset==Data::SpecifyBitrate )
     {
-        return ( equalsBasics(_other) && data.presetBitrate==other->data.presetBitrate && data.presetBitrateCbr==other->data.presetBitrateCbr && data.presetFast==other->data.presetFast );
+        return ( equalsBasics(_other) && equalsFilters(_other) && data.presetBitrate==other->data.presetBitrate && data.presetBitrateCbr==other->data.presetBitrateCbr && data.presetFast==other->data.presetFast );
     }
     else if( data.preset==other->data.preset )
     {
-        return ( equalsBasics(_other) && data.presetFast==other->data.presetFast );
+        return ( equalsBasics(_other) && equalsFilters(_other) && data.presetFast==other->data.presetFast );
     }
     else
     {

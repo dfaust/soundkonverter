@@ -46,6 +46,7 @@ public:
     virtual ~ConversionOptions();
 
     bool equalsBasics( ConversionOptions *_other );
+    bool equalsFilters( ConversionOptions *_other );
     virtual bool equals( ConversionOptions *_other ); // checks if the other ConversionOptions is equal to this
 
     virtual QDomElement toXml( QDomDocument document );

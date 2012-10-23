@@ -20,7 +20,7 @@ bool OpusToolsConversionOptions::equals( ConversionOptions *_other )
 
     OpusToolsConversionOptions *other = dynamic_cast<OpusToolsConversionOptions*>(_other);
 
-    return data.floatBitrate == other->data.floatBitrate;
+    return ( equalsBasics(_other) && equalsFilters(_other) && data.floatBitrate == other->data.floatBitrate );
 }
 
 QDomElement OpusToolsConversionOptions::toXml( QDomDocument document )

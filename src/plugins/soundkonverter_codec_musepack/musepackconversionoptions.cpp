@@ -14,7 +14,8 @@ MusePackConversionOptions::~MusePackConversionOptions()
 
 bool MusePackConversionOptions::equals( ConversionOptions *_other )
 {
-    if( !_other || _other->pluginName!=pluginName ) return false;
+    if( !_other || _other->pluginName!=pluginName )
+        return false;
 
     MusePackConversionOptions *other = dynamic_cast<MusePackConversionOptions*>(_other);
 
@@ -24,7 +25,7 @@ bool MusePackConversionOptions::equals( ConversionOptions *_other )
     }
     else if( data.preset==other->data.preset )
     {
-        return equalsBasics(_other);
+        return ( equalsBasics(_other) && equalsFilters(_other) );
     }
     else
     {

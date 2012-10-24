@@ -45,7 +45,7 @@ public:
     QString albumName;
     QString codecName;
     int samplingRate;
-    QPointer<TagData> tags;
+    TagData *tags;
 
     int time;
 };

@@ -5,26 +5,26 @@
 
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent ),
+    tags( 0 )
 {
     state = Waiting;
-    tags = 0;
     samplingRate = 0;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding )
-    : QTreeWidgetItem( parent, preceding )
+    : QTreeWidgetItem( parent, preceding ),
+    tags( 0 )
 {
     state = Waiting;
-    tags = 0;
     samplingRate = 0;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent ),
+    tags( 0 )
 {
     state = Waiting;
-    tags = 0;
     samplingRate = 0;
 }
 

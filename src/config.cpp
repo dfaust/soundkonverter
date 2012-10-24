@@ -25,8 +25,11 @@ Config::Config( Logger *_logger, QObject *parent )
 Config::~Config()
 {
     save();
+
     qDeleteAll( data.profiles.values() );
     data.profiles.clear();
+
+    delete pPluginLoader;
     delete pTagEngine;
     delete pConversionOptionsManager;
 }

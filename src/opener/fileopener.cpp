@@ -18,6 +18,7 @@
 #include <KPushButton>
 #include <QLabel>
 #include <QLayout>
+#include <QBoxLayout>
 #include <KMessageBox>
 #include <KFileDialog>
 #include <QDir>

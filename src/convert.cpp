@@ -18,8 +18,9 @@
 #include <QFileInfo>
 
 
-Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger )
-    : config( _config ),
+Convert::Convert( Config *_config, FileList *_fileList, Logger *_logger, QObject *parent )
+    : QObject( parent ),
+    config( _config ),
     fileList( _fileList ),
     logger( _logger )
 {

@@ -125,7 +125,9 @@ TagData::TagData()
 }
 
 TagData::~TagData()
-{}
+{
+    qDeleteAll( covers );
+}
 
 
 TagEngine::TagEngine( Config *_config )
@@ -143,12 +145,12 @@ TagEngine::~TagEngine()
 
 TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 {
-    TagData *tagData = new TagData();
-
     TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit() );
 
     if( !fileref.isNull() )
     {
+        TagData *tagData = new TagData();
+
         TagLib::Tag *tag = fileref.tag();
 
         tagData->track = 0;
@@ -363,7 +365,7 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
 bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
 {
     if( !tagData )
-        tagData = new TagData();
+        return false;
 
     TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit(), false );
 
@@ -552,6 +554,7 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
 
         return fileref.save();
     }
+
     return false;
 }
 

@@ -17,7 +17,6 @@
 #include "core/replaygainplugin.h"
 #include "core/ripperplugin.h"
 
-#include <QObject>
 #include <QStringList>
 #include <KUrl>
 
@@ -50,13 +49,12 @@ struct ConversionPipe
 /**
 	@author Daniel Faust <hessijames@gmail.com>
 */
-class PluginLoader : public QObject // TODO parent
+class PluginLoader
 {
     friend class Config;
 
-    Q_OBJECT
 public:
-    PluginLoader( Logger *_logger, Config *parent );
+    PluginLoader( Logger *_logger, Config *_config );
     ~PluginLoader();
 
 //     enum Possibilities { EncAble, DecAble, EncOrDecAble, ReplayGain }; // TODO make or'ed list

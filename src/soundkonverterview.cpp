@@ -125,7 +125,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
     connect( fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );
 
-    Convert *convert = new Convert( config, fileList, logger );
+    Convert *convert = new Convert( config, fileList, logger, this );
     connect( fileList, SIGNAL(convertItem(FileListItem*)), convert, SLOT(add(FileListItem*)) );
     connect( fileList, SIGNAL(killItem(FileListItem*)), convert, SLOT(kill(FileListItem*)) );
     connect( fileList, SIGNAL(itemRemoved(FileListItem*)), convert, SLOT(itemRemoved(FileListItem*)) );

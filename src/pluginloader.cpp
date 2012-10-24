@@ -53,14 +53,18 @@ bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& 
 }
 
 
-PluginLoader::PluginLoader( Logger *_logger, Config *parent )
-    : QObject( parent ),
-    logger( _logger ),
-    config( parent )
+PluginLoader::PluginLoader( Logger *_logger, Config *_config )
+    : logger( _logger ),
+    config( _config )
 {}
 
 PluginLoader::~PluginLoader()
-{}
+{
+    qDeleteAll( codecPlugins );
+    qDeleteAll( filterPlugins );
+    qDeleteAll( replaygainPlugins );
+    qDeleteAll( ripperPlugins );
+}
 
 void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugin )
 {

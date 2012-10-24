@@ -29,7 +29,7 @@ class Convert : public QObject
 {
     Q_OBJECT
 public:
-    Convert( Config *_config, FileList *_fileList, Logger *_logger );
+    Convert( Config *_config, FileList *_fileList, Logger *_logger, QObject *parent );
     ~Convert();
 
     void cleanUp();

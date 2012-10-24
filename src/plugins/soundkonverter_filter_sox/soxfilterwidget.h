@@ -34,10 +34,6 @@ private:
 private slots:
     void addEffectWidgetClicked();
     void removeEffectWidgetClicked( SoxEffectWidget *widget );
-
-signals:
-    void somethingChanged();
-
 };
 
 #endif // SOXFILTERWIDGET_H

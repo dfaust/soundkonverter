@@ -149,7 +149,7 @@ void SoxEffectWidget::effectChanged( int index )
         dNormalizeVolume->setRange( -99, 99 );
         dNormalizeVolume->setSuffix( " " + i18nc("decibel","dB") );
         connect( dNormalizeVolume, SIGNAL(valueChanged(double)), this, SLOT(normalizeVolumeChanged(double)) );
-        connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        connect( dNormalizeVolume, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
         widgetsBox->addWidget( dNormalizeVolume );
 
         dNormalizeVolume->setValue( 0 );
@@ -164,7 +164,7 @@ void SoxEffectWidget::effectChanged( int index )
         QDoubleSpinBox *dBassGain = new QDoubleSpinBox( this );
         dBassGain->setRange( -99, 99 );
         dBassGain->setSuffix( " " + i18nc("decibel","dB") );
-        connect( dBassGain, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        connect( dBassGain, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
         widgetsBox->addWidget( dBassGain );
 
         dBassGain->setValue( 0 );
@@ -178,7 +178,7 @@ void SoxEffectWidget::effectChanged( int index )
         QDoubleSpinBox *dTrebleGain = new QDoubleSpinBox( this );
         dTrebleGain->setRange( -99, 99 );
         dTrebleGain->setSuffix( " " + i18nc("decibel","dB") );
-        connect( dTrebleGain, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+        connect( dTrebleGain, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
         widgetsBox->addWidget( dTrebleGain );
 
         dTrebleGain->setValue( 0 );

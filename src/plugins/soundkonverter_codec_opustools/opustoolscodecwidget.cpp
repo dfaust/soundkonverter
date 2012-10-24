@@ -34,7 +34,7 @@ OpusToolsCodecWidget::OpusToolsCodecWidget()
     sQuality->setSingleStep( 100 );
     sQuality->setValue( 16000 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sQuality );
 
     dQuality = new QDoubleSpinBox( this );
@@ -45,7 +45,7 @@ OpusToolsCodecWidget::OpusToolsCodecWidget()
     dQuality->setValue( 160 );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
-    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
 
     topBox->addSpacing( 12 );
@@ -57,7 +57,7 @@ OpusToolsCodecWidget::OpusToolsCodecWidget()
     cBitrateMode->addItem( i18n("Constant") );
     cBitrateMode->setCurrentIndex( 0 );
     cBitrateMode->setFixedWidth( cBitrateMode->sizeHint().width() );
-    connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cBitrateMode );
 
     topBox->addStretch();

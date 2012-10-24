@@ -37,13 +37,13 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
-    connect( cMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
     sQuality->setRange( 32, 384 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sQuality );
 
     iQuality = new QSpinBox( this );
@@ -51,7 +51,7 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     iQuality->setSuffix( " kbps" );
     iQuality->setFixedWidth( iQuality->sizeHint().width() );
     connect( iQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
-    connect( iQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( iQuality );
 
     topBox->addStretch();

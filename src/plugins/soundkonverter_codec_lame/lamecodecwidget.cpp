@@ -38,7 +38,7 @@ LameCodecWidget::LameCodecWidget()
     cPreset->addItem( i18n("Specify bitrate") );
     cPreset->addItem( i18n("User defined") );
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
-    connect( cPreset, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cPreset, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     presetBox->addWidget( cPreset );
 //     cPreset->setToolTip( i18n("Either use one of lames's presets or your own settings.") );
 
@@ -47,18 +47,18 @@ LameCodecWidget::LameCodecWidget()
     iPresetBitrate->setSuffix( " kbps" );
     iPresetBitrate->setValue( 192 );
     connect( iPresetBitrate, SIGNAL(valueChanged(int)), this, SLOT(presetBitrateChanged(int)) );
-    connect( iPresetBitrate, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iPresetBitrate, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     presetBox->addWidget( iPresetBitrate );
 
     cPresetBitrateCbr = new QCheckBox( i18n("cbr"), this );
-    connect( cPresetBitrateCbr, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( cPresetBitrateCbr, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     presetBox->addWidget( cPresetBitrateCbr );
     cPresetBitrateCbr->setToolTip( i18n("Encode using a constant bitrate.\nOnly works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps") );
 
     presetBox->addSpacing( 12 );
 
     cPresetFast = new QCheckBox( i18n("Fast encoding"), this );
-    connect( cPresetFast, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( cPresetFast, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     presetBox->addWidget( cPresetFast );
     cPresetFast->setToolTip( i18n("Use a faster encoding algorithm (results in a slightly lower output quality).") );
 
@@ -84,13 +84,13 @@ LameCodecWidget::LameCodecWidget()
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
-    connect( cMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, userdefinedBox );
     sQuality->setRange( 8, 320 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( sQuality );
 
     iQuality = new QSpinBox( userdefinedBox );
@@ -98,7 +98,7 @@ LameCodecWidget::LameCodecWidget()
     iQuality->setSuffix( " kbps" );
     iQuality->setFixedWidth( iQuality->sizeHint().width() );
     connect( iQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
-    connect( iQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( iQuality );
 
     userdefinedTopBox->addSpacing( 12 );
@@ -110,7 +110,7 @@ LameCodecWidget::LameCodecWidget()
     cBitrateMode->addItem( i18n("Average") );
     cBitrateMode->addItem( i18n("Constant") );
     cBitrateMode->setFixedWidth( cBitrateMode->sizeHint().width() );
-    connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cBitrateMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( cBitrateMode );
 
     userdefinedTopBox->addStretch();
@@ -128,7 +128,7 @@ LameCodecWidget::LameCodecWidget()
     sCompressionLevel->setSingleStep( 1 );
     sCompressionLevel->setPageStep( 1 );
     connect( sCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSliderChanged(int)) );
-    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     bottomBox->addWidget( sCompressionLevel );
     sCompressionLevel->setToolTip( i18n("Compression level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the slower the conversion and vice versa.)\nA value of 2 is recommended.") );
 
@@ -137,7 +137,7 @@ LameCodecWidget::LameCodecWidget()
     iCompressionLevel->setSingleStep( 1 );
     iCompressionLevel->setFixedWidth( iCompressionLevel->sizeHint().width() );
     connect( iCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSpinBoxChanged(int)) );
-    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     bottomBox->addWidget( iCompressionLevel );
     iCompressionLevel->setToolTip( i18n("Compression level from 9 to 0 where 0 is the highest quality.\n(The higher the quality, the slower the conversion and vice versa.)\nA value of 2 is recommended.") );
 

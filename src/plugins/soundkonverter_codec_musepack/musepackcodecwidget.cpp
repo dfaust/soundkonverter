@@ -44,7 +44,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     cPreset->setCurrentIndex( 3 );
     cPreset->setToolTip( i18n("Either use one of MusePacks's presets or your own settings.") );
     connect( cPreset, SIGNAL(activated(const QString&)), this, SLOT(presetChanged(const QString&)) );
-    connect( cPreset, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cPreset, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     presetBox->addWidget( cPreset );
 
     presetBox->addStretch();
@@ -72,7 +72,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     sQuality->setSingleStep( 100 );
     sQuality->setValue( 500 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( sQuality );
 
     dQuality = new QDoubleSpinBox( userdefinedBox );
@@ -81,7 +81,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     dQuality->setValue( 5 );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
-    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( dQuality );
 
     userdefinedTopBox->addStretch();

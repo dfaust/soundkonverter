@@ -26,7 +26,7 @@ SoxFilterWidget::SoxFilterWidget()
     grid->addLayout( box1, gridRow++, 0 );
 
     chSampleRate = new QCheckBox( i18n("Sample rate")+":", this );
-    connect( chSampleRate, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( chSampleRate, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleRate );
     cSampleRate = new KComboBox( this );
     cSampleRate->addItem( "8000 Hz" );
@@ -41,14 +41,14 @@ SoxFilterWidget::SoxFilterWidget()
     cSampleRate->setCurrentIndex( 7 );
     cSampleRate->setEditable( true );
     cSampleRate->setEnabled( false );
-    connect( cSampleRate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cSampleRate, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     box1->addWidget( cSampleRate );
     connect( chSampleRate, SIGNAL(toggled(bool)), cSampleRate, SLOT(setEnabled(bool)) );
 
     box1->addSpacing( 12 );
 
     chSampleSize = new QCheckBox( i18n("Sample size")+":", this );
-    connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleSize );
     cSampleSize = new KComboBox( this );
     cSampleSize->addItem( "8 bit" );
@@ -64,7 +64,7 @@ SoxFilterWidget::SoxFilterWidget()
     box1->addSpacing( 12 );
 
     chChannels = new QCheckBox( i18n("Channels")+":", this );
-    connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chChannels );
     cChannels = new KComboBox( this );
     cChannels->addItem( i18n("Mono") );

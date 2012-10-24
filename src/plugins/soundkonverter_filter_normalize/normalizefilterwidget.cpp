@@ -21,7 +21,7 @@ NormalizeFilterWidget::NormalizeFilterWidget()
     grid->addLayout( topBox, 0, 0 );
 
     cNormalize = new QCheckBox( i18n("Normalize"), this );
-    connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(somethingChanged()) );
+    connect( cNormalize, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cNormalize );
 
     topBox->addStretch();

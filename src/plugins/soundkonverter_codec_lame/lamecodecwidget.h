@@ -59,9 +59,6 @@ private slots:
     void qualitySpinBoxChanged( int quality );
     void compressionLevelSliderChanged( int quality );
     void compressionLevelSpinBoxChanged( int quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // LAMECODECWIDGET_H

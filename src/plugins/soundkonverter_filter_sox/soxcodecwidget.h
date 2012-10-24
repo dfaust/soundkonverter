@@ -54,9 +54,6 @@ private slots:
     void modeChanged( int mode );
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( double quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // SOXCODECWIDGET_H

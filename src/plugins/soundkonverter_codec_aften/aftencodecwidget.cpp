@@ -31,12 +31,12 @@ AftenCodecWidget::AftenCodecWidget()
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
-    connect( cMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sQuality );
 
     dQuality = new QSpinBox( this );
@@ -44,7 +44,7 @@ AftenCodecWidget::AftenCodecWidget()
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
-    connect( dQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( dQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
 
     cBitrate = new KComboBox( this );
@@ -68,7 +68,7 @@ AftenCodecWidget::AftenCodecWidget()
     cBitrate->addItem( "576 kbps" );
     cBitrate->addItem( "640 kbps" );
     cBitrate->hide();
-    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cBitrate );
 
     topBox->addStretch();

@@ -38,9 +38,6 @@ private:
 private slots:
     void qualitySliderChanged( int bitrate );
     void qualitySpinBoxChanged( int bitrate );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // FFMPEGCODECWIDGET_H

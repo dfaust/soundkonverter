@@ -20,9 +20,6 @@ public:
 
 private:
     QString currentFormat; // holds the current output file format
-
-signals:
-    void somethingChanged();
 };
 
 #endif // FLUIDSYNTHCODECWIDGET_H

@@ -35,9 +35,6 @@ private:
 private slots:
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( double quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // OPUSTOOLSCODECWIDGET_H

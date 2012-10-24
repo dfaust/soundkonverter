@@ -35,7 +35,7 @@ FFmpegCodecWidget::FFmpegCodecWidget()
     sBitrate->setRange( 8, 320 );
     sBitrate->setValue( 160 );
     connect( sBitrate, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sBitrate, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sBitrate, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sBitrate );
 
     iBitrate = new QSpinBox( this );
@@ -44,7 +44,7 @@ FFmpegCodecWidget::FFmpegCodecWidget()
     iBitrate->setSuffix( " kbps" );
     iBitrate->setFixedWidth( iBitrate->sizeHint().width() );
     connect( iBitrate, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
-    connect( iBitrate, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iBitrate, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( iBitrate );
 
     cBitrate = new KComboBox( this );
@@ -69,7 +69,7 @@ FFmpegCodecWidget::FFmpegCodecWidget()
     cBitrate->addItem( "640 kbps" );
     cBitrate->setCurrentIndex( 10 );
     cBitrate->hide();
-    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cBitrate, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cBitrate );
 
     topBox->addStretch();

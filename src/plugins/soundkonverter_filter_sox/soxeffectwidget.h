@@ -40,6 +40,7 @@ signals:
     void addEffectWidgetClicked();
     void removeEffectWidgetClicked( SoxEffectWidget *widget );
 
+    void optionsChanged();
 };
 
 

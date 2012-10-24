@@ -33,9 +33,6 @@ private:
 private slots:
     void compressionLevelSliderChanged( int quality );
     void compressionLevelSpinBoxChanged( int quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // MACCODECWIDGET_H

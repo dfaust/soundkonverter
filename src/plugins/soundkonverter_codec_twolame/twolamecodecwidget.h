@@ -45,9 +45,6 @@ private slots:
     void modeChanged( int mode );
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( int quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // TWOLAMECODECWIDGET_H

@@ -36,7 +36,7 @@ FlacCodecWidget::FlacCodecWidget()
 //     sQuality->setTickPosition( QSlider::TicksBelow );
 //     sQuality->setFixedWidth( sQuality->sizeHint().width() );
     connect( sCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSliderChanged(int)) );
-    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sCompressionLevel );
 
     iCompressionLevel = new QSpinBox( this );
@@ -45,7 +45,7 @@ FlacCodecWidget::FlacCodecWidget()
     iCompressionLevel->setFixedWidth( iCompressionLevel->sizeHint().width() );
 //     dQuality->setFixedHeight( cMode->minimumSizeHint().height() );
     connect( iCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSpinBoxChanged(int)) );
-    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( iCompressionLevel );
 
     topBox->addStretch();

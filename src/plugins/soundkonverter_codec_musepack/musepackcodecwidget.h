@@ -46,9 +46,6 @@ private slots:
     // user defined options
     void qualitySliderChanged( int quality );
     void qualitySpinBoxChanged( double quality );
-
-signals:
-    void somethingChanged();
 };
 
 #endif // MUSEPACKCODECWIDGET_H

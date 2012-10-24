@@ -26,9 +26,6 @@ private:
     KLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
-
-signals:
-    void somethingChanged();
 };
 
 #endif // FLACCODECWIDGET_H

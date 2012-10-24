@@ -18,9 +18,6 @@ public:
 
 private:
     QCheckBox *cNormalize;
-
-signals:
-    void somethingChanged();
 };
 
 #endif // NORMALIZEFILTERWIDGET_H

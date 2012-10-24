@@ -41,7 +41,7 @@ SoxCodecWidget::SoxCodecWidget()
     sCompressionLevel->setSingleStep( 1 );
     sCompressionLevel->setPageStep( 1 );
     connect( sCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSliderChanged(int)) );
-    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sCompressionLevel );
 
     iCompressionLevel = new QSpinBox( this );
@@ -49,7 +49,7 @@ SoxCodecWidget::SoxCodecWidget()
     iCompressionLevel->setSingleStep( 1 );
     iCompressionLevel->setFixedWidth( iCompressionLevel->sizeHint().width() );
     connect( iCompressionLevel, SIGNAL(valueChanged(int)), this, SLOT(compressionLevelSpinBoxChanged(int)) );
-    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( iCompressionLevel, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( iCompressionLevel );
 
     iCompressionLevel->setValue( 5 );
@@ -63,7 +63,7 @@ SoxCodecWidget::SoxCodecWidget()
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
-    connect( cMode, SIGNAL(activated(int)), SIGNAL(somethingChanged()) );
+    connect( cMode, SIGNAL(activated(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( cMode );
 
     lQuality = new QLabel( i18n("Quality:"), this );
@@ -71,7 +71,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     sQuality = new QSlider( Qt::Horizontal, this );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
-    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(somethingChanged()) );
+    connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sQuality );
 
     dQuality = new QDoubleSpinBox( this );
@@ -79,7 +79,7 @@ SoxCodecWidget::SoxCodecWidget()
     dQuality->setSuffix( " kbps" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
-    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(somethingChanged()) );
+    connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
 
 

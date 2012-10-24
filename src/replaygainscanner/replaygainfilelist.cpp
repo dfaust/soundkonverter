@@ -80,13 +80,6 @@ ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidge
 
     setContextMenuPolicy( Qt::CustomContextMenu );
     connect( this, SIGNAL(customContextMenuRequested(const QPoint&)), this, SLOT(showContextMenu(const QPoint&)) );
-
-    const QList<ReplayGainPlugin*> replayGainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
-    for( int i=0; i<replayGainPlugins.size(); i++ )
-    {
-        connect( replayGainPlugins.at(i), SIGNAL(jobFinished(int,int)), this, SLOT(pluginProcessFinished(int,int)) );
-        connect( replayGainPlugins.at(i), SIGNAL(log(int,const QString&)), this, SLOT(pluginLog(int,const QString&)) );
-    }
 }
 
 ReplayGainFileList::~ReplayGainFileList()

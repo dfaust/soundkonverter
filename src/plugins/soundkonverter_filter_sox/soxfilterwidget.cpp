@@ -156,8 +156,10 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
         effectWidgets.removeAt( i );
         i--;
     }
-    if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should alway be true
+    if( !effectWidgets.isEmpty() && effectWidgets.last() ) // really should always be true
     {
+        SoxFilterOptions::EffectData effectData;
+        effectWidgets.last()->setEffectOptions( effectData );
         effectWidgets.last()->setAddButtonShown( true );
         if( effectWidgets.count() == 1 )
             effectWidgets.last()->setRemoveButtonShown( false );

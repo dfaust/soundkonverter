@@ -235,9 +235,9 @@ SoxFilterOptions::EffectData SoxEffectWidget::currentEffectOptions()
 
 bool SoxEffectWidget::setEffectOptions( SoxFilterOptions::EffectData effectData )
 {
-    const int index = cEffect->findText( effectData.effectName );
+    int index = cEffect->findText( effectData.effectName );
     if( index == -1 )
-        return false;
+        index = 0;
 
     cEffect->setCurrentIndex( index );
     effectChanged( index );

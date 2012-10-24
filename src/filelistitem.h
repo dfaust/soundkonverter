@@ -6,7 +6,6 @@
 
 #include <QTreeWidgetItem>
 #include <QItemDelegate>
-#include <QPointer>
 #include <QLabel>
 
 #include <KUrl>
@@ -44,7 +43,7 @@ public:
     ~FileListItem();
 
     int conversionOptionsId;
-    QPointer<TagData> tags;     // we need to instruct the tagengine to read the tags from the file!
+    TagData *tags;              // we need to instruct the tagengine to read the tags from the file!
                                 // and the user can change them!
     KUrl url;                   // the original input file path name
     KUrl outputUrl;             // if the user wants to change the output directory/file name per file
@@ -62,7 +61,7 @@ public:
 
     int logId;                  // the id the item is registered at the logger with, 0 if the conversion hasn't started yet
 
-    QPointer<QLabel> lInfo;     // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
+    QLabel *lInfo;              // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
 };
 
 class FileListItemDelegate : public QItemDelegate

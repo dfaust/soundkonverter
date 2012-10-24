@@ -1,24 +1,15 @@
-//
-// C++ Implementation: filelistitem
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "filelistitem.h"
 
 #include <QPainter>
 
 
 FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
-    : QTreeWidgetItem( parent, after )
+    : QTreeWidgetItem( parent, after ),
+    tags( 0 ),
+    lInfo( 0 )
 {
     conversionOptionsId = -1;
-    tags = 0;
 
     state = WaitingForConversion;
     local = true;
@@ -31,10 +22,11 @@ FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
 }
 
 FileListItem::FileListItem( QTreeWidget *parent )
-    : QTreeWidgetItem( parent )
+    : QTreeWidgetItem( parent ),
+    tags( 0 ),
+    lInfo( 0 )
 {
     conversionOptionsId = -1;
-    tags = 0;
 
     state = WaitingForConversion;
     local = true;

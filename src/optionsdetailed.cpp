@@ -38,7 +38,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lFormat = new QLabel( i18n("Output format")+":", this );
+    QLabel *lFormat = new QLabel( i18n("Format")+":", this );
     topBox->addWidget( lFormat );
     cFormat = new KComboBox( this );
     topBox->addWidget( cFormat );
@@ -114,7 +114,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QHBoxLayout *middleBox = new QHBoxLayout( );
     grid->addLayout( middleBox, gridRow++, 0 );
 
-    QLabel *lOutput = new QLabel( i18n("Output")+":", this );
+    QLabel *lOutput = new QLabel( i18n("Destination:"), this );
     middleBox->addWidget( lOutput );
     outputDirectory = new OutputDirectory( config, this );
     middleBox->addWidget( outputDirectory );

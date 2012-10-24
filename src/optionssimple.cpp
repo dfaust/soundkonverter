@@ -53,7 +53,9 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     connect( pProfileInfo, SIGNAL(clicked()), this, SLOT(profileInfo()) );
     topBoxQuality->addStretch( );
 
-    QLabel *lFormat = new QLabel( i18n("Output format")+":", this );
+    topBoxQuality->addSpacing( 10 );
+
+    QLabel *lFormat = new QLabel( i18n("Format")+":", this );
     grid->addWidget( lFormat, 0, 2 );
 
     QHBoxLayout *topBoxFormat = new QHBoxLayout();
@@ -69,12 +71,12 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
 //     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
     connect( pFormatInfo, SIGNAL(clicked()), this, SLOT(formatInfo()) );
     topBoxFormat->addSpacing( 3 );
-    QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More") + "</a>", this );
+    QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More formats...") + "</a>", this );
     topBoxFormat->addWidget( formatHelp );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
     topBoxFormat->addStretch( );
 
-    QLabel *lOutput = new QLabel( i18n("Output")+":", this );
+    QLabel *lOutput = new QLabel( i18n("Destination:"), this );
     grid->addWidget( lOutput, 1, 0 );
 
     QHBoxLayout *middleBox = new QHBoxLayout();

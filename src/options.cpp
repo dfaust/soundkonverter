@@ -115,6 +115,7 @@ void Options::simpleOptionsChanged()
 {
     optionsDetailed->setCurrentFormat( optionsSimple->currentFormat() );
     optionsDetailed->setCurrentProfile( optionsSimple->currentProfile() );
+    optionsDetailed->resetFilterOptions();
     optionsDetailed->setReplayGainChecked( optionsSimple->isReplayGainChecked() );
     QString toolTip;
     const bool replaygainEnabled = optionsDetailed->isReplayGainEnabled( &toolTip );

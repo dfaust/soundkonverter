@@ -43,6 +43,7 @@ public:
     bool setCurrentProfile( const QString& profile );
     QString currentFormat();
     void setCurrentFormat( const QString& format );
+    void resetFilterOptions();
     void setReplayGainChecked( bool enabled );
 
     bool isReplayGainEnabled( QString *toolTip = 0 );

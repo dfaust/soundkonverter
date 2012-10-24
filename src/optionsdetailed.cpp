@@ -158,6 +158,18 @@ void OptionsDetailed::init()
 //     return size_hint;
 // }
 
+void OptionsDetailed::resetFilterOptions()
+{
+    for( int i=0; i<wFilter.size(); i++ )
+    {
+        FilterWidget *widget = wFilter.keys().at(i);
+        if( widget )
+        {
+            widget->setCurrentFilterOptions( 0 );
+        }
+    }
+}
+
 void OptionsDetailed::setReplayGainChecked( bool enabled )
 {
     cReplayGain->setChecked(enabled);

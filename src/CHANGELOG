@@ -1,6 +1,6 @@
 1.9.80 (2.0.0 beta1):
--Add: Parallel ReplayGain calculation in the ReplayGain tool
--Add: Move tracks to new Album via context menu in the ReplayGain tool
+-Add: Parallel Replay Gain calculation in the Replay Gain tool
+-Add: Move tracks to new Album via context menu in the Replay Gain tool
 -Add: sox plugin with support for some new file formats
 -Add: Convert sample rate and sample size, downmix and apply effects (normalize, bass and treble) using sox
 -Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
@@ -12,12 +12,16 @@
 -Change: Immediately start converting a file after adding it to the file list if the conversion is running in queue mode
 -Change: Quit soundKonverter when canceling the CD ripper dialog if soundKonverter was started with the --rip option
 -Change: Quit the Replay Gain tool when it gets closed
--Fix: Handle internal ReplayGain calculation properly
--Fix: Drop directories onto the ReplayGain tool window
--Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the ReplayGain tool
+-Fix: Handle internal Replay Gain calculation properly
+-Fix: Drop directories onto the Replay Gain tool window
+-Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the Replay Gain tool
 -Fix: Better file type recognition
 -Fix: Output options control via command line parameters when ripping audio cds
 -Fix: User defined parameters for mpcenc when using a preset
+
+1.6.4:
+-Fix: Stall when Replay Gain plugin returns error code (e.g. when trying to remove musepack gain)
+-Fix: Some memory leaks
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

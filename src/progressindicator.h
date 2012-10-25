@@ -35,8 +35,6 @@ public slots:
 
     void update( float timeProgress );
 
-//private slots:
-
 private:
     QProgressBar *pBar;
     QLabel *lSpeed;

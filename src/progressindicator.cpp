@@ -3,6 +3,7 @@
 #include "global.h"
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QProgressBar>
 #include <QToolTip>
@@ -41,7 +42,12 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
             QLabel *lSpeedText = new QLabel( i18n("Speed")+":", this );
             statusChildGrid->addWidget( lSpeedText, 0, 0, Qt::AlignVCenter );
 
-            lSpeed = new QLabel( "<pre> 0.0x</pre>", this );
+            QString actSpeed = "  0.0x";
+
+            if( KGlobal::locale()->decimalSymbol() != "." )
+                actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
+
+            lSpeed = new QLabel( "<pre>" + actSpeed + "</pre>", this );
             statusChildGrid->addWidget( lSpeed, 0, 1, Qt::AlignVCenter | Qt::AlignRight );
             speedTime.setHMS( 24, 0, 0 );
         }
@@ -104,7 +110,13 @@ void ProgressIndicator::finished( bool reset )
     if( lSpeed )
     {
         speedTime.setHMS( 24, 0, 0 );
-        lSpeed->setText( "<pre> 0.0x</pre>" );
+
+        QString actSpeed = "  0.0x";
+
+        if( KGlobal::locale()->decimalSymbol() != "." )
+            actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
+
+        lSpeed->setText( "<pre>" + actSpeed + "</pre>" );
     }
 
     emit progressChanged( i18n("Finished") );
@@ -148,6 +160,9 @@ void ProgressIndicator::update( float timeProgress )
                     actSpeed.sprintf( "%.1fx", speed );
 
                     if( speed < 10 )
+                        actSpeed = " " + actSpeed;
+
+                    if( speed < 100 )
                         actSpeed = " " + actSpeed;
 
                     if( KGlobal::locale()->decimalSymbol() != "." )

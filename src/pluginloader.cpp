@@ -69,7 +69,11 @@ PluginLoader::PluginLoader( Logger *_logger, Config *parent )
 }
 
 PluginLoader::~PluginLoader()
-{}
+{
+    qDeleteAll( codecPlugins );
+    qDeleteAll( replaygainPlugins );
+    qDeleteAll( ripperPlugins );
+}
 
 //
 // private

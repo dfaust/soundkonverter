@@ -1,3 +1,7 @@
+1.6.4:
+-Fix: Stall when Replay Gain plugin returns error code (e.g. when trying to remove musepack gain)
+-Fix: Some memory leaks
+
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)
 -Fix: Make sure the file chooser dialog won't get overlayed by the options dialog in non-KDE environments

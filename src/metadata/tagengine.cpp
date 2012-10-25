@@ -148,7 +148,10 @@ TagData::TagData()
 }
 
 TagData::~TagData()
-{}
+{
+    qDeleteAll( covers );
+    covers.clear();
+}
 
 
 TagEngine::TagEngine( Config *_config )

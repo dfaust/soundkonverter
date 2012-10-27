@@ -172,7 +172,7 @@ void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain 
 
     for( int i=0; i<processes.count(); i++ )
     {
-        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->succeeded )
+        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->succeeded && processes.at(i)->id != 1000 )
         {
             time = processes.at(i)->time;
             removeItem = processes.at(i);

@@ -12,6 +12,51 @@
 #include <KGlobal>
 
 
+TrailingAverage::TrailingAverage()
+{
+    count = 10;
+}
+
+TrailingAverage::~TrailingAverage()
+{}
+
+void TrailingAverage::setCount( int _count )
+{
+    count = _count;
+
+    while( deltaTime.count() > count )
+        deltaTime.removeFirst();
+
+    while( deltaValue.count() > count )
+        deltaValue.removeFirst();
+}
+
+void TrailingAverage::addData( float _deltaTime, float _deltaValue )
+{
+    while( deltaTime.count() > count )
+        deltaTime.removeFirst();
+
+    while( deltaValue.count() > count )
+        deltaValue.removeFirst();
+
+    deltaTime.append( _deltaTime );
+    deltaValue.append( _deltaValue );
+}
+
+float TrailingAverage::average()
+{
+    float _deltaTime = 0;
+    foreach( const float time, deltaTime )
+        _deltaTime += time;
+
+    float _deltaValue = 0;
+    foreach( const float value, deltaValue )
+        _deltaValue += value;
+
+    return _deltaValue / _deltaTime;
+}
+
+
 ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
     : QWidget( parent ),
     lSpeed( 0 ),
@@ -49,7 +94,8 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
 
             lSpeed = new QLabel( "<pre>" + actSpeed + "</pre>", this );
             statusChildGrid->addWidget( lSpeed, 0, 1, Qt::AlignVCenter | Qt::AlignRight );
-            speedTime.setHMS( 24, 0, 0 );
+
+            speedAverage.setCount( 10 );
         }
 
         if( features & FeatureTime )
@@ -60,8 +106,11 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
             lTime = new QLabel( "<pre> 0s</pre>", this );
             lTime->setFont( QFont( "Courier" ) );
             statusChildGrid->addWidget( lTime, 1, 1, Qt::AlignVCenter | Qt::AlignRight );
-            elapsedTime.setHMS( 24, 0, 0 );
+
+            timeAverage.setCount( 60 );
         }
+
+        updateTime.setHMS( 24, 0, 0 );
     }
 }
 
@@ -101,16 +150,15 @@ void ProgressIndicator::finished( bool reset )
     else
         pBar->setValue( pBar->maximum() );
 
+    updateTime.setHMS( 24, 0, 0 );
+
     if( lTime )
     {
-        elapsedTime.setHMS( 24, 0, 0 );
         lTime->setText( "<pre> 0s</pre>" );
     }
 
     if( lSpeed )
     {
-        speedTime.setHMS( 24, 0, 0 );
-
         QString actSpeed = "  0.0x";
 
         if( KGlobal::locale()->decimalSymbol() != "." )
@@ -124,56 +172,57 @@ void ProgressIndicator::finished( bool reset )
 
 void ProgressIndicator::update( float timeProgress )
 {
-    pBar->setValue( (int)(processedTime + timeProgress) );
+    const float currentProcessedTime = processedTime + timeProgress;
 
-    float fPercent;
+    pBar->setValue( (int)currentProcessedTime );
 
-    if( pBar->maximum() > 0 )
-        fPercent = (float)pBar->value() * 100 / (float)pBar->maximum();
-    else
-        fPercent = 0.1f;
+    const int iPercent = ( pBar->maximum() > 0 ) ? pBar->value() * 100 / pBar->maximum() : 0;
 
     if( lTime || lSpeed )
     {
-        if( !elapsedTime.isValid() )
-            elapsedTime.start();
+        if( !updateTime.isValid() )
+            updateTime.start();
 
-        if( !speedTime.isValid() )
-            speedTime.start();
-
-        if( speedTime.elapsed() > 1000 )
+        if( updateTime.elapsed() >= 1000 )
         {
-            if( fPercent > 1.0f && lTime )
+            const float deltaTime = updateTime.restart() / 1000;
+
+            if( lTime )
             {
-                const int time = (int)( elapsedTime.elapsed()/1000/fPercent*(100-fPercent) + 1 );
-                lTime->setText( "<pre>" + Global::prettyNumber(time,"s") + "</pre>" );
+                timeAverage.addData( deltaTime, currentProcessedTime - lastProcessedTime );
+                const float remainingProcessTime = totalTime - currentProcessedTime;
+                const float remainingTime = remainingProcessTime / timeAverage.average() + 1;
+
+                lTime->setText( "<pre>" + Global::prettyNumber(remainingTime,"s") + "</pre>" );
             }
 
             if( lSpeed )
             {
-                const int time = speedTime.restart() / 1000;
-                const float speed = ( processedTime + timeProgress - speedProcessedTime ) / time;
-                speedProcessedTime = processedTime + timeProgress;
+                speedAverage.addData( deltaTime, currentProcessedTime - lastProcessedTime );
+                const float speed = speedAverage.average();
+
                 if( speed >= 0.0f && speed < 100000.0f )
                 {
-                    QString actSpeed;
-                    actSpeed.sprintf( "%.1fx", speed );
+                    QString speedString;
+                    speedString.sprintf( "%.1fx", speed );
 
                     if( speed < 10 )
-                        actSpeed = " " + actSpeed;
+                        speedString = " " + speedString;
 
                     if( speed < 100 )
-                        actSpeed = " " + actSpeed;
+                        speedString = " " + speedString;
 
                     if( KGlobal::locale()->decimalSymbol() != "." )
-                        actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
+                        speedString.replace(".",KGlobal::locale()->decimalSymbol());
 
-                    lSpeed->setText( "<pre>" + actSpeed + "</pre>" );
+                    lSpeed->setText( "<pre>" + speedString + "</pre>" );
                 }
             }
+
+            lastProcessedTime = currentProcessedTime;
         }
     }
 
-    emit progressChanged( QString::number((int)fPercent) + "%" );
+    emit progressChanged( QString::number(iPercent) + "%" );
 }
 

@@ -9,6 +9,23 @@
 class QProgressBar;
 class QLabel;
 
+
+class TrailingAverage
+{
+public:
+    TrailingAverage();
+    ~TrailingAverage();
+
+    void setCount( int _count );
+    void addData( float _deltaTime, float _deltaValue );
+    float average();
+
+private:
+    int count;
+    QList<float> deltaTime;
+    QList<float> deltaValue;
+};
+
 /**
  * @short Displays the current progress
  * @author Daniel Faust <hessijames@gmail.com>
@@ -40,12 +57,13 @@ private:
     QLabel *lSpeed;
     QLabel *lTime;
 
-    QTime elapsedTime;
-    QTime speedTime;
-    float speedProcessedTime;
-
     float totalTime;
     float processedTime;
+
+    QTime updateTime;
+    float lastProcessedTime;
+    TrailingAverage timeAverage;
+    TrailingAverage speedAverage;
 
 signals:
     void progressChanged( const QString& progress );

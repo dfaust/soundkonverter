@@ -5,7 +5,9 @@
 
 CodecPluginItem::CodecPluginItem( QObject *parent )
     : BackendPluginItem( parent )
-{}
+{
+    data.length = 0;
+}
 
 CodecPluginItem::~CodecPluginItem()
 {}

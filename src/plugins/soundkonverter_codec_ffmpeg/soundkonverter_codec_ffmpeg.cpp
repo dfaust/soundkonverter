@@ -2,8 +2,9 @@
 #include "ffmpegcodecglobal.h"
 
 #include "soundkonverter_codec_ffmpeg.h"
-#include "../../core/conversionoptions.h"
 #include "ffmpegcodecwidget.h"
+#include "../../core/conversionoptions.h"
+#include "../../metadata/tagengine.h"
 
 #include <KMessageBox>
 #include <KDialog>
@@ -474,6 +475,9 @@ unsigned int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const 
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
+    if( tags )
+        newItem->data.length = tags->length;
+
     newItem->process->clearProgram();
     newItem->process->setShellCommand( command.join(" ") );
     newItem->process->start();
@@ -510,7 +514,7 @@ float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *leng
     QRegExp reg("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
     if( output.contains(reg) )
     {
-        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();;
+        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
     }
 
     // TODO error handling

@@ -9,7 +9,6 @@
 #include <QToolTip>
 
 #include <KLocale>
-#include <KGlobal>
 
 
 TrailingAverage::TrailingAverage()
@@ -87,10 +86,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
             QLabel *lSpeedText = new QLabel( i18n("Speed")+":", this );
             statusChildGrid->addWidget( lSpeedText, 0, 0, Qt::AlignVCenter );
 
-            QString actSpeed = "  0.0x";
-
-            if( KGlobal::locale()->decimalSymbol() != "." )
-                actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
+            QString actSpeed = "  0x";
 
             lSpeed = new QLabel( "<pre>" + actSpeed + "</pre>", this );
             statusChildGrid->addWidget( lSpeed, 0, 1, Qt::AlignVCenter | Qt::AlignRight );
@@ -159,10 +155,7 @@ void ProgressIndicator::finished( bool reset )
 
     if( lSpeed )
     {
-        QString actSpeed = "  0.0x";
-
-        if( KGlobal::locale()->decimalSymbol() != "." )
-            actSpeed.replace(".",KGlobal::locale()->decimalSymbol());
+        QString actSpeed = "  0x";
 
         lSpeed->setText( "<pre>" + actSpeed + "</pre>" );
     }
@@ -203,17 +196,13 @@ void ProgressIndicator::update( float timeProgress )
 
                 if( speed >= 0.0f && speed < 100000.0f )
                 {
-                    QString speedString;
-                    speedString.sprintf( "%.1fx", speed );
+                    QString speedString = QString::number(qRound(speed)) + "x";
 
                     if( speed < 10 )
                         speedString = " " + speedString;
 
                     if( speed < 100 )
                         speedString = " " + speedString;
-
-                    if( KGlobal::locale()->decimalSymbol() != "." )
-                        speedString.replace(".",KGlobal::locale()->decimalSymbol());
 
                     lSpeed->setText( "<pre>" + speedString + "</pre>" );
                 }

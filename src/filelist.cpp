@@ -278,7 +278,12 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
             if( fast )
             {
-                pScanStatus->setMaximum( count );
+                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+                {
+                    pScanStatus->setMaximum( count );
+                    kapp->processEvents();
+                    tScanStatus.start();
+                }
             }
             else
             {

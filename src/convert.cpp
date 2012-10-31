@@ -95,6 +95,9 @@ void Convert::convert( ConvertItem *item )
     else
         inputUrl = item->inputUrl;
 
+    if( !item->fileListItem->tags )
+        item->fileListItem->tags = config->tagEngine()->readTags( inputUrl );
+
     if( item->outputUrl.isEmpty() )
     {
         item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );

@@ -69,7 +69,7 @@ FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
     grid->setColumnStretch( 2, 1 );
     pScanStatus = new QProgressBar( this );
     pScanStatus->setMinimumHeight( pScanStatus->height() );
-    pScanStatus->setFormat( "%v / %m" );
+    pScanStatus->setFormat( i18n("%v out of %m files added") );
     pScanStatus->hide();
     grid->addWidget( pScanStatus, 1, 1 );
     grid->setColumnStretch( 1, 2 );

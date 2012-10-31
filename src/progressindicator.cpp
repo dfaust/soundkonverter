@@ -70,7 +70,6 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
     box->addWidget( pBar, 0, Qt::AlignVCenter );
     pBar->setRange( 0, 1 );
     pBar->setValue( 0 );
-    pBar->setFormat( "%v / %m" );
 
     if( features != 0 )
     {

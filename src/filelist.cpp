@@ -257,7 +257,9 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
-    dir.setSorting( QDir::LocaleAware );
+
+    if( !fast )
+        dir.setSorting( QDir::LocaleAware );
 
     const QStringList list = dir.entryList();
 
@@ -298,17 +300,13 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     return count;
 }
 
-void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId, FileListItem *after, bool enabled )
+void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId )
 {
-    FileListItem *lastListItem;
-    if( !after && !enabled )
-        lastListItem = topLevelItem( topLevelItemCount()-1 );
-    else
-        lastListItem = after;
-
     QString codecName;
     QString filePathName;
     QString device;
+
+    int lastConversionOptionsId = -1;
 
     bool optionsLayerHidden = false; // shouldn't be necessary
 
@@ -321,36 +319,40 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     int batchNumber = 0;
     foreach( const KUrl fileName, fileList )
     {
-        QFileInfo fileInfo( fileName.toLocalFile() );
-        if( fileInfo.isDir() )
-        {
-            if( !optionsLayerHidden && QObject::sender() == optionsLayer )
-            {
-                optionsLayerHidden = true;
-                optionsLayer->hide();
-                kapp->processEvents();
-            }
-
-//             debug
-//             logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
-
-            addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
-            continue;
-        }
-
         if( !_codecName.isEmpty() )
         {
             codecName = _codecName;
         }
         else
         {
-            codecName = config->pluginLoader()->getCodecFromFile( fileName );
+            QFileInfo fileInfo( fileName.toLocalFile() );
+            if( fileInfo.isDir() )
+            {
+                if( !optionsLayerHidden && QObject::sender() == optionsLayer )
+                {
+                    optionsLayerHidden = true;
+                    optionsLayer->hide();
+                    kapp->processEvents();
+                }
 
-            if( !config->pluginLoader()->canDecode(codecName) )
+                //             debug
+                //             logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
+
+                addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
                 continue;
+            }
+            else
+            {
+                codecName = config->pluginLoader()->getCodecFromFile( fileName );
+
+                if( !config->pluginLoader()->canDecode(codecName) )
+                    continue;
+            }
         }
 
-        FileListItem * const newItem = new FileListItem( this, lastListItem );
+//         logger->log( 1000, "adding file: " + fileName.toLocalFile() + ", codec: " + codecName );
+
+        FileListItem * const newItem = new FileListItem( this );
         if( conversionOptionsId == -1 )
         {
             if( batchNumber == 0 )
@@ -359,14 +361,15 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             }
             else
             {
-                newItem->conversionOptionsId = config->conversionOptionsManager()->increaseReferences( lastListItem->conversionOptionsId );
+                newItem->conversionOptionsId = config->conversionOptionsManager()->increaseReferences( lastConversionOptionsId );
             }
         }
         else
         {
             newItem->conversionOptionsId = config->conversionOptionsManager()->increaseReferences( conversionOptionsId );
         }
-        lastListItem = newItem;
+
+        lastConversionOptionsId = newItem->conversionOptionsId;
         newItem->codecName = codecName;
         newItem->track = -1;
         newItem->url = fileName;
@@ -382,6 +385,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             newItem->length = ( newItem->tags && newItem->tags->length > 0 ) ? newItem->tags->length : 200.0f;
         }
         newItem->notifyCommand = command;
+
         addTopLevelItem( newItem );
         updateItem( newItem );
         emit timeChanged( newItem->length );
@@ -392,17 +396,19 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             kapp->processEvents();
     }
 
-    emit fileCountChanged( topLevelItemCount() );
+    if( !pScanStatus->isVisible() )
+    {
+        emit fileCountChanged( topLevelItemCount() );
 
-    if( queue )
-        convertNextItem();
+        if( queue )
+            convertNextItem();
+    }
 }
 
 void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
 {
 //     debug
 //     logger->log( 1000, "@addDir: " + directory.toLocalFile() );
-
 //     TimeCount = 0;
 
     if( !conversionOptions )
@@ -428,6 +434,12 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     pScanStatus->hide(); // hide the status bar, when the scan is done
 
 //     qDebug() << "TimeCount: " << TimeCount;
+//     logger->log( 1000, "TimeCount: " + QString::number(TimeCount) );
+
+    emit fileCountChanged( topLevelItemCount() );
+
+    if( queue )
+        convertNextItem();
 }
 
 void FileList::addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand )
@@ -602,11 +614,6 @@ void FileList::updateItem( FileListItem *item )
     {
         item->setText( Column_Input, item->url.pathOrUrl() );
     }
-
-    update( indexFromItem( item, 0 ) );
-    update( indexFromItem( item, 1 ) );
-    update( indexFromItem( item, 2 ) );
-    update( indexFromItem( item, 3 ) );
 }
 
 void FileList::showLogClicked( const QString& logIdString )

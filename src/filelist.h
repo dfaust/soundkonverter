@@ -114,7 +114,7 @@ private slots:
 
 public slots:
     // connected to soundKonverterView
-    void addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1, FileListItem *after = 0, bool enabled = false );
+    void addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1 );
     void addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions );
     void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand = "" );
     void startConversion();

@@ -63,8 +63,8 @@ private:
     /** Update timer for the scan status */
     QTime tScanStatus;
 
-    int TimeCount;
-    QTime Time;
+//     int TimeCount;
+//     QTime Time;
 
     void convertNextItem();
     int waitingCount();

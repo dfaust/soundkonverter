@@ -396,7 +396,7 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 //     debug
 //     logger->log( 1000, "@addDir: " + directory.toLocalFile() );
 
-    TimeCount = 0;
+//     TimeCount = 0;
 
     if( !conversionOptions )
     {
@@ -412,15 +412,16 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
 //     kapp->processEvents();
     tScanStatus.start();
 
-    Time.start();
+//     Time.start();
     listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId, true );
     kapp->processEvents();
     listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId );
-    TimeCount += Time.elapsed();
+//     TimeCount += Time.elapsed();
 
     pScanStatus->hide(); // hide the status bar, when the scan is done
 
-    qDebug() << "TimeCount: " << TimeCount;
+//     qDebug() << "TimeCount: " << TimeCount;
+//     logger->log( 1000, "TimeCount: " + QString::number(TimeCount) );
 }
 
 void FileList::addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions )
@@ -580,11 +581,6 @@ void FileList::updateItem( FileListItem *item )
     {
         item->setText( Column_Input, item->url.pathOrUrl() );
     }
-
-    update( indexFromItem( item, 0 ) );
-    update( indexFromItem( item, 1 ) );
-    update( indexFromItem( item, 2 ) );
-    update( indexFromItem( item, 3 ) );
 }
 
 void FileList::showLogClicked( const QString& logIdString )

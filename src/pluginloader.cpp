@@ -723,6 +723,9 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
         if( info.extensions.contains(extension) )
             newRating += 100 - info.extensions.indexOf(extension);
 
+        if( newRating == info.priority )
+            continue;
+
         if( newRating == 300 )
         {
             return info.codecName;

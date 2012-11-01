@@ -52,6 +52,7 @@ int soundKonverterApp::newInstance()
             autostart = false;
             mainWindow->show();
         }
+        mainWindow->show();
         kapp->processEvents();
         mainWindow->loadAutosaveFileList();
     }

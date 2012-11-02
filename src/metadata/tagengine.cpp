@@ -118,7 +118,6 @@ TagData::TagData()
     discTotal = 0;
     year = 0;
     length = 0;
-    fileSize = 0;
     samplingRate = 0;
     coversRead = false;
 }

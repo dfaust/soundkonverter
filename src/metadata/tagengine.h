@@ -107,7 +107,6 @@ public:
 
     /** The technical information */
     int length;
-    int fileSize;
     int samplingRate;
 };
 

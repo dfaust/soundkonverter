@@ -108,7 +108,7 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     codecList.append( data );
 
     data.ffmpegCodecList.clear();
-    data.codecName = "m4a";
+    data.codecName = "m4a/aac";
     ffmpegData.name = "libfaac";
     ffmpegData.external = true;
     ffmpegData.experimental = false;
@@ -128,8 +128,8 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     codecList.append( data );
 
     data.ffmpegCodecList.clear();
-    data.codecName = "alac";
-    ffmpegData.name = "alac";
+    data.codecName = "m4a/alac";
+    ffmpegData.name = "m4a/alac";
     ffmpegData.external = false;
     ffmpegData.experimental = false;
     data.ffmpegCodecList.append( ffmpegData );
@@ -197,7 +197,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "wma";
     fromCodecs += "aac";
     fromCodecs += "ac3";
-    fromCodecs += "alac";
+    fromCodecs += "m4a/alac";
     fromCodecs += "mp2";
 //     fromCodecs += "sonic";
 //     fromCodecs += "sonic lossless";
@@ -207,7 +207,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
     fromCodecs += "ape";
 //     fromCodecs += "e-ac3";
     fromCodecs += "speex";
-    fromCodecs += "m4a";
+    fromCodecs += "m4a/aac";
     fromCodecs += "mp1";
     fromCodecs += "musepack";
     fromCodecs += "shorten";
@@ -450,7 +450,7 @@ unsigned int soundkonverter_codec_ffmpeg::convert( const KUrl& inputFile, const 
                 break;
             }
         }
-        if( outputCodec != "alac" && outputCodec != "flac" )
+        if( outputCodec != "m4a/alac" && outputCodec != "flac" )
         {
             command += "-ab";
             command += QString::number(conversionOptions->bitrate) + "k";
@@ -633,9 +633,9 @@ QString soundkonverter_codec_ffmpeg::getCodecFromFile( const KUrl& filename, con
             *rating = 300;
 
         if( codecInfoCodec == "aac" )
-            return "m4a";
+            return "m4a/aac";
         else if( codecInfoCodec == "alac" )
-            return "alac";
+            return "m4a/alac";
     }
 
     return "";

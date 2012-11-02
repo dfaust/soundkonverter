@@ -33,14 +33,14 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     fromCodecs += "wma";
     fromCodecs += "aac";
     fromCodecs += "ac3";
-    fromCodecs += "alac";
+    fromCodecs += "m4a/alac";
     fromCodecs += "mp2";
     fromCodecs += "als";
     fromCodecs += "amr nb";
     fromCodecs += "amr wb";
     fromCodecs += "ape";
     fromCodecs += "speex";
-    fromCodecs += "m4a";
+    fromCodecs += "m4a/aac";
     fromCodecs += "mp1";
     fromCodecs += "musepack";
     fromCodecs += "shorten";

@@ -47,10 +47,10 @@ QList<ReplayGainPipe> soundkonverter_replaygain_aacgain::codecTable()
     QList<ReplayGainPipe> table;
     ReplayGainPipe newPipe;
 
-    newPipe.codecName = "m4a";
+    newPipe.codecName = "m4a/aac";
     newPipe.rating = 100;
     newPipe.enabled = ( binaries["aacgain"] != "" );
-    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "m4a", "aacgain" ) + "\n" + standardMessage( "install_patented_backend", "aacgain" );
+    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "m4a/aac", "aacgain" ) + "\n" + standardMessage( "install_patented_backend", "aacgain" );
     table.append( newPipe );
 
     newPipe.codecName = "mp3";

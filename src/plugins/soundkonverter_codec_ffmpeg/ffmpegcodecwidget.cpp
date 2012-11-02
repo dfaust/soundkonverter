@@ -142,7 +142,7 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
         cCmdArguments->hide();
         lCmdArguments->hide();
     }
-    else if( currentFormat == "flac" || currentFormat == "alac" )
+    else if( currentFormat == "flac" || currentFormat == "m4a/alac" )
     {
         lBitrate->hide();
         sBitrate->hide();
@@ -184,7 +184,7 @@ void FFmpegCodecWidget::setCurrentFormat( const QString& format )
 
 QString FFmpegCodecWidget::currentProfile()
 {
-    if( currentFormat == "wav" || currentFormat == "flac" || currentFormat == "alac" )
+    if( currentFormat == "wav" || currentFormat == "flac" || currentFormat == "m4a/alac" )
     {
         return i18n("Lossless");
     }
@@ -326,7 +326,7 @@ int FFmpegCodecWidget::currentDataRate()
     {
         dataRate = 10590000;
     }
-    else if( currentFormat == "flac" || currentFormat == "alac" )
+    else if( currentFormat == "flac" || currentFormat == "m4a/alac" )
     {
         dataRate = 6520000;
     }

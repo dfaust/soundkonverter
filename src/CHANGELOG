@@ -13,6 +13,7 @@
 -Change: Immediately start converting a file after adding it to the file list if the conversion is running in queue mode
 -Change: Quit soundKonverter when canceling the CD ripper dialog if soundKonverter was started with the --rip option
 -Change: Quit the Replay Gain tool when it gets closed
+-Change: Rename the m4a format to m4a/aac and alac to m4a/alac
 -Fix: Handle internal Replay Gain calculation properly
 -Fix: Drop directories onto the Replay Gain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the Replay Gain tool

@@ -41,13 +41,14 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     QStringList filterList;
     QStringList allFilter;
     QStringList formats = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-    for( int i=0; i<formats.count(); i++ )
+    foreach( QString format, formats )
     {
-        QString extensionFilter = config->pluginLoader()->codecExtensions(formats.at(i)).join(" *.");
-        if( extensionFilter.length() == 0 ) continue;
+        QString extensionFilter = config->pluginLoader()->codecExtensions(format).join(" *.");
+        if( extensionFilter.length() == 0 )
+            continue;
         extensionFilter = "*." + extensionFilter;
         allFilter += extensionFilter;
-        filterList += extensionFilter + "|" + i18n("%1 files",formats.at(i));
+        filterList += extensionFilter + "|" + i18n("%1 files",format.replace("/","\\/"));
     }
     filterList.prepend( allFilter.join(" ") + "|" + i18n("All supported files") );
     filterList += "*.*|" + i18n("All files");

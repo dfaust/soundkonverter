@@ -48,7 +48,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.mimeTypes.append( "audio/aac" );
         info.extensions.append( "aac" );
     }
-    else if( codecName == "m4a" )
+    else if( codecName == "m4a/aac" )
     {
         info.priority = 95;
         info.description = i18n("m4a files are encoded with the aac codec. It is widely used by Apple Inc.");
@@ -123,7 +123,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //         info.mimeTypes.append( "audio/eac3" );
 //         info.extensions.append( "eac3" );
 //     }
-    else if( codecName == "alac" )
+    else if( codecName == "m4a/alac" )
     {
         info.priority = 90;
         info.lossless = true;

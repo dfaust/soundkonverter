@@ -15,7 +15,7 @@ soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QSt
     binaries["faad"] = "";
 
     allCodecs += "aac";
-    allCodecs += "m4a";
+    allCodecs += "m4a/aac";
     allCodecs += "mp4";
     allCodecs += "wav";
 }
@@ -42,10 +42,10 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     table.append( newTrunk );
 
     newTrunk.codecFrom = "wav";
-    newTrunk.codecTo = "m4a";
+    newTrunk.codecTo = "m4a/aac";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faac"] != "" );
-    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a/aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -57,11 +57,11 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
-    newTrunk.codecFrom = "m4a";
+    newTrunk.codecFrom = "m4a/aac";
     newTrunk.codecTo = "wav";
     newTrunk.rating = 100;
     newTrunk.enabled = ( binaries["faad"] != "" );
-    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a/aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -148,7 +148,7 @@ QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, co
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-    if( outputCodec == "aac" || outputCodec == "m4a" )
+    if( outputCodec == "aac" || outputCodec == "m4a/aac" )
     {
         command += binaries["faac"];
         if( conversionOptions->qualityMode == ConversionOptions::Quality )

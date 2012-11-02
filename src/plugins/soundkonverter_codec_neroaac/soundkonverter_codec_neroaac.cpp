@@ -17,7 +17,7 @@ soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, con
     binaries["neroAacEnc"] = "";
     binaries["neroAacDec"] = "";
 
-    allCodecs += "m4a";
+    allCodecs += "m4a/aac";
     allCodecs += "mp4";
     allCodecs += "wav";
 }
@@ -36,18 +36,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_neroaac::codecTable()
     ConversionPipeTrunk newTrunk;
 
     newTrunk.codecFrom = "wav";
-    newTrunk.codecTo = "m4a";
+    newTrunk.codecTo = "m4a/aac";
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacEnc"] != "" );
-    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a", "neroAacEnc" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email address.", QString("neroAacEnc"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
+    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a/aac", "neroAacEnc" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email address.", QString("neroAacEnc"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
-    newTrunk.codecFrom = "m4a";
+    newTrunk.codecFrom = "m4a/aac";
     newTrunk.codecTo = "wav";
     newTrunk.rating = 90;
     newTrunk.enabled = ( binaries["neroAacDec"] != "" );
-    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a", "neroAacDec" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email address.", QString("neroAacDec"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
+    newTrunk.problemInfo = standardMessage( "decode_codec,backend", "m4a/aac", "neroAacDec" ) + "\n" + i18n( "You can download '%1' at '%2' after entering an email address.", QString("neroAacDec"), QString("http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php") );
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -135,7 +135,7 @@ QStringList soundkonverter_codec_neroaac::convertCommand( const KUrl& inputFile,
     QStringList command;
     ConversionOptions *conversionOptions = _conversionOptions;
 
-    if( outputCodec == "m4a" )
+    if( outputCodec == "m4a/aac" )
     {
         command += binaries["neroAacEnc"];
         if( conversionOptions->qualityMode == ConversionOptions::Quality )

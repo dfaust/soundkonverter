@@ -14,7 +14,7 @@
 
 FaacCodecWidget::FaacCodecWidget()
     : CodecWidget(),
-    currentFormat( "m4a" )
+    currentFormat( "m4a/aac" )
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );

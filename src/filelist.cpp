@@ -1409,7 +1409,6 @@ void FileList::load( bool user )
                         item->tags->album_gain = tags.attribute("album_gain").toFloat();
                         item->tags->length = tags.attribute("length").toInt();
                         item->tags->fileSize = tags.attribute("fileSize").toInt();
-                        item->tags->bitrate = tags.attribute("bitrate").toInt();
                         item->tags->samplingRate = tags.attribute("samplingRate").toInt();
                     }
                     addTopLevelItem( item );
@@ -1489,7 +1488,6 @@ void FileList::save( bool user )
             tags.setAttribute("album_gain",item->tags->album_gain);
             tags.setAttribute("length",item->tags->length);
             tags.setAttribute("fileSize",item->tags->fileSize);
-            tags.setAttribute("bitrate",item->tags->bitrate);
             tags.setAttribute("samplingRate",item->tags->samplingRate);
             file.appendChild(tags);
         }

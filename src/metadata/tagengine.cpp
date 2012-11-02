@@ -119,7 +119,6 @@ TagData::TagData()
     year = 0;
     length = 0;
     fileSize = 0;
-    bitrate = 0;
     samplingRate = 0;
     coversRead = false;
 }
@@ -196,10 +195,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
         if( audioProperties )
         {
             tagData->length = audioProperties->length();
-            // TODO read all information
-            //tagData->fileSize = ;
-            // = audioProperties->channels();
-            //tagData->bitrate = audioProperties->bitrate();
             tagData->samplingRate = audioProperties->sampleRate();
         }
 

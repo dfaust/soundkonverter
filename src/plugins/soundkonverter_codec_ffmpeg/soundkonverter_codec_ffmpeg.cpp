@@ -21,6 +21,7 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     Q_UNUSED(args)
 
     binaries["ffmpeg"] = "";
+    binaries["ffprobe"] = "";
 
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group;
@@ -598,6 +599,67 @@ void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitS
     infoProcess.data()->deleteLater();
 }
 
+QString soundkonverter_codec_ffmpeg::getCodecFromFile( const KUrl& filename, const QString& mimeType, short *rating )
+{
+    if( mimeType != "audio/mp4" && mimeType != "audio/x-m4a" )
+        return "";
+
+    if( !filename.isLocalFile() )
+        return "";
+
+    if( binaries["ffprobe"].isEmpty() )
+        return "";
+
+    codecInfoCodec.clear();
+
+    codecInfoProcess = new KProcess();
+    codecInfoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+    connect( codecInfoProcess.data(), SIGNAL(readyRead()), this, SLOT(codecInfoProcessOutput()) );
+    connect( codecInfoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(codecInfoProcessExit(int,QProcess::ExitStatus)) );
+
+    QStringList command;
+    command += binaries["ffprobe"];
+    command += "-i";
+    command += "\"" + escapeUrl(filename) + "\"";
+    codecInfoProcess.data()->clearProgram();
+    codecInfoProcess.data()->setShellCommand( command.join(" ") );
+    codecInfoProcess.data()->start();
+
+    codecInfoProcess.data()->waitForFinished( 10000 );
+
+    if( !codecInfoCodec.isEmpty() )
+    {
+        if( rating )
+            *rating = 300;
+
+        if( codecInfoCodec == "aac" )
+            return "m4a";
+        else if( codecInfoCodec == "alac" )
+            return "alac";
+    }
+
+    return "";
+}
+
+void soundkonverter_codec_ffmpeg::codecInfoProcessOutput()
+{
+    codecInfoProcessOutputData.append( codecInfoProcess.data()->readAllStandardOutput().data() );
+}
+
+void soundkonverter_codec_ffmpeg::codecInfoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
+{
+    Q_UNUSED(exitStatus)
+    Q_UNUSED(exitCode)
+
+    QRegExp regCodec("Stream #0:0\\(\\w+\\): Audio: (\\w+)");
+    if( codecInfoProcessOutputData.contains( regCodec ) )
+    {
+        codecInfoCodec = regCodec.cap(1);
+    }
+
+    codecInfoProcessOutputData.clear();
+    codecInfoProcess.data()->deleteLater();
+}
 
 #include "soundkonverter_codec_ffmpeg.moc"
 

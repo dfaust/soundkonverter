@@ -7,6 +7,7 @@
 -Add: Option to switch between COMMENT and DESCRIPTION as comment fields for ogg vorbis and flac files
 -Add: Compression level option to the lame plugin
 -Add: Opus support (via opus-tools)
+-Add: Use ffprobe to distinguish between aac and alac .m4a files
 -Change: Remember dimensions of the sub-windows and dialogs
 -Change: Sampling rate and number of channels can as of now only be changed through a filter plugin (currently only sox)
 -Change: Immediately start converting a file after adding it to the file list if the conversion is running in queue mode

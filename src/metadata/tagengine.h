@@ -81,10 +81,7 @@ class TagData : public QObject
 {
     Q_OBJECT
 public:
-    /** Constructor */
     TagData();
-
-    /** Destructor */
     ~TagData();
 
     /** The tags */
@@ -94,10 +91,10 @@ public:
     QString title;
     QString genre;
     QString comment;
-    int track;
-    int disc;
-    int discTotal;
-    int year;
+    short track;
+    short disc;
+    short discTotal;
+    short year;
     float track_gain;
     float album_gain;
 
@@ -106,8 +103,8 @@ public:
     bool coversRead;
 
     /** The technical information */
-    int length;
-    int samplingRate;
+    short length;
+    short samplingRate;
 };
 
 
@@ -119,10 +116,7 @@ public:
 class TagEngine
 {
 public:
-    /** Constructor */
     TagEngine( Config *_config );
-
-    /** Destructor */
     ~TagEngine();
 
     /** A list of all genre */

@@ -117,9 +117,13 @@ TagData::TagData()
     disc = 0;
     discTotal = 0;
     year = 0;
+    track_gain = 210588;
+    album_gain = 210588;
+
+    coversRead = false;
+
     length = 0;
     samplingRate = 0;
-    coversRead = false;
 }
 
 TagData::~TagData()
@@ -141,7 +145,7 @@ TagEngine::TagEngine( Config *_config )
 TagEngine::~TagEngine()
 {}
 
-TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
+TagData* TagEngine::readTags( const KUrl& fileName )
 {
     TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit() );
 
@@ -150,13 +154,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
         TagData *tagData = new TagData();
 
         TagLib::Tag *tag = fileref.tag();
-
-        tagData->track = 0;
-        tagData->year = 0;
-        tagData->disc = 0;
-        tagData->track_gain = 210588; // 0 is a valid value
-        tagData->album_gain = 210588;
-
         if( tag )
         {
             tagData->title = TStringToQString( tag->title() );
@@ -190,7 +187,6 @@ TagData* TagEngine::readTags( const KUrl& fileName ) // TagLib
         }
 
         TagLib::AudioProperties *audioProperties = fileref.audioProperties();
-
         if( audioProperties )
         {
             tagData->length = audioProperties->length();

@@ -72,11 +72,7 @@ public:
     static QString roleName( Role role );
 };
 
-/**
- * @short All metainformation can be stored in this class
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
- */
+
 class TagData : public QObject
 {
     Q_OBJECT
@@ -108,11 +104,6 @@ public:
 };
 
 
-/**
- * @short Manages everything that has something to do with tags
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
- */
 class TagEngine
 {
 public:

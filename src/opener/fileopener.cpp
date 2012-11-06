@@ -106,10 +106,14 @@ void FileOpener::fileDialogAccepted()
     urls.clear();
     urls = fileDialog->selectedUrls();
 
+    const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+    const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+    const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+
     for( int i=0; i<urls.count(); i++ )
     {
         QString mimeType;
-        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType );
+        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType, checkM4a );
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {

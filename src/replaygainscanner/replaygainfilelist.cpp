@@ -158,10 +158,14 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
     }
     else
     {
+        const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+        const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+        const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+
         foreach( QUrl url, q_urls )
         {
             QString mimeType;
-            QString codecName = config->pluginLoader()->getCodecFromFile( url, &mimeType );
+            QString codecName = config->pluginLoader()->getCodecFromFile( url, &mimeType, checkM4a );
 
             if( mimeType == "inode/directory" )
             {
@@ -290,6 +294,10 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
 
     const QStringList list = dir.entryList();
 
+    const bool containsAac = filter.contains("m4a/aac");
+    const bool containsAlac = filter.contains("m4a/alac");
+    const bool checkM4a = ( containsAac || containsAlac ) && containsAac != containsAlac;
+
     foreach( const QString fileName, list )
     {
         QFileInfo fileInfo( directory + "/" + fileName );
@@ -309,7 +317,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
             }
             else
             {
-                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName );
+                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
 
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
@@ -340,7 +348,10 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
         }
         else
         {
-            codecName = config->pluginLoader()->getCodecFromFile( url );
+            const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+            const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+            const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+            codecName = config->pluginLoader()->getCodecFromFile( url, 0, checkM4a );
 
             if( !config->pluginLoader()->canReplayGain(codecName,0) )
                 continue;

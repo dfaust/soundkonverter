@@ -306,10 +306,14 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
 
+    const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+    const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+    const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+
     for( int i=0; i<urls.size(); i++ )
     {
         QString mimeType;
-        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType );
+        QString codecName = config->pluginLoader()->getCodecFromFile( urls.at(i), &mimeType, checkM4a );
 
         if( codecName == "inode/directory" || config->pluginLoader()->canDecode(codecName,&errorList) )
         {

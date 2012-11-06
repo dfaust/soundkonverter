@@ -700,7 +700,7 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
     return list;
 }
 
-QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType )
+QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType, bool checkM4a )
 {
     QString codec = "";
     short rating = 0;
@@ -724,6 +724,10 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
         if( info.extensions.contains(extension) )
             newRating += 100 - info.extensions.indexOf(extension);
 
+        // special treatment for the mp4 family
+        if( ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && extension == "aac" && info.codecName == "m4a/aac" )
+            newRating = 300;
+
         if( newRating == info.priority )
             continue;
 
@@ -738,26 +742,30 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType 
         }
     }
 
-    QList<BackendPlugin*> allPlugins;
-    foreach( CodecPlugin *plugin, codecPlugins )
-        allPlugins.append( plugin );
-    foreach( FilterPlugin *plugin, filterPlugins )
-        allPlugins.append( plugin );
-    foreach( ReplayGainPlugin *plugin, replaygainPlugins )
-        allPlugins.append( plugin );
-
-    foreach( BackendPlugin *plugin, allPlugins )
+    // special treatment for the mp4 family
+    if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) )
     {
-        short newRating = 0;
-        const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
-        if( !newCodec.isEmpty() && newRating == 300 )
+        QList<BackendPlugin*> allPlugins;
+        foreach( CodecPlugin *plugin, codecPlugins )
+            allPlugins.append( plugin );
+        foreach( FilterPlugin *plugin, filterPlugins )
+            allPlugins.append( plugin );
+        foreach( ReplayGainPlugin *plugin, replaygainPlugins )
+            allPlugins.append( plugin );
+
+        foreach( BackendPlugin *plugin, allPlugins )
         {
-            return newCodec;
-        }
-        else if( !newCodec.isEmpty() && newRating > rating )
-        {
-            rating = newRating;
-            codec = newCodec;
+            short newRating = 0;
+            const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
+            if( !newCodec.isEmpty() && newRating == 300 )
+            {
+                return newCodec;
+            }
+            else if( !newCodec.isEmpty() && newRating > rating )
+            {
+                rating = newRating;
+                codec = newCodec;
+            }
         }
     }
 

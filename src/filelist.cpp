@@ -127,10 +127,14 @@ void FileList::dropEvent( QDropEvent *event )
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
 
+    const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+    const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+    const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+
     for( int i=0; i<q_urls.size(); i++ )
     {
         QString mimeType;
-        QString codecName = config->pluginLoader()->getCodecFromFile( q_urls.at(i), &mimeType );
+        QString codecName = config->pluginLoader()->getCodecFromFile( q_urls.at(i), &mimeType, checkM4a );
 
         if( mimeType == "inode/directory" || config->pluginLoader()->canDecode(codecName,&errorList) )
         {
@@ -263,6 +267,10 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
     const QStringList list = dir.entryList();
 
+    const bool containsAac = filter.contains("m4a/aac");
+    const bool containsAlac = filter.contains("m4a/alac");
+    const bool checkM4a = ( containsAac || containsAlac ) && containsAac != containsAlac;
+
     foreach( const QString fileName, list )
     {
         QFileInfo fileInfo( directory + "/" + fileName );
@@ -287,9 +295,9 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
             }
             else
             {
-                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName );
+                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
 
-                if( filter.count() == 0 || filter.contains(codecName) )
+                if( filter.contains(codecName) )
                 {
                     addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
                 }
@@ -349,7 +357,10 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
             }
             else
             {
-                codecName = config->pluginLoader()->getCodecFromFile( fileName );
+                const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
+                const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+                const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
+                codecName = config->pluginLoader()->getCodecFromFile( fileName, 0, checkM4a );
 
                 if( !config->pluginLoader()->canDecode(codecName) )
                     continue;

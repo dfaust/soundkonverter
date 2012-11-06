@@ -50,13 +50,23 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "m4a/aac" )
     {
-        info.priority = 95;
-        info.description = i18n("m4a files are encoded with the aac codec. It is widely used by Apple Inc.");
+        info.priority = 90;
+        info.description = i18n("m4a files encoded with the aac (Advanced Audio Coding) codec. It is widely used by Apple Inc.");
         info.mimeTypes.append( "audio/mp4" );
         info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
         info.extensions.append( "f4a" );
         info.extensions.append( "aac" );
+    }
+    else if( codecName == "m4a/alac" )
+    {
+        info.priority = 80;
+        info.lossless = true;
+        info.description = i18n("m4a files encoded with the alac (Apple Lossless Audio Codec) codec. It is widely used by Apple Inc."); // http://en.wikipedia.org/wiki/Alac
+        info.mimeTypes.append( "audio/mp4" );
+        info.mimeTypes.append( "audio/x-m4a" );
+        info.extensions.append( "m4a" );
+        info.extensions.append( "f4a" );
     }
     else if( codecName == "mp4" )
     {
@@ -123,16 +133,6 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //         info.mimeTypes.append( "audio/eac3" );
 //         info.extensions.append( "eac3" );
 //     }
-    else if( codecName == "m4a/alac" )
-    {
-        info.priority = 90;
-        info.lossless = true;
-        info.description = i18n("Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."); // http://en.wikipedia.org/wiki/Alac
-        info.mimeTypes.append( "audio/mp4" );
-        info.mimeTypes.append( "audio/x-m4a" );
-        info.extensions.append( "m4a" );
-        info.extensions.append( "f4a" );
-    }
     else if( codecName == "mp2" )
     {
         info.description = i18n("MPEG-1 Audio Layer II is an old lossy audio format."); // http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II

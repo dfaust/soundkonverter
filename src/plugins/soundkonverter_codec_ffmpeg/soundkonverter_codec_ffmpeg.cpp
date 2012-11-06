@@ -129,7 +129,7 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 
     data.ffmpegCodecList.clear();
     data.codecName = "m4a/alac";
-    ffmpegData.name = "m4a/alac";
+    ffmpegData.name = "alac";
     ffmpegData.external = false;
     ffmpegData.experimental = false;
     data.ffmpegCodecList.append( ffmpegData );

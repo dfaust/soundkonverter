@@ -521,6 +521,7 @@ void FileList::updateItem( FileListItem *item )
     {
         disconnect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, 0 );
         delete item->lInfo;
+        item->lInfo = 0;
     }
     item->setText( Column_State, "" );
     item->setToolTip( Column_State, "" );

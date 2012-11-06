@@ -292,11 +292,12 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
                 if( filter.count() == 0 || filter.contains(codecName) )
                 {
                     addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
-                    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                    {
-                        pScanStatus->setValue( count );
-                        tScanStatus.start();
-                    }
+                }
+
+                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+                {
+                    pScanStatus->setValue( count );
+                    tScanStatus.start();
                 }
             }
         }
@@ -431,7 +432,8 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     tScanStatus.start();
 
 //     Time.start();
-    listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId, true );
+    const int count = listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId, true );
+    pScanStatus->setMaximum( count );
     kapp->processEvents();
     listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId );
 //     TimeCount += Time.elapsed();

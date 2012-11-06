@@ -5,6 +5,7 @@
 #include "config.h"
 #include "codecproblems.h"
 
+#include <KApplication>
 #include <QResizeEvent>
 #include <QGridLayout>
 #include <QProgressBar>
@@ -313,20 +314,26 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
 
             if( fast )
             {
-                pScanStatus->setMaximum( count );
+                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+                {
+                    pScanStatus->setMaximum( count );
+                    kapp->processEvents();
+                    tScanStatus.start();
+                }
             }
             else
             {
                 codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
 
-                if( filter.count() == 0 || filter.contains(codecName) )
+                if( filter.contains(codecName) )
                 {
                     addFiles( KUrl(directory + "/" + fileName), codecName );
-                    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                    {
-                        pScanStatus->setValue( count );
-                        tScanStatus.start();
-                    }
+                }
+
+                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+                {
+                    pScanStatus->setValue( count );
+                    tScanStatus.start();
                 }
             }
         }
@@ -468,7 +475,9 @@ void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QS
     pScanStatus->show(); // show the status while scanning the directories
     tScanStatus.start();
 
-    listDir( directory.path(), codecList, recursive, true );
+    const int count = listDir( directory.path(), codecList, recursive, true );
+    pScanStatus->setMaximum( count );
+    kapp->processEvents();
     listDir( directory.path(), codecList, recursive );
 
     pScanStatus->hide(); // hide the status bar, when the scan is done

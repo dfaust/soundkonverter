@@ -619,7 +619,6 @@ QString soundkonverter_codec_ffmpeg::getCodecFromFile( const KUrl& filename, con
 
     QStringList command;
     command += binaries["ffprobe"];
-    command += "-i";
     command += "\"" + escapeUrl(filename) + "\"";
     codecInfoProcess.data()->clearProgram();
     codecInfoProcess.data()->setShellCommand( command.join(" ") );
@@ -651,7 +650,7 @@ void soundkonverter_codec_ffmpeg::codecInfoProcessExit( int exitCode, QProcess::
     Q_UNUSED(exitStatus)
     Q_UNUSED(exitCode)
 
-    QRegExp regCodec("Stream #0:0\\(\\w+\\): Audio: (\\w+)");
+    QRegExp regCodec("Stream #0.0\\(\\w+\\): Audio: (\\w+)");
     if( codecInfoProcessOutputData.contains( regCodec ) )
     {
         codecInfoCodec = regCodec.cap(1);

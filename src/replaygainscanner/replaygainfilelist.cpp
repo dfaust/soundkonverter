@@ -285,7 +285,37 @@ void ReplayGainFileList::resizeEvent( QResizeEvent *event )
     setColumnWidth( Column_Album, 80 );
 }
 
-int ReplayGainFileList::listDir( const QString& directory, const QStringList& filter, bool recursive, bool fast, int count )
+int ReplayGainFileList::countDir( const QString& directory, bool recursive, int count )
+{
+    QDir dir( directory );
+    dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+    dir.setSorting( QDir::Unsorted );
+
+    count += dir.count();
+
+    if( recursive )
+    {
+        dir.setFilter( QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+
+        const QStringList list = dir.entryList();
+
+        foreach( const QString fileName, list )
+        {
+            count = countDir( directory + "/" + fileName, recursive, count );
+        }
+    }
+
+    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+    {
+        pScanStatus->setMaximum( count );
+        kapp->processEvents();
+        tScanStatus.start();
+    }
+
+    return count;
+}
+
+int ReplayGainFileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int count )
 {
     QString codecName;
 
@@ -306,35 +336,23 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
         const bool isDir = fileInfo.isDir(); // NOTE checking for isFile might not work with all file names
         if( isDir && recursive )
         {
-            count = listDir( directory + "/" + fileName, filter, recursive, fast, count );
+            count = listDir( directory + "/" + fileName, filter, recursive, count );
         }
         else if( !isDir )
         {
             count++;
 
-            if( fast )
+            codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
+
+            if( filter.contains(codecName) )
             {
-                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                {
-                    pScanStatus->setMaximum( count );
-                    kapp->processEvents();
-                    tScanStatus.start();
-                }
+                addFiles( KUrl(directory + "/" + fileName), codecName );
             }
-            else
+
+            if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
             {
-                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
-
-                if( filter.contains(codecName) )
-                {
-                    addFiles( KUrl(directory + "/" + fileName), codecName );
-                }
-
-                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                {
-                    pScanStatus->setValue( count );
-                    tScanStatus.start();
-                }
+                pScanStatus->setValue( count );
+                tScanStatus.start();
             }
         }
     }
@@ -475,10 +493,12 @@ void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QS
     pScanStatus->show(); // show the status while scanning the directories
     tScanStatus.start();
 
-    const int count = listDir( directory.path(), codecList, recursive, true );
+    const int count = countDir( directory.toLocalFile(), recursive );
+
     pScanStatus->setMaximum( count );
     kapp->processEvents();
-    listDir( directory.path(), codecList, recursive );
+
+    listDir( directory.toLocalFile(), codecList, recursive );
 
     pScanStatus->hide(); // hide the status bar, when the scan is done
 }

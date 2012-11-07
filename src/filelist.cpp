@@ -249,21 +249,43 @@ void FileList::resizeEvent( QResizeEvent *event )
     setColumnWidth( Column_Quality, 120 );
 }
 
-int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, bool fast, int count )
+int FileList::countDir( const QString& directory, bool recursive, int count )
 {
-//     debug
-//     if( fast )
-//         logger->log( 1000, "@listDir fast: " + directory );
-//     else
-//         logger->log( 1000, "@listDir: " + directory );
+    QDir dir( directory );
+    dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+    dir.setSorting( QDir::Unsorted );
 
+    count += dir.count();
+
+    if( recursive )
+    {
+        dir.setFilter( QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+
+        const QStringList list = dir.entryList();
+
+        foreach( const QString fileName, list )
+        {
+            count = countDir( directory + "/" + fileName, recursive, count );
+        }
+    }
+
+    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+    {
+        pScanStatus->setMaximum( count );
+        kapp->processEvents();
+        tScanStatus.start();
+    }
+
+    return count;
+}
+
+int FileList::listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, int count )
+{
     QString codecName;
 
     QDir dir( directory );
     dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
-
-    if( !fast )
-        dir.setSorting( QDir::LocaleAware );
+    dir.setSorting( QDir::LocaleAware );
 
     const QStringList list = dir.entryList();
 
@@ -278,35 +300,23 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
         const bool isDir = fileInfo.isDir(); // NOTE checking for isFile might not work with all file names
         if( isDir && recursive )
         {
-            count = listDir( directory + "/" + fileName, filter, recursive, conversionOptionsId, fast, count );
+            count = listDir( directory + "/" + fileName, filter, recursive, conversionOptionsId, count );
         }
         else if( !isDir )
         {
             count++;
 
-            if( fast )
+            codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
+
+            if( filter.contains(codecName) )
             {
-                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                {
-                    pScanStatus->setMaximum( count );
-                    kapp->processEvents();
-                    tScanStatus.start();
-                }
+                addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
             }
-            else
+
+            if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
             {
-                codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
-
-                if( filter.contains(codecName) )
-                {
-                    addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
-                }
-
-                if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
-                {
-                    pScanStatus->setValue( count );
-                    tScanStatus.start();
-                }
+                pScanStatus->setValue( count );
+                tScanStatus.start();
             }
         }
     }
@@ -424,10 +434,6 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
 
 void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
 {
-//     debug
-//     logger->log( 1000, "@addDir: " + directory.toLocalFile() );
-//     TimeCount = 0;
-
     if( !conversionOptions )
     {
         logger->log( 1000, "@addDir: No conversion options given" );
@@ -439,20 +445,16 @@ void FileList::addDir( const KUrl& directory, bool recursive, const QStringList&
     pScanStatus->setValue( 0 );
     pScanStatus->setMaximum( 0 );
     pScanStatus->show(); // show the status while scanning the directories
-//     kapp->processEvents();
     tScanStatus.start();
 
-//     Time.start();
-    const int count = listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId, true );
+    const int count = countDir( directory.toLocalFile(), recursive );
+
     pScanStatus->setMaximum( count );
     kapp->processEvents();
+
     listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId );
-//     TimeCount += Time.elapsed();
 
     pScanStatus->hide(); // hide the status bar, when the scan is done
-
-//     qDebug() << "TimeCount: " << TimeCount;
-//     logger->log( 1000, "TimeCount: " + QString::number(TimeCount) );
 
     emit fileCountChanged( topLevelItemCount() );
 

@@ -54,8 +54,10 @@ private:
     Config *config;
     Logger *logger;
 
-    /** Lists all file in a directory and adds them to the file list, if fast is false. The number of listed files is returned */
-    int listDir( const QString& directory, const QStringList& filter, bool recursive, bool fast = false, int count = 0 );
+    /** Counts all files in a directory */
+    int countDir( const QString& directory, bool recursive, int count = 0 );
+    /** Lists all files in a directory and adds them to the file list */
+    int listDir( const QString& directory, const QStringList& filter, bool recursive, int count = 0 );
     /** A progressbar, that is shown, when a directory is added recursive */
     QProgressBar *pScanStatus;
     /** Update timer for the scan status */

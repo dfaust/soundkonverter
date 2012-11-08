@@ -22,6 +22,7 @@
 
 class Logger;
 class Config;
+class QFile;
 
 
 struct ConversionPipe
@@ -82,6 +83,7 @@ public:
     //** returns a list of possible rippers */
 //     QList<RipperInfo> getRipperInfos( bool mustRipEntireCd = false, const QString& preferredPlugin = "" );
 
+    QString getCodecFromM4aFile( QFile *file, QStringList atomPath );
     QString getCodecFromFile( const KUrl& filename, QString *mimeType = 0, bool checkM4a = true );
 
     bool canDecode( const QString& codecName, QStringList *errorList = 0 );

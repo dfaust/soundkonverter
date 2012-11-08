@@ -14,6 +14,7 @@
 #include "config.h"
 
 #include <QSet>
+#include <QFile>
 
 #include <KServiceTypeTrader>
 #include <KMimeType>
@@ -700,6 +701,63 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
     return list;
 }
 
+QString PluginLoader::getCodecFromM4aFile( QFile *file, QStringList atomPath )
+{
+    const QByteArray length = file->read(4);
+    const QByteArray name = file->read(4);
+
+    if( atomPath.isEmpty() )
+    {
+        do
+        {
+            const QByteArray l = file->read(4);
+            const QByteArray n = file->read(4);
+
+            if( n == "mp4a" )
+            {
+                // It could be something other than aac but lets assume it's aac for now
+                return "m4a/aac";
+            }
+            else if( n == "alac" )
+            {
+                return "m4a/alac";
+            }
+            else if( l.size() == 4 )
+            {
+                const qint64 int_l = ( (static_cast<int>(l.at(0)) & 0xFF)<<32) + ((static_cast<int>(l.at(1)) & 0xFF) << 16) + ((static_cast< int>(l.at(2)) & 0xFF) << 8) + ((static_cast<int>(l.at(3)) & 0xFF) );
+                file->seek( file->pos() - 8 + int_l );
+            }
+            else
+            {
+                return "";
+            }
+        }
+        while( !file->atEnd() );
+
+        return "";
+    }
+    else if( name == atomPath.first() )
+    {
+        atomPath.removeFirst();
+    }
+    else if( length.size() == 4 )
+    {
+        const qint64 int_length = ( (static_cast<int>(length.at(0)) & 0xFF)<<32) + ((static_cast<int>(length.at(1)) & 0xFF) << 16) + ((static_cast< int>(length.at(2)) & 0xFF) << 8) + ((static_cast<int>(length.at(3)) & 0xFF) );
+        file->seek( file->pos() - 8 + int_length );
+    }
+    else
+    {
+        return "";
+    }
+
+    if( file->atEnd() )
+    {
+        return "";
+    }
+
+    return getCodecFromM4aFile( file, atomPath );
+}
+
 QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType, bool checkM4a )
 {
     QString codec = "";
@@ -743,8 +801,27 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
     }
 
     // special treatment for the mp4 family
-    if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) )
+    if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && filename.isLocalFile() )
     {
+        QFile file( filename.toLocalFile() );
+        if( file.open(QIODevice::ReadOnly) )
+        {
+            QStringList atomPath;
+            atomPath += "moov";
+            atomPath += "trak";
+            atomPath += "mdia";
+            atomPath += "minf";
+            atomPath += "stbl";
+            atomPath += "stsd";
+
+            const QString newCodec = getCodecFromM4aFile( &file, atomPath );
+
+            file.close();
+
+            if( !newCodec.isEmpty() )
+                return newCodec;
+        }
+
         QList<BackendPlugin*> allPlugins;
         foreach( CodecPlugin *plugin, codecPlugins )
             allPlugins.append( plugin );

@@ -821,30 +821,31 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
             if( !newCodec.isEmpty() )
                 return newCodec;
         }
-
-        QList<BackendPlugin*> allPlugins;
-        foreach( CodecPlugin *plugin, codecPlugins )
-            allPlugins.append( plugin );
-        foreach( FilterPlugin *plugin, filterPlugins )
-            allPlugins.append( plugin );
-        foreach( ReplayGainPlugin *plugin, replaygainPlugins )
-            allPlugins.append( plugin );
-
-        foreach( BackendPlugin *plugin, allPlugins )
-        {
-            short newRating = 0;
-            const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
-            if( !newCodec.isEmpty() && newRating == 300 )
-            {
-                return newCodec;
-            }
-            else if( !newCodec.isEmpty() && newRating > rating )
-            {
-                rating = newRating;
-                codec = newCodec;
-            }
-        }
     }
+
+    // get codec from a plugin - not used at the moment
+    // QList<BackendPlugin*> allPlugins;
+    // foreach( CodecPlugin *plugin, codecPlugins )
+    //     allPlugins.append( plugin );
+    // foreach( FilterPlugin *plugin, filterPlugins )
+    //     allPlugins.append( plugin );
+    // foreach( ReplayGainPlugin *plugin, replaygainPlugins )
+    //     allPlugins.append( plugin );
+    //
+    // foreach( BackendPlugin *plugin, allPlugins )
+    // {
+    //     short newRating = 0;
+    //     const QString newCodec = plugin->getCodecFromFile( filename, mime, &newRating );
+    //     if( !newCodec.isEmpty() && newRating == 300 )
+    //     {
+    //         return newCodec;
+    //     }
+    //     else if( !newCodec.isEmpty() && newRating > rating )
+    //     {
+    //         rating = newRating;
+    //         codec = newCodec;
+    //     }
+    // }
 
     return codec;
 }

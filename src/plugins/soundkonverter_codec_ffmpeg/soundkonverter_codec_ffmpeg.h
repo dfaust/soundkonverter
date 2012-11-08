@@ -41,7 +41,6 @@ public:
 
     QList<ConversionPipeTrunk> codecTable();
 
-    QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream", short *rating = 0 );
     bool isConfigSupported( ActionType action, const QString& codecName );
     void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent );
     bool hasInfo();
@@ -58,9 +57,6 @@ private:
     QList<CodecData> codecList;
     QWeakPointer<KProcess> infoProcess;
     QString infoProcessOutputData;
-    QWeakPointer<KProcess> codecInfoProcess;
-    QString codecInfoProcessOutputData;
-    QString codecInfoCodec;
 
     QWeakPointer<KDialog> configDialog;
     QCheckBox *configDialogExperimantalCodecsEnabledCheckBox;
@@ -81,9 +77,6 @@ private slots:
 
     void infoProcessOutput();
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
-
-    void codecInfoProcessOutput();
-    void codecInfoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
 K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg )

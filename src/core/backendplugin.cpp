@@ -68,6 +68,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
         info.extensions.append( "f4a" );
+        info.extensions.append( "alac" );
         info.extensions.append( "mp4" );
     }
     else if( codecName == "mp4" )

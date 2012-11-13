@@ -819,7 +819,7 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
     }
 
     // special treatment for the mp4 family
-    //if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && filename.isLocalFile() )
+    if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && filename.isLocalFile() )
     {
         QFile file( filename.toLocalFile() );
         if( file.open(QIODevice::ReadOnly) )

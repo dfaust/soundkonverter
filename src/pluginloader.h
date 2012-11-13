@@ -83,7 +83,7 @@ public:
     //** returns a list of possible rippers */
 //     QList<RipperInfo> getRipperInfos( bool mustRipEntireCd = false, const QString& preferredPlugin = "" );
 
-    QString getCodecFromM4aFile( QFile *file, QStringList atomPath );
+    QString getCodecFromM4aFile( QFile *file );
     QString getCodecFromFile( const KUrl& filename, QString *mimeType = 0, bool checkM4a = true );
 
     bool canDecode( const QString& codecName, QStringList *errorList = 0 );
@@ -115,6 +115,9 @@ public:
 private:
     Logger *logger;
     Config *config;
+
+    // for determining the codec of an m4a file
+    QStringList atomPath;
 
 //     void addCodecItem( ConversionPipeTrunk trunk );
 //     void addReplayGainItem( ReplayGainPipe pipe );

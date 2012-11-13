@@ -57,7 +57,14 @@ bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& 
 PluginLoader::PluginLoader( Logger *_logger, Config *_config )
     : logger( _logger ),
     config( _config )
-{}
+{
+    atomPath += "moov";
+    atomPath += "trak";
+    atomPath += "mdia";
+    atomPath += "minf";
+    atomPath += "stbl";
+    atomPath += "stsd";
+}
 
 PluginLoader::~PluginLoader()
 {
@@ -701,61 +708,72 @@ QList<ReplayGainPipe> PluginLoader::getReplayGainPipes( const QString& codecName
     return list;
 }
 
-QString PluginLoader::getCodecFromM4aFile( QFile *file, QStringList atomPath )
+QString PluginLoader::getCodecFromM4aFile( QFile *file )
 {
-    const QByteArray length = file->read(4);
-    const QByteArray name = file->read(4);
+    int atomPathDepth = 0;
 
-    if( atomPath.isEmpty() )
+    qint64 maxPos = file->size();
+
+    while( !file->atEnd() )
     {
-        do
-        {
-            const QByteArray l = file->read(4);
-            const QByteArray n = file->read(4);
+        const QByteArray length = file->read(4);
+        const QByteArray name = file->read(4);
 
-            if( n == "mp4a" )
+        if( atomPathDepth == 6 && name == "mp4a" )
+        {
+            // It could be something other than aac but lets assume it's aac for now
+            return "m4a/aac";
+        }
+        else if( atomPathDepth == 6 && name == "alac" )
+        {
+            return "m4a/alac";
+        }
+        else if( length.size() == 4 )
+        {
+            qint64 int_length = ((static_cast<qint64>(length.at(0)) & 0xFF) << 24) +
+                                ((static_cast<qint64>(length.at(1)) & 0xFF) << 16) +
+                                ((static_cast<qint64>(length.at(2)) & 0xFF) << 8) +
+                                ((static_cast<qint64>(length.at(3)) & 0xFF) );
+
+            if( int_length == 0 ) // Meaning: continues until end of file.
+                return "";
+
+            if( int_length == 1 ) // Meaning: length is 64 bits
             {
-                // It could be something other than aac but lets assume it's aac for now
-                return "m4a/aac";
+                const QByteArray l = file->read(8);
+                int_length    = ((static_cast<qint64>(l.at(0)) & 0xFF) << 56) +
+                                ((static_cast<qint64>(l.at(1)) & 0xFF) << 48) +
+                                ((static_cast<qint64>(l.at(2)) & 0xFF) << 40) +
+                                ((static_cast<qint64>(l.at(3)) & 0xFF) << 32) +
+                                ((static_cast<qint64>(l.at(4)) & 0xFF) << 24) +
+                                ((static_cast<qint64>(l.at(5)) & 0xFF) << 16) +
+                                ((static_cast<qint64>(l.at(6)) & 0xFF) << 8) +
+                                ((static_cast<qint64>(l.at(7)) & 0xFF) );
             }
-            else if( n == "alac" )
+
+            if( name == atomPath.at(atomPathDepth) )
             {
-                return "m4a/alac";
-            }
-            else if( l.size() == 4 )
-            {
-                const qint64 int_l = ( (static_cast<int>(l.at(0)) & 0xFF)<<32) + ((static_cast<int>(l.at(1)) & 0xFF) << 16) + ((static_cast< int>(l.at(2)) & 0xFF) << 8) + ((static_cast<int>(l.at(3)) & 0xFF) );
-                file->seek( file->pos() - 8 + int_l );
+                atomPathDepth++;
+                maxPos = file->pos() - 8 + int_length;
+
+                if( atomPathDepth == 6 )
+                    file->seek( file->pos() + 8 ); // Skip 'stsd' header
             }
             else
             {
-                return "";
+                if( file->pos() - 8 + int_length > maxPos )
+                    return "";
+
+                file->seek( file->pos() - 8 + int_length );
             }
         }
-        while( !file->atEnd() );
-
-        return "";
-    }
-    else if( name == atomPath.first() )
-    {
-        atomPath.removeFirst();
-    }
-    else if( length.size() == 4 )
-    {
-        const qint64 int_length = ( (static_cast<int>(length.at(0)) & 0xFF)<<32) + ((static_cast<int>(length.at(1)) & 0xFF) << 16) + ((static_cast< int>(length.at(2)) & 0xFF) << 8) + ((static_cast<int>(length.at(3)) & 0xFF) );
-        file->seek( file->pos() - 8 + int_length );
-    }
-    else
-    {
-        return "";
+        else
+        {
+            return "";
+        }
     }
 
-    if( file->atEnd() )
-    {
-        return "";
-    }
-
-    return getCodecFromM4aFile( file, atomPath );
+    return "";
 }
 
 QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType, bool checkM4a )
@@ -801,20 +819,12 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
     }
 
     // special treatment for the mp4 family
-    if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && filename.isLocalFile() )
+    //if( checkM4a && ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && filename.isLocalFile() )
     {
         QFile file( filename.toLocalFile() );
         if( file.open(QIODevice::ReadOnly) )
         {
-            QStringList atomPath;
-            atomPath += "moov";
-            atomPath += "trak";
-            atomPath += "mdia";
-            atomPath += "minf";
-            atomPath += "stbl";
-            atomPath += "stsd";
-
-            const QString newCodec = getCodecFromM4aFile( &file, atomPath );
+            const QString newCodec = getCodecFromM4aFile( &file );
 
             file.close();
 

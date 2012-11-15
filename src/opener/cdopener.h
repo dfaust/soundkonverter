@@ -144,6 +144,8 @@ private:
     KLineEdit *lAlbum;
     /** A spinbox for entering or selecting the disc number */
     KIntSpinBox *iDisc;
+    /** A spinbox for entering or selecting the total disc number */
+    KIntSpinBox *iDiscTotal;
     /** A spinbox for entering or selecting the year of the album */
     KIntSpinBox *iYear;
     /** A combobox for entering or selecting the genre of the album */

@@ -1418,7 +1418,9 @@ void FileList::load( bool user )
                         item->tags->genre = tags.attribute("genre");
                         item->tags->comment = tags.attribute("comment");
                         item->tags->track = tags.attribute("track").toInt();
+                        item->tags->trackTotal = tags.attribute("trackTotal").toInt();
                         item->tags->disc = tags.attribute("disc").toInt();
+                        item->tags->discTotal = tags.attribute("discTotal").toInt();
                         item->tags->year = tags.attribute("year").toInt();
                         item->tags->trackGain = tags.attribute("track_gain").toFloat();
                         item->tags->albumGain = tags.attribute("album_gain").toFloat();
@@ -1496,7 +1498,9 @@ void FileList::save( bool user )
             tags.setAttribute("genre",item->tags->genre);
             tags.setAttribute("comment",item->tags->comment);
             tags.setAttribute("track",item->tags->track);
+            tags.setAttribute("trackTotal",item->tags->trackTotal);
             tags.setAttribute("disc",item->tags->disc);
+            tags.setAttribute("discTotal",item->tags->discTotal);
             tags.setAttribute("year",item->tags->year);
             tags.setAttribute("track_gain",item->tags->trackGain);
             tags.setAttribute("album_gain",item->tags->albumGain);

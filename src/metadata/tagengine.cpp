@@ -30,9 +30,6 @@
 #include <mp4tag.h>
 #include <mp4file.h>
 
-// TODO COMPILATION tag
-// TODO BPM tag
-
 
 // Taglib added support for FLAC pictures in 1.7.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
@@ -114,6 +111,7 @@ TagData::TagData()
     genre = QString();
     comment = QString();
     track = 0;
+    trackTotal = 0;
     disc = 0;
     discTotal = 0;
     year = 0;
@@ -205,36 +203,41 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             tagData->tagsRead = TagData::TagsRead(tagData->tagsRead | TagData::AlbumGain);
         }
 
+        QString track;
         QString disc;
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
         {
-            // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
-            // TBPM : BPM
-            // TPE2 : Album artist
             // TCMP : Compilation (true,1 vs. false,0)
             // POPM : rating, playcount
+            // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
             // APIC : TagLib::ID3v2::AttachedPictureFrame
             // UFID : TagLib::ID3v2::UniqueFileIdentifierFrame
 
             if ( file->ID3v2Tag() )
             {
-                if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
-                    disc = TStringToQString( file->ID3v2Tag()->frameListMap()["TPOS"].front()->toString() );
-
                 if ( !file->ID3v2Tag()->frameListMap()[ "TCOM" ].isEmpty() )
                     tagData->composer = TStringToQString( file->ID3v2Tag()->frameListMap()["TCOM"].front()->toString() );
+
+                if ( !file->ID3v2Tag()->frameListMap()[ "TRCK" ].isEmpty() )
+                    track = TStringToQString( file->ID3v2Tag()->frameListMap()["TRCK"].front()->toString() );
+
+                if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
+                    disc = TStringToQString( file->ID3v2Tag()->frameListMap()["TPOS"].front()->toString() );
             }
         }
         else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
         {
-            // ALBUMARTIST
-            // BPM
             // COMPILATION (1 vs. 0)
 
             if ( file->tag() )
             {
                 if ( !file->tag()->fieldListMap()[ "COMPOSER" ].isEmpty() )
                     tagData->composer = TStringToQString( file->tag()->fieldListMap()["COMPOSER"].front() );
+
+                if ( !file->tag()->fieldListMap()[ "TRACKTOTAL" ].isEmpty() ) // used by EasyTag
+                    tagData->trackTotal = TStringToQString( file->tag()->fieldListMap()["TRACKTOTAL"].front() ).toInt();
+                else if ( !file->tag()->fieldListMap()[ "TRACKNUMBER" ].isEmpty() )
+                    track = TStringToQString( file->tag()->fieldListMap()["TRACKNUMBER"].front() );
 
                 if ( !file->tag()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->tag()->fieldListMap()["DISCNUMBER"].front() );
@@ -247,16 +250,17 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 if ( !file->xiphComment()->fieldListMap()[ "COMPOSER" ].isEmpty() )
                     tagData->composer = TStringToQString( file->xiphComment()->fieldListMap()["COMPOSER"].front() );
 
+                if ( !file->xiphComment()->fieldListMap()[ "TRACKTOTAL" ].isEmpty() ) // used by EasyTag
+                    tagData->trackTotal = TStringToQString( file->xiphComment()->fieldListMap()["TRACKTOTAL"].front() ).toInt();
+                else if ( !file->xiphComment()->fieldListMap()[ "TRACKNUMBER" ].isEmpty() )
+                    track = TStringToQString( file->xiphComment()->fieldListMap()["TRACKNUMBER"].front() );
+
                 if ( !file->xiphComment()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->xiphComment()->fieldListMap()["DISCNUMBER"].front() );
             }
         }
         else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
         {
-            // \xA9wrt : Composer
-            // aART : Album artist
-            // tmpo : BPM
-            // disk
             // cpil : Compilation (true vs. false)
 
             TagLib::MP4::Tag *mp4tag = dynamic_cast<TagLib::MP4::Tag *>( file->tag() );
@@ -268,6 +272,10 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     if( it->first == "\xA9wrt" )
                     {
                         tagData->composer = TStringToQString( it->second.toStringList().front() );
+                    }
+                    else if( it->first == "trkn" )
+                    {
+                        tagData->trackTotal = it->second.toIntPair().second;
                     }
                     else if( it->first == "disk" )
                     {
@@ -283,10 +291,6 @@ TagData* TagEngine::readTags( const KUrl& fileName )
         }
         else if ( TagLib::ASF::File *file = dynamic_cast<TagLib::ASF::File *>( fileref.file() ) )
         {
-            // WM/Composer : Composer
-            // WM/AlbumTitle : Album artist
-            // WM/BeatsPerMinute : BPM
-
             TagLib::ASF::Tag *asftag = dynamic_cast< TagLib::ASF::Tag * >( file->tag() );
             if( asftag )
             {
@@ -299,6 +303,14 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     if( it->first == "WM/Composer" )
                     {
                         tagData->composer = TStringToQString( it->second[0].toString() );
+                    }
+                    else if( it->first == "WM/TrackNumber" )
+                    {
+                        track = TStringToQString( it->second[0].toString() );
+                    }
+                    else if( it->first == "WM/PartOfSet" )
+                    {
+                        disc = TStringToQString( it->second[0].toString() );
                     }
                 }
             }
@@ -337,9 +349,18 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             }
         }*/
 
+        if( !track.isEmpty() )
+        {
+            const int i = track.indexOf('/');
+            if( i != -1 )
+            {
+                tagData->trackTotal = track.right( track.count() - i - 1 ).toInt();
+            }
+        }
+
         if( !disc.isEmpty() )
         {
-            int i = disc.indexOf('/');
+            const int i = disc.indexOf('/');
             if( i != -1 )
             {
                 tagData->disc = disc.left( i ).toInt();
@@ -399,6 +420,12 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             return false;
         }
 
+        QString track;
+        if( tagData->trackTotal > 0 )
+        {
+            track = QString::number(tagData->track) + "/" + QString::number(tagData->trackTotal);
+        }
+
         QString disc;
         if( tagData->disc > 0 )
         {
@@ -413,20 +440,6 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if ( file->ID3v2Tag() )
             {
-                if( !disc.isEmpty() )
-                {
-                    if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
-                    {
-                        file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
-                    }
-                    else
-                    {
-                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPOS", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                        frame->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
-                        file->ID3v2Tag()->addFrame( frame );
-                    }
-                }
-
                 if( !tagData->composer.isEmpty() )
                 {
                     if ( !file->ID3v2Tag()->frameListMap()[ "TCOM" ].isEmpty() )
@@ -441,36 +454,63 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                     }
                 }
 
-                // TODO check if hacks are neccessary for taglib 1.5
-                // HACK sets the id3v2 genre tag as string
-                if( !tagData->genre.isEmpty() )
+                if( !track.isEmpty() )
                 {
-                    if ( !file->ID3v2Tag()->frameListMap()[ "TCON" ].isEmpty() )
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TRCK" ].isEmpty() )
                     {
-                        file->ID3v2Tag()->frameListMap()[ "TCON" ].front()->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->frameListMap()[ "TRCK" ].front()->setText( TagLib::String(track.toUtf8().data(), TagLib::String::UTF8) );
                     }
                     else
                     {
-                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCON", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                        frame->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TRCK", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(track.toUtf8().data(), TagLib::String::UTF8) );
                         file->ID3v2Tag()->addFrame( frame );
                     }
                 }
 
-                // HACK sets the id3v2 year tag
-                if( tagData->year > 0 )
+                if( !disc.isEmpty() )
                 {
-                    if ( !file->ID3v2Tag()->frameListMap()[ "TYER" ].isEmpty() )
+                    if ( !file->ID3v2Tag()->frameListMap()[ "TPOS" ].isEmpty() )
                     {
-                        file->ID3v2Tag()->frameListMap()[ "TYER" ].front()->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                        file->ID3v2Tag()->frameListMap()[ "TPOS" ].front()->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
                     }
                     else
                     {
-                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TYER", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
-                        frame->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPOS", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
                         file->ID3v2Tag()->addFrame( frame );
                     }
                 }
+
+                // // HACK sets the id3v2 genre tag as string
+                // if( !tagData->genre.isEmpty() )
+                // {
+                //     if ( !file->ID3v2Tag()->frameListMap()[ "TCON" ].isEmpty() )
+                //     {
+                //         file->ID3v2Tag()->frameListMap()[ "TCON" ].front()->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                //     }
+                //     else
+                //     {
+                //         TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TCON", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                //         frame->setText( TagLib::String(tagData->genre.toUtf8().data(), TagLib::String::UTF8) );
+                //         file->ID3v2Tag()->addFrame( frame );
+                //     }
+                // }
+
+                // // HACK sets the id3 <= v2.3.0 year tag
+                // if( tagData->year > 0 )
+                // {
+                //     if ( !file->ID3v2Tag()->frameListMap()[ "TYER" ].isEmpty() )
+                //     {
+                //         file->ID3v2Tag()->frameListMap()[ "TYER" ].front()->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                //     }
+                //     else
+                //     {
+                //         TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TYER", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                //         frame->setText( TagLib::String(QString::number(tagData->year).toUtf8().data(), TagLib::String::UTF8) );
+                //         file->ID3v2Tag()->addFrame( frame );
+                //     }
+                // }
             }
         }
         else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
@@ -478,10 +518,28 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             if ( file->tag() )
             {
                 if( !tagData->composer.isEmpty() )
+                {
+                    if( file->tag()->contains("COMPOSER") )
+                        file->tag()->removeField("COMPOSER");
+
                     file->tag()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( tagData->trackTotal > 0 )
+                {
+                    if( file->tag()->contains("TRACKTOTAL") )
+                        file->tag()->removeField("TRACKTOTAL");
+
+                    file->tag()->addField( "TRACKTOTAL", TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                }
 
                 if( !disc.isEmpty() )
+                {
+                    if( file->tag()->contains("DISCNUMBER") )
+                        file->tag()->removeField("DISCNUMBER");
+
                     file->tag()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                }
             }
         }
         else if ( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
@@ -489,10 +547,28 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             if ( file->xiphComment() )
             {
                 if( !tagData->composer.isEmpty() )
+                {
+                    if( file->xiphComment()->contains("COMPOSER") )
+                        file->xiphComment()->removeField("COMPOSER");
+
                     file->xiphComment()->addField( "COMPOSER", TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( tagData->trackTotal > 0 )
+                {
+                    if( file->xiphComment()->contains("TRACKTOTAL") )
+                        file->xiphComment()->removeField("TRACKTOTAL");
+
+                    file->xiphComment()->addField( "TRACKTOTAL", TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                }
 
                 if( !disc.isEmpty() )
+                {
+                    if( file->xiphComment()->contains("DISCNUMBER") )
+                        file->xiphComment()->removeField("DISCNUMBER");
+
                     file->xiphComment()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                }
             }
         }
         else if ( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File *>( fileref.file() ) )
@@ -503,21 +579,46 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 if( !tagData->composer.isEmpty() )
                     mp4tag->itemListMap()["\xA9wrt"] = TagLib::StringList(TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8));
 
+                if( tagData->trackTotal > 0 )
+                    mp4tag->itemListMap()["trkn"] = TagLib::MP4::Item( tagData->track, tagData->trackTotal );
+
                 if( tagData->disc > 0 )
-                    mp4tag->itemListMap()["disk"] = TagLib::MP4::Item( tagData->disc, tagData->discTotal );
+                {
+                    if( tagData->discTotal > 0 )
+                        mp4tag->itemListMap()["disk"] = TagLib::MP4::Item( tagData->disc, tagData->discTotal );
+                    else
+                        mp4tag->itemListMap()["disk"] = TagLib::MP4::Item( tagData->disc );
+                }
             }
         }
         else if ( TagLib::ASF::File *file = dynamic_cast<TagLib::ASF::File *>( fileref.file() ) )
         {
-            // WM/Composer : Composer
-            // WM/AlbumTitle : Album artist
-            // WM/BeatsPerMinute : BPM
-
             TagLib::ASF::Tag *asftag = dynamic_cast< TagLib::ASF::Tag * >( file->tag() );
             if( asftag )
             {
                 if( !tagData->composer.isEmpty() )
+                {
+                    if( !asftag->attributeListMap()["WM/Composer"].isEmpty() )
+                        asftag->attributeListMap()["WM/Composer"].clear();
+
                     asftag->addAttribute( TagLib::String("WM/Composer"), TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8) );
+                }
+
+                if( !track.isEmpty() )
+                {
+                    if( !asftag->attributeListMap()["WM/TrackNumber"].isEmpty() )
+                        asftag->attributeListMap()["WM/TrackNumber"].clear();
+
+                    asftag->addAttribute( TagLib::String("WM/TrackNumber"), TagLib::String(track.toUtf8().data(), TagLib::String::UTF8) );
+                }
+
+                if( !disc.isEmpty() )
+                {
+                    if( !asftag->attributeListMap()["WM/PartOfSet"].isEmpty() )
+                        asftag->attributeListMap()["WM/PartOfSet"].clear();
+
+                    asftag->addAttribute( TagLib::String("WM/PartOfSet"), TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
+                }
             }
         }
         /*if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not

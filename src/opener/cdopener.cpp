@@ -200,6 +200,12 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     iDisc = new KIntSpinBox( 1, 99, 1, 1, cdOpenerWidget );
     albumBox->addWidget( iDisc );
     albumBox->addStretch();
+    QLabel *lDiscTotalLabel = new QLabel( i18nc("Track/Disc No. x of y","of"), cdOpenerWidget );
+    lDiscTotalLabel->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+    albumBox->addWidget( lDiscTotalLabel );
+    albumBox->addStretch();
+    iDiscTotal = new KIntSpinBox( 1, 99, 1, 1, cdOpenerWidget );
+    albumBox->addWidget( iDiscTotal );
 
     // set up the third row at the top
     QLabel *lYearLabel = new QLabel( i18n("Year:"), cdOpenerWidget );
@@ -681,18 +687,23 @@ bool CDOpener::openCdDevice( const QString& _device )
     qDeleteAll( tags );
     tags.clear();
 
+    const int trackTotal = cdda_audio_tracks( cdDrive );
+
     TagData *newTags = new TagData();
     newTags->artist = i18n("Unknown");
     newTags->album = i18n("Unknown");
+    newTags->trackTotal = trackTotal;
     newTags->disc = 1;
+    newTags->discTotal = 1;
     newTags->year = (QDate::currentDate()).year();
     newTags->genre = i18n("Unknown");
     tags += newTags;
 
-    for( int i=0; i<cdda_audio_tracks(cdDrive); i++ )
+    for( int i=0; i<trackTotal; i++ )
     {
         TagData *newTags = new TagData();
         newTags->track = i+1;
+        newTags->trackTotal = trackTotal;
         newTags->artist = i18n("Unknown");
         newTags->title = i18n("Unknown");
         const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,newTags->track)-cdda_track_firstsector(cdDrive,newTags->track));
@@ -726,6 +737,7 @@ bool CDOpener::openCdDevice( const QString& _device )
     cComposer->setEditText( tags.at(0)->composer );
     lAlbum->setText( tags.at(0)->album );
     iDisc->setValue( tags.at(0)->disc );
+    iDiscTotal->setValue( tags.at(0)->discTotal );
     iYear->setValue( tags.at(0)->year );
     cGenre->setEditText( tags.at(0)->genre );
 
@@ -858,6 +870,7 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
     cComposer->setEditText( tags.at(0)->composer );
     lAlbum->setText( tags.at(0)->album );
     iDisc->setValue( tags.at(0)->disc );
+    iDiscTotal->setValue( tags.at(0)->discTotal );
     iYear->setValue( tags.at(0)->year );
     cGenre->setEditText( tags.at(0)->genre );
 
@@ -1326,6 +1339,7 @@ void CDOpener::addClicked()
             tags.at(0)->composer = cComposer->currentText();
             tags.at(0)->album = lAlbum->text();
             tags.at(0)->disc = iDisc->value();
+            tags.at(0)->discTotal = iDiscTotal->value();
             tags.at(0)->year = iYear->value();
             tags.at(0)->genre = cGenre->currentText();
             const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,trackCount)-cdda_track_firstsector(cdDrive,1));
@@ -1346,6 +1360,7 @@ void CDOpener::addClicked()
                         tags.at(i+1)->composer = cComposer->currentText();
                     tags.at(i+1)->album = lAlbum->text();
                     tags.at(i+1)->disc = iDisc->value();
+                    tags.at(i+1)->discTotal = iDiscTotal->value();
                     tags.at(i+1)->year = iYear->value();
                     tags.at(i+1)->genre = cGenre->currentText();
                     const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,i+1)-cdda_track_firstsector(cdDrive,i+1));

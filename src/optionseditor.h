@@ -54,9 +54,13 @@ private:
     KLineEdit* lTitle;
     KPushButton* pTitleEdit;
     /** A spinbox for entering or selecting the track number */
-    QLabel* lNumberLabel;
-    KIntSpinBox* iNumber;
-    KPushButton* pNumberEdit;
+    QLabel* lTrackLabel;
+    KIntSpinBox* iTrack;
+    KPushButton* pTrackEdit;
+    /** A spinbox for entering or selecting the total track number */
+    QLabel* lTrackTotalLabel;
+    KIntSpinBox* iTrackTotal;
+    KPushButton* pTrackTotalEdit;
     /** A lineedit for entering the artist of a track */
     QLabel* lArtistLabel;
     KLineEdit* lArtist;
@@ -116,7 +120,8 @@ private slots:
     void editTagsClicked();
 
     void editTitleClicked();
-    void editNumberClicked();
+    void editTrackClicked();
+    void editTrackTotalClicked();
     void editArtistClicked();
     void editComposerClicked();
     void editAlbumClicked();

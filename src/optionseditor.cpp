@@ -16,6 +16,7 @@
 
 #include "global.h"
 
+#include <QBoxLayout>
 #include <KComboBox>
 #include <KIcon>
 #include <KLineEdit>
@@ -102,17 +103,28 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pTitleEdit->hide();
     titleBox->addWidget( pTitleEdit );
     connect( pTitleEdit, SIGNAL(clicked()), this, SLOT(editTitleClicked()) );
-    lNumberLabel = new QLabel( i18n("Track No.:"), tagsWidget );
-    titleBox->addWidget( lNumberLabel );
-    iNumber = new KIntSpinBox( 0, 999, 1, 1, tagsWidget );
-    titleBox->addWidget( iNumber );
-    pNumberEdit = new KPushButton( KIcon("edit-rename"), " ", tagsWidget );
-    pNumberEdit->setFixedSize( pNumberEdit->sizeHint().height(), iNumber->sizeHint().height() );
-    pNumberEdit->setFlat( true );
-    pNumberEdit->setToolTip( i18n("Edit") );
-    pNumberEdit->hide();
-    titleBox->addWidget( pNumberEdit );
-    connect( pNumberEdit, SIGNAL(clicked()), this, SLOT(editNumberClicked()) );
+    lTrackLabel = new QLabel( i18n("Track No.:"), tagsWidget );
+    titleBox->addWidget( lTrackLabel );
+    iTrack = new KIntSpinBox( 0, 999, 1, 1, tagsWidget );
+    titleBox->addWidget( iTrack );
+    pTrackEdit = new KPushButton( KIcon("edit-rename"), " ", tagsWidget );
+    pTrackEdit->setFixedSize( pTrackEdit->sizeHint().height(), iTrack->sizeHint().height() );
+    pTrackEdit->setFlat( true );
+    pTrackEdit->setToolTip( i18n("Edit") );
+    pTrackEdit->hide();
+    titleBox->addWidget( pTrackEdit );
+    connect( pTrackEdit, SIGNAL(clicked()), this, SLOT(editTrackClicked()) );
+    lTrackTotalLabel = new QLabel( i18nc("Track/Disc No. x of y","of"), tagsWidget );
+    titleBox->addWidget( lTrackTotalLabel );
+    iTrackTotal = new KIntSpinBox( 0, 999, 1, 1, tagsWidget );
+    titleBox->addWidget( iTrackTotal );
+    pTrackTotalEdit = new KPushButton( KIcon("edit-rename"), " ", tagsWidget );
+    pTrackTotalEdit->setFixedSize( pTrackTotalEdit->sizeHint().height(), iTrackTotal->sizeHint().height() );
+    pTrackTotalEdit->setFlat( true );
+    pTrackTotalEdit->setToolTip( i18n("Edit") );
+    pTrackTotalEdit->hide();
+    titleBox->addWidget( pTrackTotalEdit );
+    connect( pTrackTotalEdit, SIGNAL(clicked()), this, SLOT(editTrackTotalClicked()) );
 
     // add a horizontal box layout for the artist and the composer
     QHBoxLayout *artistBox = new QHBoxLayout();
@@ -172,7 +184,7 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     pDiscEdit->hide();
     albumdataBox->addWidget( pDiscEdit );
     connect( pDiscEdit, SIGNAL(clicked()), this, SLOT(editDiscClicked()) );
-    lDiscTotalLabel = new QLabel( i18nc("Disc No. x of y","of"), tagsWidget );
+    lDiscTotalLabel = new QLabel( i18nc("Track/Disc No. x of y","of"), tagsWidget );
     albumdataBox->addWidget( lDiscTotalLabel );
     iDiscTotal = new KIntSpinBox( 0, 99, 1, 1, tagsWidget );
     albumdataBox->addWidget( iDiscTotal );
@@ -249,9 +261,11 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
     lTitleLabel->setEnabled( enabled );
     lTitle->setEnabled( enabled );
     pTitleEdit->hide();
-    lNumberLabel->setEnabled( enabled );
-    iNumber->setEnabled( enabled );
-    pNumberEdit->hide();
+    lTrackLabel->setEnabled( enabled );
+    iTrack->setEnabled( enabled );
+    lTrackTotalLabel->setEnabled( enabled );
+    iTrackTotal->setEnabled( enabled );
+    pTrackEdit->hide();
     lArtistLabel->setEnabled( enabled );
     lArtist->setEnabled( enabled );
     pArtistEdit->hide();
@@ -280,7 +294,8 @@ void OptionsEditor::setTagInputEnabled( bool enabled )
     if( !enabled )
     {
         lTitle->setText( "" );
-        iNumber->setValue( 0 );
+        iTrack->setValue( 0 );
+        iTrackTotal->setValue( 0 );
         lArtist->setText( "" );
         lComposer->setText( "" );
         lAlbum->setText( "" );
@@ -415,7 +430,8 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
             }
             lCoversLabel->setEnabled( item->tags->covers.count() > 0 );
             lTitle->setText( item->tags->title );
-            iNumber->setValue( item->tags->track );
+            iTrack->setValue( item->tags->track );
+            iTrackTotal->setValue( item->tags->trackTotal );
             lArtist->setText( item->tags->artist );
             lComposer->setText( item->tags->composer );
             lAlbum->setText( item->tags->album );
@@ -433,7 +449,8 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         FileListItem *firstItem = selectedItems.first();
         const int     conversionOptionsId = firstItem->conversionOptionsId;
         const QString title               = ( firstItem->tags == 0 ) ? "" : firstItem->tags->title;
-        const int     number              = ( firstItem->tags == 0 ) ? 0  : firstItem->tags->track;
+        const int     track               = ( firstItem->tags == 0 ) ? 0  : firstItem->tags->track;
+        const int     trackTotal          = ( firstItem->tags == 0 ) ? 0  : firstItem->tags->trackTotal;
         const QString artist              = ( firstItem->tags == 0 ) ? "" : firstItem->tags->artist;
         const QString composer            = ( firstItem->tags == 0 ) ? "" : firstItem->tags->composer;
         const QString album               = ( firstItem->tags == 0 ) ? "" : firstItem->tags->album;
@@ -471,11 +488,17 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
                 lTitle->setText( "" );
                 pTitleEdit->show();
             }
-            if( number != item->tags->track && iNumber->isEnabled() )
+            if( track != item->tags->track && iTrack->isEnabled() )
             {
-                iNumber->setEnabled( false );
-                iNumber->setValue( 1 );
-                pNumberEdit->show();
+                iTrack->setEnabled( false );
+                iTrack->setValue( 1 );
+                pTrackEdit->show();
+            }
+            if( trackTotal != item->tags->trackTotal && iTrackTotal->isEnabled() )
+            {
+                iTrackTotal->setEnabled( false );
+                iTrackTotal->setValue( 1 );
+                pTrackTotalEdit->show();
             }
             if( artist != item->tags->artist && lArtist->isEnabled() )
             {
@@ -538,8 +561,11 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         if( lTitle->isEnabled() )
             lTitle->setText( title );
 
-        if( iNumber->isEnabled() )
-            iNumber->setValue( number );
+        if( iTrack->isEnabled() )
+            iTrack->setValue( track );
+
+        if( iTrackTotal->isEnabled() )
+            iTrackTotal->setValue( trackTotal );
 
         if( lArtist->isEnabled() )
             lArtist->setText( artist );
@@ -600,8 +626,11 @@ void OptionsEditor::applyChanges()
             if( lTitle->isEnabled() )
                 selectedItems.at(i)->tags->title = lTitle->text();
 
-            if( iNumber->isEnabled() )
-                selectedItems.at(i)->tags->track = iNumber->value();
+            if( iTrack->isEnabled() )
+                selectedItems.at(i)->tags->track = iTrack->value();
+
+            if( iTrackTotal->isEnabled() )
+                selectedItems.at(i)->tags->trackTotal = iTrackTotal->value();
 
             if( lArtist->isEnabled() )
                 selectedItems.at(i)->tags->artist = lArtist->text();
@@ -656,7 +685,8 @@ void OptionsEditor::editTagsClicked()
     }
 
     editTitleClicked();
-    editNumberClicked();
+    editTrackClicked();
+    editTrackTotalClicked();
     editArtistClicked();
     editComposerClicked();
     editAlbumClicked();
@@ -679,15 +709,27 @@ void OptionsEditor::editTitleClicked()
     }
 }
 
-void OptionsEditor::editNumberClicked()
+void OptionsEditor::editTrackClicked()
 {
-    iNumber->setEnabled( true );
-    iNumber->setFocus();
-    pNumberEdit->hide();
+    iTrack->setEnabled( true );
+    iTrack->setFocus();
+    pTrackEdit->hide();
 
     if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
     {
-        iNumber->setValue( selectedItems.first()->tags->track );
+        iTrack->setValue( selectedItems.first()->tags->track );
+    }
+}
+
+void OptionsEditor::editTrackTotalClicked()
+{
+    iTrackTotal->setEnabled( true );
+    iTrackTotal->setFocus();
+    pTrackTotalEdit->hide();
+
+    if( selectedItems.count() > 0 && selectedItems.first() && selectedItems.first()->tags )
+    {
+        iTrackTotal->setValue( selectedItems.first()->tags->trackTotal );
     }
 }
 

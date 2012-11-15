@@ -88,6 +88,7 @@ public:
     QString genre;
     QString comment;
     short track;
+    short trackTotal;
     short disc;
     short discTotal;
     short year;

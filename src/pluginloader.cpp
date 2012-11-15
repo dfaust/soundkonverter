@@ -803,6 +803,8 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
         // special treatment for the mp4 family
         if( ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && extension == "aac" && info.codecName == "m4a/aac" )
             newRating = 300;
+        else if( ( mime == "audio/mp4" || mime == "audio/x-m4a" ) && extension == "alac" && info.codecName == "m4a/alac" )
+            newRating = 300;
 
         if( newRating == info.priority )
             continue;

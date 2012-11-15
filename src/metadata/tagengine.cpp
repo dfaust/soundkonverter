@@ -117,10 +117,10 @@ TagData::TagData()
     disc = 0;
     discTotal = 0;
     year = 0;
-    track_gain = 210588;
-    album_gain = 210588;
+    trackGain = 0;
+    albumGain = 0;
 
-    coversRead = false;
+    tagsRead = TagsRead(0);
 
     length = 0;
     samplingRate = 0;
@@ -195,9 +195,15 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
         Meta::ReplayGainTagMap replayGainTags = Meta::readReplayGainTags( fileref );
         if( replayGainTags.contains(Meta::ReplayGain_Track_Gain) )
-            tagData->track_gain = replayGainTags[ Meta::ReplayGain_Track_Gain ];
+        {
+            tagData->trackGain = replayGainTags[ Meta::ReplayGain_Track_Gain ];
+            tagData->tagsRead = TagData::TagsRead(tagData->tagsRead | TagData::TrackGain);
+        }
         if( replayGainTags.contains(Meta::ReplayGain_Album_Gain) )
-            tagData->album_gain = replayGainTags[ Meta::ReplayGain_Album_Gain ];
+        {
+            tagData->albumGain = replayGainTags[ Meta::ReplayGain_Album_Gain ];
+            tagData->tagsRead = TagData::TagsRead(tagData->tagsRead | TagData::AlbumGain);
+        }
 
         QString disc;
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
@@ -302,10 +308,10 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             if ( file->APETag() )
             {
                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-                    track_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
+                    trackGain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
 
                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-                    album_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
+                    albumGain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
             }
         }*/
 /*        else if ( TagLib::WavPack::File *file = dynamic_cast<TagLib::WavPack::File *>( fileref.file() ) )
@@ -313,10 +319,10 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             if ( file->APETag() )
             {
                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_TRACK_GAIN" ].isEmpty() )
-                    track_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
+                    trackGain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_TRACK_GAIN"].toString() );
 
                 if ( !file->APETag()->itemListMap()[ "REPLAYGAIN_ALBUM_GAIN" ].isEmpty() )
-                    album_gain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
+                    albumGain = TStringToQString( file->APETag()->itemListMap()["REPLAYGAIN_ALBUM_GAIN"].toString() );
             }
         }*/
         /*else if ( TagLib::TTA::File *file = dynamic_cast<TagLib::TTA::File *>( fileref.file() ) ) // NOTE writing works, but reading not

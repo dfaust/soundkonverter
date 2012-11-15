@@ -523,10 +523,10 @@ void Convert::writeTags( ConvertItem *item )
     else
         inputUrl = item->inputUrl;
 
-    if( !item->fileListItem->tags->coversRead )
+    if( !(item->fileListItem->tags->tagsRead & TagData::Covers) )
     {
         item->fileListItem->tags->covers = config->tagEngine()->readCovers( inputUrl );
-        item->fileListItem->tags->coversRead = true;
+        item->fileListItem->tags->tagsRead = TagData::TagsRead(item->fileListItem->tags->tagsRead | TagData::Covers);
     }
 
     const bool success = config->tagEngine()->writeCovers( item->outputUrl, item->fileListItem->tags->covers );

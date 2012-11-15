@@ -269,7 +269,7 @@ static Meta::ReplayGainTagMap readMP4Tags( TagLib::MP4::Tag *tag )
 
     return outputMap;
 }
-#endif 
+#endif
 
 Meta::ReplayGainTagMap
 Meta::readReplayGainTags( TagLib::FileRef fileref )

@@ -519,17 +519,17 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
         else
             item->setText( Column_File, item->url.fileName() );
 
-        if( item->tags && item->tags->track_gain != 210588 )
+        if( item->tags && item->tags->tagsRead & TagData::TrackGain )
         {
-            item->setText( Column_Track, QString().sprintf("%+.2f dB",item->tags->track_gain) );
+            item->setText( Column_Track, QString().sprintf("%+.2f dB",item->tags->trackGain) );
         }
         else
         {
             item->setText( Column_Track, "?" );
         }
-        if( item->tags && item->tags->album_gain != 210588 )
+        if( item->tags && item->tags->tagsRead & TagData::AlbumGain )
         {
-            item->setText( Column_Album, QString().sprintf("%+.2f dB",item->tags->album_gain) );
+            item->setText( Column_Album, QString().sprintf("%+.2f dB",item->tags->albumGain) );
         }
         else
         {
@@ -721,7 +721,7 @@ void ReplayGainFileList::processNextItem()
 
         if( item->type == ReplayGainFileListItem::Track )
         {
-            if( mode == ReplayGainPlugin::Force || mode == ReplayGainPlugin::Remove || !item->tags || item->tags->track_gain == 210588 || item->tags->album_gain == 210588 )
+            if( mode == ReplayGainPlugin::Force || mode == ReplayGainPlugin::Remove || !item->tags || !(item->tags->tagsRead & TagData::TrackGain) || !(item->tags->tagsRead & TagData::AlbumGain) )
                 calcGain = true;
         }
         else
@@ -729,7 +729,7 @@ void ReplayGainFileList::processNextItem()
             bool albumGainDifferent = false;
             bool childProcessing = false;
 
-            float albumGain = 210588;
+            float albumGain = 0;
             for( int j=0; j<item->childCount(); j++ )
             {
                 ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
@@ -739,10 +739,19 @@ void ReplayGainFileList::processNextItem()
                     break;
                 }
 
-                if( j == 0 && child->tags )
-                    albumGain = child->tags->album_gain;
-
-                if( !child->tags || child->tags->album_gain != albumGain || child->tags->album_gain == 210588 )
+                if( j == 0 )
+                {
+                    if( child->tags )
+                    {
+                        albumGain = child->tags->albumGain;
+                    }
+                    else
+                    {
+                        albumGainDifferent = true;
+                        break;
+                    }
+                }
+                else if( !child->tags || child->tags->albumGain != albumGain || !(child->tags->tagsRead & TagData::AlbumGain) )
                 {
                     albumGainDifferent = true;
                     break;

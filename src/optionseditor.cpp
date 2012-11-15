@@ -385,10 +385,10 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         }
         else
         {
-            if( !item->tags->coversRead )
+            if( !(item->tags->tagsRead & TagData::Covers) )
             {
                 item->tags->covers = tagEngine->readCovers( item->url );
-                item->tags->coversRead = true;
+                item->tags->tagsRead = TagData::TagsRead(item->tags->tagsRead | TagData::Covers);
             }
             foreach( CoverData* cover, item->tags->covers )
             {

@@ -1420,8 +1420,8 @@ void FileList::load( bool user )
                         item->tags->track = tags.attribute("track").toInt();
                         item->tags->disc = tags.attribute("disc").toInt();
                         item->tags->year = tags.attribute("year").toInt();
-                        item->tags->track_gain = tags.attribute("track_gain").toFloat();
-                        item->tags->album_gain = tags.attribute("album_gain").toFloat();
+                        item->tags->trackGain = tags.attribute("track_gain").toFloat();
+                        item->tags->albumGain = tags.attribute("album_gain").toFloat();
                         item->tags->length = tags.attribute("length").toInt();
                         item->tags->samplingRate = tags.attribute("samplingRate").toInt();
                     }
@@ -1498,8 +1498,8 @@ void FileList::save( bool user )
             tags.setAttribute("track",item->tags->track);
             tags.setAttribute("disc",item->tags->disc);
             tags.setAttribute("year",item->tags->year);
-            tags.setAttribute("track_gain",item->tags->track_gain);
-            tags.setAttribute("album_gain",item->tags->album_gain);
+            tags.setAttribute("track_gain",item->tags->trackGain);
+            tags.setAttribute("album_gain",item->tags->albumGain);
             tags.setAttribute("length",item->tags->length);
             tags.setAttribute("samplingRate",item->tags->samplingRate);
             file.appendChild(tags);

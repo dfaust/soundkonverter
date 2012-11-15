@@ -91,12 +91,17 @@ public:
     short disc;
     short discTotal;
     short year;
-    float track_gain;
-    float album_gain;
+    float trackGain;
+    float albumGain;
 
     /** Covers */
     QList<CoverData*> covers;
-    bool coversRead;
+
+    enum TagsRead {
+        TrackGain = 0x01,
+        AlbumGain = 0x02,
+        Covers    = 0x04
+    } tagsRead;
 
     /** The technical information */
     short length;

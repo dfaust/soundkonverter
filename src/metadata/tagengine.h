@@ -95,6 +95,9 @@ public:
     float trackGain;
     float albumGain;
 
+    QString musicBrainzTrackId;
+    QString musicBrainzReleaseId;
+
     /** Covers */
     QList<CoverData*> covers;
 

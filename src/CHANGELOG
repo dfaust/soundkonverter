@@ -6,7 +6,7 @@
 -Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
 -Add: Option to switch between COMMENT and DESCRIPTION as preferred comment field for ogg vorbis and flac files
 -Add: Option to select preferred total tracks/discs number fields for ogg vorbis and flac files
--Add: Handle more tags like total track number
+-Add: Copy the tags total tracks/discs number, MusicBrainz Track Id and MusicBrainz Release Id
 -Add: Compression level option to the lame plugin
 -Add: Opus support (via opus-tools)
 -Change: Remember dimensions of the sub-windows and dialogs

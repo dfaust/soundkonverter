@@ -25,6 +25,7 @@
 #include <asffile.h>
 #include <textidentificationframe.h>
 #include <attachedpictureframe.h>
+#include <uniquefileidentifierframe.h>
 #include <xiphcomment.h>
 #include <mpcfile.h>
 #include <mp4tag.h>
@@ -104,12 +105,6 @@ QString CoverData::roleName( Role role )
 
 TagData::TagData()
 {
-    artist = QString();
-    composer = QString();
-    album = QString();
-    title = QString();
-    genre = QString();
-    comment = QString();
     track = 0;
     trackTotal = 0;
     disc = 0;
@@ -229,6 +224,44 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
                 if( !tag->frameListMap()["TPOS"].isEmpty() )
                     disc = TStringToQString( tag->frameListMap()["TPOS"].front()->toString() );
+
+                TagLib::ID3v2::FrameList ufid = tag->frameListMap()["UFID"];
+                if( !ufid.isEmpty() )
+                {
+                    for( TagLib::ID3v2::FrameList::Iterator it = ufid.begin(); it != ufid.end(); it++ )
+                    {
+                        TagLib::ID3v2::UniqueFileIdentifierFrame *frame = dynamic_cast<TagLib::ID3v2::UniqueFileIdentifierFrame*>(*it);
+                        if( frame && frame->owner() == "http://musicbrainz.org" )
+                        {
+                            const TagLib::ByteVector id = frame->identifier();
+                            tagData->musicBrainzTrackId = QString::fromAscii( id.data(), id.size() );
+                        }
+                    }
+                }
+                // Not tested - what about MusicBrainz Album Ids?
+                // if( tagData->musicBrainzTrackId.isEmpty() )
+                // {
+                //     // foobar2k
+                //     TagLib::ID3v2::UserTextIdentificationFrame *frame = TagLib::ID3v2::UserTextIdentificationFrame::find( tag, "MUSICBRAINZ_TRACKID" );
+                //     if( frame )
+                //     {
+                //         const TagLib::StringList texts = frame->fieldList();
+                //         if( texts.size() > 1)
+                //         {
+                //             tagData->musicBrainzTrackId = TStringToQString( texts[1] );
+                //         }
+                //     }
+                // }
+
+                TagLib::ID3v2::UserTextIdentificationFrame *frame = TagLib::ID3v2::UserTextIdentificationFrame::find( tag, "MusicBrainz Album Id" );
+                if( frame )
+                {
+                    const TagLib::StringList texts = frame->fieldList();
+                    if( texts.size() > 1)
+                    {
+                        tagData->musicBrainzReleaseId = TStringToQString( texts[1] );
+                    }
+                }
             }
         }
         else if( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File*>(fileref.file()) )
@@ -253,6 +286,12 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     tagData->trackTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
                 else if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() )
                     disc = TStringToQString( tag->fieldListMap()["DISCNUMBER"].front() );
+
+                if( !tag->fieldListMap()["MUSICBRAINZ_TRACKID"].isEmpty() )
+                    tagData->musicBrainzTrackId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_TRACKID"].front() );
+
+                if( !tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].isEmpty() )
+                    tagData->musicBrainzReleaseId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].front() );
             }
         }
         else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File*>(fileref.file()) )
@@ -275,6 +314,12 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     tagData->trackTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
                 else if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() ) // used by Kid3, EasyTag
                     disc = TStringToQString( tag->fieldListMap()["DISCNUMBER"].front() );
+
+                if( !tag->fieldListMap()["MUSICBRAINZ_TRACKID"].isEmpty() )
+                    tagData->musicBrainzTrackId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_TRACKID"].front() );
+
+                if( !tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].isEmpty() )
+                    tagData->musicBrainzReleaseId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].front() );
             }
         }
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
@@ -303,6 +348,14 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 //                     {
 //                         tagData->comment = TStringToQString( it->second.toStringList().front() );
 //                     }
+                    else if( it->first == "----:com.apple.iTunes:MusicBrainz Track Id" )
+                    {
+                        tagData->musicBrainzTrackId = TStringToQString( it->second.toStringList().front() );
+                    }
+                    else if( it->first == "----:com.apple.iTunes:MusicBrainz Album Id" )
+                    {
+                        tagData->musicBrainzReleaseId = TStringToQString( it->second.toStringList().front() );
+                    }
                 }
             }
         }
@@ -318,15 +371,23 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
                     if( it->first == "WM/Composer" )
                     {
-                        tagData->composer = TStringToQString( it->second[0].toString() );
+                        tagData->composer = TStringToQString( it->second.front().toString() );
                     }
                     else if( it->first == "WM/TrackNumber" )
                     {
-                        track = TStringToQString( it->second[0].toString() );
+                        track = TStringToQString( it->second.front().toString() );
                     }
                     else if( it->first == "WM/PartOfSet" )
                     {
-                        disc = TStringToQString( it->second[0].toString() );
+                        disc = TStringToQString( it->second.front().toString() );
+                    }
+                    else if( it->first == "MusicBrainz/Track Id" )
+                    {
+                        tagData->musicBrainzTrackId = TStringToQString( it->second.front().toString() );
+                    }
+                    else if( it->first == "MusicBrainz/Album Id" )
+                    {
+                        tagData->musicBrainzReleaseId = TStringToQString( it->second.front().toString() );
                     }
                 }
             }
@@ -504,6 +565,20 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                     }
                 }
 
+                if( !tagData->musicBrainzTrackId.isEmpty() )
+                {
+                    TagLib::ID3v2::UniqueFileIdentifierFrame *frame = new TagLib::ID3v2::UniqueFileIdentifierFrame( "http://musicbrainz.org", TagLib::ByteVector(tagData->musicBrainzTrackId.toUtf8().data(), TagLib::String::UTF8) );
+                    tag->addFrame( frame );
+                }
+
+                if( !tagData->musicBrainzReleaseId.isEmpty() )
+                {
+                    TagLib::ID3v2::UserTextIdentificationFrame *frame = new TagLib::ID3v2::UserTextIdentificationFrame( TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                    frame->setDescription( "MusicBrainz Album Id" );
+                    frame->setText( TagLib::String(tagData->musicBrainzReleaseId.toUtf8().data(), TagLib::String::UTF8) );
+                    tag->addFrame( frame );
+                }
+
                 // // HACK sets the id3v2 genre tag as string
                 // if( !tagData->genre.isEmpty() )
                 // {
@@ -584,6 +659,22 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                         tag->addField( TagLib::String(config->data.general.preferredVorbisCommentDiscTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->discTotal).toUtf8().data(), TagLib::String::UTF8), true );
                     }
                 }
+
+                if( !tagData->musicBrainzTrackId.isEmpty() )
+                {
+                    if( tag->contains("MUSICBRAINZ_TRACKID") )
+                        tag->removeField("MUSICBRAINZ_TRACKID");
+
+                    tag->addField( "MUSICBRAINZ_TRACKID", TagLib::String(tagData->musicBrainzTrackId.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( !tagData->musicBrainzReleaseId.isEmpty() )
+                {
+                    if( tag->contains("MUSICBRAINZ_ALBUMID") )
+                        tag->removeField("MUSICBRAINZ_ALBUMID");
+
+                    tag->addField( "MUSICBRAINZ_ALBUMID", TagLib::String(tagData->musicBrainzReleaseId.toUtf8().data(), TagLib::String::UTF8), true );
+                }
             }
         }
         else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File*>(fileref.file()) )
@@ -635,6 +726,22 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                         tag->addField( TagLib::String(config->data.general.preferredVorbisCommentDiscTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->discTotal).toUtf8().data(), TagLib::String::UTF8), true );
                     }
                 }
+
+                if( !tagData->musicBrainzTrackId.isEmpty() )
+                {
+                    if( tag->contains("MUSICBRAINZ_TRACKID") )
+                        tag->removeField("MUSICBRAINZ_TRACKID");
+
+                    tag->addField( "MUSICBRAINZ_TRACKID", TagLib::String(tagData->musicBrainzTrackId.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( !tagData->musicBrainzReleaseId.isEmpty() )
+                {
+                    if( tag->contains("MUSICBRAINZ_ALBUMID") )
+                        tag->removeField("MUSICBRAINZ_ALBUMID");
+
+                    tag->addField( "MUSICBRAINZ_ALBUMID", TagLib::String(tagData->musicBrainzReleaseId.toUtf8().data(), TagLib::String::UTF8), true );
+                }
             }
         }
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
@@ -654,6 +761,12 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                     else
                         tag->itemListMap()["disk"] = TagLib::MP4::Item( tagData->disc );
                 }
+
+                if( !tagData->musicBrainzTrackId.isEmpty() )
+                    tag->itemListMap()["----:com.apple.iTunes:MusicBrainz Track Id"] = TagLib::StringList(TagLib::String(tagData->musicBrainzTrackId.toUtf8().data(), TagLib::String::UTF8));
+
+                if( !tagData->musicBrainzReleaseId.isEmpty() )
+                    tag->itemListMap()["----:com.apple.iTunes:MusicBrainz Album Id"] = TagLib::StringList(TagLib::String(tagData->musicBrainzReleaseId.toUtf8().data(), TagLib::String::UTF8));
             }
         }
         else if( TagLib::ASF::File *file = dynamic_cast<TagLib::ASF::File*>(fileref.file()) )
@@ -682,6 +795,22 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                         tag->attributeListMap()["WM/PartOfSet"].clear();
 
                     tag->addAttribute( TagLib::String("WM/PartOfSet"), TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8) );
+                }
+
+                if( !tagData->musicBrainzTrackId.isEmpty() )
+                {
+                    if( !tag->attributeListMap()["MusicBrainz/Track Id"].isEmpty() )
+                        tag->attributeListMap()["MusicBrainz/Track Id"].clear();
+
+                    tag->addAttribute( TagLib::String("MusicBrainz/Track Id"), TagLib::String(tagData->musicBrainzTrackId.toUtf8().data(), TagLib::String::UTF8) );
+                }
+
+                if( !tagData->musicBrainzReleaseId.isEmpty() )
+                {
+                    if( !tag->attributeListMap()["MusicBrainz/Album Id"].isEmpty() )
+                        tag->attributeListMap()["MusicBrainz/Album Id"].clear();
+
+                    tag->addAttribute( TagLib::String("MusicBrainz/Album Id"), TagLib::String(tagData->musicBrainzReleaseId.toUtf8().data(), TagLib::String::UTF8) );
                 }
             }
         }

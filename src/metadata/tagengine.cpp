@@ -655,7 +655,7 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
     return false;
 }
 
-QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
+QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
 {
     QList<CoverData*> covers;
 
@@ -665,14 +665,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
     {
         if ( TagLib::MPEG::File *file = dynamic_cast<TagLib::MPEG::File *>( fileref.file() ) )
         {
-            // TXXX : TagLib::ID3v2::UserTextIdentificationFrame
-            // TBPM : BPM
-            // TPE2 : Album artist
-            // TCMP : Compilation (true,1 vs. false,0)
-            // POPM : rating, playcount
-            // APIC : TagLib::ID3v2::AttachedPictureFrame
-            // UFID : TagLib::ID3v2::UniqueFileIdentifierFrame
-
             if ( file->ID3v2Tag() )
             {
                 TagLib::ID3v2::FrameList apic_frames = file->ID3v2Tag()->frameListMap()["APIC"];
@@ -691,9 +683,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
         else if ( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
         {
             // http://wiki.xiph.org/VorbisComment#Recommended_field_names
-            // ALBUMARTIST
-            // BPM
-            // COMPILATION (1 vs. 0)
 
             if ( file->tag() )
             {
@@ -745,8 +734,8 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName ) // TagLib
 
                 for( uint i=0; i<coverArtValue.size(); i++ )
                 {
-                    QByteArray image_data_b64(coverArtValue[i].toCString());
-                    QByteArray image_data = QByteArray::fromBase64(image_data_b64);
+                    const QByteArray image_data_b64(coverArtValue[i].toCString());
+                    const QByteArray image_data = QByteArray::fromBase64(image_data_b64);
 
                     const TagLib::String mimeType = ( mimeTypeValue.size() > i ) ? mimeTypeValue[i] : "";
                     const TagLib::String description = ( descriptionValue.size() > i ) ? descriptionValue[i] : "";

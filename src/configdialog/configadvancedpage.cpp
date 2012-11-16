@@ -17,6 +17,7 @@
 #include <KIntSpinBox>
 
 #include <QLayout>
+#include <QBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
 #include <KComboBox>
@@ -54,21 +55,59 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
-    QHBoxLayout *preferredOggVorbisCommentTagBox = new QHBoxLayout();
-    preferredOggVorbisCommentTagBox->addSpacing( ConfigDialogOffset );
-    box->addLayout( preferredOggVorbisCommentTagBox );
-    QLabel* lPreferredOggVorbisCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files")+":", this );
-    lPreferredOggVorbisCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION, others the field COMMENT.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
-    preferredOggVorbisCommentTagBox->addWidget( lPreferredOggVorbisCommentTag );
-    cPreferredOggVorbisCommentTag = new KComboBox( this );
-    cPreferredOggVorbisCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION, others the field COMMENT.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
-    cPreferredOggVorbisCommentTag->addItem( "COMMENT" );
-    cPreferredOggVorbisCommentTag->addItem( "DESCRIPTION" );
-    cPreferredOggVorbisCommentTag->setCurrentIndex( config->data.general.preferredOggVorbisCommentTag == "COMMENT" ? 0 : 1 );
-    preferredOggVorbisCommentTagBox->addWidget( cPreferredOggVorbisCommentTag );
-    connect( cPreferredOggVorbisCommentTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    preferredOggVorbisCommentTagBox->setStretch( 0, 3 );
-    preferredOggVorbisCommentTagBox->setStretch( 1, 1 );
+    QHBoxLayout *preferredVorbisCommentCommentTagBox = new QHBoxLayout();
+    preferredVorbisCommentCommentTagBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( preferredVorbisCommentCommentTagBox );
+    QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files")+":", this );
+    lPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
+    preferredVorbisCommentCommentTagBox->addWidget( lPreferredVorbisCommentCommentTag );
+    cPreferredVorbisCommentCommentTag = new KComboBox( this );
+    cPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
+    cPreferredVorbisCommentCommentTag->addItem( "COMMENT" );
+    cPreferredVorbisCommentCommentTag->addItem( "DESCRIPTION" );
+    cPreferredVorbisCommentCommentTag->setCurrentIndex( config->data.general.preferredVorbisCommentCommentTag == "COMMENT" ? 0 : 1 );
+    preferredVorbisCommentCommentTagBox->addWidget( cPreferredVorbisCommentCommentTag );
+    connect( cPreferredVorbisCommentCommentTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    preferredVorbisCommentCommentTagBox->setStretch( 0, 3 );
+    preferredVorbisCommentCommentTagBox->setStretch( 1, 1 );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *preferredVorbisCommentTrackTotalTagBox = new QHBoxLayout();
+    preferredVorbisCommentTrackTotalTagBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( preferredVorbisCommentTrackTotalTagBox );
+    QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files")+":", this );
+    lPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
+    preferredVorbisCommentTrackTotalTagBox->addWidget( lPreferredVorbisCommentTrackTotalTag );
+    cPreferredVorbisCommentTrackTotalTag = new KComboBox( this );
+    cPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
+    cPreferredVorbisCommentTrackTotalTag->addItem( "TRACKTOTAL" );
+    cPreferredVorbisCommentTrackTotalTag->addItem( "TOTALTRACKS" );
+    cPreferredVorbisCommentTrackTotalTag->addItem( "TRACKNUMBER" );
+    cPreferredVorbisCommentTrackTotalTag->setCurrentIndex( cPreferredVorbisCommentTrackTotalTag->findText(config->data.general.preferredVorbisCommentTrackTotalTag) );
+    preferredVorbisCommentTrackTotalTagBox->addWidget( cPreferredVorbisCommentTrackTotalTag );
+    connect( cPreferredVorbisCommentTrackTotalTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    preferredVorbisCommentTrackTotalTagBox->setStretch( 0, 3 );
+    preferredVorbisCommentTrackTotalTagBox->setStretch( 1, 1 );
+
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *preferredVorbisCommentDiscTotalTagBox = new QHBoxLayout();
+    preferredVorbisCommentDiscTotalTagBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( preferredVorbisCommentDiscTotalTagBox );
+    QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files")+":", this );
+    lPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
+    preferredVorbisCommentDiscTotalTagBox->addWidget( lPreferredVorbisCommentDiscTotalTag );
+    cPreferredVorbisCommentDiscTotalTag = new KComboBox( this );
+    cPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
+    cPreferredVorbisCommentDiscTotalTag->addItem( "DISCTOTAL" );
+    cPreferredVorbisCommentDiscTotalTag->addItem( "TOTALDISCS" );
+    cPreferredVorbisCommentDiscTotalTag->addItem( "DISCNUMBER" );
+    cPreferredVorbisCommentDiscTotalTag->setCurrentIndex( cPreferredVorbisCommentDiscTotalTag->findText(config->data.general.preferredVorbisCommentDiscTotalTag) );
+    preferredVorbisCommentDiscTotalTagBox->addWidget( cPreferredVorbisCommentDiscTotalTag );
+    connect( cPreferredVorbisCommentDiscTotalTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
+    preferredVorbisCommentDiscTotalTagBox->setStretch( 0, 3 );
+    preferredVorbisCommentDiscTotalTagBox->setStretch( 1, 1 );
 
     box->addSpacing( ConfigDialogSpacingSmall );
 
@@ -151,7 +190,9 @@ ConfigAdvancedPage::~ConfigAdvancedPage()
 void ConfigAdvancedPage::resetDefaults()
 {
     cPreferredOggVorbisExtension->setCurrentIndex( 0 );
-    cPreferredOggVorbisCommentTag->setCurrentIndex( 1 );
+    cPreferredVorbisCommentCommentTag->setCurrentIndex( 1 );
+    cPreferredVorbisCommentTrackTotalTag->setCurrentIndex( 0 );
+    cPreferredVorbisCommentDiscTotalTag->setCurrentIndex( 0 );
     cUseVFATNames->setChecked( false );
     cWriteLogFiles->setChecked( false );
     cUseSharedMemoryForTempFiles->setChecked( false );
@@ -164,7 +205,9 @@ void ConfigAdvancedPage::resetDefaults()
 void ConfigAdvancedPage::saveSettings()
 {
     config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
-    config->data.general.preferredOggVorbisCommentTag = cPreferredOggVorbisCommentTag->currentText();
+    config->data.general.preferredVorbisCommentCommentTag = cPreferredVorbisCommentCommentTag->currentText();
+    config->data.general.preferredVorbisCommentTrackTotalTag = cPreferredVorbisCommentTrackTotalTag->currentText();
+    config->data.general.preferredVorbisCommentDiscTotalTag = cPreferredVorbisCommentDiscTotalTag->currentText();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
     config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
@@ -175,7 +218,9 @@ void ConfigAdvancedPage::saveSettings()
 void ConfigAdvancedPage::somethingChanged()
 {
     const bool changed = cPreferredOggVorbisExtension->currentText() != config->data.general.preferredOggVorbisExtension ||
-                         cPreferredOggVorbisCommentTag->currentText() != config->data.general.preferredOggVorbisCommentTag ||
+                         cPreferredVorbisCommentCommentTag->currentText() != config->data.general.preferredVorbisCommentCommentTag ||
+                         cPreferredVorbisCommentTrackTotalTag->currentText() != config->data.general.preferredVorbisCommentTrackTotalTag ||
+                         cPreferredVorbisCommentDiscTotalTag->currentText() != config->data.general.preferredVorbisCommentDiscTotalTag ||
                          cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
                          cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
                          cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||

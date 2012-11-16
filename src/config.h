@@ -83,7 +83,9 @@ public:
                 Directory = 2
             } replayGainGrouping;
             QString preferredOggVorbisExtension;
-            QString preferredOggVorbisCommentTag;
+            QString preferredVorbisCommentCommentTag;
+            QString preferredVorbisCommentTrackTotalTag;
+            QString preferredVorbisCommentDiscTotalTag;
         } general;
 
         struct Advanced

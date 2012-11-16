@@ -81,7 +81,9 @@ void Config::load()
     data.general.actionMenuReplayGainMimeTypes = group.readEntry( "actionMenuReplayGainMimeTypes", QStringList() );
     data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
     data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
-    data.general.preferredOggVorbisCommentTag = group.readEntry( "preferredOggVorbisCommentTag", "DESCRIPTION" );
+    data.general.preferredVorbisCommentCommentTag = group.readEntry( "preferredVorbisCommentCommentTag", "DESCRIPTION" );
+    data.general.preferredVorbisCommentTrackTotalTag = group.readEntry( "preferredVorbisCommentTrackTotalTag", "TRACKTOTAL" );
+    data.general.preferredVorbisCommentDiscTotalTag = group.readEntry( "preferredVorbisCommentDiscTotalTag", "DISCTOTAL" );
 
     // due to a bug lastNormalOutputDirectoryPaths could have more than 5 items
     while( data.general.lastNormalOutputDirectoryPaths.count() > 5 )
@@ -550,7 +552,9 @@ void Config::save()
     group.writeEntry( "actionMenuReplayGainMimeTypes", data.general.actionMenuReplayGainMimeTypes );
     group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
     group.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
-    group.writeEntry( "preferredOggVorbisCommentTag", data.general.preferredOggVorbisCommentTag );
+    group.writeEntry( "preferredVorbisCommentCommentTag", data.general.preferredVorbisCommentCommentTag );
+    group.writeEntry( "preferredVorbisCommentTrackTotalTag", data.general.preferredVorbisCommentTrackTotalTag );
+    group.writeEntry( "preferredVorbisCommentDiscTotalTag", data.general.preferredVorbisCommentDiscTotalTag );
 
     group = conf->group( "Advanced" );
     group.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );

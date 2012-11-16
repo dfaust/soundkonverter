@@ -4,7 +4,8 @@
 -Add: sox plugin with support for some new file formats
 -Add: Convert sample rate and sample size, downmix and apply effects (normalize, bass and treble) using sox
 -Add: Copy embedded covers for ogg files using METADATA_BLOCK_PICTURE
--Add: Option to switch between COMMENT and DESCRIPTION as comment fields for ogg vorbis and flac files
+-Add: Option to switch between COMMENT and DESCRIPTION as preferred comment field for ogg vorbis and flac files
+-Add: Option to select preferred total tracks/discs number fields for ogg vorbis and flac files
 -Add: Handle more tags like total track number
 -Add: Compression level option to the lame plugin
 -Add: Opus support (via opus-tools)

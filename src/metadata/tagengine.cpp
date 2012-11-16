@@ -160,7 +160,7 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             tagData->genre = TStringToQString( tag->genre() );
             if( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
             {
-                const QString preferredOggVorbisCommentTag = config->data.general.preferredOggVorbisCommentTag;
+                const QString preferredOggVorbisCommentTag = config->data.general.preferredVorbisCommentCommentTag;
                 const QString otherOggVorbisCommentTag = ( preferredOggVorbisCommentTag == "COMMENT" ) ? "DESCRIPTION" : "COMMENT";
                 if( file->tag() && file->tag()->fieldListMap().contains(TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
                     tagData->comment = TStringToQString( file->tag()->fieldListMap()[TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
@@ -169,7 +169,7 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             }
             else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
             {
-                const QString preferredOggVorbisCommentTag = config->data.general.preferredOggVorbisCommentTag;
+                const QString preferredOggVorbisCommentTag = config->data.general.preferredVorbisCommentCommentTag;
                 const QString otherOggVorbisCommentTag = ( preferredOggVorbisCommentTag == "COMMENT" ) ? "DESCRIPTION" : "COMMENT";
                 if( file->xiphComment() && file->xiphComment()->fieldListMap().contains(TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(),TagLib::String::UTF8)) )
                     tagData->comment = TStringToQString( file->xiphComment()->fieldListMap()[TagLib::String(preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8)].front() );
@@ -236,10 +236,16 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
                 if ( !file->tag()->fieldListMap()[ "TRACKTOTAL" ].isEmpty() ) // used by EasyTag
                     tagData->trackTotal = TStringToQString( file->tag()->fieldListMap()["TRACKTOTAL"].front() ).toInt();
+                else if ( !file->tag()->fieldListMap()[ "TOTALTRACKS" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->tag()->fieldListMap()["TOTALTRACKS"].front() ).toInt();
                 else if ( !file->tag()->fieldListMap()[ "TRACKNUMBER" ].isEmpty() )
                     track = TStringToQString( file->tag()->fieldListMap()["TRACKNUMBER"].front() );
 
-                if ( !file->tag()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
+                if ( !file->tag()->fieldListMap()[ "DISCTOTAL" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->tag()->fieldListMap()["DISCTOTAL"].front() ).toInt();
+                else if ( !file->tag()->fieldListMap()[ "TOTALDISCS" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->tag()->fieldListMap()["TOTALDISCS"].front() ).toInt();
+                else if ( !file->tag()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->tag()->fieldListMap()["DISCNUMBER"].front() );
             }
         }
@@ -252,10 +258,16 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
                 if ( !file->xiphComment()->fieldListMap()[ "TRACKTOTAL" ].isEmpty() ) // used by EasyTag
                     tagData->trackTotal = TStringToQString( file->xiphComment()->fieldListMap()["TRACKTOTAL"].front() ).toInt();
+                else if ( !file->xiphComment()->fieldListMap()[ "TOTALTRACKS" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->xiphComment()->fieldListMap()["TOTALTRACKS"].front() ).toInt();
                 else if ( !file->xiphComment()->fieldListMap()[ "TRACKNUMBER" ].isEmpty() )
                     track = TStringToQString( file->xiphComment()->fieldListMap()["TRACKNUMBER"].front() );
 
-                if ( !file->xiphComment()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
+                if ( !file->xiphComment()->fieldListMap()[ "DISCTOTAL" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->xiphComment()->fieldListMap()["DISCTOTAL"].front() ).toInt();
+                else if ( !file->xiphComment()->fieldListMap()[ "TOTALDISCS" ].isEmpty() )
+                    tagData->trackTotal = TStringToQString( file->xiphComment()->fieldListMap()["TOTALDISCS"].front() ).toInt();
+                else if ( !file->xiphComment()->fieldListMap()[ "DISCNUMBER" ].isEmpty() )
                     disc = TStringToQString( file->xiphComment()->fieldListMap()["DISCNUMBER"].front() );
             }
         }
@@ -402,12 +414,12 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
             if( TagLib::Ogg::Vorbis::File *file = dynamic_cast<TagLib::Ogg::Vorbis::File *>( fileref.file() ) )
             {
                 if( !tagData->comment.isEmpty() && file->tag() )
-                    file->tag()->addField( TagLib::String(config->data.general.preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
+                    file->tag()->addField( TagLib::String(config->data.general.preferredVorbisCommentCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
             }
             else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File *>( fileref.file() ) )
             {
                 if( !tagData->comment.isEmpty() && file->xiphComment() )
-                    file->xiphComment()->addField( TagLib::String(config->data.general.preferredOggVorbisCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
+                    file->xiphComment()->addField( TagLib::String(config->data.general.preferredVorbisCommentCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
             }
             else
             {
@@ -527,18 +539,40 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
 
                 if( tagData->trackTotal > 0 )
                 {
-                    if( file->tag()->contains("TRACKTOTAL") )
-                        file->tag()->removeField("TRACKTOTAL");
+                    if( config->data.general.preferredVorbisCommentTrackTotalTag == "TRACKNUMBER" )
+                    {
+                        if( file->tag()->contains("TRACKNUMBER") )
+                            file->tag()->removeField("TRACKNUMBER");
 
-                    file->tag()->addField( "TRACKTOTAL", TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                        file->tag()->addField( "TRACKNUMBER", TagLib::String(track.toUtf8().data(), TagLib::String::UTF8), true );
+                    }
+                    else
+                    {
+                        file->tag()->addField( TagLib::String(config->data.general.preferredVorbisCommentTrackTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                    }
                 }
 
-                if( !disc.isEmpty() )
+                if( tagData->disc > 0 )
                 {
                     if( file->tag()->contains("DISCNUMBER") )
                         file->tag()->removeField("DISCNUMBER");
 
-                    file->tag()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                    file->tag()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( tagData->discTotal > 0 )
+                {
+                    if( config->data.general.preferredVorbisCommentDiscTotalTag == "DISCNUMBER" )
+                    {
+                        if( file->tag()->contains("DISCNUMBER") )
+                            file->tag()->removeField("DISCNUMBER");
+
+                        file->tag()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                    }
+                    else
+                    {
+                        file->tag()->addField( TagLib::String(config->data.general.preferredVorbisCommentDiscTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->discTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                    }
                 }
             }
         }
@@ -556,18 +590,40 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
 
                 if( tagData->trackTotal > 0 )
                 {
-                    if( file->xiphComment()->contains("TRACKTOTAL") )
-                        file->xiphComment()->removeField("TRACKTOTAL");
+                    if( config->data.general.preferredVorbisCommentTrackTotalTag == "TRACKNUMBER" )
+                    {
+                        if( file->xiphComment()->contains("TRACKNUMBER") )
+                            file->xiphComment()->removeField("TRACKNUMBER");
 
-                    file->xiphComment()->addField( "TRACKTOTAL", TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                        file->xiphComment()->addField( "TRACKNUMBER", TagLib::String(track.toUtf8().data(), TagLib::String::UTF8), true );
+                    }
+                    else
+                    {
+                        file->xiphComment()->addField( TagLib::String(config->data.general.preferredVorbisCommentTrackTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->trackTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                    }
                 }
 
-                if( !disc.isEmpty() )
+                if( tagData->disc > 0 )
                 {
                     if( file->xiphComment()->contains("DISCNUMBER") )
                         file->xiphComment()->removeField("DISCNUMBER");
 
-                    file->xiphComment()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                    file->xiphComment()->addField( "DISCNUMBER", TagLib::String(QString::number(tagData->disc).toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
+                if( tagData->discTotal > 0 )
+                {
+                    if( config->data.general.preferredVorbisCommentDiscTotalTag == "DISCNUMBER" )
+                    {
+                        if( file->xiphComment()->contains("DISCNUMBER") )
+                            file->xiphComment()->removeField("DISCNUMBER");
+
+                        file->xiphComment()->addField( "DISCNUMBER", TagLib::String(disc.toUtf8().data(), TagLib::String::UTF8), true );
+                    }
+                    else
+                    {
+                        file->xiphComment()->addField( TagLib::String(config->data.general.preferredVorbisCommentDiscTotalTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(QString::number(tagData->discTotal).toUtf8().data(), TagLib::String::UTF8), true );
+                    }
                 }
             }
         }

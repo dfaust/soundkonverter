@@ -100,7 +100,8 @@ void Convert::convert( ConvertItem *item )
 
     if( item->outputUrl.isEmpty() )
     {
-        item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
+        // item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
+        item->outputUrl = OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
         if( QFile::exists(item->outputUrl.toLocalFile()) )
         {
             logger->log( item->logID, "\tOutput file already exists" );

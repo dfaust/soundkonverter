@@ -46,7 +46,7 @@ public:
     TagData *tags;              // we need to instruct the tagengine to read the tags from the file!
                                 // and the user can change them!
     KUrl url;                   // the original input file path name
-    KUrl outputUrl;             // if the user wants to change the output directory/file name per file
+    // KUrl outputUrl;             // if the user wants to change the output directory/file name per file
     QString codecName;          // the codec name of the input file
     State state;                // is this item being converted or ripper or etc.
     ReturnCode returnCode;      // what's the return code of the conversion

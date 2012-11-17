@@ -506,15 +506,16 @@ void FileList::updateItem( FileListItem *item )
     if( !item )
         return;
 
-    KUrl outputUrl;
-    if( !item->outputUrl.toLocalFile().isEmpty() )
-    {
-        outputUrl = item->outputUrl;
-    }
-    else
-    {
-        outputUrl = OutputDirectory::calcPath( item, config );
-    }
+    // KUrl outputUrl;
+    // if( !item->outputUrl.toLocalFile().isEmpty() )
+    // {
+    //     outputUrl = item->outputUrl;
+    // }
+    // else
+    // {
+    //     outputUrl = OutputDirectory::calcPath( item, config );
+    // }
+    const KUrl outputUrl = OutputDirectory::calcPath( item, config );
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
     removeItemWidget( item, Column_State );
@@ -1395,7 +1396,7 @@ void FileList::load( bool user )
                     QDomElement file = files.at(i).toElement();
                     FileListItem *item = new FileListItem( this );
                     item->url = KUrl(file.attribute("url"));
-                    item->outputUrl = KUrl(file.attribute("outputUrl"));
+                    // item->outputUrl = KUrl(file.attribute("outputUrl"));
                     item->codecName = file.attribute("codecName");
                     item->conversionOptionsId = conversionOptionsIds[file.attribute("conversionOptionsId").toInt()]; // TODO check if id exists
                     item->local = file.attribute("local").toInt();
@@ -1478,7 +1479,7 @@ void FileList::save( bool user )
 
         QDomElement file = list.createElement("file");
         file.setAttribute("url",item->url.pathOrUrl());
-        file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
+        // file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
         file.setAttribute("codecName",item->codecName);
         file.setAttribute("conversionOptionsId",item->conversionOptionsId);
         file.setAttribute("local",item->local);

@@ -687,18 +687,18 @@ bool CDOpener::openCdDevice( const QString& _device )
     qDeleteAll( tags );
     tags.clear();
 
-    const int trackTotal = cdda_audio_tracks( cdDrive );
-
     TagData *newTags = new TagData();
     newTags->artist = i18n("Unknown");
     newTags->album = i18n("Unknown");
-    newTags->trackTotal = trackTotal;
+    newTags->track = 1;
+    newTags->trackTotal = 1;
     newTags->disc = 1;
     newTags->discTotal = 1;
     newTags->year = (QDate::currentDate()).year();
     newTags->genre = i18n("Unknown");
     tags += newTags;
 
+    const int trackTotal = cdda_audio_tracks( cdDrive );
     for( int i=0; i<trackTotal; i++ )
     {
         TagData *newTags = new TagData();

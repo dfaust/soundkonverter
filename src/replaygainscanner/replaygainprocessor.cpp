@@ -224,14 +224,14 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
 
     if( fileListItem->type == ReplayGainFileListItem::Track )
     {
-        newItem->time = fileListItem->time;
+        newItem->time = fileListItem->length;
     }
     else
     {
         for( int j=0; j<newItem->fileListItem->childCount(); j++ )
         {
             ReplayGainFileListItem *child = (ReplayGainFileListItem*)newItem->fileListItem->child(j);
-            newItem->time += child->time;
+            newItem->time += child->length;
         }
     }
 

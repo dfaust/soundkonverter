@@ -50,7 +50,7 @@ public:
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 
     void load( bool user = false );
-    void updateAllItems();
+    void updateAllItems(); // Gets triggered if the configuration changes and the file list needs to be updated
     void updateItem( FileListItem *item );
 
     bool waitForAlbumGain( FileListItem *item );
@@ -106,9 +106,8 @@ private slots:
     void killSelectedItems();
     void itemsSelected();
 
-    void updateItems( QList<FileListItem*> items );
-
     // connected to OptionsEditor
+    void updateItems( QList<FileListItem*> items );
     void selectPreviousItem();
     void selectNextItem();
 

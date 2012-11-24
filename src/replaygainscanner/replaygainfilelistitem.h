@@ -47,7 +47,7 @@ public:
     int samplingRate;
     TagData *tags;
 
-    int time;
+    int length;
 };
 
 class ReplayGainFileListItemDelegate : public QItemDelegate

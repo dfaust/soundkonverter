@@ -384,10 +384,11 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
 
         TagData *tags = config->tagEngine()->readTags( url );
 
+        const int length = tags ? tags->length : 200;
+        const int samplingRate = tags ? tags->samplingRate : 0;
+
         if( tags && !tags->album.simplified().isEmpty() )
         {
-            const int samplingRate = tags->samplingRate;
-
             newAlbumItem = 0;
             newTrackItem = 0;
 
@@ -418,7 +419,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                     newTrackItem->samplingRate = samplingRate;
                     newTrackItem->url = url;
                     newTrackItem->tags = tags;
-                    newTrackItem->time = tags->length;
+                    newTrackItem->length = length;
                     break;
                 }
             }
@@ -456,31 +457,23 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                 newTrackItem->samplingRate = samplingRate;
                 newTrackItem->url = url;
                 newTrackItem->tags = tags;
-                newTrackItem->time = tags->length;
+                newTrackItem->length = length;
             }
-        }
-        else if( tags )
-        {
-            newTrackItem = new ReplayGainFileListItem( this );
-            newTrackItem->type = ReplayGainFileListItem::Track;
-            newTrackItem->codecName = codecName;
-            newTrackItem->samplingRate = tags->samplingRate;
-            newTrackItem->url = url;
-            newTrackItem->tags = tags;
-            newTrackItem->time = tags->length;
         }
         else
         {
             newTrackItem = new ReplayGainFileListItem( this );
             newTrackItem->type = ReplayGainFileListItem::Track;
             newTrackItem->codecName = codecName;
+            newTrackItem->samplingRate = samplingRate;
             newTrackItem->url = url;
-            newTrackItem->time = 200;
+            newTrackItem->tags = tags;
+            newTrackItem->length = length;
         }
 
         updateItem( newTrackItem );
 
-        emit timeChanged( newTrackItem->time );
+        emit timeChanged( newTrackItem->length );
     }
 
 //     emit fileCountChanged( topLevelItemCount() );
@@ -1037,31 +1030,25 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 
 void ReplayGainFileList::moveSelectedItems()
 {
-    QList<QTreeWidgetItem*> q_items = selectedItems();
-
     ReplayGainFileListItem *newAlbumItem = 0;
 
-    if( q_items.count() > 0 )
-    {
-        newAlbumItem = new ReplayGainFileListItem( this );
-        newAlbumItem->type = ReplayGainFileListItem::Album;
-        newAlbumItem->codecName = QString();
-        newAlbumItem->samplingRate = 0;
-        newAlbumItem->url = KUrl();
-        newAlbumItem->albumName = i18n("New album");
-        newAlbumItem->setExpanded( true );
-        newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
-    }
-
+    const QList<QTreeWidgetItem*> q_items = selectedItems();
     foreach( QTreeWidgetItem *q_item, q_items )
     {
-        ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+        ReplayGainFileListItem *item = dynamic_cast<ReplayGainFileListItem*>(q_item);
+        if( !item )
+            continue;
 
-        if( newAlbumItem->codecName.isEmpty() )
+        if( !newAlbumItem )
         {
+            newAlbumItem = new ReplayGainFileListItem( this );
+            newAlbumItem->type = ReplayGainFileListItem::Album;
+            newAlbumItem->albumName = i18n("New album");
             newAlbumItem->codecName = item->codecName;
             newAlbumItem->samplingRate = item->samplingRate;
             newAlbumItem->url = KUrl(item->url.directory());
+            newAlbumItem->setExpanded( true );
+            newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
         }
 
         if( item->codecName == newAlbumItem->codecName && item->samplingRate == newAlbumItem->samplingRate )
@@ -1088,7 +1075,7 @@ void ReplayGainFileList::removeSelectedItems()
         item = topLevelItem(i);
         if( item->type == ReplayGainFileListItem::Track && item->isSelected() && item->state != ReplayGainFileListItem::Processing )
         {
-            emit timeChanged( -item->time );
+            emit timeChanged( -item->length );
             delete item;
             i--;
         }
@@ -1099,7 +1086,7 @@ void ReplayGainFileList::removeSelectedItems()
                 child = (ReplayGainFileListItem*)item->child(j);
                 if( child->type == ReplayGainFileListItem::Track && ( child->isSelected() || item->isSelected() ) && child->state != ReplayGainFileListItem::Processing )
                 {
-                    emit timeChanged( -child->time );
+                    emit timeChanged( -child->length );
                     delete child;
                     j--;
                 }

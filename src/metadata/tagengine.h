@@ -108,8 +108,8 @@ public:
     } tagsRead;
 
     /** The technical information */
-    short length;
-    short samplingRate;
+    int length;
+    int samplingRate;
 };
 
 

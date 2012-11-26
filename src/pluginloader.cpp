@@ -788,7 +788,7 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
     if( mime == "inode/directory" )
         return codec;
 
-    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 );
+    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 ).toLower();
 
     foreach( const BackendPlugin::FormatInfo info, formatInfos )
     {

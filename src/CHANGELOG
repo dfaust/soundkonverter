@@ -26,6 +26,7 @@
 -Fix: Stall when Replay Gain plugin returns error code (e.g. when trying to remove musepack gain)
 -Fix: Some memory leaks
 -Fix: Performance improvements when adding large directories
+-Fix: Recognize file type correctly if extension is upper case
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

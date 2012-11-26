@@ -410,7 +410,7 @@ QString BackendPlugin::getCodecFromFile( const KUrl& filename, const QString& mi
         }
     }
 
-    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 );
+    const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 ).toLower();
 
     for( int i=0; i<allCodecs.count(); i++ )
     {

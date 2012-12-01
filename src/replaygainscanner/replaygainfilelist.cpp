@@ -457,7 +457,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
 
         totalTime += newItem->time;
 
-        updateItem( newItem );
+        updateItem( newItem, true );
 
 //         emit timeChanged( newItem->time );
     }
@@ -515,7 +515,7 @@ void ReplayGainFileList::removeSelectedItems()
     }
 }
 
-void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
+void ReplayGainFileList::updateItem( ReplayGainFileListItem *item, bool initialUpdate )
 {
     if( !item )
         return;
@@ -545,9 +545,13 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
             item->setText( Column_Album, "?" );
         }
     }
-    update( indexFromItem( item, 0 ) );
-    update( indexFromItem( item, 1 ) );
-    update( indexFromItem( item, 2 ) );
+
+    if( !initialUpdate )
+    {
+        update( indexFromItem( item, 0 ) );
+        update( indexFromItem( item, 1 ) );
+        update( indexFromItem( item, 2 ) );
+    }
 }
 
 void ReplayGainFileList::processItems( const QList<ReplayGainFileListItem*>& itemList )

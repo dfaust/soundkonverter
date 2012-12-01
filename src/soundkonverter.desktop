@@ -7,6 +7,7 @@ Type=Application
 GenericName=Audio file converter, CD ripper and Replay Gain tool
 GenericName[cs]=Převaděč zvukových souborů, vytahovač stop z CD a nástroj na vyrovnání hlasitosti přehrávaných skladeb
 GenericName[de]=Audio-Datei Konverter, CD Ripper und Replay Gain Werkzeug
+GenericName[es]=Conversor de archivos de audio, extractor de CD y herramienta de ganancia de Reproducción
 GenericName[et]=Helifailide teisendaja, CD-rippija ja helitugevuse parandustööriist
 GenericName[fr]=Convertisseur de fichiers audio, extracteur de CD et outil de Replay Gain
 GenericName[hu]=Audiofájl-konverter, CD-beolvasó és hangerő-korrekciós eszköz

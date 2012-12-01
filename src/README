@@ -45,7 +45,8 @@ If you try to convert a file that is not supported, soundKonverter will tell you
 
 soundKonverter has nothing to do with the soundconverter project, the very similar name is just an unfortunate coincident.
 
-Website: http://kde-apps.org/content/show.php?content=29024
+Websites: https://github.com/HessiJames/soundkonverter
+          http://kde-apps.org/content/show.php?content=29024
 
 
 
@@ -164,12 +165,12 @@ But make sure the source is trustworthy of course...!
 
 Git repository:
 ===============
-For everybody who is interested, there is a git repository at http://gitorious.org/soundkonverter/soundkonverter
+For everybody who is interested, there is a git repository at https://github.com/HessiJames/soundkonverter
 In order to obtain the source code from the git repository you need to install 'git' and execute the following commands:
 
 initialize local git repository:
 
-git clone git://gitorious.org/soundkonverter/soundkonverter.git
+git clone git://github.com/HessiJames/soundkonverter.git
 
 update repository:
 
@@ -227,5 +228,5 @@ Translations:
 If you would like to translate soundKonverter to your native language you can request a new translation at https://www.transifex.net/projects/p/soundkonverter
 
 Patches:
-You can very easily clone the current code with gitorious. You can then work in your cloned version and request a merge.
-Have a look at: http://gitorious.org/soundkonverter/soundkonverter
+You can very easily fork the current code with github. You can then work in your forked version and request a pull.
+Have a look at: https://github.com/HessiJames/soundkonverter

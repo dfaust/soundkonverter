@@ -449,7 +449,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
                 newAlbumItem->setExpanded( true );
                 newAlbumItem->setFlags( newAlbumItem->flags() ^ Qt::ItemIsDragEnabled );
                 lastAlbumItem = newAlbumItem;
-                updateItem( newAlbumItem );
+                updateItem( newAlbumItem, true );
                 // create track element
                 newTrackItem = new ReplayGainFileListItem( newAlbumItem );
                 newTrackItem->type = ReplayGainFileListItem::Track;
@@ -471,7 +471,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
             newTrackItem->length = length;
         }
 
-        updateItem( newTrackItem );
+        updateItem( newTrackItem, true );
 
         emit timeChanged( newTrackItem->length );
     }
@@ -496,7 +496,7 @@ void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QS
     pScanStatus->hide(); // hide the status bar, when the scan is done
 }
 
-void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
+void ReplayGainFileList::updateItem( ReplayGainFileListItem *item, bool initialUpdate )
 {
     if( !item )
         return;
@@ -529,9 +529,13 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item )
             item->setText( Column_Album, "?" );
         }
     }
-    update( indexFromItem( item, 0 ) );
-    update( indexFromItem( item, 1 ) );
-    update( indexFromItem( item, 2 ) );
+
+    if( !initialUpdate )
+    {
+        update( indexFromItem( item, 0 ) );
+        update( indexFromItem( item, 1 ) );
+        update( indexFromItem( item, 2 ) );
+    }
 }
 
 void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )

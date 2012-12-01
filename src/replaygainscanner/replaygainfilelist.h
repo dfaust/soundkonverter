@@ -86,7 +86,7 @@ private:
     void processNextItem();
     int waitingCount();
     int processingCount();
-    void updateItem( ReplayGainFileListItem *item );
+    void updateItem( ReplayGainFileListItem *item, bool initialUpdate = false );
 
 public slots:
     void addDir( const KUrl& directory, bool recursive, const QStringList& codecList );

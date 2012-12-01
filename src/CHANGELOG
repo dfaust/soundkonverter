@@ -16,7 +16,6 @@
 -Change: Quit the Replay Gain tool when it gets closed
 -Change: Rename the m4a format to m4a/aac and alac to m4a/alac
 -Fix: Handle internal Replay Gain calculation properly
--Fix: Drop directories onto the Replay Gain tool window
 -Fix: Don't accept dropping tracks onto albums with different codec or sampling rate in the Replay Gain tool
 -Fix: Better file type recognition
 -Fix: Output options control via command line parameters when ripping audio cds
@@ -27,6 +26,7 @@
 -Fix: Some memory leaks
 -Fix: Performance improvements when adding large directories
 -Fix: Recognize file type correctly if extension is upper case
+-Fix: Dropping directories on the Replay Gain tool wouldn't work
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

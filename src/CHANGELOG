@@ -3,6 +3,7 @@
 -Fix: Some memory leaks
 -Fix: Performance improvements when adding large directories
 -Fix: Recognize file type correctly if extension is upper case
+-Fix: Dropping directories on the Replay Gain tool wouldn't work
 
 1.6.3:
 -Add: Brazilian Portuguese translation (by André Marcelo Alvarenga)

@@ -182,7 +182,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
             QString mimeType;
             QString codecName = config->pluginLoader()->getCodecFromFile( q_urls.at(i), &mimeType );
 
-            if( codecName == "inode/directory" )
+            if( mimeType == "inode/directory" )
             {
                 k_urls_dirs += q_urls.at(i);
             }

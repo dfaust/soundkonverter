@@ -28,8 +28,9 @@ mac             (ape)                                                   (ape)
 shorten         (shorten)                                               (shorten)
 wavpack         (wavpack)                                               (wavpack)
 ttaenc          (tta)                                                   (tta)
-sox
+opustools       (opus)                                                  (opus)
 speex           (speex)                                                 (speex)
+sox             (ogg vorbis,mp3,flac,mp2,8svx,aiff,amr nb,amr wb)       (ogg vorbis,mp3,flac,mp2,8svx,aiff,amr nb,amr wb)
 
 Filters:
 sox             (sample rate, sample size, channels, normalize, bass, treble)

@@ -180,62 +180,48 @@ void OptionsSimple::updateProfiles()
 
 void OptionsSimple::profileInfo()
 {
-    QString sProfileString = cProfile->currentText();
+    const QString sProfileString = cProfile->currentText();
+
+    QString info;
 
     if( sProfileString == i18n("Very low") )
     {
-        KMessageBox::information( this,
-            i18n("This produces sound files of a very low quality.\nThat can be useful if you have a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files with a very low quality can be useful if you have a mobile device where your storage space is limited.\nIt is not recommended to save your music in this quality without a copy of higher quality.");
     }
     else if( sProfileString == i18n("Low") )
     {
-        KMessageBox::information( this,
-            i18n("This produces sound files of a low quality.\nThat can be useful if you have a mobile device where your storage space is limited. It is not recommended to save your music in this quality without a copy with higher quality."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files with a low quality can be useful if you have a mobile device where your storage space is limited.\nIt is not recommended to save your music in this quality without a copy of higher quality.");
     }
     else if( sProfileString == i18n("Medium") )
     {
-        KMessageBox::information( this,
-            i18n("This produces sound files of a medium quality.\nIf your disc space is limited, you can use this to save your music."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files with a medium quality is a compromise between quality and file size.\nMost people might not hear much of a difference to the original files but you should only use it to save music if your storage space is limited.");
     }
     else if( sProfileString == i18n("High") )
     {
-        KMessageBox::information( this,
-            i18n("This produces sound files of a high quality.\nIf you have enough disc space available, you can use this to save your music."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files with a high quality is a good choice if you have enough storage space available. You can use this to save your music.");
     }
     else if( sProfileString == i18n("Very high") )
     {
-        KMessageBox::information( this,
-            i18n("This produces sound files of a very high quality.\nYou should only use this, if you are a quality freak and have enough disc space available."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files with a very high quality is fine if you have enough storage space.");
     }
     else if( sProfileString == i18n("Lossless") )
     {
-        KMessageBox::information( this,
-            i18n("This produces files, that have exact the same quality as the input files.\nThis files are very big and definitely only for quality freaks."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("Encoding files lossless will preserve the quality of the original file.\nIt is only then useful if the original file has a good quality (e.g. audio CD).\nThe file size will be big, so you should only use it if you have enough storage space.");
     }
     else if( sProfileString == i18n("Hybrid") )
     {
-        KMessageBox::information( this,
-            i18n("This produces two files. One lossy compressed playable file and one correction file.\nBoth files together result in a file that is equivalent to the input file."),
-            i18n("Profile info for %1",sProfileString) );
+        // info = i18n("This produces two files. One lossy compressed playable file and one correction file.\nBoth files together result in a file that is equivalent to the input file.");
     }
     else if( sProfileString == i18n("User defined") )
     {
-        KMessageBox::information( this,
-            i18n("You can define your own profile in the \"detailed\" tab."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("You can define your own profile in the \"detailed\" tab.");
     }
     else // the info button is hidden when showing user defined profiles
     {
-        KMessageBox::information( this,
-            i18n("This is a user defined profile."),
-            i18n("Profile info for %1",sProfileString) );
+        info = i18n("This is a user defined profile.");
     }
+
+    KMessageBox::information( this, info, i18n("Profile info for %1",sProfileString) );
 }
 
 void OptionsSimple::profileRemove()

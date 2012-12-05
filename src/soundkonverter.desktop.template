@@ -7,4 +7,4 @@ Type=Application
 _GenericName=Audio file converter, CD ripper and Replay Gain tool
 Terminal=false
 Categories=AudioVideo;Audio;AudioVideoEditing;KDE;
-X-DocPath=http://kde-apps.org/content/show.php?content=29024
+X-DocPath=https://github.com/HessiJames/soundkonverter/wiki

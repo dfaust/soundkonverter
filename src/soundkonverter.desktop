@@ -15,4 +15,4 @@ GenericName[pt_BR]=Conversor de arquivo de áudio, extração de CD e ferramenta
 GenericName[ru]=Утилита для преобразования аудиоформатов, риппинга CD и выравнивания громкости
 Terminal=false
 Categories=AudioVideo;Audio;AudioVideoEditing;KDE;
-X-DocPath=http://kde-apps.org/content/show.php?content=29024
+X-DocPath=https://github.com/HessiJames/soundkonverter/wiki

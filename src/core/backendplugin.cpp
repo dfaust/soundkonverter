@@ -37,21 +37,21 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     if( codecName == "wav" )
     {
         info.lossless = true;
-        info.description = i18n("Wave won't compress the audio stream.");
+        info.description = i18n("Wave is a very simple audio format that doesn't compress the audio stream so it's lossless but the file size is very big and it doesn't support advanced features like tags.<br>It is supported by virtually any software or device.<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/wiki/WAV</a>");
         info.mimeTypes.append( "audio/x-wav" );
         info.mimeTypes.append( "audio/wav" );
         info.extensions.append( "wav" );
     }
     else if( codecName == "aac" )
     {
-        info.description = i18n("Advanced Audio Coding is a lossy and popular audio format. It is widely used by Apple Inc."); // http://en.wikipedia.org/wiki/Advanced_Audio_Coding
+        info.description = i18n("Advanced Audio Coding (AAC) is a lossy and popular audio format. It is widely used by Apple Inc.<br>In soundKonverter \"aac\" refers to only the codec. In order to get a file with tagging capabilities use \"m4a/aac\".<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>");
         info.mimeTypes.append( "audio/aac" );
         info.extensions.append( "aac" );
     }
     else if( codecName == "m4a/aac" )
     {
         info.priority = 90;
-        info.description = i18n("m4a files encoded with the aac (Advanced Audio Coding) codec. It is widely used by Apple Inc.");
+        info.description = i18n("Advanced Audio Coding (AAC) is a lossy and popular audio format. It is widely used by Apple Inc.<br>In soundKonverter \"m4a/aac\" refers to a MPEG-4 audio file encoded with AAC.<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>");
         info.mimeTypes.append( "audio/mp4" );
         info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
@@ -63,7 +63,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     {
         info.priority = 80;
         info.lossless = true;
-        info.description = i18n("m4a files encoded with the alac (Apple Lossless Audio Codec) codec. It is widely used by Apple Inc."); // http://en.wikipedia.org/wiki/Alac
+        info.description = i18n("Apple Lossless Audio Codec (ALAC) is a lossless audio format. It is widely used by Apple Inc.<br>In soundKonverter \"m4a/alac\" refers to a MPEG-4 audio file encoded with ALAC.<br><br><a href=\"http://en.wikipedia.org/wiki/Apple_Lossless\">http://en.wikipedia.org/wiki/Apple Lossless</a>");
         info.mimeTypes.append( "audio/mp4" );
         info.mimeTypes.append( "audio/x-m4a" );
         info.extensions.append( "m4a" );
@@ -73,7 +73,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "mp4" )
     {
-//         info.description = i18n("mp4 files are video files with an aac encoded audio stream. It is widely used by Apple Inc.");
+        // info.description = i18n("mp4 files are video files with an aac encoded audio stream. It is widely used by Apple Inc.");
         info.mimeTypes.append( "video/mp4" );
         info.extensions.append( "mp4" );
         info.extensions.append( "m4v" );
@@ -81,7 +81,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "ogg vorbis" )
     {
-        info.description = i18n("Ogg Vorbis is a free and lossy high quality audio codec.\nFor more information see: http://www.xiph.org/vorbis/");
+        info.description = i18n("Ogg Vorbis is a lossy and popular audio format.<br>It is free of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/Vorbis\">http://en.wikipedia.org/wiki/Vorbis</a>");
         info.mimeTypes.append( "application/ogg" );
         info.mimeTypes.append( "audio/vorbis" );
         info.mimeTypes.append( "application/x-ogg" );
@@ -92,7 +92,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "opus" )
     {
-        info.description = i18n("Opus is a free and lossy low latency audio codec.\nIt was designed for real time communication over the internet.\nFor more information see: http://opus-codec.org");
+        info.description = i18n("Opus is a lossy audio format designed for real time communication over the internet.<br>It can cover a wide range of bitrates with a high quality and it is free of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/wiki/Opus (audio format)</a>");
         info.mimeTypes.append( "audio/ogg" );
         info.mimeTypes.append( "audio/opus" );
         info.extensions.append( "opus" );
@@ -100,7 +100,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "mp3" )
     {
-        info.description = i18n("MP3 is the most popular lossy audio codec. It's supported by all audio players.");
+        info.description = i18n("MPEG-1 or MPEG-2 Audio Layer III (MP3) is the most popular lossy audio format.<br>It is supported by virtually all audio players even though it has some legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/MP3\">http://en.wikipedia.org/wiki/MP3</a>");
         info.mimeTypes.append( "audio/x-mp3" );
         info.mimeTypes.append( "audio/mpeg" );
         info.mimeTypes.append( "audio/mp3" );
@@ -109,7 +109,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "flac" )
     {
         info.lossless = true;
-        info.description = i18n("Flac is the free lossless audio codec.\nAs it's name says, it compresses without any loss of quality.");
+        info.description = i18n("Free Lossless Audio Codec (FLAC) is a lossless audio format.<br>It is free of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>");
         info.mimeTypes.append( "audio/flac" );
         info.mimeTypes.append( "audio/x-flac" );
         info.mimeTypes.append( "audio/x-flac+ogg" );
@@ -119,13 +119,13 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "wma" )
     {
-        info.description = i18n("Windows Media Audio is a proprietary audio codec from Microsoft.");
+        info.description = i18n("Windows Media Audio (WMA) is a lossy audio format developed by Microsoft.<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://en.wikipedia.org/wiki/Windows Media Audio</a>");
         info.mimeTypes.append( "audio/x-ms-wma" );
         info.extensions.append( "wma" );
     }
-    else if( codecName == "ac3" ) // TODO description
+    else if( codecName == "ac3" )
     {
-        info.description = i18n("Dolby Digital-Audio"); // http://en.wikipedia.org/wiki/Ac3
+        info.description = i18n("AC3 or AC-3 is part of the Dolby Digital format family.<br>It was designed to be used for movies (e.g. DVDs) and supports sourround sound.<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/wiki/Dolby Digital</a>");
         info.mimeTypes.append( "audio/ac3" );
         info.extensions.append( "ac3" );
     }
@@ -138,7 +138,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //     }
     else if( codecName == "mp2" )
     {
-        info.description = i18n("MPEG-1 Audio Layer II is an old lossy audio format."); // http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II
+        info.description = i18n("MPEG-1 or MPEG-2 Audio Layer II (MP2) is an old lossy audio format.<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>");
         info.mimeTypes.append( "audio/mp2" );
         info.mimeTypes.append( "audio/x-mp2" );
         info.extensions.append( "mp2" );
@@ -147,27 +147,23 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //     {
 //         info.lossless = false;
 //         info.description = i18n("Sonic");
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
 //     }
 //     else if( codecName == "sonicls" )
 //     {
 //         info.lossless = true;
 //         info.description = i18n("Sonic Lossless");
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
 //     }
     else if( codecName == "als" ) // TODO mime type, etc.
     {
         info.lossless = true;
-        info.description = i18n("MPEG-4 Audio Lossless Coding"); // http://en.wikipedia.org/wiki/Audio_Lossless_Coding
+        // info.description = i18n("MPEG-4 Audio Lossless Coding"); // http://en.wikipedia.org/wiki/Audio_Lossless_Coding
         info.mimeTypes.append( "audio/mp4" );
         info.extensions.append( "mp4" );
     }
     else if( codecName == "amr nb" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for speech compression in mobile communication."); // http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec
+        info.description = i18n("Adaptive Multi-Rate Narrow-Band (AMR NB) is mainly used for speech compression for mobile communication.<br><br><a href=\"http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/Adaptive Multi-Rate audio codec</a>");
         info.mimeTypes.append( "audio/amr" );
         info.mimeTypes.append( "audio/3gpp" );
         info.mimeTypes.append( "audio/3gpp2" );
@@ -176,7 +172,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "amr wb" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses a higher data rate resulting in a higher quality."); // http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband
+        info.description = i18n("Adaptive Multi-Rate Wide-Band (AMR WB) is an advanced version of AMR NB which uses a higher data rate resulting in a higher quality.<br>Still it should be used only for speech compression.<br><br><a href=\"http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en.wikipedia.org/wiki/Adaptive Multi-Rate Wideband</a>");
         info.mimeTypes.append( "audio/amr-wb" );
         info.mimeTypes.append( "audio/3gpp" );
         info.extensions.append( "awb" );
@@ -184,7 +180,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "ape" )
     {
         info.lossless = true;
-        info.description = i18n("Monkey’s Audio is a fast and efficient but proprietary lossless audio format.");
+        info.description = i18n("Monkey's Audio is a lossless audio format.<br><br><a href=\"http://en.wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's Audio</a>");
         info.mimeTypes.append( "audio/x-ape" );
         info.extensions.append( "ape" );
         info.extensions.append( "mac" );
@@ -193,21 +189,21 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "speex" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("Speex is a free and lossy audio codec designed for low quality speech encoding.\nFor more information see: http://www.speex.org");
+        info.description = i18n("Speex is a lossy audio format designed for speech encoding.<br>It is free of any legal restrictions. Since the release of Opus, Speex is considered obsolete.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en.wikipedia.org/wiki/Speex<a/>");
         info.mimeTypes.append( "audio/x-speex" );
         info.mimeTypes.append( "audio/x-speex+ogg" );
         info.extensions.append( "spx" );
     }
     else if( codecName == "mp1" )
     {
-        info.description = i18n("MPEG-1 Audio Layer I very old and lossy file format."); // http://en.wikipedia.org/wiki/MP1
+        // info.description = i18n("MPEG-1 Audio Layer I very old and lossy file format."); // http://en.wikipedia.org/wiki/MP1
         info.mimeTypes.append( "audio/mpeg" );
         info.mimeTypes.append( "audio/mpa" );
         info.extensions.append( "mp1" );
     }
     else if( codecName == "musepack" )
     {
-        info.description = i18n("Musepack is a free and lossy file format based on mp2 and optimized for high quality."); // http://en.wikipedia.org/wiki/Musepack
+        info.description = i18n("Musepack (MPC) is a free and lossy file format based on mp2 and optimized for high quality.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack\">http://en.wikipedia.org/wiki/Musepack<a/>");
         info.mimeTypes.append( "audio/x-musepack" );
         info.mimeTypes.append( "audio/musepack" );
         info.extensions.append( "mpc" );
@@ -217,7 +213,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "shorten" )
     {
         info.lossless = true;
-        info.description = i18n("Shorten is a free and lossless audio codec.\nFor more information see: http://etree.org/shnutils/shorten/");
+        info.description = i18n("Shorten (SHN) is a free and lossless audio format.<br><br><a href=\"http://en.wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>");
         info.mimeTypes.append( "application/x-shorten" );
         info.extensions.append( "shn" );
     }
@@ -225,48 +221,42 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
 //     {
 //         info.lossless = true;
 //         info.description = i18n("Meridian Lossless Packing is an old propritary lossless audio format."); // http://en.wikipedia.org/wiki/Meridian_Lossless_Packing
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
 //     }
 //     else if( codecName == "truehd" )
 //     {
 //         info.lossless = true;
 //         info.description = i18n("Dolby TrueHD is a lossless audio format based on mlp for use on Blu-Ray discs."); // http://en.wikipedia.org/wiki/Dolby_TrueHD
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
 //     }
 //     else if( codecName == "truespeech" )
 //     {
 //         info.lossless = false;
 //         info.description = i18n("Truespeech is a propritary speech codec for low bitrates."); // http://en.wikipedia.org/wiki/Truespeech
-// //         info.mimeTypes.append( "audio/x-ms-wma" );
-// //         info.extensions.append( "wma" );
 //     }
     else if( codecName == "tta" )
     {
         info.lossless = true;
-        info.description = i18n("True Audio is a free lossless audio format."); // http://en.wikipedia.org/wiki/TTA_(codec)
+        info.description = i18n("True Audio (TTA) is a free and lossless audio format.<br><br><a href=\"http://en.wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/TTA (codec)<a/>");
         info.mimeTypes.append( "audio/x-tta" );
         info.extensions.append( "tta" );
     }
     else if( codecName == "wavpack" )
     {
         info.lossless = true;
-        info.description = i18n("WavPack is a free and lossless audio codec.\nFor more information see: http://www.wavpack.com");
+        info.description = i18n("WavPack (WV) is a free and lossless audio format.<br><br><a href=\"http://en.wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>");
         info.mimeTypes.append( "audio/x-wavpack" );
         info.extensions.append( "wv" );
         info.extensions.append( "wvp" );
     }
     else if( codecName == "ra" )
     {
-        info.description = i18n("Real Media Audio is a proprietary and lossy codec.");
+        // info.description = i18n("Real Media Audio is a proprietary and lossy codec.");
         info.mimeTypes.append( "audio/vnd.rn-realaudio" );
         info.extensions.append( "ra" );
         info.extensions.append( "rax" );
     }
     else if( codecName == "3gp" )
     {
-        info.description = i18n("3GP is a audio/video container format for mobile devices."); // http://de.wikipedia.org/wiki/3gp
+        // info.description = i18n("3GP is a audio/video container format for mobile devices."); // http://de.wikipedia.org/wiki/3gp
         info.mimeTypes.append( "video/3gpp" );
         info.mimeTypes.append( "audio/3gpp" );
         info.mimeTypes.append( "video/3gpp2" );
@@ -280,7 +270,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "rm" )
     {
-        info.description = i18n("Real Media is a proprietary and lossy codec.");
+        // info.description = i18n("Real Media is a proprietary and lossy codec.");
         info.mimeTypes.append( "application/vnd.rn-realmedia" );
         info.extensions.append( "rm" );
         info.extensions.append( "rmj" );
@@ -349,7 +339,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "midi" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("midi is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
+        // info.description = i18n("midi is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
         info.mimeTypes.append( "audio/midi" );
         info.extensions.append( "midi" );
         info.extensions.append( "mid" );
@@ -358,7 +348,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "mod" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("Amiga-SoundTracker-Audio is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
+        // info.description = i18n("Amiga-SoundTracker-Audio is a very old sound file format, that doesn't encode audio waves but stores instrument timings.");
         info.mimeTypes.append( "audio/x-mod" );
         info.extensions.append( "669" );
         info.extensions.append( "m15" );
@@ -371,13 +361,13 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "sad" )
     {
         info.inferiorQuality = true;
-//         info.description = i18n("Black & White audio files where used for the game Black & White and contain an MP2 stream.");
+        // info.description = i18n("Black & White audio files where used for the game Black & White and contain an MP2 stream.");
         info.extensions.append( "sad" );
     }
     else if( codecName == "8svx" )
     {
         info.inferiorQuality = true;
-        info.description = i18n("8-Bit Sampled Voice (8SVX) is an audio file format standard developed by Electronic Arts for the Commodore-Amiga computer series.");
+        info.description = i18n("8-Bit Sampled Voice (8SVX) is an audio file format standard developed by Electronic Arts for the Commodore-Amiga computer series.<br><br><a href=\"http://en.wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>");
         info.mimeTypes.append( "audio/x-8svx" );
         info.mimeTypes.append( "audio/8svx" );
         info.mimeTypes.append( "audio/x-aiff" );
@@ -388,7 +378,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     else if( codecName == "aiff" )
     {
         info.lossless = true;
-        info.description = i18n("Audio Interchange File Format (AIFF) is an audio file format standard used for storing sound data for personal computers and other electronic audio devices.");
+        info.description = i18n("Audio Interchange File Format (AIFF) is a very simple audio format that doesn't compress the audio stream so it's lossless but the file size is very big and it doesn't support advanced features like tags.<br><br><a href=\"http://en.wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en.wikipedia.org/wiki/Audio Interchange File Format</a>");
         info.mimeTypes.append( "audio/x-aiff" );
         info.mimeTypes.append( "audio/aiff" );
         info.extensions.append( "aiff" ); // aiff has meta data, aif not

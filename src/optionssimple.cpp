@@ -272,18 +272,12 @@ void OptionsSimple::profileRemove()
 
 void OptionsSimple::formatInfo()
 {
-    QString format = cFormat->currentText();
-    QString info = config->pluginLoader()->codecDescription(format);
+    const QString format = cFormat->currentText();
+    const QString info = config->pluginLoader()->codecDescription(format);
 
     if( !info.isEmpty() )
     {
         KMessageBox::information( this, info, i18n("Format info for %1",format), QString(), KMessageBox::Notify | KMessageBox::AllowLink );
-/*        QMessageBox *messageBox = new QMessageBox( this );
-        messageBox->setIcon( QMessageBox::Information );
-        messageBox->setWindowTitle( i18n("Format info for %1",format) );
-        messageBox->setText( info.replace("\n","<br>") );
-        messageBox->setTextFormat( Qt::RichText );
-        messageBox->exec();*/
     }
     else
     {

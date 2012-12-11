@@ -30,7 +30,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     QHBoxLayout *presetBox = new QHBoxLayout();
     grid->addLayout( presetBox, 0, 0 );
 
-    QLabel *lPreset = new QLabel( i18n("Preset")+":", this );
+    QLabel *lPreset = new QLabel( i18n("Preset:"), this );
     presetBox->addWidget( lPreset );
     cPreset = new KComboBox( this );
     cPreset->addItem( i18nc("Backend profile","Telephone") );
@@ -91,7 +91,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 2, 0 );
 
-    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );

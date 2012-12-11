@@ -42,7 +42,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout();
     preferredOggVorbisExtensionBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredOggVorbisExtensionBox );
-    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files")+":", this );
+    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files:"), this );
     preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
     cPreferredOggVorbisExtension = new KComboBox( this );
     cPreferredOggVorbisExtension->addItem( "ogg" );
@@ -58,7 +58,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *preferredVorbisCommentCommentTagBox = new QHBoxLayout();
     preferredVorbisCommentCommentTagBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredVorbisCommentCommentTagBox );
-    QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files")+":", this );
+    QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
     preferredVorbisCommentCommentTagBox->addWidget( lPreferredVorbisCommentCommentTag );
     cPreferredVorbisCommentCommentTag = new KComboBox( this );
@@ -76,7 +76,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *preferredVorbisCommentTrackTotalTagBox = new QHBoxLayout();
     preferredVorbisCommentTrackTotalTagBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredVorbisCommentTrackTotalTagBox );
-    QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files")+":", this );
+    QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
     preferredVorbisCommentTrackTotalTagBox->addWidget( lPreferredVorbisCommentTrackTotalTag );
     cPreferredVorbisCommentTrackTotalTag = new KComboBox( this );
@@ -95,7 +95,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *preferredVorbisCommentDiscTotalTagBox = new QHBoxLayout();
     preferredVorbisCommentDiscTotalTagBox->addSpacing( ConfigDialogOffset );
     box->addLayout( preferredVorbisCommentDiscTotalTagBox );
-    QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files")+":", this );
+    QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
     preferredVorbisCommentDiscTotalTagBox->addWidget( lPreferredVorbisCommentDiscTotalTag );
     cPreferredVorbisCommentDiscTotalTag = new KComboBox( this );
@@ -148,7 +148,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout();
     useSharedMemoryForTempFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( useSharedMemoryForTempFilesBox );
-    cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than")+":", this );
+    cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than:"), this );
     cUseSharedMemoryForTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
     cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
     useSharedMemoryForTempFilesBox->addWidget( cUseSharedMemoryForTempFiles );

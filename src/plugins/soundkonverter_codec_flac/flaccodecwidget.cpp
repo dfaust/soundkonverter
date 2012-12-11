@@ -26,7 +26,7 @@ FlacCodecWidget::FlacCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lCompressionLevel = new QLabel( i18n("Compression level")+":", this );
+    QLabel *lCompressionLevel = new QLabel( i18n("Compression level:"), this );
     topBox->addWidget( lCompressionLevel );
 
     sCompressionLevel = new QSlider( Qt::Horizontal, this );

@@ -50,7 +50,7 @@ OpusToolsCodecWidget::OpusToolsCodecWidget()
 
     topBox->addSpacing( 12 );
 
-    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode")+":", this );
+    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     topBox->addWidget( lBitrateMode );
     cBitrateMode = new KComboBox( this );
     cBitrateMode->addItem( i18n("Average") );

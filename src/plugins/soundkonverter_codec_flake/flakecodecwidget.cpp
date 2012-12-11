@@ -28,7 +28,7 @@ FlakeCodecWidget::FlakeCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lCompressionLevel = new QLabel( i18n("Compression level")+":", this );
+    QLabel *lCompressionLevel = new QLabel( i18n("Compression level:"), this );
     topBox->addWidget( lCompressionLevel );
 
     sCompressionLevel = new QSlider( Qt::Horizontal, this );
@@ -57,7 +57,7 @@ FlakeCodecWidget::FlakeCodecWidget()
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 1, 0 );
 
-    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );

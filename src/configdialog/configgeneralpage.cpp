@@ -49,7 +49,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *startTabBox = new QHBoxLayout();
     startTabBox->addSpacing( ConfigDialogOffset );
     box->addLayout( startTabBox );
-    QLabel *lStartTab = new QLabel( i18n("Start in Mode")+":", this );
+    QLabel *lStartTab = new QLabel( i18n("Start in Mode:"), this );
     startTabBox->addWidget( lStartTab );
     cStartTab = new KComboBox( this );
     cStartTab->addItem( i18n("Last used") );
@@ -64,7 +64,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *defaultProfileBox = new QHBoxLayout();
     defaultProfileBox->addSpacing( ConfigDialogOffset );
     box->addLayout( defaultProfileBox );
-    QLabel *lDefaultProfile = new QLabel( i18n("Default profile")+":", this );
+    QLabel *lDefaultProfile = new QLabel( i18n("Default profile:"), this );
     defaultProfileBox->addWidget( lDefaultProfile );
     cDefaultProfile = new KComboBox( this );
     QStringList sDefaultProfile;
@@ -82,7 +82,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     defaultProfileBox->addWidget( cDefaultProfile );
     connect( cDefaultProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
     connect( cDefaultProfile, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    QLabel *lDefaultFormat = new QLabel( i18n("Default format")+":", this );
+    QLabel *lDefaultFormat = new QLabel( i18n("Default format:"), this );
     defaultProfileBox->addWidget( lDefaultFormat );
     cDefaultFormat = new KComboBox( this );
     cDefaultFormat->setCurrentIndex( cDefaultFormat->findText(config->data.general.defaultFormat) );
@@ -100,7 +100,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 
 //     QHBoxLayout *priorityBox = new QHBoxLayout();
 //     box->addLayout( priorityBox );
-//     QLabel *lPriority = new QLabel( i18n("Process priority of the backends")+":", this );
+//     QLabel *lPriority = new QLabel( i18n("Process priority of the backends:"), this );
 //     priorityBox->addWidget( lPriority );
 //     cPriority = new KComboBox( this );
 //     sPriority += i18n("Normal");
@@ -115,7 +115,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *conflictHandlingBox = new QHBoxLayout();
     conflictHandlingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( conflictHandlingBox );
-    QLabel *lConflictHandling = new QLabel( i18n("Conflict handling")+":", this );
+    QLabel *lConflictHandling = new QLabel( i18n("Conflict handling:"), this );
     conflictHandlingBox->addWidget( lConflictHandling );
     cConflictHandling = new KComboBox( this );
     cConflictHandling->addItem( i18n("Generate new file name") );
@@ -131,7 +131,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *numFilesBox = new QHBoxLayout();
     numFilesBox->addSpacing( ConfigDialogOffset );
     box->addLayout( numFilesBox );
-    QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once")+":", this );
+    QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once:"), this );
     numFilesBox->addWidget( lNumFiles );
     iNumFiles = new KIntSpinBox( this );
     iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
@@ -164,7 +164,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QHBoxLayout *replayGainGroupingBox = new QHBoxLayout();
     replayGainGroupingBox->addSpacing( ConfigDialogOffset );
     box->addLayout( replayGainGroupingBox );
-    QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by")+":", this );
+    QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by:"), this );
     replayGainGroupingBox->addWidget( lReplayGainGrouping );
     cReplayGainGrouping = new KComboBox( this );
     cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Album tags and directories") );

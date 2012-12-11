@@ -25,7 +25,7 @@ SoxFilterWidget::SoxFilterWidget()
     QHBoxLayout *box1 = new QHBoxLayout();
     grid->addLayout( box1, gridRow++, 0 );
 
-    chSampleRate = new QCheckBox( i18n("Sample rate")+":", this );
+    chSampleRate = new QCheckBox( i18n("Sample rate:"), this );
     connect( chSampleRate, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleRate );
     cSampleRate = new KComboBox( this );
@@ -47,7 +47,7 @@ SoxFilterWidget::SoxFilterWidget()
 
     box1->addSpacing( 12 );
 
-    chSampleSize = new QCheckBox( i18n("Sample size")+":", this );
+    chSampleSize = new QCheckBox( i18n("Sample size:"), this );
     connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleSize );
     cSampleSize = new KComboBox( this );
@@ -63,7 +63,7 @@ SoxFilterWidget::SoxFilterWidget()
 
     box1->addSpacing( 12 );
 
-    chChannels = new QCheckBox( i18n("Channels")+":", this );
+    chChannels = new QCheckBox( i18n("Channels:"), this );
     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chChannels );
     cChannels = new KComboBox( this );

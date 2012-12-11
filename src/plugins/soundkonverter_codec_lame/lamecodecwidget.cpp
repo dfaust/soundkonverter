@@ -28,7 +28,7 @@ LameCodecWidget::LameCodecWidget()
     QHBoxLayout *presetBox = new QHBoxLayout();
     grid->addLayout( presetBox, 0, 0 );
 
-    QLabel *lPreset = new QLabel( i18n("Preset")+":", this );
+    QLabel *lPreset = new QLabel( i18n("Preset:"), this );
     presetBox->addWidget( lPreset );
     cPreset = new KComboBox( this );
     cPreset->addItem( i18nc("Backend profile","Medium") );
@@ -77,7 +77,7 @@ LameCodecWidget::LameCodecWidget()
     QHBoxLayout *userdefinedTopBox = new QHBoxLayout();
     userdefinedBoxLayout->addLayout( userdefinedTopBox );
 
-    QLabel *lMode = new QLabel( i18n("Mode")+":", userdefinedBox );
+    QLabel *lMode = new QLabel( i18n("Mode:"), userdefinedBox );
     userdefinedTopBox->addWidget( lMode );
 
     cMode = new KComboBox( userdefinedBox );
@@ -103,7 +103,7 @@ LameCodecWidget::LameCodecWidget()
 
     userdefinedTopBox->addSpacing( 12 );
 
-    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode")+":", this );
+    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     userdefinedTopBox->addWidget( lBitrateMode );
     cBitrateMode = new KComboBox( this );
     cBitrateMode->addItem( i18n("Variable") );
@@ -120,7 +120,7 @@ LameCodecWidget::LameCodecWidget()
     QHBoxLayout *bottomBox = new QHBoxLayout();
     grid->addLayout( bottomBox, 2, 0 );
 
-    QLabel *lCompressionLevel = new QLabel( i18n("Compression level")+":", this );
+    QLabel *lCompressionLevel = new QLabel( i18n("Compression level:"), this );
     bottomBox->addWidget( lCompressionLevel );
 
     sCompressionLevel = new QSlider( Qt::Horizontal, this );
@@ -143,7 +143,7 @@ LameCodecWidget::LameCodecWidget()
 
     bottomBox->addSpacing( 12 );
 
-    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     bottomBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );

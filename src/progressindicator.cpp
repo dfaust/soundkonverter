@@ -82,7 +82,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
 
         if( features & FeatureSpeed )
         {
-            QLabel *lSpeedText = new QLabel( i18n("Speed")+":", this );
+            QLabel *lSpeedText = new QLabel( i18n("Speed:"), this );
             statusChildGrid->addWidget( lSpeedText, 0, 0, Qt::AlignVCenter );
 
             QString actSpeed = "  0x";
@@ -95,7 +95,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
 
         if( features & FeatureTime )
         {
-            QLabel *lTimeText = new QLabel( i18n("Remaining time")+":", this );
+            QLabel *lTimeText = new QLabel( i18n("Remaining time:"), this );
             statusChildGrid->addWidget( lTimeText, 1, 0, Qt::AlignVCenter );
 
             lTime = new QLabel( "<pre> 0s</pre>", this );

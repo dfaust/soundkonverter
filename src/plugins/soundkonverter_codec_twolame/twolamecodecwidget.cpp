@@ -30,7 +30,7 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lMode = new QLabel( i18n("Mode")+":", this );
+    QLabel *lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
 
     cMode = new KComboBox( this );
@@ -61,7 +61,7 @@ TwoLameCodecWidget::TwoLameCodecWidget()
     QHBoxLayout *cmdArgumentsBox = new QHBoxLayout();
     grid->addLayout( cmdArgumentsBox, 1, 0 );
 
-    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments")+":", this );
+    cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
     lCmdArguments = new KLineEdit( this );
     lCmdArguments->setEnabled( false );

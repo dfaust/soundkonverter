@@ -38,7 +38,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lFormat = new QLabel( i18n("Format")+":", this );
+    QLabel *lFormat = new QLabel( i18n("Format:"), this );
     topBox->addWidget( lFormat );
     cFormat = new KComboBox( this );
     topBox->addWidget( cFormat );
@@ -48,7 +48,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 
     topBox->addStretch();
 
-    lPlugin = new QLabel( i18n("Use Plugin")+":", this );
+    lPlugin = new QLabel( i18n("Use Plugin:"), this );
     topBox->addWidget( lPlugin );
     cPlugin = new KComboBox( this );
     topBox->addWidget( cPlugin );

@@ -32,7 +32,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     grid->setMargin( 10 );
     grid->setSpacing( 10 );
 
-    QLabel *lQuality = new QLabel( i18n("Quality")+":", this );
+    QLabel *lQuality = new QLabel( i18n("Quality:"), this );
     grid->addWidget( lQuality, 0, 0 );
 
     QHBoxLayout *topBoxQuality = new QHBoxLayout();
@@ -55,7 +55,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
 
     topBoxQuality->addSpacing( 10 );
 
-    QLabel *lFormat = new QLabel( i18n("Format")+":", this );
+    QLabel *lFormat = new QLabel( i18n("Format:"), this );
     grid->addWidget( lFormat, 0, 2 );
 
     QHBoxLayout *topBoxFormat = new QHBoxLayout();

@@ -28,7 +28,7 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lMode = new QLabel( i18n("Mode")+":", this );
+    QLabel *lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
     cMode = new KComboBox( this );
     cMode->addItem( i18n("Quality") );
@@ -52,7 +52,7 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
 
     topBox->addSpacing( 12 );
 
-    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode")+":", this );
+    QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     topBox->addWidget( lBitrateMode );
     cBitrateMode = new KComboBox( this );
     cBitrateMode->addItem( i18n("Variable") );

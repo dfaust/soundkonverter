@@ -25,7 +25,7 @@ FaacCodecWidget::FaacCodecWidget()
     QHBoxLayout *topBox = new QHBoxLayout();
     grid->addLayout( topBox, 0, 0 );
 
-    QLabel *lMode = new QLabel( i18n("Mode")+":", this );
+    QLabel *lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
     cMode = new KComboBox( this );
     cMode->addItem( i18n("Quality") );

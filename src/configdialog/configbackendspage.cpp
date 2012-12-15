@@ -13,6 +13,7 @@
 #include "../config.h"
 #include "../core/codecplugin.h"
 
+#include <QBoxLayout>
 #include <KComboBox>
 #include <KIcon>
 #include <KLocale>
@@ -406,21 +407,21 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
     encoderList->setFormat( format );
     replaygainList->setFormat( format );
 
-    for( int i=0; i<config->data.backends.codecs.count(); i++ )
+    foreach( const Config::CodecData codec, config->data.backends.codecs )
     {
-        if( config->data.backends.codecs.at(i).codecName == format )
+        if( codec.codecName == format )
         {
-            for( int j=0; j<config->data.backends.codecs.at(i).decoders.count(); j++ )
+            foreach( const QString decoder, codec.decoders )
             {
-                decoderList->addItem( config->data.backends.codecs.at(i).decoders.at(j) );
+                decoderList->addItem( decoder );
             }
-            for( int j=0; j<config->data.backends.codecs.at(i).encoders.count(); j++ )
+            foreach( const QString encoder, codec.encoders )
             {
-                encoderList->addItem( config->data.backends.codecs.at(i).encoders.at(j) );
+                encoderList->addItem( encoder );
             }
-            for( int j=0; j<config->data.backends.codecs.at(i).replaygain.count(); j++ )
+            foreach( const QString replaygain, codec.replaygain )
             {
-                replaygainList->addItem( config->data.backends.codecs.at(i).replaygain.at(j) );
+                replaygainList->addItem( replaygain );
             }
         }
     }

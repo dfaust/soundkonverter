@@ -150,16 +150,16 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
 
         QStringList codecsString;
-        QMap<QString,bool> encodeCodecs;
-        QMap<QString,bool> decodeCodecs;
+        QMap<QString,int> encodeCodecs;
+        QMap<QString,int> decodeCodecs;
         QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
         for( int i=0; i<codecTable.count(); i++ )
         {
             if( codecTable.at(i).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(i).codecTo) || !encodeCodecs[codecTable.at(i).codecTo] ) )
-                encodeCodecs[codecTable.at(i).codecTo] = codecTable.at(i).enabled;
+                encodeCodecs[codecTable.at(i).codecTo] += codecTable.at(i).enabled;
 
             if( codecTable.at(i).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(i).codecFrom) || !decodeCodecs[codecTable.at(i).codecFrom] ) )
-                decodeCodecs[codecTable.at(i).codecFrom] = codecTable.at(i).enabled;
+                decodeCodecs[codecTable.at(i).codecFrom] += codecTable.at(i).enabled;
         }
         codecsString += i18n("Supported codecs:");
         QStringList list;
@@ -185,16 +185,16 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
         CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
 
         QStringList codecsString;
-        QMap<QString,bool> encodeCodecs;
-        QMap<QString,bool> decodeCodecs;
+        QMap<QString,int> encodeCodecs;
+        QMap<QString,int> decodeCodecs;
         QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
         for( int i=0; i<codecTable.count(); i++ )
         {
             if( codecTable.at(i).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(i).codecTo) || !encodeCodecs[codecTable.at(i).codecTo] ) )
-                encodeCodecs[codecTable.at(i).codecTo] = codecTable.at(i).enabled;
+                encodeCodecs[codecTable.at(i).codecTo] += codecTable.at(i).enabled;
 
             if( codecTable.at(i).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(i).codecFrom) || !decodeCodecs[codecTable.at(i).codecFrom] ) )
-                decodeCodecs[codecTable.at(i).codecFrom] = codecTable.at(i).enabled;
+                decodeCodecs[codecTable.at(i).codecFrom] += codecTable.at(i).enabled;
         }
         codecsString += i18n("Supported codecs:");
         QStringList list;

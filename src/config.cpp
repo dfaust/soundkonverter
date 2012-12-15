@@ -391,7 +391,7 @@ void Config::load()
         }
     }
     // always enable the first filter
-    if( data.backends.enabledFilters.isEmpty() && data.backends.filters.count() > 0 )
+    if( data.app.configVersion < 1005 && data.backends.enabledFilters.isEmpty() && data.backends.filters.count() > 0 )
     {
         data.backends.enabledFilters.append( data.backends.filters.first() );
     }

@@ -392,17 +392,9 @@ QList<CodecPlugin*> PluginLoader::encodersForCodec( const QString& codecName )
 {
     QSet<CodecPlugin*> encoders;
 
-    foreach( const ConversionPipeTrunk pipeTrunk, conversionPipeTrunks )
+    foreach( const ConversionPipeTrunk pipeTrunk, conversionFilterPipeTrunks )
     {
-        if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled && pipeTrunk.plugin->type() == "codec" )
-        {
-            encoders += qobject_cast<CodecPlugin*>(pipeTrunk.plugin);
-        }
-    }
-
-    foreach( const ConversionPipeTrunk pipeTrunk, filterPipeTrunks )
-    {
-        if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled && pipeTrunk.plugin->type() == "filter" )
+        if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled )
         {
             encoders += qobject_cast<CodecPlugin*>(pipeTrunk.plugin);
         }

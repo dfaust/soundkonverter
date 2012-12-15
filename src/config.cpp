@@ -218,21 +218,9 @@ void Config::load()
         enabledPlugins.clear();
         newPlugins.clear();
         // register existing enabled plugins as such and list new enabled plugins
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionPipeTrunks )
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionFilterPipeTrunks )
         {
-            if( trunk.codecTo == format && trunk.enabled && trunk.plugin->type() == "codec" )
-            {
-                pluginName = trunk.plugin->name();
-                enabledPlugins += pluginName;
-                if( !data.backends.codecs.at(codecIndex).encoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
-                {
-                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
-                }
-            }
-        }
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->filterPipeTrunks )
-        {
-            if( trunk.codecTo == format && trunk.enabled && trunk.plugin->type() == "filter" )
+            if( trunk.codecTo == format && trunk.enabled )
             {
                 pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;
@@ -262,21 +250,9 @@ void Config::load()
         enabledPlugins.clear();
         newPlugins.clear();
         // register existing enabled plugins as such and list new enabled plugins
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionPipeTrunks )
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionFilterPipeTrunks )
         {
-            if( trunk.codecFrom == format && trunk.enabled && trunk.plugin->type() == "codec" )
-            {
-                pluginName = trunk.plugin->name();
-                enabledPlugins += pluginName;
-                if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
-                {
-                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
-                }
-            }
-        }
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->filterPipeTrunks )
-        {
-            if( trunk.codecFrom == format && trunk.enabled && trunk.plugin->type() == "filter" )
+            if( trunk.codecFrom == format && trunk.enabled )
             {
                 pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;

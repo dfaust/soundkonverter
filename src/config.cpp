@@ -120,13 +120,13 @@ void Config::load()
     group = conf->group( "Backends" );
     data.backends.rippers = group.readEntry( "rippers", QStringList() );
     formats = group.readEntry( "formats", QStringList() );
-    for( int i=0; i<formats.count(); i++ )
+    foreach( const QString format, formats )
     {
         CodecData codecData;
-        codecData.codecName = formats.at(i);
-        codecData.encoders = group.readEntry( formats.at(i) + "_encoders", QStringList() );
-        codecData.decoders = group.readEntry( formats.at(i) + "_decoders", QStringList() );
-        codecData.replaygain = group.readEntry( formats.at(i) + "_replaygain", QStringList() );
+        codecData.codecName = format;
+        codecData.encoders = group.readEntry( format + "_encoders", QStringList() );
+        codecData.decoders = group.readEntry( format + "_decoders", QStringList() );
+        codecData.replaygain = group.readEntry( format + "_replaygain", QStringList() );
         data.backends.codecs += codecData;
     }
     data.backends.filters = group.readEntry( "filters", QStringList() );
@@ -179,15 +179,16 @@ void Config::load()
         data.backends.rippers += newPlugins.at(i).right(newPlugins.at(i).length()-8);
     }
 
-    for( int i=0; i<formats.count(); i++ )
+    foreach( const QString format, formats )
     {
-        if( formats.at(i) == "wav" )
+        if( format == "wav" )
             continue;
 
+        // add format to the data.backends.codecs list if it isn't already in it
         found = false;
-        for( int k=0; k<data.backends.codecs.count(); k++ )
+        foreach( const CodecData codec, data.backends.codecs )
         {
-            if( data.backends.codecs.at(k).codecName == formats.at(i) )
+            if( codec.codecName == format )
             {
                 found = true;
                 break;
@@ -196,16 +197,17 @@ void Config::load()
         if( !found )
         {
             CodecData codecData;
-            codecData.codecName = formats.at(i);
+            codecData.codecName = format;
             data.backends.codecs += codecData;
         }
 
+        // get the index of format in the data.backends.codecs list for direct access and continue if it can't be found to avoid crashes
         codecIndex = -1;
-        for( int j=0; j<data.backends.codecs.count(); j++ )
+        for( int i=0; i<data.backends.codecs.count(); i++ )
         {
-            if( data.backends.codecs.at(j).codecName == formats.at(i) )
+            if( data.backends.codecs.at(i).codecName == format )
             {
-                codecIndex = j;
+                codecIndex = i;
                 break;
             }
         }
@@ -215,157 +217,171 @@ void Config::load()
         // encoders
         enabledPlugins.clear();
         newPlugins.clear();
-        for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
+        // register existing enabled plugins as such and list new enabled plugins
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionPipeTrunks )
         {
-            if( pPluginLoader->conversionPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            if( trunk.codecTo == format && trunk.enabled && trunk.plugin->type() == "codec" )
             {
-                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;
                 if( !data.backends.codecs.at(codecIndex).encoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
-        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->filterPipeTrunks )
         {
-            if( pPluginLoader->filterPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            if( trunk.codecTo == format && trunk.enabled && trunk.plugin->type() == "filter" )
             {
-                pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;
                 if( !data.backends.codecs.at(codecIndex).encoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
-        for( int j=0; j<data.backends.codecs.at(codecIndex).encoders.count(); j++ )
+        // remove plugins from the encoder list if they aren't enabled any more
+        for( int i=0; i<data.backends.codecs.at(codecIndex).encoders.count(); i++ )
         {
-            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).encoders.at(j)) )
+            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).encoders.at(i)) )
             {
-                data.backends.codecs[codecIndex].encoders.removeAt(j);
-                j--;
+                data.backends.codecs[codecIndex].encoders.removeAt(i);
+                i--;
             }
         }
+        // sort new enabled plugins and append them to the encoder list
         newPlugins.sort();
-        for( int j=newPlugins.count()-1; j>=0; j-- )
+        for( int i=newPlugins.count()-1; i>=0; i-- ) // QStringList doesn't support sorting in descending order
         {
-            data.backends.codecs[codecIndex].encoders += newPlugins.at(j).right(newPlugins.at(j).length()-8);
+            data.backends.codecs[codecIndex].encoders += newPlugins.at(i).right(newPlugins.at(i).length()-8);
         }
 
         // decoders
         enabledPlugins.clear();
         newPlugins.clear();
-        for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
+        // register existing enabled plugins as such and list new enabled plugins
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionPipeTrunks )
         {
-            if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            if( trunk.codecFrom == format && trunk.enabled && trunk.plugin->type() == "codec" )
             {
-                pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
+                pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;
                 if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(pPluginLoader->conversionPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
-        for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
+        foreach( const ConversionPipeTrunk trunk, pPluginLoader->filterPipeTrunks )
         {
-            if( pPluginLoader->filterPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            if( trunk.codecFrom == format && trunk.enabled && trunk.plugin->type() == "filter" )
             {
-                pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
+                pluginName = trunk.plugin->name();
                 enabledPlugins += pluginName;
                 if( !data.backends.codecs.at(codecIndex).decoders.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(pPluginLoader->filterPipeTrunks.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
-        for( int j=0; j<data.backends.codecs.at(codecIndex).decoders.count(); j++ )
+        // remove plugins from the decoder list if they aren't enabled any more
+        for( int i=0; i<data.backends.codecs.at(codecIndex).decoders.count(); i++ )
         {
-            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).decoders.at(j)) )
+            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).decoders.at(i)) )
             {
-                data.backends.codecs[codecIndex].decoders.removeAt(j);
-                j--;
+                data.backends.codecs[codecIndex].decoders.removeAt(i);
+                i--;
             }
         }
+        // sort new enabled plugins and append them to the decoder list
         newPlugins.sort();
-        for( int j=newPlugins.count()-1; j>=0; j-- )
+        for( int i=newPlugins.count()-1; i>=0; i-- ) // QStringList doesn't support sorting in descending order
         {
-            data.backends.codecs[codecIndex].decoders += newPlugins.at(j).right(newPlugins.at(j).length()-8);
+            data.backends.codecs[codecIndex].decoders += newPlugins.at(i).right(newPlugins.at(i).length()-8);
         }
 
         // replaygain
         enabledPlugins.clear();
-        if( pPluginLoader->hasCodecInternalReplayGain(formats.at(i)) )
+        const bool internalReplayGainEnabled = pPluginLoader->hasCodecInternalReplayGain(format);
+        if( internalReplayGainEnabled )
         {
             enabledPlugins += i18n("Try internal");
         }
         newPlugins.clear();
-        for( int j=0; j<pPluginLoader->replaygainPipes.count(); j++ )
+        // register existing enabled plugins as such and list new enabled plugins
+        foreach( const ReplayGainPipe pipe, pPluginLoader->replaygainPipes )
         {
-            if( pPluginLoader->replaygainPipes.at(j).codecName == formats.at(i) && pPluginLoader->replaygainPipes.at(j).enabled )
+            if( pipe.codecName == format && pipe.enabled )
             {
-                pluginName = pPluginLoader->replaygainPipes.at(j).plugin->name();
+                pluginName = pipe.plugin->name();
                 enabledPlugins += pluginName;
                 if( !data.backends.codecs.at(codecIndex).replaygain.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(pPluginLoader->replaygainPipes.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(pipe.rating).rightJustified(8,'0') + pluginName;
                 }
             }
         }
-        for( int j=0; j<data.backends.codecs.at(codecIndex).replaygain.count(); j++ )
+        // remove plugins from the replay gain list if they aren't enabled any more
+        for( int i=0; i<data.backends.codecs.at(codecIndex).replaygain.count(); i++ )
         {
-            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).replaygain.at(j)) )
+            if( !enabledPlugins.contains(data.backends.codecs.at(codecIndex).replaygain.at(i)) )
             {
-                data.backends.codecs[codecIndex].replaygain.removeAt(j);
-                j--;
+                data.backends.codecs[codecIndex].replaygain.removeAt(i);
+                i--;
             }
         }
-        if( pPluginLoader->hasCodecInternalReplayGain(formats.at(i)) && !data.backends.codecs.at(codecIndex).replaygain.contains(i18n("Try internal")) )
+        // append internal replay gain if it is enabled
+        if( internalReplayGainEnabled && !data.backends.codecs.at(codecIndex).replaygain.contains(i18n("Try internal")) )
         {
             data.backends.codecs[codecIndex].replaygain += i18n("Try internal");
         }
+        // sort new enabled plugins and append them to the replay gain list
         newPlugins.sort();
-        for( int j=newPlugins.count()-1; j>=0; j-- )
+        for( int i=newPlugins.count()-1; i>=0; i-- ) // QStringList doesn't support sorting in descending order
         {
-            data.backends.codecs[codecIndex].replaygain += newPlugins.at(j).right(newPlugins.at(j).length()-8);
+            data.backends.codecs[codecIndex].replaygain += newPlugins.at(i).right(newPlugins.at(i).length()-8);
         }
     }
 
     // filters
     enabledPlugins.clear();
     newPlugins.clear();
-    QList<FilterPlugin*> filterPlugins = pPluginLoader->getAllFilterPlugins();
-    for( int i=0; i<filterPlugins.count(); i++ )
+    // register existing enabled plugins as such and list new enabled plugins
+    foreach( FilterPlugin *plugin, pPluginLoader->getAllFilterPlugins() )
     {
-        pluginName = filterPlugins.at(i)->name();
-        QList<ConversionPipeTrunk> codecTable = filterPlugins.at(i)->codecTable();
-        for( int j = 0; j < codecTable.count(); j++ )
+        pluginName = plugin->name();
+        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
         {
-            if( codecTable.at(j).enabled && codecTable.at(j).codecFrom == "wav" && codecTable.at(j).codecTo == "wav" )
+            if( trunk.enabled && trunk.codecFrom == "wav" && trunk.codecTo == "wav" )
             {
                 enabledPlugins += pluginName;
                 if( !data.backends.filters.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(codecTable.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                     break;
                 }
             }
         }
     }
-    for( int j=0; j<data.backends.filters.count(); j++ )
+    // remove plugins from the filter list if they aren't enabled any more
+    for( int i=0; i<data.backends.filters.count(); i++ )
     {
-        if( !enabledPlugins.contains(data.backends.filters.at(j)) )
+        if( !enabledPlugins.contains(data.backends.filters.at(i)) )
         {
-            data.backends.filters.removeAt(j);
-            j--;
+            data.backends.filters.removeAt(i);
+            i--;
         }
     }
+    // sort new enabled plugins and append them to the filter list
     newPlugins.sort();
-    for( int i=0; i<newPlugins.count(); i++ )
+    for( int i=newPlugins.count()-1; i>=0; i-- ) // QStringList doesn't support sorting in descending order
     {
         data.backends.filters += newPlugins.at(i).right(newPlugins.at(i).length()-8);
     }
+    // since filters can be completely disabled we have to keep track of data.backends.enabledFilters as well
+    // remove plugins from the enabledFilters list if they aren't enabled any more
     for( int i=0; i<data.backends.enabledFilters.count(); i++ )
     {
         if( !data.backends.filters.contains(data.backends.enabledFilters.at(i)) )
@@ -374,6 +390,7 @@ void Config::load()
             i--;
         }
     }
+    // always enable the first filter
     if( data.backends.enabledFilters.isEmpty() && data.backends.filters.count() > 0 )
     {
         data.backends.enabledFilters.append( data.backends.filters.first() );
@@ -569,12 +586,12 @@ void Config::save()
     group = conf->group( "Backends" );
     group.writeEntry( "rippers", data.backends.rippers );
     QStringList formats;
-    for( int i=0; i<data.backends.codecs.count(); i++ )
+    foreach( const CodecData codec, data.backends.codecs )
     {
-        const QString format = data.backends.codecs.at(i).codecName;
-        group.writeEntry( format + "_encoders", data.backends.codecs.at(i).encoders );
-        group.writeEntry( format + "_decoders", data.backends.codecs.at(i).decoders );
-        group.writeEntry( format + "_replaygain", data.backends.codecs.at(i).replaygain );
+        const QString format = codec.codecName;
+        group.writeEntry( format + "_encoders", codec.encoders );
+        group.writeEntry( format + "_decoders", codec.decoders );
+        group.writeEntry( format + "_replaygain", codec.replaygain );
         formats += format;
     }
     group.writeEntry( "formats", formats );
@@ -725,15 +742,15 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
     bool ignore;
 
     const QStringList formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-    for( int i=0; i<formats.count(); i++ )
+    foreach( const QString format, formats )
     {
-        if( formats.at(i) == "wav" )
+        if( format == "wav" )
             continue;
 
         codecIndex = -1;
         for( int j=0; j<data.backends.codecs.count(); j++ )
         {
-            if( data.backends.codecs.at(j).codecName == formats.at(i) )
+            if( data.backends.codecs.at(j).codecName == format )
             {
                 codecIndex = j;
                 break;
@@ -746,7 +763,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         tempPluginList.clear();
         for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
         {
-            if( pPluginLoader->conversionPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            if( pPluginLoader->conversionPipeTrunks.at(j).codecTo == format && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
             {
                 const QString pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
@@ -757,7 +774,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         }
         for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
         {
-            if( pPluginLoader->filterPipeTrunks.at(j).codecTo == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            if( pPluginLoader->filterPipeTrunks.at(j).codecTo == format && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
             {
                 const QString pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
@@ -787,7 +804,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             ignore = false;
             for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
             {
-                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == format &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::Encode &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).encoders.first() &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
@@ -802,7 +819,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 if( ignore && includeIgnored )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::Encode;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
                     optimization.betterBackend = optimizedPluginList.first();
@@ -811,7 +828,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
                 else if( !ignore )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::Encode;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).encoders.first();
                     optimization.betterBackend = optimizedPluginList.first();
@@ -825,7 +842,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         tempPluginList.clear();
         for( int j=0; j<pPluginLoader->conversionPipeTrunks.count(); j++ )
         {
-            if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
+            if( pPluginLoader->conversionPipeTrunks.at(j).codecFrom == format && pPluginLoader->conversionPipeTrunks.at(j).enabled && pPluginLoader->conversionPipeTrunks.at(j).plugin->type() == "codec" )
             {
                 const QString pluginName = pPluginLoader->conversionPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
@@ -836,7 +853,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         }
         for( int j=0; j<pPluginLoader->filterPipeTrunks.count(); j++ )
         {
-            if( pPluginLoader->filterPipeTrunks.at(j).codecFrom == formats.at(i) && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
+            if( pPluginLoader->filterPipeTrunks.at(j).codecFrom == format && pPluginLoader->filterPipeTrunks.at(j).enabled && pPluginLoader->filterPipeTrunks.at(j).plugin->type() == "filter" )
             {
                 const QString pluginName = pPluginLoader->filterPipeTrunks.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
@@ -866,7 +883,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             ignore = false;
             for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
             {
-                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == format &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::Decode &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).decoders.first() &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
@@ -881,7 +898,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 if( ignore && includeIgnored )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::Decode;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
                     optimization.betterBackend = optimizedPluginList.first();
@@ -890,7 +907,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
                 else if( !ignore )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::Decode;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).decoders.first();
                     optimization.betterBackend = optimizedPluginList.first();
@@ -904,7 +921,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
         tempPluginList.clear();
         for( int j=0; j<pPluginLoader->replaygainPipes.count(); j++ )
         {
-            if( pPluginLoader->replaygainPipes.at(j).codecName == formats.at(i) && pPluginLoader->replaygainPipes.at(j).enabled )
+            if( pPluginLoader->replaygainPipes.at(j).codecName == format && pPluginLoader->replaygainPipes.at(j).enabled )
             {
                 const QString pluginName = pPluginLoader->replaygainPipes.at(j).plugin->name();
                 if( tempPluginList.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
@@ -934,7 +951,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             ignore = false;
             for( int j=0; j<data.backendOptimizationsIgnoreList.optimizationList.count(); j++ )
             {
-                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == formats.at(i) &&
+                if( data.backendOptimizationsIgnoreList.optimizationList.at(j).codecName == format &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).mode == CodecOptimizations::Optimization::ReplayGain &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).currentBackend == data.backends.codecs.at(codecIndex).replaygain.first() &&
                     data.backendOptimizationsIgnoreList.optimizationList.at(j).betterBackend == optimizedPluginList.first()
@@ -950,7 +967,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
             {
                 if( ignore && includeIgnored )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::ReplayGain;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
                     optimization.betterBackend = optimizedPluginList.first();
@@ -959,7 +976,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
                 }
                 else if( !ignore )
                 {
-                    optimization.codecName = formats.at(i);
+                    optimization.codecName = format;
                     optimization.mode = CodecOptimizations::Optimization::ReplayGain;
                     optimization.currentBackend = data.backends.codecs.at(codecIndex).replaygain.first();
                     optimization.betterBackend = optimizedPluginList.first();

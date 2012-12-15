@@ -214,7 +214,7 @@ void OptionsSimple::profileInfo()
     }
     else if( sProfileString == i18n("User defined") )
     {
-        info = i18n("You can define your own profile in the \"detailed\" tab.");
+        info = i18n("You can define your own profile in the \"Detailed\" tab.");
     }
     else // the info button is hidden when showing user defined profiles
     {

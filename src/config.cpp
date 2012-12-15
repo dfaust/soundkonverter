@@ -147,32 +147,33 @@ void Config::load()
     // rippers
     enabledPlugins.clear();
     newPlugins.clear();
-    QList<RipperPlugin*> ripperPlugins = pPluginLoader->getAllRipperPlugins();
-    for( int i=0; i<ripperPlugins.count(); i++ )
+    // register existing enabled plugins as such and list new enabled plugins
+    foreach( RipperPlugin *plugin, pPluginLoader->getAllRipperPlugins() )
     {
-        pluginName = ripperPlugins.at(i)->name();
-        QList<ConversionPipeTrunk> codecTable = ripperPlugins.at(i)->codecTable();
-        for( int j = 0; j < codecTable.count(); j++ )
+        pluginName = plugin->name();
+        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
         {
-            if( codecTable.at(j).enabled )
+            if( trunk.enabled )
             {
                 enabledPlugins += pluginName;
                 if( !data.backends.rippers.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
                 {
-                    newPlugins += QString::number(codecTable.at(j).rating).rightJustified(8,'0') + pluginName;
+                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
                     break;
                 }
             }
         }
     }
-    for( int j=0; j<data.backends.rippers.count(); j++ )
+    // remove plugins from the ripper list if they aren't enabled any more
+    for( int i=0; i<data.backends.rippers.count(); i++ )
     {
-        if( !enabledPlugins.contains(data.backends.rippers.at(j)) )
+        if( !enabledPlugins.contains(data.backends.rippers.at(i)) )
         {
-            data.backends.rippers.removeAt(j);
-            j--;
+            data.backends.rippers.removeAt(i);
+            i--;
         }
     }
+    // sort new enabled plugins and append them to the ripper list
     newPlugins.sort();
     for( int i=0; i<newPlugins.count(); i++ )
     {

@@ -109,7 +109,7 @@ void Config::load()
         }
         chkdf.remove();
     }
-    data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 2 );
+    data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 4 );
     data.advanced.usePipes = group.readEntry( "usePipes", false );
 
     group = conf->group( "CoverArt" );

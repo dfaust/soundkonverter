@@ -196,7 +196,7 @@ void ConfigAdvancedPage::resetDefaults()
     cUseVFATNames->setChecked( false );
     cWriteLogFiles->setChecked( false );
     cUseSharedMemoryForTempFiles->setChecked( false );
-    iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 2 );
+    iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 4 );
     cUsePipes->setChecked( false );
 
     emit configChanged( true );

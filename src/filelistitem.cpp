@@ -6,8 +6,7 @@
 
 FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     : QTreeWidgetItem( parent, after ),
-    tags( 0 ),
-    lInfo( 0 )
+    tags( 0 )
 {
     conversionOptionsId = -1;
 
@@ -23,8 +22,7 @@ FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
 
 FileListItem::FileListItem( QTreeWidget *parent )
     : QTreeWidgetItem( parent ),
-    tags( 0 ),
-    lInfo( 0 )
+    tags( 0 )
 {
     conversionOptionsId = -1;
 
@@ -43,8 +41,8 @@ FileListItem::~FileListItem()
     if( tags )
         delete tags;
 
-    if( lInfo )
-        delete lInfo;
+    if( lInfo.data() )
+        delete lInfo.data();
 }
 
 FileListItemDelegate::FileListItemDelegate( QObject *parent )

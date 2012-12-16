@@ -519,11 +519,10 @@ void FileList::updateItem( FileListItem *item )
     item->setText( Column_Output, outputUrl.toLocalFile() );
 
     removeItemWidget( item, Column_State );
-    if( item->lInfo )
+    if( item->lInfo.data() )
     {
-        disconnect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, 0 );
-        delete item->lInfo;
-        item->lInfo = 0;
+        disconnect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, 0 );
+        delete item->lInfo.data();
     }
     item->setText( Column_State, "" );
     item->setToolTip( Column_State, "" );
@@ -602,8 +601,8 @@ void FileList::updateItem( FileListItem *item )
                 case FileListItem::Failed:
                 {
                     item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
-                    connect( item->lInfo, SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
-                    setItemWidget( item, Column_State, item->lInfo );
+                    connect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
+                    setItemWidget( item, Column_State, item->lInfo.data() );
                     const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
                     item->setToolTip( Column_State, toolTip );
                     item->setToolTip( Column_Input, toolTip );

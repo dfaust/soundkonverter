@@ -7,6 +7,7 @@
 #include <QTreeWidgetItem>
 #include <QItemDelegate>
 #include <QLabel>
+#include <QWeakPointer>
 
 #include <KUrl>
 
@@ -61,7 +62,7 @@ public:
 
     int logId;                  // the id the item is registered at the logger with, 0 if the conversion hasn't started yet
 
-    QLabel *lInfo;              // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
+    QWeakPointer<QLabel> lInfo; // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
 };
 
 class FileListItemDelegate : public QItemDelegate

@@ -135,17 +135,17 @@ void PluginLoader::load()
                 createInstanceTimeSum += createInstanceTime.elapsed();
                 codecPlugins.append( plugin );
                 plugin->scanForBackends();
-                QMap<QString,bool> encodeCodecs;
-                QMap<QString,bool> decodeCodecs;
+                QMap<QString,int> encodeCodecs;
+                QMap<QString,int> decodeCodecs;
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {
                     codecTable[j].plugin = plugin;
                     conversionPipeTrunks.append( codecTable.at(j) );
-                    if( codecTable.at(j).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(j).codecTo) || !encodeCodecs[codecTable.at(j).codecTo] ) )
-                        encodeCodecs[codecTable.at(j).codecTo] = codecTable.at(j).enabled;
-                    if( codecTable.at(j).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(j).codecFrom) || !decodeCodecs[codecTable.at(j).codecFrom] ) )
-                        decodeCodecs[codecTable.at(j).codecFrom] = codecTable.at(j).enabled;
+                    if( codecTable.at(j).codecTo != "wav" )
+                        encodeCodecs[codecTable.at(j).codecTo] += codecTable.at(j).enabled;
+                    if( codecTable.at(j).codecFrom != "wav" )
+                        decodeCodecs[codecTable.at(j).codecFrom] += codecTable.at(j).enabled;
                     addFormatInfo( codecTable.at(j).codecFrom, plugin );
                     addFormatInfo( codecTable.at(j).codecTo, plugin );
                 }
@@ -195,17 +195,17 @@ void PluginLoader::load()
                 createInstanceTimeSum += createInstanceTime.elapsed();
                 filterPlugins.append( plugin );
                 plugin->scanForBackends();
-                QMap<QString,bool> encodeCodecs;
-                QMap<QString,bool> decodeCodecs;
+                QMap<QString,int> encodeCodecs;
+                QMap<QString,int> decodeCodecs;
                 QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
                 for( int j = 0; j < codecTable.count(); j++ )
                 {
                     codecTable[j].plugin = plugin;
                     filterPipeTrunks.append( codecTable.at(j) );
-                    if( codecTable.at(j).codecTo != "wav" && ( !encodeCodecs.contains(codecTable.at(j).codecTo) || !encodeCodecs[codecTable.at(j).codecTo] ) )
-                        encodeCodecs[codecTable.at(j).codecTo] = codecTable.at(j).enabled;
-                    if( codecTable.at(j).codecFrom != "wav" && ( !decodeCodecs.contains(codecTable.at(j).codecFrom) || !decodeCodecs[codecTable.at(j).codecFrom] ) )
-                        decodeCodecs[codecTable.at(j).codecFrom] = codecTable.at(j).enabled;
+                    if( codecTable.at(j).codecTo != "wav" )
+                        encodeCodecs[codecTable.at(j).codecTo] += codecTable.at(j).enabled;
+                    if( codecTable.at(j).codecFrom != "wav" )
+                        decodeCodecs[codecTable.at(j).codecFrom] += codecTable.at(j).enabled;
                     addFormatInfo( codecTable.at(j).codecFrom, plugin );
                     addFormatInfo( codecTable.at(j).codecTo, plugin );
                 }

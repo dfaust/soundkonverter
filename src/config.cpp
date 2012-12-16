@@ -185,24 +185,7 @@ void Config::load()
         if( format == "wav" )
             continue;
 
-        // add format to the data.backends.codecs list if it isn't already in it
-        found = false;
-        foreach( const CodecData codec, data.backends.codecs )
-        {
-            if( codec.codecName == format )
-            {
-                found = true;
-                break;
-            }
-        }
-        if( !found )
-        {
-            CodecData codecData;
-            codecData.codecName = format;
-            data.backends.codecs += codecData;
-        }
-
-        // get the index of format in the data.backends.codecs list for direct access and continue if it can't be found to avoid crashes
+        // get the index of the format in the data.backends.codecs list for direct access
         codecIndex = -1;
         for( int i=0; i<data.backends.codecs.count(); i++ )
         {
@@ -212,8 +195,14 @@ void Config::load()
                 break;
             }
         }
+        // add format to the data.backends.codecs list if it isn't already in it
         if( codecIndex == -1 )
-            continue;
+        {
+            CodecData codecData;
+            codecData.codecName = format;
+            data.backends.codecs += codecData;
+            codecIndex = data.backends.codecs.count() - 1;
+        }
 
         // encoders
         enabledPlugins.clear();

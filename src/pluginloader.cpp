@@ -41,7 +41,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
         if( minimumRating2 == 0 || trunk.rating < minimumRating2 )
             minimumRating2 = trunk.rating;
 
-        rating1 -= 10;
+        rating2 -= 10;
     }
     rating2 += minimumRating2;
 

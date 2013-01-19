@@ -7,7 +7,7 @@
 -Add: Option to switch between COMMENT and DESCRIPTION as preferred comment field for ogg vorbis and flac files
 -Add: Option to select preferred total tracks/discs number fields for ogg vorbis and flac files
 -Add: Copy the tags total tracks/discs number, MusicBrainz Track Id and MusicBrainz Release Id
--Add: Compression level option to the lame plugin
+-Add: Compression level option for the lame plugin
 -Add: Opus support (via opus-tools)
 -Change: Remember dimensions of the sub-windows and dialogs
 -Change: Sampling rate and number of channels can as of now only be changed through a filter plugin (currently only sox)

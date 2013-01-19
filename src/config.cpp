@@ -497,6 +497,8 @@ void Config::load()
         data.backendOptimizationsIgnoreList.optimizationList.append(optimization);
     }
 
+    writeServiceMenu();
+
     logger->log( 1000, QString("loading of the configuration took %1 ms").arg(time.elapsed()) );
 }
 

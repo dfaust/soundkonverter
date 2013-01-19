@@ -366,7 +366,7 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
     {
         command += conversionOptions->cmdArguments;
     }
-    if( inputFile.isEmpty() )
+    if( inputFile.isEmpty() || inputCodec == "amr nb" ) // NOTE sox expects anb as extension for amr nb files
     {
         command += "--type";
         command += soxCodecName(inputCodec);
@@ -419,7 +419,7 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
         command += "--compression";
         command += QString::number(conversionOptions->quality);
     }
-    if( outputFile.isEmpty() )
+    if( outputFile.isEmpty() || outputCodec == "amr nb" ) // NOTE sox expects anb as extension for amr nb files
     {
         command += "--type";
         command += soxCodecName(outputCodec);

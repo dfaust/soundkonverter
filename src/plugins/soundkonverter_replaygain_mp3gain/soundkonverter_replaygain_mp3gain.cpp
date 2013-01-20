@@ -146,6 +146,7 @@ unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileLis
     }
     else if( mode == ReplayGainPlugin::Force )
     {
+        command += "-a";
         command += "-s";
         command += "r";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );

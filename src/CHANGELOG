@@ -1,3 +1,6 @@
+1.9.90 (2.0.0 rc1):
+-Fix: Modify mp3 stream when forcing the recalculation of Replay Gain
+
 1.9.80 (2.0.0 beta1):
 -Add: Parallel Replay Gain calculation in the Replay Gain tool
 -Add: Move tracks to new Album via context menu in the Replay Gain tool

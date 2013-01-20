@@ -10,6 +10,7 @@
 class ConversionOptions;
 class KDialog;
 class QComboBox;
+class QCheckBox;
 
 
 class Mp3GainPluginItem : public ReplayGainPluginItem
@@ -47,9 +48,11 @@ public:
 
 private:
     QWeakPointer<KDialog> configDialog;
-    QComboBox *configDialogTagLabelComboBox;
+    QComboBox *configDialogTagModeComboBox;
+    QCheckBox *configDialogModifyAudioStreamCheckBox;
 
     int tagMode;
+    bool modifyAudioStream;
 
 private slots:
     /** The undo process has exited */

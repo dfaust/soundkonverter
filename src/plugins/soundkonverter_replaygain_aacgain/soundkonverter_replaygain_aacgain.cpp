@@ -5,6 +5,7 @@
 
 #include <KDialog>
 #include <QComboBox>
+#include <QCheckBox>
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -32,6 +33,7 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
 
     group = conf->group( "Plugin-"+name() );
     tagMode = group.readEntry( "tagMode", 0 );
+    modifyAudioStream = group.readEntry( "modifyAudioStream", true );
 }
 
 soundkonverter_replaygain_aacgain::~soundkonverter_replaygain_aacgain()
@@ -82,19 +84,29 @@ void soundkonverter_replaygain_aacgain::showConfigDialog( ActionType action, con
         configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
-        QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
-        QLabel *configDialogTagLabel = new QLabel( i18n("Use tag format:"), configDialogWidget );
-        configDialogBox->addWidget( configDialogTagLabel );
-        configDialogTagLabelComboBox = new QComboBox( configDialogWidget );
-        configDialogTagLabelComboBox->addItem( "APE" );
-        configDialogTagLabelComboBox->addItem( "ID3v2" );
-        configDialogBox->addWidget( configDialogTagLabelComboBox );
+        QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
+
+        QHBoxLayout *configDialogBox1 = new QHBoxLayout();
+        QLabel *configDialogTagModeLabel = new QLabel( i18n("Use tag format:"), configDialogWidget );
+        configDialogBox1->addWidget( configDialogTagModeLabel );
+        configDialogTagModeComboBox = new QComboBox( configDialogWidget );
+        configDialogTagModeComboBox->addItem( "APE" );
+        configDialogTagModeComboBox->addItem( "ID3v2" );
+        configDialogBox1->addWidget( configDialogTagModeComboBox );
+        configDialogBox->addLayout( configDialogBox1 );
+
+        QHBoxLayout *configDialogBox2 = new QHBoxLayout();
+        configDialogModifyAudioStreamCheckBox = new QCheckBox( i18n("Modify audio stream"), configDialogWidget );
+        configDialogModifyAudioStreamCheckBox->setToolTip( i18n("Write gain adjustments directly into the encoded data. That way the adjustment works with all mp3 players.\nUndoing the changes is still possible since correction data will be written as well.") );
+        configDialogBox2->addWidget( configDialogModifyAudioStreamCheckBox );
+        configDialogBox->addLayout( configDialogBox2 );
 
         configDialog.data()->setMainWidget( configDialogWidget );
         connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
         connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
-    configDialogTagLabelComboBox->setCurrentIndex( tagMode );
+    configDialogTagModeComboBox->setCurrentIndex( tagMode );
+    configDialogModifyAudioStreamCheckBox->setChecked( modifyAudioStream );
     configDialog.data()->show();
 }
 
@@ -102,13 +114,14 @@ void soundkonverter_replaygain_aacgain::configDialogSave()
 {
     if( configDialog.data() )
     {
-        tagMode = configDialogTagLabelComboBox->currentIndex();
+        tagMode = configDialogTagModeComboBox->currentIndex();
 
         KSharedConfig::Ptr conf = KGlobal::config();
         KConfigGroup group;
 
         group = conf->group( "Plugin-"+name() );
         group.writeEntry( "tagMode", tagMode );
+        group.writeEntry( "modifyAudioStream", modifyAudioStream );
 
         configDialog.data()->deleteLater();
     }
@@ -118,7 +131,8 @@ void soundkonverter_replaygain_aacgain::configDialogDefault()
 {
     if( configDialog.data() )
     {
-        configDialogTagLabelComboBox->setCurrentIndex( 0 );
+        configDialogTagModeComboBox->setCurrentIndex( 0 );
+        configDialogModifyAudioStreamCheckBox->setChecked( true );
     }
 }
 
@@ -148,12 +162,18 @@ unsigned int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileLis
     command += "-k";
     if( mode == ReplayGainPlugin::Add )
     {
-        command += "-a";
+        if( modifyAudioStream )
+        {
+            command += "-a";
+        }
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
     }
     else if( mode == ReplayGainPlugin::Force )
     {
-        command += "-a";
+        if( modifyAudioStream )
+        {
+            command += "-a";
+        }
         command += "-s";
         command += "r";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );

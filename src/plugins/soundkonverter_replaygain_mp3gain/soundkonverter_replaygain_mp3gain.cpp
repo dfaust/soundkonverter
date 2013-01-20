@@ -108,6 +108,7 @@ void soundkonverter_replaygain_mp3gain::configDialogSave()
     if( configDialog.data() )
     {
         tagMode = configDialogTagModeComboBox->currentIndex();
+        modifyAudioStream = configDialogModifyAudioStreamCheckBox->isChecked();
 
         KSharedConfig::Ptr conf = KGlobal::config();
         KConfigGroup group;

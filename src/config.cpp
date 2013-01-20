@@ -622,7 +622,7 @@ void Config::writeServiceMenu()
     content += "Exec=soundkonverter %F\n";
 
     const QString convertActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" );
-    if( ( data.general.actionMenuConvertMimeTypes != mimeTypes || QFile::exists(convertActionFileName) ) && mimeTypes.count() > 0 )
+    if( ( data.general.actionMenuConvertMimeTypes != mimeTypes || !QFile::exists(convertActionFileName) ) && mimeTypes.count() > 0 )
     {
         QFile convertActionFile( convertActionFileName );
         if( convertActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )
@@ -658,7 +658,7 @@ void Config::writeServiceMenu()
     content += "Exec=soundkonverter --replaygain %F\n";
 
     const QString replaygainActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" );
-    if( ( data.general.actionMenuReplayGainMimeTypes != mimeTypes || QFile::exists(replaygainActionFileName) ) && mimeTypes.count() > 0 )
+    if( ( data.general.actionMenuReplayGainMimeTypes != mimeTypes || !QFile::exists(replaygainActionFileName) ) && mimeTypes.count() > 0 )
     {
         QFile replaygainActionFile( replaygainActionFileName );
         if( replaygainActionFile.open( QIODevice::WriteOnly | QIODevice::Text ) )

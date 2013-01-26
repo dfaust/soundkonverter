@@ -348,7 +348,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed 
             options->outputDirectoryMode = outputDirectory->mode();
             options->outputDirectory = outputDirectory->directory();
             options->outputFilesystem = outputDirectory->filesystem();
-            options->replaygain = cReplayGain->isChecked();
+            options->replaygain = cReplayGain->isEnabled() && cReplayGain->isChecked();
 
             for( int i=0; i<wFilter.size(); i++ )
             {

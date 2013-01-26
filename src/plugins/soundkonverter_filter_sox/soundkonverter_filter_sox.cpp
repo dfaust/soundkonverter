@@ -377,6 +377,11 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
         command += "--bits";
         command += QString::number(filterOptions->data.sampleSize);
     }
+    if( filterOptions && filterOptions->data.channels )
+    {
+        command += "--channels";
+        command += QString::number(filterOptions->data.channels);
+    }
     if( outputCodec == "flac" && ( conversionOptions->pluginName == global_plugin_name || conversionOptions->pluginName == "FLAC" ) )
     {
         command += "--compression";

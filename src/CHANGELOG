@@ -3,6 +3,7 @@
 -Fix: Modify mp3 stream when forcing the recalculation of Replay Gain
 -Fix: Don't try to calculate Replay Gain if it is impossible
 -Fix: Down/upmixing with sox
+-Fix: Sox effects wouldn't work
 
 1.9.80 (2.0.0 beta1):
 -Add: Parallel Replay Gain calculation in the Replay Gain tool

@@ -174,7 +174,7 @@ void Convert::convert( ConvertItem *item )
                 }
                 case BackendPlugin::FeatureNotSupported:
                 {
-                    logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                    logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a necessary feature.") );
                     executeSameStep( item );
                     break;
                 }
@@ -413,7 +413,7 @@ void Convert::convertNextBackend( ConvertItem *item )
             }
             case BackendPlugin::FeatureNotSupported:
             {
-                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a ecessary feature.") );
+                logger->log( item->logID, "\t" + i18n("Conversion failed. The preferred plugin lacks support for a necessary feature.") );
                 executeSameStep( item );
                 break;
             }

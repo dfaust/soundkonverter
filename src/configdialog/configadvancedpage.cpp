@@ -122,7 +122,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
 
     box->addSpacing( ConfigDialogSpacingBig );
 
-    QLabel *lDebug = new QLabel( i18n("Debug"), this );
+    QLabel *lDebug = new QLabel( i18n("Debug"), this ); // TODO rename
     lDebug->setFont( groupFont );
     box->addWidget( lDebug );
 

@@ -504,17 +504,17 @@ QStringList soundkonverter_codec_libav::convertCommand( const KUrl& inputFile, c
 float soundkonverter_codec_libav::parseOutput( const QString& output, int *length )
 {
     // Duration: 00:02:16.50, start: 0.000000, bitrate: 1411 kb/s
-    // size=    2445kB time=00:01:58.31 bitrate= 169.3kbits/s
+    // size=    2445kB time=158.31 bitrate= 169.3kbits/s
 
     QRegExp regLength("Duration: (\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
     if( length && output.contains(regLength) )
     {
         *length = regLength.cap(1).toInt()*3600 + regLength.cap(2).toInt()*60 + regLength.cap(3).toInt();
     }
-    QRegExp reg("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    QRegExp reg("time=(\\d+)\\.\\d");
     if( output.contains(reg) )
     {
-        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
+        return reg.cap(1).toInt();
     }
 
     // TODO error handling

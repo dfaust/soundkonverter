@@ -519,10 +519,15 @@ float soundkonverter_codec_ffmpeg::parseOutput( const QString& output, int *leng
     {
         *length = regLength.cap(1).toInt()*3600 + regLength.cap(2).toInt()*60 + regLength.cap(3).toInt();
     }
-    QRegExp reg("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
-    if( output.contains(reg) )
+    QRegExp reg1("time=(\\d{2}):(\\d{2}):(\\d{2})\\.(\\d{2})");
+    QRegExp reg2("time=(\\d+)\\.\\d");
+    if( output.contains(reg1) )
     {
-        return reg.cap(1).toInt()*3600 + reg.cap(2).toInt()*60 + reg.cap(3).toInt();
+        return reg1.cap(1).toInt()*3600 + reg1.cap(2).toInt()*60 + reg1.cap(3).toInt();
+    }
+    else if( output.contains(reg2) )
+    {
+        return reg2.cap(1).toInt();
     }
 
     // TODO error handling

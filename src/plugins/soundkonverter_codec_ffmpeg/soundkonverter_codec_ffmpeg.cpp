@@ -72,6 +72,10 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     ffmpegData.external = true;
     ffmpegData.experimental = false;
     data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "mp3";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
     codecList.append( data );
 
     data.ffmpegCodecList.clear();
@@ -145,6 +149,10 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
     data.ffmpegCodecList.clear();
     data.codecName = "amr nb";
     ffmpegData.name = "libopencore_amrnb";
+    ffmpegData.external = true;
+    ffmpegData.experimental = false;
+    data.ffmpegCodecList.append( ffmpegData );
+    ffmpegData.name = "amr_nb";
     ffmpegData.external = true;
     ffmpegData.experimental = false;
     data.ffmpegCodecList.append( ffmpegData );

@@ -72,6 +72,10 @@ soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const Q
     libavData.external = true;
     libavData.experimental = false;
     data.libavCodecList.append( libavData );
+    libavData.name = "mp3";
+    libavData.external = true;
+    libavData.experimental = false;
+    data.libavCodecList.append( libavData );
     codecList.append( data );
 
     data.libavCodecList.clear();
@@ -145,6 +149,10 @@ soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const Q
     data.libavCodecList.clear();
     data.codecName = "amr nb";
     libavData.name = "libopencore_amrnb";
+    libavData.external = true;
+    libavData.experimental = false;
+    data.libavCodecList.append( libavData );
+    libavData.name = "amr_nb";
     libavData.external = true;
     libavData.experimental = false;
     data.libavCodecList.append( libavData );

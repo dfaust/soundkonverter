@@ -1,5 +1,6 @@
 1.9.90 (2.0.0 rc1):
 -Add: Option to not modify the audio stream of mp3 files when calculating Replay Gain
+-Add: libav plugin
 -Fix: Modify mp3 stream when forcing the recalculation of Replay Gain
 -Fix: Don't try to calculate Replay Gain if it is impossible
 -Fix: Down/upmixing with sox

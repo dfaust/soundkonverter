@@ -23,7 +23,7 @@
 #include <QStringList>
 
 
-ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget *parent, Qt::WFlags f )
+ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, bool showMainWindowButton, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
     config( _config ),
     logger( _logger )
@@ -49,10 +49,11 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
 
     filterBox->addStretch();
 
-    cForce = new QCheckBox( i18n("Force recalculation"), this );
-    cForce->setToolTip( i18n("Recalculate Replay Gain tags for files that already have Replay Gain tags set.") );
-    filterBox->addWidget( cForce );
-
+    pShowMainWindow = new KPushButton( KIcon("soundkonverter"), i18n("Show soundKonverter main window"), widget );
+    pShowMainWindow->setVisible( showMainWindowButton );
+    filterBox->addWidget( pShowMainWindow );
+    connect( pShowMainWindow, SIGNAL(clicked()), this, SLOT(showMainWindowClicked()) );
+    
     fileList = new ReplayGainFileList( config, logger, widget );
     grid->addWidget( fileList, 1, 0 );
     connect( fileList, SIGNAL(processStarted()), this, SLOT(processStarted()) );
@@ -86,6 +87,10 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, QWidget 
     buttonBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(cancelClicked()) );
 
+    cForce = new QCheckBox( i18n("Force recalculation"), this );
+    cForce->setToolTip( i18n("Recalculate Replay Gain tags for files that already have Replay Gain tags set.") );
+    buttonBox->addWidget( cForce );
+    
     buttonBox->addStretch();
 
     pClose = new KPushButton( KIcon("dialog-close"), i18n("Close"), widget );
@@ -285,6 +290,12 @@ void ReplayGainScanner::showDirDialog()
     }
 
     delete dialog;
+}
+
+void ReplayGainScanner::showMainWindowClicked()
+{
+    pShowMainWindow->hide();
+    emit showMainWindow();
 }
 
 void ReplayGainScanner::addFiles( KUrl::List urls )

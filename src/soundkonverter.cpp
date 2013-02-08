@@ -248,13 +248,28 @@ void soundKonverter::showLogViewer( const int logId )
 void soundKonverter::showReplayGainScanner()
 {
     if( !replayGainScanner )
-        replayGainScanner = new ReplayGainScanner( config, logger, 0 );
+    {
+        replayGainScanner = new ReplayGainScanner( config, logger, !isVisible(), 0 );
+        connect( replayGainScanner.data(), SIGNAL(finished()), this, SLOT(replayGainScannerClosed()) );
+        connect( replayGainScanner.data(), SIGNAL(showMainWindow()), this, SLOT(showMainWindow()) );
+    }
 
     replayGainScanner.data()->setAttribute( Qt::WA_DeleteOnClose );
 
     replayGainScanner.data()->show();
     replayGainScanner.data()->raise();
     replayGainScanner.data()->activateWindow();
+}
+
+void soundKonverter::replayGainScannerClosed()
+{
+    if( !isVisible() )
+        KApplication::kApplication()->quit();
+}
+
+void soundKonverter::showMainWindow()
+{
+    show();
 }
 
 void soundKonverter::showAboutPlugins()

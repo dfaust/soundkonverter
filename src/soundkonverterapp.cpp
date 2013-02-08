@@ -26,6 +26,9 @@ int soundKonverterApp::newInstance()
     bool autoclose = false;
     bool autostart = false;
     bool activateMainWindow = true;
+    
+    if( ( first || !mainWindow->isVisible() ) && args->isSet("replaygain") && args->count() > 0 )
+        visible = false;
 
     autoclose = args->isSet( "autoclose" );
     autostart = args->isSet( "autostart" );

@@ -9,6 +9,7 @@
 -Fix: Down/upmixing with sox
 -Fix: Sox effects wouldn't work
 -Fix: Recognice mp3 and amr nb encoding support in ffmpeg/libav plugins
+-Fix: Crash when encoding with sox and without filters
 
 1.9.80 (2.0.0 beta1):
 -Add: Parallel Replay Gain calculation in the Replay Gain tool

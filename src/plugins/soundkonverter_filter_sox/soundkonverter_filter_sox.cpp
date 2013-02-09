@@ -354,7 +354,7 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
     QStringList command;
 
     SoxFilterOptions *filterOptions = 0;
-    foreach( FilterOptions *_filterOptions,conversionOptions->filterOptions )
+    foreach( FilterOptions *_filterOptions, conversionOptions->filterOptions )
     {
         if( _filterOptions->pluginName == global_plugin_name )
             filterOptions = dynamic_cast<SoxFilterOptions*>(_filterOptions);
@@ -445,12 +445,15 @@ QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, co
             command += "-v";
         command += QString::number(filterOptions->data.sampleRate);
     }
-    foreach( const SoxFilterOptions::EffectData effectData, filterOptions->data.effects )
+    if( filterOptions )
     {
-        if( effectData.effectName == "norm" || effectData.effectName == "bass" || effectData.effectName == "treble" )
+        foreach( const SoxFilterOptions::EffectData effectData, filterOptions->data.effects )
         {
-            command += effectData.effectName;
-            command += QString::number(effectData.data.at(0).toDouble());
+            if( effectData.effectName == "norm" || effectData.effectName == "bass" || effectData.effectName == "treble" )
+            {
+                command += effectData.effectName;
+                command += QString::number(effectData.data.at(0).toDouble());
+            }
         }
     }
 

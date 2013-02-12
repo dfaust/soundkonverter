@@ -99,6 +99,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( pStart, SIGNAL(clicked()), fileList, SLOT(startConversion()) );
 
     stopActionMenu = new KActionMenu( KIcon("process-stop"), i18n("Stop"), this );
+    stopActionMenu->setDelayed( false );
     killAction = new KAction( KIcon("flag-red"), i18n("Stop immediatelly"), this );
     stopActionMenu->addAction( killAction );
     connect( killAction, SIGNAL(triggered()), fileList, SLOT(killConversion()) );

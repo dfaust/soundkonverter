@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-01-22 21:50+0100\n"
+"POT-Creation-Date: 2013-02-12 10:23+0100\n"
 "PO-Revision-Date: 2012-07-03 16:48+0000\n"
 "Last-Translator: bizdelnick <bizdelnick@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/soundkonverter/"
@@ -91,7 +91,8 @@ msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr "Для кодирования файлов %1 бекенд '%2' может быть заменен на '%3'."
 
 #: codecoptimizations.cpp:55
-msgid "For ripping audio cds the backend '%1' can be replaced with '%2'."
+#, fuzzy
+msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
 msgstr "Для риппинга аудио-CD бекенд '%1' может быть заменен на '%2'."
 
 #: codecoptimizations.cpp:59
@@ -172,7 +173,8 @@ msgid "Possible solutions for %1"
 msgstr "Возможные решения для %1"
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:325
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:333
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:333
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:214
 msgctxt "like in either or"
 msgid "or"
@@ -207,6 +209,9 @@ msgstr "Последнее использованное"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:289
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:268
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:316
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:211
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:234
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:289
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:174
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:213
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:165
@@ -248,6 +253,9 @@ msgstr "Попробовать внутренний"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:247
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:256
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:283
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:199
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:222
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:247
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:162
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:186
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:153
@@ -278,6 +286,9 @@ msgstr "Очень низкое"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:261
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:260
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:294
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:203
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:226
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:261
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:166
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:195
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:157
@@ -309,6 +320,9 @@ msgstr "Низкое"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:275
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:264
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:305
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:207
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:230
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:275
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:170
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:204
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:161
@@ -340,6 +354,9 @@ msgstr "Среднее"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:303
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:272
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:327
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:215
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:238
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:303
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:178
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:222
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:169
@@ -372,6 +389,7 @@ msgstr "Очень высокое"
 #: plugins/soundkonverter_codec_fluidsynth/fluidsynthcodecwidget.cpp:43
 #: plugins/soundkonverter_codec_fluidsynth/fluidsynthcodecwidget.cpp:48
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:252
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:189
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:90
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:95
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:158
@@ -407,6 +425,8 @@ msgstr "Разнородное"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:242
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:39
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:275
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:193
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:242
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:43
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:181
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:172
@@ -851,9 +871,10 @@ msgstr ""
 "Преобразование не удалось. По крайней мере один из используемых бекендов "
 "должен быть правильно настроен."
 
-#: convert.cpp:177 convert.cpp:416
+#: convert.cpp:177 convert.cpp:416 convert.cpp:493
 msgid ""
-"Conversion failed. The preferred plugin lacks support for a ecessary feature."
+"Conversion failed. The preferred plugin lacks support for a necessary "
+"feature."
 msgstr ""
 
 #: convert.cpp:183 convert.cpp:422 convert.cpp:499
@@ -886,12 +907,6 @@ msgstr ""
 #: convert.cpp:458 replaygainscanner/replaygainprocessor.cpp:56
 msgid "Applying Replay Gain"
 msgstr "Выравнивание громкости"
-
-#: convert.cpp:493
-msgid ""
-"Conversion failed. The preferred plugin lacks support for a necessary "
-"feature."
-msgstr ""
 
 #: convert.cpp:515
 msgid "Writing tags"
@@ -979,7 +994,7 @@ msgstr "Нормальный выход"
 
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
-msgid "Succeeded but problems occured"
+msgid "Succeeded but problems occurred"
 msgstr ""
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
@@ -1116,7 +1131,7 @@ msgstr ""
 #: core/backendplugin.cpp:128
 msgid ""
 "AC3 or AC-3 is part of the Dolby Digital format family.<br>It was designed "
-"to be used for movies (e.g. DVDs) and supports sourround sound.<br><br><a "
+"to be used for movies (e.g. DVDs) and supports surround sound.<br><br><a "
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
@@ -2467,6 +2482,7 @@ msgid "Bitrate"
 msgstr "Битрейт"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:31
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:31
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:88
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:246
 #, fuzzy
@@ -2476,6 +2492,7 @@ msgstr "Битрейт"
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:82
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:146
+#: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:82
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:94
 #: plugins/soundkonverter_codec_shorten/shortencodecwidget.cpp:26
 #: plugins/soundkonverter_codec_ttaenc/ttaenccodecwidget.cpp:26
@@ -2486,17 +2503,18 @@ msgstr "Битрейт"
 msgid "Additional encoder arguments:"
 msgstr "Дополнительные аргументы кодировщика"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:293
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:301
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
 msgstr "Включите экспериментальные кодеки в диалоге конфигурации ffmpeg."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:297
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:305
 msgid "Compile ffmpeg with %1 support."
 msgstr "Скомпилируйте ffmpeg с поддержкой %1."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:357
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:365
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:111
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:365
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:81
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:240
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:83
@@ -2504,11 +2522,13 @@ msgstr "Скомпилируйте ffmpeg с поддержкой %1."
 msgid "Configure %1"
 msgstr "Настроить %1"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:362
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:370
 msgid "Enable experimental codecs"
 msgstr "Включить экспериментальные кодеки"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:388
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:396
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:396
 msgid "Please restart soundKonverter in order to activate the changes."
 msgstr "Пожалуйста, перезапустите soundKonverter чтобы применить изменения."
 
@@ -2749,6 +2769,16 @@ msgstr ""
 "LAME - свободный высокачественный MP3-кодировщик.\n"
 "Вы можете получить его на http://lame.sourceforge.net"
 
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
+#, fuzzy
+msgid "Enable experimental codecs in the libav configuration dialog."
+msgstr "Включите экспериментальные кодеки в диалоге конфигурации ffmpeg."
+
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
+#, fuzzy
+msgid "Compile libav with %1 support."
+msgstr "Скомпилируйте ffmpeg с поддержкой %1."
+
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
 msgctxt "Backend profile"
@@ -2890,7 +2920,7 @@ msgstr ""
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 #, fuzzy
-msgid "Quality level from 9 to 0 where 0 is the highes quality."
+msgid "Quality level from 9 to 0 where 0 is the highest quality."
 msgstr "Уровень качества от 9 до 0, где 0 - высочайшее качество."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
@@ -3203,7 +3233,8 @@ msgid "Stop"
 msgstr "Остановить"
 
 #: soundkonverterview.cpp:102
-msgid "Stop imediatelly"
+#, fuzzy
+msgid "Stop immediatelly"
 msgstr "Остановить немедленно"
 
 #: soundkonverterview.cpp:105

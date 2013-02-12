@@ -125,7 +125,7 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
     }
     else if( codecName == "ac3" )
     {
-        info.description = i18n("AC3 or AC-3 is part of the Dolby Digital format family.<br>It was designed to be used for movies (e.g. DVDs) and supports sourround sound.<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/wiki/Dolby Digital</a>");
+        info.description = i18n("AC3 or AC-3 is part of the Dolby Digital format family.<br>It was designed to be used for movies (e.g. DVDs) and supports surround sound.<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/wiki/Dolby Digital</a>");
         info.mimeTypes.append( "audio/ac3" );
         info.extensions.append( "ac3" );
     }

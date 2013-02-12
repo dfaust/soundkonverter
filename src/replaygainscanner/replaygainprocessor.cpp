@@ -265,7 +265,7 @@ void ReplayGainProcessor::remove( ReplayGainProcessorItem *item, ReplayGainFileL
             exitMessage = i18nc("Conversion exit status","Normal exit");
             break;
         case ReplayGainFileListItem::SucceededWithProblems:
-            exitMessage = i18nc("Conversion exit status","Succeeded but problems occured");
+            exitMessage = i18nc("Conversion exit status","Succeeded but problems occurred");
             break;
         case ReplayGainFileListItem::StoppedByUser:
             exitMessage = i18nc("Conversion exit status","Aborted by the user");

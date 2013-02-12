@@ -621,7 +621,7 @@ void SoxCodecWidget::modeChanged( int mode )
         dQuality->setValue( 5 );
         //dQuality->setValue( qualityForBitrate(dQuality->value()) );
         //qualitySpinBoxChanged( dQuality->value() );
-        dQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highes quality.") );
+        dQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.") );
     }
     else
     {

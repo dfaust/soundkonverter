@@ -1115,7 +1115,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             exitMessage = i18nc("Conversion exit status","Normal exit");
             break;
         case FileListItem::SucceededWithProblems:
-            exitMessage = i18nc("Conversion exit status","Succeeded but problems occured");
+            exitMessage = i18nc("Conversion exit status","Succeeded but problems occurred");
             break;
         case FileListItem::StoppedByUser:
             exitMessage = i18nc("Conversion exit status","Aborted by the user");

@@ -120,6 +120,16 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useVFATNamesBox->addWidget( cUseVFATNames );
     connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
+    box->addSpacing( ConfigDialogSpacingSmall );
+
+    QHBoxLayout *ejectCdAfterRipBox = new QHBoxLayout();
+    ejectCdAfterRipBox->addSpacing( ConfigDialogOffset );
+    box->addLayout( ejectCdAfterRipBox );
+    cEjectCdAfterRip = new QCheckBox( i18n("Eject CD after ripping has been completed"), this );
+    cEjectCdAfterRip->setChecked( config->data.advanced.ejectCdAfterRip );
+    ejectCdAfterRipBox->addWidget( cEjectCdAfterRip );
+    connect( cEjectCdAfterRip, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
+
     box->addSpacing( ConfigDialogSpacingBig );
 
     QLabel *lDebug = new QLabel( i18n("Debug"), this ); // TODO rename
@@ -194,6 +204,7 @@ void ConfigAdvancedPage::resetDefaults()
     cPreferredVorbisCommentTrackTotalTag->setCurrentIndex( 0 );
     cPreferredVorbisCommentDiscTotalTag->setCurrentIndex( 0 );
     cUseVFATNames->setChecked( false );
+    cEjectCdAfterRip->setChecked( true );
     cWriteLogFiles->setChecked( false );
     cUseSharedMemoryForTempFiles->setChecked( false );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 4 );
@@ -209,6 +220,7 @@ void ConfigAdvancedPage::saveSettings()
     config->data.general.preferredVorbisCommentTrackTotalTag = cPreferredVorbisCommentTrackTotalTag->currentText();
     config->data.general.preferredVorbisCommentDiscTotalTag = cPreferredVorbisCommentDiscTotalTag->currentText();
     config->data.general.useVFATNames = cUseVFATNames->isChecked();
+    config->data.advanced.ejectCdAfterRip = cEjectCdAfterRip->isChecked();
     config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
     config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
     config->data.advanced.maxSizeForSharedMemoryTempFiles = iMaxSizeForSharedMemoryTempFiles->value();
@@ -222,6 +234,7 @@ void ConfigAdvancedPage::somethingChanged()
                          cPreferredVorbisCommentTrackTotalTag->currentText() != config->data.general.preferredVorbisCommentTrackTotalTag ||
                          cPreferredVorbisCommentDiscTotalTag->currentText() != config->data.general.preferredVorbisCommentDiscTotalTag ||
                          cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
+                         cEjectCdAfterRip->isChecked() != config->data.advanced.ejectCdAfterRip ||
                          cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
                          cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||
                          iMaxSizeForSharedMemoryTempFiles->value() != config->data.advanced.maxSizeForSharedMemoryTempFiles ||

@@ -18,6 +18,9 @@
 // #include <KDiskFreeSpaceInfo>
 #include <kmountpoint.h>
 // #include <KIO/Job>
+#include <solid/device.h>
+#include <solid/block.h>
+#include <solid/opticaldrive.h>
 
 #include <QLayout>
 #include <QGridLayout>
@@ -991,10 +994,30 @@ void FileList::rippingFinished( const QString& device )
             {
                 if( item->track >= 0 && item->device == device )
                 {
+                    // rip next track
                     emit convertItem( item );
                     if( selectedFiles.contains(item) )
                         itemsSelected();
                     return;
+                }
+            }
+        }
+    }
+
+    // no more track from that device found
+    if( config->data.advanced.ejectCdAfterRip )
+    {
+        QList<Solid::Device> solidDevices = Solid::Device::listFromType(Solid::DeviceInterface::OpticalDrive, QString());
+        foreach( Solid::Device solidDevice, solidDevices )
+        {
+            Solid::OpticalDrive *opticalDrive = solidDevice.as<Solid::OpticalDrive>();
+            if( opticalDrive )
+            {
+                Solid::Block *block = solidDevice.as<Solid::Block>();
+                if( block && block->device() == device )
+                {
+                    opticalDrive->eject();
+                    break;
                 }
             }
         }

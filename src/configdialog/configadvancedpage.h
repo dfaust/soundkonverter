@@ -42,6 +42,7 @@ private:
     KComboBox *cPreferredVorbisCommentTrackTotalTag;
     KComboBox *cPreferredVorbisCommentDiscTotalTag;
     QCheckBox *cUseVFATNames;
+    QCheckBox *cEjectCdAfterRip;
     QCheckBox *cWriteLogFiles;
     QCheckBox *cUseSharedMemoryForTempFiles;
     KIntSpinBox *iMaxSizeForSharedMemoryTempFiles;

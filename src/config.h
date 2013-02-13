@@ -94,6 +94,7 @@ public:
             int maxSizeForSharedMemoryTempFiles; // maximum file size for storing in shared memory [MiB]
             int sharedMemorySize; // the size of the tmpfs [MiB]
             bool usePipes;
+            bool ejectCdAfterRip;
         } advanced;
 
         struct CoverArt

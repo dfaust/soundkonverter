@@ -30,8 +30,9 @@
 #include <QCheckBox>
 #include <QHeaderView>
 
-// #include <solid/device.h>
-// #include <solid/block.h>
+#include <solid/device.h>
+#include <solid/block.h>
+#include <solid/opticaldisc.h>
 
 
 PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f )
@@ -550,82 +551,28 @@ void CDOpener::setCommand( const QString& _command )
 
 QMap<QString,QString> CDOpener::cdDevices()
 {
-//         QStringList deviceList;
-//         QList<Solid::Device> solidDeviceList = Solid::Device::listFromType(Solid::DeviceInterface::OpticalDrive, QString());
-//         foreach( Solid::Device solidDevice, solidDeviceList )
-//         {
-//             deviceList += solidDevice.as<Solid::Block>()->device();
-//         }
-
     QMap<QString,QString> devices;
 
-    QFile *file;
-    QString line;
-
-    file = new QFile( "/proc/sys/dev/cdrom/info" );
-    if( !file->open(QIODevice::ReadOnly | QIODevice::Text) )
+    QList<Solid::Device> solidDevices = Solid::Device::listFromType(Solid::DeviceInterface::OpticalDisc, QString());
+    foreach( Solid::Device solidDevice, solidDevices )
     {
-        KMessageBox::information(this,"can't open /proc/sys/dev/cdrom/info");
-        return devices;
-    }
+        Solid::OpticalDisc *opticalDisc = solidDevice.as<Solid::OpticalDisc>();
+        if( opticalDisc && opticalDisc->availableContent() & Solid::OpticalDisc::Audio )
+        {
+            Solid::Block *block = solidDevice.as<Solid::Block>();
+            if( block )
+            {
+                const QString device = block->device();
+                const Solid::Device parentDevice( solidDevice.parentUdi() );
+                const QString name = parentDevice.product();
 
-    QStringList deviceList;
-    QStringList cdBurnList;
-    QStringList dvdPlayList;
-    QStringList dvdBurnList;
-
-    QTextStream stream( file );
-    line = stream.readLine();
-    while( !line.isNull() )
-    {
-        if( line.contains("drive name:") )
-        {
-            line = line.right( line.length() - line.indexOf(":") - 1 );
-            line = line.simplified();
-            deviceList = line.split( " ", QString::SkipEmptyParts );
-        }
-        else if( line.contains("Can write CD-R:") )
-        {
-            line = line.right( line.length() - line.indexOf(":") - 1 );
-            line = line.simplified();
-            cdBurnList = line.split( " ", QString::SkipEmptyParts );
-        }
-        else if( line.contains("Can read DVD:") )
-        {
-            line = line.right( line.length() - line.indexOf(":") - 1 );
-            line = line.simplified();
-            dvdPlayList = line.split( " ", QString::SkipEmptyParts );
-        }
-        else if( line.contains("Can write DVD-R:") )
-        {
-            line = line.right( line.length() - line.indexOf(":") - 1 );
-            line = line.simplified();
-            dvdBurnList = line.split( " ", QString::SkipEmptyParts );
-        }
-        line = stream.readLine();
-    }
-
-    file->close();
-
-    for( int i=0; i<deviceList.count(); i++ )
-    {
-        deviceList[i] = "/dev/"+deviceList.at(i);
-        cdDrive = cdda_identify( deviceList.at(i).toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
-        if( cdDrive && cdda_open(cdDrive) == 0 )
-        {
-            QString type;
-            if( dvdBurnList.at(i) == "1" )
-                type = i18n("DVD Recorder");
-            else if( dvdPlayList.at(i) == "1" && cdBurnList.at(i) == "1" )
-                type = i18n("CD Recorder") + "/" + i18n("DVD Player");
-            else if( dvdPlayList.at(i) == "1" )
-                type = i18n("DVD Player");
-            else if( cdBurnList.at(i) == "1" )
-                type = i18n("CD Recorder");
-            else
-                type = i18n("CD Player");
-            const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(type).arg(deviceList.at(i)).arg(cdda_audio_tracks(cdDrive));
-            devices.insert( deviceList.at(i), desc );
+                cdDrive = cdda_identify( device.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
+                if( cdDrive && cdda_open(cdDrive) == 0 )
+                {
+                    const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(name).arg(device).arg(cdda_audio_tracks(cdDrive));
+                    devices.insert( device, desc );
+                }
+            }
         }
     }
 

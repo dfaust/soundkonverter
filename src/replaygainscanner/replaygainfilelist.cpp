@@ -738,7 +738,7 @@ void ReplayGainFileList::processNextItem()
 
                 if( j == 0 )
                 {
-                    if( child->tags )
+                    if( child->tags && child->tags->tagsRead & TagData::AlbumGain )
                     {
                         albumGain = child->tags->albumGain;
                     }

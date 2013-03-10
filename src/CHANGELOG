@@ -1,3 +1,7 @@
+2.0.0:
+-Add: Update translations
+-Remove: French translation (only 58% translated)
+
 1.9.90 (2.0.0 rc1):
 -Add: Option to not modify the audio stream of mp3 files when calculating Replay Gain
 -Add: libav plugin

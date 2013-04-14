@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2013.
 # André Marcelo Alvarenga <amalvarenga@gmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-03-10 10:18+0100\n"
-"PO-Revision-Date: 2013-02-16 18:30+0000\n"
+"POT-Creation-Date: 2013-04-14 12:43+0200\n"
+"PO-Revision-Date: 2013-04-06 23:04+0000\n"
 "Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "soundkonverter/language/pt_BR/)\n"
@@ -1791,7 +1792,7 @@ msgstr "1. Selecionar as faixas do CD"
 
 #: opener/cdopener.cpp:131 opener/diropener.cpp:57 opener/urlopener.cpp:53
 msgid "2. Set conversion options"
-msgstr "2. Definir as opções de conversão"
+msgstr "2. Defina as opções de conversão"
 
 #: opener/cdopener.cpp:164 opener/cdopener.cpp:300 optionseditor.cpp:133
 msgid "Artist:"
@@ -2437,7 +2438,7 @@ msgstr "Pasta de origem"
 
 #: outputdirectory.cpp:38
 msgid "Specify output directory"
-msgstr "Indique a pasta de destino"
+msgstr "Indicar a pasta de destino"
 
 #: outputdirectory.cpp:39
 msgid "Copy directory structure"

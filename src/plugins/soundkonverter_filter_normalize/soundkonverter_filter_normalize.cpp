@@ -14,7 +14,7 @@ soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *paren
 {
     Q_UNUSED(args)
 
-    binaries["normalize1"] = "";
+    binaries["normalize"] = "";
 
     allCodecs += "wav";
 }

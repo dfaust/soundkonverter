@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Orosz Tamás, 2011.
-# Tamas Orosz <orosz.tamaas@gmail.com>, 2011-2013.
+# Orosz Tamás, 2011
+# otomi <orosz.tamaas@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-04-14 12:43+0200\n"
-"PO-Revision-Date: 2013-02-13 10:33+0000\n"
+"POT-Creation-Date: 2013-05-04 10:49+0200\n"
+"PO-Revision-Date: 2013-05-01 19:19+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/hu/)\n"
@@ -92,6 +92,7 @@ msgstr ""
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
 msgstr ""
+"Audio CD-k beolvasásához a(z) '%1' háttérprogram lecserélhető erre: '%2'. "
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
@@ -980,7 +981,7 @@ msgstr "Normál kilépés"
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr ""
+msgstr "Sikerült de hiba történt"
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
 msgctxt "Conversion exit status"
@@ -1159,6 +1160,10 @@ msgid ""
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
+"Az AC3 vagy AC-3 a Dolby Digital családba tartozó audioformátum."
+"<br>Mozifilmekhez (pl. DVD) lett kifejlesztve és támogatja a térbeli "
+"hangzást.<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital"
+"\">http://en.wikipedia.org/wiki/Dolby Digital</a>"
 
 #: core/backendplugin.cpp:141
 msgid ""
@@ -2825,11 +2830,11 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
 msgid "Enable experimental codecs in the libav configuration dialog."
-msgstr ""
+msgstr "Kísérleti kodekek engedélyezése a libav párbeszédablakában."
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
 msgid "Compile libav with %1 support."
-msgstr ""
+msgstr "libav fordítás %1 támogatással."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
@@ -2969,7 +2974,7 @@ msgstr "Gyors"
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 msgid "Quality level from 9 to 0 where 0 is the highest quality."
-msgstr ""
+msgstr "A minőség szintje 9 és 0 között lehet, ahol 0 a legjobb minőség."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
@@ -3277,7 +3282,7 @@ msgstr "Leállítás"
 
 #: soundkonverterview.cpp:103
 msgid "Stop immediatelly"
-msgstr ""
+msgstr "Azonnali leállítás"
 
 #: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"

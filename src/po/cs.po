@@ -3,21 +3,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Daniel Faust <hessijames@gmail.com>, 2006-2007.
-#   <hessijames@gmail.com>, 2012.
-# Pavel Fric <fripohled.blogspot.com>, 2011.
-# Pavel Fric <fripohled@blogspot.com>, 2010.
-# Pavel Fric <pavelfric@seznam.cz>, 2010-2012.
-#  <pavelfric@seznam.cz>, 2013.
-#   <pavelfric@seznam.cz>, 2012-2013.
+# HessiJames <hessijames@gmail.com>, 2006-2007
+# HessiJames <hessijames@gmail.com>, 2012
+# Pavel Fric <fripohled.blogspot.com>, 2011
+# Pavel Fric <fripohled@blogspot.com>, 2010
+# fri <pavelfric@seznam.cz>, 2010-2012
+# fri <pavelfric@seznam.cz>, 2013
+# fri <pavelfric@seznam.cz>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-04-14 12:43+0200\n"
-"PO-Revision-Date: 2013-02-12 11:08+0000\n"
-"Last-Translator: fri <pavelfric@seznam.cz>\n"
+"POT-Creation-Date: 2013-05-04 10:49+0200\n"
+"PO-Revision-Date: 2013-04-29 10:10+0000\n"
+"Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/soundkonverter/"
 "language/cs/)\n"
 "Language: cs\n"

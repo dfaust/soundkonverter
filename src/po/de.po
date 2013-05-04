@@ -3,17 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Christian Kalkhoff <me@ninan.info>, 2013.
-# Daniel Faust <hessijames@gmail.com>, 2010-2011,2013.
-#   <hessijames@gmail.com>, 2011-2012.
-#  <stefan.niedermann@googlemail.com>, 2013.
+# softmetz <me@ninan.info>, 2013
+# HessiJames <hessijames@gmail.com>, 2010-2011,2013
+# HessiJames <hessijames@gmail.com>, 2011-2012
+# stefanniedermann <stefan.niedermann@googlemail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-04-14 12:43+0200\n"
-"PO-Revision-Date: 2013-02-24 10:47+0000\n"
+"POT-Creation-Date: 2013-05-04 10:49+0200\n"
+"PO-Revision-Date: 2013-04-29 10:10+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/soundkonverter/"
 "language/de/)\n"
@@ -2901,7 +2901,7 @@ msgstr "Radio"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:288
 msgctxt "Backend profile"
 msgid "Braindead"
-msgstr "Gehirntot"
+msgstr "Hirntot"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
@@ -3060,7 +3060,7 @@ msgstr ""
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:180
 msgctxt "decibel"
 msgid "dB"
-msgstr "Dezibel"
+msgstr "dB"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:162
 msgid ""

@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-#   <hessijames@gmail.com>, 2012.
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2011-2012.
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2008-2009, 2011.
+# HessiJames <hessijames@gmail.com>, 2012
+# Mihkel Tõnnov <mihhkel@gmail.com>, 2011-2013
+# Mihkel Tõnnov <mihhkel@gmail.com>, 2011
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-04-14 12:43+0200\n"
-"PO-Revision-Date: 2013-02-12 09:51+0000\n"
+"POT-Creation-Date: 2013-05-04 10:49+0200\n"
+"PO-Revision-Date: 2013-04-29 10:10+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/et/)\n"
@@ -91,7 +91,7 @@ msgstr "%1-failide kodeerimisel on \"%3\" parem taustprogramm kui \"%2\"."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
-msgstr ""
+msgstr "Audio-CD-de rippimisel on \"%2\" parem taustprogramm kui \"%1\"."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
@@ -987,7 +987,7 @@ msgstr "Tavaline väljumine"
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr ""
+msgstr "Õnnestus, aga ilmnesid probleemid"
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
 msgctxt "Conversion exit status"
@@ -1164,6 +1164,10 @@ msgid ""
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
+"AC3 või AC-3 kuulub Dolby Digitali vorminguperre.<br>See loodi kasutamiseks "
+"filmides (nt DVD-del) ja toetab <em>surround-</em> ehk ruumilist heli."
+"<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en."
+"wikipedia.org/wiki/Dolby Digital</a>"
 
 #: core/backendplugin.cpp:141
 msgid ""
@@ -2819,11 +2823,11 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
 msgid "Enable experimental codecs in the libav configuration dialog."
-msgstr ""
+msgstr "Luba libav seadistusdialoogis katsejärgus koodekite kasutamine."
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
 msgid "Compile libav with %1 support."
-msgstr ""
+msgstr "Kompileeri libav %1 toega."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
@@ -2964,7 +2968,7 @@ msgstr "Kiire"
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 msgid "Quality level from 9 to 0 where 0 is the highest quality."
-msgstr ""
+msgstr "Kvaliteeditase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
@@ -3017,6 +3021,8 @@ msgid ""
 "Treble:\n"
 "Amplify the high frequencies"
 msgstr ""
+"Kõrged:\n"
+"võimendab kõrgeid sagedusi"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:28
 msgid "Sample rate:"
@@ -3143,7 +3149,7 @@ msgstr "Uue üksuse lisamine helitugevuse paranduse töötlusloendisse. : \"%1\"
 
 #: replaygainscanner/replaygainprocessor.cpp:222
 msgid "Replay Gain for %1"
-msgstr ""
+msgstr "Helitugevuse parandus: \"%1\""
 
 #: replaygainscanner/replaygainprocessor.cpp:240
 msgid "Possible Replay Gain backends:"
@@ -3270,7 +3276,7 @@ msgstr "Katkesta"
 
 #: soundkonverterview.cpp:103
 msgid "Stop immediatelly"
-msgstr ""
+msgstr "Katkesta kohe"
 
 #: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"

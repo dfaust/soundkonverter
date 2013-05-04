@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# André Marcelo Alvarenga <alvarenga@kde.org>, 2013.
-# André Marcelo Alvarenga <amalvarenga@gmail.com>, 2013.
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2013
+# André Marcelo Alvarenga <alvarenga@kde.org>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-04-14 12:43+0200\n"
-"PO-Revision-Date: 2013-04-06 23:04+0000\n"
-"Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
+"POT-Creation-Date: 2013-05-04 10:49+0200\n"
+"PO-Revision-Date: 2013-04-29 10:10+0000\n"
+"Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
 "soundkonverter/language/pt_BR/)\n"
 "Language: pt_BR\n"

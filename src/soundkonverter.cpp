@@ -70,45 +70,6 @@ soundKonverter::soundKonverter()
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
     setupGUI( QSize(700,400), ToolBar | Keys | Save | Create );
-
-    // clean up old files from previous soundKonverter versions
-    if( config->data.app.configVersion < 1001 )
-    {
-        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") )
-        {
-            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop");
-            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") );
-        }
-        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") )
-        {
-            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop");
-            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
-        }
-    }
-
-    // clean up log directory
-    QDir dir( KStandardDirs::locateLocal("data","soundkonverter/log/") );
-    dir.setFilter( QDir::Files | QDir::Writable );
-
-    QStringList list = dir.entryList();
-
-    for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-    {
-        if( *it != "1000.log" && (*it).endsWith(".log") )
-        {
-            QFile::remove( dir.absolutePath() + "/" + (*it) );
-            logger->log( 1000, i18n("Removing old file: %1").arg(dir.absolutePath()+"/"+(*it)) );
-        }
-    }
-
-    // Check if new backends got installed and the backend settings can be optimized
-    QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations();
-    if( !optimizationList.isEmpty() )
-    {
-        CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
-        connect( optimizationsDialog, SIGNAL(solutions(const QList<CodecOptimizations::Optimization>&)), config, SLOT(doOptimizations(const QList<CodecOptimizations::Optimization>&)) );
-        optimizationsDialog->open();
-    }
 }
 
 soundKonverter::~soundKonverter()
@@ -292,9 +253,49 @@ void soundKonverter::loadAutosaveFileList()
 
 void soundKonverter::startupChecks()
 {
+    // check if codec plugins could be loaded
     if( config->pluginLoader()->getAllCodecPlugins().count() == 0 )
     {
         KMessageBox::error(this, i18n("No codec plugins could be loaded. Without codec plugins soundKonverter can't work.\nThis problem can have two causes:\n1. You just installed soundKonverter and the KDE System Configuration Cache is not up-to-date, yet.\nIn this case, run kbuildsycoca4 and restart soundKonverter to fix the problem.\n2. Your installation is broken.\nIn this case try reinstalling soundKonverter."));
+    }
+
+    // remove old KDE4 action menus created by soundKonverter 0.3 - don't change the paths, it's what soundKonverter 0.3 used
+    if( config->data.app.configVersion < 1001 )
+    {
+        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") )
+        {
+            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop");
+            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") );
+        }
+        if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") )
+        {
+            QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop");
+            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
+        }
+    }
+
+    // clean up log directory
+    QDir dir( KStandardDirs::locateLocal("data","soundkonverter/log/") );
+    dir.setFilter( QDir::Files | QDir::Writable );
+
+    QStringList list = dir.entryList();
+
+    for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+    {
+        if( *it != "1000.log" && (*it).endsWith(".log") )
+        {
+            QFile::remove( dir.absolutePath() + "/" + (*it) );
+            logger->log( 1000, i18n("Removing old file: %1").arg(dir.absolutePath()+"/"+(*it)) );
+        }
+    }
+
+    // check if new backends got installed and the backend settings can be optimized
+    QList<CodecOptimizations::Optimization> optimizationList = config->getOptimizations();
+    if( !optimizationList.isEmpty() )
+    {
+        CodecOptimizations *optimizationsDialog = new CodecOptimizations( optimizationList, this );
+        connect( optimizationsDialog, SIGNAL(solutions(const QList<CodecOptimizations::Optimization>&)), config, SLOT(doOptimizations(const QList<CodecOptimizations::Optimization>&)) );
+        optimizationsDialog->open();
     }
 }
 

@@ -5,6 +5,7 @@
 #include "../codecproblems.h"
 
 #include <QLayout>
+#include <QHBoxLayout>
 #include <QLabel>
 #include <QDir>
 #include <QCheckBox>
@@ -83,7 +84,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     QLabel *labelFilter = new QLabel( i18n("Directory:"), dirOpenerWidget );
     directoryBox->addWidget( labelFilter );
 
-    uDirectory = new KUrlRequester( QDir::homePath(), dirOpenerWidget );
+    uDirectory = new KUrlRequester( KUrl("kfiledialog:///soundkonverter-add-media"), dirOpenerWidget );
     uDirectory->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     directoryBox->addWidget( uDirectory );
 

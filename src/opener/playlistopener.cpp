@@ -18,6 +18,7 @@
 #include <KPushButton>
 #include <QLabel>
 #include <QLayout>
+#include <QHBoxLayout>
 #include <KMessageBox>
 #include <KFileDialog>
 #include <QDir>
@@ -52,7 +53,7 @@ PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
 
-    fileDialog = new KFileDialog( KUrl(QDir::homePath()), "*.m3u", this );
+    fileDialog = new KFileDialog( KUrl("kfiledialog:///soundkonverter-add-media"), "*.m3u", this );
     fileDialog->setWindowTitle( i18n("Add Files") );
     fileDialog->setMode( KFile::File | KFile::ExistingOnly );
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );

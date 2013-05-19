@@ -72,7 +72,7 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
 
-    fileDialog = new KFileDialog( KUrl(QDir::homePath()), filterList.join("\n"), this, formatHelp );
+    fileDialog = new KFileDialog( KUrl("kfiledialog:///soundkonverter-add-media"), filterList.join("\n"), this, formatHelp );
     fileDialog->setWindowTitle( i18n("Add Files") );
     fileDialog->setMode( KFile::Files | KFile::ExistingOnly );
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );

@@ -54,6 +54,7 @@ public:
     void setAutoClose( bool enabled ) { autoclose = enabled; }
     void startConversion();
     void loadAutosaveFileList();
+    void startupChecks();
 
 private slots:
     void showConfigDialog();

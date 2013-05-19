@@ -99,7 +99,6 @@ int soundKonverterApp::newInstance()
         if( !urls.isEmpty() )
             mainWindow->addConvertFiles( urls, profile, format, directory, notifyCommand );
     }
-    first = false;
     args->clear();
 
     if( activateMainWindow )
@@ -107,6 +106,11 @@ int soundKonverterApp::newInstance()
 
     if( autostart )
         mainWindow->startConversion();
+
+    if( first )
+        mainWindow->startupChecks();
+
+    first = false;
 
     return 0;
 }

@@ -23,6 +23,7 @@
 #include <KIcon>
 #include <KStandardDirs>
 #include <KMenu>
+#include <KMessageBox>
 #include <QDir>
 
 #if KDE_IS_VERSION(4,4,0)
@@ -287,6 +288,14 @@ void soundKonverter::startConversion()
 void soundKonverter::loadAutosaveFileList()
 {
     m_view->loadAutosaveFileList();
+}
+
+void soundKonverter::startupChecks()
+{
+    if( config->pluginLoader()->getAllCodecPlugins().count() == 0 )
+    {
+        KMessageBox::error(this, i18n("No codec plugins could be loaded. Without codec plugins soundKonverter can't work.\nThis problem can have two causes:\n1. You just installed soundKonverter and the KDE System Configuration Cache is not up-to-date, yet.\nIn this case, run kbuildsycoca4 and restart soundKonverter to fix the problem.\n2. Your installation is broken.\nIn this case try reinstalling soundKonverter."));
+    }
 }
 
 void soundKonverter::conversionStarted()

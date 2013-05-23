@@ -5,6 +5,7 @@
 #include "config.h"
 
 #include <QLayout>
+#include <QHBoxLayout>
 #include <QDir>
 #include <QFileInfo>
 #include <QString>
@@ -118,6 +119,8 @@ QString OutputDirectory::filesystemForDirectory( const QString& dir )
 
 KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames )
 {
+    QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
+
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
         return KUrl();
@@ -163,7 +166,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         // TODO these restrictions could be a little bit over the top
         if( path.right(1) == "/" )
             path += "%f";
-        else if( path.lastIndexOf(QRegExp("%[abcdfgnpty]")) < path.lastIndexOf("/") )
+        else if( path.lastIndexOf(regEx) < path.lastIndexOf("/") )
             path += "/%f";
 
         const int fileNameBegin = path.lastIndexOf("/");
@@ -178,7 +181,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         path.replace( "\\[", "$quared_bracket_open$" );
         path.replace( "\\]", "$quared_bracket_close$" );
 
-        QRegExp reg( "\\[(.*)%([abcdfgnpty])(.*)\\]" );
+        QRegExp reg( "\\[(.*)%([abcdfgnpsty])(.*)\\]", Qt::CaseInsensitive );
         reg.setMinimal( true );
         while( path.indexOf(reg) != -1 )
         {
@@ -220,6 +223,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         path.replace( "%t", "$replace_by_title$" );
         path.replace( "%y", "$replace_by_year$" );
         path.replace( "%f", "$replace_by_filename$" );
+        path.replace( "%s", "$replace_by_sourcedir$" );
 
         QString artist = ( fileListItem->tags == 0 || fileListItem->tags->artist.isEmpty() ) ? i18n("Unknown Artist") : fileListItem->tags->artist;
         artist.replace("/",",");
@@ -257,6 +261,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         QString filename = fileName.left( fileName.lastIndexOf(".") );
         filename.replace("/",",");
         path.replace( "$replace_by_filename$", filename );
+
+        QString sourcedir = fileListItem->url.directory();
+        path.replace( "$replace_by_sourcedir$", sourcedir );
 
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
@@ -447,10 +454,12 @@ QString OutputDirectory::ntfsPath( const QString& path )
 
 void OutputDirectory::selectDir()
 {
+    QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
+
     QString dir = cDir->currentText();
     QString startDir = dir;
     QString params;
-    int i = dir.indexOf( QRegExp("%[aAbBcCdDfFgGnNpPtTyY]{1,1}") );
+    int i = dir.indexOf( regEx );
     if( i != -1 && cMode->currentIndex() == 0 )
     {
         i = dir.lastIndexOf( "/", i );
@@ -475,8 +484,10 @@ void OutputDirectory::selectDir()
 
 void OutputDirectory::gotoDir()
 {
+    QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
+
     QString startDir = cDir->currentText();
-    int i = startDir.indexOf( QRegExp("%[aAbBcCdDfFgGnNpPtTyY]{1,1}") );
+    int i = startDir.indexOf( regEx );
     if( i != -1 )
     {
         i = startDir.lastIndexOf( "/", i );
@@ -511,7 +522,7 @@ void OutputDirectory::updateMode( Mode mode )
         pDirGoto->setEnabled( true );
         cMode->setToolTip( i18n("Name all converted files according to the specified pattern") );
         cDir->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
-                "%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n\n"
+                "%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n%s - Path to the source directory\n\n"
                 "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.\n"
                 "In order to use squared brackets you will have to escape them with a backslash ('\\[' and '\\]').") );
     }

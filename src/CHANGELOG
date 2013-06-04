@@ -1,6 +1,7 @@
 2.0.3:
 -Fix: Update normalize filter widget properly
 -Fix: Show more than one filter widget at a time
+-Fix: Load normalize options properly from saved profiles (could lead to a crash)
 
 2.0.2:
 -Add: Italian translation

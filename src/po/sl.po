@@ -3,115 +3,114 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# HessiJames <hessijames@gmail.com>, 2012
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2011-2013
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2011
+# R33D3M33R <andrejm@ubuntu.si>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
 "POT-Creation-Date: 2013-07-19 20:32+0200\n"
-"PO-Revision-Date: 2013-04-29 10:10+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
-"Language-Team: Estonian (http://www.transifex.com/projects/p/soundkonverter/"
-"language/et/)\n"
-"Language: et\n"
+"PO-Revision-Date: 2013-06-26 19:41+0000\n"
+"Last-Translator: R33D3M33R <andrejm@ubuntu.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/projects/p/soundkonverter/"
+"language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #: aboutplugins.cpp:19
 msgid "About plugins"
-msgstr "Pluginate info"
+msgstr "O vstavkih"
 
 #: aboutplugins.cpp:31
 msgid "Installed plugins:"
-msgstr "Paigaldatud pluginad:"
+msgstr "Nameščeni vstavki:"
 
 #: aboutplugins.cpp:128
 msgid "About plugin %1:"
-msgstr "Plugina \"%1\" info:"
+msgstr "O vstavku %1:"
 
 #: aboutplugins.cpp:130
 msgid "Plugin type: %1"
-msgstr "Plugina tüüp: %1"
+msgstr "Vrsta vstavka: %1"
 
 #: aboutplugins.cpp:136
 msgid "Backend binaries:"
-msgstr "Taustprogrammid:"
+msgstr "Izvedljive datoteke zaledja:"
 
 #: aboutplugins.cpp:141
 msgid "%1 (found at: %2)"
-msgstr "%1 (leitud: %2)"
+msgstr "%1 (najden v: %2)"
 
 #: aboutplugins.cpp:143
 msgid "%1 (not found)"
-msgstr "%1 (ei leitud)"
+msgstr "%1 (ni bil najden)"
 
 #: aboutplugins.cpp:164 aboutplugins.cpp:199 aboutplugins.cpp:230
 msgid "Supported codecs:"
-msgstr "Toetatud koodekid:"
+msgstr "Podprti kodeki:"
 
 #: aboutplugins.cpp:169 aboutplugins.cpp:177 aboutplugins.cpp:204
 #: aboutplugins.cpp:212 aboutplugins.cpp:227
 msgid "Currently deactivated."
-msgstr "Hetkel deaktiveeritud."
+msgstr "Trenutno onemogočen."
 
 #: aboutplugins.cpp:172 aboutplugins.cpp:207
 msgid "Encode: %1"
-msgstr "Kodeerimine: %1"
+msgstr "Kodiraj: %1"
 
 #: aboutplugins.cpp:180 aboutplugins.cpp:215
 msgid "Decode: %1"
-msgstr "Dekodeerimine: %1"
+msgstr "Odkodiraj: %1"
 
 #: aboutplugins.cpp:240 configdialog/configbackendspage.cpp:163
 #: configdialog/configbackendspage.cpp:303
 #: configdialog/configbackendspage.cpp:382 optionsdetailed.cpp:295
 msgid "Configure %1 ..."
-msgstr "%1 seadistamine..."
+msgstr "Nastavi %1 ..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr "Taustprogrammi probleemide lahendused"
+msgstr "Rešitve za težave z zaledjem"
 
 #: codecoptimizations.cpp:27
 msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
-"On paigaldatud või eemaldatud taustprogramme ning soundKonverteri seadeid "
-"saab optimeerida."
+"Namestili ali odstranili ste zaledja, zato so lahko vaše nastavitve "
+"soundKonverterja optimizirane."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr "%1-failide kodeerimisel on \"%3\" parem taustprogramm kui \"%2\"."
+msgstr "Za kodiranje datotek %1 lahko zaledje '%2' zamenjate z '%3'."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
-msgstr "Audio-CD-de rippimisel on \"%2\" parem taustprogramm kui \"%1\"."
+msgstr "Za zajemanje zvočnih CD-jev lahko zaledje '%1' zamenjate z '%2'."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr "%1-failide dekodeerimisel on \"%3\" parem taustprogramm kui \"%2\"."
+msgstr "Za odkodiranje datotek %1 lahko zaledje '%2' zamenjate z '%3'."
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
-"Helitugevuse parandusteabe lisamisel %1-failidele on \"%3\" parem "
-"taustprogramm kui \"%2\"."
+"Za uveljavljanje jakosti predvajanja datotekam %1 lahko zaledje '%2' "
+"zamenjate z '%3'."
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
-msgstr "Eira"
+msgstr "Prezri"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr "Paranda"
+msgstr "Popravi"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -119,33 +118,33 @@ msgid ""
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter ei leidnud puuduvaid pakette.\n"
-"Kui tunned mõnest failivormingust puudust, võib olla vaja paigaldada mõni "
-"lisaplugin distro paketihalduri abil."
+"soundKonverter ni mogel najti nobenega manjkajočega paketa.\n"
+"Če vam manjkajo nekatere vrste datotek, boste morda morali namestiti dodaten "
+"vstavek preko upravljalnika paketov za vašo distribucijo."
 
 #: codecproblems.cpp:32
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Mõned paigaldatud pluginad ei tööta.\n"
-"Võimalikud lahendused on toodud allpool."
+"Nekateri od nameščenih vstavkov ne delujejo.\n"
+"Spodaj so naštete mogoče rešitve."
 
 #: codecproblems.cpp:37
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Mõnede failide dekodeerimine pole võimalik.\n"
-"Võimalikud lahendused on toodud allpool."
+"Nekaterih datotek ni mogoče odkodirati.\n"
+"Spodaj so naštete mogoče rešitve."
 
 #: codecproblems.cpp:41
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Helitugevuse parandusteave pole mõnede failide puhul toetatud.\n"
-"Võimalikud lahendused on toodud allpool."
+"Jakost predvajanja ni podprta za nekatere datoteke.\n"
+"Spodaj so naštete mogoče rešitve."
 
 #: codecproblems.cpp:47
 msgid ""
@@ -153,22 +152,21 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
-"Ükski paigaldatud plugin ei toeta audio-CD-de rippimist.\n"
-"soundKonverterile CD-rippimise plugina leidmiseks vaata oma distro "
-"paketihaldurisse."
+"Zajemanja zvočnih CD-jev ne podpira nobeden od nameščenih vstavkov.\n"
+"Oglejte si upravljalnik paketov vaše distribucije, da dobite vstavek za "
+"zajemanje CD-jev za soundKonverter."
 
 #: codecproblems.cpp:51
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Audio-CD-de rippimine pole hetkel puuduvate taustprogrammide tõttu "
-"võimalik.\n"
-"Võimalikud lahendused on toodud allpool."
+"Zajemanje zvočnih CD-jev trenutno ni podprto, saj manjkajo zaledja.\n"
+"Spodaj so naštete mogoče rešitve."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 msgid "Possible solutions for %1"
-msgstr "Võimalikud lahendused: %1"
+msgstr "Mogoče rešitve za %1"
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:333
@@ -176,11 +174,11 @@ msgstr "Võimalikud lahendused: %1"
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:214
 msgctxt "like in either or"
 msgid "or"
-msgstr "või"
+msgstr "ali"
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
-msgstr "Mõjutatud failid:"
+msgstr "Prizadete datoteke:"
 
 #: config.cpp:51 config.cpp:53 config.cpp:428 config.cpp:469
 #: configdialog/configgeneralpage.cpp:55 configdialog/configgeneralpage.cpp:71
@@ -191,7 +189,7 @@ msgstr "Mõjutatud failid:"
 #: configdialog/configgeneralpage.cpp:268 options.cpp:43 options.cpp:64
 #: optionsdetailed.cpp:467
 msgid "Last used"
-msgstr "Viimati kasutatud"
+msgstr "Nazadnje uporabljeno"
 
 #: config.cpp:52 config.cpp:432 config.cpp:439 config.cpp:445
 #: configdialog/configgeneralpage.cpp:75
@@ -227,17 +225,17 @@ msgstr "Viimati kasutatud"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:525
 #: soundkonverterview.cpp:544 soundkonverterview.cpp:546
 msgid "High"
-msgstr "Kõrge"
+msgstr "Visoka kakovost"
 
 #: config.cpp:118 configdialog/configcoverartpage.cpp:135
 msgctxt "cover file name"
 msgid "cover"
-msgstr "kaanepilt"
+msgstr "ovitek"
 
 #: config.cpp:276 config.cpp:302 config.cpp:304 convert.cpp:147
 #: convert.cpp:219 convert.cpp:386
 msgid "Try internal"
-msgstr "Proovitakse sisemist"
+msgstr "Poskusi notranje"
 
 #: config.cpp:429 config.cpp:445 configdialog/configgeneralpage.cpp:72
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:460
@@ -270,7 +268,7 @@ msgstr "Proovitakse sisemist"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:456
 #: soundkonverterview.cpp:529 soundkonverterview.cpp:531
 msgid "Very low"
-msgstr "Väga madal"
+msgstr "Zelo nizka kakovost"
 
 #: config.cpp:430 config.cpp:445 configdialog/configgeneralpage.cpp:73
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:461
@@ -304,7 +302,7 @@ msgstr "Väga madal"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:479
 #: soundkonverterview.cpp:534 soundkonverterview.cpp:536
 msgid "Low"
-msgstr "Madal"
+msgstr "Nizka kakovost"
 
 #: config.cpp:431 config.cpp:445 configdialog/configgeneralpage.cpp:74
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:462
@@ -338,7 +336,7 @@ msgstr "Madal"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:502
 #: soundkonverterview.cpp:539 soundkonverterview.cpp:541
 msgid "Medium"
-msgstr "Keskmine"
+msgstr "Srednja kakovost"
 
 #: config.cpp:433 config.cpp:445 configdialog/configgeneralpage.cpp:76
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:464
@@ -372,7 +370,7 @@ msgstr "Keskmine"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:548
 #: soundkonverterview.cpp:549 soundkonverterview.cpp:551
 msgid "Very high"
-msgstr "Väga kõrge"
+msgstr "Zelo visoka kakovost"
 
 #: config.cpp:434 config.cpp:449 configdialog/configgeneralpage.cpp:77
 #: configdialog/configgeneralpage.cpp:261 optionsdetailed.cpp:465
@@ -407,13 +405,13 @@ msgstr "Väga kõrge"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:571
 #: soundkonverterview.cpp:554 soundkonverterview.cpp:556
 msgid "Lossless"
-msgstr "Kadudeta"
+msgstr "Brez izgub"
 
 #: config.cpp:435 config.cpp:453 configdialog/configgeneralpage.cpp:266
 #: optionsdetailed.cpp:466 optionssimple.cpp:211 optionssimple.cpp:305
 #: soundkonverterview.cpp:559 soundkonverterview.cpp:561
 msgid "Hybrid"
-msgstr "Hübriid"
+msgstr "Hibridna"
 
 #: config.cpp:457 optionsdetailed.cpp:469 optionssimple.cpp:168
 #: optionssimple.cpp:215 optionssimple.cpp:309 optionssimple.cpp:372
@@ -435,27 +433,27 @@ msgstr "Hübriid"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:168
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:448
 msgid "User defined"
-msgstr "Kasutajamääratud"
+msgstr "Uporabniško določeno"
 
 #: config.cpp:620
 msgid "Convert with soundKonverter"
-msgstr "Teisenda soundKonverteriga..."
+msgstr "Pretvori s soundKonverter-jem"
 
 #: config.cpp:656
 msgid "Add Replay Gain with soundKonverter"
-msgstr "Lisa helitugevuse parandusteave..."
+msgstr "Dodaj jakost predvajanja s soundKonverter-jem"
 
 #: configdialog/configadvancedpage.cpp:36 configdialog/configdialog.cpp:48
 msgid "Advanced"
-msgstr "Lisaseaded"
+msgstr "Napredno"
 
 #: configdialog/configadvancedpage.cpp:45
 msgid "Preferred file name extension for ogg vorbis files:"
-msgstr "Eelistatud faililaiend Ogg Vorbise failidele:"
+msgstr "Prednostna pripona imena datoteke za datoteke ogg vorbis:"
 
 #: configdialog/configadvancedpage.cpp:61
 msgid "Preferred comment tag field for ogg vorbis and flac files:"
-msgstr "Eelistatud kommentaarisildi väli Ogg Vorbise ja FLAC-failidele:"
+msgstr "Prednostno polje oznake opombe za datoteke ogg vorbis in flac:"
 
 #: configdialog/configadvancedpage.cpp:62
 #: configdialog/configadvancedpage.cpp:65
@@ -465,14 +463,16 @@ msgid ""
 "Comments will be written to the selected field, when reading tags the "
 "selected field will be preferred."
 msgstr ""
-"Mõned programmid kasutavad välja DESCRIPTION, olgugi et korrektne oleks "
+"Nekateri programi uporabljajo polje DESCRIPTION, čeprav je pravilno polje "
 "COMMENT.\n"
-"Kommentaarid kirjutatakse siin määratud väljale ning ka siltide lugemisel "
-"eelistatakse sama välja."
+"Opombe bodo zapisane v izbrano polje, hkrati pa bo polje prednostno tudi med "
+"branjem oznak."
 
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
-msgstr "Eelistatud lugude koguarvu sildi väli Ogg Vorbise ja FLAC-failidele:"
+msgstr ""
+"Prednostno polje oznake skupnega števila skladb za datoteke ogg vorbis in "
+"flac:"
 
 #: configdialog/configadvancedpage.cpp:80
 #: configdialog/configadvancedpage.cpp:83
@@ -482,14 +482,16 @@ msgid ""
 "When using the field TRACKNUMBER, the track number and the total tracks "
 "number will be written to the same field separated by a slash ('/')."
 msgstr ""
-"Lugude koguarv kirjutatakse siin määratud väljale ning ka siltide lugemisel "
-"eelistatakse sama välja.\n"
-"Kasutades välja TRACKNUMBER, kirjutatakse loo number ja lugude koguarv "
-"samale väljale, eraldades nad kaldkriipsuga (/)."
+"Skupno število skladb bo zapisano v izbrano polje, hkrati pa bo polje "
+"prednostno tudi med branjem oznak.\n"
+"Če boste uporabili polje TRACKNUMBER, bosta tako številka skladbe kot skupno "
+"število skladb zapisana v enako polje, ločena z poševnico ('/')."
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
-msgstr "Eelistatud plaatide koguarvu sildi väli Ogg Vorbise ja FLAC-failidele:"
+msgstr ""
+"Prednostno polje oznake skupnega števila diskov za datoteke ogg vorbis in "
+"flac:"
 
 #: configdialog/configadvancedpage.cpp:99
 #: configdialog/configadvancedpage.cpp:102
@@ -499,14 +501,14 @@ msgid ""
 "When using the field DISCNUMBER, the disc number and the total discs number "
 "will be written to the same field separated by a slash ('/')."
 msgstr ""
-"Plaatide koguarv kirjutatakse siin määratud väljale ning ka siltide "
-"lugemisel eelistatakse sama välja.\n"
-"Kasutades välja DISCNUMBER, kirjutatakse plaadi number ja plaatide koguarv "
-"samale väljale, eraldades nad kaldkriipsuga (/)."
+"Skupno število diskov bo zapisano v izbrano polje, hkrati pa bo polje "
+"prednostno tudi med branjem oznak.\n"
+"Če boste uporabili polje DISCNUMBER, bosta tako številka skladbe kot skupno "
+"število skladb zapisana v enako polje, ločena z poševnico ('/')."
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
-msgstr "FAT-iga ühilduvate failinimede kasutamine"
+msgstr "Vedno uporabi izhodna imena datotek združljiva s FAT"
 
 #: configdialog/configadvancedpage.cpp:118
 msgid ""
@@ -514,18 +516,17 @@ msgid ""
 "If the output directory is on a FAT file system FAT compatible file names "
 "will automatically be used independently from this option."
 msgstr ""
-"Märkimisel asendadakse mõned erimärgid (nt \"?\") alakriipsudega (\"_\").\n"
-"Kui väljundkataloog asub FAT-failisüsteemil, kasutatakse FAT-iga ühilduvaid "
-"failinimesid automaatselt,\n"
-"sõltumata sellest, mis siin määratud on."
+"Zamenja nekatere posebne znake kot '?' z '_'.\n"
+"Če je izhodna mapa na datotečnem sistem FAT, bodo imena datotek privzeto "
+"združljiva s FAT, ne glede na to možnost."
 
 #: configdialog/configadvancedpage.cpp:125
 msgid "Debug"
-msgstr "Silumine"
+msgstr "Razhrošči"
 
 #: configdialog/configadvancedpage.cpp:134
 msgid "Write log files to disc"
-msgstr "Logifailide salvestamine kettale"
+msgstr "Zapiši dnevnike na disk"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid ""
@@ -534,18 +535,20 @@ msgid ""
 "the log viewer.\n"
 "Log files will be written to %1"
 msgstr ""
-"Märkimisel salvestatakse teisenduslogid kõvakettale.\n"
-"See võib olla kasulik kokkujooksmiste korral, kui programmi enda kaudu logi "
-"vaadata ei saa.\n"
-"Logifailid kirjutatakse kataloogi \"%1\""
+"Zapiše dnevnike na trdi disk med pretvarjanjem.\n"
+"To je lahko uporabno, če pride do sesutja in ne morete dostopati do datoteke "
+"dnevnika s pomočjo pregledovalnika dnevnikov.\n"
+"Dnevniške datoteke bodo zapisane v %1"
 
 #: configdialog/configadvancedpage.cpp:142
 msgid "Experimental"
-msgstr "Katsejärgus"
+msgstr "Poskusno"
 
 #: configdialog/configadvancedpage.cpp:151
 msgid "Store temporary files in memory unless the estimated size is more than:"
-msgstr "Ajutisi faile hoitakse mälus, kui nende hinnanguline suurus on kuni"
+msgstr ""
+"Shrani začasne datoteke v pomnilnik, razen če je njihova predvidena velikost "
+"večja od:"
 
 #: configdialog/configadvancedpage.cpp:152
 #: configdialog/configadvancedpage.cpp:156
@@ -553,8 +556,8 @@ msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
-"Saalimise vältimiseks ei hoita mälus faile, mille oodatav maht on siin "
-"määratust suurem."
+"Ne shrani datotek, za katere pričakuje, da bodo večje od te vrednosti, v "
+"pomnilnik in tako prepreči uporabo počasnejšega izmenjevalnega pomnilnika."
 
 #: configdialog/configadvancedpage.cpp:157
 msgctxt "mega in bytes"
@@ -563,11 +566,11 @@ msgstr "MiB"
 
 #: configdialog/configadvancedpage.cpp:164
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr "Paistab, et /dev/shm'i ei ole ühendatud ühtegi failisüsteemi"
+msgstr "Izgleda, da na /dev/shm ni priklopljen noben datotečni sistem"
 
 #: configdialog/configadvancedpage.cpp:178
 msgid "Use pipes when possible"
-msgstr "Võimalusel toru kasutamine"
+msgstr "Uporabi cevi, če je mogoče"
 
 #: configdialog/configadvancedpage.cpp:179
 msgid ""
@@ -575,80 +578,80 @@ msgid ""
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
-"Torud muudavad tarbetuks ajutiste failide kasutamise, kasvatades nii "
-"jõudlust.\n"
-"Ent mõned taustprogrammid teevad selles režiimis vigu, seega ole ettevaatlik."
+"Cevi odstranijo potrebo po začasnih datotekah, kar posledično izboljša "
+"hitrost delovanja.\n"
+"Vseeno bodite previdni, saj v tem načinu nekatera zaledja povzročajo napake."
 
 #: configdialog/configbackendspage.cpp:136
 #: configdialog/configbackendspage.cpp:197
 #: configdialog/configbackendspage.cpp:339
 msgid "Decoder"
-msgstr "Dekooder"
+msgstr "Odkodirnik"
 
 #: configdialog/configbackendspage.cpp:138
 #: configdialog/configbackendspage.cpp:199
 #: configdialog/configbackendspage.cpp:342
 msgid "Encoder"
-msgstr "Kooder"
+msgstr "Kodirnik"
 
 #: configdialog/configbackendspage.cpp:140
 #: configdialog/configbackendspage.cpp:201
 #: configdialog/configbackendspage.cpp:345 convert.cpp:1346 filelist.cpp:549
 #: filelist.cpp:559
 msgid "Replay Gain"
-msgstr "Helitugevuse parandus"
+msgstr "Jakost predvajanja"
 
 #: configdialog/configbackendspage.cpp:148
 msgid "Move %1 one position up"
-msgstr "Liiguta \"%1\" ühe koha võrra üles"
+msgstr "Premakni %1 mest navzgor"
 
 #: configdialog/configbackendspage.cpp:153
 msgid "Move %1 one position down"
-msgstr "Liiguta \"%1\" ühe koha võrra alla"
+msgstr "Premakni %1 mest navzdol"
 
 #: configdialog/configbackendspage.cpp:158
 msgid "About %1 ..."
-msgstr "%1i info..."
+msgstr "O %1 ..."
 
 #: configdialog/configbackendspage.cpp:232
 msgid "CD ripper"
-msgstr "CD-rippija"
+msgstr "Zajem CD-jev"
 
 #: configdialog/configbackendspage.cpp:241
 msgid "Use plugin:"
-msgstr "Kasutatav plugin:"
+msgstr "Uporabi vstavek:"
 
 #: configdialog/configbackendspage.cpp:259
 msgid "Filters"
-msgstr "Fintrid"
+msgstr "Filtri"
 
 #: configdialog/configbackendspage.cpp:275
 msgid "Enable plugins:"
-msgstr "Lubatud pluginad:"
+msgstr "Omogoči vstavke:"
 
 #: configdialog/configbackendspage.cpp:314
 msgid "Priorities"
-msgstr "Prioriteedid"
+msgstr "Prednosti"
 
 #: configdialog/configbackendspage.cpp:326
 msgid "Configure plugin priorities for format:"
-msgstr "Pluginaprioriteetide seadistamine vormingule:"
+msgstr "Nastavi prednosti vstavkov za vrsto:"
 
 #: configdialog/configbackendspage.cpp:353
 msgid "Show possible optimizations"
-msgstr "Näita võimalikke täiustusi"
+msgstr "Prikaži mogoče optimizacije"
 
 #: configdialog/configbackendspage.cpp:393
 msgid ""
 "You have changed the current settings.\n"
 "Do you want to save them?"
 msgstr ""
-"Seadistust on muudetud.\n"
-"Kas tahad uue seadistuse salvestada?"
+"Spremenili ste trenutne nastavitve.\n"
+"Ali jih želite shraniti?"
 
 #: configdialog/configbackendspage.cpp:393
 msgid "Settings changed"
-msgstr "Seadistusi on muudetud"
+msgstr "Nastavitve so bile spremenjene"
 
 #: configdialog/configbackendspage.cpp:450
 msgid ""
@@ -657,51 +660,51 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"See valib iga vormingu jaoks parima taustprogrammi ja salvestab uue "
-"seadistuse ilma küsimata.\n"
+"To bo izbralo najboljša zaledja za vse vrste in takoj shranilo nove "
+"možnosti.\n"
 "\n"
-"Kas tahad jätkata?"
+"Ali želite nadaljevati?"
 
 #: configdialog/configbackendspage.cpp:572
 msgid "All backend settings seem to be optimal, there is nothing to do."
 msgstr ""
-"Taustprogrammide seaded näivad olevat optimaalsed, pole vaja midagi teha."
+"Vse nastavitve zaledij izgledajo optimalne, zato ni ničesar za narediti."
 
 #: configdialog/configcoverartpage.cpp:24
 msgid "Saving covers to output directory"
-msgstr "Kaanepiltide salvestamine väljundkataloogi"
+msgstr "Shranjevanje ovitkov v izhodno mapo"
 
 #: configdialog/configcoverartpage.cpp:36
 msgid "Save embedded covers to output directory"
-msgstr "Põimitud kaanepiltide salvestamine väljundkataloogi"
+msgstr "Shrani vgrajene ovitke v izhodno mapo"
 
 #: configdialog/configcoverartpage.cpp:38
 msgid "Always"
-msgstr "Alati"
+msgstr "Vedno"
 
 #: configdialog/configcoverartpage.cpp:40
 msgid "Only if embedding the covers into the output files is not possible"
-msgstr "Ainult siis, kui põimimine väljundfailidesse pole võimalik"
+msgstr "Samo, če ni mogoče vgraditi ovitkov v izhodne datoteke "
 
 #: configdialog/configcoverartpage.cpp:42
 msgid "Never"
-msgstr "Mitte kunagi"
+msgstr "Nikoli"
 
 #: configdialog/configcoverartpage.cpp:62
 msgid "File name for the cover (when saving to output directory)"
-msgstr "Kaanepildi failinimi (väljundkataloogi salvestades)"
+msgstr "Ime datoteke za ovitek (ob shranjevanju v izhodno mapo)"
 
 #: configdialog/configcoverartpage.cpp:64
 msgid "The embedded cover description"
-msgstr "Põimitud kaanepildi kirjeldus"
+msgstr "Opis vgrajenega ovitka"
 
 #: configdialog/configcoverartpage.cpp:66
 msgid "The default cover file name"
-msgstr "Kaanepildi vaikimisi failinimi"
+msgstr "Privzeto ime datoteke ovitka"
 
 #: configdialog/configcoverartpage.cpp:70
 msgid "Default cover file name:"
-msgstr "Kaanepildi vaikimisi failinimi:"
+msgstr "Privzeto ime datoteke ovitka:"
 
 #: configdialog/configcoverartpage.cpp:73
 msgid ""
@@ -713,79 +716,79 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Järgnevad stringid on muutujad, mis asendatakse\n"
-"vastava infoga faili metaandmetest:\n"
+"Sledeči nizi so nadomestni znaki, ki bodo zamenjani\n"
+"s podatki v metapodatkih:\n"
 "\n"
-"%a - esitaja\n"
+"%a - izvajalec\n"
 "%b - album\n"
-"%d - kaanepildi kirjeldus\n"
-"%r - kaanepildi roll"
+"%d - opis ovitka\n"
+"%r - vloga ovitka"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
-msgstr "Seadistused"
+msgstr "Nastavitve"
 
 #: configdialog/configdialog.cpp:42
 msgid "General"
-msgstr "Üldine"
+msgstr "Splošno"
 
 #: configdialog/configdialog.cpp:54
 msgid "Cover art"
-msgstr "Kaanepilt"
+msgstr "Ovitek"
 
 #: configdialog/configdialog.cpp:60 main.cpp:28
 msgid "Backends"
-msgstr "Taustprogrammid"
+msgstr "Zaledja"
 
 #: configdialog/configgeneralpage.cpp:43
 msgid "User interface"
-msgstr "Kasutajaliides"
+msgstr "Uporabniški vmesnik"
 
 #: configdialog/configgeneralpage.cpp:52
 msgid "Start in Mode:"
-msgstr "Käivitusrežiim:"
+msgstr "Zaženi v načinu:"
 
 #: configdialog/configgeneralpage.cpp:56 options.cpp:79
 msgid "Simple"
-msgstr "Lihtne"
+msgstr "Preprost"
 
 #: configdialog/configgeneralpage.cpp:57 options.cpp:80
 msgid "Detailed"
-msgstr "Üksikasjalik"
+msgstr "Podroben"
 
 #: configdialog/configgeneralpage.cpp:67
 msgid "Default profile:"
-msgstr "Vaikeprofiil:"
+msgstr "Privzeti profil:"
 
 #: configdialog/configgeneralpage.cpp:85
 msgid "Default format:"
-msgstr "Vaikevorming:"
+msgstr "Privzeta vrsta:"
 
 #. i18n: file: soundkonverterui.rc:14
 #. i18n: ectx: Menu (conversion)
 #: configdialog/configgeneralpage.cpp:95 optionseditor.cpp:51 rc.cpp:3
 msgid "Conversion"
-msgstr "Teisendamine"
+msgstr "Pretvorba"
 
 #: configdialog/configgeneralpage.cpp:118
 msgid "Conflict handling:"
-msgstr "Konfliktide lahendamine:"
+msgstr "Obravnavanje sporov:"
 
 #: configdialog/configgeneralpage.cpp:121
 msgid "Generate new file name"
-msgstr "Faili nimele lisatakse \"uus\""
+msgstr "Ustvari novo ime datoteke"
 
 #: configdialog/configgeneralpage.cpp:122
 msgid "Skip file"
-msgstr "Fail jäetakse vahele"
+msgstr "Preskoči datoteko"
 
 #: configdialog/configgeneralpage.cpp:124
 msgid "Do that if the output file already exists"
-msgstr "Mida teha, kui väljundfaili nimega fail juba olemas on."
+msgstr "Naredi to, če izhodna datoteka že obstaja"
 
 #: configdialog/configgeneralpage.cpp:134
 msgid "Number of files to convert at once:"
-msgstr "Samaaegselt teisendatavate failide arv:"
+msgstr "Število datotek, ki bodo pretvorjene naenkrat:"
 
 #: configdialog/configgeneralpage.cpp:137
 #: configdialog/configgeneralpage.cpp:185
@@ -794,250 +797,254 @@ msgid ""
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
-"Seda numbrit ei tohiks sättida suuremaks protsessori tuumade arvust.\n"
-"Protsessoril tuvastati %1 tuuma."
+"Te številke ne bi smeli nastaviti višje od količine prisotnih jeder "
+"procesorja.\n"
+"Zaznanih je bilo %1 jeder procesorja."
 
 #: configdialog/configgeneralpage.cpp:150
 msgid "Apply album gain to converted files"
-msgstr "Albumi lugude helivaljuse ühtlustamine teisendamisel"
+msgstr "Uveljavi jakost predvajanja albuma za pretvorjene datoteke"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
 msgstr ""
-"Märkimisel hoitakse sama albumi lugusid faililoendis ootel, et neisse albumi "
-"helitugevuse parandusteave lisada."
+"Ohrani skladbe enakega albuma v čakalni vrsti, da bo uveljavljena jakost "
+"predvajanja albuma za vse datoteke."
 
 #: configdialog/configgeneralpage.cpp:158
 #: replaygainscanner/replaygainscanner.cpp:33
 #: replaygainscanner/replaygainscanner.cpp:344
 msgid "Replay Gain tool"
-msgstr "Helitugevuse parandustööriist"
+msgstr "Orodje jakosti predvajanja"
 
 #: configdialog/configgeneralpage.cpp:167
 msgid "Group files in the Replay Gain tool by:"
-msgstr "Failide rühmitamise alus helitugevuse parandustööriistas:"
+msgstr "Združi datoteke v orodju jakosti predvajanja:"
 
 #: configdialog/configgeneralpage.cpp:170
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr "Albumi sildid ja kataloogid"
+msgstr "Po oznakah albumov in mapah"
 
 #: configdialog/configgeneralpage.cpp:171
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr "Ainult albumi sildid"
+msgstr "Samo po oznakah albumov"
 
 #: configdialog/configgeneralpage.cpp:172
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr "Ainult kataloogid"
+msgstr "Samo po mapah"
 
 #: configdialog/configgeneralpage.cpp:182
 msgid "Number of items to process at once:"
-msgstr "Samaaegselt teisendatavate failide arv:"
+msgstr "Število predmetov, ki bodo naenkrat obdelani:"
 
 #: convert.cpp:68 convert.cpp:1301
 msgid "Getting file"
-msgstr "Faili hankimine"
+msgstr "Pridobivanje datoteke"
 
 #: convert.cpp:76
 msgid "Copying \"%1\" to \"%2\""
-msgstr "Kopeerimine: \"%1\" -> \"%2\""
+msgstr "Kopiranje \"%1\" v \"%2\""
 
 #: convert.cpp:119 convert.cpp:462
 #: replaygainscanner/replaygainprocessor.cpp:60
 msgid "No more backends left to try :("
-msgstr "Pole enam ühtki taustprogrammi proovida :("
+msgstr "Ni več zaledij, ki bi jih lahko preizkusili :("
 
 #: convert.cpp:134 convert.cpp:249 convert.cpp:1307 filelist.cpp:569
 #: soundkonverter.cpp:282 soundkonverter.cpp:284 soundkonverter.cpp:311
 #: soundkonverter.cpp:313
 msgid "Converting"
-msgstr "Teisendamine"
+msgstr "Pretvarjanje"
 
 #: convert.cpp:171 convert.cpp:410 convert.cpp:487
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
-"Teisendamine ebaõnnestus. Vähemalt üks kasutatud taustprogrammidest vajab "
-"seadistamist."
+"Pretvarjanje je spodletelo. Vsaj eno uporabljeno zaledje morate pravilno "
+"nastaviti."
 
 #: convert.cpp:177 convert.cpp:416 convert.cpp:493
 msgid ""
 "Conversion failed. The preferred plugin lacks support for a necessary "
 "feature."
 msgstr ""
-"Teisendamine ebaõnnestus. Eelistatud plugin ei toeta vajalikku funktsiooni."
+"Pretvorba je spodletela. Prednostnemu vstavku manjka podpora za nujno "
+"zmožnost."
 
 #: convert.cpp:183 convert.cpp:422 convert.cpp:499
 msgid "Conversion failed. Unknown Error."
-msgstr "Teisendamine ebaõnnestus. Tundmatu viga."
+msgstr "Pretvorba je spodletela. Neznana napaka."
 
 #: convert.cpp:344 convert.cpp:1313 filelist.cpp:564
 msgid "Ripping"
-msgstr "Rippimine"
+msgstr "Zajemanje"
 
 #: convert.cpp:349 convert.cpp:1319
 msgid "Decoding"
-msgstr "Dekodeerimine"
+msgstr "Odkodiranje"
 
 #: convert.cpp:354 convert.cpp:367 convert.cpp:373
 msgid "Applying filter"
-msgstr "Filtri rakendamine"
+msgstr "Uveljavljanje filtra"
 
 #: convert.cpp:362 convert.cpp:1331
 msgid "Encoding"
-msgstr "Kodeerimine"
+msgstr "Kodiranje"
 
 #: convert.cpp:443
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
 msgstr ""
-"Helitugevuse parandusteabe vahelejätmine, hiljem arvutatakse albumi jaoks"
+"Preskakovanje jakosti predvajanja, kasneje bo izračunana jakost predvajanja "
+"albuma"
 
 #: convert.cpp:458 replaygainscanner/replaygainprocessor.cpp:56
 msgid "Applying Replay Gain"
-msgstr "Helitugevuse paranduse rakendamine"
+msgstr "Uveljavljanje jakosti predvajanja"
 
 #: convert.cpp:515
 msgid "Writing tags"
-msgstr "Metaandmete kirjutamine"
+msgstr "Zapisovanje oznak"
 
 #: convert.cpp:542
 msgid "Running user script"
-msgstr "Kasutajaskripti käivitamine"
+msgstr "Zaganjanje uporabniškega skripta"
 
 #: convert.cpp:567
 msgid "Executing next step"
-msgstr "Järgmise sammu alustamine"
+msgstr "Izvajanje naslednjega koraka"
 
 #: convert.cpp:711
 msgid "Read tags successfully"
-msgstr "Metaandmed edukalt loetud"
+msgstr "Branje oznak je bilo uspešno"
 
 #: convert.cpp:715
 msgid "Unable to read tags"
-msgstr "Siltide lugemine pole võimalik"
+msgstr "Oznak ni bilo mogoče prebrati"
 
 #: convert.cpp:728 convert.cpp:733
 msgctxt "removing file"
 msgid "Removing: %1"
-msgstr "Eemaldamine: %1"
+msgstr "Odstranjevanje: %1"
 
 #: convert.cpp:742
 msgid "An error occurred. Error code: %1 (%2)"
-msgstr "Ilmnes viga. Veakood: %1 (%2)"
+msgstr "Prišlo je do napake. Koda napake: %1 (%2)"
 
 #: convert.cpp:846 convert.cpp:909
 msgid "Conversion failed. Exit code: %1"
-msgstr "Teisendamine ebaõnnestus. Lõpetamise olek: %1"
+msgstr "Pretvorba je spodletela. Izhodna koda: %1"
 
 #: convert.cpp:976
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
-msgstr "CD rada %1: %2 - %3"
+msgstr "Skladba %1 CD-ja: %2 - %3"
 
 #: convert.cpp:980
 msgctxt "identificator for the logger"
 msgid "CD track %1"
-msgstr "CD rada %1"
+msgstr "Skladba %1 CD-ja"
 
 #: convert.cpp:987
 msgid "Adding new item to conversion list: '%1'"
-msgstr "Uue üksuse lisamine teisendusloendisse: \"%1\""
+msgstr "Dodajanje novih predmetov na seznam za pretvarjanje: '%1'"
 
 #: convert.cpp:994 replaygainscanner/replaygainprocessor.cpp:223
 msgid "Got log ID: %1"
-msgstr "Logi-ID käes: %1"
+msgstr "Pridobljen ID dnevnika: %1"
 
 #: convert.cpp:1019
 msgid "Track number: %1, device: %2"
-msgstr "Raja number: %1, seade: %2"
+msgstr "Številka skladbe: %1, naprava: %2"
 
 #: convert.cpp:1024
 msgid "Possible conversion strategies:"
-msgstr "Võimalikud teisenduskavad:"
+msgstr "Mogoče strategije pretvorbe:"
 
 #: convert.cpp:1038
 msgid "File system type: %1"
-msgstr "Failisüsteemi tüüp: %1"
+msgstr "Vrsta datotečnega sistema: %1"
 
 #: convert.cpp:1096
 msgid ""
 "An error occurred, the output file size is less than one percent of the "
 "input file size"
 msgstr ""
-"Ilmnes viga, väljundfaili suurus on alla ühe protsendi sisendfaili suurusest"
+"Prišlo je do napake. Izhodna velikost datoteke je manjša kot odstotek vhodne "
+"velikosti datoteke."
 
 #: convert.cpp:1100
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
-msgstr "Teisendamine ebaõnnestus, proovitakse uuesti. Lõpetamise olek: -2 (%1)"
+msgstr "Pretvorba je spodletela, poskušam znova. Izhodna koda:-2 (%1)"
 
 #: convert.cpp:1102 convert.cpp:1174
 msgid "Removing partially converted output file"
-msgstr "Pooleldi teisendatud väljundfaili kustutamine"
+msgstr "Odstranjevanje delno pretvorjene izhodne datoteke"
 
 #: convert.cpp:1115 replaygainscanner/replaygainprocessor.cpp:265
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr "Tavaline väljumine"
+msgstr "Običajen izhod"
 
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr "Õnnestus, aga ilmnesid probleemid"
+msgstr "Uspelo, ampak je prišlo do napak"
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr "Kasutaja katkestas"
+msgstr "Prekinil uporabnik"
 
 #: convert.cpp:1124 replaygainscanner/replaygainprocessor.cpp:274
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "Taustprogrammid tahavad seadistamist"
+msgstr "Zaledje je potrebno nastaviti"
 
 #: convert.cpp:1127
 msgctxt "Conversion exit status"
 msgid "Not enough space on the output device"
-msgstr "Väljundseadmel pole piisavalt ruumi"
+msgstr "Na izhodni napravi ni dovolj prostora"
 
 #: convert.cpp:1130
 msgctxt "Conversion exit status"
 msgid "File already exists"
-msgstr "Fail on juba olemas"
+msgstr "Datoteka že obstaja"
 
 #: convert.cpp:1133 replaygainscanner/replaygainprocessor.cpp:280
 msgctxt "Conversion exit status"
 msgid "An error occurred"
-msgstr "Ilmnes viga"
+msgstr "Prišlo je do napake"
 
 #: convert.cpp:1154
 msgid "Executing command: \"%1\""
-msgstr "Käivitamine: \"%1\""
+msgstr "Izvajanje ukaza: \"%1\""
 
 #: convert.cpp:1180 replaygainscanner/replaygainprocessor.cpp:284
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr "Faili eemaldamine teisendusloendist. Lõpetamise olek: %1 (%2)"
+msgstr "Odstranjevanje datoteke iz seznama za pretvorbo. Izhodna koda %1 (%2)"
 
 #: convert.cpp:1182
 msgid "Conversion time"
-msgstr "Teisendusaeg"
+msgstr "Čas pretvorbe"
 
 #: convert.cpp:1183
 msgid "Output file size"
-msgstr "Väljundfaili maht"
+msgstr "Velikost izhodne datoteke"
 
 #: convert.cpp:1184
 msgid "File size ratio"
-msgstr "Failisuuruse suhe"
+msgstr "Razmerje velikosti datoteke"
 
 #: convert.cpp:1291
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr "Teadmata"
+msgstr "Neznan"
 
 #: convert.cpp:1325
 msgid "Filter"
@@ -1045,7 +1052,7 @@ msgstr "Filter"
 
 #: convert.cpp:1351 replaygainscanner/replaygainprocessor.cpp:331
 msgid "Progress: %1"
-msgstr "Edenemine: %1"
+msgstr "Napredek: %1"
 
 #: core/backendplugin.cpp:40
 msgid ""
@@ -1055,10 +1062,10 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
-"Wave on väga lihtne helifailivorming, milles helivoogu kokku ei pakita. "
-"Seega on see kadudeta, kuid failid on väga suured ja ei toeta lisavõimalusi "
-"nagu sildid.<br>Seda vormingut oskab mängida praktiliselt iga tarkvara ja "
-"seade.<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en."
+"Wave je preprosta oblika zvoka, ki ne stisne zvočnega pretoka. Posledično je "
+"brez izgub, ampak je velikost datoteke velika in ne podpira naprednih "
+"zmožnosti kot so oznake.<br>Podprta je v praktično vseh programih in "
+"napravah.<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en."
 "wikipedia.org/wiki/WAV</a>"
 
 #: core/backendplugin.cpp:47
@@ -1069,11 +1076,12 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding"
 "\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>"
 msgstr ""
-"Advanced Audio Coding (AAC) on populaarne kadudega helivorming. Seda "
-"kasutatakse laialt Apple'i toodetes.<br>soundKonverteris viitab \"aac\" "
-"üksnes koodekile. Et saada sildistatavat faili, kasuta vormingut \"m4a/aac\"."
-"<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding"
-"\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>"
+"Napredno kodiranje zvoka (AAC) je priljubljena oblika zvoka z izgubami. Na "
+"široko jo uporablja Apple.<br>V soundKonverter-ju se \"aac\" nanaša le na "
+"kodek. Da bi dobili datoteko, kjer lahko uporabite tudi oznake, uporabite "
+"\"m4a/aac\".<br><br><a href=\"http://en.wikipedia.org/wiki/"
+"Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio Coding</"
+"a>"
 
 #: core/backendplugin.cpp:54
 msgid ""
@@ -1083,11 +1091,11 @@ msgid ""
 "wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio "
 "Coding</a>"
 msgstr ""
-"Advanced Audio Coding (AAC) on populaarne kadudega helivorming. Seda "
-"kasutatakse laialt Apple'i toodetes.<br>soundKonverteris viitab \"m4a/aac\" "
-"MPEG-4 helifailile, mis on kodeeritud AAC-ga.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/"
-"Advanced Audio Coding</a>"
+"Napredno kodiranje zvoka (AAC) je priljubljena oblika zvoka z izgubami Na "
+"široko jo uporablja Apple.<br>V soundKonverter-ju se \"ma/aac\" nanaša na "
+"zvočno datoteko MPEG-4 kodirano z AAC.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio "
+"Coding</a>"
 
 #: core/backendplugin.cpp:66
 msgid ""
@@ -1096,9 +1104,9 @@ msgid ""
 "audio file encoded with ALAC.<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "Apple_Lossless\">http://en.wikipedia.org/wiki/Apple Lossless</a>"
 msgstr ""
-"Apple Lossless Audio Codec (ALAC) on kadudeta helivorming. Seda kasutatakse "
-"laialt Apple'i toodetes.<br>soundKonverteris viitab \"m4a/alac\" MPEG-4 "
-"helifailile, mis on kodeeritud ALAC-ga.<br><br><a href=\"http://en.wikipedia."
+"Apple-ov zvočni kodek brez izgub (ALAC) je oblika zvoka brez izgub. Na "
+"široko jo uporablja Apple.<br>V soundKonverter-ju se \"m4a/alac\" nanaša na "
+"zvočno datoteko MPEG-4 kodirano z ALAC.<br><br><a href=\"http://en.wikipedia."
 "org/wiki/Apple_Lossless\">http://en.wikipedia.org/wiki/Apple Lossless</a>"
 
 #: core/backendplugin.cpp:84
@@ -1107,9 +1115,9 @@ msgid ""
 "restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/Vorbis\">http://"
 "en.wikipedia.org/wiki/Vorbis</a>"
 msgstr ""
-"Ogg Vorbis on populaarne kadudega helivorming.<br>See on vaba igasugustest "
-"juriidilistest piirangutest.<br><br><a href=\"http://en.wikipedia.org/wiki/"
-"Vorbis\">http://en.wikipedia.org/wiki/Vorbis</a>"
+"Ogg Vorbis je priljubljena oblika zvoka z izgubami.<br>Nima nobenih "
+"zakonskih omejitev.<br><br><a href=\"http://en.wikipedia.org/wiki/Vorbis"
+"\">http://en.wikipedia.org/wiki/Vorbis</a>"
 
 #: core/backendplugin.cpp:95
 msgid ""
@@ -1119,11 +1127,11 @@ msgid ""
 "org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/wiki/Opus (audio "
 "format)</a>"
 msgstr ""
-"Opus on kadudega helivorming, mis on mõeldud reaalajasideks üle Interneti."
-"<br>See katab laia bitikiiruste vahemiku kõrge kvaliteediga ja on vaba "
-"igasugustest juriidilistest piirangutest.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/wiki/Opus "
-"(audio format)</a>"
+"Opus je oblika zvoka z izgubami, ki je bila zasnovana za realno-časovne "
+"komunikacije preko interneta.<br>Pokriva široko območje bitnih hitrosti z "
+"visoko kakovostjo in nima nobenih zakonskih omejitev.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/"
+"wiki/Opus (audio format)</a>"
 
 #: core/backendplugin.cpp:103
 msgid ""
@@ -1132,10 +1140,10 @@ msgid ""
 "some legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "MP3\">http://en.wikipedia.org/wiki/MP3</a>"
 msgstr ""
-"MPEG-1 or MPEG-2 Audio Layer III (MP3) on populaarseim kadudega helivorming."
-"<br>Seda oskab mängida praktiliselt iga muusikamängija, kuid sel on "
-"juriidilisi piiranguid.<br><br><a href=\"http://en.wikipedia.org/wiki/"
-"MP3\">http://en.wikipedia.org/wiki/MP3</a>"
+"Zvočna plast MPEG-1 ali MPEG-2 III (MP3) je najbolj priljubljena oblika "
+"zvoka z izgubami.<br>Čeprav ima nekatere zakonske omejitve, jo podpirajo "
+"praktično vsi zvočni predvajalniki.<br><br><a href=\"http://en.wikipedia.org/"
+"wiki/MP3\">http://en.wikipedia.org/wiki/MP3</a>"
 
 #: core/backendplugin.cpp:112
 msgid ""
@@ -1143,9 +1151,9 @@ msgid ""
 "of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/FLAC"
 "\">http://en.wikipedia.org/wiki/FLAC</a>"
 msgstr ""
-"Free Lossless Audio Codec (FLAC) on kadudeta helivorming.<br>See on vaba "
-"igasugustest juriidilistest piirangutest.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>"
+"Brezplačen zvočni kodek brez izgub (FLAC) je oblika zvoka brez izgub."
+"<br>Nima nobenih zakonskih omejitev.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>"
 
 #: core/backendplugin.cpp:122
 msgid ""
@@ -1153,9 +1161,9 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://"
 "en.wikipedia.org/wiki/Windows Media Audio</a>"
 msgstr ""
-"Windows Media Audio (WMA) on Microsofti arendatud kadudega helivorming."
-"<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://"
-"en.wikipedia.org/wiki/Windows Media Audio</a>"
+"Windows zvočna datoteka (WMA) je oblika zvoka z izgubami, ki jo je razvil "
+"Microsoft.<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio"
+"\">http://en.wikipedia.org/wiki/Windows Media Audio</a>"
 
 #: core/backendplugin.cpp:128
 msgid ""
@@ -1164,10 +1172,10 @@ msgid ""
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
-"AC3 või AC-3 kuulub Dolby Digitali vorminguperre.<br>See loodi kasutamiseks "
-"filmides (nt DVD-del) ja toetab <em>surround-</em> ehk ruumilist heli."
-"<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en."
-"wikipedia.org/wiki/Dolby Digital</a>"
+"AC3 ali AC-3 je del družine oblik Dolby Digital.<br>Zasnovan je bil za "
+"uporabo v filmih (npr. DVD-jih) in podpira  prostorski zvok.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/wiki/"
+"Dolby Digital</a>"
 
 #: core/backendplugin.cpp:141
 msgid ""
@@ -1175,7 +1183,7 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
 "\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 msgstr ""
-"MPEG-1 või MPEG-2 Audio Layer II (MP2) on vana kadudega helivorming."
+"Zvočna plast MPEG-1 ali MPEG-2 II (MP2) je stara oblika zvoka z izgubami."
 "<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
 "\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 
@@ -1186,9 +1194,9 @@ msgid ""
 "org/wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/"
 "Adaptive Multi-Rate audio codec</a>"
 msgstr ""
-"Adaptive Multi-Rate Narrow-Band (AMR NB) on kasutusel peamiselt kõne "
-"pakkimisel mobiilsides.<br><br><a href=\"http://en.wikipedia.org/wiki/"
-"Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/Adaptive "
+"Adaptive Multi-Rate Narrow-Band (AMR NB) se večinoma uporablja pri stiskanju "
+"govora za mobilne komunikacije.<br><br><a href=\"http://en.wikipedia.org/"
+"wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/Adaptive "
 "Multi-Rate audio codec</a>"
 
 #: core/backendplugin.cpp:175
@@ -1199,11 +1207,11 @@ msgid ""
 "wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en.wikipedia.org/"
 "wiki/Adaptive Multi-Rate Wideband</a>"
 msgstr ""
-"Adaptive Multi-Rate Wide-Band (AMR WB) on AMR NB täiuslikum versioon, mis "
-"kasutab suuremat andmekiirust ja seega pakub kõrgemat kvaliteeti.<br>Siiski "
-"tasub seda kasutada vaid kõne pakkimiseks.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en.wikipedia.org/"
-"wiki/Adaptive Multi-Rate Wideband</a>"
+"Adaptive Multi-Rate Wide-Band (AMR WB) je napredna različica AMR NB, ki "
+"uporablja višjo hitrost podatkov kar na koncu pomeni višjo kakovost."
+"<br>Kljub temu naj bi jo uporabljali le za stiskanje govora.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en."
+"wikipedia.org/wiki/Adaptive Multi-Rate Wideband</a>"
 
 #: core/backendplugin.cpp:183
 msgid ""
@@ -1211,8 +1219,9 @@ msgid ""
 "wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's "
 "Audio</a>"
 msgstr ""
-"Monkey's Audio on kaduteta helivorming.<br><br><a href=\"http://en.wikipedia."
-"org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's Audio</a>"
+"Monkey's Audio je oblika zvoka brez izgub.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's "
+"Audio</a>"
 
 #: core/backendplugin.cpp:192
 msgid ""
@@ -1221,10 +1230,10 @@ msgid ""
 "obsolete.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en."
 "wikipedia.org/wiki/Speex<a/>"
 msgstr ""
-"Speex on kadudega helivorming, mis loodi kõne kodeerimiseks.<br>See on vaba "
-"igasugustest juriidilistest piirangutest. Alates Opuse avaldamisest peetakse "
-"Speexi iganenuks.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex"
-"\">http://en.wikipedia.org/wiki/Speex<a/>"
+"Speex je oblika zvoka z izgubami, ki je bila zasnovana za kodiranje govora."
+"<br>Nima nobenih zakonskih omejitev. Speex je ob izidu Opusa postal zastarel."
+"<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en.wikipedia."
+"org/wiki/Speex<a/>"
 
 #: core/backendplugin.cpp:206
 msgid ""
@@ -1232,17 +1241,17 @@ msgid ""
 "for high quality.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
 "\">http://en.wikipedia.org/wiki/Musepack<a/>"
 msgstr ""
-"Musepack (MPC) on vaba kadudega failivorming, mis põhineb MP2-l ja on "
-"optimeeritud kõrge kvaliteedi jaoks.<br><br><a href=\"http://en.wikipedia."
-"org/wiki/Musepack\">http://en.wikipedia.org/wiki/Musepack<a/>"
+"Musepack (MPC) je brezplačna oblika zvoka z izgubami, ki temelji na mp2 in "
+"je optimizirana za visoko kakovost.<br><br><a href=\"http://en.wikipedia.org/"
+"wiki/Musepack\">http://en.wikipedia.org/wiki/Musepack<a/>"
 
 #: core/backendplugin.cpp:216
 msgid ""
 "Shorten (SHN) is a free and lossless audio format.<br><br><a href=\"http://"
 "en.wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
 msgstr ""
-"Shorten (SHN) on vaba kadudeta helivorming.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
+"Shorten (SHN) je brezplačna oblika zvoka brez izgub.<br><br><a href=\"http://"
+"en.wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
 
 #: core/backendplugin.cpp:238
 msgid ""
@@ -1250,16 +1259,17 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/"
 "TTA (codec)<a/>"
 msgstr ""
-"True Audio (TTA) on vaba kadudeta helivorming.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/TTA (codec)<a/>"
+"True Audio (TTA) je brezplačna oblika zvoka brez izgub.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/"
+"TTA (codec)<a/>"
 
 #: core/backendplugin.cpp:245
 msgid ""
 "WavPack (WV) is a free and lossless audio format.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 msgstr ""
-"WavPack (WV) on vaba kadudeta helivorming.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
+"WavPack (WV) je brezplačna oblika zvoka brez izgub.<br><br><a href=\"http://"
+"en.wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 
 #: core/backendplugin.cpp:370
 msgid ""
@@ -1267,8 +1277,8 @@ msgid ""
 "Electronic Arts for the Commodore-Amiga computer series.<br><br><a href="
 "\"http://en.wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 msgstr ""
-"8-Bit Sampled Voice (8SVX) on Electronic Artsi arendatud helifailide "
-"standardvorming Commodore-Amiga arvutiseeriale.<br><br><a href=\"http://en."
+"8-Bit Sampled Voice (8SVX) je standardna oblika zvoka, ki so ga razvili pri "
+"Electronic Arts za računalnike Commodore-Amiga.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 
 #: core/backendplugin.cpp:381
@@ -1279,39 +1289,39 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en."
 "wikipedia.org/wiki/Audio Interchange File Format</a>"
 msgstr ""
-"Audio Interchange File Format (AIFF) on väga lihtne helifailivorming, milles "
-"helivoogu kokku ei pakita. Seega on see kadudeta, kuid failid on väga suured "
-"ja ei toeta lisavõimalusi nagu sildid.<br><br><a href=\"http://en.wikipedia."
-"org/wiki/Audio_Interchange_File_Format\">http://en.wikipedia.org/wiki/Audio "
-"Interchange File Format</a>"
+"Vrsta datotek za izmenjavo zvoka (AIFF) je zelo preprosta oblika zvoka, ki "
+"ne stisne zvočnega pretoka, zato je brez izgub, a so datoteke velike in ne "
+"podpira naprednih zmožnosti kot so oznake.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en.wikipedia.org/"
+"wiki/Audio Interchange File Format</a>"
 
 #: core/backendplugin.cpp:449
 msgid "Killing process on user request"
-msgstr "Kasutaja soovil protsessi tapmine"
+msgstr "Uničenje opravila na uporabnikovo zahtevo"
 
 #: core/backendplugin.cpp:524
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr "%1-failide kodeerimiseks tuleb paigaldada \"%2\"."
+msgstr "Da boste lahko kodirali datoteke %1, morate namestiti '%2'."
 
 #: core/backendplugin.cpp:531
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr "%1-failide dekodeerimiseks tuleb paigaldada \"%2\"."
+msgstr "Da boste lahko odkodirali datoteke %1, morate namestiti '%2'."
 
 #: core/backendplugin.cpp:538
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr "%1-failide teisendamiseks tuleb paigaldada \"%2\"."
+msgstr "Da boste lahko prekodirali datoteke %1, morate namestiti '%2'."
 
 #: core/backendplugin.cpp:545
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
-"Helitugevuse parandusteabe arvutamiseks %1-failidel tuleb paigaldada pakett "
-"\"%2\"."
+"Da boste lahko izračunali jakost predvajanja za datoteke %1, morate "
+"namestiti '%2'."
 
 #: core/backendplugin.cpp:552
 msgid "'%1' should be shipped with your distribution."
-msgstr "\"%1\" peaks distroga kaasas olema."
+msgstr "'%1' bi moral biti prisoten v vaši distribuciji."
 
 #: core/backendplugin.cpp:559
 msgid ""
@@ -1319,33 +1329,33 @@ msgid ""
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
-"Kuna \"%1\" sisaldab patenditud koodekeid, ei pruugi seda sinu distroga "
-"vaikimisi kaasas olla.\n"
-"Paljude distrode puhul leidub \"%1\" mõnes lisatarkvaravaramus."
+"Ker '%1' vsebuje patentirane kodeke, morda ni vključen v privzeti namestitvi "
+"vaše distribucije. Veliko distribucij ponuja '%1' v dodatnem programskem "
+"skladišču."
 
 #: core/backendplugin.cpp:566
 msgid "You can download '%1' at %2"
-msgstr "\"%1\" on allalaaditav aadressilt %2"
+msgstr "'%1' lahko prejmete z %2"
 
 #: core/backendplugin.cpp:575
 msgid "In order to use the filter %1, you need to install '%2'."
-msgstr "Filtri \"%1\" kasutamiseks tuleb paigaldada \"%2\"."
+msgstr "Da lahko uporabite filter %1, morate namestiti '%2'."
 
 #: core/backendplugin.cpp:579
 msgid "In order to use the filters %1, you need to install '%2'."
-msgstr "Filtrite \"%1\" kasutamiseks tuleb paigaldada \"%2\"."
+msgstr "Da lahko uporabite filtre %1, morate namestiti '%2'."
 
 #: filelist.cpp:48
 msgid "State"
-msgstr "Olek"
+msgstr "Stanje"
 
 #: filelist.cpp:49
 msgid "Input"
-msgstr "Sisend"
+msgstr "Vhod"
 
 #: filelist.cpp:50
 msgid "Output"
-msgstr "Väljund"
+msgstr "Izhod"
 
 #: filelist.cpp:51 plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:31
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:100
@@ -1374,25 +1384,25 @@ msgstr "Väljund"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:63
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:136
 msgid "Quality"
-msgstr "Kvaliteet"
+msgstr "Kakovost"
 
 #: filelist.cpp:79
 msgid "Edit options..."
-msgstr "Muuda seadeid..."
+msgstr "Urejanje možnosti ..."
 
 #: filelist.cpp:81
 msgid "Start conversion"
-msgstr "Alusta teisendamist"
+msgstr "Začni pretvorbo"
 
 #: filelist.cpp:83
 msgid "Stop conversion"
-msgstr "Peata teisendamine"
+msgstr "Zaustavi pretvorbo"
 
 #: filelist.cpp:85 optionssimple.cpp:44
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:101
 #: replaygainscanner/replaygainfilelist.cpp:75
 msgid "Remove"
-msgstr "Eemalda"
+msgstr "Odstrani"
 
 #: filelist.cpp:178 opener/fileopener.cpp:139 opener/playlistopener.cpp:141
 #: replaygainscanner/replaygainfilelist.cpp:215
@@ -1402,55 +1412,55 @@ msgid ""
 "Maybe you need to install an additional soundKonverter plugin.\n"
 "You should have a look at your distribution's package manager for this."
 msgstr ""
-"See failitüüp on soundKonverterile tundmatu.\n"
-"Võimalik, et tuleks paigaldada veel mõni soundKonverteri plugin.\n"
-"Otsi seda oma distro paketihaldurist."
+"Te vrste datoteke soundKonverter ne pozna.\n"
+"Morda morate namestiti dodaten vstavek za soundKonverter.\n"
+"V ta namen si oglejte upravljalnik paketov vaše distribucije."
 
 #: filelist.cpp:216 opener/fileopener.cpp:179 opener/playlistopener.cpp:181
 #: opener/playlistopener.cpp:213 replaygainscanner/replaygainfilelist.cpp:253
 #: replaygainscanner/replaygainscanner.cpp:239 soundkonverterview.cpp:382
 msgid "... and %1 more files"
-msgstr "...ja veel %1 faili"
+msgstr "... in še %1 datotek"
 
 #: filelist.cpp:539 filelist.cpp:598
 msgid "Will be skipped"
-msgstr "Jäetakse vahele"
+msgstr "Bo preskočeno"
 
 #: filelist.cpp:543 soundkonverter.cpp:141 soundkonverter.cpp:145
 msgid "Waiting"
-msgstr "Ootel"
+msgstr "Čakanje"
 
 #: filelist.cpp:554
 msgid "Waiting for Replay Gain"
-msgstr "Helitugevuse paranduse ootamine"
+msgstr "Čakanje na jakost predvajanja"
 
 #: filelist.cpp:583
 msgid "Stopped"
-msgstr "Peatatud"
+msgstr "Zaustavljeno"
 
 #: filelist.cpp:588
 msgid "Backend not configured"
-msgstr "Taustprogramm seadistamata"
+msgstr "Zaledje ni nastavljeno"
 
 #: filelist.cpp:593
 msgid "Disc full"
-msgstr "Ketas täis"
+msgstr "Disk je poln"
 
 #: filelist.cpp:603
 msgid "Failed"
-msgstr "Ebaõnnestus"
+msgstr "Spodletelo"
 
 #: filelist.cpp:606
 msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
 msgstr ""
-"Teisendus ebaõnnestus.\n"
-"Lisainfot leiab logist."
+"Pretvorba je spodletela.\n"
+"Za več podrobnosti si oglejte dnevnik"
 
 #: filelist.cpp:630
 msgid "CD track %1"
-msgstr "CD rada %1"
+msgstr "Skladba %1 CD-ja"
 
 #: filelist.cpp:1297
 msgid ""
@@ -1458,9 +1468,9 @@ msgid ""
 "\n"
 "If not, the saved file list will be appended."
 msgstr ""
-"Kas tahad praeguse faililoendi asendada?\n"
+"Ali želite prepisati trenuten seznam datotek?\n"
 "\n"
-"Kui ei, siis salvestatud loend lisatakse praegusele."
+"Če ne, bo shranjen seznam datotek pripet."
 
 #: global.cpp:97 global.cpp:99 global.cpp:123 global.cpp:125
 msgctxt "days"
@@ -1470,7 +1480,7 @@ msgstr "d"
 #: global.cpp:99 global.cpp:101 global.cpp:125 global.cpp:127
 msgctxt "hours"
 msgid "h"
-msgstr "h"
+msgstr "u"
 
 #: global.cpp:101 global.cpp:103 global.cpp:105 global.cpp:127 global.cpp:129
 #: global.cpp:131
@@ -1491,51 +1501,51 @@ msgstr "ms"
 
 #: logger.cpp:90
 msgid "Identifier"
-msgstr "Identifikaator"
+msgstr "Določilnik"
 
 #: logger.cpp:91
 msgid "Log ID"
-msgstr "Logi ID"
+msgstr "ID dnevnika"
 
 #: logger.cpp:185 logger.cpp:188
 msgid "Finished logging"
-msgstr "Logimine lõpetatud"
+msgstr "Beleženje zaključeno"
 
 #: logviewer.cpp:25
 msgid "Log Viewer"
-msgstr "Logi"
+msgstr "Pregledovalnik dnevnika"
 
 #: logviewer.cpp:28
 msgid "Update"
-msgstr "Uuenda"
+msgstr "Posodobi"
 
 #: logviewer.cpp:31
 msgid "Save to file..."
-msgstr "Salvesta failiks..."
+msgstr "Shrani v datoteko ..."
 
 #: logviewer.cpp:42
 msgid "Log file:"
-msgstr "Logifail:"
+msgstr "Datoteka dnevnika:"
 
 #: logviewer.cpp:84
 msgid "soundKonverter application log"
-msgstr "soundKonverteri rakenduselogi"
+msgstr "Dnevnik programa soundKonverter"
 
 #: logviewer.cpp:127
 msgid "Save log file"
-msgstr "Logifaili salvestamine"
+msgstr "Shrani dnevniško datoteko"
 
 #: logviewer.cpp:134
 msgid "File already exists. Do you really want to overwrite it?"
-msgstr "Selle nimega fail on juba olemas. Kas tahad olemasoleva üle kirjutada?"
+msgstr "Datoteka že obstaja. Ali jo zares želite prepisati?"
 
 #: logviewer.cpp:139
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
 msgstr ""
-"Faili kirjutamine ebaõnnestus.\n"
-"Võib-olla pole selleks piisavalt õigusi."
+"Zapisovanje v datoteko je spodletelo.\n"
+"Morda nimate dovoljenj za pisanje."
 
 #: main.cpp:16
 msgid ""
@@ -1545,12 +1555,11 @@ msgid ""
 "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
-"soundKonverter on mitmete audioteisendajate, helitugevuse "
-"parandustööriistade ja CD-rippijate kasutajaliides.\n"
+"soundKonverter je začelje za različne pretvornike zvoka, orodja za jakost "
+"predvajanja in zajemalnike CD-jev.\n"
 "\n"
-"Palun esita veateated aadressil https://bugs.launchpad.net/ubuntu/+source/"
-"soundkonverter\n"
-"või lihtsalt saada e-kiri: hessijames@gmail.com"
+"Poročila o hroščih objavite na https://bugs.launchpad.net/soundkonverter\n"
+"ali pa mi pošljite e-pošto na hessijames@gmail.com"
 
 #: main.cpp:22
 msgid "soundKonverter"
@@ -1570,7 +1579,7 @@ msgstr "David Vignoni"
 
 #: main.cpp:24
 msgid "Nuvola icon theme"
-msgstr "Nuvola ikooniteema"
+msgstr "Tema ikon Nuvola"
 
 #: main.cpp:25
 msgid "Scott Wheeler"
@@ -1590,7 +1599,7 @@ msgstr "Audex"
 
 #: main.cpp:27
 msgid "Amarok developers"
-msgstr "Amaroki arendajad"
+msgstr "Razvijalci Amaroka"
 
 #: main.cpp:27
 msgid "Amarok"
@@ -1598,45 +1607,45 @@ msgstr "Amarok"
 
 #: main.cpp:28
 msgid "All programmers of audio converters"
-msgstr "Kõigi heliteisendajate loojad"
+msgstr "Vsi programerji pretvornikov zvoka"
 
 #: main.cpp:32
 msgid "Open the Replay Gain tool an add all given files"
-msgstr "Avab helitugevuse parandustööriista ja lisab kõik antud failid"
+msgstr "Odpri orodje za jakost zvoka in dodaj vse dane datoteke"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
-msgstr "Loetleb kõik rajad <CD-seadmel>; 'auto' andmisel otsitakse CD'd"
+msgstr ""
+"Izpiši seznam vseh skladb na pogonu CD <device>, 'samodejno' bo iskalo za CD-"
+"jem"
 
 #: main.cpp:34
 msgid "Add all files using the given profile"
-msgstr "Kõik failid lisatakse kasutades <profiili>"
+msgstr "Dodaj vse datoteke z uporabo danega profila"
 
 #: main.cpp:35
 msgid "Add all files using the given format"
-msgstr "Kõik failid lisatakse kasutades <vormingut>"
+msgstr "Dodaj vse datoteke z uporabo dane oblike"
 
 #: main.cpp:36
 msgid "Output all files to <directory>"
-msgstr "Kõik failid väljastatakse <kataloogi>"
+msgstr "Izpiši vse datoteke v <mapa>"
 
 #: main.cpp:37
 msgid "Start soundKonverter invisible"
-msgstr "soundKonverter käivitatakse peidetult"
+msgstr "Zaženi soundKonverter nevidnega"
 
 #: main.cpp:38
 msgid "Start the conversion immediately (enabled when using '--invisible')"
-msgstr ""
-"Teisendamist alustatakse otsekohe (seda tehakse ka võtme '--invisible' "
-"kasutamisel)"
+msgstr "Tako zaženi pretvorbo (omogočeno ob uporabi '--invisible')"
 
 #: main.cpp:39
 msgid ""
 "Close soundKonverter after all files are converted (enabled when using '--"
 "invisible')"
 msgstr ""
-"Pärast kõikide failide teisendamist soundKonverter suletakse (seda tehakse "
-"ka võtme '--invisible' kasutamisel)"
+"Zapri soundKonverter, ko so pretvorjene vse datoteke (omogočeno ob uporabi "
+"'--invisible')"
 
 #: main.cpp:40
 #, c-format
@@ -1644,149 +1653,149 @@ msgid ""
 "Execute <command> after each file has been converted (%i=input file, "
 "%o=output file)"
 msgstr ""
-"Pärast iga faili teisendamist käivitatakse <käsk> (%i = sisendfail, %o = "
-"väljundfail)"
+"Izvedi <ukaz>, ko je pretvorjena vsaka datoteka (%i=vhodna datoteka, "
+"%o=izhodna datoteka)"
 
 #: main.cpp:41
 msgid "Audio file(s) to append to the file list"
-msgstr "Nimekirja lisatav(ad) helifail(id)"
+msgstr "Zvočne datoteke, ki bodo pripete na seznam datotek"
 
 #: metadata/tagengine.cpp:59
 msgctxt "cover type"
 msgid "Unclassified"
-msgstr "Määratlemata"
+msgstr "Neuvrščeno"
 
 #: metadata/tagengine.cpp:61
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
-msgstr "32x32 px PNG-vormingus faili ikoon"
+msgstr "Ikona datoteke PNG 32x32"
 
 #: metadata/tagengine.cpp:63
 msgctxt "cover type"
 msgid "File icon"
-msgstr "Faili ikoon"
+msgstr "Ikona datoteke"
 
 #: metadata/tagengine.cpp:65
 msgctxt "cover type"
 msgid "Front cover"
-msgstr "Karbi esikülg"
+msgstr "Prednji ovitek"
 
 #: metadata/tagengine.cpp:67
 msgctxt "cover type"
 msgid "Back cover"
-msgstr "Karbi tagakülg"
+msgstr "Zadnji ovitek"
 
 #: metadata/tagengine.cpp:69
 msgctxt "cover type"
 msgid "Leaflet page"
-msgstr "Voldiku lehekülg"
+msgstr "Stran letaka"
 
 #: metadata/tagengine.cpp:71
 msgctxt "cover type"
 msgid "CD photo"
-msgstr "CD foto"
+msgstr "Fotografija CD-ja"
 
 #: metadata/tagengine.cpp:73
 msgctxt "cover type"
 msgid "Lead artist picture"
-msgstr "Pilt peaesinejast"
+msgstr "Slika glavnega izvajalca"
 
 #: metadata/tagengine.cpp:75
 msgctxt "cover type"
 msgid "Artist picture"
-msgstr "Pilt esitajast"
+msgstr "Slika izvajalca"
 
 #: metadata/tagengine.cpp:77
 msgctxt "cover type"
 msgid "Conductor picture"
-msgstr "Pilt dirigendist"
+msgstr "Slika dirigenta"
 
 #: metadata/tagengine.cpp:79
 msgctxt "cover type"
 msgid "Band picture"
-msgstr "Pilt bändist"
+msgstr "Slika skupine"
 
 #: metadata/tagengine.cpp:81
 msgctxt "cover type"
 msgid "Composer picture"
-msgstr "Pilt heliloojast"
+msgstr "Slika skladatelja"
 
 #: metadata/tagengine.cpp:83
 msgctxt "cover type"
 msgid "Lyricist picture"
-msgstr "Pilt sõnade autorist"
+msgstr "Slika avtorja besedil"
 
 #: metadata/tagengine.cpp:85
 msgctxt "cover type"
 msgid "Picture of the recording location"
-msgstr "Pilt lindistuskohast"
+msgstr "Slika mesta snemanja"
 
 #: metadata/tagengine.cpp:87
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
-msgstr "Pilt muusikutest lindistamise ajal"
+msgstr "Slika izvajalcev med snemanjem"
 
 #: metadata/tagengine.cpp:89
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
-msgstr "Pilt muusikutest esituse ajal"
+msgstr "Slika izvajalcev med izvajanjem"
 
 #: metadata/tagengine.cpp:91
 msgctxt "cover type"
 msgid "Picture from a video"
-msgstr "Kaader filmist/videost"
+msgstr "Slika iz videa"
 
 #: metadata/tagengine.cpp:93
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
-msgstr "Pilt suurest värvilisest kalast"
+msgstr "Slika velike, obarvane ribe"
 
 #: metadata/tagengine.cpp:95
 msgctxt "cover type"
 msgid "Illustration related to the track"
-msgstr "Looga seotud illustratsioon"
+msgstr "Ilustracija povezana s skladbo"
 
 #: metadata/tagengine.cpp:97
 msgctxt "cover type"
 msgid "Band logo"
-msgstr "Bändi logo"
+msgstr "Logotip skupine"
 
 #: metadata/tagengine.cpp:99
 msgctxt "cover type"
 msgid "Publisher logo"
-msgstr "Väljaandja logo"
+msgstr "Logotip založnika"
 
 #: opener/cdopener.cpp:117
 msgid "Add CD tracks"
-msgstr "CD radade lisamine"
+msgstr "Dodaj skladbe CD-ja"
 
 #: opener/cdopener.cpp:126
 msgid "1. Select CD tracks"
-msgstr "1. Vali CD rajad"
+msgstr "1. Izberite skladbe CD-ja"
 
 #: opener/cdopener.cpp:131 opener/diropener.cpp:57 opener/urlopener.cpp:53
 msgid "2. Set conversion options"
-msgstr "2. Määra teisendusvalikud"
+msgstr "2. Nastavite možnosti pretvorbe"
 
 #: opener/cdopener.cpp:164 opener/cdopener.cpp:300 optionseditor.cpp:133
 msgid "Artist:"
-msgstr "Esitaja:"
+msgstr "Izvajalec:"
 
 #: opener/cdopener.cpp:169 opener/cdopener.cpp:854 opener/cdopener.cpp:1037
 #: opener/cdopener.cpp:1043 opener/cdopener.cpp:1108 opener/cdopener.cpp:1143
 #: opener/cdopener.cpp:1357
 msgid "Various Artists"
-msgstr "Mitu esitajat"
+msgstr "Več izvajalcev"
 
 #: opener/cdopener.cpp:176 opener/cdopener.cpp:311 optionseditor.cpp:144
 msgid "Composer:"
-msgstr "Helilooja:"
+msgstr "Skladatelj:"
 
 #: opener/cdopener.cpp:182 opener/cdopener.cpp:859 opener/cdopener.cpp:1056
 #: opener/cdopener.cpp:1062 opener/cdopener.cpp:1121 opener/cdopener.cpp:1149
 #: opener/cdopener.cpp:1359
 msgid "Various Composer"
-msgstr "Mitu heliloojat"
+msgstr "Več skladateljev"
 
 #: opener/cdopener.cpp:189 optionseditor.cpp:160
 msgid "Album:"
@@ -1794,80 +1803,80 @@ msgstr "Album:"
 
 #: opener/cdopener.cpp:197 optionseditor.cpp:176
 msgid "Disc No.:"
-msgstr "Plaadi nr:"
+msgstr "Št. diska:"
 
 #: opener/cdopener.cpp:203 optionseditor.cpp:117 optionseditor.cpp:187
 msgctxt "Track/Disc No. x of y"
 msgid "of"
-msgstr "/"
+msgstr "od"
 
 #: opener/cdopener.cpp:211 optionseditor.cpp:199
 msgid "Year:"
-msgstr "Aasta:"
+msgstr "Leto:"
 
 #: opener/cdopener.cpp:219 optionseditor.cpp:211
 msgid "Genre:"
-msgstr "Stiil:"
+msgstr "Zvrst:"
 
 #: opener/cdopener.cpp:240
 msgctxt "column title"
 msgid "Rip"
-msgstr "Ripitav"
+msgstr "Zajemi"
 
 #: opener/cdopener.cpp:241 opener/cdopener.cpp:1102
 #: replaygainscanner/replaygainfilelist.cpp:36
 msgid "Track"
-msgstr "Lugu"
+msgstr "Skladba"
 
 #: opener/cdopener.cpp:242
 msgid "Artist"
-msgstr "Esitaja"
+msgstr "Izvajalec"
 
 #: opener/cdopener.cpp:243
 msgid "Composer"
-msgstr "Helilooja"
+msgstr "Skladatelj"
 
 #: opener/cdopener.cpp:244
 msgid "Title"
-msgstr "Pealkiri"
+msgstr "Naslov"
 
 #: opener/cdopener.cpp:245
 msgid "Length"
-msgstr "Pikkus"
+msgstr "Dolžina"
 
 #: opener/cdopener.cpp:246
 msgid "Player"
-msgstr "Mängija"
+msgstr "Predvajalnik"
 
 #: opener/cdopener.cpp:262
 msgid "No track selected"
-msgstr "Ühtki rada pole valitud"
+msgstr "Ni izbrane skladbe"
 
 #: opener/cdopener.cpp:285 optionseditor.cpp:95
 msgid "Title:"
-msgstr "Pealkiri:"
+msgstr "Naslov:"
 
 #: opener/cdopener.cpp:326 optionseditor.cpp:232
 msgid "Comment:"
-msgstr "Kommentaar:"
+msgstr "Opomba:"
 
 #: opener/cdopener.cpp:373 opener/diropener.cpp:144 opener/fileopener.cpp:56
 #: opener/playlistopener.cpp:40 opener/urlopener.cpp:70 optionseditor.cpp:57
 #: optionslayer.cpp:42
 msgid "Select your desired output options and click on \"Ok\"."
-msgstr "Vali soovitud väljundseaded ja klõpsa \"OK\"."
+msgstr "Izberite vaše želene možnosti izhoda in kliknite na \"V redu\"."
 
 #: opener/cdopener.cpp:394
 msgid "Save cue sheet..."
-msgstr "Salvesta cue-fail..."
+msgstr "Shrani predlogo cue ..."
 
 #: opener/cdopener.cpp:399
 msgid "Request CDDB"
-msgstr "CDDB päring"
+msgstr "Zahtevaj CDDB"
 
 #: opener/cdopener.cpp:404
 msgid "Rip entire CD to one file"
-msgstr "Kogu CD rippimine üheks failiks"
+msgstr "Zajemi celoten CD v eno datoteko"
 
 #: opener/cdopener.cpp:414
 msgid ""
@@ -1875,8 +1884,9 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
-"Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
-"Võimalikud lahendused on toodud allpool.\n"
+"Trenutno nameščena zaledja ne podpirajo zajemanje celotnega CD-ja v eno "
+"datoteko.\n"
+"Spodaj so navedene mogoče rešitve.\n"
 
 #: opener/cdopener.cpp:418
 msgid ""
@@ -1885,85 +1895,87 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin which supports ripping to one file."
 msgstr ""
-"Paigaldatud taustprogrammid ei toeta kogu CD rippimist üheks failiks.\n"
-"Vaata, kas distro paketihalduris on saadaval rippimisplugin, mis seda toetab."
+"Trenutno nameščena zaledja ne podpirajo zajemanje celotnega CD-ja v eno "
+"datoteko.\n"
+"Preverite upravljalnik paketov vaše distribucije, da namestite dodatni "
+"vstavek za zajemanje, ki podpira zajemanje v eno datoteko."
 
 #: opener/cdopener.cpp:425 opener/diropener.cpp:38 opener/urlopener.cpp:81
 msgid "Proceed"
-msgstr "Jätka"
+msgstr "Nadaljuj"
 
 #: opener/cdopener.cpp:428 opener/fileopener.cpp:64
 #: opener/playlistopener.cpp:48 opener/urlopener.cpp:84 optionslayer.cpp:50
 msgid "Ok"
-msgstr "OK"
+msgstr "V redu"
 
 #: opener/cdopener.cpp:432 opener/fileopener.cpp:67
 #: opener/playlistopener.cpp:51 opener/urlopener.cpp:88 optionslayer.cpp:53
 #: replaygainscanner/replaygainscanner.cpp:84
 msgid "Cancel"
-msgstr "Loobu"
+msgstr "Prekliči"
 
 #: opener/cdopener.cpp:473
 msgid "Select CD-ROM drive"
-msgstr "CD-seadme valimine"
+msgstr "Izberite pogon CD-ROM"
 
 #: opener/cdopener.cpp:473
 msgid "Multiple CD-ROM drives where found. Please select one:"
-msgstr "Leiti mitu CD-seadet. Vali üks:"
+msgstr "Najdenih je bilo več pogonov CD-ROM. Izberite enega:"
 
 #: opener/cdopener.cpp:618
 msgid "DVD Recorder"
-msgstr "DVD-kirjuti"
+msgstr "Snemalnik DVD-jev"
 
 #: opener/cdopener.cpp:620 opener/cdopener.cpp:624
 msgid "CD Recorder"
-msgstr "CD-kirjuti"
+msgstr "Snemalnik CD-jev"
 
 #: opener/cdopener.cpp:620 opener/cdopener.cpp:622
 msgid "DVD Player"
-msgstr "DVD-lugeja"
+msgstr "Predvajalnik DVD-jev"
 
 #: opener/cdopener.cpp:626
 msgid "CD Player"
-msgstr "CD-lugeja"
+msgstr "Predvajalnik CD-jev"
 
 #: opener/cdopener.cpp:627
 msgid "%1 (%2): Audio CD with %3 tracks"
-msgstr "%1 (%2): audio-CD %3 rajaga"
+msgstr "%1 (%2): zvočni CD s %3 sledmi"
 
 #: opener/cdopener.cpp:691 opener/cdopener.cpp:692 opener/cdopener.cpp:698
 #: opener/cdopener.cpp:707 opener/cdopener.cpp:708
 msgid "Unknown"
-msgstr "Teadmata"
+msgstr "Neznano"
 
 #: opener/cdopener.cpp:756
 msgid "Please wait, trying to download CDDB data ..."
-msgstr "Palun oota, CDDB-st andmete allalaadimine..."
+msgstr "Počakajte, poskus prejema podatkov CDDB ..."
 
 #: opener/cdopener.cpp:805
 msgid "Select CDDB Entry"
-msgstr "CDDB kirje valimine"
+msgstr "Izberite vnos CDDB"
 
 #: opener/cdopener.cpp:805
 msgid "Multiple CDDB entries where found. Please select one:"
-msgstr "Leiti mitu CDDB-kirjet. Vali üks:"
+msgstr "Najdenih je bilo več vnosov CDDB. Izberite enega:"
 
 #: opener/cdopener.cpp:992
 msgid "All tracks"
-msgstr "Kõik rajad"
+msgstr "Vse skladbe"
 
 #: opener/cdopener.cpp:996
 msgid "Tracks"
-msgstr "Rajad"
+msgstr "Skladbe"
 
 #: opener/cdopener.cpp:1302
 msgid "Please select at least one track in order to proceed."
-msgstr "Jätkamiseks vali mõni rada."
+msgstr "Izberite vsaj eno sled za nadaljevanje."
 
 #: opener/cdopener.cpp:1383 opener/diropener.cpp:208 opener/fileopener.cpp:206
 #: opener/playlistopener.cpp:238 opener/urlopener.cpp:146 optionslayer.cpp:140
 msgid "No conversion options selected."
-msgstr "Teisendusvalikud on määramata."
+msgstr "Ni bilo izbranih možnosti pretvorbe."
 
 #: opener/cdopener.cpp:1397
 msgid ""
@@ -1971,123 +1983,123 @@ msgid ""
 "\n"
 "Do you want to overwrite the existing one?"
 msgstr ""
-"Selle nimega fail on juba olemas.\n"
+"Datoteka s tem imenom že obstaja.\n"
 "\n"
-"Kas tahad olemasoleva üle kirjutada?"
+"Ali jo želite prepisati?"
 
 #: opener/cdopener.cpp:1398
 msgid "File already exists"
-msgstr "Fail on juba olemas"
+msgstr "Datoteka že obstaja"
 
 #: opener/diropener.cpp:26
 msgid "Add folder"
-msgstr "Kataloogi lisamine"
+msgstr "Dodaj mapo"
 
 #: opener/diropener.cpp:52
 msgid "1. Select directory"
-msgstr "1. Vali kataloog"
+msgstr "1. Izberite mapo"
 
 #: opener/diropener.cpp:83
 msgid "Directory:"
-msgstr "Kataloog:"
+msgstr "Mapa:"
 
 #: opener/diropener.cpp:90
 msgid "Only add selected file formats:"
-msgstr "Lisatakse ainult järgmistes vormingutes failid:"
+msgstr "Dodaj samo izbrane vrste datotek:"
 
 #: opener/diropener.cpp:118 opener/fileopener.cpp:72
 #: replaygainscanner/replaygainscanner.cpp:150
 msgid "Are you missing some file formats?"
-msgstr "Mõni failivorming puudu?"
+msgstr "Ali vam manjkajo nekatere vrste datotek?"
 
 #: opener/diropener.cpp:126
 msgid "Select all"
-msgstr "Vali kõik"
+msgstr "Izberi vse"
 
 #: opener/diropener.cpp:130
 msgid "Select none"
-msgstr "Ära vali midagi"
+msgstr "Odstrani izbor"
 
 #: opener/diropener.cpp:134
 msgid "Recursive"
-msgstr "Rekursiivselt"
+msgstr "Rekurzivno"
 
 #: opener/diropener.cpp:136
 msgid "If checked, files from subdirectories will be added, too."
-msgstr "Märkimisel lisatakse ka failid alamkataloogidest."
+msgstr "Če je označeno, bodo dodane tudi datoteke iz podmap."
 
 #: opener/fileopener.cpp:32 opener/fileopener.cpp:76
 #: opener/playlistopener.cpp:56 replaygainscanner/replaygainscanner.cpp:154
 msgid "Add Files"
-msgstr "Failide lisamine"
+msgstr "Dodaj datoteke"
 
 #: opener/fileopener.cpp:51 replaygainscanner/replaygainscanner.cpp:144
 msgid "%1 files"
-msgstr "%1-failid"
+msgstr "%1 datotek"
 
 #: opener/fileopener.cpp:53 replaygainscanner/replaygainscanner.cpp:146
 msgid "All supported files"
-msgstr "Kõik toetatud failid"
+msgstr "Vse podprte datoteke"
 
 #: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:147
 msgid "All files"
-msgstr "Kõik failid"
+msgstr "Vse datoteke"
 
 #: opener/playlistopener.cpp:31
 msgid "Add playlist"
-msgstr "Esitusloendi lisamine"
+msgstr "Dodaj seznam predvajanja"
 
 #: opener/playlistopener.cpp:215
 msgid "The following files couldn't be found:\n"
-msgstr "Järgmisi faile ei leitud:\n"
+msgstr "Sledečih datotek ni bilo mogoče najti:\n"
 
 #: opener/playlistopener.cpp:218
 msgid "Files not found"
-msgstr "Leidmata failid"
+msgstr "Datoteke niso bile najdene"
 
 #: opener/urlopener.cpp:35
 msgid "Add url"
-msgstr "URL-i lisamine"
+msgstr "Dodaj naslov URL"
 
 #: opener/urlopener.cpp:48
 msgid "1. Enter url"
-msgstr "1. Sisesta URL"
+msgstr "1. Vnesite naslov URL"
 
 #: opener/urlopener.cpp:114
 msgid "The Url you entered is invalid. Please try again."
-msgstr "Sisestatud URL ei sobi. Proovi uuesti."
+msgstr "Vnesen naslov URL ni veljaven. Poskusite znova."
 
 #: optionsdetailed.cpp:41 optionssimple.cpp:58
 msgid "Format:"
-msgstr "Vorming:"
+msgstr "Vrsta:"
 
 #: optionsdetailed.cpp:51
 msgid "Use Plugin:"
-msgstr "Kasutatav plugin:"
+msgstr "Uporabi vstavek:"
 
 #: optionsdetailed.cpp:116 optionssimple.cpp:79
 msgid "Destination:"
-msgstr "Sihtkoht:"
+msgstr "Cilj:"
 
 #: optionsdetailed.cpp:124 optionssimple.cpp:101
 msgid "Calculate Replay Gain tags"
-msgstr "Helitugevuse parandussiltide arvutamine"
+msgstr "Izračunaj oznake jakosti predvajanja"
 
 #: optionsdetailed.cpp:134
 msgid "Save current options as a profile"
-msgstr "Salvesta need seaded profiilina"
+msgstr "Shrani trenutne možnosti kot profil"
 
 #: optionsdetailed.cpp:141
 msgid "Load saved profiles"
-msgstr "Salvestatud profiilide laadimine"
+msgstr "Naloži shranjene profile"
 
 #: optionsdetailed.cpp:252
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
 msgstr ""
-"%1-vormingu puhul helitugevuse parandusteavet ei toetata.\n"
-"Võimalikud lahendused on toodud allpool."
+"Jakost predvajanja ni podprta za vrsto datoteke %1.\n"
+"Spodaj so naštete mogoče rešitve."
 
 #: optionsdetailed.cpp:256
 msgid ""
@@ -2095,47 +2107,51 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional Replay Gain plugin."
 msgstr ""
-"%1-vormingu puhul helitugevuse parandusteavet ei toetata.\n"
-"Otsi vajalikku pluginat oma distro paketihaldurist."
+"Jakost predvajanja ni podprta za vrsto datoteke %1.\n"
+"Preverite upravljalnik paketov vaše distribucije, da namestite dodatni "
+"vstavek jakosti predvajanja."
 
 #: optionsdetailed.cpp:262
 msgid ""
 "Replay Gain tags can tell your music player how loud a track is\n"
 "so it can adjust the volume to play all tracks with equal loudness."
 msgstr ""
-"Helitugevuse parandusteabe siltidega saab muusikamängijale ette öelda,\n"
-"kui vali iga lugu on, et automaatselt helivaljust sättida ja mängida kõiki "
-"lugusid sama valjult."
+"Jakost predvajanja lahko pove vašemu predvajalniku glasbe kako glasna je "
+"skladba,\n"
+"da lahko slednji prilagodi glasnost in predvaja vse skladbe z enako "
+"glasnostjo."
 
 #: optionsdetailed.cpp:311 optionssimple.cpp:389
 msgid ""
 "Using the current conversion options will create files with approximately %1 "
 "per minute."
-msgstr "Praeguste teisendusseadetega tuleb failimahuks umbes %1 minuti kohta."
+msgstr ""
+"Z uporabo možnosti trenutne pretvorbe bodo datoteke ustvarjene s hitrostjo "
+"%1 na minuto."
 
 #: optionsdetailed.cpp:448
 msgid "New profile"
-msgstr "Uus profiil"
+msgstr "Nov profil"
 
 #: optionsdetailed.cpp:448
 msgid "Enter a name for the new profile:"
-msgstr "Sisesta uue profiili nimi:"
+msgstr "Vnesite ime za nov profil:"
 
 #: optionsdetailed.cpp:455
 msgid "You cannot save a profile without a name."
-msgstr "Profiili ei saa salvestada ilma nimeta."
+msgstr "Ne morete shraniti profila brez imena."
 
 #: optionsdetailed.cpp:455
 msgid "Profile name is empty"
-msgstr "Profiili nimi puudub"
+msgstr "Ime profila je prazno"
 
 #: optionsdetailed.cpp:475
 msgid "You cannot overwrite the built-in profiles."
-msgstr "Sisse-ehitatud profiile pole võimalik üle kirjutada."
+msgstr "Ne morete prepisati vgrajenih profilov."
 
 #: optionsdetailed.cpp:475 optionsdetailed.cpp:500
 msgid "Profile already exists"
-msgstr "Profiil on juba olemas"
+msgstr "Profil že obstaja"
 
 #: optionsdetailed.cpp:500
 msgid ""
@@ -2143,48 +2159,48 @@ msgid ""
 "\n"
 "Do you want to overwrite the existing one?"
 msgstr ""
-"Selle nimega profiil on juba olemas.\n"
+"Profil s tem imenom že obstaja.\n"
 "\n"
-"Kas tahad olemasoleva üle kirjutada?"
+"Ali ga želite prepisati?"
 
 #: optionseditor.cpp:40
 msgid "Previous"
-msgstr "Eelmine"
+msgstr "Predhodno"
 
 #: optionseditor.cpp:42
 msgid "Next"
-msgstr "Järgmine"
+msgstr "Naslednje"
 
 #: optionseditor.cpp:65
 msgid "Edit conversion options"
-msgstr "Muuda teisendusvalikuid"
+msgstr "Uredite možnosti pretvorbe"
 
 #: optionseditor.cpp:74
 msgid "Tags"
-msgstr "Sildid"
+msgstr "Oznake"
 
 #: optionseditor.cpp:85
 msgid "Covers:"
-msgstr "Kaanepildid:"
+msgstr "Ovitki:"
 
 #: optionseditor.cpp:102 optionseditor.cpp:113 optionseditor.cpp:124
 #: optionseditor.cpp:140 optionseditor.cpp:151 optionseditor.cpp:167
 #: optionseditor.cpp:183 optionseditor.cpp:194 optionseditor.cpp:206
 #: optionseditor.cpp:223 optionseditor.cpp:239
 msgid "Edit"
-msgstr "Redigeeri"
+msgstr "Uredi"
 
 #: optionseditor.cpp:106
 msgid "Track No.:"
-msgstr "Loo nr:"
+msgstr "Št. skladbe:"
 
 #: optionseditor.cpp:249
 msgid "Edit tags"
-msgstr "Redigeeri silte"
+msgstr "Uredi oznake"
 
 #: optionseditor.cpp:353
 msgid "No file selected"
-msgstr "Ühtegi faili pole valitud"
+msgstr "Ni izbrane datoteke"
 
 #: optionseditor.cpp:384
 msgid ""
@@ -2195,12 +2211,10 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags after downloading."
 msgstr ""
-"Selle faili siltide lugemine polnud võimalik, sest tegu pole kohaliku "
-"failiga.\n"
-"Vahetult enne teisendamist proovib soundKonverter uuesti.\n"
-"Kui tahad silte käsitsi redigeerida, klõpsa alloleval nupul. Sel juhul "
-"pärast faili allalaadimist\n"
-"silte uuesti lugeda ei proovita."
+"Oznak ni bilo mogoče prebrati, ker to ni krajevna datoteka.\n"
+"soundKonverter bo poskušal prebrati oznake tik pred pretvorbo datoteke.\n"
+"Če želite urediti oznake, lahko kliknete spodnji gumb, ampak potem\n"
+"soundKonverter ne bo poskušal prebrati oznak po prejemu."
 
 #: optionseditor.cpp:394
 msgid ""
@@ -2211,47 +2225,48 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
-"Selle faili siltide lugemine ebaõnnestus.\n"
-"Vahetult enne teisendamist proovib soundKonverter uuesti.\n"
-"Kui tahad silte käsitsi redigeerida, klõpsa alloleval nupul. Sel juhul silte "
-"uuesti lugeda ei proovita."
+"Branje oznak za to datoteko je spodletelo.\n"
+"soundKonverter bo poskušal znova prebrati oznake tik pred pretvorbo "
+"datoteke.\n"
+"Če želite urediti oznake, lahko kliknete spodnji gumb, ampak potem\n"
+"soundKonverter ne bo poskušal znova prebrati oznak."
 
 #: optionseditor.cpp:418
 msgctxt "cover tooltip"
 msgid "Cover type:"
-msgstr "Pildi tüüp:"
+msgstr "Vrsta ovitka:"
 
 #: optionseditor.cpp:420
 msgctxt "cover tooltip"
 msgid "Description:"
-msgstr "Kirjeldus:"
+msgstr "Opis:"
 
 #: optionseditor.cpp:421
 msgctxt "cover tooltip"
 msgid "Size:"
-msgstr "Suurus:"
+msgstr "Velikost:"
 
 #: optionseditor.cpp:421
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
-msgstr "%1 x %2 pikslit (%3)"
+msgstr "%1 x %2 slikovnih točk (%3)"
 
 #: optionseditor.cpp:423
 msgctxt "cover tooltip"
 msgid "Mime type:"
-msgstr "MIME-tüüp:"
+msgstr "Vrsta MIME:"
 
 #: optionseditor.cpp:447
 msgid "%1 Files"
-msgstr "%1 faili"
+msgstr "%1 datotek"
 
 #: optionseditor.cpp:468
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
 msgstr ""
-"Valitud on mitu erinevate teisendusvalikutega faili.\n"
-"Kõikide failide valikute ühtseks muutmiseks klõpsa alloleval nupul."
+"Izbrali ste več datotek z različnimi možnostmi pretvorbe.\n"
+"Možnosti lahko spremenite za vse datoteke tako da kliknete spodnji gumb."
 
 #: optionseditor.cpp:476
 msgid ""
@@ -2262,40 +2277,41 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
-"Vähemalt ühe faili siltide lugemine ebaõnnestus.\n"
-"Vahetult enne teisendamist proovib soundKonverter uuesti.\n"
-"Kui tahad silte käsitsi redigeerida, klõpsa alloleval nupul. Sel juhul silte "
-"uuesti lugeda ei proovita."
+"Branje oznak za eno ali več datotek je spodletelo\n"
+"soundKonverter bo poskušal znova prebrati oznake tik pred pretvorbo "
+"datotek.\n"
+"Če želite urediti oznake, lahko kliknete spodnji gumb, ampak potem\n"
+"soundKonverter ne bo poskušal znova prebrati oznak."
 
 #: optionssimple.cpp:35
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:69
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:286
 msgid "Quality:"
-msgstr "Kvaliteet:"
+msgstr "Kakovost:"
 
 #: optionssimple.cpp:46
 msgid "Remove the selected profile"
-msgstr "Eemalda valitud profiil"
+msgstr "Odstrani izbran profil"
 
 #: optionssimple.cpp:49 optionssimple.cpp:68
 msgid "Info"
-msgstr "Info"
+msgstr "Podrobnosti"
 
 #: optionssimple.cpp:51
 msgid "Information about the selected profile"
-msgstr "Info valitud profiili kohta"
+msgstr "Podrobnosti o izbranem profilu"
 
 #: optionssimple.cpp:70
 msgid "Information about the selected file format"
-msgstr "Info valitud failivormingu kohta"
+msgstr "Podrobnosti o izbrani vrsti datoteke"
 
 #: optionssimple.cpp:74
 msgid "More formats..."
-msgstr "Rohkem vorminguid..."
+msgstr "Več vrst ..."
 
 #: optionssimple.cpp:96
 msgid "Optional:"
-msgstr "Valikuline:"
+msgstr "Izbirno:"
 
 #: optionssimple.cpp:189
 msgid ""
@@ -2304,10 +2320,10 @@ msgid ""
 "It is not recommended to save your music in this quality without a copy of "
 "higher quality."
 msgstr ""
-"Failide kodeerimine väga madala helikvaliteediga võib olla kasulik, kui sul "
-"on väga piiratud mälumahuga mobiilne seade.\n"
-"Pole soovitatav salvestada oma muusikat sellise kvaliteediga ilma, et "
-"säiliks ka kõrgema kvaliteediga koopia."
+"Kodiranje datotek z zelo nizko kakovostjo je lahko uporabno, če imate "
+"mobilno napravo, kjer je velikost shrambe omejena.\n"
+"Priporočeno je, da ne shranite glasbe v tej kakovosti brez kopij v višji "
+"kakovosti."
 
 #: optionssimple.cpp:193
 msgid ""
@@ -2316,10 +2332,10 @@ msgid ""
 "It is not recommended to save your music in this quality without a copy of "
 "higher quality."
 msgstr ""
-"Failide kodeerimine madala helikvaliteediga võib olla kasulik, kui sul on "
-"väga piiratud mälumahuga mobiilne seade.\n"
-"Pole soovitatav salvestada oma muusikat sellise kvaliteediga ilma, et "
-"säiliks ka kõrgema kvaliteediga koopia."
+"Kodiranje datotek z nizko kakovostjo je lahko uporabno, če imate mobilno "
+"napravo, kjer je velikost shrambe omejena.\n"
+"Priporočeno je, da ne shranite glasbe v tej kakovosti brez kopij v višji "
+"kakovosti."
 
 #: optionssimple.cpp:197
 msgid ""
@@ -2328,27 +2344,26 @@ msgid ""
 "Most people might not hear much of a difference to the original files but "
 "you should only use it to save music if your storage space is limited."
 msgstr ""
-"Failide kodeerimine keskmise helikvaliteediga on kompromiss kvaliteedi ja "
-"failisuuruse vahel.\n"
-"Enamik inimesi ilmselt ei kuule algsete failidega võrreldes suuremat "
-"erinevust, kuid muusikat tasub sellise kvaliteediga salvestada vaid siis, "
-"kui kettaruum on piiratud."
+"Kodiranje datotek s srednjo kakovostjo je kompromis med kakovostjo in "
+"velikostjo datoteke.\n"
+"Večina ljudi morda ne bo slišala velikih razlik glede na izvirnike,  ampak "
+"to bi morali uporabiti le v primeru, če je vaša velikost shrambe omejena."
 
 #: optionssimple.cpp:201
 msgid ""
 "Encoding files with a high quality is a good choice if you have enough "
 "storage space available. You can use this to save your music."
 msgstr ""
-"Failide kodeerimine kõrge helikvaliteediga on hea valik, kui sul on "
-"piisavalt salvestusruumi. Sellise kvaliteediga juba võib oma muusikat hoida."
+"Kodiranje datotek z visoko kakovostjo je dobra izbira, če imate na voljo "
+"dovolj veliko shrambo. To lahko uporabite, da shranite vašo glasbo."
 
 #: optionssimple.cpp:205
 msgid ""
 "Encoding files with a very high quality is fine if you have enough storage "
 "space."
 msgstr ""
-"Failide kodeerimine väga kõrge helikvaliteediga sobib siis, kui kettaruumi "
-"on piisavalt."
+"Kodiranje datotek z zelo visoko kakovostjo je v redu, če imate na voljo "
+"dovolj veliko shrambo."
 
 #: optionssimple.cpp:209
 msgid ""
@@ -2358,97 +2373,96 @@ msgid ""
 "The file size will be big, so you should only use it if you have enough "
 "storage space."
 msgstr ""
-"Failide kodeerimine ilma kadudeta säilitab algse faili helikvaliteedi.\n"
-"See on mõttekas üksnes juhul, kui sisend on kõrge kvaliteediga (nt heli-"
-"CD).\n"
-"Saadavad failid on väga suured, mistõttu tasub seda kasutada vaid siis, kui "
-"kettaruumi on piisavalt."
+"Kodiranje datotek brez izgub bo ohranilo kakovost izvirnih datotek.\n"
+"Uporabno je le, če ima izvirnik dobro kakovost (npr. zvočni CD).\n"
+"Velikost datoteke bo velika, zato to uporabite le, če imate dovolj veliko "
+"shrambo."
 
 #: optionssimple.cpp:217
 msgid "You can define your own profile in the \"Detailed\" tab."
-msgstr "Omaloodud profiili saad määrata kaardil \"Üksikasjalik\"."
+msgstr "Vaš lastni profil lahko določite v zavihku \"Podrobno\"."
 
 #: optionssimple.cpp:221
 msgid "This is a user defined profile."
-msgstr "See on kasutajamääratud profiil."
+msgstr "To je uporabniško določen profil."
 
 #: optionssimple.cpp:224
 msgid "Profile info for %1"
-msgstr "Profiili \"%1\" info"
+msgstr "Podrobnosti o profilu za %1"
 
 #: optionssimple.cpp:231
 msgid "Do you really want to remove the profile: %1"
-msgstr "Kas tahad kindlasti eemaldada profiili \"%1\"?"
+msgstr "Ali zares želite odstraniti profil %1?"
 
 #: optionssimple.cpp:231
 msgid "Remove profile?"
-msgstr "Profiili eemaldamine"
+msgstr "Odstranim profil?"
 
 #: optionssimple.cpp:280
 msgid "Format info for %1"
-msgstr "Vormingu \"%1\" info"
+msgstr "Podrobnosti o vrsti za %1"
 
 #: optionssimple.cpp:284
 msgid "Sorry, no format information available."
-msgstr "Vabandust, infot vormingu kohta pole."
+msgstr "Žal ni na voljo nobenih podrobnosti o vrsti."
 
 #: outputdirectory.cpp:36
 msgid "By meta data"
-msgstr "Metaandmete põhjal"
+msgstr "Po metapodatkih"
 
 #: outputdirectory.cpp:37
 msgid "Source directory"
-msgstr "Lähtekataloog"
+msgstr "Izvorna mapa"
 
 #: outputdirectory.cpp:38
 msgid "Specify output directory"
-msgstr "Määratud kataloog"
+msgstr "Podajte izhodno mapo"
 
 #: outputdirectory.cpp:39
 msgid "Copy directory structure"
-msgstr "Kataloogipuu kopeerimine"
+msgstr "Kopiraj zgradbo map"
 
 #: outputdirectory.cpp:50 outputdirectory.cpp:461
 msgid "Choose an output directory"
-msgstr "Vali väljundkataloog"
+msgstr "Izberite izhodno mapo"
 
 #: outputdirectory.cpp:55
 msgid "Open the output directory with Dolphin"
-msgstr "Ava väljundkataloog Dolphinis"
+msgstr "Odpri izhodno mapo v Dolphinu"
 
 #: outputdirectory.cpp:224
 msgid "Unknown Artist"
-msgstr "Esitaja teadmata"
+msgstr "Neznan izvajalec"
 
 #: outputdirectory.cpp:228
 msgid "Unknown Album"
-msgstr "Album teadmata"
+msgstr "Neznan album"
 
 #: outputdirectory.cpp:232
 msgid "No Comment"
-msgstr "Kommentaar puudub"
+msgstr "Brez opombe"
 
 #: outputdirectory.cpp:239
 msgid "Unknown Genre"
-msgstr "Stiil teadmata"
+msgstr "Neznana zvrst"
 
 #: outputdirectory.cpp:246
 msgid "Unknown Composer"
-msgstr "Helilooja teadmata"
+msgstr "Neznan skladatelj"
 
 #: outputdirectory.cpp:250
 msgid "Unknown Title"
-msgstr "Pealkiri teadmata"
+msgstr "Neznan naslov"
 
 #: outputdirectory.cpp:331
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
-msgstr "uus"
+msgstr "nov"
 
 #: outputdirectory.cpp:512
 msgid "Name all converted files according to the specified pattern"
-msgstr "Teisendatud failid nimetatakse määratud mustri järgi."
+msgstr "Poimenuj vse pretvorjene datoteke glede na podan vzorec"
 
 #: outputdirectory.cpp:513
 msgid ""
@@ -2472,38 +2486,38 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Järgnevad stringid on muutujad, mis asendatakse\n"
-"vastava infoga faili metaandmetest:\n"
+"Sledeči nizi so nadomestni znaki, ki bodo zamenjani\n"
+"s podati v metapodatkih:\n"
 "\n"
-"%a - esitaja\n"
+"%a - izvajalec\n"
 "%b - album\n"
-"%c - kommentaar\n"
-"%d - plaadi number\n"
-"%g - stiil\n"
-"%n - loo number\n"
-"%p - helilooja\n"
-"%t - pealkiri\n"
-"%y - aasta\n"
-"%f - algne failinimi\n"
+"%c - opomba\n"
+"%d - številka diska\n"
+"%g - zvrst\n"
+"%n - številka skladbe\n"
+"%p - skladatelj\n"
+"%t - naslov\n"
+"%y - leto\n"
+"%f - ime izvorne datoteke\n"
 "\n"
-"Kui panna muutujad (vajadusel koos neid ümbritsevate\n"
-"märkidega) nurksulgudesse (s.t \"[\" ja \"]\" vahele), siis neid\n"
-"eiratakse, kui vastava muutuja asendusväärtus on tühi.\n"
-"Et failinimedes nurksulge endid kasutada, tuleb nende ette\n"
-"panna kurakaldkriips (niiviisi: \"\\[\" ja \"\\]\")."
+"Te nadomestne znake in njihove sosede lahko obdate tudi z oglatimi oklepaji "
+"('[' in ']'),\n"
+"da bodo prezrti, če je vrednost za zamenjavo prazna.\n"
+"Da boste lahko uporabili oglate oklepaje, boste morali prednje pripeti levo "
+"poševnico ('\\[' and '\\]')."
 
 #: outputdirectory.cpp:525
 msgid ""
 "Output all converted files into the same directory as the original files"
-msgstr "Teisendatud failid kirjutatakse lähtefailidega samasse kataloogi."
+msgstr "Shrani vse pretvorjene datoteke v enako mapo kot izvorne datoteke"
 
 #: outputdirectory.cpp:536
 msgid "Output all converted files into the specified output directory"
-msgstr "Teisendatud failid kirjutatakse määratud väljundkataloogi."
+msgstr "Shrani vse pretvorjene datoteke v podano izhodno mapo"
 
 #: outputdirectory.cpp:547
 msgid "Copy the whole directory structure for all converted files"
-msgstr "Kopeeritakse teisendatud failide kogu kataloogipuu."
+msgstr "Kopiraj celotno zgradbo mape za vse pretvorjene datoteke"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:28
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:28
@@ -2514,7 +2528,7 @@ msgstr "Kopeeritakse teisendatud failide kogu kataloogipuu."
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:31
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:60
 msgid "Mode:"
-msgstr "Režiim:"
+msgstr "Način:"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:32
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:131
@@ -2534,14 +2548,14 @@ msgstr "Režiim:"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:124
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:64
 msgid "Bitrate"
-msgstr "Bitikiirus"
+msgstr "Bitna hitrost"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:31
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:31
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:88
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:246
 msgid "Bitrate:"
-msgstr "Bitikiirus:"
+msgstr "Bitna hitrost:"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:82
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
@@ -2554,15 +2568,15 @@ msgstr "Bitikiirus:"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:47
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:102
 msgid "Additional encoder arguments:"
-msgstr "Lisaargumendid kooderile:"
+msgstr "Dodatni argumenti kodirnika:"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:301
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
-msgstr "Luba ffmpeg seadistusdialoogis katsejärgus koodekite kasutamine."
+msgstr "Omogoči eksperimentalne kodeke v nastavitvenem oknu ffmpeg."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:305
 msgid "Compile ffmpeg with %1 support."
-msgstr "Kompileeri ffmpeg %1 toega."
+msgstr "Prevedite ffmpeg s podporo %1."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:365
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
@@ -2573,17 +2587,17 @@ msgstr "Kompileeri ffmpeg %1 toega."
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:83
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:76
 msgid "Configure %1"
-msgstr "%1i seadistamine"
+msgstr "Nastavi %1"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:370
 msgid "Enable experimental codecs"
-msgstr "Katsejärgus koodekite lubamine"
+msgstr "Omogoči eksperimentalne kodeke"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:396
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:396
 msgid "Please restart soundKonverter in order to activate the changes."
-msgstr "Muudatuste rakendamiseks käivita soundKonverter uuesti."
+msgstr "Da omogočite spremembe, morate znova zagnati soundKonverter."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
@@ -2592,11 +2606,11 @@ msgstr "Muudatuste rakendamiseks käivita soundKonverter uuesti."
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:36
 msgid "Compression level:"
-msgstr "Pakkimistase:"
+msgstr "Raven stiskanja:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
 msgid "Use SoundFont file:"
-msgstr "Kasutatav SoundFonti fail:"
+msgstr "Uporabi datoteko SoundFont:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:86
 msgid ""
@@ -2604,24 +2618,24 @@ msgid ""
 "maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
-"MIDI-andmete lainekujule (wav-vormingusse) teisendamiseks on vajalik "
-"SoundFont, mis seob MIDI-andmed heliefektidega.\n"
-"SoundFonti failide saamiseks vaata aadressile %1."
+"Za pretvorbo podatkov midi v obliko wave, potrebujete SoundFont, ki preslika "
+"podatke midi v zvočne učinke.\n"
+"Oglejte si %1, da dobite datoteke SoundFont."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:141
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
-msgstr "FluidSynth pole veel seadistatud. Määrata tuleb SoundFonti fail."
+msgstr "FluidSynth še ni nastavljen. Nastaviti morate datoteko SoundFont."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:33
 msgid "Preset:"
-msgstr "Eelseade:"
+msgstr "Predloga nastavitev:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:396
 msgctxt "Backend profile"
 msgid "Medium"
-msgstr "Keskmine"
+msgstr "Srednje"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:35
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
@@ -2629,7 +2643,7 @@ msgstr "Keskmine"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:273
 msgctxt "Backend profile"
 msgid "Standard"
-msgstr "Tavaline"
+msgstr "Običajno"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:410
@@ -2637,7 +2651,7 @@ msgstr "Tavaline"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:278
 msgctxt "Backend profile"
 msgid "Extreme"
-msgstr "Äärmuslik"
+msgstr "Zelo visoko"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:417
@@ -2645,12 +2659,12 @@ msgstr "Äärmuslik"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:283
 msgctxt "Backend profile"
 msgid "Insane"
-msgstr "Hullumeelne"
+msgstr "Noro"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:424
 msgid "Specify bitrate"
-msgstr "Määratud bitikiirus"
+msgstr "Podajte bitno hitrost"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:53
 msgid "cbr"
@@ -2661,26 +2675,24 @@ msgid ""
 "Encode using a constant bitrate.\n"
 "Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
 msgstr ""
-"Kodeerimisel kasutatakse konstantset bitikiirust.\n"
-"Töötab ainult 80, 96, 112, 128, 160, 192, 224, 256 või 320 kb/s puhul."
+"Kodiraj s stalno bitno hitrostjo.\n"
+"Deluje samo z 80, 96, 112, 128, 160, 192, 224, 256 in 320 kb/s"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:60
 msgid "Fast encoding"
-msgstr "Kiire kodeerimine"
+msgstr "Hitro kodiranje"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:63
 msgid ""
 "Use a faster encoding algorithm (results in a slightly lower output quality)."
-msgstr ""
-"Märkimisel kasutatakse kiiremat (ja natuke madalama väljundkvaliteediga) "
-"kodeerimisalgoritmi."
+msgstr "Uporabi hitrejši kodirni algoritem (izhodna kakovost je malo slabša)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:106
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:59
 #: plugins/soundkonverter_codec_opustools/opustoolscodecwidget.cpp:53
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:55
 msgid "Bitrate mode:"
-msgstr "Bitikiiruse režiim:"
+msgstr "Način bitne hitrosti:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:109
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:217
@@ -2692,7 +2704,7 @@ msgstr "Bitikiiruse režiim:"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:120
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:263
 msgid "Variable"
-msgstr "Varieeruv"
+msgstr "Spremenljiva"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:110
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:193
@@ -2710,7 +2722,7 @@ msgstr "Varieeruv"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:127
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:280
 msgid "Average"
-msgstr "Keskmine"
+msgstr "Povprečna"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:111
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:227
@@ -2724,7 +2736,7 @@ msgstr "Keskmine"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:128
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:281
 msgid "Constant"
-msgstr "Konstantne"
+msgstr "Stalna"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:133
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:142
@@ -2733,25 +2745,26 @@ msgid ""
 "(The higher the quality, the slower the conversion and vice versa.)\n"
 "A value of 2 is recommended."
 msgstr ""
-"Pakkimistase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet.\n"
-"(Mida kõrgem kvaliteet, seda aeglasem teisendus ja vastupidi.)\n"
-"Soovitatav väärtus on 2."
+"Raven stiskanja od 9 do 0, kjer je 0 najvišja kakovost.\n"
+"(Višja kot je kakovost, počasnejša je pretvorba in obratno.)\n"
+"Priporočena vrednost je 2."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:401
 msgid ""
 "This preset should provide near transparency to most people on most music "
 "(~150 kbps abr)."
 msgstr ""
-"See eelseade peaks olema piisav enamikule inimestest enamiku muusika jaoks "
-"(~150 kb/s abr)."
+"Ta predloga nastavitev naj bi ponujala približno tak izhod, ki ga večina "
+"ljudi ne bo ločila od izhoda za večino glasbe (~150 kb/s abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:408
 msgid ""
 "This preset should generally be transparent to most people on most music\n"
 "and is already quite high in quality (~230 kbps abr)."
 msgstr ""
-"See eelseade peaks olema piisav enamikule inimestest enamiku muusika jaoks\n"
-"ja on juba päris kõrge kvaliteediga (~230 kb/s abr)."
+"Ta predloga nastavitev naj bi ponujala izhod, ki ga večina ljudi ne bo "
+"ločila od\n"
+"izhoda. Kakovost je že zelo visoka (~230 kb/s abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:415
 msgid ""
@@ -2759,9 +2772,9 @@ msgid ""
 "generally provide\n"
 "slightly higher quality than the standard mode (~280 kbps abr)."
 msgstr ""
-"Kui sul on äärmiselt hea kuulmine ja vastav helitehnika, siis see eelseade "
-"pakub üldjuhul\n"
-"tavarežiimist veidi kõrgemat kvaliteeti (~280 kb/s abr)."
+"Če imate zelo dober sluh in podobno opremo, bo ta predloga nastavitev v "
+"splošnem\n"
+"ponujala rahlo višjo kakovost kot običajen način (~280 kb/s abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:422
 msgid ""
@@ -2770,10 +2783,10 @@ msgid ""
 "the absolute highest quality with no regard to filesize, this is the way to "
 "go (320 kbps cbr)."
 msgstr ""
-"Enamiku inimeste ja olukordade jaoks on see eelseade nagu sääsejaht "
-"suurtükiga, kuid kui\n"
-"tahad tingimata parimast parimat kvaliteeti ja ei hooli failimahust, siis on "
-"siin midagi sulle (320 kb/s cbr)."
+"Ta predloga nastavitev bo običajno pretiravanje za večino ljudi v večini "
+"situacij, ampak\n"
+"če morate imeti najvišjo kakovost ne glede na velikost datoteke, je to prava "
+"izbira (320 kb/s cbr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:468
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:469
@@ -2781,53 +2794,53 @@ msgid ""
 "Quality level from 9 to 0 where 0 is the highest quality.\n"
 "(The higher the quality, the bigger the file size and vice versa.)"
 msgstr ""
-"Kvaliteeditase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet.\n"
-"(Mida kõrgem kvaliteet, seda suuremad failid ja vastupidi.)"
+"Raven kakovosti od 9 do 0, kjer je 0 najvišja kakovost.\n"
+"(Višja kot je kakovost, večja je datoteka in obratno.)"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:116
 msgid "Stereo mode:"
-msgstr "Stereorežiim:"
+msgstr "Način stereo:"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:119
 msgid "Automatic"
-msgstr "Automaatne"
+msgstr "Samodejno"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:120
 msgid "Joint Stereo"
-msgstr "Liitstereo"
+msgstr "Združeni stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:121
 msgid "Simple Stereo"
-msgstr "Lihtstereo"
+msgstr "Preprost stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:122
 msgid "Forced Joint Stereo"
-msgstr "Sunnitud liitstereo"
+msgstr "Vsiljen združen stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:123
 msgid "Dual Mono"
-msgstr "Topeltmono"
+msgstr "Dvojni mono"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:166
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:92
 msgid "About %1"
-msgstr "%1i info"
+msgstr "O %1"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:171
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
-"LAME on vaba kõrgekvaliteetne MP3-kooder.\n"
-"Saad selle aadressilt http://lame.sourceforge.net"
+"LAME je brezplačen kodirnik MP3 z visoko kakovostjo.\n"
+"Dobite ga lahko na: http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
 msgid "Enable experimental codecs in the libav configuration dialog."
-msgstr "Luba libav seadistusdialoogis katsejärgus koodekite kasutamine."
+msgstr "Omogoči eksperimentalne kodeke v nastavitvenem oknu libav."
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
 msgid "Compile libav with %1 support."
-msgstr "Kompileeri libav %1 toega."
+msgstr "Prevedite libav s podporo %1."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
@@ -2839,59 +2852,57 @@ msgstr "Telefon"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:263
 msgctxt "Backend profile"
 msgid "Thumb"
-msgstr "Pöial"
+msgstr "Thumb"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:268
 msgctxt "Backend profile"
 msgid "Radio"
-msgstr "Raadio"
+msgstr "Radio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:42
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:288
 msgctxt "Backend profile"
 msgid "Braindead"
-msgstr "Ajusurnud"
+msgstr "Braindead"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
-msgstr "Kasutada võib MusePacki eelseadeid või omamääratud seadeid."
+msgstr "Uporabite predloge nastavitev MusePacka ali vaše lastne."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:261
 msgid "low quality (~60 kbps abr)."
-msgstr "madal kvaliteet (~60 kb/s abr)."
+msgstr "nizka kakovost (~60 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:266
 msgid "low/medium quality (~90 kbps abr)."
-msgstr "alla keskmise kvaliteet (~90 kb/s abr)."
+msgstr "nizka/srednja kakovost (~90 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:271
 msgid "medium quality (~130 kbps abr)."
-msgstr "keskmine kvaliteet (~130 kb/s abr)."
+msgstr "srednja kakovost (~130 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:276
 msgid "high quality (~180 kbps abr)."
-msgstr "kõrge kvaliteet (~180 kb/s abr)."
+msgstr "visoka kakovost (~180 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:281
 msgid "excellent quality (~210 kbps abr)."
-msgstr "hiilgav kvaliteet (~210 kb/s abr)."
+msgstr "odlična kakovost (~210 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:286
 msgid "excellent quality (~240 kbps abr)."
-msgstr "hiilgav kvaliteet (~240 kb/s abr)."
+msgstr "odlična kakovost (~240 kb/s abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:291
 msgid "excellent quality (~270 kbps abr)."
-msgstr "hiilgav kvaliteet (~270 kb/s abr)."
+msgstr "odlična kakovost (~270 kb/s abr)."
 
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:42
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:50
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:58
 msgid "You can download '%1' at '%2' after entering an email address."
-msgstr ""
-"\"%1\" on allalaaditav aadressilt %2, kuid eeldab e-posti aadressi "
-"sisestamist."
+msgstr "'%1' lahko prejmete preko '%2' zatem ko vnesete naslov e-pošte."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:50
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:58
@@ -2902,104 +2913,103 @@ msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
-"\"%1\" leidub enamasti paketis \"%2\", mis peaks distroga kaasas olema."
+"'%1' je običajno v paketu '%2', ki bi moral biti pakiran v vaši distribuciji."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:86
 msgid "Uncoupled channels"
-msgstr "Paardamata kanalid"
+msgstr "Odklopljeni kanali"
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:87
 msgid "Use one mono stream per channel"
-msgstr "Iga kanali jaoks kasutatakse ühte monoheliga voogu."
+msgstr "Uporabi en pretok mono na kanal"
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:97
 msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
 msgstr ""
-"TwoLame on vaba MP2-kooder.\n"
-"Saad selle aadressilt http://www.twolame.org"
+"TwoLame je brezplačen kodirnik MP2.\n"
+"Dobite ga lahko na: http://www.twolame.org"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:258
 msgid "Quality level from -50 to 50."
-msgstr "Kvaliteedi tase vahemikus -50 kuni 50."
+msgstr "Raven kakovosti od -50 do 50."
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
-msgstr ""
-"\"%1\" leidub enamasti paketis \"%2\", mille saab alla laadida aadressilt %3"
+msgstr "'%1' je običajno v paketu '%2', ki ga lahko prejmete z %3"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
-msgstr "Kiire"
+msgstr "Hitro"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:35
 msgid "Normal"
-msgstr "Tavaline"
+msgstr "Običajno"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:36
 msgid "High quality"
-msgstr "Kõrge kvaliteet"
+msgstr "Visoka kakovost"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:37
 msgid "Very high quality"
-msgstr "Ülikõrge kvaliteet"
+msgstr "Zelo visoka kakovost"
 
 #: plugins/soundkonverter_filter_normalize/normalizefilterwidget.cpp:24
 msgid "Normalize"
-msgstr "Normaliseerimine"
+msgstr "Normaliziraj"
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:186
 msgid "Enable experimental codecs in the sox configuration dialog."
-msgstr "Luba sox'i seadistusdialoogis katsejärgus koodekite kasutamine."
+msgstr "Omogoči eksperimentalne kodeke v nastavitvenem oknu sox."
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:190
 msgid "Compile sox with %1 support."
-msgstr "Kompileeri sox %1 toega."
+msgstr "Prevedite sox s podporo %1."
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:245
 msgid "Sample rate change quality:"
-msgstr "Diskreetimissageduse muutmiskvaliteet:"
+msgstr "Sprememba kakovosti hitrosti vzorčenja:"
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:248
 msgid "Quick"
-msgstr "Kiire"
+msgstr "Hitra"
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 msgid "Quality level from 9 to 0 where 0 is the highest quality."
-msgstr "Kvaliteeditase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet."
+msgstr "Raven kakovosti od 9 do 0, kjer je 0 najvišja kakovost."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
-msgstr "Efekt:"
+msgstr "Učinek:"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:27
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:189
 #: plugins/soundkonverter_filter_sox/soxfilteroptions.cpp:82
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:132
 msgid "Disabled"
-msgstr "Keelatud"
+msgstr "Onemogočen"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:102
 msgid "Remove this effect"
-msgstr "Eemalda see efekt"
+msgstr "Odstrani ta učinek"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:106
 msgid "Add"
-msgstr "Lisa"
+msgstr "Dodaj"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:107
 msgid "Add another effect"
-msgstr "Lisa veel üks efekt"
+msgstr "Dodaj drug učinek"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:146
 msgid ""
 "Normalize:\n"
 "Change the volume so all files have the same loudness"
 msgstr ""
-"Normaliseerimine:\n"
-"muudab helitugevust nii, et kõik failid on sama valjud"
+"Normaliziraj:\n"
+"Spremeni glasnost, da imajo vse datoteke enako"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:150
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:166
@@ -3013,28 +3023,28 @@ msgid ""
 "Bass:\n"
 "Amplify the low frequencies"
 msgstr ""
-"Bass:\n"
-"võimendab madalaid sagedusi"
+"Bas:\n"
+"Ojača nizke frekvence"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:176
 msgid ""
 "Treble:\n"
 "Amplify the high frequencies"
 msgstr ""
-"Kõrged:\n"
-"võimendab kõrgeid sagedusi"
+"Porazdelitev:\n"
+"Ojača visoke frekvence"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:28
 msgid "Sample rate:"
-msgstr "Diskreetimissagedus:"
+msgstr "Hitrost vzorčenja:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:50
 msgid "Sample size:"
-msgstr "Diskreedisuurus:"
+msgstr "Velikost vzorca:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:66
 msgid "Channels:"
-msgstr "Kanalid:"
+msgstr "Kanali:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:70
 msgid "Mono"
@@ -3047,12 +3057,12 @@ msgstr "Stereo"
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:90
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:83
 msgid "Use tag format:"
-msgstr "Sildivorming:"
+msgstr "Uporabi obliko oznak:"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:99
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:92
 msgid "Modify audio stream"
-msgstr "Helivoo muutmine"
+msgstr "Spremeni zvočni pretok"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:100
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:93
@@ -3062,9 +3072,9 @@ msgid ""
 "Undoing the changes is still possible since correction data will be written "
 "as well."
 msgstr ""
-"Helitugevust muudetakse otse kodeeritud andmetes. Nii töötab parandus kõigis "
-"MP3-mängijates.\n"
-"Kuna kirjutatakse ka parandusteave, saab muudatused siiski tagasi võtta."
+"Zapiši prilagoditve jakosti predvajanja neposredno v kodirane podatke. Na ta "
+"način bo prilagoditev delovala z vsemi predvajalniki MP3.\n"
+"Razveljavitev je mogoča, saj bodo zapisani tudi podatki popravkov."
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:42
 msgid ""
@@ -3073,25 +3083,26 @@ msgid ""
 "'cdparanoia' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Audio-CD-de rippimiseks radade kaupa või üheks failiks tuleb paigaldada "
-"\"cdparanoia\".\n"
-"See on saadaval enamikul distrodest, kuid paketi nimi võib veidi erineda."
+"Da lahko zajamete zvočne CD-je v skladbe ali v eno datoteko, morate "
+"namestiti 'cdparanoia'.\n"
+"'cdparanoia' je običajno pakirana v vaši distribuciji, ime paketa je lahko "
+"tudi drugačno."
 
 #: progressindicator.cpp:85
 msgid "Speed:"
-msgstr "Kiirus:"
+msgstr "Hitrost:"
 
 #: progressindicator.cpp:98
 msgid "Remaining time:"
-msgstr "Aeg lõpetamiseni:"
+msgstr "Preostali čas:"
 
 #: progressindicator.cpp:162 soundkonverter.cpp:297 soundkonverter.cpp:299
 msgid "Finished"
-msgstr "Valmis"
+msgstr "Končano"
 
 #: replaygainscanner/replaygainfilelist.cpp:35
 msgid "File"
-msgstr "Fail"
+msgstr "Datoteka"
 
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Album"
@@ -3099,217 +3110,218 @@ msgstr "Album"
 
 #: replaygainscanner/replaygainfilelist.cpp:59
 msgid "Collapse all"
-msgstr "Ahenda kõik"
+msgstr "Zloži vse"
 
 #: replaygainscanner/replaygainfilelist.cpp:63
 msgid "Expand all"
-msgstr "Laienda kõik"
+msgstr "Razširi vse"
 
 #: replaygainscanner/replaygainfilelist.cpp:73
 msgid "Move to new Album"
-msgstr "Liiguta uude albumisse"
+msgstr "Premakni v nov album"
 
 #: replaygainscanner/replaygainfilelist.cpp:142
 msgid ""
 "Some tracks can't be added to the album because either the codec or the "
 "sampling rate is different."
 msgstr ""
-"Mõnesid lugusid pole võimalik albumisse lisada, kuna neil on erinev vorming "
-"või diskreetimissagedus."
+"Nekaterih skladb ni bilo mogoče dodati v album, ker je različen kodek ali "
+"hitrost vzorčenja."
 
 #: replaygainscanner/replaygainfilelist.cpp:1050
 msgid "New album"
-msgstr "Uus album"
+msgstr "Nov album"
 
 #: replaygainscanner/replaygainprocessor.cpp:89
 msgid "Replay Gain failed. The used backend needs to be configured properly."
 msgstr ""
-"Helitugevuse parandus ebaõnnestus. Kasutatud taustprogramm tuleb korralikult "
-"seadistada."
+"Jakost predvajanja je spodletela. Uporabljeno zaledje morate pravilno "
+"nastaviti."
 
 #: replaygainscanner/replaygainprocessor.cpp:95
 msgid ""
 "Replay Gain failed. The preferred plugin lacks support for a necessary "
 "feature."
 msgstr ""
-"Helitugevuse parandus ebaõnnestus. Eelistatud plugin ei toeta vajalikku "
-"funktsiooni."
+"Jakost predvajanja je spodletela. Prednostnemu vstavku manjka podpora za "
+"nujno zmožnost."
 
 #: replaygainscanner/replaygainprocessor.cpp:102
 msgid "Replay Gain failed. Unknown Error."
-msgstr "Helitugevuse parandus ebaõnnestus. Tundmatu viga."
+msgstr "Jakost predvajanja je spodletela. Neznana napaka."
 
 #: replaygainscanner/replaygainprocessor.cpp:142
 msgid "Replay Gain failed. Exit code: %1"
-msgstr "Helitugevuse parandus ebaõnnestus. Lõpetamise olek: %1"
+msgstr "Jakost predvajanja je spodletela. Izhodna koda: %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:214
 msgid "Adding new item to Replay Gain processing list: '%1'"
-msgstr "Uue üksuse lisamine helitugevuse paranduse töötlusloendisse. : \"%1\""
+msgstr "Dodajanje novih predmetov na seznam za jakost predvajanja: '%1'"
 
 #: replaygainscanner/replaygainprocessor.cpp:222
 msgid "Replay Gain for %1"
-msgstr "Helitugevuse parandus: \"%1\""
+msgstr "Jakost predvajanja za %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:240
 msgid "Possible Replay Gain backends:"
-msgstr "Võimalikud helitugevuse paranduse taustprogrammid:"
+msgstr "Mogoča zaledja za jakost predvajanja:"
 
 #: replaygainscanner/replaygainprocessor.cpp:277
 msgctxt "Conversion exit status"
 msgid "Skipped"
-msgstr "Jäeti vahele"
+msgstr "Preskočeno"
 
 #: replaygainscanner/replaygainscanner.cpp:45 soundkonverter.cpp:192
 #: soundkonverterview.cpp:80
 msgid "Add folder..."
-msgstr "Lisa kataloog..."
+msgstr "Dodaj mapo ..."
 
 #: replaygainscanner/replaygainscanner.cpp:46 soundkonverter.cpp:187
 #: soundkonverterview.cpp:79
 msgid "Add files..."
-msgstr "Lisa faile..."
+msgstr "Dodaj datoteke ..."
 
 #: replaygainscanner/replaygainscanner.cpp:52
 msgid "Force recalculation"
-msgstr "Kordusarvutuse sundimine"
+msgstr "Vsili ponovni izračun"
 
 #: replaygainscanner/replaygainscanner.cpp:53
 msgid ""
 "Recalculate Replay Gain tags for files that already have Replay Gain tags "
 "set."
 msgstr ""
-"Helitugevuse parandusteave arvutatakse uuesti ka failidele, millel juba on "
-"helitugevuse parandusteabe sildid."
+"Znova izračuna oznake jakosti predvajanja za tiste datoteke, ki imajo te "
+"oznake že nastavljene."
 
 #: replaygainscanner/replaygainscanner.cpp:74
 msgid "Tag untagged"
-msgstr "Sildista"
+msgstr "Označi neoznačene"
 
 #: replaygainscanner/replaygainscanner.cpp:75
 msgid ""
 "Calculate Replay Gain tags for all files in the file list without Replay "
 "Gain tags."
 msgstr ""
-"Helitugevuse parandusteave arvutatakse loendi kõigile failidele, millel seda "
-"veel pole."
+"Izračuna oznake jakosti predvajanja za vse datoteke v seznamu, ki te oznake "
+"nimajo."
 
 #: replaygainscanner/replaygainscanner.cpp:79
 msgid "Untag tagged"
-msgstr "Eemalda sildid"
+msgstr "Odstrani oznako označenim"
 
 #: replaygainscanner/replaygainscanner.cpp:80
 msgid "Remove the Replay Gain tags from all files in the file list."
-msgstr "Helitugevuse parandusteave eemaldatakse kõigilt failidelt loendis."
+msgstr "Odstrani oznake jakosti predvajanja za vse datoteke v seznamu."
 
 #: replaygainscanner/replaygainscanner.cpp:91
 msgid "Close"
-msgstr "Sulge"
+msgstr "Zapri"
 
 #: replaygainscanner/replaygainscanner.cpp:314
 msgid ""
 "There are still Replay Gain jobs running.\n"
 "Do you really want to cancel them?"
 msgstr ""
-"Helitugevuse parandustööd alles käivad.\n"
-"Kas tahad kindlasti need katkestada?"
+"Še vedno tečejo opravila jakosti predvajanja.\n"
+"Ali jih želite zares preklicati?"
 
 #: soundkonverter.cpp:44
 msgid "This is soundKonverter %1"
-msgstr "See on soundKonverter %1"
+msgstr "To je soundKonverter %1"
 
 #: soundkonverter.cpp:46
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr "Kompiilitud TagLib'i versiooniga %1.%2.%3"
+msgstr "Prevedeno s TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:48
 msgid ""
 "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, flac "
 "and asf/wma files. TagLib 1.7 is needed for that."
 msgstr ""
-"Kaanepiltide lugemist-kirjutamist ei toetata FLAC- ja ASF/WMA-failide ning "
-"ogg/METADATA_BLOCK_PICTURE puhul. Selleks on vaja TagLib'i versiooni 1.7."
+"Branje/zapisovanje ovitkov ni podprto za datoteke ogg/"
+"METADATA_BLOCK_PICTURE, flac in asf/wma. Za to je zahtevan TagLib 1.7."
 
 #: soundkonverter.cpp:79 soundkonverter.cpp:84 soundkonverter.cpp:99
 msgid "Removing old file: %1"
-msgstr "Vana faili eemaldamine: %1"
+msgstr "Odstranjevanje stare datoteke: %1"
 
 #: soundkonverter.cpp:172
 msgid "View logs..."
-msgstr "Logid..."
+msgstr "Pokaži dnevnike ..."
 
 #: soundkonverter.cpp:177
 msgid "Replay Gain tool..."
-msgstr "Helitugevuse parandustööriist..."
+msgstr "Orodje jakosti predvajanja ..."
 
 #: soundkonverter.cpp:182
 msgid "About plugins..."
-msgstr "Pluginate info..."
+msgstr "O vstavkih ..."
 
 #: soundkonverter.cpp:197 soundkonverterview.cpp:81
 msgid "Add CD tracks..."
-msgstr "Lisa CD-radu..."
+msgstr "Dodaj skladbe CD-ja ..."
 
 #: soundkonverter.cpp:202 soundkonverterview.cpp:82
 msgid "Add url..."
-msgstr "Lisa URL..."
+msgstr "Dodaj naslov URL ..."
 
 #: soundkonverter.cpp:207 soundkonverterview.cpp:83
 msgid "Add playlist..."
-msgstr "Lisa esitusloend..."
+msgstr "Dodaj seznam predvajanja ..."
 
 #: soundkonverter.cpp:212
 msgid "Load file list"
-msgstr "Laadi faililoend"
+msgstr "Naloži seznam datotek"
 
 #: soundkonverter.cpp:217
 msgid "Save file list"
-msgstr "Salvesta faililoend"
+msgstr "Shrani seznam datotek"
 
 #: soundkonverterview.cpp:91 soundkonverterview.cpp:94
 msgid "Start"
-msgstr "Alusta"
+msgstr "Začni"
 
 #: soundkonverterview.cpp:101 soundkonverterview.cpp:114
 msgid "Stop"
-msgstr "Katkesta"
+msgstr "Zaustavi"
 
 #: soundkonverterview.cpp:103
 msgid "Stop immediatelly"
-msgstr "Katkesta kohe"
+msgstr "Zaustavi takoj"
 
 #: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"
-msgstr "Katkesta pärast praeguste teisenduste valmimist"
+msgstr "Zaustavi, ko se končajo trenutne pretvorbe"
 
 #: soundkonverterview.cpp:109
 msgid "Continue after current conversions are completed"
-msgstr "Jätka pärast praeguste teisenduste valmimist"
+msgstr "Nadaljuj, ko se končajo trenutne pretvorbe"
 
 #: soundkonverterview.cpp:260
 msgid "No CD device found"
-msgstr "CD-seadet ei leitud"
+msgstr "Ni najdenih naprav CD"
 
 #. i18n: file: soundkonverterui.rc:20
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:6
 msgid "Tools"
-msgstr "Tööriistad"
+msgstr "Orodja"
 
 #: rc.cpp:7
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Mihkel Tõnnov"
+msgstr "Andrej Mernik"
 
 #: rc.cpp:8
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "mihhkel@gmail.com"
+msgstr "andrejm@ubuntu.si"
 
 #: rc.cpp:9
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr "Helifailide teisendaja, CD-rippija ja helitugevuse parandustööriist"
+msgstr ""
+"Pretvornik zvočni datotek, zajemalnik CD-jev in orodje za jakost predvajanja"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
-msgstr "Ripi audio-CD soundKonverteriga"
+msgstr "Zajemi zvočni CD s soundKonverter-jem"

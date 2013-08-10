@@ -98,7 +98,6 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         grid->addWidget( widget, gridRow++, 0 );
         widget->show();
         filterCount++;
-        break; // show only one widget at the moment
     }
     if( filterCount > 0 )
     {
@@ -428,7 +427,6 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
         if( widget && plugin && !usedFilter.contains(plugin->name()) )
         {
             widget->setCurrentFilterOptions( 0 );
-            break;
         }
     }
 

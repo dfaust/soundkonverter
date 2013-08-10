@@ -166,6 +166,13 @@ float soundkonverter_filter_normalize::parseOutput( const QString& output )
     return -1;
 }
 
+FilterOptions *soundkonverter_filter_normalize::filterOptionsFromXml( QDomElement filterOptions )
+{
+    NormalizeFilterOptions *options = new NormalizeFilterOptions();
+    options->fromXml( filterOptions );
+    return options;
+}
+
 
 #include "soundkonverter_filter_normalize.moc"
 

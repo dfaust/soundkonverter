@@ -4,9 +4,10 @@
 #include "normalizefilterwidget.h"
 #include "normalizefilteroptions.h"
 
+#include <QLayout>
+#include <QHBoxLayout>
 #include <KLocale>
 #include <QCheckBox>
-#include <QLayout>
 
 NormalizeFilterWidget::NormalizeFilterWidget()
     : FilterWidget()
@@ -50,7 +51,14 @@ FilterOptions* NormalizeFilterWidget::currentFilterOptions()
 
 bool NormalizeFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
 {
-    if( !_options || _options->pluginName != global_plugin_name )
+    if( !_options )
+    {
+        cNormalize->setChecked( false );
+
+        return true;
+    }
+
+    if( _options->pluginName != global_plugin_name )
         return false;
 
     NormalizeFilterOptions *options = dynamic_cast<NormalizeFilterOptions*>(_options);

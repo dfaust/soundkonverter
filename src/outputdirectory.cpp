@@ -148,7 +148,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
-        if( options->outputFilesystem == "ntfs" )
+        if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
         url = changeExtension( KUrl(path), extension );
@@ -268,7 +268,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
-        if( options->outputFilesystem == "ntfs" )
+        if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
         url = KUrl( path + "." + extension );
@@ -293,7 +293,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
             path = vfatPath( path );
 
-        if( options->outputFilesystem == "ntfs" )
+        if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
         url = changeExtension( KUrl(path), extension );

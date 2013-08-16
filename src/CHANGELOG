@@ -2,6 +2,7 @@
 -Add: Hide main window when started with --replaygain argument
 -Add: Option to eject CD after ripping has been completed (enabled by default)
 -Add: New space holder for the "meta data" naming mode that contains the source directory
+-Add: Configuration options for cdparanoia
 -Change: Remember last folder for add files/directory/playlist dialogs
 
 2.0.4:

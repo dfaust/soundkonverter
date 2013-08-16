@@ -5,13 +5,14 @@
 
 #include <QWidget>
 #include <QLayout>
+#include <QHBoxLayout>
 #include <QLabel>
+#include <QComboBox>
 #include <QCheckBox>
-#include <KLocale>
-#include <KComboBox>
 #include <QSpinBox>
-#include <QGroupBox>
-#include <QSlider>
+#include <KLocale>
+#include <KDialog>
+
 
 soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args  )
     : RipperPlugin( parent )
@@ -19,6 +20,15 @@ soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *par
     Q_UNUSED(args)
 
     binaries["cdparanoia"] = "";
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    forceEndianness = group.readEntry( "forceEndianness", 0 );
+    maximumRetries = group.readEntry( "maximumRetries", 20 );
+    enableParanoia = group.readEntry( "enableParanoia", true );
+    enableExtraParanoia = group.readEntry( "enableExtraParanoia", true );
 }
 
 soundkonverter_ripper_cdparanoia::~soundkonverter_ripper_cdparanoia()
@@ -50,14 +60,93 @@ bool soundkonverter_ripper_cdparanoia::isConfigSupported( ActionType action, con
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    return false;
+    return true;
 }
 
 void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, const QString& codecName, QWidget *parent )
 {
     Q_UNUSED(action)
     Q_UNUSED(codecName)
-    Q_UNUSED(parent)
+
+    if( !configDialog.data() )
+    {
+        configDialog = new KDialog( parent );
+        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+
+        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
+
+        QHBoxLayout *configDialogBox1 = new QHBoxLayout();
+        QLabel *configDialogForceEndiannessLabel = new QLabel( i18n("Endianness:"), configDialogWidget );
+        configDialogBox1->addWidget( configDialogForceEndiannessLabel );
+        configDialogForceEndiannessComboBox = new QComboBox( configDialogWidget );
+        configDialogForceEndiannessComboBox->addItem( "Auto" );
+        configDialogForceEndiannessComboBox->addItem( "Little endian" );
+        configDialogForceEndiannessComboBox->addItem( "Big endian" );
+        configDialogBox1->addWidget( configDialogForceEndiannessComboBox );
+        configDialogBox->addLayout( configDialogBox1 );
+
+        QHBoxLayout *configDialogBox2 = new QHBoxLayout();
+        QLabel *configDialogMaximumRetriesLabel = new QLabel( i18n("Maximum read retries:"), configDialogWidget );
+        configDialogBox2->addWidget( configDialogMaximumRetriesLabel );
+        configDialogMaximumRetriesSpinBox = new QSpinBox( configDialogWidget );
+        configDialogMaximumRetriesSpinBox->setRange(0, 100);
+        configDialogBox2->addWidget( configDialogMaximumRetriesSpinBox );
+        configDialogBox->addLayout( configDialogBox2 );
+
+        QHBoxLayout *configDialogBox3 = new QHBoxLayout( configDialogWidget );
+        configDialogEnableParanoiaCheckBox = new QCheckBox( i18n("Enable paranoia"), configDialogWidget );
+        configDialogBox3->addWidget( configDialogEnableParanoiaCheckBox );
+        configDialogBox->addLayout( configDialogBox3 );
+
+        QHBoxLayout *configDialogBox4 = new QHBoxLayout( configDialogWidget );
+        configDialogEnableExtraParanoiaCheckBox = new QCheckBox( i18n("Enable extra paranoia"), configDialogWidget );
+        configDialogBox4->addWidget( configDialogEnableExtraParanoiaCheckBox );
+        configDialogBox->addLayout( configDialogBox4 );
+
+        configDialog.data()->setMainWidget( configDialogWidget );
+        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+    }
+    configDialogForceEndiannessComboBox->setCurrentIndex( forceEndianness );
+    configDialogMaximumRetriesSpinBox->setValue( maximumRetries );
+    configDialogEnableParanoiaCheckBox->setChecked( enableParanoia );
+    configDialogEnableExtraParanoiaCheckBox->setChecked( enableExtraParanoia );
+    configDialog.data()->show();
+}
+
+void soundkonverter_ripper_cdparanoia::configDialogSave()
+{
+    if( configDialog.data() )
+    {
+        forceEndianness = configDialogForceEndiannessComboBox->currentIndex();
+        maximumRetries = configDialogMaximumRetriesSpinBox->value();
+        enableParanoia = configDialogEnableParanoiaCheckBox->isChecked();
+        enableExtraParanoia = configDialogEnableExtraParanoiaCheckBox->isChecked();
+
+        KSharedConfig::Ptr conf = KGlobal::config();
+        KConfigGroup group;
+
+        group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "forceEndianness", forceEndianness );
+        group.writeEntry( "maximumRetries", maximumRetries );
+        group.writeEntry( "enableParanoia", enableParanoia );
+        group.writeEntry( "enableExtraParanoia", enableExtraParanoia );
+
+        configDialog.data()->deleteLater();
+    }
+}
+
+void soundkonverter_ripper_cdparanoia::configDialogDefault()
+{
+    if( configDialog.data() )
+    {
+        configDialogForceEndiannessComboBox->setCurrentIndex( 0 );
+        configDialogMaximumRetriesSpinBox->setValue( 20 );
+        configDialogEnableParanoiaCheckBox->setChecked( true );
+        configDialogEnableExtraParanoiaCheckBox->setChecked( true );
+    }
 }
 
 bool soundkonverter_ripper_cdparanoia::hasInfo()
@@ -75,9 +164,33 @@ unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int t
     QStringList command;
 
     command += binaries["cdparanoia"];
-    command += "-e";
-    command += "-d";
+    command += "--stderr-progress";
+    command += "--force-cdrom-device";
     command += device;
+    if( forceEndianness == 1 )
+    {
+        command += "--force-cdrom-little-endian";
+    }
+    else if( forceEndianness == 2 )
+    {
+        command += "--force-cdrom-big-endian";
+    }
+    command += "--never-skip=" + QString::number(maximumRetries);
+    if( !enableExtraParanoia )
+    {
+        if( !enableParanoia )
+        {
+            command += "--disable-paranoia";
+        }
+        else
+        {
+            command += "--disable-extra-paranoia";
+        }
+    }
+    else if( !enableParanoia )
+    {
+        command += "--disable-paranoia";
+    }
     if( track > 0 )
     {
         command += QString::number(track);

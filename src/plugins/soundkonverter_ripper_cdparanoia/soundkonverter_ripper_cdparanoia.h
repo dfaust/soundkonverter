@@ -7,6 +7,12 @@
 #include <KUrl>
 #include <KProcess>
 #include <QList>
+#include <QWeakPointer>
+
+class KDialog;
+class QCheckBox;
+class QComboBox;
+class QSpinBox;
 
 
 class soundkonverter_ripper_cdparanoia : public RipperPlugin
@@ -36,6 +42,23 @@ public:
 private slots:
     /** Get the process' output */
     void processOutput();
+
+private:
+    QWeakPointer<KDialog> configDialog;
+    QComboBox *configDialogForceEndiannessComboBox;
+    QSpinBox *configDialogMaximumRetriesSpinBox;
+    QCheckBox *configDialogEnableParanoiaCheckBox;
+    QCheckBox *configDialogEnableExtraParanoiaCheckBox;
+
+    int configVersion;
+    int forceEndianness;
+    int maximumRetries;
+    bool enableParanoia;
+    bool enableExtraParanoia;
+
+private slots:
+    void configDialogSave();
+    void configDialogDefault();
 };
 
 K_EXPORT_SOUNDKONVERTER_RIPPER( cdparanoia, soundkonverter_ripper_cdparanoia )

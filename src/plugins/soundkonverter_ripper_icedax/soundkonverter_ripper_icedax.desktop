@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=soundKonverter icedax plugin
+X-KDE-Library=soundkonverter_ripper_icedax
+ServiceTypes=soundKonverter/RipperPlugin
+X-KDE-PluginInfo-Author=Volker Härtel
+X-KDE-PluginInfo-Email=cyberbeat@gmx.de
+X-KDE-PluginInfo-Name=soundkonverter_ripper_icedax
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-License=GPL

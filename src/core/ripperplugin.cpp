@@ -7,6 +7,10 @@ RipperPluginItem::RipperPluginItem( QObject *parent )
 {
     data.fromSector = 0;
     data.toSector = 0;
+
+    data.fileCount = 0;
+    data.processedFiles = 0;
+    data.lastFileProgress = 0;
 }
 
 RipperPluginItem::~RipperPluginItem()

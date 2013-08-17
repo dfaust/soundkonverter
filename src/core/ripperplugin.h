@@ -17,8 +17,12 @@ public:
     virtual ~RipperPluginItem();
 
     struct Data {
-        int fromSector;
+        int fromSector; // cd paranoia
         int toSector;
+
+        int fileCount; // icedax
+        int processedFiles;
+        float lastFileProgress;
     } data;
 };
 

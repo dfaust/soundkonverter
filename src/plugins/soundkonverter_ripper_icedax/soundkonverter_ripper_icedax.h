@@ -30,7 +30,7 @@ public:
 
     unsigned int rip( const QString& device, int track, int tracks, const KUrl& outputFile );
     QStringList ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile );
-    float parseOutput( const QString& output, int *fromSector, int *toSector );
+    float parseOutput( const QString& output, RipperPluginItem *ripperItem );
     float parseOutput( const QString& output );
 
 private slots:

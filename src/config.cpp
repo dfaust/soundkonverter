@@ -119,7 +119,6 @@ void Config::load()
     data.coverArt.writeCoverDefaultName = group.readEntry( "writeCoverDefaultName", i18nc("cover file name","cover") );
 
     group = conf->group( "Backends" );
-    data.backends.rippers = group.readEntry( "rippers", QStringList() );
     formats = group.readEntry( "formats", QStringList() );
     foreach( const QString format, formats )
     {
@@ -144,42 +143,6 @@ void Config::load()
     formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
 
     // build default backend priority list
-
-    // rippers
-    enabledPlugins.clear();
-    newPlugins.clear();
-    // register existing enabled plugins as such and list new enabled plugins
-    foreach( RipperPlugin *plugin, pPluginLoader->getAllRipperPlugins() )
-    {
-        pluginName = plugin->name();
-        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
-        {
-            if( trunk.enabled )
-            {
-                enabledPlugins += pluginName;
-                if( !data.backends.rippers.contains(pluginName) && newPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count()==0 )
-                {
-                    newPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
-                    break;
-                }
-            }
-        }
-    }
-    // remove plugins from the ripper list if they aren't enabled any more
-    for( int i=0; i<data.backends.rippers.count(); i++ )
-    {
-        if( !enabledPlugins.contains(data.backends.rippers.at(i)) )
-        {
-            data.backends.rippers.removeAt(i);
-            i--;
-        }
-    }
-    // sort new enabled plugins and append them to the ripper list
-    newPlugins.sort();
-    for( int i=0; i<newPlugins.count(); i++ )
-    {
-        data.backends.rippers += newPlugins.at(i).right(newPlugins.at(i).length()-8);
-    }
 
     foreach( const QString format, formats )
     {
@@ -554,7 +517,7 @@ void Config::save()
     group.writeEntry( "writeCoverDefaultName", data.coverArt.writeCoverDefaultName );
 
     group = conf->group( "Backends" );
-    group.writeEntry( "rippers", data.backends.rippers );
+    group.deleteEntry( "rippers" );
     QStringList formats;
     foreach( const CodecData codec, data.backends.codecs )
     {

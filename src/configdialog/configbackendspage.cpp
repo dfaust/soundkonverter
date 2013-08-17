@@ -242,7 +242,13 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     ripperBox->addWidget( lSelectorRipper );
     ripperBox->setStretchFactor( lSelectorRipper, 2 );
     cSelectorRipper = new KComboBox( this );
-    cSelectorRipper->addItems( config->data.backends.rippers );
+    foreach( const Config::CodecData& codec, config->data.backends.codecs )
+    {
+        if( codec.codecName == "audio cd" )
+        {
+            cSelectorRipper->addItems( codec.decoders );
+        }
+    }
     ripperBox->addWidget( cSelectorRipper );
     ripperBox->setStretchFactor( cSelectorRipper, 1 );
     connect( cSelectorRipper, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
@@ -435,7 +441,26 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
 
 void ConfigBackendsPage::resetDefaults()
 {
-    // TODO reset rippers
+    // rippers
+    QStringList allPlugins;
+    foreach( RipperPlugin *plugin, config->pluginLoader()->getAllRipperPlugins() )
+    {
+        const QString pluginName = plugin->name();
+        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
+        {
+            if( trunk.enabled && allPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
+            {
+                allPlugins += QString::number(trunk.rating).rightJustified(8,'0') + pluginName;
+                break;
+            }
+        }
+    }
+    allPlugins.sort();
+    if( allPlugins.count() > 0 )
+    {
+        const QString defaultRipper = allPlugins.first().right(allPlugins.first().length()-8);
+        cSelectorRipper->setCurrentIndex( cSelectorRipper->findText(defaultRipper) );
+    }
 
     int i = 0;
     foreach( QCheckBox *checkBox, filterCheckBoxes )
@@ -466,7 +491,17 @@ void ConfigBackendsPage::resetDefaults()
 
 void ConfigBackendsPage::saveSettings()
 {
-    // TODO save rippers
+    for( int i=0; i<config->data.backends.codecs.count(); i++ )
+    {
+        if( config->data.backends.codecs.at(i).codecName == "audio cd" )
+        {
+            const QString currentRipper = cSelectorRipper->currentText();
+            QStringList rippers = config->data.backends.codecs[i].decoders;
+            rippers.removeAll( currentRipper );
+            rippers.prepend( currentRipper );
+            config->data.backends.codecs[i].decoders = rippers;
+        }
+    }
 
     config->data.backends.enabledFilters.clear();
     int i = 0;

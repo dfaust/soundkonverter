@@ -5,6 +5,7 @@
 -Add: Configuration options for cdparanoia
 -Add: icedax ripper plugin
 -Change: Remember last folder for add files/directory/playlist dialogs
+-Change: Add symlinked files to file list
 
 2.0.4:
 -Add: Slovenian translation

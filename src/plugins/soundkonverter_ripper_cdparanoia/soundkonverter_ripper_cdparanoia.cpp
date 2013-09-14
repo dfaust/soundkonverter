@@ -25,6 +25,7 @@ soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *par
     KConfigGroup group;
 
     group = conf->group( "Plugin-"+name() );
+    forceReadSpeed = group.readEntry( "forceReadSpeed", 0 );
     forceEndianness = group.readEntry( "forceEndianness", 0 );
     maximumRetries = group.readEntry( "maximumRetries", 20 );
     enableParanoia = group.readEntry( "enableParanoia", true );
@@ -77,6 +78,16 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
 
+        QHBoxLayout *configDialogBox0 = new QHBoxLayout();
+        configDialogForceReadSpeedCheckBox = new QCheckBox( i18n("Force read speed:"), configDialogWidget );
+        configDialogBox0->addWidget( configDialogForceReadSpeedCheckBox );
+        configDialogForceReadSpeedSpinBox = new QSpinBox( configDialogWidget );
+        configDialogForceReadSpeedSpinBox->setRange(1, 64);
+        configDialogForceReadSpeedSpinBox->setSuffix(" x");
+        configDialogBox0->addWidget( configDialogForceReadSpeedSpinBox );
+        configDialogBox->addLayout( configDialogBox0 );
+        connect( configDialogForceReadSpeedCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( configDialogForceReadSpeedChanged(int) ) );
+
         QHBoxLayout *configDialogBox1 = new QHBoxLayout();
         QLabel *configDialogForceEndiannessLabel = new QLabel( i18n("Endianness:"), configDialogWidget );
         configDialogBox1->addWidget( configDialogForceEndiannessLabel );
@@ -109,17 +120,31 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
         connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
         connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
+    configDialogForceReadSpeedCheckBox->setChecked( forceReadSpeed > 0 );
+    configDialogForceReadSpeedSpinBox->setValue( forceReadSpeed );
     configDialogForceEndiannessComboBox->setCurrentIndex( forceEndianness );
     configDialogMaximumRetriesSpinBox->setValue( maximumRetries );
     configDialogEnableParanoiaCheckBox->setChecked( enableParanoia );
     configDialogEnableExtraParanoiaCheckBox->setChecked( enableExtraParanoia );
+
+    configDialogForceReadSpeedChanged( configDialogForceReadSpeedCheckBox->checkState() );
+
     configDialog.data()->show();
+}
+
+void soundkonverter_ripper_cdparanoia::configDialogForceReadSpeedChanged( int state )
+{
+    if( configDialog.data() )
+    {
+        configDialogForceReadSpeedSpinBox->setEnabled( state == Qt::Checked );
+    }
 }
 
 void soundkonverter_ripper_cdparanoia::configDialogSave()
 {
     if( configDialog.data() )
     {
+        forceReadSpeed = configDialogForceReadSpeedCheckBox->isChecked() ? configDialogForceReadSpeedSpinBox->value() : 0;
         forceEndianness = configDialogForceEndiannessComboBox->currentIndex();
         maximumRetries = configDialogMaximumRetriesSpinBox->value();
         enableParanoia = configDialogEnableParanoiaCheckBox->isChecked();
@@ -129,6 +154,7 @@ void soundkonverter_ripper_cdparanoia::configDialogSave()
         KConfigGroup group;
 
         group = conf->group( "Plugin-"+name() );
+        group.writeEntry( "forceReadSpeed", forceReadSpeed );
         group.writeEntry( "forceEndianness", forceEndianness );
         group.writeEntry( "maximumRetries", maximumRetries );
         group.writeEntry( "enableParanoia", enableParanoia );
@@ -142,6 +168,8 @@ void soundkonverter_ripper_cdparanoia::configDialogDefault()
 {
     if( configDialog.data() )
     {
+        configDialogForceReadSpeedCheckBox->setChecked( false );
+        configDialogForceReadSpeedSpinBox->setValue( 1 );
         configDialogForceEndiannessComboBox->setCurrentIndex( 0 );
         configDialogMaximumRetriesSpinBox->setValue( 20 );
         configDialogEnableParanoiaCheckBox->setChecked( true );
@@ -167,6 +195,11 @@ unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int t
     command += "--stderr-progress";
     command += "--force-cdrom-device";
     command += device;
+    if( forceReadSpeed > 0 )
+    {
+        command += "--force-read-speed";
+        command += QString::number(forceReadSpeed);
+    }
     if( forceEndianness == 1 )
     {
         command += "--force-cdrom-little-endian";

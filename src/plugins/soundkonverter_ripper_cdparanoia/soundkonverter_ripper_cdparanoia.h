@@ -45,18 +45,22 @@ private slots:
 
 private:
     QWeakPointer<KDialog> configDialog;
+    QCheckBox *configDialogForceReadSpeedCheckBox;
+    QSpinBox *configDialogForceReadSpeedSpinBox;
     QComboBox *configDialogForceEndiannessComboBox;
     QSpinBox *configDialogMaximumRetriesSpinBox;
     QCheckBox *configDialogEnableParanoiaCheckBox;
     QCheckBox *configDialogEnableExtraParanoiaCheckBox;
 
     int configVersion;
+    int forceReadSpeed;
     int forceEndianness;
     int maximumRetries;
     bool enableParanoia;
     bool enableExtraParanoia;
 
 private slots:
+    void configDialogForceReadSpeedChanged( int state );
     void configDialogSave();
     void configDialogDefault();
 };

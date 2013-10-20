@@ -280,12 +280,13 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 else if( !tag->fieldListMap()["TRACKNUMBER"].isEmpty() )
                     track = TStringToQString( tag->fieldListMap()["TRACKNUMBER"].front() );
 
-                if( !tag->fieldListMap()["DISCTOTAL"].isEmpty() )
-                    tagData->trackTotal = TStringToQString( tag->fieldListMap()["DISCTOTAL"].front() ).toInt();
-                else if( !tag->fieldListMap()["TOTALDISCS"].isEmpty() )
-                    tagData->trackTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
-                else if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() )
+                if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() ) // used by Kid3, EasyTag
                     disc = TStringToQString( tag->fieldListMap()["DISCNUMBER"].front() );
+
+                if( !tag->fieldListMap()["DISCTOTAL"].isEmpty() )
+                    tagData->discTotal = TStringToQString( tag->fieldListMap()["DISCTOTAL"].front() ).toInt();
+                else if( !tag->fieldListMap()["TOTALDISCS"].isEmpty() )
+                    tagData->discTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
 
                 if( !tag->fieldListMap()["MUSICBRAINZ_TRACKID"].isEmpty() )
                     tagData->musicBrainzTrackId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_TRACKID"].front() );
@@ -308,12 +309,13 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 else if( !tag->fieldListMap()["TRACKNUMBER"].isEmpty() ) // used by Kid3
                     track = TStringToQString( tag->fieldListMap()["TRACKNUMBER"].front() );
 
-                if( !tag->fieldListMap()["DISCTOTAL"].isEmpty() )
-                    tagData->trackTotal = TStringToQString( tag->fieldListMap()["DISCTOTAL"].front() ).toInt();
-                else if( !tag->fieldListMap()["TOTALDISCS"].isEmpty() )
-                    tagData->trackTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
-                else if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() ) // used by Kid3, EasyTag
+                if( !tag->fieldListMap()["DISCNUMBER"].isEmpty() ) // used by Kid3, EasyTag
                     disc = TStringToQString( tag->fieldListMap()["DISCNUMBER"].front() );
+
+                if( !tag->fieldListMap()["DISCTOTAL"].isEmpty() )
+                    tagData->discTotal = TStringToQString( tag->fieldListMap()["DISCTOTAL"].front() ).toInt();
+                else if( !tag->fieldListMap()["TOTALDISCS"].isEmpty() )
+                    tagData->discTotal = TStringToQString( tag->fieldListMap()["TOTALDISCS"].front() ).toInt();
 
                 if( !tag->fieldListMap()["MUSICBRAINZ_TRACKID"].isEmpty() )
                     tagData->musicBrainzTrackId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_TRACKID"].front() );
@@ -446,7 +448,6 @@ TagData* TagEngine::readTags( const KUrl& fileName )
             else
             {
                 tagData->disc = disc.toInt();
-                tagData->discTotal = 0;
             }
         }
 

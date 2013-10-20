@@ -6,6 +6,7 @@
 -Add: icedax ripper plugin
 -Add: Copy album artist tags
 -Change: Remember last folder for add files/directory/playlist dialogs
+-Fix: Don't mix up total tracks and total discs when reading vorbis comments
 
 2.0.4:
 -Add: Slovenian translation

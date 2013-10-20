@@ -288,14 +288,14 @@ void ReplayGainFileList::resizeEvent( QResizeEvent *event )
 int ReplayGainFileList::countDir( const QString& directory, bool recursive, int count )
 {
     QDir dir( directory );
-    dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+    dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::Readable );
     dir.setSorting( QDir::Unsorted );
 
     count += dir.count();
 
     if( recursive )
     {
-        dir.setFilter( QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+        dir.setFilter( QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable );
 
         const QStringList list = dir.entryList();
 
@@ -320,7 +320,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
     QString codecName;
 
     QDir dir( directory );
-    dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks | QDir::Readable );
+    dir.setFilter( QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable );
     dir.setSorting( QDir::LocaleAware );
 
     const QStringList list = dir.entryList();

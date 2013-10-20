@@ -82,6 +82,7 @@ public:
 
     /** The tags */
     QString artist;
+    QString albumArtist;
     QString composer;
     QString album;
     QString title;

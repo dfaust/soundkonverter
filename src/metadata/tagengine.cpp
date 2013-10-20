@@ -216,6 +216,9 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
             if( TagLib::ID3v2::Tag *tag = file->ID3v2Tag() )
             {
+                if( !tag->frameListMap()["TPE2"].isEmpty() )
+                    tagData->albumArtist = TStringToQString( tag->frameListMap()["TPE2"].front()->toString() );
+
                 if( !tag->frameListMap()["TCOM"].isEmpty() )
                     tagData->composer = TStringToQString( tag->frameListMap()["TCOM"].front()->toString() );
 
@@ -270,6 +273,9 @@ TagData* TagEngine::readTags( const KUrl& fileName )
 
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
+                if( !tag->fieldListMap()["ALBUMARTIST"].isEmpty() )
+                    tagData->albumArtist = TStringToQString( tag->fieldListMap()["ALBUMARTIST"].front() );
+
                 if( !tag->fieldListMap()["COMPOSER"].isEmpty() )
                     tagData->composer = TStringToQString( tag->fieldListMap()["COMPOSER"].front() );
 
@@ -298,6 +304,9 @@ TagData* TagEngine::readTags( const KUrl& fileName )
         {
             if( TagLib::Ogg::XiphComment *tag = file->xiphComment() )
             {
+                if( !tag->fieldListMap()["ALBUMARTIST"].isEmpty() )
+                    tagData->albumArtist = TStringToQString( tag->fieldListMap()["ALBUMARTIST"].front() );
+
                 if( !tag->fieldListMap()["COMPOSER"].isEmpty() )
                     tagData->composer = TStringToQString( tag->fieldListMap()["COMPOSER"].front() );
 
@@ -331,7 +340,11 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 TagLib::MP4::ItemListMap map = tag->itemListMap();
                 for( TagLib::MP4::ItemListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
                 {
-                    if( it->first == "\xA9wrt" )
+                    if( it->first == "aART" )
+                    {
+                        tagData->albumArtist = TStringToQString( it->second.toStringList().front() );
+                    }
+                    else if( it->first == "\xA9wrt" )
                     {
                         tagData->composer = TStringToQString( it->second.toStringList().front() );
                     }
@@ -369,7 +382,11 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     if( !it->second.size() )
                         continue;
 
-                    if( it->first == "WM/Composer" )
+                    if( it->first == "WM/AlbumArtist" )
+                    {
+                        tagData->albumArtist = TStringToQString( it->second.front().toString() );
+                    }
+                    else if( it->first == "WM/Composer" )
                     {
                         tagData->composer = TStringToQString( it->second.front().toString() );
                     }
@@ -481,14 +498,13 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 {
                     if( !tagData->comment.isEmpty() )
                         tag->addField( TagLib::String(config->data.general.preferredVorbisCommentCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
-
                 }
             }
             else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File*>(fileref.file()) )
             {
                 if( TagLib::Ogg::XiphComment *tag = file->xiphComment() )
                 {
-                    if( !tagData->comment.isEmpty() && file->xiphComment() )
+                    if( !tagData->comment.isEmpty() )
                         tag->addField( TagLib::String(config->data.general.preferredVorbisCommentCommentTag.toUtf8().data(), TagLib::String::UTF8), TagLib::String(tagData->comment.toUtf8().data(), TagLib::String::UTF8), true );
                 }
             }
@@ -523,6 +539,20 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if( TagLib::ID3v2::Tag *tag = file->ID3v2Tag() )
             {
+                if( !tagData->albumArtist.isEmpty() )
+                {
+                    if( !tag->frameListMap()["TPE2"].isEmpty() )
+                    {
+                        tag->frameListMap()["TPE2"].front()->setText( TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8) );
+                    }
+                    else
+                    {
+                        TagLib::ID3v2::TextIdentificationFrame *frame = new TagLib::ID3v2::TextIdentificationFrame( "TPE2", TagLib::ID3v2::FrameFactory::instance()->defaultTextEncoding() );
+                        frame->setText( TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8) );
+                        tag->addFrame( frame );
+                    }
+                }
+
                 if( !tagData->composer.isEmpty() )
                 {
                     if( !tag->frameListMap()["TCOM"].isEmpty() )
@@ -614,6 +644,14 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
+                if( !tagData->albumArtist.isEmpty() )
+                {
+                    if( tag->contains("ALBUMARTIST") )
+                        tag->removeField("ALBUMARTIST");
+
+                    tag->addField( "ALBUMARTIST", TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
                 if( !tagData->composer.isEmpty() )
                 {
                     if( tag->contains("COMPOSER") )
@@ -681,6 +719,14 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if( TagLib::Ogg::XiphComment *tag = file->xiphComment() )
             {
+                if( !tagData->albumArtist.isEmpty() )
+                {
+                    if( tag->contains("ALBUMARTIST") )
+                        tag->removeField("ALBUMARTIST");
+
+                    tag->addField( "ALBUMARTIST", TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8), true );
+                }
+
                 if( !tagData->composer.isEmpty() )
                 {
                     if( tag->contains("COMPOSER") )
@@ -748,6 +794,9 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if( TagLib::MP4::Tag *tag = file->tag() )
             {
+                if( !tagData->albumArtist.isEmpty() )
+                    tag->itemListMap()["aART"] = TagLib::StringList(TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8));
+
                 if( !tagData->composer.isEmpty() )
                     tag->itemListMap()["\xA9wrt"] = TagLib::StringList(TagLib::String(tagData->composer.toUtf8().data(), TagLib::String::UTF8));
 
@@ -773,6 +822,14 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
         {
             if( TagLib::ASF::Tag *tag = file->tag() )
             {
+                if( !tagData->albumArtist.isEmpty() )
+                {
+                    if( !tag->attributeListMap()["WM/AlbumArtist"].isEmpty() )
+                        tag->attributeListMap()["WM/AlbumArtist"].clear();
+
+                    tag->addAttribute( TagLib::String("WM/AlbumArtist"), TagLib::String(tagData->albumArtist.toUtf8().data(), TagLib::String::UTF8) );
+                }
+
                 if( !tagData->composer.isEmpty() )
                 {
                     if( !tag->attributeListMap()["WM/Composer"].isEmpty() )

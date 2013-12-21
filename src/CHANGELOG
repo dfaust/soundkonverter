@@ -1,4 +1,8 @@
 2.0.5:
+-Add: Catalan translation
+-Add: Swedish translation
+-Add: Chinese (Taiwan) translation
+-Add: Romanian translation
 -Fix: Don't mix up total tracks and total discs when reading vorbis comments
 
 2.0.4:

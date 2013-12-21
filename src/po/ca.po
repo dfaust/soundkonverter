@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# A Kanashiro, 2013
+# kirek <rbuldo@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
@@ -11,10 +11,10 @@ msgstr ""
 "soundkonverter/\n"
 "POT-Creation-Date: 2013-12-21 13:56+0100\n"
 "PO-Revision-Date: 2013-11-20 12:13+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/soundkonverter/"
-"language/es/)\n"
-"Language: es\n"
+"Last-Translator: kirek <rbuldo@gmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/soundkonverter/"
+"language/ca/)\n"
+"Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,96 +22,99 @@ msgstr ""
 
 #: aboutplugins.cpp:19
 msgid "About plugins"
-msgstr "Sobre los plugins"
+msgstr "Quant als complements"
 
 #: aboutplugins.cpp:31
 msgid "Installed plugins:"
-msgstr "Plugins instalados:"
+msgstr "Complements instal·lats:"
 
 #: aboutplugins.cpp:128
 msgid "About plugin %1:"
-msgstr "Sobre el plugin %1:"
+msgstr "Quant al complement %1:"
 
 #: aboutplugins.cpp:130
 msgid "Plugin type: %1"
-msgstr "Tipo de plugin: %1"
+msgstr "Tipus de complement: %1"
 
 #: aboutplugins.cpp:136
 msgid "Backend binaries:"
-msgstr "Binarios externos:"
+msgstr "Binaris externs:"
 
 #: aboutplugins.cpp:141
 msgid "%1 (found at: %2)"
-msgstr "%1 (encontrado en: %2)"
+msgstr "%1 (trobat a: %2)"
 
 #: aboutplugins.cpp:143
 msgid "%1 (not found)"
-msgstr "%1 (no encontrado)"
+msgstr "%1 (no trobat)"
 
 #: aboutplugins.cpp:164 aboutplugins.cpp:199 aboutplugins.cpp:230
 msgid "Supported codecs:"
-msgstr "Codecs soportados:"
+msgstr "Còdecs suportats:"
 
 #: aboutplugins.cpp:169 aboutplugins.cpp:177 aboutplugins.cpp:204
 #: aboutplugins.cpp:212 aboutplugins.cpp:227
 msgid "Currently deactivated."
-msgstr "Actualmente desactivado."
+msgstr "Actualment inhabilitats."
 
 #: aboutplugins.cpp:172 aboutplugins.cpp:207
 msgid "Encode: %1"
-msgstr "Codificar: %1"
+msgstr "Codifica: %1"
 
 #: aboutplugins.cpp:180 aboutplugins.cpp:215
 msgid "Decode: %1"
-msgstr "Decodificar: %1"
+msgstr "Descodifica: %1"
 
 #: aboutplugins.cpp:240 configdialog/configbackendspage.cpp:163
 #: configdialog/configbackendspage.cpp:303
 #: configdialog/configbackendspage.cpp:382 optionsdetailed.cpp:295
 msgid "Configure %1 ..."
-msgstr "Configurar %1 ..."
+msgstr "Configura %1 ..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr "Soluciones para problemas de binarios externos"
+msgstr "Solucions per els problemes dels binaris externs"
 
 #: codecoptimizations.cpp:27
 msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
-"Ha instalado o eliminado binarios externos y sus configuraciones de "
-"soundKonverter pueden ser optimizadas."
+"Has instal·lat o esborrat binaris externs i les configuracions de "
+"soundKonverter poden ser optimitzades."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para codificar archivos %1, el binario '%2' puede ser reemplazado con .'%3'"
+"Per codificar els fitxers %1 el binari extern '%2' pot ser substitut per "
+"'%3'."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
 msgstr ""
+"Per extreure CDs d'àudio el binari extern '%1' pot ser substitut per '%2'."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
 msgstr ""
-"Para decodificar archivos %1, el binario '%2' puede ser reemplazado por '%3'."
+"Per descodificar els fitxers %1 el binari extern '%2' pot ser substitut per "
+"'%3'."
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
-"Para aplicar Replay Gain en los archiivos %1, el binario '%2' puede ser "
-"reemplazado por '%3'."
+"Per aplicar Replay Gain als fitxers %1 el binari extern '%2' pot ser "
+"substitut per '%3'."
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
-msgstr "Ignorar"
+msgstr "Ignora"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr "Corregir"
+msgstr "Corregeix"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -119,33 +122,33 @@ msgid ""
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter no pudo encontrar los paquetes que faltan.⏎ Si le falta algún "
-"formato archivo, deberá instalar un plugin adicional con el administrador de "
-"paquetes de su distribución."
+"soundKonverter no pot trobar alguns paquets que falten.\n"
+"Si troba a faltar alguns formats de fitxer pot ser que hagi d'instal·lar un "
+"complement addicional a través del gestor de paquets de la seva distribució."
 
 #: codecproblems.cpp:32
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Algún de los plugins instalados no está funcionando.⏎ Las posibles "
-"soluciones se listan debajo."
+"Alguns dels complements instal·lats no funcionen.\n"
+"Les possibles solucions s'enumeren a continuació."
 
 #: codecproblems.cpp:37
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Algunos archivos no se pueden codificar.⏎ Las posibles soluciones se listan "
-"debajo."
+"Alguns fitxers no poden ser descodificats.\n"
+"Les possibles solucions s'enumeren a continuació."
 
 #: codecproblems.cpp:41
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Replay Gain no está soportado por algunos archivos.⏎ Las posibles soluciones "
-"se listan debajo."
+"Replay Gain no està suportat per alguns fitxers.\n"
+"Les possibles solucions s'enumeren a continuació."
 
 #: codecproblems.cpp:47
 msgid ""
@@ -153,21 +156,23 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
-"La extracción de CDs no está soportada por ninguno de los plugins instalados."
-"⏎ Consulte en el administrador de paquetes de su distribución para poder "
-"extraer CDs con soundKonverter."
+"Extreure àudio dels CDs no està suportat per els complements instal·lats.\n"
+"Si us plau, doneu un cop d'ull al gestor de paquets de la vostra distribució "
+"per tal d'aconseguir un complement per la extracció d'àudio de cd per a "
+"soundKonverter."
 
 #: codecproblems.cpp:51
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
-"La extracción de CDs no está soportada porque faltan los binarios para ello."
-"⏎ Las posibles soluciones se listan debajo."
+"Extreure àudio dels CDs no està suportat perquè manquen els binaris externs "
+"per fer-ho.\n"
+"Les possibles solucions s'enumeren a continuació."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 msgid "Possible solutions for %1"
-msgstr "Posibles soluciones para %1"
+msgstr "Possibles solucions per %1"
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:333
@@ -175,11 +180,11 @@ msgstr "Posibles soluciones para %1"
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:214
 msgctxt "like in either or"
 msgid "or"
-msgstr "ó"
+msgstr "o"
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
-msgstr "Archivos afectados"
+msgstr "Fitxers afectats:"
 
 #: config.cpp:51 config.cpp:53 config.cpp:428 config.cpp:469
 #: configdialog/configgeneralpage.cpp:55 configdialog/configgeneralpage.cpp:71
@@ -190,7 +195,7 @@ msgstr "Archivos afectados"
 #: configdialog/configgeneralpage.cpp:268 options.cpp:43 options.cpp:64
 #: optionsdetailed.cpp:467
 msgid "Last used"
-msgstr "Último usado"
+msgstr "Utilitzat per última vegada"
 
 #: config.cpp:52 config.cpp:432 config.cpp:439 config.cpp:445
 #: configdialog/configgeneralpage.cpp:75
@@ -231,7 +236,7 @@ msgstr "Alta"
 #: config.cpp:118 configdialog/configcoverartpage.cpp:135
 msgctxt "cover file name"
 msgid "cover"
-msgstr "cubierta"
+msgstr "portada"
 
 #: config.cpp:276 config.cpp:302 config.cpp:304 convert.cpp:147
 #: convert.cpp:219 convert.cpp:386
@@ -269,7 +274,7 @@ msgstr "Interna"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:456
 #: soundkonverterview.cpp:529 soundkonverterview.cpp:531
 msgid "Very low"
-msgstr "Muy baja"
+msgstr "Molt baixa"
 
 #: config.cpp:430 config.cpp:445 configdialog/configgeneralpage.cpp:73
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:461
@@ -303,7 +308,7 @@ msgstr "Muy baja"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:479
 #: soundkonverterview.cpp:534 soundkonverterview.cpp:536
 msgid "Low"
-msgstr "Baja"
+msgstr "Baixa"
 
 #: config.cpp:431 config.cpp:445 configdialog/configgeneralpage.cpp:74
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:462
@@ -337,7 +342,7 @@ msgstr "Baja"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:502
 #: soundkonverterview.cpp:539 soundkonverterview.cpp:541
 msgid "Medium"
-msgstr "Media"
+msgstr "Mitjana"
 
 #: config.cpp:433 config.cpp:445 configdialog/configgeneralpage.cpp:76
 #: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:464
@@ -371,7 +376,7 @@ msgstr "Media"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:548
 #: soundkonverterview.cpp:549 soundkonverterview.cpp:551
 msgid "Very high"
-msgstr "Muy alta"
+msgstr "Molt alta"
 
 #: config.cpp:434 config.cpp:449 configdialog/configgeneralpage.cpp:77
 #: configdialog/configgeneralpage.cpp:261 optionsdetailed.cpp:465
@@ -406,13 +411,13 @@ msgstr "Muy alta"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:571
 #: soundkonverterview.cpp:554 soundkonverterview.cpp:556
 msgid "Lossless"
-msgstr "Sin pérdida"
+msgstr "Sense pèrdues"
 
 #: config.cpp:435 config.cpp:453 configdialog/configgeneralpage.cpp:266
 #: optionsdetailed.cpp:466 optionssimple.cpp:211 optionssimple.cpp:305
 #: soundkonverterview.cpp:559 soundkonverterview.cpp:561
 msgid "Hybrid"
-msgstr "Híbrido"
+msgstr "Híbrid"
 
 #: config.cpp:457 optionsdetailed.cpp:469 optionssimple.cpp:168
 #: optionssimple.cpp:215 optionssimple.cpp:309 optionssimple.cpp:372
@@ -434,27 +439,28 @@ msgstr "Híbrido"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:168
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:448
 msgid "User defined"
-msgstr "Definido por el usuario"
+msgstr "Definit per l'usuari"
 
 #: config.cpp:620
 msgid "Convert with soundKonverter"
-msgstr "Convertir con soundKonverter"
+msgstr "Converteix amb soundKonverter"
 
 #: config.cpp:656
 msgid "Add Replay Gain with soundKonverter"
-msgstr "Agregar Replay Gain con soundKonverter"
+msgstr "Afegeix Reply Gain amb soundKonverter"
 
 #: configdialog/configadvancedpage.cpp:36 configdialog/configdialog.cpp:48
 msgid "Advanced"
-msgstr "Avanzado"
+msgstr "Avançat"
 
 #: configdialog/configadvancedpage.cpp:45
 msgid "Preferred file name extension for ogg vorbis files:"
-msgstr "Extensión preferida para archivos ogg vorbis:"
+msgstr "Extensió de nom de fitxer preferit per els fitxers Ogg Vorbis:"
 
 #: configdialog/configadvancedpage.cpp:61
 msgid "Preferred comment tag field for ogg vorbis and flac files:"
-msgstr "Campo de comentario preferido para archivos ogg vorbis y flac:"
+msgstr ""
+"Camp d'etiqueta de comentari preferida per els fitxers Ogg Vorbis i FLAC:"
 
 #: configdialog/configadvancedpage.cpp:62
 #: configdialog/configadvancedpage.cpp:65
@@ -464,10 +470,16 @@ msgid ""
 "Comments will be written to the selected field, when reading tags the "
 "selected field will be preferred."
 msgstr ""
+"Algunes aplicacions utilitzen el camp DESCRIPCIÓ tot i que el camp COMENTARI "
+"és el correcte.\n"
+"Els comentaris s'escriuen en el camp seleccionat, al llegir les etiquetes es "
+"prioritza el camp seleccionat."
 
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
 msgstr ""
+"Camp d'etiqueta de nombre total de pistes preferit per els fitxers Ogg "
+"Vorbis i FLAC:"
 
 #: configdialog/configadvancedpage.cpp:80
 #: configdialog/configadvancedpage.cpp:83
@@ -477,10 +489,17 @@ msgid ""
 "When using the field TRACKNUMBER, the track number and the total tracks "
 "number will be written to the same field separated by a slash ('/')."
 msgstr ""
+"El nombre total de pistes s'escriurà en el camp seleccionat, al llegir les "
+"etiquetes es prioritza el camp seleccionat.\n"
+"Quan s'utilitza el camp nombre de pista (TRACKNUMBER), el nombre de pista i "
+"el nombre total de pistes s'escriuen en el mateix camp separat per una barra "
+"('/')."
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
 msgstr ""
+"Camp d'etiqueta de nombre total de discs preferit per els fitxers Ogg Vorbis "
+"i FLAC:"
 
 #: configdialog/configadvancedpage.cpp:99
 #: configdialog/configadvancedpage.cpp:102
@@ -490,10 +509,15 @@ msgid ""
 "When using the field DISCNUMBER, the disc number and the total discs number "
 "will be written to the same field separated by a slash ('/')."
 msgstr ""
+"El nombre total de discs s'escriurà en el camp seleccionat, al llegir les "
+"etiquetes es prioritza el camp seleccionat.\n"
+"Quan s'utilitza el camp nombre de disc (DISCNUMBER), el nombre de disc i el "
+"nombre total de discs s'escriuen en el mateix camp separat per una barra "
+"('/')."
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
-msgstr "Siempre usar nombre de archivos compatibles con FAT"
+msgstr "Utilitza sempre noms de fitxer de sortida compatibles amb FAT"
 
 #: configdialog/configadvancedpage.cpp:118
 msgid ""
@@ -501,17 +525,18 @@ msgid ""
 "If the output directory is on a FAT file system FAT compatible file names "
 "will automatically be used independently from this option."
 msgstr ""
-"Reemplazar algunos caracteres especiales como '?' por '_'.⏎ Si el directorio "
-"de salida está en un sistema de archivo FAT, se usarán nombres de archivos "
-"compatibles con FAT automáticamente independientemente de esta opción."
+"Substitueix alguns caràcters especials com '?' per '_'.\n"
+"Si el directori de sortida està en un sistema de fitxers FAT s'utilitzarà "
+"automàticament noms de fitxer compatibles amb FAT, independentment d'aquesta "
+"opció."
 
 #: configdialog/configadvancedpage.cpp:125
 msgid "Debug"
-msgstr "Depurar"
+msgstr "Depura"
 
 #: configdialog/configadvancedpage.cpp:134
 msgid "Write log files to disc"
-msgstr "Escribir registro al disco"
+msgstr "Escriu els arxius de registre al disc"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid ""
@@ -520,9 +545,10 @@ msgid ""
 "the log viewer.\n"
 "Log files will be written to %1"
 msgstr ""
-"Escribir registros al disco rígido mientras se convierte.⏎ Ésto puede ser "
-"útil si ocurre una falla y no puede acceder al registro usando un visor de "
-"registro.⏎ Los registros se escribirán en %1"
+"Escriu els arxius de registre en el disc dur mentre és converteix.\n"
+"Això pot ser útil si es produeix un accident i no es pot accedir a l'arxiu "
+"de registre utilitzant el visor de registre. \n"
+"Els arxius de registre s'escriuen en %1"
 
 #: configdialog/configadvancedpage.cpp:142
 msgid "Experimental"
@@ -531,8 +557,8 @@ msgstr "Experimental"
 #: configdialog/configadvancedpage.cpp:151
 msgid "Store temporary files in memory unless the estimated size is more than:"
 msgstr ""
-"Guardar archivos temporarios en memoria a menos que el tamaño estimado sea "
-"más que:"
+"Desa els fitxers temporals en la memòria a menys que la mida estimada sigui "
+"més de:"
 
 #: configdialog/configadvancedpage.cpp:152
 #: configdialog/configadvancedpage.cpp:156
@@ -540,8 +566,8 @@ msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
-"No almacenar los archivos que sean mayores que este valor en memoria para "
-"evitar swapping."
+"No guardis fitxers a la memòria que s'esperi que siguin més grans que aquest "
+"valor per prevenir swapping"
 
 #: configdialog/configadvancedpage.cpp:157
 msgctxt "mega in bytes"
@@ -550,11 +576,11 @@ msgstr "MiB"
 
 #: configdialog/configadvancedpage.cpp:164
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr "Parece que no hay sistema de archivo montado en /dev/shm"
+msgstr "Sembla que no hi ha cap sistema de fitxers muntat en /dev/shm"
 
 #: configdialog/configadvancedpage.cpp:178
 msgid "Use pipes when possible"
-msgstr "Usar tubería cuando sea posible"
+msgstr "Utilitza canonades quan sigui possible"
 
 #: configdialog/configadvancedpage.cpp:179
 msgid ""
@@ -562,15 +588,16 @@ msgid ""
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
-"Las tuberías son necesarias cuando se usan archivos temporales, mejorando el "
-"rendimiento.⏎ Pero algunos binarios causan errores cuando se usa este modo, "
-"por lo tanto debe ser cuidadoso."
+"Les canonades fan innecessari la utilització de fitxers temporals, "
+"incrementant el rendiment.\n"
+"No obstant això, alguns binaris externs causen errors en aquesta mode, per "
+"tant sigués cautelós."
 
 #: configdialog/configbackendspage.cpp:136
 #: configdialog/configbackendspage.cpp:197
 #: configdialog/configbackendspage.cpp:339
 msgid "Decoder"
-msgstr "Decodificador"
+msgstr "Descodificador"
 
 #: configdialog/configbackendspage.cpp:138
 #: configdialog/configbackendspage.cpp:199
@@ -583,19 +610,19 @@ msgstr "Codificador"
 #: configdialog/configbackendspage.cpp:345 convert.cpp:1346 filelist.cpp:549
 #: filelist.cpp:559
 msgid "Replay Gain"
-msgstr "Replay Gain"
+msgstr "Reply Gain"
 
 #: configdialog/configbackendspage.cpp:148
 msgid "Move %1 one position up"
-msgstr "Mover %1 una posición arriba"
+msgstr "Moure %1 una posició cap amunt"
 
 #: configdialog/configbackendspage.cpp:153
 msgid "Move %1 one position down"
-msgstr "Mover %1 una posición abajo"
+msgstr "Moure %1 una posició cap avall"
 
 #: configdialog/configbackendspage.cpp:158
 msgid "About %1 ..."
-msgstr "Acerca de %1 ..."
+msgstr "Quant al %1 ..."
 
 #: configdialog/configbackendspage.cpp:232
 msgid "CD ripper"
@@ -603,39 +630,39 @@ msgstr "Extractor de CD"
 
 #: configdialog/configbackendspage.cpp:241
 msgid "Use plugin:"
-msgstr "Usar plugin:"
+msgstr "Utilitza el complement:"
 
 #: configdialog/configbackendspage.cpp:259
 msgid "Filters"
-msgstr "Filtros"
+msgstr "Filtres"
 
 #: configdialog/configbackendspage.cpp:275
 msgid "Enable plugins:"
-msgstr "Habilitar plugins:"
+msgstr "Habilita els complements:"
 
 #: configdialog/configbackendspage.cpp:314
 msgid "Priorities"
-msgstr "Prioridades"
+msgstr "Prioritats"
 
 #: configdialog/configbackendspage.cpp:326
 msgid "Configure plugin priorities for format:"
-msgstr "Configurar prioridades de plugin para el formato:"
+msgstr "Configura les prioritats del complement per al format:"
 
 #: configdialog/configbackendspage.cpp:353
 msgid "Show possible optimizations"
-msgstr "Mostrar optimizaciones posiles"
+msgstr "Mostra les optimitzacions possibles"
 
 #: configdialog/configbackendspage.cpp:393
 msgid ""
 "You have changed the current settings.\n"
 "Do you want to save them?"
 msgstr ""
-"Ha modificado las configuraciones actuales.\n"
-"¿Desea guardarlas?"
+"Has modificat la configuració actual.\n"
+"Vols desar-la?"
 
 #: configdialog/configbackendspage.cpp:393
 msgid "Settings changed"
-msgstr "Configuraciones modificadas"
+msgstr "Configuració modificada"
 
 #: configdialog/configbackendspage.cpp:450
 msgid ""
@@ -644,48 +671,53 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"Això triarà els millors binaris externs per a tots els formats i guardarà "
+"les noves preferències immediatament.\n"
+"\n"
+"Voleu continuar?"
 
 #: configdialog/configbackendspage.cpp:572
 msgid "All backend settings seem to be optimal, there is nothing to do."
-msgstr "Todos los binarios parecen estar bien, no hay nada que hacer."
+msgstr ""
+"Les configuracions dels binaris externs sembla òptima, no hi ha res a fer."
 
 #: configdialog/configcoverartpage.cpp:24
 msgid "Saving covers to output directory"
-msgstr "Guardar cubiertas al directorio de salida"
+msgstr "Desant portades en el directori de sortida"
 
 #: configdialog/configcoverartpage.cpp:36
 msgid "Save embedded covers to output directory"
-msgstr "Almacenar cubiertas embebidas en el directorio de salida"
+msgstr "Desa les portades incrustades en el directori de sortida"
 
 #: configdialog/configcoverartpage.cpp:38
 msgid "Always"
-msgstr "Siempre"
+msgstr "Sempre"
 
 #: configdialog/configcoverartpage.cpp:40
 msgid "Only if embedding the covers into the output files is not possible"
-msgstr "Sólo embeber las cubiertas si no es posible"
+msgstr ""
+"Només si la incrustació de les cobertes en els fitxers de sortida no és "
+"possible"
 
 #: configdialog/configcoverartpage.cpp:42
 msgid "Never"
-msgstr "Nunca"
+msgstr "Mai"
 
 #: configdialog/configcoverartpage.cpp:62
 msgid "File name for the cover (when saving to output directory)"
-msgstr ""
-"Nombre de archivo para la cubierta (cuando se guarda en el directorio de "
-"salida)"
+msgstr "Nom del fitxer de la portada (en desar-la al directori de sortida)"
 
 #: configdialog/configcoverartpage.cpp:64
 msgid "The embedded cover description"
-msgstr "Descripción de la cubierta embebida"
+msgstr "Descripció de la portada incrustada"
 
 #: configdialog/configcoverartpage.cpp:66
 msgid "The default cover file name"
-msgstr "Nombre de archivo de cubierta por defecto"
+msgstr "El nom del fitxer de la portada per defecte"
 
 #: configdialog/configcoverartpage.cpp:70
 msgid "Default cover file name:"
-msgstr "Nombre de archivo de cubierta por defecto:"
+msgstr "Nom del fitxer de la portada per defecte:"
 
 #: configdialog/configcoverartpage.cpp:73
 msgid ""
@@ -697,13 +729,17 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Las siguientes líneas son comodines para ser reemplazados por la información "
-"en los metadatos:⏎  ⏎  %a - Artista ⏎  %b - Álbum %d - Descripción de "
-"cubierta ⏎ %r - Tipo de cubierta"
+"Els següents textos són comodins que seran reemplaçats\n"
+"per la informació de les metadades:\n"
+"\n"
+"%a - Artista\n"
+"%b - Àlbum\n"
+"%d - Descripció de la portada\n"
+"%r - Tipus de portada"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
-msgstr "Configuraciones"
+msgstr "Configuració"
 
 #: configdialog/configdialog.cpp:42
 msgid "General"
@@ -711,19 +747,19 @@ msgstr "General"
 
 #: configdialog/configdialog.cpp:54
 msgid "Cover art"
-msgstr "Arte de cubierta"
+msgstr "Art de la portada"
 
 #: configdialog/configdialog.cpp:60 main.cpp:28
 msgid "Backends"
-msgstr "Binarios"
+msgstr "Binaris externs"
 
 #: configdialog/configgeneralpage.cpp:43
 msgid "User interface"
-msgstr "Usar interface"
+msgstr "Interfície d'usuari"
 
 #: configdialog/configgeneralpage.cpp:52
 msgid "Start in Mode:"
-msgstr "Iniciar en Modo:"
+msgstr "Comença en el Mode:"
 
 #: configdialog/configgeneralpage.cpp:56 options.cpp:79
 msgid "Simple"
@@ -731,41 +767,41 @@ msgstr "Simple"
 
 #: configdialog/configgeneralpage.cpp:57 options.cpp:80
 msgid "Detailed"
-msgstr "Detallado"
+msgstr "Detallat"
 
 #: configdialog/configgeneralpage.cpp:67
 msgid "Default profile:"
-msgstr "Perfil por defecto:"
+msgstr "Perfil per defecte:"
 
 #: configdialog/configgeneralpage.cpp:85
 msgid "Default format:"
-msgstr "Formato por defecto:"
+msgstr "Format per defecte:"
 
 #. i18n: file: soundkonverterui.rc:14
 #. i18n: ectx: Menu (conversion)
 #: configdialog/configgeneralpage.cpp:95 optionseditor.cpp:51 rc.cpp:3
 msgid "Conversion"
-msgstr "Conversión"
+msgstr "Conversió"
 
 #: configdialog/configgeneralpage.cpp:118
 msgid "Conflict handling:"
-msgstr "Manejo de conflicto:"
+msgstr "Resolució de conflictes:"
 
 #: configdialog/configgeneralpage.cpp:121
 msgid "Generate new file name"
-msgstr "Generar nuevo nombre de archivo"
+msgstr "Genera un nom de fitxer nou"
 
 #: configdialog/configgeneralpage.cpp:122
 msgid "Skip file"
-msgstr "Saltar archivo"
+msgstr "Ometre el fitxer"
 
 #: configdialog/configgeneralpage.cpp:124
 msgid "Do that if the output file already exists"
-msgstr "Hacer ésto si el archivo de salida ya existe"
+msgstr "Fer això si ja existeix el fitxer de sortida"
 
 #: configdialog/configgeneralpage.cpp:134
 msgid "Number of files to convert at once:"
-msgstr "Número de archivos para convertir a la vez:"
+msgstr "Nombre de fitxers a convertir alhora:"
 
 #: configdialog/configgeneralpage.cpp:137
 #: configdialog/configgeneralpage.cpp:185
@@ -774,145 +810,146 @@ msgid ""
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
-"Este número no debería ser mayor que la cantidad de núcleos de procesador "
-"disponibles.⏎ Se detectaron %1 núcleos de procesador."
+"No assignis aquest número més alt que la quantitat de nuclis de processat "
+"instal·lats.\n"
+"S'han detectat %1 nuclis de processat."
 
 #: configdialog/configgeneralpage.cpp:150
 msgid "Apply album gain to converted files"
-msgstr "Aplicar ganancia de álbum a los archivos convertidos"
+msgstr "Aplica el guany d'àlbum als fitxers convertits"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
 msgstr ""
-"Mantener las canciones del mismo álbum esperando en la lista de archivos "
-"para poder aplicarle ganancia de álbum a todas ellas."
+"Mantindre les cançons del mateix àlbum esperant a la llista de fitxers per "
+"tal d'aplicar el guany de l'àlbum a tots els fitxers."
 
 #: configdialog/configgeneralpage.cpp:158
 #: replaygainscanner/replaygainscanner.cpp:33
 #: replaygainscanner/replaygainscanner.cpp:344
 msgid "Replay Gain tool"
-msgstr "Herramienta Replay Gain"
+msgstr "Eina de Replay Gain"
 
 #: configdialog/configgeneralpage.cpp:167
 msgid "Group files in the Replay Gain tool by:"
-msgstr "Agrupar archivos en la herramienta Replay Gain por:"
+msgstr "Agrupa els fitxers en la eina Replay Gain per:"
 
 #: configdialog/configgeneralpage.cpp:170
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr "Etiquetas y directorios de álbum"
+msgstr "Etiquetes d'àlbum i directoris"
 
 #: configdialog/configgeneralpage.cpp:171
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr "Sólo etiquetas de álbum"
+msgstr "Només etiquetes d'àlbum"
 
 #: configdialog/configgeneralpage.cpp:172
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr "Sólo directorios"
+msgstr "Només directoris"
 
 #: configdialog/configgeneralpage.cpp:182
 msgid "Number of items to process at once:"
-msgstr "Número de ítems a procesar a la vez:"
+msgstr "Nombre de fitxers a processar alhora:"
 
 #: convert.cpp:68 convert.cpp:1301
 msgid "Getting file"
-msgstr "Obteniendo archivo"
+msgstr "Obtenint el fitxer"
 
 #: convert.cpp:76
 msgid "Copying \"%1\" to \"%2\""
-msgstr "Copiando \"%1\" a \"%2\""
+msgstr "Copiant \"%1\" a \"%2\""
 
 #: convert.cpp:119 convert.cpp:462
 #: replaygainscanner/replaygainprocessor.cpp:60
 msgid "No more backends left to try :("
-msgstr "No quedan más binarios para probar :("
+msgstr "No hi ha més binaris externs per provar :("
 
 #: convert.cpp:134 convert.cpp:249 convert.cpp:1307 filelist.cpp:569
 #: soundkonverter.cpp:282 soundkonverter.cpp:284 soundkonverter.cpp:311
 #: soundkonverter.cpp:313
 msgid "Converting"
-msgstr "Convirtiendo"
+msgstr "Convertint"
 
 #: convert.cpp:171 convert.cpp:410 convert.cpp:487
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
-"Falló la conversión. Al menos uno de los binarios utilizados debe "
-"configurarse apropiadamente."
+"Error de conversió. Almenys un dels binaris externs utilitzats s'ha de "
+"configurar correctament."
 
 #: convert.cpp:177 convert.cpp:416 convert.cpp:493
 msgid ""
 "Conversion failed. The preferred plugin lacks support for a necessary "
 "feature."
 msgstr ""
-"Falló conversión. El plugin preferido carece de soporte para la "
-"característica necesitada."
+"Error de conversió. El complement preferit no té suport per a una funció "
+"necessària."
 
 #: convert.cpp:183 convert.cpp:422 convert.cpp:499
 msgid "Conversion failed. Unknown Error."
-msgstr "Falló conversión. Error desconocido."
+msgstr "Error de conversió. Error desconegut."
 
 #: convert.cpp:344 convert.cpp:1313 filelist.cpp:564
 msgid "Ripping"
-msgstr "Extrayendo"
+msgstr "Extraient"
 
 #: convert.cpp:349 convert.cpp:1319
 msgid "Decoding"
-msgstr "Decodificando"
+msgstr "Descodificant"
 
 #: convert.cpp:354 convert.cpp:367 convert.cpp:373
 msgid "Applying filter"
-msgstr "Aplicando filtro"
+msgstr "Aplicant filtre"
 
 #: convert.cpp:362 convert.cpp:1331
 msgid "Encoding"
-msgstr "Codificando"
+msgstr "Codificant"
 
 #: convert.cpp:443
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
-msgstr "Saltando Replay Gain, la ganancia de álbum se calculará más tarde"
+msgstr "Ometent el Replay Gain, el guany d'àlbum es calcularà més endavant"
 
 #: convert.cpp:458 replaygainscanner/replaygainprocessor.cpp:56
 msgid "Applying Replay Gain"
-msgstr "Aplicando Replay Gain"
+msgstr "Aplicant el Replay Gain"
 
 #: convert.cpp:515
 msgid "Writing tags"
-msgstr "Escribiendo etiquetas"
+msgstr "Escrivint les etiquetes"
 
 #: convert.cpp:542
 msgid "Running user script"
-msgstr "Ejecutando script de usuario"
+msgstr "Executant els scripts d'usuari"
 
 #: convert.cpp:567
 msgid "Executing next step"
-msgstr "Ejecutando próximo paso"
+msgstr "Executant el pas següent"
 
 #: convert.cpp:711
 msgid "Read tags successfully"
-msgstr "Etiquetas leídas correctamente"
+msgstr "Lectura de les etiquetes amb èxit"
 
 #: convert.cpp:715
 msgid "Unable to read tags"
-msgstr "No se pueden leer etiquetas"
+msgstr "No es poden llegir les etiquetes"
 
 #: convert.cpp:728 convert.cpp:733
 msgctxt "removing file"
 msgid "Removing: %1"
-msgstr "Eliminando: %1"
+msgstr "Esborrant: %1"
 
 #: convert.cpp:742
 msgid "An error occurred. Error code: %1 (%2)"
-msgstr "Ocurrió un error. Código de error: %1 (%2)"
+msgstr "S'ha produït un error. Codi d'error: %1 (%2)"
 
 #: convert.cpp:846 convert.cpp:909
 msgid "Conversion failed. Exit code: %1"
-msgstr "Falló la conversión. Código de salida: %1"
+msgstr "Error de conversió. Codi de sortida: %1"
 
 #: convert.cpp:976
 msgctxt "identificator for the logger"
@@ -926,107 +963,107 @@ msgstr "Pista %1"
 
 #: convert.cpp:987
 msgid "Adding new item to conversion list: '%1'"
-msgstr "Agregando nuevo ítem a la lista de conversión: '%1'"
+msgstr "Addició d'un article nou a la llista de conversió: '%1'"
 
 #: convert.cpp:994 replaygainscanner/replaygainprocessor.cpp:223
 msgid "Got log ID: %1"
-msgstr "Obtenido ID de registro: %1"
+msgstr "Obtingut ID de registre: %1"
 
 #: convert.cpp:1019
 msgid "Track number: %1, device: %2"
-msgstr "Número de pista: %1, dispositivo: %2"
+msgstr "Nombre de pista : %1, dispositiu: %2"
 
 #: convert.cpp:1024
 msgid "Possible conversion strategies:"
-msgstr "Estrategias de conversión posibles:"
+msgstr "Estratègies de conversió possibles:"
 
 #: convert.cpp:1038
 msgid "File system type: %1"
-msgstr "Tipo de sistema de archivo: %1"
+msgstr "Tipus de sistema de fitxers: %1"
 
 #: convert.cpp:1096
 msgid ""
 "An error occurred, the output file size is less than one percent of the "
 "input file size"
 msgstr ""
-"Ocurrió un error, el tamaño del archivo de salida es menor que el uno por "
-"ciento del archivo de entrada"
+"S'ha produït un error, la mida del fitxer de sortida és menor a l'u per cent "
+"de la mida del fitxer d'entrada"
 
 #: convert.cpp:1100
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
-msgstr "Falló la conversión, probando de nuevo. Código de salida: -2 (%1)"
+msgstr "Error de conversió, tornant a intentar-ho. Codi de sortida: -2 (%1)"
 
 #: convert.cpp:1102 convert.cpp:1174
 msgid "Removing partially converted output file"
-msgstr "Eliminando el archivo de salida convertido parcialmente"
+msgstr "Esborrant el fitxer de sortida parcialment convertit"
 
 #: convert.cpp:1115 replaygainscanner/replaygainprocessor.cpp:265
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr "Salida normal"
+msgstr "Sortida normal"
 
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr ""
+msgstr "Finalitzat però amb problemes"
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr "Abortado por usuario"
+msgstr "Avortada per l'usuari"
 
 #: convert.cpp:1124 replaygainscanner/replaygainprocessor.cpp:274
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "Ejecutable necesita configuración"
+msgstr "El binari extern necessita configurar-se"
 
 #: convert.cpp:1127
 msgctxt "Conversion exit status"
 msgid "Not enough space on the output device"
-msgstr "No hay suficiente espacio en el dispositivo de salida"
+msgstr "No hi ha prou espai en el dispositiu de sortida"
 
 #: convert.cpp:1130
 msgctxt "Conversion exit status"
 msgid "File already exists"
-msgstr "El archivo ya existe"
+msgstr "El fitxer ja existeix"
 
 #: convert.cpp:1133 replaygainscanner/replaygainprocessor.cpp:280
 msgctxt "Conversion exit status"
 msgid "An error occurred"
-msgstr "Ocurrió un error"
+msgstr "S'ha produït un error"
 
 #: convert.cpp:1154
 msgid "Executing command: \"%1\""
-msgstr "Ejecutando comando: \"%1\""
+msgstr "Executant l'ordre: \"%1\""
 
 #: convert.cpp:1180 replaygainscanner/replaygainprocessor.cpp:284
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr "Eliminando archivo de la lista de conversión. Código de salida %1 (%2)"
+msgstr "Eliminant fitxers de la llista de conversió. Codi de sortida %1 (%2)"
 
 #: convert.cpp:1182
 msgid "Conversion time"
-msgstr "Tiempo de conversión"
+msgstr "Temps de conversió"
 
 #: convert.cpp:1183
 msgid "Output file size"
-msgstr "Tamaño del archivo de salida"
+msgstr "Mida del fitxer de sortida"
 
 #: convert.cpp:1184
 msgid "File size ratio"
-msgstr "Razón de tamaño de archivo"
+msgstr "Relació de la mida del fitxer"
 
 #: convert.cpp:1291
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "Desconegut"
 
 #: convert.cpp:1325
 msgid "Filter"
-msgstr "Filtro"
+msgstr "Filtre"
 
 #: convert.cpp:1351 replaygainscanner/replaygainprocessor.cpp:331
 msgid "Progress: %1"
-msgstr "Progreso: %1"
+msgstr "Progrés: %1"
 
 #: core/backendplugin.cpp:40
 msgid ""
@@ -1036,6 +1073,11 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
+"Wave és un format d'àudio molt senzill que comprimeix el flux d'àudio, per "
+"tant no té pèrdues, però la mida del fitxer és molt gran i no suporta "
+"característiques avançades com les etiquetes. <br>Està suportat per "
+"pràcticament qualsevol programari o dispositiu.<br><br><a href=\"http://ca."
+"wikipedia.org/wiki/WAV\">http://ca.wikipedia.org/wiki/WAV</a>"
 
 #: core/backendplugin.cpp:47
 msgid ""
@@ -1045,6 +1087,12 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding"
 "\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>"
 msgstr ""
+"Advanced Audio Coding (AAC) és un popular format d'àudio amb pèrdua. És "
+"àmpliament utilitzat per Apple Inc.<br>En soundKonverter \"AAC\" es refereix "
+"només al còdec. Per tal d'obtenir un fitxer amb capacitats d'etiquetatge "
+"utilitzar \"M4A/AAC\".<br><br><a href=\"http://ca.wikipedia.org/wiki/"
+"Advanced_Audio_Coding\">http://ca.wikipedia.org/wiki/Advanced Audio Coding</"
+"a>"
 
 #: core/backendplugin.cpp:54
 msgid ""
@@ -1054,6 +1102,11 @@ msgid ""
 "wiki/Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio "
 "Coding</a>"
 msgstr ""
+"Advanced Audio Coding (AAC) és un popular format d'àudio amb pèrdua. És "
+"àmpliament utilitzat per Apple Inc.<br>En soundKonverter \"M4A/AAC\" es "
+"refereix al àudio MPEG-4 codificat amb AAC.<br><br><a href=\"http://ca."
+"wikipedia.org/wiki/Advanced_Audio_Coding\">http://ca.wikipedia.org/wiki/"
+"Advanced Audio Coding</a>"
 
 #: core/backendplugin.cpp:66
 msgid ""
@@ -1062,6 +1115,11 @@ msgid ""
 "audio file encoded with ALAC.<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "Apple_Lossless\">http://en.wikipedia.org/wiki/Apple Lossless</a>"
 msgstr ""
+"Apple Lossless Àudio Còdec (ALAC) és un format d'àudio sense pèrdua. És "
+"àmpliament utilitzat per Apple Inc.<br>En soundKonverter \"m4a/alac\" es "
+"refereix a un arxiu MPEG-4 àudio codificat amb ALAC.<br><br><a href=\"http://"
+"es.wikipedia.org/wiki/Apple_Lossless\">http://es.wikipedia.org/wiki/Apple "
+"Lossless</a>"
 
 #: core/backendplugin.cpp:84
 msgid ""
@@ -1069,9 +1127,9 @@ msgid ""
 "restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/Vorbis\">http://"
 "en.wikipedia.org/wiki/Vorbis</a>"
 msgstr ""
-"Ogg Vorbis es un codec libre de audio de alta calidad con pérdida. <br> Está "
-"libre de cualquier restricción legal.<br><br><a href=\"http://en.wikipedia."
-"org/wiki/Vorbis\">http://en.wikipedia.org/wiki/Vorbis</a>"
+"Ogg Vorbis  és un popular format d'àudio amb pèrdua.<br>Està lliure de de "
+"restriccions legals.<br><br><a href=\"http://ca.wikipedia.org/wiki/Vorbis"
+"\">http://ca.wikipedia.org/wiki/Vorbis</a>"
 
 #: core/backendplugin.cpp:95
 msgid ""
@@ -1081,6 +1139,11 @@ msgid ""
 "org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/wiki/Opus (audio "
 "format)</a>"
 msgstr ""
+"Opus és un format d'àudio amb pèrdua dissenyat per a la comunicació en temps "
+"real a través d'Internet.<br>Cobreix una àmplia gamma de taxes de bits amb "
+"una alta qualitat i està lliure de de restriccions legals.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/Opus_(audio_format)\">http://en.wikipedia.org/"
+"wiki/Opus (audio format)</a>"
 
 #: core/backendplugin.cpp:103
 msgid ""
@@ -1089,6 +1152,10 @@ msgid ""
 "some legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "MP3\">http://en.wikipedia.org/wiki/MP3</a>"
 msgstr ""
+"MPEG-1 or MPEG-2 Audio Layer III (MP3) és el format més popular d'àudio amb "
+"pèrdua.<br>Està suportat per gairebé tots els reproductors d'àudio, encara "
+"que té algunes restriccions legals.<br><br><a href=\"http://ca.wikipedia.org/"
+"wiki/MP3\">http://ca.wikipedia.org/wiki/MP3</a>"
 
 #: core/backendplugin.cpp:112
 msgid ""
@@ -1096,9 +1163,9 @@ msgid ""
 "of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/FLAC"
 "\">http://en.wikipedia.org/wiki/FLAC</a>"
 msgstr ""
-"Free Lossless Audio Codec (FLAC) es un codec libre de audio sin pérdida."
-"<br>Es libre de cualquier restricción legal.<br><br><a href=\"http://en."
-"wikipedia.org/wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>"
+"Free Lossless Audio Codec (FLAC) es un format d'àudio sense pèrdua.<br>Està "
+"lliure de de restriccions legals.<br><br><a href=\"http://ca.wikipedia.org/"
+"wiki/FLAC\">http://ca.wikipedia.org/wiki/FLAC</a>"
 
 #: core/backendplugin.cpp:122
 msgid ""
@@ -1106,6 +1173,9 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://"
 "en.wikipedia.org/wiki/Windows Media Audio</a>"
 msgstr ""
+"Windows Media Audio (WMA) es un format d'àudio amb pèrdua desenvolupat per "
+"Microsoft.<br><br><a href=\"http://ca.wikipedia.org/wiki/Windows_Media_Audio"
+"\">http://ca.wikipedia.org/wiki/Windows Media Audio</a>"
 
 #: core/backendplugin.cpp:128
 msgid ""
@@ -1114,6 +1184,10 @@ msgid ""
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
+"AC3 or AC-3és part de la família dels formats Dolby Digital.<br>Va ser "
+"dissenyat per a ser utilitzat per a les pel·lícules (per exemple, DVD) i és "
+"compatible amb so envoltant.<br><br><a href=\"http://ca.wikipedia.org/wiki/"
+"Dolby_Digital\">http://ca.wikipedia.org/wiki/Dolby Digital</a>"
 
 #: core/backendplugin.cpp:141
 msgid ""
@@ -1121,6 +1195,9 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
 "\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 msgstr ""
+"MPEG-1 or MPEG-2 Audio Layer II (MP2) es un format vell d'àudio amb pèrdua."
+"<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
+"\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 
 #: core/backendplugin.cpp:166
 msgid ""
@@ -1129,6 +1206,10 @@ msgid ""
 "org/wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/"
 "Adaptive Multi-Rate audio codec</a>"
 msgstr ""
+"Adaptive Multi-Rate Narrow-Band (AMR NB) s'utilitza principalment per a la "
+"compressió de la veu per a la comunicació mòbil.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/"
+"wiki/Adaptive Multi-Rate audio codec</a>"
 
 #: core/backendplugin.cpp:175
 msgid ""
@@ -1138,6 +1219,11 @@ msgid ""
 "wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en.wikipedia.org/"
 "wiki/Adaptive Multi-Rate Wideband</a>"
 msgstr ""
+"Adaptive Multi-Rate Wide-Band (AMR WB) és una versió avançada d'AMR NB que "
+"utilitza una taxa de dades més alta resulta en una millor qualitat.<br>Tot i "
+"això, només s'ha d'utilitzar per a la compressió de la veu.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en."
+"wikipedia.org/wiki/Adaptive Multi-Rate Wideband</a>"
 
 #: core/backendplugin.cpp:183
 msgid ""
@@ -1145,6 +1231,9 @@ msgid ""
 "wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's "
 "Audio</a>"
 msgstr ""
+"Monkey's Audio es un format d'àudio sense pèrdua.<br><br><a href=\"http://es."
+"wikipedia.org/wiki/Monkey's_Audio\">http://es.wikipedia.org/wiki/Monkey's "
+"Audio</a>"
 
 #: core/backendplugin.cpp:192
 msgid ""
@@ -1153,10 +1242,10 @@ msgid ""
 "obsolete.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en."
 "wikipedia.org/wiki/Speex<a/>"
 msgstr ""
-"Speex es un codificador con pérdida libre diseñado para codificación de voz "
-"de baja calidad.<br>Está libre de cualquier restricción. Debido a la "
-"aparición de Opus, Speex se considera obsoleto<br><br><a href=\"http://en."
-"wikipedia.org/wiki/Speex\">http://en.wikipedia.org/wiki/Speex<a/>"
+"Speex és un format d'àudio amb pèrdua dissenyat per a la codificació de veu."
+"<br>Està lliure de de restriccions legals. Des del llançament de l'Opus, "
+"Speex esta considerat obsolet.<br><br><a href=\"http://ca.wikipedia.org/wiki/"
+"Speex\">http://ca.wikipedia.org/wiki/Speex<a/>"
 
 #: core/backendplugin.cpp:206
 msgid ""
@@ -1164,15 +1253,18 @@ msgid ""
 "for high quality.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
 "\">http://en.wikipedia.org/wiki/Musepack<a/>"
 msgstr ""
-"Musepack (MPC) es un formato libre con pérdida basado en mp2 y optimizado "
-"para alta calidad.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
-"\">http://en.wikipedia.org/wiki/Musepack<a/>"
+"Musepack (MPC) és un format lliure d'àudio amb pèrdues basat en mp2 i "
+"optimitzat per a l'alta qualitat.<br><br><a href=\"http://es.wikipedia.org/"
+"wiki/Musepack\">http://es.wikipedia.org/wiki/Musepack<a/>"
 
 #: core/backendplugin.cpp:216
 msgid ""
 "Shorten (SHN) is a free and lossless audio format.<br><br><a href=\"http://"
 "en.wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
 msgstr ""
+"Shorten (SHN) és un format lliure d'àudio sense pèrdues.<br><br><a href="
+"\"http://es.wikipedia.org/wiki/Shorten\">http://es.wikipedia.org/wiki/"
+"Shorten</a>"
 
 #: core/backendplugin.cpp:238
 msgid ""
@@ -1180,13 +1272,16 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/"
 "TTA (codec)<a/>"
 msgstr ""
+"True Audio (TTA) és un format lliure d'àudio sense pèrdues.<br><br><a href="
+"\"http://es.wikipedia.org/wiki/True_Audio_Códec\">http://es.wikipedia.org/"
+"wiki/True Audio Códec<a/>"
 
 #: core/backendplugin.cpp:245
 msgid ""
 "WavPack (WV) is a free and lossless audio format.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 msgstr ""
-"WavPack (WV) es un formato de audio libre sin pérdida.<br><br><a href="
+"WavPack (WV) és un format lliure d'àudio sense pèrdues.<br><br><a href="
 "\"http://en.wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/"
 "WavPack<a/>"
 
@@ -1196,6 +1291,9 @@ msgid ""
 "Electronic Arts for the Commodore-Amiga computer series.<br><br><a href="
 "\"http://en.wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 msgstr ""
+"8-Bit Sampled Voice (8SVX) és un estàndard de format d'àudio desenvolupat "
+"per Electronic Arts per ordinadors Commodore-Amiga.<br><br><a href=\"http://"
+"en.wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 
 #: core/backendplugin.cpp:381
 msgid ""
@@ -1205,34 +1303,40 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en."
 "wikipedia.org/wiki/Audio Interchange File Format</a>"
 msgstr ""
+"Audio Interchange File Format (AIFF) és un format d'àudio molt senzill que "
+"no comprimeix el flux d'àudio, per tant no té pèrdues, però la mida del "
+"fitxer és molt gran i no suporta característiques avançades com les "
+"etiquetes.<br><br><a href=\"http://ca.wikipedia.org/wiki/"
+"Audio_Interchange_File_Format\">http://ca.wikipedia.org/wiki/Audio "
+"Interchange File Format</a>"
 
 #: core/backendplugin.cpp:449
 msgid "Killing process on user request"
-msgstr "Matando proceso a pedido de usuario"
+msgstr "Eliminant procés a petició de l'usuari"
 
 #: core/backendplugin.cpp:524
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr "Para codificar los archivos %1, necesita instalar '%2'"
+msgstr "Per tal de codificar els fitxers %1, cal instal·lar '%2'."
 
 #: core/backendplugin.cpp:531
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr "Para decodificar los archivos %1, necesita instalar '%2'"
+msgstr "Per tal de descodificar els fitxers %1, cal instal·lar '%2'."
 
 #: core/backendplugin.cpp:538
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr "Para transcodificar los archivos %1, necesita instalar '%2'"
+msgstr "Per tal de transcodificar els fitxers %1, cal instal·lar '%2'."
 
 #: core/backendplugin.cpp:545
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
 msgstr ""
-"Para calcular las etiquetas Replay Gain de los archivos %1, necesita "
-"instalar '%2'"
+"Per tal de calcular les etiquetes de Replay Gain per els fitxers %1, cal "
+"instal·lar '%2'."
 
 #: core/backendplugin.cpp:552
 msgid "'%1' should be shipped with your distribution."
-msgstr "'%1' debería venir con sus distribución"
+msgstr "'%1' hauria de estar inclòs amb la teva distribució."
 
 #: core/backendplugin.cpp:559
 msgid ""
@@ -1240,25 +1344,25 @@ msgid ""
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
-"Como '%1' incluye codecs patentados, es posible que no estén incluidos por "
-"defecto en su distribución. Muchas distribuciones proveen '%1' en un "
-"repositorio adicional."
+"Degut que '%1' inclou còdecs patentats, podria no estar inclòs en la "
+"instal·lació per defecte de la teva distribució. Moltes distribucions "
+"ofereixen '%1' a un repositori de programari addicional."
 
 #: core/backendplugin.cpp:566
 msgid "You can download '%1' at %2"
-msgstr "Puede bajar '%1' en '%2'"
+msgstr "Podeu descarregar '%1' a %2"
 
 #: core/backendplugin.cpp:575
 msgid "In order to use the filter %1, you need to install '%2'."
-msgstr "Para usar el filtro %1, debe instalar '%2'."
+msgstr "Per tal d'utilitzar el filtre %1, cal instal·lar '%2'."
 
 #: core/backendplugin.cpp:579
 msgid "In order to use the filters %1, you need to install '%2'."
-msgstr "Para usar los filtros %1, debe instalar '%2'."
+msgstr "Per tal d'utilitzar els filtres %1, cal instal·lar '%2'."
 
 #: filelist.cpp:48
 msgid "State"
-msgstr "Estado"
+msgstr "Estat"
 
 #: filelist.cpp:49
 msgid "Input"
@@ -1266,7 +1370,7 @@ msgstr "Entrada"
 
 #: filelist.cpp:50
 msgid "Output"
-msgstr "Salida"
+msgstr "Sortida"
 
 #: filelist.cpp:51 plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:31
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:100
@@ -1295,25 +1399,25 @@ msgstr "Salida"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:63
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:136
 msgid "Quality"
-msgstr "Calidad"
+msgstr "Qualitat"
 
 #: filelist.cpp:79
 msgid "Edit options..."
-msgstr "Editar opciones..."
+msgstr "Editar opcions..."
 
 #: filelist.cpp:81
 msgid "Start conversion"
-msgstr "Iniciar conversión"
+msgstr "Comença la conversió"
 
 #: filelist.cpp:83
 msgid "Stop conversion"
-msgstr "Detener conversión"
+msgstr "Atura la conversió"
 
 #: filelist.cpp:85 optionssimple.cpp:44
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:101
 #: replaygainscanner/replaygainfilelist.cpp:75
 msgid "Remove"
-msgstr "Eliminar"
+msgstr "Elimina"
 
 #: filelist.cpp:178 opener/fileopener.cpp:139 opener/playlistopener.cpp:141
 #: replaygainscanner/replaygainfilelist.cpp:215
@@ -1323,49 +1427,52 @@ msgid ""
 "Maybe you need to install an additional soundKonverter plugin.\n"
 "You should have a look at your distribution's package manager for this."
 msgstr ""
-"Este tipo de archivo es desconocido por soundKonverter.\n"
-"Deberá instalar un plugin adicional para soundKonverter.\n"
-"Consulte en el administrador de paquetes de su distribución."
+"Aquest tipus de fitxer és desconegut per soundKonverter.\n"
+"Potser necessita instal·lar un complement soundKonverter addicional.\n"
+"Tindria que fer un cop d'ull al gestor de paquets de la vostra distribució "
+"per instal·lar-lo."
 
 #: filelist.cpp:216 opener/fileopener.cpp:179 opener/playlistopener.cpp:181
 #: opener/playlistopener.cpp:213 replaygainscanner/replaygainfilelist.cpp:253
 #: replaygainscanner/replaygainscanner.cpp:239 soundkonverterview.cpp:382
 msgid "... and %1 more files"
-msgstr "... y %1 archivos más"
+msgstr "... i %1 fitxers més"
 
 #: filelist.cpp:539 filelist.cpp:598
 msgid "Will be skipped"
-msgstr "Será saltado"
+msgstr "Serà omès "
 
 #: filelist.cpp:543 soundkonverter.cpp:141 soundkonverter.cpp:145
 msgid "Waiting"
-msgstr "Esperando"
+msgstr "Esperant"
 
 #: filelist.cpp:554
 msgid "Waiting for Replay Gain"
-msgstr "Esperando para Replay Gain"
+msgstr "Esperant a Replay Gain"
 
 #: filelist.cpp:583
 msgid "Stopped"
-msgstr "Detenido"
+msgstr "Aturat"
 
 #: filelist.cpp:588
 msgid "Backend not configured"
-msgstr "Binario no configurado"
+msgstr "Binari extern sense configurar"
 
 #: filelist.cpp:593
 msgid "Disc full"
-msgstr "Disco lleno"
+msgstr "Disc ple"
 
 #: filelist.cpp:603
 msgid "Failed"
-msgstr "Falló"
+msgstr "Error"
 
 #: filelist.cpp:606
 msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
-msgstr "Falló la conversión.⏎ Mire el registro para más inforamción."
+msgstr ""
+"Error en la conversió.\n"
+"Consulteu el registre per obtenir més informació."
 
 #: filelist.cpp:630
 msgid "CD track %1"
@@ -1377,8 +1484,9 @@ msgid ""
 "\n"
 "If not, the saved file list will be appended."
 msgstr ""
-"¿Desea sobrescribir la lista de archivos actual?⏎ ⏎ Si no, el archivo se "
-"agregará a la lista."
+"Voleu sobreescriure la llista de fitxers actual?\n"
+"\n"
+"En cas contrari, s'agregarà a la llista de fitxers guardats."
 
 #: global.cpp:97 global.cpp:99 global.cpp:123 global.cpp:125
 msgctxt "days"
@@ -1413,45 +1521,47 @@ msgstr "Identificador"
 
 #: logger.cpp:91
 msgid "Log ID"
-msgstr "ID de registro"
+msgstr "ID de registre"
 
 #: logger.cpp:185 logger.cpp:188
 msgid "Finished logging"
-msgstr "Finalizado el registro"
+msgstr "Finalitzat el registre"
 
 #: logviewer.cpp:25
 msgid "Log Viewer"
-msgstr "Visor de registro"
+msgstr "Visor de registre"
 
 #: logviewer.cpp:28
 msgid "Update"
-msgstr "Actualizar"
+msgstr "Actualitza"
 
 #: logviewer.cpp:31
 msgid "Save to file..."
-msgstr "Guardar a archivo..."
+msgstr "Desa el fitxer..."
 
 #: logviewer.cpp:42
 msgid "Log file:"
-msgstr "Registro:"
+msgstr "Registre:"
 
 #: logviewer.cpp:84
 msgid "soundKonverter application log"
-msgstr "Registro de aplicación de soundKonverter"
+msgstr "Registre de l'aplicació soundKonverter"
 
 #: logviewer.cpp:127
 msgid "Save log file"
-msgstr "Guardar registro"
+msgstr "Desa el registre"
 
 #: logviewer.cpp:134
 msgid "File already exists. Do you really want to overwrite it?"
-msgstr "Archivo ya existe. ¿Desea sobrescribirlo?"
+msgstr "El fitxer ja existeix. Està segur que vols sobreescriure'l?"
 
 #: logviewer.cpp:139
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
-msgstr "Falló escritura de archivo.⏎ Tal vez no posee permiso de escritura."
+msgstr ""
+"Error al escriure al fitxer.\n"
+"Potser no té permís d'escriptura."
 
 #: main.cpp:16
 msgid ""
@@ -1461,10 +1571,10 @@ msgid ""
 "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
 "or simply send me a mail to hessijames@gmail.com"
 msgstr ""
-"soundKonverter es una interfase para varios conversores de audio, "
-"herramientas Replay Gain y extractores de CD.⏎ ⏎ Registre los errores en "
-"https://bugs.launchpad.net/soundkonverter ⏎ o simplemente envíeme un correo "
-"a hessijames@gmail.com"
+"soundKonverter és una interfície per a diversos convertidors d'àudio, eines "
+"de Replay Gain i extractors de CD.\n"
+"Envieu els informes de error en https://bugs.launchpad.net/soundkonverter\n"
+"o simplement envieu-me un correu a hessijames@gmail.com"
 
 #: main.cpp:22
 msgid "soundKonverter"
@@ -1480,11 +1590,11 @@ msgstr "Daniel Faust"
 
 #: main.cpp:24
 msgid "David Vignoni"
-msgstr "Daniel Faust"
+msgstr "David Vignoni"
 
 #: main.cpp:24
 msgid "Nuvola icon theme"
-msgstr "Tema de íconos Nuvola"
+msgstr "Tema d'icones Nuvola"
 
 #: main.cpp:25
 msgid "Scott Wheeler"
@@ -1504,7 +1614,7 @@ msgstr "Audex"
 
 #: main.cpp:27
 msgid "Amarok developers"
-msgstr "Desarrolladores de Amarok"
+msgstr "Desenvolupadors d'Amarok"
 
 #: main.cpp:27
 msgid "Amarok"
@@ -1512,45 +1622,45 @@ msgstr "Amarok"
 
 #: main.cpp:28
 msgid "All programmers of audio converters"
-msgstr "Todos los programadores de conversores de audio"
+msgstr "Tots els programadors de convertidors d'àudio"
 
 #: main.cpp:32
 msgid "Open the Replay Gain tool an add all given files"
-msgstr "Abrir la herramienta Replay Gain y agrear todos los archivos"
+msgstr "Obre l'eina Replay Gain i afegeix tots els fitxers"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
 msgstr ""
-"Listar todas las pistas de la unidad <dispositivo>, 'auto' buscará el cd"
+"Enumera totes les pistes de la unitat <dispositiu>, 'auto' buscarà un cd"
 
 #: main.cpp:34
 msgid "Add all files using the given profile"
-msgstr "Agregar todos los archivos usando el perfil dado"
+msgstr "Afegeix tots els fitxers amb el perfil donat"
 
 #: main.cpp:35
 msgid "Add all files using the given format"
-msgstr "Agregar todos los archivos usando el formato dado"
+msgstr "Afegeix tots els fitxers amb el format donat"
 
 #: main.cpp:36
 msgid "Output all files to <directory>"
-msgstr "Volcar todos los archivos al <directorio>"
+msgstr "Bolca tots els fitxers al <directori>"
 
 #: main.cpp:37
 msgid "Start soundKonverter invisible"
-msgstr "Iniciar soundKonverter invisible"
+msgstr "Inicia soundKonverter invisible"
 
 #: main.cpp:38
 msgid "Start the conversion immediately (enabled when using '--invisible')"
 msgstr ""
-"Iniciar la conversión inmediatamente (habilitado cuando se usa '--invisible')"
+"Comença la conversió immediatament (activat quant s'utilitza '--invisible')"
 
 #: main.cpp:39
 msgid ""
 "Close soundKonverter after all files are converted (enabled when using '--"
 "invisible')"
 msgstr ""
-"Cerrar soundKonverter después de que todos los archivos sean convertidos "
-"(habilitado cuando se usa '--invisible')"
+"Tanca soundKonverter quant tots els fitxers han sigut convertits (activat "
+"quant s'utilitza '--invisible')"
 
 #: main.cpp:40
 #, c-format
@@ -1558,42 +1668,42 @@ msgid ""
 "Execute <command> after each file has been converted (%i=input file, "
 "%o=output file)"
 msgstr ""
-"Ejecutar <comando> después de que cada archivo sea convertido (%i = archivo "
-"de entrada, %o = archivo de salida)"
+"Executa <comanda> després de que cada fitxer s'hagi convertit (%i=fitxer "
+"d'entrada, %o=fitxer de sortida)"
 
 #: main.cpp:41
 msgid "Audio file(s) to append to the file list"
-msgstr "Archivo(s) de audio para agregar a la lista"
+msgstr "Fitxer(s) d'àudio per annexar a la llista de fitxers"
 
 #: metadata/tagengine.cpp:59
 msgctxt "cover type"
 msgid "Unclassified"
-msgstr "Sin clasificar"
+msgstr "Sense classificar"
 
 #: metadata/tagengine.cpp:61
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
-msgstr "ícono PNG de 32x32"
+msgstr "Icona PNG de 32x32"
 
 #: metadata/tagengine.cpp:63
 msgctxt "cover type"
 msgid "File icon"
-msgstr "Ícono"
+msgstr "Icona"
 
 #: metadata/tagengine.cpp:65
 msgctxt "cover type"
 msgid "Front cover"
-msgstr "Cubierta de tapa"
+msgstr "Portada"
 
 #: metadata/tagengine.cpp:67
 msgctxt "cover type"
 msgid "Back cover"
-msgstr "Contratapa"
+msgstr "Contraportada"
 
 #: metadata/tagengine.cpp:69
 msgctxt "cover type"
 msgid "Leaflet page"
-msgstr "Folleto"
+msgstr "Fullet"
 
 #: metadata/tagengine.cpp:71
 msgctxt "cover type"
@@ -1603,84 +1713,84 @@ msgstr "Foto del CD"
 #: metadata/tagengine.cpp:73
 msgctxt "cover type"
 msgid "Lead artist picture"
-msgstr "Imagen del artista principal"
+msgstr "Imatge del artista principal"
 
 #: metadata/tagengine.cpp:75
 msgctxt "cover type"
 msgid "Artist picture"
-msgstr "Imagen de artista"
+msgstr "Imatge del artista"
 
 #: metadata/tagengine.cpp:77
 msgctxt "cover type"
 msgid "Conductor picture"
-msgstr "Imagen del director"
+msgstr "Imatge del director"
 
 #: metadata/tagengine.cpp:79
 msgctxt "cover type"
 msgid "Band picture"
-msgstr "Imagen de la banda"
+msgstr "Imatge de la banda"
 
 #: metadata/tagengine.cpp:81
 msgctxt "cover type"
 msgid "Composer picture"
-msgstr "Imagen del compositor"
+msgstr "Imatge del compositor"
 
 #: metadata/tagengine.cpp:83
 msgctxt "cover type"
 msgid "Lyricist picture"
-msgstr "Imagen del letrista"
+msgstr "Imatge del lletrista"
 
 #: metadata/tagengine.cpp:85
 msgctxt "cover type"
 msgid "Picture of the recording location"
-msgstr "Imagen del lugar de grabación"
+msgstr "Imatge del lloc de gravació"
 
 #: metadata/tagengine.cpp:87
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
-msgstr "Imagen de los artistas durante la grabación"
+msgstr "Imatge dels artistes durant la gravació"
 
 #: metadata/tagengine.cpp:89
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
-msgstr "Imagen de los artistas durante la ejecución"
+msgstr "Imatge dels artistes durant la interpretació"
 
 #: metadata/tagengine.cpp:91
 msgctxt "cover type"
 msgid "Picture from a video"
-msgstr "Imagen a partir de un video"
+msgstr "Imatge a partir d'un vídeo"
 
 #: metadata/tagengine.cpp:93
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
-msgstr "Imagen de un pez, grande y colorido"
+msgstr "Imatge d'un peix gran, de color"
 
 #: metadata/tagengine.cpp:95
 msgctxt "cover type"
 msgid "Illustration related to the track"
-msgstr "Ilustración relacionada con la pista"
+msgstr "Il·lustració relacionada amb la pista"
 
 #: metadata/tagengine.cpp:97
 msgctxt "cover type"
 msgid "Band logo"
-msgstr "Logo de la banda"
+msgstr "Logotip de la banda"
 
 #: metadata/tagengine.cpp:99
 msgctxt "cover type"
 msgid "Publisher logo"
-msgstr "Logo del sello"
+msgstr "Logotip de la discogràfica"
 
 #: opener/cdopener.cpp:117
 msgid "Add CD tracks"
-msgstr "Agregar pistas"
+msgstr "Afegeix pistes"
 
 #: opener/cdopener.cpp:126
 msgid "1. Select CD tracks"
-msgstr "1. Elegir pistas"
+msgstr "1. Selecciona les pistes del CD"
 
 #: opener/cdopener.cpp:131 opener/diropener.cpp:57 opener/urlopener.cpp:53
 msgid "2. Set conversion options"
-msgstr "2. Configurar opciones de conversión"
+msgstr "2. Estableix les opcions de conversió"
 
 #: opener/cdopener.cpp:164 opener/cdopener.cpp:300 optionseditor.cpp:133
 msgid "Artist:"
@@ -1690,7 +1800,7 @@ msgstr "Artista:"
 #: opener/cdopener.cpp:1043 opener/cdopener.cpp:1108 opener/cdopener.cpp:1143
 #: opener/cdopener.cpp:1357
 msgid "Various Artists"
-msgstr "Varios Artistas"
+msgstr "Varis Artistes"
 
 #: opener/cdopener.cpp:176 opener/cdopener.cpp:311 optionseditor.cpp:144
 msgid "Composer:"
@@ -1700,15 +1810,15 @@ msgstr "Compositor:"
 #: opener/cdopener.cpp:1062 opener/cdopener.cpp:1121 opener/cdopener.cpp:1149
 #: opener/cdopener.cpp:1359
 msgid "Various Composer"
-msgstr "Varios Compositores"
+msgstr "Varis Compositors"
 
 #: opener/cdopener.cpp:189 optionseditor.cpp:160
 msgid "Album:"
-msgstr "Álbum:"
+msgstr "Àlbum:"
 
 #: opener/cdopener.cpp:197 optionseditor.cpp:176
 msgid "Disc No.:"
-msgstr "Disco Nro.:"
+msgstr "Disc Núm.:"
 
 #: opener/cdopener.cpp:203 optionseditor.cpp:117 optionseditor.cpp:187
 msgctxt "Track/Disc No. x of y"
@@ -1717,16 +1827,16 @@ msgstr "de"
 
 #: opener/cdopener.cpp:211 optionseditor.cpp:199
 msgid "Year:"
-msgstr "Año:"
+msgstr "Any:"
 
 #: opener/cdopener.cpp:219 optionseditor.cpp:211
 msgid "Genre:"
-msgstr "Género"
+msgstr "Gènere:"
 
 #: opener/cdopener.cpp:240
 msgctxt "column title"
 msgid "Rip"
-msgstr "Extraer"
+msgstr "Extreure"
 
 #: opener/cdopener.cpp:241 opener/cdopener.cpp:1102
 #: replaygainscanner/replaygainfilelist.cpp:36
@@ -1743,11 +1853,11 @@ msgstr "Compositor"
 
 #: opener/cdopener.cpp:244
 msgid "Title"
-msgstr "Título"
+msgstr "Títol"
 
 #: opener/cdopener.cpp:245
 msgid "Length"
-msgstr "Duración"
+msgstr "Duració"
 
 #: opener/cdopener.cpp:246
 msgid "Player"
@@ -1755,33 +1865,33 @@ msgstr "Reproductor"
 
 #: opener/cdopener.cpp:262
 msgid "No track selected"
-msgstr "No hay pistas seleccionadas"
+msgstr "Cap pista seleccionada"
 
 #: opener/cdopener.cpp:285 optionseditor.cpp:95
 msgid "Title:"
-msgstr "Título:"
+msgstr "Títol:"
 
 #: opener/cdopener.cpp:326 optionseditor.cpp:232
 msgid "Comment:"
-msgstr "Comentario:"
+msgstr "Comentari:"
 
 #: opener/cdopener.cpp:373 opener/diropener.cpp:144 opener/fileopener.cpp:56
 #: opener/playlistopener.cpp:40 opener/urlopener.cpp:70 optionseditor.cpp:57
 #: optionslayer.cpp:42
 msgid "Select your desired output options and click on \"Ok\"."
-msgstr "Elija el directorio de salida y haga click en \"Ok\"."
+msgstr "Seleccioni les opcions de sortida que vulgueu i feu clic a \"Ok\"."
 
 #: opener/cdopener.cpp:394
 msgid "Save cue sheet..."
-msgstr "Guardar archivo cue ..."
+msgstr "Desa el fitxer cue..."
 
 #: opener/cdopener.cpp:399
 msgid "Request CDDB"
-msgstr "Buscar CDDB"
+msgstr "Busca en CDDB"
 
 #: opener/cdopener.cpp:404
 msgid "Rip entire CD to one file"
-msgstr "Extraer el CD entero en un solo archivo"
+msgstr "Extreu el CD complet en un fitxer"
 
 #: opener/cdopener.cpp:414
 msgid ""
@@ -1789,8 +1899,9 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
-"Extraer el CD en un solo archivo no está soportado por los binarios "
-"instalados.⏎ Las posibles soluciones se listan debajo.⏎\n"
+"Extreure un CD complet a un sol fitxer no està suportat per els binaris "
+"externs instal·lats.\n"
+"Les possibles solucions s'enumeren a continuació.\n"
 
 #: opener/cdopener.cpp:418
 msgid ""
@@ -1799,14 +1910,14 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin which supports ripping to one file."
 msgstr ""
-"La extracción de CD a un solo archivo no está soportada por los binarios "
-"instalados.⏎ Verifique con el administrador de paquetes de su distribución "
-"para poder instalar un plugin adicional que soporte extracción a un solo "
-"archivo."
+"Extreure un CD complet a un sol fitxer no està suportat per els binaris "
+"externs instal·lats.\n"
+"Si us plau, doneu un cop d'ull al gestor de paquets de la vostra distribució "
+"per tal d'aconseguir un complement que suporti la extracció a un sol fitxer."
 
 #: opener/cdopener.cpp:425 opener/diropener.cpp:38 opener/urlopener.cpp:81
 msgid "Proceed"
-msgstr "Proceder"
+msgstr "Seguir"
 
 #: opener/cdopener.cpp:428 opener/fileopener.cpp:64
 #: opener/playlistopener.cpp:48 opener/urlopener.cpp:84 optionslayer.cpp:50
@@ -1817,23 +1928,23 @@ msgstr "Ok"
 #: opener/playlistopener.cpp:51 opener/urlopener.cpp:88 optionslayer.cpp:53
 #: replaygainscanner/replaygainscanner.cpp:84
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Cancel·lar"
 
 #: opener/cdopener.cpp:473
 msgid "Select CD-ROM drive"
-msgstr "Elegir unidad de CD-ROM"
+msgstr "Elegiu la unitat de CD-ROM"
 
 #: opener/cdopener.cpp:473
 msgid "Multiple CD-ROM drives where found. Please select one:"
-msgstr "Se han encontrado múltiples unidades de CD-ROM. Por favor elija una."
+msgstr "S'han trobat múltiples unitats de CD-ROM. Elegiu una:"
 
 #: opener/cdopener.cpp:618
 msgid "DVD Recorder"
-msgstr "Grabador de DVD"
+msgstr "Gravadora de DVD"
 
 #: opener/cdopener.cpp:620 opener/cdopener.cpp:624
 msgid "CD Recorder"
-msgstr "Grabador de CD"
+msgstr "Gravadora de CD"
 
 #: opener/cdopener.cpp:620 opener/cdopener.cpp:622
 msgid "DVD Player"
@@ -1845,163 +1956,165 @@ msgstr "Reproductor de CD"
 
 #: opener/cdopener.cpp:627
 msgid "%1 (%2): Audio CD with %3 tracks"
-msgstr "%1 (%2): Audio CD con %3 pistas"
+msgstr "%1 (%2): CD d'àudio amb %3 pistes"
 
 #: opener/cdopener.cpp:691 opener/cdopener.cpp:692 opener/cdopener.cpp:698
 #: opener/cdopener.cpp:707 opener/cdopener.cpp:708
 msgid "Unknown"
-msgstr "Desconocido"
+msgstr "Desconegut"
 
 #: opener/cdopener.cpp:756
 msgid "Please wait, trying to download CDDB data ..."
-msgstr "Por favor espere, intentando bajar la información CDDB"
+msgstr "Esperi si us plau, intentant descarregar dades CDDB ..."
 
 #: opener/cdopener.cpp:805
 msgid "Select CDDB Entry"
-msgstr "Elija una entrada CDDB"
+msgstr "Seleccioni una entrada CDDB"
 
 #: opener/cdopener.cpp:805
 msgid "Multiple CDDB entries where found. Please select one:"
-msgstr "Se encontraron múltiples entradas CDDB. Elija una:"
+msgstr "S'han trobat múltiples entrades CDDB. Seleccioni una"
 
 #: opener/cdopener.cpp:992
 msgid "All tracks"
-msgstr "Todas las pistas"
+msgstr "Totes les pistes"
 
 #: opener/cdopener.cpp:996
 msgid "Tracks"
-msgstr "Pistas"
+msgstr "Pistes"
 
 #: opener/cdopener.cpp:1302
 msgid "Please select at least one track in order to proceed."
-msgstr "Por favor seleccione al menos una pista para proceder."
+msgstr "Si us plau, seleccioni almenys una pista per a seguir."
 
 #: opener/cdopener.cpp:1383 opener/diropener.cpp:208 opener/fileopener.cpp:206
 #: opener/playlistopener.cpp:238 opener/urlopener.cpp:146 optionslayer.cpp:140
 msgid "No conversion options selected."
-msgstr "No se eligieron opciones de conversión."
+msgstr "No s'ha seleccionat cap opció de conversió."
 
 #: opener/cdopener.cpp:1397
 msgid ""
 "A file with this name already exists.\n"
 "\n"
 "Do you want to overwrite the existing one?"
-msgstr "Ya existe un archivo con ese nombre.⏎ ⏎ ¿Desea sobrescribirlo?"
+msgstr ""
+"Un fitxer amb aquest nom ja existeix.\n"
+"\n"
+"Voleu sobreescriure l'existent?"
 
 #: opener/cdopener.cpp:1398
 msgid "File already exists"
-msgstr "Ya existe el archivo"
+msgstr "El fitxer ja existeix"
 
 #: opener/diropener.cpp:26
 msgid "Add folder"
-msgstr "Agregar carpeta"
+msgstr "Afegeix una carpeta"
 
 #: opener/diropener.cpp:52
 msgid "1. Select directory"
-msgstr "1. Elegir directorio"
+msgstr "1. Seleccioni un directori"
 
 #: opener/diropener.cpp:83
 msgid "Directory:"
-msgstr "Directorio:"
+msgstr "Directori:"
 
 #: opener/diropener.cpp:90
 msgid "Only add selected file formats:"
-msgstr "Sólo agregar los formatos de archivo seleccionados:"
+msgstr "Només afegeix els formats de fitxer seleccionats:"
 
 #: opener/diropener.cpp:118 opener/fileopener.cpp:72
 #: replaygainscanner/replaygainscanner.cpp:150
 msgid "Are you missing some file formats?"
-msgstr "¿No le está faltando algún formato de archivo?"
+msgstr "Trobeu a faltar alguns formats de fitxer?"
 
 #: opener/diropener.cpp:126
 msgid "Select all"
-msgstr "Seleccionar todos"
+msgstr "Seleccionna-ho tot"
 
 #: opener/diropener.cpp:130
 msgid "Select none"
-msgstr "Seleccionar uno"
+msgstr "Sense selecció"
 
 #: opener/diropener.cpp:134
 msgid "Recursive"
-msgstr "Recursivo"
+msgstr "Recursiu"
 
 #: opener/diropener.cpp:136
 msgid "If checked, files from subdirectories will be added, too."
-msgstr ""
-"Si está seleccionado, los archivos del subdirectorio también se agregarán."
+msgstr "Si és selecciona, també s'agregaran els fitxers dels subdirectoris."
 
 #: opener/fileopener.cpp:32 opener/fileopener.cpp:76
 #: opener/playlistopener.cpp:56 replaygainscanner/replaygainscanner.cpp:154
 msgid "Add Files"
-msgstr "Agregar archivos"
+msgstr "Afegeix fitxers"
 
 #: opener/fileopener.cpp:51 replaygainscanner/replaygainscanner.cpp:144
 msgid "%1 files"
-msgstr "%1 archivos"
+msgstr "%1 fitxers"
 
 #: opener/fileopener.cpp:53 replaygainscanner/replaygainscanner.cpp:146
 msgid "All supported files"
-msgstr "Todos los archivos soportados"
+msgstr "Tots els fitxers suportats"
 
 #: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:147
 msgid "All files"
-msgstr "Todos los archivos"
+msgstr "Tots els fitxers"
 
 #: opener/playlistopener.cpp:31
 msgid "Add playlist"
-msgstr "Agregar lista de reproducción"
+msgstr "Afegeix llista de reproducció"
 
 #: opener/playlistopener.cpp:215
 msgid "The following files couldn't be found:\n"
-msgstr "No se encontraron los siguientes archivos: \n"
+msgstr "Els següents fitxers no s'han trobat:\n"
 
 #: opener/playlistopener.cpp:218
 msgid "Files not found"
-msgstr "No se encontraron archivos"
+msgstr "Fitxers no trobats"
 
 #: opener/urlopener.cpp:35
 msgid "Add url"
-msgstr "Agregar url"
+msgstr "Afegeix url"
 
 #: opener/urlopener.cpp:48
 msgid "1. Enter url"
-msgstr "1. Ingresar url"
+msgstr "1. Introdueix URL"
 
 #: opener/urlopener.cpp:114
 msgid "The Url you entered is invalid. Please try again."
-msgstr "La Url que ingresó es inválida. Intente de nuevo."
+msgstr "La URL que has introduït no és valida. Torneu-ho a provar."
 
 #: optionsdetailed.cpp:41 optionssimple.cpp:58
 msgid "Format:"
-msgstr "Formato:"
+msgstr "Format:"
 
 #: optionsdetailed.cpp:51
 msgid "Use Plugin:"
-msgstr "Usar Plugin:"
+msgstr "Utilitza el complement:"
 
 #: optionsdetailed.cpp:116 optionssimple.cpp:79
 msgid "Destination:"
-msgstr "Destino:"
+msgstr "Destí:"
 
 #: optionsdetailed.cpp:124 optionssimple.cpp:101
 msgid "Calculate Replay Gain tags"
-msgstr "Calcular etiquetas Replay Gain"
+msgstr "Calcula les etiquetes de Replay Gain"
 
 #: optionsdetailed.cpp:134
 msgid "Save current options as a profile"
-msgstr "Guardar opciones actuales como un perfil"
+msgstr "Desa les preferències actuals com un perfil"
 
 #: optionsdetailed.cpp:141
 msgid "Load saved profiles"
-msgstr "Cargar perfiles guardados"
+msgstr "Carrega els perfils guardats"
 
 #: optionsdetailed.cpp:252
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Replay Gain no está soportado por el formato %1.⏎ Las posibles soluciones se "
-"listan debajo."
+"Replay Gain no està suportat per el format de fitxer %1.\n"
+"Les possibles solucions s'enumeren a continuació."
 
 #: optionsdetailed.cpp:256
 msgid ""
@@ -2009,93 +2122,100 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional Replay Gain plugin."
 msgstr ""
-"Replay Gain no está soportado para el formato %1.⏎ Verifique con el "
-"administrador de paquetes de su distribución para poder instalar un plugin "
-"adicional de Replay Gain."
+"Replay Gain no està suportat per el format de fitxer %1.\n"
+"Si us plau, doneu un cop d'ull al gestor de paquets de la vostra distribució "
+"per tal d'instal·lar un complement addicional que suporti Replay Gain."
 
 #: optionsdetailed.cpp:262
 msgid ""
 "Replay Gain tags can tell your music player how loud a track is\n"
 "so it can adjust the volume to play all tracks with equal loudness."
 msgstr ""
+"Les etiquetes Replay Gain poden dir al seu reproductor de música el volum el "
+"que té una pista\n"
+"pel que pot ajustar el volum per tal de reproduir totes les pistes amb la "
+"mateixa intensitat."
 
 #: optionsdetailed.cpp:311 optionssimple.cpp:389
 msgid ""
 "Using the current conversion options will create files with approximately %1 "
 "per minute."
 msgstr ""
-"Se crearán archivos usando las opciones actuales de conversión en %1 por "
-"minuto."
+"L'ús de les opcions de conversió actuals crearà fitxers amb aproximadament "
+"%1 per minut."
 
 #: optionsdetailed.cpp:448
 msgid "New profile"
-msgstr "Nuevo perfil"
+msgstr "Nou perfil"
 
 #: optionsdetailed.cpp:448
 msgid "Enter a name for the new profile:"
-msgstr "Ingrese nombre para el nuevo perfil:"
+msgstr "Introduïu un nom per al nou perfil:"
 
 #: optionsdetailed.cpp:455
 msgid "You cannot save a profile without a name."
-msgstr "No puede guardar un perfil sin un nombre"
+msgstr "No es pot desar un perfil sense nom."
 
 #: optionsdetailed.cpp:455
 msgid "Profile name is empty"
-msgstr "Nombre de perfil vacío"
+msgstr "El nom del perfil està buit"
 
 #: optionsdetailed.cpp:475
 msgid "You cannot overwrite the built-in profiles."
-msgstr "No puede sobrescribir los perfiles predefinidos."
+msgstr "No és possible sobreescriure els perfils per defecte."
 
 #: optionsdetailed.cpp:475 optionsdetailed.cpp:500
 msgid "Profile already exists"
-msgstr "Ya existe perfil"
+msgstr "El perfil ja existeix"
 
 #: optionsdetailed.cpp:500
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
 "Do you want to overwrite the existing one?"
-msgstr "Ya existe un perfil con ese nombre.⏎ ⏎ ¿Desea sobrescribir ese perfil?"
+msgstr ""
+"Un perfil amb aquest nom ja existeix.\n"
+"\n"
+"Voleu sobreescriure l'existent?"
 
 #: optionseditor.cpp:40
 msgid "Previous"
-msgstr "Previo"
+msgstr "Anterior"
 
 #: optionseditor.cpp:42
 msgid "Next"
-msgstr "Siguiente"
+msgstr "Següent"
 
 #: optionseditor.cpp:65
 msgid "Edit conversion options"
-msgstr "Editar opciones de conversión"
+msgstr "Edita les opcions de conversió"
 
 #: optionseditor.cpp:74
 msgid "Tags"
-msgstr "Etiquetas"
+msgstr "Etiquetes"
 
 #: optionseditor.cpp:85
 msgid "Covers:"
-msgstr "Cubiertas:"
+msgstr "Portades:"
 
 #: optionseditor.cpp:102 optionseditor.cpp:113 optionseditor.cpp:124
 #: optionseditor.cpp:140 optionseditor.cpp:151 optionseditor.cpp:167
 #: optionseditor.cpp:183 optionseditor.cpp:194 optionseditor.cpp:206
 #: optionseditor.cpp:223 optionseditor.cpp:239
 msgid "Edit"
-msgstr "Editar"
+msgstr "Edita"
 
 #: optionseditor.cpp:106
 msgid "Track No.:"
-msgstr "Pista Nro.:"
+msgstr "Pista núm.:"
 
 #: optionseditor.cpp:249
 msgid "Edit tags"
-msgstr "Editar etiquetas"
+msgstr "Editar les etiquetes"
 
 #: optionseditor.cpp:353
 msgid "No file selected"
-msgstr "Ningún archivo seleccionado"
+msgstr "Cap fitxer seleccionat"
 
 #: optionseditor.cpp:384
 msgid ""
@@ -2106,11 +2226,12 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags after downloading."
 msgstr ""
-"No se pudieron leer las etiquetas porque no es un archivo local.⏎ "
-"soundKonverter tratará de leer las etiquetas cuando esté por convertir el "
-"archivo.⏎ Si desea editar las etiquetas, puede pulsar el botón de abajo pero "
-"entonces soundKonverter no va a tratar⏎ de leer las etiquetas después de "
-"bajarlas."
+"Les etiquetes no es poden llegir perquè no és un fitxer local.\n"
+"soundKonverter intentarà llegir les etiquetes, just abans de convertir el "
+"fitxer.\n"
+"Si voleu editar les etiquetes, pot polsar el botó de sota, si ho fa, "
+"soundKonverter no intentarà\n"
+"llegir les etiquetes després de la descàrrega."
 
 #: optionseditor.cpp:394
 msgid ""
@@ -2121,47 +2242,49 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
-"Falló al leer las etiquetas de uno o más archivos. soundKonverter tratará de "
-"leer las etiquetas en un segundo intento, cuando esté por convertir los "
-"archivos. Si desea editar las etiquetas, cliquee en el botón de abajo pero "
-"soundKonverter no tratará de leer las etiquetas por segunda vez."
+"Error al llegir les etiquetes d'aquest fitxer.\n"
+"soundKonverter intentarà llegir les etiquetes per segona vegada, just abans "
+"de convertir el fitxer.\n"
+"Si voleu editar les etiquetes, pot polsar el botó de sota, si ho fa, "
+"soundKonverter no intentarà\n"
+"llegir les etiquetes per segon cop."
 
 #: optionseditor.cpp:418
 msgctxt "cover tooltip"
 msgid "Cover type:"
-msgstr "Tipo de cubierta:"
+msgstr "Tipus de portada:"
 
 #: optionseditor.cpp:420
 msgctxt "cover tooltip"
 msgid "Description:"
-msgstr "Descripción"
+msgstr "Descripció:"
 
 #: optionseditor.cpp:421
 msgctxt "cover tooltip"
 msgid "Size:"
-msgstr "Tamaño:"
+msgstr "Mida:"
 
 #: optionseditor.cpp:421
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
-msgstr "%1 x %2 píxeles (%3)"
+msgstr "%1 x %2 píxels (%3)"
 
 #: optionseditor.cpp:423
 msgctxt "cover tooltip"
 msgid "Mime type:"
-msgstr "Tipo Mime:"
+msgstr "Tipus MIME:"
 
 #: optionseditor.cpp:447
 msgid "%1 Files"
-msgstr "%1 Archivos"
+msgstr "%1 Fitxers"
 
 #: optionseditor.cpp:468
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
 msgstr ""
-"Ha seleccionado múltiples archivos con diferentes opciones de conversión. "
-"Puede cambiar las opciones de todos los archivos pulsando el botón de abajo."
+"Ha seleccionat diversos fitxers amb diferents opcions de conversió.\n"
+"Podeu canviar les opcions de tots els fitxers prement el botó de sota."
 
 #: optionseditor.cpp:476
 msgid ""
@@ -2172,16 +2295,22 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
+"Error al llegir les etiquetes d'un o més fitxers.\n"
+"soundKonverter intentarà llegir les etiquetes per segona vegada, just abans "
+"de convertir els fitxers.\n"
+"Si voleu editar les etiquetes, pot polsar el botó de sota, si ho fa, "
+"soundKonverter no intentarà\n"
+"llegir les etiquetes per segon cop."
 
 #: optionssimple.cpp:35
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:69
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:286
 msgid "Quality:"
-msgstr "Calidad:"
+msgstr "Qualitat:"
 
 #: optionssimple.cpp:46
 msgid "Remove the selected profile"
-msgstr "Eliminar el perfil seleccionado"
+msgstr "Elimina el perfil seleccionat"
 
 #: optionssimple.cpp:49 optionssimple.cpp:68
 msgid "Info"
@@ -2189,19 +2318,19 @@ msgstr "Info"
 
 #: optionssimple.cpp:51
 msgid "Information about the selected profile"
-msgstr "Información sobre el perfil elegido"
+msgstr "Informació sobre el perfil seleccionat"
 
 #: optionssimple.cpp:70
 msgid "Information about the selected file format"
-msgstr "Información sobre el formato de archivo elegido"
+msgstr "Informació sobre el format de fitxer seleccionat"
 
 #: optionssimple.cpp:74
 msgid "More formats..."
-msgstr "Más formatos..."
+msgstr "Més formats..."
 
 #: optionssimple.cpp:96
 msgid "Optional:"
-msgstr "Opcional"
+msgstr "Opcional:"
 
 #: optionssimple.cpp:189
 msgid ""
@@ -2210,6 +2339,10 @@ msgid ""
 "It is not recommended to save your music in this quality without a copy of "
 "higher quality."
 msgstr ""
+"Codificar els fitxers amb una qualitat molt baixa pot ser útil si té un "
+"dispositiu mòbil on l'espai d'emmagatzematge és limitat.\n"
+"No es recomana guardar la seva música en aquesta qualitat sense una còpia de "
+"més qualitat."
 
 #: optionssimple.cpp:193
 msgid ""
@@ -2218,6 +2351,10 @@ msgid ""
 "It is not recommended to save your music in this quality without a copy of "
 "higher quality."
 msgstr ""
+"Codificar els fitxers amb una qualitat baixa pot ser útil si té un "
+"dispositiu mòbil on l'espai d'emmagatzematge és limitat.\n"
+"No es recomana guardar la seva música en aquesta qualitat sense una còpia de "
+"més qualitat."
 
 #: optionssimple.cpp:197
 msgid ""
@@ -2226,18 +2363,28 @@ msgid ""
 "Most people might not hear much of a difference to the original files but "
 "you should only use it to save music if your storage space is limited."
 msgstr ""
+"Codificar els fitxers amb una qualitat mitjana és un compromís entre "
+"qualitat i mida del fitxer.\n"
+"La majoria de les persones no poden apreciar massa diferència respecte els "
+"fitxers originals, però només s'ha d'utilitzar per guardar música si l'espai "
+"d'emmagatzematge és limitat."
 
 #: optionssimple.cpp:201
 msgid ""
 "Encoding files with a high quality is a good choice if you have enough "
 "storage space available. You can use this to save your music."
 msgstr ""
+"Codificar els fitxers amb una alta qualitat és una bona opció si té prou "
+"espai d'emmagatzematge disponible. Pot utilitzar aquesta qualitat per "
+"guardar la seva música."
 
 #: optionssimple.cpp:205
 msgid ""
 "Encoding files with a very high quality is fine if you have enough storage "
 "space."
 msgstr ""
+"Codificar els fitxers amb una molt alta qualitat està molt bé si tens prou "
+"espai d'emmagatzematge."
 
 #: optionssimple.cpp:209
 msgid ""
@@ -2247,92 +2394,98 @@ msgid ""
 "The file size will be big, so you should only use it if you have enough "
 "storage space."
 msgstr ""
+"Codificar els fitxers sense pèrdua preservarà la qualitat del fitxers "
+"original.\n"
+"Per tant només és útil si el fitxer original té una bona qualitat (per "
+"exemple, CD d'àudio).\n"
+"La mida del fitxer serà gran, per la qual cosa s'ha d'utilitzar només si té "
+"prou espai d'emmagatzematge."
 
 #: optionssimple.cpp:217
 msgid "You can define your own profile in the \"Detailed\" tab."
-msgstr "Puede definir su propio perfil en la solapa \"Detallada\"."
+msgstr "Pot definir el seu propi perfil a la pestanya \"Detalls\"."
 
 #: optionssimple.cpp:221
 msgid "This is a user defined profile."
-msgstr "Este es un perfil definido por el usuario."
+msgstr "Aquest és un perfil definit per l'usuari."
 
 #: optionssimple.cpp:224
 msgid "Profile info for %1"
-msgstr "Información de perfil para %1"
+msgstr "Informació del perfil per %1"
 
 #: optionssimple.cpp:231
 msgid "Do you really want to remove the profile: %1"
-msgstr "¿Realmente quiere eliminar el perfil: %1?"
+msgstr "Realment voleu eliminar el perfil: %1"
 
 #: optionssimple.cpp:231
 msgid "Remove profile?"
-msgstr "¿Eliminar perfil?"
+msgstr "Elimina el perfil?"
 
 #: optionssimple.cpp:280
 msgid "Format info for %1"
-msgstr "Información de formato para %1"
+msgstr "Format d'informació per %1"
 
 #: optionssimple.cpp:284
 msgid "Sorry, no format information available."
-msgstr "Lo siento, la información de formato no está disponible."
+msgstr "Ho sentim, no disposem de informació per aquest format."
 
 #: outputdirectory.cpp:36
 msgid "By meta data"
-msgstr "Por metadatos."
+msgstr "Per les metadades"
 
 #: outputdirectory.cpp:37
 msgid "Source directory"
-msgstr "Directorio origen"
+msgstr "Directori d'origen"
 
 #: outputdirectory.cpp:38
 msgid "Specify output directory"
-msgstr "Especificar directorio de salida"
+msgstr "Especifiqui el directori de sortida"
 
 #: outputdirectory.cpp:39
 msgid "Copy directory structure"
-msgstr "Copiar la estructura de directorio"
+msgstr "Copia l'estructura del directori"
 
 #: outputdirectory.cpp:50 outputdirectory.cpp:461
 msgid "Choose an output directory"
-msgstr "Elegir un directorio de salida"
+msgstr "Tria un directori de sortida"
 
 #: outputdirectory.cpp:55
 msgid "Open the output directory with Dolphin"
-msgstr "Abrir el directorio de salida con Dolphin"
+msgstr "Obre el directori de sortida amb Dolphin"
 
 #: outputdirectory.cpp:224
 msgid "Unknown Artist"
-msgstr "Artista Desconocido"
+msgstr "Artista desconegut"
 
 #: outputdirectory.cpp:228
 msgid "Unknown Album"
-msgstr "Álbum Desconocido"
+msgstr "Àlbum desconegut"
 
 #: outputdirectory.cpp:232
 msgid "No Comment"
-msgstr "Sin Comentarios"
+msgstr "Sense comentari"
 
 #: outputdirectory.cpp:239
 msgid "Unknown Genre"
-msgstr "Género Desconocido"
+msgstr "Gènere desconegut"
 
 #: outputdirectory.cpp:246
 msgid "Unknown Composer"
-msgstr "Compositor Desconocido"
+msgstr "Compositor desconegut"
 
 #: outputdirectory.cpp:250
 msgid "Unknown Title"
-msgstr "Título Desconocido"
+msgstr "Títol desconegut"
 
 #: outputdirectory.cpp:331
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
-msgstr "nuevo"
+msgstr "nou"
 
 #: outputdirectory.cpp:512
 msgid "Name all converted files according to the specified pattern"
-msgstr "Llamar a todos los archivos convertidos según patrón especificado"
+msgstr "Anomena tots els arxius convertits d'acord amb el patró especificat"
 
 #: outputdirectory.cpp:513
 msgid ""
@@ -2356,42 +2509,41 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Las siguientes cadenas son comodines que serán reemplazados por la "
-"información en los metadatos:\n"
+"Els següents textos són comodins que seran reemplaçats\n"
+"per la informació de les metadades:\n"
 "\n"
 "%a - Artista\n"
-"%b - Álbum\n"
-"%c - Comentario\n"
-"%d - Número de disco\n"
-"%g - Género\n"
-"%n - Número de pista\n"
+"%b - Àlbum\n"
+"%c - Comentari\n"
+"%d - Nombre de disc\n"
+"%g - Gènere\n"
+"%n - Nombre de pista\n"
 "%p - Compositor\n"
-"%t - Título\n"
-"%y - Año\n"
-"%f - Nombre del archivo original\n"
+"%t - Títol\n"
+"%y - Any\n"
+"%f - Nom del fitxer original\n"
 "\n"
-"Puede encerrar estos comodines y caracteres alrededor con corchetes  ('[' "
-"and ']') para que éstos sean ignorados cuando el valor a reemplazar sea "
-"vacío.\n"
-"Para ésto debe usar caracteres de escape de la siguiente forma ('\\[' and "
-"'\\]')."
+"Pot posar entre claudàtors ('[' i ']') els comodins i caràcters "
+"circumdants \n"
+"per tal que s'ignorin si el valor que substitueixen és buit.\n"
+"Per poder utilitzar claudàtors haurà d'escapar-los amb una barra invertida "
+"('\\[' i '\\]')."
 
 #: outputdirectory.cpp:525
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr ""
-"Volcar todos los archivos convertidos en el mismo directorio que los "
-"archivos originales"
+"Bolca tots els arxius convertits en el mateix directori que els fitxers "
+"originals"
 
 #: outputdirectory.cpp:536
 msgid "Output all converted files into the specified output directory"
 msgstr ""
-"Volcar todos los archivos convertidos en el directorio de salida especificado"
+"Bolca tots els arxius convertits en el directori de sortida especificat"
 
 #: outputdirectory.cpp:547
 msgid "Copy the whole directory structure for all converted files"
-msgstr ""
-"Copiar toda la estructura de directorio para todos los archivos convertidos"
+msgstr "Copia tota l'estructura de directoris per a tots els arxius convertits"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:28
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:28
@@ -2402,7 +2554,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:31
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:60
 msgid "Mode:"
-msgstr "Modo:"
+msgstr "Mode:"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:32
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:131
@@ -2422,14 +2574,14 @@ msgstr "Modo:"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:124
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:64
 msgid "Bitrate"
-msgstr "Tasa de bits"
+msgstr "Taxa de bit"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:31
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:31
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:88
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:246
 msgid "Bitrate:"
-msgstr "Tasa de bit:"
+msgstr "Taxa de bits:"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:82
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:60
@@ -2442,15 +2594,16 @@ msgstr "Tasa de bit:"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:47
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:102
 msgid "Additional encoder arguments:"
-msgstr "Argumentos adicionales del codificador:"
+msgstr "Arguments addicionals del codificador:"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:301
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
-msgstr "Habilitar codecs experimentales en la configuración de ffmpeg."
+msgstr ""
+"Habilita els còdecs experimentals en el diàleg de configuració de ffmpeg."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:305
 msgid "Compile ffmpeg with %1 support."
-msgstr "Compilar ffmpeg con soporte %1."
+msgstr "Compili ffmpeg amb suport per %1."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:365
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:80
@@ -2461,17 +2614,17 @@ msgstr "Compilar ffmpeg con soporte %1."
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:83
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:76
 msgid "Configure %1"
-msgstr "Configurar %1"
+msgstr "Configura %1"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:370
 msgid "Enable experimental codecs"
-msgstr "Habilitar codecs experimentales"
+msgstr "Habilita els còdecs experimentals"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:396
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:396
 msgid "Please restart soundKonverter in order to activate the changes."
-msgstr "Reinicie soundKonverter para activar cambios."
+msgstr "Reinicii soundKonverter per activar els canvis."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:29
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:31
@@ -2480,11 +2633,11 @@ msgstr "Reinicie soundKonverter para activar cambios."
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:30
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:36
 msgid "Compression level:"
-msgstr "Nivel de compresión:"
+msgstr "Nivell de compressió:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
 msgid "Use SoundFont file:"
-msgstr "Usar archivo SoundFont:"
+msgstr "Utilitza el fitxer SoundFont:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:86
 msgid ""
@@ -2492,24 +2645,25 @@ msgid ""
 "maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
-"Para poder convertir datos midi a formato wave necesita SoundFont para que "
-"mapee la información midi a efectos de sonido.\n"
-"Fíjese en %1 para obtener los archivos SoundFont."
+"Per convertir les dades MIDI a una forma d'ona és necessiri un SoundFont que "
+"correlaciona les dades MIDI als efectes de so. ⏎\n"
+"Fes una ullada a %1 per tal d'obtenir els fitxers SoundFont."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:141
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
-msgstr "FluidSynth no está configurado todavía. Necesita un archivo SoundFont."
+msgstr ""
+"FluidSynth encara no està configurat. Cal especificar un fitxer SoundFont."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:31
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:33
 msgid "Preset:"
-msgstr "Predefinido:"
+msgstr "Valor predefinit:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:34
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:396
 msgctxt "Backend profile"
 msgid "Medium"
-msgstr "Medio"
+msgstr "Mitja"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:35
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
@@ -2517,7 +2671,7 @@ msgstr "Medio"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:273
 msgctxt "Backend profile"
 msgid "Standard"
-msgstr "Estándar"
+msgstr "Estàndard"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:410
@@ -2525,7 +2679,7 @@ msgstr "Estándar"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:278
 msgctxt "Backend profile"
 msgid "Extreme"
-msgstr "Extremo"
+msgstr "Extrem"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:417
@@ -2533,12 +2687,12 @@ msgstr "Extremo"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:283
 msgctxt "Backend profile"
 msgid "Insane"
-msgstr "Demente"
+msgstr "Dement"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:424
 msgid "Specify bitrate"
-msgstr "Especificar tasa de bi"
+msgstr "Especifica una taxa de bit"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:53
 msgid "cbr"
@@ -2549,25 +2703,26 @@ msgid ""
 "Encode using a constant bitrate.\n"
 "Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
 msgstr ""
-"Codificar usando tasa de bit constante.\n"
-"Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
+"Codifica utilitzant una taxa de bit constant.\n"
+"Només funciona amb 80, 96, 112, 128, 160, 192, 224, 256 i 320 kbps"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:60
 msgid "Fast encoding"
-msgstr "Codificación rápida"
+msgstr "Codificació ràpida"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:63
 msgid ""
 "Use a faster encoding algorithm (results in a slightly lower output quality)."
 msgstr ""
-"Usar un algoritmo de codificación rápida (implica menor calidad de salida)."
+"Utilitza un algorisme de codificació més ràpid (la qualitat de sortida serà "
+"lleugerament inferior)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:106
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:59
 #: plugins/soundkonverter_codec_opustools/opustoolscodecwidget.cpp:53
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:55
 msgid "Bitrate mode:"
-msgstr "Modo de tasa de bit:"
+msgstr "Mode de taxa de bit:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:109
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:217
@@ -2597,7 +2752,7 @@ msgstr "Variable"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:127
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:280
 msgid "Average"
-msgstr "Media"
+msgstr "Mitjana"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:111
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:227
@@ -2611,7 +2766,7 @@ msgstr "Media"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:128
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:281
 msgid "Constant"
-msgstr "Constante"
+msgstr "Constant"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:133
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:142
@@ -2620,25 +2775,25 @@ msgid ""
 "(The higher the quality, the slower the conversion and vice versa.)\n"
 "A value of 2 is recommended."
 msgstr ""
-"Nivel de calidad de 9 a 0 donde 0 es la mayor calidad.\n"
-"(Cuanto mayor sea la calidad, más lenta será la conversión y viceversa).\n"
-"Se recomienda un valor de 2."
+"Nivell de compressió de 9 a 0, on 0 és la qualitat més alta.\n"
+"(Com més gran sigui la qualitat, més lenta serà la conversió i viceversa.)\n"
+"Es recomana un valor de 2."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:401
 msgid ""
 "This preset should provide near transparency to most people on most music "
 "(~150 kbps abr)."
 msgstr ""
-"Este preajuste debería proveer un sonido transparente para la mayoría de los "
-"casos (~150 kbps abr)."
+"Aquest valor predefinit ha de proporcionar un so gairebé transparent en la "
+"majoria dels casos (~150 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:408
 msgid ""
 "This preset should generally be transparent to most people on most music\n"
 "and is already quite high in quality (~230 kbps abr)."
 msgstr ""
-"Este preajuste debería ser transparente para la mayoría de los casos y ya es "
-"una calidad bastante alta (~230 kbps abr)."
+"Aquest valor predefinit ha de proporcionar un so transparent a la majoria "
+"del casos i té una qualitat bastant alta (~230 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:415
 msgid ""
@@ -2646,8 +2801,9 @@ msgid ""
 "generally provide\n"
 "slightly higher quality than the standard mode (~280 kbps abr)."
 msgstr ""
-"Si posee un equipo de buena calidad de audio, este preajuste proveerá un "
-"calidad ligeramente mayor que el modo estándar (~280 kbps abr)."
+"Si té molt bona oïda i equips de so, aquest valor predefinit proporcionarà "
+"generalment\n"
+"una lleugera millora de qualitat respecte el mode estàndard (~280 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:422
 msgid ""
@@ -2656,9 +2812,10 @@ msgid ""
 "the absolute highest quality with no regard to filesize, this is the way to "
 "go (320 kbps cbr)."
 msgstr ""
-"Este preajuste es exagerado para la mayoría de la gente en la mayoría de los "
-"casos, pero si desea obtener la mayor calidad sin importar el tamaño de "
-"archivo, esta es la manera de hacerlo (320 kbps cbr)."
+"Aquest valor predefinit sol ser excessiu per la majoria de la gent i "
+"situacions, però si ha de tenir\n"
+"la major qualitat possible sense tenir en compte la mida del fitxer, aquest "
+"és el camí a seguir (320 kbps cbr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:468
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:469
@@ -2666,16 +2823,16 @@ msgid ""
 "Quality level from 9 to 0 where 0 is the highest quality.\n"
 "(The higher the quality, the bigger the file size and vice versa.)"
 msgstr ""
-"Nivel de calidad de 9 a 0 donde 0 es la mayor calidad.\n"
-"(Cuanto mayor sea la calidad, más grande será el archivo y viceversa)."
+"Nivell de qualitat de 9 a 0, on 0 és la qualitat més alta.\n"
+"(Com més gran sigui la qualitat, més gran serà el fitxer i viceversa.)"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:116
 msgid "Stereo mode:"
-msgstr "Modo stereo"
+msgstr "Mode estèreo:"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:119
 msgid "Automatic"
-msgstr "Automático"
+msgstr "Automàtic"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:120
 msgid "Joint Stereo"
@@ -2696,35 +2853,36 @@ msgstr "Dual Mono"
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:166
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:92
 msgid "About %1"
-msgstr "Sobre %1"
+msgstr "Quant al %1"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:171
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
-"LAME codificador de MP3 gratis de alta calidad.\n"
-"Lo puede obtener de: http://lame.sourceforge.net"
+"LAME és un codificador de MP3 d'alta qualitat.\n"
+"Es pot aconseguir a: http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
 msgid "Enable experimental codecs in the libav configuration dialog."
 msgstr ""
+"Habilita els còdecs experimentals en el diàleg de configuració de libav."
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
 msgid "Compile libav with %1 support."
-msgstr ""
+msgstr "Compili libav amb suport per %1."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
 msgctxt "Backend profile"
 msgid "Telephone"
-msgstr "Teléfono"
+msgstr "Telefon"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:37
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:263
 msgctxt "Backend profile"
 msgid "Thumb"
-msgstr ""
+msgstr "Thumb"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:268
@@ -2736,45 +2894,49 @@ msgstr "Radio"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:288
 msgctxt "Backend profile"
 msgid "Braindead"
-msgstr "Muerte cerebral"
+msgstr "Mort cerebral"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:45
 msgid "Either use one of MusePacks's presets or your own settings."
-msgstr "O utiliza los ajustes de MusePack o los suyos."
+msgstr ""
+"Utilitzar un dels valor predefinit de MusePack o be els teus propis "
+"ajustaments."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:261
 msgid "low quality (~60 kbps abr)."
-msgstr "calidad baja (~60 kbps abr)."
+msgstr "baixa qualitat (~60 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:266
 msgid "low/medium quality (~90 kbps abr)."
-msgstr "calidad baja/media (~90 kbps abr)."
+msgstr "baixa/mitjana qualitat (~90 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:271
 msgid "medium quality (~130 kbps abr)."
-msgstr "calidad media (~130 kbps abr)."
+msgstr "mitjana qualitat (~130 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:276
 msgid "high quality (~180 kbps abr)."
-msgstr "calidad alta (~180 kbps abr)."
+msgstr "alta qualitat (~180 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:281
 msgid "excellent quality (~210 kbps abr)."
-msgstr "calidad excelente (~210 kbps abr)."
+msgstr "excel·lent qualitat (~210 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:286
 msgid "excellent quality (~240 kbps abr)."
-msgstr "calidad excelente (~240 kbps abr)."
+msgstr "excel·lent qualitat (~240 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:291
 msgid "excellent quality (~270 kbps abr)."
-msgstr "calidad excelente (~270 kbps abr)."
+msgstr "excel·lent qualitat (~270 kbps abr)."
 
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:42
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:50
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:58
 msgid "You can download '%1' at '%2' after entering an email address."
-msgstr "Puede bajar '%1' en '%2' después de ingresar la dirección de correo."
+msgstr ""
+"Pot descarregar '%1' a '%2' després d'introduir una adreça de correu "
+"electrònic."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:50
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:58
@@ -2785,37 +2947,37 @@ msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
-"'%1' usualmente está en el paquete '%2' que debería venir con su "
-"distribución."
+"'%1' és troba en general en el paquet '%2' que tindria que estar inclòs amb "
+"la seva distribució."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:86
 msgid "Uncoupled channels"
-msgstr "Canales desacoplados"
+msgstr "Canals desacoblats"
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:87
 msgid "Use one mono stream per channel"
-msgstr ""
+msgstr "Utilitza un flux mono per canal"
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:97
 msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
 msgstr ""
-"TwoLame es un codificador de MP2 libre.\n"
-"Lo puede obtener de: http://www.twolame.org"
+"TwoLame és un codificador MP2 lliure.\n"
+"Es pot aconseguir a: http://www.twolame.org"
 
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:258
 msgid "Quality level from -50 to 50."
-msgstr "Nivel de calidad de -50 a 50."
+msgstr "Nivell de qualitat des de -50 fins a 50"
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
-msgstr "'%1' usualmente está en el paquete '%2' que se puede bajar en %3"
+msgstr "'%1' és troba en general en el paquet '%2' que pots descarregar a %3"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Fast"
-msgstr "Rápido"
+msgstr "Ràpid"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:35
 msgid "Normal"
@@ -2823,66 +2985,66 @@ msgstr "Normal"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:36
 msgid "High quality"
-msgstr "Alta calidad"
+msgstr "Alta qualitat"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:37
 msgid "Very high quality"
-msgstr "Muy alta calidad"
+msgstr "Molt alta qualitat"
 
 #: plugins/soundkonverter_filter_normalize/normalizefilterwidget.cpp:24
 msgid "Normalize"
-msgstr "Normalizar"
+msgstr "Normalitza"
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:186
 msgid "Enable experimental codecs in the sox configuration dialog."
-msgstr ""
+msgstr "Habilita els còdecs experimentals en el diàleg de configuració de sox."
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:190
 msgid "Compile sox with %1 support."
-msgstr "Compilar sox con soporte %1."
+msgstr "Compili sox amb suport per %1."
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:245
 msgid "Sample rate change quality:"
-msgstr ""
+msgstr "Canvia la qualitat de la taxa de mostratge:"
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:248
 msgid "Quick"
-msgstr "Rápido"
+msgstr "Ràpid"
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 msgid "Quality level from 9 to 0 where 0 is the highest quality."
-msgstr ""
+msgstr "Nivell de qualitat de 9 a 0, on 0 és la qualitat més alta."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
-msgstr "Efecto:"
+msgstr "Efecte:"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:27
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:189
 #: plugins/soundkonverter_filter_sox/soxfilteroptions.cpp:82
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:132
 msgid "Disabled"
-msgstr "Deshabilitado"
+msgstr "Inhabilitat"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:102
 msgid "Remove this effect"
-msgstr "Eliminar este efecto"
+msgstr "Elimina el efecte"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:106
 msgid "Add"
-msgstr "Agregar"
+msgstr "Afegeix"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:107
 msgid "Add another effect"
-msgstr "Agrear otro efecto"
+msgstr "Afegeix un altre efecte"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:146
 msgid ""
 "Normalize:\n"
 "Change the volume so all files have the same loudness"
 msgstr ""
-"Normalizar:\n"
-"Cambiar el volumen para que todos los archivos tengan el mismo volumen"
+"Normalitza:\n"
+"Canvia el volum perquè tots els fitxers tinguin el mateix volum"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:150
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:166
@@ -2896,28 +3058,28 @@ msgid ""
 "Bass:\n"
 "Amplify the low frequencies"
 msgstr ""
-"Bajo:\n"
-"Amplificar bajas frecuencias"
+"Baixos:\n"
+"Amplifica les freqüències baixes"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:176
 msgid ""
 "Treble:\n"
 "Amplify the high frequencies"
 msgstr ""
-"Agudos:\n"
-"Amplificar altas frecuencias"
+"Aguts:\n"
+"Amplifica les freqüències altes"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:28
 msgid "Sample rate:"
-msgstr "Tasa de muestra:"
+msgstr "Taxa de mostratge:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:50
 msgid "Sample size:"
-msgstr "Tamaño de muestra:"
+msgstr "Mida de la mostra:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:66
 msgid "Channels:"
-msgstr "Canales"
+msgstr "Canals:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:70
 msgid "Mono"
@@ -2925,17 +3087,17 @@ msgstr "Mono"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:71
 msgid "Stereo"
-msgstr "Stereo"
+msgstr "Estèreo"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:90
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:83
 msgid "Use tag format:"
-msgstr "Usar formato de etiqueta:"
+msgstr "Utilitza el format d'etiqueta:"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:99
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:92
 msgid "Modify audio stream"
-msgstr ""
+msgstr "Modifica el flux d'àudio"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:100
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:93
@@ -2945,6 +3107,9 @@ msgid ""
 "Undoing the changes is still possible since correction data will be written "
 "as well."
 msgstr ""
+"Escriu els ajustos de guany directament en les dades codificades. D'aquesta "
+"manera l'ajust funciona amb tots els reproductors de mp3.\n"
+"Es poden desfer els canvis ja que també s'escriuran les dades de correcció."
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:42
 msgid ""
@@ -2953,234 +3118,244 @@ msgid ""
 "'cdparanoia' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Para poder extraer cds pista por pista o a un solo archivo, tiene que "
-"instalar 'cdparanoia'.⏎ 'cdparanoia' usualmente viene en su distribución, "
-"aunque el nombre del paquete puede variar."
+"Per extreure CDs d'àudio per pista o a un sol fitxer, cal instal·lar "
+"'cdparanoia'.\n"
+"'cdparanoia' normalment esta inclòs amb la seva distribució, però el nom del "
+"paquet pot variar."
 
 #: progressindicator.cpp:85
 msgid "Speed:"
-msgstr "Velocidad:"
+msgstr "Velocitat:"
 
 #: progressindicator.cpp:98
 msgid "Remaining time:"
-msgstr "Tiempo disponible:"
+msgstr "Temps restant:"
 
 #: progressindicator.cpp:162 soundkonverter.cpp:297 soundkonverter.cpp:299
 msgid "Finished"
-msgstr "Finalizado"
+msgstr "Finalitzat"
 
 #: replaygainscanner/replaygainfilelist.cpp:35
 msgid "File"
-msgstr "Archivo"
+msgstr "Fitxer"
 
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Album"
-msgstr "Álbum"
+msgstr "Àlbum"
 
 #: replaygainscanner/replaygainfilelist.cpp:59
 msgid "Collapse all"
-msgstr "Colapsar todo"
+msgstr "Contraure tot"
 
 #: replaygainscanner/replaygainfilelist.cpp:63
 msgid "Expand all"
-msgstr "Expandir todo"
+msgstr "Expandir tot"
 
 #: replaygainscanner/replaygainfilelist.cpp:73
 msgid "Move to new Album"
-msgstr "Mover a nuevo Álbum"
+msgstr "Mou al nou Àlbum"
 
 #: replaygainscanner/replaygainfilelist.cpp:142
 msgid ""
 "Some tracks can't be added to the album because either the codec or the "
 "sampling rate is different."
 msgstr ""
+"Algunes pistes no es poden afegir a l'àlbum, ja sigui perquè el còdec o la "
+"taxa de mostreig és diferent."
 
 #: replaygainscanner/replaygainfilelist.cpp:1050
 msgid "New album"
-msgstr "Nuevo álbum"
+msgstr "Nou àlbum"
 
 #: replaygainscanner/replaygainprocessor.cpp:89
 msgid "Replay Gain failed. The used backend needs to be configured properly."
 msgstr ""
-"Replay Gain falló. El binario utilizado necesita estar configurado "
-"apropiadamente."
+"Error de Replay Gain. El binari extern utilitzat s'ha de configurar "
+"correctament."
 
 #: replaygainscanner/replaygainprocessor.cpp:95
 msgid ""
 "Replay Gain failed. The preferred plugin lacks support for a necessary "
 "feature."
 msgstr ""
-"Replay Gain falló. El plugin preferido carece del soporte para la "
-"característica necesaria."
+"Error de Replay Gain. El complement preferit no té suport per a una funció "
+"necessària."
 
 #: replaygainscanner/replaygainprocessor.cpp:102
 msgid "Replay Gain failed. Unknown Error."
-msgstr "Replay Gain fallo. Error Desconocido."
+msgstr "Error de Replay Gain. Error desconegut."
 
 #: replaygainscanner/replaygainprocessor.cpp:142
 msgid "Replay Gain failed. Exit code: %1"
-msgstr "Replay Gain falló. Código de salida: %1"
+msgstr "Error de Replay Gain. Codi de sortida: %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:214
 msgid "Adding new item to Replay Gain processing list: '%1'"
-msgstr ""
+msgstr "Addició d'un nou article a la llista de processat de Replay Gain: '%1'"
 
 #: replaygainscanner/replaygainprocessor.cpp:222
 msgid "Replay Gain for %1"
-msgstr "Replay Gain para %1"
+msgstr "Replay Gain per %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:240
 msgid "Possible Replay Gain backends:"
-msgstr ""
+msgstr "Possibles binaris externs per a Replay Gain:"
 
 #: replaygainscanner/replaygainprocessor.cpp:277
 msgctxt "Conversion exit status"
 msgid "Skipped"
-msgstr "Salteado"
+msgstr "Omès"
 
 #: replaygainscanner/replaygainscanner.cpp:45 soundkonverter.cpp:192
 #: soundkonverterview.cpp:80
 msgid "Add folder..."
-msgstr "Agregar carpeta..."
+msgstr "Afegeix una carpeta..."
 
 #: replaygainscanner/replaygainscanner.cpp:46 soundkonverter.cpp:187
 #: soundkonverterview.cpp:79
 msgid "Add files..."
-msgstr "Agregar archivos..."
+msgstr "Afegeix fitxers..."
 
 #: replaygainscanner/replaygainscanner.cpp:52
 msgid "Force recalculation"
-msgstr "Forzar recálculo"
+msgstr "Força el recàlcul"
 
 #: replaygainscanner/replaygainscanner.cpp:53
 msgid ""
 "Recalculate Replay Gain tags for files that already have Replay Gain tags "
 "set."
 msgstr ""
+"Recalcula les etiquetes Replay Gain per els fitxers que ja tenen etiquetes "
+"Replay Gain."
 
 #: replaygainscanner/replaygainscanner.cpp:74
 msgid "Tag untagged"
-msgstr "Etiqueta sin etiquetar"
+msgstr "Etiqueta sense etiquetar"
 
 #: replaygainscanner/replaygainscanner.cpp:75
 msgid ""
 "Calculate Replay Gain tags for all files in the file list without Replay "
 "Gain tags."
 msgstr ""
+"Calcula les etiquetes Replay Gain per a tots els fitxers de la llista sense "
+"etiquetes Replay Gain."
 
 #: replaygainscanner/replaygainscanner.cpp:79
 msgid "Untag tagged"
-msgstr "Quitar etiqueta"
+msgstr "Treure etiqueta"
 
 #: replaygainscanner/replaygainscanner.cpp:80
 msgid "Remove the Replay Gain tags from all files in the file list."
-msgstr ""
+msgstr "Elimina les etiquetes Replay Gain de tots els fitxers de la llista."
 
 #: replaygainscanner/replaygainscanner.cpp:91
 msgid "Close"
-msgstr "Cerrar"
+msgstr "Tancar"
 
 #: replaygainscanner/replaygainscanner.cpp:314
 msgid ""
 "There are still Replay Gain jobs running.\n"
 "Do you really want to cancel them?"
 msgstr ""
+"Encara hi ha treballs de Replay Gain en execució.\n"
+"Realment voleu cancel·lar-los?"
 
 #: soundkonverter.cpp:44
 msgid "This is soundKonverter %1"
-msgstr "Ésto es soundKonverter %1"
+msgstr "Aquest és soundKonverter %1"
 
 #: soundkonverter.cpp:46
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr "Compilado con TagLib %1.%2.%3"
+msgstr "Compilat amb TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:48
 msgid ""
 "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, flac "
 "and asf/wma files. TagLib 1.7 is needed for that."
 msgstr ""
+"Lectura/escriptura de les cobertes no s'admet per a fitxers ogg/"
+"METADATA_BLOCK_PICTURE, flac i asf/wma. És necessari Taglib 1.7 per fer-ho."
 
 #: soundkonverter.cpp:79 soundkonverter.cpp:84 soundkonverter.cpp:99
 msgid "Removing old file: %1"
-msgstr "Eliminado archivo viejo: %1"
+msgstr "Esborrant fitxer vell: %1"
 
 #: soundkonverter.cpp:172
 msgid "View logs..."
-msgstr "Ver registros..."
+msgstr "Veure registre..."
 
 #: soundkonverter.cpp:177
 msgid "Replay Gain tool..."
-msgstr "Herramienta Replay Gain ..."
+msgstr "Eina de Replay Gain..."
 
 #: soundkonverter.cpp:182
 msgid "About plugins..."
-msgstr "Sobre plugins..."
+msgstr "Quant als complements..."
 
 #: soundkonverter.cpp:197 soundkonverterview.cpp:81
 msgid "Add CD tracks..."
-msgstr "Agregar pistas..."
+msgstr "Afegeix pistes..."
 
 #: soundkonverter.cpp:202 soundkonverterview.cpp:82
 msgid "Add url..."
-msgstr "Agregar url..."
+msgstr "Afegeix una URL..."
 
 #: soundkonverter.cpp:207 soundkonverterview.cpp:83
 msgid "Add playlist..."
-msgstr "Agregar listas de reproducción..."
+msgstr "Afegeix una llista de reproducció..."
 
 #: soundkonverter.cpp:212
 msgid "Load file list"
-msgstr "Cargar lista de archivo"
+msgstr "Carrega la llista de fitxers"
 
 #: soundkonverter.cpp:217
 msgid "Save file list"
-msgstr "Guardar lista de archivos"
+msgstr "Desa la llista de fitxers"
 
 #: soundkonverterview.cpp:91 soundkonverterview.cpp:94
 msgid "Start"
-msgstr "Iniciar"
+msgstr "Inicia"
 
 #: soundkonverterview.cpp:101 soundkonverterview.cpp:114
 msgid "Stop"
-msgstr "Detener"
+msgstr "Atura"
 
 #: soundkonverterview.cpp:103
 msgid "Stop immediatelly"
-msgstr ""
+msgstr "Atura immediatament"
 
 #: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"
-msgstr "Detener una vez que las conversiones estén finalizadas"
+msgstr "Atura després de completar les conversions actuals"
 
 #: soundkonverterview.cpp:109
 msgid "Continue after current conversions are completed"
-msgstr "Continuar después que las conversiones actuales estén finalizadas"
+msgstr "Continua després de completar les conversions actuals"
 
 #: soundkonverterview.cpp:260
 msgid "No CD device found"
-msgstr "No se encontró unidad de CD"
+msgstr "No s'ha trobat dispositiu de CD"
 
 #. i18n: file: soundkonverterui.rc:20
 #. i18n: ectx: Menu (tools)
 #: rc.cpp:6
 msgid "Tools"
-msgstr "Herramientas"
+msgstr "Eines"
 
 #: rc.cpp:7
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Sus nombres"
+msgstr "Els seus noms"
 
 #: rc.cpp:8
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "Sus emails"
+msgstr "Els seus correus"
 
 #: rc.cpp:9
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr ""
-"Conversor de archivos de audio, extractor de CD y herramienta Replay Gain"
+msgstr "Convertidor d'arxius d'àudio, extractor de CD i eina Replay Gain"
 
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
-msgstr "Extraer audio CD con soundKonverter"
+msgstr "Extreure CD d'àudio amb soundKonverter"

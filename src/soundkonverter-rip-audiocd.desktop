@@ -6,6 +6,7 @@ X-KDE-Priority=TopLevel
 
 [Desktop Action Rip]
 Name=Rip Audio CD with soundKonverter
+Name[ca]=Extreure CD d'àudio amb soundKonverter
 Name[cs]=Vytáhněte skladby z CD za pomoci soundKonverteru
 Name[de]=Audio-CD mit soundKonverter auslesen
 Name[es]=Extraer audio CD con soundKonverter
@@ -15,7 +16,10 @@ Name[hu]=Audio CD beolvasása a soundKonverterrel
 Name[it]=Estrai CD audio con soundKonverter
 Name[pt]=Extrair um CD áudio com o soundKonverter
 Name[pt_BR]=Extrair um CD de áudio com o soundKonverter
+Name[ro]=Extrage CD audio cu soundKonverter
 Name[ru]=Извлечь аудиоданные с CD с помощью soundKonverter
 Name[sl]=Zajemi zvočni CD s soundKonverter-jem
+Name[sv_SE]=Rippa ljud CD med soundKonverter
+Name[zh_TW]=用 soundKonverter 擷取音樂CD 
 Icon=soundkonverter
 Exec=soundkonverter --rip %d

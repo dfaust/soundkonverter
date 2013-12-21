@@ -219,6 +219,8 @@ QStringList soundkonverter_codec_opustools::convertCommand( const KUrl& inputFil
 
 float soundkonverter_codec_opustools::parseOutput( const QString& output )
 {
+    Q_UNUSED(output)
+
     // [|] 00:00:30.66 15.3x realtime, 309.3kbit/s
 
     return -1;

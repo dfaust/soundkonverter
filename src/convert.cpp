@@ -1346,6 +1346,9 @@ void Convert::updateProgress()
                 item->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
             }
+            default:
+            {
+            }
         }
         time += item->finishedTime + fileProgress * fileTime / 100.0f;
         logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );

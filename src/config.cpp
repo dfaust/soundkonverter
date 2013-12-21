@@ -135,7 +135,6 @@ void Config::load()
     pPluginLoader->load();
 
     QString pluginName;
-    bool found;
     QStringList enabledPlugins;
     QStringList newPlugins;
     int codecIndex;

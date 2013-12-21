@@ -78,12 +78,6 @@ void soundkonverter_codec_speex::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_speex::newCodecWidget()
 {
     SpeexCodecWidget *widget = new SpeexCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

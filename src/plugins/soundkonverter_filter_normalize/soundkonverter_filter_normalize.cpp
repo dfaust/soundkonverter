@@ -83,12 +83,6 @@ FilterWidget *soundkonverter_filter_normalize::newFilterWidget()
 CodecWidget *soundkonverter_filter_normalize::newCodecWidget()
 {
 //     CodecWidget *widget = new CodecWidget();
-//     if( lastUsedConversionOptions )
-//     {
-//         widget->setCurrentConversionOptions( lastUsedConversionOptions );
-//         delete lastUsedConversionOptions;
-//         lastUsedConversionOptions = 0;
-//     }
 //     return qobject_cast<CodecWidget*>(widget);
 return 0;
 }

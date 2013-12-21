@@ -420,12 +420,6 @@ void soundkonverter_codec_libav::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_libav::newCodecWidget()
 {
     LibavCodecWidget *widget = new LibavCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

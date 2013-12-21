@@ -105,12 +105,6 @@ void soundkonverter_codec_twolame::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_twolame::newCodecWidget()
 {
     TwoLameCodecWidget *widget = new TwoLameCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

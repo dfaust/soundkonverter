@@ -36,6 +36,12 @@ CodecWidget *CodecPlugin::deleteCodecWidget( CodecWidget *codecWidget )
         delete lastUsedConversionOptions;
 
     lastUsedConversionOptions = codecWidget->currentConversionOptions();
+    if( lastUsedConversionOptions )
+    {
+        lastUsedConversionOptions->pluginName = name();
+        lastUsedConversionOptions->profile = codecWidget->currentProfile();
+    }
+
     delete codecWidget;
 
     return 0;

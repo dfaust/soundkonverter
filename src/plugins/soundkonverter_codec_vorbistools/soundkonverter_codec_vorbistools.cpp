@@ -78,12 +78,6 @@ void soundkonverter_codec_vorbistools::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_vorbistools::newCodecWidget()
 {
     VorbisToolsCodecWidget *widget = new VorbisToolsCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

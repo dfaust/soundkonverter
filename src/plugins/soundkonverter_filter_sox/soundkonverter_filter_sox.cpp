@@ -309,12 +309,6 @@ FilterWidget *soundkonverter_filter_sox::newFilterWidget()
 CodecWidget *soundkonverter_filter_sox::newCodecWidget()
 {
     SoxCodecWidget *widget = new SoxCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

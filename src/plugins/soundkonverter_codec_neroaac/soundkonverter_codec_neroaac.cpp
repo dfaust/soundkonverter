@@ -90,12 +90,6 @@ void soundkonverter_codec_neroaac::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_neroaac::newCodecWidget()
 {
     NeroaacCodecWidget *widget = new NeroaacCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

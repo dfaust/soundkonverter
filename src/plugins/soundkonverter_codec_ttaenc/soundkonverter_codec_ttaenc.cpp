@@ -77,12 +77,6 @@ void soundkonverter_codec_ttaenc::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_ttaenc::newCodecWidget()
 {
     TTAEncCodecWidget *widget = new TTAEncCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

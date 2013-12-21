@@ -104,12 +104,6 @@ void soundkonverter_codec_faac::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_faac::newCodecWidget()
 {
     FaacCodecWidget *widget = new FaacCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

@@ -78,12 +78,6 @@ void soundkonverter_codec_wavpack::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_wavpack::newCodecWidget()
 {
     WavPackCodecWidget *widget = new WavPackCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

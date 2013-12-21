@@ -125,12 +125,6 @@ void soundkonverter_codec_fluidsynth::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_fluidsynth::newCodecWidget()
 {
     FluidsynthCodecWidget *widget = new FluidsynthCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

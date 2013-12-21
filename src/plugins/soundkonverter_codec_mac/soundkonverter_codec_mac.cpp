@@ -77,12 +77,6 @@ void soundkonverter_codec_mac::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_mac::newCodecWidget()
 {
     MacCodecWidget *widget = new MacCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

@@ -49,7 +49,6 @@ public:
 
     virtual ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
-protected:
     ConversionOptions *lastUsedConversionOptions;
 
 };

@@ -420,12 +420,6 @@ void soundkonverter_codec_ffmpeg::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_ffmpeg::newCodecWidget()
 {
     FFmpegCodecWidget *widget = new FFmpegCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

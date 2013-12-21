@@ -77,12 +77,6 @@ void soundkonverter_codec_shorten::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_shorten::newCodecWidget()
 {
     ShortenCodecWidget *widget = new ShortenCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

@@ -78,12 +78,6 @@ void soundkonverter_codec_timidity::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_timidity::newCodecWidget()
 {
     TimidityCodecWidget *widget = new TimidityCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

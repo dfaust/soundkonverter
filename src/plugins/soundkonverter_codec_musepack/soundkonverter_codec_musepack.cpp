@@ -126,12 +126,6 @@ void soundkonverter_codec_musepack::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_musepack::newCodecWidget()
 {
     MusePackCodecWidget *widget = new MusePackCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

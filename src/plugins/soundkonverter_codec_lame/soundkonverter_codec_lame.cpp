@@ -179,12 +179,6 @@ void soundkonverter_codec_lame::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_lame::newCodecWidget()
 {
     LameCodecWidget *widget = new LameCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

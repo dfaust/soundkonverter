@@ -274,18 +274,24 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
 //         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
         return;
     }
-    currentPlugin = plugin;
     if( wPlugin )
     {
         grid->removeWidget( wPlugin );
         disconnect( wPlugin, SIGNAL(optionsChanged()), 0, 0 );
-        wPlugin = plugin->deleteCodecWidget( wPlugin );
+        wPlugin = currentPlugin->deleteCodecWidget( wPlugin );
     }
+    currentPlugin = plugin;
     wPlugin = plugin->newCodecWidget();
     if( wPlugin )
     {
         connect( wPlugin, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+        if( plugin->lastUsedConversionOptions )
+        {
+            wPlugin->setCurrentConversionOptions( plugin->lastUsedConversionOptions );
+            delete plugin->lastUsedConversionOptions;
+            plugin->lastUsedConversionOptions = 0;
+        }
         grid->addWidget( wPlugin, 2, 0 );
     }
 

@@ -77,12 +77,6 @@ void soundkonverter_codec_aften::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_aften::newCodecWidget()
 {
     AftenCodecWidget *widget = new AftenCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

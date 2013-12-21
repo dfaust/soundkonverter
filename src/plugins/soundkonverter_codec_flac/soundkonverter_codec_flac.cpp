@@ -77,12 +77,6 @@ void soundkonverter_codec_flac::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_flac::newCodecWidget()
 {
     FlacCodecWidget *widget = new FlacCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

@@ -70,12 +70,6 @@ void soundkonverter_codec_flake::showInfo( QWidget *parent )
 CodecWidget *soundkonverter_codec_flake::newCodecWidget()
 {
     FlakeCodecWidget *widget = new FlakeCodecWidget();
-    if( lastUsedConversionOptions )
-    {
-        widget->setCurrentConversionOptions( lastUsedConversionOptions );
-        delete lastUsedConversionOptions;
-        lastUsedConversionOptions = 0;
-    }
     return qobject_cast<CodecWidget*>(widget);
 }
 

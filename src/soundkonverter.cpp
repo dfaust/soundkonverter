@@ -46,7 +46,11 @@ soundKonverter::soundKonverter()
 
     logger->log( 1000, "\n" + i18n("Compiled with TagLib %1.%2.%3").arg(TAGLIB_MAJOR_VERSION).arg(TAGLIB_MINOR_VERSION).arg(TAGLIB_PATCH_VERSION) );
     #if (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION < 7)
-    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, flac and asf/wma files. TagLib 1.7 is needed for that.") + "</span>" );
+    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for cover art in FLAC picture format for Xiph tags requires taglib 1.7 or later.") + "</span>" );
+    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for cover art for ASF/WMA tags requires taglib 1.7 or later.") + "</span>" );
+    #endif
+    #if (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION < 9)
+    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for tags for Ogg Opus files requires taglib 1.9 or later.") + "</span>" );
     #endif
 
     config = new Config( logger, this );

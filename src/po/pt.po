@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2013-07-19 20:32+0200\n"
-"PO-Revision-Date: 2013-04-29 10:10+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
+"POT-Creation-Date: 2013-12-21 13:56+0100\n"
+"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"Last-Translator: Sérgio Marques <smarquespt@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/"
 "soundkonverter/language/pt/)\n"
 "Language: pt\n"
@@ -23,11 +23,11 @@ msgstr ""
 
 #: aboutplugins.cpp:19
 msgid "About plugins"
-msgstr "Sobre os \"plugins\""
+msgstr "Sobre os extras"
 
 #: aboutplugins.cpp:31
 msgid "Installed plugins:"
-msgstr "\"Plugins\" instalados:"
+msgstr "Extras instalados:"
 
 #: aboutplugins.cpp:128
 msgid "About plugin %1:"
@@ -93,6 +93,7 @@ msgstr ""
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
 msgstr ""
+"Para extrair CDs, a infraestrutura \"%1\" pode ser substituída por \"%2\"."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
@@ -131,7 +132,7 @@ msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Alguns dos \"plugins\" não funcionam.\n"
+"Alguns dos extras não funcionam.\n"
 "As soluções possíveis são exibidas abaixo."
 
 #: codecproblems.cpp:37
@@ -156,8 +157,8 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
-"A extração de CDs não é suportada pelos plugins instalados.\n"
-"Tente obter, através do seu gestor de pacotes, um \"plugin\" para extrair os "
+"A extração de CDs não é suportada pelos extras instalados.\n"
+"Tente obter, através do seu gestor de pacotes, uma aplicação para extrair os "
 "Cds através do soundKonverter."
 
 #: codecproblems.cpp:51
@@ -476,6 +477,7 @@ msgstr ""
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
 msgstr ""
+"Campo de comentário para o número total de faixas nos ficheiros flac e ogg:"
 
 #: configdialog/configadvancedpage.cpp:80
 #: configdialog/configadvancedpage.cpp:83
@@ -485,10 +487,15 @@ msgid ""
 "When using the field TRACKNUMBER, the track number and the total tracks "
 "number will be written to the same field separated by a slash ('/')."
 msgstr ""
+"O número total de faixas será guardado no campo escolhido. Ao ler os "
+"detalhes, este será o campo preferencial.\n"
+"Se utilizar o campo TRACKNUNBER, o número de faixa e o total de faixas será "
+"gravado no mesmo campo, sendo separados um uma barra ('/')."
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
 msgstr ""
+"Campo de comentário para o número total de discos nos ficheiros flac e ogg:"
 
 #: configdialog/configadvancedpage.cpp:99
 #: configdialog/configadvancedpage.cpp:102
@@ -498,6 +505,10 @@ msgid ""
 "When using the field DISCNUMBER, the disc number and the total discs number "
 "will be written to the same field separated by a slash ('/')."
 msgstr ""
+"O número total de discos será guardado no campo escolhido. Ao ler os "
+"detalhes, este será o campo preferencial.\n"
+"Se utilizar o campo DISCNUNBER, o número do disco e o total de discos será "
+"gravado no mesmo campo, sendo separados um uma barra ('/')."
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
@@ -622,7 +633,7 @@ msgstr "Filtros"
 
 #: configdialog/configbackendspage.cpp:275
 msgid "Enable plugins:"
-msgstr "\"Plugins ativos\":"
+msgstr "Extras ativos:"
 
 #: configdialog/configbackendspage.cpp:314
 msgid "Priorities"
@@ -987,7 +998,7 @@ msgstr "Normal"
 #: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr ""
+msgstr "Terminado mas com erros"
 
 #: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
 msgctxt "Conversion exit status"
@@ -1055,7 +1066,7 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
-"Wave é um formato básico e que não comprime a emissão áudio. O formato "
+"Wave é um formato simples e que não comprime a emissão áudio. O formato não "
 "incorpora perdas mas o tamanho de ficheiro é grande e não tem suporte a "
 "opções avançadas.<br>É suportado por quase todos os dispositivos e programas."
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
@@ -1071,7 +1082,7 @@ msgid ""
 msgstr ""
 "Advanced Audio Coding (AAC) é um formato com perdas. É muito utilizado nos "
 "dispositivos Apple Inc.<br>No soundKonverter \"aac\" refere-se apenas ao "
-"codificador. Para criar um ficheiro com possibilidade de adicionar detalhes "
+"codificador. Para criar um ficheiro com possibilidade de adicionar detalhes, "
 "utilize \"m4a/aac\".<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio Coding</"
 "a>"
@@ -1133,6 +1144,10 @@ msgid ""
 "some legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/"
 "MP3\">http://en.wikipedia.org/wiki/MP3</a>"
 msgstr ""
+"MPEG-1 ou MPEG-2 Audio Layer III (MP3) é o formato áudio mais utilizado."
+"<br>É suportado por todos os reprodutores áudio mesmo possuindo restrições "
+"legais.<br><br><a href=\"http://en.wikipedia.org/wiki/MP3\">http://en."
+"wikipedia.org/wiki/MP3</a>"
 
 #: core/backendplugin.cpp:112
 msgid ""
@@ -1140,6 +1155,9 @@ msgid ""
 "of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/FLAC"
 "\">http://en.wikipedia.org/wiki/FLAC</a>"
 msgstr ""
+"Free Lossless Audio Codec (FLAC) é um formato áudio sem perdas.<br>Não "
+"possui quaisquer restrições legais.<br><br><a href=\"http://en.wikipedia.org/"
+"wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>"
 
 #: core/backendplugin.cpp:122
 msgid ""
@@ -1147,6 +1165,9 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://"
 "en.wikipedia.org/wiki/Windows Media Audio</a>"
 msgstr ""
+"Windows Media Audio (WMA) é um formato áudio com perdas e é desenvolvido "
+"pela Microsoft.<br><br><a href=\"http://en.wikipedia.org/wiki/"
+"Windows_Media_Audio\">http://en.wikipedia.org/wiki/Windows Media Audio</a>"
 
 #: core/backendplugin.cpp:128
 msgid ""
@@ -1155,6 +1176,10 @@ msgid ""
 "href=\"http://en.wikipedia.org/wiki/Dolby_Digital\">http://en.wikipedia.org/"
 "wiki/Dolby Digital</a>"
 msgstr ""
+"O formato AC3 ou AC-3 faz parte da família Dolby Digital.<br>Foi "
+"desenvolvido para ser utilizado em filmes (ex: DVD) e possui suporte a som "
+"surround.<br><br><a href=\"http://en.wikipedia.org/wiki/Dolby_Digital"
+"\">http://en.wikipedia.org/wiki/Dolby Digital</a>"
 
 #: core/backendplugin.cpp:141
 msgid ""
@@ -1162,6 +1187,9 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
 "\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 msgstr ""
+"O formato MPEG-1 ou MPEG-2 Audio Layer II (MP2) é bastanete antigo."
+"<br><br><a href=\"http://en.wikipedia.org/wiki/MPEG-1_Audio_Layer_II"
+"\">http://en.wikipedia.org/wiki/MPEG-1 Audio Layer II</a>"
 
 #: core/backendplugin.cpp:166
 msgid ""
@@ -1170,6 +1198,10 @@ msgid ""
 "org/wiki/Adaptive_Multi-Rate_audio_codec\">http://en.wikipedia.org/wiki/"
 "Adaptive Multi-Rate audio codec</a>"
 msgstr ""
+"O formato Adaptive Multi-Rate Narrow-Band (AMR NB) é utilizado, "
+"principalmente, para compressão de voz para comunicações móveis.<br><br><a "
+"href=\"http://en.wikipedia.org/wiki/Adaptive_Multi-Rate_audio_codec\">http://"
+"en.wikipedia.org/wiki/Adaptive Multi-Rate audio codec</a>"
 
 #: core/backendplugin.cpp:175
 msgid ""
@@ -1179,6 +1211,11 @@ msgid ""
 "wikipedia.org/wiki/Adaptive_Multi-Rate_Wideband\">http://en.wikipedia.org/"
 "wiki/Adaptive Multi-Rate Wideband</a>"
 msgstr ""
+"O formato Adaptive Multi-Rate Wide-Band (AMR WB) é uma versão melhorada do "
+"formato AMR NB e que utiliza uma taxa de dados superior para obter uma "
+"melhor qualidade.<br>Este formato só deve ser utilizado para compressão de "
+"vozes.<br><br><a href=\"http://en.wikipedia.org/wiki/Adaptive_Multi-"
+"Rate_Wideband\">http://en.wikipedia.org/wiki/Adaptive Multi-Rate Wideband</a>"
 
 #: core/backendplugin.cpp:183
 msgid ""
@@ -1186,6 +1223,8 @@ msgid ""
 "wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's "
 "Audio</a>"
 msgstr ""
+"Monkey's Audio é um formato sem perdas.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's Audio</a>"
 
 #: core/backendplugin.cpp:192
 msgid ""
@@ -1194,6 +1233,10 @@ msgid ""
 "obsolete.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en."
 "wikipedia.org/wiki/Speex<a/>"
 msgstr ""
+"Speex é um formato com perdas criado para codificar vozes.<br>Não possui "
+"quaisquer restrições legais. Após a disponibilização do formato Opus, o "
+"formato Speex foi considerado obsoleto.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/Speex\">http://en.wikipedia.org/wiki/Speex<a/>"
 
 #: core/backendplugin.cpp:206
 msgid ""
@@ -1201,12 +1244,17 @@ msgid ""
 "for high quality.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
 "\">http://en.wikipedia.org/wiki/Musepack<a/>"
 msgstr ""
+"Musepack (MPC) é um formato livre e com perdas baseado no formato mp2 mas "
+"otimizado para uma qualidade superior.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/Musepack\">http://en.wikipedia.org/wiki/Musepack<a/>"
 
 #: core/backendplugin.cpp:216
 msgid ""
 "Shorten (SHN) is a free and lossless audio format.<br><br><a href=\"http://"
 "en.wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
 msgstr ""
+"Shorten (SHN) é um formato livre e sem perdas.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Shorten\">http://en.wikipedia.org/wiki/Shorten</a>"
 
 #: core/backendplugin.cpp:238
 msgid ""
@@ -1214,12 +1262,16 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/"
 "TTA (codec)<a/>"
 msgstr ""
+"True Audio (TTA) é um formato livre e sem perdas.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/TTA_(codec)\">http://en.wikipedia.org/wiki/TTA (codec)<a/>"
 
 #: core/backendplugin.cpp:245
 msgid ""
 "WavPack (WV) is a free and lossless audio format.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 msgstr ""
+"WavPack (WV) é um formato livre e sem perdas.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 
 #: core/backendplugin.cpp:370
 msgid ""
@@ -1227,6 +1279,9 @@ msgid ""
 "Electronic Arts for the Commodore-Amiga computer series.<br><br><a href="
 "\"http://en.wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 msgstr ""
+"8-Bit Sampled Voice (8SVX) é um formato desenvolvido pela Electronic Arts "
+"para os computadores da série Commodore-Amiga.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 
 #: core/backendplugin.cpp:381
 msgid ""
@@ -1236,6 +1291,11 @@ msgid ""
 "\"http://en.wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en."
 "wikipedia.org/wiki/Audio Interchange File Format</a>"
 msgstr ""
+"Audio Interchange File Format (AIFF) é um formato simples e que não comprime "
+"a emissão áudio. O formato não incorpora perdas mas o tamanho de ficheiro é "
+"grande e não tem suporte a opções avançadas.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Audio_Interchange_File_Format\">http://en.wikipedia.org/"
+"wiki/Audio Interchange File Format</a>"
 
 #: core/backendplugin.cpp:449
 msgid "Killing process on user request"
@@ -2778,11 +2838,11 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
 msgid "Enable experimental codecs in the libav configuration dialog."
-msgstr ""
+msgstr "Ativar codificadores experimentais no diálogo de configurações libav."
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
 msgid "Compile libav with %1 support."
-msgstr ""
+msgstr "Compile a libav com suporte a with %1."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:36
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:258
@@ -2923,7 +2983,7 @@ msgstr "Rápida"
 
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:624
 msgid "Quality level from 9 to 0 where 0 is the highest quality."
-msgstr ""
+msgstr "Qualidade entre 9 e 0, sendo 0 a melhor qualidade."
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
@@ -3200,7 +3260,7 @@ msgstr "Replay Gain..."
 
 #: soundkonverter.cpp:182
 msgid "About plugins..."
-msgstr "Sobre os \"plugins\"..."
+msgstr "Sobre os extras..."
 
 #: soundkonverter.cpp:197 soundkonverterview.cpp:81
 msgid "Add CD tracks..."
@@ -3232,7 +3292,7 @@ msgstr "Parar"
 
 #: soundkonverterview.cpp:103
 msgid "Stop immediatelly"
-msgstr ""
+msgstr "Parar imediatamente"
 
 #: soundkonverterview.cpp:106
 msgid "Stop after current conversions are completed"

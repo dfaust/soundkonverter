@@ -7,6 +7,12 @@
 -Add: Copy album artist tags
 -Change: Remember last folder for add files/directory/playlist dialogs
 -Change: Add symlinked files to file list
+
+2.0.5:
+-Add: Catalan translation
+-Add: Swedish translation
+-Add: Chinese (Taiwan) translation
+-Add: Romanian translation
 -Fix: Don't mix up total tracks and total discs when reading vorbis comments
 
 2.0.4:

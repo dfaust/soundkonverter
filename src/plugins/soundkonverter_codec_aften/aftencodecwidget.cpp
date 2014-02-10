@@ -35,17 +35,22 @@ AftenCodecWidget::AftenCodecWidget()
     topBox->addWidget( cMode );
 
     sQuality = new QSlider( Qt::Horizontal, this );
+    sQuality->setRange( 0, 1023 );
+    sQuality->setSingleStep( 10 );
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( sQuality );
+    sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 1023) );
 
     dQuality = new QSpinBox( this );
-    dQuality->setRange( 32, 640 );
-    dQuality->setSuffix( " kbps" );
+    dQuality->setRange( 0, 1023 );
+    dQuality->setSingleStep( 1 );
+    dQuality->setSuffix( "" );
     dQuality->setFixedWidth( dQuality->sizeHint().width() );
     connect( dQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySpinBoxChanged(int)) );
     connect( dQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
+    dQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 1023) );
 
     cBitrate = new KComboBox( this );
     cBitrate->addItem( "32 kbps" );
@@ -243,11 +248,6 @@ void AftenCodecWidget::modeChanged( int mode )
 {
     if( mode == 0 )
     {
-        sQuality->setRange( 0, 1023 );
-        sQuality->setSingleStep( 10 );
-        dQuality->setRange( 0, 1023 );
-        dQuality->setSingleStep( 1 );
-        dQuality->setSuffix( "" );
         sQuality->setValue( 240 );
         dQuality->setValue( 240 );
 //         dQuality->setValue( qualityForBitrate(dQuality->value()) );

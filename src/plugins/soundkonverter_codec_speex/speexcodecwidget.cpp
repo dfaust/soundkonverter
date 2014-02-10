@@ -168,6 +168,8 @@ void SpeexCodecWidget::modeChanged( int mode )
         dQuality->setValue( 8 );
 //         dQuality->setValue( qualityForBitrate(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
+        sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 10) );
+        dQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 10) );
     }
     else
     {
@@ -181,6 +183,8 @@ void SpeexCodecWidget::modeChanged( int mode )
         dQuality->setValue( 64 );
 //         dQuality->setValue( bitrateForQuality(dQuality->value()) );
 //         qualitySpinBoxChanged( dQuality->value() );
+        sQuality->setToolTip( "" );
+        dQuality->setToolTip( "" );
     }
 }
 

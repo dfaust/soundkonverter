@@ -255,7 +255,8 @@ void TwoLameCodecWidget::modeChanged( int mode )
         iQuality->setSuffix( "" );
         sQuality->setValue( 5 );
         iQuality->setValue( 5 );
-        iQuality->setToolTip( i18n("Quality level from -50 to 50.") );
+        sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", -50, 50) );
+        iQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", -50, 50) );
     }
     else
     {
@@ -267,6 +268,8 @@ void TwoLameCodecWidget::modeChanged( int mode )
         sQuality->setValue( 160 );
         iQuality->setValue( 160 );
         iQuality->setToolTip( i18n("Bitrate") );
+        sQuality->setToolTip( "" );
+        iQuality->setToolTip( "" );
     }
 }
 

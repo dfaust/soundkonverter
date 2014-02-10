@@ -17,6 +17,8 @@
 #include <KLineEdit>
 
 
+// TODO clean up use of modeChanged()
+
 SoxCodecWidget::SoxCodecWidget()
     : CodecWidget(),
     currentFormat( "" )
@@ -224,6 +226,8 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         lCompressionLevel->show();
         sCompressionLevel->show();
         iCompressionLevel->show();
+        sCompressionLevel->setToolTip( i18n("Compression level from %1 to %2 where %2 is the best compression.\nThe better the compression, the slower the conversion but the smaller the file size and vice versa.", 0, 8) );
+        iCompressionLevel->setToolTip( i18n("Compression level from %1 to %2 where %2 is the best compression.\nThe better the compression, the slower the conversion but the smaller the file size and vice versa.", 0, 8) );
 
         lMode->hide();
         cMode->hide();
@@ -254,6 +258,8 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         dQuality->setSuffix( " kbps" );
         sQuality->setValue( 160 );
         dQuality->setValue( 160 );
+        sQuality->setToolTip( "" );
+        dQuality->setToolTip( "" );
 
         lBitratePreset->hide();
         cBitratePreset->hide();
@@ -294,6 +300,8 @@ void SoxCodecWidget::setCurrentFormat( const QString& format )
         dQuality->setSuffix( "" );
         sQuality->setValue( 400 );
         dQuality->setValue( 4.0 );
+        sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", -1, 10) );
+        dQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", -1, 10) );
 
         lBitratePreset->hide();
         cBitratePreset->hide();
@@ -621,7 +629,8 @@ void SoxCodecWidget::modeChanged( int mode )
         dQuality->setValue( 5 );
         //dQuality->setValue( qualityForBitrate(dQuality->value()) );
         //qualitySpinBoxChanged( dQuality->value() );
-        dQuality->setToolTip( i18n("Quality level from 9 to 0 where 0 is the highest quality.") );
+        sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 9, 0) );
+        dQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 9, 0) );
     }
     else
     {
@@ -635,6 +644,8 @@ void SoxCodecWidget::modeChanged( int mode )
         dQuality->setValue( 160 );
         //dQuality->setValue( bitrateForQuality(dQuality->value()) );
         //qualitySpinBoxChanged( dQuality->value() );
+        sQuality->setToolTip( "" );
+        dQuality->setToolTip( "" );
     }
 }
 

@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
-    options.add( "replaygain", ki18n("Open the Replay Gain tool an add all given files") );
+    options.add( "replaygain", ki18n("Open the Replay Gain tool and add all given files") );
     options.add( "rip <device>", ki18n("List all tracks on the cd drive <device>, 'auto' will search for a cd") );
     options.add( "profile <profile>", ki18n("Add all files using the given profile") );
     options.add( "format <format>", ki18n("Add all files using the given format") );

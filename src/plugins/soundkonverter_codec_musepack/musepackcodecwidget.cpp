@@ -74,6 +74,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     connect( sQuality, SIGNAL(valueChanged(int)), this, SLOT(qualitySliderChanged(int)) );
     connect( sQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( sQuality );
+    sQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 10) );
 
     dQuality = new QDoubleSpinBox( userdefinedBox );
     dQuality->setRange( 0, 10 );
@@ -83,6 +84,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     connect( dQuality, SIGNAL(valueChanged(double)), this, SLOT(qualitySpinBoxChanged(double)) );
     connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( dQuality );
+    dQuality->setToolTip( i18n("Quality level from %1 to %2 where %2 is the highest quality.\nThe higher the quality, the bigger the file size and vice versa.", 0, 10) );
 
     userdefinedTopBox->addStretch();
 

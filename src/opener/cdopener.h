@@ -138,8 +138,6 @@ private:
 
     /** A combobox for entering the artist or selecting VA of the whole CD */
     KLineEdit *lArtist;
-    /** A combobox for entering the composer or selecting VC of the whole CD */
-    KComboBox *cComposer;
     /** A lineedit for entering the album name */
     KLineEdit *lAlbum;
     /** A spinbox for entering or selecting the disc number */
@@ -234,6 +232,7 @@ private:
     void fadeOut();
 
     void adjustArtistColumn();
+    void adjustComposerColumn();
 
 private slots:
     void requestCddb( bool autoRequest = false );
@@ -244,7 +243,6 @@ private slots:
     void trackUpPressed();
     void trackDownPressed();
     void artistChanged( const QString& text );
-    void composerChanged( const QString& text );
     void trackTitleChanged( const QString& text );
     void trackArtistChanged( const QString& text );
     void trackComposerChanged( const QString& text );

@@ -137,7 +137,7 @@ private:
     QTreeWidget *trackList;
 
     /** A combobox for entering the artist or selecting VA of the whole CD */
-    KComboBox *cArtist;
+    KLineEdit *lArtist;
     /** A combobox for entering the composer or selecting VC of the whole CD */
     KComboBox *cComposer;
     /** A lineedit for entering the album name */
@@ -207,6 +207,8 @@ private:
     bool cdTextFound;
     bool cddbFound;
 
+    QString lastAlbumArtist;
+
     QTimer timeoutTimer;
 
     QList<int> selectedTracks;
@@ -230,6 +232,8 @@ private:
 
     void fadeIn();
     void fadeOut();
+
+    void adjustArtistColumn();
 
 private slots:
     void requestCddb( bool autoRequest = false );

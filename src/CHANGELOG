@@ -1,3 +1,6 @@
+2.0.91 (2.1.0 rc2):
+-Add: Full GUI support for album artist tags including the CD ripper
+
 2.0.90 (2.1.0 rc1):
 -Add: Hide main window when started with --replaygain argument
 -Add: Option to eject CD after ripping has been completed (enabled by default)

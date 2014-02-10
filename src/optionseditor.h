@@ -69,6 +69,10 @@ private:
     QLabel* lComposerLabel;
     KLineEdit* lComposer;
     KPushButton* pComposerEdit;
+    /** A lineedit for entering the album artist */
+    QLabel* lAlbumArtistLabel;
+    KLineEdit* lAlbumArtist;
+    KPushButton* pAlbumArtistEdit;
     /** A lineedit for entering the album name */
     QLabel* lAlbumLabel;
     KLineEdit* lAlbum;
@@ -124,6 +128,7 @@ private slots:
     void editTrackTotalClicked();
     void editArtistClicked();
     void editComposerClicked();
+    void editAlbumArtistClicked();
     void editAlbumClicked();
     void editDiscClicked();
     void editDiscTotalClicked();

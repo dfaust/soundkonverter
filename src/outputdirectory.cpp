@@ -188,6 +188,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
             if( fileListItem->tags &&
                 (
                   ( reg.cap(2) == "a" && !fileListItem->tags->artist.isEmpty() ) ||
+                  ( reg.cap(2) == "z" && !fileListItem->tags->albumArtist.isEmpty() ) ||
                   ( reg.cap(2) == "b" && !fileListItem->tags->album.isEmpty() ) ||
                   ( reg.cap(2) == "c" && !fileListItem->tags->comment.isEmpty() ) ||
                   ( reg.cap(2) == "d" && fileListItem->tags->disc != 0 ) ||
@@ -214,6 +215,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
             path.replace( "//", "/" );
 
         path.replace( "%a", "$replace_by_artist$" );
+        path.replace( "%z", "$replace_by_albumartist$" );
         path.replace( "%b", "$replace_by_album$" );
         path.replace( "%c", "$replace_by_comment$" );
         path.replace( "%d", "$replace_by_disc$" );
@@ -228,6 +230,10 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         QString artist = ( fileListItem->tags == 0 || fileListItem->tags->artist.isEmpty() ) ? i18n("Unknown Artist") : fileListItem->tags->artist;
         artist.replace("/",",");
         path.replace( "$replace_by_artist$", artist );
+
+        QString albumArtist = ( fileListItem->tags == 0 || fileListItem->tags->albumArtist.isEmpty() ) ? i18n("Unknown Artist") : fileListItem->tags->albumArtist;
+        albumArtist.replace("/",",");
+        path.replace( "$replace_by_albumartist$", albumArtist );
 
         QString album = ( fileListItem->tags == 0 || fileListItem->tags->album.isEmpty() ) ? i18n("Unknown Album") : fileListItem->tags->album;
         album.replace("/",",");
@@ -522,7 +528,7 @@ void OutputDirectory::updateMode( Mode mode )
         pDirGoto->setEnabled( true );
         cMode->setToolTip( i18n("Name all converted files according to the specified pattern") );
         cDir->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
-                "%a - Artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n%s - Path to the source directory\n\n"
+                "%a - Artist\n%z - Album artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n%s - Path to the source directory\n\n"
                 "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.\n"
                 "In order to use squared brackets you will have to escape them with a backslash ('\\[' and '\\]').") );
     }

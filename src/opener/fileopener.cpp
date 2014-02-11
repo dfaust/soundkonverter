@@ -14,6 +14,7 @@
 #include "../config.h"
 #include "../codecproblems.h"
 
+#include <QApplication>
 #include <KLocale>
 #include <KPushButton>
 #include <QLabel>
@@ -32,6 +33,8 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     setCaption( i18n("Add Files") );
     setWindowIcon( KIcon("audio-x-generic") );
     setButtons( 0 );
+
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget();
     setMainWidget( widget );
@@ -83,7 +86,7 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "FileOpener" );
     restoreDialogSize( group );

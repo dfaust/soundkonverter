@@ -16,6 +16,7 @@
 
 #include "global.h"
 
+#include <QApplication>
 #include <QBoxLayout>
 #include <KComboBox>
 #include <KIcon>
@@ -420,6 +421,8 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         }
         else
         {
+            const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
             if( !(item->tags->tagsRead & TagData::Covers) )
             {
                 item->tags->covers = tagEngine->readCovers( item->url );
@@ -446,7 +449,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
                 bCovers->addWidget( label );
                 lCovers.append( label );
 
-                label->setPixmap( pixmap.scaledToHeight( 48, Qt::SmoothTransformation ) );
+                label->setPixmap( pixmap.scaledToHeight( 4.5*fontHeight, Qt::SmoothTransformation ) );
             }
             lCoversLabel->setEnabled( item->tags->covers.count() > 0 );
             lTitle->setText( item->tags->title );

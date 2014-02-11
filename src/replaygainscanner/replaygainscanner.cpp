@@ -16,6 +16,7 @@
 #include <KPushButton>
 #include <KMessageBox>
 
+#include <QApplication>
 #include <QCheckBox>
 #include <QLabel>
 #include <QLayout>
@@ -32,6 +33,8 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, bool sho
 
     setCaption( i18n("Replay Gain tool") );
     setWindowIcon( KIcon("soundkonverter-replaygain") );
+
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
@@ -109,7 +112,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, bool sho
     connect( replayGainProcessor, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 
 
-    setInitialSize( QSize(600,400) );
+    setInitialSize( QSize(60*fontHeight,40*fontHeight) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "ReplayGainTool" );
     restoreDialogSize( group );

@@ -41,6 +41,8 @@ soundKonverter::soundKonverter()
     // accept dnd
     setAcceptDrops(true);
 
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     logger = new Logger( this );
     logger->log( 1000, i18n("This is soundKonverter %1").arg(SOUNDKONVERTER_VERSION_STRING) );
 
@@ -73,7 +75,7 @@ soundKonverter::soundKonverter()
     // It also applies the saved mainwindow settings, if any, and ask the
     // mainwindow to automatically save settings if changed: window size,
     // toolbar position, icon size, etc.
-    setupGUI( QSize(700,400), ToolBar | Keys | Save | Create );
+    setupGUI( QSize(70*fontHeight,45*fontHeight), ToolBar | Keys | Save | Create );
 }
 
 soundKonverter::~soundKonverter()

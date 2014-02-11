@@ -2,6 +2,7 @@
 #include "progressindicator.h"
 #include "global.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QLabel>
@@ -61,6 +62,8 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
     lSpeed( 0 ),
     lTime( 0 )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     totalTime = processedTime = 0;
 
     QHBoxLayout *box = new QHBoxLayout( this );
@@ -73,7 +76,7 @@ ProgressIndicator::ProgressIndicator( QWidget *parent, Feature features )
 
     if( features != 0 )
     {
-        box->addSpacing( 4 );
+        box->addSpacing( 0.4*fontHeight );
 
         QGridLayout *statusChildGrid = new QGridLayout();
         statusChildGrid->setContentsMargins( 0, 0, 0, 0 );

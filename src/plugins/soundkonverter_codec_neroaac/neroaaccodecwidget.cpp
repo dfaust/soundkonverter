@@ -6,6 +6,7 @@
 
 #include <math.h>
 
+#include <QApplication>
 #include <QLayout>
 #include <QLabel>
 #include <KLocale>
@@ -20,9 +21,10 @@ NeroaacCodecWidget::NeroaacCodecWidget()
     : CodecWidget(),
     currentFormat( "m4a/aac" )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
 
     // set up encoding options selection
 
@@ -54,7 +56,7 @@ NeroaacCodecWidget::NeroaacCodecWidget()
     connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
 
-    topBox->addSpacing( 12 );
+    topBox->addSpacing( fontHeight );
 
     QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     topBox->addWidget( lBitrateMode );

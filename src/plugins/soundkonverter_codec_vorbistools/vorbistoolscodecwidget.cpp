@@ -6,6 +6,7 @@
 
 #include <math.h>
 
+#include <QApplication>
 #include <KLocale>
 #include <KComboBox>
 #include <QLayout>
@@ -19,9 +20,10 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
     : CodecWidget(),
     currentFormat( "ogg vorbis" )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
 
     // set up encoding options selection
 
@@ -50,7 +52,7 @@ VorbisToolsCodecWidget::VorbisToolsCodecWidget()
     connect( dQuality, SIGNAL(valueChanged(double)), SIGNAL(optionsChanged()) );
     topBox->addWidget( dQuality );
 
-    topBox->addSpacing( 12 );
+    topBox->addSpacing( fontHeight );
 
     QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     topBox->addWidget( lBitrateMode );

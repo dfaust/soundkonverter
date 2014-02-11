@@ -18,7 +18,6 @@ AftenCodecWidget::AftenCodecWidget()
 {
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
 
     // set up encoding options selection
 

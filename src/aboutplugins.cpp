@@ -2,6 +2,7 @@
 #include "aboutplugins.h"
 #include "config.h"
 
+#include <QApplication>
 #include <KLocale>
 #include <KIcon>
 #include <KPushButton>
@@ -20,6 +21,8 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     setWindowIcon( KIcon("preferences-plugin") );
     setButtons( KDialog::Close );
     setButtonFocus( KDialog::Close );
+
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget( this );
     setMainWidget( widget );
@@ -71,9 +74,9 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
     pluginNames.sort();
     pluginsList->addItems( pluginNames );
 
-    pluginsList->setFixedWidth( 180 );
+    pluginsList->setFixedWidth( 15*fontHeight );
 
-    box->addSpacing( 10 );
+    box->addSpacing( fontHeight );
 
     QVBoxLayout *pluginInfoBox = new QVBoxLayout( widget );
     box->addLayout( pluginInfoBox );
@@ -102,7 +105,7 @@ AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WFlags f )
         currentPluginChanged( currentItem->text() );
     }
 
-    setInitialSize( QSize(500,300) );
+    setInitialSize( QSize(50*fontHeight,40*fontHeight) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "AboutPlugins" );
     restoreDialogSize( group );

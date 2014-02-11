@@ -62,8 +62,6 @@ FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
     setRootIsDecorated( false );
     setDragDropMode( QAbstractItemView::InternalMove );
 
-    setMinimumHeight( 200 );
-
     QGridLayout *grid = new QGridLayout( this );
     grid->setRowStretch( 0, 1 );
     grid->setRowStretch( 2, 1 );

@@ -19,6 +19,8 @@ LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),
     logger( _logger )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     connect( logger, SIGNAL(removedProcess(int)), this, SLOT(processRemoved(int)) );
     connect( logger, SIGNAL(updateProcess(int)), this, SLOT(updateProcess(int)) );
 
@@ -54,7 +56,7 @@ LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
 
     refillLogs();
 
-    setInitialSize( QSize(600,390) );
+    setInitialSize( QSize(60*fontHeight,40*fontHeight) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "LogViewer" );
     restoreDialogSize( group );

@@ -5,6 +5,7 @@
 #include "../../core/conversionoptions.h"
 #include "fluidsynthcodecwidget.h"
 
+#include <QApplication>
 #include <KDialog>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -76,6 +77,8 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
 
     if( !configDialog.data() )
     {
+        const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
         configDialog = new KDialog( parent );
         configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
         configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel );
@@ -86,7 +89,7 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
         configDialogSoundFontLabel->setToolTip( i18n("In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\nHave a look at %1 in order to get SoundFont files.",QString("http://sourceforge.net/apps/trac/fluidsynth/wiki/SoundFont")) );
         configDialogBox->addWidget( configDialogSoundFontLabel );
         configDialogSoundFontUrlRequester = new KUrlRequester( configDialogWidget );
-        configDialogSoundFontUrlRequester->setMinimumWidth( 200 );
+        configDialogSoundFontUrlRequester->setMinimumWidth( 30*fontHeight );
         configDialogBox->addWidget( configDialogSoundFontUrlRequester );
 
         configDialog.data()->setMainWidget( configDialogWidget );

@@ -29,6 +29,7 @@
 #include <KActionMenu>
 #include <KMessageBox>
 
+#include <QApplication>
 #include <QLabel>
 #include <QLayout>
 #include <QHBoxLayout>
@@ -44,6 +45,8 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
       cdManager( _cdManager )
 {
     setAcceptDrops( true );
+
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     // the grid for all widgets in the main window
     QGridLayout* gridLayout = new QGridLayout( this );
@@ -67,7 +70,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
     // add a horizontal box layout for the add combobutton to the grid
     QHBoxLayout *addBox = new QHBoxLayout();
-    addBox->setContentsMargins( 1, 2, 1, 0 ); // determined by experiments
+    addBox->setContentsMargins( 1, 0, 1, 0 ); // extra margin - determined by experiments
     gridLayout->addLayout( addBox, 3, 0 );
 
     // create the combobutton for adding files to the file list
@@ -81,12 +84,12 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     cAdd->insertItem( KIcon("media-optical-audio"), i18n("Add CD tracks...") );
     cAdd->insertItem( KIcon("network-workgroup"), i18n("Add url...") );
     cAdd->insertItem( KIcon("view-media-playlist"), i18n("Add playlist...") );
-    cAdd->increaseHeight( 6 );
+    cAdd->increaseHeight( 0.6*fontHeight );
     addBox->addWidget( cAdd, 0, Qt::AlignVCenter );
     connect( cAdd, SIGNAL(clicked(int)), this, SLOT(addClicked(int)) );
     cAdd->setFocus();
 
-    addBox->addSpacing( 10 );
+    addBox->addSpacing( fontHeight );
 
     startAction = new KAction( KIcon("system-run"), i18n("Start"), this );
     connect( startAction, SIGNAL(triggered()), fileList, SLOT(startConversion()) );
@@ -118,7 +121,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     pStop->setMenu( stopActionMenu->menu() );
     addBox->addWidget( pStop, 0, Qt::AlignVCenter );
 
-    addBox->addSpacing( 10 );
+    addBox->addSpacing( fontHeight );
 
     progressIndicator = new ProgressIndicator( this, ProgressIndicator::Feature( ProgressIndicator::FeatureSpeed | ProgressIndicator::FeatureTime ) );
     addBox->addWidget( progressIndicator, 0, Qt::AlignVCenter );

@@ -16,12 +16,6 @@
 
 class Config;
 
-#define ConfigDialogOffset 20
-
-#define ConfigDialogSpacingSmall 5
-#define ConfigDialogSpacingMedium 10
-#define ConfigDialogSpacingBig 20
-
 /**
 	@author Daniel Faust <hessijames@gmail.com>
 */
@@ -31,6 +25,11 @@ class ConfigPageBase : public QWidget
 public:
     ConfigPageBase( QWidget *parent=0 );
     virtual ~ConfigPageBase();
+
+    int spacingOffset;
+    int spacingSmall;
+    int spacingMedium;
+    int spacingBig;
 
 public slots:
     virtual void resetDefaults();

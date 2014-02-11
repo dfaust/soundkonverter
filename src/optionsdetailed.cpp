@@ -6,6 +6,7 @@
 #include "outputdirectory.h"
 #include "global.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QLabel>
@@ -32,6 +33,8 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     : QWidget( parent ),
     config( _config )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     int gridRow = 0;
     grid = new QGridLayout( this );
 
@@ -66,7 +69,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     QFrame *lineFrame = new QFrame( this );
     lineFrame->setFrameShape( QFrame::HLine );
     lineFrame->setFrameShadow( QFrame::Sunken );
-    lineFrame->setFixedHeight( 10 );
+    lineFrame->setFixedHeight( fontHeight );
     grid->addWidget( lineFrame, 1, 0 );
 
     // prepare the plugin widget
@@ -79,7 +82,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     lineFrame = new QFrame( this );
     lineFrame->setFrameShape( QFrame::HLine );
     lineFrame->setFrameShadow( QFrame::Sunken );
-    lineFrame->setFixedHeight( 10 );
+    lineFrame->setFixedHeight( fontHeight );
     grid->addWidget( lineFrame, gridRow++, 0 );
 
     int filterCount = 0;
@@ -105,7 +108,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         lineFrame = new QFrame( this );
         lineFrame->setFrameShape( QFrame::HLine );
         lineFrame->setFrameShadow( QFrame::Sunken );
-        lineFrame->setFixedHeight( 10 );
+        lineFrame->setFixedHeight( fontHeight );
         grid->addWidget( lineFrame, gridRow++, 0 );
     }
 

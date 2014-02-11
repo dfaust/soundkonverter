@@ -14,6 +14,7 @@
 #include "../options.h"
 #include "../config.h"
 
+#include <QApplication>
 #include <KLocale>
 #include <KPushButton>
 #include <QLabel>
@@ -38,6 +39,8 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
     page = FileOpenPage;
 
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QWidget *widget = new QWidget();
     setMainWidget( widget );
 
@@ -61,7 +64,7 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
     QVBoxLayout *urlBox = new QVBoxLayout();
     mainGrid->addLayout( urlBox, 2, 0 );
-    urlBox->addSpacing( 60 );
+    urlBox->addSpacing( 6*fontHeight );
     urlRequester = new KUrlRequester( widget );
     urlRequester->setMode( KFile::File | KFile::ExistingOnly );
     urlBox->addWidget( urlRequester );
@@ -92,7 +95,7 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
 
         // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "UrlOpener" );
     restoreDialogSize( group );

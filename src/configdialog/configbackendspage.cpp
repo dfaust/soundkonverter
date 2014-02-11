@@ -233,10 +233,10 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     lCdRipper->setFont( groupFont );
     box->addWidget( lCdRipper );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *ripperBox = new QHBoxLayout();
-    ripperBox->addSpacing( ConfigDialogOffset );
+    ripperBox->addSpacing( spacingOffset );
     box->addLayout( ripperBox );
     QLabel *lSelectorRipper = new QLabel( i18n("Use plugin:"), this );
     ripperBox->addWidget( lSelectorRipper );
@@ -260,16 +260,16 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     ripperBox->setStretchFactor( pConfigureRipper, 1 );
     connect( pConfigureRipper, SIGNAL(clicked()), this, SLOT(configureRipper()) );
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lFilters = new QLabel( i18n("Filters"), this );
     lFilters->setFont( groupFont );
     box->addWidget( lFilters );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *filterBox = new QHBoxLayout();
-    filterBox->addSpacing( ConfigDialogOffset );
+    filterBox->addSpacing( spacingOffset );
     box->addLayout( filterBox );
     QGridLayout *filterGrid = new QGridLayout();
 
@@ -315,19 +315,19 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     filterGrid->setColumnStretch( 1, 1 );
     filterBox->addLayout( filterGrid );
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lPriorities = new QLabel( i18n("Priorities"), this );
     lPriorities->setFont( groupFont );
     box->addWidget( lPriorities );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QVBoxLayout *formatBox = new QVBoxLayout();
     box->addLayout( formatBox, 1 );
 
     QHBoxLayout *formatSelectorBox = new QHBoxLayout();
-    formatSelectorBox->addSpacing( ConfigDialogOffset );
+    formatSelectorBox->addSpacing( spacingOffset );
     formatBox->addLayout( formatSelectorBox );
     QLabel *lSelectorFormat = new QLabel( i18n("Configure plugin priorities for format:"), this );
     formatSelectorBox->addWidget( lSelectorFormat );
@@ -340,7 +340,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     formatSelectorBox->addStretch();
 
     QHBoxLayout *formatBackendsBox = new QHBoxLayout();
-    formatBackendsBox->addSpacing( ConfigDialogOffset );
+    formatBackendsBox->addSpacing( spacingOffset );
     formatBox->addLayout( formatBackendsBox );
     decoderList = new BackendsListWidget( i18n("Decoder"), config, this );
     formatBackendsBox->addWidget( decoderList );
@@ -353,7 +353,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     connect( replaygainList, SIGNAL(orderChanged()), this, SLOT(somethingChanged()) );
 
     QHBoxLayout *optimizationsBox = new QHBoxLayout();
-    optimizationsBox->addSpacing( ConfigDialogOffset );
+    optimizationsBox->addSpacing( spacingOffset );
     formatBox->addLayout( optimizationsBox );
     optimizationsBox->addStretch();
     pShowOptimizations = new KPushButton( KIcon("games-solve"), i18n("Show possible optimizations"), this );

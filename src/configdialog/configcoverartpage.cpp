@@ -25,10 +25,10 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     lCoverSaving->setFont( groupFont );
     box->addWidget( lCoverSaving );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *coverSavingBox = new QHBoxLayout();
-    coverSavingBox->addSpacing( ConfigDialogOffset );
+    coverSavingBox->addSpacing( spacingOffset );
     box->addLayout( coverSavingBox );
     QVBoxLayout *writeCoversBox = new QVBoxLayout();
     coverSavingBox->addLayout( writeCoversBox );
@@ -57,7 +57,7 @@ ConfigCoverArtPage::ConfigCoverArtPage( Config *_config, QWidget *parent )
     else if( config->data.coverArt.writeCovers == 2 )
         rWriteCoversNever->setChecked( true );
 
-    writeCoversBox->addSpacing( ConfigDialogSpacingMedium );
+    writeCoversBox->addSpacing( spacingMedium );
 
     lWriteCoverName = new QLabel( i18n("File name for the cover (when saving to output directory)"), this );
     writeCoversBox->addWidget( lWriteCoverName );

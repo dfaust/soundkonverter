@@ -17,6 +17,7 @@
 #include <KStandardDirs>
 #include <KInputDialog>
 
+#include <QApplication>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QGridLayout>
@@ -40,15 +41,17 @@ PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeW
     track( _track ),
     m_treeWidgetItem( _treeWidgetItem )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QHBoxLayout *trackPlayerBox = new QHBoxLayout();
     setLayout( trackPlayerBox );
 
     pStartPlayback = new KPushButton( KIcon("media-playback-start"), "", this );
-    pStartPlayback->setFixedSize( 16, 16 );
+    pStartPlayback->setFixedSize( 1.5*fontHeight, 1.5*fontHeight );
     trackPlayerBox->addWidget( pStartPlayback );
     connect( pStartPlayback, SIGNAL(clicked()), this, SLOT(startPlaybackClicked()) );
     pStopPlayback = new KPushButton( KIcon("media-playback-stop"), "", this );
-    pStopPlayback->setFixedSize( 16, 16 );
+    pStopPlayback->setFixedSize( 1.5*fontHeight, 1.5*fontHeight );
     pStopPlayback->hide();
     trackPlayerBox->addWidget( pStopPlayback );
     connect( pStopPlayback, SIGNAL(clicked()), this, SLOT(stopPlaybackClicked()) );
@@ -114,6 +117,8 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     page = CdOpenPage;
 
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     // let the dialog look nice
     setCaption( i18n("Add CD tracks") );
     setWindowIcon( KIcon("media-optical-audio") );
@@ -155,7 +160,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     QLabel *lAlbumCover = new QLabel( "", cdOpenerWidget );
     topBoxLayout->addWidget( lAlbumCover );
     lAlbumCover->setPixmap( QPixmap( KStandardDirs::locate("data","soundkonverter/images/nocover.png") ) );
-    lAlbumCover->setContentsMargins( 0, 0, 6, 0 );
+    lAlbumCover->setContentsMargins( 0, 0, 0.5*fontHeight, 0 );
 
     // the grid for the artist and album input
     QGridLayout *topGridLayout = new QGridLayout();
@@ -303,7 +308,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     tagGridLayout->addWidget( lTrackCommentLabel, 2, 1 );
     tTrackComment = new KTextEdit( tagGroupBox );
     trackCommentBox->addWidget( tTrackComment );
-    tTrackComment->setFixedHeight( 45 );
+    tTrackComment->setFixedHeight( 4*fontHeight );
     connect( tTrackComment, SIGNAL(textChanged()), this, SLOT(trackCommentChanged()) );
     pTrackCommentEdit = new KPushButton( "", tagGroupBox );
     pTrackCommentEdit->setIcon( KIcon("document-edit") );
@@ -370,7 +375,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     pSaveCue = new KPushButton( KIcon("document-save"), i18n("Save cue sheet..."), widget );
     controlBox->addWidget( pSaveCue );
     connect( pSaveCue, SIGNAL(clicked()), this, SLOT(saveCuesheetClicked()) );
-    controlBox->addSpacing( 10 );
+    controlBox->addSpacing( fontHeight );
 
     pCDDB = new KPushButton( KIcon("download"), i18n("Request CDDB"), widget );
     controlBox->addWidget( pCDDB );
@@ -396,7 +401,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         cEntireCd->setToolTip( errorList.join("\n") );
     }
     controlBox->addWidget( cEntireCd );
-    controlBox->addSpacing( 20 );
+    controlBox->addSpacing( 2*fontHeight );
 
     pProceed = new KPushButton( KIcon("go-next"), i18n("Proceed"), widget );
     controlBox->addWidget( pProceed );
@@ -476,7 +481,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
 
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "CDOpener" );

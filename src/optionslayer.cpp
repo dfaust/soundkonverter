@@ -3,6 +3,7 @@
 #include "options.h"
 #include "config.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QFrame>
 
@@ -17,9 +18,10 @@
 OptionsLayer::OptionsLayer( Config *config, QWidget *parent )
     : QWidget( parent )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *gridLayout = new QGridLayout( this );
-    gridLayout->setContentsMargins( 20, 20, 20, 20 );
-//     gridLayout->setContentsMargins( 0, 0, 0, 0 );
+    gridLayout->setContentsMargins( 2*fontHeight, 2*fontHeight, 2*fontHeight, 2*fontHeight );
 
     frame = new QFrame( this );
     gridLayout->addWidget( frame, 0, 0 );
@@ -36,15 +38,12 @@ OptionsLayer::OptionsLayer( Config *config, QWidget *parent )
 
 
     QVBoxLayout *frameLayout = new QVBoxLayout( frame );
-    frameLayout->setContentsMargins( 3, 3, 3, 3 );
-//     frameLayout->setSpacing( 0 );
 
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), this );
     frameLayout->addWidget( options );
 
 
     QHBoxLayout *buttonBox = new QHBoxLayout();
-    buttonBox->setContentsMargins( 0, 0, 6, 6 );
     frameLayout->addLayout( buttonBox );
     buttonBox->addStretch();
     pOk = new KPushButton( KIcon("dialog-ok"), i18n("Ok"), this );

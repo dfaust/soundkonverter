@@ -1,6 +1,7 @@
 
 #include "combobutton.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QString>
 #include <QAbstractItemView>
@@ -37,11 +38,13 @@ ComboButton::~ComboButton()
 
 void ComboButton::balanceSize()
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     const int width = m_button->sizeHint().width();
 
     const int height = ( m_box->sizeHint().height() > m_button->sizeHint().height() ) ? m_box->sizeHint().height() : m_button->sizeHint().height();
 
-    m_box->setFixedSize( width+19, height+m_increaseHeight );
+    m_box->setFixedSize( width+1.8*fontHeight, height+m_increaseHeight );
     m_box->view()->setMinimumWidth( m_box->view()->sizeHintForColumn(0) );
     m_button->setFixedSize( width, height+m_increaseHeight );
     m_button->setIconSize( QSize(m_iconHight+m_increaseHeight,m_iconHight+m_increaseHeight) );

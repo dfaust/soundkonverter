@@ -5,6 +5,7 @@
 #include "global.h"
 #include "codecproblems.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QLabel>
@@ -28,9 +29,11 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     : QWidget( parent ),
     config( _config )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *grid = new QGridLayout( this );
-    grid->setMargin( 10 );
-    grid->setSpacing( 10 );
+    grid->setMargin( fontHeight );
+    grid->setSpacing( fontHeight );
 
     QLabel *lQuality = new QLabel( i18n("Quality:"), this );
     grid->addWidget( lQuality, 0, 0 );
@@ -40,7 +43,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     cProfile = new KComboBox( this );
     topBoxQuality->addWidget( cProfile );
     connect( cProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
-    topBoxQuality->addSpacing( 3 );
+    topBoxQuality->addSpacing( 0.25*fontHeight );
     pProfileRemove = new KPushButton( KIcon("edit-delete"), i18n("Remove"), this );
     topBoxQuality->addWidget( pProfileRemove );
     pProfileRemove->setToolTip( i18n("Remove the selected profile") );
@@ -53,7 +56,7 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     connect( pProfileInfo, SIGNAL(clicked()), this, SLOT(profileInfo()) );
     topBoxQuality->addStretch( );
 
-    topBoxQuality->addSpacing( 10 );
+    topBoxQuality->addSpacing( fontHeight );
 
     QLabel *lFormat = new QLabel( i18n("Format:"), this );
     grid->addWidget( lFormat, 0, 2 );
@@ -64,13 +67,13 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
     topBoxFormat->addWidget( cFormat );
 //     connect( cFormat, SIGNAL(activated(int)), this, SLOT(formatChanged()) );
     connect( cFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    topBoxFormat->addSpacing( 3 );
+    topBoxFormat->addSpacing( 0.25*fontHeight );
     pFormatInfo = new KPushButton( KIcon("dialog-information"), i18n("Info"), this );
     topBoxFormat->addWidget( pFormatInfo );
     pFormatInfo->setToolTip( i18n("Information about the selected file format") );
 //     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
     connect( pFormatInfo, SIGNAL(clicked()), this, SLOT(formatInfo()) );
-    topBoxFormat->addSpacing( 3 );
+    topBoxFormat->addSpacing( 0.25*fontHeight );
     QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More formats...") + "</a>", this );
     topBoxFormat->addWidget( formatHelp );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );

@@ -37,10 +37,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     lAdvanced->setFont( groupFont );
     box->addWidget( lAdvanced );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout();
-    preferredOggVorbisExtensionBox->addSpacing( ConfigDialogOffset );
+    preferredOggVorbisExtensionBox->addSpacing( spacingOffset );
     box->addLayout( preferredOggVorbisExtensionBox );
     QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files:"), this );
     preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
@@ -53,10 +53,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     preferredOggVorbisExtensionBox->setStretch( 0, 3 );
     preferredOggVorbisExtensionBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *preferredVorbisCommentCommentTagBox = new QHBoxLayout();
-    preferredVorbisCommentCommentTagBox->addSpacing( ConfigDialogOffset );
+    preferredVorbisCommentCommentTagBox->addSpacing( spacingOffset );
     box->addLayout( preferredVorbisCommentCommentTagBox );
     QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
@@ -71,10 +71,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     preferredVorbisCommentCommentTagBox->setStretch( 0, 3 );
     preferredVorbisCommentCommentTagBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *preferredVorbisCommentTrackTotalTagBox = new QHBoxLayout();
-    preferredVorbisCommentTrackTotalTagBox->addSpacing( ConfigDialogOffset );
+    preferredVorbisCommentTrackTotalTagBox->addSpacing( spacingOffset );
     box->addLayout( preferredVorbisCommentTrackTotalTagBox );
     QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
@@ -90,10 +90,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     preferredVorbisCommentTrackTotalTagBox->setStretch( 0, 3 );
     preferredVorbisCommentTrackTotalTagBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *preferredVorbisCommentDiscTotalTagBox = new QHBoxLayout();
-    preferredVorbisCommentDiscTotalTagBox->addSpacing( ConfigDialogOffset );
+    preferredVorbisCommentDiscTotalTagBox->addSpacing( spacingOffset );
     box->addLayout( preferredVorbisCommentDiscTotalTagBox );
     QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
@@ -109,10 +109,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     preferredVorbisCommentDiscTotalTagBox->setStretch( 0, 3 );
     preferredVorbisCommentDiscTotalTagBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *useVFATNamesBox = new QHBoxLayout();
-    useVFATNamesBox->addSpacing( ConfigDialogOffset );
+    useVFATNamesBox->addSpacing( spacingOffset );
     box->addLayout( useVFATNamesBox );
     cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
     cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directory is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
@@ -120,26 +120,26 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useVFATNamesBox->addWidget( cUseVFATNames );
     connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *ejectCdAfterRipBox = new QHBoxLayout();
-    ejectCdAfterRipBox->addSpacing( ConfigDialogOffset );
+    ejectCdAfterRipBox->addSpacing( spacingOffset );
     box->addLayout( ejectCdAfterRipBox );
     cEjectCdAfterRip = new QCheckBox( i18n("Eject CD after ripping has been completed"), this );
     cEjectCdAfterRip->setChecked( config->data.advanced.ejectCdAfterRip );
     ejectCdAfterRipBox->addWidget( cEjectCdAfterRip );
     connect( cEjectCdAfterRip, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lDebug = new QLabel( i18n("Debug"), this ); // TODO rename
     lDebug->setFont( groupFont );
     box->addWidget( lDebug );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *writeLogFilesBox = new QHBoxLayout();
-    writeLogFilesBox->addSpacing( ConfigDialogOffset );
+    writeLogFilesBox->addSpacing( spacingOffset );
     box->addLayout( writeLogFilesBox );
     cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
     cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",KStandardDirs::locateLocal("data","soundkonverter/log/")) );
@@ -147,16 +147,16 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     writeLogFilesBox->addWidget( cWriteLogFiles );
     connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lExperimental = new QLabel( i18n("Experimental"), this );
     lExperimental->setFont( groupFont );
     box->addWidget( lExperimental );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout();
-    useSharedMemoryForTempFilesBox->addSpacing( ConfigDialogOffset );
+    useSharedMemoryForTempFilesBox->addSpacing( spacingOffset );
     box->addLayout( useSharedMemoryForTempFilesBox );
     cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than:"), this );
     cUseSharedMemoryForTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
@@ -180,10 +180,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
     useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *usePipesBox = new QHBoxLayout();
-    usePipesBox->addSpacing( ConfigDialogOffset );
+    usePipesBox->addSpacing( spacingOffset );
     box->addLayout( usePipesBox );
     cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );
     cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.\nBut some backends cause errors in this mode so be cautious.") );

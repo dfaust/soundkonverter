@@ -4,6 +4,7 @@
 #include "lamecodecwidget.h"
 #include "lameconversionoptions.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QLabel>
@@ -19,9 +20,10 @@ LameCodecWidget::LameCodecWidget()
     : CodecWidget(),
     currentFormat( "mp3" )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
 
     // set up preset selection
 
@@ -55,7 +57,7 @@ LameCodecWidget::LameCodecWidget()
     presetBox->addWidget( cPresetBitrateCbr );
     cPresetBitrateCbr->setToolTip( i18n("Encode using a constant bitrate.\nOnly works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps") );
 
-    presetBox->addSpacing( 12 );
+    presetBox->addSpacing( fontHeight );
 
     cPresetFast = new QCheckBox( i18n("Fast encoding"), this );
     connect( cPresetFast, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
@@ -101,7 +103,7 @@ LameCodecWidget::LameCodecWidget()
     connect( iQuality, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     userdefinedTopBox->addWidget( iQuality );
 
-    userdefinedTopBox->addSpacing( 12 );
+    userdefinedTopBox->addSpacing( fontHeight );
 
     QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     userdefinedTopBox->addWidget( lBitrateMode );
@@ -141,7 +143,7 @@ LameCodecWidget::LameCodecWidget()
     bottomBox->addWidget( iCompressionLevel );
     iCompressionLevel->setToolTip( i18n("Compression level from %1 to %2 where %2 is the best compression.\nThe better the compression, the slower the conversion but the smaller the file size and vice versa.\nA value of %3 is recommended.", 9, 0, 2) );
 
-    bottomBox->addSpacing( 12 );
+    bottomBox->addSpacing( fontHeight );
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     bottomBox->addWidget( cCmdArguments );

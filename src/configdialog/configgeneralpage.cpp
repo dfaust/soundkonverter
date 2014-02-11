@@ -44,10 +44,10 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     lUserInterface->setFont( groupFont );
     box->addWidget( lUserInterface );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *startTabBox = new QHBoxLayout();
-    startTabBox->addSpacing( ConfigDialogOffset );
+    startTabBox->addSpacing( spacingOffset );
     box->addLayout( startTabBox );
     QLabel *lStartTab = new QLabel( i18n("Start in Mode:"), this );
     startTabBox->addWidget( lStartTab );
@@ -59,10 +59,10 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     startTabBox->addWidget( cStartTab );
     connect( cStartTab, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *defaultProfileBox = new QHBoxLayout();
-    defaultProfileBox->addSpacing( ConfigDialogOffset );
+    defaultProfileBox->addSpacing( spacingOffset );
     box->addLayout( defaultProfileBox );
     QLabel *lDefaultProfile = new QLabel( i18n("Default profile:"), this );
     defaultProfileBox->addWidget( lDefaultProfile );
@@ -90,13 +90,13 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     connect( cDefaultFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     profileChanged();
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lConversion = new QLabel( i18n("Conversion"), this );
     lConversion->setFont( groupFont );
     box->addWidget( lConversion );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
 //     QHBoxLayout *priorityBox = new QHBoxLayout();
 //     box->addLayout( priorityBox );
@@ -113,7 +113,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //     box->addSpacing( 5 );
 
     QHBoxLayout *conflictHandlingBox = new QHBoxLayout();
-    conflictHandlingBox->addSpacing( ConfigDialogOffset );
+    conflictHandlingBox->addSpacing( spacingOffset );
     box->addLayout( conflictHandlingBox );
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling:"), this );
     conflictHandlingBox->addWidget( lConflictHandling );
@@ -126,10 +126,10 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     conflictHandlingBox->addWidget( cConflictHandling );
     connect( cConflictHandling, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *numFilesBox = new QHBoxLayout();
-    numFilesBox->addSpacing( ConfigDialogOffset );
+    numFilesBox->addSpacing( spacingOffset );
     box->addLayout( numFilesBox );
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once:"), this );
     numFilesBox->addWidget( lNumFiles );
@@ -142,10 +142,10 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     numFilesBox->setStretch( 0, 3 );
     numFilesBox->setStretch( 1, 1 );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *waitForAlbumGainBox = new QHBoxLayout();
-    waitForAlbumGainBox->addSpacing( ConfigDialogOffset );
+    waitForAlbumGainBox->addSpacing( spacingOffset );
     box->addLayout( waitForAlbumGainBox );
     cWaitForAlbumGain = new QCheckBox( i18n("Apply album gain to converted files"), this );
     cWaitForAlbumGain->setToolTip( i18n("Keep songs of the same album waiting in file list in order to apply album gain to all files.") );
@@ -153,16 +153,16 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
     connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingBig );
+    box->addSpacing( spacingBig );
 
     QLabel *lReplayGainTool = new QLabel( i18n("Replay Gain tool"), this );
     lReplayGainTool->setFont( groupFont );
     box->addWidget( lReplayGainTool );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *replayGainGroupingBox = new QHBoxLayout();
-    replayGainGroupingBox->addSpacing( ConfigDialogOffset );
+    replayGainGroupingBox->addSpacing( spacingOffset );
     box->addLayout( replayGainGroupingBox );
     QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by:"), this );
     replayGainGroupingBox->addWidget( lReplayGainGrouping );
@@ -174,10 +174,10 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     replayGainGroupingBox->addWidget( cReplayGainGrouping );
     connect( cReplayGainGrouping, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
 
-    box->addSpacing( ConfigDialogSpacingSmall );
+    box->addSpacing( spacingSmall );
 
     QHBoxLayout *numReplayGainFilesBox = new QHBoxLayout();
-    numReplayGainFilesBox->addSpacing( ConfigDialogOffset );
+    numReplayGainFilesBox->addSpacing( spacingOffset );
     box->addLayout( numReplayGainFilesBox );
     QLabel *lNumReplayGainFiles = new QLabel( i18n("Number of items to process at once:"), this );
     numReplayGainFilesBox->addWidget( lNumReplayGainFiles );

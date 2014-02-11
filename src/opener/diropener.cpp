@@ -4,6 +4,7 @@
 #include "../options.h"
 #include "../codecproblems.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -38,6 +39,8 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
 
     setButtonText( KDialog::User1, i18n("Proceed") );
     setButtonIcon( KDialog::User1, KIcon("go-next") );
+
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     connect( this, SIGNAL(user1Clicked()), this, SLOT(proceedClicked()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(addClicked()) );
@@ -156,7 +159,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
 
         // Prevent the dialog from beeing too wide because of the directory history
     if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-10,sizeHint().height()) );
+        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
     KSharedConfig::Ptr conf = KGlobal::config();
     KConfigGroup group = conf->group( "DirOpener" );
     restoreDialogSize( group );

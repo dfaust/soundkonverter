@@ -6,6 +6,7 @@
 
 #include <math.h>
 
+#include <QApplication>
 #include <KLocale>
 #include <KComboBox>
 #include <KLineEdit>
@@ -21,9 +22,10 @@ MusePackCodecWidget::MusePackCodecWidget()
     : CodecWidget(),
     currentFormat( "musepack" )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
-    grid->setSpacing( 6 );
 
     // set up preset selection
 
@@ -65,7 +67,7 @@ MusePackCodecWidget::MusePackCodecWidget()
     QLabel *lQuality = new QLabel( i18n("Quality"), userdefinedBox );
     userdefinedTopBox->addWidget( lQuality );
 
-    userdefinedTopBox->addSpacing( 5 );
+    userdefinedTopBox->addSpacing( 0.5*fontHeight );
 
     sQuality = new QSlider( Qt::Horizontal, userdefinedBox );
     sQuality->setRange( 0, 1000 );

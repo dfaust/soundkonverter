@@ -4,6 +4,7 @@
 #include "core/conversionoptions.h"
 #include "config.h"
 
+#include <QApplication>
 #include <QLayout>
 #include <QHBoxLayout>
 #include <QDir>
@@ -518,6 +519,8 @@ void OutputDirectory::modeChangedSlot( int mode )
 
 void OutputDirectory::updateMode( Mode mode )
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     if( mode == MetaData )
     {
         cDir->clear();
@@ -566,7 +569,7 @@ void OutputDirectory::updateMode( Mode mode )
     }
 
     // Prevent the directory combo box from beeing too wide because of the directory history
-    cDir->setMinimumWidth( 200 );
+    cDir->setMinimumWidth( 20*fontHeight );
     cDir->view()->setMinimumWidth( cDir->view()->sizeHintForColumn(0) );
 }
 

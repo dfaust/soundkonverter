@@ -5,6 +5,7 @@
 #include "soxeffectwidget.h"
 #include "soxfilteroptions.h"
 
+#include <QApplication>
 #include <KLocale>
 #include <QCheckBox>
 #include <QLayout>
@@ -16,6 +17,8 @@
 SoxFilterWidget::SoxFilterWidget()
     : FilterWidget()
 {
+    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
     int gridRow = 0;
     QGridLayout *grid = new QGridLayout( this );
     grid->setMargin( 0 );
@@ -45,7 +48,7 @@ SoxFilterWidget::SoxFilterWidget()
     box1->addWidget( cSampleRate );
     connect( chSampleRate, SIGNAL(toggled(bool)), cSampleRate, SLOT(setEnabled(bool)) );
 
-    box1->addSpacing( 12 );
+    box1->addSpacing( fontHeight );
 
     chSampleSize = new QCheckBox( i18n("Sample size:"), this );
     connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
@@ -61,7 +64,7 @@ SoxFilterWidget::SoxFilterWidget()
     box1->addWidget( cSampleSize );
     connect( chSampleSize, SIGNAL(toggled(bool)), cSampleSize, SLOT(setEnabled(bool)) );
 
-    box1->addSpacing( 12 );
+    box1->addSpacing( fontHeight );
 
     chChannels = new QCheckBox( i18n("Channels:"), this );
     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );

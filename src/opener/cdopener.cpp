@@ -351,13 +351,14 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
 
     // Conversion Options Widget
 
+    // add a vertical box layout for the options widget
+    QVBoxLayout *optionsBox = new QVBoxLayout();
+    mainGrid->addLayout( optionsBox, 2, 0 );
+
     options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
-    mainGrid->addWidget( options, 2, 0 );
-    adjustSize();
-    const int h_margin = ( cdOpenerWidget->sizeHint().width() - options->sizeHint().width() ) / 4;
-    const int v_margin = ( cdOpenerWidget->sizeHint().height() - options->sizeHint().height() ) / 4;
-    options->setContentsMargins( h_margin, v_margin, h_margin, v_margin );
+    optionsBox->addWidget( options );
     options->hide();
+    optionsBox->addStretch();
 
 
     // draw a horizontal line

@@ -1,6 +1,7 @@
 2.0.91 (2.1.0 rc2):
 -Add: Full GUI support for album artist tags including the CD ripper
 -Change: Replace uses of fixed pixel metrics with sizes based on the default font size
+-Fix: CD ripper layout
 
 2.0.90 (2.1.0 rc1):
 -Add: Hide main window when started with --replaygain argument

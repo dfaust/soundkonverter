@@ -5,6 +5,9 @@
 #include "../../core/conversionoptions.h"
 #include "faaccodecwidget.h"
 
+#include <QFileInfo>
+#include <KConfigGroup>
+
 
 soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QStringList& args  )
     : CodecPlugin( parent )
@@ -13,6 +16,14 @@ soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QSt
 
     binaries["faac"] = "";
     binaries["faad"] = "";
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    configVersion = group.readEntry( "configVersion", 0 );
+    faacLastModified = group.readEntry( "faacLastModified", QDateTime() );
+    faacHasMp4Support = group.readEntry( "faacHasMp4Support", true );
 
     allCodecs += "aac";
     allCodecs += "m4a/aac";
@@ -28,10 +39,36 @@ QString soundkonverter_codec_faac::name()
     return global_plugin_name;
 }
 
+int soundkonverter_codec_faac::version()
+{
+    return global_plugin_version;
+}
+
 QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
 {
     QList<ConversionPipeTrunk> table;
     ConversionPipeTrunk newTrunk;
+
+    if( !binaries["faac"].isEmpty() )
+    {
+        QFileInfo faacInfo( binaries["faac"] );
+        if( faacInfo.lastModified() > faacLastModified || configVersion < version() )
+        {
+            infoProcess = new KProcess();
+            infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
+
+            QStringList command;
+            command += binaries["faac"];
+            command += "--help";
+            infoProcess.data()->clearProgram();
+            infoProcess.data()->setShellCommand( command.join(" ") );
+            infoProcess.data()->start();
+
+            infoProcess.data()->waitForFinished( 3000 );
+        }
+    }
 
     newTrunk.codecFrom = "wav";
     newTrunk.codecTo = "aac";
@@ -44,8 +81,15 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
     newTrunk.codecFrom = "wav";
     newTrunk.codecTo = "m4a/aac";
     newTrunk.rating = 100;
-    newTrunk.enabled = ( binaries["faac"] != "" );
-    newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a/aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
+    newTrunk.enabled = ( binaries["faac"] != "" && faacHasMp4Support );
+    if( binaries["faad"] != "" && !faacHasMp4Support )
+    {
+        newTrunk.problemInfo = i18n("Compile faac with MP4 support.");
+    }
+    else
+    {
+        newTrunk.problemInfo = standardMessage( "encode_codec,backend", "m4a/aac", "faac" ) + "\n" + standardMessage( "install_patented_backend", "faac" );
+    }
     newTrunk.data.hasInternalReplayGain = false;
     table.append( newTrunk );
 
@@ -155,6 +199,10 @@ QStringList soundkonverter_codec_faac::convertCommand( const KUrl& inputFile, co
             command += "-b";
             command += QString::number(conversionOptions->bitrate);
         }
+        if( outputCodec == "m4a/aac" )
+        {
+            command += "-w"; // Wrap AAC data in MP4 container
+        }
         command += "-o";
         command += "\"" + escapeUrl(outputFile) + "\"";
         command += "\"" + escapeUrl(inputFile) + "\"";
@@ -189,6 +237,40 @@ float soundkonverter_codec_faac::parseOutput( const QString& output )
     }
 
     return -1;
+}
+
+void soundkonverter_codec_faac::infoProcessOutput()
+{
+    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+}
+
+void soundkonverter_codec_faac::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
+{
+    Q_UNUSED(exitStatus)
+    Q_UNUSED(exitCode)
+
+    if( infoProcessOutputData.contains("MP4 support unavailable", Qt::CaseInsensitive) )
+    {
+        faacHasMp4Support = false;
+    }
+    else
+    {
+        faacHasMp4Support = true;
+    }
+
+    QFileInfo ffmpegInfo( binaries["faac"] );
+    faacLastModified = ffmpegInfo.lastModified();
+
+    KSharedConfig::Ptr conf = KGlobal::config();
+    KConfigGroup group;
+
+    group = conf->group( "Plugin-"+name() );
+    group.writeEntry( "configVersion", version() );
+    group.writeEntry( "faacLastModified", faacLastModified );
+    group.writeEntry( "faacHasMp4Support", faacHasMp4Support );
+
+    infoProcessOutputData.clear();
+    infoProcess.data()->deleteLater();
 }
 
 

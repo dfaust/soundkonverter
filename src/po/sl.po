@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# R33D3M33R <andrejm@ubuntu.si>, 2013
+# R33D3M33R <andrejm@ubuntu.si>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-21 10:38+0000\n"
 "Last-Translator: R33D3M33R <andrejm@ubuntu.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/sl/)\n"
@@ -522,7 +522,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Po končanem zajemu CD-ja ga izvrzi"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -1614,9 +1614,8 @@ msgid "All programmers of audio converters"
 msgstr "Vsi programerji pretvornikov zvoka"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "Odpri orodje za jakost zvoka in dodaj vse dane datoteke"
+msgstr "Odpri orodje za Jakost predvajanja in dodaj vse dane datoteke"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1783,9 +1782,8 @@ msgid "2. Set conversion options"
 msgstr "2. Nastavite možnosti pretvorbe"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Izvajalec:"
+msgstr "Izvajalec albuma:"
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2442,7 +2440,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Poimenuj vse pretvorjene datoteke glede na podan vzorec"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2466,10 +2463,11 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Sledeči nizi so nadomestni znaki, ki bodo zamenjani\n"
+"Naslednji nizi so nadomestni znaki, ki bodo zamenjani\n"
 "s podati v metapodatkih:\n"
 "\n"
 "%a - izvajalec\n"
+"%z - izvajalec albuma\n"
 "%b - album\n"
 "%c - opomba\n"
 "%d - številka diska\n"
@@ -2479,6 +2477,7 @@ msgstr ""
 "%t - naslov\n"
 "%y - leto\n"
 "%f - ime izvorne datoteke\n"
+"%s - pot do izvorne mape\n"
 "\n"
 "Te nadomestne znake in njihove sosede lahko obdate tudi z oglatimi oklepaji "
 "('[' in ']'),\n"
@@ -2549,13 +2548,12 @@ msgstr "Bitna hitrost"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Raven kakovosti od 9 do 0, kjer je 0 najvišja kakovost.\n"
-"(Višja kot je kakovost, večja je datoteka in obratno.)"
+"Raven kakovosti od %1 do %2, kjer je %2 najvišja kakovost.\n"
+"Višja kot je kakovost, večja je datoteka in obratno."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2622,15 +2620,14 @@ msgstr "Raven stiskanja:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Raven stiskanja od 9 do 0, kjer je 0 najvišja kakovost.\n"
-"(Višja kot je kakovost, počasnejša je pretvorba in obratno.)\n"
-"Priporočena vrednost je 2."
+"Raven stiskanja od %1 do %2, kjer je %2 najvišja stopnja stiskanja.\n"
+"Višja kot je kakovost, počasnejša je pretvorba, a je datoteka manjša in "
+"obratno."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2764,16 +2761,16 @@ msgstr "Stalna"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Raven stiskanja od 9 do 0, kjer je 0 najvišja kakovost.\n"
-"(Višja kot je kakovost, počasnejša je pretvorba in obratno.)\n"
-"Priporočena vrednost je 2."
+"Raven stiskanja od %1 do %2, kjer je %2 najvišja stopnja stiskanja.\n"
+"Višja kot je stopnja stiskanja, počasnejša je pretvorba, a je datoteka "
+"manjša in obratno.\n"
+"Priporočena vrednost je %3."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3099,28 +3096,25 @@ msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Force read speed:"
-msgstr ""
+msgstr "Vsili hitrost branja:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Kanali:"
+msgstr "Endianness:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
-msgstr ""
+msgstr "Največ ponovnih poskusov branja:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Omogoči vstavke:"
+msgstr "Omogoči \"paranoia\""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
-msgstr ""
+msgstr "Omogoči \"extra paranoia\""
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
@@ -3128,9 +3122,9 @@ msgid ""
 "vary."
 msgstr ""
 "Da lahko zajamete zvočne CD-je v skladbe ali v eno datoteko, morate "
-"namestiti 'cdparanoia'.\n"
-"'cdparanoia' je običajno pakirana v vaši distribuciji, ime paketa je lahko "
-"tudi drugačno."
+"namestiti 'icedax'.\n"
+"'icedax' je običajno pakiran v vaši distribuciji, ime paketa je lahko tudi "
+"drugačno."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3226,9 +3220,8 @@ msgid "Add files..."
 msgstr "Dodaj datoteke ..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Zaženi soundKonverter nevidnega"
+msgstr "Pokaži glavno okno SoundKonverterja"
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3287,14 +3280,16 @@ msgid ""
 "Support for cover art in FLAC picture format for Xiph tags requires taglib "
 "1.7 or later."
 msgstr ""
+"Podpora ovitkom slikovne vrste FLAC v oznakah Xiph zahteva taglib 1.7 ali "
+"novejši."
 
 #: soundkonverter.cpp:52
 msgid "Support for cover art for ASF/WMA tags requires taglib 1.7 or later."
-msgstr ""
+msgstr "Podpora ovitkom za oznake ASF/WMA zahteva taglib 1.7 ali novejši."
 
 #: soundkonverter.cpp:55
 msgid "Support for tags for Ogg Opus files requires taglib 1.9 or later."
-msgstr ""
+msgstr "Podpora za oznake datotek Ogg Opus zahteva taglib 1.9 ali novejši."
 
 #: soundkonverter.cpp:140
 msgid "View logs..."
@@ -3340,6 +3335,15 @@ msgid ""
 "2. Your installation is broken.\n"
 "In this case try reinstalling soundKonverter."
 msgstr ""
+"Vstavkov kodekov ni bilo mogoče naložiti. Brez teh ni mogoče uporabljati "
+"soundKonverter-ja.\n"
+"Vzroka za to težavo sta dva:\n"
+"1. pravkar ste namestili soundKonverter, zato Sistemski namestitveni "
+"predpomnilnik za KDE še ni osvežen.\n"
+"V tem primeru zaženite kbuildsycoca4 in znova zaženite soundKonverter, da "
+"rešite težavo.\n"
+"2. Vaša namestitev je pokvarjena.\n"
+"V tem primeru poskusite znova namestiti soundKonverter."
 
 #: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
 msgid "Removing old file: %1"
@@ -3393,37 +3397,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Zajemi zvočni CD s soundKonverter-jem"
-
-#~ msgid "Various Artists"
-#~ msgstr "Več izvajalcev"
-
-#~ msgid "Various Composer"
-#~ msgstr "Več skladateljev"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "Snemalnik DVD-jev"
-
-#~ msgid "CD Recorder"
-#~ msgstr "Snemalnik CD-jev"
-
-#~ msgid "DVD Player"
-#~ msgstr "Predvajalnik DVD-jev"
-
-#~ msgid "CD Player"
-#~ msgstr "Predvajalnik CD-jev"
-
-#~ msgid "Unknown"
-#~ msgstr "Neznano"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Raven kakovosti od -50 do 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Raven kakovosti od 9 do 0, kjer je 0 najvišja kakovost."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Branje/zapisovanje ovitkov ni podprto za datoteke ogg/"
-#~ "METADATA_BLOCK_PICTURE, flac in asf/wma. Za to je zahtevan TagLib 1.7."

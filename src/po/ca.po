@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
-"Last-Translator: kirek <rbuldo@gmail.com>\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-12 11:59+0000\n"
+"Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/projects/p/soundkonverter/"
 "language/ca/)\n"
 "Language: ca\n"
@@ -1629,9 +1629,8 @@ msgid "All programmers of audio converters"
 msgstr "Tots els programadors de convertidors d'àudio"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "Obre l'eina Replay Gain i afegeix tots els fitxers"
+msgstr ""
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1798,9 +1797,8 @@ msgid "2. Set conversion options"
 msgstr "2. Estableix les opcions de conversió"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Artista:"
+msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2465,7 +2463,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Anomena tots els arxius convertits d'acord amb el patró especificat"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2489,25 +2486,6 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Els següents textos són comodins que seran reemplaçats\n"
-"per la informació de les metadades:\n"
-"\n"
-"%a - Artista\n"
-"%b - Àlbum\n"
-"%c - Comentari\n"
-"%d - Nombre de disc\n"
-"%g - Gènere\n"
-"%n - Nombre de pista\n"
-"%p - Compositor\n"
-"%t - Títol\n"
-"%y - Any\n"
-"%f - Nom del fitxer original\n"
-"\n"
-"Pot posar entre claudàtors ('[' i ']') els comodins i caràcters "
-"circumdants \n"
-"per tal que s'ignorin si el valor que substitueixen és buit.\n"
-"Per poder utilitzar claudàtors haurà d'escapar-los amb una barra invertida "
-"('\\[' i '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2575,13 +2553,10 @@ msgstr "Taxa de bit"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Nivell de qualitat de 9 a 0, on 0 és la qualitat més alta.\n"
-"(Com més gran sigui la qualitat, més gran serà el fitxer i viceversa.)"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2649,15 +2624,11 @@ msgstr "Nivell de compressió:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Nivell de compressió de 9 a 0, on 0 és la qualitat més alta.\n"
-"(Com més gran sigui la qualitat, més lenta serà la conversió i viceversa.)\n"
-"Es recomana un valor de 2."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2794,16 +2765,12 @@ msgstr "Constant"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Nivell de compressió de 9 a 0, on 0 és la qualitat més alta.\n"
-"(Com més gran sigui la qualitat, més lenta serà la conversió i viceversa.)\n"
-"Es recomana un valor de 2."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3137,35 +3104,28 @@ msgid "Force read speed:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Canals:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Habilita els complements:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
 "'icedax' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Per extreure CDs d'àudio per pista o a un sol fitxer, cal instal·lar "
-"'cdparanoia'.\n"
-"'cdparanoia' normalment esta inclòs amb la seva distribució, però el nom del "
-"paquet pot variar."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3261,9 +3221,8 @@ msgid "Add files..."
 msgstr "Afegeix fitxers..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Inicia soundKonverter invisible"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3427,38 +3386,3 @@ msgstr "Convertidor d'arxius d'àudio, extractor de CD i eina Replay Gain"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extreure CD d'àudio amb soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Varis Artistes"
-
-#~ msgid "Various Composer"
-#~ msgstr "Varis Compositors"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "Gravadora de DVD"
-
-#~ msgid "CD Recorder"
-#~ msgstr "Gravadora de CD"
-
-#~ msgid "DVD Player"
-#~ msgstr "Reproductor de DVD"
-
-#~ msgid "CD Player"
-#~ msgstr "Reproductor de CD"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconegut"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Nivell de qualitat des de -50 fins a 50"
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Nivell de qualitat de 9 a 0, on 0 és la qualitat més alta."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Lectura/escriptura de les cobertes no s'admet per a fitxers ogg/"
-#~ "METADATA_BLOCK_PICTURE, flac i asf/wma. És necessari Taglib 1.7 per fer-"
-#~ "ho."

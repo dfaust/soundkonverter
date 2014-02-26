@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# FranzMari <franzmari@chakra-project.it>, 2013
+# FranzMari <franzmari@chakra-project.it>, 2013-2014
 # FranzMari <franzmari@chakra-project.it>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-17 18:43+0000\n"
 "Last-Translator: FranzMari <franzmari@chakra-project.it>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/it/)\n"
@@ -524,7 +524,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Espelli il CD dopo che l'estrazione è stata completata"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -1621,7 +1621,6 @@ msgid "All programmers of audio converters"
 msgstr "Tutti i programmatori di convertitori audio"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
 msgstr "Apri lo strumento di Replay Gain e aggiungi tutti i file indicati"
 
@@ -1791,9 +1790,8 @@ msgid "2. Set conversion options"
 msgstr "2. Imposta opzioni di conversione"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Artista:"
+msgstr "Artista dell'album:"
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2453,7 +2451,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Dai un nome a tutti i file convertiti in base allo schema specificato"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2481,6 +2478,7 @@ msgstr ""
 "con le informazioni nei meta data:\n"
 "\n"
 "%a - Artista\n"
+"%z - Artista dell'album\n"
 "%b - Album\n"
 "%c - Commento\n"
 "%d - Numero disco\n"
@@ -2490,6 +2488,7 @@ msgstr ""
 "%t - Titolo\n"
 "%y - Anno\n"
 "%f - Nome file originale\n"
+"%s - Percorso della cartella sorgente\n"
 "\n"
 "Puoi mettere questi caratteri jolly tra parentesi quadre ('[' e ']')\n"
 "in modo che vengano ignorati se il valore corrispondente è nullo.\n"
@@ -2560,13 +2559,12 @@ msgstr "Bit rate"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Livello di qualità da 9 a 0, dove 0 è la qualità più alta.\n"
-"(Maggiore è la qualità, più grande sarà la dimensione del file e viceversa)."
+"Livello di qualità da %1 a %2, dove %2 è la qualità più alta.\n"
+"Maggiore è la qualità, più grande sarà la dimensione del file e viceversa."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2634,15 +2632,14 @@ msgstr "Livello di compressione:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Livello di compressione da 9 a 0, dove 0 è la massima qualità.\n"
-"(Maggiore è la qualità, più lenta sarà la conversione e viceversa).\n"
-"Il livello consigliato è 2."
+"Livello di compressione da %1 a %2, dove %2 è la massima compressione.\n"
+"Maggiore è la compressione, più lenta sarà la conversione e minore la "
+"dimensione del file e viceversa."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2778,16 +2775,16 @@ msgstr "Costante"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Livello di compressione da 9 a 0, dove 0 è la massima qualità.\n"
-"(Maggiore è la qualità, più lenta sarà la conversione e viceversa).\n"
-"Il livello consigliato è 2."
+"Livello di compressione da %1 a %2, dove %2 è la massima qualità.\n"
+"Maggiore è la compressione, più lenta sarà la conversione e minore la "
+"dimensione del file e viceversa.\n"
+"Il livello consigliato è %3."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3118,28 +3115,25 @@ msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Force read speed:"
-msgstr ""
+msgstr "Forza velocità di lettura:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Canali:"
+msgstr "Ordine dei byte:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
-msgstr ""
+msgstr "Tentativi di lettura massimi:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Abilita plugin:"
+msgstr "Abilita paranoia"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
-msgstr ""
+msgstr "Abilita extra paranoia"
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
@@ -3147,8 +3141,8 @@ msgid ""
 "vary."
 msgstr ""
 "Per estrarre i CD audio traccia per traccia o in un unico file, bisogna "
-"installare 'cdparanoia'.\n"
-"'cdparanoia' è solitamente fornito dalla tua distribuzione, il nome del "
+"installare 'icedax'.\n"
+"'icedax' è solitamente fornito dalla tua distribuzione, il nome del "
 "pacchetto può variare."
 
 #: progressindicator.cpp:88
@@ -3245,9 +3239,8 @@ msgid "Add files..."
 msgstr "Aggiungi file..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Avvia soundKonverter in modalità invisibile"
+msgstr "Mostra la finestra principale di soundKonverter"
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3306,14 +3299,19 @@ msgid ""
 "Support for cover art in FLAC picture format for Xiph tags requires taglib "
 "1.7 or later."
 msgstr ""
+"Il supporto per le copertine per i tag Xiph nei file FLAC richiede taglib "
+"1.7 o superiori."
 
 #: soundkonverter.cpp:52
 msgid "Support for cover art for ASF/WMA tags requires taglib 1.7 or later."
 msgstr ""
+"Il supporto per le copertine per i tag ASF/WMA richiede taglib 1.7 o "
+"superiori."
 
 #: soundkonverter.cpp:55
 msgid "Support for tags for Ogg Opus files requires taglib 1.9 or later."
 msgstr ""
+"Il supporto per i tag nei file Ogg Opus richiede taglib 1.9 o superiori."
 
 #: soundkonverter.cpp:140
 msgid "View logs..."
@@ -3359,6 +3357,15 @@ msgid ""
 "2. Your installation is broken.\n"
 "In this case try reinstalling soundKonverter."
 msgstr ""
+"Non è stato possibile caricare alcun plugin codec. Senza plugin codec "
+"soundKonverter non può funzionare.\n"
+"Il problema può avere due cause:\n"
+"1. Hai appena installato soundKonverter e la cache di configurazione del "
+"sistema di KDE non è ancora aggiornata.\n"
+"In questo caso, esegui kbuildsycoca4 e riavvia soundKonverter per eliminare "
+"il problema.\n"
+"2. La tua installazione è rovinata.\n"
+"In questo caso, prova a reinstallare soundKonverter."
 
 #: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
 msgid "Removing old file: %1"
@@ -3411,38 +3418,3 @@ msgstr "Convertitore di file audio, estrattore di CD e strumento Replay Gain"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Estrai CD audio con soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Artisti Vari:"
-
-#~ msgid "Various Composer"
-#~ msgstr "Compositori Vari:"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "Masterizzatore DVD"
-
-#~ msgid "CD Recorder"
-#~ msgstr "Masterizzatore CD"
-
-#~ msgid "DVD Player"
-#~ msgstr "Lettore DVD"
-
-#~ msgid "CD Player"
-#~ msgstr "Lettore CD"
-
-#~ msgid "Unknown"
-#~ msgstr "Sconosciuto"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Livello qualità da -50 a 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Livello di qualità da 9 a 0, dove 0 è la qualità più alta."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Lettura e scrittura delle copertine non sono supportate per i file ogg/"
-#~ "METADATA_BLOCK_PICTURE, flac e asf/wma. Per questo è necessario TagLib "
-#~ "1.7."

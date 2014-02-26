@@ -10,9 +10,9 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
-"Last-Translator: 柏諺 黃 <s8321414@gmail.com>\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-12 11:59+0000\n"
+"Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/"
 "soundkonverter/language/zh_TW/)\n"
 "Language: zh_TW\n"
@@ -1498,9 +1498,8 @@ msgid "All programmers of audio converters"
 msgstr "所有音訊轉換器的程式設計師"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "開啟播放增益工具並且加入所有給予的檔案"
+msgstr ""
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1661,9 +1660,8 @@ msgid "2. Set conversion options"
 msgstr "2. 設定轉換選項"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "演出者："
+msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2359,13 +2357,10 @@ msgstr "位元率"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"品質等級從 9 到 0，其中 0 是最高品質。\n"
-"(品質越高，檔案愈大，反之亦然。)"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2432,15 +2427,11 @@ msgstr "壓縮等級："
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"壓縮層級從 9 到 0 ，其中 0 是最高品質的。\n"
-"(品質越高，轉換越慢，反之亦然。)\n"
-"推薦值 2。"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2573,16 +2564,12 @@ msgstr "常數"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"壓縮層級從 9 到 0 ，其中 0 是最高品質的。\n"
-"(品質越高，轉換越慢，反之亦然。)\n"
-"推薦值 2。"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -2897,18 +2884,16 @@ msgid "Force read speed:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "聲道："
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "啟用外掛程式："
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
@@ -3010,9 +2995,8 @@ msgid "Add files..."
 msgstr "加入檔案..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "開始 soundKonverter 隱形"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3172,37 +3156,3 @@ msgstr "音樂格式轉換、CD 擷取、播放增益工具"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "用 soundKonverter 擷取音樂CD "
-
-#~ msgid "Various Artists"
-#~ msgstr "不同的演出者"
-
-#~ msgid "Various Composer"
-#~ msgstr "不同的作曲家"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "DVD 解碼器"
-
-#~ msgid "CD Recorder"
-#~ msgstr "CD 解碼器"
-
-#~ msgid "DVD Player"
-#~ msgstr "DVD 撥放器"
-
-#~ msgid "CD Player"
-#~ msgstr "CD 撥放器"
-
-#~ msgid "Unknown"
-#~ msgstr "未知"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "從-50到50的品質等級。"
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "品質等級從 9 到 0，其中 0 是品質最高的。"
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "ogg/METADATA_BLOCK_PICTURE, flac 和 asf/wma 檔案對於讀/寫封面都不支援。因"
-#~ "此 TagLib 1.7 是被需要的。"

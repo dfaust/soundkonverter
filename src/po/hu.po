@@ -3,15 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# HessiJames <hessijames@gmail.com>, 2013
+# HessiJames <hessijames@gmail.com>, 2013
 # Orosz Tamás, 2011
+# otomi <orosz.tamaas@gmail.com>, 2014
+# otomi <orosz.tamaas@gmail.com>, 2014
 # otomi <orosz.tamaas@gmail.com>, 2011-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-17 17:37+0000\n"
 "Last-Translator: otomi <orosz.tamaas@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/hu/)\n"
@@ -482,6 +486,9 @@ msgid ""
 "When using the field TRACKNUMBER, the track number and the total tracks "
 "number will be written to the same field separated by a slash ('/')."
 msgstr ""
+"Az összes sáv száma a kiválasztott mezőbe íródik.\n"
+"A TRACKNUMBER mező használatakor a sáv száma és az összes sáv száma "
+"ugyanabba a mezőbe kerül, egy '/' jellel elválasztva."
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
@@ -495,6 +502,9 @@ msgid ""
 "When using the field DISCNUMBER, the disc number and the total discs number "
 "will be written to the same field separated by a slash ('/')."
 msgstr ""
+"Az összes lemez száma a kiválasztott mezőbe íródik.\n"
+"A DISCNUMBER mező használatakor a lemez száma és az összes lemez száma "
+"ugyanabba a mezőbe kerül, egy '/' jellel elválasztva."
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
@@ -513,7 +523,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "CD kiadása a beolvasás után"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -1606,9 +1616,8 @@ msgid "All programmers of audio converters"
 msgstr "Az audiokonvertálók összes programozója"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "A hangerő-korrekció megnyitása és az összes adott fájl hozzáadása"
+msgstr "A hangerő-korrekciós eszköz megnyitása és az összes fájl hozzáadása"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1774,9 +1783,8 @@ msgid "2. Set conversion options"
 msgstr "2. Konvertálási beállítások "
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Előadó:"
+msgstr "Album előadója:"
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2437,7 +2445,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Minden konvertált fájl átnevezése a megadott minta alapján"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2461,22 +2468,25 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Az alábbi karakterláncok helyettesítő karakterek a metaadatban:\n"
+"Az alábbi helyettesítő karakterek a hozzájuk tartozó\n"
+"információval lesznek lecserélve a metaadatban:\n"
 "\n"
-"%a - előadó\n"
-"%b - album\n"
-"%c - megjegyzés\n"
-"%d - lemez száma\n"
-"%g - műfaj\n"
-"%n - szám\n"
-"%p - szerző\n"
-"%t - cím\n"
-"%y - év\n"
-"%f - eredeti fájlnév\n"
+"%a - Előadó\n"
+"%z - Album előadója\n"
+"%b - Album\n"
+"%c - Megjegyzés\n"
+"%d - Lemez száma\n"
+"%g - Műfaj\n"
+"%n - Sáv száma\n"
+"%p - Zeneszerző\n"
+"%t - Cím\n"
+"%y - Év\n"
+"%f - Eredeti fájlnév\n"
+"%s - Útvonal a könyvtárhoz\n"
 "\n"
-"A helyettesítő karaktereket szögletes zárójelbe teheti ('['és ']')\n"
-"így mellőzve lesznek, ha a mező üres.\n"
-"Szögletes zárójel írásához használja a backslash-t ('\\[' and '\\]')."
+"A helyettesítő karaktereket szögletes zárójelbe teheti ('[' és ']'),\n"
+"ekkor figyelmen kívül lesznek hagyva, ha az érték üres.\n"
+"Szögletes zárójel írásához használja a backslash-t ('\\[' és '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2541,13 +2551,12 @@ msgstr "Bitráta"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"A minőség szintje 9 és 0 között lehet, ahol 0 a legjobb minőség.\n"
-"(Minél jobb a minőség, annál nagyobb a fájlméret, és fordítva.)"
+"A minőség szintje %1 és %2 között, ahol %2 a legjobb minőség.\n"
+"A jobb minőség nagyobb fájlt eredményez és fordítva."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2614,15 +2623,14 @@ msgstr "Tömörítési szint:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"A tömörítés szintje 9 és 0 között lehet, ahol 0 a legjobb minőség.\n"
-"(Minél jobb a minőség, annál lassabb a konverzió, és fordítva.) A 2-es szint "
-"ajánlott."
+"A tömörítés szintje %1 és %2 között, ahol %2 a legjobb tömörítés.\n"
+"A jobb tömörítés lassabb konvertálással jár, de kisebb fájlt eredményez és "
+"fordítva."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2760,16 +2768,16 @@ msgstr "Konstans"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"A tömörítés szintje 9 és 0 között lehet, ahol 0 a legjobb minőség.\n"
-"(Minél jobb a minőség, annál lassabb a konverzió, és fordítva.) A 2-es szint "
-"ajánlott."
+"A tömörítés szintje %1 és %2 között, ahol %2 a legjobb tömörítés.\n"
+"A jobb tömörítés lassabb konvertálással jár, de kisebb fájlt eredményez és "
+"fordítva.\n"
+"Ajánlott érték: %3"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3095,37 +3103,34 @@ msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Force read speed:"
-msgstr ""
+msgstr "Kívánt olvasási sebesség:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Csatornák:"
+msgstr "Endianness:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
-msgstr ""
+msgstr "Maximum olvasási ismétlés:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Engedélyezett bővítmények:"
+msgstr "Paranoia engedélyezése"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
-msgstr ""
+msgstr "Extra paranoia engedélyezése"
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
 "'icedax' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Ahhoz, hogy audio CD-t írjon számonként vagy egy fájlba, telepítenie kell a "
-"cdparanoia-t. A cdparanoia rendszerint a disztribúció része, a csomag neve "
-"eltérhet."
+"Audio CD-k sávonkénti vagy egy fájlba történő írásához telepítenie kell az "
+"'icedax'-ot.\n"
+"Az 'icedax' rendszerint a disztribúció része, a csomag neve változhat."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3221,9 +3226,8 @@ msgid "Add files..."
 msgstr "Fájlok hozzáadása..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "A soundKonverter láthatatlan indítása"
+msgstr "soundKonverter főablak megjelenítése"
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3280,14 +3284,20 @@ msgid ""
 "Support for cover art in FLAC picture format for Xiph tags requires taglib "
 "1.7 or later."
 msgstr ""
+"A FLAC képformátumú borítóképek Xiph címkékben való támogatásához a taglib "
+"1.7 vagy újabb verziója szükséges."
 
 #: soundkonverter.cpp:52
 msgid "Support for cover art for ASF/WMA tags requires taglib 1.7 or later."
 msgstr ""
+"A  borítóképek ASF/WMA címkékben való támogatásához a taglib 1.7 vagy újabb "
+"verziója szükséges."
 
 #: soundkonverter.cpp:55
 msgid "Support for tags for Ogg Opus files requires taglib 1.9 or later."
 msgstr ""
+"A z Ogg Opus fájlok címkéinek támogatásához a taglib 1.9 vagy újabb verziója "
+"szükséges."
 
 #: soundkonverter.cpp:140
 msgid "View logs..."
@@ -3333,6 +3343,15 @@ msgid ""
 "2. Your installation is broken.\n"
 "In this case try reinstalling soundKonverter."
 msgstr ""
+"Nem lehetett kodek bővítményeket betölteni. A kodekek nélkül a "
+"soundKonverter nem működik.\n"
+"Ennek a problémának két oka lehet:\n"
+"1. Nemrég telepítette a soundKonvertert és a KDE rendszerkonfigurációs "
+"gyorsítótára még nem naprakész.\n"
+"Ebben az esetben futtassa a kbuildsycoca4-et, majd indítsa újra a "
+"soundKonvertert a hiba elhárításához.\n"
+"2. A telepített program sérült.\n"
+"Ebben az esetben telepítse újra a soundKonvertert."
 
 #: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
 msgid "Removing old file: %1"
@@ -3385,38 +3404,3 @@ msgstr "Audiofájl-konverter, CD-beolvasó és hangerő-korrekciós eszköz"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Audio CD beolvasása a soundKonverterrel"
-
-#~ msgid "Various Artists"
-#~ msgstr "Különféle előadók"
-
-#~ msgid "Various Composer"
-#~ msgstr "Különféle zeneszerzők"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "DVD-író"
-
-#~ msgid "CD Recorder"
-#~ msgstr "CD-író"
-
-#~ msgid "DVD Player"
-#~ msgstr "DVD-lejátszó"
-
-#~ msgid "CD Player"
-#~ msgstr "CD-lejátszó"
-
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "A minőség szintje -50 és 50 között."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "A minőség szintje 9 és 0 között lehet, ahol 0 a legjobb minőség."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "A borítók olvasása/írása nem támogatott az ogg/METADATA_BLOCK_PICTURE, a "
-#~ "flac\n"
-#~ "és az asf/wma fájlok esetén. Ehhez a TagLib 1.7 szükséges."

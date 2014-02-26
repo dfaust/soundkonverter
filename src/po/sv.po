@@ -3,13 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# PavelNicklasson <pavelnicklasson@bahnhof.se>, 2014
+# PavelNicklasson <pavelnicklasson@bahnhof.se>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-12-19 20:36+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-19 21:14+0000\n"
 "Last-Translator: PavelNicklasson <pavelnicklasson@bahnhof.se>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/projects/p/"
 "soundkonverter/language/sv_SE/)\n"
@@ -520,7 +522,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Mata ut CD då rippningen är färdig"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -716,7 +718,7 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Följande strängar är wildcards som kommer att bytas ut\n"
+"Följande strängar är platshållare som kommer att bytas ut\n"
 "av information i metadatan:\n"
 "\n"
 "%a - Artist\n"
@@ -1608,9 +1610,8 @@ msgid "All programmers of audio converters"
 msgstr "Alla programmerare av ljudkonverterare"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "Öppna Replay Gain-verktyget och lägg till valda filer"
+msgstr "Öppna Replay Gain-verktyget och lägg till alla angivna filer"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1773,9 +1774,8 @@ msgid "2. Set conversion options"
 msgstr "2. Ange konverteringsalternativ"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Artist:"
+msgstr "Albumartist:"
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2429,7 +2429,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Namnge alla konverterade filer enligt det angivna mönstret"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2453,25 +2452,27 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Följande strängar är wildcards som kommer att ersättas\n"
-"med information från metadatan:\n"
+"De följande strängarna är platshållare som kommer att bytas ut\n"
+"av informationen i metadatan:\n"
 "\n"
 "%a - Artist\n"
+"%z - Albumartist\n"
 "%b - Album\n"
 "%c - Kommentar\n"
-"%d - Disk nummer\n"
+"%d - Skivnummer\n"
 "%g - Genre\n"
-"%n - Spår nummer\n"
+"%n - Spårummer\n"
 "%p - Kompositör\n"
 "%t - Titel\n"
 "%y - År\n"
 "%f - Ursprungligt filnamn\n"
+"%s - Sökväg till källkatalogen\n"
 "\n"
-"Du kan sätta parentes runt wildcard och hakparentes runt tecken intill  ('[' "
-"och ']')\n"
-"så ignorereas de om ersättningsvärdet är tomt.\n"
-"För att använda hakparentes måste du omge den med omvänt snedstreck ('\\[' "
-"och '\\]')."
+"Du kan sätta platshållarna och omgivande tecken inom hakparentes ('[' och "
+"']')\n"
+"för att de ska ignoreras om ersättningsvärdet är tomt.\n"
+"För att kunna använda hakparentes måste du lämna dem med ett omvänt "
+"snedstreck ('\\[' and '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2536,13 +2537,12 @@ msgstr "Bitrate"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Kvalitetsnivå från 9 till 0 där 0 är den högsta kvaliteten.\n"
-"(Ju högre kvalitet, desto större filstorlek och tvärtom.)"
+"Kvalitetsnivå från %1 till %2 där %2 är den högsta kvaliteten.\n"
+"Ju högre kvalitet, desto större filstorlek och vice versa. "
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2610,15 +2610,14 @@ msgstr "Kompressionsnivå:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Kompressionsnivå från 9 till 0 där 0 är den högsta kvaliteten.\n"
-"(Ju högre kvalitet, desto långsammare konvertering och tvärtom.)\n"
-"Värdet 2 rekommenderas."
+"Kompressionsnivå från %1 till %2 där %2 är den bästa kompressionen.\n"
+"Ju bättre kompression, desto långsammare konvertering men mindre filstorlek "
+"och vice versa."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2754,16 +2753,16 @@ msgstr "Konstant"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Kompressionsnivå från 9 till 0 där 0 är den högsta kvaliteten.\n"
-"(Ju högre kvalitet, desto långsammare konvertering och tvärtom.)\n"
-"Värdet 2 rekommenderas."
+"Kompressionsnivå från %1 till %2 där %2 är den bästa kompressionen.\n"
+"Ju bättre kompression, desto långsammare konvertering men mindre filstorlek "
+"och vice versa.\n"
+"Ett värde på %3 rekommenderas."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3088,37 +3087,34 @@ msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Force read speed:"
-msgstr ""
+msgstr "Tvinga läshastighet:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Kanaler:"
+msgstr "Endian:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
-msgstr ""
+msgstr "Maximala läsförsök:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Aktivera insticksprogram:"
+msgstr "Aktivera paranoia"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
-msgstr ""
+msgstr "Aktivera extra paranoia"
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
 "'icedax' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"För att rippa ljud-cd:ar spår för spår eller till en enda fil, måste du "
-"installera 'cdparanoia'.\n"
-"'cdparanoia' skeppas oftast med din distribution, paketnamnet kan växla."
+"För att rippa cd-skivor per spår eller till en enda fil, måste du installera "
+"'icedax'.\n"
+"'icedax' skickas vanligtvis med din distribution, paketnamnet kan variera."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3213,9 +3209,8 @@ msgid "Add files..."
 msgstr "Lägg till filer..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Starta soundKonverter osynligt"
+msgstr "Visa SoundKonverters huvudfönster"
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3274,14 +3269,17 @@ msgid ""
 "Support for cover art in FLAC picture format for Xiph tags requires taglib "
 "1.7 or later."
 msgstr ""
+"Stöd för omslagsbilder i FLAC bildformat för Xiph-etiketter kräver taglib "
+"1.7 eller senare."
 
 #: soundkonverter.cpp:52
 msgid "Support for cover art for ASF/WMA tags requires taglib 1.7 or later."
 msgstr ""
+"Stöd för omslagsbilder för ASF/WMA-etiketter kräver taglib 1.7 eller senare."
 
 #: soundkonverter.cpp:55
 msgid "Support for tags for Ogg Opus files requires taglib 1.9 or later."
-msgstr ""
+msgstr "Stöd för etiketter för Ogg Opus-filer kräver taglib 1.9 eller senare."
 
 #: soundkonverter.cpp:140
 msgid "View logs..."
@@ -3327,6 +3325,15 @@ msgid ""
 "2. Your installation is broken.\n"
 "In this case try reinstalling soundKonverter."
 msgstr ""
+"Inga insticksprogram med omkodare kunde läsas in. Utan insticksprogram med "
+"omkodare fungerar inte soundKonverter.\n"
+"Problemet kan ha två orsaker:\n"
+"1. Du installerade precis soundKonverter och KDE:s systemkonfigurationscache "
+"har inte uppdaterats än.\n"
+"I detta fall, kör kbuildsycoca4 och starta om soundKonverter för att lösa "
+"problemet.\n"
+"2. Din installation är trasig.\n"
+"I detta fall kan du försöka installera om soundKonverter."
 
 #: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
 msgid "Removing old file: %1"
@@ -3379,37 +3386,3 @@ msgstr "Ljudfilkonverterare, CD-rippare och Replay Gain-verktyg"
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Rippa ljud CD med soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Olika artister"
-
-#~ msgid "Various Composer"
-#~ msgstr "Olika kompositörer"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "DVD-brännare"
-
-#~ msgid "CD Recorder"
-#~ msgstr "CD-brännare"
-
-#~ msgid "DVD Player"
-#~ msgstr "DVD-spelare"
-
-#~ msgid "CD Player"
-#~ msgstr "CD-spelare"
-
-#~ msgid "Unknown"
-#~ msgstr "Okänd"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Kvalitetsnivå från  -50 till 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Kvalitetsnivå från 9 till 0 där 0 är den högsta kvaliteten."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Läsa/skriva omslag stöds inte för ogg/METADATA_BLOCK_PICTURE, flac och "
-#~ "asf/wma filer. TagLib 1.7 behövs för det."

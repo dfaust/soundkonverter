@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-12 11:59+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/soundkonverter/"
 "language/es/)\n"
@@ -1519,9 +1519,8 @@ msgid "All programmers of audio converters"
 msgstr "Todos los programadores de conversores de audio"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "Abrir la herramienta Replay Gain y agrear todos los archivos"
+msgstr ""
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1688,9 +1687,8 @@ msgid "2. Set conversion options"
 msgstr "2. Configurar opciones de conversión"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Artista:"
+msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2312,7 +2310,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Llamar a todos los archivos convertidos según patrón especificado"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2336,25 +2333,6 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Las siguientes cadenas son comodines que serán reemplazados por la "
-"información en los metadatos:\n"
-"\n"
-"%a - Artista\n"
-"%b - Álbum\n"
-"%c - Comentario\n"
-"%d - Número de disco\n"
-"%g - Género\n"
-"%n - Número de pista\n"
-"%p - Compositor\n"
-"%t - Título\n"
-"%y - Año\n"
-"%f - Nombre del archivo original\n"
-"\n"
-"Puede encerrar estos comodines y caracteres alrededor con corchetes  ('[' "
-"and ']') para que éstos sean ignorados cuando el valor a reemplazar sea "
-"vacío.\n"
-"Para ésto debe usar caracteres de escape de la siguiente forma ('\\[' and "
-"'\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2423,13 +2401,10 @@ msgstr "Tasa de bits"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Nivel de calidad de 9 a 0 donde 0 es la mayor calidad.\n"
-"(Cuanto mayor sea la calidad, más grande será el archivo y viceversa)."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2496,15 +2471,11 @@ msgstr "Nivel de compresión:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Nivel de calidad de 9 a 0 donde 0 es la mayor calidad.\n"
-"(Cuanto mayor sea la calidad, más lenta será la conversión y viceversa).\n"
-"Se recomienda un valor de 2."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2639,16 +2610,12 @@ msgstr "Constante"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Nivel de calidad de 9 a 0 donde 0 es la mayor calidad.\n"
-"(Cuanto mayor sea la calidad, más lenta será la conversión y viceversa).\n"
-"Se recomienda un valor de 2."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -2971,34 +2938,28 @@ msgid "Force read speed:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Canales"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Habilitar plugins:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
 "'icedax' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Para poder extraer cds pista por pista o a un solo archivo, tiene que "
-"instalar 'cdparanoia'.⏎ 'cdparanoia' usualmente viene en su distribución, "
-"aunque el nombre del paquete puede variar."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3092,9 +3053,8 @@ msgid "Add files..."
 msgstr "Agregar archivos..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Iniciar soundKonverter invisible"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3253,27 +3213,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extraer audio CD con soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Varios Artistas"
-
-#~ msgid "Various Composer"
-#~ msgstr "Varios Compositores"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "Grabador de DVD"
-
-#~ msgid "CD Recorder"
-#~ msgstr "Grabador de CD"
-
-#~ msgid "DVD Player"
-#~ msgstr "Reproductor de DVD"
-
-#~ msgid "CD Player"
-#~ msgstr "Reproductor de CD"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconocido"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Nivel de calidad de -50 a 50."

@@ -4,15 +4,15 @@
 #
 # Translators:
 # Arthur Țițeică <arthur@psw.ro>, 2013
-# roentgen <arthur.titeica@gmail.com>, 2013
+# roentgen <arthur.titeica@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
-"Last-Translator: roentgen <arthur.titeica@gmail.com>\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-12 11:59+0000\n"
+"Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/ro/)\n"
 "Language: ro\n"
@@ -1526,9 +1526,8 @@ msgid "All programmers of audio converters"
 msgstr ""
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
-msgstr "Deschide unealta Replay Gain și adaugă toate fișierele date"
+msgstr ""
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1689,9 +1688,8 @@ msgid "2. Set conversion options"
 msgstr "2. Setează opțiunile de conversie"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Artist:"
+msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2903,18 +2901,16 @@ msgid "Force read speed:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Canale:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Activează extensiile:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
@@ -3021,9 +3017,8 @@ msgid "Add files..."
 msgstr "Adaugă fișiere..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Pornește soundKonverter în mod invizibil"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3188,18 +3183,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Extrage CD audio cu soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Artiști diverși"
-
-#~ msgid "Various Composer"
-#~ msgstr "Compozitori diverși"
-
-#~ msgid "Unknown"
-#~ msgstr "Necunoscut"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Nivel calitate de la -50 până la 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Nivel calitate de la 9 la 0 unde 0 este cea mai înaltă calitate."

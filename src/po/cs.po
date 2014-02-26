@@ -8,16 +8,16 @@
 # Pavel Fric <fripohled.blogspot.com>, 2011
 # Pavel Fric <fripohled@blogspot.com>, 2010
 # fri <pavelfric@seznam.cz>, 2010-2012
-# fri <pavelfric@seznam.cz>, 2013
+# fri <pavelfric@seznam.cz>, 2013-2014
 # fri <pavelfric@seznam.cz>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-17 13:17+0000\n"
+"Last-Translator: fri <pavelfric@seznam.cz>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/soundkonverter/"
 "language/cs/)\n"
 "Language: cs\n"
@@ -526,7 +526,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Vysunutí CD po vytažení skladeb bylo dokončeno"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -1620,7 +1620,6 @@ msgid "All programmers of audio converters"
 msgstr "Všichni programátoři převodníku zvuku"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
 msgstr ""
 "Otevřít nástroj pro vyrovnání hlasitosti skladeb a přidat všechny dané "
@@ -1791,9 +1790,8 @@ msgid "2. Set conversion options"
 msgstr "2. Nastavit převodní volby"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Umělec:"
+msgstr "Umělec alba:"
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2451,7 +2449,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Pojmenovat všechny převedené soubory podle zadaného vzoru"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2479,6 +2476,7 @@ msgstr ""
 "údaji v popisných datech:\n"
 "\n"
 "%a - Umělec\n"
+"%z - Umělec alba\n"
 "%b - Album\n"
 "%c - Poznámka\n"
 "%d - Číslo disku\n"
@@ -2488,6 +2486,7 @@ msgstr ""
 "%t - Název\n"
 "%y - Rok\n"
 "%f - Původní název souboru\n"
+"%s - Cesta ke zdrojovému adresáři\n"
 "\n"
 "Tyto zástupné znaky můžete dát do kulatých závorek a okolní znaky do "
 "hranatých závorek ('[' a ']'),\n"
@@ -2561,13 +2560,12 @@ msgstr "Datový tok"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Úroveň kvality od 9 do 0, kde 0 představuje nejvyšší jakost.\n"
-"(Čím vyšší je jakost, tím větší je velikost souboru a naopak.)"
+"Úroveň kvality od %1 do %2, kde %2 představuje nejvyšší jakost.\n"
+"Čím vyšší je jakost, tím větší je velikost souboru a naopak."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2634,15 +2632,13 @@ msgstr "Úroveň komprese:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Úroveň komprese od 9 po 0, kde 0 je nejvyšší kvalita.\n"
-"(Čím vyšší je jakost, tím pomalejší je převod a naopak.)\n"
-"Jako hodnota se doporučuje 2."
+"Úroveň komprese od %1 po %2, kde %2 je nejvyšší kvalita.\n"
+"Čím vyšší je jakost, tím pomalejší je převod a naopak."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2780,16 +2776,15 @@ msgstr "Stálý"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Úroveň komprese od 9 po 0, kde 0 je nejvyšší kvalita.\n"
-"(Čím vyšší je jakost, tím pomalejší je převod a naopak.)\n"
-"Jako hodnota se doporučuje 2."
+"Úroveň komprese od %1 po %2, kde %2 je nejvyšší kvalita.\n"
+"Čím vyšší je jakost, tím pomalejší je převod a naopak.\n"
+"Jako hodnota se doporučuje %3."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3118,28 +3113,25 @@ msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Force read speed:"
-msgstr ""
+msgstr "Vynutit rychlost čtení:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Kanály:"
+msgstr "Endiannes:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
-msgstr ""
+msgstr "Největší počet opětovných pokusů o čtení:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Povolit přídavné moduly:"
+msgstr "Povolit paranoiu"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
-msgstr ""
+msgstr "Povolit paranoiu navíc"
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
@@ -3147,9 +3139,9 @@ msgid ""
 "vary."
 msgstr ""
 "Pro vytahování skladeb ze zvukových CD po jednotlivých stopách nebo do "
-"jednoho souboru potřebujete nainstalovat 'cdparanoia'.\n"
-"Program 'cdparanoia' je obvykle přítomen ve vaší distribuci. Název balíčku "
-"se může různit."
+"jednoho souboru potřebujete nainstalovat 'icedax'.\n"
+"Program 'icedax' je obvykle přítomen ve vaší distribuci. Název balíčku se "
+"může různit."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3246,9 +3238,8 @@ msgid "Add files..."
 msgstr "Přidat soubory..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Spustit soundKonverter neviditelný"
+msgstr "Ukázat hlavní okno soundKonverteru"
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3308,14 +3299,17 @@ msgid ""
 "Support for cover art in FLAC picture format for Xiph tags requires taglib "
 "1.7 or later."
 msgstr ""
+"Podpora pro obal ve formátu  \"obrázek pro FLAC\" ve značkách Xiph vyžaduje "
+"taglib 1.7 nebo novější."
 
 #: soundkonverter.cpp:52
 msgid "Support for cover art for ASF/WMA tags requires taglib 1.7 or later."
-msgstr ""
+msgstr "Podpora pro obal ve značkách ASF/WMA vyžaduje taglib 1.7 nebo novější."
 
 #: soundkonverter.cpp:55
 msgid "Support for tags for Ogg Opus files requires taglib 1.9 or later."
 msgstr ""
+"Podpora pro značky v souborech Ogg Opus vyžaduje taglib 1.9 nebo novější."
 
 #: soundkonverter.cpp:140
 msgid "View logs..."
@@ -3361,6 +3355,15 @@ msgid ""
 "2. Your installation is broken.\n"
 "In this case try reinstalling soundKonverter."
 msgstr ""
+"Nepodařilo se nahrát žádné přídavné moduly s kodeky. Bez přídavných modulů s "
+"kodeky soundKonverter nemůže pracovat.\n"
+"To může mít dvě příčiny:\n"
+"1. Právě jste nainstaloval soundKonverter a vyrovnávací paměť s nastavením "
+"systému KDE ještě není zaktualizována.\n"
+"V tom případě spusťte kbuildsycoca4 a spusťte soundKonverter znovu, aby byly "
+"tyto potíže řádně ošetřeny.\n"
+"2. Vaše instalace je poškozena.\n"
+"V tom případě zkuste soundKonverter přeinstalovat."
 
 #: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
 msgid "Removing old file: %1"
@@ -3415,37 +3418,3 @@ msgstr ""
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Vytáhněte skladby z CD za pomoci soundKonverteru"
-
-#~ msgid "Various Artists"
-#~ msgstr "Různí umělci"
-
-#~ msgid "Various Composer"
-#~ msgstr "Různí skladatelé"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "Vypalovačka DVD"
-
-#~ msgid "CD Recorder"
-#~ msgstr "Vypalovačka CD"
-
-#~ msgid "DVD Player"
-#~ msgstr "Přehrávač DVD"
-
-#~ msgid "CD Player"
-#~ msgstr "Přehrávač CD"
-
-#~ msgid "Unknown"
-#~ msgstr "Neznámý"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Úroveň jakosti od -50 do 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Úroveň jakosti od 9 po 0, kde 0 je největší kvalita."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Čtení/Zápis obalů není pro soubory ogg/METADATA_BLOCK_PICTURE, flac and "
-#~ "asf/wma podporován. Je na to potřeba TagLib 1.7."

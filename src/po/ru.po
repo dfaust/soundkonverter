@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-17 13:06+0100\n"
-"PO-Revision-Date: 2013-11-20 12:13+0000\n"
+"POT-Creation-Date: 2014-02-26 12:26+0100\n"
+"PO-Revision-Date: 2014-02-12 11:59+0000\n"
 "Last-Translator: HessiJames <hessijames@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/soundkonverter/"
 "language/ru/)\n"
@@ -1610,10 +1610,8 @@ msgid "All programmers of audio converters"
 msgstr "Все программисты аудиоконвертеров"
 
 #: main.cpp:32
-#, fuzzy
 msgid "Open the Replay Gain tool and add all given files"
 msgstr ""
-"Открыть инструмент выравнивания громкости и добавить все выбранные файлы"
 
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
@@ -1780,9 +1778,8 @@ msgid "2. Set conversion options"
 msgstr "2. Установите опции преобразования"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
-#, fuzzy
 msgid "Album artist:"
-msgstr "Исполнитель:"
+msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
@@ -2443,7 +2440,6 @@ msgid "Name all converted files according to the specified pattern"
 msgstr "Именовать преобразованные файлы в соответствии с шаблоном"
 
 #: outputdirectory.cpp:533
-#, fuzzy
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2467,25 +2463,6 @@ msgid ""
 "In order to use squared brackets you will have to escape them with a "
 "backslash ('\\[' and '\\]')."
 msgstr ""
-"Следующие строки - шаблоны, которые будут заменены\n"
-"информацией из метаданных:\n"
-"\n"
-"%a - Исполнитель\n"
-"%b - Альбом\n"
-"%c - Комментарий\n"
-"%d - Номер диска\n"
-"%g - Жанр\n"
-"%n - Номер дорожки\n"
-"%p - Композитор\n"
-"%t - Название\n"
-"%y - Год\n"
-"%f - Оригинальное название файла\n"
-"\n"
-"Эти шаблоны и окружающие их символы можно заключать в квадратные скобки ('[' "
-"и ']'),\n"
-"тогда они будут проигнорированы, если подставляемое значение пусто.\n"
-"Для использования квадратных скобок их следует экранировать обратной косой "
-"чертой ('\\[' и '\\]')."
 
 #: outputdirectory.cpp:545
 msgid ""
@@ -2552,13 +2529,10 @@ msgstr "Битрейт"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:303
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:631
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:632
-#, fuzzy
 msgid ""
 "Quality level from %1 to %2 where %2 is the highest quality.\n"
 "The higher the quality, the bigger the file size and vice versa."
 msgstr ""
-"Уровень качества от 9 до 0, где 0 - высочайшее качество.\n"
-"(Чем выше качество, тем больше размер файла, и наоборот.)"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -2625,15 +2599,11 @@ msgstr "Степень сжатия:"
 #: plugins/soundkonverter_codec_mac/maccodecwidget.cpp:53
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:228
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:229
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa."
 msgstr ""
-"Уровень сжатия от 9 до 0, где 0 соответствует высочайшему качеству.\n"
-"(Чем выше качество, тем медленнее преобразование, и наоборот.)\n"
-"Рекомендуется использовать значение 2."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
 msgid "Use SoundFont file:"
@@ -2769,16 +2739,12 @@ msgstr "Постоянный"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
-#, fuzzy
 msgid ""
 "Compression level from %1 to %2 where %2 is the best compression.\n"
 "The better the compression, the slower the conversion but the smaller the "
 "file size and vice versa.\n"
 "A value of %3 is recommended."
 msgstr ""
-"Уровень сжатия от 9 до 0, где 0 соответствует высочайшему качеству.\n"
-"(Чем выше качество, тем медленнее преобразование, и наоборот.)\n"
-"Рекомендуется использовать значение 2."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:403
 msgid ""
@@ -3111,35 +3077,28 @@ msgid "Force read speed:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
-#, fuzzy
 msgid "Endianness:"
-msgstr "Каналы:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
 msgid "Maximum read retries:"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
-#, fuzzy
 msgid "Enable paranoia"
-msgstr "Включить плагины:"
+msgstr ""
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
 msgid "Enable extra paranoia"
 msgstr ""
 
 #: plugins/soundkonverter_ripper_icedax/soundkonverter_ripper_icedax.cpp:34
-#, fuzzy
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'icedax'.\n"
 "'icedax' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
-"Для извлечения данных с аудио-CD по дорожкам или в один файл необходимо "
-"установить 'cdparanoia'.\n"
-"'cdparanoia' обычно поставляется с дистрибутивом, имя пакета может "
-"отличаться."
 
 #: progressindicator.cpp:88
 msgid "Speed:"
@@ -3235,9 +3194,8 @@ msgid "Add files..."
 msgstr "Добавить файлы..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
-#, fuzzy
 msgid "Show soundKonverter main window"
-msgstr "Запустить soundKonverter невидимым"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
@@ -3401,37 +3359,3 @@ msgstr "Аудиоконвертер, CD-риппер и инструмент в
 #: rc.cpp:10
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Извлечь аудиоданные с CD с помощью soundKonverter"
-
-#~ msgid "Various Artists"
-#~ msgstr "Разные исполнители"
-
-#~ msgid "Various Composer"
-#~ msgstr "Разные композиторы"
-
-#~ msgid "DVD Recorder"
-#~ msgstr "DVD-рекордер"
-
-#~ msgid "CD Recorder"
-#~ msgstr "CD-рекордер"
-
-#~ msgid "DVD Player"
-#~ msgstr "DVD-проигрыватель"
-
-#~ msgid "CD Player"
-#~ msgstr "CD-проигрыватель"
-
-#~ msgid "Unknown"
-#~ msgstr "Неизвестно"
-
-#~ msgid "Quality level from -50 to 50."
-#~ msgstr "Уровень качества от -50 до 50."
-
-#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
-#~ msgstr "Уровень качества от 9 до 0, где 0 - высочайшее качество."
-
-#~ msgid ""
-#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
-#~ msgstr ""
-#~ "Чтение/запись обложек не поддерживается для ogg/METADATA_BLOCK_PICTURE, "
-#~ "flac и asf/wma. Для этого требуется TagLib 1.7."

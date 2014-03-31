@@ -27,6 +27,7 @@ public:
 
     enum State {
         Waiting,
+        WaitingForReplayGain,
         Processing,
         Stopped
     } state;
@@ -48,6 +49,11 @@ public:
     TagData *tags;
 
     int length;
+
+    QStringList directories();
+    KUrl::List urls();
+    void setState( State newState );
+
 };
 
 class ReplayGainFileListItemDelegate : public QItemDelegate

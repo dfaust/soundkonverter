@@ -50,8 +50,8 @@ private:
     /** Write the tags of the file with the convert item @p item */
     void writeTags( ConvertItem *item );
 
-    /** Run the userscript for the convert item @p item */
-    void executeUserScript( ConvertItem *item );
+//     /** Run the userscript for the convert item @p item */
+//     void executeUserScript( ConvertItem *item );
 
     /** Decide, what to do next with out item @p item */
     void executeNextStep( ConvertItem *item );
@@ -73,6 +73,8 @@ private:
     FileList *fileList;
     Logger* logger;
     QMap<int,QString> usedOutputNames;
+
+    QStringList activeVorbisGainDirectories; // vorbisgain creates temporary files with the fixed name "vorbisgain.tmp", so it must run only once per directory (https://github.com/HessiJames/soundkonverter/issues/12)
 
     struct LogQueue {
         int id;

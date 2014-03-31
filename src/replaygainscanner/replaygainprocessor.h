@@ -70,6 +70,8 @@ private:
     ReplayGainFileList *fileList;
     Logger *logger;
 
+    QStringList activeVorbisGainDirectories; // vorbisgain creates temporary files with the fixed name "vorbisgain.tmp", so it must run only once per directory (https://github.com/HessiJames/soundkonverter/issues/12)
+
     struct LogQueue {
         int id;
         BackendPlugin *plugin;
@@ -100,6 +102,7 @@ signals:
     // connected to FileList
     /** The conversion of an item has finished and the state is reported */
     void finished( ReplayGainFileListItem *fileListItem, ReplayGainFileListItem::ReturnCode returnCode );
+    void updateItem( ReplayGainFileListItem *item, bool initialUpdate = false );
 
     // connected to Logger
     /** Tell the logger that the process has finished */

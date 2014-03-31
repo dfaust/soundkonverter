@@ -105,6 +105,7 @@ ReplayGainScanner::ReplayGainScanner( Config* _config, Logger* _logger, bool sho
     connect( fileList, SIGNAL(processItem(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)), replayGainProcessor, SLOT(add(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)) );
     connect( fileList, SIGNAL(killItem(ReplayGainFileListItem*)), replayGainProcessor, SLOT(kill(ReplayGainFileListItem*)) );
     connect( replayGainProcessor, SIGNAL(finished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)), fileList, SLOT(itemFinished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)) );
+    connect( replayGainProcessor, SIGNAL(updateItem(ReplayGainFileListItem*,bool)), fileList, SLOT(updateItem(ReplayGainFileListItem*,bool)) );
 
     connect( replayGainProcessor, SIGNAL(finishedProcess(int,bool)), logger, SLOT(processCompleted(int,bool)) );
 

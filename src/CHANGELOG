@@ -1,5 +1,6 @@
 2.1.1:
 -Add: Check for MP4 support in faac
+-Fix: Don't run vorbisgain more than once per directory
 
 2.1.0:
 -Add: Update translations

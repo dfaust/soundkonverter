@@ -34,6 +34,60 @@ ReplayGainFileListItem::~ReplayGainFileListItem()
         delete tags;
 }
 
+QStringList ReplayGainFileListItem::directories()
+{
+    QStringList directories;
+
+    if( type == ReplayGainFileListItem::Track )
+    {
+        directories.append( url.directory() );
+    }
+    else
+    {
+        for( int j=0; j<childCount(); j++ )
+        {
+            directories.append( static_cast<ReplayGainFileListItem*>(child(j))->url.directory() );
+        }
+    }
+
+    return directories;
+}
+
+KUrl::List ReplayGainFileListItem::urls()
+{
+    KUrl::List urls;
+
+    if( type == ReplayGainFileListItem::Track )
+    {
+        urls.append( url );
+    }
+    else
+    {
+        for( int j=0; j<childCount(); j++ )
+        {
+            urls.append( static_cast<ReplayGainFileListItem*>(child(j))->url );
+        }
+    }
+
+    return urls;
+}
+
+void ReplayGainFileListItem::setState( ReplayGainFileListItem::State newState )
+{
+    if( type == ReplayGainFileListItem::Track )
+    {
+        state = newState;
+    }
+    else
+    {
+        for( int j=0; j<childCount(); j++ )
+        {
+            static_cast<ReplayGainFileListItem*>(child(j))->state = newState;
+        }
+    }
+}
+
+
 
 ReplayGainFileListItemDelegate::ReplayGainFileListItemDelegate( QObject *parent )
     : QItemDelegate( parent )
@@ -58,31 +112,39 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
         switch( item->state )
         {
             case ReplayGainFileListItem::Waiting:
+            case ReplayGainFileListItem::WaitingForReplayGain:
+            {
                 break;
+            }
             case ReplayGainFileListItem::Processing:
+            {
                 isProcessing = true;
                 break;
+            }
             case ReplayGainFileListItem::Stopped:
+            {
                 switch( item->returnCode )
                 {
                     case ReplayGainFileListItem::Succeeded:
-                        isSucceeded = true;
-                        break;
                     case ReplayGainFileListItem::SucceededWithProblems:
+                    {
                         isSucceeded = true;
                         break;
+                    }
                     case ReplayGainFileListItem::Skipped:
-                        break;
                     case ReplayGainFileListItem::StoppedByUser:
+                    {
                         break;
+                    }
                     case ReplayGainFileListItem::BackendNeedsConfiguration:
-                        isFailed = true;
-                        break;
                     case ReplayGainFileListItem::Failed:
+                    {
                         isFailed = true;
                         break;
+                    }
                 }
                 break;
+            }
         }
     }
 

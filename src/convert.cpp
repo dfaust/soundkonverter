@@ -466,16 +466,46 @@ void Convert::replaygain( ConvertItem *item )
 
     item->state = ConvertItem::replaygain;
     item->backendPlugin = item->replaygainPipes.at(item->take).plugin;
+
     KUrl::List urlList;
+    QStringList directories;
     foreach( ConvertItem *albumItem, albumItems )
     {
         urlList.append( albumItem->outputUrl );
+        directories.append( albumItem->outputUrl.directory() );
         if( albumItem != item )
         {
             albumItem->fileListItem->state = FileListItem::ApplyingAlbumGain;
             fileList->updateItem( albumItem->fileListItem );
         }
     }
+
+    bool waitForVorbisGainFinish = false;
+    if( item->backendPlugin->name() == "Vorbis Gain" )
+    {
+        foreach( const QString directory, directories )
+        {
+            if( activeVorbisGainDirectories.contains(directory) )
+            {
+                waitForVorbisGainFinish = true;
+                break;
+            }
+        }
+
+        if( waitForVorbisGainFinish )
+        {
+            logger->log( item->logID, i18n("Waiting for running Vorbis Gain process to finish") );
+            item->state = ConvertItem::wait_replaygain;
+            item->fileListItem->state = FileListItem::WaitingForAlbumGain;
+            fileList->updateItem( item->fileListItem );
+            return;
+        }
+        else
+        {
+            activeVorbisGainDirectories.append( directories );
+        }
+    }
+
     item->backendID = qobject_cast<ReplayGainPlugin*>(item->backendPlugin)->apply( urlList );
 
     if( item->backendID < 100 )
@@ -537,11 +567,11 @@ void Convert::writeTags( ConvertItem *item )
     }
 }
 
-void Convert::executeUserScript( ConvertItem *item )
-{
-    logger->log( item->logID, i18n("Running user script") );
-    item->state = ConvertItem::execute_userscript;
-
+// void Convert::executeUserScript( ConvertItem *item )
+// {
+//     logger->log( item->logID, i18n("Running user script") );
+//     item->state = ConvertItem::execute_userscript;
+//
 //     KUrl source( item->fileListItem->options.filePathName );
 //     KUrl destination( item->outputFilePathName );
 //
@@ -557,10 +587,10 @@ void Convert::executeUserScript( ConvertItem *item )
 //     *(item->convertProcess) << destination.path();
 //
 //     logger->log( item->logID, userscript + " \"" + source.path() + "\" \"" + destination.path() + "\"" );
-
+//
 // // /*    item->convertProcess->setPriority( config->data.general.priority );
 // //     item->convertProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput );*/
-}
+// }
 
 void Convert::executeNextStep( ConvertItem *item )
 {
@@ -572,6 +602,18 @@ void Convert::executeNextStep( ConvertItem *item )
 
     switch( item->state )
     {
+        case ConvertItem::initial:
+        {
+            if( item->mode & ConvertItem::get )
+                get( item );
+            else if( item->mode & ConvertItem::convert )
+                convert( item );
+            else if( item->mode & ConvertItem::replaygain )
+                replaygain( item );
+            else
+                remove( item, FileListItem::Succeeded );
+            break;
+        }
         case ConvertItem::get:
         {
             if( item->mode & ConvertItem::convert )
@@ -597,21 +639,14 @@ void Convert::executeNextStep( ConvertItem *item )
             convertNextBackend( item );
             break;
         }
+        case ConvertItem::wait_replaygain:
+        {
+            replaygain( item );
+            break;
+        }
         case ConvertItem::replaygain:
         {
             remove( item, FileListItem::Succeeded );
-            break;
-        }
-        default:
-        {
-            if( item->mode & ConvertItem::get )
-                get( item );
-            else if( item->mode & ConvertItem::convert )
-                convert( item );
-            else if( item->mode & ConvertItem::replaygain )
-                replaygain( item );
-            else
-                remove( item, FileListItem::Succeeded );
             break;
         }
     }
@@ -631,6 +666,10 @@ void Convert::executeSameStep( ConvertItem *item )
 
     switch( item->state )
     {
+        case ConvertItem::initial:
+        {
+            break;
+        }
         case ConvertItem::get:
         {
             get( item );
@@ -657,13 +696,12 @@ void Convert::executeSameStep( ConvertItem *item )
             convert( item );
             return;
         }
+        case ConvertItem::wait_replaygain:
         case ConvertItem::replaygain:
         {
             replaygain( item );
             return;
         }
-        default:
-            break;
     }
 
     remove( item, FileListItem::Failed ); // shouldn't be possible
@@ -696,10 +734,14 @@ void Convert::kioJobFinished( KJob *job )
                 switch( item->state )
                 {
                     case ConvertItem::get:
+                    {
                         fileTime = item->getTime;
                         break;
+                    }
                     default:
+                    {
                         fileTime = 0.0f;
+                    }
                 }
                 if( item->state == ConvertItem::get )
                 {
@@ -804,18 +846,27 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                 float fileTime;
                 switch( item->state )
                 {
+                    case ConvertItem::initial:
+                    case ConvertItem::get:
+                    case ConvertItem::wait_replaygain:
+                    {
+                        fileTime = 0.0f;
+                        break;
+                    }
                     case ConvertItem::convert:
                     case ConvertItem::rip:
                     case ConvertItem::decode:
                     case ConvertItem::filter:
                     case ConvertItem::encode:
+                    {
                         fileTime = item->convertTimes.at(item->conversionPipesStep);
                         break;
+                    }
                     case ConvertItem::replaygain:
+                    {
                         fileTime = item->replaygainTime;
                         break;
-                    default:
-                        fileTime = 0.0f;
+                    }
                 }
                 item->finishedTime += fileTime;
 
@@ -835,10 +886,14 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
                     case ConvertItem::rip:
                     case ConvertItem::decode:
                     case ConvertItem::filter:
+                    {
                         convertNextBackend( item );
                         break;
+                    }
                     default:
+                    {
                         executeNextStep( item );
+                    }
                 }
             }
             else
@@ -865,6 +920,19 @@ void Convert::pluginProcessFinished( int id, int exitCode )
         {
             item->backendID = -1;
 
+            if( item->backendPlugin->name() == "Vorbis Gain" )
+            {
+                activeVorbisGainDirectories.removeAll( item->outputUrl.directory() );
+                foreach( ConvertItem *nextItem, items )
+                {
+                    if( nextItem->state == ConvertItem::wait_replaygain && nextItem->backendPlugin->name() == "Vorbis Gain" )
+                    {
+                        executeNextStep( nextItem );
+                        break;
+                    }
+                }
+            }
+
             if( item->killed )
             {
                 remove( item, FileListItem::StoppedByUser );
@@ -876,18 +944,27 @@ void Convert::pluginProcessFinished( int id, int exitCode )
                 float fileTime;
                 switch( item->state )
                 {
+                    case ConvertItem::initial:
+                    case ConvertItem::get:
+                    case ConvertItem::wait_replaygain:
+                    {
+                        fileTime = 0.0f;
+                        break;
+                    }
                     case ConvertItem::convert:
                     case ConvertItem::rip:
                     case ConvertItem::decode:
                     case ConvertItem::filter:
                     case ConvertItem::encode:
+                    {
                         fileTime = item->convertTimes.at(item->conversionPipesStep);
                         break;
+                    }
                     case ConvertItem::replaygain:
+                    {
                         fileTime = item->replaygainTime;
                         break;
-                    default:
-                        fileTime = 0.0f;
+                    }
                 }
                 item->finishedTime += fileTime;
 
@@ -1272,6 +1349,7 @@ void Convert::updateProgress()
     foreach( ConvertItem *item, items )
     {
         float fileProgress = 0.0f;
+        bool logProgress = true;
 
         if( item->backendID != -1 && item->backendPlugin )
         {
@@ -1295,6 +1373,10 @@ void Convert::updateProgress()
         fileTime = 0.0f;
         switch( item->state )
         {
+            case ConvertItem::initial:
+            {
+                break;
+            }
             case ConvertItem::get:
             {
                 fileTime = item->getTime;
@@ -1331,6 +1413,12 @@ void Convert::updateProgress()
                 item->fileListItem->setText( 0, i18n("Encoding")+"... "+fileProgressString );
                 break;
             }
+            case ConvertItem::wait_replaygain:
+            {
+                item->fileListItem->setText( 0, i18n("Waiting for Replay Gain") );
+                logProgress = false;
+                break;
+            }
             case ConvertItem::replaygain:
             {
                 const QString albumName = item->fileListItem->tags ? item->fileListItem->tags->album : "";
@@ -1346,12 +1434,13 @@ void Convert::updateProgress()
                 item->fileListItem->setText( 0, i18n("Replay Gain")+"... "+fileProgressString );
                 break;
             }
-            default:
-            {
-            }
         }
         time += item->finishedTime + fileProgress * fileTime / 100.0f;
-        logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
+
+        if( logProgress )
+        {
+            logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
+        }
     }
 
     emit updateTime( time );

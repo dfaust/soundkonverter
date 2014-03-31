@@ -835,22 +835,19 @@ int FileList::convertingCount() // TODO use Convert
         switch( item->state )
         {
             case FileListItem::WaitingForConversion:
-                break;
-            case FileListItem::Ripping:
-                isConverting = true;
-                break;
-            case FileListItem::Converting:
-                isConverting = true;
-                break;
-            case FileListItem::ApplyingReplayGain:
-                isConverting = true;
-                break;
             case FileListItem::WaitingForAlbumGain:
-                break;
             case FileListItem::ApplyingAlbumGain:
-                break;
             case FileListItem::Stopped:
+            {
                 break;
+            }
+            case FileListItem::Ripping:
+            case FileListItem::Converting:
+            case FileListItem::ApplyingReplayGain:
+            {
+                isConverting = true;
+                break;
+            }
         }
         if( isConverting )
             count++;

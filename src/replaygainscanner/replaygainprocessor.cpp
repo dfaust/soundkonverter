@@ -63,21 +63,46 @@ void ReplayGainProcessor::replaygain( ReplayGainProcessorItem *item )
     }
 
     item->backendPlugin = item->replaygainPipes.at(item->take).plugin;
-    KUrl::List urlList;
-    if( item->fileListItem->type == ReplayGainFileListItem::Track )
+
+    KUrl::List urlList = item->fileListItem->urls();
+
+    if( item->backendPlugin->name() == "Vorbis Gain" )
     {
-        urlList.append( item->fileListItem->url );
-//         item->fileListItem->state = ReplayGainFileListItem::Processing;
-    }
-    else
-    {
-        for( int j=0; j<item->fileListItem->childCount(); j++ )
+        bool waitForVorbisGainFinish = false;
+        QStringList directories = item->fileListItem->directories();
+
+        foreach( const QString directory, directories )
         {
-            ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->fileListItem->child(j);
-            urlList.append( child->url );
-//             child->state = ReplayGainFileListItem::Processing;
+            if( activeVorbisGainDirectories.contains(directory) )
+            {
+                waitForVorbisGainFinish = true;
+                break;
+            }
+        }
+
+        if( waitForVorbisGainFinish )
+        {
+            logger->log( item->logID, i18n("Waiting for running Vorbis Gain process to finish") );
+            item->fileListItem->setState( ReplayGainFileListItem::WaitingForReplayGain );
+            if( item->fileListItem->type == ReplayGainFileListItem::Track )
+            {
+                emit updateItem( item->fileListItem );
+            }
+            else
+            {
+                for( int j=0; j<item->fileListItem->childCount(); j++ )
+                {
+                    emit updateItem( static_cast<ReplayGainFileListItem*>(item->fileListItem->child(j)) );
+                }
+            }
+            return;
+        }
+        else
+        {
+            activeVorbisGainDirectories.append( directories );
         }
     }
+
     item->backendID = qobject_cast<ReplayGainPlugin*>(item->backendPlugin)->apply( urlList, item->mode );
 
     if( item->backendID < 100 )
@@ -126,6 +151,35 @@ void ReplayGainProcessor::pluginProcessFinished( int id, int exitCode )
         if( item->backendPlugin && item->backendPlugin == QObject::sender() && item->backendID == id )
         {
             item->backendID = -1;
+
+            if( item->backendPlugin->name() == "Vorbis Gain" )
+            {
+                foreach( const QString directory, item->fileListItem->directories() )
+                {
+                    activeVorbisGainDirectories.removeAll( directory );
+                }
+
+                foreach( ReplayGainProcessorItem *nextItem, items )
+                {
+                    if( nextItem->fileListItem->state == ReplayGainFileListItem::WaitingForReplayGain && nextItem->backendPlugin->name() == "Vorbis Gain" )
+                    {
+                        nextItem->fileListItem->setState( ReplayGainFileListItem::Processing );
+                        if( nextItem->fileListItem->type == ReplayGainFileListItem::Track )
+                        {
+                            emit updateItem( nextItem->fileListItem );
+                        }
+                        else
+                        {
+                            for( int j=0; j<nextItem->fileListItem->childCount(); j++ )
+                            {
+                                emit updateItem( static_cast<ReplayGainFileListItem*>(nextItem->fileListItem->child(j)) );
+                            }
+                        }
+                        replaygain( nextItem );
+                        break;
+                    }
+                }
+            }
 
             if( item->killed )
             {
@@ -303,9 +357,24 @@ void ReplayGainProcessor::kill( ReplayGainFileListItem *fileListItem )
         {
             item->killed = true;
 
-            if( item->backendID != -1 && item->backendPlugin )
+            if( fileListItem->state == ReplayGainFileListItem::WaitingForReplayGain )
             {
-                item->backendPlugin->kill( item->backendID );
+                if( item->backendPlugin && item->backendPlugin->name() == "Vorbis Gain" )
+                {
+                    foreach( const QString directory, item->fileListItem->directories() )
+                    {
+                        activeVorbisGainDirectories.removeAll( directory );
+                    }
+                }
+
+                remove( item, ReplayGainFileListItem::StoppedByUser );
+            }
+            else
+            {
+                if( item->backendID != -1 && item->backendPlugin )
+                {
+                    item->backendPlugin->kill( item->backendID );
+                }
             }
         }
     }
@@ -328,7 +397,11 @@ void ReplayGainProcessor::updateProgress()
         }
 
         time += (float)item->time * fileProgress / 100.0f;
-        logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
+
+        if( item->fileListItem->state == ReplayGainFileListItem::Processing )
+        {
+            logger->log( item->logID, "<pre>\t<span style=\"color:#585858\">" + i18n("Progress: %1",fileProgress) + "</span></pre>" );
+        }
     }
 
     emit updateTime( time );

@@ -26,15 +26,17 @@ public:
      * A list of flags for knowing what to do
      */
     enum Mode {
+        initial            = 0x0000, // Initial state
         get                = 0x0001, // Copy the file to tmp
         convert            = 0x0002, // Convert the file
         rip                = 0x0004, // Ripping the file (only for the current state)
         decode             = 0x0008, // Decoding the file (only for the current state)
         filter             = 0x0010, // Applying filters (only for the current state)
         encode             = 0x0020, // Encoding the file (only for the current state)
-        replaygain         = 0x0040, // Apply replaygain
-        write_tags         = 0x0080, // Write the tags to the file
-        execute_userscript = 0x0100  // Run the user script
+        wait_replaygain    = 0x0040, // Wait for replaygain
+        replaygain         = 0x0080  // Apply replaygain
+//         write_tags         = 0x0100, // Write the tags to the file
+//         execute_userscript = 0x0200  // Run the user script
     };
 
     /** Constructor, @p item a pointer to the file list item */

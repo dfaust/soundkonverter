@@ -89,7 +89,7 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
         connect( configDialogForceReadSpeedCheckBox, SIGNAL( stateChanged(int) ), this, SLOT( configDialogForceReadSpeedChanged(int) ) );
 
         QHBoxLayout *configDialogBox1 = new QHBoxLayout();
-        QLabel *configDialogForceEndiannessLabel = new QLabel( i18n("Endianness:"), configDialogWidget );
+        QLabel *configDialogForceEndiannessLabel = new QLabel( i18nc("Byte-Order", "Endianness:"), configDialogWidget );
         configDialogBox1->addWidget( configDialogForceEndiannessLabel );
         configDialogForceEndiannessComboBox = new QComboBox( configDialogWidget );
         configDialogForceEndiannessComboBox->addItem( "Auto" );

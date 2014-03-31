@@ -119,6 +119,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         else
         {
             bool canDrop = true;
+            bool showMessage = false;
             if( destination->type == ReplayGainFileListItem::Album )
             {
                 QList<QTreeWidgetItem*> q_items = selectedItems();
@@ -129,15 +130,21 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
                     if( item->codecName != destination->codecName || item->samplingRate != destination->samplingRate )
                     {
                         canDrop = false;
+                        showMessage = true;
                         break;
                     }
                 }
             }
+            else if( destination->type == ReplayGainFileListItem::Track )
+            {
+                canDrop = false;
+            }
+
             if( canDrop )
             {
                 QTreeWidget::dropEvent(event);
             }
-            else
+            else if( showMessage )
             {
                 KMessageBox::error( this, i18n("Some tracks can't be added to the album because either the codec or the sampling rate is different.") );
             }

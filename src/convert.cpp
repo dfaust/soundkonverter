@@ -498,6 +498,7 @@ void Convert::replaygain( ConvertItem *item )
             item->state = ConvertItem::wait_replaygain;
             item->fileListItem->state = FileListItem::WaitingForAlbumGain;
             fileList->updateItem( item->fileListItem );
+            emit finished( 0, FileListItem::Failed, false ); // send signal to FileList; trigger call of FileList::convertNextItem()
             return;
         }
         else

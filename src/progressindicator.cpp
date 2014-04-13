@@ -128,7 +128,6 @@ void ProgressIndicator::timeChanged( float timeDelta )
 void ProgressIndicator::timeFinished( float timeDelta )
 {
     processedTime += timeDelta;
-    pBar->setValue( (int)processedTime );
 }
 
 void ProgressIndicator::finished( bool reset )

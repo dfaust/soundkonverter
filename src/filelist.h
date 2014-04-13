@@ -71,7 +71,7 @@ private:
 
     void convertNextItem();
     int waitingCount();
-    int convertingCount();
+    int convertingCount( bool includeWaiting = false );
 
 //     qulonglong spaceLeftForDirectory( const QString& dir );
 //     QStringList fullDiscs; // a list of mount points with volumes that don't have enougth space left

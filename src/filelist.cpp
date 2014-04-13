@@ -822,7 +822,7 @@ int FileList::waitingCount()
     return count;
 }
 
-int FileList::convertingCount() // TODO use Convert
+int FileList::convertingCount( bool includeWaiting ) // TODO use Convert
 {
     int count = 0;
     FileListItem *item;
@@ -835,10 +835,17 @@ int FileList::convertingCount() // TODO use Convert
         switch( item->state )
         {
             case FileListItem::WaitingForConversion:
-            case FileListItem::WaitingForAlbumGain:
             case FileListItem::ApplyingAlbumGain:
             case FileListItem::Stopped:
             {
+                break;
+            }
+            case FileListItem::WaitingForAlbumGain:
+            {
+                if( includeWaiting )
+                {
+                    isConverting = true;
+                }
                 break;
             }
             case FileListItem::Ripping:
@@ -910,7 +917,7 @@ void FileList::itemFinished( FileListItem *item, FileListItem::ReturnCode return
     {
         convertNextItem();
     }
-    else if( convertingCount() == 0 )
+    else if( convertingCount(true) == 0 )
     {
         queue = false;
         save( false );

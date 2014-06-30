@@ -42,6 +42,7 @@ set(soundkonvertercore_SRCS
    core/ripperplugin.cpp
 )
 kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
+set_target_properties(soundkonvertercore PROPERTIES SOVERSION 0)
 target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
 install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    <id>soundkonverter.desktop</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-2.0</project_license>
+    <project_group>KDE</project_group>
+    <developer_name>Daniel Faust</developer_name>
+    <update_contact>hessijames_AT_gmail.com</update_contact>
+    <provides>
+        <binary>soundkonverter</binary>
+    </provides>
+
+    <url type="homepage">https://github.com/HessiJames/soundkonverter</url>
+    <url type="bugtracker">https://github.com/HessiJames/soundkonverter/issues</url>
+    <url type="help">https://github.com/HessiJames/soundkonverter/wiki</url>
+
+    <description>
+        <p>soundKonverter is a frontend to various audio converters.</p>
+        <p>The key features are:</p>
+        <ul>
+            <li>Audio file conversion</li>
+            <li>Replay Gain calculation</li>
+            <li>CD ripping</li>
+        </ul>
+        <p>soundKonverter supports reading and writing tags and covers for many formats, so they are preserved when converting files.</p>
+        <p>It is extendable by plugins and supports many backends including:</p>
+        <ul>
+            <li>
+                Audio file conversion<br>
+                Backends: faac, faad, ffmpeg, flac, lame, mplayer, neroaac, timidity, fluidsynth, vorbistools, opustools, sox, twolame, flake, mac, shorten, wavpack and speex<br>
+                Formats: ogg vorbis, mp3, flac, wma, aac, ac3, opus, alac, mp2, als, amr nb, amr wb, ape, speex, m4a, mp1, musepack shorten, tta, wavpack, ra, midi, mod, 3gp, rm, avi, mkv, ogv, mpeg, mov, mp4, flv, wmv and rv
+            </li>
+            <li>
+                Replay Gain calculation<br>
+                Backends: aacgain, metaflac, mp3gain, vorbisgain, wvgain, mpcgain<br>
+                Formats: aac, mp3, flac, ogg vorbis, wavpack, musepack
+            </li>
+            <li>
+                CD ripping<br>
+                Backends: cdparanoia
+            </li>
+        </ul>
+        <p>If you try to convert a file that is not supported, soundKonverter will tell you which backend you need to install.</p>
+    </description>
+
+    <screenshots>
+        <screenshot type="default">
+            <image width="696" height="493">http://screenshots.debian.net/screenshots/s/soundkonverter/9175_large.png</image>
+        </screenshot>
+    </screenshots>
+
+    <releases>
+        <release version="2.1.1" timestamp="1397395162">
+            <description>
+                <ul>
+                    <li>Add: Check for MP4 support in faac</li>
+                    <li>Fix: Don't run vorbisgain more than once per directory</li>
+                    <li>Fix: Progress bar jumps when a file finished</li>
+                </ul>
+            </description>
+        </release>
+    </releases>
+</component>

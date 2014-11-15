@@ -98,6 +98,13 @@ void Convert::convert( ConvertItem *item )
     if( !item->fileListItem->tags )
         item->fileListItem->tags = config->tagEngine()->readTags( inputUrl );
 
+    if( item->fileListItem->tags->isEncrypted )
+    {
+        logger->log( item->logID, "<br><span style=\"color:#C00000\">" + i18n("File is encrypted, conversion not possible") + "</span>" );
+        remove( item, FileListItem::Encrypted );
+        return;
+    }
+
     if( item->outputUrl.isEmpty() )
     {
         // item->outputUrl = !item->fileListItem->outputUrl.url().isEmpty() ? item->fileListItem->outputUrl : OutputDirectory::calcPath( item->fileListItem, config, usedOutputNames.values() );
@@ -1067,6 +1074,8 @@ void Convert::add( FileListItem *fileListItem )
     ConvertItem *newItem = new ConvertItem( fileListItem );
     items.append( newItem );
 
+    newItem->progressedTime.start();
+
     // register at the logger
     newItem->logID = logger->registerProcess( fileName.pathOrUrl() );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",QString::number(newItem->logID)) );
@@ -1077,6 +1086,13 @@ void Convert::add( FileListItem *fileListItem )
 //     logger->log( newItem->logID, "Mime Type: " + newItem->fileListItem->mimeType );
 //     if( newItem->fileListItem->tags ) logger->log( newItem->logID, i18n("Tags successfully read") );
 //     else logger->log( newItem->logID, i18n("Reading tags failed") );
+
+    if( fileListItem->tags && fileListItem->tags->isEncrypted )
+    {
+        logger->log( newItem->logID, "<br><span style=\"color:#C00000\">" + i18n("File is encrypted, conversion not possible") + "</span>" );
+        remove( newItem, FileListItem::Encrypted );
+        return;
+    }
 
     // set some variables to default values
     newItem->mode = (ConvertItem::Mode)0x0000;
@@ -1132,8 +1148,6 @@ void Convert::add( FileListItem *fileListItem )
 
     // (visual) feedback
     fileListItem->state = FileListItem::Converting;
-
-    newItem->progressedTime.start();
 
     // and start
     executeNextStep( newItem );
@@ -1206,6 +1220,9 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             break;
         case FileListItem::Skipped:
             exitMessage = i18nc("Conversion exit status","File already exists");
+            break;
+        case FileListItem::Encrypted:
+            exitMessage = i18nc("Conversion exit status","File is encrypted");
             break;
         case FileListItem::Failed:
             exitMessage = i18nc("Conversion exit status","An error occurred");

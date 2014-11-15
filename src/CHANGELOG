@@ -1,3 +1,6 @@
+2.1.2:
+-Add: Detect (DRM)-encrypted wma and m4a files
+
 2.1.1:
 -Add: Check for MP4 support in faac
 -Fix: Don't run vorbisgain more than once per directory

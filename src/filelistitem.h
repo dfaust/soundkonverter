@@ -34,6 +34,7 @@ public:
         SucceededWithProblems           = 1,
         StoppedByUser                   = 2,
         Skipped                         = 3,
+        Encrypted                       = 7,
         BackendNeedsConfiguration       = 4,
         DiscFull                        = 5,
         Failed                          = 6

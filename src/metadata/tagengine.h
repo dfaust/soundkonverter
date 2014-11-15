@@ -111,6 +111,7 @@ public:
     /** The technical information */
     int length;
     int samplingRate;
+    bool isEncrypted;
 };
 
 

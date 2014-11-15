@@ -99,6 +99,9 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
                         break;
                     case FileListItem::Skipped:
                         break;
+                    case FileListItem::Encrypted:
+                        isFailed = true;
+                        break;
                     case FileListItem::Failed:
                         isFailed = true;
                         break;

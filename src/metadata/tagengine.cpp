@@ -10,6 +10,12 @@
 # define TAGLIB_HAS_ASF_PICTURE
 #endif
 
+// Taglib added support for DRM detection in 1.8.0
+#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 8)
+# define TAGLIB_HAS_MP4_DRM
+# define TAGLIB_HAS_ASF_DRM
+#endif
+
 // Taglib added support for opus in 1.9.0
 #if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 9)
 # define TAGLIB_HAS_OPUS
@@ -127,6 +133,7 @@ TagData::TagData()
 
     length = 0;
     samplingRate = 0;
+    isEncrypted = false;
 }
 
 TagData::~TagData()
@@ -417,6 +424,10 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     }
                 }
             }
+
+            #ifdef TAGLIB_HAS_MP4_DRM
+            tagData->isEncrypted = file->audioProperties()->isEncrypted();
+            #endif // TAGLIB_HAS_MP4_DRM
         }
         else if( TagLib::ASF::File *file = dynamic_cast<TagLib::ASF::File*>(fileref.file()) )
         {
@@ -454,6 +465,10 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     }
                 }
             }
+
+            #ifdef TAGLIB_HAS_ASF_DRM
+            tagData->isEncrypted = file->audioProperties()->isEncrypted();
+            #endif // TAGLIB_HAS_ASF_DRM
         }
         /*else if( TagLib::MPC::File *file = dynamic_cast<TagLib::MPC::File *>( fileref.file() ) )
         {

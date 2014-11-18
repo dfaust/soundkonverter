@@ -57,9 +57,6 @@ public:
 
     /** adds replaygain to one or more files */
     virtual unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
-
-protected:
-    int lastId;
 };
 
 #define K_EXPORT_SOUNDKONVERTER_REPLAYGAIN(libname, classname) \

@@ -6,6 +6,7 @@
 #include <KDialog>
 #include <QComboBox>
 #include <QCheckBox>
+#include <QDoubleSpinBox>
 #include <QHBoxLayout>
 #include <QLabel>
 
@@ -33,6 +34,7 @@ soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *p
     group = conf->group( "Plugin-"+name() );
     tagMode = group.readEntry( "tagMode", 0 );
     modifyAudioStream = group.readEntry( "modifyAudioStream", true );
+    gainAdjustment = group.readEntry( "gainAdjustment", 0.0 );
 }
 
 soundkonverter_replaygain_mp3gain::~soundkonverter_replaygain_mp3gain()
@@ -88,6 +90,16 @@ void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, con
         configDialogBox1->addWidget( configDialogTagModeComboBox );
         configDialogBox->addLayout( configDialogBox1 );
 
+        QHBoxLayout *configDialogBox3 = new QHBoxLayout();
+        QLabel *configDialogGainAdjustmentLabel = new QLabel( i18n("Adjust gain:"), configDialogWidget );
+        configDialogBox3->addWidget( configDialogGainAdjustmentLabel );
+        configDialogGainAdjustmentSpinBox = new QDoubleSpinBox( configDialogWidget );
+        configDialogGainAdjustmentSpinBox->setRange( -99, 99 );
+        configDialogGainAdjustmentSpinBox->setSuffix( " " + i18nc("decibel","dB") );
+        configDialogGainAdjustmentSpinBox->setToolTip( i18n("Lower or raise the suggested gain") );
+        configDialogBox3->addWidget( configDialogGainAdjustmentSpinBox );
+        configDialogBox->addLayout( configDialogBox3 );
+
         QHBoxLayout *configDialogBox2 = new QHBoxLayout();
         configDialogModifyAudioStreamCheckBox = new QCheckBox( i18n("Modify audio stream"), configDialogWidget );
         configDialogModifyAudioStreamCheckBox->setToolTip( i18n("Write gain adjustments directly into the encoded data. That way the adjustment works with all mp3 players.\nUndoing the changes is still possible since correction data will be written as well.") );
@@ -100,6 +112,7 @@ void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, con
     }
     configDialogTagModeComboBox->setCurrentIndex( tagMode );
     configDialogModifyAudioStreamCheckBox->setChecked( modifyAudioStream );
+    configDialogGainAdjustmentSpinBox->setValue( gainAdjustment );
     configDialog.data()->show();
 }
 
@@ -109,6 +122,7 @@ void soundkonverter_replaygain_mp3gain::configDialogSave()
     {
         tagMode = configDialogTagModeComboBox->currentIndex();
         modifyAudioStream = configDialogModifyAudioStreamCheckBox->isChecked();
+        gainAdjustment = configDialogGainAdjustmentSpinBox->value();
 
         KSharedConfig::Ptr conf = KGlobal::config();
         KConfigGroup group;
@@ -116,6 +130,7 @@ void soundkonverter_replaygain_mp3gain::configDialogSave()
         group = conf->group( "Plugin-"+name() );
         group.writeEntry( "tagMode", tagMode );
         group.writeEntry( "modifyAudioStream", modifyAudioStream );
+        group.writeEntry( "gainAdjustment", gainAdjustment );
 
         configDialog.data()->deleteLater();
     }
@@ -127,6 +142,7 @@ void soundkonverter_replaygain_mp3gain::configDialogDefault()
     {
         configDialogTagModeComboBox->setCurrentIndex( 0 );
         configDialogModifyAudioStreamCheckBox->setChecked( true );
+        configDialogGainAdjustmentSpinBox->setValue( 0.0 );
     }
 }
 
@@ -177,6 +193,11 @@ unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileLis
         command += "-u";
         connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(undoProcessExit(int,QProcess::ExitStatus)) );
         newItem->undoFileList = fileList;
+    }
+    if( gainAdjustment != 0 )
+    {
+        command += "-d";
+        command += QString::number(gainAdjustment);
     }
     if( mode == ReplayGainPlugin::Add || mode == ReplayGainPlugin::Force )
     {

@@ -121,6 +121,15 @@ void Convert::convert( ConvertItem *item )
     }
     usedOutputNames.insert( item->logID, item->outputUrl.toLocalFile() );
 
+    if( config->data.general.copyIfSameCodec && item->fileListItem->codecName == conversionOptions->codecName )
+    {
+        logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",inputUrl.pathOrUrl(),item->outputUrl.toLocalFile()) );
+        QFile::copy( inputUrl.pathOrUrl(), item->outputUrl.toLocalFile() );
+        item->state = ConvertItem::convert;
+        executeNextStep( item );
+        return;
+    }
+
     if( item->take > item->conversionPipes.count() - 1 )
     {
         logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );

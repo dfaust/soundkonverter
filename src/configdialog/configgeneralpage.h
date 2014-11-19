@@ -43,6 +43,7 @@ private:
     KComboBox *cConflictHandling;
     KIntSpinBox *iNumFiles;
     QCheckBox *cWaitForAlbumGain;
+    QCheckBox *cCopyIfSameCodec;
     KComboBox *cReplayGainGrouping;
     KIntSpinBox *iNumReplayGainFiles;
 

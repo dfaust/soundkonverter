@@ -153,6 +153,17 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     waitForAlbumGainBox->addWidget( cWaitForAlbumGain );
     connect( cWaitForAlbumGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
+    box->addSpacing( spacingSmall );
+
+    QHBoxLayout *copyIfSameCodecBox = new QHBoxLayout();
+    copyIfSameCodecBox->addSpacing( spacingOffset );
+    box->addLayout( copyIfSameCodecBox );
+    cCopyIfSameCodec = new QCheckBox( i18n("Copy files instead of converting to the same file format"), this );
+    cCopyIfSameCodec->setToolTip( i18n("If the input and the output file format are the same, copy the files instead of re-encoding them.") );
+    cCopyIfSameCodec->setChecked( config->data.general.copyIfSameCodec );
+    copyIfSameCodecBox->addWidget( cCopyIfSameCodec );
+    connect( cCopyIfSameCodec, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
+
     box->addSpacing( spacingBig );
 
     QLabel *lReplayGainTool = new QLabel( i18n("Replay Gain tool"), this );
@@ -207,6 +218,7 @@ void ConfigGeneralPage::resetDefaults()
     cConflictHandling->setCurrentIndex( 0 );
     iNumFiles->setValue( processorsCount > 0 ? processorsCount : 1 );
     cWaitForAlbumGain->setChecked( true );
+    cCopyIfSameCodec->setChecked( false );
     cReplayGainGrouping->setCurrentIndex( 0 );
     iNumReplayGainFiles->setValue( processorsCount > 0 ? processorsCount : 1 );
 
@@ -222,6 +234,7 @@ void ConfigGeneralPage::saveSettings()
     config->data.general.conflictHandling = (Config::Data::General::ConflictHandling)cConflictHandling->currentIndex();
     config->data.general.numFiles = iNumFiles->value();
     config->data.general.waitForAlbumGain = cWaitForAlbumGain->isChecked();
+    config->data.general.copyIfSameCodec = cCopyIfSameCodec->isChecked();
     config->data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)cReplayGainGrouping->currentIndex();
     config->data.general.numReplayGainFiles = iNumReplayGainFiles->value();
 }
@@ -234,6 +247,7 @@ void ConfigGeneralPage::somethingChanged()
                          cConflictHandling->currentIndex() != (int)config->data.general.conflictHandling ||
                          iNumFiles->value() != config->data.general.numFiles ||
                          cWaitForAlbumGain->isChecked() != config->data.general.waitForAlbumGain ||
+                         cCopyIfSameCodec->isChecked() != config->data.general.copyIfSameCodec ||
                          cReplayGainGrouping->currentIndex() != (int)config->data.general.replayGainGrouping ||
                          iNumReplayGainFiles->value() != config->data.general.numReplayGainFiles;
 

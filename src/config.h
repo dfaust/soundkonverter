@@ -62,6 +62,7 @@ public:
 //             int priority;
             bool waitForAlbumGain;
             bool useVFATNames;
+            bool copyIfSameCodec;
             bool writeLogFiles;
             enum ConflictHandling
             {

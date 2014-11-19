@@ -531,6 +531,8 @@ void FileList::updateItem( FileListItem *item )
     item->setToolTip( Column_Output, "" );
     item->setToolTip( Column_Quality, "" );
 
+    ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
+
     switch( item->state )
     {
         case FileListItem::WaitingForConversion:
@@ -538,6 +540,10 @@ void FileList::updateItem( FileListItem *item )
             if( QFile::exists(outputUrl.toLocalFile()) )
             {
                 item->setText( Column_State, i18n("Will be skipped") );
+            }
+            else if( config->data.general.copyIfSameCodec && options && item->codecName == options->codecName )
+            {
+                item->setText( Column_State, i18n("Will be copied") );
             }
             else
             {
@@ -628,7 +634,6 @@ void FileList::updateItem( FileListItem *item )
         }
     }
 
-    ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
     if( options )
         item->setText( Column_Quality, options->profile );
 

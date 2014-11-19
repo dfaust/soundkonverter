@@ -1,6 +1,7 @@
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files
 -Add: Adjust gain for mp3 files
+-Add: Option to copy files instead of re-encoding them if input and output codec are the same
 -Change: Fall-back from album artist to artist in "meta data" naming mode if album artist is empty
 
 2.1.1:

@@ -60,6 +60,7 @@ void Config::load()
     data.general.lastNormalOutputDirectoryPaths = group.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
     data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", true );
     data.general.useVFATNames = group.readEntry( "useVFATNames", false );
+    data.general.copyIfSameCodec = group.readEntry( "copyIfSameCodec", false );
     data.general.writeLogFiles = group.readEntry( "writeLogFiles", false );
     data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
 //     data.general.priority = group.readEntry( "priority", 10 );
@@ -488,6 +489,7 @@ void Config::save()
     group.writeEntry( "lastNormalOutputDirectoryPaths", data.general.lastNormalOutputDirectoryPaths );
     group.writeEntry( "waitForAlbumGain", data.general.waitForAlbumGain );
     group.writeEntry( "useVFATNames", data.general.useVFATNames );
+    group.writeEntry( "copyIfSameCodec", data.general.copyIfSameCodec );
     group.writeEntry( "writeLogFiles", data.general.writeLogFiles );
     group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
 //     group.writeEntry( "priority", data.general.priority );

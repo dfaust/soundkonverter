@@ -507,6 +507,17 @@ void FileList::updateItem( FileListItem *item )
     if( !item )
         return;
 
+    // force repaint
+    item->setText( Column_State, "" );
+    item->setText( Column_Input, "" );
+    item->setText( Column_Output, "" );
+    item->setText( Column_Quality, "" );
+
+    item->setToolTip( Column_State, "" );
+    item->setToolTip( Column_Input, "" );
+    item->setToolTip( Column_Output, "" );
+    item->setToolTip( Column_Quality, "" );
+
     // KUrl outputUrl;
     // if( !item->outputUrl.toLocalFile().isEmpty() )
     // {
@@ -525,11 +536,6 @@ void FileList::updateItem( FileListItem *item )
         disconnect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, 0 );
         delete item->lInfo.data();
     }
-    item->setText( Column_State, "" );
-    item->setToolTip( Column_State, "" );
-    item->setToolTip( Column_Input, "" );
-    item->setToolTip( Column_Output, "" );
-    item->setToolTip( Column_Quality, "" );
 
     switch( item->state )
     {

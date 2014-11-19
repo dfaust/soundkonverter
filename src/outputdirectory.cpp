@@ -232,7 +232,15 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         artist.replace("/",",");
         path.replace( "$replace_by_artist$", artist );
 
-        QString albumArtist = ( fileListItem->tags == 0 || fileListItem->tags->albumArtist.isEmpty() ) ? i18n("Unknown Artist") : fileListItem->tags->albumArtist;
+        QString albumArtist;
+        if( fileListItem->tags )
+        {
+            albumArtist = fileListItem->tags->albumArtist.isEmpty() ? fileListItem->tags->artist : fileListItem->tags->albumArtist;
+        }
+        if( albumArtist.isEmpty() )
+        {
+            albumArtist = i18n("Unknown Artist");
+        }
         albumArtist.replace("/",",");
         path.replace( "$replace_by_albumartist$", albumArtist );
 

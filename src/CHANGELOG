@@ -4,6 +4,10 @@
 -Add: Option to copy files instead of re-encoding them if input and output codec are the same
 -Change: Fall-back from album artist to artist in "meta data" naming mode if album artist is empty
 
+2.1.2:
+-Fix: False error detection in the Replay Gain tool
+-Fix: Properly re-paint conversion file list on status change
+
 2.1.1:
 -Add: Check for MP4 support in faac
 -Fix: Don't run vorbisgain more than once per directory

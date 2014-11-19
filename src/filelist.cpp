@@ -602,7 +602,7 @@ void FileList::updateItem( FileListItem *item )
                 }
                 case FileListItem::Skipped:
                 {
-                    item->setText( Column_State, i18n("Will be skipped") );
+                    item->setText( Column_State, i18n("Skipped") );
                     break;
                 }
                 case FileListItem::Encrypted:

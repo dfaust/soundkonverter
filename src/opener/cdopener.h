@@ -121,6 +121,8 @@ private:
 
     QString parseNameCredits(const MusicBrainz5::CNameCreditList *names);
 
+    QStringList amazonCoverUrls(const QString& asin);
+
     /** the widget for selecting and editing the cd tracks */
     QWidget *cdOpenerWidget;
     /** the widget for showing the progress of reading the cd / cddb data */

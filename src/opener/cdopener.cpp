@@ -766,6 +766,12 @@ void CDOpener::requestCddb( bool autoRequest )
 
                     artistChanged( lArtist->text() );
 
+                    const QString asin = QString::fromStdString(fullRelease->ASIN());
+
+                    QStringList coverUrls;
+                    coverUrls += QString("http://coverartarchive.org/release/%1/front").arg(QString::fromStdString(fullRelease->ID()));
+                    coverUrls += amazonCoverUrls(asin);
+
                     // However, these releases will include information for all media in the release
                     // So we need to filter out the only the media we want.
                     MusicBrainz5::CMediumList mediaList = fullRelease->MediaMatchingDiscID(discID);
@@ -852,6 +858,47 @@ QString CDOpener::parseNameCredits(const MusicBrainz5::CNameCreditList *names)
     }
 
     return full.trimmed();
+}
+
+QStringList CDOpener::amazonCoverUrls(const QString& asin)
+{
+    if( asin.isEmpty() )
+        return QStringList();
+
+    QHash<QString, QStringList> server;
+
+    server.insert("amazon.com",   QStringList("ec1.images-amazon.com") << "01");
+    server.insert("amazon.ca",    QStringList("ec1.images-amazon.com") << "01");
+    server.insert("amazon.co.uk", QStringList("ec1.images-amazon.com") << "02");
+    server.insert("amazon.de",    QStringList("ec2.images-amazon.com") << "03");
+    server.insert("amazon.fr",    QStringList("ec1.images-amazon.com") << "08");
+    server.insert("amazon.jp",    QStringList("ec1.images-amazon.com") << "09");
+    server.insert("amazon.co.jp", QStringList("ec1.images-amazon.com") << "09");
+
+    QStringList sizes;
+    // huge size option is only available for items
+    // that have a ZOOMing picture on its amazon web page
+    // and it doesn't work for all of the domain names
+    // sizes += "_SCRM_";       // huge size
+    sizes += "LZZZZZZZ";        // large size,   format 1
+    // sizes += "_SCLZZZZZZZ_"; // large size,   format 3
+    sizes += "MZZZZZZZ";        // default size, format 1
+    // sizes += "_SCMZZZZZZZ_"; // medium size,  format 3
+    // sizes += "TZZZZZZZ";     // medium size,  format 1
+    // sizes += "_SCTZZZZZZZ_"; // small size,   format 3
+    // sizes += "THUMBZZZ";     // small size,   format 1
+
+    QStringList urls;
+
+    const QString serverName = server.value("amazon.com").at(0);
+    const QString serverId   = server.value("amazon.com").at(1);
+
+    foreach( const QString size, sizes )
+    {
+        urls += QString("http://%1/images/P/%2.%3.%4.jpg").arg(serverName).arg(asin).arg(serverId).arg(size);
+    }
+
+    return urls;
 }
 
 void CDOpener::timeout()

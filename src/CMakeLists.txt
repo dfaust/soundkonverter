@@ -6,7 +6,8 @@ find_package(KDE4 REQUIRED)
 include(KDE4Defaults)
 
 find_package(Cdparanoia REQUIRED)
-find_package(Kcddb REQUIRED)
+find_package(Discid REQUIRED)
+find_package(Musicbrainz5 REQUIRED)
 
 set(TAGLIB_MIN_VERSION "1.4")
 find_package(Taglib REQUIRED)
@@ -23,6 +24,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion")
 # implicit conversions from signed to unsigned
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsign-conversion")
+# enable exception handling
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
 
 
 add_subdirectory(plugins)
@@ -91,7 +94,7 @@ set(soundkonverter_SRCS
    aboutplugins.cpp
 )
 kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
-target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES} soundkonvertercore)
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 
 

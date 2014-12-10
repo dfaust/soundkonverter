@@ -35,6 +35,22 @@
 #include <solid/block.h>
 #include <solid/opticaldisc.h>
 
+#include <discid/discid.h>
+
+#include <musicbrainz5/Query.h>
+#include <musicbrainz5/Medium.h>
+#include <musicbrainz5/MediumList.h>
+#include <musicbrainz5/ReleaseGroup.h>
+#include <musicbrainz5/Track.h>
+#include <musicbrainz5/TrackList.h>
+#include <musicbrainz5/Recording.h>
+#include <musicbrainz5/Disc.h>
+#include <musicbrainz5/HTTPFetch.h>
+#include <musicbrainz5/Release.h>
+#include <musicbrainz5/ArtistCredit.h>
+#include <musicbrainz5/NameCredit.h>
+#include <musicbrainz5/Artist.h>
+
 
 PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f )
     : QWidget( parent, f ),
@@ -109,7 +125,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     config( _config ),
     cdDrive( 0 ),
     cdParanoia( 0 ),
-    cddb( 0 ),
     discTags( 0 ),
     cdTextFound( false ),
     cddbFound( false )
@@ -420,15 +435,6 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     fadeAlpha = 255.0f;
 
 
-    cddb = new KCDDB::Client();
-    connect( cddb, SIGNAL(finished(KCDDB::Result)), this, SLOT(lookup_cddb_done(KCDDB::Result)) );
-
-
-    // set up timeout timer
-    timeoutTimer.setSingleShot( true );
-    connect( &timeoutTimer, SIGNAL(timeout()), this, SLOT(timeout()) );
-
-
     if( !_device.isEmpty() )
     {
         device = _device;
@@ -506,9 +512,6 @@ CDOpener::~CDOpener()
         cdda_close( cdDrive );
 //         delete cdDrive;
     }
-
-    if( cddb )
-        delete cddb;
 }
 
 void CDOpener::setProfile( const QString& profile )
@@ -680,103 +683,175 @@ void CDOpener::requestCddb( bool autoRequest )
 {
     lOverlayLabel->setText( i18n("Please wait, trying to download CDDB data ...") );
 
-    timeoutTimer.start( autoRequest ? 10000 : 20000 );
+    DiscId *disc = discid_new();
 
-    // cddb needs offsets +150 frames (2 seconds * 75 frames per second)
-    KCDDB::TrackOffsetList offsets;
-    for( int i=1; i<=cdda_tracks(cdDrive); i++ )
+    if( discid_read_sparse(disc, device.toLocal8Bit().constData(), 0) )
     {
-        if( !(IS_AUDIO(cdDrive,i-1)) )
-            break;
+        char *discID = discid_get_id(disc);
 
-        offsets.append( cdda_track_firstsector(cdDrive,i) + 150 );
-    }
-    offsets.append( cdda_disc_lastsector(cdDrive) + 150 + 1 );
+        MusicBrainz5::CQuery query("soundkonverter/" SOUNDKONVERTER_VERSION_STRING " ( hessijames@gmail.com )");
 
-    cddb->config().reparse();
-    cddb->setBlockingMode( false );
-    cddb->lookup( offsets );
-}
-
-void CDOpener::lookup_cddb_done( KCDDB::Result result )
-{
-    timeoutTimer.stop();
-
-    if( result != KCDDB::Success && result != KCDDB::MultipleRecordFound )
-    {
-        // TODO error message if request was initiated by the user
-        // Error(i18n("No entry found in CDDB."), i18n("This means no data found in the CDDB database. Please enter the data manually. Maybe try another CDDB server."), Error::ERROR, this);
-        fadeOut();
-        return;
-    }
-
-    cddbFound = true;
-
-    KCDDB::CDInfo info = cddb->lookupResponse().first();
-    if( cddb->lookupResponse().count() > 1 || cdTextFound )
-    {
-        KCDDB::CDInfoList cddb_info = cddb->lookupResponse();
-        QStringList list;
-        if( cdTextFound )
+        try
         {
-            // list.append( QString("CD Text: %1, %2").arg(compact_disc->discArtist()).arg(compact_disc->discTitle()) );
-        }
-        for( int i=0; i<cddb_info.count(); i++ )
-        {
-            list.append( QString("%1, %2, %3").arg(cddb_info.at(i).get(KCDDB::Artist).toString()).arg(cddb_info.at(i).get(KCDDB::Title).toString()).arg(cddb_info.at(i).get(KCDDB::Genre).toString()) );
-        }
-
-        bool ok = false;
-        const QString cddbItem = KInputDialog::getItem( i18n("Select CDDB Entry"), i18n("Multiple CDDB entries where found. Please select one:"), list, 0, false, &ok, this );
-
-        if( ok )
-        {
-            // The user selected and item and pressed OK
-            const int offset = cdTextFound ? 1 : 0;
-            const int index = list.indexOf( cddbItem );
-            if( index - offset < 0 )
+            MusicBrainz5::CQuery::tParamMap params;
+            params["inc"] = "artists";
+            // http://musicbrainz.org/ws/2/discid/Pa3lPdWkGajOa5fR3_aDwJ3LoS0-/?inc=artists
+            // http://musicbrainz.org/ws/2/discid/7zJyVkBip13wLjk0aSdDcNQrqdM-/?inc=artists
+            MusicBrainz5::CMetadata discMetadata = query.Query("discid", discID, "", params);
+            if( discMetadata.Disc() && discMetadata.Disc()->ReleaseList() )
             {
-                fadeOut();
-                return;
+                MusicBrainz5::CReleaseList *releaseList = discMetadata.Disc()->ReleaseList();
+                std::cout << "Found " << releaseList->NumItems() << " release(s)" << std::endl;
+
+                int releaseNumber = 0;
+
+                if( releaseList->NumItems() > 1 )
+                {
+                    QStringList list;
+
+                    for( int releaseNumber=0; releaseNumber<releaseList->NumItems(); releaseNumber++ )
+                    {
+                        MusicBrainz5::CRelease *release = releaseList->Item(releaseNumber);
+
+                        const QString artist = parseNameCredits(release->ArtistCredit()->NameCreditList());
+                        const QString title = QString::fromStdString(release->Title());
+                        const QString date = QString::fromStdString(release->Date());
+
+                        if( !date.isEmpty() )
+                        {
+                            list.append( QString("%1 - %2 (%3)").arg(artist).arg(title).arg(date) );
+                        }
+                        else
+                        {
+                            list.append( QString("%1 - %2").arg(artist).arg(title) );
+                        }
+                    }
+
+                    bool ok = false;
+                    const QString cddbItem = KInputDialog::getItem( i18n("Select CDDB Entry"), i18n("Multiple CDDB entries where found. Please select one:"), list, 0, false, &ok, this );
+
+                    if( ok )
+                    {
+                        // The user selected an item and pressed OK
+                        releaseNumber = list.indexOf( cddbItem );
+                    }
+                    else
+                    {
+                        // user pressed Cancel
+                        fadeOut();
+                        return;
+                    }
+                }
+
+                MusicBrainz5::CRelease *release = releaseList->Item(releaseNumber);
+                std::cout << "Basic release: " << std::endl << (*release) << std::endl;
+
+                // The releases returned from LookupDiscID don't contain full information
+                params["inc"] = "artists recordings discids artist-credits";
+                std::string releaseID = release->ID();
+                // http://musicbrainz.org/ws/2/release/acc0689e-b777-4628-92ea-4224d7684dbb/?inc=artists+recordings+discids+artist-credits
+                // http://musicbrainz.org/ws/2/release/2702fe57-a5b6-4f57-91d1-546b42ab3e06/?inc=artists+recordings+discids+artist-credits
+                MusicBrainz5::CMetadata releaseMetadata = query.Query("release", releaseID, "", params);
+                if( releaseMetadata.Release() )
+                {
+                    MusicBrainz5::CRelease *fullRelease = releaseMetadata.Release();
+
+                    discTags->album = QString::fromStdString(fullRelease->Title());
+                    discTags->artist = parseNameCredits(fullRelease->ArtistCredit()->NameCreditList());
+                    discTags->year = QString::fromStdString(fullRelease->Date()).left(4).toShort();
+
+                    lArtist->setText( discTags->artist );
+                    lAlbum->setText( discTags->album );
+                    iYear->setValue( discTags->year );
+
+                    artistChanged( lArtist->text() );
+
+                    // However, these releases will include information for all media in the release
+                    // So we need to filter out the only the media we want.
+                    MusicBrainz5::CMediumList mediaList = fullRelease->MediaMatchingDiscID(discID);
+                    if( mediaList.NumItems() > 0 )
+                    {
+                        MusicBrainz5::CMedium *medium = mediaList.Item(0);
+
+                        iDisc->setValue( discTags->disc );
+                        iDiscTotal->setValue( discTags->discTotal );
+
+                        MusicBrainz5::CTrackList *trackList = medium->TrackList();
+                        if( trackList )
+                        {
+                            for( int trackNumber=0; trackNumber<trackList->NumItems() && trackNumber<trackTags.count(); trackNumber++ )
+                            {
+                                MusicBrainz5::CTrack *track = trackList->Item(trackNumber);
+
+                                const QString artist = parseNameCredits(track->Recording()->ArtistCredit()->NameCreditList());
+                                const QString title = QString::fromStdString(track->Recording()->Title());
+
+                                trackTags.at(trackNumber)->artist = artist;
+                                trackTags.at(trackNumber)->title = title;
+
+                                QTreeWidgetItem *item = this->trackList->topLevelItem(trackNumber);
+                                item->setText( 2, artist );
+                                item->setText( 4, title );
+                            }
+                        }
+                    }
+                }
             }
-            info = cddb_info.at( index - offset );
         }
-        else
+        catch( MusicBrainz5::CConnectionError& error )
         {
-            // user pressed Cancel
-            fadeOut();
-            return;
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CConnectionError");
+
+//             std::cout << "LastResult: " << query.LastResult() << std::endl;
+//             std::cout << "LastHTTPCode: " << query.LastHTTPCode() << std::endl;
+//             std::cout << "LastErrorMessage: " << query.LastErrorMessage() << std::endl;
+        }
+        catch( MusicBrainz5::CTimeoutError& error )
+        {
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CTimeoutError");
+        }
+        catch( MusicBrainz5::CAuthenticationError& error )
+        {
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CAuthenticationError");
+        }
+        catch( MusicBrainz5::CFetchError& error )
+        {
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CFetchError");
+        }
+        catch( MusicBrainz5::CRequestError& error )
+        {
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CRequestError");
+        }
+        catch( MusicBrainz5::CResourceNotFoundError& error )
+        {
+            KMessageBox::information(this, error.what(), "MusicBrainz5::CResourceNotFoundError");
         }
     }
-
-    for( int i=0; i<cdda_audio_tracks(cdDrive); i++ )
+    else
     {
-        trackTags.at(i)->artist = info.track(i).get(KCDDB::Artist).toString();
-        trackTags.at(i)->title = info.track(i).get(KCDDB::Title).toString();
-        trackTags.at(i)->comment = info.track(i).get(KCDDB::Comment).toString();
-
-        QTreeWidgetItem *item = trackList->topLevelItem(i);
-        item->setText( 2, trackTags.at(i)->artist );
-        item->setText( 4, trackTags.at(i)->title );
+        discid_get_error_msg(disc);
     }
 
-    discTags->album = info.get(KCDDB::Title).toString();
-    discTags->artist = info.get(KCDDB::Artist).toString();
-    discTags->year = info.get(KCDDB::Year).toInt();
-    discTags->genre = info.get(KCDDB::Genre).toString();
+    discid_free(disc);
 
     // TODO resize colums up to a certain width
 
-    lArtist->setText( discTags->artist );
-    lAlbum->setText( discTags->album );
-    iDisc->setValue( discTags->disc );
-    iDiscTotal->setValue( discTags->discTotal );
-    iYear->setValue( discTags->year );
-    cGenre->setEditText( discTags->genre );
-
-    artistChanged( lArtist->text() );
-
     fadeOut();
+}
+
+QString CDOpener::parseNameCredits(const MusicBrainz5::CNameCreditList *names)
+{
+    QString full;
+
+    for( int i=0; i<names->NumItems(); i++)
+    {
+        MusicBrainz5::CNameCredit *credit = names->Item(i);
+        const QString name = QString::fromStdString(credit->Artist()->Name());
+        const QString glue = QString::fromStdString(credit->JoinPhrase());
+        full += name + glue;
+    }
+
+    return full.trimmed();
 }
 
 void CDOpener::timeout()

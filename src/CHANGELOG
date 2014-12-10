@@ -1,3 +1,6 @@
+2.9.80 (3.0.0 beta1):
+-Change: Replace libkcddb with libmusicbrainz and libdiscid
+
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files
 -Add: Adjust gain for mp3 files

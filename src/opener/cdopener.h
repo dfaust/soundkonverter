@@ -5,10 +5,6 @@
 #include <KDialog>
 #include <QTimer>
 
-#include <libkcddb/kcddb.h>
-#include <libkcddb/client.h>
-#include <libkcddb/cdinfo.h>
-
 extern "C"
 {
 #include <cdda_interface.h>
@@ -21,6 +17,8 @@ extern "C"
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
 #include <Phonon/MediaController>
+
+#include <musicbrainz5/NameCreditList.h>
 
 class TagEngine;
 class Config;
@@ -121,6 +119,8 @@ private:
     bool openCdDevice( const QString& _device );
     int cdda_audio_tracks( cdrom_drive *cdDrive ) const;
 
+    QString parseNameCredits(const MusicBrainz5::CNameCreditList *names);
+
     /** the widget for selecting and editing the cd tracks */
     QWidget *cdOpenerWidget;
     /** the widget for showing the progress of reading the cd / cddb data */
@@ -199,16 +199,12 @@ private:
 
 //     void *wmHandle;
 
-    KCDDB::Client *cddb;
-
     TagData *discTags;
     QList<TagData*> trackTags;
     bool cdTextFound;
     bool cddbFound;
 
     QString lastAlbumArtist;
-
-    QTimer timeoutTimer;
 
     QList<int> selectedTracks;
 
@@ -237,7 +233,6 @@ private:
 
 private slots:
     void requestCddb( bool autoRequest = false );
-    void lookup_cddb_done( KCDDB::Result result );
     void timeout();
 
     void trackChanged();

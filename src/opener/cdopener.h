@@ -201,7 +201,8 @@ private:
 
     KCDDB::Client *cddb;
 
-    QList<TagData*> tags; // @0 disc tags
+    TagData *discTags;
+    QList<TagData*> trackTags;
     bool cdTextFound;
     bool cddbFound;
 

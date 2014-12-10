@@ -110,6 +110,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     cdDrive( 0 ),
     cdParanoia( 0 ),
     cddb( 0 ),
+    discTags( 0 ),
     cdTextFound( false ),
     cddbFound( false )
 {
@@ -612,16 +613,18 @@ bool CDOpener::openCdDevice( const QString& _device )
 
     // add tracks to list
 
-    qDeleteAll( tags );
-    tags.clear();
+    if( discTags )
+        delete discTags;
 
-    TagData *newTags = new TagData();
-    newTags->track = 1;
-    newTags->trackTotal = 1;
-    newTags->disc = 1;
-    newTags->discTotal = 1;
-    newTags->year = (QDate::currentDate()).year();
-    tags += newTags;
+    qDeleteAll( trackTags );
+    trackTags.clear();
+
+    discTags = new TagData();
+    discTags->track = 1;
+    discTags->trackTotal = 1;
+    discTags->disc = 1;
+    discTags->discTotal = 1;
+    discTags->year = (QDate::currentDate()).year();
 
     const int trackTotal = cdda_audio_tracks( cdDrive );
     for( int i=0; i<trackTotal; i++ )
@@ -631,7 +634,7 @@ bool CDOpener::openCdDevice( const QString& _device )
         newTags->trackTotal = trackTotal;
         const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,newTags->track)-cdda_track_firstsector(cdDrive,newTags->track));
         newTags->length = (8 * size) / (44100 * 2 * 16);
-        tags += newTags;
+        trackTags += newTags;
 
         QStringList data;
         data.append( "" );
@@ -656,12 +659,12 @@ bool CDOpener::openCdDevice( const QString& _device )
     if( trackList->topLevelItem(0) )
         trackList->topLevelItem(0)->setSelected( true );
 
-    lArtist->setText( tags.at(0)->artist );
-    lAlbum->setText( tags.at(0)->album );
-    iDisc->setValue( tags.at(0)->disc );
-    iDiscTotal->setValue( tags.at(0)->discTotal );
-    iYear->setValue( tags.at(0)->year );
-    cGenre->setEditText( tags.at(0)->genre );
+    lArtist->setText( discTags->artist );
+    lAlbum->setText( discTags->album );
+    iDisc->setValue( discTags->disc );
+    iDiscTotal->setValue( discTags->discTotal );
+    iYear->setValue( discTags->year );
+    cGenre->setEditText( discTags->genre );
 
     artistChanged( lArtist->text() );
     adjustComposerColumn();
@@ -746,30 +749,30 @@ void CDOpener::lookup_cddb_done( KCDDB::Result result )
         }
     }
 
-    for( int i=1; i<=cdda_audio_tracks(cdDrive); i++ )
+    for( int i=0; i<cdda_audio_tracks(cdDrive); i++ )
     {
-        tags.at(i)->artist = info.track(i-1).get(KCDDB::Artist).toString();
-        tags.at(i)->title = info.track(i-1).get(KCDDB::Title).toString();
-        tags.at(i)->comment = info.track(i-1).get(KCDDB::Comment).toString();
+        trackTags.at(i)->artist = info.track(i).get(KCDDB::Artist).toString();
+        trackTags.at(i)->title = info.track(i).get(KCDDB::Title).toString();
+        trackTags.at(i)->comment = info.track(i).get(KCDDB::Comment).toString();
 
-        QTreeWidgetItem *item = trackList->topLevelItem(i-1);
-        item->setText( 2, tags.at(i)->artist );
-        item->setText( 4, tags.at(i)->title );
+        QTreeWidgetItem *item = trackList->topLevelItem(i);
+        item->setText( 2, trackTags.at(i)->artist );
+        item->setText( 4, trackTags.at(i)->title );
     }
 
-    tags.at(0)->album = info.get(KCDDB::Title).toString();
-    tags.at(0)->artist = info.get(KCDDB::Artist).toString();
-    tags.at(0)->year = info.get(KCDDB::Year).toInt();
-    tags.at(0)->genre = info.get(KCDDB::Genre).toString();
+    discTags->album = info.get(KCDDB::Title).toString();
+    discTags->artist = info.get(KCDDB::Artist).toString();
+    discTags->year = info.get(KCDDB::Year).toInt();
+    discTags->genre = info.get(KCDDB::Genre).toString();
 
     // TODO resize colums up to a certain width
 
-    lArtist->setText( tags.at(0)->artist );
-    lAlbum->setText( tags.at(0)->album );
-    iDisc->setValue( tags.at(0)->disc );
-    iDiscTotal->setValue( tags.at(0)->discTotal );
-    iYear->setValue( tags.at(0)->year );
-    cGenre->setEditText( tags.at(0)->genre );
+    lArtist->setText( discTags->artist );
+    lAlbum->setText( discTags->album );
+    iDisc->setValue( discTags->disc );
+    iDiscTotal->setValue( discTags->discTotal );
+    iYear->setValue( discTags->year );
+    cGenre->setEditText( discTags->genre );
 
     artistChanged( lArtist->text() );
 
@@ -783,7 +786,7 @@ void CDOpener::timeout()
 
 void CDOpener::trackUpPressed()
 {
-    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.first() - 2 );
+    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.first() - 1 );
 
     if( !item )
         return;
@@ -792,7 +795,7 @@ void CDOpener::trackUpPressed()
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i)-1 );
+        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
@@ -807,7 +810,7 @@ void CDOpener::trackUpPressed()
 
 void CDOpener::trackDownPressed()
 {
-    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.last() );
+    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.last() + 1 );
 
     if( !item )
         return;
@@ -816,7 +819,7 @@ void CDOpener::trackDownPressed()
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i)-1 );
+        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
@@ -841,7 +844,7 @@ void CDOpener::trackChanged()
         item = trackList->topLevelItem( i );
         if( item->isSelected() )
         {
-            selectedTracks.append( i+1 );
+            selectedTracks.append( i );
         }
     }
 
@@ -872,12 +875,12 @@ void CDOpener::trackChanged()
     }
     else if( selectedTracks.count() > 1 )
     {
-        if( selectedTracks.first() > 1 )
+        if( selectedTracks.first() > 0 )
             pTrackUp->setEnabled( true );
         else
             pTrackUp->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() )
+        if( selectedTracks.last() < trackList->topLevelItemCount() - 1 )
             pTrackDown->setEnabled( true );
         else
             pTrackDown->setEnabled( false );
@@ -889,31 +892,31 @@ void CDOpener::trackChanged()
         }
         else
         {
-            trackListString = i18n("Tracks") + QString().sprintf( " %02i", selectedTracks.at(0) );
+            trackListString = i18n("Tracks") + QString().sprintf( " %02i", selectedTracks.at(0) + 1 );
             for( int i=1; i<selectedTracks.count(); i++ )
             {
-                trackListString += QString().sprintf( ", %02i", selectedTracks.at(i) );
+                trackListString += QString().sprintf( ", %02i", selectedTracks.at(i) + 1 );
             }
         }
         tagGroupBox->setTitle( trackListString );
 
-        const QString title = tags.at(selectedTracks.at(0))->title;
+        const QString title = trackTags.at(selectedTracks.at(0))->title;
         bool equalTitles = true;
-        const QString artist = tags.at(selectedTracks.at(0))->artist;
+        const QString artist = trackTags.at(selectedTracks.at(0))->artist;
         bool equalArtists = true;
-        const QString composer = tags.at(selectedTracks.at(0))->composer;
+        const QString composer = trackTags.at(selectedTracks.at(0))->composer;
         bool equalComposers = true;
-        const QString comment = tags.at(selectedTracks.at(0))->comment;
+        const QString comment = trackTags.at(selectedTracks.at(0))->comment;
         bool equalComments = true;
         for( int i=1; i<selectedTracks.count(); i++ )
         {
-            if( title != tags.at(selectedTracks.at(i))->title )
+            if( title != trackTags.at(selectedTracks.at(i))->title )
                 equalTitles = false;
-            if( artist != tags.at(selectedTracks.at(i))->artist )
+            if( artist != trackTags.at(selectedTracks.at(i))->artist )
                 equalArtists = false;
-            if( composer != tags.at(selectedTracks.at(i))->composer )
+            if( composer != trackTags.at(selectedTracks.at(i))->composer )
                 equalComposers = false;
-            if( comment != tags.at(selectedTracks.at(i))->comment )
+            if( comment != trackTags.at(selectedTracks.at(i))->comment )
                 equalComments = false;
         }
 
@@ -973,52 +976,52 @@ void CDOpener::trackChanged()
     }
     else
     {
-        if( selectedTracks.first() > 1 )
+        if( selectedTracks.first() > 0 )
             pTrackUp->setEnabled( true );
         else
             pTrackUp->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() )
+        if( selectedTracks.last() < trackList->topLevelItemCount() - 1 )
             pTrackDown->setEnabled( true );
         else
             pTrackDown->setEnabled( false );
 
-        tagGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0)) );
+        tagGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0) + 1) );
 
         lTrackTitle->setEnabled( true );
-        lTrackTitle->setText( tags.at(selectedTracks.at(0))->title );
+        lTrackTitle->setText( trackTags.at(selectedTracks.at(0))->title );
         pTrackTitleEdit->hide();
 
         lTrackArtist->setEnabled( true );
-        lTrackArtist->setText( tags.at(selectedTracks.at(0))->artist );
+        lTrackArtist->setText( trackTags.at(selectedTracks.at(0))->artist );
         pTrackArtistEdit->hide();
 
         lTrackComposer->setEnabled( true );
-        lTrackComposer->setText( tags.at(selectedTracks.at(0))->composer );
+        lTrackComposer->setText( trackTags.at(selectedTracks.at(0))->composer );
         pTrackComposerEdit->hide();
 
         tTrackComment->setEnabled( true );
         tTrackComment->setReadOnly( false );
-        tTrackComment->setText( tags.at(selectedTracks.at(0))->comment );
+        tTrackComment->setText( trackTags.at(selectedTracks.at(0))->comment );
         pTrackCommentEdit->hide();
     }
 }
 
 void CDOpener::artistChanged( const QString& text )
 {
-    for( int i=1; i<tags.count(); i++ )
+    for( int i=0; i<trackTags.count(); i++ )
     {
-        if( tags.at(i)->artist == lastAlbumArtist )
+        if( trackTags.at(i)->artist == lastAlbumArtist )
         {
-            tags.at(i)->artist = text;
-            if( QTreeWidgetItem *item = trackList->topLevelItem( i-1 ) )
+            trackTags.at(i)->artist = text;
+            if( QTreeWidgetItem *item = trackList->topLevelItem( i ) )
             {
                 item->setText( Column_Artist, text );
             }
         }
     }
 
-    tags.at(0)->artist = text;
+    discTags->artist = text;
 
     lastAlbumArtist = text;
 
@@ -1028,11 +1031,11 @@ void CDOpener::artistChanged( const QString& text )
 
 void CDOpener::adjustArtistColumn()
 {
-    QString albumArtist = tags.at(0)->artist;
+    QString albumArtist = discTags->artist;
 
-    for( int i=1; i<tags.count(); i++ )
+    for( int i=0; i<trackTags.count(); i++ )
     {
-        if( tags.at(i)->artist != albumArtist )
+        if( trackTags.at(i)->artist != albumArtist )
         {
             trackList->setColumnHidden( Column_Artist, false );
             return;
@@ -1044,9 +1047,9 @@ void CDOpener::adjustArtistColumn()
 
 void CDOpener::adjustComposerColumn()
 {
-    for( int i=1; i<tags.count(); i++ )
+    for( int i=0; i<trackTags.count(); i++ )
     {
-        if( !tags.at(i)->composer.isEmpty() )
+        if( !trackTags.at(i)->composer.isEmpty() )
         {
             trackList->setColumnHidden( Column_Composer, false );
             return;
@@ -1063,10 +1066,10 @@ void CDOpener::trackTitleChanged( const QString& text )
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i)-1 );
+        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Title, text );
-        tags.at(selectedTracks.at(i))->title = text;
+        trackTags.at(selectedTracks.at(i))->title = text;
     }
 }
 
@@ -1077,10 +1080,10 @@ void CDOpener::trackArtistChanged( const QString& text )
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i)-1 );
+        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Artist, text );
-        tags.at(selectedTracks.at(i))->artist = text;
+        trackTags.at(selectedTracks.at(i))->artist = text;
     }
 
     adjustArtistColumn();
@@ -1093,10 +1096,10 @@ void CDOpener::trackComposerChanged( const QString& text )
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i)-1 );
+        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Composer, text );
-        tags.at(selectedTracks.at(i))->composer = text;
+        trackTags.at(selectedTracks.at(i))->composer = text;
     }
 
     adjustComposerColumn();
@@ -1111,7 +1114,7 @@ void CDOpener::trackCommentChanged()
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        tags.at(selectedTracks.at(i))->comment = text;
+        trackTags.at(selectedTracks.at(i))->comment = text;
     }
 }
 
@@ -1244,18 +1247,18 @@ void CDOpener::addClicked()
 
         if( cEntireCd->isEnabled() && cEntireCd->isChecked() )
         {
-            tags.at(0)->title = lAlbum->text();
-            tags.at(0)->artist = lArtist->text();
-            tags.at(0)->albumArtist = lArtist->text();
-            tags.at(0)->album = lAlbum->text();
-            tags.at(0)->disc = iDisc->value();
-            tags.at(0)->discTotal = iDiscTotal->value();
-            tags.at(0)->year = iYear->value();
-            tags.at(0)->genre = cGenre->currentText();
+            discTags->title = lAlbum->text();
+            discTags->artist = lArtist->text();
+            discTags->albumArtist = lArtist->text();
+            discTags->album = lAlbum->text();
+            discTags->disc = iDisc->value();
+            discTags->discTotal = iDiscTotal->value();
+            discTags->year = iYear->value();
+            discTags->genre = cGenre->currentText();
             const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,trackCount)-cdda_track_firstsector(cdDrive,1));
-            tags.at(0)->length = (8 * size) / (44100 * 2 * 16);
+            discTags->length = (8 * size) / (44100 * 2 * 16);
 
-            tagList.append( tags.at(0) );
+            tagList.append( discTags );
             tracks.append( 0 );
         }
         else
@@ -1264,16 +1267,16 @@ void CDOpener::addClicked()
             {
                 if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
                 {
-                    tags.at(i+1)->albumArtist = lArtist->text();
-                    tags.at(i+1)->album = lAlbum->text();
-                    tags.at(i+1)->disc = iDisc->value();
-                    tags.at(i+1)->discTotal = iDiscTotal->value();
-                    tags.at(i+1)->year = iYear->value();
-                    tags.at(i+1)->genre = cGenre->currentText();
+                    trackTags.at(i)->albumArtist = lArtist->text();
+                    trackTags.at(i)->album = lAlbum->text();
+                    trackTags.at(i)->disc = iDisc->value();
+                    trackTags.at(i)->discTotal = iDiscTotal->value();
+                    trackTags.at(i)->year = iYear->value();
+                    trackTags.at(i)->genre = cGenre->currentText();
                     const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,i+1)-cdda_track_firstsector(cdDrive,i+1));
-                    tags.at(i+1)->length = (8 * size) / (44100 * 2 * 16);
+                    trackTags.at(i)->length = (8 * size) / (44100 * 2 * 16);
 
-                    tagList.append( tags.at(i+1) );
+                    tagList.append( trackTags.at(i) );
                     tracks.append( i+1 );
                 }
             }
@@ -1316,13 +1319,13 @@ void CDOpener::saveCuesheetClicked()
     content.append( "PERFORMER \"" + lArtist->text() + "\"\n" );
     content.append( "FILE \"\" WAVE\n" );
 
-    for( int i=1; i<tags.count(); i++ )
+    for( int i=0; i<trackTags.count(); i++ )
     {
-        content.append( QString().sprintf("  TRACK %02i AUDIO\n",tags.at(i)->track ) );
-        content.append( "    TITLE \"" + tags.at(i)->title + "\"\n" );
-        content.append( "    PERFORMER \"" + tags.at(i)->artist + "\"\n" );
-        content.append( "    SONGWRITER \"" + tags.at(i)->composer + "\"\n" );
-        const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i);
+        content.append( QString().sprintf("  TRACK %02i AUDIO\n",trackTags.at(i)->track ) );
+        content.append( "    TITLE \"" + trackTags.at(i)->title + "\"\n" );
+        content.append( "    PERFORMER \"" + trackTags.at(i)->artist + "\"\n" );
+        content.append( "    SONGWRITER \"" + trackTags.at(i)->composer + "\"\n" );
+        const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i+1);
         const long length = (8 * size) / (44100 * 2 * 16);
         const long frames = (8 * size) / (588 * 2 * 16);
         content.append( QString().sprintf("    INDEX 01 %02li:%02li:%02li\n",length/60,length%60,frames%75) );

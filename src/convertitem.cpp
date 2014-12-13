@@ -2,7 +2,7 @@
 #include "convertitem.h"
 #include "filelistitem.h"
 
-#include <KStandardDirs>
+#include <QDir>
 #include <QFile>
 
 
@@ -26,7 +26,7 @@ ConvertItem::ConvertItem( FileListItem *item )
 ConvertItem::~ConvertItem()
 {}
 
-KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension, bool useSharedMemory )
+QUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extension, bool useSharedMemory )
 {
     QString tempUrl;
     int i=0;
@@ -37,12 +37,12 @@ KUrl ConvertItem::generateTempUrl( const QString& trunk, const QString& extensio
         }
         else
         {
-            tempUrl = KStandardDirs::locateLocal( "tmp", QString("soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension) );
+            tempUrl = QDir::tempPath() + QString("/soundkonverter_temp_%1_%2_%3.%4").arg(trunk).arg(logID).arg(i).arg(extension);
         }
         i++;
-    } while( tempConvertUrls.contains(KUrl(tempUrl)) || QFile::exists(tempUrl) );
+    } while( tempConvertUrls.contains(QUrl(tempUrl)) || QFile::exists(tempUrl) );
 
-    return KUrl(tempUrl);
+    return QUrl(tempUrl);
 }
 
 void ConvertItem::updateTimes()

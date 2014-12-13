@@ -3,7 +3,7 @@
 
 #include "soundkonverter_replaygain_musepackgain.h"
 
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <QFile>
 
 
@@ -27,9 +27,9 @@ QString soundkonverter_replaygain_musepackgain::name()
 
 void soundkonverter_replaygain_musepackgain::scanForBackends( const QStringList& directoryList )
 {
-    binaries["replaygain"] = KStandardDirs::findExe( "replaygain" ); // sv7
+    binaries["replaygain"] = QStandardPaths::findExe( "replaygain" ); // sv7
     if( binaries["replaygain"].isEmpty() )
-        binaries["replaygain"] = KStandardDirs::findExe( "mpcgain" ); // sv8
+        binaries["replaygain"] = QStandardPaths::findExe( "mpcgain" ); // sv8
 
     if( binaries["replaygain"].isEmpty() )
     {
@@ -88,7 +88,7 @@ void soundkonverter_replaygain_musepackgain::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
+unsigned int soundkonverter_replaygain_musepackgain::apply( const QList<QUrl>& fileList, ReplayGainPlugin::ApplyMode mode )
 {
     if( fileList.count() <= 0 )
         return BackendPlugin::UnknownError;
@@ -98,14 +98,14 @@ unsigned int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fi
 
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
     QStringList command;
     command += binaries["replaygain"];
-    foreach( const KUrl file, fileList )
+    foreach( const QUrl file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

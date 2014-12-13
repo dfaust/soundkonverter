@@ -7,9 +7,9 @@
 #include <math.h>
 
 #include <QApplication>
-#include <KLocale>
-#include <KComboBox>
-#include <KLineEdit>
+#include <KLocalizedString>
+#include <QComboBox>
+#include <QLineEdit>
 #include <QLayout>
 #include <QLabel>
 #include <QDoubleSpinBox>
@@ -34,7 +34,7 @@ MusePackCodecWidget::MusePackCodecWidget()
 
     QLabel *lPreset = new QLabel( i18n("Preset:"), this );
     presetBox->addWidget( lPreset );
-    cPreset = new KComboBox( this );
+    cPreset = new QComboBox( this );
     cPreset->addItem( i18nc("Backend profile","Telephone") );
     cPreset->addItem( i18nc("Backend profile","Thumb") );
     cPreset->addItem( i18nc("Backend profile","Radio") );
@@ -97,7 +97,7 @@ MusePackCodecWidget::MusePackCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

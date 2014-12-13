@@ -11,18 +11,19 @@
 #include <QBoxLayout>
 #include <QLabel>
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QFrame>
 #include <QChar>
-#include <KIcon>
-#include <KComboBox>
-#include <KPushButton>
-#include <KInputDialog>
-#include <KMessageBox>
+#include <QIcon>
+#include <QComboBox>
+#include <QPushButton>
+#include <QInputDialog>
+#include <QMessageBox>
 #include <QFile>
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <QMenu>
 #include <QToolButton>
+#include <QTextStream>
 
 //
 // class OptionsDetailed
@@ -43,7 +44,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 
     QLabel *lFormat = new QLabel( i18n("Format:"), this );
     topBox->addWidget( lFormat );
-    cFormat = new KComboBox( this );
+    cFormat = new QComboBox( this );
     topBox->addWidget( cFormat );
     cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
@@ -53,12 +54,12 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
 
     lPlugin = new QLabel( i18n("Use Plugin:"), this );
     topBox->addWidget( lPlugin );
-    cPlugin = new KComboBox( this );
+    cPlugin = new QComboBox( this );
     topBox->addWidget( cPlugin );
     cPlugin->setSizeAdjustPolicy( QComboBox::AdjustToContents );
     connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(encoderChanged(const QString&)) );
     connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
-    pConfigurePlugin = new KPushButton( KIcon("configure"), "", this );
+    pConfigurePlugin = new QPushButton( QIcon::fromTheme("configure"), "", this );
     pConfigurePlugin->setFixedSize( cPlugin->sizeHint().height(), cPlugin->sizeHint().height() );
     pConfigurePlugin->setFlat( true );
     topBox->addWidget( pConfigurePlugin );
@@ -131,14 +132,14 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
     bottomBox->addWidget( lEstimSize );
-    pProfileSave = new KPushButton( KIcon("document-save"), "", this );
+    pProfileSave = new QPushButton( QIcon::fromTheme("document-save"), "", this );
     bottomBox->addWidget( pProfileSave );
     pProfileSave->setFixedWidth( pProfileSave->height() );
     pProfileSave->setToolTip( i18n("Save current options as a profile") );
     connect( pProfileSave, SIGNAL(clicked()), this, SLOT(saveCustomProfile()) );
     pProfileLoad = new QToolButton( this );
     bottomBox->addWidget( pProfileLoad );
-    pProfileLoad->setIcon( KIcon("document-open") );
+    pProfileLoad->setIcon( QIcon::fromTheme("document-open") );
     pProfileLoad->setPopupMode( QToolButton::InstantPopup );
     pProfileLoad->setFixedWidth( pProfileLoad->height() );
     pProfileLoad->setToolTip( i18n("Load saved profiles") );
@@ -209,7 +210,7 @@ void OptionsDetailed::updateProfiles()
     }
 
     pProfileLoad->setMenu( menu );
-    pProfileLoad->setShown( profiles.count() > 0 );
+    pProfileLoad->setVisible( profiles.count() > 0 );
 }
 
 void OptionsDetailed::formatChanged( const QString& format )
@@ -236,11 +237,11 @@ void OptionsDetailed::formatChanged( const QString& format )
         wPlugin->setCurrentFormat( cFormat->currentText() );
     }
 
-    lPlugin->setShown( format != "wav" );
-    cPlugin->setShown( format != "wav" );
-    pConfigurePlugin->setShown( format != "wav" );
+    lPlugin->setVisible( format != "wav" );
+    cPlugin->setVisible( format != "wav" );
+    pConfigurePlugin->setVisible( format != "wav" );
     if( wPlugin )
-        wPlugin->setShown( format != "wav" );
+        wPlugin->setVisible( format != "wav" );
 
     QStringList errorList;
     cReplayGain->setEnabled( config->pluginLoader()->canReplayGain(cFormat->currentText(),currentPlugin,&errorList) );
@@ -274,7 +275,7 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
     if( !plugin )
     {
 //         TODO leads to crashes
-//         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
+//         QMessageBox::critical( this, "soundKonverter", i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
         return;
     }
     if( wPlugin )
@@ -454,14 +455,14 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
         else
         {
             bool ok;
-            profileName = KInputDialog::getText( i18n("New profile"), i18n("Enter a name for the new profile:"), "", &ok );
+            profileName = QInputDialog::getText( this, i18n("New profile"), i18n("Enter a name for the new profile:"), QLineEdit::Normal, "", &ok );
             if( !ok )
                 return false;
         }
 
         if( profileName.isEmpty() )
         {
-            KMessageBox::information( this, i18n("You cannot save a profile without a name."), i18n("Profile name is empty") );
+            QMessageBox::information( this, i18n("You cannot save a profile without a name."), i18n("Profile name is empty") );
             return false;
         }
 
@@ -481,7 +482,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
 
         if( profiles.contains(profileName) )
         {
-            KMessageBox::information( this, i18n("You cannot overwrite the built-in profiles."), i18n("Profile already exists") );
+            QMessageBox::information( this, i18n("You cannot overwrite the built-in profiles."), i18n("Profile already exists") );
             return false;
         }
 
@@ -489,7 +490,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
         QDomElement root;
         bool profileFound = false;
 
-        QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+        QFile listFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/profiles.xml" );
         if( listFile.open( QIODevice::ReadOnly ) )
         {
             if( list.setContent( &listFile ) )
@@ -504,11 +505,11 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
                         {
                             int ret;
                             if( lastUsed )
-                                ret = KMessageBox::Yes;
+                                ret = QMessageBox::Yes;
                             else
-                                ret = KMessageBox::questionYesNo( this, i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?"), i18n("Profile already exists") );
+                                ret = QMessageBox::question( this, i18n("Profile already exists"), i18n("A profile with this name already exists.\n\nDo you want to overwrite the existing one?") );
 
-                            if( ret == KMessageBox::Yes )
+                            if( ret == QMessageBox::Yes )
                             {
                                 ConversionOptions *conversionOptions = currentConversionOptions( false );
                                 delete config->data.profiles[profileName];

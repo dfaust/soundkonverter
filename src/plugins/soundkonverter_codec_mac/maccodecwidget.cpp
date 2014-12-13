@@ -11,8 +11,8 @@
 #include <QSpinBox>
 #include <QSlider>
 #include <QCheckBox>
-#include <KLineEdit>
-#include <KLocale>
+#include <QLineEdit>
+#include <KLocalizedString>
 
 
 MacCodecWidget::MacCodecWidget()

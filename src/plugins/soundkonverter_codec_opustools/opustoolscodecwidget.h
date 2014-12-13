@@ -6,7 +6,7 @@
 
 class QSlider;
 class QDoubleSpinBox;
-class KComboBox;
+class QComboBox;
 
 class OpusToolsCodecWidget : public CodecWidget
 {
@@ -25,7 +25,7 @@ public:
 private:
     QSlider *sQuality;
     QDoubleSpinBox *dQuality;
-    KComboBox *cBitrateMode;
+    QComboBox *cBitrateMode;
 
     QString currentFormat; // holds the current output file format
 

@@ -9,7 +9,7 @@
 #include <QObject>
 #include <QTimer>
 #include <QTime>
-#include <QWeakPointer>
+// #include <QWeakPointer>
 
 class ReplayGainPlugin;
 class Config;

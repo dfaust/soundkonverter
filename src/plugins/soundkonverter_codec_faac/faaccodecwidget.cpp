@@ -4,8 +4,8 @@
 #include "faaccodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-#include <KLocale>
-#include <KComboBox>
+#include <KLocalizedString>
+#include <QComboBox>
 #include <QLayout>
 #include <QLabel>
 #include <QSpinBox>
@@ -26,7 +26,7 @@ FaacCodecWidget::FaacCodecWidget()
 
     QLabel *lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
-    cMode = new KComboBox( this );
+    cMode = new QComboBox( this );
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );

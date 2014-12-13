@@ -7,7 +7,7 @@ set(soundkonverter_replaygain_vorbisgain_SRCS
    soundkonverter_replaygain_vorbisgain.cpp
  )
 
-kde4_add_plugin(soundkonverter_replaygain_vorbisgain ${soundkonverter_replaygain_vorbisgain_SRCS})
+add_library(soundkonverter_replaygain_vorbisgain MODULE ${soundkonverter_replaygain_vorbisgain_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_vorbisgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
 

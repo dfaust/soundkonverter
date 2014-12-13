@@ -5,7 +5,6 @@
 
 #include <QWidget>
 
-#include <KGenericFactory>
 #include <QDomDocument>
 
 class FilterOptions;
@@ -17,7 +16,7 @@ class ConversionOptions;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT FilterWidget : public QWidget
+class FilterWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -37,7 +36,7 @@ signals:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT CodecWidget : public QWidget
+class CodecWidget : public QWidget
 {
     Q_OBJECT
 public:

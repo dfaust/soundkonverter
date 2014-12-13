@@ -4,9 +4,9 @@
 #include "libavcodecwidget.h"
 #include "../../core/conversionoptions.h"
 
-#include <KLocale>
-#include <KComboBox>
-#include <KLineEdit>
+#include <KLocalizedString>
+#include <QComboBox>
+#include <QLineEdit>
 #include <QLayout>
 #include <QLabel>
 #include <QDoubleSpinBox>
@@ -46,7 +46,7 @@ LibavCodecWidget::LibavCodecWidget()
     connect( iBitrate, SIGNAL(valueChanged(int)), SIGNAL(optionsChanged()) );
     topBox->addWidget( iBitrate );
 
-    cBitrate = new KComboBox( this );
+    cBitrate = new QComboBox( this );
     cBitrate->addItem( "32 kbps" );
     cBitrate->addItem( "40 kbps" );
     cBitrate->addItem( "48 kbps" );
@@ -80,7 +80,7 @@ LibavCodecWidget::LibavCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

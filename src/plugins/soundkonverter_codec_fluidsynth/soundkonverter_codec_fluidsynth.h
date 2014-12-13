@@ -4,11 +4,11 @@
 
 #include "../../core/codecplugin.h"
 
-#include <KUrl>
-#include <QWeakPointer>
+#include <QUrl>
+// #include <QWeakPointer>
 
 class ConversionOptions;
-class KDialog;
+class QDialog;
 class KUrlRequester;
 
 
@@ -31,15 +31,15 @@ public:
     void showInfo( QWidget *parent );
     CodecWidget *newCodecWidget();
 
-    unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
-    QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    unsigned int convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    QStringList convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
 private:
-    QWeakPointer<KDialog> configDialog;
+    QDialog* configDialog;
     KUrlRequester *configDialogSoundFontUrlRequester;
 
-    KUrl soundFontFile;
+    QUrl soundFontFile;
 
 private slots:
     void configDialogSave();

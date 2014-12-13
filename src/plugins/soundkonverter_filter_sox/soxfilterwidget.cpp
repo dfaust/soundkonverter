@@ -6,12 +6,12 @@
 #include "soxfilteroptions.h"
 
 #include <QApplication>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QCheckBox>
 #include <QLayout>
 #include <QLabel>
 
-#include <KComboBox>
+#include <QComboBox>
 
 
 SoxFilterWidget::SoxFilterWidget()
@@ -31,7 +31,7 @@ SoxFilterWidget::SoxFilterWidget()
     chSampleRate = new QCheckBox( i18n("Sample rate:"), this );
     connect( chSampleRate, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleRate );
-    cSampleRate = new KComboBox( this );
+    cSampleRate = new QComboBox( this );
     cSampleRate->addItem( "8000 Hz" );
     cSampleRate->addItem( "11025 Hz" );
     cSampleRate->addItem( "12000 Hz" );
@@ -53,7 +53,7 @@ SoxFilterWidget::SoxFilterWidget()
     chSampleSize = new QCheckBox( i18n("Sample size:"), this );
     connect( chSampleSize, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chSampleSize );
-    cSampleSize = new KComboBox( this );
+    cSampleSize = new QComboBox( this );
     cSampleSize->addItem( "8 bit" );
     cSampleSize->addItem( "16 bit" );
     cSampleSize->addItem( "24 bit" );
@@ -69,7 +69,7 @@ SoxFilterWidget::SoxFilterWidget()
     chChannels = new QCheckBox( i18n("Channels:"), this );
     connect( chChannels, SIGNAL(toggled(bool)), SIGNAL(optionsChanged()) );
     box1->addWidget( chChannels );
-    cChannels = new KComboBox( this );
+    cChannels = new QComboBox( this );
     cChannels->addItem( i18n("Mono") );
     cChannels->addItem( i18n("Stereo") );
     cChannels->setEnabled( false );

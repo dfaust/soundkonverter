@@ -5,7 +5,7 @@
 #include "../../core/codecwidget.h"
 
 class QCheckBox;
-class KLineEdit;
+class QLineEdit;
 
 class TTAEncCodecWidget : public CodecWidget
 {
@@ -23,7 +23,7 @@ public:
 
 private:
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 };

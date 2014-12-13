@@ -40,22 +40,22 @@ QStringList ReplayGainFileListItem::directories()
 
     if( type == ReplayGainFileListItem::Track )
     {
-        directories.append( url.directory() );
+        directories.append( url.path() );
     }
     else
     {
         for( int j=0; j<childCount(); j++ )
         {
-            directories.append( static_cast<ReplayGainFileListItem*>(child(j))->url.directory() );
+            directories.append( static_cast<ReplayGainFileListItem*>(child(j))->url.path() );
         }
     }
 
     return directories;
 }
 
-KUrl::List ReplayGainFileListItem::urls()
+QList<QUrl> ReplayGainFileListItem::urls()
 {
-    KUrl::List urls;
+    QList<QUrl> urls;
 
     if( type == ReplayGainFileListItem::Track )
     {

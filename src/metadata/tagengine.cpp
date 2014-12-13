@@ -26,7 +26,7 @@
 #include <QDir>
 #include <QBuffer>
 
-#include <KLocale>
+#include <KLocalizedString>
 
 #include <fileref.h>
 #include <id3v1genres.h> //used to load genre list
@@ -155,9 +155,9 @@ TagEngine::TagEngine( Config *_config )
 TagEngine::~TagEngine()
 {}
 
-TagData* TagEngine::readTags( const KUrl& fileName )
+TagData* TagEngine::readTags( const QUrl& fileName )
 {
-    TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit() );
+    TagLib::FileRef fileref( fileName.url(QUrl::PreferLocalFile).toLocal8Bit() );
 
     if( !fileref.isNull() )
     {
@@ -254,7 +254,7 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                         if( frame && frame->owner() == "http://musicbrainz.org" )
                         {
                             const TagLib::ByteVector id = frame->identifier();
-                            tagData->musicBrainzTrackId = QString::fromAscii( id.data(), id.size() );
+                            tagData->musicBrainzTrackId = QString::fromLatin1( id.data(), id.size() );
                         }
                     }
                 }
@@ -533,12 +533,12 @@ TagData* TagEngine::readTags( const KUrl& fileName )
     return 0;
 }
 
-bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
+bool TagEngine::writeTags( const QUrl& fileName, TagData *tagData )
 {
     if( !tagData )
         return false;
 
-    TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit(), false );
+    TagLib::FileRef fileref( fileName.url(QUrl::PreferLocalFile).toLocal8Bit(), false );
 
     //Set default codec to UTF-8 (see bugs 111246 and 111232)
     TagLib::ID3v2::FrameFactory::instance()->setDefaultTextEncoding( TagLib::String::UTF8 );
@@ -1042,11 +1042,11 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
     return false;
 }
 
-QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
+QList<CoverData*> TagEngine::readCovers( const QUrl& fileName )
 {
     QList<CoverData*> covers;
 
-    TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit() );
+    TagLib::FileRef fileref( fileName.url(QUrl::PreferLocalFile).toLocal8Bit() );
 
     if( !fileref.isNull() )
     {
@@ -1228,12 +1228,12 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
     return covers;
 }
 
-bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
+bool TagEngine::writeCovers( const QUrl& fileName, QList<CoverData*> covers )
 {
     if( covers.isEmpty() )
         return true;
 
-    TagLib::FileRef fileref( fileName.pathOrUrl().toLocal8Bit(), false );
+    TagLib::FileRef fileref( fileName.url(QUrl::PreferLocalFile).toLocal8Bit(), false );
 
     if( !fileref.isNull() )
     {

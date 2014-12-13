@@ -4,7 +4,7 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QComboBox;
 class QSlider;
 class QSpinBox;
 
@@ -23,10 +23,10 @@ public:
     int currentDataRate();
 
 private:
-    KComboBox *cMode;
+    QComboBox *cMode;
     QSlider *sQuality;
     QSpinBox *dQuality;
-    KComboBox *cBitrate;
+    QComboBox *cBitrate;
 
     QString currentFormat; // holds the current output file format
 

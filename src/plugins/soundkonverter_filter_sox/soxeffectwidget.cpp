@@ -3,14 +3,14 @@
 
 #include "soxeffectwidget.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 #include <QLayout>
 #include <QBoxLayout>
 #include <QDoubleSpinBox>
 #include <QLabel>
 
-#include <KComboBox>
-#include <KPushButton>
+#include <QComboBox>
+#include <QPushButton>
 
 
 SoxEffectWidget::SoxEffectWidget( QWidget *parent )
@@ -22,7 +22,7 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
     QLabel *lEffect = new QLabel( i18n("Effect:") );
     box->addWidget( lEffect );
 
-    cEffect = new KComboBox( this );
+    cEffect = new QComboBox( this );
     connect( cEffect, SIGNAL(activated(int)), this, SLOT(effectChanged(int)) );
     cEffect->addItem( i18n("Disabled") );
 //     cEffect->addItem( "allpass" );
@@ -98,12 +98,12 @@ SoxEffectWidget::SoxEffectWidget( QWidget *parent )
 
     box->addStretch();
 
-    pRemove = new KPushButton( KIcon("list-remove"), i18n("Remove"), this );
+    pRemove = new QPushButton( QIcon::fromTheme("list-remove"), i18n("Remove"), this );
     pRemove->setToolTip( i18n("Remove this effect") );
     box->addWidget( pRemove );
     connect( pRemove, SIGNAL(clicked()), this, SLOT(removeClicked()) );
 
-    pAdd = new KPushButton( KIcon("list-add"), i18n("Add"), this );
+    pAdd = new QPushButton( QIcon::fromTheme("list-add"), i18n("Add"), this );
     pAdd->setToolTip( i18n("Add another effect") );
     box->addWidget( pAdd );
     connect( pAdd, SIGNAL(clicked()), SIGNAL(addEffectWidgetClicked()) );
@@ -115,12 +115,12 @@ SoxEffectWidget::~SoxEffectWidget()
 
 void SoxEffectWidget::setAddButtonShown( bool shown )
 {
-    pAdd->setShown( shown );
+    pAdd->setVisible( shown );
 }
 
 void SoxEffectWidget::setRemoveButtonShown( bool shown )
 {
-    pRemove->setShown( shown );
+    pRemove->setVisible( shown );
 }
 
 void SoxEffectWidget::removeClicked()

@@ -2,11 +2,11 @@
 #ifndef BACKENDPLUGIN_H
 #define BACKENDPLUGIN_H
 
-#include <KGenericFactory>
-#include <KProcess>
-#include <KUrl>
+#include <QProcess>
+#include <QUrl>
 #include <QList>
 #include <QObject>
+#include <QMap>
 
 class BackendPlugin;
 
@@ -40,7 +40,7 @@ public:
     BackendPluginItem( QObject *parent=0 );
     virtual ~BackendPluginItem();
 
-    KProcess *process;
+    QProcess *process;
     int id;
     float progress;             // hold the current progress, -1 is the initial value and shows that the progress can't be determined
 };
@@ -48,7 +48,7 @@ public:
 /**
     @author Daniel Faust <hessijames@gmail.com>
 */
-class KDE_EXPORT BackendPlugin : public QObject
+class BackendPlugin : public QObject
 {
     Q_OBJECT
 public:
@@ -87,7 +87,7 @@ public:
     virtual QString type() = 0;
 
     virtual FormatInfo formatInfo( const QString& codecName );
-    virtual QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream", short *rating = 0 );
+    virtual QString getCodecFromFile( const QUrl& filename, const QString& mimeType = "application/octet-stream", short *rating = 0 );
     virtual bool isConfigSupported( ActionType action, const QString& codecName ) = 0;
     virtual void showConfigDialog( ActionType action, const QString& codecName, QWidget *parent ) = 0;
     virtual bool hasInfo() = 0;
@@ -112,7 +112,7 @@ public:
     QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 );
 
     /** returns the url as a string with all special characters escaped so the bash can find the files */
-    QString escapeUrl( const KUrl& url );
+    QString escapeUrl( const QUrl& url );
 
     void logCommand( int id, const QString& message );
     void logOutput( int id, const QString& message );

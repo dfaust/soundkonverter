@@ -3,7 +3,7 @@
 
 #include "soundkonverter_replaygain_mp3gain.h"
 
-#include <KDialog>
+#include <QDialog>
 #include <QComboBox>
 #include <QCheckBox>
 #include <QDoubleSpinBox>
@@ -74,9 +74,9 @@ void soundkonverter_replaygain_mp3gain::showConfigDialog( ActionType action, con
 
     if( !configDialog.data() )
     {
-        configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+        configDialog = new QDialog( parent );
+        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
@@ -156,15 +156,15 @@ void soundkonverter_replaygain_mp3gain::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
+unsigned int soundkonverter_replaygain_mp3gain::apply( const QList<QUrl>& fileList, ReplayGainPlugin::ApplyMode mode )
 {
     if( fileList.count() <= 0 )
         return BackendPlugin::UnknownError;
 
     Mp3GainPluginItem *newItem = new Mp3GainPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
 
     QStringList command;
@@ -214,7 +214,7 @@ unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileLis
             command += "i";
         }
     }
-    foreach( const KUrl file, fileList )
+    foreach( const QUrl file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }
@@ -254,8 +254,8 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     if( item->process )
         item->process->deleteLater();
 
-    item->process = new KProcess( item );
-    item->process->setOutputChannelMode( KProcess::MergedChannels );
+    item->process = new QProcess( item );
+    item->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -263,7 +263,7 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     command += binaries["mp3gain"];
     command += "-s";
     command += "d";
-    foreach( const KUrl file, item->undoFileList )
+    foreach( const QUrl file, item->undoFileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

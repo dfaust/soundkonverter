@@ -1,8 +1,8 @@
 
 #include "codecoptimizations.h"
 
-#include <KLocale>
-#include <KIcon>
+#include <KLocalizedString>
+#include <QIcon>
 #include <QLayout>
 #include <QLabel>
 #include <QScrollArea>
@@ -10,18 +10,18 @@
 #include <QRadioButton>
 
 
-CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimizationList, QWidget* parent, Qt::WFlags f )
-    : KDialog( parent, f ),
+CodecOptimizations::CodecOptimizations( const QList<Optimization>& _optimizationList, QWidget* parent, Qt::WindowFlags f )
+    : QDialog( parent, f ),
     optimizationList( _optimizationList )
 {
-    setCaption( i18n("Solutions for backend problems") );
-    setWindowIcon( KIcon("help-about") );
-    setButtons( KDialog::Ok | KDialog::Cancel );
-    setButtonFocus( KDialog::Cancel );
+//     setWindowTitle( i18n("Solutions for backend problems") );
+    setWindowIcon( QIcon::fromTheme("help-about") );
+//     setButtons( QDialog::Ok | QDialog::Cancel );
+//     setButtonFocus( QDialog::Cancel );
     connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
 
     QWidget *widget = new QWidget( this );
-    setMainWidget( widget );
+//     setMainWidget( widget );
     QVBoxLayout *box = new QVBoxLayout( widget );
 
     QLabel *messageLabel = new QLabel( i18n("You have installed or removed backends and your soundKonverter settings can be optimized."), this );

@@ -4,9 +4,9 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QComboBox;
 class QCheckBox;
-class KLineEdit;
+class QLineEdit;
 
 class WavPackCodecWidget : public CodecWidget
 {
@@ -23,9 +23,9 @@ public:
     int currentDataRate();
 
 private:
-    KComboBox *cCompressionLevel;
+    QComboBox *cCompressionLevel;
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 };

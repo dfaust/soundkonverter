@@ -7,9 +7,9 @@
 #include <QTreeWidgetItem>
 #include <QItemDelegate>
 #include <QLabel>
-#include <QWeakPointer>
+// #include <QWeakPointer>
 
-#include <KUrl>
+#include <QUrl>
 
 
 /**
@@ -47,8 +47,8 @@ public:
     int conversionOptionsId;
     TagData *tags;              // we need to instruct the tagengine to read the tags from the file!
                                 // and the user can change them!
-    KUrl url;                   // the original input file path name
-    // KUrl outputUrl;             // if the user wants to change the output directory/file name per file
+    QUrl url;                   // the original input file path name
+    // QUrl outputUrl;             // if the user wants to change the output directory/file name per file
     QString codecName;          // the codec name of the input file
     State state;                // is this item being converted or ripper or etc.
     ReturnCode returnCode;      // what's the return code of the conversion
@@ -63,7 +63,7 @@ public:
 
     int logId;                  // the id the item is registered at the logger with, 0 if the conversion hasn't started yet
 
-    QWeakPointer<QLabel> lInfo; // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
+    QLabel* lInfo; // a pointer to button to show additional information (e.g. error log). if no butotn shall be shown the pointer must be 0
 };
 
 class FileListItemDelegate : public QItemDelegate

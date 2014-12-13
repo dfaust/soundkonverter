@@ -10,8 +10,8 @@
 #include <QComboBox>
 #include <QCheckBox>
 #include <QSpinBox>
-#include <KLocale>
-#include <KDialog>
+#include <KLocalizedString>
+#include <QDialog>
 
 
 soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args  )
@@ -71,9 +71,9 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
 
     if( !configDialog.data() )
     {
-        configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+        configDialog = new QDialog( parent );
+        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
@@ -187,7 +187,7 @@ void soundkonverter_ripper_cdparanoia::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
+unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const QUrl& outputFile )
 {
     QStringList command;
 
@@ -236,8 +236,8 @@ unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int t
 
     RipperPluginItem *newItem = new RipperPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -251,7 +251,7 @@ unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int t
     return newItem->id;
 }
 
-QStringList soundkonverter_ripper_cdparanoia::ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile )
+QStringList soundkonverter_ripper_cdparanoia::ripCommand( const QString& device, int track, int tracks, const QUrl& outputFile )
 {
     Q_UNUSED(device)
     Q_UNUSED(track)

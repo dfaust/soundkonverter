@@ -7,10 +7,10 @@
 #include "soxfilterwidget.h"
 #include "soxcodecwidget.h"
 
-#include <KDialog>
+#include <QDialog>
 #include <QHBoxLayout>
-#include <KComboBox>
-#include <KMessageBox>
+#include <QComboBox>
+#include <QMessageBox>
 #include <QLabel>
 #include <QFileInfo>
 
@@ -137,8 +137,8 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
         QFileInfo soxInfo( binaries["sox"] );
         if( soxInfo.lastModified() > soxLastModified || configVersion < version() )
         {
-            infoProcess = new KProcess();
-            infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+            infoProcess = new QProcess();
+            infoProcess.data()->setOutputChannelMode( QProcess::MergedChannels );
             connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
             connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
@@ -236,15 +236,15 @@ void soundkonverter_filter_sox::showConfigDialog( ActionType action, const QStri
 
     if( !configDialog.data() )
     {
-        configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+        configDialog = new QDialog( parent );
+        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
         QLabel *configDialogSamplingRateQualityLabel = new QLabel( i18n("Sample rate change quality:"), configDialogWidget );
         configDialogBox->addWidget( configDialogSamplingRateQualityLabel );
-        configDialogSamplingRateQualityComboBox = new KComboBox( configDialogWidget );
+        configDialogSamplingRateQualityComboBox = new QComboBox( configDialogWidget );
         configDialogSamplingRateQualityComboBox->addItem( i18n("Quick"), "quick" );
         configDialogSamplingRateQualityComboBox->addItem( i18n("Low"), "low" );
         configDialogSamplingRateQualityComboBox->addItem( i18n("Medium"), "medium" );
@@ -312,7 +312,7 @@ CodecWidget *soundkonverter_filter_sox::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-unsigned int soundkonverter_filter_sox::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_filter_sox::convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
@@ -320,8 +320,8 @@ unsigned int soundkonverter_filter_sox::convert( const KUrl& inputFile, const KU
 
     FilterPluginItem *newItem = new FilterPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -335,7 +335,7 @@ unsigned int soundkonverter_filter_sox::convert( const KUrl& inputFile, const KU
     return newItem->id;
 }
 
-QStringList soundkonverter_filter_sox::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+QStringList soundkonverter_filter_sox::convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED( tags );
     Q_UNUSED( replayGain );

@@ -15,14 +15,14 @@
 #include <QWidget>
 #include <QColor>
 #include <QTimer>
-#include <KUrl>
+#include <QUrl>
 
 class Config;
 class Options;
 class ConversionOptions;
 
 class QFrame;
-class KPushButton;
+class QPushButton;
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>
@@ -39,19 +39,19 @@ public:
 
     void fadeIn();
     void fadeOut(); // should be private
-    void addUrls( const KUrl::List& _urls );
+    void addUrls( const QList<QUrl>& _urls );
 
 private:
     QFrame *frame;
     Options *options;
-    KPushButton *pOk;
-    KPushButton *pCancel;
+    QPushButton *pOk;
+    QPushButton *pCancel;
 
     QTimer fadeTimer;
     float fadeAlpha;
     int fadeMode; // 1 = fade in, 2 = fade out
 
-    KUrl::List urls;
+    QList<QUrl> urls;
     QString command;
 
     inline QBrush brushSetAlpha( QBrush brush, const int alpha )
@@ -84,7 +84,7 @@ private slots:
     void ok();
 
 signals:
-    void done( const KUrl::List& urls, ConversionOptions *options, const QString& command );
+    void done( const QList<QUrl>& urls, ConversionOptions *options, const QString& command );
     void saveFileList();
 
 };

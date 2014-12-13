@@ -7,7 +7,7 @@ set(soundkonverter_ripper_cdparanoia_SRCS
    soundkonverter_ripper_cdparanoia.cpp
  )
 
-kde4_add_plugin(soundkonverter_ripper_cdparanoia ${soundkonverter_ripper_cdparanoia_SRCS})
+add_library(soundkonverter_ripper_cdparanoia MODULE ${soundkonverter_ripper_cdparanoia_SRCS})
 
 target_link_libraries(soundkonverter_ripper_cdparanoia ${KDE4_KDEUI_LIBS} soundkonvertercore )
 

@@ -9,9 +9,9 @@
 #include <QLayout>
 #include <QLabel>
 #include <QCheckBox>
-#include <KLineEdit>
-#include <KLocale>
-#include <KComboBox>
+#include <QLineEdit>
+#include <KLocalizedString>
+#include <QComboBox>
 
 
 WavPackCodecWidget::WavPackCodecWidget()
@@ -29,7 +29,7 @@ WavPackCodecWidget::WavPackCodecWidget()
     QLabel *lCompressionLevel = new QLabel( i18n("Compression level:"), this );
     topBox->addWidget( lCompressionLevel );
 
-    cCompressionLevel = new KComboBox(  this );
+    cCompressionLevel = new QComboBox(  this );
     cCompressionLevel->addItem( i18n("Fast") );
     cCompressionLevel->addItem( i18n("Normal") );
     cCompressionLevel->addItem( i18n("High quality") );
@@ -45,7 +45,7 @@ WavPackCodecWidget::WavPackCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

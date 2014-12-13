@@ -13,12 +13,12 @@
 
 #include "../config.h"
 
-#include <KLocale>
-#include <KComboBox>
-#include <KLineEdit>
-#include <KPushButton>
-#include <KFileDialog>
-#include <KIntSpinBox>
+#include <KLocalizedString>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QPushButton>
+#include <QFileDialog>
+#include <QSpinBox>
 
 #include <QLayout>
 #include <QBoxLayout>
@@ -51,7 +51,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( startTabBox );
     QLabel *lStartTab = new QLabel( i18n("Start in Mode:"), this );
     startTabBox->addWidget( lStartTab );
-    cStartTab = new KComboBox( this );
+    cStartTab = new QComboBox( this );
     cStartTab->addItem( i18n("Last used") );
     cStartTab->addItem( i18n("Simple") );
     cStartTab->addItem( i18n("Detailed") );
@@ -66,7 +66,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( defaultProfileBox );
     QLabel *lDefaultProfile = new QLabel( i18n("Default profile:"), this );
     defaultProfileBox->addWidget( lDefaultProfile );
-    cDefaultProfile = new KComboBox( this );
+    cDefaultProfile = new QComboBox( this );
     QStringList sDefaultProfile;
     sDefaultProfile += i18n("Last used");
     sDefaultProfile += i18n("Very low");
@@ -84,7 +84,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     connect( cDefaultProfile, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     QLabel *lDefaultFormat = new QLabel( i18n("Default format:"), this );
     defaultProfileBox->addWidget( lDefaultFormat );
-    cDefaultFormat = new KComboBox( this );
+    cDefaultFormat = new QComboBox( this );
     cDefaultFormat->setCurrentIndex( cDefaultFormat->findText(config->data.general.defaultFormat) );
     defaultProfileBox->addWidget( cDefaultFormat );
     connect( cDefaultFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
@@ -102,7 +102,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
 //     box->addLayout( priorityBox );
 //     QLabel *lPriority = new QLabel( i18n("Process priority of the backends:"), this );
 //     priorityBox->addWidget( lPriority );
-//     cPriority = new KComboBox( this );
+//     cPriority = new QComboBox( this );
 //     sPriority += i18n("Normal");
 //     sPriority += i18n("Low");
 //     cPriority->addItems( sPriority );
@@ -117,7 +117,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( conflictHandlingBox );
     QLabel *lConflictHandling = new QLabel( i18n("Conflict handling:"), this );
     conflictHandlingBox->addWidget( lConflictHandling );
-    cConflictHandling = new KComboBox( this );
+    cConflictHandling = new QComboBox( this );
     cConflictHandling->addItem( i18n("Generate new file name") );
     cConflictHandling->addItem( i18n("Skip file") );
 //     cConflictHandling->addItem( i18n("Overwrite file") );
@@ -133,7 +133,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( numFilesBox );
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once:"), this );
     numFilesBox->addWidget( lNumFiles );
-    iNumFiles = new KIntSpinBox( this );
+    iNumFiles = new QSpinBox( this );
     iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
     iNumFiles->setRange( 1, 100 );
     iNumFiles->setValue( config->data.general.numFiles );
@@ -177,7 +177,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( replayGainGroupingBox );
     QLabel* lReplayGainGrouping = new QLabel( i18n("Group files in the Replay Gain tool by:"), this );
     replayGainGroupingBox->addWidget( lReplayGainGrouping );
-    cReplayGainGrouping = new KComboBox( this );
+    cReplayGainGrouping = new QComboBox( this );
     cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Album tags and directories") );
     cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Album tags only") );
     cReplayGainGrouping->addItem( i18nc("Group files in the Replay Gain tool by","Directories only") );
@@ -192,7 +192,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     box->addLayout( numReplayGainFilesBox );
     QLabel *lNumReplayGainFiles = new QLabel( i18n("Number of items to process at once:"), this );
     numReplayGainFilesBox->addWidget( lNumReplayGainFiles );
-    iNumReplayGainFiles = new KIntSpinBox( this );
+    iNumReplayGainFiles = new QSpinBox( this );
     iNumReplayGainFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
     iNumReplayGainFiles->setRange( 1, 100 );
     iNumReplayGainFiles->setValue( config->data.general.numReplayGainFiles );

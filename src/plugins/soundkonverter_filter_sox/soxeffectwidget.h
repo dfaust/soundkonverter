@@ -5,8 +5,8 @@
 #include "../../core/codecwidget.h"
 #include "soxfilteroptions.h"
 
-class KComboBox;
-class KPushButton;
+class QComboBox;
+class QPushButton;
 class QHBoxLayout;
 
 
@@ -24,11 +24,11 @@ public:
     bool setEffectOptions( SoxFilterOptions::EffectData effectData );
 
 private:
-    KComboBox *cEffect;
+    QComboBox *cEffect;
     QHBoxLayout *widgetsBox;
     QList<QWidget*> widgets;
-    KPushButton *pRemove;
-    KPushButton *pAdd;
+    QPushButton *pRemove;
+    QPushButton *pAdd;
 
 private slots:
     void removeClicked();

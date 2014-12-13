@@ -9,11 +9,11 @@
 #include <QBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
-#include <KLocale>
-#include <KComboBox>
+#include <KLocalizedString>
+#include <QComboBox>
 #include <QSpinBox>
 
-#include <KLineEdit>
+#include <QLineEdit>
 
 
 LameCodecWidget::LameCodecWidget()
@@ -32,7 +32,7 @@ LameCodecWidget::LameCodecWidget()
 
     QLabel *lPreset = new QLabel( i18n("Preset:"), this );
     presetBox->addWidget( lPreset );
-    cPreset = new KComboBox( this );
+    cPreset = new QComboBox( this );
     cPreset->addItem( i18nc("Backend profile","Medium") );
     cPreset->addItem( i18nc("Backend profile","Standard") );
     cPreset->addItem( i18nc("Backend profile","Extreme") );
@@ -82,7 +82,7 @@ LameCodecWidget::LameCodecWidget()
     QLabel *lMode = new QLabel( i18n("Mode:"), userdefinedBox );
     userdefinedTopBox->addWidget( lMode );
 
-    cMode = new KComboBox( userdefinedBox );
+    cMode = new QComboBox( userdefinedBox );
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
@@ -107,7 +107,7 @@ LameCodecWidget::LameCodecWidget()
 
     QLabel *lBitrateMode = new QLabel( i18n("Bitrate mode:"), this );
     userdefinedTopBox->addWidget( lBitrateMode );
-    cBitrateMode = new KComboBox( this );
+    cBitrateMode = new QComboBox( this );
     cBitrateMode->addItem( i18n("Variable") );
     cBitrateMode->addItem( i18n("Average") );
     cBitrateMode->addItem( i18n("Constant") );
@@ -147,7 +147,7 @@ LameCodecWidget::LameCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     bottomBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     bottomBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

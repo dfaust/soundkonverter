@@ -3,7 +3,7 @@
 #ifndef CODECPROBLEMS_H
 #define CODECPROBLEMS_H
 
-#include <KDialog>
+#include <QDialog>
 
 
 /**
@@ -11,7 +11,7 @@
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class CodecProblems : public KDialog
+class CodecProblems : public QDialog
 {
     Q_OBJECT
 public:
@@ -29,7 +29,7 @@ public:
     };
     
     /** Default Constructor */
-    CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent=0, Qt::WFlags f=0 );
+    CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent=0, Qt::WindowFlags f=0 );
 
     /** Default Destructor */
     ~CodecProblems();

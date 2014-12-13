@@ -6,8 +6,8 @@
 #include "../../core/conversionoptions.h"
 #include "../../metadata/tagengine.h"
 
-#include <KMessageBox>
-#include <KDialog>
+#include <QMessageBox>
+#include <QDialog>
 #include <QCheckBox>
 #include <QHBoxLayout>
 #include <QFileInfo>
@@ -245,8 +245,8 @@ QList<ConversionPipeTrunk> soundkonverter_codec_libav::codecTable()
         QFileInfo libavInfo( binaries["avconv"] );
         if( libavInfo.lastModified() > libavLastModified || configVersion < version() )
         {
-            infoProcess = new KProcess();
-            infoProcess.data()->setOutputChannelMode( KProcess::MergedChannels );
+            infoProcess = new QProcess();
+            infoProcess.data()->setOutputChannelMode( QProcess::MergedChannels );
             connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
             connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
@@ -361,9 +361,9 @@ void soundkonverter_codec_libav::showConfigDialog( ActionType action, const QStr
 
     if( !configDialog.data() )
     {
-        configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
+        configDialog = new QDialog( parent );
+        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
@@ -393,7 +393,7 @@ void soundkonverter_codec_libav::configDialogSave()
 
         if( experimentalCodecsEnabled != old_experimentalCodecsEnabled )
         {
-            KMessageBox::information( configDialog.data(), i18n("Please restart soundKonverter in order to activate the changes.") );
+            QMessageBox::information( configDialog.data(), i18n("Please restart soundKonverter in order to activate the changes.") );
         }
         configDialog.data()->deleteLater();
     }
@@ -423,7 +423,7 @@ CodecWidget *soundkonverter_codec_libav::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-unsigned int soundkonverter_codec_libav::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_codec_libav::convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)
@@ -472,8 +472,8 @@ unsigned int soundkonverter_codec_libav::convert( const KUrl& inputFile, const K
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -490,7 +490,7 @@ unsigned int soundkonverter_codec_libav::convert( const KUrl& inputFile, const K
     return newItem->id;
 }
 
-QStringList soundkonverter_codec_libav::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+QStringList soundkonverter_codec_libav::convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputFile)
     Q_UNUSED(outputFile)

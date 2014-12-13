@@ -3,11 +3,11 @@
 #ifndef LOGVIEWER_H
 #define LOGVIEWER_H
 
-#include <KDialog>
+#include <QDialog>
 
 class Logger;
-class KComboBox;
-class KTextEdit;
+class QComboBox;
+class QTextEdit;
 
 
 /**
@@ -15,12 +15,12 @@ class KTextEdit;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class LogViewer : public KDialog
+class LogViewer : public QDialog
 {
 Q_OBJECT
 public:
     /** Default Constructor */
-    LogViewer( Logger* _logger, QWidget* parent=0, Qt::WFlags f=0 );
+    LogViewer( Logger* _logger, QWidget* parent=0, Qt::WindowFlags f=0 );
 
     /** Default Destructor */
     ~LogViewer();
@@ -28,8 +28,8 @@ public:
 private:
     Logger* logger;
 
-    KComboBox *cItem;
-    KTextEdit *kLog;
+    QComboBox *cItem;
+    QTextEdit *kLog;
 
 private slots:
     void refillLogs();

@@ -16,8 +16,8 @@
 
 #include <QGroupBox>
 
-class KComboBox;
-class KPushButton;
+class QComboBox;
+class QPushButton;
 class QCheckBox;
 class QListWidget;
 class QToolButton;
@@ -86,18 +86,18 @@ public:
 private:
     Config *config;
 
-    KComboBox *cSelectorRipper;
-    KComboBox *cSelectorFormat;
+    QComboBox *cSelectorRipper;
+    QComboBox *cSelectorFormat;
 
     QList<QCheckBox*> filterCheckBoxes;
-    QList<KPushButton*> filterConfigButtons;
+    QList<QPushButton*> filterConfigButtons;
 
     BackendsListWidget *decoderList;
     BackendsListWidget *encoderList;
     BackendsListWidget *replaygainList;
 
-    KPushButton *pConfigureRipper;
-    KPushButton *pShowOptimizations;
+    QPushButton *pConfigureRipper;
+    QPushButton *pShowOptimizations;
 
     QString currentFormat;
 

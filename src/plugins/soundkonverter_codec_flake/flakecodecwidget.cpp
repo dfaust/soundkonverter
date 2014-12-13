@@ -11,8 +11,8 @@
 #include <QSpinBox>
 #include <QSlider>
 #include <QCheckBox>
-#include <KLineEdit>
-#include <KLocale>
+#include <QLineEdit>
+#include <KLocalizedString>
 
 
 FlakeCodecWidget::FlakeCodecWidget()
@@ -58,7 +58,7 @@ FlakeCodecWidget::FlakeCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     const QString toolTip =
         "[-p #]\tPadding bytes to put in header (default: 4096)\n"

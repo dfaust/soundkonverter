@@ -13,15 +13,15 @@
 
 #include "../config.h"
 
-#include <KLocale>
-#include <KIntSpinBox>
+#include <KLocalizedString>
+#include <QSpinBox>
 
 #include <QLayout>
 #include <QBoxLayout>
 #include <QLabel>
 #include <QCheckBox>
-#include <KComboBox>
-#include <KStandardDirs>
+#include <QComboBox>
+#include <QStandardPaths>
 
 
 ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
@@ -44,7 +44,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     box->addLayout( preferredOggVorbisExtensionBox );
     QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files:"), this );
     preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
-    cPreferredOggVorbisExtension = new KComboBox( this );
+    cPreferredOggVorbisExtension = new QComboBox( this );
     cPreferredOggVorbisExtension->addItem( "ogg" );
     cPreferredOggVorbisExtension->addItem( "oga" );
     cPreferredOggVorbisExtension->setCurrentIndex( config->data.general.preferredOggVorbisExtension == "ogg" ? 0 : 1 );
@@ -61,7 +61,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
     preferredVorbisCommentCommentTagBox->addWidget( lPreferredVorbisCommentCommentTag );
-    cPreferredVorbisCommentCommentTag = new KComboBox( this );
+    cPreferredVorbisCommentCommentTag = new QComboBox( this );
     cPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
     cPreferredVorbisCommentCommentTag->addItem( "COMMENT" );
     cPreferredVorbisCommentCommentTag->addItem( "DESCRIPTION" );
@@ -79,7 +79,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
     preferredVorbisCommentTrackTotalTagBox->addWidget( lPreferredVorbisCommentTrackTotalTag );
-    cPreferredVorbisCommentTrackTotalTag = new KComboBox( this );
+    cPreferredVorbisCommentTrackTotalTag = new QComboBox( this );
     cPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
     cPreferredVorbisCommentTrackTotalTag->addItem( "TRACKTOTAL" );
     cPreferredVorbisCommentTrackTotalTag->addItem( "TOTALTRACKS" );
@@ -98,7 +98,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files:"), this );
     lPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
     preferredVorbisCommentDiscTotalTagBox->addWidget( lPreferredVorbisCommentDiscTotalTag );
-    cPreferredVorbisCommentDiscTotalTag = new KComboBox( this );
+    cPreferredVorbisCommentDiscTotalTag = new QComboBox( this );
     cPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
     cPreferredVorbisCommentDiscTotalTag->addItem( "DISCTOTAL" );
     cPreferredVorbisCommentDiscTotalTag->addItem( "TOTALDISCS" );
@@ -142,7 +142,7 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     writeLogFilesBox->addSpacing( spacingOffset );
     box->addLayout( writeLogFilesBox );
     cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
-    cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",KStandardDirs::locateLocal("data","soundkonverter/log/")) );
+    cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/log/") );
     cWriteLogFiles->setChecked( config->data.general.writeLogFiles );
     writeLogFilesBox->addWidget( cWriteLogFiles );
     connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
@@ -162,9 +162,10 @@ ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
     cUseSharedMemoryForTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
     cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
     useSharedMemoryForTempFilesBox->addWidget( cUseSharedMemoryForTempFiles );
-    iMaxSizeForSharedMemoryTempFiles = new KIntSpinBox( 1, config->data.advanced.sharedMemorySize, 1, config->data.advanced.sharedMemorySize / 2, this );
+    iMaxSizeForSharedMemoryTempFiles = new QSpinBox( this );
     iMaxSizeForSharedMemoryTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
     iMaxSizeForSharedMemoryTempFiles->setSuffix( " " + i18nc("mega in bytes","MiB") );
+    iMaxSizeForSharedMemoryTempFiles->setRange( 1, config->data.advanced.sharedMemorySize );
     iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.maxSizeForSharedMemoryTempFiles );
     useSharedMemoryForTempFilesBox->addWidget( iMaxSizeForSharedMemoryTempFiles );
     if( config->data.advanced.sharedMemorySize == 0 )

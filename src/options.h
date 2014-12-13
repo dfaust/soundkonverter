@@ -10,7 +10,7 @@ class OptionsDetailed;
 class Config;
 class ConversionOptions;
 
-class KTabWidget;
+class QTabWidget;
 
 
 /**
@@ -53,7 +53,7 @@ public slots:
 private:
     Config *config;
 
-    KTabWidget *tab;
+    QTabWidget *tab;
 
     OptionsSimple *optionsSimple;
     OptionsDetailed *optionsDetailed;

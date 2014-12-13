@@ -3,7 +3,7 @@
 #ifndef TAGENGINE_H
 #define TAGENGINE_H
 
-#include <KUrl>
+#include <QUrl>
 
 #include <QStringList>
 
@@ -124,11 +124,11 @@ public:
     /** A list of all genre */
     QStringList genreList;
 
-    TagData* readTags( const KUrl& fileName );
-    bool writeTags( const KUrl& fileName, TagData *tagData );
+    TagData* readTags( const QUrl& fileName );
+    bool writeTags( const QUrl& fileName, TagData *tagData );
 
-    QList<CoverData*> readCovers( const KUrl& fileName );
-    bool writeCovers( const KUrl& fileName, QList<CoverData*> covers );
+    QList<CoverData*> readCovers( const QUrl& fileName );
+    bool writeCovers( const QUrl& fileName, QList<CoverData*> covers );
     bool writeCoversToDirectory( const QString& directoryName, TagData *tags );
 
 private:

@@ -4,10 +4,10 @@
 
 #include "../../core/codecplugin.h"
 
-#include <QWeakPointer>
+// #include <QWeakPointer>
 
 class ConversionOptions;
-class KDialog;
+class QDialog;
 class QCheckBox;
 
 
@@ -31,14 +31,14 @@ public:
     void showInfo( QWidget *parent );
     CodecWidget *newCodecWidget();
 
-    unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
-    QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    unsigned int convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    QStringList convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
     ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
 private:
-    QWeakPointer<KDialog> configDialog;
+    QDialog* configDialog;
     QCheckBox *configDialogUncoupledChannelsCheckBox;
 
     int configVersion;

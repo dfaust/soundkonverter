@@ -4,7 +4,7 @@
 
 #include "../../core/codecplugin.h"
 
-#include <QWeakPointer>
+// #include <QWeakPointer>
 #include <QDateTime>
 
 class ConversionOptions;
@@ -32,12 +32,12 @@ public:
 
     CodecWidget *newCodecWidget();
 
-    unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
-    QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    unsigned int convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    QStringList convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
 private:
-    QWeakPointer<KProcess> infoProcess;
+    QProcess* infoProcess;
     QString infoProcessOutputData;
 
     int configVersion;

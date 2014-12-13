@@ -7,7 +7,7 @@
 #include <QTime>
 #include <QFile>
 #include <QTextStream>
-#include <KUrl>
+#include <QUrl>
 
 
 /**

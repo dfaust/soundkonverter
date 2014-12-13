@@ -1,9 +1,10 @@
 
 #include "logger.h"
 
-#include <KLocale>
-#include <KStandardDirs>
+#include <KLocalizedString>
+#include <QStandardPaths>
 #include <KConfigGroup>
+#include <KSharedConfig>
 
 #include <cstdlib>
 #include <ctime>
@@ -19,9 +20,7 @@ LoggerItem::~LoggerItem()
 Logger::Logger( QObject *parent)
     : QObject( parent )
 {
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-    group = conf->group( "General" );
+    KConfigGroup group( KSharedConfig::openConfig(), "General" );
     writeLogFiles = group.readEntry( "writeLogFiles", false );
 
     LoggerItem *item = new LoggerItem();
@@ -29,7 +28,7 @@ Logger::Logger( QObject *parent)
     item->id = 1000;
     item->completed = true;
     item->succeeded = true;
-    item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
+    item->file.setFileName( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString("/soundkonverter/log/%1.log").arg(item->id) );
     if( writeLogFiles )
     {
         // TODO error handling
@@ -77,7 +76,7 @@ int Logger::registerProcess( const QString& identifier )
     item->identifier = identifier;
     item->id = getNewID();
     item->completed = false;
-    item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
+    item->file.setFileName( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString("/soundkonverter/log/%1.log").arg(item->id) );
     if( writeLogFiles )
     {
         // TODO error handling

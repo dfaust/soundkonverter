@@ -7,7 +7,7 @@ set(soundkonverter_replaygain_musepackgain_SRCS
    soundkonverter_replaygain_musepackgain.cpp
  )
 
-kde4_add_plugin(soundkonverter_replaygain_musepackgain ${soundkonverter_replaygain_musepackgain_SRCS})
+add_library(soundkonverter_replaygain_musepackgain MODULE ${soundkonverter_replaygain_musepackgain_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_musepackgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
 

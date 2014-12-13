@@ -41,8 +41,8 @@ FileListItem::~FileListItem()
     if( tags )
         delete tags;
 
-    if( lInfo.data() )
-        delete lInfo.data();
+    if( lInfo )
+        delete lInfo;
 }
 
 FileListItemDelegate::FileListItemDelegate( QObject *parent )

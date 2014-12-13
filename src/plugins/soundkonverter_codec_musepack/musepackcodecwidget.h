@@ -4,8 +4,8 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
-class KLineEdit;
+class QComboBox;
+class QLineEdit;
 class QSlider;
 class QDoubleSpinBox;
 class QGroupBox;
@@ -27,13 +27,13 @@ public:
 
 private:
     // preset selection
-    KComboBox *cPreset;
+    QComboBox *cPreset;
     // user defined options
     QGroupBox *userdefinedBox;
     QSlider *sQuality;
     QDoubleSpinBox *dQuality;
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

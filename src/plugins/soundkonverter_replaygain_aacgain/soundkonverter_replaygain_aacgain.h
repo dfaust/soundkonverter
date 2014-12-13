@@ -4,11 +4,11 @@
 
 #include "../../core/replaygainplugin.h"
 
-#include <KUrl>
-#include <QWeakPointer>
+#include <QUrl>
+// #include <QWeakPointer>
 
 class ConversionOptions;
-class KDialog;
+class QDialog;
 class QComboBox;
 class QCheckBox;
 class QDoubleSpinBox;
@@ -21,7 +21,7 @@ public:
     AacGainPluginItem( QObject *parent=0 );
     ~AacGainPluginItem();
 
-    KUrl::List undoFileList;
+    QList<QUrl> undoFileList;
 };
 
 
@@ -44,11 +44,11 @@ public:
     bool hasInfo();
     void showInfo( QWidget *parent );
 
-    unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add );
+    unsigned int apply( const QList<QUrl>& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
 
 private:
-    QWeakPointer<KDialog> configDialog;
+    QDialog* configDialog;
     QComboBox *configDialogTagModeComboBox;
     QCheckBox *configDialogModifyAudioStreamCheckBox;
     QDoubleSpinBox *configDialogGainAdjustmentSpinBox;

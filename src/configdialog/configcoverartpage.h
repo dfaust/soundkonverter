@@ -18,7 +18,7 @@ class Config;
 class QRadioButton;
 class QLabel;
 class QAbstractButton;
-class KLineEdit;
+class QLineEdit;
 
 /**
 	@author Daniel Faust <hessijames@gmail.com>
@@ -46,7 +46,7 @@ private:
     QRadioButton *rWriteCoverNameTitle;
     QRadioButton *rWriteCoverNameDefault;
     QLabel       *lWriteCoverNameDefaultLabel;
-    KLineEdit    *lWriteCoverNameDefaultEdit;
+    QLineEdit    *lWriteCoverNameDefaultEdit;
 
 //     QCheckBox *cCopyCover;
 //     QCheckBox *cEmbedCover;

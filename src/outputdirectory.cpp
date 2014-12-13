@@ -15,13 +15,14 @@
 #include <QRegExp>
 #include <QProcess>
 
-#include <KLocale>
-#include <KFileDialog>
-#include <KComboBox>
-#include <KLineEdit>
-#include <KIcon>
-#include <KPushButton>
+#include <KLocalizedString>
+#include <QFileDialog>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QIcon>
+#include <QPushButton>
 #include <kmountpoint.h>
+#include <QUrl>
 
 
 OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
@@ -34,7 +35,7 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     QHBoxLayout *box = new QHBoxLayout( );
     grid->addLayout( box, 0, 0 );
 
-    cMode = new KComboBox( this );
+    cMode = new QComboBox( this );
     cMode->addItem( i18n("By meta data") );
     cMode->addItem( i18n("Source directory") );
     cMode->addItem( i18n("Specify output directory") );
@@ -42,16 +43,17 @@ OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
     box->addWidget( cMode );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChangedSlot(int)) );
 
-    cDir = new KComboBox( true, this );
+    cDir = new QComboBox( this );
+    cDir->setEditable(true);
     box->addWidget( cDir, 1 );
     connect( cDir, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
-    pDirSelect = new KPushButton( KIcon("folder"), "", this );
+    pDirSelect = new QPushButton( QIcon::fromTheme("folder"), "", this );
     box->addWidget( pDirSelect );
     pDirSelect->setFixedWidth( pDirSelect->height() );
     pDirSelect->setToolTip( i18n("Choose an output directory") );
     connect( pDirSelect, SIGNAL(clicked()), this, SLOT(selectDir()) );
-    pDirGoto = new KPushButton( KIcon("system-file-manager"), "", this );
+    pDirGoto = new QPushButton( QIcon::fromTheme("system-file-manager"), "", this );
     box->addWidget( pDirGoto );
     pDirGoto->setFixedWidth( pDirGoto->height() );
     pDirGoto->setToolTip( i18n("Open the output directory with Dolphin") );
@@ -118,16 +120,16 @@ QString OutputDirectory::filesystemForDirectory( const QString& dir )
     return mp->mountType();
 }
 
-KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames )
+QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames )
 {
     QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
 
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
-        return KUrl();
+        return QUrl();
 
     QString path;
-    KUrl url;
+    QUrl url;
 
     QString extension;
     if( config->pluginLoader()->codecExtensions(options->codecName).count() > 0 )
@@ -152,7 +154,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
-        url = changeExtension( KUrl(path), extension );
+        url = changeExtension( QUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
             url = uniqueFileName( url, usedOutputNames );
@@ -277,7 +279,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         filename.replace("/",",");
         path.replace( "$replace_by_filename$", filename );
 
-        QString sourcedir = fileListItem->url.directory();
+        QString sourcedir = fileListItem->url.path();
         path.replace( "$replace_by_sourcedir$", sourcedir );
 
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
@@ -286,7 +288,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
-        url = KUrl( path + "." + extension );
+        url = QUrl( path + "." + extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
             url = uniqueFileName( url, usedOutputNames );
@@ -296,7 +298,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     else if( options->outputDirectoryMode == CopyStructure )
     {
         QString basePath = options->outputDirectory;
-        QString originalPath = fileListItem->url.pathOrUrl();
+        QString originalPath = fileListItem->url.url(QUrl::PreferLocalFile);
         int cutpos = basePath.length();
         while( basePath.left(cutpos) != originalPath.left(cutpos) )
         {
@@ -311,7 +313,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
             path = ntfsPath( path );
 
-        url = changeExtension( KUrl(path), extension );
+        url = changeExtension( QUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
             url = uniqueFileName( url, usedOutputNames );
@@ -322,7 +324,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     {
         path = fileListItem->url.toLocalFile();
 
-        url = changeExtension( KUrl(path), extension );
+        url = changeExtension( QUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
             url = uniqueFileName( url, usedOutputNames );
@@ -331,33 +333,35 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     }
 }
 
-KUrl OutputDirectory::changeExtension( const KUrl& url, const QString& extension )
+QUrl OutputDirectory::changeExtension( const QUrl& url, const QString& extension )
 {
-    KUrl newUrl = url;
+    QUrl newUrl = url;
 
-    QString fileName = newUrl.fileName();
-    fileName = newUrl.fileName().left( newUrl.fileName().lastIndexOf(".")+1 ) + extension;
-
-    newUrl.setFileName( fileName );
+// PORT FIX
+//     QString fileName = newUrl.fileName();
+//     fileName = newUrl.fileName().left( newUrl.fileName().lastIndexOf(".")+1 ) + extension;
+//
+//     newUrl.setFileName( fileName );
 
     return newUrl;
 }
 
-KUrl OutputDirectory::uniqueFileName( const KUrl& url, const QStringList& usedOutputNames )
+QUrl OutputDirectory::uniqueFileName( const QUrl& url, const QStringList& usedOutputNames )
 {
-    KUrl uniqueUrl = url;
+    QUrl uniqueUrl = url;
 
-    while( QFile::exists(uniqueUrl.toLocalFile()) || usedOutputNames.contains(uniqueUrl.toLocalFile()) )
-    {
-        QString fileName = uniqueUrl.fileName();
-        fileName = fileName.left( fileName.lastIndexOf(".")+1 ) + i18nc("will be appended to the filename if a file with the same name already exists","new") + fileName.mid( fileName.lastIndexOf(".") );
-        uniqueUrl.setFileName( fileName );
-    }
+// PORT FIX
+//     while( QFile::exists(uniqueUrl.toLocalFile()) || usedOutputNames.contains(uniqueUrl.toLocalFile()) )
+//     {
+//         QString fileName = uniqueUrl.fileName();
+//         fileName = fileName.left( fileName.lastIndexOf(".")+1 ) + i18nc("will be appended to the filename if a file with the same name already exists","new") + fileName.mid( fileName.lastIndexOf(".") );
+//         uniqueUrl.setFileName( fileName );
+//     }
 
     return uniqueUrl;
 }
 
-KUrl OutputDirectory::makePath( const KUrl& url )
+QUrl OutputDirectory::makePath( const QUrl& url )
 {
     QFileInfo fileInfo( url.toLocalFile() );
 
@@ -482,7 +486,7 @@ void OutputDirectory::selectDir()
         params = dir.mid( i );
     }
 
-    QString directory = KFileDialog::getExistingDirectory( startDir, this, i18n("Choose an output directory") );
+    QString directory = QFileDialog::getExistingDirectory( this, i18n("Choose an output directory"), startDir );
     if( !directory.isEmpty() )
     {
         if( i != -1 && cMode->currentIndex() == 0 )
@@ -546,7 +550,7 @@ void OutputDirectory::updateMode( Mode mode )
     else if( mode == Source )
     {
         cDir->clear();
-        cDir->setEditText( "" );
+        cDir->clearEditText();
         cDir->setEnabled( false );
         pDirSelect->setEnabled( false );
         pDirGoto->setEnabled( false );
@@ -601,32 +605,32 @@ void OutputDirectory::directoryChangedSlot( const QString& directory )
     QString sModeString = cMode->currentText();
 
     if( (Mode)mode == Default ) {
-        KMessageBox::information( this,
+        QMessageBox::information( this,
             i18n("This will output each file into the soundKonverter default directory."),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
     else if( (Mode)mode == Source ) {
-        KMessageBox::information( this,
+        QMessageBox::information( this,
             i18n("This will output each file into the same directory as the original file."),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
     else if( (Mode)mode == Specify ) {
-        KMessageBox::information( this,
+        QMessageBox::information( this,
             i18n("This will output each file into the directory specified in the editbox behind."),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
     else if( (Mode)mode == MetaData ) {
-        KMessageBox::information( this,
+        QMessageBox::information( this,
             i18n("This will output each file into a directory, which is created based on the metadata in the audio files. Select a directory, where the new directories should be created."),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
     else if( (Mode)mode == CopyStructure ) {
-        KMessageBox::information( this,
+        QMessageBox::information( this,
             i18n("This will output each file into a directory, which is created based on the name of the original directory. So you can copy a whole directory structure, in one you have the original files, in the other the converted."),
             QString(i18n("Mode")+": ").append(sModeString) );
     }
     else {
-        KMessageBox::error( this,
+        QMessageBox::error( this,
             i18n("This mode (%s) doesn't exist.", sModeString),
             QString(i18n("Mode")+": ").append(sModeString) );
     }

@@ -4,7 +4,7 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QComboBox;
 class QSlider;
 class QSpinBox;
 

@@ -15,29 +15,31 @@
 #include "../codecproblems.h"
 
 #include <QApplication>
-#include <KLocale>
-#include <KPushButton>
+#include <KLocalizedString>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QHBoxLayout>
-#include <KMessageBox>
-#include <KFileDialog>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QDir>
+#include <QUrl>
+#include <QTextStream>
 
 
-PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f ),
+PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
+    : QDialog( parent, f ),
     dialogAborted( false ),
     config( _config )
 {
-    setCaption( i18n("Add playlist") );
-    setWindowIcon( KIcon("view-media-playlist") );
-    setButtons( 0 );
+    setWindowTitle( i18n("Add playlist") );
+    setWindowIcon( QIcon::fromTheme("view-media-playlist") );
+//     setButtons( 0 );
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget();
-    setMainWidget( widget );
+//     setMainWidget( widget );
 
     QGridLayout *mainGrid = new QGridLayout( widget );
 
@@ -49,35 +51,35 @@ PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     mainGrid->addLayout( controlBox, 2, 0 );
     controlBox->addStretch();
 
-    pAdd = new KPushButton( KIcon("dialog-ok"), i18n("Ok"), widget );
+    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
     controlBox->addWidget( pAdd );
     connect( pAdd, SIGNAL(clicked()), this, SLOT(okClickedSlot()) );
-    pCancel = new KPushButton( KIcon("dialog-cancel"), i18n("Cancel"), widget );
+    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
 
-    fileDialog = new KFileDialog( KUrl("kfiledialog:///soundkonverter-add-media"), "*.m3u", this );
+    fileDialog = new QFileDialog( this, i18n("Add Files"), "kfiledialog:///soundkonverter-add-media", "*.m3u" );
     fileDialog->setWindowTitle( i18n("Add Files") );
-    fileDialog->setMode( KFile::File | KFile::ExistingOnly );
+    fileDialog->setFileMode(QFileDialog::ExistingFile);
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
     connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
     const int dialogReturnCode = fileDialog->exec();
     if( dialogReturnCode == QDialog::Rejected )
         dialogAborted = true;
 
-        // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "PlaylistOpener" );
-    restoreDialogSize( group );
+//         // Prevent the dialog from beeing too wide because of the directory history
+//     if( parent && width() > parent->width() )
+//         setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "PlaylistOpener" );
+//     restoreDialogSize( group );
 }
 
 PlaylistOpener::~PlaylistOpener()
 {
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "PlaylistOpener" );
-    saveDialogSize( group );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "PlaylistOpener" );
+//     saveDialogSize( group );
 }
 
 void PlaylistOpener::fileDialogAccepted()
@@ -90,7 +92,7 @@ void PlaylistOpener::fileDialogAccepted()
     QStringList filesNotFound;
 
     urls.clear();
-    KUrl playlistUrl = fileDialog->selectedUrl();
+    QUrl playlistUrl = QUrl(fileDialog->selectedFiles().first());
     QFile playlistFile( playlistUrl.toLocalFile() );
     if( playlistFile.open(QIODevice::ReadOnly) )
     {
@@ -101,12 +103,12 @@ void PlaylistOpener::fileDialogAccepted()
             line = stream.readLine();
             if( !line.startsWith("#EXTM3U") && !line.startsWith("#EXTINF") && !line.isEmpty() )
             {
-                KUrl url(line);
-                if( url.isRelative() ) url = KUrl( playlistUrl.directory() + "/" + line );
-                url.cleanPath();
+                QUrl url(line);
+                if( url.isRelative() ) url = QUrl( playlistUrl.path() + "/" + line );
+//                 url.cleanPath();
 
                 if( !url.isLocalFile() || QFile::exists(url.toLocalFile()) ) urls += url;
-                else filesNotFound += url.pathOrUrl();
+                else filesNotFound += url.url(QUrl::PreferLocalFile);
             }
         } while( !line.isNull() );
         playlistFile.close();
@@ -123,7 +125,7 @@ void PlaylistOpener::fileDialogAccepted()
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {
-            fileName = urls.at(i).pathOrUrl();
+            fileName = urls.at(i).url(QUrl::PreferLocalFile);
 
             if( codecName.isEmpty() )
                 codecName = mimeType;
@@ -239,6 +241,6 @@ void PlaylistOpener::okClickedSlot()
     }
     else
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
     }
 }

@@ -6,7 +6,7 @@
 
 #include <QLayout>
 #include <QHBoxLayout>
-#include <KLocale>
+#include <KLocalizedString>
 #include <QCheckBox>
 
 NormalizeFilterWidget::NormalizeFilterWidget()

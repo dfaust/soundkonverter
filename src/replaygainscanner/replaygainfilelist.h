@@ -5,14 +5,14 @@
 #include "replaygainfilelistitem.h"
 #include "core/replaygainplugin.h"
 
-#include <KUrl>
+#include <QUrl>
 #include <QTime>
 
 class Config;
 class Logger;
 class ConversionOptions;
 class QProgressBar;
-class KAction;
+class QAction;
 // class QMenu;
 
 
@@ -44,7 +44,7 @@ public:
 
     ReplayGainFileListItem *topLevelItem( int index ) const { return static_cast<ReplayGainFileListItem*>( QTreeWidget::topLevelItem(index) ); }
 
-    void addFiles( const KUrl::List& fileList, const QString& _codecName = "" );
+    void addFiles( const QList<QUrl>& fileList, const QString& _codecName = "" );
 
     void startProcessing( ReplayGainPlugin::ApplyMode _mode );
     void removeAllReplayGain();
@@ -75,20 +75,20 @@ private:
     QTreeWidgetItem *lastAlbumItem;
 
     QMenu *contextMenu;
-    KAction *collapseAction;
-    KAction *expandAction;
-//     KAction *processAddAction;
-//     KAction *processRemoveAction;
-//     KAction *killAction;
-    KAction *moveAction;
-    KAction *removeAction;
+    QAction *collapseAction;
+    QAction *expandAction;
+//     QAction *processAddAction;
+//     QAction *processRemoveAction;
+//     QAction *killAction;
+    QAction *moveAction;
+    QAction *removeAction;
 
     void processNextItem();
     int waitingCount();
     int processingCount();
 
 public slots:
-    void addDir( const KUrl& directory, bool recursive, const QStringList& codecList );
+    void addDir( const QUrl& directory, bool recursive, const QStringList& codecList );
     void updateItem( ReplayGainFileListItem *item, bool initialUpdate = false );
 
 private slots:

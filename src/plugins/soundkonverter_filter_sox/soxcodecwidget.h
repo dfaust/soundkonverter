@@ -9,8 +9,8 @@ class QSlider;
 class QSpinBox;
 class QDoubleSpinBox;
 class QLabel;
-class KComboBox;
-class KLineEdit;
+class QComboBox;
+class QLineEdit;
 
 
 class SoxCodecWidget : public CodecWidget
@@ -34,16 +34,16 @@ private:
     QSpinBox       *iCompressionLevel;
     // mp2, mp3 and ogg vorbis
     QLabel         *lMode;
-    KComboBox      *cMode;
+    QComboBox      *cMode;
     QLabel         *lQuality;
     QSlider        *sQuality;
     QDoubleSpinBox *dQuality;
     // amr nb and amr wb
     QLabel         *lBitratePreset;
-    KComboBox      *cBitratePreset;
+    QComboBox      *cBitratePreset;
 
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

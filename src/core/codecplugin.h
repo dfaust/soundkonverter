@@ -10,7 +10,7 @@ class CodecWidget;
 class TagData;
 
 
-class KDE_EXPORT CodecPluginItem : public BackendPluginItem
+class CodecPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
@@ -24,7 +24,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class KDE_EXPORT CodecPlugin : public BackendPlugin
+class CodecPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
@@ -43,18 +43,15 @@ public:
      * -1   unknown error
      * -100 plugin not configured
      */
-    virtual unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false ) = 0;
+    virtual unsigned int convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false ) = 0;
     /** returns a command for converting a file through a pipe; "" if pipes aren't supported */
-    virtual QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false ) = 0;
+    virtual QStringList convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false ) = 0;
 
     virtual ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
     ConversionOptions *lastUsedConversionOptions;
 
 };
-
-#define K_EXPORT_SOUNDKONVERTER_CODEC(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_codec_##libname, KGenericFactory<classname>("soundkonverter_codec_" #libname) )
 
 #endif // CODECPLUGIN_H
 

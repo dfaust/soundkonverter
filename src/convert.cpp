@@ -12,8 +12,8 @@
 #include <kio/jobclasses.h>
 #include <kio/job.h>
 
-#include <KLocale>
-#include <KMessageBox>
+#include <KLocalizedString>
+#include <QMessageBox>
 #include <QFile>
 #include <QFileInfo>
 
@@ -73,11 +73,11 @@ void Convert::get( ConvertItem *item )
     if( !updateTimer.isActive() )
         updateTimer.start( ConfigUpdateDelay );
 
-    logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",item->inputUrl.pathOrUrl(),item->tempInputUrl.toLocalFile()) );
+    logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",item->inputUrl.url(QUrl::PreferLocalFile),item->tempInputUrl.toLocalFile()) );
 
     item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
-    connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
-    connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
+    connect( item->kioCopyJob, SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
+    connect( item->kioCopyJob, SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
 }
 
 void Convert::convert( ConvertItem *item )
@@ -89,7 +89,7 @@ void Convert::convert( ConvertItem *item )
     if( !conversionOptions )
         return;
 
-    KUrl inputUrl;
+    QUrl inputUrl;
     if( !item->tempInputUrl.toLocalFile().isEmpty() )
         inputUrl = item->tempInputUrl;
     else
@@ -112,7 +112,7 @@ void Convert::convert( ConvertItem *item )
         if( QFile::exists(item->outputUrl.toLocalFile()) )
         {
             logger->log( item->logID, "\tOutput file already exists" );
-            item->outputUrl = KUrl();
+            item->outputUrl = QUrl();
             remove( item, FileListItem::Skipped );
             return;
         }
@@ -123,8 +123,8 @@ void Convert::convert( ConvertItem *item )
 
     if( config->data.general.copyIfSameCodec && item->fileListItem->codecName == conversionOptions->codecName )
     {
-        logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",inputUrl.pathOrUrl(),item->outputUrl.toLocalFile()) );
-        QFile::copy( inputUrl.pathOrUrl(), item->outputUrl.toLocalFile() );
+        logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",inputUrl.url(QUrl::PreferLocalFile),item->outputUrl.toLocalFile()) );
+        QFile::copy( inputUrl.url(QUrl::PreferLocalFile), item->outputUrl.toLocalFile() );
         item->state = ConvertItem::convert;
         executeNextStep( item );
         return;
@@ -222,8 +222,8 @@ void Convert::convert( ConvertItem *item )
             {
                 BackendPlugin *plugin = trunk.plugin;
                 QStringList command;
-                const KUrl inUrl = ( step == 0 ) ? inputUrl : KUrl();
-                const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : KUrl();
+                const QUrl inUrl = ( step == 0 ) ? inputUrl : QUrl();
+                const QUrl outUrl = ( step == stepCount ) ? item->outputUrl : QUrl();
                 if( plugin->type() == "codec" || plugin->type() == "filter" )
                 {
                     if( step == stepCount && trunk.data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
@@ -274,13 +274,11 @@ void Convert::convert( ConvertItem *item )
             item->convertTimes.append( time );
             item->conversionPipesStep = 0;
             logger->log( item->logID, "<pre>\t<span style=\"color:#DC6300\">" + command + "</span></pre>" );
-            item->process = new KProcess();
-            item->process.data()->setOutputChannelMode( KProcess::MergedChannels );
-            connect( item->process.data(), SIGNAL(readyRead()), this, SLOT(processOutput()) );
-            connect( item->process.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
-            item->process.data()->clearProgram();
-            item->process.data()->setShellCommand( command );
-            item->process.data()->start();
+            item->process = new QProcess();
+            item->process->setProcessChannelMode( QProcess::MergedChannels );
+            connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
+            connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
+            item->process->start( command );
         }
         else
         {
@@ -343,14 +341,14 @@ void Convert::convertNextBackend( ConvertItem *item )
     if( !plugin )
         return;
 
-    KUrl inputUrl;
+    QUrl inputUrl;
     if( !item->tempInputUrl.toLocalFile().isEmpty() )
         inputUrl = item->tempInputUrl;
     else
         inputUrl = item->inputUrl;
 
-    const KUrl inUrl = ( step == 0 ) ? inputUrl : item->tempConvertUrls.at(step - 1);
-    const KUrl outUrl = ( step == stepCount ) ? item->outputUrl : item->tempConvertUrls.at(step);
+    const QUrl inUrl = ( step == 0 ) ? inputUrl : item->tempConvertUrls.at(step - 1);
+    const QUrl outUrl = ( step == stepCount ) ? item->outputUrl : item->tempConvertUrls.at(step);
 
     if( step == 0 )
     {
@@ -483,12 +481,12 @@ void Convert::replaygain( ConvertItem *item )
     item->state = ConvertItem::replaygain;
     item->backendPlugin = item->replaygainPipes.at(item->take).plugin;
 
-    KUrl::List urlList;
+    QList<QUrl> urlList;
     QStringList directories;
     foreach( ConvertItem *albumItem, albumItems )
     {
         urlList.append( albumItem->outputUrl );
-        directories.append( albumItem->outputUrl.directory() );
+        directories.append( albumItem->outputUrl.path() );
         if( albumItem != item )
         {
             albumItem->fileListItem->state = FileListItem::ApplyingAlbumGain;
@@ -565,7 +563,7 @@ void Convert::writeTags( ConvertItem *item )
 
     config->tagEngine()->writeTags( item->outputUrl, item->fileListItem->tags );
 
-    KUrl inputUrl;
+    QUrl inputUrl;
     if( !item->tempInputUrl.toLocalFile().isEmpty() )
         inputUrl = item->tempInputUrl;
     else
@@ -580,7 +578,7 @@ void Convert::writeTags( ConvertItem *item )
     const bool success = config->tagEngine()->writeCovers( item->outputUrl, item->fileListItem->tags->covers );
     if( config->data.coverArt.writeCovers == 0 || ( config->data.coverArt.writeCovers == 1 && !success ) )
     {
-        config->tagEngine()->writeCoversToDirectory( item->outputUrl.directory(), item->fileListItem->tags );
+        config->tagEngine()->writeCoversToDirectory( item->outputUrl.path(), item->fileListItem->tags );
     }
 }
 
@@ -589,8 +587,8 @@ void Convert::writeTags( ConvertItem *item )
 //     logger->log( item->logID, i18n("Running user script") );
 //     item->state = ConvertItem::execute_userscript;
 //
-//     KUrl source( item->fileListItem->options.filePathName );
-//     KUrl destination( item->outputFilePathName );
+//     QUrl source( item->fileListItem->options.filePathName );
+//     QUrl destination( item->outputFilePathName );
 //
 //     item->fileListItem->setText( 0, i18n("Running user script")+"... 00 %" );
 //
@@ -606,7 +604,7 @@ void Convert::writeTags( ConvertItem *item )
 //     logger->log( item->logID, userscript + " \"" + source.path() + "\" \"" + destination.path() + "\"" );
 //
 // // /*    item->convertProcess->setPriority( config->data.general.priority );
-// //     item->convertProcess->start( KProcess::NotifyOnExit, KProcess::AllOutput );*/
+// //     item->convertProcess->start( QProcess::NotifyOnExit, QProcess::AllOutput );*/
 // }
 
 void Convert::executeNextStep( ConvertItem *item )
@@ -699,7 +697,7 @@ void Convert::executeSameStep( ConvertItem *item )
         case ConvertItem::encode:
         {
             // remove temp/failed files
-            foreach( const KUrl url, item->tempConvertUrls )
+            foreach( const QUrl url, item->tempConvertUrls )
             {
                 if( QFile::exists(url.toLocalFile()) )
                 {
@@ -729,7 +727,7 @@ void Convert::kioJobProgress( KJob *job, unsigned long percent )
     // search the item list for our item
     foreach( ConvertItem *item, items )
     {
-        if( item->kioCopyJob.data() == job )
+        if( item->kioCopyJob == job )
         {
             item->progress = (float)percent;
         }
@@ -741,9 +739,9 @@ void Convert::kioJobFinished( KJob *job )
     // search the item list for our item
     foreach( ConvertItem *item, items )
     {
-        if( item->kioCopyJob.data() == job )
+        if( item->kioCopyJob == job )
         {
-            item->kioCopyJob.data()->deleteLater();
+            item->kioCopyJob->deleteLater();
 
             if( job->error() == 0 ) // copy was successful
             {
@@ -810,9 +808,9 @@ void Convert::processOutput()
 {
     foreach( ConvertItem *item, items )
     {
-        if( item->process.data() == QObject::sender() )
+        if( item->process == QObject::sender() )
         {
-            const QString output = item->process.data()->readAllStandardOutput().data();
+            const QString output = item->process->readAllStandardOutput();
 
             bool logOutput = true;
             foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
@@ -841,16 +839,15 @@ void Convert::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     if( QObject::sender() == 0 )
     {
         logger->log( 1000, QString("Error: processExit was called from a null sender. Exit code: %1").arg(exitCode) );
-        KMessageBox::error( 0, QString("Error: processExit was called from a null sender. Exit code: %1").arg(exitCode) );
         return;
     }
 
     // search the item list for our item
     foreach( ConvertItem *item, items )
     {
-        if( item->process.data() == QObject::sender() )
+        if( item->process == QObject::sender() )
         {
-            item->process.data()->deleteLater(); // NOTE crash discovered here - probably fixed by using deleteLater
+            item->process->deleteLater(); // NOTE crash discovered here - probably fixed by using deleteLater
 
             if( item->killed )
             {
@@ -927,7 +924,6 @@ void Convert::pluginProcessFinished( int id, int exitCode )
     if( QObject::sender() == 0 )
     {
         logger->log( 1000, QString("Error: pluginProcessFinished was called from a null sender. Exit code: %1").arg(exitCode) );
-        KMessageBox::error( 0, QString("Error: pluginProcessFinished was called from a null sender. Exit code: %1").arg(exitCode) );
         return;
     }
 
@@ -939,7 +935,7 @@ void Convert::pluginProcessFinished( int id, int exitCode )
 
             if( item->backendPlugin->name() == "Vorbis Gain" )
             {
-                activeVorbisGainDirectories.removeAll( item->outputUrl.directory() );
+                activeVorbisGainDirectories.removeAll( item->outputUrl.path() );
                 foreach( ConvertItem *nextItem, items )
                 {
                     if( nextItem->state == ConvertItem::wait_replaygain && nextItem->backendPlugin->name() == "Vorbis Gain" )
@@ -1062,23 +1058,23 @@ void Convert::pluginLog( int id, const QString& message )
 
 void Convert::add( FileListItem *fileListItem )
 {
-    KUrl fileName;
+    QUrl fileName;
     if( fileListItem->track >= 0 )
     {
         if( fileListItem->tags )
         {
-            fileName = KUrl( i18nc("identificator for the logger","CD track %1: %2 - %3",QString().sprintf("%02i",fileListItem->tags->track),fileListItem->tags->artist,fileListItem->tags->title) );
+            fileName = QUrl( i18nc("identificator for the logger","CD track %1: %2 - %3",QString().sprintf("%02i",fileListItem->tags->track),fileListItem->tags->artist,fileListItem->tags->title) );
         }
         else // shouldn't be possible
         {
-            fileName = KUrl( i18nc("identificator for the logger","CD track %1",fileListItem->track) );
+            fileName = QUrl( i18nc("identificator for the logger","CD track %1",fileListItem->track) );
         }
     }
     else
     {
         fileName = fileListItem->url;
     }
-    logger->log( 1000, i18n("Adding new item to conversion list: '%1'",fileName.pathOrUrl()) );
+    logger->log( 1000, i18n("Adding new item to conversion list: '%1'",fileName.url(QUrl::PreferLocalFile)) );
 
     ConvertItem *newItem = new ConvertItem( fileListItem );
     items.append( newItem );
@@ -1086,7 +1082,7 @@ void Convert::add( FileListItem *fileListItem )
     newItem->progressedTime.start();
 
     // register at the logger
-    newItem->logID = logger->registerProcess( fileName.pathOrUrl() );
+    newItem->logID = logger->registerProcess( fileName.url(QUrl::PreferLocalFile) );
     logger->log( 1000, "\t" + i18n("Got log ID: %1",QString::number(newItem->logID)) );
 
     // TODO remove redundancy, logID is needed in the fileListItem
@@ -1266,7 +1262,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     {
         QFile::remove(item->tempInputUrl.toLocalFile());
     }
-    foreach( const KUrl url, item->tempConvertUrls )
+    foreach( const QUrl url, item->tempConvertUrls )
     {
         if( QFile::exists(url.toLocalFile()) )
         {
@@ -1289,10 +1285,10 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
 
     emit timeFinished( item->fileListItem->length );
 
-    if( item->process.data() )
-        item->process.data()->deleteLater();
-    if( item->kioCopyJob.data() )
-        item->kioCopyJob.data()->deleteLater();
+    if( item->process )
+        item->process->deleteLater();
+    if( item->kioCopyJob )
+        item->kioCopyJob->deleteLater();
 
     if( !waitForAlbumGain && !albumName.isEmpty() )
     {
@@ -1330,13 +1326,13 @@ void Convert::kill( FileListItem *fileListItem )
             {
                 items.at(i)->backendPlugin->kill( items.at(i)->backendID );
             }
-            else if( items.at(i)->process.data() != 0 )
+            else if( items.at(i)->process != 0 )
             {
-                items.at(i)->process.data()->kill();
+                items.at(i)->process->kill();
             }
-            else if( items.at(i)->kioCopyJob.data() != 0 )
+            else if( items.at(i)->kioCopyJob != 0 )
             {
-                items.at(i)->kioCopyJob.data()->kill( KJob::EmitResult );
+                items.at(i)->kioCopyJob->kill( KJob::EmitResult );
             }
         }
     }

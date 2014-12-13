@@ -3,10 +3,9 @@
 #ifndef CONVERSIONOPTIONS_H
 #define CONVERSIONOPTIONS_H
 
-#include <KGenericFactory>
-
 #include <QString>
 #include <QDomElement>
+#include <QList>
 
 
 /**
@@ -14,7 +13,7 @@
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT FilterOptions
+class FilterOptions
 {
 public:
     FilterOptions();
@@ -39,7 +38,7 @@ public:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT ConversionOptions
+class ConversionOptions
 {
 public:
     ConversionOptions();

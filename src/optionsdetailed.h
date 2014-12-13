@@ -15,8 +15,8 @@ class OutputDirectory;
 class CodecWidget;
 class FilterWidget;
 
-class KComboBox;
-class KPushButton;
+class QComboBox;
+class QPushButton;
 class QGridLayout;
 class QLabel;
 class QToolButton;
@@ -56,15 +56,15 @@ public:
 
 private:
     QGridLayout *grid;
-    KComboBox *cFormat;
+    QComboBox *cFormat;
     QLabel *lPlugin;
-    KComboBox *cPlugin;
-    KPushButton *pConfigurePlugin;
+    QComboBox *cPlugin;
+    QPushButton *pConfigurePlugin;
     CodecWidget *wPlugin;
     QMap<FilterWidget*,FilterPlugin*> wFilter;
     QCheckBox *cReplayGain;
     QLabel *lEstimSize;
-    KPushButton *pProfileSave;
+    QPushButton *pProfileSave;
     QToolButton *pProfileLoad;
 
     Config *config;

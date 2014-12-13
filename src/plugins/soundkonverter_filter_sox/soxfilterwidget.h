@@ -7,7 +7,7 @@
 class SoxEffectWidget;
 
 class QCheckBox;
-class KComboBox;
+class QComboBox;
 class QVBoxLayout;
 
 
@@ -23,11 +23,11 @@ public:
 
 private:
     QCheckBox *chSampleSize;
-    KComboBox *cSampleSize;
+    QComboBox *cSampleSize;
     QCheckBox *chSampleRate;
-    KComboBox *cSampleRate;
+    QComboBox *cSampleRate;
     QCheckBox *chChannels;
-    KComboBox *cChannels;
+    QComboBox *cChannels;
     QVBoxLayout *effectWidgetsBox;
     QList<SoxEffectWidget*> effectWidgets;
 

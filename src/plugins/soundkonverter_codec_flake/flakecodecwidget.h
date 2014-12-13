@@ -4,11 +4,11 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QComboBox;
 class QSlider;
 class QSpinBox;
 class QCheckBox;
-class KLineEdit;
+class QLineEdit;
 
 class FlakeCodecWidget : public CodecWidget
 {
@@ -28,7 +28,7 @@ private:
     QSlider *sCompressionLevel;
     QSpinBox *iCompressionLevel;
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

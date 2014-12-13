@@ -5,9 +5,9 @@
 #include <QLayout>
 #include <QString>
 #include <QAbstractItemView>
-#include <KIcon>
-#include <KPushButton>
-#include <KComboBox>
+#include <QIcon>
+#include <QPushButton>
+#include <QComboBox>
 
 
 ComboButton::ComboButton( QWidget *parent )
@@ -18,12 +18,12 @@ ComboButton::ComboButton( QWidget *parent )
     QGridLayout *grid = new QGridLayout( this );
     grid->setContentsMargins( 0, 0, 0, 0 );
 
-    m_box = new KComboBox( this );
+    m_box = new QComboBox( this );
     grid->addWidget( m_box, 0, 0 );
     connect( m_box, SIGNAL(activated(int)), this, SLOT(boxActivated(int)) );
     setFocusProxy( m_box );
 
-    m_button = new KPushButton( QString(), this );
+    m_button = new QPushButton( QString(), this );
     grid->addWidget( m_button, 0, 0 );
     connect( m_button, SIGNAL(clicked()), this, SLOT(buttonClicked()) );
     m_iconHight = m_button->iconSize().height();
@@ -53,7 +53,7 @@ void ComboButton::balanceSize()
 void ComboButton::repaintButton()
 {
     m_button->setText( m_box->currentText() );
-    m_button->setIcon( KIcon(m_box->itemIcon(m_box->currentIndex())) );
+    m_button->setIcon( QIcon(m_box->itemIcon(m_box->currentIndex())) );
     balanceSize();
 }
 
@@ -65,7 +65,7 @@ void ComboButton::insertItem( const QString &text, int index )
     repaintButton();
 }
 
-void ComboButton::insertItem( const KIcon &icon, const QString &text, int index )
+void ComboButton::insertItem( const QIcon &icon, const QString &text, int index )
 {
     if( index == -1 ) index = m_box->count();
     m_box->insertItem( index, icon, text );

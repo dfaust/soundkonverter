@@ -4,12 +4,12 @@
 
 #include "../../core/filterplugin.h"
 
-#include <QWeakPointer>
+// #include <QWeakPointer>
 #include <QDateTime>
 
 class FilterOptions;
-class KDialog;
-class KComboBox;
+class QDialog;
+class QComboBox;
 
 
 class soundkonverter_filter_sox : public FilterPlugin
@@ -44,19 +44,19 @@ public:
     CodecWidget *newCodecWidget();
     FilterWidget *newFilterWidget();
 
-    unsigned int convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
-    QStringList convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    unsigned int convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
+    QStringList convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags = 0, bool replayGain = false );
     float parseOutput( const QString& output );
 
     FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 
 private:
     QList<SoxCodecData> codecList;
-    QWeakPointer<KProcess> infoProcess;
+    QProcess* infoProcess;
     QString infoProcessOutputData;
 
-    QWeakPointer<KDialog> configDialog;
-    KComboBox *configDialogSamplingRateQualityComboBox;
+    QDialog* configDialog;
+    QComboBox *configDialogSamplingRateQualityComboBox;
 
     int configVersion;
     QString samplingRateQuality;

@@ -18,7 +18,7 @@
 #include "core/ripperplugin.h"
 
 #include <QStringList>
-#include <KUrl>
+#include <QUrl>
 
 class Logger;
 class Config;
@@ -84,7 +84,7 @@ public:
 //     QList<RipperInfo> getRipperInfos( bool mustRipEntireCd = false, const QString& preferredPlugin = "" );
 
     QString getCodecFromM4aFile( QFile *file );
-    QString getCodecFromFile( const KUrl& filename, QString *mimeType = 0, bool checkM4a = true );
+    QString getCodecFromFile( const QUrl& filename, QString *mimeType = 0, bool checkM4a = true );
 
     bool canDecode( const QString& codecName, QStringList *errorList = 0 );
     bool canReplayGain( const QString& codecName, CodecPlugin *plugin, QStringList *errorList = 0 );

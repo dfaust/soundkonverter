@@ -6,12 +6,12 @@
 
 #include <QGroupBox>
 
-class KComboBox;
+class QComboBox;
 class QSpinBox;
 class QCheckBox;
 class QLabel;
 class QSlider;
-class KLineEdit;
+class QLineEdit;
 
 class LameCodecWidget : public CodecWidget
 {
@@ -29,20 +29,20 @@ public:
 
 private:
     // preset selection
-    KComboBox *cPreset;
+    QComboBox *cPreset;
     QSpinBox *iPresetBitrate;
     QCheckBox *cPresetBitrateCbr;
     QCheckBox *cPresetFast;
     // user defined options
     QGroupBox *userdefinedBox;
-    KComboBox *cMode;
+    QComboBox *cMode;
     QSpinBox *iQuality;
     QSlider *sQuality;
-    KComboBox *cBitrateMode;
+    QComboBox *cBitrateMode;
     QSlider *sCompressionLevel;
     QSpinBox *iCompressionLevel;
     QCheckBox *cCmdArguments;
-    KLineEdit *lCmdArguments;
+    QLineEdit *lCmdArguments;
 
     QString currentFormat; // holds the current output file format
 

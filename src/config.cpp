@@ -4,11 +4,13 @@
 #include "global.h"
 
 #include <KConfigGroup>
+#include <KSharedConfig>
 #include <QDir>
 #include <QDomElement>
 #include <QTime>
 #include <solid/device.h>
-#include <KStandardDirs>
+#include <QStandardPaths>
+#include <KLocalizedString>
 
 
 Config::Config( Logger *_logger, QObject *parent )
@@ -41,31 +43,28 @@ void Config::load()
 
     QStringList formats;
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "General" );
-    data.app.configVersion = group.readEntry( "configVersion", 0 );
-    data.general.startTab = group.readEntry( "startTab", 0 );
-    data.general.lastTab = group.readEntry( "lastTab", 0 );
-    data.general.defaultProfile = group.readEntry( "defaultProfile", i18n("Last used") );
-    data.general.lastProfile = group.readEntry( "lastProfile", i18n("High") );
-    data.general.defaultFormat = group.readEntry( "defaultFormat", i18n("Last used") );
-    data.general.lastFormat = group.readEntry( "lastFormat", "ogg vorbis" );
-    data.general.lastOutputDirectoryMode = group.readEntry( "lastOutputDirectoryMode", 0 );
-    data.general.specifyOutputDirectory = group.readEntry( "specifyOutputDirectory", QDir::homePath() + "/soundKonverter" );
-    data.general.metaDataOutputDirectory = group.readEntry( "metaDataOutputDirectory", QDir::homePath() + "/soundKonverter/%b/%d - %n - %a - %t" );
-    data.general.copyStructureOutputDirectory = group.readEntry( "copyStructureOutputDirectory", QDir::homePath() + "/soundKonverter" );
-    data.general.lastMetaDataOutputDirectoryPaths = group.readEntry( "lastMetaDataOutputDirectoryPaths", QStringList() );
-    data.general.lastNormalOutputDirectoryPaths = group.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
-    data.general.waitForAlbumGain = group.readEntry( "waitForAlbumGain", true );
-    data.general.useVFATNames = group.readEntry( "useVFATNames", false );
-    data.general.copyIfSameCodec = group.readEntry( "copyIfSameCodec", false );
-    data.general.writeLogFiles = group.readEntry( "writeLogFiles", false );
-    data.general.conflictHandling = (Config::Data::General::ConflictHandling)group.readEntry( "conflictHandling", 0 );
-//     data.general.priority = group.readEntry( "priority", 10 );
-    data.general.numFiles = group.readEntry( "numFiles", 0 );
-    data.general.numReplayGainFiles = group.readEntry( "numReplayGainFiles", 0 );
+    KConfigGroup groupGeneral( KSharedConfig::openConfig(), "General" );
+    data.app.configVersion = groupGeneral.readEntry( "configVersion", 0 );
+    data.general.startTab = groupGeneral.readEntry( "startTab", 0 );
+    data.general.lastTab = groupGeneral.readEntry( "lastTab", 0 );
+    data.general.defaultProfile = groupGeneral.readEntry( "defaultProfile", i18n("Last used") );
+    data.general.lastProfile = groupGeneral.readEntry( "lastProfile", i18n("High") );
+    data.general.defaultFormat = groupGeneral.readEntry( "defaultFormat", i18n("Last used") );
+    data.general.lastFormat = groupGeneral.readEntry( "lastFormat", "ogg vorbis" );
+    data.general.lastOutputDirectoryMode = groupGeneral.readEntry( "lastOutputDirectoryMode", 0 );
+    data.general.specifyOutputDirectory = groupGeneral.readEntry( "specifyOutputDirectory", QDir::homePath() + "/soundKonverter" );
+    data.general.metaDataOutputDirectory = groupGeneral.readEntry( "metaDataOutputDirectory", QDir::homePath() + "/soundKonverter/%b/%d - %n - %a - %t" );
+    data.general.copyStructureOutputDirectory = groupGeneral.readEntry( "copyStructureOutputDirectory", QDir::homePath() + "/soundKonverter" );
+    data.general.lastMetaDataOutputDirectoryPaths = groupGeneral.readEntry( "lastMetaDataOutputDirectoryPaths", QStringList() );
+    data.general.lastNormalOutputDirectoryPaths = groupGeneral.readEntry( "lastNormalOutputDirectoryPaths", QStringList() );
+    data.general.waitForAlbumGain = groupGeneral.readEntry( "waitForAlbumGain", true );
+    data.general.useVFATNames = groupGeneral.readEntry( "useVFATNames", false );
+    data.general.copyIfSameCodec = groupGeneral.readEntry( "copyIfSameCodec", false );
+    data.general.writeLogFiles = groupGeneral.readEntry( "writeLogFiles", false );
+    data.general.conflictHandling = (Config::Data::General::ConflictHandling)groupGeneral.readEntry( "conflictHandling", 0 );
+//     data.general.priority = groupGeneral.readEntry( "priority", 10 );
+    data.general.numFiles = groupGeneral.readEntry( "numFiles", 0 );
+    data.general.numReplayGainFiles = groupGeneral.readEntry( "numReplayGainFiles", 0 );
     if( data.general.numFiles == 0 || data.general.numReplayGainFiles == 0 )
     {
         QList<Solid::Device> processors = Solid::Device::listFromType(Solid::DeviceInterface::Processor, QString());
@@ -75,23 +74,23 @@ void Config::load()
         if( data.general.numReplayGainFiles == 0 )
             data.general.numReplayGainFiles = num;
     }
-//     data.general.executeUserScript = group.readEntry( "executeUserScript", false );
-//     data.general.showToolBar = group.readEntry( "showToolBar", false );
-//     data.general.outputFilePermissions = group.readEntry( "outputFilePermissions", 644 );
-    data.general.actionMenuConvertMimeTypes = group.readEntry( "actionMenuConvertMimeTypes", QStringList() );
-    data.general.actionMenuReplayGainMimeTypes = group.readEntry( "actionMenuReplayGainMimeTypes", QStringList() );
-    data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)group.readEntry( "replayGainGrouping", 0 );
-    data.general.preferredOggVorbisExtension = group.readEntry( "preferredOggVorbisExtension", "ogg" );
-    data.general.preferredVorbisCommentCommentTag = group.readEntry( "preferredVorbisCommentCommentTag", "DESCRIPTION" );
-    data.general.preferredVorbisCommentTrackTotalTag = group.readEntry( "preferredVorbisCommentTrackTotalTag", "TRACKTOTAL" );
-    data.general.preferredVorbisCommentDiscTotalTag = group.readEntry( "preferredVorbisCommentDiscTotalTag", "DISCTOTAL" );
+//     data.general.executeUserScript = groupGeneral.readEntry( "executeUserScript", false );
+//     data.general.showToolBar = groupGeneral.readEntry( "showToolBar", false );
+//     data.general.outputFilePermissions = groupGeneral.readEntry( "outputFilePermissions", 644 );
+    data.general.actionMenuConvertMimeTypes = groupGeneral.readEntry( "actionMenuConvertMimeTypes", QStringList() );
+    data.general.actionMenuReplayGainMimeTypes = groupGeneral.readEntry( "actionMenuReplayGainMimeTypes", QStringList() );
+    data.general.replayGainGrouping = (Config::Data::General::ReplayGainGrouping)groupGeneral.readEntry( "replayGainGrouping", 0 );
+    data.general.preferredOggVorbisExtension = groupGeneral.readEntry( "preferredOggVorbisExtension", "ogg" );
+    data.general.preferredVorbisCommentCommentTag = groupGeneral.readEntry( "preferredVorbisCommentCommentTag", "DESCRIPTION" );
+    data.general.preferredVorbisCommentTrackTotalTag = groupGeneral.readEntry( "preferredVorbisCommentTrackTotalTag", "TRACKTOTAL" );
+    data.general.preferredVorbisCommentDiscTotalTag = groupGeneral.readEntry( "preferredVorbisCommentDiscTotalTag", "DISCTOTAL" );
 
     // due to a bug lastNormalOutputDirectoryPaths could have more than 5 items
     while( data.general.lastNormalOutputDirectoryPaths.count() > 5 )
         data.general.lastNormalOutputDirectoryPaths.takeLast();
 
-    group = conf->group( "Advanced" );
-    data.advanced.useSharedMemoryForTempFiles = group.readEntry( "useSharedMemoryForTempFiles", false );
+    KConfigGroup groupAdvanced( KSharedConfig::openConfig(), "Advanced" );
+    data.advanced.useSharedMemoryForTempFiles = groupAdvanced.readEntry( "useSharedMemoryForTempFiles", false );
     data.advanced.sharedMemorySize = 0;
     if( QFile::exists("/dev/shm") )
     {
@@ -110,28 +109,28 @@ void Config::load()
         }
         chkdf.remove();
     }
-    data.advanced.maxSizeForSharedMemoryTempFiles = group.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 4 );
-    data.advanced.usePipes = group.readEntry( "usePipes", false );
-    data.advanced.ejectCdAfterRip = group.readEntry( "ejectCdAfterRip", true );
+    data.advanced.maxSizeForSharedMemoryTempFiles = groupAdvanced.readEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.sharedMemorySize / 4 );
+    data.advanced.usePipes = groupAdvanced.readEntry( "usePipes", false );
+    data.advanced.ejectCdAfterRip = groupAdvanced.readEntry( "ejectCdAfterRip", true );
 
-    group = conf->group( "CoverArt" );
-    data.coverArt.writeCovers = group.readEntry( "writeCovers", 1 );
-    data.coverArt.writeCoverName = group.readEntry( "writeCoverName", 0 );
-    data.coverArt.writeCoverDefaultName = group.readEntry( "writeCoverDefaultName", i18nc("cover file name","cover") );
+    KConfigGroup groupCoverArt( KSharedConfig::openConfig(), "CoverArt" );
+    data.coverArt.writeCovers = groupCoverArt.readEntry( "writeCovers", 1 );
+    data.coverArt.writeCoverName = groupCoverArt.readEntry( "writeCoverName", 0 );
+    data.coverArt.writeCoverDefaultName = groupCoverArt.readEntry( "writeCoverDefaultName", i18nc("cover file name","cover") );
 
-    group = conf->group( "Backends" );
-    formats = group.readEntry( "formats", QStringList() );
+    KConfigGroup groupBackends( KSharedConfig::openConfig(), "Backends" );
+    formats = groupBackends.readEntry( "formats", QStringList() );
     foreach( const QString format, formats )
     {
         CodecData codecData;
         codecData.codecName = format;
-        codecData.encoders = group.readEntry( format + "_encoders", QStringList() );
-        codecData.decoders = group.readEntry( format + "_decoders", QStringList() );
-        codecData.replaygain = group.readEntry( format + "_replaygain", QStringList() );
+        codecData.encoders = groupBackends.readEntry( format + "_encoders", QStringList() );
+        codecData.decoders = groupBackends.readEntry( format + "_decoders", QStringList() );
+        codecData.replaygain = groupBackends.readEntry( format + "_replaygain", QStringList() );
         data.backends.codecs += codecData;
     }
-    data.backends.filters = group.readEntry( "filters", QStringList() );
-    data.backends.enabledFilters = group.readEntry( "enabledFilters", QStringList() );
+    data.backends.filters = groupBackends.readEntry( "filters", QStringList() );
+    data.backends.enabledFilters = groupBackends.readEntry( "enabledFilters", QStringList() );
 
     pPluginLoader->load();
 
@@ -327,7 +326,7 @@ void Config::load()
     }
 
     logger->log( 1000, "\nloading profiles ..." );
-    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+    QFile listFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/profiles.xml" );
     if( listFile.open( QIODevice::ReadOnly ) )
     {
         QDomDocument list("soundkonverter_profilelist");
@@ -434,13 +433,13 @@ void Config::load()
         }
     }
 
-    group = conf->group( "BackendOptimizationsIgnoreList" );
-    const int backendOptimizationsIgnoreListCount = group.readEntry( "count", 0 );
+    KConfigGroup groupBackendOptimizationsIgnoreList( KSharedConfig::openConfig(), "BackendOptimizationsIgnoreList" );
+    const int backendOptimizationsIgnoreListCount = groupBackendOptimizationsIgnoreList.readEntry( "count", 0 );
 
     CodecOptimizations::Optimization optimization;
     for( int i=0; i<backendOptimizationsIgnoreListCount; i++ )
     {
-        const QStringList backendOptimization = group.readEntry( QString("ignore_%1").arg(i), QStringList() );
+        const QStringList backendOptimization = groupBackendOptimizationsIgnoreList.readEntry( QString("ignore_%1").arg(i), QStringList() );
         optimization.codecName = backendOptimization.at(0);
         const QString mode = backendOptimization.at(1);
         if( mode == "Encode" )
@@ -470,70 +469,67 @@ void Config::save()
 {
     writeServiceMenu();
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
+    KConfigGroup groupGeneral( KSharedConfig::openConfig(), "General" );
+    groupGeneral.writeEntry( "configVersion", SOUNDKONVERTER_VERSION_NUMBER );
+    groupGeneral.writeEntry( "startTab", data.general.startTab );
+    groupGeneral.writeEntry( "lastTab", data.general.lastTab );
+    groupGeneral.writeEntry( "defaultProfile", data.general.defaultProfile );
+    groupGeneral.writeEntry( "lastProfile", data.general.lastProfile );
+    groupGeneral.writeEntry( "defaultFormat", data.general.defaultFormat );
+    groupGeneral.writeEntry( "lastFormat", data.general.lastFormat );
+    groupGeneral.writeEntry( "lastOutputDirectoryMode", data.general.lastOutputDirectoryMode );
+    groupGeneral.writeEntry( "specifyOutputDirectory", data.general.specifyOutputDirectory );
+    groupGeneral.writeEntry( "metaDataOutputDirectory", data.general.metaDataOutputDirectory );
+    groupGeneral.writeEntry( "copyStructureOutputDirectory", data.general.copyStructureOutputDirectory );
+    groupGeneral.writeEntry( "lastMetaDataOutputDirectoryPaths", data.general.lastMetaDataOutputDirectoryPaths );
+    groupGeneral.writeEntry( "lastNormalOutputDirectoryPaths", data.general.lastNormalOutputDirectoryPaths );
+    groupGeneral.writeEntry( "waitForAlbumGain", data.general.waitForAlbumGain );
+    groupGeneral.writeEntry( "useVFATNames", data.general.useVFATNames );
+    groupGeneral.writeEntry( "copyIfSameCodec", data.general.copyIfSameCodec );
+    groupGeneral.writeEntry( "writeLogFiles", data.general.writeLogFiles );
+    groupGeneral.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
+//     groupGeneral.writeEntry( "priority", data.general.priority );
+    groupGeneral.writeEntry( "numFiles", data.general.numFiles );
+    groupGeneral.writeEntry( "numReplayGainFiles", data.general.numReplayGainFiles );
+//     groupGeneral.writeEntry( "executeUserScript", data.general.executeUserScript );
+//     groupGeneral.writeEntry( "showToolBar", data.general.showToolBar );
+//     groupGeneral.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
+    groupGeneral.writeEntry( "actionMenuConvertMimeTypes", data.general.actionMenuConvertMimeTypes );
+    groupGeneral.writeEntry( "actionMenuReplayGainMimeTypes", data.general.actionMenuReplayGainMimeTypes );
+    groupGeneral.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
+    groupGeneral.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
+    groupGeneral.writeEntry( "preferredVorbisCommentCommentTag", data.general.preferredVorbisCommentCommentTag );
+    groupGeneral.writeEntry( "preferredVorbisCommentTrackTotalTag", data.general.preferredVorbisCommentTrackTotalTag );
+    groupGeneral.writeEntry( "preferredVorbisCommentDiscTotalTag", data.general.preferredVorbisCommentDiscTotalTag );
 
-    group = conf->group( "General" );
-    group.writeEntry( "configVersion", SOUNDKONVERTER_VERSION_NUMBER );
-    group.writeEntry( "startTab", data.general.startTab );
-    group.writeEntry( "lastTab", data.general.lastTab );
-    group.writeEntry( "defaultProfile", data.general.defaultProfile );
-    group.writeEntry( "lastProfile", data.general.lastProfile );
-    group.writeEntry( "defaultFormat", data.general.defaultFormat );
-    group.writeEntry( "lastFormat", data.general.lastFormat );
-    group.writeEntry( "lastOutputDirectoryMode", data.general.lastOutputDirectoryMode );
-    group.writeEntry( "specifyOutputDirectory", data.general.specifyOutputDirectory );
-    group.writeEntry( "metaDataOutputDirectory", data.general.metaDataOutputDirectory );
-    group.writeEntry( "copyStructureOutputDirectory", data.general.copyStructureOutputDirectory );
-    group.writeEntry( "lastMetaDataOutputDirectoryPaths", data.general.lastMetaDataOutputDirectoryPaths );
-    group.writeEntry( "lastNormalOutputDirectoryPaths", data.general.lastNormalOutputDirectoryPaths );
-    group.writeEntry( "waitForAlbumGain", data.general.waitForAlbumGain );
-    group.writeEntry( "useVFATNames", data.general.useVFATNames );
-    group.writeEntry( "copyIfSameCodec", data.general.copyIfSameCodec );
-    group.writeEntry( "writeLogFiles", data.general.writeLogFiles );
-    group.writeEntry( "conflictHandling", (int)data.general.conflictHandling );
-//     group.writeEntry( "priority", data.general.priority );
-    group.writeEntry( "numFiles", data.general.numFiles );
-    group.writeEntry( "numReplayGainFiles", data.general.numReplayGainFiles );
-//     group.writeEntry( "executeUserScript", data.general.executeUserScript );
-//     group.writeEntry( "showToolBar", data.general.showToolBar );
-//     group.writeEntry( "outputFilePermissions", data.general.outputFilePermissions );
-    group.writeEntry( "actionMenuConvertMimeTypes", data.general.actionMenuConvertMimeTypes );
-    group.writeEntry( "actionMenuReplayGainMimeTypes", data.general.actionMenuReplayGainMimeTypes );
-    group.writeEntry( "replayGainGrouping", (int)data.general.replayGainGrouping );
-    group.writeEntry( "preferredOggVorbisExtension", data.general.preferredOggVorbisExtension );
-    group.writeEntry( "preferredVorbisCommentCommentTag", data.general.preferredVorbisCommentCommentTag );
-    group.writeEntry( "preferredVorbisCommentTrackTotalTag", data.general.preferredVorbisCommentTrackTotalTag );
-    group.writeEntry( "preferredVorbisCommentDiscTotalTag", data.general.preferredVorbisCommentDiscTotalTag );
+    KConfigGroup groupAdvanced( KSharedConfig::openConfig(), "Advanced" );
+    groupAdvanced.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );
+    groupAdvanced.writeEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.maxSizeForSharedMemoryTempFiles );
+    groupAdvanced.writeEntry( "usePipes", data.advanced.usePipes );
+    groupAdvanced.writeEntry( "ejectCdAfterRip", data.advanced.ejectCdAfterRip );
 
-    group = conf->group( "Advanced" );
-    group.writeEntry( "useSharedMemoryForTempFiles", data.advanced.useSharedMemoryForTempFiles );
-    group.writeEntry( "maxSizeForSharedMemoryTempFiles", data.advanced.maxSizeForSharedMemoryTempFiles );
-    group.writeEntry( "usePipes", data.advanced.usePipes );
-    group.writeEntry( "ejectCdAfterRip", data.advanced.ejectCdAfterRip );
+    KConfigGroup groupCoverArt( KSharedConfig::openConfig(), "CoverArt" );
+    groupCoverArt.writeEntry( "writeCovers", data.coverArt.writeCovers );
+    groupCoverArt.writeEntry( "writeCoverName", data.coverArt.writeCoverName );
+    groupCoverArt.writeEntry( "writeCoverDefaultName", data.coverArt.writeCoverDefaultName );
 
-    group = conf->group( "CoverArt" );
-    group.writeEntry( "writeCovers", data.coverArt.writeCovers );
-    group.writeEntry( "writeCoverName", data.coverArt.writeCoverName );
-    group.writeEntry( "writeCoverDefaultName", data.coverArt.writeCoverDefaultName );
-
-    group = conf->group( "Backends" );
-    group.deleteEntry( "rippers" );
+    KConfigGroup groupBackends( KSharedConfig::openConfig(), "Backends" );
+    groupBackends.deleteEntry( "rippers" );
     QStringList formats;
     foreach( const CodecData codec, data.backends.codecs )
     {
         const QString format = codec.codecName;
-        group.writeEntry( format + "_encoders", codec.encoders );
-        group.writeEntry( format + "_decoders", codec.decoders );
-        group.writeEntry( format + "_replaygain", codec.replaygain );
+        groupBackends.writeEntry( format + "_encoders", codec.encoders );
+        groupBackends.writeEntry( format + "_decoders", codec.decoders );
+        groupBackends.writeEntry( format + "_replaygain", codec.replaygain );
         formats += format;
     }
-    group.writeEntry( "formats", formats );
-    group.writeEntry( "filters", data.backends.filters );
-    group.writeEntry( "enabledFilters", data.backends.enabledFilters );
+    groupBackends.writeEntry( "formats", formats );
+    groupBackends.writeEntry( "filters", data.backends.filters );
+    groupBackends.writeEntry( "enabledFilters", data.backends.enabledFilters );
 
-    group = conf->group( "BackendOptimizationsIgnoreList" );
-    group.writeEntry( "count", data.backendOptimizationsIgnoreList.optimizationList.count() );
+    KConfigGroup groupBackendOptimizationsIgnoreList( KSharedConfig::openConfig(), "BackendOptimizationsIgnoreList" );
+    groupBackendOptimizationsIgnoreList.writeEntry( "count", data.backendOptimizationsIgnoreList.optimizationList.count() );
 
     for( int i=0; i<data.backendOptimizationsIgnoreList.optimizationList.count(); i++ )
     {
@@ -553,7 +549,7 @@ void Config::save()
         }
         backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).currentBackend;
         backendOptimization << data.backendOptimizationsIgnoreList.optimizationList.at(i).betterBackend;
-        group.writeEntry( QString("ignore_%1").arg(i), backendOptimization );
+        groupBackendOptimizationsIgnoreList.writeEntry( QString("ignore_%1").arg(i), backendOptimization );
     }
 
     emit updateWriteLogFilesSetting( data.general.writeLogFiles );
@@ -587,7 +583,7 @@ void Config::writeServiceMenu()
     content += "Icon=soundkonverter\n";
     content += "Exec=soundkonverter %F\n";
 
-    const QString convertActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/convert_with_soundkonverter.desktop" );
+    const QString convertActionFileName = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/kde5/services/ServiceMenus/convert_with_soundkonverter.desktop";
     if( ( data.general.actionMenuConvertMimeTypes != mimeTypes || !QFile::exists(convertActionFileName) ) && mimeTypes.count() > 0 )
     {
         QFile convertActionFile( convertActionFileName );
@@ -623,7 +619,7 @@ void Config::writeServiceMenu()
     content += "Icon=soundkonverter-replaygain\n";
     content += "Exec=soundkonverter --replaygain %F\n";
 
-    const QString replaygainActionFileName = KStandardDirs::locateLocal( "services", "ServiceMenus/add_replaygain_with_soundkonverter.desktop" );
+    const QString replaygainActionFileName = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/kde5/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop";
     if( ( data.general.actionMenuReplayGainMimeTypes != mimeTypes || !QFile::exists(replaygainActionFileName) ) && mimeTypes.count() > 0 )
     {
         QFile replaygainActionFile( replaygainActionFileName );

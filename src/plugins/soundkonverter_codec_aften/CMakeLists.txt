@@ -1,4 +1,5 @@
 project(soundkonverter_codec_aften)
+find_package(Qt5Xml)
 find_package(KDE4 REQUIRED)
 include (KDE4Defaults)
 include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
@@ -8,9 +9,9 @@ set(soundkonverter_codec_aften_SRCS
    aftencodecwidget.cpp
  )
 
-kde4_add_plugin(soundkonverter_codec_aften ${soundkonverter_codec_aften_SRCS})
+add_library(soundkonverter_codec_aften MODULE ${soundkonverter_codec_aften_SRCS})
 
-target_link_libraries(soundkonverter_codec_aften ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
+target_link_libraries(soundkonverter_codec_aften ${KDE4_KDEUI_LIBS} Qt5::Xml soundkonvertercore )
 
 ########### install files ###############
 

@@ -12,24 +12,24 @@
 #ifndef PLAYLISTOPENER_H
 #define PLAYLISTOPENER_H
 
-#include <KDialog>
+#include <QDialog>
 
-#include <KUrl>
+#include <QUrl>
 
 class Config;
 class Options;
 class QLabel;
 class ConversionOptions;
-class KDialog;
-class KPushButton;
-class KFileDialog;
+class QDialog;
+class QPushButton;
+class QFileDialog;
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class PlaylistOpener : public KDialog
+class PlaylistOpener : public QDialog
 {
     Q_OBJECT
 public:
-    PlaylistOpener( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
+    PlaylistOpener( Config *_config, QWidget *parent=0, Qt::WindowFlags f=0 );
     ~PlaylistOpener();
 
     /** true if the file dialog was aborted (don't execute the dialog) */
@@ -38,11 +38,11 @@ public:
 private:
     Config *config;
 
-    KFileDialog *fileDialog;
+    QFileDialog *fileDialog;
     Options *options;
-    KUrl::List urls;
-    KPushButton *pAdd;
-    KPushButton *pCancel;
+    QList<QUrl> urls;
+    QPushButton *pAdd;
+    QPushButton *pCancel;
     QLabel *formatHelp;
 
 private slots:
@@ -50,7 +50,7 @@ private slots:
     void okClickedSlot();
 
 signals:
-    void open( const KUrl::List& files, ConversionOptions *conversionOptions );
+    void open( const QList<QUrl>& files, ConversionOptions *conversionOptions );
 
 };
 

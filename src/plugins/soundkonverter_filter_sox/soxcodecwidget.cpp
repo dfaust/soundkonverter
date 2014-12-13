@@ -12,9 +12,9 @@
 #include <QLabel>
 #include <QSpinBox>
 #include <QSlider>
-#include <KComboBox>
-#include <KLocale>
-#include <KLineEdit>
+#include <QComboBox>
+#include <KLocalizedString>
+#include <QLineEdit>
 
 
 // TODO clean up use of modeChanged()
@@ -60,7 +60,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     lMode = new QLabel( i18n("Mode:"), this );
     topBox->addWidget( lMode );
-    cMode = new KComboBox( this );
+    cMode = new QComboBox( this );
     cMode->addItem( i18n("Quality") );
     cMode->addItem( i18n("Bitrate") );
     connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChanged(int)) );
@@ -88,7 +88,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     lBitratePreset = new QLabel( i18n("Bitrate:"), this );
     topBox->addWidget( lBitratePreset );
-    cBitratePreset = new KComboBox( this );
+    cBitratePreset = new QComboBox( this );
     cBitratePreset->addItem( "00.00 kbps" );
     topBox->addWidget( cBitratePreset );
 
@@ -102,7 +102,7 @@ SoxCodecWidget::SoxCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

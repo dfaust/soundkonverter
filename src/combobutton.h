@@ -6,9 +6,9 @@
 #include <QWidget>
 
 class QString;
-class KIcon;
-class KPushButton;
-class KComboBox;
+class QIcon;
+class QPushButton;
+class QComboBox;
 
 /**
  * @short ComboButton
@@ -36,7 +36,7 @@ public:
     /** Insert a new item with @p text at position @p index */
     void insertItem( const QString &text, int index = -1 );
     /** Insert a new item with an icon @p pixmap and @p text at position @p index */
-    void insertItem( const KIcon &icon, const QString &text, int index = -1 );
+    void insertItem( const QIcon &icon, const QString &text, int index = -1 );
 
     /** Increase the combobutton's height by @p height */
     void increaseHeight( int height );
@@ -55,9 +55,9 @@ public:
 
 private:
     /** A pointer to the button */
-    KPushButton *m_button;
+    QPushButton *m_button;
     /** A pointer to the combobox */
-    KComboBox *m_box;
+    QComboBox *m_box;
 
     int m_increaseHeight;
     int m_iconHight;

@@ -4,7 +4,7 @@
 #define SOUNDKONVERTERAPP_H
 
 
-#include <kuniqueapplication.h>
+#include <QApplication>
 
 class soundKonverter;
 
@@ -13,12 +13,12 @@ class soundKonverter;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 0.3
  */
-class soundKonverterApp : public KUniqueApplication
+class soundKonverterApp : public QApplication
 {
     Q_OBJECT
 public:
     /** Constructor */
-    soundKonverterApp();
+    soundKonverterApp(int & argc, char ** argv);
 
     /** Destructor */
     ~soundKonverterApp();

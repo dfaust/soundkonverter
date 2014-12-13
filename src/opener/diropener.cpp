@@ -10,35 +10,35 @@
 #include <QLabel>
 #include <QDir>
 #include <QCheckBox>
-#include <KLocale>
-#include <KPushButton>
-#include <KFileDialog>
-#include <KIcon>
-#include <KListWidget>
-#include <KUrlRequester>
-#include <KMessageBox>
+#include <KLocalizedString>
+#include <QPushButton>
+#include <QFileDialog>
+#include <QIcon>
+#include <QListWidget>
+#include <kurlrequester.h>
+#include <QMessageBox>
 
 
-DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f ),
+DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WindowFlags f )
+    : QDialog( parent, f ),
     dialogAborted( false ),
     config( _config ),
     mode( _mode )
 {
-    setCaption( i18n("Add folder") );
-    setWindowIcon( KIcon("folder") );
+    setWindowTitle( i18n("Add folder") );
+    setWindowIcon( QIcon::fromTheme("folder") );
 
-    if( mode == Convert )
-    {
-        setButtons( KDialog::User1 | KDialog::Cancel );
-    }
-    else if( mode == ReplayGain )
-    {
-        setButtons( KDialog::Ok | KDialog::Cancel );
-    }
+//     if( mode == Convert )
+//     {
+//         setButtons( QDialog::User1 | QDialog::Cancel );
+//     }
+//     else if( mode == ReplayGain )
+//     {
+//         setButtons( QDialog::Ok | QDialog::Cancel );
+//     }
 
-    setButtonText( KDialog::User1, i18n("Proceed") );
-    setButtonIcon( KDialog::User1, KIcon("go-next") );
+//     setButtonText( QDialog::User1, i18n("Proceed") );
+//     setButtonIcon( QDialog::User1, QIcon::fromTheme("go-next") );
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
@@ -51,7 +51,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     QGridLayout *mainGrid = new QGridLayout( widget );
     QGridLayout *topGrid = new QGridLayout();
     mainGrid->addLayout( topGrid, 0, 0 );
-    setMainWidget( widget );
+//     setMainWidget( widget );
 
     lSelector = new QLabel( i18n("1. Select directory"), widget );
     QFont font;
@@ -87,7 +87,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     QLabel *labelFilter = new QLabel( i18n("Directory:"), dirOpenerWidget );
     directoryBox->addWidget( labelFilter );
 
-    uDirectory = new KUrlRequester( KUrl("kfiledialog:///soundkonverter-add-media"), dirOpenerWidget );
+    uDirectory = new KUrlRequester( QUrl("kfiledialog:///soundkonverter-add-media"), dirOpenerWidget );
     uDirectory->setMode( KFile::Directory | KFile::ExistingOnly | KFile::LocalOnly );
     directoryBox->addWidget( uDirectory );
 
@@ -98,7 +98,7 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     box->addLayout( fileTypesBox );
 
     QStringList codecList;
-    fileTypes = new KListWidget( dirOpenerWidget );
+    fileTypes = new QListWidget( dirOpenerWidget );
     if( mode == Convert )
     {
         codecList = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
@@ -127,11 +127,11 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     fileTypesBox->addLayout( fileTypesButtonsBox );
     fileTypesButtonsBox->addStretch();
 
-    pSelectAll = new KPushButton( KIcon("edit-select-all"), i18n("Select all"), dirOpenerWidget );
+    pSelectAll = new QPushButton( QIcon::fromTheme("edit-select-all"), i18n("Select all"), dirOpenerWidget );
     fileTypesButtonsBox->addWidget( pSelectAll );
     connect( pSelectAll, SIGNAL(clicked()), this, SLOT(selectAllClicked()) );
 
-    pSelectNone = new KPushButton( KIcon("application-x-zerosize"), i18n("Select none"), dirOpenerWidget );
+    pSelectNone = new QPushButton( QIcon::fromTheme("application-x-zerosize"), i18n("Select none"), dirOpenerWidget );
     fileTypesButtonsBox->addWidget( pSelectNone );
     connect( pSelectNone, SIGNAL(clicked()), this, SLOT(selectNoneClicked()) );
 
@@ -151,25 +151,25 @@ DirOpener::DirOpener( Config *_config, Mode _mode, QWidget *parent, Qt::WFlags f
     options->hide();
 
 
-    const KUrl url = KFileDialog::getExistingDirectoryUrl( uDirectory->url(), this );
+    const QUrl url = QFileDialog::getExistingDirectory( this, i18n("Add directory"), uDirectory->url().toLocalFile() );
     if( !url.isEmpty() )
         uDirectory->setUrl( url );
     else
         dialogAborted = true;
 
-        // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "DirOpener" );
-    restoreDialogSize( group );
+//         // Prevent the dialog from beeing too wide because of the directory history
+//     if( parent && width() > parent->width() )
+//         setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "DirOpener" );
+//     restoreDialogSize( group );
 }
 
 DirOpener::~DirOpener()
 {
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "DirOpener" );
-    saveDialogSize( group );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "DirOpener" );
+//     saveDialogSize( group );
 }
 
 void DirOpener::proceedClicked()
@@ -184,7 +184,7 @@ void DirOpener::proceedClicked()
         lSelector->setFont( font );
         font.setBold( true );
         lOptions->setFont( font );
-        setButtons( KDialog::Ok | KDialog::Cancel );
+//         setButtons( QDialog::Ok | QDialog::Cancel );
     }
 }
 
@@ -209,7 +209,7 @@ void DirOpener::addClicked()
         }
         else
         {
-            KMessageBox::error( this, i18n("No conversion options selected.") );
+            /**/QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
         }
     }
     else if( mode == ReplayGain )

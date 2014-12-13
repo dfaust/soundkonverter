@@ -15,13 +15,13 @@
 #include "../config.h"
 
 #include <QApplication>
-#include <KLocale>
-#include <KPushButton>
+#include <KLocalizedString>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
-#include <KMessageBox>
+#include <QMessageBox>
 
-#include <KUrlRequester>
+#include <kurlrequester.h>
 #include <QDir>
 
 
@@ -29,20 +29,20 @@
 
 // TODO message box if url can't be added -> maybe in file list
 
-UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f ),
+UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
+    : QDialog( parent, f ),
     config( _config )
 {
-    setCaption( i18n("Add url") );
-    setWindowIcon( KIcon("network-workgroup") );
-    setButtons( 0 );
+    setWindowTitle( i18n("Add url") );
+    setWindowIcon( QIcon::fromTheme("network-workgroup") );
+//     setButtons( 0 );
 
     page = FileOpenPage;
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget();
-    setMainWidget( widget );
+//     setMainWidget( widget );
 
     QGridLayout *mainGrid = new QGridLayout( widget );
     QGridLayout *topGrid = new QGridLayout( widget );
@@ -81,31 +81,31 @@ UrlOpener::UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     mainGrid->addLayout( controlBox, 5, 0 );
     controlBox->addStretch();
 
-    pProceed = new KPushButton( KIcon("go-next"), i18n("Proceed"), widget );
+    pProceed = new QPushButton( QIcon::fromTheme("go-next"), i18n("Proceed"), widget );
     controlBox->addWidget( pProceed );
     connect( pProceed, SIGNAL(clicked()), this, SLOT(proceedClickedSlot()) );
-    pAdd = new KPushButton( KIcon("dialog-ok"), i18n("Ok"), widget );
+    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
     controlBox->addWidget( pAdd );
     pAdd->hide();
     connect( pAdd, SIGNAL(clicked()), this, SLOT(okClickedSlot()) );
-    pCancel = new KPushButton( KIcon("dialog-cancel"), i18n("Cancel"), widget );
+    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
 
 
-        // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "UrlOpener" );
-    restoreDialogSize( group );
+//         // Prevent the dialog from beeing too wide because of the directory history
+//     if( parent && width() > parent->width() )
+//         setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "UrlOpener" );
+//     restoreDialogSize( group );
 }
 
 UrlOpener::~UrlOpener()
 {
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "UrlOpener" );
-    saveDialogSize( group );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "UrlOpener" );
+//     saveDialogSize( group );
 }
 
 void UrlOpener::proceedClickedSlot()
@@ -114,11 +114,11 @@ void UrlOpener::proceedClickedSlot()
     {
         if( !urlRequester->url().isValid() )
         {
-            KMessageBox::information( this, i18n("The Url you entered is invalid. Please try again.") );
+            QMessageBox::information( this, "soundKonverter", i18n("The Url you entered is invalid. Please try again.") );
             return;
         }
 
-        urls = urlRequester->url();
+        urls += urlRequester->url();
 
         urlRequester->hide();
         options->show();
@@ -146,7 +146,7 @@ void UrlOpener::okClickedSlot()
         }
         else
         {
-            KMessageBox::error( this, i18n("No conversion options selected.") );
+            QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
         }
     }
 }

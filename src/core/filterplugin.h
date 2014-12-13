@@ -19,7 +19,7 @@ class TagData;
 // };
 
 
-class KDE_EXPORT FilterPluginItem : public CodecPluginItem
+class FilterPluginItem : public CodecPluginItem
 {
     Q_OBJECT
 public:
@@ -29,7 +29,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class KDE_EXPORT FilterPlugin : public CodecPlugin
+class FilterPlugin : public CodecPlugin
 {
     Q_OBJECT
 public:
@@ -47,9 +47,9 @@ public:
 //      * -1   unknown error
 //      * -100 plugin not configured
 //      */
-//     virtual int filter( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions ) = 0;
+//     virtual int filter( const QUrl& inputFile, const QUrl& outputFile, FilterOptions *_filterOptions ) = 0;
 //     /** returns a command for converting a file through a pipe; "" if pipes aren't supported */
-//     virtual QStringList filterCommand( const KUrl& inputFile, const KUrl& outputFile, FilterOptions *_filterOptions ) = 0;
+//     virtual QStringList filterCommand( const QUrl& inputFile, const QUrl& outputFile, FilterOptions *_filterOptions ) = 0;
 
     virtual FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 
@@ -57,9 +57,6 @@ protected:
     FilterOptions *lastUsedFilterOptions;
 
 };
-
-#define K_EXPORT_SOUNDKONVERTER_FILTER(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_filter_##libname, KGenericFactory<classname>("soundkonverter_filter_" #libname) )
 
 #endif // FILTERPLUGIN_H
 

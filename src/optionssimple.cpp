@@ -12,14 +12,15 @@
 #include <QString>
 #include <QToolTip>
 
-#include <KLocale>
-#include <KIcon>
-#include <KMessageBox>
-#include <KComboBox>
+#include <KLocalizedString>
+#include <QIcon>
+#include <QMessageBox>
+#include <QComboBox>
 #include <QCheckBox>
-#include <KPushButton>
+#include <QPushButton>
 #include <QFile>
-#include <KStandardDirs>
+#include <QStandardPaths>
+#include <QTextStream>
 
 
 // FIXME when changing the output directory, check if the profile is a user defined and set it to 'User defined', if it is
@@ -40,16 +41,16 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
 
     QHBoxLayout *topBoxQuality = new QHBoxLayout();
     grid->addLayout( topBoxQuality, 0, 1 );
-    cProfile = new KComboBox( this );
+    cProfile = new QComboBox( this );
     topBoxQuality->addWidget( cProfile );
     connect( cProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
     topBoxQuality->addSpacing( 0.25*fontHeight );
-    pProfileRemove = new KPushButton( KIcon("edit-delete"), i18n("Remove"), this );
+    pProfileRemove = new QPushButton( QIcon::fromTheme("edit-delete"), i18n("Remove"), this );
     topBoxQuality->addWidget( pProfileRemove );
     pProfileRemove->setToolTip( i18n("Remove the selected profile") );
     pProfileRemove->hide();
     connect( pProfileRemove, SIGNAL(clicked()), this, SLOT(profileRemove()) );
-    pProfileInfo = new KPushButton( KIcon("dialog-information"), i18n("Info"), this );
+    pProfileInfo = new QPushButton( QIcon::fromTheme("dialog-information"), i18n("Info"), this );
     topBoxQuality->addWidget( pProfileInfo );
     pProfileInfo->setToolTip( i18n("Information about the selected profile") );
 //     cProfile->setFixedHeight( pProfileInfo->minimumSizeHint().height() );
@@ -63,12 +64,12 @@ OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetail
 
     QHBoxLayout *topBoxFormat = new QHBoxLayout();
     grid->addLayout( topBoxFormat, 0, 3 );
-    cFormat = new KComboBox( this );
+    cFormat = new QComboBox( this );
     topBoxFormat->addWidget( cFormat );
 //     connect( cFormat, SIGNAL(activated(int)), this, SLOT(formatChanged()) );
     connect( cFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
     topBoxFormat->addSpacing( 0.25*fontHeight );
-    pFormatInfo = new KPushButton( KIcon("dialog-information"), i18n("Info"), this );
+    pFormatInfo = new QPushButton( QIcon::fromTheme("dialog-information"), i18n("Info"), this );
     topBoxFormat->addWidget( pFormatInfo );
     pFormatInfo->setToolTip( i18n("Information about the selected file format") );
 //     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
@@ -224,19 +225,19 @@ void OptionsSimple::profileInfo()
         info = i18n("This is a user defined profile.");
     }
 
-    KMessageBox::information( this, info, i18n("Profile info for %1",sProfileString) );
+    QMessageBox::information( this, info, i18n("Profile info for %1",sProfileString) );
 }
 
 void OptionsSimple::profileRemove()
 {
     const QString profileName = cProfile->currentText();
 
-    const int ret = KMessageBox::questionYesNo( this, i18n("Do you really want to remove the profile: %1").arg(profileName), i18n("Remove profile?") );
-    if( ret == KMessageBox::Yes )
+    const int ret = QMessageBox::question( this, i18n("Remove profile?"), i18n("Do you really want to remove the profile: %1").arg(profileName) );
+    if( ret == QMessageBox::Yes )
     {
         QDomDocument list("soundkonverter_profilelist");
 
-        QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
+        QFile listFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/profiles.xml" );
         if( listFile.open( QIODevice::ReadOnly ) )
         {
             if( list.setContent( &listFile ) )
@@ -280,11 +281,11 @@ void OptionsSimple::formatInfo()
 
     if( !info.isEmpty() )
     {
-        KMessageBox::information( this, info, i18n("Format info for %1",format), QString(), KMessageBox::Notify | KMessageBox::AllowLink );
+        QMessageBox::information( this, i18n("Format info for %1",format), info );
     }
     else
     {
-        KMessageBox::information( this, i18n("Sorry, no format information available.") );
+        QMessageBox::information( this, "soundKonverter", i18n("Sorry, no format information available.") );
     }
 }
 

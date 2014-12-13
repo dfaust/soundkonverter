@@ -3,7 +3,7 @@
 
 #include "soundkonverter_ripper_icedax.h"
 
-#include <KLocale>
+#include <KLocalizedString>
 
 soundkonverter_ripper_icedax::soundkonverter_ripper_icedax( QObject *parent, const QStringList& args  )
     : RipperPlugin( parent )
@@ -62,7 +62,7 @@ void soundkonverter_ripper_icedax::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
+unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track, int tracks, const QUrl& outputFile )
 {
     QStringList command;
 
@@ -82,8 +82,8 @@ unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track
 
     RipperPluginItem *newItem = new RipperPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -99,7 +99,7 @@ unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track
     return newItem->id;
 }
 
-QStringList soundkonverter_ripper_icedax::ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile )
+QStringList soundkonverter_ripper_icedax::ripCommand( const QString& device, int track, int tracks, const QUrl& outputFile )
 {
     Q_UNUSED(device)
     Q_UNUSED(track)

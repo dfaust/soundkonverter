@@ -14,10 +14,10 @@ class OutputDirectory;
 // class OptionsDetailed;
 
 class KToolBarButton;
-class KPushButton;
+class QPushButton;
 class QLabel;
 class QCheckBox;
-class KComboBox;
+class QComboBox;
 class CodecPlugin;
 
 /**
@@ -60,11 +60,11 @@ public:
     OutputDirectory *outputDirectory; // this way it's easier to sync simple and detailed options
 
 private:
-    KComboBox* cProfile;
-    KPushButton* pProfileRemove;
-    KPushButton* pProfileInfo;
-    KComboBox* cFormat;
-    KPushButton* pFormatInfo;
+    QComboBox* cProfile;
+    QPushButton* pProfileRemove;
+    QPushButton* pProfileInfo;
+    QComboBox* cFormat;
+    QPushButton* pFormatInfo;
 
     QCheckBox *cReplayGain;
 //     QCheckBox *cBpm;

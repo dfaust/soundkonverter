@@ -16,21 +16,17 @@
 #include <taglib.h>
 
 #include <KActionCollection>
-#include <KApplication>
+#include <QApplication>
 #include <KActionMenu>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KToolBar>
-#include <KIcon>
-#include <KStandardDirs>
-#include <KMenu>
-#include <KMessageBox>
+#include <QIcon>
+#include <QStandardPaths>
+#include <QMenu>
+#include <QMessageBox>
 #include <QDir>
 
-#if KDE_IS_VERSION(4,4,0)
-    #include <KStatusNotifierItem>
-#else
-    #include <KSystemTrayIcon>
-#endif
+#include <kstatusnotifieritem.h>
 
 soundKonverter::soundKonverter()
     : KXmlGuiWindow(),
@@ -84,7 +80,7 @@ soundKonverter::~soundKonverter()
         delete logViewer;
 
     if( replayGainScanner )
-        delete replayGainScanner.data();
+        delete replayGainScanner;
 
     if( systemTray )
         delete systemTray;
@@ -109,21 +105,21 @@ void soundKonverter::showSystemTray()
         systemTray->setToolTip( "soundkonverter", i18n("Waiting"), "" );
     #else
         systemTray = new KSystemTrayIcon( this );
-        systemTray->setIcon( KIcon("soundkonverter") );
+        systemTray->setIcon( QIcon::fromTheme("soundkonverter") );
         systemTray->setToolTip( i18n("Waiting") );
         systemTray->show();
     #endif
 }
 
-void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
+void soundKonverter::addConvertFiles( const QList<QUrl>& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
 {
     m_view->addConvertFiles( urls, profile, format, directory, notifyCommand );
 }
 
-void soundKonverter::addReplayGainFiles( const KUrl::List& urls )
+void soundKonverter::addReplayGainFiles( const QList<QUrl>& urls )
 {
     showReplayGainScanner();
-    replayGainScanner.data()->addFiles( urls );
+    replayGainScanner->addFiles( urls );
 }
 
 bool soundKonverter::ripCd( const QString& device, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
@@ -136,54 +132,54 @@ void soundKonverter::setupActions()
     KStandardAction::quit( this, SLOT(close()), actionCollection() );
     KStandardAction::preferences( this, SLOT(showConfigDialog()), actionCollection() );
 
-    KAction *logviewer = actionCollection()->addAction("logviewer");
+    QAction *logviewer = actionCollection()->addAction("logviewer");
     logviewer->setText(i18n("View logs..."));
-    logviewer->setIcon(KIcon("view-list-text"));
+    logviewer->setIcon(QIcon::fromTheme("view-list-text"));
     connect( logviewer, SIGNAL(triggered()), this, SLOT(showLogViewer()) );
 
-    KAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
+    QAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
     replaygainscanner->setText(i18n("Replay Gain tool..."));
-    replaygainscanner->setIcon(KIcon("soundkonverter-replaygain"));
+    replaygainscanner->setIcon(QIcon::fromTheme("soundkonverter-replaygain"));
     connect( replaygainscanner, SIGNAL(triggered()), this, SLOT(showReplayGainScanner()) );
 
-    KAction *aboutplugins = actionCollection()->addAction("aboutplugins");
+    QAction *aboutplugins = actionCollection()->addAction("aboutplugins");
     aboutplugins->setText(i18n("About plugins..."));
-    aboutplugins->setIcon(KIcon("preferences-plugin"));
+    aboutplugins->setIcon(QIcon::fromTheme("preferences-plugin"));
     connect( aboutplugins, SIGNAL(triggered()), this, SLOT(showAboutPlugins()) );
 
-    KAction *add_files = actionCollection()->addAction("add_files");
+    QAction *add_files = actionCollection()->addAction("add_files");
     add_files->setText(i18n("Add files..."));
-    add_files->setIcon(KIcon("audio-x-generic"));
+    add_files->setIcon(QIcon::fromTheme("audio-x-generic"));
     connect( add_files, SIGNAL(triggered()), m_view, SLOT(showFileDialog()) );
 
-    KAction *add_folder = actionCollection()->addAction("add_folder");
+    QAction *add_folder = actionCollection()->addAction("add_folder");
     add_folder->setText(i18n("Add folder..."));
-    add_folder->setIcon(KIcon("folder"));
+    add_folder->setIcon(QIcon::fromTheme("folder"));
     connect( add_folder, SIGNAL(triggered()), m_view, SLOT(showDirDialog()) );
 
-    KAction *add_audiocd = actionCollection()->addAction("add_audiocd");
+    QAction *add_audiocd = actionCollection()->addAction("add_audiocd");
     add_audiocd->setText(i18n("Add CD tracks..."));
-    add_audiocd->setIcon(KIcon("media-optical-audio"));
+    add_audiocd->setIcon(QIcon::fromTheme("media-optical-audio"));
     connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
 
-    KAction *add_url = actionCollection()->addAction("add_url");
+    QAction *add_url = actionCollection()->addAction("add_url");
     add_url->setText(i18n("Add url..."));
-    add_url->setIcon(KIcon("network-workgroup"));
+    add_url->setIcon(QIcon::fromTheme("network-workgroup"));
     connect( add_url, SIGNAL(triggered()), m_view, SLOT(showUrlDialog()) );
 
-    KAction *add_playlist = actionCollection()->addAction("add_playlist");
+    QAction *add_playlist = actionCollection()->addAction("add_playlist");
     add_playlist->setText(i18n("Add playlist..."));
-    add_playlist->setIcon(KIcon("view-media-playlist"));
+    add_playlist->setIcon(QIcon::fromTheme("view-media-playlist"));
     connect( add_playlist, SIGNAL(triggered()), m_view, SLOT(showPlaylistDialog()) );
 
-    KAction *load = actionCollection()->addAction("load");
+    QAction *load = actionCollection()->addAction("load");
     load->setText(i18n("Load file list"));
-    load->setIcon(KIcon("document-open"));
+    load->setIcon(QIcon::fromTheme("document-open"));
     connect( load, SIGNAL(triggered()), m_view, SLOT(loadFileList()) );
 
-    KAction *save = actionCollection()->addAction("save");
+    QAction *save = actionCollection()->addAction("save");
     save->setText(i18n("Save file list"));
-    save->setIcon(KIcon("document-save"));
+    save->setIcon(QIcon::fromTheme("document-save"));
     connect( save, SIGNAL(triggered()), m_view, SLOT(saveFileList()) );
 
     actionCollection()->addAction("start", m_view->start());
@@ -218,21 +214,21 @@ void soundKonverter::showReplayGainScanner()
     if( !replayGainScanner )
     {
         replayGainScanner = new ReplayGainScanner( config, logger, !isVisible(), 0 );
-        connect( replayGainScanner.data(), SIGNAL(finished()), this, SLOT(replayGainScannerClosed()) );
-        connect( replayGainScanner.data(), SIGNAL(showMainWindow()), this, SLOT(showMainWindow()) );
+        connect( replayGainScanner, SIGNAL(finished()), this, SLOT(replayGainScannerClosed()) );
+        connect( replayGainScanner, SIGNAL(showMainWindow()), this, SLOT(showMainWindow()) );
     }
 
-    replayGainScanner.data()->setAttribute( Qt::WA_DeleteOnClose );
+    replayGainScanner->setAttribute( Qt::WA_DeleteOnClose );
 
-    replayGainScanner.data()->show();
-    replayGainScanner.data()->raise();
-    replayGainScanner.data()->activateWindow();
+    replayGainScanner->show();
+    replayGainScanner->raise();
+    replayGainScanner->activateWindow();
 }
 
 void soundKonverter::replayGainScannerClosed()
 {
     if( !isVisible() )
-        KApplication::kApplication()->quit();
+        qApp->quit();
 }
 
 void soundKonverter::showMainWindow()
@@ -262,7 +258,7 @@ void soundKonverter::startupChecks()
     // check if codec plugins could be loaded
     if( config->pluginLoader()->getAllCodecPlugins().count() == 0 )
     {
-        KMessageBox::error(this, i18n("No codec plugins could be loaded. Without codec plugins soundKonverter can't work.\nThis problem can have two causes:\n1. You just installed soundKonverter and the KDE System Configuration Cache is not up-to-date, yet.\nIn this case, run kbuildsycoca4 and restart soundKonverter to fix the problem.\n2. Your installation is broken.\nIn this case try reinstalling soundKonverter."));
+        QMessageBox::critical(this, "soundKonverter", i18n("No codec plugins could be loaded. Without codec plugins soundKonverter can't work.\nThis problem can have two causes:\n1. You just installed soundKonverter and the KDE System Configuration Cache is not up-to-date, yet.\nIn this case, run kbuildsycoca4 and restart soundKonverter to fix the problem.\n2. Your installation is broken.\nIn this case try reinstalling soundKonverter."));
     }
 
     // remove old KDE4 action menus created by soundKonverter 0.3 - don't change the paths, it's what soundKonverter 0.3 used
@@ -281,7 +277,7 @@ void soundKonverter::startupChecks()
     }
 
     // clean up log directory
-    QDir dir( KStandardDirs::locateLocal("data","soundkonverter/log/") );
+    QDir dir( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/log/" );
     dir.setFilter( QDir::Files | QDir::Writable );
 
     QStringList list = dir.entryList();
@@ -320,7 +316,7 @@ void soundKonverter::conversionStarted()
 void soundKonverter::conversionStopped( bool failed )
 {
     if( autoclose && !failed /*&& !m_view->isVisible()*/ )
-        KApplication::kApplication()->quit(); // close app on conversion stop unless the conversion was stopped by the user or the window is shown
+        qApp->quit(); // close app on conversion stop unless the conversion was stopped by the user or the window is shown
 
     if( systemTray )
     {

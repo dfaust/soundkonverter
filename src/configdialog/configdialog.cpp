@@ -17,22 +17,22 @@
 #include "configcoverartpage.h"
 #include "configbackendspage.h"
 
-#include <KLocale>
-#include <KIcon>
-#include <KPushButton>
+#include <KLocalizedString>
+#include <QIcon>
+#include <QPushButton>
 
 ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/ )
     : KPageDialog( parent ),
     config( _config )
 {
-    setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
-    setCaption( i18n("Settings") );
+//     setButtons( QDialog::Help | QDialog::Default | QDialog::Apply | QDialog::Ok | QDialog::Cancel );
+//     setWindowTitle( i18n("Settings") );
 
     generalPageChanged = false;
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
-    button(KDialog::Apply)->setEnabled( false );
+//     button(QDialog::Apply)->setEnabled( false );
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
@@ -41,25 +41,25 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     configGeneralPage = new ConfigGeneralPage( config, this );
     generalPage = addPage( (QWidget*)configGeneralPage, i18n("General") );
     generalPage->setHeader( "" );
-    generalPage->setIcon( KIcon("configure") );
+    generalPage->setIcon( QIcon::fromTheme("configure") );
     connect( configGeneralPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configAdvancedPage = new ConfigAdvancedPage( config, this );
     advancedPage = addPage( (QWidget*)configAdvancedPage, i18n("Advanced") );
     advancedPage->setHeader( "" );
-    advancedPage->setIcon( KIcon("preferences-desktop-gaming") );
+    advancedPage->setIcon( QIcon::fromTheme("preferences-desktop-gaming") );
     connect( configAdvancedPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configCoverArtPage = new ConfigCoverArtPage( config, this );
     coverArtPage = addPage( (QWidget*)configCoverArtPage, i18n("Cover art") );
     coverArtPage->setHeader( "" );
-    coverArtPage->setIcon( KIcon("image-x-generic") );
+    coverArtPage->setIcon( QIcon::fromTheme("image-x-generic") );
     connect( configCoverArtPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configBackendsPage = new ConfigBackendsPage( config, this );
     backendsPage = addPage( (QWidget*)configBackendsPage, i18n("Backends") );
     backendsPage->setHeader( "" );
-    backendsPage->setIcon( KIcon("applications-system") );
+    backendsPage->setIcon( QIcon::fromTheme("applications-system") );
     connect( configBackendsPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     lastUseVFATNames = config->data.general.useVFATNames;
@@ -90,7 +90,7 @@ void ConfigDialog::configChanged( bool state )
 
     const bool changed = ( generalPageChanged || advancedlPageChanged || coverArtPageChanged || backendsPageChanged );
 
-    button(KDialog::Apply)->setEnabled( changed );
+//     button(QDialog::Apply)->setEnabled( changed );
 }
 
 void ConfigDialog::applyClicked()
@@ -101,7 +101,7 @@ void ConfigDialog::applyClicked()
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
-    button(KDialog::Apply)->setEnabled( false );
+//     button(QDialog::Apply)->setEnabled( false );
 }
 
 void ConfigDialog::okClicked()

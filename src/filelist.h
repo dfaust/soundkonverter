@@ -18,7 +18,7 @@ class OptionsLayer;
 class ConversionOptions;
 
 class QMenu;
-class KAction;
+class QAction;
 class QProgressBar;
 
 /**
@@ -92,11 +92,11 @@ private:
     OptionsLayer *optionsLayer;
 
     QMenu *contextMenu;
-    KAction *editAction;
-    KAction *startAction;
-    KAction *stopAction;
-    KAction *removeAction;
-//     KAction* paste;
+    QAction *editAction;
+    QAction *startAction;
+    QAction *stopAction;
+    QAction *removeAction;
+//     QAction* paste;
 
 private slots:
     void showContextMenu( const QPoint& point );
@@ -115,8 +115,8 @@ private slots:
 
 public slots:
     // connected to soundKonverterView
-    void addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1 );
-    void addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions );
+    void addFiles( const QList<QUrl>& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1 );
+    void addDir( const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions );
     void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand = "" );
     void startConversion();
     void killConversion();

@@ -8,8 +8,8 @@
 
 #include <QLayout>
 
-#include <KLocale>
-#include <KTabWidget>
+#include <KLocalizedString>
+#include <QTabWidget>
 
 
 Options::Options( Config *_config, const QString& text, QWidget *parent )
@@ -19,7 +19,7 @@ Options::Options( Config *_config, const QString& text, QWidget *parent )
     QGridLayout *gridLayout = new QGridLayout( this );
     gridLayout->setContentsMargins( 0, 0, 0, 0 );
 
-    tab = new KTabWidget( this );
+    tab = new QTabWidget( this );
     gridLayout->addWidget( tab, 0, 0 );
     connect( tab, SIGNAL(currentChanged(int)), this, SLOT(tabChanged(int)) );
 

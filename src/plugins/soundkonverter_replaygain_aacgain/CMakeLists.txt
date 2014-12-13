@@ -7,7 +7,7 @@ set(soundkonverter_replaygain_aacgain_SRCS
    soundkonverter_replaygain_aacgain.cpp
  )
 
-kde4_add_plugin(soundkonverter_replaygain_aacgain ${soundkonverter_replaygain_aacgain_SRCS})
+add_library(soundkonverter_replaygain_aacgain MODULE ${soundkonverter_replaygain_aacgain_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_aacgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
 

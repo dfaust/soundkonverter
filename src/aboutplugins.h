@@ -3,12 +3,13 @@
 #ifndef ABOUTPLUGINS_H
 #define ABOUTPLUGINS_H
 
-#include <KDialog>
+#include <QDialog>
+#include <QMap>
 
 class Config;
 class BackendPlugin;
 class QLabel;
-class KPushButton;
+class QPushButton;
 
 
 /**
@@ -16,12 +17,12 @@ class KPushButton;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class AboutPlugins : public KDialog
+class AboutPlugins : public QDialog
 {
     Q_OBJECT
 public:
     /** Default Constructor */
-    AboutPlugins( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
+    AboutPlugins( Config *_config, QWidget *parent=0, Qt::WindowFlags f=0 );
 
     /** Default Destructor */
     ~AboutPlugins();
@@ -32,7 +33,7 @@ private:
     BackendPlugin *currentPlugin;
 
     QLabel *aboutPluginLabel;
-    KPushButton *configurePlugin;
+    QPushButton *configurePlugin;
 
     QMap<QString,QString> problemInfos;
 

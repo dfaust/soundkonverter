@@ -15,29 +15,29 @@
 #include "../codecproblems.h"
 
 #include <QApplication>
-#include <KLocale>
-#include <KPushButton>
+#include <KLocalizedString>
+#include <QPushButton>
 #include <QLabel>
 #include <QLayout>
 #include <QBoxLayout>
-#include <KMessageBox>
-#include <KFileDialog>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QDir>
 
 
-FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
-    : KDialog( parent, f ),
+FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
+    : QDialog( parent, f ),
     dialogAborted( false ),
     config( _config )
 {
-    setCaption( i18n("Add Files") );
-    setWindowIcon( KIcon("audio-x-generic") );
-    setButtons( 0 );
+    setWindowTitle( i18n("Add Files") );
+    setWindowIcon( QIcon::fromTheme("audio-x-generic") );
+//     setButtons( 0 );
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     QWidget *widget = new QWidget();
-    setMainWidget( widget );
+//     setMainWidget( widget );
 
     QGridLayout *mainGrid = new QGridLayout( widget );
 
@@ -64,10 +64,10 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     mainGrid->addLayout( controlBox, 2, 0 );
     controlBox->addStretch();
 
-    pAdd = new KPushButton( KIcon("dialog-ok"), i18n("Ok"), widget );
+    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
     controlBox->addWidget( pAdd );
     connect( pAdd, SIGNAL(clicked()), this, SLOT(okClickedSlot()) );
-    pCancel = new KPushButton( KIcon("dialog-cancel"), i18n("Cancel"), widget );
+    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
     controlBox->addWidget( pCancel );
     connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
 
@@ -75,28 +75,28 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
     formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
 
-    fileDialog = new KFileDialog( KUrl("kfiledialog:///soundkonverter-add-media"), filterList.join("\n"), this, formatHelp );
+    fileDialog = new QFileDialog( this, i18n("Add Files"), "kfiledialog:///soundkonverter-add-media", filterList.join("\n") );
     fileDialog->setWindowTitle( i18n("Add Files") );
-    fileDialog->setMode( KFile::Files | KFile::ExistingOnly );
+    fileDialog->setFileMode(QFileDialog::ExistingFiles);
     connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
     connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
     const int dialogReturnCode = fileDialog->exec();
     if( dialogReturnCode == QDialog::Rejected )
         dialogAborted = true;
 
-    // Prevent the dialog from beeing too wide because of the directory history
-    if( parent && width() > parent->width() )
-        setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "FileOpener" );
-    restoreDialogSize( group );
+//     // Prevent the dialog from beeing too wide because of the directory history
+//     if( parent && width() > parent->width() )
+//         setInitialSize( QSize(parent->width()-fontHeight,sizeHint().height()) );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "FileOpener" );
+//     restoreDialogSize( group );
 }
 
 FileOpener::~FileOpener()
 {
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group = conf->group( "FileOpener" );
-    saveDialogSize( group );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group = conf->group( "FileOpener" );
+//     saveDialogSize( group );
 }
 
 void FileOpener::fileDialogAccepted()
@@ -120,7 +120,7 @@ void FileOpener::fileDialogAccepted()
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {
-            fileName = urls.at(i).pathOrUrl();
+            fileName = urls.at(i).url(QUrl::PreferLocalFile);
 
             if( codecName.isEmpty() )
                 codecName = mimeType;
@@ -206,7 +206,7 @@ void FileOpener::okClickedSlot()
     }
     else
     {
-        KMessageBox::error( this, i18n("No conversion options selected.") );
+        QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
     }
 }
 

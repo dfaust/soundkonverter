@@ -7,7 +7,7 @@ set(soundkonverter_ripper_icedax_SRCS
    soundkonverter_ripper_icedax.cpp
  )
 
-kde4_add_plugin(soundkonverter_ripper_icedax ${soundkonverter_ripper_icedax_SRCS})
+add_library(soundkonverter_ripper_icedax MODULE ${soundkonverter_ripper_icedax_SRCS})
 
 target_link_libraries(soundkonverter_ripper_icedax ${KDE4_KDEUI_LIBS} soundkonvertercore )
 

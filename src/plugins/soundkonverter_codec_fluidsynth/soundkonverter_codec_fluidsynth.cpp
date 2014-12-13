@@ -6,7 +6,7 @@
 #include "fluidsynthcodecwidget.h"
 
 #include <QApplication>
-#include <KDialog>
+#include <QDialog>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <KUrlRequester>
@@ -27,7 +27,7 @@ soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *paren
     KConfigGroup group;
 
     group = conf->group( "Plugin-"+name() );
-    soundFontFile = group.readEntry( "soundFontFile", KUrl() );
+    soundFontFile = group.readEntry( "soundFontFile", QUrl() );
 }
 
 soundkonverter_codec_fluidsynth::~soundkonverter_codec_fluidsynth()
@@ -79,9 +79,9 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
     {
         const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-        configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel );
+        configDialog = new QDialog( parent );
+        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
@@ -131,7 +131,7 @@ CodecWidget *soundkonverter_codec_fluidsynth::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-unsigned int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_codec_fluidsynth::convert( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     if( soundFontFile.isEmpty() )
     {
@@ -147,8 +147,8 @@ unsigned int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, co
 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
-    newItem->process = new KProcess( newItem );
-    newItem->process->setOutputChannelMode( KProcess::MergedChannels );
+    newItem->process = new QProcess( newItem );
+    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -162,7 +162,7 @@ unsigned int soundkonverter_codec_fluidsynth::convert( const KUrl& inputFile, co
     return newItem->id;
 }
 
-QStringList soundkonverter_codec_fluidsynth::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+QStringList soundkonverter_codec_fluidsynth::convertCommand( const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(_conversionOptions)

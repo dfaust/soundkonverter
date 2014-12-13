@@ -20,14 +20,14 @@
 #include "options.h"
 #include "codecproblems.h"
 
-#include <KLocale>
-#include <KPushButton>
-#include <KIcon>
-#include <KFileDialog>
-#include <KMenu>
-#include <KAction>
+#include <KLocalizedString>
+#include <QPushButton>
+#include <QIcon>
+#include <QFileDialog>
+#include <QMenu>
+#include <QAction>
 #include <KActionMenu>
-#include <KMessageBox>
+#include <QMessageBox>
 
 #include <QApplication>
 #include <QLabel>
@@ -64,7 +64,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     fileList->setOptionsLayer( optionsLayer );
     optionsLayer->hide();
     gridLayout->addWidget( optionsLayer, 1, 0 );
-    connect( optionsLayer, SIGNAL(done(const KUrl::List&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*,const QString&)) );
+    connect( optionsLayer, SIGNAL(done(const QList<QUrl>&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*,const QString&)) );
     connect( optionsLayer, SIGNAL(saveFileList()), fileList, SLOT(save()) );
 
 
@@ -79,11 +79,11 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     //font.setWeight( QFont::DemiBold );
     font.setPointSize( font.pointSize() + 3 );
     cAdd->setFont( font );
-    cAdd->insertItem( KIcon("audio-x-generic"), i18n("Add files...") );
-    cAdd->insertItem( KIcon("folder"), i18n("Add folder...") );
-    cAdd->insertItem( KIcon("media-optical-audio"), i18n("Add CD tracks...") );
-    cAdd->insertItem( KIcon("network-workgroup"), i18n("Add url...") );
-    cAdd->insertItem( KIcon("view-media-playlist"), i18n("Add playlist...") );
+    cAdd->insertItem( QIcon::fromTheme("audio-x-generic"), i18n("Add files...") );
+    cAdd->insertItem( QIcon::fromTheme("folder"), i18n("Add folder...") );
+    cAdd->insertItem( QIcon::fromTheme("media-optical-audio"), i18n("Add CD tracks...") );
+    cAdd->insertItem( QIcon::fromTheme("network-workgroup"), i18n("Add url...") );
+    cAdd->insertItem( QIcon::fromTheme("view-media-playlist"), i18n("Add playlist...") );
     cAdd->increaseHeight( 0.6*fontHeight );
     addBox->addWidget( cAdd, 0, Qt::AlignVCenter );
     connect( cAdd, SIGNAL(clicked(int)), this, SLOT(addClicked(int)) );
@@ -91,30 +91,30 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
 
     addBox->addSpacing( fontHeight );
 
-    startAction = new KAction( KIcon("system-run"), i18n("Start"), this );
+    startAction = new QAction( QIcon::fromTheme("system-run"), i18n("Start"), this );
     connect( startAction, SIGNAL(triggered()), fileList, SLOT(startConversion()) );
 
-    pStart = new KPushButton( KIcon("system-run"), i18n("Start"), this );
+    pStart = new QPushButton( QIcon::fromTheme("system-run"), i18n("Start"), this );
     pStart->setFixedHeight( pStart->size().height() );
     pStart->setEnabled( false );
     startAction->setEnabled( false );
     addBox->addWidget( pStart, 0, Qt::AlignVCenter );
     connect( pStart, SIGNAL(clicked()), fileList, SLOT(startConversion()) );
 
-    stopActionMenu = new KActionMenu( KIcon("process-stop"), i18n("Stop"), this );
+    stopActionMenu = new KActionMenu( QIcon::fromTheme("process-stop"), i18n("Stop"), this );
     stopActionMenu->setDelayed( false );
-    killAction = new KAction( KIcon("flag-red"), i18n("Stop immediatelly"), this );
+    killAction = new QAction( QIcon::fromTheme("flag-red"), i18n("Stop immediatelly"), this );
     stopActionMenu->addAction( killAction );
     connect( killAction, SIGNAL(triggered()), fileList, SLOT(killConversion()) );
-    stopAction = new KAction( KIcon("flag-yellow"), i18n("Stop after current conversions are completed"), this );
+    stopAction = new QAction( QIcon::fromTheme("flag-yellow"), i18n("Stop after current conversions are completed"), this );
     stopActionMenu->addAction( stopAction );
     connect( stopAction, SIGNAL(triggered()), fileList, SLOT(stopConversion()) );
-    continueAction = new KAction( KIcon("flag-green"), i18n("Continue after current conversions are completed"), this );
+    continueAction = new QAction( QIcon::fromTheme("flag-green"), i18n("Continue after current conversions are completed"), this );
     stopActionMenu->addAction( continueAction );
     connect( continueAction, SIGNAL(triggered()), fileList, SLOT(continueConversion()) );
     queueModeChanged( true );
 
-    pStop = new KPushButton( KIcon("process-stop"), i18n("Stop"), this );
+    pStop = new QPushButton( QIcon::fromTheme("process-stop"), i18n("Stop"), this );
     pStop->setFixedHeight( pStop->size().height() );
     pStop->hide();
     stopActionMenu->setEnabled( false );
@@ -176,11 +176,11 @@ void soundKonverterView::showFileDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -194,11 +194,11 @@ void soundKonverterView::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const QUrl&,bool,const QStringList&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const QUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -260,7 +260,7 @@ bool soundKonverterView::showCdDialog( const QString& device, QString _profile, 
     }
     else
     {
-        KMessageBox::error( this, i18n("No CD device found") );
+        QMessageBox::information( this, i18n("No CD device found"), i18n("No CD device found") );
     }
 
     delete dialog;
@@ -272,11 +272,11 @@ void soundKonverterView::showUrlDialog()
 {
     UrlOpener *dialog = new UrlOpener( config, this );
 
-    connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
     dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+    disconnect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
     delete dialog;
 
@@ -290,11 +290,11 @@ void soundKonverterView::showPlaylistDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -302,9 +302,9 @@ void soundKonverterView::showPlaylistDialog()
     delete dialog;
 }
 
-void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
+void soundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
-    KUrl::List k_urls;
+    QList<QUrl> k_urls;
     QStringList errorList;
     //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;
@@ -325,7 +325,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         }
         else
         {
-            fileName = urls.at(i).pathOrUrl();
+            fileName = urls.at(i).url(QUrl::PreferLocalFile);
 
             if( codecName.isEmpty() )
                 codecName = mimeType;
@@ -417,8 +417,8 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
             else
             {
                 // FIXME error message, null pointer for conversion options
-//                 KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0"), i18n("Internal error") );
-                KMessageBox::error( this, "Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0", "Internal error" );
+//                 QMessageBox::critical( this, "soundKonverter", i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0"), i18n("Internal error") );
+                QMessageBox::critical( this, "soundKonverter", "Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0", "Internal error" );
             }
         }
         else

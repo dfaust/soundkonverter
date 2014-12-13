@@ -5,7 +5,7 @@
 #include "backendplugin.h"
 
 #include <QMap>
-#include <KUrl>
+#include <QUrl>
 
 class ReplayGainPlugin;
 
@@ -21,7 +21,7 @@ struct ReplayGainPipe
 };
 
 
-class KDE_EXPORT ReplayGainPluginItem : public BackendPluginItem
+class ReplayGainPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
@@ -38,7 +38,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class KDE_EXPORT ReplayGainPlugin : public BackendPlugin
+class ReplayGainPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
@@ -56,11 +56,8 @@ public:
     virtual QList<ReplayGainPipe> codecTable() = 0;
 
     /** adds replaygain to one or more files */
-    virtual unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
+    virtual unsigned int apply( const QList<QUrl>& fileList, ApplyMode mode = Add ) = 0;
 };
-
-#define K_EXPORT_SOUNDKONVERTER_REPLAYGAIN(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_##libname, KGenericFactory<classname>("soundkonverter_replaygain_" #libname) )
 
 #endif // REPLAYGAINPLUGIN_H
 

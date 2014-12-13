@@ -4,7 +4,7 @@
 
 #include "../../core/codecwidget.h"
 
-class KComboBox;
+class QComboBox;
 class QSlider;
 class QDoubleSpinBox;
 // class QCheckBox;
@@ -24,7 +24,7 @@ public:
     int currentDataRate();
 
 private:
-    KComboBox *cMode;
+    QComboBox *cMode;
     QSlider *sQuality;
     QDoubleSpinBox *dQuality;
 

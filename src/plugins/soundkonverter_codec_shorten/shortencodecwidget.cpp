@@ -6,8 +6,8 @@
 
 #include <QLayout>
 #include <QCheckBox>
-#include <KLineEdit>
-#include <KLocale>
+#include <QLineEdit>
+#include <KLocalizedString>
 
 
 ShortenCodecWidget::ShortenCodecWidget()
@@ -24,7 +24,7 @@ ShortenCodecWidget::ShortenCodecWidget()
 
     cCmdArguments = new QCheckBox( i18n("Additional encoder arguments:"), this );
     cmdArgumentsBox->addWidget( cCmdArguments );
-    lCmdArguments = new KLineEdit( this );
+    lCmdArguments = new QLineEdit( this );
     lCmdArguments->setEnabled( false );
     cmdArgumentsBox->addWidget( lCmdArguments );
     connect( cCmdArguments, SIGNAL(toggled(bool)), lCmdArguments, SLOT(setEnabled(bool)) );

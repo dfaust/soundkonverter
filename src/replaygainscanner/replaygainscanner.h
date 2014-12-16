@@ -16,15 +16,17 @@ class QTreeWidget;
 class QFileDialog;
 
 
-/**
- * @short The Replay Gain Tool
- * @author Daniel Faust <hessijames@gmail.com>
- */
+namespace Ui {
+    class ReplayGainScanner;
+}
+
+/** The Replay Gain Tool */
 class ReplayGainScanner : public QDialog
 {
     Q_OBJECT
+
 public:
-    ReplayGainScanner( Config*, Logger*, bool showMainWindowButton = false, QWidget *parent=0, Qt::WindowFlags f=0 );
+    ReplayGainScanner(Config*, Logger*, bool showMainWindowButton=false, QWidget *parent=0, Qt::WindowFlags f=0);
     ~ReplayGainScanner();
 
     void addFiles( QList<QUrl> urls );
@@ -45,15 +47,8 @@ private slots:
     void progressChanged( const QString& progress );
 
 private:
-    ComboButton *cAdd;
-    QPushButton *pShowMainWindow;
-    QCheckBox *cForce;
-    ReplayGainFileList *fileList;
-    ProgressIndicator *progressIndicator;
-    QPushButton *pTagVisible;
-    QPushButton *pRemoveTag;
-    QPushButton *pCancel;
-    QPushButton *pClose;
+    Ui::ReplayGainScanner *ui;
+
     QFileDialog *fileDialog;
 
     Config *config;

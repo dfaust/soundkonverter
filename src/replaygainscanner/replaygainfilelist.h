@@ -9,7 +9,6 @@
 #include <QTime>
 
 class Config;
-class Logger;
 class ConversionOptions;
 class QProgressBar;
 class QAction;
@@ -21,11 +20,7 @@ class QAction;
 // - Qeue management
 
 
-/**
- * @short The file list of the Replay Gain scanner
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
+/** The file list of the Replay Gain scanner */
 class ReplayGainFileList : public QTreeWidget
 {
     Q_OBJECT
@@ -36,11 +31,13 @@ public:
         Column_Album    = 2
     };
 
-    /** Constructor */
-    ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent=0 );
-
-    /** Destructor */
+    ReplayGainFileList(QWidget *parent);
     ~ReplayGainFileList();
+
+    void setConfig(Config *config)
+    {
+        this->config = config;
+    }
 
     ReplayGainFileListItem *topLevelItem( int index ) const { return static_cast<ReplayGainFileListItem*>( QTreeWidget::topLevelItem(index) ); }
 
@@ -52,7 +49,6 @@ public:
 
 private:
     Config *config;
-    Logger *logger;
 
     /** Counts all files in a directory */
     int countDir( const QString& directory, bool recursive, int count = 0 );

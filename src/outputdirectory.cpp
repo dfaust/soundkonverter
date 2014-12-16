@@ -1,128 +1,103 @@
 
 #include "outputdirectory.h"
+#include "ui_outputdirectory.h"
+
 #include "filelistitem.h"
 #include "core/conversionoptions.h"
 #include "config.h"
 
-#include <QApplication>
-#include <QLayout>
-#include <QHBoxLayout>
 #include <QDir>
 #include <QFileInfo>
-#include <QString>
 #include <QStringList>
-#include <QLabel>
 #include <QRegExp>
 #include <QProcess>
 
 #include <KLocalizedString>
 #include <QFileDialog>
-#include <QComboBox>
-#include <QLineEdit>
-#include <QIcon>
-#include <QPushButton>
-#include <kmountpoint.h>
+#include <KMountPoint>
 #include <QUrl>
 
 
-OutputDirectory::OutputDirectory( Config *_config, QWidget *parent )
-    : QWidget( parent ),
-    config( _config )
+OutputDirectory::OutputDirectory(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::OutputDirectory)
 {
-    QGridLayout *grid = new QGridLayout( this );
-    grid->setMargin( 0 );
+    ui->setupUi(this);
 
-    QHBoxLayout *box = new QHBoxLayout( );
-    grid->addLayout( box, 0, 0 );
-
-    cMode = new QComboBox( this );
-    cMode->addItem( i18n("By meta data") );
-    cMode->addItem( i18n("Source directory") );
-    cMode->addItem( i18n("Specify output directory") );
-    cMode->addItem( i18n("Copy directory structure") );
-    box->addWidget( cMode );
-    connect( cMode, SIGNAL(activated(int)), this, SLOT(modeChangedSlot(int)) );
-
-    cDir = new QComboBox( this );
-    cDir->setEditable(true);
-    box->addWidget( cDir, 1 );
-    connect( cDir, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
-
-    pDirSelect = new QPushButton( QIcon::fromTheme("folder"), "", this );
-    box->addWidget( pDirSelect );
-    pDirSelect->setFixedWidth( pDirSelect->height() );
-    pDirSelect->setToolTip( i18n("Choose an output directory") );
-    connect( pDirSelect, SIGNAL(clicked()), this, SLOT(selectDir()) );
-    pDirGoto = new QPushButton( QIcon::fromTheme("system-file-manager"), "", this );
-    box->addWidget( pDirGoto );
-    pDirGoto->setFixedWidth( pDirGoto->height() );
-    pDirGoto->setToolTip( i18n("Open the output directory with Dolphin") );
-    connect( pDirGoto, SIGNAL(clicked()), this, SLOT(gotoDir()) );
-
-    setMode( (OutputDirectory::Mode)config->data.general.lastOutputDirectoryMode );
+    connect(ui->modeComboBox, SIGNAL(activated(int)),                       this, SLOT(modeChangedSlot(int)));
+    connect(ui->directoryComboBox, SIGNAL(editTextChanged(const QString&)), this, SLOT(directoryChangedSlot(const QString&)));
+    connect(ui->gotoDirectoryPushButton, SIGNAL(clicked()),                 this, SLOT(gotoDir()));
 }
 
 OutputDirectory::~OutputDirectory()
-{}
+{
+}
+
+void OutputDirectory::init(Config* config)
+{
+    this->config = config;
+
+    setMode((OutputDirectory::Mode)config->data.general.lastOutputDirectoryMode);
+}
 
 void OutputDirectory::disable()
 {
-    cMode->setEnabled( false );
-    cDir->setEnabled( false );
-    pDirSelect->setEnabled( false );
+    ui->modeComboBox->setEnabled(false);
+    ui->directoryComboBox->setEnabled(false);
+    ui->selectDirectoryPushButton->setEnabled(false);
 }
 
 void OutputDirectory::enable()
 {
-    cMode->setEnabled( true );
-    modeChangedSlot( cMode->currentIndex() );
+    ui->modeComboBox->setEnabled(true);
+    modeChangedSlot(ui->modeComboBox->currentIndex());
 }
 
 OutputDirectory::Mode OutputDirectory::mode()
 {
-    return (Mode)cMode->currentIndex();
+    return (Mode)ui->modeComboBox->currentIndex();
 }
 
-void OutputDirectory::setMode( OutputDirectory::Mode mode )
+void OutputDirectory::setMode(OutputDirectory::Mode mode)
 {
-    cMode->setCurrentIndex( (int)mode );
-    updateMode( mode );
+    ui->modeComboBox->setCurrentIndex((int)mode);
+    updateMode(mode);
 }
 
 QString OutputDirectory::directory()
 {
-    if( (Mode)cMode->currentIndex() != Source )
-        return cDir->currentText();
+    if( (Mode)ui->modeComboBox->currentIndex() != Source )
+        return ui->directoryComboBox->currentText();
     else
         return "";
 }
 
-void OutputDirectory::setDirectory( const QString& directory )
+void OutputDirectory::setDirectory(const QString& directory)
 {
-    if( (Mode)cMode->currentIndex() != Source )
-        cDir->setEditText( directory );
+    if( (Mode)ui->modeComboBox->currentIndex() != Source )
+        ui->directoryComboBox->setEditText( directory );
 }
 
 QString OutputDirectory::filesystem()
 {
-    return filesystemForDirectory( directory() );
+    return filesystemForDirectory(directory());
 }
 
-QString OutputDirectory::filesystemForDirectory( const QString& dir )
+QString OutputDirectory::filesystemForDirectory(const QString& dir)
 {
     if( dir.isEmpty() )
         return QString();
 
-    KMountPoint::Ptr mp = KMountPoint::currentMountPoints().findByPath( dir );
+    KMountPoint::Ptr mp = KMountPoint::currentMountPoints().findByPath(dir);
     if( !mp )
         return QString();
 
     return mp->mountType();
 }
 
-QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames )
+QUrl OutputDirectory::calcPath(FileListItem *fileListItem, Config *config, const QStringList& usedOutputNames)
 {
-    QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
+    QRegExp regEx("%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive);
 
     ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
@@ -142,22 +117,22 @@ QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     if( fileListItem->track == -1 )
         fileName = fileListItem->url.fileName();
     else
-        fileName =  QString().sprintf("%02i",fileListItem->tags->track) + " - " + fileListItem->tags->artist + " - " + fileListItem->tags->title + "." + extension;
+        fileName = QString().sprintf("%02i", fileListItem->tags->track) + " - " + fileListItem->tags->artist + " - " + fileListItem->tags->title + "." + extension;
 
     if( options->outputDirectoryMode == Specify )
     {
         path = options->outputDirectory+"/"+fileName;
 
         if( config->data.general.useVFATNames || options->outputFilesystem == "vfat" )
-            path = vfatPath( path );
+            path = vfatPath(path);
 
         if( options->outputFilesystem == "ntfs" || options->outputFilesystem == "fuseblk" )
-            path = ntfsPath( path );
+            path = ntfsPath(path);
 
-        url = changeExtension( QUrl(path), extension );
+        url = changeExtension(QUrl(path), extension);
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )
-            url = uniqueFileName( url, usedOutputNames );
+            url = uniqueFileName(url, usedOutputNames);
 
         return url;
     }
@@ -176,13 +151,13 @@ QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         if( fileListItem->tags == 0 ||
             ( path.mid(fileNameBegin).contains("%n") && fileListItem->tags->track == 0 ) ||
             ( path.mid(fileNameBegin).contains("%t") && fileListItem->tags->title.isEmpty() )
-          )
+        )
         {
             path = path.left( fileNameBegin ) + "/%f";
         }
 
-        path.replace( "\\[", "$quared_bracket_open$" );
-        path.replace( "\\]", "$quared_bracket_close$" );
+        path.replace("\\[", "$quared_bracket_open$");
+        path.replace("\\]", "$quared_bracket_close$");
 
         QRegExp reg( "\\[(.*)%([abcdfgnpsty])(.*)\\]", Qt::CaseInsensitive );
         reg.setMinimal( true );
@@ -190,18 +165,18 @@ QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
         {
             if( fileListItem->tags &&
                 (
-                  ( reg.cap(2) == "a" && !fileListItem->tags->artist.isEmpty() ) ||
+                  ( reg.cap(2) == "a" && !fileListItem->tags->artist.isEmpty() )      ||
                   ( reg.cap(2) == "z" && !fileListItem->tags->albumArtist.isEmpty() ) ||
-                  ( reg.cap(2) == "b" && !fileListItem->tags->album.isEmpty() ) ||
-                  ( reg.cap(2) == "c" && !fileListItem->tags->comment.isEmpty() ) ||
-                  ( reg.cap(2) == "d" && fileListItem->tags->disc != 0 ) ||
-                  ( reg.cap(2) == "g" && !fileListItem->tags->genre.isEmpty() ) ||
-                  ( reg.cap(2) == "n" && fileListItem->tags->track != 0 ) ||
-                  ( reg.cap(2) == "p" && !fileListItem->tags->composer.isEmpty() ) ||
-                  ( reg.cap(2) == "t" && !fileListItem->tags->title.isEmpty() ) ||
-                  ( reg.cap(2) == "y" && fileListItem->tags->year != 0 )
+                  ( reg.cap(2) == "b" && !fileListItem->tags->album.isEmpty() )       ||
+                  ( reg.cap(2) == "c" && !fileListItem->tags->comment.isEmpty() )     ||
+                  ( reg.cap(2) == "d" &&  fileListItem->tags->disc != 0 )             ||
+                  ( reg.cap(2) == "g" && !fileListItem->tags->genre.isEmpty() )       ||
+                  ( reg.cap(2) == "n" &&  fileListItem->tags->track != 0 )            ||
+                  ( reg.cap(2) == "p" && !fileListItem->tags->composer.isEmpty() )    ||
+                  ( reg.cap(2) == "t" && !fileListItem->tags->title.isEmpty() )       ||
+                  ( reg.cap(2) == "y" &&  fileListItem->tags->year != 0 )
                 )
-              )
+            )
             {
                 path.replace( reg, "\\1%\\2\\3" );
             }
@@ -211,24 +186,24 @@ QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
             }
         }
 
-        path.replace( "$quared_bracket_open$", "[" );
-        path.replace( "$quared_bracket_close$", "]" );
+        path.replace("$quared_bracket_open$", "[");
+        path.replace("$quared_bracket_close$", "]");
 
         while( path.contains("//") )
             path.replace( "//", "/" );
 
-        path.replace( "%a", "$replace_by_artist$" );
-        path.replace( "%z", "$replace_by_albumartist$" );
-        path.replace( "%b", "$replace_by_album$" );
-        path.replace( "%c", "$replace_by_comment$" );
-        path.replace( "%d", "$replace_by_disc$" );
-        path.replace( "%g", "$replace_by_genre$" );
-        path.replace( "%n", "$replace_by_track$" );
-        path.replace( "%p", "$replace_by_composer$" );
-        path.replace( "%t", "$replace_by_title$" );
-        path.replace( "%y", "$replace_by_year$" );
-        path.replace( "%f", "$replace_by_filename$" );
-        path.replace( "%s", "$replace_by_sourcedir$" );
+        path.replace("%a", "$replace_by_artist$");
+        path.replace("%z", "$replace_by_albumartist$");
+        path.replace("%b", "$replace_by_album$");
+        path.replace("%c", "$replace_by_comment$");
+        path.replace("%d", "$replace_by_disc$");
+        path.replace("%g", "$replace_by_genre$");
+        path.replace("%n", "$replace_by_track$");
+        path.replace("%p", "$replace_by_composer$");
+        path.replace("%t", "$replace_by_title$");
+        path.replace("%y", "$replace_by_year$");
+        path.replace("%f", "$replace_by_filename$");
+        path.replace("%s", "$replace_by_sourcedir$");
 
         QString artist = ( fileListItem->tags == 0 || fileListItem->tags->artist.isEmpty() ) ? i18n("Unknown Artist") : fileListItem->tags->artist;
         artist.replace("/",",");
@@ -333,7 +308,7 @@ QUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     }
 }
 
-QUrl OutputDirectory::changeExtension( const QUrl& url, const QString& extension )
+QUrl OutputDirectory::changeExtension(const QUrl& url, const QString& extension)
 {
     QUrl newUrl = url;
 
@@ -346,7 +321,7 @@ QUrl OutputDirectory::changeExtension( const QUrl& url, const QString& extension
     return newUrl;
 }
 
-QUrl OutputDirectory::uniqueFileName( const QUrl& url, const QStringList& usedOutputNames )
+QUrl OutputDirectory::uniqueFileName(const QUrl& url, const QStringList& usedOutputNames)
 {
     QUrl uniqueUrl = url;
 
@@ -361,17 +336,22 @@ QUrl OutputDirectory::uniqueFileName( const QUrl& url, const QStringList& usedOu
     return uniqueUrl;
 }
 
-QUrl OutputDirectory::makePath( const QUrl& url )
+QUrl OutputDirectory::makePath(const QUrl& url)
 {
-    QFileInfo fileInfo( url.toLocalFile() );
+    QString path;
 
-    QStringList dirs = fileInfo.absoluteDir().absolutePath().split( "/" );
-    QString mkDir;
     QDir dir;
-    for( QStringList::Iterator it = dirs.begin(); it != dirs.end(); ++it ) {
-        mkDir += "/" + *it;
-        dir.setPath( mkDir );
-        if( !dir.exists() ) dir.mkdir( mkDir );
+
+    foreach( const QString& directory, url.toLocalFile().split("/") )
+    {
+        path += "/" + directory;
+
+        dir.setPath(path);
+
+        if( !dir.exists() )
+        {
+            dir.mkdir(path);
+        }
     }
 
     return url;
@@ -475,11 +455,11 @@ void OutputDirectory::selectDir()
 {
     QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
 
-    QString dir = cDir->currentText();
+    QString dir = ui->directoryComboBox->currentText();
     QString startDir = dir;
     QString params;
     int i = dir.indexOf( regEx );
-    if( i != -1 && cMode->currentIndex() == 0 )
+    if( i != -1 && ui->modeComboBox->currentIndex() == 0 )
     {
         i = dir.lastIndexOf( "/", i );
         startDir = dir.left( i );
@@ -489,15 +469,15 @@ void OutputDirectory::selectDir()
     QString directory = QFileDialog::getExistingDirectory( this, i18n("Choose an output directory"), startDir );
     if( !directory.isEmpty() )
     {
-        if( i != -1 && cMode->currentIndex() == 0 )
+        if( i != -1 && ui->modeComboBox->currentIndex() == 0 )
         {
-            cDir->setEditText( directory + params );
+            ui->directoryComboBox->setEditText( directory + params );
         }
         else
         {
-            cDir->setEditText( directory );
+            ui->directoryComboBox->setEditText( directory );
         }
-        emit directoryChanged( cDir->currentText() );
+        emit directoryChanged( ui->directoryComboBox->currentText() );
     }
 }
 
@@ -505,7 +485,7 @@ void OutputDirectory::gotoDir()
 {
     QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
 
-    QString startDir = cDir->currentText();
+    QString startDir = ui->directoryComboBox->currentText();
     int i = startDir.indexOf( regEx );
     if( i != -1 )
     {
@@ -520,11 +500,11 @@ void OutputDirectory::modeChangedSlot( int mode )
 {
     config->data.general.lastOutputDirectoryMode = mode;
 
-    disconnect( cDir, SIGNAL(editTextChanged(const QString&)), 0, 0 );
+    disconnect( ui->directoryComboBox, SIGNAL(editTextChanged(const QString&)), 0, 0 );
 
     updateMode( (Mode)mode );
 
-    connect( cDir, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
+    connect( ui->directoryComboBox, SIGNAL(editTextChanged(const QString&)),  this, SLOT(directoryChangedSlot(const QString&)) );
 
     emit modeChanged( mode );
 }
@@ -535,59 +515,59 @@ void OutputDirectory::updateMode( Mode mode )
 
     if( mode == MetaData )
     {
-        cDir->clear();
-        cDir->addItems( config->data.general.lastMetaDataOutputDirectoryPaths );
-        cDir->setEditText( config->data.general.metaDataOutputDirectory );
-        cDir->setEnabled( true );
-        pDirSelect->setEnabled( true );
-        pDirGoto->setEnabled( true );
-        cMode->setToolTip( i18n("Name all converted files according to the specified pattern") );
-        cDir->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
+        ui->directoryComboBox->clear();
+        ui->directoryComboBox->addItems( config->data.general.lastMetaDataOutputDirectoryPaths );
+        ui->directoryComboBox->setEditText( config->data.general.metaDataOutputDirectory );
+        ui->directoryComboBox->setEnabled( true );
+        ui->selectDirectoryPushButton->setEnabled( true );
+        ui->gotoDirectoryPushButton->setEnabled( true );
+        ui->modeComboBox->setToolTip( i18n("Name all converted files according to the specified pattern") );
+        ui->directoryComboBox->setToolTip( i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
                 "%a - Artist\n%z - Album artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n%s - Path to the source directory\n\n"
                 "You may parenthesize these wildcards and surrounding characters with squared brackets ('[' and ']')\nso they will be ignored if the replacement value is empty.\n"
                 "In order to use squared brackets you will have to escape them with a backslash ('\\[' and '\\]').") );
     }
     else if( mode == Source )
     {
-        cDir->clear();
-        cDir->clearEditText();
-        cDir->setEnabled( false );
-        pDirSelect->setEnabled( false );
-        pDirGoto->setEnabled( false );
-        cMode->setToolTip( i18n("Output all converted files into the same directory as the original files") );
-        cDir->setToolTip("");
+        ui->directoryComboBox->clear();
+        ui->directoryComboBox->clearEditText();
+        ui->directoryComboBox->setEnabled( false );
+        ui->selectDirectoryPushButton->setEnabled( false );
+        ui->gotoDirectoryPushButton->setEnabled( false );
+        ui->modeComboBox->setToolTip( i18n("Output all converted files into the same directory as the original files") );
+        ui->directoryComboBox->setToolTip("");
     }
     else if( mode == Specify )
     {
-        cDir->clear();
-        cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
-        cDir->setEditText( config->data.general.specifyOutputDirectory );
-        cDir->setEnabled( true );
-        pDirSelect->setEnabled( true );
-        pDirGoto->setEnabled( true );
-        cMode->setToolTip( i18n("Output all converted files into the specified output directory") );
-        cDir->setToolTip("");
+        ui->directoryComboBox->clear();
+        ui->directoryComboBox->addItems( config->data.general.lastNormalOutputDirectoryPaths );
+        ui->directoryComboBox->setEditText( config->data.general.specifyOutputDirectory );
+        ui->directoryComboBox->setEnabled( true );
+        ui->selectDirectoryPushButton->setEnabled( true );
+        ui->gotoDirectoryPushButton->setEnabled( true );
+        ui->modeComboBox->setToolTip( i18n("Output all converted files into the specified output directory") );
+        ui->directoryComboBox->setToolTip("");
     }
     else if( mode == CopyStructure )
     {
-        cDir->clear();
-        cDir->addItems( config->data.general.lastNormalOutputDirectoryPaths );
-        cDir->setEditText( config->data.general.copyStructureOutputDirectory );
-        cDir->setEnabled( true );
-        pDirSelect->setEnabled( true );
-        pDirGoto->setEnabled( true );
-        cMode->setToolTip( i18n("Copy the whole directory structure for all converted files") );
-        cDir->setToolTip("");
+        ui->directoryComboBox->clear();
+        ui->directoryComboBox->addItems( config->data.general.lastNormalOutputDirectoryPaths );
+        ui->directoryComboBox->setEditText( config->data.general.copyStructureOutputDirectory );
+        ui->directoryComboBox->setEnabled( true );
+        ui->selectDirectoryPushButton->setEnabled( true );
+        ui->gotoDirectoryPushButton->setEnabled( true );
+        ui->modeComboBox->setToolTip( i18n("Copy the whole directory structure for all converted files") );
+        ui->directoryComboBox->setToolTip("");
     }
 
     // Prevent the directory combo box from beeing too wide because of the directory history
-    cDir->setMinimumWidth( 20*fontHeight );
-    cDir->view()->setMinimumWidth( cDir->view()->sizeHintForColumn(0) );
+    ui->directoryComboBox->setMinimumWidth( 20*fontHeight );
+    ui->directoryComboBox->view()->setMinimumWidth( ui->directoryComboBox->view()->sizeHintForColumn(0) );
 }
 
 void OutputDirectory::directoryChangedSlot( const QString& directory )
 {
-    Mode mode = (Mode)cMode->currentIndex();
+    Mode mode = (Mode)ui->modeComboBox->currentIndex();
 
     if( mode == MetaData )
         config->data.general.metaDataOutputDirectory = directory;
@@ -601,8 +581,8 @@ void OutputDirectory::directoryChangedSlot( const QString& directory )
 
 /*void OutputDirectory::modeInfo()
 {
-    int mode = cMode->currentItem();
-    QString sModeString = cMode->currentText();
+    int mode = ui->modeComboBox->currentItem();
+    QString sModeString = ui->modeComboBox->currentText();
 
     if( (Mode)mode == Default ) {
         QMessageBox::information( this,

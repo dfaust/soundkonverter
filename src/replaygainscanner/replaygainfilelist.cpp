@@ -1,7 +1,6 @@
 
 #include "replaygainfilelist.h"
 
-#include "logger.h"
 #include "config.h"
 #include "codecproblems.h"
 
@@ -19,10 +18,9 @@
 #include <QMimeData>
 
 
-ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent )
+ReplayGainFileList::ReplayGainFileList( QWidget *parent )
     : QTreeWidget( parent ),
-    config( _config ),
-    logger( _logger )
+    config( 0 )
 {
     queue = false;
 

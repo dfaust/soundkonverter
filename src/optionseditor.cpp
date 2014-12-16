@@ -56,7 +56,8 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     // the grid for all widgets in the main window
     QGridLayout* conversionOptionsGridLayout = new QGridLayout( conversionOptionsWidget );
     // generate the options input area
-    options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), conversionOptionsWidget );
+    options = new Options(conversionOptionsWidget);
+    options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
     conversionOptionsGridLayout->addWidget( options, 0, 0 );
     conversionOptionsGridLayout->setRowStretch( 1, 1 );
 

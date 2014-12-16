@@ -1,108 +1,67 @@
 
 #include "aboutplugins.h"
+#include "ui_aboutplugins.h"
 #include "config.h"
 
-#include <QApplication>
 #include <KLocalizedString>
-#include <QIcon>
-#include <QPushButton>
-#include <QLayout>
-#include <QLabel>
-#include <QListWidget>
 #include <QToolTip>
+#include <QtCore> // KDevelop foreach syntax highlighting fix
 
-
-AboutPlugins::AboutPlugins( Config *_config, QWidget* parent, Qt::WindowFlags f )
-    : QDialog( parent, f ),
-    config( _config ),
-    currentPlugin( 0 )
+AboutPlugins::AboutPlugins(Config *_config, QWidget* parent, Qt::WindowFlags f) :
+    QDialog(parent, f),
+    ui(new Ui::AboutPlugins),
+    config(_config),
+    currentPlugin(0)
 {
-    setWindowTitle( i18n("About plugins") );
-    setWindowIcon( QIcon::fromTheme("preferences-plugin") );
-//     setButtons( QDialog::Close );
-//     setButtonFocus( QDialog::Close );
+//     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+    ui->setupUi(this);
 
-    QWidget *widget = new QWidget( this );
-//     setMainWidget( widget );
-    QHBoxLayout *box = new QHBoxLayout( widget );
-
-    QVBoxLayout *pluginListBox = new QVBoxLayout( widget );
-    box->addLayout( pluginListBox );
-
-    QLabel *installedPlugins = new QLabel( i18n("Installed plugins:"), this );
-    pluginListBox->addWidget( installedPlugins );
-
-    QListWidget *pluginsList = new QListWidget( this );
-    pluginListBox->addWidget( pluginsList );
-    connect( pluginsList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(currentPluginChanged(const QString&)) );
+    connect(ui->closeButton, SIGNAL(clicked()),                          this, SLOT(close()));
+    connect(ui->pluginsList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(currentPluginChanged(const QString&)));
+    connect(ui->aboutPluginLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(showProblemInfo(const QString&)));
+    connect(ui->configurePluginButton, SIGNAL(clicked()),                this, SLOT(configurePluginButtonClicked()));
 
     QStringList pluginNames;
-    QList<CodecPlugin*> codecPlugins = config->pluginLoader()->getAllCodecPlugins();
-    for( int i=0; i<codecPlugins.count(); i++ )
+
+    foreach( CodecPlugin *plugin, config->pluginLoader()->getAllCodecPlugins() )
     {
-        pluginNames += codecPlugins.at(i)->name();
+        pluginNames += plugin->name();
     }
     pluginNames.sort();
-    pluginsList->addItems( pluginNames );
-
+    ui->pluginsList->addItems(pluginNames);
     pluginNames.clear();
-    QList<FilterPlugin*> filterPlugins = config->pluginLoader()->getAllFilterPlugins();
-    for( int i=0; i<filterPlugins.count(); i++ )
+
+    foreach( FilterPlugin *plugin, config->pluginLoader()->getAllFilterPlugins() )
     {
-        pluginNames += filterPlugins.at(i)->name();
+        pluginNames += plugin->name();
     }
     pluginNames.sort();
-    pluginsList->addItems( pluginNames );
-
+    ui->pluginsList->addItems(pluginNames);
     pluginNames.clear();
-    QList<ReplayGainPlugin*> replaygainPlugins = config->pluginLoader()->getAllReplayGainPlugins();
-    for( int i=0; i<replaygainPlugins.count(); i++ )
+
+    foreach( ReplayGainPlugin *plugin, config->pluginLoader()->getAllReplayGainPlugins() )
     {
-        pluginNames += replaygainPlugins.at(i)->name();
+        pluginNames += plugin->name();
     }
     pluginNames.sort();
-    pluginsList->addItems( pluginNames );
-
+    ui->pluginsList->addItems(pluginNames);
     pluginNames.clear();
-    QList<RipperPlugin*> ripperPlugins = config->pluginLoader()->getAllRipperPlugins();
-    for( int i=0; i<ripperPlugins.count(); i++ )
+
+    foreach( RipperPlugin *plugin, config->pluginLoader()->getAllRipperPlugins() )
     {
-        pluginNames += ripperPlugins.at(i)->name();
+        pluginNames += plugin->name();
     }
     pluginNames.sort();
-    pluginsList->addItems( pluginNames );
+    ui->pluginsList->addItems(pluginNames);
+    pluginNames.clear();
 
-    pluginsList->setFixedWidth( 15*fontHeight );
+//     ui->pluginsList->setFixedWidth( 15*fontHeight );
 
-    box->addSpacing( fontHeight );
-
-    QVBoxLayout *pluginInfoBox = new QVBoxLayout( widget );
-    box->addLayout( pluginInfoBox );
-
-    aboutPluginLabel = new QLabel( this );
-    aboutPluginLabel->setSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred );
-    aboutPluginLabel->setWordWrap( true );
-    aboutPluginLabel->setTextFormat( Qt::RichText );
-    pluginInfoBox->addWidget( aboutPluginLabel );
-    connect( aboutPluginLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(showProblemInfo(const QString&)) );
-
-    pluginInfoBox->addStretch();
-
-    QHBoxLayout *configurePluginBox = new QHBoxLayout( widget );
-    pluginInfoBox->addLayout( configurePluginBox );
-    configurePlugin = new QPushButton( QIcon::fromTheme("configure"), "", widget );
-    configurePlugin->hide();
-    configurePluginBox->addWidget( configurePlugin );
-    configurePluginBox->addStretch();
-    connect( configurePlugin, SIGNAL(clicked()), this, SLOT(configurePluginClicked()) );
-
-    pluginsList->setCurrentRow(0);
-    QListWidgetItem *currentItem = pluginsList->currentItem();
-    if( currentItem )
+    ui->pluginsList->setCurrentRow(0);
+    if( QListWidgetItem *currentItem = ui->pluginsList->currentItem() )
     {
-        currentPluginChanged( currentItem->text() );
+        currentPluginChanged(currentItem->text());
     }
 
 //     setInitialSize( QSize(50*fontHeight,40*fontHeight) );
@@ -118,117 +77,110 @@ AboutPlugins::~AboutPlugins()
 //     saveDialogSize( group );
 }
 
-void AboutPlugins::currentPluginChanged( const QString& pluginName )
+void AboutPlugins::currentPluginChanged(const QString& pluginName)
 {
-    currentPlugin = config->pluginLoader()->backendPluginByName( pluginName );
+    currentPlugin = config->pluginLoader()->backendPluginByName(pluginName);
     if( !currentPlugin )
     {
-        aboutPluginLabel->setText( "" );
+        ui->aboutPluginLabel->setText( "" );
         return;
     }
 
     QStringList info;
-    info += i18n("About plugin %1:",pluginName);
+    info += i18n("About plugin %1:", pluginName);
 
-    info += i18n("Plugin type: %1",currentPlugin->type());
+    info += i18n("Plugin type: %1", currentPlugin->type());
 
-    QMap<QString,QString> binaries = currentPlugin->binaries;
+    QMap<QString, QString> binaries = currentPlugin->binaries;
     QStringList binariesString;
     if( binaries.count() > 0 )
     {
         binariesString += i18n("Backend binaries:");
     }
-    for( int i=0; i<binaries.count(); i++ )
+    foreach( const QString& binary, binaries.keys() )
     {
-        if( !binaries.values().at(i).isEmpty() )
-            binariesString += i18n("%1 (found at: %2)",binaries.keys().at(i),"<span style=\"color:green\">" + binaries.values().at(i) + "</span>");
+        if( !binaries.value(binary).isEmpty() )
+            binariesString += i18n("%1 (found at: %2)", binary, "<span style=\"color:green\">" + binaries.value(binary) + "</span>");
         else
-            binariesString += "<span style=\"color:red\">" + i18n("%1 (not found)",binaries.keys().at(i)) + "</span>";
+            binariesString += "<span style=\"color:red\">" + i18n("%1 (not found)", binary) + "</span>";
     }
     info += binariesString.join("<br>");
 
     problemInfos.clear();
     if( currentPlugin->type() == "codec" )
     {
-        CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
+        CodecPlugin *codecPlugin = qobject_cast<CodecPlugin*>(currentPlugin);
 
         QStringList codecsString;
-        QMap<QString,int> encodeCodecs;
-        QMap<QString,int> decodeCodecs;
-        QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
-        for( int i=0; i<codecTable.count(); i++ )
+        QMap<QString, int> encodeCodecs;
+        QMap<QString, int> decodeCodecs;
+        foreach( const ConversionPipeTrunk& trunk, codecPlugin->codecTable() )
         {
-            if( codecTable.at(i).codecTo != "wav" )
-                encodeCodecs[codecTable.at(i).codecTo] += codecTable.at(i).enabled;
+            if( trunk.codecTo != "wav" )
+                encodeCodecs[trunk.codecTo] += trunk.enabled;
 
-            if( codecTable.at(i).codecFrom != "wav" )
-                decodeCodecs[codecTable.at(i).codecFrom] += codecTable.at(i).enabled;
+            if( trunk.codecFrom != "wav" )
+                decodeCodecs[trunk.codecFrom] += trunk.enabled;
         }
         codecsString += i18n("Supported codecs:");
         QStringList list;
-        for( int i=0; i<encodeCodecs.count(); i++ )
+        foreach( const QString& codecName, encodeCodecs.keys() )
         {
-            const QString codecName = encodeCodecs.keys().at(i);
-            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
-            list += encodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
+            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems(pluginName, codecName);
+            list += encodeCodecs.value(codecName) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
         }
-        codecsString += i18n("Encode: %1",list.join(", "));
+        codecsString += i18n("Encode: %1", list.join(", "));
         list.clear();
-        for( int i=0; i<decodeCodecs.count(); i++ )
+        foreach( const QString& codecName, decodeCodecs.keys() )
         {
-            const QString codecName = decodeCodecs.keys().at(i);
-            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
-            list += decodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
+            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems(pluginName, codecName);
+            list += decodeCodecs.value(codecName) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
         }
-        codecsString += i18n("Decode: %1",list.join(", "));
+        codecsString += i18n("Decode: %1", list.join(", "));
         info += codecsString.join("<br>");
     }
     else if( currentPlugin->type() == "filter" )
     {
-        CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
+        CodecPlugin *codecPlugin = qobject_cast<CodecPlugin*>(currentPlugin);
 
         QStringList codecsString;
-        QMap<QString,int> encodeCodecs;
-        QMap<QString,int> decodeCodecs;
-        QList<ConversionPipeTrunk> codecTable = codecPlugin->codecTable();
-        for( int i=0; i<codecTable.count(); i++ )
+        QMap<QString, int> encodeCodecs;
+        QMap<QString, int> decodeCodecs;
+        foreach( const ConversionPipeTrunk& trunk, codecPlugin->codecTable() )
         {
-            if( codecTable.at(i).codecTo != "wav" )
-                encodeCodecs[codecTable.at(i).codecTo] += codecTable.at(i).enabled;
+            if( trunk.codecTo != "wav" )
+                encodeCodecs[trunk.codecTo] += trunk.enabled;
 
-            if( codecTable.at(i).codecFrom != "wav" )
-                decodeCodecs[codecTable.at(i).codecFrom] += codecTable.at(i).enabled;
+            if( trunk.codecFrom != "wav" )
+                decodeCodecs[trunk.codecFrom] += trunk.enabled;
         }
         codecsString += i18n("Supported codecs:");
         QStringList list;
-        for( int i=0; i<encodeCodecs.count(); i++ )
+        foreach( const QString& codecName, encodeCodecs.keys() )
         {
-            const QString codecName = encodeCodecs.keys().at(i);
-            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems( pluginName, codecName );
-            list += encodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
+            problemInfos["encode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems(pluginName, codecName);
+            list += encodeCodecs.value(codecName) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"encode-"+codecName+"\">" + codecName + "</a>";
         }
-        codecsString += i18n("Encode: %1",list.join(", "));
+        codecsString += i18n("Encode: %1", list.join(", "));
         list.clear();
-        for( int i=0; i<decodeCodecs.count(); i++ )
+        foreach( const QString& codecName, decodeCodecs.keys() )
         {
-            const QString codecName = decodeCodecs.keys().at(i);
-            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginDecodeProblems( pluginName, codecName );
-            list += decodeCodecs.values().at(i) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
+            problemInfos["decode-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginEncodeProblems(pluginName, codecName);
+            list += decodeCodecs.value(codecName) ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"decode-"+codecName+"\">" + codecName + "</a>";
         }
-        codecsString += i18n("Decode: %1",list.join(", "));
+        codecsString += i18n("Decode: %1", list.join(", "));
         info += codecsString.join("<br>");
     }
     else if( currentPlugin->type() == "replaygain" )
     {
-        ReplayGainPlugin *replaygainPlugin = (ReplayGainPlugin*)currentPlugin;
+        ReplayGainPlugin *replaygainPlugin = qobject_cast<ReplayGainPlugin*>(currentPlugin);
 
         QStringList codecs;
-        QList<ReplayGainPipe> codecTable = replaygainPlugin->codecTable();
-        for( int i=0; i<codecTable.count(); i++ )
+        foreach( const ReplayGainPipe& trunk, replaygainPlugin->codecTable() )
         {
-            const QString codecName = codecTable.at(i).codecName;
-            problemInfos["replaygain-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginReplayGainProblems( pluginName, codecName );
-            codecs += codecTable.at(i).enabled ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"replaygain-"+codecName+"\">" + codecName + "</a>";
+            const QString codecName = trunk.codecName;
+            problemInfos["replaygain-"+codecName] = i18n("Currently deactivated.") + "\n\n" + config->pluginLoader()->pluginReplayGainProblems(pluginName, codecName);
+            codecs += trunk.enabled ? "<span style=\"color:green\">" + codecName + "</span>" : "<a style=\"color:red\" href=\"replaygain-"+codecName+"\">" + codecName + "</a>";
         }
         info += QString( i18n("Supported codecs:") + "<br>" + codecs.join(", ") );
     }
@@ -236,29 +188,29 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     {
     }
 
-    aboutPluginLabel->setText( info.join("<br><br>") );
+    ui->aboutPluginLabel->setText(info.join("<br><br>"));
 
-    if( currentPlugin->isConfigSupported(BackendPlugin::General,"") )
+    if( currentPlugin->isConfigSupported(BackendPlugin::General, "") )
     {
-        configurePlugin->setText( i18n("Configure %1 ...",currentPlugin->name()) );
-        configurePlugin->show();
+        ui->configurePluginButton->setText(i18n("Configure %1 ...", currentPlugin->name()));
+        ui->configurePluginButton->show();
     }
     else
     {
-        configurePlugin->hide();
+        ui->configurePluginButton->hide();
     }
 }
 
-void AboutPlugins::configurePluginClicked()
+void AboutPlugins::configurePluginButtonClicked()
 {
     if( currentPlugin )
     {
-        currentPlugin->showConfigDialog( BackendPlugin::General, "", this );
+        currentPlugin->showConfigDialog(BackendPlugin::General, "", this);
     }
 }
 
-void AboutPlugins::showProblemInfo( const QString& problemId )
+void AboutPlugins::showProblemInfo(const QString& problemId)
 {
-    QToolTip::showText( QCursor::pos(), problemInfos[problemId], aboutPluginLabel );
+    QToolTip::showText(QCursor::pos(), problemInfos.value(problemId), ui->aboutPluginLabel);
 }
 

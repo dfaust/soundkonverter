@@ -5,6 +5,7 @@
 #include <QStandardPaths>
 #include <KConfigGroup>
 #include <KSharedConfig>
+#include <QDebug>
 
 #include <cstdlib>
 #include <ctime>
@@ -20,6 +21,8 @@ LoggerItem::~LoggerItem()
 Logger::Logger( QObject *parent)
     : QObject( parent )
 {
+    qDebug() << "Logger";
+
     KConfigGroup group( KSharedConfig::openConfig(), "General" );
     writeLogFiles = group.readEntry( "writeLogFiles", false );
 

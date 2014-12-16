@@ -1,27 +1,18 @@
-//
-// C++ Implementation: global
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "global.h"
 
 #include <KLocalizedString>
 #include <QLocale>
 
-
 Global::Global()
-{}
+{
+}
 
 Global::~Global()
-{}
+{
+}
 
-QString Global::prettyNumber( double num, QString unit, short digits )
+QString Global::prettyNumber(double num, QString unit, short digits)
 {
     QLocale locale;
 
@@ -29,24 +20,24 @@ QString Global::prettyNumber( double num, QString unit, short digits )
     if( unit == "%" && digits == 3 )
     {
         if( num < 10 )
-            prettyString.sprintf("%.2f %%",num);
+            prettyString.sprintf("%.2f %%", num);
         else if( num < 100 )
-            prettyString.sprintf("%.1f %%",num);
+            prettyString.sprintf("%.1f %%", num);
         else
-            prettyString.sprintf("%.0f %%",num);
+            prettyString.sprintf("%.0f %%", num);
 
         if( locale.decimalPoint() != '.' )
-            prettyString.replace(".",locale.decimalPoint());
+            prettyString.replace(".", locale.decimalPoint());
     }
     else if( unit == "%" && digits == 2 )
     {
         if( num < 10 )
-            prettyString.sprintf("%.1f %%",num);
+            prettyString.sprintf("%.1f %%", num);
         else
-            prettyString.sprintf("%.0f %%",num);
+            prettyString.sprintf("%.0f %%", num);
 
         if( locale.decimalPoint() != '.' )
-            prettyString.replace(".",locale.decimalPoint());
+            prettyString.replace(".", locale.decimalPoint());
     }
     else if( unit == "B" )
     {
@@ -85,7 +76,7 @@ QString Global::prettyNumber( double num, QString unit, short digits )
         prettyString = prettyString + " " + unit;
 
         if( locale.decimalPoint() != '.' )
-            prettyString.replace(".",locale.decimalPoint());
+            prettyString.replace(".", locale.decimalPoint());
     }
     else if( unit == "ms" )
     {

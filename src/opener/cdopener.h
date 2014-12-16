@@ -22,20 +22,14 @@ extern "C"
 
 class TagEngine;
 class Config;
-class Options;
 class ConversionOptions;
-class QTreeWidget;
-class QPushButton;
-class QLineEdit;
-class QComboBox;
-class QSpinBox;
-class QTextEdit;
-class QGroupBox;
 class QTreeWidgetItem;
-class QLabel;
-class QCheckBox;
 class TagData;
+class QLabel;
 
+namespace Ui {
+    class CDOpener;
+}
 
 class PlayerWidget : public QWidget
 {
@@ -67,20 +61,11 @@ signals:
 };
 
 
-/**
- * @short Shows a dialog for selecting files from a CD
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
+/** Shows a dialog for selecting files from a CD */
 class CDOpener : public QDialog
 {
      Q_OBJECT
 public:
-    enum DialogPage {
-        CdOpenPage,
-        ConversionOptionsPage
-    };
-
     enum Columns {
         Column_Rip      = 0,
         Column_Track    = 1,
@@ -91,10 +76,7 @@ public:
         Column_Player   = 6
     };
 
-    /** Constructor */
     CDOpener( Config *_config, const QString& _device, QWidget *parent = 0, Qt::WindowFlags f=0 );
-
-    /** Destructor */
     ~CDOpener();
 
     /** true if no CD was found (don't execute the dialog) */
@@ -114,6 +96,8 @@ public slots:
     void setCommand( const QString& _command );
 
 private:
+    Ui::CDOpener *ui;
+
     /** returns a list of devices holding audio cds plus a short description (track count) */
     QMap<QString,QString> cdDevices();
     bool openCdDevice( const QString& _device );
@@ -123,54 +107,10 @@ private:
 
     QStringList amazonCoverUrls(const QString& asin);
 
-    /** the widget for selecting and editing the cd tracks */
-    QWidget *cdOpenerWidget;
     /** the widget for showing the progress of reading the cd / cddb data */
     QWidget *cdOpenerOverlayWidget;
-    /** the conversion options editor widget */
-    Options *options;
-    /** the current page */
-    DialogPage page;
-
-    QLabel *lSelector;
-    QLabel *lOptions;
-
-    /** A list of all tracks on the CD */
-    QTreeWidget *trackList;
-
-    /** A combobox for entering the artist or selecting VA of the whole CD */
-    QLineEdit *lArtist;
-    /** A lineedit for entering the album name */
-    QLineEdit *lAlbum;
-    /** A spinbox for entering or selecting the disc number */
-    QSpinBox *iDisc;
-    /** A spinbox for entering or selecting the total disc number */
-    QSpinBox *iDiscTotal;
-    /** A spinbox for entering or selecting the year of the album */
-    QSpinBox *iYear;
-    /** A combobox for entering or selecting the genre of the album */
-    QComboBox *cGenre;
-
-    /** The groupbox shows the selected track numbers */
-    QGroupBox *tagGroupBox;
-
-    /** Set the focus of the tag editor to the track over it */
-    QPushButton *pTrackUp;
-    /** Set the focus of the tag editor to the track under it */
-    QPushButton *pTrackDown;
-
-    /** A lineedit for entering the title of track */
-    QLineEdit *lTrackTitle;
-    QPushButton *pTrackTitleEdit;
-    /** A lineedit for entering the artist of a track */
-    QLineEdit *lTrackArtist;
-    QPushButton *pTrackArtistEdit;
-    /** A lineedit for entering the composer of a track */
-    QLineEdit *lTrackComposer;
-    QPushButton *pTrackComposerEdit;
-    /** A textedit for entering a comment for a track */
-    QTextEdit *tTrackComment;
-    QPushButton *pTrackCommentEdit;
+    /** Show the progress of reading the cd / cddb data */
+    QLabel *lOverlayLabel;
 
     Phonon::AudioOutput *audioOutput;
     Phonon::MediaObject *mediaObject;
@@ -179,19 +119,6 @@ private:
 
     QList<PlayerWidget*> playerWidgets;
 
-    /** Save the tag information to a cue file */
-    QPushButton *pSaveCue;
-    /** Request CDDB information */
-    QPushButton *pCDDB;
-    /** Rip enitre CD as one track */
-    QCheckBox *cEntireCd;
-    /** Add selected tracks to the file list and quit the dialog */
-    QPushButton *pAdd;
-    /** proceed to select conversion options */
-    QPushButton *pProceed;
-    /** Quit the dialog */
-    QPushButton *pCancel;
-
     Config *config;
 
     QString device;
@@ -199,19 +126,13 @@ private:
     cdrom_drive *cdDrive;
     cdrom_paranoia *cdParanoia;
 
-//     void *wmHandle;
-
     TagData *discTags;
     QList<TagData*> trackTags;
-    bool cdTextFound;
     bool cddbFound;
 
     QString lastAlbumArtist;
 
     QList<int> selectedTracks;
-
-    /** Show the progress of reading the cd / cddb data */
-    QLabel *lOverlayLabel;
 
     QTimer fadeTimer;
     float fadeAlpha;

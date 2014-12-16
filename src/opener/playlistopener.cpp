@@ -1,68 +1,37 @@
-//
-// C++ Implementation: opener
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "playlistopener.h"
+#include "ui_optionsdialog.h"
+
 #include "../options.h"
 #include "../config.h"
 #include "../codecproblems.h"
 
-#include <QApplication>
 #include <KLocalizedString>
-#include <QPushButton>
-#include <QLabel>
-#include <QLayout>
-#include <QHBoxLayout>
 #include <QMessageBox>
 #include <QFileDialog>
-#include <QDir>
 #include <QUrl>
 #include <QTextStream>
 
-
-PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
-    : QDialog( parent, f ),
-    dialogAborted( false ),
-    config( _config )
+PlaylistOpener::PlaylistOpener(Config *_config, QWidget *parent, Qt::WindowFlags f) :
+    QDialog(parent, f),
+    ui(new Ui::OptionsDialog),
+    dialogAborted(false),
+    config(_config)
 {
-    setWindowTitle( i18n("Add playlist") );
-    setWindowIcon( QIcon::fromTheme("view-media-playlist") );
-//     setButtons( 0 );
+    ui->setupUi(this);
 
-    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+    setWindowTitle(i18n("Add playlist"));
+    setWindowIcon(QIcon::fromTheme("view-media-playlist"));
 
-    QWidget *widget = new QWidget();
-//     setMainWidget( widget );
+    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
-    QGridLayout *mainGrid = new QGridLayout( widget );
+    connect(ui->okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
-    options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
-    mainGrid->addWidget( options, 1, 0 );
-
-    // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout();
-    mainGrid->addLayout( controlBox, 2, 0 );
-    controlBox->addStretch();
-
-    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
-    controlBox->addWidget( pAdd );
-    connect( pAdd, SIGNAL(clicked()), this, SLOT(okClickedSlot()) );
-    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
-    controlBox->addWidget( pCancel );
-    connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
-
-    fileDialog = new QFileDialog( this, i18n("Add Files"), "kfiledialog:///soundkonverter-add-media", "*.m3u" );
-    fileDialog->setWindowTitle( i18n("Add Files") );
+    fileDialog = new QFileDialog( this, i18n("Add playlist"), "kfiledialog:///soundkonverter-add-media", "*.m3u" );
     fileDialog->setFileMode(QFileDialog::ExistingFile);
-    connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
-    connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
+    connect(fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()));
+    connect(fileDialog, SIGNAL(rejected()), this, SLOT(reject()));
     const int dialogReturnCode = fileDialog->exec();
     if( dialogReturnCode == QDialog::Rejected )
         dialogAborted = true;
@@ -98,24 +67,28 @@ void PlaylistOpener::fileDialogAccepted()
     {
         QTextStream stream(&playlistFile);
         QString line;
+
         do
         {
             line = stream.readLine();
             if( !line.startsWith("#EXTM3U") && !line.startsWith("#EXTINF") && !line.isEmpty() )
             {
                 QUrl url(line);
-                if( url.isRelative() ) url = QUrl( playlistUrl.path() + "/" + line );
-//                 url.cleanPath();
+                if( url.isRelative() )
+                    url = QUrl( playlistUrl.path() + "/" + line );
 
-                if( !url.isLocalFile() || QFile::exists(url.toLocalFile()) ) urls += url;
-                else filesNotFound += url.url(QUrl::PreferLocalFile);
+                if( !url.isLocalFile() || QFile::exists(url.toLocalFile()) )
+                    urls += url;
+                else
+                    filesNotFound += url.url(QUrl::PreferLocalFile);
             }
         } while( !line.isNull() );
+
         playlistFile.close();
     }
 
-    const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
-    const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+    const bool canDecodeAac = config->pluginLoader()->canDecode("m4a/aac");
+    const bool canDecodeAlac = config->pluginLoader()->canDecode("m4a/alac");
     const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
 
     for( int i=0; i<urls.count(); i++ )
@@ -158,23 +131,7 @@ void PlaylistOpener::fileDialogAccepted()
         problem.codecName = problems.keys().at(i);
         if( problem.codecName != "wav" )
         {
-            #if QT_VERSION >= 0x040500
-                problems[problem.codecName][1].removeDuplicates();
-            #else
-                QStringList found;
-                for( int j=0; j<problems.value(problem.codecName).at(1).count(); j++ )
-                {
-                    if( found.contains(problems.value(problem.codecName).at(1).at(j)) )
-                    {
-                        problems[problem.codecName][1].removeAt(j);
-                        j--;
-                    }
-                    else
-                    {
-                        found += problems.value(problem.codecName).at(1).at(j);
-                    }
-                }
-            #endif
+            problems[problem.codecName][1].removeDuplicates();
             problem.solutions = problems.value(problem.codecName).at(1);
             if( problems.value(problem.codecName).at(0).count() <= 3 )
             {
@@ -232,15 +189,15 @@ void PlaylistOpener::fileDialogAccepted()
 
 void PlaylistOpener::okClickedSlot()
 {
-    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
     if( conversionOptions )
     {
-        options->accepted();
-        emit open( urls, conversionOptions );
+        ui->options->accepted();
+        emit open(urls, conversionOptions);
         accept();
     }
     else
     {
-        QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
+        QMessageBox::critical(this, "soundKonverter", i18n("No conversion options selected."));
     }
 }

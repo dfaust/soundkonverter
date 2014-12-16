@@ -1,5 +1,7 @@
 
 #include "cdopener.h"
+#include "ui_cdopener.h"
+
 #include "../metadata/tagengine.h"
 #include "../config.h"
 #include "../options.h"
@@ -7,30 +9,14 @@
 #include "../global.h"
 
 #include <KLocalizedString>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QComboBox>
-// #include <KNumInput>
-#include <QTextEdit>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QInputDialog>
 
-#include <QApplication>
-#include <QLayout>
-#include <QBoxLayout>
-#include <QGridLayout>
-#include <QLabel>
-#include <QGroupBox>
-#include <QTreeWidget>
 #include <QDateTime>
 #include <QColor>
-#include <QDir>
 #include <QFile>
-#include <QCheckBox>
-#include <QHeaderView>
-#include <QSpinBox>
 
 #include <solid/device.h>
 #include <solid/block.h>
@@ -53,10 +39,10 @@
 #include <musicbrainz5/Artist.h>
 
 
-PlayerWidget::PlayerWidget( Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f )
-    : QWidget( parent, f ),
-    track( _track ),
-    m_treeWidgetItem( _treeWidgetItem )
+PlayerWidget::PlayerWidget(Phonon::MediaObject *mediaObject, int _track, QTreeWidgetItem *_treeWidgetItem, QWidget *parent, Qt::WindowFlags f) :
+    QWidget(parent, f),
+    track(_track),
+    m_treeWidgetItem(_treeWidgetItem)
 {
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
@@ -119,377 +105,173 @@ void PlayerWidget::trackChanged( int _track )
     }
 }
 
-
-CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt::WindowFlags f )
-    : QDialog( parent, f ),
+CDOpener::CDOpener(Config *_config, const QString& _device, QWidget *parent, Qt::WindowFlags f) :
+    QDialog(parent, f),
+    ui(new Ui::CDOpener),
     noCdFound( false ),
     config( _config ),
     cdDrive( 0 ),
     cdParanoia( 0 ),
     discTags( 0 ),
-    cdTextFound( false ),
     cddbFound( false )
 {
-//     setButtons( 0 );
-
-    page = CdOpenPage;
-
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-    // let the dialog look nice
-    setWindowTitle( i18n("Add CD tracks") );
-    setWindowIcon( QIcon::fromTheme("media-optical-audio") );
+    ui->setupUi(this);
 
-    QWidget *widget = new QWidget( this );
-    QGridLayout *mainGrid = new QGridLayout( widget );
-    QGridLayout *topGrid = new QGridLayout();
-    mainGrid->addLayout( topGrid, 0, 0 );
-//     setMainWidget( widget );
+    QPixmap coverPixmap(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "soundkonverter/images/nocover.png"));
+    ui->coverLabel->setFixedSize(qRound((qreal)ui->coverLabel->size().height() * coverPixmap.width() / coverPixmap.height()), ui->coverLabel->size().height());
+    ui->coverLabel->setPixmap(coverPixmap);
 
-    lSelector = new QLabel( i18n("1. Select CD tracks"), widget );
-    QFont font;
-    font.setBold( true );
-    lSelector->setFont( font );
-    topGrid->addWidget( lSelector, 0, 0 );
-    lOptions = new QLabel( i18n("2. Set conversion options"), widget );
-    topGrid->addWidget( lOptions, 0, 1 );
+    ui->albumArtistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui->albumLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui->discNoLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
 
-    // draw a horizontal line
-    QFrame *lineFrame = new QFrame( widget );
-    lineFrame->setFrameShape( QFrame::HLine );
-    lineFrame->setFrameShadow( QFrame::Sunken );
-    mainGrid->addWidget( lineFrame, 1, 0 );
+    ui->titleLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui->artistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui->commentLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
 
+    ui->yearSpinBox->setValue(QDate::currentDate().year());
 
-    // CD Opener Widget
+    ui->genreComboBox->addItems(config->tagEngine()->genreList);
+    ui->genreComboBox->clearEditText();
 
-    cdOpenerWidget = new QWidget( widget );
-    mainGrid->addWidget( cdOpenerWidget, 2, 0 );
+    ui->commentTextEdit->setFixedHeight(4*fontHeight);
 
-    // the grid for all widgets in the dialog
-    QGridLayout *gridLayout = new QGridLayout( cdOpenerWidget );
+    ui->okButton->hide();
 
-    // the box for the cover and artist/album grid
-    QHBoxLayout *topBoxLayout = new QHBoxLayout();
-    gridLayout->addLayout( topBoxLayout, 0, 0 );
+    connect(ui->albumArtistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(artistChanged(const QString&)));
 
-    // the album cover
-    QLabel *lAlbumCover = new QLabel( "", cdOpenerWidget );
-    topBoxLayout->addWidget( lAlbumCover );
-    lAlbumCover->setPixmap( QPixmap( QStandardPaths::locate(QStandardPaths::GenericDataLocation, "soundkonverter/images/nocover.png") ) );
-    lAlbumCover->setContentsMargins( 0, 0, 0.5*fontHeight, 0 );
+    connect(ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()));
+//     connect(ui->tracksTreeWidget, SIGNAL(itemEntered(QTreeWidgetItem*,int)), this, SLOT(itemHighlighted(QTreeWidgetItem*,int)));
 
-    // the grid for the artist and album input
-    QGridLayout *topGridLayout = new QGridLayout();
-    topBoxLayout->addLayout( topGridLayout );
+    connect(ui->trackUpButton, SIGNAL(clicked()), this, SLOT(trackUpPressed()));
+    connect(ui->trackDownButton, SIGNAL(clicked()), this, SLOT(trackDownPressed()));
 
-    // set up the first row at the top
-    QLabel *lArtistLabel = new QLabel( i18n("Album artist:"), cdOpenerWidget );
-    topGridLayout->addWidget( lArtistLabel, 0, 0 );
-    lArtist = new QLineEdit( cdOpenerWidget );
-    topGridLayout->addWidget( lArtist, 0, 1 );
-    connect( lArtist, SIGNAL(textChanged(const QString&)), this, SLOT(artistChanged(const QString&)) );
-
-    // set up the second row at the top
-    QLabel *lAlbumLabel = new QLabel( i18n("Album:"), cdOpenerWidget );
-    topGridLayout->addWidget( lAlbumLabel, 1, 0 );
-    lAlbum = new QLineEdit( cdOpenerWidget );
-    topGridLayout->addWidget( lAlbum, 1, 1 );
-
-    // set up the third row at the top
-    QLabel *lDiscLabel = new QLabel( i18n("Disc No.:"), cdOpenerWidget );
-    topGridLayout->addWidget( lDiscLabel, 2, 0 );
-    // add a horizontal box layout for the year and genre
-    QHBoxLayout *yearBox = new QHBoxLayout();
-    topGridLayout->addLayout( yearBox, 2, 1 );
-    // and fill it up
-    iDisc = new QSpinBox( cdOpenerWidget );
-    iDisc->setRange(1, 99);
-    iDisc->setValue(1);
-    yearBox->addWidget( iDisc );
-    QLabel *lDiscTotalLabel = new QLabel( i18nc("Track/Disc No. x of y","of"), cdOpenerWidget );
-    lDiscTotalLabel->setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
-    yearBox->addWidget( lDiscTotalLabel );
-    iDiscTotal = new QSpinBox( cdOpenerWidget );
-    iDisc->setRange(1, 99);
-    iDisc->setValue(1);
-    yearBox->addWidget( iDiscTotal );
-    QLabel *lYearLabel = new QLabel( i18n("Year:"), cdOpenerWidget );
-    lYearLabel->setAlignment( Qt::AlignRight | Qt::AlignVCenter );
-    yearBox->addWidget( lYearLabel );
-    iYear = new QSpinBox( cdOpenerWidget );
-    iYear->setRange(0, 99999);
-    iYear->setValue(QDate::currentDate().year());
-    yearBox->addWidget( iYear );
-    QLabel *lGenreLabel = new QLabel( i18n("Genre:"), cdOpenerWidget );
-    lGenreLabel->setAlignment( Qt::AlignRight | Qt::AlignVCenter );
-    yearBox->addWidget( lGenreLabel );
-    cGenre = new QComboBox( cdOpenerWidget );
-    cGenre->setEditable(true);
-    cGenre->addItems( config->tagEngine()->genreList );
-    cGenre->clearEditText();
-    yearBox->addWidget( cGenre );
-
-    topGridLayout->setColumnStretch( 1, 1 );
+    connect(ui->titleLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackTitleChanged(const QString&)));
+    connect(ui->editTitleButton, SIGNAL(clicked()), this, SLOT(editTrackTitleClicked()));
+    connect(ui->artistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackArtistChanged(const QString&)));
+    connect(ui->editArtistButton, SIGNAL(clicked()), this, SLOT(editTrackArtistClicked()));
+    connect(ui->composerLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackComposerChanged(const QString&)));
+    connect(ui->editComposerButton, SIGNAL(clicked()), this, SLOT(editTrackComposerClicked()));
+    connect(ui->commentTextEdit, SIGNAL(textChanged()), this, SLOT(trackCommentChanged()));
+    connect(ui->editCommentButton, SIGNAL(clicked()), this, SLOT(editTrackCommentClicked()));
 
 
-    // generate the list view for the tracks
-    trackList = new QTreeWidget( cdOpenerWidget );
-    gridLayout->addWidget( trackList, 1, 0 );
-    // and fill in the headers
-    trackList->setColumnCount( 5 );
-    QStringList labels;
-    labels.append( i18nc("column title","Rip") );
-    labels.append( i18n("Track") );
-    labels.append( i18n("Artist") );
-    labels.append( i18n("Composer") );
-    labels.append( i18n("Title") );
-    labels.append( i18n("Length") );
-    labels.append( i18n("Player") );
-    trackList->setHeaderLabels( labels );
-    trackList->setSelectionBehavior( QAbstractItemView::SelectRows );
-    trackList->setSelectionMode( QAbstractItemView::ExtendedSelection );
-    trackList->setSortingEnabled( false );
-    trackList->setRootIsDecorated( false );
-//     trackList->header()->setResizeMode( Column_Artist, QHeaderView::ResizeToContents );
-//     trackList->header()->setResizeMode( Column_Composer, QHeaderView::ResizeToContents );
-//     trackList->header()->setResizeMode( Column_Title, QHeaderView::ResizeToContents );
-//     trackList->setMouseTracking( true );
-    connect( trackList, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
-//     connect( trackList, SIGNAL(itemEntered(QTreeWidgetItem*,int)), this, SLOT(itemHighlighted(QTreeWidgetItem*,int)) );
-    gridLayout->setRowStretch( 1, 1 );
+    audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
+    audioOutput->setVolume(0.5);
+    mediaObject = new Phonon::MediaObject(this);
+    mediaObject->setTickInterval(500);
 
+    Phonon::createPath(mediaObject, audioOutput);
 
-    // create the box at the bottom for editing the tags
-    tagGroupBox = new QGroupBox( i18n("No track selected"), cdOpenerWidget );
-    gridLayout->addWidget( tagGroupBox, 2, 0 );
-    QGridLayout *tagGridLayout = new QGridLayout( tagGroupBox );
+    mediaController = new Phonon::MediaController(mediaObject);
+    mediaController->setAutoplayTitles(false);
 
-    // add the up and down buttons
-    pTrackUp = new QPushButton( "", tagGroupBox );
-    pTrackUp->setIcon( QIcon::fromTheme("arrow-up") );
-    pTrackUp->setFixedSize( pTrackUp->sizeHint().height(), pTrackUp->sizeHint().height() );
-    pTrackUp->setAutoRepeat( true );
-    connect( pTrackUp, SIGNAL(clicked()), this, SLOT(trackUpPressed()) );
-    tagGridLayout->addWidget( pTrackUp, 0, 0 );
-    pTrackDown = new QPushButton( "", tagGroupBox );
-    pTrackDown->setIcon( QIcon::fromTheme("arrow-down") );
-    pTrackDown->setFixedSize( pTrackDown->sizeHint().height(), pTrackDown->sizeHint().height() );
-    pTrackDown->setAutoRepeat( true );
-    connect( pTrackDown, SIGNAL(clicked()), this, SLOT(trackDownPressed()) );
-    tagGridLayout->addWidget( pTrackDown, 1, 0 );
-
-    // add the inputs
-    // add a horizontal box layout for the title
-    QHBoxLayout *trackTitleBox = new QHBoxLayout();
-    tagGridLayout->addLayout( trackTitleBox, 0, 2 );
-    // and fill it up
-    QLabel *lTrackTitleLabel = new QLabel( i18n("Title:"), tagGroupBox );
-    tagGridLayout->addWidget( lTrackTitleLabel, 0, 1 );
-    lTrackTitle = new QLineEdit( tagGroupBox );
-    trackTitleBox->addWidget( lTrackTitle );
-    connect( lTrackTitle, SIGNAL(textChanged(const QString&)), this, SLOT(trackTitleChanged(const QString&)) );
-    pTrackTitleEdit = new QPushButton( "", tagGroupBox );
-    pTrackTitleEdit->setIcon( QIcon::fromTheme("document-edit") );
-    pTrackTitleEdit->setFixedSize( lTrackTitle->sizeHint().height(), lTrackTitle->sizeHint().height() );
-    pTrackTitleEdit->hide();
-    trackTitleBox->addWidget( pTrackTitleEdit );
-    connect( pTrackTitleEdit, SIGNAL(clicked()), this, SLOT(editTrackTitleClicked()) );
-    // add a horizontal box layout for the composer
-    QHBoxLayout *trackArtistBox = new QHBoxLayout();
-    tagGridLayout->addLayout( trackArtistBox, 1, 2 );
-    // and fill it up
-    QLabel *lTrackArtistLabel = new QLabel( i18n("Artist:"), tagGroupBox );
-    tagGridLayout->addWidget( lTrackArtistLabel, 1, 1 );
-    lTrackArtist = new QLineEdit( tagGroupBox );
-    trackArtistBox->addWidget( lTrackArtist );
-    connect( lTrackArtist, SIGNAL(textChanged(const QString&)), this, SLOT(trackArtistChanged(const QString&)) );
-    pTrackArtistEdit = new QPushButton( "", tagGroupBox );
-    pTrackArtistEdit->setIcon( QIcon::fromTheme("document-edit") );
-    pTrackArtistEdit->setFixedSize( lTrackArtist->sizeHint().height(), lTrackArtist->sizeHint().height() );
-    pTrackArtistEdit->hide();
-    trackArtistBox->addWidget( pTrackArtistEdit );
-    connect( pTrackArtistEdit, SIGNAL(clicked()), this, SLOT(editTrackArtistClicked()) );
-    QLabel *lTrackComposerLabel = new QLabel( i18n("Composer:"), tagGroupBox );
-    trackArtistBox->addWidget( lTrackComposerLabel );
-    lTrackComposer = new QLineEdit( tagGroupBox );
-    trackArtistBox->addWidget( lTrackComposer );
-    connect( lTrackComposer, SIGNAL(textChanged(const QString&)), this, SLOT(trackComposerChanged(const QString&)) );
-    pTrackComposerEdit = new QPushButton( "", tagGroupBox );
-    pTrackComposerEdit->setIcon( QIcon::fromTheme("document-edit") );
-    pTrackComposerEdit->setFixedSize( lTrackComposer->sizeHint().height(), lTrackComposer->sizeHint().height() );
-    pTrackComposerEdit->hide();
-    trackArtistBox->addWidget( pTrackComposerEdit );
-    connect( pTrackComposerEdit, SIGNAL(clicked()), this, SLOT(editTrackComposerClicked()) );
-    // add a horizontal box layout for the comment
-    QHBoxLayout *trackCommentBox = new QHBoxLayout();
-    tagGridLayout->addLayout( trackCommentBox, 2, 2 );
-    // and fill it up
-    QLabel *lTrackCommentLabel = new QLabel( i18n("Comment:"), tagGroupBox );
-    tagGridLayout->addWidget( lTrackCommentLabel, 2, 1 );
-    tTrackComment = new QTextEdit( tagGroupBox );
-    trackCommentBox->addWidget( tTrackComment );
-    tTrackComment->setFixedHeight( 4*fontHeight );
-    connect( tTrackComment, SIGNAL(textChanged()), this, SLOT(trackCommentChanged()) );
-    pTrackCommentEdit = new QPushButton( "", tagGroupBox );
-    pTrackCommentEdit->setIcon( QIcon::fromTheme("document-edit") );
-    pTrackCommentEdit->setFixedSize( lTrackTitle->sizeHint().height(), lTrackTitle->sizeHint().height() );
-    pTrackCommentEdit->hide();
-    trackCommentBox->addWidget( pTrackCommentEdit );
-    connect( pTrackCommentEdit, SIGNAL(clicked()), this, SLOT(editTrackCommentClicked()) );
-
-
-    audioOutput = new Phonon::AudioOutput( Phonon::MusicCategory, this );
-    audioOutput->setVolume( 0.5 );
-    mediaObject = new Phonon::MediaObject( this );
-    mediaObject->setTickInterval( 500 );
-
-    Phonon::createPath( mediaObject, audioOutput );
-
-    mediaController = new Phonon::MediaController( mediaObject );
-    mediaController->setAutoplayTitles( false );
-
-    connect( mediaController, SIGNAL(titleChanged(int)), this, SLOT(playbackTitleChanged(int)) );
-    connect( mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(playbackStateChanged(Phonon::State,Phonon::State)) );
+    connect(mediaController, SIGNAL(titleChanged(int)),                     this, SLOT(playbackTitleChanged(int)));
+    connect(mediaObject, SIGNAL(stateChanged(Phonon::State,Phonon::State)), this, SLOT(playbackStateChanged(Phonon::State,Phonon::State)));
 
 
 
-    // Cd Opener Overlay Widget
-
-    cdOpenerOverlayWidget = new QWidget( widget );
-    mainGrid->addWidget( cdOpenerOverlayWidget, 2, 0 );
-    QHBoxLayout *cdOpenerOverlayLayout = new QHBoxLayout();
-    cdOpenerOverlayWidget->setLayout( cdOpenerOverlayLayout );
-//     lOverlayLabel = new QLabel( i18n("Please wait, trying to read audio CD ..."), cdOpenerOverlayWidget );
-    lOverlayLabel = new QLabel( cdOpenerOverlayWidget );
-    cdOpenerOverlayLayout->addWidget( lOverlayLabel );
-    lOverlayLabel->setAlignment( Qt::AlignCenter );
-    cdOpenerOverlayWidget->setAutoFillBackground( true );
-    QPalette newPalette = cdOpenerOverlayWidget->palette();
-    newPalette.setBrush( QPalette::Window, brushSetAlpha( newPalette.window(), 192 ) );
-    cdOpenerOverlayWidget->setPalette( newPalette );
-
-
-    // Conversion Options Widget
-
-    // add a vertical box layout for the options widget
-    QVBoxLayout *optionsBox = new QVBoxLayout();
-    mainGrid->addLayout( optionsBox, 2, 0 );
-
-    options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
-    optionsBox->addWidget( options );
-    options->hide();
-    optionsBox->addStretch();
+//     // Cd Opener Overlay Widget
+//
+//     cdOpenerOverlayWidget = new QWidget( widget );
+//     mainGrid->addWidget( cdOpenerOverlayWidget, 2, 0 );
+//     QHBoxLayout *cdOpenerOverlayLayout = new QHBoxLayout();
+//     cdOpenerOverlayWidget->setLayout( cdOpenerOverlayLayout );
+// //     lOverlayLabel = new QLabel( i18n("Please wait, trying to read audio CD ..."), cdOpenerOverlayWidget );
+//     lOverlayLabel = new QLabel( cdOpenerOverlayWidget );
+//     cdOpenerOverlayLayout->addWidget( lOverlayLabel );
+//     lOverlayLabel->setAlignment( Qt::AlignCenter );
+//     cdOpenerOverlayWidget->setAutoFillBackground( true );
+//     QPalette newPalette = cdOpenerOverlayWidget->palette();
+//     newPalette.setBrush( QPalette::Window, brushSetAlpha( newPalette.window(), 192 ) );
+//     cdOpenerOverlayWidget->setPalette( newPalette );
 
 
-    // draw a horizontal line
-    QFrame *buttonLineFrame = new QFrame( widget );
-    buttonLineFrame->setFrameShape( QFrame::HLine );
-    buttonLineFrame->setFrameShadow( QFrame::Sunken );
-    buttonLineFrame->setFrameShape( QFrame::HLine );
-    mainGrid->addWidget( buttonLineFrame, 4, 0 );
+    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
-    // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout();
-    mainGrid->addLayout( controlBox, 5, 0 );
 
-    // add the control elements
-    pSaveCue = new QPushButton( QIcon::fromTheme("document-save"), i18n("Save cue sheet..."), widget );
-    controlBox->addWidget( pSaveCue );
-    connect( pSaveCue, SIGNAL(clicked()), this, SLOT(saveCuesheetClicked()) );
-    controlBox->addSpacing( fontHeight );
+    connect( ui->saveCueSheetButton, SIGNAL(clicked()), this, SLOT(saveCuesheetClicked()) );
 
-    pCDDB = new QPushButton( QIcon::fromTheme("download"), i18n("Request CDDB"), widget );
-    controlBox->addWidget( pCDDB );
-    connect( pCDDB, SIGNAL(clicked()), this, SLOT(requestCddb()) );
-    controlBox->addStretch();
+//     connect( pCDDB, SIGNAL(clicked()), this, SLOT(requestCddb()) );
 
-    cEntireCd = new QCheckBox( i18n("Rip entire CD to one file"), widget );
     QStringList errorList;
-    cEntireCd->setEnabled( config->pluginLoader()->canRipEntireCd(&errorList) );
-    if( !cEntireCd->isEnabled() )
+    ui->ripEntireCdCheckBox->setEnabled(config->pluginLoader()->canRipEntireCd(&errorList));
+    if( !ui->ripEntireCdCheckBox->isEnabled() )
     {
-        QPalette notificationPalette = cEntireCd->palette();
-        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) ); // QColor(181,96,101)
-        cEntireCd->setPalette( notificationPalette );
+        QPalette notificationPalette = ui->ripEntireCdCheckBox->palette();
+        notificationPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(174,127,130)); // QColor(181,96,101)
+        ui->ripEntireCdCheckBox->setPalette(notificationPalette);
         if( !errorList.isEmpty() )
         {
-            errorList.prepend( i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPossible solutions are listed below.\n") );
+            errorList.prepend(i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPossible solutions are listed below.\n"));
         }
         else
         {
             errorList += i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPlease check your distribution's package manager in order to install an additional ripper plugin which supports ripping to one file.");
         }
-        cEntireCd->setToolTip( errorList.join("\n") );
-    }
-    controlBox->addWidget( cEntireCd );
-    controlBox->addSpacing( 2*fontHeight );
-
-    pProceed = new QPushButton( QIcon::fromTheme("go-next"), i18n("Proceed"), widget );
-    controlBox->addWidget( pProceed );
-    connect( pProceed, SIGNAL(clicked()), this, SLOT(proceedClicked()) );
-    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
-    controlBox->addWidget( pAdd );
-    pAdd->hide();
-    connect( pAdd, SIGNAL(clicked()), this, SLOT(addClicked()) );
-    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
-    controlBox->addWidget( pCancel );
-    connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
-
-    connect( &fadeTimer, SIGNAL(timeout()), this, SLOT(fadeAnim()) );
-    fadeAlpha = 255.0f;
-
-
-    if( !_device.isEmpty() )
-    {
-        device = _device;
-    }
-    else
-    {
-        const QMap<QString,QString> devices = cdDevices();
-        if( devices.count() <= 0 )
-        {
-            noCdFound = true;
-            return;
-        }
-        else if( devices.count() == 1 )
-        {
-            device = devices.keys().at(0);
-        }
-        else
-        {
-            QStringList list;
-            foreach( const QString desc, devices.values() )
-            {
-                list.append( desc );
-            }
-            bool ok = false;
-            const QString selection = QInputDialog::getItem( this, i18n("Select CD-ROM drive"), i18n("Multiple CD-ROM drives where found. Please select one:"), list, 0, false, &ok );
-
-            if( ok )
-            {
-                // The user selected an item and pressed OK
-                device = devices.keys().at(list.indexOf(selection));
-            }
-            else
-            {
-                noCdFound = true;
-                return;
-            }
-        }
+        ui->ripEntireCdCheckBox->setToolTip(errorList.join("\n"));
     }
 
-    const bool success = openCdDevice( device );
-    if( !success )
-    {
-//         QMessageBox::information(this,"success = false, couldn't open audio device.\nplease report this bug.");
-        noCdFound = true;
-        return;
-    }
+    connect(ui->proceedButton, SIGNAL(clicked()), this, SLOT(proceedClicked()));
+    connect(ui->okButton, SIGNAL(clicked()), this, SLOT(addClicked()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
-
-    mediaSource = new Phonon::MediaSource( Phonon::Cd, device );
-    mediaObject->setCurrentSource( *mediaSource ); // WARNING doesn't work with phonon-xine
+//     connect( &fadeTimer, SIGNAL(timeout()), this, SLOT(fadeAnim()) );
+//     fadeAlpha = 255.0f;
+//
+//
+//     if( !_device.isEmpty() )
+//     {
+//         device = _device;
+//     }
+//     else
+//     {
+//         const QMap<QString,QString> devices = cdDevices();
+//         if( devices.count() <= 0 )
+//         {
+//             noCdFound = true;
+//             return;
+//         }
+//         else if( devices.count() == 1 )
+//         {
+//             device = devices.keys().at(0);
+//         }
+//         else
+//         {
+//             QStringList list;
+//             foreach( const QString desc, devices.values() )
+//             {
+//                 list.append( desc );
+//             }
+//             bool ok = false;
+//             const QString selection = QInputDialog::getItem( this, i18n("Select CD-ROM drive"), i18n("Multiple CD-ROM drives where found. Please select one:"), list, 0, false, &ok );
+//
+//             if( ok )
+//             {
+//                 // The user selected an item and pressed OK
+//                 device = devices.keys().at(list.indexOf(selection));
+//             }
+//             else
+//             {
+//                 noCdFound = true;
+//                 return;
+//             }
+//         }
+//     }
+//
+//     const bool success = openCdDevice( device );
+//     if( !success )
+//     {
+// //         QMessageBox::information(this,"success = false, couldn't open audio device.\nplease report this bug.");
+//         noCdFound = true;
+//         return;
+//     }
+//
+//
+//     mediaSource = new Phonon::MediaSource( Phonon::Cd, device );
+//     mediaObject->setCurrentSource( *mediaSource ); // WARNING doesn't work with phonon-xine
 
 
 //     // Prevent the dialog from beeing too wide because of the directory history
@@ -521,17 +303,17 @@ CDOpener::~CDOpener()
 
 void CDOpener::setProfile( const QString& profile )
 {
-    options->setProfile( profile );
+    ui->options->setProfile( profile );
 }
 
 void CDOpener::setFormat( const QString& format )
 {
-    options->setFormat( format );
+    ui->options->setFormat( format );
 }
 
 void CDOpener::setOutputDirectory( const QString& directory )
 {
-    options->setOutputDirectory( directory );
+    ui->options->setOutputDirectory( directory );
 }
 
 void CDOpener::setCommand( const QString& _command )
@@ -600,25 +382,6 @@ bool CDOpener::openCdDevice( const QString& _device )
     }
     cdParanoia = paranoia_init( cdDrive );
 
-    // cd text
-
-//     const int status = wm_cd_init( device.toLocal8Bit().data(), "", "", "", &wmHandle );
-//
-//     struct cdtext_info *info = 0;
-//
-//     if( !WM_CDS_ERROR(status) )
-//     {
-//         info = wm_cd_get_cdtext( wmHandle );
-//
-//         if( !info || !info->valid || info->count_of_entries != cdda_tracks(cdDrive) )
-//         if( !info || !info->valid )
-//         {
-//             kDebug() << "no or invalid CDTEXT";
-//             info = 0;
-//         }
-//     }
-
-
     // add tracks to list
 
     if( discTags )
@@ -651,30 +414,30 @@ bool CDOpener::openCdDevice( const QString& _device )
         data.append( newTags->composer );
         data.append( newTags->title );
         data.append( QString().sprintf("%i:%02i",newTags->length/60,newTags->length%60) );
-        QTreeWidgetItem *item = new QTreeWidgetItem( trackList, data );
+        QTreeWidgetItem *item = new QTreeWidgetItem( ui->tracksTreeWidget, data );
         PlayerWidget *playerWidget = new PlayerWidget( mediaObject, newTags->track, item, this );
 //         playerWidget->hide();
         connect( playerWidget, SIGNAL(startPlayback(int)), this, SLOT(startPlayback(int)) );
         connect( playerWidget, SIGNAL(stopPlayback()), this, SLOT(stopPlayback()) );
         playerWidgets.append( playerWidget );
-        trackList->setItemWidget( item, Column_Player, playerWidget );
+        ui->tracksTreeWidget->setItemWidget( item, Column_Player, playerWidget );
         item->setCheckState( 0, Qt::Checked );
     }
-    trackList->resizeColumnToContents( Column_Rip );
-    trackList->resizeColumnToContents( Column_Track );
-    trackList->resizeColumnToContents( Column_Length );
+    ui->tracksTreeWidget->resizeColumnToContents( Column_Rip );
+    ui->tracksTreeWidget->resizeColumnToContents( Column_Track );
+    ui->tracksTreeWidget->resizeColumnToContents( Column_Length );
 
-    if( trackList->topLevelItem(0) )
-        trackList->topLevelItem(0)->setSelected( true );
+    if( ui->tracksTreeWidget->topLevelItem(0) )
+        ui->tracksTreeWidget->topLevelItem(0)->setSelected( true );
 
-    lArtist->setText( discTags->artist );
-    lAlbum->setText( discTags->album );
-    iDisc->setValue( discTags->disc );
-    iDiscTotal->setValue( discTags->discTotal );
-    iYear->setValue( discTags->year );
-    cGenre->setEditText( discTags->genre );
+    ui->albumArtistLineEdit->setText( discTags->artist );
+    ui->albumLineEdit->setText( discTags->album );
+    ui->discNoSpinBox->setValue( discTags->disc );
+    ui->discNoTotalSpinBox->setValue( discTags->discTotal );
+    ui->yearSpinBox->setValue( discTags->year );
+    ui->genreComboBox->setEditText( discTags->genre );
 
-    artistChanged( lArtist->text() );
+    artistChanged( ui->albumArtistLineEdit->text() );
     adjustComposerColumn();
 
 
@@ -765,11 +528,11 @@ void CDOpener::requestCddb( bool autoRequest )
                     discTags->artist = parseNameCredits(fullRelease->ArtistCredit()->NameCreditList());
                     discTags->year = QString::fromStdString(fullRelease->Date()).left(4).toShort();
 
-                    lArtist->setText( discTags->artist );
-                    lAlbum->setText( discTags->album );
-                    iYear->setValue( discTags->year );
+                    ui->albumArtistLineEdit->setText( discTags->artist );
+                    ui->albumLineEdit->setText( discTags->album );
+                    ui->yearSpinBox->setValue( discTags->year );
 
-                    artistChanged( lArtist->text() );
+                    artistChanged( ui->albumArtistLineEdit->text() );
 
                     const QString asin = QString::fromStdString(fullRelease->ASIN());
 
@@ -784,8 +547,8 @@ void CDOpener::requestCddb( bool autoRequest )
                     {
                         MusicBrainz5::CMedium *medium = mediaList.Item(0);
 
-                        iDisc->setValue( discTags->disc );
-                        iDiscTotal->setValue( discTags->discTotal );
+                        ui->discNoSpinBox->setValue( discTags->disc );
+                        ui->discNoTotalSpinBox->setValue( discTags->discTotal );
 
                         MusicBrainz5::CTrackList *trackList = medium->TrackList();
                         if( trackList )
@@ -800,7 +563,7 @@ void CDOpener::requestCddb( bool autoRequest )
                                 trackTags.at(trackNumber)->artist = artist;
                                 trackTags.at(trackNumber)->title = title;
 
-                                QTreeWidgetItem *item = this->trackList->topLevelItem(trackNumber);
+                                QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem(trackNumber);
                                 item->setText( 2, artist );
                                 item->setText( 4, title );
                             }
@@ -913,48 +676,48 @@ void CDOpener::timeout()
 
 void CDOpener::trackUpPressed()
 {
-    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.first() - 1 );
+    QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.first() - 1 );
 
     if( !item )
         return;
 
-    disconnect( trackList, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
+    disconnect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
 
     item->setSelected( true );
-    trackList->scrollToItem( item );
+    ui->tracksTreeWidget->scrollToItem( item );
 
-    connect( trackList, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
+    connect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
 
     trackChanged();
 }
 
 void CDOpener::trackDownPressed()
 {
-    QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.last() + 1 );
+    QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.last() + 1 );
 
     if( !item )
         return;
 
-    disconnect( trackList, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
+    disconnect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
 
     item->setSelected( true );
-    trackList->scrollToItem( item );
+    ui->tracksTreeWidget->scrollToItem( item );
 
-    connect( trackList, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
+    connect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
 
     trackChanged();
 }
@@ -966,9 +729,9 @@ void CDOpener::trackChanged()
     // rebuild the list of the selected tracks
     selectedTracks.clear();
     QTreeWidgetItem *item;
-    for( int i=0; i<trackList->topLevelItemCount(); i++ )
+    for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
     {
-        item = trackList->topLevelItem( i );
+        item = ui->tracksTreeWidget->topLevelItem( i );
         if( item->isSelected() )
         {
             selectedTracks.append( i );
@@ -978,54 +741,54 @@ void CDOpener::trackChanged()
     // insert the new values
     if( selectedTracks.count() < 1 )
     {
-        pTrackUp->setEnabled( false );
-        pTrackDown->setEnabled( false );
+        ui->trackUpButton->setEnabled( false );
+        ui->trackDownButton->setEnabled( false );
 
-        lTrackTitle->setEnabled( false );
-        lTrackTitle->setText( "" );
-        pTrackTitleEdit->hide();
-        lTrackArtist->setEnabled( false );
-        lTrackArtist->setText( "" );
-        pTrackArtistEdit->hide();
-        lTrackComposer->setEnabled( false );
-        lTrackComposer->setText( "" );
-        pTrackComposerEdit->hide();
-        tTrackComment->setEnabled( false );
-        tTrackComment->setReadOnly( true );
-        tTrackComment->setText( "" );
-        pTrackCommentEdit->hide();
+        ui->titleLineEdit->setEnabled( false );
+        ui->titleLineEdit->setText( "" );
+        ui->editTitleButton->hide();
+        ui->artistLineEdit->setEnabled( false );
+        ui->artistLineEdit->setText( "" );
+        ui->editArtistButton->hide();
+        ui->composerLineEdit->setEnabled( false );
+        ui->composerLineEdit->setText( "" );
+        ui->editComposerButton->hide();
+        ui->commentTextEdit->setEnabled( false );
+        ui->commentTextEdit->setReadOnly( true );
+        ui->commentTextEdit->setText( "" );
+        ui->editCommentButton->hide();
 
-        pTrackUp->setEnabled( false );
-        pTrackDown->setEnabled( false );
+        ui->trackUpButton->setEnabled( false );
+        ui->trackDownButton->setEnabled( false );
 
         return;
     }
     else if( selectedTracks.count() > 1 )
     {
         if( selectedTracks.first() > 0 )
-            pTrackUp->setEnabled( true );
+            ui->trackUpButton->setEnabled( true );
         else
-            pTrackUp->setEnabled( false );
+            ui->trackUpButton->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() - 1 )
-            pTrackDown->setEnabled( true );
+        if( selectedTracks.last() < ui->tracksTreeWidget->topLevelItemCount() - 1 )
+            ui->trackDownButton->setEnabled( true );
         else
-            pTrackDown->setEnabled( false );
+            ui->trackDownButton->setEnabled( false );
 
-        QString trackListString = "";
-        if( selectedTracks.count() == trackList->topLevelItemCount() )
+        QString trackGroupBoxTitle = "";
+        if( selectedTracks.count() == ui->tracksTreeWidget->topLevelItemCount() )
         {
-            trackListString = i18n("All tracks");
+            trackGroupBoxTitle = i18n("All tracks");
         }
         else
         {
-            trackListString = i18n("Tracks") + QString().sprintf( " %02i", selectedTracks.at(0) + 1 );
+            trackGroupBoxTitle = i18n("Tracks") + QString().sprintf(" %02i", selectedTracks.at(0) + 1);
             for( int i=1; i<selectedTracks.count(); i++ )
             {
-                trackListString += QString().sprintf( ", %02i", selectedTracks.at(i) + 1 );
+                trackGroupBoxTitle += QString().sprintf(", %02i", selectedTracks.at(i) + 1);
             }
         }
-        tagGroupBox->setTitle( trackListString );
+        ui->trackGroupBox->setTitle(trackGroupBoxTitle);
 
         const QString title = trackTags.at(selectedTracks.at(0))->title;
         bool equalTitles = true;
@@ -1049,88 +812,88 @@ void CDOpener::trackChanged()
 
         if( equalTitles )
         {
-            lTrackTitle->setEnabled( true );
-            lTrackTitle->setText( title );
-            pTrackTitleEdit->hide();
+            ui->titleLineEdit->setEnabled( true );
+            ui->titleLineEdit->setText( title );
+            ui->editTitleButton->hide();
         }
         else
         {
-            lTrackTitle->setEnabled( false );
-            lTrackTitle->setText( "" );
-            pTrackTitleEdit->show();
+            ui->titleLineEdit->setEnabled( false );
+            ui->titleLineEdit->setText( "" );
+            ui->editTitleButton->show();
         }
 
         if( equalArtists )
         {
-            lTrackArtist->setEnabled( true );
-            lTrackArtist->setText( artist );
-            pTrackArtistEdit->hide();
+            ui->artistLineEdit->setEnabled( true );
+            ui->artistLineEdit->setText( artist );
+            ui->editArtistButton->hide();
         }
         else
         {
-            lTrackArtist->setEnabled( false );
-            lTrackArtist->setText( "" );
-            pTrackArtistEdit->show();
+            ui->artistLineEdit->setEnabled( false );
+            ui->artistLineEdit->setText( "" );
+            ui->editArtistButton->show();
         }
 
         if( equalComposers )
         {
-            lTrackComposer->setEnabled( true );
-            lTrackComposer->setText( composer );
-            pTrackComposerEdit->hide();
+            ui->composerLineEdit->setEnabled( true );
+            ui->composerLineEdit->setText( composer );
+            ui->editComposerButton->hide();
         }
         else
         {
-            lTrackComposer->setEnabled( false );
-            lTrackComposer->setText( "" );
-            pTrackComposerEdit->show();
+            ui->composerLineEdit->setEnabled( false );
+            ui->composerLineEdit->setText( "" );
+            ui->editComposerButton->show();
         }
 
         if( equalComments )
         {
-            tTrackComment->setEnabled( true );
-            tTrackComment->setReadOnly( false );
-            tTrackComment->setText( comment );
-            pTrackCommentEdit->hide();
+            ui->commentTextEdit->setEnabled( true );
+            ui->commentTextEdit->setReadOnly( false );
+            ui->commentTextEdit->setText( comment );
+            ui->editCommentButton->hide();
         }
         else
         {
-            tTrackComment->setEnabled( false );
-            tTrackComment->setReadOnly( true );
-            tTrackComment->setText( "" );
-            pTrackCommentEdit->show();
+            ui->commentTextEdit->setEnabled( false );
+            ui->commentTextEdit->setReadOnly( true );
+            ui->commentTextEdit->setText( "" );
+            ui->editCommentButton->show();
         }
     }
     else
     {
         if( selectedTracks.first() > 0 )
-            pTrackUp->setEnabled( true );
+            ui->trackUpButton->setEnabled( true );
         else
-            pTrackUp->setEnabled( false );
+            ui->trackUpButton->setEnabled( false );
 
-        if( selectedTracks.last() < trackList->topLevelItemCount() - 1 )
-            pTrackDown->setEnabled( true );
+        if( selectedTracks.last() < ui->tracksTreeWidget->topLevelItemCount() - 1 )
+            ui->trackDownButton->setEnabled( true );
         else
-            pTrackDown->setEnabled( false );
+            ui->trackDownButton->setEnabled( false );
 
-        tagGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0) + 1) );
+        ui->trackGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0) + 1) );
 
-        lTrackTitle->setEnabled( true );
-        lTrackTitle->setText( trackTags.at(selectedTracks.at(0))->title );
-        pTrackTitleEdit->hide();
+        ui->titleLineEdit->setEnabled( true );
+        ui->titleLineEdit->setText( trackTags.at(selectedTracks.at(0))->title );
+        ui->editTitleButton->hide();
 
-        lTrackArtist->setEnabled( true );
-        lTrackArtist->setText( trackTags.at(selectedTracks.at(0))->artist );
-        pTrackArtistEdit->hide();
+        ui->artistLineEdit->setEnabled( true );
+        ui->artistLineEdit->setText( trackTags.at(selectedTracks.at(0))->artist );
+        ui->editArtistButton->hide();
 
-        lTrackComposer->setEnabled( true );
-        lTrackComposer->setText( trackTags.at(selectedTracks.at(0))->composer );
-        pTrackComposerEdit->hide();
+        ui->composerLineEdit->setEnabled( true );
+        ui->composerLineEdit->setText( trackTags.at(selectedTracks.at(0))->composer );
+        ui->editComposerButton->hide();
 
-        tTrackComment->setEnabled( true );
-        tTrackComment->setReadOnly( false );
-        tTrackComment->setText( trackTags.at(selectedTracks.at(0))->comment );
-        pTrackCommentEdit->hide();
+        ui->commentTextEdit->setEnabled( true );
+        ui->commentTextEdit->setReadOnly( false );
+        ui->commentTextEdit->setText( trackTags.at(selectedTracks.at(0))->comment );
+        ui->editCommentButton->hide();
     }
 }
 
@@ -1141,7 +904,7 @@ void CDOpener::artistChanged( const QString& text )
         if( trackTags.at(i)->artist == lastAlbumArtist )
         {
             trackTags.at(i)->artist = text;
-            if( QTreeWidgetItem *item = trackList->topLevelItem( i ) )
+            if( QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( i ) )
             {
                 item->setText( Column_Artist, text );
             }
@@ -1164,12 +927,12 @@ void CDOpener::adjustArtistColumn()
     {
         if( trackTags.at(i)->artist != albumArtist )
         {
-            trackList->setColumnHidden( Column_Artist, false );
+            ui->tracksTreeWidget->setColumnHidden( Column_Artist, false );
             return;
         }
     }
 
-    trackList->setColumnHidden( Column_Artist, true );
+    ui->tracksTreeWidget->setColumnHidden( Column_Artist, true );
 }
 
 void CDOpener::adjustComposerColumn()
@@ -1178,22 +941,22 @@ void CDOpener::adjustComposerColumn()
     {
         if( !trackTags.at(i)->composer.isEmpty() )
         {
-            trackList->setColumnHidden( Column_Composer, false );
+            ui->tracksTreeWidget->setColumnHidden( Column_Composer, false );
             return;
         }
     }
 
-    trackList->setColumnHidden( Column_Composer, true );
+    ui->tracksTreeWidget->setColumnHidden( Column_Composer, true );
 }
 
 void CDOpener::trackTitleChanged( const QString& text )
 {
-    if( !lTrackTitle->isEnabled() )
+    if( !ui->titleLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Title, text );
         trackTags.at(selectedTracks.at(i))->title = text;
@@ -1202,12 +965,12 @@ void CDOpener::trackTitleChanged( const QString& text )
 
 void CDOpener::trackArtistChanged( const QString& text )
 {
-    if( !lTrackArtist->isEnabled() )
+    if( !ui->artistLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Artist, text );
         trackTags.at(selectedTracks.at(i))->artist = text;
@@ -1218,12 +981,12 @@ void CDOpener::trackArtistChanged( const QString& text )
 
 void CDOpener::trackComposerChanged( const QString& text )
 {
-    if( !lTrackComposer->isEnabled() )
+    if( !ui->composerLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = trackList->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Composer, text );
         trackTags.at(selectedTracks.at(i))->composer = text;
@@ -1234,9 +997,9 @@ void CDOpener::trackComposerChanged( const QString& text )
 
 void CDOpener::trackCommentChanged()
 {
-    QString text = tTrackComment->toPlainText();
+    QString text = ui->commentTextEdit->toPlainText();
 
-    if( !tTrackComment->isEnabled() )
+    if( !ui->commentTextEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
@@ -1247,34 +1010,34 @@ void CDOpener::trackCommentChanged()
 
 void CDOpener::editTrackTitleClicked()
 {
-    lTrackTitle->setEnabled( true );
-    lTrackTitle->setFocus();
-    pTrackTitleEdit->hide();
-    trackTitleChanged( lTrackTitle->text() );
+    ui->titleLineEdit->setEnabled( true );
+    ui->titleLineEdit->setFocus();
+    ui->editTitleButton->hide();
+    trackTitleChanged( ui->titleLineEdit->text() );
 }
 
 void CDOpener::editTrackArtistClicked()
 {
-    lTrackArtist->setEnabled( true );
-    lTrackArtist->setFocus();
-    pTrackArtistEdit->hide();
-    trackArtistChanged( lTrackArtist->text() );
+    ui->artistLineEdit->setEnabled( true );
+    ui->artistLineEdit->setFocus();
+    ui->editArtistButton->hide();
+    trackArtistChanged( ui->artistLineEdit->text() );
 }
 
 void CDOpener::editTrackComposerClicked()
 {
-    lTrackComposer->setEnabled( true );
-    lTrackComposer->setFocus();
-    pTrackComposerEdit->hide();
-    trackComposerChanged( lTrackComposer->text() );
+    ui->composerLineEdit->setEnabled( true );
+    ui->composerLineEdit->setFocus();
+    ui->editComposerButton->hide();
+    trackComposerChanged( ui->composerLineEdit->text() );
 }
 
 void CDOpener::editTrackCommentClicked()
 {
-    tTrackComment->setEnabled( true );
-    tTrackComment->setReadOnly( false );
-    tTrackComment->setFocus();
-    pTrackCommentEdit->hide();
+    ui->commentTextEdit->setEnabled( true );
+    ui->commentTextEdit->setReadOnly( false );
+    ui->commentTextEdit->setFocus();
+    ui->editCommentButton->hide();
     trackCommentChanged();
 }
 
@@ -1331,57 +1094,56 @@ void CDOpener::proceedClicked()
 {
     int trackCount = 0;
 
-    for( int i=0; i<trackList->topLevelItemCount(); i++ )
+    for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
     {
-        if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
+        if( ui->tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
             trackCount++;
     }
 
     if( trackCount == 0 )
     {
-        QMessageBox::critical( this, "soundKonverter", i18n("Please select at least one track in order to proceed.") );
+        QMessageBox::information(this, "soundKonverter", i18n("Please select at least one track in order to proceed."));
         return;
     }
 
-    if( options->currentConversionOptions() && options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
+    if( ui->options->currentConversionOptions() && ui->options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
     {
-        options->setOutputDirectoryMode( (int)OutputDirectory::MetaData );
+        ui->options->setOutputDirectoryMode((int)OutputDirectory::MetaData);
     }
 
-    cdOpenerWidget->hide();
-    pSaveCue->hide();
-    pCDDB->hide();
-    cEntireCd->hide();
-    options->show();
-    page = ConversionOptionsPage;
+    ui->stackedWidget->setCurrentIndex(1);
+
     QFont font;
-    font.setBold( false );
-    lSelector->setFont( font );
-    font.setBold( true );
-    lOptions->setFont( font );
-    pProceed->hide();
-    pAdd->show();
+    ui->step1Label->setFont(font);
+    font.setBold(true);
+    ui->step2Label->setFont(font);
+
+    ui->saveCueSheetButton->hide();
+//     pCDDB->hide();
+    ui->ripEntireCdCheckBox->hide();
+    ui->proceedButton->hide();
+    ui->okButton->show();
 }
 
 void CDOpener::addClicked()
 {
-    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
     if( conversionOptions )
     {
         QList<int> tracks;
         QList<TagData*> tagList;
         const int trackCount = cdda_audio_tracks( cdDrive );
 
-        if( cEntireCd->isEnabled() && cEntireCd->isChecked() )
+        if( ui->ripEntireCdCheckBox->isEnabled() && ui->ripEntireCdCheckBox->isChecked() )
         {
-            discTags->title = lAlbum->text();
-            discTags->artist = lArtist->text();
-            discTags->albumArtist = lArtist->text();
-            discTags->album = lAlbum->text();
-            discTags->disc = iDisc->value();
-            discTags->discTotal = iDiscTotal->value();
-            discTags->year = iYear->value();
-            discTags->genre = cGenre->currentText();
+            discTags->title = ui->albumLineEdit->text();
+            discTags->artist = ui->albumArtistLineEdit->text();
+            discTags->albumArtist = ui->albumArtistLineEdit->text();
+            discTags->album = ui->albumLineEdit->text();
+            discTags->disc = ui->discNoSpinBox->value();
+            discTags->discTotal = ui->discNoTotalSpinBox->value();
+            discTags->year = ui->yearSpinBox->value();
+            discTags->genre = ui->genreComboBox->currentText();
             const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,trackCount)-cdda_track_firstsector(cdDrive,1));
             discTags->length = (8 * size) / (44100 * 2 * 16);
 
@@ -1390,16 +1152,16 @@ void CDOpener::addClicked()
         }
         else
         {
-            for( int i=0; i<trackList->topLevelItemCount(); i++ )
+            for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
             {
-                if( trackList->topLevelItem(i)->checkState(0) == Qt::Checked )
+                if( ui->tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
                 {
-                    trackTags.at(i)->albumArtist = lArtist->text();
-                    trackTags.at(i)->album = lAlbum->text();
-                    trackTags.at(i)->disc = iDisc->value();
-                    trackTags.at(i)->discTotal = iDiscTotal->value();
-                    trackTags.at(i)->year = iYear->value();
-                    trackTags.at(i)->genre = cGenre->currentText();
+                    trackTags.at(i)->albumArtist = ui->albumArtistLineEdit->text();
+                    trackTags.at(i)->album = ui->albumLineEdit->text();
+                    trackTags.at(i)->disc = ui->discNoSpinBox->value();
+                    trackTags.at(i)->discTotal = ui->discNoTotalSpinBox->value();
+                    trackTags.at(i)->year = ui->yearSpinBox->value();
+                    trackTags.at(i)->genre = ui->genreComboBox->currentText();
                     const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,i+1)-cdda_track_firstsector(cdDrive,i+1));
                     trackTags.at(i)->length = (8 * size) / (44100 * 2 * 16);
 
@@ -1409,7 +1171,7 @@ void CDOpener::addClicked()
             }
         }
 
-        options->accepted();
+        ui->options->accepted();
 
         emit addTracks( device, tracks, trackCount, tagList, conversionOptions, command );
 
@@ -1423,45 +1185,41 @@ void CDOpener::addClicked()
 
 void CDOpener::saveCuesheetClicked()
 {
-    QString filename = QFileDialog::getSaveFileName( this, i18n("Save cuesheet"), QDir::homePath(), "*.cue" );
+    const QString filename = QFileDialog::getSaveFileName(this, i18n("Save cuesheet"), "", "*.cue");
     if( filename.isEmpty() )
         return;
 
-    QFile cueFile( filename );
+    QFile cueFile(filename);
     if( cueFile.exists() )
     {
-        const int ret = QMessageBox::question( this,
-                    i18n("File already exists"),
-                    i18n("A file with this name already exists.\n\nDo you want to overwrite the existing one?") );
+        const int ret = QMessageBox::question(this, i18n("File already exists"), i18n("A file with this name already exists.\n\nDo you want to overwrite the existing one?"));
         if( ret == QMessageBox::No )
             return;
     }
-    if( !cueFile.open( QIODevice::WriteOnly ) )
-        return;
 
-    QString content;
-
-    content.append( "REM COMMENT \"soundKonverter " + QString(SOUNDKONVERTER_VERSION_STRING) + "\"\n" );
-    content.append( "TITLE \"" + lAlbum->text() + "\"\n" );
-    content.append( "PERFORMER \"" + lArtist->text() + "\"\n" );
-    content.append( "FILE \"\" WAVE\n" );
-
-    for( int i=0; i<trackTags.count(); i++ )
+    if( cueFile.open(QIODevice::WriteOnly) )
     {
-        content.append( QString().sprintf("  TRACK %02i AUDIO\n",trackTags.at(i)->track ) );
-        content.append( "    TITLE \"" + trackTags.at(i)->title + "\"\n" );
-        content.append( "    PERFORMER \"" + trackTags.at(i)->artist + "\"\n" );
-        content.append( "    SONGWRITER \"" + trackTags.at(i)->composer + "\"\n" );
-        const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i+1);
-        const long length = (8 * size) / (44100 * 2 * 16);
-        const long frames = (8 * size) / (588 * 2 * 16);
-        content.append( QString().sprintf("    INDEX 01 %02li:%02li:%02li\n",length/60,length%60,frames%75) );
+        QTextStream ts(&cueFile);
+
+        ts << "REM COMMENT \"soundKonverter " SOUNDKONVERTER_VERSION_STRING "\"\n";
+        ts << "TITLE \"" + ui->albumLineEdit->text() + "\"\n";
+        ts << "PERFORMER \"" + ui->albumArtistLineEdit->text() + "\"\n";
+        ts << "FILE \"\" WAVE\n";
+
+        for( int i=0; i<trackTags.count(); i++ )
+        {
+            ts << QString().sprintf("  TRACK %02i AUDIO\n", trackTags.at(i)->track);
+            ts << "    TITLE \"" + trackTags.at(i)->title + "\"\n";
+            ts << "    PERFORMER \"" + trackTags.at(i)->artist + "\"\n";
+            ts << "    SONGWRITER \"" + trackTags.at(i)->composer + "\"\n";
+            const long size = CD_FRAMESIZE_RAW * cdda_track_firstsector(cdDrive,i+1);
+            const long length = (8 * size) / (44100 * 2 * 16);
+            const long frames = (8 * size) / (588 * 2 * 16);
+            ts << QString().sprintf("    INDEX 01 %02li:%02li:%02li\n", length/60, length%60, frames%75);
+        }
+
+        cueFile.close();
     }
-
-    QTextStream ts( &cueFile );
-    ts << content;
-
-    cueFile.close();
 }
 
 // void CDOpener::itemHighlighted( QTreeWidgetItem *item, int column )
@@ -1516,5 +1274,3 @@ void CDOpener::playbackStateChanged( Phonon::State newstate, Phonon::State oldst
         playbackTitleChanged( mediaController->currentTitle() );
     }
 }
-
-

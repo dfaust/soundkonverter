@@ -1,14 +1,4 @@
-//
-// C++ Interface: opener
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef FILEOPENER_H
 #define FILEOPENER_H
 
@@ -17,14 +7,15 @@
 #include <QUrl>
 
 class Config;
-class Options;
 class QLabel;
 class ConversionOptions;
 class QDialog;
-class QPushButton;
 class QFileDialog;
 
-/** @author Daniel Faust <hessijames@gmail.com> */
+namespace Ui {
+    class OptionsDialog;
+}
+
 class FileOpener : public QDialog
 {
     Q_OBJECT
@@ -36,13 +27,13 @@ public:
     bool dialogAborted;
 
 private:
+    Ui::OptionsDialog *ui;
+
     Config *config;
 
     QFileDialog *fileDialog;
-    Options *options;
     QList<QUrl> urls;
-    QPushButton *pAdd;
-    QPushButton *pCancel;
+
     QLabel *formatHelp;
 
 private slots:
@@ -52,7 +43,6 @@ private slots:
 
 signals:
     void open( const QList<QUrl>& files, ConversionOptions *conversionOptions );
-
 };
 
 #endif

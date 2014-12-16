@@ -1,8 +1,4 @@
-/*
- * soundkonverterview.cpp
- *
- * Copyright (C) 2007 Daniel Faust <hessijames@gmail.com>
- */
+
 #include "soundkonverterview.h"
 #include "filelist.h"
 #include "filelistitem.h"
@@ -36,14 +32,15 @@
 #include <QFont>
 #include <QTreeView>
 #include <QToolButton>
+#include <QDebug>
 
-
-soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDManager *_cdManager, QWidget *parent )
-    : QWidget( parent ),
-      config( _config ),
-      logger( _logger ),
-      cdManager( _cdManager )
+SoundKonverterView::SoundKonverterView(Logger *_logger, Config *_config, QWidget *parent) :
+    QWidget(parent),
+    config( _config ),
+    logger( _logger )
 {
+    qDebug() << "soundKonverterView";
+
     setAcceptDrops( true );
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
@@ -142,10 +139,10 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 }
 
-soundKonverterView::~soundKonverterView()
+SoundKonverterView::~SoundKonverterView()
 {}
 
-void soundKonverterView::addClicked( int index )
+void SoundKonverterView::addClicked( int index )
 {
     if( index == 0 )
     {
@@ -169,7 +166,7 @@ void soundKonverterView::addClicked( int index )
     }
 }
 
-void soundKonverterView::showFileDialog()
+void SoundKonverterView::showFileDialog()
 {
     FileOpener *dialog = new FileOpener( config, this );
 //     dialog->resize( size().width() - 10, size().height() );
@@ -188,7 +185,7 @@ void soundKonverterView::showFileDialog()
     delete dialog;
 }
 
-void soundKonverterView::showDirDialog()
+void SoundKonverterView::showDirDialog()
 {
     DirOpener *dialog = new DirOpener( config, DirOpener::Convert, this );
 
@@ -206,7 +203,7 @@ void soundKonverterView::showDirDialog()
     delete dialog;
 }
 
-bool soundKonverterView::showCdDialog( const QString& device, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
+bool SoundKonverterView::showCdDialog( const QString& device, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
     QString profile = _profile;
     QString format = _format;
@@ -268,7 +265,7 @@ bool soundKonverterView::showCdDialog( const QString& device, QString _profile, 
     return success;
 }
 
-void soundKonverterView::showUrlDialog()
+void SoundKonverterView::showUrlDialog()
 {
     UrlOpener *dialog = new UrlOpener( config, this );
 
@@ -283,7 +280,7 @@ void soundKonverterView::showUrlDialog()
     fileList->save( false );
 }
 
-void soundKonverterView::showPlaylistDialog()
+void SoundKonverterView::showPlaylistDialog()
 {
     PlaylistOpener *dialog = new PlaylistOpener( config, this );
 //     dialog->resize( size().width() - 10, size().height() );
@@ -302,7 +299,7 @@ void soundKonverterView::showPlaylistDialog()
     delete dialog;
 }
 
-void soundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
+void SoundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
     QList<QUrl> k_urls;
     QStringList errorList;
@@ -403,7 +400,8 @@ void soundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _prof
 
         if( !profile.isEmpty() && !format.isEmpty() && !directory.isEmpty() )
         {
-            Options *options = new Options( config, "", 0 );
+            Options *options = new Options(0);
+            options->init(config, "");
             options->hide();
             options->setProfile( profile );
             options->setFormat( format );
@@ -444,28 +442,28 @@ void soundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _prof
     fileList->save( false );
 }
 
-void soundKonverterView::loadAutosaveFileList()
+void SoundKonverterView::loadAutosaveFileList()
 {
     fileList->load( false );
 }
 
-void soundKonverterView::startConversion()
+void SoundKonverterView::startConversion()
 {
     fileList->startConversion();
 }
 
-void soundKonverterView::killConversion()
+void SoundKonverterView::killConversion()
 {
     fileList->killConversion();
 }
 
-void soundKonverterView::fileCountChanged( int count )
+void SoundKonverterView::fileCountChanged( int count )
 {
     pStart->setEnabled( count > 0 );
     startAction->setEnabled( count > 0 );
 }
 
-void soundKonverterView::conversionStarted()
+void SoundKonverterView::conversionStarted()
 {
     pStart->hide();
     startAction->setEnabled( false );
@@ -474,7 +472,7 @@ void soundKonverterView::conversionStarted()
     emit signalConversionStarted();
 }
 
-void soundKonverterView::conversionStopped( bool failed )
+void SoundKonverterView::conversionStopped( bool failed )
 {
     pStart->show();
     startAction->setEnabled( true );
@@ -483,28 +481,28 @@ void soundKonverterView::conversionStopped( bool failed )
     emit signalConversionStopped( failed );
 }
 
-void soundKonverterView::queueModeChanged( bool enabled )
+void SoundKonverterView::queueModeChanged( bool enabled )
 {
     stopAction->setVisible( enabled );
     continueAction->setVisible( !enabled );
 }
 
-void soundKonverterView::loadFileList( bool user )
+void SoundKonverterView::loadFileList( bool user )
 {
     fileList->load( user );
 }
 
-void soundKonverterView::saveFileList( bool user )
+void SoundKonverterView::saveFileList( bool user )
 {
     fileList->save( user );
 }
 
-void soundKonverterView::updateFileList()
+void SoundKonverterView::updateFileList()
 {
     fileList->updateAllItems();
 }
 
-void soundKonverterView::cleanupParameters( QString *profile, QString *format )
+void SoundKonverterView::cleanupParameters( QString *profile, QString *format )
 {
     QString old_profile = *profile;
     QString old_format = *format;

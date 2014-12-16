@@ -1,8 +1,4 @@
-/*
- * soundkonverterview.h
- *
- * Copyright (C) 2007 Daniel Faust <hessijames@gmail.com>
- */
+
 #ifndef _SOUNDKONVERTERVIEW_H_
 #define _SOUNDKONVERTERVIEW_H_
 
@@ -19,7 +15,6 @@ class ProgressIndicator;
 class ComboButton;
 class Config;
 class Logger;
-class CDManager;
 class FileList;
 class OptionsLayer;
 
@@ -36,15 +31,12 @@ class OptionsLayer;
  * @version 1.0
  */
 
-class soundKonverterView : public QWidget
+class SoundKonverterView : public QWidget
 {
     Q_OBJECT
 public:
-    /** Default constructor */
-    soundKonverterView( Logger *_logger, Config *_config, CDManager *_cdManager, QWidget *parent );
-
-    /** Destructor */
-    ~soundKonverterView();
+    SoundKonverterView( Logger *_logger, Config *_config, QWidget *parent );
+    ~SoundKonverterView();
 
     void addConvertFiles( const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
     void loadAutosaveFileList();
@@ -88,7 +80,6 @@ private slots:
 private:
     Config *config;
     Logger *logger;
-    CDManager *cdManager;
 
     FileList *fileList;
     OptionsLayer *optionsLayer;

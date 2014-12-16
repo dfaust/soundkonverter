@@ -1,16 +1,14 @@
 
-
 #ifndef CODECPROBLEMS_H
 #define CODECPROBLEMS_H
 
 #include <QDialog>
 
+namespace Ui {
+    class CodecProblems;
+}
 
-/**
- * @short Shows a message box with possible solutions for backend problems
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
+/** Shows a message box with possible solutions for backend problems */
 class CodecProblems : public QDialog
 {
     Q_OBJECT
@@ -21,19 +19,18 @@ public:
         ReplayGain,
         AudioCd
     };
-    
+
     struct Problem {
         QString codecName;
         QStringList solutions;
         QStringList affectedFiles;
     };
-    
-    /** Default Constructor */
-    CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent=0, Qt::WindowFlags f=0 );
 
-    /** Default Destructor */
+    CodecProblems(Mode mode, const QList<Problem>& problemList, QWidget *parent, Qt::WindowFlags f=0);
     ~CodecProblems();
 
+private:
+    Ui::CodecProblems *ui;
 };
 
 #endif // CODECPROBLEMS_H

@@ -1,5 +1,4 @@
 
-
 #ifndef LOGGER_H
 #define LOGGER_H
 
@@ -7,13 +6,9 @@
 #include <QTime>
 #include <QFile>
 #include <QTextStream>
-#include <QUrl>
+// #include <QUrl>
 
-
-/**
- * @short An item for every process that is logged
- * @author Daniel Faust <hessijames@gmail.com>
- */
+/** An item for every process that is logged */
 class LoggerItem
 {
 public:
@@ -30,29 +25,26 @@ public:
     QTextStream textStream;
 };
 
-
-/**
- * @short All data about the processes are collected here
- * @author Daniel Faust <hessijames@gmail.com>
- */
+/** All data about the processes are collected here */
 class Logger : public QObject
 {
     Q_OBJECT
+
 public:
-    Logger( QObject *parent );
+    Logger(QObject *parent);
     ~Logger();
 
     /** Creates a new logger item and returns the id of it, @p filename is added to the new logger item */
-    int registerProcess( const QString& identifier );
+    int registerProcess(const QString& identifier);
 
     /** Adds the string @p data to the data of the logger item with id @p id */
-    void log( int id, const QString& data );
+    void log(int id, const QString& data);
 
     /** Returns a list of all logger item titles + ids */
 //     QList<LoggerItem*> getLogOverview();
 
     /** Returns the logger item with id @p id */
-    LoggerItem* getLog( int id );
+    LoggerItem* getLog(int id);
 
     /** Returns a list of all logger items */
     QList<LoggerItem*> getLogs();
@@ -67,14 +59,13 @@ private:
     int getNewID();
 
 public slots:
-    void processCompleted( int id, bool succeeded, bool waitingForAlbumGain = false );
+    void processCompleted(int id, bool succeeded, bool waitingForAlbumGain=false);
     // connected to config
-    void updateWriteSetting( bool _writeLogFiles );
+    void updateWriteSetting(bool _writeLogFiles);
 
 signals:
-    void removedProcess( int id );
-    void updateProcess( int id );
-
+    void removedProcess(int id);
+    void updateProcess(int id);
 };
 
 #endif // LOGGER_H

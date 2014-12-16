@@ -39,7 +39,8 @@ OptionsLayer::OptionsLayer( Config *config, QWidget *parent )
 
     QVBoxLayout *frameLayout = new QVBoxLayout( frame );
 
-    options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), this );
+    options = new Options( this);
+    options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
     frameLayout->addWidget( options );
 
 

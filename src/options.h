@@ -1,9 +1,9 @@
 
-
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
 #include <QWidget>
+#include <QPointer>
 
 class OptionsSimple;
 class OptionsDetailed;
@@ -12,21 +12,20 @@ class ConversionOptions;
 
 class QTabWidget;
 
+namespace Ui {
+    class Options;
+}
 
-/**
- * @short The widget, where we can set our output options
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
- */
+/** The widget, where we can set our output options */
 class Options : public QWidget
 {
     Q_OBJECT
-public:
-    /** Constructor */
-    Options( Config *_config, const QString& text, QWidget *parent=0 );
 
-    /** Destructor */
+public:
+    Options(QWidget *parent=0);
     ~Options();
+
+    void init(Config *config, const QString &text);
 
     /** Return the current options */
     ConversionOptions *currentConversionOptions();
@@ -51,7 +50,9 @@ public slots:
     void accepted();
 
 private:
-    Config *config;
+    Ui::Options *ui;
+
+    QPointer<Config> config;
 
     QTabWidget *tab;
 

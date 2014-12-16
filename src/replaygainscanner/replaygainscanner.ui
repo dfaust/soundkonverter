@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ReplayGainScanner</class>
+ <widget class="QDialog" name="ReplayGainScanner">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>544</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Replay Gain tool</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="soundkonverter-replaygain"/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="ComboButton" name="addComboButton" native="true"/>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="showMainWindowButton">
+       <property name="text">
+        <string>Show soundKonverter main window</string>
+       </property>
+       <property name="icon">
+        <iconset theme="soundkonverter"/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="ReplayGainFileList" name="fileList">
+     <column>
+      <property name="text">
+       <string notr="true">1</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="ProgressIndicator" name="progressIndicator" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="tagButton">
+       <property name="toolTip">
+        <string>Calculate Replay Gain tags for all files in the file list without Replay Gain tags.</string>
+       </property>
+       <property name="text">
+        <string>Tag untagged</string>
+       </property>
+       <property name="icon">
+        <iconset theme="list-add"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="untagButton">
+       <property name="toolTip">
+        <string>Remove the Replay Gain tags from all files in the file list.</string>
+       </property>
+       <property name="text">
+        <string>Untag tagged</string>
+       </property>
+       <property name="icon">
+        <iconset theme="list-remove"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+       <property name="icon">
+        <iconset theme="dialog-cancel"/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="forceCheckBox">
+       <property name="toolTip">
+        <string>Recalculate Replay Gain tags for files that already have Replay Gain tags set.</string>
+       </property>
+       <property name="text">
+        <string>Force recalculation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="closeButton">
+       <property name="text">
+        <string>Close</string>
+       </property>
+       <property name="icon">
+        <iconset theme="dialog-close">
+         <normaloff>../../../../../</normaloff>../../../../../</iconset>
+       </property>
+       <property name="default">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComboButton</class>
+   <extends>QWidget</extends>
+   <header>combobutton.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ProgressIndicator</class>
+   <extends>QWidget</extends>
+   <header>progressindicator.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ReplayGainFileList</class>
+   <extends>QTreeWidget</extends>
+   <header>replaygainscanner/replaygainfilelist.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

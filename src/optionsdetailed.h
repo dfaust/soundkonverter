@@ -2,37 +2,30 @@
 #ifndef OPTIONSDETAILED_H
 #define OPTIONSDETAILED_H
 
-#include <QCheckBox>
 #include <QDomDocument>
 #include <QMap>
 #include <QWidget>
+#include <QPointer>
 
 class CodecPlugin;
 class Config;
 class ConversionOptions;
 class FilterPlugin;
-class OutputDirectory;
 class CodecWidget;
 class FilterWidget;
 
-class QComboBox;
-class QPushButton;
-class QGridLayout;
-class QLabel;
-class QToolButton;
+namespace Ui {
+    class OptionsDetailed;
+}
 
-
-/**
-	@author Daniel Faust <hessijames@gmail.com>
-*/
 class OptionsDetailed : public QWidget
 {
     Q_OBJECT
 public:
-    OptionsDetailed( Config *_config, QWidget *parent=0 );
+    OptionsDetailed(QWidget *parent=0);
     ~OptionsDetailed();
 
-    void init();
+    void init(Config *config);
 
     /** Return the current options */
     ConversionOptions *currentConversionOptions( bool saveLastUsed = true );
@@ -50,28 +43,14 @@ public:
     bool isReplayGainChecked();
     CodecPlugin *getCurrentPlugin();
 
-    OutputDirectory *outputDirectory; // this way it's easier to sync simple and detailed options
-
-//     QSize sizeHint();
-
 private:
-    QGridLayout *grid;
-    QComboBox *cFormat;
-    QLabel *lPlugin;
-    QComboBox *cPlugin;
-    QPushButton *pConfigurePlugin;
-    CodecWidget *wPlugin;
-    QMap<FilterWidget*,FilterPlugin*> wFilter;
-    QCheckBox *cReplayGain;
-    QLabel *lEstimSize;
-    QPushButton *pProfileSave;
-    QToolButton *pProfileLoad;
+    Ui::OptionsDetailed *ui;
 
-    Config *config;
+    QPointer<Config> config;
 
-    CodecPlugin *currentPlugin;
-
-//     QSize size_hint;
+    QPointer<CodecPlugin> currentPlugin;
+    QPointer<CodecWidget> pluginWidget;
+    QMap<FilterWidget*, FilterPlugin*> filterWidgets;
 
 public slots:
     void somethingChanged();

@@ -1,165 +1,106 @@
 
 #include "optionssimple.h"
+#include "ui_optionssimple.h"
 #include "config.h"
 #include "outputdirectory.h"
 #include "global.h"
 #include "codecproblems.h"
 
-#include <QApplication>
-#include <QLayout>
-#include <QBoxLayout>
-#include <QLabel>
-#include <QString>
-#include <QToolTip>
-
 #include <KLocalizedString>
-#include <QIcon>
 #include <QMessageBox>
-#include <QComboBox>
-#include <QCheckBox>
-#include <QPushButton>
 #include <QFile>
 #include <QStandardPaths>
-#include <QTextStream>
-
 
 // FIXME when changing the output directory, check if the profile is a user defined and set it to 'User defined', if it is
 
-// TODO hide lossless/hybrid/etc. when not available
-OptionsSimple::OptionsSimple( Config *_config, /*OptionsDetailed* _optionsDetailed,*/ const QString &text, QWidget *parent )
-    : QWidget( parent ),
-    config( _config )
+// TODO hide lossless when not available
+
+OptionsSimple::OptionsSimple(QWidget *parent) :
+    QWidget( parent ),
+    ui(new Ui::OptionsSimple)
 {
-    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+    ui->setupUi(this);
 
-    QGridLayout *grid = new QGridLayout( this );
-    grid->setMargin( fontHeight );
-    grid->setSpacing( fontHeight );
+//     connect(ui->formatComboBox, SIGNAL(activated(int)), this, SLOT(formatChanged()));
+    connect(ui->deleteProfilePushButton, SIGNAL(clicked()), this, SLOT(profileRemove()));
+    connect(ui->infoProfilePushButton, SIGNAL(clicked()), this, SLOT(profileInfo()));
 
-    QLabel *lQuality = new QLabel( i18n("Quality:"), this );
-    grid->addWidget( lQuality, 0, 0 );
+    connect(ui->formatComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
+    connect(ui->infoFormatPushButton, SIGNAL(clicked()), this, SLOT(formatInfo()));
+//     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()));
 
-    QHBoxLayout *topBoxQuality = new QHBoxLayout();
-    grid->addLayout( topBoxQuality, 0, 1 );
-    cProfile = new QComboBox( this );
-    topBoxQuality->addWidget( cProfile );
-    connect( cProfile, SIGNAL(activated(int)), this, SLOT(profileChanged()) );
-    topBoxQuality->addSpacing( 0.25*fontHeight );
-    pProfileRemove = new QPushButton( QIcon::fromTheme("edit-delete"), i18n("Remove"), this );
-    topBoxQuality->addWidget( pProfileRemove );
-    pProfileRemove->setToolTip( i18n("Remove the selected profile") );
-    pProfileRemove->hide();
-    connect( pProfileRemove, SIGNAL(clicked()), this, SLOT(profileRemove()) );
-    pProfileInfo = new QPushButton( QIcon::fromTheme("dialog-information"), i18n("Info"), this );
-    topBoxQuality->addWidget( pProfileInfo );
-    pProfileInfo->setToolTip( i18n("Information about the selected profile") );
-//     cProfile->setFixedHeight( pProfileInfo->minimumSizeHint().height() );
-    connect( pProfileInfo, SIGNAL(clicked()), this, SLOT(profileInfo()) );
-    topBoxQuality->addStretch( );
+//     connect(ui->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(ui->outputDirectoryChanged()));
+//     connect(ui->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(ui->outputDirectoryChanged()));
 
-    topBoxQuality->addSpacing( fontHeight );
+//     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+//
+//     grid->setMargin( fontHeight );
+//     grid->setSpacing( fontHeight );
+//
+//     topBoxQuality->addSpacing( 0.25*fontHeight );
+//     ui->deleteProfilePushButton->hide();
 
-    QLabel *lFormat = new QLabel( i18n("Format:"), this );
-    grid->addWidget( lFormat, 0, 2 );
+//     topBoxFormat->addSpacing( 0.25*fontHeight );
+//     QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More formats...") + "</a>", this );
 
-    QHBoxLayout *topBoxFormat = new QHBoxLayout();
-    grid->addLayout( topBoxFormat, 0, 3 );
-    cFormat = new QComboBox( this );
-    topBoxFormat->addWidget( cFormat );
-//     connect( cFormat, SIGNAL(activated(int)), this, SLOT(formatChanged()) );
-    connect( cFormat, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    topBoxFormat->addSpacing( 0.25*fontHeight );
-    pFormatInfo = new QPushButton( QIcon::fromTheme("dialog-information"), i18n("Info"), this );
-    topBoxFormat->addWidget( pFormatInfo );
-    pFormatInfo->setToolTip( i18n("Information about the selected file format") );
-//     cFormat->setFixedHeight( pFormatInfo->minimumSizeHint().height() );
-    connect( pFormatInfo, SIGNAL(clicked()), this, SLOT(formatInfo()) );
-    topBoxFormat->addSpacing( 0.25*fontHeight );
-    QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More formats...") + "</a>", this );
-    topBoxFormat->addWidget( formatHelp );
-    connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
-    topBoxFormat->addStretch( );
-
-    QLabel *lOutput = new QLabel( i18n("Destination:"), this );
-    grid->addWidget( lOutput, 1, 0 );
-
-    QHBoxLayout *middleBox = new QHBoxLayout();
-    grid->addLayout( middleBox, 1, 1, 1, 3 );
-    outputDirectory = new OutputDirectory( config, this );
-    middleBox->addWidget( outputDirectory );
-    connect( outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(outputDirectoryChanged()) );
-    connect( outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(outputDirectoryChanged()) );
-
-    QHBoxLayout *estimSizeBox = new QHBoxLayout();
-    grid->addLayout( estimSizeBox, 2, 0 );
-    estimSizeBox->addStretch();
-    lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
-    lEstimSize->hide(); // hide for now because most plugins report inaccurate data
-    estimSizeBox->addWidget( lEstimSize );
-
-    QLabel *lOptional = new QLabel( i18n("Optional:") );
-    grid->addWidget( lOptional, 3, 0 );
-
-    QHBoxLayout *optionalBox = new QHBoxLayout();
-    grid->addLayout( optionalBox, 3, 1 );
-    cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
-    optionalBox->addWidget( cReplayGain );
-    connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-    optionalBox->addStretch();
-
-    QLabel *lInfo = new QLabel( text, this );
-    grid->addWidget( lInfo, 4, 0, 1, 4, Qt::AlignVCenter | Qt::AlignCenter );
-    grid->setRowStretch( 4, 1 );
-
-    grid->setColumnStretch( 1, 1 );
-    grid->setColumnStretch( 3, 1 );
+//
+//     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
+//     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
+//
+//     connect(ui->replayGainCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 }
 
 OptionsSimple::~OptionsSimple()
-{}
-
-void OptionsSimple::init()
 {
+}
+
+void OptionsSimple::init(Config *config, const QString &text)
+{
+    this->config = config;
+
+    ui->infoLabel->setText(text);
+
     updateProfiles();
 }
 
-void OptionsSimple::setReplayGainEnabled( bool enabled, const QString& toolTip )
+void OptionsSimple::setReplayGainEnabled(bool enabled, const QString& toolTip)
 {
-    cReplayGain->setEnabled(enabled);
-    cReplayGain->setToolTip(toolTip);
+    ui->replayGainCheckBox->setEnabled(enabled);
+    ui->replayGainCheckBox->setToolTip(toolTip);
+
     if( !enabled )
     {
-        QPalette notificationPalette = cReplayGain->palette();
-        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
-        cReplayGain->setPalette( notificationPalette );
+        QPalette notificationPalette = ui->replayGainCheckBox->palette();
+        notificationPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(174,127,130));
+        ui->replayGainCheckBox->setPalette(notificationPalette);
     }
 }
 
-void OptionsSimple::setReplayGainChecked( bool enabled )
+void OptionsSimple::setReplayGainChecked(bool enabled)
 {
-    cReplayGain->setChecked(enabled);
+    ui->replayGainCheckBox->setChecked(enabled);
 }
 
 QString OptionsSimple::currentProfile()
 {
-    return cProfile->currentText();
+    return ui->profileComboBox->currentText();
 }
 
 QString OptionsSimple::currentFormat()
 {
-    return cFormat->currentText();
+    return ui->formatComboBox->currentText();
 }
 
 bool OptionsSimple::isReplayGainChecked()
 {
-    return cReplayGain->isChecked();
+    return ui->replayGainCheckBox->isChecked();
 }
 
 void OptionsSimple::updateProfiles()
 {
-    const QString lastProfile = cProfile->currentText();
+    const QString lastProfile = ui->profileComboBox->currentText();
     QStringList sProfile;
-    cProfile->clear();
+    ui->profileComboBox->clear();
 
     sProfile += i18n("Very low");
     sProfile += i18n("Low");
@@ -167,14 +108,13 @@ void OptionsSimple::updateProfiles()
     sProfile += i18n("High");
     sProfile += i18n("Very high");
     sProfile += i18n("Lossless");
-//     sProfile += i18n("Hybrid"); // currently unused
     sProfile += config->customProfiles();
     sProfile += i18n("User defined");
-    cProfile->addItems( sProfile );
+    ui->profileComboBox->addItems( sProfile );
 
-    if( cProfile->findText(lastProfile) != -1 )
+    if( ui->profileComboBox->findText(lastProfile) != -1 )
     {
-        cProfile->setCurrentIndex( cProfile->findText(lastProfile) );
+        ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(lastProfile));
     }
     else
     {
@@ -184,7 +124,7 @@ void OptionsSimple::updateProfiles()
 
 void OptionsSimple::profileInfo()
 {
-    const QString sProfileString = cProfile->currentText();
+    const QString sProfileString = ui->profileComboBox->currentText();
 
     QString info;
 
@@ -225,22 +165,22 @@ void OptionsSimple::profileInfo()
         info = i18n("This is a user defined profile.");
     }
 
-    QMessageBox::information( this, info, i18n("Profile info for %1",sProfileString) );
+    QMessageBox::information(this, info, i18n("Profile info for %1", sProfileString));
 }
 
 void OptionsSimple::profileRemove()
 {
-    const QString profileName = cProfile->currentText();
+    const QString profileName = ui->profileComboBox->currentText();
 
-    const int ret = QMessageBox::question( this, i18n("Remove profile?"), i18n("Do you really want to remove the profile: %1").arg(profileName) );
+    const int ret = QMessageBox::question(this, i18n("Remove profile?"), i18n("Do you really want to remove the profile: %1").arg(profileName));
     if( ret == QMessageBox::Yes )
     {
         QDomDocument list("soundkonverter_profilelist");
 
-        QFile listFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/profiles.xml" );
+        QFile listFile(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/profiles.xml");
         if( listFile.open( QIODevice::ReadOnly ) )
         {
-            if( list.setContent( &listFile ) )
+            if( list.setContent(&listFile) )
             {
                 QDomElement root = list.documentElement();
                 if( root.nodeName() == "soundkonverter" && root.attribute("type") == "profilelist" )
@@ -262,13 +202,12 @@ void OptionsSimple::profileRemove()
             listFile.close();
         }
 
-        if( listFile.open( QIODevice::WriteOnly ) )
+        if( listFile.open(QIODevice::WriteOnly) )
         {
             updateProfiles();
             emit customProfilesEdited();
 
-            QTextStream stream(&listFile);
-            stream << list.toString();
+            listFile.write(list.toString().toUtf8().data());
             listFile.close();
         }
     }
@@ -276,68 +215,68 @@ void OptionsSimple::profileRemove()
 
 void OptionsSimple::formatInfo()
 {
-    const QString format = cFormat->currentText();
+    const QString format = ui->formatComboBox->currentText();
     const QString info = config->pluginLoader()->codecDescription(format);
 
     if( !info.isEmpty() )
     {
-        QMessageBox::information( this, i18n("Format info for %1",format), info );
+        QMessageBox::information(this, i18n("Format info for %1",format), info);
     }
     else
     {
-        QMessageBox::information( this, "soundKonverter", i18n("Sorry, no format information available.") );
+        QMessageBox::information(this, "soundKonverter", i18n("Sorry, no format information available."));
     }
 }
 
 void OptionsSimple::profileChanged()
 {
-    const QString profile = cProfile->currentText();
-    const QString lastFormat = cFormat->currentText();
-    cFormat->clear();
+    const QString profile = ui->profileComboBox->currentText();
+    const QString lastFormat = ui->formatComboBox->currentText();
+    ui->formatComboBox->clear();
 
-    pProfileRemove->hide();
-    pProfileInfo->show();
+    ui->deleteProfilePushButton->hide();
+    ui->infoProfilePushButton->show();
 
     if( profile == i18n("Very low") || profile == i18n("Low") || profile == i18n("Medium") || profile == i18n("High") || profile == i18n("Very high") )
     {
-        cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Lossy) );
+        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossy));
     }
     else if( profile == i18n("Lossless") )
     {
-        cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Lossless) );
+        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossless));
     }
     else if( profile == i18n("Hybrid") )
     {
-        cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::Hybrid) );
+        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Hybrid));
     }
     else if( profile == i18n("User defined") )
     {
-        cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
+        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid)));
     }
     else
     {
-        foreach( const QString profileName, config->data.profiles.keys() )
+        foreach( const QString& profileName, config->data.profiles.keys() )
         {
             if( profileName == profile )
             {
-                ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+                ConversionOptions *conversionOptions = config->data.profiles.value(profileName);
                 if( conversionOptions )
                 {
-                    cFormat->addItem( conversionOptions->codecName );
-                    outputDirectory->setMode( (OutputDirectory::Mode)conversionOptions->outputDirectoryMode );
-                    outputDirectory->setDirectory( conversionOptions->outputDirectory );
-                    cReplayGain->setChecked( conversionOptions->replaygain );
-                    pProfileRemove->show();
-                    pProfileInfo->hide();
+                    ui->formatComboBox->addItem(conversionOptions->codecName);
+                    ui->outputDirectory->setMode((OutputDirectory::Mode)conversionOptions->outputDirectoryMode);
+                    ui->outputDirectory->setDirectory(conversionOptions->outputDirectory);
+                    ui->replayGainCheckBox->setChecked(conversionOptions->replaygain);
+                    ui->deleteProfilePushButton->show();
+                    ui->infoProfilePushButton->hide();
                 }
                 break;
             }
         }
     }
 
-    if( cFormat->findText(lastFormat) != -1 )
+    if( ui->formatComboBox->findText(lastFormat) != -1 )
     {
-        cFormat->setCurrentIndex( cFormat->findText(lastFormat) );
+        ui->formatComboBox->setCurrentIndex(ui->formatComboBox->findText(lastFormat));
     }
 
     somethingChanged();
@@ -346,34 +285,34 @@ void OptionsSimple::profileChanged()
 // void OptionsSimple::formatChanged()
 // {
 //     QStringList errorList;
-//     cReplayGain->setEnabled( config->pluginLoader()->canReplayGain(cFormat->currentText(),currentPlugin,&errorList) );
-//     if( !cReplayGain->isEnabled() )
+//     ui->replayGainCheckBox->setEnabled( config->pluginLoader()->canReplayGain(ui->formatComboBox->currentText(),currentPlugin,&errorList) );
+//     if( !ui->replayGainCheckBox->isEnabled() )
 //     {
 //         if( !errorList.isEmpty() )
 //         {
-//             errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",cFormat->currentText()) );
+//             errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",ui->formatComboBox->currentText()) );
 //         }
 //         else
 //         {
-//             errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",cFormat->currentText());
+//             errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",ui->formatComboBox->currentText());
 //         }
-//         cReplayGain->setToolTip( errorList.join("\n\n") );
+//         ui->replayGainCheckBox->setToolTip( errorList.join("\n\n") );
 //     }
 //     else
 //     {
-//         cReplayGain->setToolTip( "" );
+//         ui->replayGainCheckBox->setToolTip( "" );
 //     }
 // }
 
 void OptionsSimple::outputDirectoryChanged()
 {
-    const QString profileName = cProfile->currentText();
-    ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+    const QString profileName = ui->profileComboBox->currentText();
+    ConversionOptions *conversionOptions = config->data.profiles.value(profileName);
     if( conversionOptions )
     {
-        if( conversionOptions->outputDirectoryMode != outputDirectory->mode() || conversionOptions->outputDirectory != outputDirectory->directory() )
+        if( conversionOptions->outputDirectoryMode != ui->outputDirectory->mode() || conversionOptions->outputDirectory != ui->outputDirectory->directory() )
         {
-            cProfile->setCurrentIndex( cProfile->findText(i18n("User defined")) );
+            ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(i18n("User defined")));
             profileChanged();
         }
     }
@@ -384,60 +323,60 @@ void OptionsSimple::somethingChanged()
     emit optionsChanged();
 }
 
-void OptionsSimple::currentDataRateChanged( int dataRate )
+void OptionsSimple::currentDataRateChanged(int dataRate)
 {
-    if( dataRate > 0 )
-    {
-        const QString dataRateString = Global::prettyNumber(dataRate,"B");
-        lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
-    }
-    else
-    {
-        lEstimSize->setText( QString(QChar(8776))+" ? B / min." );
-        lEstimSize->setToolTip( "" );
-    }
+//     if( dataRate > 0 )
+//     {
+//         const QString dataRateString = Global::prettyNumber(dataRate,"B");
+//         lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
+//         lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
+//     }
+//     else
+//     {
+//         lEstimSize->setText( QString(QChar(8776))+" ? B / min." );
+//         lEstimSize->setToolTip( "" );
+//     }
 }
 
-void OptionsSimple::setCurrentProfile( const QString& profile )
+void OptionsSimple::setCurrentProfile(const QString& profile)
 {
     // TODO check profile (and don't change, if not available)
-    cProfile->setCurrentIndex( cProfile->findText(profile) );
+    ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(profile));
     profileChanged();
 }
 
-void OptionsSimple::setCurrentFormat( const QString& format )
+void OptionsSimple::setCurrentFormat(const QString& format)
 {
-    cFormat->setCurrentIndex( cFormat->findText(format) );
+    ui->formatComboBox->setCurrentIndex(ui->formatComboBox->findText(format));
 //     formatChanged();
 }
 
-void OptionsSimple::setCurrentOutputDirectory( const QString& directory )
+void OptionsSimple::setCurrentOutputDirectory(const QString& directory)
 {
-    outputDirectory->setDirectory( directory );
+    ui->outputDirectory->setDirectory(directory);
     outputDirectoryChanged();
 }
 
-void OptionsSimple::setCurrentOutputDirectoryMode( int mode )
+void OptionsSimple::setCurrentOutputDirectoryMode(int mode)
 {
-    outputDirectory->setMode( (OutputDirectory::Mode)mode );
+    ui->outputDirectory->setMode((OutputDirectory::Mode)mode);
     outputDirectoryChanged();
 }
 
 void OptionsSimple::showHelp()
 {
     QList<CodecProblems::Problem> problemList;
-    QMap<QString,QStringList> problems = config->pluginLoader()->encodeProblems();
-    for( int i=0; i<problems.count(); i++ )
+    QMap<QString, QStringList> problems = config->pluginLoader()->encodeProblems();
+    foreach( const QString& codecName, problems.keys() )
     {
-        CodecProblems::Problem problem;
-        problem.codecName = problems.keys().at(i);
-        if( problem.codecName != "wav" )
+        if( codecName != "wav" )
         {
-            problem.solutions = problems.value(problem.codecName);
+            CodecProblems::Problem problem;
+            problem.codecName = codecName;
+            problem.solutions = problems.value(codecName);
             problemList += problem;
         }
     }
-    CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Debug, problemList, this );
+    CodecProblems *problemsDialog = new CodecProblems(CodecProblems::Debug, problemList, this);
     problemsDialog->exec();
 }

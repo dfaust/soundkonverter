@@ -1,54 +1,39 @@
-//
-// C++ Implementation: opener
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "fileopener.h"
+#include "ui_optionsdialog.h"
+
 #include "../options.h"
 #include "../config.h"
 #include "../codecproblems.h"
 
-#include <QApplication>
 #include <KLocalizedString>
-#include <QPushButton>
 #include <QLabel>
-#include <QLayout>
-#include <QBoxLayout>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QDir>
 
-
-FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
-    : QDialog( parent, f ),
+FileOpener::FileOpener(Config *_config, QWidget *parent, Qt::WindowFlags f) :
+    QDialog(parent, f),
+    ui(new Ui::OptionsDialog),
     dialogAborted( false ),
     config( _config )
 {
-    setWindowTitle( i18n("Add Files") );
-    setWindowIcon( QIcon::fromTheme("audio-x-generic") );
-//     setButtons( 0 );
+    ui->setupUi(this);
 
-    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+    setWindowTitle(i18n("Add files"));
+    setWindowIcon(QIcon::fromTheme("audio-x-generic"));
 
-    QWidget *widget = new QWidget();
-//     setMainWidget( widget );
-
-    QGridLayout *mainGrid = new QGridLayout( widget );
+    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
     QStringList filterList;
     QStringList allFilter;
-    const QStringList formats = config->pluginLoader()->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
+    const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid));
     foreach( QString format, formats )
     {
         QString extensionFilter = config->pluginLoader()->codecExtensions(format).join(" *.");
         if( extensionFilter.length() == 0 )
             continue;
+
         extensionFilter = "*." + extensionFilter;
         allFilter += extensionFilter;
         filterList += extensionFilter + "|" + i18n("%1 files",format.replace("/","\\/"));
@@ -56,30 +41,16 @@ FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WindowFlags f )
     filterList.prepend( allFilter.join(" ") + "|" + i18n("All supported files") );
     filterList += "*.*|" + i18n("All files");
 
-    options = new Options( config, i18n("Select your desired output options and click on \"Ok\"."), widget );
-    mainGrid->addWidget( options, 1, 0 );
+    connect(ui->okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
+    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
-    // add a horizontal box layout for the control elements
-    QHBoxLayout *controlBox = new QHBoxLayout();
-    mainGrid->addLayout( controlBox, 2, 0 );
-    controlBox->addStretch();
+//     formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
+//     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
 
-    pAdd = new QPushButton( QIcon::fromTheme("dialog-ok"), i18n("Ok"), widget );
-    controlBox->addWidget( pAdd );
-    connect( pAdd, SIGNAL(clicked()), this, SLOT(okClickedSlot()) );
-    pCancel = new QPushButton( QIcon::fromTheme("dialog-cancel"), i18n("Cancel"), widget );
-    controlBox->addWidget( pCancel );
-    connect( pCancel, SIGNAL(clicked()), this, SLOT(reject()) );
-
-    // add the control elements
-    formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
-    connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
-
-    fileDialog = new QFileDialog( this, i18n("Add Files"), "kfiledialog:///soundkonverter-add-media", filterList.join("\n") );
-    fileDialog->setWindowTitle( i18n("Add Files") );
+    fileDialog = new QFileDialog(this, i18n("Add files"), "kfiledialog:///soundkonverter-add-media", filterList.join("\n"));
     fileDialog->setFileMode(QFileDialog::ExistingFiles);
-    connect( fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()) );
-    connect( fileDialog, SIGNAL(rejected()), this, SLOT(reject()) );
+    connect(fileDialog, SIGNAL(accepted()), this, SLOT(fileDialogAccepted()));
+    connect(fileDialog, SIGNAL(rejected()), this, SLOT(reject()));
     const int dialogReturnCode = fileDialog->exec();
     if( dialogReturnCode == QDialog::Rejected )
         dialogAborted = true;
@@ -109,8 +80,8 @@ void FileOpener::fileDialogAccepted()
     urls.clear();
     urls = fileDialog->selectedUrls();
 
-    const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
-    const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
+    const bool canDecodeAac = config->pluginLoader()->canDecode("m4a/aac");
+    const bool canDecodeAlac = config->pluginLoader()->canDecode("m4a/alac");
     const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
 
     for( int i=0; i<urls.count(); i++ )
@@ -153,23 +124,7 @@ void FileOpener::fileDialogAccepted()
         problem.codecName = problems.keys().at(i);
         if( problem.codecName != "wav" )
         {
-            #if QT_VERSION >= 0x040500
-                problems[problem.codecName][1].removeDuplicates();
-            #else
-                QStringList found;
-                for( int j=0; j<problems.value(problem.codecName).at(1).count(); j++ )
-                {
-                    if( found.contains(problems.value(problem.codecName).at(1).at(j)) )
-                    {
-                        problems[problem.codecName][1].removeAt(j);
-                        j--;
-                    }
-                    else
-                    {
-                        found += problems.value(problem.codecName).at(1).at(j);
-                    }
-                }
-            #endif
+            problems[problem.codecName][1].removeDuplicates();
             problem.solutions = problems.value(problem.codecName).at(1);
             if( problems.value(problem.codecName).at(0).count() <= 3 )
             {
@@ -185,45 +140,45 @@ void FileOpener::fileDialogAccepted()
         }
     }
 
-    if( problemList.count() > 0 )
+    if( !problemList.isEmpty() )
     {
         CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Decode, problemList, this );
         problemsDialog->exec();
     }
 
-    if( urls.count() <= 0 )
+    if( urls.isEmpty() )
         reject();
 }
 
 void FileOpener::okClickedSlot()
 {
-    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
     if( conversionOptions )
     {
-        options->accepted();
-        emit open( urls, conversionOptions );
+        ui->options->accepted();
+        emit open(urls, conversionOptions);
         accept();
     }
     else
     {
-        QMessageBox::critical( this, "soundKonverter", i18n("No conversion options selected.") );
+        QMessageBox::critical(this, "soundKonverter", i18n("No conversion options selected."));
     }
 }
 
 void FileOpener::showHelp()
 {
     QList<CodecProblems::Problem> problemList;
-    QMap<QString,QStringList> problems = config->pluginLoader()->decodeProblems();
-    for( int i=0; i<problems.count(); i++ )
+    QMap<QString, QStringList> problems = config->pluginLoader()->decodeProblems();
+    foreach( const QString& codecName, problems.keys() )
     {
-        CodecProblems::Problem problem;
-        problem.codecName = problems.keys().at(i);
-        if( problem.codecName != "wav" )
+        if( codecName != "wav" )
         {
-            problem.solutions = problems.value(problem.codecName);
+            CodecProblems::Problem problem;
+            problem.codecName = codecName;
+            problem.solutions = problems.value(codecName);
             problemList += problem;
         }
     }
-    CodecProblems *problemsDialog = new CodecProblems( CodecProblems::Debug, problemList, this );
+    CodecProblems *problemsDialog = new CodecProblems(CodecProblems::Debug, problemList, this);
     problemsDialog->exec();
 }

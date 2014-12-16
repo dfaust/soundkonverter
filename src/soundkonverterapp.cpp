@@ -7,27 +7,32 @@
 #include <QStandardPaths>
 #include <QUrl>
 #include <QFile>
+#include <QDebug>
 
-
-soundKonverterApp::soundKonverterApp(int & argc, char ** argv)
-    : QApplication(argc, argv)
+soundKonverterApp::soundKonverterApp(int & argc, char ** argv) :
+    QApplication(argc, argv)
 {
-    mainWindow = new soundKonverter();
-    setActiveWindow( mainWindow );
+    qDebug() << "soundKonverterApp";
+    mainWindow = new SoundKonverter();
+    mainWindow->show();
+    setActiveWindow(mainWindow);
 }
 
 soundKonverterApp::~soundKonverterApp()
-{}
+{
+}
 
 int soundKonverterApp::newInstance()
 {
+    qDebug() << "soundKonverterApp::newInstance";
+
+    static bool first = true;
+    bool visible = true;
+    bool autoclose = false;
+    bool autostart = false;
+    bool activateMainWindow = true;
+
 //     QCommandLineParser parser;
-//
-//     static bool first = true;
-//     bool visible = true;
-//     bool autoclose = false;
-//     bool autostart = false;
-//     bool activateMainWindow = true;
 //
 //     if( ( first || !mainWindow->isVisible() ) && parser.isSet("replaygain") && parser.positionalArguments().count() > 0 )
 //         visible = false;
@@ -101,18 +106,18 @@ int soundKonverterApp::newInstance()
 //         if( !urls.isEmpty() )
 //             mainWindow->addConvertFiles( urls, profile, format, directory, notifyCommand );
 //     }
-//
-//
-//     if( activateMainWindow )
-//         mainWindow->activateWindow();
-//
-//     if( autostart )
-//         mainWindow->startConversion();
-//
-//     if( first )
-//         mainWindow->startupChecks();
-//
-//     first = false;
+
+
+    if( activateMainWindow )
+        mainWindow->activateWindow();
+
+    if( autostart )
+        mainWindow->startConversion();
+
+    if( first )
+        mainWindow->startupChecks();
+
+    first = false;
 
     return 0;
 }

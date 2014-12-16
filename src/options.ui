@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Options</class>
+ <widget class="QWidget" name="Options">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="margin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="OptionsSimple" name="optionsSimple">
+      <attribute name="title">
+       <string>Simple</string>
+      </attribute>
+     </widget>
+     <widget class="OptionsDetailed" name="optionsDetailed">
+      <attribute name="title">
+       <string>Detailed</string>
+      </attribute>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>OptionsSimple</class>
+   <extends>QWidget</extends>
+   <header>optionssimple.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>OptionsDetailed</class>
+   <extends>QWidget</extends>
+   <header>optionsdetailed.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

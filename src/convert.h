@@ -1,5 +1,4 @@
 
-
 #ifndef CONVERT_H
 #define CONVERT_H
 
@@ -12,7 +11,6 @@
 #include <QTimer>
 
 class BackendPlugin;
-class CDManager;
 class Config;
 class ConvertItem;
 class FileList;
@@ -69,7 +67,6 @@ private:
     QMap< QString, QList<ConvertItem*> > albumGainItems;
 
     Config *config;
-    CDManager* cdManager;
     FileList *fileList;
     Logger* logger;
     QMap<int,QString> usedOutputNames;

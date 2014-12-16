@@ -22,6 +22,7 @@ find_package(KF5CoreAddons)
 find_package(KF5WidgetsAddons)
 find_package(KF5KIO)
 find_package(KF5Solid)
+find_package(KF5Crash)
 
 find_package(Phonon4Qt5)
 
@@ -30,7 +31,7 @@ find_package(Cdparanoia REQUIRED)
 find_package(Discid REQUIRED)
 find_package(Musicbrainz5 REQUIRED)
 
-set(TAGLIB_MIN_VERSION "1.4")
+set(TAGLIB_MIN_VERSION "1.9")
 find_package(Taglib REQUIRED)
 
 include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
@@ -122,15 +123,31 @@ set(soundkonverter_SRCS
    outputdirectory.cpp
    aboutplugins.cpp
 )
+
+qt5_wrap_ui(soundkonverter_SRCS
+    logviewer.ui
+    aboutplugins.ui
+    codecproblems.ui
+    options.ui
+    optionssimple.ui
+    optionsdetailed.ui
+    outputdirectory.ui
+    optionsdialog.ui
+    opener/diropener.ui
+    opener/urlopener.ui
+    opener/cdopener.ui
+    replaygainscanner/replaygainscanner.ui
+)
+
 add_executable(soundkonverter ${soundkonverter_SRCS})
 # target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::CoreAddons KF5::WidgetsAddons KF5::ConfigCore KF5::ConfigGui KF5::KIOCore KF5::KIOFileWidgets KF5::KIOWidgets KF5::KIONTLM Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES} soundkonvertercore)
-target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::CoreAddons KF5::WidgetsAddons KF5::ConfigCore KF5::ConfigGui KF5::KIOCore KF5::KIOFileWidgets KF5::KIOWidgets KF5::KIONTLM Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES})
+target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::CoreAddons KF5::WidgetsAddons KF5::ConfigCore KF5::ConfigGui KF5::KIOCore KF5::KIOFileWidgets KF5::KIOWidgets KF5::KIONTLM KF5::Crash Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES})
 # install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 
 
 # install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-# install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
-#
+# install(FILES soundkonverterui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/soundkonverter)
+
 # install(FILES soundkonverter_codecplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 # install(FILES soundkonverter_filterplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 # install(FILES soundkonverter_replaygainplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})

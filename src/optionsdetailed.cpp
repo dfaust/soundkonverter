@@ -1,93 +1,57 @@
 
 #include "optionsdetailed.h"
+#include "ui_optionsdetailed.h"
+
+// #include "global.h"
 #include "config.h"
 #include "core/codecplugin.h"
 #include "core/codecwidget.h"
 #include "outputdirectory.h"
-#include "global.h"
-
-#include <QApplication>
-#include <QLayout>
-#include <QBoxLayout>
-#include <QLabel>
 
 #include <KLocalizedString>
-#include <QFrame>
-#include <QChar>
-#include <QIcon>
-#include <QComboBox>
-#include <QPushButton>
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QFile>
 #include <QStandardPaths>
 #include <QMenu>
-#include <QToolButton>
-#include <QTextStream>
 
-//
-// class OptionsDetailed
-//
-////////////////////
-
-OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
-    : QWidget( parent ),
-    config( _config )
+OptionsDetailed::OptionsDetailed(QWidget* parent) :
+    QWidget(parent),
+    ui(new Ui::OptionsDetailed)
 {
-    const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+    ui->setupUi(this);
 
-    int gridRow = 0;
-    grid = new QGridLayout( this );
+    connect(ui->formatComboBox, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)));
+//     connect(ui->formatComboBox, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()));
 
-    QHBoxLayout *topBox = new QHBoxLayout();
-    grid->addLayout( topBox, 0, 0 );
+    connect(ui->pluginComboBox, SIGNAL(activated(const QString&)), this, SLOT(encoderChanged(const QString&)));
+    connect(ui->pluginComboBox, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()));
 
-    QLabel *lFormat = new QLabel( i18n("Format:"), this );
-    topBox->addWidget( lFormat );
-    cFormat = new QComboBox( this );
-    topBox->addWidget( cFormat );
-    cFormat->addItems( config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
-    connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(formatChanged(const QString&)) );
-//     connect( cFormat, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
+    connect(ui->configurePluginButton, SIGNAL(clicked()),          this, SLOT(configurePlugin()));
 
-    topBox->addStretch();
+//     connect( ui->replayGainCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
-    lPlugin = new QLabel( i18n("Use Plugin:"), this );
-    topBox->addWidget( lPlugin );
-    cPlugin = new QComboBox( this );
-    topBox->addWidget( cPlugin );
-    cPlugin->setSizeAdjustPolicy( QComboBox::AdjustToContents );
-    connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(encoderChanged(const QString&)) );
-    connect( cPlugin, SIGNAL(activated(const QString&)), this, SLOT(somethingChanged()) );
-    pConfigurePlugin = new QPushButton( QIcon::fromTheme("configure"), "", this );
-    pConfigurePlugin->setFixedSize( cPlugin->sizeHint().height(), cPlugin->sizeHint().height() );
-    pConfigurePlugin->setFlat( true );
-    topBox->addWidget( pConfigurePlugin );
-    topBox->setStretchFactor( pConfigurePlugin, 1 );
-    connect( pConfigurePlugin, SIGNAL(clicked()), this, SLOT(configurePlugin()) );
+    connect(ui->saveProfileButton, SIGNAL(clicked()),              this, SLOT(saveCustomProfile()));
 
-    // draw a horizontal line
-    QFrame *lineFrame = new QFrame( this );
-    lineFrame->setFrameShape( QFrame::HLine );
-    lineFrame->setFrameShadow( QFrame::Sunken );
-    lineFrame->setFixedHeight( fontHeight );
-    grid->addWidget( lineFrame, 1, 0 );
+//     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
+//     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
+}
 
-    // prepare the plugin widget
-    wPlugin = 0;
-    grid->setRowStretch( 2, 1 );
-    grid->setRowMinimumHeight( 2, 20 );
-    gridRow = 3;
+OptionsDetailed::~OptionsDetailed()
+{
+    if( currentPlugin && pluginWidget )
+    {
+        currentPlugin->deleteCodecWidget(pluginWidget);
+    }
+}
 
-    // draw a horizontal line
-    lineFrame = new QFrame( this );
-    lineFrame->setFrameShape( QFrame::HLine );
-    lineFrame->setFrameShadow( QFrame::Sunken );
-    lineFrame->setFixedHeight( fontHeight );
-    grid->addWidget( lineFrame, gridRow++, 0 );
+void OptionsDetailed::init(Config *config)
+{
+    this->config = config;
 
-    int filterCount = 0;
-    foreach( QString pluginName, config->data.backends.enabledFilters )
+    ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid)));
+
+    foreach( const QString& pluginName, config->data.backends.enabledFilters )
     {
         FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
         if( !plugin )
@@ -97,75 +61,25 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
         if( !widget )
             continue;
 
-        wFilter.insert( widget, plugin );
-        connect( widget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
-        grid->addWidget( widget, gridRow++, 0 );
+        filterWidgets.insert(widget, plugin);
+        connect(widget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()));
+
+        ui->filterLayout->addWidget(widget);
+
         widget->show();
-        filterCount++;
-    }
-    if( filterCount > 0 )
-    {
-        // draw a horizontal line
-        lineFrame = new QFrame( this );
-        lineFrame->setFrameShape( QFrame::HLine );
-        lineFrame->setFrameShadow( QFrame::Sunken );
-        lineFrame->setFixedHeight( fontHeight );
-        grid->addWidget( lineFrame, gridRow++, 0 );
     }
 
-    // the output directory
-    QHBoxLayout *middleBox = new QHBoxLayout( );
-    grid->addLayout( middleBox, gridRow++, 0 );
-
-    QLabel *lOutput = new QLabel( i18n("Destination:"), this );
-    middleBox->addWidget( lOutput );
-    outputDirectory = new OutputDirectory( config, this );
-    middleBox->addWidget( outputDirectory );
-
-    QHBoxLayout *bottomBox = new QHBoxLayout();
-    grid->addLayout( bottomBox, gridRow++, 0 );
-
-    cReplayGain = new QCheckBox( i18n("Calculate Replay Gain tags"), this );
-    bottomBox->addWidget( cReplayGain );
-    //connect( cReplayGain, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-    bottomBox->addStretch();
-    lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
-    lEstimSize->hide(); // hide for now because most plugins report inaccurate data
-    bottomBox->addWidget( lEstimSize );
-    pProfileSave = new QPushButton( QIcon::fromTheme("document-save"), "", this );
-    bottomBox->addWidget( pProfileSave );
-    pProfileSave->setFixedWidth( pProfileSave->height() );
-    pProfileSave->setToolTip( i18n("Save current options as a profile") );
-    connect( pProfileSave, SIGNAL(clicked()), this, SLOT(saveCustomProfile()) );
-    pProfileLoad = new QToolButton( this );
-    bottomBox->addWidget( pProfileLoad );
-    pProfileLoad->setIcon( QIcon::fromTheme("document-open") );
-    pProfileLoad->setPopupMode( QToolButton::InstantPopup );
-    pProfileLoad->setFixedWidth( pProfileLoad->height() );
-    pProfileLoad->setToolTip( i18n("Load saved profiles") );
-}
-
-OptionsDetailed::~OptionsDetailed()
-{}
-
-void OptionsDetailed::init()
-{
     updateProfiles();
 
-    cFormat->setCurrentIndex( 0 );
-    formatChanged( cFormat->currentText() );
+    ui->formatComboBox->setCurrentIndex(0);
+    formatChanged(ui->formatComboBox->currentText());
 }
-
-// QSize OptionsDetailed::sizeHint()
-// {
-//     return size_hint;
-// }
 
 void OptionsDetailed::resetFilterOptions()
 {
-    for( int i=0; i<wFilter.size(); i++ )
+    for( int i=0; i<filterWidgets.size(); i++ )
     {
-        FilterWidget *widget = wFilter.keys().at(i);
+        FilterWidget *widget = filterWidgets.keys().at(i);
         if( widget )
         {
             widget->setCurrentFilterOptions( 0 );
@@ -175,20 +89,20 @@ void OptionsDetailed::resetFilterOptions()
 
 void OptionsDetailed::setReplayGainChecked( bool enabled )
 {
-    cReplayGain->setChecked(enabled);
+    ui->replayGainCheckBox->setChecked(enabled);
 }
 
-bool OptionsDetailed::isReplayGainEnabled( QString *toolTip )
+bool OptionsDetailed::isReplayGainEnabled(QString *toolTip)
 {
     if( toolTip )
-        *toolTip = cReplayGain->toolTip();
+        *toolTip = ui->replayGainCheckBox->toolTip();
 
-    return cReplayGain->isEnabled();
+    return ui->replayGainCheckBox->isEnabled();
 }
 
 bool OptionsDetailed::isReplayGainChecked()
 {
-    return cReplayGain->isChecked();
+    return ui->replayGainCheckBox->isChecked();
 }
 
 CodecPlugin *OptionsDetailed::getCurrentPlugin()
@@ -196,142 +110,143 @@ CodecPlugin *OptionsDetailed::getCurrentPlugin()
     return currentPlugin;
 }
 
-//
-// class private slots
-//
-
 void OptionsDetailed::updateProfiles()
 {
-    QMenu *menu = new QMenu( this );
+    QMenu *menu = new QMenu(this);
     const QStringList profiles = config->customProfiles();
-    for( int i=0; i<profiles.count(); i++ )
+    foreach( const QString& profile, profiles )
     {
-        menu->addAction( profiles.at(i), this, SLOT(loadCustomProfileButtonClicked()) );
+        menu->addAction(profile, this, SLOT(loadCustomProfileButtonClicked()));
     }
 
-    pProfileLoad->setMenu( menu );
-    pProfileLoad->setVisible( profiles.count() > 0 );
+    ui->loadProfileButton->setMenu(menu);
+    ui->loadProfileButton->setVisible(!profiles.isEmpty());
 }
 
-void OptionsDetailed::formatChanged( const QString& format )
+void OptionsDetailed::formatChanged(const QString& format)
 {
-    const QString oldEncoder = cPlugin->currentText();
+    const QString oldEncoder = ui->pluginComboBox->currentText();
 
-    cPlugin->clear();
+    ui->pluginComboBox->clear();
     //if( format != "wav" ) // TODO make it nicer if wav is selected
-    for( int i=0; i<config->data.backends.codecs.count(); i++ )
+    foreach( const Config::CodecData& codecData, config->data.backends.codecs )
     {
-        if( config->data.backends.codecs.at(i).codecName == format )
+        if( codecData.codecName == format )
         {
-            cPlugin->addItems( config->data.backends.codecs.at(i).encoders );
+            ui->pluginComboBox->addItems(codecData.encoders);
         }
     }
-    cPlugin->setCurrentIndex( 0 );
+    ui->pluginComboBox->setCurrentIndex( 0 );
 
-    if( cPlugin->currentText() != oldEncoder )
+    if( ui->pluginComboBox->currentText() != oldEncoder )
     {
-        encoderChanged( cPlugin->currentText() );
+        encoderChanged(ui->pluginComboBox->currentText());
     }
-    else if( wPlugin )
+    else if( pluginWidget )
     {
-        wPlugin->setCurrentFormat( cFormat->currentText() );
+        pluginWidget->setCurrentFormat(ui->formatComboBox->currentText());
     }
 
-    lPlugin->setVisible( format != "wav" );
-    cPlugin->setVisible( format != "wav" );
-    pConfigurePlugin->setVisible( format != "wav" );
-    if( wPlugin )
-        wPlugin->setVisible( format != "wav" );
+    ui->pluginLabel->setVisible(format != "wav");
+    ui->pluginComboBox->setVisible(format != "wav");
+    ui->configurePluginButton->setVisible(format != "wav");
+
+    if( pluginWidget )
+        pluginWidget->setVisible(format != "wav");
 
     QStringList errorList;
-    cReplayGain->setEnabled( config->pluginLoader()->canReplayGain(cFormat->currentText(),currentPlugin,&errorList) );
-    if( !cReplayGain->isEnabled() )
+    ui->replayGainCheckBox->setEnabled(config->pluginLoader()->canReplayGain(ui->formatComboBox->currentText(), currentPlugin, &errorList));
+    if( !ui->replayGainCheckBox->isEnabled() )
     {
-        QPalette notificationPalette = cReplayGain->palette();
-        notificationPalette.setColor( QPalette::Disabled, QPalette::WindowText, QColor(174,127,130) );
-        cReplayGain->setPalette( notificationPalette );
+        QPalette notificationPalette = ui->replayGainCheckBox->palette();
+        notificationPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(174,127,130));
+        ui->replayGainCheckBox->setPalette( notificationPalette );
 
         if( !errorList.isEmpty() )
         {
-            errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",cFormat->currentText()) );
+            errorList.prepend(i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.", ui->formatComboBox->currentText()));
         }
         else
         {
-            errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",cFormat->currentText());
+            errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.", ui->formatComboBox->currentText());
         }
-        cReplayGain->setToolTip( errorList.join("\n\n") );
+
+        ui->replayGainCheckBox->setToolTip(errorList.join("\n\n"));
     }
     else
     {
-        cReplayGain->setToolTip( i18n("Replay Gain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness.") );
+        ui->replayGainCheckBox->setToolTip(i18n("Replay Gain tags can tell your music player how loud a track is\nso it can adjust the volume to play all tracks with equal loudness."));
     }
 
     somethingChanged();
 }
 
-void OptionsDetailed::encoderChanged( const QString& encoder )
+void OptionsDetailed::encoderChanged(const QString& encoder)
 {
-    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( encoder );
+    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName(encoder));
     if( !plugin )
     {
 //         TODO leads to crashes
-//         QMessageBox::critical( this, "soundKonverter", i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
+//         QMessageBox::critical( this, "soundKonverter", i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codeui->pluginComboBoxByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
         return;
     }
-    if( wPlugin )
+
+    if( pluginWidget )
     {
-        grid->removeWidget( wPlugin );
-        disconnect( wPlugin, SIGNAL(optionsChanged()), 0, 0 );
-        wPlugin = currentPlugin->deleteCodecWidget( wPlugin );
+        ui->pluginLayout->removeWidget(pluginWidget);
+        disconnect(pluginWidget, SIGNAL(optionsChanged()), 0, 0);
+        pluginWidget = currentPlugin->deleteCodecWidget(pluginWidget);
     }
+
     currentPlugin = plugin;
-    wPlugin = plugin->newCodecWidget();
-    if( wPlugin )
+    pluginWidget = plugin->newCodecWidget();
+
+    if( pluginWidget )
     {
-        connect( wPlugin, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
-        qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
+        connect(pluginWidget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()));
+        qobject_cast<CodecWidget*>(pluginWidget)->setCurrentFormat(ui->formatComboBox->currentText());
         if( plugin->lastUsedConversionOptions )
         {
-            wPlugin->setCurrentConversionOptions( plugin->lastUsedConversionOptions );
+            pluginWidget->setCurrentConversionOptions(plugin->lastUsedConversionOptions);
             delete plugin->lastUsedConversionOptions;
             plugin->lastUsedConversionOptions = 0;
         }
-        grid->addWidget( wPlugin, 2, 0 );
+        ui->pluginLayout->addWidget(pluginWidget);
     }
 
-    pConfigurePlugin->setEnabled( plugin->isConfigSupported(BackendPlugin::Encoder,"") );
+    ui->configurePluginButton->setEnabled(plugin->isConfigSupported(BackendPlugin::Encoder, ""));
 
-    if( pConfigurePlugin->isEnabled() )
-        pConfigurePlugin->setToolTip( i18n("Configure %1 ...",encoder) );
+    if( ui->configurePluginButton->isEnabled() )
+        ui->configurePluginButton->setToolTip(i18n("Configure %1 ...", encoder));
     else
-        pConfigurePlugin->setToolTip( "" );
+        ui->configurePluginButton->setToolTip("");
 }
 
 void OptionsDetailed::somethingChanged()
 {
     int dataRate = 0;
 
-    if( wPlugin )
-        dataRate = wPlugin->currentDataRate();
+    if( pluginWidget )
+        dataRate = pluginWidget->currentDataRate();
 
-    if( dataRate > 0 )
-    {
-        const QString dataRateString = Global::prettyNumber(dataRate,"B");
-        lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
-    }
-    else
-    {
-        lEstimSize->setText( QString(QChar(8776))+" ? B / min." );
-        lEstimSize->setToolTip( "" );
-    }
+//     if( dataRate > 0 )
+//     {
+//         const QString dataRateString = Global::prettyNumber(dataRate,"B");
+//         lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
+//         lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
+//     }
+//     else
+//     {
+//         lEstimSize->setText( QString(QChar(8776))+" ? B / min." );
+//         lEstimSize->setToolTip( "" );
+//     }
 
     emit currentDataRateChanged( dataRate );
 }
 
 void OptionsDetailed::configurePlugin()
 {
-    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( cPlugin->currentText() );
+    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName(ui->pluginComboBox->currentText()));
 
     if( plugin )
     {
@@ -339,30 +254,30 @@ void OptionsDetailed::configurePlugin()
     }
 }
 
-ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed )
+ConversionOptions *OptionsDetailed::currentConversionOptions(bool saveLastUsed)
 {
     ConversionOptions *options = 0;
 
-    if( wPlugin && currentPlugin )
+    if( pluginWidget && currentPlugin )
     {
-        options = wPlugin->currentConversionOptions();
+        options = pluginWidget->currentConversionOptions();
         if( options )
         {
-            options->codecName = cFormat->currentText();
+            options->codecName = ui->formatComboBox->currentText();
             if( options->codecName != "wav" )
                 options->pluginName = currentPlugin->name();
             else
                 options->pluginName = "";
-            options->profile = wPlugin->currentProfile();
-            options->outputDirectoryMode = outputDirectory->mode();
-            options->outputDirectory = outputDirectory->directory();
-            options->outputFilesystem = outputDirectory->filesystem();
-            options->replaygain = cReplayGain->isEnabled() && cReplayGain->isChecked();
+            options->profile = pluginWidget->currentProfile();
+            options->outputDirectoryMode = ui->outputDirectory->mode();
+            options->outputDirectory = ui->outputDirectory->directory();
+            options->outputFilesystem = ui->outputDirectory->filesystem();
+            options->replaygain = ui->replayGainCheckBox->isEnabled() && ui->replayGainCheckBox->isChecked();
 
-            for( int i=0; i<wFilter.size(); i++ )
+            for( int i=0; i<filterWidgets.size(); i++ )
             {
-                FilterWidget *widget = wFilter.keys().at(i);
-                FilterPlugin *plugin = wFilter.values().at(i);
+                FilterWidget *widget = filterWidgets.keys().at(i);
+                FilterPlugin *plugin = filterWidgets.values().at(i);
                 if( widget && plugin )
                 {
                     FilterOptions *filterOptions = widget->currentFilterOptions();
@@ -378,7 +293,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed 
             {
                 config->data.general.lastProfile = currentProfile();
                 saveCustomProfile( true );
-                config->data.general.lastFormat = cFormat->currentText();
+                config->data.general.lastFormat = ui->formatComboBox->currentText();
             }
         }
     }
@@ -386,28 +301,30 @@ ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed 
     return options;
 }
 
-bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
+bool OptionsDetailed::setCurrentConversionOptions(ConversionOptions *options)
 {
     if( !options )
         return false;
 
-    cFormat->setCurrentIndex( cFormat->findText(options->codecName) );
-    formatChanged( cFormat->currentText() );
+    ui->formatComboBox->setCurrentIndex(ui->formatComboBox->findText(options->codecName));
+    formatChanged(ui->formatComboBox->currentText());
+
     if( options->codecName != "wav" )
     {
-        cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
-        encoderChanged( cPlugin->currentText() );
+        ui->pluginComboBox->setCurrentIndex(ui->pluginComboBox->findText(options->pluginName));
+        encoderChanged(ui->pluginComboBox->currentText());
     }
-    outputDirectory->setMode( (OutputDirectory::Mode)options->outputDirectoryMode );
-    outputDirectory->setDirectory( options->outputDirectory );
-    cReplayGain->setChecked( options->replaygain );
+
+    ui->outputDirectory->setMode( (OutputDirectory::Mode)options->outputDirectoryMode );
+    ui->outputDirectory->setDirectory( options->outputDirectory );
+    ui->replayGainCheckBox->setChecked( options->replaygain );
 
     bool succeeded = true;
 
     if( options->codecName == "wav" )
         succeeded = true;
-    else if( wPlugin )
-        succeeded = wPlugin->setCurrentConversionOptions( options );
+    else if( pluginWidget )
+        succeeded = pluginWidget->setCurrentConversionOptions(options);
     else
         succeeded = false;
 
@@ -415,37 +332,38 @@ bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
     foreach( FilterOptions *filterOptions, options->filterOptions )
     {
         bool filterSucceeded = false;
-        for( int i=0; i<wFilter.size(); i++ )
+        foreach( FilterWidget *widget, filterWidgets.keys() )
         {
-            FilterWidget *widget = wFilter.keys().at(i);
-            FilterPlugin *plugin = wFilter.values().at(i);
+            FilterPlugin *plugin = filterWidgets.value(widget);
+
             if( widget && plugin && filterOptions->pluginName == plugin->name() )
             {
-                filterSucceeded = widget->setCurrentFilterOptions( filterOptions );
-                usedFilter.append( filterOptions->pluginName );
+                filterSucceeded = widget->setCurrentFilterOptions(filterOptions);
+                usedFilter.append(filterOptions->pluginName);
                 break;
             }
         }
         if( !filterSucceeded )
             succeeded = false;
     }
+
     // if a filter is disabled, its FilterOptions is 0 thus it won't be added to ConversionOptions, but we need to update the widget so it won't show false data
-    for( int i=0; i<wFilter.size(); i++ )
+    foreach( FilterWidget *widget, filterWidgets.keys() )
     {
-        FilterWidget *widget = wFilter.keys().at(i);
-        FilterPlugin *plugin = wFilter.values().at(i);
+        FilterPlugin *plugin = filterWidgets.value(widget);
+
         if( widget && plugin && !usedFilter.contains(plugin->name()) )
         {
-            widget->setCurrentFilterOptions( 0 );
+            widget->setCurrentFilterOptions(0);
         }
     }
 
     return succeeded;
 }
 
-bool OptionsDetailed::saveCustomProfile( bool lastUsed )
+bool OptionsDetailed::saveCustomProfile(bool lastUsed)
 {
-    if( wPlugin && currentPlugin )
+    if( pluginWidget && currentPlugin )
     {
         QString profileName;
         if( lastUsed )
@@ -455,7 +373,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
         else
         {
             bool ok;
-            profileName = QInputDialog::getText( this, i18n("New profile"), i18n("Enter a name for the new profile:"), QLineEdit::Normal, "", &ok );
+            profileName = QInputDialog::getText(this, i18n("New profile"), i18n("Enter a name for the new profile:"), QLineEdit::Normal, "", &ok);
             if( !ok )
                 return false;
         }
@@ -553,8 +471,7 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
             updateProfiles();
             emit customProfilesEdited();
 
-            QTextStream stream(&listFile);
-            stream << list.toString();
+            listFile.write(list.toString().toUtf8().data());
             listFile.close();
 
             return true;
@@ -572,29 +489,29 @@ bool OptionsDetailed::saveCustomProfile( bool lastUsed )
 
 void OptionsDetailed::loadCustomProfileButtonClicked()
 {
-    const QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&","");
+    const QString profile = qobject_cast<QAction*>(QObject::sender())->text().replace("&", "");
     setCurrentProfile( profile );
 }
 
 QString OptionsDetailed::currentProfile()
 {
-    if( wPlugin )
-        return wPlugin->currentProfile();
+    if( pluginWidget )
+        return pluginWidget->currentProfile();
     else
         return "";
 }
 
-bool OptionsDetailed::setCurrentProfile( const QString& profile )
+bool OptionsDetailed::setCurrentProfile(const QString& profile)
 {
     if( config->data.profiles.keys().contains(profile) )
     {
-        ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+        ConversionOptions *conversionOptions = config->data.profiles.value(profile);
         if( conversionOptions )
-            return setCurrentConversionOptions( conversionOptions );
+            return setCurrentConversionOptions(conversionOptions);
     }
-    else if( wPlugin )
+    else if( pluginWidget )
     {
-        return wPlugin->setCurrentProfile( profile );
+        return pluginWidget->setCurrentProfile(profile);
     }
 
     return false;
@@ -602,16 +519,14 @@ bool OptionsDetailed::setCurrentProfile( const QString& profile )
 
 QString OptionsDetailed::currentFormat()
 {
-    return cFormat->currentText();
+    return ui->formatComboBox->currentText();
 }
 
 void OptionsDetailed::setCurrentFormat( const QString& format )
 {
-    if( !format.isEmpty() && format != cFormat->currentText() )
+    if( !format.isEmpty() && format != ui->formatComboBox->currentText() )
     {
-        cFormat->setCurrentIndex( cFormat->findText(format) );
-        formatChanged( cFormat->currentText() );
+        ui->formatComboBox->setCurrentIndex( ui->formatComboBox->findText(format) );
+        formatChanged( ui->formatComboBox->currentText() );
     }
 }
-
-

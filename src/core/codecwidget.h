@@ -10,15 +10,11 @@
 class FilterOptions;
 class ConversionOptions;
 
-
-/**
- * @short The plugin specific widget for detailed options
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
+/** The plugin specific widget for detailed options */
 class FilterWidget : public QWidget
 {
     Q_OBJECT
+
 public:
     FilterWidget();
     virtual ~FilterWidget();
@@ -31,14 +27,11 @@ signals:
 };
 
 
-/**
- * @short The plugin specific widget for detailed options
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
+/** The plugin specific widget for detailed options */
 class CodecWidget : public QWidget
 {
     Q_OBJECT
+
 public:
     CodecWidget();
     virtual ~CodecWidget();
@@ -53,5 +46,7 @@ public:
 signals:
     void optionsChanged();
 };
+
+Q_DECLARE_INTERFACE(CodecWidget, "org.soundkonverter.codecwidget")
 
 #endif // CODECWIDGET_H

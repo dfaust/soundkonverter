@@ -8,10 +8,10 @@
 
 class RipperPlugin;
 
-
 class RipperPluginItem : public BackendPluginItem
 {
     Q_OBJECT
+
 public:
     RipperPluginItem( QObject *parent=0 );
     virtual ~RipperPluginItem();
@@ -26,11 +26,10 @@ public:
     } data;
 };
 
-
-/** @author Daniel Faust <hessijames@gmail.com> */
 class RipperPlugin : public BackendPlugin
 {
     Q_OBJECT
+
 public:
     RipperPlugin( QObject *parent=0 );
     virtual ~RipperPlugin();
@@ -45,5 +44,6 @@ public:
     virtual QStringList ripCommand( const QString& device, int track, int tracks, const QUrl& outputFile ) = 0;
 };
 
-#endif // RIPPERPLUGIN_H
+Q_DECLARE_INTERFACE(RipperPlugin, "org.soundkonverter.ripperplugin")
 
+#endif // RIPPERPLUGIN_H

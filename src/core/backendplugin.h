@@ -10,7 +10,6 @@
 
 class BackendPlugin;
 
-
 struct ConversionPipeTrunk
 {
     QString codecFrom, codecTo;
@@ -32,10 +31,10 @@ struct ConversionPipeTrunk
     }
 };
 
-
 class BackendPluginItem : public QObject
 {
     Q_OBJECT
+
 public:
     BackendPluginItem( QObject *parent=0 );
     virtual ~BackendPluginItem();
@@ -45,12 +44,10 @@ public:
     float progress;             // hold the current progress, -1 is the initial value and shows that the progress can't be determined
 };
 
-/**
-    @author Daniel Faust <hessijames@gmail.com>
-*/
 class BackendPlugin : public QObject
 {
     Q_OBJECT
+
 public:
     enum ActionType
     {
@@ -135,5 +132,6 @@ private slots:
     virtual void processExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-#endif // BACKENDPLUGIN_H
+Q_DECLARE_INTERFACE(BackendPlugin, "org.soundkonverter.backendplugin")
 
+#endif // BACKENDPLUGIN_H

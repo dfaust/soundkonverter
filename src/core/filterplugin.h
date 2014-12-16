@@ -10,25 +10,15 @@ class FilterPlugin;
 class FilterWidget;
 class TagData;
 
-
-// struct FilterPipe
-// {
-//     FilterPlugin *plugin;
-//     bool enabled; // can we use this conversion pipe? (all needed backends installed?)
-//     QString problemInfo; // howto message, if a backend is missing
-// };
-
-
 class FilterPluginItem : public CodecPluginItem
 {
     Q_OBJECT
+
 public:
     FilterPluginItem( QObject *parent=0 );
     virtual ~FilterPluginItem();
 };
 
-
-/** @author Daniel Faust <hessijames@gmail.com> */
 class FilterPlugin : public CodecPlugin
 {
     Q_OBJECT
@@ -58,5 +48,6 @@ protected:
 
 };
 
-#endif // FILTERPLUGIN_H
+Q_DECLARE_INTERFACE(FilterPlugin, "org.soundkonverter.filterplugin")
 
+#endif // FILTERPLUGIN_H

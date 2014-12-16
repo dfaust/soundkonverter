@@ -9,7 +9,6 @@
 
 class ReplayGainPlugin;
 
-
 struct ReplayGainPipe
 {
     QString codecName;
@@ -20,10 +19,10 @@ struct ReplayGainPipe
     QString problemInfo; // howto message, if a backend is missing
 };
 
-
 class ReplayGainPluginItem : public BackendPluginItem
 {
     Q_OBJECT
+
 public:
     ReplayGainPluginItem( QObject *parent=0 );
     virtual ~ReplayGainPluginItem();
@@ -36,11 +35,10 @@ public:
     } data;
 };
 
-
-/** @author Daniel Faust <hessijames@gmail.com> */
 class ReplayGainPlugin : public BackendPlugin
 {
     Q_OBJECT
+
 public:
     enum ApplyMode {
         Add = 0,
@@ -59,5 +57,6 @@ public:
     virtual unsigned int apply( const QList<QUrl>& fileList, ApplyMode mode = Add ) = 0;
 };
 
-#endif // REPLAYGAINPLUGIN_H
+Q_DECLARE_INTERFACE(ReplayGainPlugin, "org.soundkonverter.replaygainplugin")
 
+#endif // REPLAYGAINPLUGIN_H

@@ -9,7 +9,6 @@ class CodecPlugin;
 class CodecWidget;
 class TagData;
 
-
 class CodecPluginItem : public BackendPluginItem
 {
     Q_OBJECT
@@ -22,8 +21,6 @@ public:
     } data;
 };
 
-
-/** @author Daniel Faust <hessijames@gmail.com> */
 class CodecPlugin : public BackendPlugin
 {
     Q_OBJECT
@@ -53,5 +50,6 @@ public:
 
 };
 
-#endif // CODECPLUGIN_H
+Q_DECLARE_INTERFACE(CodecPlugin, "org.soundkonverter.codecplugin")
 
+#endif // CODECPLUGIN_H

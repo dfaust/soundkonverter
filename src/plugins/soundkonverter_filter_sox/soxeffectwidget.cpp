@@ -14,7 +14,7 @@
 
 
 SoxEffectWidget::SoxEffectWidget( QWidget *parent )
-    : QWidget( parent )
+    : QWidget()
 {
     QHBoxLayout *box = new QHBoxLayout( this );
     box->setMargin( 0 );

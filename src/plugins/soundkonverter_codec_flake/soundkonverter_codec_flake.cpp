@@ -6,10 +6,10 @@
 #include "flakecodecwidget.h"
 
 
-soundkonverter_codec_flake::soundkonverter_codec_flake( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_flake::soundkonverter_codec_flake()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["flake"] = "";
 
@@ -82,13 +82,13 @@ unsigned int soundkonverter_codec_flake::convert( const QUrl& inputFile, const Q
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

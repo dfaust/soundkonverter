@@ -65,7 +65,7 @@ DirOpener::DirOpener(Config *_config, Mode _mode, QWidget *parent, Qt::WindowFla
         }
     }
 
-    const QUrl url = QFileDialog::getExistingDirectory(this, i18n("Add directory"), ui->urlRequester->url().toLocalFile());
+    const QUrl url = QUrl::fromLocalFile(QFileDialog::getExistingDirectory(this, i18n("Add directory"), ui->urlRequester->url().toLocalFile()));
     if( !url.isEmpty() )
         ui->urlRequester->setUrl(url);
     else

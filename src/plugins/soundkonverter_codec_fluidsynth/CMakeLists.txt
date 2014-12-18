@@ -1,19 +1,21 @@
 project(soundkonverter_codec_fluidsynth)
+
+find_package(Qt5Widgets)
 find_package(Qt5Xml)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5I18n)
+find_package(KF5KIO)
 
 set(soundkonverter_codec_fluidsynth_SRCS
    soundkonverter_codec_fluidsynth.cpp
    fluidsynthcodecwidget.cpp
- )
+)
 
-add_library(soundkonverter_codec_fluidsynth MODULE ${soundkonverter_codec_fluidsynth_SRCS})
+add_library(soundkonverter_codec_fluidsynth STATIC ${soundkonverter_codec_fluidsynth_SRCS})
 
-target_link_libraries(soundkonverter_codec_fluidsynth ${KDE4_KDEUI_LIBS} Qt5::Xml soundkonvertercore )
+target_link_libraries(soundkonverter_codec_fluidsynth Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n KF5::KIOFileWidgets soundkonvertercore)
 
-########### install files ###############
+kservice_desktop_to_json(soundkonverter_codec_fluidsynth soundkonverter_codec_fluidsynth.desktop)
 
-install(TARGETS soundkonverter_codec_fluidsynth DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES soundkonverter_codec_fluidsynth.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install(TARGETS soundkonverter_codec_fluidsynth DESTINATION ${PLUGIN_INSTALL_DIR})
+# install(FILES soundkonverter_codec_fluidsynth.desktop DESTINATION ${SERVICES_INSTALL_DIR})

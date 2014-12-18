@@ -8,15 +8,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_replaygain_vorbisgain : public ReplayGainPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_replaygain_vorbisgain( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.replaygainplugin.vorbisgain" FILE "soundkonverter_replaygain_vorbisgain.json")
+    Q_INTERFACES(ReplayGainPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_replaygain_vorbisgain();
     ~soundkonverter_replaygain_vorbisgain();
 
     QString name();
@@ -35,12 +34,6 @@ public:
 private slots:
     /** Get the process' output */
     void processOutput();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( vorbisgain, soundkonverter_replaygain_vorbisgain )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_VORBISGAIN_H_
-
-

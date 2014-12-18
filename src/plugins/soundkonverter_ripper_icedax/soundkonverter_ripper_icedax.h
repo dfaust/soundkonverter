@@ -8,15 +8,14 @@
 #include <QProcess>
 #include <QList>
 
-
 class soundkonverter_ripper_icedax : public RipperPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_ripper_icedax( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.ripperplugin.icedax" FILE "soundkonverter_ripper_icedax.json")
+    Q_INTERFACES(RipperPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_ripper_icedax();
     ~soundkonverter_ripper_icedax();
 
     QString name();
@@ -38,9 +37,4 @@ private slots:
     void processOutput();
 };
 
-K_EXPORT_SOUNDKONVERTER_RIPPER( icedax, soundkonverter_ripper_icedax )
-
-
 #endif // SOUNDKONVERTER_RIPPER_ICEDAX_H
-
-

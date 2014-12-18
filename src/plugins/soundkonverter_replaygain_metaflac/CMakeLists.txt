@@ -1,17 +1,19 @@
 project(soundkonverter_replaygain_metaflac)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(Qt5Widgets)
+find_package(Qt5Xml)
+
+find_package(KF5I18n)
 
 set(soundkonverter_replaygain_metaflac_SRCS
    soundkonverter_replaygain_metaflac.cpp
- )
+)
 
-add_library(soundkonverter_replaygain_metaflac MODULE ${soundkonverter_replaygain_metaflac_SRCS})
+add_library(soundkonverter_replaygain_metaflac STATIC ${soundkonverter_replaygain_metaflac_SRCS})
 
-target_link_libraries(soundkonverter_replaygain_metaflac ${KDE4_KDEUI_LIBS} soundkonvertercore )
+target_link_libraries(soundkonverter_replaygain_metaflac Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 
-########### install files ###############
+kservice_desktop_to_json(soundkonverter_replaygain_metaflac soundkonverter_replaygain_metaflac.desktop)
 
-install(TARGETS soundkonverter_replaygain_metaflac DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES soundkonverter_replaygain_metaflac.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install(TARGETS soundkonverter_replaygain_metaflac DESTINATION ${PLUGIN_INSTALL_DIR})
+# install(FILES soundkonverter_replaygain_metaflac.desktop DESTINATION ${SERVICES_INSTALL_DIR})

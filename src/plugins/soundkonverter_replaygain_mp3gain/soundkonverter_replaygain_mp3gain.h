@@ -5,14 +5,12 @@
 #include "../../core/replaygainplugin.h"
 
 #include <QUrl>
-// #include <QWeakPointer>
 
 class ConversionOptions;
 class QDialog;
 class QComboBox;
 class QCheckBox;
 class QDoubleSpinBox;
-
 
 class Mp3GainPluginItem : public ReplayGainPluginItem
 {
@@ -24,15 +22,14 @@ public:
     QList<QUrl> undoFileList;
 };
 
-
 class soundkonverter_replaygain_mp3gain : public ReplayGainPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_replaygain_mp3gain( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.replaygainplugin.mp3gain" FILE "soundkonverter_replaygain_mp3gain.json")
+    Q_INTERFACES(ReplayGainPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_replaygain_mp3gain();
     ~soundkonverter_replaygain_mp3gain();
 
     QString name();
@@ -63,12 +60,6 @@ private slots:
 
     void configDialogSave();
     void configDialogDefault();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( mp3gain, soundkonverter_replaygain_mp3gain )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_MP3GAIN_H_
-
-

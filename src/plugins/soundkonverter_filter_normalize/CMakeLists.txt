@@ -1,20 +1,21 @@
 project(soundkonverter_filter_normalize)
+
+find_package(Qt5Widgets)
 find_package(Qt5Xml)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5I18n)
 
 set(soundkonverter_filter_normalize_SRCS
    soundkonverter_filter_normalize.cpp
    normalizefilteroptions.cpp
    normalizefilterwidget.cpp
- )
+)
 
-add_library(soundkonverter_filter_normalize MODULE ${soundkonverter_filter_normalize_SRCS})
+add_library(soundkonverter_filter_normalize STATIC ${soundkonverter_filter_normalize_SRCS})
 
-target_link_libraries(soundkonverter_filter_normalize ${KDE4_KDEUI_LIBS} Qt5::Xml soundkonvertercore )
+target_link_libraries(soundkonverter_filter_normalize Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 
-########### install files ###############
+kservice_desktop_to_json(soundkonverter_filter_normalize soundkonverter_filter_normalize.desktop)
 
-install(TARGETS soundkonverter_filter_normalize DESTINATION ${PLUGIN_INSTALL_DIR})
-install(FILES soundkonverter_filter_normalize.desktop DESTINATION ${SERVICES_INSTALL_DIR})
+# install(TARGETS soundkonverter_filter_normalize DESTINATION ${PLUGIN_INSTALL_DIR})
+# install(FILES soundkonverter_filter_normalize.desktop DESTINATION ${SERVICES_INSTALL_DIR})

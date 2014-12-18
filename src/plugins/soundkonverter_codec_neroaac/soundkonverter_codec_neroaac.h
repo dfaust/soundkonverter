@@ -6,15 +6,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_neroaac : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_neroaac( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.neroaac" FILE "soundkonverter_codec_neroaac.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_neroaac();
     ~soundkonverter_codec_neroaac();
 
     QString name();
@@ -38,9 +37,4 @@ private slots:
     void processOutput();
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( neroaac, soundkonverter_codec_neroaac )
-
-
 #endif // _SOUNDKONVERTER_CODEC_NEROAAC_H_
-
-

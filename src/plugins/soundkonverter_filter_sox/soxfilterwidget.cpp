@@ -185,12 +185,12 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     chSampleRate->setChecked( options->data.sampleRate > 0 );
     if( options->data.sampleRate > 0 )
     {
-        cSampleRate->setCurrentItem( QString::number(options->data.sampleRate) + " Hz" );
+        cSampleRate->setEditText( QString::number(options->data.sampleRate) + " Hz" );
     }
     chSampleSize->setChecked( options->data.sampleSize > 0 );
     if( options->data.sampleSize > 0 )
     {
-        cSampleSize->setCurrentItem( QString::number(options->data.sampleSize) + " bit" );
+        cSampleSize->setEditText( QString::number(options->data.sampleSize) + " bit" );
     }
     chChannels->setChecked( options->data.channels > 0 );
     if( options->data.channels > 0 )

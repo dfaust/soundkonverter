@@ -6,13 +6,14 @@
 #include "../../core/conversionoptions.h"
 #include "../../metadata/tagengine.h"
 
+#include <KLocalizedString>
 
 // NeroAAC is a propritary implementation of an aac encoder that claims to reach a better quality then faac.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php
 
-soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_neroaac::soundkonverter_codec_neroaac()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["neroAacEnc"] = "";
     binaries["neroAacDec"] = "";
@@ -103,13 +104,13 @@ unsigned int soundkonverter_codec_neroaac::convert( const QUrl& inputFile, const
     newItem->id = lastId++;
     newItem->data.length = tags ? tags->length : 200;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 
@@ -198,7 +199,7 @@ void soundkonverter_codec_neroaac::processOutput()
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            QString output = backendItems.at(i)->process->readAllStandardOutput().data();
+            QString output = backendItems.at(i)->process->readAllStandardOutput();
             pluginItem = qobject_cast<CodecPluginItem*>(backendItems.at(i));
             progress = parseOutput( output, pluginItem->data.length );
             if( progress == -1 && !output.simplified().isEmpty() )

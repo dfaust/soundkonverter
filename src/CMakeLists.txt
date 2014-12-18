@@ -14,12 +14,17 @@ include(KDECompilerSettings)
 find_package(Qt5Widgets)
 find_package(Qt5Xml)
 
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
+
 find_package(KF5I18n)
 find_package(KF5Config)
 find_package(KF5XmlGui)
 find_package(KF5Notifications)
-find_package(KF5CoreAddons)
-find_package(KF5WidgetsAddons)
+# find_package(KF5CoreAddons)
+# find_package(KF5WidgetsAddons)
 find_package(KF5KIO)
 find_package(KF5Solid)
 find_package(KF5Crash)
@@ -48,11 +53,9 @@ include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 # enable exception handling
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fexceptions")
 
-# -DQT_NO_URL_CAST_FROM_STRING
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-
-# add_subdirectory(plugins)
-
+add_subdirectory(plugins)
 
 # include(MacroOptionalAddSubdirectory)
 # ecm_optional_add_subdirectory( po )
@@ -70,7 +73,6 @@ set(soundkonvertercore_SRCS
 add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
 target_link_libraries(soundkonvertercore Qt5::Widgets Qt5::Xml KF5::I18n)
 # install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
-
 
 set(soundkonverter_SRCS
    configdialog/configdialog.cpp
@@ -117,7 +119,7 @@ set(soundkonverter_SRCS
    aboutplugins.cpp
 )
 
-qt5_wrap_ui(soundkonverter_SRCS
+ki18n_wrap_ui(soundkonverter_SRCS
     logviewer.ui
     aboutplugins.ui
     codecproblems.ui
@@ -133,9 +135,9 @@ qt5_wrap_ui(soundkonverter_SRCS
 )
 
 add_executable(soundkonverter ${soundkonverter_SRCS})
-target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::CoreAddons KF5::WidgetsAddons KF5::ConfigCore KF5::ConfigGui KF5::KIOCore KF5::KIOFileWidgets KF5::KIOWidgets KF5::KIONTLM KF5::Crash Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::KIOFileWidgets KF5::Crash Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+# target_link_libraries(soundkonverter Qt5::Widgets Qt5::Xml KF5::XmlGui KF5::Notifications KF5::I18n KF5::Solid KF5::CoreAddons KF5::WidgetsAddons KF5::ConfigCore KF5::ConfigGui KF5::KIOCore KF5::KIOFileWidgets KF5::KIOWidgets KF5::KIONTLM KF5::Crash Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${DISCID_LIBRARIES} ${MUSICBRAINZ5_LIBRARIES} ${CDPARANOIA_LIBRARIES} soundkonvertercore)
 # install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
-
 
 # install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 # install(FILES soundkonverterui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/soundkonverter)

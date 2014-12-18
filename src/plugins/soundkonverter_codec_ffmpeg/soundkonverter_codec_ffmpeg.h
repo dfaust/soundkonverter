@@ -4,17 +4,19 @@
 
 #include "../../core/codecplugin.h"
 
-// #include <QWeakPointer>
 #include <QDateTime>
+#include <QSet>
 
 class ConversionOptions;
 class QDialog;
 class QCheckBox;
 
-
 class soundkonverter_codec_ffmpeg : public CodecPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.ffmpeg" FILE "soundkonverter_codec_ffmpeg.json")
+    Q_INTERFACES(CodecPlugin)
+
 public:
     struct FFmpegCodecData
     {
@@ -30,10 +32,7 @@ public:
         FFmpegCodecData currentFFmpegCodec;
     };
 
-    /** Default Constructor */
-    soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args );
-
-    /** Default Destructor */
+    soundkonverter_codec_ffmpeg();
     ~soundkonverter_codec_ffmpeg();
 
     QString name();
@@ -79,9 +78,4 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FFMPEG_H_
-
-

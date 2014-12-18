@@ -5,29 +5,27 @@
 #include "../../core/conversionoptions.h"
 #include "fluidsynthcodecwidget.h"
 
+#include <KLocalizedString>
 #include <QApplication>
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <KUrlRequester>
 
-
-soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["fluidsynth"] = "";
 
     allCodecs += "midi";
     allCodecs += "mod";
     allCodecs += "wav";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    soundFontFile = group.readEntry( "soundFontFile", QUrl() );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     soundFontFile = group.readEntry( "soundFontFile", QUrl() );
 }
 
 soundkonverter_codec_fluidsynth::~soundkonverter_codec_fluidsynth()
@@ -75,15 +73,15 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
         const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
         configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel );
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
         QLabel *configDialogSoundFontLabel = new QLabel( i18n("Use SoundFont file:"), configDialogWidget );
         configDialogSoundFontLabel->setToolTip( i18n("In order to convert the midi data to a wave form you need a SoundFont which maps the midi data to sound effects.\nHave a look at %1 in order to get SoundFont files.",QString("http://sourceforge.net/apps/trac/fluidsynth/wiki/SoundFont")) );
@@ -92,26 +90,26 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
         configDialogSoundFontUrlRequester->setMinimumWidth( 30*fontHeight );
         configDialogBox->addWidget( configDialogSoundFontUrlRequester );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
     }
     configDialogSoundFontUrlRequester->setUrl( soundFontFile );
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_codec_fluidsynth::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
-        soundFontFile = configDialogSoundFontUrlRequester->url().toLocalFile();
+        soundFontFile = configDialogSoundFontUrlRequester->url();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "soundFontFile", soundFontFile );
 
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "soundFontFile", soundFontFile );
-
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
@@ -148,13 +146,13 @@ unsigned int soundkonverter_codec_fluidsynth::convert( const QUrl& inputFile, co
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

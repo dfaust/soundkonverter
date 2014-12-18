@@ -12,26 +12,25 @@
 #include <QHBoxLayout>
 #include <QFileInfo>
 
+#include <KLocalizedString>
 
 // TODO check for decoders at runtime, too
 
-soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["ffmpeg"] = "";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    configVersion = group.readEntry( "configVersion", 0 );
-    experimentalCodecsEnabled = group.readEntry( "experimentalCodecsEnabled", false );
-    ffmpegVersionMajor = group.readEntry( "ffmpegVersionMajor", 0 );
-    ffmpegVersionMinor = group.readEntry( "ffmpegVersionMinor", 0 );
-    ffmpegLastModified = group.readEntry( "ffmpegLastModified", QDateTime() );
-    ffmpegCodecList = group.readEntry( "codecList", QStringList() ).toSet();
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     configVersion = group.readEntry( "configVersion", 0 );
+//     experimentalCodecsEnabled = group.readEntry( "experimentalCodecsEnabled", false );
+//     ffmpegVersionMajor = group.readEntry( "ffmpegVersionMajor", 0 );
+//     ffmpegVersionMinor = group.readEntry( "ffmpegVersionMinor", 0 );
+//     ffmpegLastModified = group.readEntry( "ffmpegLastModified", QDateTime() );
+//     ffmpegCodecList = group.readEntry( "codecList", QStringList() ).toSet();
 
     CodecData data;
     FFmpegCodecData ffmpegData;
@@ -246,18 +245,18 @@ QList<ConversionPipeTrunk> soundkonverter_codec_ffmpeg::codecTable()
         if( ffmpegInfo.lastModified() > ffmpegLastModified || configVersion < version() )
         {
             infoProcess = new QProcess();
-            infoProcess.data()->setOutputChannelMode( QProcess::MergedChannels );
-            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
-            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
+            infoProcess->setProcessChannelMode(QProcess::MergedChannels);
+            connect( infoProcess, SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
             QStringList command;
             command += binaries["ffmpeg"];
             command += "-codecs";
-            infoProcess.data()->clearProgram();
-            infoProcess.data()->setShellCommand( command.join(" ") );
-            infoProcess.data()->start();
+            
+            
+            infoProcess->start(command.join(" "));
 
-            infoProcess.data()->waitForFinished( 3000 );
+            infoProcess->waitForFinished( 3000 );
         }
     }
 
@@ -359,49 +358,49 @@ void soundkonverter_codec_ffmpeg::showConfigDialog( ActionType action, const QSt
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
-        configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
+        configDialog = new QDialog();
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
         configDialogExperimantalCodecsEnabledCheckBox = new QCheckBox( i18n("Enable experimental codecs"), configDialogWidget );
         configDialogBox->addWidget( configDialogExperimantalCodecsEnabledCheckBox );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog, SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogExperimantalCodecsEnabledCheckBox->setChecked( experimentalCodecsEnabled );
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_codec_ffmpeg::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         const bool old_experimentalCodecsEnabled = experimentalCodecsEnabled;
         experimentalCodecsEnabled = configDialogExperimantalCodecsEnabledCheckBox->isChecked();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
-
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "experimentalCodecsEnabled", experimentalCodecsEnabled );
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "experimentalCodecsEnabled", experimentalCodecsEnabled );
 
         if( experimentalCodecsEnabled != old_experimentalCodecsEnabled )
         {
-            QMessageBox::information( configDialog.data(), i18n("Please restart soundKonverter in order to activate the changes.") );
+            QMessageBox::information( configDialog, "soundKonverter", i18n("Please restart soundKonverter in order to activate the changes.") );
         }
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
 void soundkonverter_codec_ffmpeg::configDialogDefault()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogExperimantalCodecsEnabledCheckBox->setChecked( false );
     }
@@ -473,16 +472,16 @@ unsigned int soundkonverter_codec_ffmpeg::convert( const QUrl& inputFile, const 
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
     if( tags )
         newItem->data.length = tags->length;
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 
@@ -560,7 +559,7 @@ void soundkonverter_codec_ffmpeg::processOutput()
 
 void soundkonverter_codec_ffmpeg::infoProcessOutput()
 {
-    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+    infoProcessOutputData.append( infoProcess->readAllStandardOutput().data() );
 }
 
 void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
@@ -591,18 +590,18 @@ void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitS
     QFileInfo ffmpegInfo( binaries["ffmpeg"] );
     ffmpegLastModified = ffmpegInfo.lastModified();
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    group.writeEntry( "configVersion", version() );
-    group.writeEntry( "ffmpegVersionMajor", ffmpegVersionMajor );
-    group.writeEntry( "ffmpegVersionMinor", ffmpegVersionMinor );
-    group.writeEntry( "ffmpegLastModified", ffmpegLastModified );
-    group.writeEntry( "codecList", ffmpegCodecList.toList() );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     group.writeEntry( "configVersion", version() );
+//     group.writeEntry( "ffmpegVersionMajor", ffmpegVersionMajor );
+//     group.writeEntry( "ffmpegVersionMinor", ffmpegVersionMinor );
+//     group.writeEntry( "ffmpegLastModified", ffmpegLastModified );
+//     group.writeEntry( "codecList", ffmpegCodecList.toList() );
 
     infoProcessOutputData.clear();
-    infoProcess.data()->deleteLater();
+    infoProcess->deleteLater();
 }
 
 #include "soundkonverter_codec_ffmpeg.moc"

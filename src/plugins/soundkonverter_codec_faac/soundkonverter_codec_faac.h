@@ -4,20 +4,18 @@
 
 #include "../../core/codecplugin.h"
 
-// #include <QWeakPointer>
 #include <QDateTime>
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_faac : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_faac( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.faac" FILE "soundkonverter_codec_faac.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_faac();
     ~soundkonverter_codec_faac();
 
     QString name();
@@ -49,9 +47,4 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( faac, soundkonverter_codec_faac )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FAAC_H_
-
-

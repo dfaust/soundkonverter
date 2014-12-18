@@ -3,11 +3,12 @@
 
 #include "soundkonverter_replaygain_metaflac.h"
 
+#include <KLocalizedString>
 
-soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac( QObject *parent, const QStringList& args  )
-    : ReplayGainPlugin( parent )
+soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac()
+    : ReplayGainPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["metaflac"] = "";
 
@@ -69,7 +70,7 @@ unsigned int soundkonverter_replaygain_metaflac::apply( const QList<QUrl>& fileL
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -88,9 +89,9 @@ unsigned int soundkonverter_replaygain_metaflac::apply( const QList<QUrl>& fileL
         command += "\"" + escapeUrl(file) + "\"";
     }
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

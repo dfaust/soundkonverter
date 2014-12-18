@@ -2,32 +2,32 @@
 #include "codecplugin.h"
 #include "codecwidget.h"
 
-
-CodecPluginItem::CodecPluginItem( QObject *parent )
-    : BackendPluginItem( parent )
+CodecPluginItem::CodecPluginItem(QObject *parent) :
+    BackendPluginItem(parent)
 {
     data.length = 0;
 }
 
 CodecPluginItem::~CodecPluginItem()
-{}
+{
+}
 
-
-CodecPlugin::CodecPlugin( QObject *parent )
-    : BackendPlugin( parent )
+CodecPlugin::CodecPlugin(QObject *parent) :
+    BackendPlugin(parent)
 {
     lastUsedConversionOptions = 0;
 }
 
 CodecPlugin::~CodecPlugin()
-{}
+{
+}
 
 QString CodecPlugin::type()
 {
     return "codec";
 }
 
-CodecWidget *CodecPlugin::deleteCodecWidget( CodecWidget *codecWidget )
+CodecWidget *CodecPlugin::deleteCodecWidget(CodecWidget *codecWidget)
 {
     if( !codecWidget )
         return 0;
@@ -47,10 +47,9 @@ CodecWidget *CodecPlugin::deleteCodecWidget( CodecWidget *codecWidget )
     return 0;
 }
 
-ConversionOptions *CodecPlugin::conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements )
+ConversionOptions *CodecPlugin::conversionOptionsFromXml(QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements)
 {
     ConversionOptions *options = new ConversionOptions();
-    options->fromXml( conversionOptions, filterOptionsElements );
+    options->fromXml(conversionOptions, filterOptionsElements);
     return options;
 }
-

@@ -3,12 +3,11 @@
 
 #include "soundkonverter_replaygain_wvgain.h"
 
+#include <KLocalizedString>
 
-soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain( QObject *parent, const QStringList& args  )
-    : ReplayGainPlugin( parent )
+soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain()
+    : ReplayGainPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["wvgain"] = "";
 
     allCodecs += "wavpack";
@@ -69,7 +68,7 @@ unsigned int soundkonverter_replaygain_wvgain::apply( const QList<QUrl>& fileLis
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -93,9 +92,9 @@ unsigned int soundkonverter_replaygain_wvgain::apply( const QList<QUrl>& fileLis
         command += "\"" + escapeUrl(file) + "\"";
     }
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

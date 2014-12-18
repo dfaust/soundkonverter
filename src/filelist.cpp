@@ -310,7 +310,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
         {
             count++;
 
-            codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
+            codecName = config->pluginLoader()->getCodecFromFile( QUrl::fromLocalFile(directory + "/" + fileName), 0, checkM4a );
 
             if( filter.contains(codecName) )
             {

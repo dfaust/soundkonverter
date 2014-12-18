@@ -16,10 +16,10 @@
 #include <QGroupBox>
 #include <QSlider>
 
-soundkonverter_codec_twolame::soundkonverter_codec_twolame( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_twolame::soundkonverter_codec_twolame()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["twolame"] = "";
 
@@ -90,15 +90,15 @@ void soundkonverter_codec_twolame::showInfo( QWidget *parent )
 {
     QDialog *dialog = new QDialog( parent );
     dialog->setWindowTitle( i18n("About %1").arg(global_plugin_name)  );
-    dialog->setButtons( QDialog::Ok );
+//     dialog->setButtons( QDialog::Ok );
 
     QLabel *widget = new QLabel( dialog );
 
     widget->setText( i18n("TwoLame is a free MP2 encoder.\nYou can get it at: http://www.twolame.org") );
 
-    dialog->setMainWidget( widget );
+//     dialog->setMainWidget( widget );
 
-    dialog->enableButtonApply( false );
+//     dialog->enableButtonApply( false );
     dialog->show();
 }
 
@@ -117,13 +117,13 @@ unsigned int soundkonverter_codec_twolame::convert( const QUrl& inputFile, const
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

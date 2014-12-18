@@ -10,11 +10,11 @@ class ConversionOptions;
 class soundkonverter_codec_aften : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_aften( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.aften" FILE "soundkonverter_codec_aften.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_aften();
     ~soundkonverter_codec_aften();
 
     QString name();
@@ -33,9 +33,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( aften, soundkonverter_codec_aften )
-
-
 #endif // _SOUNDKONVERTER_CODEC_AFTEN_H_
-
-

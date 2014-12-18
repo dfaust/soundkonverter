@@ -5,14 +5,12 @@
 #include "../../core/replaygainplugin.h"
 
 #include <QUrl>
-// #include <QWeakPointer>
 
 class ConversionOptions;
 class QDialog;
 class QComboBox;
 class QCheckBox;
 class QDoubleSpinBox;
-
 
 class AacGainPluginItem : public ReplayGainPluginItem
 {
@@ -28,11 +26,11 @@ public:
 class soundkonverter_replaygain_aacgain : public ReplayGainPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.replaygainplugin.aacgain" FILE "soundkonverter_replaygain_aacgain.json")
+    Q_INTERFACES(ReplayGainPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_replaygain_aacgain();
     ~soundkonverter_replaygain_aacgain();
 
     QString name();
@@ -63,12 +61,6 @@ private slots:
 
     void configDialogSave();
     void configDialogDefault();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( aacgain, soundkonverter_replaygain_aacgain )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_AACGAIN_H_
-
-

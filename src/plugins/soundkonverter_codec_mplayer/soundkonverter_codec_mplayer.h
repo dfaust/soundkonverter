@@ -6,15 +6,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_mplayer : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_mplayer( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.mplayer" FILE "soundkonverter_codec_mplayer.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_mplayer();
     ~soundkonverter_codec_mplayer();
 
     QString name();
@@ -35,12 +34,6 @@ private:
    QStringList fromCodecs;
    QStringList toCodecs;
    QMap<QString,QString> codecMap;
-
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( mplayer, soundkonverter_codec_mplayer )
-
-
 #endif // SOUNDKONVERTER_CODEC_MPLAYER_H
-
-

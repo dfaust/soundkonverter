@@ -5,10 +5,10 @@
 
 #include <KLocalizedString>
 
-soundkonverter_ripper_icedax::soundkonverter_ripper_icedax( QObject *parent, const QStringList& args  )
-    : RipperPlugin( parent )
+soundkonverter_ripper_icedax::soundkonverter_ripper_icedax()
+    : RipperPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["icedax"] = "";
 }
@@ -83,15 +83,15 @@ unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track
     RipperPluginItem *newItem = new RipperPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
     newItem->data.fileCount = ( track > 0 ) ? 1 : tracks;
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

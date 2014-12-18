@@ -7,6 +7,7 @@
 #include "soxfilterwidget.h"
 #include "soxcodecwidget.h"
 
+#include <KLocalizedString>
 #include <QDialog>
 #include <QHBoxLayout>
 #include <QComboBox>
@@ -15,22 +16,22 @@
 #include <QFileInfo>
 
 
-soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QStringList& args  )
-    : FilterPlugin( parent )
+soundkonverter_filter_sox::soundkonverter_filter_sox()
+    : FilterPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["sox"] = "";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    configVersion = group.readEntry( "configVersion", 0 );
-    samplingRateQuality = group.readEntry( "samplingRateQuality", "high" );
-    experimentalEffectsEnabled = group.readEntry( "experimentalEffectsEnabled", false );
-    soxLastModified = group.readEntry( "soxLastModified", QDateTime() );
-    soxCodecList = group.readEntry( "codecList", QStringList() ).toSet();
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     configVersion = group.readEntry( "configVersion", 0 );
+//     samplingRateQuality = group.readEntry( "samplingRateQuality", "high" );
+//     experimentalEffectsEnabled = group.readEntry( "experimentalEffectsEnabled", false );
+//     soxLastModified = group.readEntry( "soxLastModified", QDateTime() );
+//     soxCodecList = group.readEntry( "codecList", QStringList() ).toSet();
 
     SoxCodecData data;
 
@@ -138,18 +139,18 @@ QList<ConversionPipeTrunk> soundkonverter_filter_sox::codecTable()
         if( soxInfo.lastModified() > soxLastModified || configVersion < version() )
         {
             infoProcess = new QProcess();
-            infoProcess.data()->setOutputChannelMode( QProcess::MergedChannels );
-            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
-            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
+            infoProcess->setProcessChannelMode(QProcess::MergedChannels);
+            connect( infoProcess, SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
             QStringList command;
             command += binaries["sox"];
             command += "--help";
-            infoProcess.data()->clearProgram();
-            infoProcess.data()->setShellCommand( command.join(" ") );
-            infoProcess.data()->start();
 
-            infoProcess.data()->waitForFinished( 3000 );
+
+            infoProcess->start(command.join(" "));
+
+            infoProcess->waitForFinished( 3000 );
         }
     }
 
@@ -234,13 +235,13 @@ void soundkonverter_filter_sox::showConfigDialog( ActionType action, const QStri
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
         configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QHBoxLayout *configDialogBox = new QHBoxLayout( configDialogWidget );
         QLabel *configDialogSamplingRateQualityLabel = new QLabel( i18n("Sample rate change quality:"), configDialogWidget );
         configDialogBox->addWidget( configDialogSamplingRateQualityLabel );
@@ -252,33 +253,33 @@ void soundkonverter_filter_sox::showConfigDialog( ActionType action, const QStri
         configDialogSamplingRateQualityComboBox->addItem( i18n("Very high"), "very high" );
         configDialogBox->addWidget( configDialogSamplingRateQualityComboBox );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog, SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogSamplingRateQualityComboBox->setCurrentIndex( configDialogSamplingRateQualityComboBox->findData(samplingRateQuality) );
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_filter_sox::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         samplingRateQuality = configDialogSamplingRateQualityComboBox->itemData( configDialogSamplingRateQualityComboBox->currentIndex() ).toString();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "samplingRateQuality", samplingRateQuality );
 
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "samplingRateQuality", samplingRateQuality );
-
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
 void soundkonverter_filter_sox::configDialogDefault()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogSamplingRateQualityComboBox->setCurrentIndex( configDialogSamplingRateQualityComboBox->findData("high") );
     }
@@ -321,13 +322,13 @@ unsigned int soundkonverter_filter_sox::convert( const QUrl& inputFile, const QU
     FilterPluginItem *newItem = new FilterPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 
@@ -490,7 +491,7 @@ QString soundkonverter_filter_sox::soxCodecName( const QString& codecName )
 
 void soundkonverter_filter_sox::infoProcessOutput()
 {
-    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+    infoProcessOutputData.append( infoProcess->readAllStandardOutput().data() );
 }
 
 void soundkonverter_filter_sox::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
@@ -516,17 +517,17 @@ void soundkonverter_filter_sox::infoProcessExit( int exitCode, QProcess::ExitSta
         QFileInfo soxInfo( binaries["sox"] );
         soxLastModified = soxInfo.lastModified();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
-
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "configVersion", version() );
-        group.writeEntry( "soxLastModified", soxLastModified );
-        group.writeEntry( "codecList", soxCodecList.toList() );
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "configVersion", version() );
+//         group.writeEntry( "soxLastModified", soxLastModified );
+//         group.writeEntry( "codecList", soxCodecList.toList() );
     }
 
     infoProcessOutputData.clear();
-    infoProcess.data()->deleteLater();
+    infoProcess->deleteLater();
 }
 
 

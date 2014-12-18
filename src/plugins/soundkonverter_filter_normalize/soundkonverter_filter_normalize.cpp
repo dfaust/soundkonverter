@@ -9,10 +9,10 @@
 #include <QFile>
 
 
-soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *parent, const QStringList& args  )
-    : FilterPlugin( parent )
+soundkonverter_filter_normalize::soundkonverter_filter_normalize()
+    : FilterPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["normalize"] = "";
 
@@ -96,13 +96,13 @@ unsigned int soundkonverter_filter_normalize::convert( const QUrl& inputFile, co
     FilterPluginItem *newItem = new FilterPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

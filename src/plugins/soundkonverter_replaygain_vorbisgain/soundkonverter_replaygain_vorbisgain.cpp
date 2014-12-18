@@ -4,11 +4,9 @@
 #include "soundkonverter_replaygain_vorbisgain.h"
 
 
-soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObject *parent, const QStringList& args  )
-    : ReplayGainPlugin( parent )
+soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain() :
+    ReplayGainPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["vorbisgain"] = "";
 
     allCodecs += "ogg vorbis";
@@ -69,7 +67,7 @@ unsigned int soundkonverter_replaygain_vorbisgain::apply( const QList<QUrl>& fil
     ReplayGainPluginItem *newItem = new ReplayGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -95,9 +93,7 @@ unsigned int soundkonverter_replaygain_vorbisgain::apply( const QList<QUrl>& fil
         command += "\"" + escapeUrl(file) + "\"";
     }
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

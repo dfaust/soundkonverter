@@ -6,15 +6,14 @@
 
 class FilterOptions;
 
-
 class soundkonverter_filter_normalize : public FilterPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_filter_normalize( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.filterplugin.normalize" FILE "soundkonverter_filter_normalize.json")
+    Q_INTERFACES(FilterPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_filter_normalize();
     ~soundkonverter_filter_normalize();
 
     QString name();
@@ -36,9 +35,4 @@ public:
     FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 };
 
-K_EXPORT_SOUNDKONVERTER_FILTER( normalize, soundkonverter_filter_normalize )
-
-
 #endif // SOUNDKONVERTER_FILTER_NORMALIZE_H
-
-

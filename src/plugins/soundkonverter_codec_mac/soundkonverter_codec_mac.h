@@ -6,15 +6,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_mac : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_mac( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.mac" FILE "soundkonverter_codec_mac.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_mac();
     ~soundkonverter_codec_mac();
 
     QString name();
@@ -33,9 +32,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( mac, soundkonverter_codec_mac )
-
-
 #endif // _SOUNDKONVERTER_CODEC_MAC_H_
-
-

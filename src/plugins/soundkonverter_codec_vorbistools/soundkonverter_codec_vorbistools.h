@@ -6,15 +6,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_vorbistools : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_vorbistools( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.vorbistools" FILE "soundkonverter_codec_vorbistools.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_vorbistools();
     ~soundkonverter_codec_vorbistools();
 
     QString name();
@@ -32,9 +31,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( vorbistools, soundkonverter_codec_vorbistools )
-
-
 #endif // SOUNDKONVERTER_CODEC_VORBISTOOLS_H
-
-

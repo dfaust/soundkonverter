@@ -6,15 +6,16 @@
 #include "opustoolscodecwidget.h"
 #include "opustoolsconversionoptions.h"
 
+#include <KLocalizedString>
 #include <QDialog>
 #include <QCheckBox>
 #include <QBoxLayout>
 
 
-soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_opustools::soundkonverter_codec_opustools()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["opusenc"] = "";
     binaries["opusdec"] = "";
@@ -22,12 +23,12 @@ soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent,
     allCodecs += "opus";
     allCodecs += "wav";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    configVersion = group.readEntry( "configVersion", 0 );
-    uncoupledChannels = group.readEntry( "uncoupledChannels", false );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     configVersion = group.readEntry( "configVersion", 0 );
+//     uncoupledChannels = group.readEntry( "uncoupledChannels", false );
 }
 
 soundkonverter_codec_opustools::~soundkonverter_codec_opustools()
@@ -75,45 +76,45 @@ void soundkonverter_codec_opustools::showConfigDialog( ActionType action, const 
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
         configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
         configDialogUncoupledChannelsCheckBox = new QCheckBox( i18n("Uncoupled channels"), configDialogWidget );
         configDialogUncoupledChannelsCheckBox->setToolTip( i18n("Use one mono stream per channel") );
         configDialogBox->addWidget( configDialogUncoupledChannelsCheckBox );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog, SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogUncoupledChannelsCheckBox->setChecked( uncoupledChannels );
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_codec_opustools::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         uncoupledChannels = configDialogUncoupledChannelsCheckBox->isChecked();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "uncoupledChannels", uncoupledChannels );
 
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "uncoupledChannels", uncoupledChannels );
-
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
 void soundkonverter_codec_opustools::configDialogDefault()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogUncoupledChannelsCheckBox->setChecked( false );
     }
@@ -144,13 +145,11 @@ unsigned int soundkonverter_codec_opustools::convert( const QUrl& inputFile, con
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

@@ -9,10 +9,10 @@
 #include <QFile>
 
 
-soundkonverter_codec_musepack::soundkonverter_codec_musepack( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_musepack::soundkonverter_codec_musepack()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["mppenc"] = "";
     binaries["mppdec"] = "";
@@ -31,9 +31,9 @@ QString soundkonverter_codec_musepack::name()
 
 void soundkonverter_codec_musepack::scanForBackends( const QStringList& directoryList )
 {
-    binaries["mppenc"] = QStandardPaths::findExe( "mppenc" ); // sv7
+    binaries["mppenc"] = QStandardPaths::findExecutable( "mppenc" ); // sv7
     if( binaries["mppenc"].isEmpty() )
-        binaries["mppenc"] = QStandardPaths::findExe( "mpcenc" ); // sv8
+        binaries["mppenc"] = QStandardPaths::findExecutable( "mpcenc" ); // sv8
 
     if( binaries["mppenc"].isEmpty() )
     {
@@ -52,9 +52,9 @@ void soundkonverter_codec_musepack::scanForBackends( const QStringList& director
         }
     }
 
-    binaries["mppdec"] = QStandardPaths::findExe( "mppdec" ); // sv7
+    binaries["mppdec"] = QStandardPaths::findExecutable( "mppdec" ); // sv7
     if( binaries["mppdec"].isEmpty() )
-        binaries["mppdec"] = QStandardPaths::findExe( "mpcdec" ); // sv8
+        binaries["mppdec"] = QStandardPaths::findExecutable( "mpcdec" ); // sv8
 
     if( binaries["mppdec"].isEmpty() )
     {
@@ -138,13 +138,13 @@ unsigned int soundkonverter_codec_musepack::convert( const QUrl& inputFile, cons
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

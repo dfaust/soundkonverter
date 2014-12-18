@@ -4,17 +4,19 @@
 
 #include "../../core/codecplugin.h"
 
-// #include <QWeakPointer>
 #include <QDateTime>
+#include <QSet>
 
 class ConversionOptions;
 class QDialog;
 class QCheckBox;
 
-
 class soundkonverter_codec_libav : public CodecPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.libav" FILE "soundkonverter_codec_libav.json")
+    Q_INTERFACES(CodecPlugin)
+
 public:
     struct LibavCodecData
     {
@@ -30,10 +32,7 @@ public:
         LibavCodecData currentLibavCodec;
     };
 
-    /** Default Constructor */
-    soundkonverter_codec_libav( QObject *parent, const QStringList& args );
-
-    /** Default Destructor */
+    soundkonverter_codec_libav();
     ~soundkonverter_codec_libav();
 
     QString name();
@@ -79,9 +78,4 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( libav, soundkonverter_codec_libav )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FFMPEG_H_
-
-

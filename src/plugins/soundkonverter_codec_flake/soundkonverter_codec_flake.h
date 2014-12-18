@@ -10,11 +10,11 @@ class ConversionOptions;
 class soundkonverter_codec_flake : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_flake( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.flake" FILE "soundkonverter_codec_flake.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_flake();
     ~soundkonverter_codec_flake();
 
     QString name();
@@ -33,9 +33,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( flake, soundkonverter_codec_flake )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FLAKE_H_
-
-

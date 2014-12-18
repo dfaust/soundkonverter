@@ -4,17 +4,19 @@
 
 #include "../../core/filterplugin.h"
 
-// #include <QWeakPointer>
 #include <QDateTime>
+#include <QSet>
 
 class FilterOptions;
 class QDialog;
 class QComboBox;
 
-
 class soundkonverter_filter_sox : public FilterPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.filterplugin.sox" FILE "soundkonverter_filter_sox.json")
+    Q_INTERFACES(FilterPlugin)
+
 public:
     struct SoxCodecData
     {
@@ -25,10 +27,7 @@ public:
         bool enabled;
     };
 
-    /** Default Constructor */
-    soundkonverter_filter_sox( QObject *parent, const QStringList& args );
-
-    /** Default Destructor */
+    soundkonverter_filter_sox();
     ~soundkonverter_filter_sox();
 
     QString name();
@@ -74,9 +73,4 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_FILTER( sox, soundkonverter_filter_sox )
-
-
 #endif // SOUNDKONVERTER_FILTER_SOX_H
-
-

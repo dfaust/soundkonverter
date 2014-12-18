@@ -6,10 +6,10 @@
 #include "aftencodecwidget.h"
 
 
-soundkonverter_codec_aften::soundkonverter_codec_aften( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_aften::soundkonverter_codec_aften()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
+
 
     binaries["aften"] = "";
 
@@ -89,13 +89,13 @@ unsigned int soundkonverter_codec_aften::convert( const QUrl& inputFile, const Q
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

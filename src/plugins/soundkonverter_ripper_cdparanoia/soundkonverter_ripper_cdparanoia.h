@@ -7,22 +7,20 @@
 #include <QUrl>
 #include <QProcess>
 #include <QList>
-// #include <QWeakPointer>
 
 class QDialog;
 class QCheckBox;
 class QComboBox;
 class QSpinBox;
 
-
 class soundkonverter_ripper_cdparanoia : public RipperPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.ripperplugin.cdparanoia" FILE "soundkonverter_ripper_cdparanoia.json")
+    Q_INTERFACES(RipperPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_ripper_cdparanoia();
     ~soundkonverter_ripper_cdparanoia();
 
     QString name();
@@ -65,9 +63,4 @@ private slots:
     void configDialogDefault();
 };
 
-K_EXPORT_SOUNDKONVERTER_RIPPER( cdparanoia, soundkonverter_ripper_cdparanoia )
-
-
 #endif // SOUNDKONVERTER_RIPPER_CDPARANOIA_H
-
-

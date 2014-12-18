@@ -14,22 +14,20 @@
 #include <QDialog>
 
 
-soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args  )
-    : RipperPlugin( parent )
+soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia()
+    : RipperPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["cdparanoia"] = "";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    forceReadSpeed = group.readEntry( "forceReadSpeed", 0 );
-    forceEndianness = group.readEntry( "forceEndianness", 0 );
-    maximumRetries = group.readEntry( "maximumRetries", 20 );
-    enableParanoia = group.readEntry( "enableParanoia", true );
-    enableExtraParanoia = group.readEntry( "enableExtraParanoia", true );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     forceReadSpeed = group.readEntry( "forceReadSpeed", 0 );
+//     forceEndianness = group.readEntry( "forceEndianness", 0 );
+//     maximumRetries = group.readEntry( "maximumRetries", 20 );
+//     enableParanoia = group.readEntry( "enableParanoia", true );
+//     enableExtraParanoia = group.readEntry( "enableExtraParanoia", true );
 }
 
 soundkonverter_ripper_cdparanoia::~soundkonverter_ripper_cdparanoia()
@@ -69,13 +67,13 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
         configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
 
         QHBoxLayout *configDialogBox0 = new QHBoxLayout();
@@ -116,9 +114,9 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
         configDialogBox4->addWidget( configDialogEnableExtraParanoiaCheckBox );
         configDialogBox->addLayout( configDialogBox4 );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog, SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogForceReadSpeedCheckBox->setChecked( forceReadSpeed > 0 );
     configDialogForceReadSpeedSpinBox->setValue( forceReadSpeed );
@@ -129,12 +127,12 @@ void soundkonverter_ripper_cdparanoia::showConfigDialog( ActionType action, cons
 
     configDialogForceReadSpeedChanged( configDialogForceReadSpeedCheckBox->checkState() );
 
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_ripper_cdparanoia::configDialogForceReadSpeedChanged( int state )
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogForceReadSpeedSpinBox->setEnabled( state == Qt::Checked );
     }
@@ -142,7 +140,7 @@ void soundkonverter_ripper_cdparanoia::configDialogForceReadSpeedChanged( int st
 
 void soundkonverter_ripper_cdparanoia::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         forceReadSpeed = configDialogForceReadSpeedCheckBox->isChecked() ? configDialogForceReadSpeedSpinBox->value() : 0;
         forceEndianness = configDialogForceEndiannessComboBox->currentIndex();
@@ -150,23 +148,23 @@ void soundkonverter_ripper_cdparanoia::configDialogSave()
         enableParanoia = configDialogEnableParanoiaCheckBox->isChecked();
         enableExtraParanoia = configDialogEnableExtraParanoiaCheckBox->isChecked();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "forceReadSpeed", forceReadSpeed );
+//         group.writeEntry( "forceEndianness", forceEndianness );
+//         group.writeEntry( "maximumRetries", maximumRetries );
+//         group.writeEntry( "enableParanoia", enableParanoia );
+//         group.writeEntry( "enableExtraParanoia", enableExtraParanoia );
 
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "forceReadSpeed", forceReadSpeed );
-        group.writeEntry( "forceEndianness", forceEndianness );
-        group.writeEntry( "maximumRetries", maximumRetries );
-        group.writeEntry( "enableParanoia", enableParanoia );
-        group.writeEntry( "enableExtraParanoia", enableExtraParanoia );
-
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
 void soundkonverter_ripper_cdparanoia::configDialogDefault()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogForceReadSpeedCheckBox->setChecked( false );
         configDialogForceReadSpeedSpinBox->setValue( 1 );
@@ -237,13 +235,13 @@ unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int t
     RipperPluginItem *newItem = new RipperPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 

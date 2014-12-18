@@ -4,22 +4,20 @@
 
 #include "../../core/codecplugin.h"
 
-// #include <QWeakPointer>
 #include <QUrl>
 
 class ConversionOptions;
 class QDialog;
 class QComboBox;
 
-
 class soundkonverter_codec_lame : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_lame( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.lame" FILE "soundkonverter_codec_lame.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_lame();
     ~soundkonverter_codec_lame();
 
     QString name();
@@ -48,12 +46,6 @@ private:
 private slots:
     void configDialogSave();
     void configDialogDefault();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( lame, soundkonverter_codec_lame )
-
-
 #endif // _SOUNDKONVERTER_CODEC_LAME_H_
-
-

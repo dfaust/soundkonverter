@@ -5,21 +5,19 @@
 #include "../../core/codecplugin.h"
 
 #include <QUrl>
-// #include <QWeakPointer>
 
 class ConversionOptions;
 class QDialog;
 class KUrlRequester;
 
-
 class soundkonverter_codec_fluidsynth : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.fluidsynth" FILE "soundkonverter_codec_fluidsynth.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_fluidsynth();
     ~soundkonverter_codec_fluidsynth();
 
     QString name();
@@ -43,12 +41,6 @@ private:
 
 private slots:
     void configDialogSave();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( fluidsynth, soundkonverter_codec_fluidsynth )
-
-
 #endif // SOUNDKONVERTER_CODEC_FLUIDSYNTH_H
-
-

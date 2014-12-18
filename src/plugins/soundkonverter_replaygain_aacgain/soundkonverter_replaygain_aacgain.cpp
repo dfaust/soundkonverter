@@ -3,6 +3,7 @@
 
 #include "soundkonverter_replaygain_aacgain.h"
 
+#include <KLocalizedString>
 #include <QDialog>
 #include <QComboBox>
 #include <QCheckBox>
@@ -19,23 +20,21 @@ AacGainPluginItem::~AacGainPluginItem()
 {}
 
 
-soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args  )
-    : ReplayGainPlugin( parent )
+soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain()
+    : ReplayGainPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["aacgain"] = "";
 
     allCodecs += "m4v";
     allCodecs += "mp3";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    tagMode = group.readEntry( "tagMode", 0 );
-    modifyAudioStream = group.readEntry( "modifyAudioStream", true );
-    gainAdjustment = group.readEntry( "gainAdjustment", 0.0 );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     tagMode = group.readEntry( "tagMode", 0 );
+//     modifyAudioStream = group.readEntry( "modifyAudioStream", true );
+//     gainAdjustment = group.readEntry( "gainAdjustment", 0.0 );
 }
 
 soundkonverter_replaygain_aacgain::~soundkonverter_replaygain_aacgain()
@@ -79,13 +78,13 @@ void soundkonverter_replaygain_aacgain::showConfigDialog( ActionType action, con
     Q_UNUSED(action)
     Q_UNUSED(codecName)
 
-    if( !configDialog.data() )
+    if( !configDialog )
     {
         configDialog = new QDialog( parent );
-        configDialog.data()->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
-        configDialog.data()->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
+        configDialog->setWindowTitle( i18n("Configure %1").arg(global_plugin_name)  );
+//         configDialog->setButtons( QDialog::Ok | QDialog::Cancel | QDialog::Default );
 
-        QWidget *configDialogWidget = new QWidget( configDialog.data() );
+        QWidget *configDialogWidget = new QWidget( configDialog );
         QVBoxLayout *configDialogBox = new QVBoxLayout( configDialogWidget );
 
         QHBoxLayout *configDialogBox1 = new QHBoxLayout();
@@ -113,39 +112,39 @@ void soundkonverter_replaygain_aacgain::showConfigDialog( ActionType action, con
         configDialogBox2->addWidget( configDialogModifyAudioStreamCheckBox );
         configDialogBox->addLayout( configDialogBox2 );
 
-        configDialog.data()->setMainWidget( configDialogWidget );
-        connect( configDialog.data(), SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
-        connect( configDialog.data(), SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
+//         configDialog->setMainWidget( configDialogWidget );
+        connect( configDialog, SIGNAL( okClicked() ), this, SLOT( configDialogSave() ) );
+        connect( configDialog, SIGNAL( defaultClicked() ), this, SLOT( configDialogDefault() ) );
     }
     configDialogTagModeComboBox->setCurrentIndex( tagMode );
     configDialogModifyAudioStreamCheckBox->setChecked( modifyAudioStream );
     configDialogGainAdjustmentSpinBox->setValue( gainAdjustment );
-    configDialog.data()->show();
+    configDialog->show();
 }
 
 void soundkonverter_replaygain_aacgain::configDialogSave()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         tagMode = configDialogTagModeComboBox->currentIndex();
         modifyAudioStream = configDialogModifyAudioStreamCheckBox->isChecked();
         gainAdjustment = configDialogGainAdjustmentSpinBox->value();
 
-        KSharedConfig::Ptr conf = KGlobal::config();
-        KConfigGroup group;
+//         KSharedConfig::Ptr conf = KGlobal::config();
+//         KConfigGroup group;
+//
+//         group = conf->group( "Plugin-"+name() );
+//         group.writeEntry( "tagMode", tagMode );
+//         group.writeEntry( "modifyAudioStream", modifyAudioStream );
+//         group.writeEntry( "gainAdjustment", gainAdjustment );
 
-        group = conf->group( "Plugin-"+name() );
-        group.writeEntry( "tagMode", tagMode );
-        group.writeEntry( "modifyAudioStream", modifyAudioStream );
-        group.writeEntry( "gainAdjustment", gainAdjustment );
-
-        configDialog.data()->deleteLater();
+        configDialog->deleteLater();
     }
 }
 
 void soundkonverter_replaygain_aacgain::configDialogDefault()
 {
-    if( configDialog.data() )
+    if( configDialog )
     {
         configDialogTagModeComboBox->setCurrentIndex( 0 );
         configDialogModifyAudioStreamCheckBox->setChecked( true );
@@ -171,7 +170,7 @@ unsigned int soundkonverter_replaygain_aacgain::apply( const QList<QUrl>& fileLi
     AacGainPluginItem *newItem = new AacGainPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
 
     QStringList command;
@@ -226,9 +225,9 @@ unsigned int soundkonverter_replaygain_aacgain::apply( const QList<QUrl>& fileLi
         command += "\"" + escapeUrl(file) + "\"";
     }
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+
+
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 
@@ -262,7 +261,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
         item->process->deleteLater();
 
     item->process = new QProcess( item );
-    item->process->setOutputChannelMode( QProcess::MergedChannels );
+    item->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( item->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( item->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
@@ -275,9 +274,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
         command += "\"" + escapeUrl(file) + "\"";
     }
 
-    item->process->clearProgram();
-    item->process->setShellCommand( command.join(" ") );
-    item->process->start();
+    item->process->start(command.join(" "));
 
     logCommand( item->id, command.join(" ") );
 }

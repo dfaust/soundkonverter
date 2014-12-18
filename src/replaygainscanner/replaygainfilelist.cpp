@@ -350,7 +350,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
         {
             count++;
 
-            codecName = config->pluginLoader()->getCodecFromFile( directory + "/" + fileName, 0, checkM4a );
+            codecName = config->pluginLoader()->getCodecFromFile( QUrl::fromLocalFile(directory + "/" + fileName), 0, checkM4a );
 
             if( filter.contains(codecName) )
             {
@@ -440,7 +440,7 @@ void ReplayGainFileList::addFiles( const QList<QUrl>& fileList, const QString& _
                 newAlbumItem->type = ReplayGainFileListItem::Album;
                 newAlbumItem->codecName = codecName;
                 newAlbumItem->samplingRate = samplingRate;
-                newAlbumItem->url = url.path();
+                newAlbumItem->url = url;
                 if( config->data.general.replayGainGrouping == Config::Data::General::AlbumDirectory )
                 {
                     newAlbumItem->albumName = tags->album;

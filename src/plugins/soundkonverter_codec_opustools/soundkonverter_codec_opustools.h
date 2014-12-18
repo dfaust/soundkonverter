@@ -4,21 +4,18 @@
 
 #include "../../core/codecplugin.h"
 
-// #include <QWeakPointer>
-
 class ConversionOptions;
 class QDialog;
 class QCheckBox;
 
-
 class soundkonverter_codec_opustools : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_opustools( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.opustools" FILE "soundkonverter_codec_opustools.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_opustools();
     ~soundkonverter_codec_opustools();
 
     QString name();
@@ -47,12 +44,6 @@ private:
 private slots:
     void configDialogSave();
     void configDialogDefault();
-
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( opustools, soundkonverter_codec_opustools )
-
-
 #endif // SOUNDKONVERTER_CODEC_OPUSTOOLS_H
-
-

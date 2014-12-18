@@ -6,24 +6,22 @@
 #include "faaccodecwidget.h"
 
 #include <QFileInfo>
-#include <KConfigGroup>
 
+#include <KLocalizedString>
 
-soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QStringList& args  )
-    : CodecPlugin( parent )
+soundkonverter_codec_faac::soundkonverter_codec_faac()
+    : CodecPlugin()
 {
-    Q_UNUSED(args)
-
     binaries["faac"] = "";
     binaries["faad"] = "";
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    configVersion = group.readEntry( "configVersion", 0 );
-    faacLastModified = group.readEntry( "faacLastModified", QDateTime() );
-    faacHasMp4Support = group.readEntry( "faacHasMp4Support", true );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     configVersion = group.readEntry( "configVersion", 0 );
+//     faacLastModified = group.readEntry( "faacLastModified", QDateTime() );
+//     faacHasMp4Support = group.readEntry( "faacHasMp4Support", true );
 
     allCodecs += "aac";
     allCodecs += "m4a/aac";
@@ -55,18 +53,17 @@ QList<ConversionPipeTrunk> soundkonverter_codec_faac::codecTable()
         if( faacInfo.lastModified() > faacLastModified || configVersion < version() )
         {
             infoProcess = new QProcess();
-            infoProcess.data()->setOutputChannelMode( QProcess::MergedChannels );
-            connect( infoProcess.data(), SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
-            connect( infoProcess.data(), SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
+            infoProcess->setProcessChannelMode(QProcess::MergedChannels);
+            connect( infoProcess, SIGNAL(readyRead()), this, SLOT(infoProcessOutput()) );
+            connect( infoProcess, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(infoProcessExit(int,QProcess::ExitStatus)) );
 
             QStringList command;
             command += binaries["faac"];
             command += "--help";
-            infoProcess.data()->clearProgram();
-            infoProcess.data()->setShellCommand( command.join(" ") );
-            infoProcess.data()->start();
+            
+            infoProcess->start(command.join(" "));
 
-            infoProcess.data()->waitForFinished( 3000 );
+            infoProcess->waitForFinished( 3000 );
         }
     }
 
@@ -160,13 +157,11 @@ unsigned int soundkonverter_codec_faac::convert( const QUrl& inputFile, const QU
     CodecPluginItem *newItem = new CodecPluginItem( this );
     newItem->id = lastId++;
     newItem->process = new QProcess( newItem );
-    newItem->process->setOutputChannelMode( QProcess::MergedChannels );
+    newItem->process->setProcessChannelMode(QProcess::MergedChannels);
     connect( newItem->process, SIGNAL(readyRead()), this, SLOT(processOutput()) );
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
-    newItem->process->clearProgram();
-    newItem->process->setShellCommand( command.join(" ") );
-    newItem->process->start();
+    newItem->process->start(command.join(" "));
 
     logCommand( newItem->id, command.join(" ") );
 
@@ -241,7 +236,7 @@ float soundkonverter_codec_faac::parseOutput( const QString& output )
 
 void soundkonverter_codec_faac::infoProcessOutput()
 {
-    infoProcessOutputData.append( infoProcess.data()->readAllStandardOutput().data() );
+    infoProcessOutputData.append( infoProcess->readAllStandardOutput() );
 }
 
 void soundkonverter_codec_faac::infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus )
@@ -261,16 +256,16 @@ void soundkonverter_codec_faac::infoProcessExit( int exitCode, QProcess::ExitSta
     QFileInfo ffmpegInfo( binaries["faac"] );
     faacLastModified = ffmpegInfo.lastModified();
 
-    KSharedConfig::Ptr conf = KGlobal::config();
-    KConfigGroup group;
-
-    group = conf->group( "Plugin-"+name() );
-    group.writeEntry( "configVersion", version() );
-    group.writeEntry( "faacLastModified", faacLastModified );
-    group.writeEntry( "faacHasMp4Support", faacHasMp4Support );
+//     KSharedConfig::Ptr conf = KGlobal::config();
+//     KConfigGroup group;
+//
+//     group = conf->group( "Plugin-"+name() );
+//     group.writeEntry( "configVersion", version() );
+//     group.writeEntry( "faacLastModified", faacLastModified );
+//     group.writeEntry( "faacHasMp4Support", faacHasMp4Support );
 
     infoProcessOutputData.clear();
-    infoProcess.data()->deleteLater();
+    infoProcess->deleteLater();
 }
 
 

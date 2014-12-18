@@ -8,15 +8,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_replaygain_metaflac : public ReplayGainPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_replaygain_metaflac( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.replaygainplugin.metaflac" FILE "soundkonverter_replaygain_metaflac.json")
+    Q_INTERFACES(ReplayGainPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_replaygain_metaflac();
     ~soundkonverter_replaygain_metaflac();
 
     QString name();
@@ -30,12 +29,6 @@ public:
 
     unsigned int apply( const QList<QUrl>& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
-
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( metaflac, soundkonverter_replaygain_metaflac )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_METAFLAC_H_
-
-

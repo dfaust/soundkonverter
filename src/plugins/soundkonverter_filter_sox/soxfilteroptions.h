@@ -4,6 +4,8 @@
 
 #include "../../core/conversionoptions.h"
 
+#include <QList>
+#include <QVariant>
 
 class SoxFilterOptions : public FilterOptions
 {
@@ -17,7 +19,7 @@ public:
 
     struct EffectData {
         QString effectName;
-        QVariantList data;
+        QList<QVariant> data;
     };
 
     struct Data {

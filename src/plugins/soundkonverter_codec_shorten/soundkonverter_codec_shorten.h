@@ -6,15 +6,14 @@
 
 class ConversionOptions;
 
-
 class soundkonverter_codec_shorten : public CodecPlugin
 {
     Q_OBJECT
-public:
-    /** Default Constructor */
-    soundkonverter_codec_shorten( QObject *parent, const QStringList& args );
+    Q_PLUGIN_METADATA(IID "org.soundkonverter.codecplugin.shorten" FILE "soundkonverter_codec_shorten.json")
+    Q_INTERFACES(CodecPlugin)
 
-    /** Default Destructor */
+public:
+    soundkonverter_codec_shorten();
     ~soundkonverter_codec_shorten();
 
     QString name();
@@ -33,9 +32,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( shorten, soundkonverter_codec_shorten )
-
-
 #endif // _SOUNDKONVERTER_CODEC_SHORTEN_H_
-
-

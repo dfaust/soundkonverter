@@ -4,6 +4,7 @@
 #include "soxfilteroptions.h"
 #include "../../core/conversionoptions.h"
 
+#include <KLocalizedString>
 
 SoxFilterOptions::SoxFilterOptions()
 {

@@ -11,7 +11,7 @@ set(soundkonverter_codec_opustools_SRCS
    opustoolsconversionoptions.cpp
 )
 
-add_library(soundkonverter_codec_opustools STATIC ${soundkonverter_codec_opustools_SRCS})
+add_library(soundkonverter_codec_opustools SHARED ${soundkonverter_codec_opustools_SRCS})
 
 target_link_libraries(soundkonverter_codec_opustools Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

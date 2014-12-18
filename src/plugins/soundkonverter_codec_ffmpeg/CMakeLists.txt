@@ -10,7 +10,7 @@ set(soundkonverter_codec_ffmpeg_SRCS
    ffmpegcodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_ffmpeg STATIC ${soundkonverter_codec_ffmpeg_SRCS})
+add_library(soundkonverter_codec_ffmpeg SHARED ${soundkonverter_codec_ffmpeg_SRCS})
 
 target_link_libraries(soundkonverter_codec_ffmpeg Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

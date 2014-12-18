@@ -9,7 +9,7 @@ set(soundkonverter_replaygain_musepackgain_SRCS
    soundkonverter_replaygain_musepackgain.cpp
 )
 
-add_library(soundkonverter_replaygain_musepackgain STATIC ${soundkonverter_replaygain_musepackgain_SRCS})
+add_library(soundkonverter_replaygain_musepackgain SHARED ${soundkonverter_replaygain_musepackgain_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_musepackgain Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

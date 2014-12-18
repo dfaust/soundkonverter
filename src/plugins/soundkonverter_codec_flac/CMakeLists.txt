@@ -10,7 +10,7 @@ set(soundkonverter_codec_flac_SRCS
    flaccodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_flac STATIC ${soundkonverter_codec_flac_SRCS})
+add_library(soundkonverter_codec_flac SHARED ${soundkonverter_codec_flac_SRCS})
 
 target_link_libraries(soundkonverter_codec_flac Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

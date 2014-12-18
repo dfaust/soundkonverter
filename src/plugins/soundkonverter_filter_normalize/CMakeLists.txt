@@ -11,7 +11,7 @@ set(soundkonverter_filter_normalize_SRCS
    normalizefilterwidget.cpp
 )
 
-add_library(soundkonverter_filter_normalize STATIC ${soundkonverter_filter_normalize_SRCS})
+add_library(soundkonverter_filter_normalize SHARED ${soundkonverter_filter_normalize_SRCS})
 
 target_link_libraries(soundkonverter_filter_normalize Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

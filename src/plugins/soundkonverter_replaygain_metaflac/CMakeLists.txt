@@ -9,7 +9,7 @@ set(soundkonverter_replaygain_metaflac_SRCS
    soundkonverter_replaygain_metaflac.cpp
 )
 
-add_library(soundkonverter_replaygain_metaflac STATIC ${soundkonverter_replaygain_metaflac_SRCS})
+add_library(soundkonverter_replaygain_metaflac SHARED ${soundkonverter_replaygain_metaflac_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_metaflac Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

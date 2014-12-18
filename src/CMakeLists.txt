@@ -70,7 +70,7 @@ set(soundkonvertercore_SRCS
    core/replaygainplugin.cpp
    core/ripperplugin.cpp
 )
-add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
+add_library(soundkonvertercore STATIC ${soundkonvertercore_SRCS})
 target_link_libraries(soundkonvertercore Qt5::Widgets Qt5::Xml KF5::I18n)
 # install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 

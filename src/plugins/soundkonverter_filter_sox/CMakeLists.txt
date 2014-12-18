@@ -13,7 +13,7 @@ set(soundkonverter_filter_sox_SRCS
    soxeffectwidget.cpp
 )
 
-add_library(soundkonverter_filter_sox STATIC ${soundkonverter_filter_sox_SRCS})
+add_library(soundkonverter_filter_sox SHARED ${soundkonverter_filter_sox_SRCS})
 
 target_link_libraries(soundkonverter_filter_sox Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

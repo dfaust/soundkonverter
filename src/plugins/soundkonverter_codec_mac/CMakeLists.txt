@@ -10,7 +10,7 @@ set(soundkonverter_codec_mac_SRCS
    maccodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_mac STATIC ${soundkonverter_codec_mac_SRCS})
+add_library(soundkonverter_codec_mac SHARED ${soundkonverter_codec_mac_SRCS})
 
 target_link_libraries(soundkonverter_codec_mac Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

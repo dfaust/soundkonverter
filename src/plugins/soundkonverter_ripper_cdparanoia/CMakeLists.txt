@@ -9,7 +9,7 @@ set(soundkonverter_ripper_cdparanoia_SRCS
    soundkonverter_ripper_cdparanoia.cpp
 )
 
-add_library(soundkonverter_ripper_cdparanoia STATIC ${soundkonverter_ripper_cdparanoia_SRCS})
+add_library(soundkonverter_ripper_cdparanoia SHARED ${soundkonverter_ripper_cdparanoia_SRCS})
 
 target_link_libraries(soundkonverter_ripper_cdparanoia Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

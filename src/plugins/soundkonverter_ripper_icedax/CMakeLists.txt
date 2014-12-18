@@ -9,7 +9,7 @@ set(soundkonverter_ripper_icedax_SRCS
    soundkonverter_ripper_icedax.cpp
 )
 
-add_library(soundkonverter_ripper_icedax STATIC ${soundkonverter_ripper_icedax_SRCS})
+add_library(soundkonverter_ripper_icedax SHARED ${soundkonverter_ripper_icedax_SRCS})
 
 target_link_libraries(soundkonverter_ripper_icedax Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

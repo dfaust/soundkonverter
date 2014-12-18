@@ -11,7 +11,7 @@ set(soundkonverter_codec_fluidsynth_SRCS
    fluidsynthcodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_fluidsynth STATIC ${soundkonverter_codec_fluidsynth_SRCS})
+add_library(soundkonverter_codec_fluidsynth SHARED ${soundkonverter_codec_fluidsynth_SRCS})
 
 target_link_libraries(soundkonverter_codec_fluidsynth Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n KF5::KIOFileWidgets soundkonvertercore)
 

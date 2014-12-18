@@ -10,7 +10,7 @@ set(soundkonverter_codec_libav_SRCS
    libavcodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_libav STATIC ${soundkonverter_codec_libav_SRCS})
+add_library(soundkonverter_codec_libav SHARED ${soundkonverter_codec_libav_SRCS})
 
 target_link_libraries(soundkonverter_codec_libav Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

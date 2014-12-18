@@ -10,7 +10,7 @@ set(soundkonverter_codec_twolame_SRCS
    twolamecodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_twolame STATIC ${soundkonverter_codec_twolame_SRCS})
+add_library(soundkonverter_codec_twolame SHARED ${soundkonverter_codec_twolame_SRCS})
 
 target_link_libraries(soundkonverter_codec_twolame Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

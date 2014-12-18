@@ -10,7 +10,7 @@ set(soundkonverter_codec_timidity_SRCS
    timiditycodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_timidity STATIC ${soundkonverter_codec_timidity_SRCS})
+add_library(soundkonverter_codec_timidity SHARED ${soundkonverter_codec_timidity_SRCS})
 
 target_link_libraries(soundkonverter_codec_timidity Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

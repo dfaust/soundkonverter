@@ -10,7 +10,7 @@ set(soundkonverter_codec_shorten_SRCS
    shortencodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_shorten STATIC ${soundkonverter_codec_shorten_SRCS})
+add_library(soundkonverter_codec_shorten SHARED ${soundkonverter_codec_shorten_SRCS})
 
 target_link_libraries(soundkonverter_codec_shorten Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

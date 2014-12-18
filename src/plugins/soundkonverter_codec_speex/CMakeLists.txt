@@ -10,7 +10,7 @@ set(soundkonverter_codec_speex_SRCS
    speexcodecwidget.cpp
 )
 
-add_library(soundkonverter_codec_speex STATIC ${soundkonverter_codec_speex_SRCS})
+add_library(soundkonverter_codec_speex SHARED ${soundkonverter_codec_speex_SRCS})
 
 target_link_libraries(soundkonverter_codec_speex Qt5::Xml Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

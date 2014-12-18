@@ -9,7 +9,7 @@ set(soundkonverter_replaygain_aacgain_SRCS
    soundkonverter_replaygain_aacgain.cpp
 )
 
-add_library(soundkonverter_replaygain_aacgain STATIC ${soundkonverter_replaygain_aacgain_SRCS})
+add_library(soundkonverter_replaygain_aacgain SHARED ${soundkonverter_replaygain_aacgain_SRCS})
 
 target_link_libraries(soundkonverter_replaygain_aacgain Qt5::Widgets Qt5::Xml KF5::I18n soundkonvertercore)
 

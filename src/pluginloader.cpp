@@ -1,26 +1,15 @@
-//
-// C++ Implementation: pluginloader
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "pluginloader.h"
 #include "logger.h"
 #include "config.h"
 
 #include <QSet>
 #include <QFile>
+#include <QApplication>
 
-#include <KServiceTypeTrader>
 #include <QMimeDatabase>
 #include <QMimeType>
-
-
+#include <QPluginLoader>
 
 bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& pipe2 )
 {
@@ -110,16 +99,58 @@ void PluginLoader::addFormatInfo( const QString& codecName, BackendPlugin *plugi
 
 void PluginLoader::load()
 {
-//     QTime overallTime;
-//     overallTime.start();
-//     QTime createInstanceTime;
-//
-//     int createInstanceTimeSum = 0;
-//
-//     KService::List offers;
-//
-//     logger->log( 1000, "\nloading plugins ..." );
-//
+    QTime overallTime;
+    overallTime.start();
+    QTime createInstanceTime;
+
+    int createInstanceTimeSum = 0;
+
+    logger->log( 1000, "\nloading plugins ..." );
+
+    QPluginLoader loader(qApp->applicationDirPath()+"/plugins/soundkonverter_codec_lame/libsoundkonverter_codec_lame.so");
+    if( CodecPlugin *plugin = qobject_cast<CodecPlugin*>(loader.instance()) )
+    {
+        logger->log( 1000, "\tloading plugin: " + plugin->name() );
+        createInstanceTimeSum += createInstanceTime.elapsed();
+        codecPlugins.append( plugin );
+        plugin->scanForBackends();
+        QMap<QString,int> encodeCodecs;
+        QMap<QString,int> decodeCodecs;
+        QList<ConversionPipeTrunk> codecTable = plugin->codecTable();
+        for( int j = 0; j < codecTable.count(); j++ )
+        {
+            codecTable[j].plugin = plugin;
+            conversionPipeTrunks.append( codecTable.at(j) );
+            if( codecTable.at(j).codecTo != "wav" )
+                encodeCodecs[codecTable.at(j).codecTo] += codecTable.at(j).enabled;
+            if( codecTable.at(j).codecFrom != "wav" )
+                decodeCodecs[codecTable.at(j).codecFrom] += codecTable.at(j).enabled;
+            addFormatInfo( codecTable.at(j).codecFrom, plugin );
+            addFormatInfo( codecTable.at(j).codecTo, plugin );
+        }
+        if( encodeCodecs.count() > 0 )
+        {
+            logger->log( 1000, "\t\tencode:" );
+            for( int j=0; j<encodeCodecs.count(); j++ )
+            {
+                QString spaces;
+                spaces.fill( ' ', 12 - encodeCodecs.keys().at(j).length() );
+                logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(encodeCodecs.keys().at(j)).arg(spaces).arg(encodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
+            }
+        }
+        if( decodeCodecs.count() > 0 )
+        {
+            logger->log( 1000, "\t\tdecode:" );
+            for( int j=0; j<decodeCodecs.count(); j++ )
+            {
+                QString spaces;
+                spaces.fill( ' ', 12 - decodeCodecs.keys().at(j).length() );
+                logger->log( 1000, "<pre>\t\t\t" + QString("%1%2(%3)").arg(decodeCodecs.keys().at(j)).arg(spaces).arg(decodeCodecs.values().at(j) ? "<span style=\"color:green\">enabled</span>" : "<span style=\"color:red\">disabled</span>") + "</pre>" );
+            }
+        }
+        logger->log( 1000, "" );
+    }
+
 //     offers = KServiceTypeTrader::self()->query("soundKonverter/CodecPlugin");
 //
 //     if( !offers.isEmpty() )
@@ -311,10 +342,10 @@ void PluginLoader::load()
 //             }
 //         }
 //     }
-//
-//     conversionFilterPipeTrunks = conversionPipeTrunks + filterPipeTrunks;
-//
-//     logger->log( 1000, QString("... all plugins loaded (took %1 ms, creating instances: %2 ms)").arg(overallTime.elapsed()).arg(createInstanceTimeSum) + "\n" );
+
+    conversionFilterPipeTrunks = conversionPipeTrunks + filterPipeTrunks;
+
+    logger->log( 1000, QString("... all plugins loaded (took %1 ms, creating instances: %2 ms)").arg(overallTime.elapsed()).arg(createInstanceTimeSum) + "\n" );
 }
 
 QStringList PluginLoader::formatList( Possibilities possibilities, CompressionType compressionType )
@@ -1164,4 +1195,3 @@ QString PluginLoader::codecDescription( const QString& codecName )
     }
     return "";
 }
-

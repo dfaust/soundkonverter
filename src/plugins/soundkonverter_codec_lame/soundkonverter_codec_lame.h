@@ -5,10 +5,15 @@
 #include "../../core/codecplugin.h"
 
 #include <QUrl>
+#include <QPointer>
 
 class ConversionOptions;
 class QDialog;
 class QComboBox;
+
+namespace Ui {
+    class LameConfigDialog;
+}
 
 class soundkonverter_codec_lame : public CodecPlugin
 {
@@ -37,8 +42,8 @@ public:
     ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
 private:
-    QDialog* configDialog;
-    QComboBox *configDialogStereoModeComboBox;
+    QPointer<QDialog> configDialog;
+    Ui::LameConfigDialog *configDialogUi;
 
     int configVersion;
     QString stereoMode;

@@ -7,7 +7,7 @@
 #include <QToolTip>
 #include <QtCore> // KDevelop foreach syntax highlighting fix
 
-AboutPlugins::AboutPlugins(Config *_config, QWidget* parent, Qt::WindowFlags f) :
+AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
     ui(new Ui::AboutPlugins),
     config(_config),

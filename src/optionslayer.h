@@ -73,7 +73,7 @@ public slots:
     void setOutputDirectory( const QString& directory );
 
     /** Set the command to execute after the conversion is complete */
-    void setCommand( const QString& _command );
+    void setCommand( const QString& command );
 
     /** Set the current conversion options */
     void setCurrentConversionOptions( ConversionOptions *options );

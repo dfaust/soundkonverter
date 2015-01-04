@@ -1,17 +1,15 @@
 
 #include "codecproblems.h"
-#include "ui_codecproblems.h"
 
 #include <KLocalizedString>
 #include <QtCore> // KDevelop foreach syntax highlighting fix
 
 CodecProblems::CodecProblems(Mode mode, const QList<Problem>& problemList, QWidget *parent, Qt::WindowFlags f) :
-    QDialog(parent, f),
-    ui(new Ui::CodecProblems)
+    QDialog(parent, f)
 {
-    ui->setupUi(this);
+    ui.setupUi(this);
 
-    connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui.closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
     QString message;
 
@@ -53,7 +51,7 @@ CodecProblems::CodecProblems(Mode mode, const QList<Problem>& problemList, QWidg
         }
     }
 
-    ui->messageLabel->setText(message);
+    ui.messageLabel->setText(message);
 
     if( !problemList.isEmpty() )
     {
@@ -75,8 +73,8 @@ CodecProblems::CodecProblems(Mode mode, const QList<Problem>& problemList, QWidg
             }
         }
 
-        ui->solutionsLabel->setText(messageList.join("\n\n").replace("\n","<br>"));
-//         ui->solutionsLabel->setMargin( 8 );
+        ui.solutionsLabel->setText(messageList.join("\n\n").replace("\n","<br>"));
+//         ui.solutionsLabel->setMargin( 8 );
     }
 }
 

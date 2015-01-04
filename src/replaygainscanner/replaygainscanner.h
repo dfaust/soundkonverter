@@ -2,6 +2,8 @@
 #ifndef REPLAYGAINSCANNER_H
 #define REPLAYGAINSCANNER_H
 
+#include "ui_replaygainscanner.h"
+
 #include <QDialog>
 
 class Config;
@@ -14,11 +16,6 @@ class QCheckBox;
 class QPushButton;
 class QTreeWidget;
 class QFileDialog;
-
-
-namespace Ui {
-    class ReplayGainScanner;
-}
 
 /** The Replay Gain Tool */
 class ReplayGainScanner : public QDialog
@@ -47,7 +44,7 @@ private slots:
     void progressChanged( const QString& progress );
 
 private:
-    Ui::ReplayGainScanner *ui;
+    Ui::ReplayGainScanner ui;
 
     QFileDialog *fileDialog;
 

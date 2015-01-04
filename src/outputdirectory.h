@@ -2,6 +2,8 @@
 #ifndef OUTPUTDIRECTORY_H
 #define OUTPUTDIRECTORY_H
 
+#include "ui_outputdirectory.h"
+
 #include <QWidget>
 #include <QUrl>
 #include <QPointer>
@@ -9,10 +11,6 @@
 class FileListItem;
 
 class Config;
-
-namespace Ui {
-    class OutputDirectory;
-}
 
 /** The input area for the output directory */
 class OutputDirectory : public QWidget
@@ -57,7 +55,7 @@ private slots:
     void gotoDir();
 
 private:
-    Ui::OutputDirectory *ui;
+    Ui::OutputDirectory ui;
 
     void updateMode(Mode);
 

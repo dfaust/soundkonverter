@@ -2,11 +2,9 @@
 #ifndef CODECPROBLEMS_H
 #define CODECPROBLEMS_H
 
-#include <QDialog>
+#include "ui_codecproblems.h"
 
-namespace Ui {
-    class CodecProblems;
-}
+#include <QDialog>
 
 /** Shows a message box with possible solutions for backend problems */
 class CodecProblems : public QDialog
@@ -30,7 +28,7 @@ public:
     ~CodecProblems();
 
 private:
-    Ui::CodecProblems *ui;
+    Ui::CodecProblems ui;
 };
 
 #endif // CODECPROBLEMS_H

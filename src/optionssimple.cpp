@@ -1,6 +1,5 @@
 
 #include "optionssimple.h"
-#include "ui_optionssimple.h"
 #include "config.h"
 #include "outputdirectory.h"
 #include "global.h"
@@ -16,21 +15,20 @@
 // TODO hide lossless when not available
 
 OptionsSimple::OptionsSimple(QWidget *parent) :
-    QWidget( parent ),
-    ui(new Ui::OptionsSimple)
+    QWidget( parent )
 {
-    ui->setupUi(this);
+    ui.setupUi(this);
 
-//     connect(ui->formatComboBox, SIGNAL(activated(int)), this, SLOT(formatChanged()));
-    connect(ui->deleteProfilePushButton, SIGNAL(clicked()), this, SLOT(profileRemove()));
-    connect(ui->infoProfilePushButton, SIGNAL(clicked()), this, SLOT(profileInfo()));
+//     connect(ui.formatComboBox, SIGNAL(activated(int)), this, SLOT(formatChanged()));
+    connect(ui.deleteProfilePushButton, SIGNAL(clicked()), this, SLOT(profileRemove()));
+    connect(ui.infoProfilePushButton, SIGNAL(clicked()), this, SLOT(profileInfo()));
 
-    connect(ui->formatComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
-    connect(ui->infoFormatPushButton, SIGNAL(clicked()), this, SLOT(formatInfo()));
+    connect(ui.formatComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
+    connect(ui.infoFormatPushButton, SIGNAL(clicked()), this, SLOT(formatInfo()));
 //     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()));
 
-//     connect(ui->outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(ui->outputDirectoryChanged()));
-//     connect(ui->outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(ui->outputDirectoryChanged()));
+//     connect(ui.outputDirectory, SIGNAL(modeChanged(int)), this, SLOT(ui.outputDirectoryChanged()));
+//     connect(ui.outputDirectory, SIGNAL(directoryChanged(const QString&)), this, SLOT(ui.outputDirectoryChanged()));
 
 //     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 //
@@ -38,7 +36,7 @@ OptionsSimple::OptionsSimple(QWidget *parent) :
 //     grid->setSpacing( fontHeight );
 //
 //     topBoxQuality->addSpacing( 0.25*fontHeight );
-//     ui->deleteProfilePushButton->hide();
+//     ui.deleteProfilePushButton->hide();
 
 //     topBoxFormat->addSpacing( 0.25*fontHeight );
 //     QLabel *formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("More formats...") + "</a>", this );
@@ -47,7 +45,7 @@ OptionsSimple::OptionsSimple(QWidget *parent) :
 //     lEstimSize = new QLabel( QString(QChar(8776))+"? B / min." );
 //     lEstimSize->hide(); // hide for now because most plugins report inaccurate data
 //
-//     connect(ui->replayGainCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
+//     connect(ui.replayGainCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 }
 
 OptionsSimple::~OptionsSimple()
@@ -58,51 +56,51 @@ void OptionsSimple::init(Config *config, const QString &text)
 {
     this->config = config;
 
-    ui->outputDirectory->init(config);
+    ui.outputDirectory->init(config);
 
-    ui->infoLabel->setText(text);
+    ui.infoLabel->setText(text);
 
     updateProfiles();
 }
 
 void OptionsSimple::setReplayGainEnabled(bool enabled, const QString& toolTip)
 {
-    ui->replayGainCheckBox->setEnabled(enabled);
-    ui->replayGainCheckBox->setToolTip(toolTip);
+    ui.replayGainCheckBox->setEnabled(enabled);
+    ui.replayGainCheckBox->setToolTip(toolTip);
 
     if( !enabled )
     {
-        QPalette notificationPalette = ui->replayGainCheckBox->palette();
+        QPalette notificationPalette = ui.replayGainCheckBox->palette();
         notificationPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(174,127,130));
-        ui->replayGainCheckBox->setPalette(notificationPalette);
+        ui.replayGainCheckBox->setPalette(notificationPalette);
     }
 }
 
 void OptionsSimple::setReplayGainChecked(bool enabled)
 {
-    ui->replayGainCheckBox->setChecked(enabled);
+    ui.replayGainCheckBox->setChecked(enabled);
 }
 
 QString OptionsSimple::currentProfile()
 {
-    return ui->profileComboBox->currentText();
+    return ui.profileComboBox->currentText();
 }
 
 QString OptionsSimple::currentFormat()
 {
-    return ui->formatComboBox->currentText();
+    return ui.formatComboBox->currentText();
 }
 
 bool OptionsSimple::isReplayGainChecked()
 {
-    return ui->replayGainCheckBox->isChecked();
+    return ui.replayGainCheckBox->isChecked();
 }
 
 void OptionsSimple::updateProfiles()
 {
-    const QString lastProfile = ui->profileComboBox->currentText();
+    const QString lastProfile = ui.profileComboBox->currentText();
     QStringList sProfile;
-    ui->profileComboBox->clear();
+    ui.profileComboBox->clear();
 
     sProfile += i18n("Very low");
     sProfile += i18n("Low");
@@ -112,11 +110,11 @@ void OptionsSimple::updateProfiles()
     sProfile += i18n("Lossless");
     sProfile += config->customProfiles();
     sProfile += i18n("User defined");
-    ui->profileComboBox->addItems( sProfile );
+    ui.profileComboBox->addItems( sProfile );
 
-    if( ui->profileComboBox->findText(lastProfile) != -1 )
+    if( ui.profileComboBox->findText(lastProfile) != -1 )
     {
-        ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(lastProfile));
+        ui.profileComboBox->setCurrentIndex(ui.profileComboBox->findText(lastProfile));
     }
     else
     {
@@ -126,7 +124,7 @@ void OptionsSimple::updateProfiles()
 
 void OptionsSimple::profileInfo()
 {
-    const QString sProfileString = ui->profileComboBox->currentText();
+    const QString sProfileString = ui.profileComboBox->currentText();
 
     QString info;
 
@@ -172,7 +170,7 @@ void OptionsSimple::profileInfo()
 
 void OptionsSimple::profileRemove()
 {
-    const QString profileName = ui->profileComboBox->currentText();
+    const QString profileName = ui.profileComboBox->currentText();
 
     const int ret = QMessageBox::question(this, i18n("Remove profile?"), i18n("Do you really want to remove the profile: %1").arg(profileName));
     if( ret == QMessageBox::Yes )
@@ -217,7 +215,7 @@ void OptionsSimple::profileRemove()
 
 void OptionsSimple::formatInfo()
 {
-    const QString format = ui->formatComboBox->currentText();
+    const QString format = ui.formatComboBox->currentText();
     const QString info = config->pluginLoader()->codecDescription(format);
 
     if( !info.isEmpty() )
@@ -232,28 +230,28 @@ void OptionsSimple::formatInfo()
 
 void OptionsSimple::profileChanged()
 {
-    const QString profile = ui->profileComboBox->currentText();
-    const QString lastFormat = ui->formatComboBox->currentText();
-    ui->formatComboBox->clear();
+    const QString profile = ui.profileComboBox->currentText();
+    const QString lastFormat = ui.formatComboBox->currentText();
+    ui.formatComboBox->clear();
 
-    ui->deleteProfilePushButton->hide();
-    ui->infoProfilePushButton->show();
+    ui.deleteProfilePushButton->hide();
+    ui.infoProfilePushButton->show();
 
     if( profile == i18n("Very low") || profile == i18n("Low") || profile == i18n("Medium") || profile == i18n("High") || profile == i18n("Very high") )
     {
-        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossy));
+        ui.formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossy));
     }
     else if( profile == i18n("Lossless") )
     {
-        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossless));
+        ui.formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Lossless));
     }
     else if( profile == i18n("Hybrid") )
     {
-        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Hybrid));
+        ui.formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::Hybrid));
     }
     else if( profile == i18n("User defined") )
     {
-        ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid)));
+        ui.formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid)));
     }
     else
     {
@@ -264,21 +262,21 @@ void OptionsSimple::profileChanged()
                 ConversionOptions *conversionOptions = config->data.profiles.value(profileName);
                 if( conversionOptions )
                 {
-                    ui->formatComboBox->addItem(conversionOptions->codecName);
-                    ui->outputDirectory->setMode((OutputDirectory::Mode)conversionOptions->outputDirectoryMode);
-                    ui->outputDirectory->setDirectory(conversionOptions->outputDirectory);
-                    ui->replayGainCheckBox->setChecked(conversionOptions->replaygain);
-                    ui->deleteProfilePushButton->show();
-                    ui->infoProfilePushButton->hide();
+                    ui.formatComboBox->addItem(conversionOptions->codecName);
+                    ui.outputDirectory->setMode((OutputDirectory::Mode)conversionOptions->outputDirectoryMode);
+                    ui.outputDirectory->setDirectory(conversionOptions->outputDirectory);
+                    ui.replayGainCheckBox->setChecked(conversionOptions->replaygain);
+                    ui.deleteProfilePushButton->show();
+                    ui.infoProfilePushButton->hide();
                 }
                 break;
             }
         }
     }
 
-    if( ui->formatComboBox->findText(lastFormat) != -1 )
+    if( ui.formatComboBox->findText(lastFormat) != -1 )
     {
-        ui->formatComboBox->setCurrentIndex(ui->formatComboBox->findText(lastFormat));
+        ui.formatComboBox->setCurrentIndex(ui.formatComboBox->findText(lastFormat));
     }
 
     somethingChanged();
@@ -287,34 +285,34 @@ void OptionsSimple::profileChanged()
 // void OptionsSimple::formatChanged()
 // {
 //     QStringList errorList;
-//     ui->replayGainCheckBox->setEnabled( config->pluginLoader()->canReplayGain(ui->formatComboBox->currentText(),currentPlugin,&errorList) );
-//     if( !ui->replayGainCheckBox->isEnabled() )
+//     ui.replayGainCheckBox->setEnabled( config->pluginLoader()->canReplayGain(ui.formatComboBox->currentText(),currentPlugin,&errorList) );
+//     if( !ui.replayGainCheckBox->isEnabled() )
 //     {
 //         if( !errorList.isEmpty() )
 //         {
-//             errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",ui->formatComboBox->currentText()) );
+//             errorList.prepend( i18n("Replay Gain is not supported for the %1 file format.\nPossible solutions are listed below.",ui.formatComboBox->currentText()) );
 //         }
 //         else
 //         {
-//             errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",ui->formatComboBox->currentText());
+//             errorList += i18n("Replay Gain is not supported for the %1 file format.\nPlease check your distribution's package manager in order to install an additional Replay Gain plugin.",ui.formatComboBox->currentText());
 //         }
-//         ui->replayGainCheckBox->setToolTip( errorList.join("\n\n") );
+//         ui.replayGainCheckBox->setToolTip( errorList.join("\n\n") );
 //     }
 //     else
 //     {
-//         ui->replayGainCheckBox->setToolTip( "" );
+//         ui.replayGainCheckBox->setToolTip( "" );
 //     }
 // }
 
 void OptionsSimple::outputDirectoryChanged()
 {
-    const QString profileName = ui->profileComboBox->currentText();
+    const QString profileName = ui.profileComboBox->currentText();
     ConversionOptions *conversionOptions = config->data.profiles.value(profileName);
     if( conversionOptions )
     {
-        if( conversionOptions->outputDirectoryMode != ui->outputDirectory->mode() || conversionOptions->outputDirectory != ui->outputDirectory->directory() )
+        if( conversionOptions->outputDirectoryMode != ui.outputDirectory->mode() || conversionOptions->outputDirectory != ui.outputDirectory->directory() )
         {
-            ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(i18n("User defined")));
+            ui.profileComboBox->setCurrentIndex(ui.profileComboBox->findText(i18n("User defined")));
             profileChanged();
         }
     }
@@ -343,25 +341,25 @@ void OptionsSimple::currentDataRateChanged(int dataRate)
 void OptionsSimple::setCurrentProfile(const QString& profile)
 {
     // TODO check profile (and don't change, if not available)
-    ui->profileComboBox->setCurrentIndex(ui->profileComboBox->findText(profile));
+    ui.profileComboBox->setCurrentIndex(ui.profileComboBox->findText(profile));
     profileChanged();
 }
 
 void OptionsSimple::setCurrentFormat(const QString& format)
 {
-    ui->formatComboBox->setCurrentIndex(ui->formatComboBox->findText(format));
+    ui.formatComboBox->setCurrentIndex(ui.formatComboBox->findText(format));
 //     formatChanged();
 }
 
 void OptionsSimple::setCurrentOutputDirectory(const QString& directory)
 {
-    ui->outputDirectory->setDirectory(directory);
+    ui.outputDirectory->setDirectory(directory);
     outputDirectoryChanged();
 }
 
 void OptionsSimple::setCurrentOutputDirectoryMode(int mode)
 {
-    ui->outputDirectory->setMode((OutputDirectory::Mode)mode);
+    ui.outputDirectory->setMode((OutputDirectory::Mode)mode);
     outputDirectoryChanged();
 }
 

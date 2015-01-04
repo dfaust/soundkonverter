@@ -1,6 +1,5 @@
 
 #include "cdopener.h"
-#include "ui_cdopener.h"
 
 #include "../metadata/tagengine.h"
 #include "../config.h"
@@ -107,7 +106,6 @@ void PlayerWidget::trackChanged( int _track )
 
 CDOpener::CDOpener(Config *_config, const QString& _device, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::CDOpener),
     noCdFound( false ),
     config( _config ),
     cdDrive( 0 ),
@@ -117,45 +115,45 @@ CDOpener::CDOpener(Config *_config, const QString& _device, QWidget *parent, Qt:
 {
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-    ui->setupUi(this);
+    ui.setupUi(this);
 
     QPixmap coverPixmap(QStandardPaths::locate(QStandardPaths::GenericDataLocation, "soundkonverter/images/nocover.png"));
-    ui->coverLabel->setFixedSize(qRound((qreal)ui->coverLabel->size().height() * coverPixmap.width() / coverPixmap.height()), ui->coverLabel->size().height());
-    ui->coverLabel->setPixmap(coverPixmap);
+    ui.coverLabel->setFixedSize(qRound((qreal)ui.coverLabel->size().height() * coverPixmap.width() / coverPixmap.height()), ui.coverLabel->size().height());
+    ui.coverLabel->setPixmap(coverPixmap);
 
-    ui->albumArtistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
-    ui->albumLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
-    ui->discNoLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.albumArtistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.albumLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.discNoLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
 
-    ui->titleLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
-    ui->artistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
-    ui->commentLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.titleLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.artistLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
+    ui.commentLabel->setContentsMargins(0.5*fontHeight, 0, 0, 0);
 
-    ui->yearSpinBox->setValue(QDate::currentDate().year());
+    ui.yearSpinBox->setValue(QDate::currentDate().year());
 
-    ui->genreComboBox->addItems(config->tagEngine()->genreList);
-    ui->genreComboBox->clearEditText();
+    ui.genreComboBox->addItems(config->tagEngine()->genreList);
+    ui.genreComboBox->clearEditText();
 
-    ui->commentTextEdit->setFixedHeight(4*fontHeight);
+    ui.commentTextEdit->setFixedHeight(4*fontHeight);
 
-    ui->okButton->hide();
+    ui.okButton->hide();
 
-    connect(ui->albumArtistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(artistChanged(const QString&)));
+    connect(ui.albumArtistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(artistChanged(const QString&)));
 
-    connect(ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()));
-//     connect(ui->tracksTreeWidget, SIGNAL(itemEntered(QTreeWidgetItem*,int)), this, SLOT(itemHighlighted(QTreeWidgetItem*,int)));
+    connect(ui.tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()));
+//     connect(ui.tracksTreeWidget, SIGNAL(itemEntered(QTreeWidgetItem*,int)), this, SLOT(itemHighlighted(QTreeWidgetItem*,int)));
 
-    connect(ui->trackUpButton, SIGNAL(clicked()), this, SLOT(trackUpPressed()));
-    connect(ui->trackDownButton, SIGNAL(clicked()), this, SLOT(trackDownPressed()));
+    connect(ui.trackUpButton, SIGNAL(clicked()), this, SLOT(trackUpPressed()));
+    connect(ui.trackDownButton, SIGNAL(clicked()), this, SLOT(trackDownPressed()));
 
-    connect(ui->titleLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackTitleChanged(const QString&)));
-    connect(ui->editTitleButton, SIGNAL(clicked()), this, SLOT(editTrackTitleClicked()));
-    connect(ui->artistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackArtistChanged(const QString&)));
-    connect(ui->editArtistButton, SIGNAL(clicked()), this, SLOT(editTrackArtistClicked()));
-    connect(ui->composerLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackComposerChanged(const QString&)));
-    connect(ui->editComposerButton, SIGNAL(clicked()), this, SLOT(editTrackComposerClicked()));
-    connect(ui->commentTextEdit, SIGNAL(textChanged()), this, SLOT(trackCommentChanged()));
-    connect(ui->editCommentButton, SIGNAL(clicked()), this, SLOT(editTrackCommentClicked()));
+    connect(ui.titleLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackTitleChanged(const QString&)));
+    connect(ui.editTitleButton, SIGNAL(clicked()), this, SLOT(editTrackTitleClicked()));
+    connect(ui.artistLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackArtistChanged(const QString&)));
+    connect(ui.editArtistButton, SIGNAL(clicked()), this, SLOT(editTrackArtistClicked()));
+    connect(ui.composerLineEdit, SIGNAL(textChanged(const QString&)), this, SLOT(trackComposerChanged(const QString&)));
+    connect(ui.editComposerButton, SIGNAL(clicked()), this, SLOT(editTrackComposerClicked()));
+    connect(ui.commentTextEdit, SIGNAL(textChanged()), this, SLOT(trackCommentChanged()));
+    connect(ui.editCommentButton, SIGNAL(clicked()), this, SLOT(editTrackCommentClicked()));
 
 
     audioOutput = new Phonon::AudioOutput(Phonon::MusicCategory, this);
@@ -189,20 +187,20 @@ CDOpener::CDOpener(Config *_config, const QString& _device, QWidget *parent, Qt:
 //     cdOpenerOverlayWidget->setPalette( newPalette );
 
 
-    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
+    ui.options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
 
-    connect( ui->saveCueSheetButton, SIGNAL(clicked()), this, SLOT(saveCuesheetClicked()) );
+    connect( ui.saveCueSheetButton, SIGNAL(clicked()), this, SLOT(saveCuesheetClicked()) );
 
 //     connect( pCDDB, SIGNAL(clicked()), this, SLOT(requestCddb()) );
 
     QStringList errorList;
-    ui->ripEntireCdCheckBox->setEnabled(config->pluginLoader()->canRipEntireCd(&errorList));
-    if( !ui->ripEntireCdCheckBox->isEnabled() )
+    ui.ripEntireCdCheckBox->setEnabled(config->pluginLoader()->canRipEntireCd(&errorList));
+    if( !ui.ripEntireCdCheckBox->isEnabled() )
     {
-        QPalette notificationPalette = ui->ripEntireCdCheckBox->palette();
+        QPalette notificationPalette = ui.ripEntireCdCheckBox->palette();
         notificationPalette.setColor(QPalette::Disabled, QPalette::WindowText, QColor(174,127,130)); // QColor(181,96,101)
-        ui->ripEntireCdCheckBox->setPalette(notificationPalette);
+        ui.ripEntireCdCheckBox->setPalette(notificationPalette);
         if( !errorList.isEmpty() )
         {
             errorList.prepend(i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPossible solutions are listed below.\n"));
@@ -211,12 +209,12 @@ CDOpener::CDOpener(Config *_config, const QString& _device, QWidget *parent, Qt:
         {
             errorList += i18n("Ripping an entire cd to a single file is not supported by the installed backends.\nPlease check your distribution's package manager in order to install an additional ripper plugin which supports ripping to one file.");
         }
-        ui->ripEntireCdCheckBox->setToolTip(errorList.join("\n"));
+        ui.ripEntireCdCheckBox->setToolTip(errorList.join("\n"));
     }
 
-    connect(ui->proceedButton, SIGNAL(clicked()), this, SLOT(proceedClicked()));
-    connect(ui->okButton, SIGNAL(clicked()), this, SLOT(addClicked()));
-    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(ui.proceedButton, SIGNAL(clicked()), this, SLOT(proceedClicked()));
+    connect(ui.okButton, SIGNAL(clicked()), this, SLOT(addClicked()));
+    connect(ui.cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
 //     connect( &fadeTimer, SIGNAL(timeout()), this, SLOT(fadeAnim()) );
 //     fadeAlpha = 255.0f;
@@ -303,17 +301,17 @@ CDOpener::~CDOpener()
 
 void CDOpener::setProfile( const QString& profile )
 {
-    ui->options->setProfile( profile );
+    ui.options->setProfile( profile );
 }
 
 void CDOpener::setFormat( const QString& format )
 {
-    ui->options->setFormat( format );
+    ui.options->setFormat( format );
 }
 
 void CDOpener::setOutputDirectory( const QString& directory )
 {
-    ui->options->setOutputDirectory( directory );
+    ui.options->setOutputDirectory( directory );
 }
 
 void CDOpener::setCommand( const QString& _command )
@@ -414,30 +412,30 @@ bool CDOpener::openCdDevice( const QString& _device )
         data.append( newTags->composer );
         data.append( newTags->title );
         data.append( QString().sprintf("%i:%02i",newTags->length/60,newTags->length%60) );
-        QTreeWidgetItem *item = new QTreeWidgetItem( ui->tracksTreeWidget, data );
+        QTreeWidgetItem *item = new QTreeWidgetItem( ui.tracksTreeWidget, data );
         PlayerWidget *playerWidget = new PlayerWidget( mediaObject, newTags->track, item, this );
 //         playerWidget->hide();
         connect( playerWidget, SIGNAL(startPlayback(int)), this, SLOT(startPlayback(int)) );
         connect( playerWidget, SIGNAL(stopPlayback()), this, SLOT(stopPlayback()) );
         playerWidgets.append( playerWidget );
-        ui->tracksTreeWidget->setItemWidget( item, Column_Player, playerWidget );
+        ui.tracksTreeWidget->setItemWidget( item, Column_Player, playerWidget );
         item->setCheckState( 0, Qt::Checked );
     }
-    ui->tracksTreeWidget->resizeColumnToContents( Column_Rip );
-    ui->tracksTreeWidget->resizeColumnToContents( Column_Track );
-    ui->tracksTreeWidget->resizeColumnToContents( Column_Length );
+    ui.tracksTreeWidget->resizeColumnToContents( Column_Rip );
+    ui.tracksTreeWidget->resizeColumnToContents( Column_Track );
+    ui.tracksTreeWidget->resizeColumnToContents( Column_Length );
 
-    if( ui->tracksTreeWidget->topLevelItem(0) )
-        ui->tracksTreeWidget->topLevelItem(0)->setSelected( true );
+    if( ui.tracksTreeWidget->topLevelItem(0) )
+        ui.tracksTreeWidget->topLevelItem(0)->setSelected( true );
 
-    ui->albumArtistLineEdit->setText( discTags->artist );
-    ui->albumLineEdit->setText( discTags->album );
-    ui->discNoSpinBox->setValue( discTags->disc );
-    ui->discNoTotalSpinBox->setValue( discTags->discTotal );
-    ui->yearSpinBox->setValue( discTags->year );
-    ui->genreComboBox->setEditText( discTags->genre );
+    ui.albumArtistLineEdit->setText( discTags->artist );
+    ui.albumLineEdit->setText( discTags->album );
+    ui.discNoSpinBox->setValue( discTags->disc );
+    ui.discNoTotalSpinBox->setValue( discTags->discTotal );
+    ui.yearSpinBox->setValue( discTags->year );
+    ui.genreComboBox->setEditText( discTags->genre );
 
-    artistChanged( ui->albumArtistLineEdit->text() );
+    artistChanged( ui.albumArtistLineEdit->text() );
     adjustComposerColumn();
 
 
@@ -528,11 +526,11 @@ void CDOpener::requestCddb( bool autoRequest )
                     discTags->artist = parseNameCredits(fullRelease->ArtistCredit()->NameCreditList());
                     discTags->year = QString::fromStdString(fullRelease->Date()).left(4).toShort();
 
-                    ui->albumArtistLineEdit->setText( discTags->artist );
-                    ui->albumLineEdit->setText( discTags->album );
-                    ui->yearSpinBox->setValue( discTags->year );
+                    ui.albumArtistLineEdit->setText( discTags->artist );
+                    ui.albumLineEdit->setText( discTags->album );
+                    ui.yearSpinBox->setValue( discTags->year );
 
-                    artistChanged( ui->albumArtistLineEdit->text() );
+                    artistChanged( ui.albumArtistLineEdit->text() );
 
                     const QString asin = QString::fromStdString(fullRelease->ASIN());
 
@@ -547,8 +545,8 @@ void CDOpener::requestCddb( bool autoRequest )
                     {
                         MusicBrainz5::CMedium *medium = mediaList.Item(0);
 
-                        ui->discNoSpinBox->setValue( discTags->disc );
-                        ui->discNoTotalSpinBox->setValue( discTags->discTotal );
+                        ui.discNoSpinBox->setValue( discTags->disc );
+                        ui.discNoTotalSpinBox->setValue( discTags->discTotal );
 
                         MusicBrainz5::CTrackList *trackList = medium->TrackList();
                         if( trackList )
@@ -563,7 +561,7 @@ void CDOpener::requestCddb( bool autoRequest )
                                 trackTags.at(trackNumber)->artist = artist;
                                 trackTags.at(trackNumber)->title = title;
 
-                                QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem(trackNumber);
+                                QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem(trackNumber);
                                 item->setText( 2, artist );
                                 item->setText( 4, title );
                             }
@@ -676,48 +674,48 @@ void CDOpener::timeout()
 
 void CDOpener::trackUpPressed()
 {
-    QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.first() - 1 );
+    QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.first() - 1 );
 
     if( !item )
         return;
 
-    disconnect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
+    disconnect( ui.tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
 
     item->setSelected( true );
-    ui->tracksTreeWidget->scrollToItem( item );
+    ui.tracksTreeWidget->scrollToItem( item );
 
-    connect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
+    connect( ui.tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
 
     trackChanged();
 }
 
 void CDOpener::trackDownPressed()
 {
-    QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.last() + 1 );
+    QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.last() + 1 );
 
     if( !item )
         return;
 
-    disconnect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
+    disconnect( ui.tracksTreeWidget, SIGNAL(itemSelectionChanged()), 0, 0 ); // avoid backfireing
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setSelected( false );
     }
 
     item->setSelected( true );
-    ui->tracksTreeWidget->scrollToItem( item );
+    ui.tracksTreeWidget->scrollToItem( item );
 
-    connect( ui->tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
+    connect( ui.tracksTreeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(trackChanged()) );
 
     trackChanged();
 }
@@ -729,9 +727,9 @@ void CDOpener::trackChanged()
     // rebuild the list of the selected tracks
     selectedTracks.clear();
     QTreeWidgetItem *item;
-    for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
+    for( int i=0; i<ui.tracksTreeWidget->topLevelItemCount(); i++ )
     {
-        item = ui->tracksTreeWidget->topLevelItem( i );
+        item = ui.tracksTreeWidget->topLevelItem( i );
         if( item->isSelected() )
         {
             selectedTracks.append( i );
@@ -741,42 +739,42 @@ void CDOpener::trackChanged()
     // insert the new values
     if( selectedTracks.count() < 1 )
     {
-        ui->trackUpButton->setEnabled( false );
-        ui->trackDownButton->setEnabled( false );
+        ui.trackUpButton->setEnabled( false );
+        ui.trackDownButton->setEnabled( false );
 
-        ui->titleLineEdit->setEnabled( false );
-        ui->titleLineEdit->setText( "" );
-        ui->editTitleButton->hide();
-        ui->artistLineEdit->setEnabled( false );
-        ui->artistLineEdit->setText( "" );
-        ui->editArtistButton->hide();
-        ui->composerLineEdit->setEnabled( false );
-        ui->composerLineEdit->setText( "" );
-        ui->editComposerButton->hide();
-        ui->commentTextEdit->setEnabled( false );
-        ui->commentTextEdit->setReadOnly( true );
-        ui->commentTextEdit->setText( "" );
-        ui->editCommentButton->hide();
+        ui.titleLineEdit->setEnabled( false );
+        ui.titleLineEdit->setText( "" );
+        ui.editTitleButton->hide();
+        ui.artistLineEdit->setEnabled( false );
+        ui.artistLineEdit->setText( "" );
+        ui.editArtistButton->hide();
+        ui.composerLineEdit->setEnabled( false );
+        ui.composerLineEdit->setText( "" );
+        ui.editComposerButton->hide();
+        ui.commentTextEdit->setEnabled( false );
+        ui.commentTextEdit->setReadOnly( true );
+        ui.commentTextEdit->setText( "" );
+        ui.editCommentButton->hide();
 
-        ui->trackUpButton->setEnabled( false );
-        ui->trackDownButton->setEnabled( false );
+        ui.trackUpButton->setEnabled( false );
+        ui.trackDownButton->setEnabled( false );
 
         return;
     }
     else if( selectedTracks.count() > 1 )
     {
         if( selectedTracks.first() > 0 )
-            ui->trackUpButton->setEnabled( true );
+            ui.trackUpButton->setEnabled( true );
         else
-            ui->trackUpButton->setEnabled( false );
+            ui.trackUpButton->setEnabled( false );
 
-        if( selectedTracks.last() < ui->tracksTreeWidget->topLevelItemCount() - 1 )
-            ui->trackDownButton->setEnabled( true );
+        if( selectedTracks.last() < ui.tracksTreeWidget->topLevelItemCount() - 1 )
+            ui.trackDownButton->setEnabled( true );
         else
-            ui->trackDownButton->setEnabled( false );
+            ui.trackDownButton->setEnabled( false );
 
         QString trackGroupBoxTitle = "";
-        if( selectedTracks.count() == ui->tracksTreeWidget->topLevelItemCount() )
+        if( selectedTracks.count() == ui.tracksTreeWidget->topLevelItemCount() )
         {
             trackGroupBoxTitle = i18n("All tracks");
         }
@@ -788,7 +786,7 @@ void CDOpener::trackChanged()
                 trackGroupBoxTitle += QString().sprintf(", %02i", selectedTracks.at(i) + 1);
             }
         }
-        ui->trackGroupBox->setTitle(trackGroupBoxTitle);
+        ui.trackGroupBox->setTitle(trackGroupBoxTitle);
 
         const QString title = trackTags.at(selectedTracks.at(0))->title;
         bool equalTitles = true;
@@ -812,88 +810,88 @@ void CDOpener::trackChanged()
 
         if( equalTitles )
         {
-            ui->titleLineEdit->setEnabled( true );
-            ui->titleLineEdit->setText( title );
-            ui->editTitleButton->hide();
+            ui.titleLineEdit->setEnabled( true );
+            ui.titleLineEdit->setText( title );
+            ui.editTitleButton->hide();
         }
         else
         {
-            ui->titleLineEdit->setEnabled( false );
-            ui->titleLineEdit->setText( "" );
-            ui->editTitleButton->show();
+            ui.titleLineEdit->setEnabled( false );
+            ui.titleLineEdit->setText( "" );
+            ui.editTitleButton->show();
         }
 
         if( equalArtists )
         {
-            ui->artistLineEdit->setEnabled( true );
-            ui->artistLineEdit->setText( artist );
-            ui->editArtistButton->hide();
+            ui.artistLineEdit->setEnabled( true );
+            ui.artistLineEdit->setText( artist );
+            ui.editArtistButton->hide();
         }
         else
         {
-            ui->artistLineEdit->setEnabled( false );
-            ui->artistLineEdit->setText( "" );
-            ui->editArtistButton->show();
+            ui.artistLineEdit->setEnabled( false );
+            ui.artistLineEdit->setText( "" );
+            ui.editArtistButton->show();
         }
 
         if( equalComposers )
         {
-            ui->composerLineEdit->setEnabled( true );
-            ui->composerLineEdit->setText( composer );
-            ui->editComposerButton->hide();
+            ui.composerLineEdit->setEnabled( true );
+            ui.composerLineEdit->setText( composer );
+            ui.editComposerButton->hide();
         }
         else
         {
-            ui->composerLineEdit->setEnabled( false );
-            ui->composerLineEdit->setText( "" );
-            ui->editComposerButton->show();
+            ui.composerLineEdit->setEnabled( false );
+            ui.composerLineEdit->setText( "" );
+            ui.editComposerButton->show();
         }
 
         if( equalComments )
         {
-            ui->commentTextEdit->setEnabled( true );
-            ui->commentTextEdit->setReadOnly( false );
-            ui->commentTextEdit->setText( comment );
-            ui->editCommentButton->hide();
+            ui.commentTextEdit->setEnabled( true );
+            ui.commentTextEdit->setReadOnly( false );
+            ui.commentTextEdit->setText( comment );
+            ui.editCommentButton->hide();
         }
         else
         {
-            ui->commentTextEdit->setEnabled( false );
-            ui->commentTextEdit->setReadOnly( true );
-            ui->commentTextEdit->setText( "" );
-            ui->editCommentButton->show();
+            ui.commentTextEdit->setEnabled( false );
+            ui.commentTextEdit->setReadOnly( true );
+            ui.commentTextEdit->setText( "" );
+            ui.editCommentButton->show();
         }
     }
     else
     {
         if( selectedTracks.first() > 0 )
-            ui->trackUpButton->setEnabled( true );
+            ui.trackUpButton->setEnabled( true );
         else
-            ui->trackUpButton->setEnabled( false );
+            ui.trackUpButton->setEnabled( false );
 
-        if( selectedTracks.last() < ui->tracksTreeWidget->topLevelItemCount() - 1 )
-            ui->trackDownButton->setEnabled( true );
+        if( selectedTracks.last() < ui.tracksTreeWidget->topLevelItemCount() - 1 )
+            ui.trackDownButton->setEnabled( true );
         else
-            ui->trackDownButton->setEnabled( false );
+            ui.trackDownButton->setEnabled( false );
 
-        ui->trackGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0) + 1) );
+        ui.trackGroupBox->setTitle( i18n("Track") + QString().sprintf(" %02i",selectedTracks.at(0) + 1) );
 
-        ui->titleLineEdit->setEnabled( true );
-        ui->titleLineEdit->setText( trackTags.at(selectedTracks.at(0))->title );
-        ui->editTitleButton->hide();
+        ui.titleLineEdit->setEnabled( true );
+        ui.titleLineEdit->setText( trackTags.at(selectedTracks.at(0))->title );
+        ui.editTitleButton->hide();
 
-        ui->artistLineEdit->setEnabled( true );
-        ui->artistLineEdit->setText( trackTags.at(selectedTracks.at(0))->artist );
-        ui->editArtistButton->hide();
+        ui.artistLineEdit->setEnabled( true );
+        ui.artistLineEdit->setText( trackTags.at(selectedTracks.at(0))->artist );
+        ui.editArtistButton->hide();
 
-        ui->composerLineEdit->setEnabled( true );
-        ui->composerLineEdit->setText( trackTags.at(selectedTracks.at(0))->composer );
-        ui->editComposerButton->hide();
+        ui.composerLineEdit->setEnabled( true );
+        ui.composerLineEdit->setText( trackTags.at(selectedTracks.at(0))->composer );
+        ui.editComposerButton->hide();
 
-        ui->commentTextEdit->setEnabled( true );
-        ui->commentTextEdit->setReadOnly( false );
-        ui->commentTextEdit->setText( trackTags.at(selectedTracks.at(0))->comment );
-        ui->editCommentButton->hide();
+        ui.commentTextEdit->setEnabled( true );
+        ui.commentTextEdit->setReadOnly( false );
+        ui.commentTextEdit->setText( trackTags.at(selectedTracks.at(0))->comment );
+        ui.editCommentButton->hide();
     }
 }
 
@@ -904,7 +902,7 @@ void CDOpener::artistChanged( const QString& text )
         if( trackTags.at(i)->artist == lastAlbumArtist )
         {
             trackTags.at(i)->artist = text;
-            if( QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( i ) )
+            if( QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( i ) )
             {
                 item->setText( Column_Artist, text );
             }
@@ -927,12 +925,12 @@ void CDOpener::adjustArtistColumn()
     {
         if( trackTags.at(i)->artist != albumArtist )
         {
-            ui->tracksTreeWidget->setColumnHidden( Column_Artist, false );
+            ui.tracksTreeWidget->setColumnHidden( Column_Artist, false );
             return;
         }
     }
 
-    ui->tracksTreeWidget->setColumnHidden( Column_Artist, true );
+    ui.tracksTreeWidget->setColumnHidden( Column_Artist, true );
 }
 
 void CDOpener::adjustComposerColumn()
@@ -941,22 +939,22 @@ void CDOpener::adjustComposerColumn()
     {
         if( !trackTags.at(i)->composer.isEmpty() )
         {
-            ui->tracksTreeWidget->setColumnHidden( Column_Composer, false );
+            ui.tracksTreeWidget->setColumnHidden( Column_Composer, false );
             return;
         }
     }
 
-    ui->tracksTreeWidget->setColumnHidden( Column_Composer, true );
+    ui.tracksTreeWidget->setColumnHidden( Column_Composer, true );
 }
 
 void CDOpener::trackTitleChanged( const QString& text )
 {
-    if( !ui->titleLineEdit->isEnabled() )
+    if( !ui.titleLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Title, text );
         trackTags.at(selectedTracks.at(i))->title = text;
@@ -965,12 +963,12 @@ void CDOpener::trackTitleChanged( const QString& text )
 
 void CDOpener::trackArtistChanged( const QString& text )
 {
-    if( !ui->artistLineEdit->isEnabled() )
+    if( !ui.artistLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Artist, text );
         trackTags.at(selectedTracks.at(i))->artist = text;
@@ -981,12 +979,12 @@ void CDOpener::trackArtistChanged( const QString& text )
 
 void CDOpener::trackComposerChanged( const QString& text )
 {
-    if( !ui->composerLineEdit->isEnabled() )
+    if( !ui.composerLineEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
     {
-        QTreeWidgetItem *item = ui->tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
+        QTreeWidgetItem *item = ui.tracksTreeWidget->topLevelItem( selectedTracks.at(i) );
         if( item )
             item->setText( Column_Composer, text );
         trackTags.at(selectedTracks.at(i))->composer = text;
@@ -997,9 +995,9 @@ void CDOpener::trackComposerChanged( const QString& text )
 
 void CDOpener::trackCommentChanged()
 {
-    QString text = ui->commentTextEdit->toPlainText();
+    QString text = ui.commentTextEdit->toPlainText();
 
-    if( !ui->commentTextEdit->isEnabled() )
+    if( !ui.commentTextEdit->isEnabled() )
         return;
 
     for( int i=0; i<selectedTracks.count(); i++ )
@@ -1010,34 +1008,34 @@ void CDOpener::trackCommentChanged()
 
 void CDOpener::editTrackTitleClicked()
 {
-    ui->titleLineEdit->setEnabled( true );
-    ui->titleLineEdit->setFocus();
-    ui->editTitleButton->hide();
-    trackTitleChanged( ui->titleLineEdit->text() );
+    ui.titleLineEdit->setEnabled( true );
+    ui.titleLineEdit->setFocus();
+    ui.editTitleButton->hide();
+    trackTitleChanged( ui.titleLineEdit->text() );
 }
 
 void CDOpener::editTrackArtistClicked()
 {
-    ui->artistLineEdit->setEnabled( true );
-    ui->artistLineEdit->setFocus();
-    ui->editArtistButton->hide();
-    trackArtistChanged( ui->artistLineEdit->text() );
+    ui.artistLineEdit->setEnabled( true );
+    ui.artistLineEdit->setFocus();
+    ui.editArtistButton->hide();
+    trackArtistChanged( ui.artistLineEdit->text() );
 }
 
 void CDOpener::editTrackComposerClicked()
 {
-    ui->composerLineEdit->setEnabled( true );
-    ui->composerLineEdit->setFocus();
-    ui->editComposerButton->hide();
-    trackComposerChanged( ui->composerLineEdit->text() );
+    ui.composerLineEdit->setEnabled( true );
+    ui.composerLineEdit->setFocus();
+    ui.editComposerButton->hide();
+    trackComposerChanged( ui.composerLineEdit->text() );
 }
 
 void CDOpener::editTrackCommentClicked()
 {
-    ui->commentTextEdit->setEnabled( true );
-    ui->commentTextEdit->setReadOnly( false );
-    ui->commentTextEdit->setFocus();
-    ui->editCommentButton->hide();
+    ui.commentTextEdit->setEnabled( true );
+    ui.commentTextEdit->setReadOnly( false );
+    ui.commentTextEdit->setFocus();
+    ui.editCommentButton->hide();
     trackCommentChanged();
 }
 
@@ -1094,9 +1092,9 @@ void CDOpener::proceedClicked()
 {
     int trackCount = 0;
 
-    for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
+    for( int i=0; i<ui.tracksTreeWidget->topLevelItemCount(); i++ )
     {
-        if( ui->tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
+        if( ui.tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
             trackCount++;
     }
 
@@ -1106,44 +1104,44 @@ void CDOpener::proceedClicked()
         return;
     }
 
-    if( ui->options->currentConversionOptions() && ui->options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
+    if( ui.options->currentConversionOptions() && ui.options->currentConversionOptions()->outputDirectoryMode == OutputDirectory::Source )
     {
-        ui->options->setOutputDirectoryMode((int)OutputDirectory::MetaData);
+        ui.options->setOutputDirectoryMode((int)OutputDirectory::MetaData);
     }
 
-    ui->stackedWidget->setCurrentIndex(1);
+    ui.stackedWidget->setCurrentIndex(1);
 
     QFont font;
-    ui->step1Label->setFont(font);
+    ui.step1Label->setFont(font);
     font.setBold(true);
-    ui->step2Label->setFont(font);
+    ui.step2Label->setFont(font);
 
-    ui->saveCueSheetButton->hide();
+    ui.saveCueSheetButton->hide();
 //     pCDDB->hide();
-    ui->ripEntireCdCheckBox->hide();
-    ui->proceedButton->hide();
-    ui->okButton->show();
+    ui.ripEntireCdCheckBox->hide();
+    ui.proceedButton->hide();
+    ui.okButton->show();
 }
 
 void CDOpener::addClicked()
 {
-    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui.options->currentConversionOptions();
     if( conversionOptions )
     {
         QList<int> tracks;
         QList<TagData*> tagList;
         const int trackCount = cdda_audio_tracks( cdDrive );
 
-        if( ui->ripEntireCdCheckBox->isEnabled() && ui->ripEntireCdCheckBox->isChecked() )
+        if( ui.ripEntireCdCheckBox->isEnabled() && ui.ripEntireCdCheckBox->isChecked() )
         {
-            discTags->title = ui->albumLineEdit->text();
-            discTags->artist = ui->albumArtistLineEdit->text();
-            discTags->albumArtist = ui->albumArtistLineEdit->text();
-            discTags->album = ui->albumLineEdit->text();
-            discTags->disc = ui->discNoSpinBox->value();
-            discTags->discTotal = ui->discNoTotalSpinBox->value();
-            discTags->year = ui->yearSpinBox->value();
-            discTags->genre = ui->genreComboBox->currentText();
+            discTags->title = ui.albumLineEdit->text();
+            discTags->artist = ui.albumArtistLineEdit->text();
+            discTags->albumArtist = ui.albumArtistLineEdit->text();
+            discTags->album = ui.albumLineEdit->text();
+            discTags->disc = ui.discNoSpinBox->value();
+            discTags->discTotal = ui.discNoTotalSpinBox->value();
+            discTags->year = ui.yearSpinBox->value();
+            discTags->genre = ui.genreComboBox->currentText();
             const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,trackCount)-cdda_track_firstsector(cdDrive,1));
             discTags->length = (8 * size) / (44100 * 2 * 16);
 
@@ -1152,16 +1150,16 @@ void CDOpener::addClicked()
         }
         else
         {
-            for( int i=0; i<ui->tracksTreeWidget->topLevelItemCount(); i++ )
+            for( int i=0; i<ui.tracksTreeWidget->topLevelItemCount(); i++ )
             {
-                if( ui->tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
+                if( ui.tracksTreeWidget->topLevelItem(i)->checkState(0) == Qt::Checked )
                 {
-                    trackTags.at(i)->albumArtist = ui->albumArtistLineEdit->text();
-                    trackTags.at(i)->album = ui->albumLineEdit->text();
-                    trackTags.at(i)->disc = ui->discNoSpinBox->value();
-                    trackTags.at(i)->discTotal = ui->discNoTotalSpinBox->value();
-                    trackTags.at(i)->year = ui->yearSpinBox->value();
-                    trackTags.at(i)->genre = ui->genreComboBox->currentText();
+                    trackTags.at(i)->albumArtist = ui.albumArtistLineEdit->text();
+                    trackTags.at(i)->album = ui.albumLineEdit->text();
+                    trackTags.at(i)->disc = ui.discNoSpinBox->value();
+                    trackTags.at(i)->discTotal = ui.discNoTotalSpinBox->value();
+                    trackTags.at(i)->year = ui.yearSpinBox->value();
+                    trackTags.at(i)->genre = ui.genreComboBox->currentText();
                     const long size = CD_FRAMESIZE_RAW * (cdda_track_lastsector(cdDrive,i+1)-cdda_track_firstsector(cdDrive,i+1));
                     trackTags.at(i)->length = (8 * size) / (44100 * 2 * 16);
 
@@ -1171,7 +1169,7 @@ void CDOpener::addClicked()
             }
         }
 
-        ui->options->accepted();
+        ui.options->accepted();
 
         emit addTracks( device, tracks, trackCount, tagList, conversionOptions, command );
 
@@ -1202,8 +1200,8 @@ void CDOpener::saveCuesheetClicked()
         QTextStream ts(&cueFile);
 
         ts << "REM COMMENT \"soundKonverter " SOUNDKONVERTER_VERSION_STRING "\"\n";
-        ts << "TITLE \"" + ui->albumLineEdit->text() + "\"\n";
-        ts << "PERFORMER \"" + ui->albumArtistLineEdit->text() + "\"\n";
+        ts << "TITLE \"" + ui.albumLineEdit->text() + "\"\n";
+        ts << "PERFORMER \"" + ui.albumArtistLineEdit->text() + "\"\n";
         ts << "FILE \"\" WAVE\n";
 
         for( int i=0; i<trackTags.count(); i++ )

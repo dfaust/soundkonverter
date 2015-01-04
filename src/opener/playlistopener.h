@@ -2,6 +2,8 @@
 #ifndef PLAYLISTOPENER_H
 #define PLAYLISTOPENER_H
 
+#include "ui_optionsdialog.h"
+
 #include <QDialog>
 
 #include <QUrl>
@@ -9,10 +11,6 @@
 class Config;
 class ConversionOptions;
 class QFileDialog;
-
-namespace Ui {
-    class OptionsDialog;
-}
 
 class PlaylistOpener : public QDialog
 {
@@ -25,7 +23,7 @@ public:
     bool dialogAborted;
 
 private:
-    Ui::OptionsDialog *ui;
+    Ui::OptionsDialog ui;
 
     Config *config;
 

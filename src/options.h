@@ -2,6 +2,8 @@
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
+#include "ui_options.h"
+
 #include <QWidget>
 #include <QPointer>
 
@@ -11,10 +13,6 @@ class Config;
 class ConversionOptions;
 
 class QTabWidget;
-
-namespace Ui {
-    class Options;
-}
 
 /** The widget, where we can set our output options */
 class Options : public QWidget
@@ -50,7 +48,7 @@ public slots:
     void accepted();
 
 private:
-    Ui::Options *ui;
+    Ui::Options ui;
 
     QPointer<Config> config;
 

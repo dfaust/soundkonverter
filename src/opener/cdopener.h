@@ -2,6 +2,8 @@
 #ifndef CDOPENER_H
 #define CDOPENER_H
 
+#include "ui_cdopener.h"
+
 #include <QDialog>
 #include <QTimer>
 
@@ -96,7 +98,7 @@ public slots:
     void setCommand( const QString& _command );
 
 private:
-    Ui::CDOpener *ui;
+    Ui::CDOpener ui;
 
     /** returns a list of devices holding audio cds plus a short description (track count) */
     QMap<QString,QString> cdDevices();

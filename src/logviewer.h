@@ -2,13 +2,11 @@
 #ifndef LOGVIEWER_H
 #define LOGVIEWER_H
 
+#include "ui_logviewer.h"
+
 #include <QDialog>
 
 class Logger;
-
-namespace Ui {
-    class LogViewer;
-}
 
 /** Shows the logs that are collected by the logger */
 class LogViewer : public QDialog
@@ -20,7 +18,7 @@ public:
     ~LogViewer();
 
 private:
-    Ui::LogViewer *ui;
+    Ui::LogViewer ui;
 
     Logger* logger;
 

@@ -2,6 +2,8 @@
 #ifndef FILEOPENER_H
 #define FILEOPENER_H
 
+#include "ui_optionsdialog.h"
+
 #include <QDialog>
 
 #include <QUrl>
@@ -11,10 +13,6 @@ class QLabel;
 class ConversionOptions;
 class QDialog;
 class QFileDialog;
-
-namespace Ui {
-    class OptionsDialog;
-}
 
 class FileOpener : public QDialog
 {
@@ -27,7 +25,7 @@ public:
     bool dialogAborted;
 
 private:
-    Ui::OptionsDialog *ui;
+    Ui::OptionsDialog ui;
 
     Config *config;
 

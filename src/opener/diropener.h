@@ -2,14 +2,12 @@
 #ifndef DIRDIALOG_H
 #define DIRDIALOG_H
 
+#include "ui_diropener.h"
+
 #include <QDialog>
 
 class Config;
 class ConversionOptions;
-
-namespace Ui {
-    class DirOpener;
-}
 
 class DirOpener : public QDialog
 {
@@ -35,7 +33,7 @@ private slots:
     void showHelp();
 
 private:
-    Ui::DirOpener *ui;
+    Ui::DirOpener ui;
 
     Config *config;
 

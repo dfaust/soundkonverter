@@ -1,6 +1,5 @@
 
 #include "replaygainscanner.h"
-#include "ui_replaygainscanner.h"
 
 #include "replaygainfilelist.h"
 #include "replaygainprocessor.h"
@@ -21,48 +20,47 @@
 
 ReplayGainScanner::ReplayGainScanner(Config* _config, Logger* _logger, bool showMainWindowButton, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::ReplayGainScanner),
     config( _config ),
     logger( _logger )
 {
 //     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-    ui->setupUi(this);
+    ui.setupUi(this);
 
-    connect(ui->closeButton, SIGNAL(clicked()),          this, SLOT(closeClicked()));
-    connect(ui->addComboButton, SIGNAL(clicked(int)),    this, SLOT(addClicked(int)));
-    connect(ui->showMainWindowButton, SIGNAL(clicked()), this, SLOT(showMainWindowClicked()));
-    connect(ui->tagButton, SIGNAL(clicked()),            this, SLOT(calcReplayGainClicked()));
-    connect(ui->untagButton, SIGNAL(clicked()),          this, SLOT(removeReplayGainClicked()));
-    connect(ui->cancelButton, SIGNAL(clicked()),         this, SLOT(cancelClicked()));
+    connect(ui.closeButton, SIGNAL(clicked()),          this, SLOT(closeClicked()));
+    connect(ui.addComboButton, SIGNAL(clicked(int)),    this, SLOT(addClicked(int)));
+    connect(ui.showMainWindowButton, SIGNAL(clicked()), this, SLOT(showMainWindowClicked()));
+    connect(ui.tagButton, SIGNAL(clicked()),            this, SLOT(calcReplayGainClicked()));
+    connect(ui.untagButton, SIGNAL(clicked()),          this, SLOT(removeReplayGainClicked()));
+    connect(ui.cancelButton, SIGNAL(clicked()),         this, SLOT(cancelClicked()));
 
-    connect(ui->fileList, SIGNAL(processStarted()),      this, SLOT(processStarted()));
-    connect(ui->fileList, SIGNAL(processStopped()),      this, SLOT(processStopped()));
+    connect(ui.fileList, SIGNAL(processStarted()),      this, SLOT(processStarted()));
+    connect(ui.fileList, SIGNAL(processStopped()),      this, SLOT(processStopped()));
 
-    connect(ui->fileList, SIGNAL(timeChanged(float)),    ui->progressIndicator, SLOT(timeChanged(float)));
-    connect(ui->fileList, SIGNAL(finished(bool)),        ui->progressIndicator, SLOT(finished(bool)));
+    connect(ui.fileList, SIGNAL(timeChanged(float)),    ui.progressIndicator, SLOT(timeChanged(float)));
+    connect(ui.fileList, SIGNAL(finished(bool)),        ui.progressIndicator, SLOT(finished(bool)));
 
-    connect(ui->progressIndicator, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)));
+    connect(ui.progressIndicator, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)));
 
-    ui->fileList->setConfig(config);
+    ui.fileList->setConfig(config);
 
-    ui->addComboButton->insertItem(QIcon::fromTheme("folder"),          i18n("Add folder..."));
-    ui->addComboButton->insertItem(QIcon::fromTheme("audio-x-generic"), i18n("Add files..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("folder"),          i18n("Add folder..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("audio-x-generic"), i18n("Add files..."));
 
-    ui->showMainWindowButton->setVisible(showMainWindowButton);
+    ui.showMainWindowButton->setVisible(showMainWindowButton);
 
-    ui->cancelButton->hide();
+    ui.cancelButton->hide();
 
-    ReplayGainProcessor *replayGainProcessor = new ReplayGainProcessor(config, ui->fileList, logger);
-    connect(ui->fileList, SIGNAL(processItem(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)),            replayGainProcessor, SLOT(add(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)));
-    connect(ui->fileList, SIGNAL(killItem(ReplayGainFileListItem*)),                                           replayGainProcessor, SLOT(kill(ReplayGainFileListItem*)));
-    connect(replayGainProcessor, SIGNAL(finished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)), ui->fileList, SLOT(itemFinished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)));
-    connect(replayGainProcessor, SIGNAL(updateItem(ReplayGainFileListItem*,bool)),                             ui->fileList, SLOT(updateItem(ReplayGainFileListItem*,bool)));
+    ReplayGainProcessor *replayGainProcessor = new ReplayGainProcessor(config, ui.fileList, logger);
+    connect(ui.fileList, SIGNAL(processItem(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)),            replayGainProcessor, SLOT(add(ReplayGainFileListItem*,ReplayGainPlugin::ApplyMode)));
+    connect(ui.fileList, SIGNAL(killItem(ReplayGainFileListItem*)),                                           replayGainProcessor, SLOT(kill(ReplayGainFileListItem*)));
+    connect(replayGainProcessor, SIGNAL(finished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)), ui.fileList, SLOT(itemFinished(ReplayGainFileListItem*,ReplayGainFileListItem::ReturnCode)));
+    connect(replayGainProcessor, SIGNAL(updateItem(ReplayGainFileListItem*,bool)),                             ui.fileList, SLOT(updateItem(ReplayGainFileListItem*,bool)));
 
     connect(replayGainProcessor, SIGNAL(finishedProcess(int,bool)), logger, SLOT(processCompleted(int,bool)));
 
-    connect(replayGainProcessor, SIGNAL(updateTime(float)),   ui->progressIndicator, SLOT(update(float)));
-    connect(replayGainProcessor, SIGNAL(timeFinished(float)), ui->progressIndicator, SLOT(timeFinished(float)));
+    connect(replayGainProcessor, SIGNAL(updateTime(float)),   ui.progressIndicator, SLOT(update(float)));
+    connect(replayGainProcessor, SIGNAL(timeFinished(float)), ui.progressIndicator, SLOT(timeFinished(float)));
 
 //     setInitialSize( QSize(60*fontHeight,40*fontHeight) );
 //     KSharedConfig::Ptr conf = KGlobal::config();
@@ -195,7 +193,7 @@ void ReplayGainScanner::fileDialogAccepted()
     }
 
     if( urls.count() > 0 )
-        ui->fileList->addFiles( urls );
+        ui.fileList->addFiles( urls );
 }
 
 void ReplayGainScanner::showHelp()
@@ -223,7 +221,7 @@ void ReplayGainScanner::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect(dialog, SIGNAL(open(const QUrl&,bool,const QStringList&)), ui->fileList, SLOT(addDir(const QUrl&,bool,const QStringList&)));
+        connect(dialog, SIGNAL(open(const QUrl&,bool,const QStringList&)), ui.fileList, SLOT(addDir(const QUrl&,bool,const QStringList&)));
 
         dialog->exec();
 
@@ -235,39 +233,39 @@ void ReplayGainScanner::showDirDialog()
 
 void ReplayGainScanner::showMainWindowClicked()
 {
-    ui->showMainWindowButton->hide();
+    ui.showMainWindowButton->hide();
 
     emit showMainWindow();
 }
 
 void ReplayGainScanner::addFiles(QList<QUrl> urls)
 {
-    ui->fileList->addFiles(urls);
+    ui.fileList->addFiles(urls);
 }
 
 void ReplayGainScanner::calcReplayGainClicked()
 {
-    ui->fileList->startProcessing(ui->forceCheckBox->isChecked() ? ReplayGainPlugin::Force : ReplayGainPlugin::Add);
+    ui.fileList->startProcessing(ui.forceCheckBox->isChecked() ? ReplayGainPlugin::Force : ReplayGainPlugin::Add);
 }
 
 void ReplayGainScanner::removeReplayGainClicked()
 {
-    ui->fileList->startProcessing(ReplayGainPlugin::Remove);
+    ui.fileList->startProcessing(ReplayGainPlugin::Remove);
 }
 
 void ReplayGainScanner::cancelClicked()
 {
-    ui->fileList->cancelProcess();
+    ui.fileList->cancelProcess();
 }
 
 void ReplayGainScanner::closeClicked()
 {
-    if( ui->cancelButton->isVisible() )
+    if( ui.cancelButton->isVisible() )
     {
         const int ret = QMessageBox::question(this, "soundKonverter", i18n("There are still Replay Gain jobs running.\nDo you really want to cancel them?"));
         if( ret == QMessageBox::Yes )
         {
-            ui->fileList->cancelProcess();
+            ui.fileList->cancelProcess();
         }
         else
         {
@@ -280,16 +278,16 @@ void ReplayGainScanner::closeClicked()
 
 void ReplayGainScanner::processStarted()
 {
-    ui->tagButton->hide();
-    ui->untagButton->hide();
-    ui->cancelButton->show();
+    ui.tagButton->hide();
+    ui.untagButton->hide();
+    ui.cancelButton->show();
 }
 
 void ReplayGainScanner::processStopped()
 {
-    ui->tagButton->show();
-    ui->untagButton->show();
-    ui->cancelButton->hide();
+    ui.tagButton->show();
+    ui.untagButton->show();
+    ui.cancelButton->hide();
 }
 
 void ReplayGainScanner::progressChanged(const QString& progress)

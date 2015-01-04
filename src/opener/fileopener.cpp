@@ -1,6 +1,5 @@
 
 #include "fileopener.h"
-#include "ui_optionsdialog.h"
 
 #include "../options.h"
 #include "../config.h"
@@ -14,16 +13,15 @@
 
 FileOpener::FileOpener(Config *_config, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::OptionsDialog),
     dialogAborted( false ),
     config( _config )
 {
-    ui->setupUi(this);
+    ui.setupUi(this);
 
     setWindowTitle(i18n("Add files"));
     setWindowIcon(QIcon::fromTheme("audio-x-generic"));
 
-    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
+    ui.options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
     QStringList filterList;
     QStringList allFilter;
@@ -41,8 +39,8 @@ FileOpener::FileOpener(Config *_config, QWidget *parent, Qt::WindowFlags f) :
     filterList.prepend( allFilter.join(" ") + "|" + i18n("All supported files") );
     filterList += "*.*|" + i18n("All files");
 
-    connect(ui->okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
-    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(ui.okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
+    connect(ui.cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
 //     formatHelp = new QLabel( "<a href=\"format-help\">" + i18n("Are you missing some file formats?") + "</a>", widget );
 //     connect( formatHelp, SIGNAL(linkActivated(const QString&)), this, SLOT(showHelp()) );
@@ -152,10 +150,10 @@ void FileOpener::fileDialogAccepted()
 
 void FileOpener::okClickedSlot()
 {
-    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui.options->currentConversionOptions();
     if( conversionOptions )
     {
-        ui->options->accepted();
+        ui.options->accepted();
         emit open(urls, conversionOptions);
         accept();
     }

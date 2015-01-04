@@ -3,6 +3,8 @@
 #ifndef OPTIONSSIMPLE_H
 #define OPTIONSSIMPLE_H
 
+#include "ui_optionssimple.h"
+
 #include <QWidget>
 #include <QPointer>
 
@@ -10,10 +12,6 @@ class Config;
 class OutputDirectory;
 
 class CodecPlugin;
-
-namespace Ui {
-    class OptionsSimple;
-}
 
 /** The options widget for setting up the output options very easy */
 class OptionsSimple : public QWidget
@@ -46,7 +44,7 @@ public:
     OutputDirectory *outputDirectory; // this way it's easier to sync simple and detailed options
 
 private:
-    Ui::OptionsSimple *ui;
+    Ui::OptionsSimple ui;
 
     QPointer<Config> config;
     CodecPlugin *currentPlugin;

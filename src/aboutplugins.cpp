@@ -1,6 +1,5 @@
 
 #include "aboutplugins.h"
-#include "ui_aboutplugins.h"
 #include "config.h"
 
 #include <KLocalizedString>
@@ -9,18 +8,17 @@
 
 AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::AboutPlugins),
     config(_config),
     currentPlugin(0)
 {
 //     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
-    ui->setupUi(this);
+    ui.setupUi(this);
 
-    connect(ui->closeButton, SIGNAL(clicked()),                          this, SLOT(close()));
-    connect(ui->pluginsList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(currentPluginChanged(const QString&)));
-    connect(ui->aboutPluginLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(showProblemInfo(const QString&)));
-    connect(ui->configurePluginButton, SIGNAL(clicked()),                this, SLOT(configurePluginButtonClicked()));
+    connect(ui.closeButton, SIGNAL(clicked()),                          this, SLOT(close()));
+    connect(ui.pluginsList, SIGNAL(currentTextChanged(const QString&)), this, SLOT(currentPluginChanged(const QString&)));
+    connect(ui.aboutPluginLabel, SIGNAL(linkActivated(const QString&)), this, SLOT(showProblemInfo(const QString&)));
+    connect(ui.configurePluginButton, SIGNAL(clicked()),                this, SLOT(configurePluginButtonClicked()));
 
     QStringList pluginNames;
 
@@ -29,7 +27,7 @@ AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) 
         pluginNames += plugin->name();
     }
     pluginNames.sort();
-    ui->pluginsList->addItems(pluginNames);
+    ui.pluginsList->addItems(pluginNames);
     pluginNames.clear();
 
     foreach( FilterPlugin *plugin, config->pluginLoader()->getAllFilterPlugins() )
@@ -37,7 +35,7 @@ AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) 
         pluginNames += plugin->name();
     }
     pluginNames.sort();
-    ui->pluginsList->addItems(pluginNames);
+    ui.pluginsList->addItems(pluginNames);
     pluginNames.clear();
 
     foreach( ReplayGainPlugin *plugin, config->pluginLoader()->getAllReplayGainPlugins() )
@@ -45,7 +43,7 @@ AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) 
         pluginNames += plugin->name();
     }
     pluginNames.sort();
-    ui->pluginsList->addItems(pluginNames);
+    ui.pluginsList->addItems(pluginNames);
     pluginNames.clear();
 
     foreach( RipperPlugin *plugin, config->pluginLoader()->getAllRipperPlugins() )
@@ -53,13 +51,13 @@ AboutPlugins::AboutPlugins(Config *_config, QWidget *parent, Qt::WindowFlags f) 
         pluginNames += plugin->name();
     }
     pluginNames.sort();
-    ui->pluginsList->addItems(pluginNames);
+    ui.pluginsList->addItems(pluginNames);
     pluginNames.clear();
 
-//     ui->pluginsList->setFixedWidth( 15*fontHeight );
+//     ui.pluginsList->setFixedWidth( 15*fontHeight );
 
-    ui->pluginsList->setCurrentRow(0);
-    if( QListWidgetItem *currentItem = ui->pluginsList->currentItem() )
+    ui.pluginsList->setCurrentRow(0);
+    if( QListWidgetItem *currentItem = ui.pluginsList->currentItem() )
     {
         currentPluginChanged(currentItem->text());
     }
@@ -82,7 +80,7 @@ void AboutPlugins::currentPluginChanged(const QString& pluginName)
     currentPlugin = config->pluginLoader()->backendPluginByName(pluginName);
     if( !currentPlugin )
     {
-        ui->aboutPluginLabel->setText( "" );
+        ui.aboutPluginLabel->setText( "" );
         return;
     }
 
@@ -188,16 +186,16 @@ void AboutPlugins::currentPluginChanged(const QString& pluginName)
     {
     }
 
-    ui->aboutPluginLabel->setText(info.join("<br><br>"));
+    ui.aboutPluginLabel->setText(info.join("<br><br>"));
 
     if( currentPlugin->isConfigSupported(BackendPlugin::General, "") )
     {
-        ui->configurePluginButton->setText(i18n("Configure %1 ...", currentPlugin->name()));
-        ui->configurePluginButton->show();
+        ui.configurePluginButton->setText(i18n("Configure %1 ...", currentPlugin->name()));
+        ui.configurePluginButton->show();
     }
     else
     {
-        ui->configurePluginButton->hide();
+        ui.configurePluginButton->hide();
     }
 }
 
@@ -211,6 +209,6 @@ void AboutPlugins::configurePluginButtonClicked()
 
 void AboutPlugins::showProblemInfo(const QString& problemId)
 {
-    QToolTip::showText(QCursor::pos(), problemInfos.value(problemId), ui->aboutPluginLabel);
+    QToolTip::showText(QCursor::pos(), problemInfos.value(problemId), ui.aboutPluginLabel);
 }
 

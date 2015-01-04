@@ -2,15 +2,13 @@
 #ifndef ABOUTPLUGINS_H
 #define ABOUTPLUGINS_H
 
+#include "ui_aboutplugins.h"
+
 #include <QDialog>
 #include <QMap>
 
 class Config;
 class BackendPlugin;
-
-namespace Ui {
-    class AboutPlugins;
-}
 
 /** Shows the logs that are collected by the logger */
 class AboutPlugins : public QDialog
@@ -22,7 +20,7 @@ public:
     ~AboutPlugins();
 
 private:
-    Ui::AboutPlugins *ui;
+    Ui::AboutPlugins ui;
 
     Config *config;
 

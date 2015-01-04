@@ -2,16 +2,14 @@
 #ifndef URLOPENER_H
 #define URLOPENER_H
 
+#include "ui_urlopener.h"
+
 #include <QDialog>
 #include <QUrl>
 
 class Config;
 class Options;
 class ConversionOptions;
-
-namespace Ui {
-    class UrlOpener;
-}
 
 class UrlOpener : public QDialog
 {
@@ -22,7 +20,7 @@ public:
     ~UrlOpener();
 
 private:
-    Ui::UrlOpener *ui;
+    Ui::UrlOpener ui;
 
     Config *config;
 

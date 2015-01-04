@@ -2,6 +2,8 @@
 #ifndef OPTIONSDETAILED_H
 #define OPTIONSDETAILED_H
 
+#include "ui_optionsdetailed.h"
+
 #include <QDomDocument>
 #include <QMap>
 #include <QWidget>
@@ -13,10 +15,6 @@ class ConversionOptions;
 class FilterPlugin;
 class CodecWidget;
 class FilterWidget;
-
-namespace Ui {
-    class OptionsDetailed;
-}
 
 class OptionsDetailed : public QWidget
 {
@@ -44,7 +42,7 @@ public:
     CodecPlugin *getCurrentPlugin();
 
 private:
-    Ui::OptionsDetailed *ui;
+    Ui::OptionsDetailed ui;
 
     QPointer<Config> config;
 

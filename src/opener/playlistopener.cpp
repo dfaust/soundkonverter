@@ -1,6 +1,5 @@
 
 #include "playlistopener.h"
-#include "ui_optionsdialog.h"
 
 #include "../options.h"
 #include "../config.h"
@@ -14,19 +13,18 @@
 
 PlaylistOpener::PlaylistOpener(Config *_config, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::OptionsDialog),
     dialogAborted(false),
     config(_config)
 {
-    ui->setupUi(this);
+    ui.setupUi(this);
 
     setWindowTitle(i18n("Add playlist"));
     setWindowIcon(QIcon::fromTheme("view-media-playlist"));
 
-    ui->options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
+    ui.options->init(config, i18n("Select your desired output options and click on \"Ok\"."));
 
-    connect(ui->okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
-    connect(ui->cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
+    connect(ui.okButton, SIGNAL(clicked()),     this, SLOT(okClickedSlot()));
+    connect(ui.cancelButton, SIGNAL(clicked()), this, SLOT(reject()));
 
     fileDialog = new QFileDialog( this, i18n("Add playlist"), "kfiledialog:///soundkonverter-add-media", "*.m3u" );
     fileDialog->setFileMode(QFileDialog::ExistingFile);
@@ -189,10 +187,10 @@ void PlaylistOpener::fileDialogAccepted()
 
 void PlaylistOpener::okClickedSlot()
 {
-    ConversionOptions *conversionOptions = ui->options->currentConversionOptions();
+    ConversionOptions *conversionOptions = ui.options->currentConversionOptions();
     if( conversionOptions )
     {
-        ui->options->accepted();
+        ui.options->accepted();
         emit open(urls, conversionOptions);
         accept();
     }

@@ -1,6 +1,5 @@
 
 #include "logviewer.h"
-#include "ui_logviewer.h"
 #include "logger.h"
 
 #include <KLocalizedString>
@@ -10,7 +9,6 @@
 
 LogViewer::LogViewer(Logger* _logger, QWidget *parent, Qt::WindowFlags f) :
     QDialog(parent, f),
-    ui(new Ui::LogViewer),
     logger(_logger)
 {
 //     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
@@ -18,11 +16,11 @@ LogViewer::LogViewer(Logger* _logger, QWidget *parent, Qt::WindowFlags f) :
     connect(logger, SIGNAL(removedProcess(int)), this, SLOT(processRemoved(int)));
     connect(logger, SIGNAL(updateProcess(int)),  this, SLOT(updateProcess(int)));
 
-    ui->setupUi(this);
+    ui.setupUi(this);
 
-    connect(ui->closeButton, SIGNAL(clicked()),   this, SLOT(close()));
-    connect(ui->saveButton, SIGNAL(clicked()),    this, SLOT(save()));
-    connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refillLogs()));
+    connect(ui.closeButton, SIGNAL(clicked()),   this, SLOT(close()));
+    connect(ui.saveButton, SIGNAL(clicked()),    this, SLOT(save()));
+    connect(ui.refreshButton, SIGNAL(clicked()), this, SLOT(refillLogs()));
 
 
     refillLogs();
@@ -42,9 +40,9 @@ LogViewer::~LogViewer()
 
 void LogViewer::refillLogs()
 {
-    const int currentProcess = ui->logSelect->itemData(ui->logSelect->currentIndex()).toInt();
+    const int currentProcess = ui.logSelect->itemData(ui.logSelect->currentIndex()).toInt();
 
-    ui->logSelect->clear();
+    ui.logSelect->clear();
 
     foreach( LoggerItem *logItem, logger->getLogs() )
     {
@@ -54,15 +52,15 @@ void LogViewer::refillLogs()
             name = name.left(35) + "..." + name.right(35);
 
         if( logItem->id == 1000 )
-            ui->logSelect->addItem(i18n("soundKonverter application log"), QVariant(logItem->id));
+            ui.logSelect->addItem(i18n("soundKonverter application log"), QVariant(logItem->id));
         else
-            ui->logSelect->addItem(name, QVariant(logItem->id));
+            ui.logSelect->addItem(name, QVariant(logItem->id));
     }
 
-    if( ui->logSelect->findData(currentProcess) != -1 )
-        ui->logSelect->setCurrentIndex(ui->logSelect->findData(currentProcess));
+    if( ui.logSelect->findData(currentProcess) != -1 )
+        ui.logSelect->setCurrentIndex(ui.logSelect->findData(currentProcess));
     else
-        ui->logSelect->setCurrentIndex(0);
+        ui.logSelect->setCurrentIndex(0);
 
     itemChanged();
 }
@@ -70,20 +68,20 @@ void LogViewer::refillLogs()
 void LogViewer::itemChanged()
 {
     // HACK avoid Qt bug? changing the color of 'uncolored' text when switching the log file
-    QTextCursor cursor = ui->logView->textCursor();
+    QTextCursor cursor = ui.logView->textCursor();
     cursor.setPosition(0);
-    ui->logView->setTextCursor(cursor);
+    ui.logView->setTextCursor(cursor);
 
-    ui->logView->clear();
-    LoggerItem* item = logger->getLog(ui->logSelect->itemData(ui->logSelect->currentIndex()).toInt());
+    ui.logView->clear();
+    LoggerItem* item = logger->getLog(ui.logSelect->itemData(ui.logSelect->currentIndex()).toInt());
 
     if( !item )
         return;
 
     foreach( const QString line, item->data )
-        ui->logView->append(line);
+        ui.logView->append(line);
 
-    QPalette currentPalette = ui->logView->palette();
+    QPalette currentPalette = ui.logView->palette();
     if( item->completed )
     {
         currentPalette.setColor(QPalette::Base, QApplication::palette().base().color());
@@ -92,7 +90,7 @@ void LogViewer::itemChanged()
     {
         currentPalette.setColor(QPalette::Base, QColor(255,234,234));
     }
-    ui->logView->setPalette(currentPalette);
+    ui.logView->setPalette(currentPalette);
 }
 
 void LogViewer::save()
@@ -116,7 +114,7 @@ void LogViewer::save()
         return;
     }
 
-    file.write(ui->logView->toPlainText().toUtf8().data());
+    file.write(ui.logView->toPlainText().toUtf8().data());
     file.close();
 }
 
@@ -136,10 +134,10 @@ void LogViewer::updateProcess(int id)
 
 void LogViewer::showLog(int id)
 {
-    if( ui->logSelect->findData(QVariant(id)) != -1 )
-        ui->logSelect->setCurrentIndex(ui->logSelect->findData(QVariant(id)));
+    if( ui.logSelect->findData(QVariant(id)) != -1 )
+        ui.logSelect->setCurrentIndex(ui.logSelect->findData(QVariant(id)));
     else
-        ui->logSelect->setCurrentIndex(0);
+        ui.logSelect->setCurrentIndex(0);
 
     itemChanged();
 }

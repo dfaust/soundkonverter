@@ -58,6 +58,8 @@ void OptionsSimple::init(Config *config, const QString &text)
 {
     this->config = config;
 
+    ui->outputDirectory->init(config);
+
     ui->infoLabel->setText(text);
 
     updateProfiles();

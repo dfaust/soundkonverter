@@ -40,8 +40,8 @@ void Options::init(Config *config, const QString &text)
     this->config = config;
 
     ui->optionsSimple->init(config, text);
-//     ui->optionsDetailed->init(config);
-//
+    ui->optionsDetailed->init(config);
+
 //     QString format;
 //     const QStringList formats = config->pluginLoader()->formatList(PluginLoader::Encode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid));
 //     if( config->data.general.defaultFormat == i18n("Last used") || config->data.general.defaultFormat == "Last used" )

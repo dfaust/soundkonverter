@@ -49,6 +49,8 @@ void OptionsDetailed::init(Config *config)
 {
     this->config = config;
 
+    ui->outputDirectory->init(config);
+
     ui->formatComboBox->addItems(config->pluginLoader()->formatList(PluginLoader::Encode, PluginLoader::CompressionType(PluginLoader::InferiorQuality | PluginLoader::Lossy | PluginLoader::Lossless | PluginLoader::Hybrid)));
 
     foreach( const QString& pluginName, config->data.backends.enabledFilters )

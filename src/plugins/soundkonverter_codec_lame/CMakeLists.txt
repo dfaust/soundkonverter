@@ -7,6 +7,7 @@ set(soundkonverter_codec_lame_SRCS
 )
 
 ki18n_wrap_ui(soundkonverter_codec_lame_SRCS
+    lamecodecwidget.ui
     lameconfigdialog.ui
 )
 

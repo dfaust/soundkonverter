@@ -55,7 +55,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="selectDirectoryPushButton">
+    <widget class="QToolButton" name="selectDirectoryButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -69,12 +69,14 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset theme="folder"/>
+      <iconset theme="folder">
+       <normaloff/>
+      </iconset>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="gotoDirectoryPushButton">
+    <widget class="QToolButton" name="gotoDirectoryButton">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
@@ -88,7 +90,9 @@
       <string/>
      </property>
      <property name="icon">
-      <iconset theme="system-file-manager"/>
+      <iconset theme="system-file-manager">
+       <normaloff/>
+      </iconset>
      </property>
     </widget>
    </item>

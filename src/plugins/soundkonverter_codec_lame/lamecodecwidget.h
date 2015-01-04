@@ -2,20 +2,15 @@
 #ifndef LAMECODECWIDGET_H
 #define LAMECODECWIDGET_H
 
+#include "ui_lamecodecwidget.h"
 #include "../../core/codecwidget.h"
 
 #include <QGroupBox>
 
-class QComboBox;
-class QSpinBox;
-class QCheckBox;
-class QLabel;
-class QSlider;
-class QLineEdit;
-
 class LameCodecWidget : public CodecWidget
 {
     Q_OBJECT
+
 public:
     LameCodecWidget();
     ~LameCodecWidget();
@@ -28,37 +23,22 @@ public:
     int currentDataRate();
 
 private:
-    // preset selection
-    QComboBox *cPreset;
-    QSpinBox *iPresetBitrate;
-    QCheckBox *cPresetBitrateCbr;
-    QCheckBox *cPresetFast;
-    // user defined options
-    QGroupBox *userdefinedBox;
-    QComboBox *cMode;
-    QSpinBox *iQuality;
-    QSlider *sQuality;
-    QComboBox *cBitrateMode;
-    QSlider *sCompressionLevel;
-    QSpinBox *iCompressionLevel;
-    QCheckBox *cCmdArguments;
-    QLineEdit *lCmdArguments;
+    Ui::LameCodecWidget ui;
 
     QString currentFormat; // holds the current output file format
 
-    int bitrateForQuality( int quality );
-    int qualityForBitrate( int bitrate );
+    int bitrateForQuality(int quality);
+    int qualityForBitrate(int bitrate);
 
 private slots:
     // presets
-    void presetChanged( const QString& preset );
-    void presetBitrateChanged( int bitrate );
+    void presetChanged(const QString& preset);
+    void presetBitrateChanged(int bitrate);
     // user defined options
-    void modeChanged( int mode );
-    void qualitySliderChanged( int quality );
-    void qualitySpinBoxChanged( int quality );
-    void compressionLevelSliderChanged( int quality );
-    void compressionLevelSpinBoxChanged( int quality );
+    void modeChanged(int mode);
+    void qualitySliderChanged(int quality);
+    void qualitySpinBoxChanged(int quality);
+    void showManpage();
 };
 
 #endif // LAMECODECWIDGET_H

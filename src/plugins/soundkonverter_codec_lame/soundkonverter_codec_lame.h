@@ -46,11 +46,14 @@ private:
     Ui::LameConfigDialog *configDialogUi;
 
     int configVersion;
+    int compressionLevel;
     QString stereoMode;
 
 private slots:
     void configDialogSave();
     void configDialogDefault();
+    void configDialogCompressionLevelSliderChanged(int quality);
+    void configDialogCompressionLevelSpinBoxChanged(int quality);
 };
 
 #endif // _SOUNDKONVERTER_CODEC_LAME_H_

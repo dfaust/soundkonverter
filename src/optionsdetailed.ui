@@ -50,7 +50,7 @@
       <widget class="QComboBox" name="pluginComboBox"/>
      </item>
      <item>
-      <widget class="QPushButton" name="configurePluginButton">
+      <widget class="QToolButton" name="configurePluginButton">
        <property name="text">
         <string/>
        </property>
@@ -59,7 +59,7 @@
          <normaloff/>
         </iconset>
        </property>
-       <property name="flat">
+       <property name="autoRaise">
         <bool>true</bool>
        </property>
       </widget>
@@ -119,6 +119,19 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="configureReplayGainButton">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="configure"/>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -132,7 +145,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="saveProfileButton">
+      <widget class="QToolButton" name="saveProfileButton">
        <property name="text">
         <string/>
        </property>

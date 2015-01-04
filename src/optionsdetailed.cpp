@@ -204,7 +204,7 @@ void OptionsDetailed::encoderChanged(const QString& encoder)
     if( pluginWidget )
     {
         connect(pluginWidget, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()));
-        qobject_cast<CodecWidget*>(pluginWidget)->setCurrentFormat(ui.formatComboBox->currentText());
+        pluginWidget->setCurrentFormat(ui.formatComboBox->currentText());
         if( plugin->lastUsedConversionOptions )
         {
             pluginWidget->setCurrentConversionOptions(plugin->lastUsedConversionOptions);

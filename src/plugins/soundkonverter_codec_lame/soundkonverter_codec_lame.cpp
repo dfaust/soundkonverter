@@ -22,6 +22,7 @@ soundkonverter_codec_lame::soundkonverter_codec_lame() :
 
     KConfigGroup group(KSharedConfig::openConfig(), "Plugin-" global_plugin_name);
     configVersion = group.readEntry("configVersion", 0);
+    compressionLevel = group.readEntry("compressionLevel", 2);
     stereoMode = group.readEntry("stereoMode", "automatic");
 }
 
@@ -106,17 +107,24 @@ void soundkonverter_codec_lame::showConfigDialog(ActionType action, const QStrin
 
         configDialogUi->setupUi(configDialog);
 
+        configDialogUi->compressionLevelSlider->setToolTip(i18n("Compression level from %1 to %2 where %2 is the best compression.\nThe better the compression, the slower the conversion but the smaller the file size and vice versa.\nA value of %3 is recommended.", 9, 0, 2));
+        configDialogUi->compressionLevelSpinBox->setToolTip(i18n("Compression level from %1 to %2 where %2 is the best compression.\nThe better the compression, the slower the conversion but the smaller the file size and vice versa.\nA value of %3 is recommended.", 9, 0, 2));
+
         configDialogUi->stereoModeComboBox->addItem(i18n("Automatic"),           "automatic");
         configDialogUi->stereoModeComboBox->addItem(i18n("Joint Stereo"),        "joint stereo");
         configDialogUi->stereoModeComboBox->addItem(i18n("Simple Stereo"),       "simple stereo");
         configDialogUi->stereoModeComboBox->addItem(i18n("Forced Joint Stereo"), "forced joint stereo");
         configDialogUi->stereoModeComboBox->addItem(i18n("Dual Mono"),           "dual mono");
 
+        connect(configDialogUi->compressionLevelSlider, SIGNAL(valueChanged(int)),  this, SLOT(configDialogCompressionLevelSliderChanged(int)));
+        connect(configDialogUi->compressionLevelSpinBox, SIGNAL(valueChanged(int)), this, SLOT(configDialogCompressionLevelSpinBoxChanged(int)));
+
         connect(configDialogUi->defaultsButton, SIGNAL(clicked()), this, SLOT(configDialogDefault()));
         connect(configDialogUi->okButton, SIGNAL(clicked()),       this, SLOT(configDialogSave()));
         connect(configDialogUi->cancelButton, SIGNAL(clicked()),   configDialog, SLOT(close()));
     }
 
+    configDialogUi->compressionLevelSpinBox->setValue(compressionLevel);
     configDialogUi->stereoModeComboBox->setCurrentIndex(configDialogUi->stereoModeComboBox->findData(stereoMode));
     configDialog->show();
 }
@@ -125,10 +133,12 @@ void soundkonverter_codec_lame::configDialogSave()
 {
     if( configDialog )
     {
+        compressionLevel = configDialogUi->compressionLevelSpinBox->value();
         stereoMode = configDialogUi->stereoModeComboBox->itemData(configDialogUi->stereoModeComboBox->currentIndex()).toString();
 
         KConfigGroup group(KSharedConfig::openConfig(), "Plugin-" global_plugin_name);
-        group.writeEntry( "stereoMode", stereoMode );
+        group.writeEntry("compressionLevel", compressionLevel);
+        group.writeEntry("stereoMode", stereoMode);
 
         configDialog->close();
     }
@@ -138,7 +148,24 @@ void soundkonverter_codec_lame::configDialogDefault()
 {
     if( configDialog )
     {
+        configDialogUi->compressionLevelSpinBox->setValue(2);
         configDialogUi->stereoModeComboBox->setCurrentIndex(configDialogUi->stereoModeComboBox->findData("automatic"));
+    }
+}
+
+void soundkonverter_codec_lame::configDialogCompressionLevelSliderChanged(int quality)
+{
+    if( configDialog )
+    {
+        configDialogUi->compressionLevelSpinBox->setValue(9 - quality);
+    }
+}
+
+void soundkonverter_codec_lame::configDialogCompressionLevelSpinBoxChanged(int quality)
+{
+    if( configDialog )
+    {
+        configDialogUi->compressionLevelSlider->setValue(9 - quality);
     }
 }
 
@@ -160,7 +187,7 @@ void soundkonverter_codec_lame::showInfo(QWidget *parent)
 CodecWidget *soundkonverter_codec_lame::newCodecWidget()
 {
     LameCodecWidget *widget = new LameCodecWidget();
-    return qobject_cast<CodecWidget*>(widget);
+    return dynamic_cast<CodecWidget*>(widget);
 }
 
 unsigned int soundkonverter_codec_lame::convert(const QUrl& inputFile, const QUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain)

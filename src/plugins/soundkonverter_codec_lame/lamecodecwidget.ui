@@ -24,15 +24,55 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="presetComboBox"/>
+      <widget class="QComboBox" name="presetComboBox">
+       <property name="toolTip">
+        <string>Either use one of lames's presets or your own settings.</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Medium</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Standard</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Extreme</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Insane</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Specify bitrate</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>User defined</string>
+        </property>
+       </item>
+      </widget>
      </item>
      <item>
       <widget class="QSpinBox" name="presetBitrateSpinBox">
        <property name="suffix">
         <string> kbps</string>
        </property>
+       <property name="minimum">
+        <number>8</number>
+       </property>
        <property name="maximum">
         <number>320</number>
+       </property>
+       <property name="value">
+        <number>192</number>
        </property>
       </widget>
      </item>
@@ -89,7 +129,7 @@ Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps</string>
     </layout>
    </item>
    <item>
-    <widget class="QStackedWidget" name="stackedWidget">
+    <widget class="QStackedWidget" name="presetStackedWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -160,10 +200,16 @@ Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps</string>
        <item>
         <widget class="QSlider" name="qualitySlider">
          <property name="minimum">
-          <number>1</number>
+          <number>8</number>
          </property>
          <property name="maximum">
           <number>320</number>
+         </property>
+         <property name="pageStep">
+          <number>8</number>
+         </property>
+         <property name="sliderPosition">
+          <number>192</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -173,10 +219,13 @@ Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps</string>
        <item>
         <widget class="QSpinBox" name="qualitySpinBox">
          <property name="minimum">
-          <number>1</number>
+          <number>8</number>
          </property>
          <property name="maximum">
           <number>320</number>
+         </property>
+         <property name="value">
+          <number>192</number>
          </property>
         </widget>
        </item>
@@ -242,46 +291,6 @@ Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps</string>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Compression level:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSlider" name="compressionLevelSlider">
-       <property name="maximum">
-        <number>9</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QSpinBox" name="compressionLevelSpinBox">
-       <property name="maximum">
-        <number>9</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_4">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeType">
-        <enum>QSizePolicy::Fixed</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>8</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QCheckBox" name="cmdArgumentsCheckBox">
        <property name="text">
         <string>Additional encoder arguments:</string>
@@ -289,7 +298,27 @@ Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps</string>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="cmdArgumentsLineEdit"/>
+      <widget class="QLineEdit" name="cmdArgumentsLineEdit">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="manPageButton">
+       <property name="toolTip">
+        <string>Show man page</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset theme="dialog-information"/>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

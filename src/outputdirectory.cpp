@@ -23,7 +23,7 @@ OutputDirectory::OutputDirectory(QWidget *parent) :
 
     connect(ui.modeComboBox, SIGNAL(activated(int)),                       this, SLOT(modeChangedSlot(int)));
     connect(ui.directoryComboBox, SIGNAL(editTextChanged(const QString&)), this, SLOT(directoryChangedSlot(const QString&)));
-    connect(ui.gotoDirectoryPushButton, SIGNAL(clicked()),                 this, SLOT(gotoDir()));
+    connect(ui.gotoDirectoryButton, SIGNAL(clicked()),                     this, SLOT(gotoDir()));
 }
 
 OutputDirectory::~OutputDirectory()
@@ -41,7 +41,7 @@ void OutputDirectory::disable()
 {
     ui.modeComboBox->setEnabled(false);
     ui.directoryComboBox->setEnabled(false);
-    ui.selectDirectoryPushButton->setEnabled(false);
+    ui.selectDirectoryButton->setEnabled(false);
 }
 
 void OutputDirectory::enable()
@@ -516,8 +516,8 @@ void OutputDirectory::updateMode(Mode mode)
         ui.directoryComboBox->addItems(config->data.general.lastMetaDataOutputDirectoryPaths);
         ui.directoryComboBox->setEditText(config->data.general.metaDataOutputDirectory);
         ui.directoryComboBox->setEnabled(true);
-        ui.selectDirectoryPushButton->setEnabled(true);
-        ui.gotoDirectoryPushButton->setEnabled(true);
+        ui.selectDirectoryButton->setEnabled(true);
+        ui.gotoDirectoryButton->setEnabled(true);
         ui.modeComboBox->setToolTip(i18n("Name all converted files according to the specified pattern"));
         ui.directoryComboBox->setToolTip(i18n("The following strings are wildcards that will be replaced\nby the information in the meta data:\n\n"
                                                "%a - Artist\n%z - Album artist\n%b - Album\n%c - Comment\n%d - Disc number\n%g - Genre\n%n - Track number\n%p - Composer\n%t - Title\n%y - Year\n%f - Original file name\n%s - Path to the source directory\n\n"
@@ -529,8 +529,8 @@ void OutputDirectory::updateMode(Mode mode)
         ui.directoryComboBox->clear();
         ui.directoryComboBox->clearEditText();
         ui.directoryComboBox->setEnabled(false);
-        ui.selectDirectoryPushButton->setEnabled(false);
-        ui.gotoDirectoryPushButton->setEnabled(false);
+        ui.selectDirectoryButton->setEnabled(false);
+        ui.gotoDirectoryButton->setEnabled(false);
         ui.modeComboBox->setToolTip(i18n("Output all converted files into the same directory as the original files"));
         ui.directoryComboBox->setToolTip("");
     }
@@ -540,8 +540,8 @@ void OutputDirectory::updateMode(Mode mode)
         ui.directoryComboBox->addItems(config->data.general.lastNormalOutputDirectoryPaths);
         ui.directoryComboBox->setEditText(config->data.general.specifyOutputDirectory);
         ui.directoryComboBox->setEnabled(true);
-        ui.selectDirectoryPushButton->setEnabled(true);
-        ui.gotoDirectoryPushButton->setEnabled(true);
+        ui.selectDirectoryButton->setEnabled(true);
+        ui.gotoDirectoryButton->setEnabled(true);
         ui.modeComboBox->setToolTip(i18n("Output all converted files into the specified output directory"));
         ui.directoryComboBox->setToolTip("");
     }
@@ -551,8 +551,8 @@ void OutputDirectory::updateMode(Mode mode)
         ui.directoryComboBox->addItems(config->data.general.lastNormalOutputDirectoryPaths);
         ui.directoryComboBox->setEditText(config->data.general.copyStructureOutputDirectory);
         ui.directoryComboBox->setEnabled(true);
-        ui.selectDirectoryPushButton->setEnabled(true);
-        ui.gotoDirectoryPushButton->setEnabled(true);
+        ui.selectDirectoryButton->setEnabled(true);
+        ui.gotoDirectoryButton->setEnabled(true);
         ui.modeComboBox->setToolTip(i18n("Copy the whole directory structure for all converted files"));
         ui.directoryComboBox->setToolTip("");
     }

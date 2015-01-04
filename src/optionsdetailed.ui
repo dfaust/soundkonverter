@@ -55,7 +55,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="configure"/>
+        <iconset theme="configure">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -104,6 +106,19 @@
       </widget>
      </item>
      <item>
+      <widget class="QDoubleSpinBox" name="replayGainSpinBox">
+       <property name="suffix">
+        <string> dB</string>
+       </property>
+       <property name="minimum">
+        <double>-99.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>99.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -122,7 +137,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="document-save"/>
+        <iconset theme="document-save">
+         <normaloff/>
+        </iconset>
        </property>
       </widget>
      </item>
@@ -135,7 +152,9 @@
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="document-open"/>
+        <iconset theme="document-open">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="popupMode">
         <enum>QToolButton::InstantPopup</enum>

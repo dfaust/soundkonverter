@@ -39,12 +39,13 @@ public:
 
     /** Adds the string @p data to the data of the logger item with id @p id */
     void log(int id, const QString& data);
+    void log(const QString& data);
 
     /** Returns a list of all logger item titles + ids */
 //     QList<LoggerItem*> getLogOverview();
 
     /** Returns the logger item with id @p id */
-    LoggerItem* getLog(int id);
+    const LoggerItem* getLog(int id);
 
     /** Returns a list of all logger items */
     QList<LoggerItem*> getLogs();
@@ -55,8 +56,10 @@ private:
 
     bool writeLogFiles;
 
+    QString logPath;
+
     /** returns an unused random id */
-    int getNewID();
+    int generateId();
 
 public slots:
     void processCompleted(int id, bool succeeded, bool waitingForAlbumGain=false);

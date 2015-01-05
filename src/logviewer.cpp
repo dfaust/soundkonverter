@@ -73,7 +73,7 @@ void LogViewer::itemChanged()
     ui.logView->setTextCursor(cursor);
 
     ui.logView->clear();
-    LoggerItem* item = logger->getLog(ui.logSelect->itemData(ui.logSelect->currentIndex()).toInt());
+    const LoggerItem* item = logger->getLog(ui.logSelect->itemData(ui.logSelect->currentIndex()).toInt());
 
     if( !item )
         return;

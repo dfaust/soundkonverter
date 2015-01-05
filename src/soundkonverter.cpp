@@ -160,8 +160,8 @@ void SoundKonverter::setupActions()
     save->setIcon(QIcon::fromTheme("document-save"));
     connect( save, SIGNAL(triggered()), soundKonverterView, SLOT(saveFileList()) );
 
-    actionCollection()->addAction("start", soundKonverterView->start());
-    actionCollection()->addAction("stop_menu", soundKonverterView->stopMenu());
+    actionCollection()->addAction("start", soundKonverterView->getStartAction());
+    actionCollection()->addAction("stop_menu", soundKonverterView->getStopActionMenu());
 }
 
 void SoundKonverter::showConfigDialog()

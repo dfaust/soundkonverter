@@ -5,6 +5,7 @@
 #include "logger.h"
 #include "optionseditor.h"
 #include "optionslayer.h"
+#include "progresslayer.h"
 #include "core/conversionoptions.h"
 #include "outputdirectory.h"
 #include "codecproblems.h"
@@ -36,14 +37,11 @@
 #include <QProgressBar>
 
 
-FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
-    : QTreeWidget( parent ),
-    logger( _logger ),
-    config( _config )
+FileList::FileList(QWidget *parent)
+    : QTreeWidget(parent)
 {
     queue = false;
     optionsEditor = 0;
-    tagEngine = config->tagEngine();
 
     setAcceptDrops( true );
     setDragEnabled( false );
@@ -66,17 +64,18 @@ FileList::FileList( Logger *_logger, Config *_config, QWidget *parent )
     setRootIsDecorated( false );
     setDragDropMode( QAbstractItemView::InternalMove );
 
-    QGridLayout *grid = new QGridLayout( this );
-    grid->setRowStretch( 0, 1 );
-    grid->setRowStretch( 2, 1 );
-    grid->setColumnStretch( 0, 1 );
-    grid->setColumnStretch( 2, 1 );
-    pScanStatus = new QProgressBar( this );
-    pScanStatus->setMinimumHeight( pScanStatus->height() );
-    pScanStatus->setFormat( "%v / %m" );
-    pScanStatus->hide();
-    grid->addWidget( pScanStatus, 1, 1 );
-    grid->setColumnStretch( 1, 2 );
+    layerGrid = new QGridLayout( this );
+    layerGrid->setMargin(0);
+//     layerGrid->setRowStretch( 0, 1 );
+//     layerGrid->setRowStretch( 2, 1 );
+//     layerGrid->setColumnStretch( 0, 1 );
+//     layerGrid->setColumnStretch( 2, 1 );
+//     pScanStatus = new QProgressBar( this );
+//     pScanStatus->setMinimumHeight( pScanStatus->height() );
+//     pScanStatus->setFormat( "%v / %m" );
+//     pScanStatus->hide();
+//     layerGrid->addWidget( pScanStatus, 1, 1 );
+//     layerGrid->setColumnStretch( 1, 2 );
 
     // we haven't got access to the action collection of soundKonverter, so let's create a new one
 //     actionCollection = new KActionCollection( this );
@@ -114,6 +113,14 @@ FileList::~FileList()
 //         QFile listFile( QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/filelist_autosave.xml" );
 //         listFile.remove();
 //     }
+}
+
+void FileList::init(Config *config, Logger *logger)
+{
+    this->config = config;
+    this->logger = logger;
+
+    tagEngine = config->tagEngine();
 }
 
 void FileList::dragEnterEvent( QDragEnterEvent *event )
@@ -232,6 +239,15 @@ void FileList::dropEvent( QDropEvent *event )
 
     if( k_urls.count() > 0 )
     {
+        if( !optionsLayer )
+        {
+            optionsLayer = new OptionsLayer(config, this);
+            optionsLayer->hide();
+            layerGrid->addWidget(optionsLayer, 0, 0);
+            connect(optionsLayer, SIGNAL(done(const QList<QUrl>&,ConversionOptions*,const QString&)), this, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*,const QString&)));
+            connect(optionsLayer, SIGNAL(saveFileList()), this, SLOT(save()));
+        }
+
         ConversionOptions *conversionOptions = config->data.profiles.value("soundkonverter_last_used");
         if( conversionOptions )
             optionsLayer->setCurrentConversionOptions( conversionOptions );
@@ -273,9 +289,9 @@ int FileList::countDir( const QString& directory, bool recursive, int count )
         }
     }
 
-    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+    if( progressLayer && tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
     {
-        pScanStatus->setMaximum( count );
+        progressLayer->setMaximum(count);
         qApp->processEvents();
         tScanStatus.start();
     }
@@ -317,9 +333,9 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 //                 addFiles( QUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
             }
 
-            if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+            if( progressLayer && tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
             {
-                pScanStatus->setValue( count );
+                progressLayer->setValue(count);
                 tScanStatus.start();
             }
         }
@@ -427,7 +443,7 @@ void FileList::addFiles( const QList<QUrl>& fileList, ConversionOptions *convers
             qApp->processEvents();
     }
 
-    if( !pScanStatus->isVisible() )
+    if( !progressLayer || !progressLayer->isVisible() )
     {
         emit fileCountChanged( topLevelItemCount() );
 
@@ -436,7 +452,7 @@ void FileList::addFiles( const QList<QUrl>& fileList, ConversionOptions *convers
     }
 }
 
-void FileList::addDir( const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
+void FileList::addDir(const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions)
 {
     if( !conversionOptions )
     {
@@ -444,23 +460,35 @@ void FileList::addDir( const QUrl& directory, bool recursive, const QStringList&
         return;
     }
 
-    const int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
+    const int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions(conversionOptions);
 
-    pScanStatus->setValue( 0 );
-    pScanStatus->setMaximum( 0 );
-    pScanStatus->show(); // show the status while scanning the directories
     tScanStatus.start();
 
-    const int count = countDir( directory.toLocalFile(), recursive );
+    if( !progressLayer )
+    {
+        progressLayer = new ProgressLayer(this);
+        progressLayer->hide();
+        layerGrid->addWidget(progressLayer, 0, 0);
+        connect(progressLayer, SIGNAL(canceled()), this, SLOT(jobCanceled()));
+    }
 
-    pScanStatus->setMaximum( count );
+    progressLayer->setMessage(i18n("Searching for files ..."));
+    progressLayer->setValue(0);
+    progressLayer->setMaximum(0);
+    progressLayer->fadeIn();
+
+    const int count = countDir(directory.toLocalFile(), recursive);
+
+    progressLayer->setMessage(i18n("Adding files ..."));
+    progressLayer->setMaximum(count);
+
     qApp->processEvents();
 
-    listDir( directory.toLocalFile(), codecList, recursive, conversionOptionsId );
+    listDir(directory.toLocalFile(), codecList, recursive, conversionOptionsId);
 
-    pScanStatus->hide(); // hide the status bar, when the scan is done
+    progressLayer->fadeOut();
 
-    emit fileCountChanged( topLevelItemCount() );
+    emit fileCountChanged(topLevelItemCount());
 
     if( queue )
         convertNextItem();
@@ -1438,9 +1466,17 @@ void FileList::load( bool user )
                     conversionOptionsReferences[conversionOptionsIds[id]] = 0;
                 }
                 QDomNodeList files = root.elementsByTagName("file");
-                pScanStatus->setValue( 0 );
-                pScanStatus->setMaximum( files.count() );
-                pScanStatus->show();
+                if( !progressLayer )
+                {
+                    progressLayer = new ProgressLayer(this);
+                    progressLayer->hide();
+                    layerGrid->addWidget(progressLayer, 0, 0);
+                    connect(progressLayer, SIGNAL(canceled()), this, SLOT(jobCanceled()));
+                }
+                progressLayer->setValue(0);
+                progressLayer->setMessage(i18n("Adding files ..."));
+                progressLayer->setMaximum(files.count());
+                progressLayer->fadeIn();
                 tScanStatus.start();
                 for( int i=0; i<files.count(); i++ )
                 {
@@ -1482,13 +1518,13 @@ void FileList::load( bool user )
                     addTopLevelItem( item );
                     updateItem( item );
                     emit timeChanged( item->length );
-                    if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
+                    if( progressLayer && tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
                     {
-                        pScanStatus->setValue( i );
+                        progressLayer->setValue(i);
                         tScanStatus.start();
                     }
                 }
-                pScanStatus->hide();
+                progressLayer->fadeOut();
             }
         }
         listFile.close();

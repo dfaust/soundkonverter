@@ -106,6 +106,7 @@ set(soundkonverter_SRCS
    convertitem.cpp
    filelist.cpp
    filelistitem.cpp
+   layer.cpp
    logger.cpp
    logviewer.cpp
    options.cpp
@@ -113,6 +114,7 @@ set(soundkonverter_SRCS
    optionsdetailed.cpp
    optionseditor.cpp
    optionslayer.cpp
+   progresslayer.cpp
    pluginloader.cpp
    progressindicator.cpp
    outputdirectory.cpp
@@ -128,6 +130,9 @@ ki18n_wrap_ui(soundkonverter_SRCS
     optionsdetailed.ui
     outputdirectory.ui
     optionsdialog.ui
+    optionslayer.ui
+    progresslayer.ui
+    soundkonverterview.ui
     opener/diropener.ui
     opener/urlopener.ui
     opener/cdopener.ui

@@ -3,8 +3,7 @@
 #include "filelist.h"
 #include "filelistitem.h"
 #include "combobutton.h"
-#include "progressindicator.h"
-#include "optionslayer.h"
+// #include "progressindicator.h"
 #include "config.h"
 #include "logger.h"
 #include "opener/fileopener.h"
@@ -39,30 +38,60 @@ SoundKonverterView::SoundKonverterView(Logger *_logger, Config *_config, QWidget
     config( _config ),
     logger( _logger )
 {
-    qDebug() << "soundKonverterView";
+    ui.setupUi(this);
 
-    setAcceptDrops( true );
+    ui.fileList->init(config, logger);
 
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
+
+    QFont font = ui.addComboButton->font();
+    font.setPointSize(font.pointSize() + 3);
+    ui.addComboButton->setFont(font);
+    ui.addComboButton->insertItem(QIcon::fromTheme("audio-x-generic"),     i18n("Add files..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("folder"),              i18n("Add folder..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("media-optical-audio"), i18n("Add CD tracks..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("network-workgroup"),   i18n("Add url..."));
+    ui.addComboButton->insertItem(QIcon::fromTheme("view-media-playlist"), i18n("Add playlist..."));
+    ui.addComboButton->increaseHeight(0.6 * fontHeight);
+    ui.addComboButton->setFocus();
+
+    connect(ui.addComboButton, SIGNAL(clicked(int)), this, SLOT(addClicked(int)));
+
+    ui.stopButton->hide();
+
+    startAction    = new QAction(QIcon::fromTheme("system-run"),  i18n("Start"), this);
+    killAction     = new QAction(QIcon::fromTheme("flag-red"),    i18n("Stop immediatelly"), this);
+    stopAction     = new QAction(QIcon::fromTheme("flag-yellow"), i18n("Stop after current conversions are completed"), this);
+    continueAction = new QAction(QIcon::fromTheme("flag-green"),  i18n("Don't stop after current conversions are completed"), this);
+
+    connect(startAction,    SIGNAL(triggered()), ui.fileList, SLOT(startConversion()));
+    connect(killAction,     SIGNAL(triggered()), ui.fileList, SLOT(killConversion()));
+    connect(stopAction,     SIGNAL(triggered()), ui.fileList, SLOT(stopConversion()));
+    connect(continueAction, SIGNAL(triggered()), ui.fileList, SLOT(continueConversion()));
+
+    stopActionMenu = new KActionMenu(QIcon::fromTheme("process-stop"), i18n("Stop"), this);
+    stopActionMenu->setDelayed(false);
+    stopActionMenu->addAction(killAction);
+    stopActionMenu->addAction(stopAction);
+    stopActionMenu->addAction(continueAction);
+
+    queueModeChanged(true);
+
+    setAcceptDrops(true);
+
+    return;
 
     // the grid for all widgets in the main window
     QGridLayout* gridLayout = new QGridLayout( this );
 
-    fileList = new FileList( logger, config, this );
-    gridLayout->addWidget( fileList, 1, 0 );
+    ui.fileList = new FileList( this );
+    gridLayout->addWidget( ui.fileList, 1, 0 );
     gridLayout->setRowStretch( 1, 1 );
-    connect( fileList, SIGNAL(fileCountChanged(int)), this, SLOT(fileCountChanged(int)) );
-    connect( fileList, SIGNAL(conversionStarted()), this, SLOT(conversionStarted()) );
-    connect( fileList, SIGNAL(conversionStopped(bool)), this, SLOT(conversionStopped(bool)) );
-    connect( fileList, SIGNAL(queueModeChanged(bool)), this, SLOT(queueModeChanged(bool)) );
-    connect( fileList, SIGNAL(showLog(int)), this, SIGNAL(showLog(int)) );
-
-    optionsLayer = new OptionsLayer( config, this );
-    fileList->setOptionsLayer( optionsLayer );
-    optionsLayer->hide();
-    gridLayout->addWidget( optionsLayer, 1, 0 );
-    connect( optionsLayer, SIGNAL(done(const QList<QUrl>&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*,const QString&)) );
-    connect( optionsLayer, SIGNAL(saveFileList()), fileList, SLOT(save()) );
+    connect( ui.fileList, SIGNAL(fileCountChanged(int)), this, SLOT(fileCountChanged(int)) );
+    connect( ui.fileList, SIGNAL(conversionStarted()), this, SLOT(conversionStarted()) );
+    connect( ui.fileList, SIGNAL(conversionStopped(bool)), this, SLOT(conversionStopped(bool)) );
+    connect( ui.fileList, SIGNAL(queueModeChanged(bool)), this, SLOT(queueModeChanged(bool)) );
+    connect( ui.fileList, SIGNAL(showLog(int)), this, SIGNAL(showLog(int)) );
 
 
     // add a horizontal box layout for the add combobutton to the grid
@@ -70,77 +99,47 @@ SoundKonverterView::SoundKonverterView(Logger *_logger, Config *_config, QWidget
     addBox->setContentsMargins( 1, 0, 1, 0 ); // extra margin - determined by experiments
     gridLayout->addLayout( addBox, 3, 0 );
 
-    // create the combobutton for adding files to the file list
-    cAdd = new ComboButton( this );
-    QFont font = cAdd->font();
-    //font.setWeight( QFont::DemiBold );
-    font.setPointSize( font.pointSize() + 3 );
-    cAdd->setFont( font );
-    cAdd->insertItem( QIcon::fromTheme("audio-x-generic"), i18n("Add files...") );
-    cAdd->insertItem( QIcon::fromTheme("folder"), i18n("Add folder...") );
-    cAdd->insertItem( QIcon::fromTheme("media-optical-audio"), i18n("Add CD tracks...") );
-    cAdd->insertItem( QIcon::fromTheme("network-workgroup"), i18n("Add url...") );
-    cAdd->insertItem( QIcon::fromTheme("view-media-playlist"), i18n("Add playlist...") );
-    cAdd->increaseHeight( 0.6*fontHeight );
-    addBox->addWidget( cAdd, 0, Qt::AlignVCenter );
-    connect( cAdd, SIGNAL(clicked(int)), this, SLOT(addClicked(int)) );
-    cAdd->setFocus();
 
     addBox->addSpacing( fontHeight );
 
-    startAction = new QAction( QIcon::fromTheme("system-run"), i18n("Start"), this );
-    connect( startAction, SIGNAL(triggered()), fileList, SLOT(startConversion()) );
-
-    pStart = new QPushButton( QIcon::fromTheme("system-run"), i18n("Start"), this );
-    pStart->setFixedHeight( pStart->size().height() );
-    pStart->setEnabled( false );
+    ui.startButton = new QPushButton( QIcon::fromTheme("system-run"), i18n("Start"), this );
+    ui.startButton->setFixedHeight( ui.startButton->size().height() );
+    ui.startButton->setEnabled( false );
     startAction->setEnabled( false );
-    addBox->addWidget( pStart, 0, Qt::AlignVCenter );
-    connect( pStart, SIGNAL(clicked()), fileList, SLOT(startConversion()) );
+    addBox->addWidget( ui.startButton, 0, Qt::AlignVCenter );
+    connect( ui.startButton, SIGNAL(clicked()), ui.fileList, SLOT(startConversion()) );
 
-    stopActionMenu = new KActionMenu( QIcon::fromTheme("process-stop"), i18n("Stop"), this );
-    stopActionMenu->setDelayed( false );
-    killAction = new QAction( QIcon::fromTheme("flag-red"), i18n("Stop immediatelly"), this );
-    stopActionMenu->addAction( killAction );
-    connect( killAction, SIGNAL(triggered()), fileList, SLOT(killConversion()) );
-    stopAction = new QAction( QIcon::fromTheme("flag-yellow"), i18n("Stop after current conversions are completed"), this );
-    stopActionMenu->addAction( stopAction );
-    connect( stopAction, SIGNAL(triggered()), fileList, SLOT(stopConversion()) );
-    continueAction = new QAction( QIcon::fromTheme("flag-green"), i18n("Continue after current conversions are completed"), this );
-    stopActionMenu->addAction( continueAction );
-    connect( continueAction, SIGNAL(triggered()), fileList, SLOT(continueConversion()) );
-    queueModeChanged( true );
-
-    pStop = new QPushButton( QIcon::fromTheme("process-stop"), i18n("Stop"), this );
-    pStop->setFixedHeight( pStop->size().height() );
-    pStop->hide();
+    ui.stopButton = new QPushButton( QIcon::fromTheme("process-stop"), i18n("Stop"), this );
+    ui.stopButton->setFixedHeight( ui.stopButton->size().height() );
+    ui.stopButton->hide();
     stopActionMenu->setEnabled( false );
-    pStop->setMenu( stopActionMenu->menu() );
-    addBox->addWidget( pStop, 0, Qt::AlignVCenter );
+    ui.stopButton->setMenu( stopActionMenu->menu() );
+    addBox->addWidget( ui.stopButton, 0, Qt::AlignVCenter );
 
     addBox->addSpacing( fontHeight );
 
-    progressIndicator = new ProgressIndicator( this, ProgressIndicator::Feature( ProgressIndicator::FeatureSpeed | ProgressIndicator::FeatureTime ) );
-    addBox->addWidget( progressIndicator, 0, Qt::AlignVCenter );
-    connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SIGNAL(progressChanged(const QString&)) );
-    connect( fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
-    connect( fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );
-
-    Convert *convert = new Convert( config, fileList, logger, this );
-    connect( fileList, SIGNAL(convertItem(FileListItem*)), convert, SLOT(add(FileListItem*)) );
-    connect( fileList, SIGNAL(killItem(FileListItem*)), convert, SLOT(kill(FileListItem*)) );
-    connect( fileList, SIGNAL(itemRemoved(FileListItem*)), convert, SLOT(itemRemoved(FileListItem*)) );
-    connect( convert, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
-    connect( convert, SIGNAL(rippingFinished(const QString&)), fileList, SLOT(rippingFinished(const QString&)) );
-
-    connect( convert, SIGNAL(finishedProcess(int,bool,bool)), logger, SLOT(processCompleted(int,bool,bool)) );
-
-    connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
-    connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
+//     progressIndicator = new ProgressIndicator( this, ProgressIndicator::Feature( ProgressIndicator::FeatureSpeed | ProgressIndicator::FeatureTime ) );
+//     addBox->addWidget( progressIndicator, 0, Qt::AlignVCenter );
+//     connect( progressIndicator, SIGNAL(progressChanged(const QString&)), this, SIGNAL(progressChanged(const QString&)) );
+//     connect( ui.fileList, SIGNAL(timeChanged(float)), progressIndicator, SLOT(timeChanged(float)) );
+//     connect( ui.fileList, SIGNAL(finished(bool)), progressIndicator, SLOT(finished(bool)) );
+//
+//     Convert *convert = new Convert( config, ui.fileList, logger, this );
+//     connect( ui.fileList, SIGNAL(convertItem(FileListItem*)), convert, SLOT(add(FileListItem*)) );
+//     connect( ui.fileList, SIGNAL(killItem(FileListItem*)), convert, SLOT(kill(FileListItem*)) );
+//     connect( ui.fileList, SIGNAL(itemRemoved(FileListItem*)), convert, SLOT(itemRemoved(FileListItem*)) );
+//     connect( convert, SIGNAL(finished(FileListItem*,FileListItem::ReturnCode,bool)), ui.fileList, SLOT(itemFinished(FileListItem*,FileListItem::ReturnCode,bool)) );
+//     connect( convert, SIGNAL(rippingFinished(const QString&)), ui.fileList, SLOT(rippingFinished(const QString&)) );
+//
+//     connect( convert, SIGNAL(finishedProcess(int,bool,bool)), logger, SLOT(processCompleted(int,bool,bool)) );
+//
+//     connect( convert, SIGNAL(updateTime(float)), progressIndicator, SLOT(update(float)) );
+//     connect( convert, SIGNAL(timeFinished(float)), progressIndicator, SLOT(timeFinished(float)) );
 }
 
 SoundKonverterView::~SoundKonverterView()
-{}
+{
+}
 
 void SoundKonverterView::addClicked( int index )
 {
@@ -173,13 +172,13 @@ void SoundKonverterView::showFileDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), ui.fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
         disconnect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
-        fileList->save( false );
+        ui.fileList->save( false );
     }
 
     delete dialog;
@@ -191,13 +190,13 @@ void SoundKonverterView::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const QUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const QUrl&,bool,const QStringList&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QUrl&,bool,const QStringList&,ConversionOptions*)), ui.fileList, SLOT(addDir(const QUrl&,bool,const QStringList&,ConversionOptions*)) );
 
         dialog->exec();
 
         disconnect( dialog, SIGNAL(open(const QUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
 
-        fileList->save( false );
+        ui.fileList->save( false );
     }
 
     delete dialog;
@@ -243,7 +242,7 @@ bool SoundKonverterView::showCdDialog( const QString& device, QString _profile, 
         if( !notifyCommand.isEmpty() )
             dialog->setCommand( notifyCommand );
 
-        connect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)), fileList, SLOT(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)) );
+        connect( dialog, SIGNAL(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)), ui.fileList, SLOT(addTracks(const QString&,QList<int>,int,QList<TagData*>,ConversionOptions*,const QString&)) );
 
         dialog->exec();
 
@@ -252,7 +251,7 @@ bool SoundKonverterView::showCdDialog( const QString& device, QString _profile, 
         if( dialog->result() == QDialog::Accepted )
         {
             success = true;
-            fileList->save( false );
+            ui.fileList->save( false );
         }
     }
     else
@@ -269,7 +268,7 @@ void SoundKonverterView::showUrlDialog()
 {
     UrlOpener *dialog = new UrlOpener( config, this );
 
-    connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
+    connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), ui.fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
     dialog->exec();
 
@@ -277,7 +276,7 @@ void SoundKonverterView::showUrlDialog()
 
     delete dialog;
 
-    fileList->save( false );
+    ui.fileList->save( false );
 }
 
 void SoundKonverterView::showPlaylistDialog()
@@ -287,13 +286,13 @@ void SoundKonverterView::showPlaylistDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), ui.fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
         disconnect( dialog, SIGNAL(open(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
-        fileList->save( false );
+        ui.fileList->save( false );
     }
 
     delete dialog;
@@ -410,7 +409,7 @@ void SoundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _prof
             delete options;
             if( conversionOptions )
             {
-                fileList->addFiles( k_urls, conversionOptions, notifyCommand );
+                ui.fileList->addFiles( k_urls, conversionOptions, notifyCommand );
             }
             else
             {
@@ -421,62 +420,62 @@ void SoundKonverterView::addConvertFiles( const QList<QUrl>& urls, QString _prof
         }
         else
         {
-            optionsLayer->addUrls( k_urls );
-
-            if( !profile.isEmpty() )
-                optionsLayer->setProfile( profile );
-
-            if( !format.isEmpty() )
-                optionsLayer->setFormat( format );
-
-            if( !directory.isEmpty() )
-                optionsLayer->setOutputDirectory( directory );
-
-            if( !notifyCommand.isEmpty() )
-                optionsLayer->setCommand( notifyCommand );
-
-            optionsLayer->fadeIn();
+//             optionsLayer->addUrls( k_urls );
+//
+//             if( !profile.isEmpty() )
+//                 optionsLayer->setProfile( profile );
+//
+//             if( !format.isEmpty() )
+//                 optionsLayer->setFormat( format );
+//
+//             if( !directory.isEmpty() )
+//                 optionsLayer->setOutputDirectory( directory );
+//
+//             if( !notifyCommand.isEmpty() )
+//                 optionsLayer->setCommand( notifyCommand );
+//
+//             optionsLayer->fadeIn();
         }
     }
 
-    fileList->save( false );
+    ui.fileList->save( false );
 }
 
 void SoundKonverterView::loadAutosaveFileList()
 {
-    fileList->load( false );
+    ui.fileList->load( false );
 }
 
 void SoundKonverterView::startConversion()
 {
-    fileList->startConversion();
+    ui.fileList->startConversion();
 }
 
 void SoundKonverterView::killConversion()
 {
-    fileList->killConversion();
+    ui.fileList->killConversion();
 }
 
 void SoundKonverterView::fileCountChanged( int count )
 {
-    pStart->setEnabled( count > 0 );
+    ui.startButton->setEnabled( count > 0 );
     startAction->setEnabled( count > 0 );
 }
 
 void SoundKonverterView::conversionStarted()
 {
-    pStart->hide();
+    ui.startButton->hide();
     startAction->setEnabled( false );
-    pStop->show();
+    ui.stopButton->show();
     stopActionMenu->setEnabled( true );
     emit signalConversionStarted();
 }
 
 void SoundKonverterView::conversionStopped( bool failed )
 {
-    pStart->show();
+    ui.startButton->show();
     startAction->setEnabled( true );
-    pStop->hide();
+    ui.stopButton->hide();
     stopActionMenu->setEnabled( false );
     emit signalConversionStopped( failed );
 }
@@ -489,17 +488,17 @@ void SoundKonverterView::queueModeChanged( bool enabled )
 
 void SoundKonverterView::loadFileList( bool user )
 {
-    fileList->load( user );
+    ui.fileList->load( user );
 }
 
 void SoundKonverterView::saveFileList( bool user )
 {
-    fileList->save( user );
+    ui.fileList->save( user );
 }
 
 void SoundKonverterView::updateFileList()
 {
-    fileList->updateAllItems();
+    ui.fileList->updateAllItems();
 }
 
 void SoundKonverterView::cleanupParameters( QString *profile, QString *format )

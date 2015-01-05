@@ -2,47 +2,39 @@
 #ifndef _SOUNDKONVERTERVIEW_H_
 #define _SOUNDKONVERTERVIEW_H_
 
+#include "ui_soundkonverterview.h"
+
 #include <QWidget>
 #include <QUrl>
 
-class QPushButton;
 class QMenu;
 class QAction;
 class KActionMenu;
-class QToolButton;
 
-class ProgressIndicator;
 class ComboButton;
 class Config;
 class Logger;
-class FileList;
-class OptionsLayer;
-
-// class QPainter;
-// class QUrl;
-
-/**
- * This is the main view class for soundKonverter.  Most of the non-menu,
- * non-toolbar, and non-statusbar (e.g., non frame) GUI code should go
- * here.
- *
- * @short Main view
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 1.0
- */
 
 class SoundKonverterView : public QWidget
 {
     Q_OBJECT
+
 public:
-    SoundKonverterView( Logger *_logger, Config *_config, QWidget *parent );
+    SoundKonverterView(Logger *_logger, Config *_config, QWidget *parent);
     ~SoundKonverterView();
 
-    void addConvertFiles( const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
+    void addConvertFiles(const QList<QUrl>& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand="");
     void loadAutosaveFileList();
 
-    QAction *start() { return startAction; }
-    KActionMenu *stopMenu() { return stopActionMenu; }
+    QAction *getStartAction()
+    {
+        return startAction;
+    }
+
+    KActionMenu *getStopActionMenu()
+    {
+        return stopActionMenu;
+    }
 
     void startConversion();
     void killConversion();
@@ -55,9 +47,9 @@ signals:
 //     void signalChangeCaption( const QString& text );
 
 public slots:
-    bool showCdDialog( const QString& device = "", QString _profile = "", QString _format = "", const QString& directory = "", const QString& notifyCommand = "" );
-    void loadFileList( bool user = true );
-    void saveFileList( bool user = true );
+    bool showCdDialog(const QString& device="", QString _profile="", QString _format="", const QString& directory="", const QString& notifyCommand="");
+    void loadFileList(bool user=true);
+    void saveFileList(bool user=true);
     void updateFileList();
 
 private slots:
@@ -69,47 +61,34 @@ private slots:
 
     // connected to fileList
     /** The count of items in the file list has changed to @p count */
-    void fileCountChanged( int count );
+    void fileCountChanged(int count);
     /** The conversion has started */
     void conversionStarted();
     /** The conversion has stopped */
-    void conversionStopped( bool failed );
+    void conversionStopped(bool failed);
     /** Conversion will continue/stop after current files have been converted */
-    void queueModeChanged( bool enabled );
+    void queueModeChanged(bool enabled);
 
 private:
+    Ui::SoundKonverterView ui;
+
     Config *config;
     Logger *logger;
 
-    FileList *fileList;
-    OptionsLayer *optionsLayer;
-
-    /** The combobutton for adding files */
-    ComboButton *cAdd;
-
-    /** The button to start the conversion */
-    QPushButton *pStart;
-    /** Tha start action */
     QAction *startAction;
 
-    /** The button to stop the conversion */
-    QPushButton *pStop;
-    /** The menu for the stop button */
     KActionMenu *stopActionMenu;
     QAction *killAction;
     QAction *stopAction;
     QAction *continueAction;
 
-    /** Displays the current progress */
-    ProgressIndicator *progressIndicator;
-
-    void cleanupParameters( QString *profile, QString *format );
+    void cleanupParameters(QString *profile, QString *format);
 
 signals:
-    void progressChanged( const QString& progress );
+    void progressChanged(const QString& progress);
     void signalConversionStarted();
-    void signalConversionStopped( bool failed );
-    void showLog( const int logId );
+    void signalConversionStopped(bool failed);
+    void showLog(const int logId);
 };
 
 #endif // _soundKonverterVIEW_H_

@@ -1,5 +1,4 @@
 
-
 #ifndef FILELIST_H
 #define FILELIST_H
 
@@ -7,6 +6,7 @@
 #include "filelistitem.h"
 
 #include <QTime>
+#include <QPointer>
 // #include <QDebug>
 
 class FileListItem;
@@ -14,21 +14,18 @@ class Config;
 class Logger;
 class TagEngine;
 class OptionsEditor;
+class ProgressLayer;
 class OptionsLayer;
 class ConversionOptions;
 
 class QMenu;
 class QAction;
-class QProgressBar;
+class QGridLayout;
 
-/**
- * @short The file list
- * @author Daniel Faust <hessijames@gmail.com>
- * @version 0.3
- */
 class FileList : public QTreeWidget
 {
     Q_OBJECT
+
 public:
     enum Columns {
         Column_State    = 0,
@@ -37,17 +34,14 @@ public:
         Column_Quality  = 3
     };
 
-    /** Constructor */
-    FileList( Logger *_logger, Config *_config, QWidget *parent = 0 );
-
-    /** Destructor */
+    FileList(QWidget *parent=0);
     ~FileList();
+
+    void init(Config *config, Logger *logger);
 
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
 //     FileListItem *itemAbove( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemAbove(item) ); }
 //     FileListItem *itemBelow( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemBelow(item) ); }
-
-    void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 
     void load( bool user = false );
     void updateAllItems(); // Gets triggered if the configuration changes and the file list needs to be updated
@@ -60,8 +54,6 @@ private:
     int countDir( const QString& directory, bool recursive, int count = 0 );
     /** Lists all files in a directory and adds them to the file list */
     int listDir( const QString& directory, const QStringList& filter, bool recursive, int conversionOptionsId, int count = 0 );
-    /** A progressbar, that is shown, when a directory is added recursive */
-    QProgressBar *pScanStatus;
     /** Update timer for the scan status */
     QTime tScanStatus;
 
@@ -85,11 +77,15 @@ private:
 
     bool queue;
 
+    QGridLayout *layerGrid;
+
     Logger *logger;
     Config *config;
     TagEngine *tagEngine;
     OptionsEditor *optionsEditor;
-    OptionsLayer *optionsLayer;
+
+    QPointer<ProgressLayer> progressLayer;
+    QPointer<OptionsLayer> optionsLayer;
 
     QMenu *contextMenu;
     QAction *editAction;

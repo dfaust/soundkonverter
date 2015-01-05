@@ -27,6 +27,8 @@ OptionsDetailed::OptionsDetailed(QWidget* parent) :
 
     connect(ui.configurePluginButton, SIGNAL(clicked()),          this, SLOT(configurePlugin()));
 
+    connect(ui.replayGainCheckBox, SIGNAL(toggled(bool)),         ui.replayGainSpinBox, SLOT(setEnabled(bool)));
+    connect(ui.replayGainCheckBox, SIGNAL(toggled(bool)),         ui.configureReplayGainButton, SLOT(setEnabled(bool)));
 //     connect( ui.replayGainCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
 
     connect(ui.saveProfileButton, SIGNAL(clicked()),              this, SLOT(saveCustomProfile()));

@@ -107,6 +107,9 @@
      </item>
      <item>
       <widget class="QDoubleSpinBox" name="replayGainSpinBox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="suffix">
         <string> dB</string>
        </property>
@@ -120,11 +123,16 @@
      </item>
      <item>
       <widget class="QToolButton" name="configureReplayGainButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="text">
         <string/>
        </property>
        <property name="icon">
-        <iconset theme="configure"/>
+        <iconset theme="configure">
+         <normaloff/>
+        </iconset>
        </property>
        <property name="autoRaise">
         <bool>true</bool>

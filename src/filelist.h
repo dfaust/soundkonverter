@@ -17,6 +17,7 @@ class OptionsEditor;
 class ProgressLayer;
 class OptionsLayer;
 class ConversionOptions;
+class DirectoryCrawler;
 
 class QMenu;
 class QAction;
@@ -87,6 +88,8 @@ private:
     QPointer<ProgressLayer> progressLayer;
     QPointer<OptionsLayer> optionsLayer;
 
+    QPointer<DirectoryCrawler> directoryCrawler;
+
     QMenu *contextMenu;
     QAction *editAction;
     QAction *startAction;
@@ -109,10 +112,15 @@ private slots:
 
     void showLogClicked( const QString& logIdString );
 
+    void directoryCrawlerFileCountFinished();
+    void directoryCrawlerFilesFound(const QStringList &fileList);
+    void directoryCrawlerFinished();
+
 public slots:
     // connected to soundKonverterView
     void addFiles( const QList<QUrl>& fileList, ConversionOptions *conversionOptions, const QString& notifyCommand = "", const QString& _codecName = "", int conversionOptionsId = -1 );
     void addDir( const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions );
+    void addDirs(const QStringList& directories, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions);
     void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& notifyCommand = "" );
     void startConversion();
     void killConversion();

@@ -9,6 +9,7 @@
 #include "core/conversionoptions.h"
 #include "outputdirectory.h"
 #include "codecproblems.h"
+#include "directorycrawler.h"
 
 #include <QApplication>
 #include <QIcon>
@@ -382,7 +383,8 @@ void FileList::addFiles( const QList<QUrl>& fileList, ConversionOptions *convers
                 //             debug
                 //             logger->log( 1000, "@addFiles: adding dir: " + fileName.toLocalFile() );
 
-                addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
+//                 addDir( fileName, true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
+                addDirs( QStringList(fileName.url(QUrl::PreferLocalFile)), true, config->pluginLoader()->formatList(PluginLoader::Decode,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)), conversionOptions );
                 continue;
             }
             else
@@ -450,6 +452,66 @@ void FileList::addFiles( const QList<QUrl>& fileList, ConversionOptions *convers
         if( queue )
             convertNextItem();
     }
+}
+
+void FileList::addDirs(const QStringList& directories, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions)
+{
+    if( !conversionOptions )
+    {
+        logger->log( 1000, "@addDir: No conversion options given" );
+        return;
+    }
+
+    const int conversionOptionsId = config->conversionOptionsManager()->addConversionOptions(conversionOptions);
+
+    tScanStatus.start();
+
+    if( !progressLayer )
+    {
+        progressLayer = new ProgressLayer(this);
+        progressLayer->hide();
+        layerGrid->addWidget(progressLayer, 0, 0);
+    }
+
+    progressLayer->setMessage(i18n("Searching for files ..."));
+    progressLayer->setValue(0);
+    progressLayer->setMaximum(0);
+    progressLayer->fadeIn();
+
+    directoryCrawler = new DirectoryCrawler(directories, recursive);
+
+    connect(progressLayer, SIGNAL(canceled()), directoryCrawler, SLOT(abort()));
+
+    connect(directoryCrawler, SIGNAL(fileCountFinished()),            this, SLOT(directoryCrawlerFileCountFinished()));
+    connect(directoryCrawler, SIGNAL(filesFound(const QStringList&)), this, SLOT(directoryCrawlerFilesFound(const QStringList&)));
+    connect(directoryCrawler, SIGNAL(finished()),                     this, SLOT(directoryCrawlerFinished()));
+    connect(directoryCrawler, SIGNAL(fileCountChanged(int)),          progressLayer, SLOT(setMaximum(int)));
+    connect(directoryCrawler, SIGNAL(fileProgressChanged(int)),       progressLayer, SLOT(setValue(int)));
+
+    directoryCrawler->start();
+}
+
+void FileList::directoryCrawlerFileCountFinished()
+{
+    progressLayer->setMessage(i18n("Adding files ..."));
+}
+
+void FileList::directoryCrawlerFilesFound(const QStringList &fileList)
+{
+    foreach( const QString& file, fileList )
+    {
+        logger->log("found file: "+file);
+    }
+}
+
+void FileList::directoryCrawlerFinished()
+{
+    progressLayer->fadeOut();
+
+    emit fileCountChanged(topLevelItemCount());
+
+    if( queue )
+        convertNextItem();
 }
 
 void FileList::addDir(const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions)

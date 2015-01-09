@@ -13,6 +13,7 @@ public:
     ProgressLayer(QWidget *parent);
     ~ProgressLayer();
 
+public slots:
     void fadeIn();
 
     void setMessage(const QString &message);

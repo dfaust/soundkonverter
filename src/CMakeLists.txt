@@ -104,6 +104,7 @@ set(soundkonverter_SRCS
    conversionoptionsmanager.cpp
    convert.cpp
    convertitem.cpp
+   directorycrawler.cpp
    filelist.cpp
    filelistitem.cpp
    layer.cpp

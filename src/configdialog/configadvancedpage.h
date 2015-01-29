@@ -1,52 +1,23 @@
-//
-// C++ Interface: configgeneralpage
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef CONFIGADVANCEDPAGE_H
 #define CONFIGADVANCEDPAGE_H
 
 #include "configpagebase.h"
 
-class Config;
-class QCheckBox;
-class QSpinBox;
-class QComboBox;
+#include "ui_configadvancedpage.h"
 
-/**
-	@author Daniel Faust <hessijames@gmail.com>
- */
+class Config;
+
 class ConfigAdvancedPage : public ConfigPageBase
 {
     Q_OBJECT
-public:
-    /**
-     * Default Constructor
-     */
-    ConfigAdvancedPage( Config *_config, QWidget *parent=0 );
 
-    /**
-     * Default Destructor
-     */
+public:
+    ConfigAdvancedPage(Config *_config, QWidget *parent=0);
     ~ConfigAdvancedPage();
 
 private:
-    QComboBox *cPreferredOggVorbisExtension;
-    QComboBox *cPreferredVorbisCommentCommentTag;
-    QComboBox *cPreferredVorbisCommentTrackTotalTag;
-    QComboBox *cPreferredVorbisCommentDiscTotalTag;
-    QCheckBox *cUseVFATNames;
-    QCheckBox *cEjectCdAfterRip;
-    QCheckBox *cWriteLogFiles;
-    QCheckBox *cUseSharedMemoryForTempFiles;
-    QSpinBox *iMaxSizeForSharedMemoryTempFiles;
-    QCheckBox *cUsePipes;
+    Ui::ConfigAdvancedPage ui;
 
     Config *config;
 
@@ -56,7 +27,6 @@ public slots:
 
 private slots:
     void somethingChanged();
-
 };
 
 #endif

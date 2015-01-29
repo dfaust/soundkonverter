@@ -1,246 +1,109 @@
-//
-// C++ Implementation: configgeneralpage
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "configadvancedpage.h"
 
 #include "../config.h"
 
 #include <KLocalizedString>
-#include <QSpinBox>
 
-#include <QLayout>
-#include <QBoxLayout>
-#include <QLabel>
-#include <QCheckBox>
-#include <QComboBox>
 #include <QStandardPaths>
 
-
-ConfigAdvancedPage::ConfigAdvancedPage( Config *_config, QWidget *parent )
-    : ConfigPageBase( parent ),
-    config( _config )
+ConfigAdvancedPage::ConfigAdvancedPage(Config *_config, QWidget *parent) :
+    ConfigPageBase(parent),
+    config(_config)
 {
-    QVBoxLayout *box = new QVBoxLayout( this );
+    ui.setupUi(this);
 
-    QFont groupFont;
-    groupFont.setBold( true );
+    ui.preferredOggVorbisExtensionComboBox->setCurrentIndex(ui.preferredOggVorbisExtensionComboBox->findText(config->data.general.preferredOggVorbisExtension));
+    connect(ui.preferredOggVorbisExtensionComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
 
-    QLabel *lAdvanced = new QLabel( i18n("Advanced"), this );
-    lAdvanced->setFont( groupFont );
-    box->addWidget( lAdvanced );
+    ui.preferredVorbisCommentCommentTagComboBox->setCurrentIndex(ui.preferredVorbisCommentCommentTagComboBox->findText(config->data.general.preferredVorbisCommentCommentTag));
+    connect(ui.preferredVorbisCommentCommentTagComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
 
-    box->addSpacing( spacingSmall );
+    ui.preferredVorbisCommentTrackTotalTagComboBox->setCurrentIndex(ui.preferredVorbisCommentTrackTotalTagComboBox->findText(config->data.general.preferredVorbisCommentTrackTotalTag));
+    connect(ui.preferredVorbisCommentTrackTotalTagComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
 
-    QHBoxLayout *preferredOggVorbisExtensionBox = new QHBoxLayout();
-    preferredOggVorbisExtensionBox->addSpacing( spacingOffset );
-    box->addLayout( preferredOggVorbisExtensionBox );
-    QLabel* lPreferredOggVorbisExtension = new QLabel( i18n("Preferred file name extension for ogg vorbis files:"), this );
-    preferredOggVorbisExtensionBox->addWidget( lPreferredOggVorbisExtension );
-    cPreferredOggVorbisExtension = new QComboBox( this );
-    cPreferredOggVorbisExtension->addItem( "ogg" );
-    cPreferredOggVorbisExtension->addItem( "oga" );
-    cPreferredOggVorbisExtension->setCurrentIndex( config->data.general.preferredOggVorbisExtension == "ogg" ? 0 : 1 );
-    preferredOggVorbisExtensionBox->addWidget( cPreferredOggVorbisExtension );
-    connect( cPreferredOggVorbisExtension, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    preferredOggVorbisExtensionBox->setStretch( 0, 3 );
-    preferredOggVorbisExtensionBox->setStretch( 1, 1 );
+    ui.preferredVorbisCommentDiscTotalTagComboBox->setCurrentIndex(ui.preferredVorbisCommentDiscTotalTagComboBox->findText(config->data.general.preferredVorbisCommentDiscTotalTag));
+    connect(ui.preferredVorbisCommentDiscTotalTagComboBox, SIGNAL(activated(int)), this, SLOT(somethingChanged()));
 
-    box->addSpacing( spacingSmall );
+    ui.useVfatNamesCheckBox->setChecked(config->data.general.useVFATNames);
+    connect(ui.useVfatNamesCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()));
 
-    QHBoxLayout *preferredVorbisCommentCommentTagBox = new QHBoxLayout();
-    preferredVorbisCommentCommentTagBox->addSpacing( spacingOffset );
-    box->addLayout( preferredVorbisCommentCommentTagBox );
-    QLabel* lPreferredVorbisCommentCommentTag = new QLabel( i18n("Preferred comment tag field for ogg vorbis and flac files:"), this );
-    lPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
-    preferredVorbisCommentCommentTagBox->addWidget( lPreferredVorbisCommentCommentTag );
-    cPreferredVorbisCommentCommentTag = new QComboBox( this );
-    cPreferredVorbisCommentCommentTag->setToolTip( i18n("Some applications use the field DESCRIPTION even though the field COMMENT is the correct one.\nComments will be written to the selected field, when reading tags the selected field will be preferred.") );
-    cPreferredVorbisCommentCommentTag->addItem( "COMMENT" );
-    cPreferredVorbisCommentCommentTag->addItem( "DESCRIPTION" );
-    cPreferredVorbisCommentCommentTag->setCurrentIndex( config->data.general.preferredVorbisCommentCommentTag == "COMMENT" ? 0 : 1 );
-    preferredVorbisCommentCommentTagBox->addWidget( cPreferredVorbisCommentCommentTag );
-    connect( cPreferredVorbisCommentCommentTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    preferredVorbisCommentCommentTagBox->setStretch( 0, 3 );
-    preferredVorbisCommentCommentTagBox->setStretch( 1, 1 );
+    ui.ejectCdAfterRipCheckBox->setChecked(config->data.advanced.ejectCdAfterRip);
+    connect(ui.ejectCdAfterRipCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()));
 
-    box->addSpacing( spacingSmall );
+    ui.writeLogFilesCheckBox->setToolTip(i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1", QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/log/"));
+    ui.writeLogFilesCheckBox->setChecked(config->data.general.writeLogFiles);
+    connect(ui.writeLogFilesCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()));
 
-    QHBoxLayout *preferredVorbisCommentTrackTotalTagBox = new QHBoxLayout();
-    preferredVorbisCommentTrackTotalTagBox->addSpacing( spacingOffset );
-    box->addLayout( preferredVorbisCommentTrackTotalTagBox );
-    QLabel* lPreferredVorbisCommentTrackTotalTag = new QLabel( i18n("Preferred total tracks number tag field for ogg vorbis and flac files:"), this );
-    lPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
-    preferredVorbisCommentTrackTotalTagBox->addWidget( lPreferredVorbisCommentTrackTotalTag );
-    cPreferredVorbisCommentTrackTotalTag = new QComboBox( this );
-    cPreferredVorbisCommentTrackTotalTag->setToolTip( i18n("Total tracks number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field TRACKNUMBER, the track number and the total tracks number will be written to the same field separated by a slash ('/').") );
-    cPreferredVorbisCommentTrackTotalTag->addItem( "TRACKTOTAL" );
-    cPreferredVorbisCommentTrackTotalTag->addItem( "TOTALTRACKS" );
-    cPreferredVorbisCommentTrackTotalTag->addItem( "TRACKNUMBER" );
-    cPreferredVorbisCommentTrackTotalTag->setCurrentIndex( cPreferredVorbisCommentTrackTotalTag->findText(config->data.general.preferredVorbisCommentTrackTotalTag) );
-    preferredVorbisCommentTrackTotalTagBox->addWidget( cPreferredVorbisCommentTrackTotalTag );
-    connect( cPreferredVorbisCommentTrackTotalTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    preferredVorbisCommentTrackTotalTagBox->setStretch( 0, 3 );
-    preferredVorbisCommentTrackTotalTagBox->setStretch( 1, 1 );
+    ui.useSharedMemoryForTempFilesCheckBox->setChecked(config->data.advanced.useSharedMemoryForTempFiles);
 
-    box->addSpacing( spacingSmall );
+    ui.maxSizeForSharedMemoryTempFilesSpinBox->setRange(1, config->data.advanced.sharedMemorySize);
+    ui.maxSizeForSharedMemoryTempFilesSpinBox->setValue(config->data.advanced.maxSizeForSharedMemoryTempFiles);
 
-    QHBoxLayout *preferredVorbisCommentDiscTotalTagBox = new QHBoxLayout();
-    preferredVorbisCommentDiscTotalTagBox->addSpacing( spacingOffset );
-    box->addLayout( preferredVorbisCommentDiscTotalTagBox );
-    QLabel* lPreferredVorbisCommentDiscTotalTag = new QLabel( i18n("Preferred total discs number tag field for ogg vorbis and flac files:"), this );
-    lPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
-    preferredVorbisCommentDiscTotalTagBox->addWidget( lPreferredVorbisCommentDiscTotalTag );
-    cPreferredVorbisCommentDiscTotalTag = new QComboBox( this );
-    cPreferredVorbisCommentDiscTotalTag->setToolTip( i18n("Total discs number will be written to the selected field, when reading tags the selected field will be preferred.\nWhen using the field DISCNUMBER, the disc number and the total discs number will be written to the same field separated by a slash ('/').") );
-    cPreferredVorbisCommentDiscTotalTag->addItem( "DISCTOTAL" );
-    cPreferredVorbisCommentDiscTotalTag->addItem( "TOTALDISCS" );
-    cPreferredVorbisCommentDiscTotalTag->addItem( "DISCNUMBER" );
-    cPreferredVorbisCommentDiscTotalTag->setCurrentIndex( cPreferredVorbisCommentDiscTotalTag->findText(config->data.general.preferredVorbisCommentDiscTotalTag) );
-    preferredVorbisCommentDiscTotalTagBox->addWidget( cPreferredVorbisCommentDiscTotalTag );
-    connect( cPreferredVorbisCommentDiscTotalTag, SIGNAL(activated(int)), this, SLOT(somethingChanged()) );
-    preferredVorbisCommentDiscTotalTagBox->setStretch( 0, 3 );
-    preferredVorbisCommentDiscTotalTagBox->setStretch( 1, 1 );
-
-    box->addSpacing( spacingSmall );
-
-    QHBoxLayout *useVFATNamesBox = new QHBoxLayout();
-    useVFATNamesBox->addSpacing( spacingOffset );
-    box->addLayout( useVFATNamesBox );
-    cUseVFATNames = new QCheckBox( i18n("Always use FAT compatible output file names"), this );
-    cUseVFATNames->setToolTip( i18n("Replaces some special characters like \'?\' by \'_\'.\nIf the output directory is on a FAT file system FAT compatible file names will automatically be used independently from this option.") );
-    cUseVFATNames->setChecked( config->data.general.useVFATNames );
-    useVFATNamesBox->addWidget( cUseVFATNames );
-    connect( cUseVFATNames, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
-    box->addSpacing( spacingSmall );
-
-    QHBoxLayout *ejectCdAfterRipBox = new QHBoxLayout();
-    ejectCdAfterRipBox->addSpacing( spacingOffset );
-    box->addLayout( ejectCdAfterRipBox );
-    cEjectCdAfterRip = new QCheckBox( i18n("Eject CD after ripping has been completed"), this );
-    cEjectCdAfterRip->setChecked( config->data.advanced.ejectCdAfterRip );
-    ejectCdAfterRipBox->addWidget( cEjectCdAfterRip );
-    connect( cEjectCdAfterRip, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
-    box->addSpacing( spacingBig );
-
-    QLabel *lDebug = new QLabel( i18n("Debug"), this ); // TODO rename
-    lDebug->setFont( groupFont );
-    box->addWidget( lDebug );
-
-    box->addSpacing( spacingSmall );
-
-    QHBoxLayout *writeLogFilesBox = new QHBoxLayout();
-    writeLogFilesBox->addSpacing( spacingOffset );
-    box->addLayout( writeLogFilesBox );
-    cWriteLogFiles = new QCheckBox( i18n("Write log files to disc"), this );
-    cWriteLogFiles->setToolTip( i18n("Write log files to the hard drive while converting.\nThis can be useful if a crash occurs and you can't access the log file using the log viewer.\nLog files will be written to %1",QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/soundkonverter/log/") );
-    cWriteLogFiles->setChecked( config->data.general.writeLogFiles );
-    writeLogFilesBox->addWidget( cWriteLogFiles );
-    connect( cWriteLogFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
-    box->addSpacing( spacingBig );
-
-    QLabel *lExperimental = new QLabel( i18n("Experimental"), this );
-    lExperimental->setFont( groupFont );
-    box->addWidget( lExperimental );
-
-    box->addSpacing( spacingSmall );
-
-    QHBoxLayout *useSharedMemoryForTempFilesBox = new QHBoxLayout();
-    useSharedMemoryForTempFilesBox->addSpacing( spacingOffset );
-    box->addLayout( useSharedMemoryForTempFilesBox );
-    cUseSharedMemoryForTempFiles = new QCheckBox( i18n("Store temporary files in memory unless the estimated size is more than:"), this );
-    cUseSharedMemoryForTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
-    cUseSharedMemoryForTempFiles->setChecked( config->data.advanced.useSharedMemoryForTempFiles );
-    useSharedMemoryForTempFilesBox->addWidget( cUseSharedMemoryForTempFiles );
-    iMaxSizeForSharedMemoryTempFiles = new QSpinBox( this );
-    iMaxSizeForSharedMemoryTempFiles->setToolTip( i18n("Don't store files that are expected to be bigger than this value in memory to avoid swapping") );
-    iMaxSizeForSharedMemoryTempFiles->setSuffix( " " + i18nc("mega in bytes","MiB") );
-    iMaxSizeForSharedMemoryTempFiles->setRange( 1, config->data.advanced.sharedMemorySize );
-    iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.maxSizeForSharedMemoryTempFiles );
-    useSharedMemoryForTempFilesBox->addWidget( iMaxSizeForSharedMemoryTempFiles );
     if( config->data.advanced.sharedMemorySize == 0 )
     {
-        cUseSharedMemoryForTempFiles->setEnabled( false );
-        cUseSharedMemoryForTempFiles->setChecked( false );
-        cUseSharedMemoryForTempFiles->setToolTip( i18n("It seems there's no filesystem mounted on /dev/shm") );
+        ui.useSharedMemoryForTempFilesCheckBox->setEnabled(false);
+        ui.useSharedMemoryForTempFilesCheckBox->setChecked(false);
+        ui.useSharedMemoryForTempFilesCheckBox->setToolTip(i18n("It seems there's no filesystem mounted on /dev/shm"));
     }
-    iMaxSizeForSharedMemoryTempFiles->setEnabled( cUseSharedMemoryForTempFiles->isChecked() );
-    connect( cUseSharedMemoryForTempFiles, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-    connect( cUseSharedMemoryForTempFiles, SIGNAL(toggled(bool)), iMaxSizeForSharedMemoryTempFiles, SLOT(setEnabled(bool)) );
-    connect( iMaxSizeForSharedMemoryTempFiles, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()) );
-    useSharedMemoryForTempFilesBox->setStretch( 0, 3 );
-    useSharedMemoryForTempFilesBox->setStretch( 1, 1 );
 
-    box->addSpacing( spacingSmall );
+    ui.maxSizeForSharedMemoryTempFilesSpinBox->setEnabled(ui.useSharedMemoryForTempFilesCheckBox->isChecked());
+    connect(ui.useSharedMemoryForTempFilesCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()));
+    connect(ui.useSharedMemoryForTempFilesCheckBox, SIGNAL(toggled(bool)), ui.maxSizeForSharedMemoryTempFilesSpinBox, SLOT(setEnabled(bool)));
+    connect(ui.maxSizeForSharedMemoryTempFilesSpinBox, SIGNAL(valueChanged(int)), this, SLOT(somethingChanged()));
 
-    QHBoxLayout *usePipesBox = new QHBoxLayout();
-    usePipesBox->addSpacing( spacingOffset );
-    box->addLayout( usePipesBox );
-    cUsePipes = new QCheckBox( i18n("Use pipes when possible"), this );
-    cUsePipes->setToolTip( i18n("Pipes make it unnecessary to use temporary files, therefore increasing the performance.\nBut some backends cause errors in this mode so be cautious.") );
-    cUsePipes->setChecked( config->data.advanced.usePipes );
-    usePipesBox->addWidget( cUsePipes );
-    connect( cUsePipes, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()) );
-
-    box->addStretch();
+    ui.usePipesCheckBox->setChecked(config->data.advanced.usePipes);
+    connect(ui.usePipesCheckBox, SIGNAL(toggled(bool)), this, SLOT(somethingChanged()));
 }
 
 ConfigAdvancedPage::~ConfigAdvancedPage()
-{}
+{
+}
 
 void ConfigAdvancedPage::resetDefaults()
 {
-    cPreferredOggVorbisExtension->setCurrentIndex( 0 );
-    cPreferredVorbisCommentCommentTag->setCurrentIndex( 1 );
-    cPreferredVorbisCommentTrackTotalTag->setCurrentIndex( 0 );
-    cPreferredVorbisCommentDiscTotalTag->setCurrentIndex( 0 );
-    cUseVFATNames->setChecked( false );
-    cEjectCdAfterRip->setChecked( true );
-    cWriteLogFiles->setChecked( false );
-    cUseSharedMemoryForTempFiles->setChecked( false );
-    iMaxSizeForSharedMemoryTempFiles->setValue( config->data.advanced.sharedMemorySize / 4 );
-    cUsePipes->setChecked( false );
+    ui.preferredOggVorbisExtensionComboBox->setCurrentIndex(0);
+    ui.preferredVorbisCommentCommentTagComboBox->setCurrentIndex(1);
+    ui.preferredVorbisCommentTrackTotalTagComboBox->setCurrentIndex(0);
+    ui.preferredVorbisCommentDiscTotalTagComboBox->setCurrentIndex(0);
+    ui.useVfatNamesCheckBox->setChecked(false);
+    ui.ejectCdAfterRipCheckBox->setChecked(true);
+    ui.writeLogFilesCheckBox->setChecked(false);
+    ui.useSharedMemoryForTempFilesCheckBox->setChecked(false);
+    ui.maxSizeForSharedMemoryTempFilesSpinBox->setValue(config->data.advanced.sharedMemorySize / 4);
+    ui.usePipesCheckBox->setChecked(false);
 
-    emit configChanged( true );
+    emit configChanged(true);
 }
 
 void ConfigAdvancedPage::saveSettings()
 {
-    config->data.general.preferredOggVorbisExtension = cPreferredOggVorbisExtension->currentText();
-    config->data.general.preferredVorbisCommentCommentTag = cPreferredVorbisCommentCommentTag->currentText();
-    config->data.general.preferredVorbisCommentTrackTotalTag = cPreferredVorbisCommentTrackTotalTag->currentText();
-    config->data.general.preferredVorbisCommentDiscTotalTag = cPreferredVorbisCommentDiscTotalTag->currentText();
-    config->data.general.useVFATNames = cUseVFATNames->isChecked();
-    config->data.advanced.ejectCdAfterRip = cEjectCdAfterRip->isChecked();
-    config->data.general.writeLogFiles = cWriteLogFiles->isChecked();
-    config->data.advanced.useSharedMemoryForTempFiles = cUseSharedMemoryForTempFiles->isEnabled() && cUseSharedMemoryForTempFiles->isChecked();
-    config->data.advanced.maxSizeForSharedMemoryTempFiles = iMaxSizeForSharedMemoryTempFiles->value();
-    config->data.advanced.usePipes = cUsePipes->isChecked();
+    config->data.general.preferredOggVorbisExtension = ui.preferredOggVorbisExtensionComboBox->currentText();
+    config->data.general.preferredVorbisCommentCommentTag = ui.preferredVorbisCommentCommentTagComboBox->currentText();
+    config->data.general.preferredVorbisCommentTrackTotalTag = ui.preferredVorbisCommentTrackTotalTagComboBox->currentText();
+    config->data.general.preferredVorbisCommentDiscTotalTag = ui.preferredVorbisCommentDiscTotalTagComboBox->currentText();
+    config->data.general.useVFATNames = ui.useVfatNamesCheckBox->isChecked();
+    config->data.advanced.ejectCdAfterRip = ui.ejectCdAfterRipCheckBox->isChecked();
+    config->data.general.writeLogFiles = ui.writeLogFilesCheckBox->isChecked();
+    config->data.advanced.useSharedMemoryForTempFiles = ui.useSharedMemoryForTempFilesCheckBox->isEnabled() && ui.useSharedMemoryForTempFilesCheckBox->isChecked();
+    config->data.advanced.maxSizeForSharedMemoryTempFiles = ui.maxSizeForSharedMemoryTempFilesSpinBox->value();
+    config->data.advanced.usePipes = ui.usePipesCheckBox->isChecked();
 }
 
 void ConfigAdvancedPage::somethingChanged()
 {
-    const bool changed = cPreferredOggVorbisExtension->currentText() != config->data.general.preferredOggVorbisExtension ||
-                         cPreferredVorbisCommentCommentTag->currentText() != config->data.general.preferredVorbisCommentCommentTag ||
-                         cPreferredVorbisCommentTrackTotalTag->currentText() != config->data.general.preferredVorbisCommentTrackTotalTag ||
-                         cPreferredVorbisCommentDiscTotalTag->currentText() != config->data.general.preferredVorbisCommentDiscTotalTag ||
-                         cUseVFATNames->isChecked() != config->data.general.useVFATNames ||
-                         cEjectCdAfterRip->isChecked() != config->data.advanced.ejectCdAfterRip ||
-                         cWriteLogFiles->isChecked() != config->data.general.writeLogFiles ||
-                         cUseSharedMemoryForTempFiles->isChecked() != config->data.advanced.useSharedMemoryForTempFiles ||
-                         iMaxSizeForSharedMemoryTempFiles->value() != config->data.advanced.maxSizeForSharedMemoryTempFiles ||
-                         cUsePipes->isChecked() != config->data.advanced.usePipes;
+    const bool changed =
+        ui.preferredOggVorbisExtensionComboBox->currentText()           != config->data.general.preferredOggVorbisExtension             ||
+        ui.preferredVorbisCommentCommentTagComboBox->currentText()      != config->data.general.preferredVorbisCommentCommentTag        ||
+        ui.preferredVorbisCommentTrackTotalTagComboBox->currentText()   != config->data.general.preferredVorbisCommentTrackTotalTag     ||
+        ui.preferredVorbisCommentDiscTotalTagComboBox->currentText()    != config->data.general.preferredVorbisCommentDiscTotalTag      ||
+        ui.useVfatNamesCheckBox->isChecked()                            != config->data.general.useVFATNames                            ||
+        ui.ejectCdAfterRipCheckBox->isChecked()                         != config->data.advanced.ejectCdAfterRip                        ||
+        ui.writeLogFilesCheckBox->isChecked()                           != config->data.general.writeLogFiles                           ||
+        ui.useSharedMemoryForTempFilesCheckBox->isChecked()             != config->data.advanced.useSharedMemoryForTempFiles            ||
+        ui.maxSizeForSharedMemoryTempFilesSpinBox->value()              != config->data.advanced.maxSizeForSharedMemoryTempFiles        ||
+        ui.usePipesCheckBox->isChecked()                                != config->data.advanced.usePipes;
 
-    emit configChanged( changed );
+    emit configChanged(changed);
 }
 

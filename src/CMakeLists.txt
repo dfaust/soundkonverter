@@ -81,6 +81,7 @@ set(soundkonverter_SRCS
    configdialog/configbackendspage.cpp
    configdialog/configadvancedpage.cpp
    configdialog/configcoverartpage.cpp
+   backendsgroupbox.cpp
    metadata/tagengine.cpp
    metadata/MetaReplayGain.cpp
    opener/fileopener.cpp
@@ -134,6 +135,11 @@ ki18n_wrap_ui(soundkonverter_SRCS
     optionslayer.ui
     progresslayer.ui
     soundkonverterview.ui
+    configdialog/configgeneralpage.ui
+    configdialog/configadvancedpage.ui
+    configdialog/configcoverartpage.ui
+    configdialog/configbackendspage.ui
+    backendsgroupbox.ui
     opener/diropener.ui
     opener/urlopener.ui
     opener/cdopener.ui

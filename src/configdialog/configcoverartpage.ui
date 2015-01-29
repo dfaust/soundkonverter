@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigCoverArtPage</class>
+ <widget class="QWidget" name="ConfigCoverArtPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>463</width>
+    <height>427</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QLabel" name="label_7">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Copy cover art</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,1">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="copyAllRadioButton">
+         <property name="text">
+          <string>Copy all covers</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">copyCoverButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="3,1">
+         <item>
+          <widget class="QRadioButton" name="copyOneRadioButton">
+           <property name="text">
+            <string>Copy only one cover:</string>
+           </property>
+           <attribute name="buttonGroup">
+            <string notr="true">copyCoverButtonGroup</string>
+           </attribute>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="comboBox_2">
+           <item>
+            <property name="text">
+             <string>front cover</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="copyNoneRadioButton">
+         <property name="text">
+          <string>Don't copy any covers</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">copyCoverButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_3">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_3">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Convert cover art</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,1">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="gridLayout" columnstretch="3,1">
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox">
+         <item>
+          <property name="text">
+           <string>jpeg</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>png</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QSpinBox" name="spinBox">
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="minimum">
+          <number>100</number>
+         </property>
+         <property name="maximum">
+          <number>9999</number>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>JPEG quality:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QSpinBox" name="spinBox_2">
+         <property name="maximum">
+          <number>100</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox">
+         <property name="text">
+          <string>Maximum dimensions:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBox_2">
+         <property name="text">
+          <string>File format:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>PNG quality:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QSpinBox" name="spinBox_3">
+         <property name="maximum">
+          <number>9</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer_4">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Save embedded cover art to output directory</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,1">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Fixed</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="alwaysSaveToDirRadioButton">
+         <property name="text">
+          <string>Always</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">saveCoverButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="onlySaveToDirRadioButton">
+         <property name="text">
+          <string>Only if embedding the covers into the output files is not possible</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">saveCoverButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="neverSaveToDirRadioButton">
+         <property name="text">
+          <string>Never</string>
+         </property>
+         <attribute name="buttonGroup">
+          <string notr="true">saveCoverButtonGroup</string>
+         </attribute>
+        </widget>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QLabel" name="saveToDirFileNameLabel">
+           <property name="text">
+            <string>File name for the cover files:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="saveToDirFileNameLineEdit">
+           <property name="toolTip">
+            <string>The following strings are wildcards that will be replaced
+by the information in the meta data:
+
+%a - Artist
+%b - Album
+%d - Cover description
+%r - Cover role</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>134</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="saveCoverButtonGroup"/>
+  <buttongroup name="copyCoverButtonGroup"/>
+ </buttongroups>
+</ui>

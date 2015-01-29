@@ -1,67 +1,34 @@
-//
-// C++ Interface: configgeneralpage
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2007
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #ifndef CONFIGCOVERARTPAGE_H
 #define CONFIGCOVERARTPAGE_H
 
 #include "configpagebase.h"
 
-class Config;
-class QRadioButton;
-class QLabel;
-class QAbstractButton;
-class QLineEdit;
+#include "ui_configcoverartpage.h"
 
-/**
-	@author Daniel Faust <hessijames@gmail.com>
- */
+class Config;
+class QAbstractButton;
+
 class ConfigCoverArtPage : public ConfigPageBase
 {
     Q_OBJECT
-public:
-    /**
-     * Default Constructor
-     */
-    ConfigCoverArtPage( Config *_config, QWidget *parent=0 );
 
-    /**
-     * Default Destructor
-     */
+public:
+    ConfigCoverArtPage(Config *_config, QWidget *parent=0);
     ~ConfigCoverArtPage();
 
 private:
-    QRadioButton *rWriteCoversAlways;
-    QRadioButton *rWriteCoversAuto;
-    QRadioButton *rWriteCoversNever;
-
-    QLabel       *lWriteCoverName;
-    QRadioButton *rWriteCoverNameTitle;
-    QRadioButton *rWriteCoverNameDefault;
-    QLabel       *lWriteCoverNameDefaultLabel;
-    QLineEdit    *lWriteCoverNameDefaultEdit;
-
-//     QCheckBox *cCopyCover;
-//     QCheckBox *cEmbedCover;
-//     QListView *lCoverList;
+    Ui::ConfigCoverArtPage ui;
 
     Config *config;
 
 private slots:
     void somethingChanged();
-    void writeCoversChanged( QAbstractButton *button );
+    void writeCoversChanged(QAbstractButton *button);
 
 public slots:
     void resetDefaults();
     void saveSettings();
-
 };
 
 #endif

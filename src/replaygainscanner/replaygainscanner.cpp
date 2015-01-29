@@ -8,7 +8,7 @@
 #include "combobutton.h"
 #include "opener/diropener.h"
 #include "codecproblems.h"
-#include "progressindicator.h"
+// #include "progressindicator.h"
 
 #include <KLocalizedString>
 
@@ -37,10 +37,10 @@ ReplayGainScanner::ReplayGainScanner(Config* _config, Logger* _logger, bool show
     connect(ui.fileList, SIGNAL(processStarted()),      this, SLOT(processStarted()));
     connect(ui.fileList, SIGNAL(processStopped()),      this, SLOT(processStopped()));
 
-    connect(ui.fileList, SIGNAL(timeChanged(float)),    ui.progressIndicator, SLOT(timeChanged(float)));
-    connect(ui.fileList, SIGNAL(finished(bool)),        ui.progressIndicator, SLOT(finished(bool)));
-
-    connect(ui.progressIndicator, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)));
+//     connect(ui.fileList, SIGNAL(timeChanged(float)),    ui.progressIndicator, SLOT(timeChanged(float)));
+//     connect(ui.fileList, SIGNAL(finished(bool)),        ui.progressIndicator, SLOT(finished(bool)));
+//
+//     connect(ui.progressIndicator, SIGNAL(progressChanged(const QString&)), this, SLOT(progressChanged(const QString&)));
 
     ui.fileList->setConfig(config);
 
@@ -59,8 +59,8 @@ ReplayGainScanner::ReplayGainScanner(Config* _config, Logger* _logger, bool show
 
     connect(replayGainProcessor, SIGNAL(finishedProcess(int,bool)), logger, SLOT(processCompleted(int,bool)));
 
-    connect(replayGainProcessor, SIGNAL(updateTime(float)),   ui.progressIndicator, SLOT(update(float)));
-    connect(replayGainProcessor, SIGNAL(timeFinished(float)), ui.progressIndicator, SLOT(timeFinished(float)));
+//     connect(replayGainProcessor, SIGNAL(updateTime(float)),   ui.progressIndicator, SLOT(update(float)));
+//     connect(replayGainProcessor, SIGNAL(timeFinished(float)), ui.progressIndicator, SLOT(timeFinished(float)));
 
 //     setInitialSize( QSize(60*fontHeight,40*fontHeight) );
 //     KSharedConfig::Ptr conf = KGlobal::config();

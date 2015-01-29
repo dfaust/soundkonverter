@@ -53,7 +53,9 @@
         <string>Start</string>
        </property>
        <property name="icon">
-        <iconset theme="system-run"/>
+        <iconset theme="system-run">
+         <normaloff/>
+        </iconset>
        </property>
       </widget>
      </item>
@@ -66,7 +68,9 @@
         <string>Stop</string>
        </property>
        <property name="icon">
-        <iconset theme="process-stop"/>
+        <iconset theme="process-stop">
+         <normaloff/>
+        </iconset>
        </property>
       </widget>
      </item>
@@ -104,8 +108,16 @@
        </item>
        <item row="0" column="1">
         <widget class="QLabel" name="speedLabel">
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+          </font>
+         </property>
          <property name="text">
           <string>0x</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>
@@ -118,8 +130,16 @@
        </item>
        <item row="1" column="1">
         <widget class="QLabel" name="timeLabel">
+         <property name="font">
+          <font>
+           <family>Monospace</family>
+          </font>
+         </property>
          <property name="text">
           <string>0s</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
          </property>
         </widget>
        </item>

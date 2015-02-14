@@ -26,7 +26,11 @@
 #include <KMessageBox>
 #include <QDir>
 
-#if KDE_IS_VERSION(4,4,0)
+//#ifdef SOUNDKONVERTER_KF5_BUILD
+    //#define KAction QAction
+//#endif
+
+#if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
     #include <KStatusNotifierItem>
 #else
     #include <KSystemTrayIcon>
@@ -101,7 +105,7 @@ void soundKonverter::saveProperties( KConfigGroup& configGroup )
 
 void soundKonverter::showSystemTray()
 {
-    #if KDE_IS_VERSION(4,4,0)
+    #if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
         systemTray = new KStatusNotifierItem( this );
         systemTray->setCategory( KStatusNotifierItem::ApplicationStatus );
         systemTray->setStatus( KStatusNotifierItem::Active );

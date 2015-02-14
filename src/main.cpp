@@ -7,7 +7,12 @@
 #include <kdeui_export.h>
 #include <KMainWindow>
 #include <KUniqueApplication>
+#ifdef SOUNDKONVERTER_KF5_BUILD
+#include <K4AboutData>
+#define KAboutData K4AboutData
+#else
 #include <KAboutData>
+#endif
 #include <KCmdLineArgs>
 #include <KLocale>
 

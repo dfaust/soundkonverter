@@ -203,7 +203,7 @@ void DirOpener::addClicked()
         if( conversionOptions )
         {
             hide();
-            options->accepted();
+
             emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, conversionOptions );
             accept();
         }

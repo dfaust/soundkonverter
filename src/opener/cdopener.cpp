@@ -16,6 +16,7 @@
 #include <KMessageBox>
 #include <KStandardDirs>
 #include <KInputDialog>
+#include <KIcon>
 
 #include <QApplication>
 #include <QLayout>

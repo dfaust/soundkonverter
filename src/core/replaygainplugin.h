@@ -2,6 +2,15 @@
 #ifndef REPLAYGAINPLUGIN_H
 #define REPLAYGAINPLUGIN_H
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    #include <kcoreaddons_export.h>
+    #include <QVariantList>
+    #define VARG_TYPE QVariantList
+#else
+    #include <QStringList>
+    #define VARG_TYPE QStringList
+#endif
+
 #include "backendplugin.h"
 
 #include <QMap>
@@ -21,7 +30,11 @@ struct ReplayGainPipe
 };
 
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT ReplayGainPluginItem : public BackendPluginItem
+#else
 class KDE_EXPORT ReplayGainPluginItem : public BackendPluginItem
+#endif
 {
     Q_OBJECT
 public:
@@ -38,7 +51,11 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT ReplayGainPlugin : public BackendPlugin
+#else
 class KDE_EXPORT ReplayGainPlugin : public BackendPlugin
+#endif
 {
     Q_OBJECT
 public:

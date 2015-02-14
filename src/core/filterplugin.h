@@ -2,6 +2,15 @@
 #ifndef FILTERPLUGIN_H
 #define FILTERPLUGIN_H
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    #include <kcoreaddons_export.h>
+    #include <QVariantList>
+    #define VARG_TYPE QVariantList
+#else
+    #include <QStringList>
+    #define VARG_TYPE QStringList
+#endif
+
 #include "codecplugin.h"
 #include "conversionoptions.h"
 
@@ -19,7 +28,11 @@ class TagData;
 // };
 
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT FilterPluginItem : public CodecPluginItem
+#else
 class KDE_EXPORT FilterPluginItem : public CodecPluginItem
+#endif
 {
     Q_OBJECT
 public:
@@ -29,7 +42,11 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT FilterPlugin : public CodecPlugin
+#else
 class KDE_EXPORT FilterPlugin : public CodecPlugin
+#endif
 {
     Q_OBJECT
 public:
@@ -58,8 +75,10 @@ protected:
 
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 #define K_EXPORT_SOUNDKONVERTER_FILTER(libname, classname) \
         K_EXPORT_COMPONENT_FACTORY( soundkonverter_filter_##libname, KGenericFactory<classname>("soundkonverter_filter_" #libname) )
+#endif
 
 #endif // FILTERPLUGIN_H
 

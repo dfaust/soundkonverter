@@ -30,10 +30,7 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     config( _config )
 {
 #ifdef SOUNDKONVERTER_KF5_BUILD
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-    buttonBox->setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
-    QPushButton *defaultButton = new QPushButton(i18n("Default"));
-    buttonBox->addButton(defaultButton, QDialogButtonBox::ActionRole);
+    buttonBox()->setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
     setWindowTitle(i18n("Settings"));
 #else
     setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );

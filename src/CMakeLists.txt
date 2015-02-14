@@ -30,13 +30,12 @@ if (KF5_BUILD)
     include(KDECompilerSettings)
     include(KDECMakeSettings)
     include(ECMPackageConfigHelpers)
+    include(ECMInstallIcons)
     include(FeatureSummary)
 
     find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
     find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
     find_package(Phonon4Qt5 REQUIRED)
-
-    #set(CMAKE_AUTOMOC TRUE)
 else ()
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 

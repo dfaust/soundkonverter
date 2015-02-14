@@ -149,7 +149,7 @@ float soundkonverter_codec_aften::parseOutput( const QString& output )
 }
 
 #ifndef SOUNDKONVERTER_KF5_BUILD
-K_PLUGIN_FACTORY(codec_aften, registerPlugin<soundkonverter_codec_aften>();)
+K_PLUGIN_FACTORY(soundkonverter_codec_aften, registerPlugin<soundkonverter_codec_aften>();)
 #endif
 
 #include "soundkonverter_codec_aften.moc"

@@ -15,7 +15,7 @@ set(soundkonverter_codec_neroaac_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_neroaac ${soundkonverter_codec_neroaac_SRCS})
+    add_library(soundkonverter_codec_neroaac MODULE ${soundkonverter_codec_neroaac_SRCS})
     target_link_libraries(soundkonverter_codec_neroaac KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_neroaac ${soundkonverter_codec_neroaac_SRCS})

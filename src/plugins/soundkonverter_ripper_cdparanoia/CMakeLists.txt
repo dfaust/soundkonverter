@@ -13,7 +13,7 @@ set(soundkonverter_ripper_cdparanoia_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_ripper_cdparanoia ${soundkonverter_ripper_cdparanoia_SRCS})
+    add_library(soundkonverter_ripper_cdparanoia MODULE ${soundkonverter_ripper_cdparanoia_SRCS})
     target_link_libraries(soundkonverter_ripper_cdparanoia KF5::WidgetsAddons soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_ripper_cdparanoia ${soundkonverter_ripper_cdparanoia_SRCS})

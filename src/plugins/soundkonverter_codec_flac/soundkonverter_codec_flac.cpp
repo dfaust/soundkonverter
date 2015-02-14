@@ -160,7 +160,7 @@ float soundkonverter_codec_flac::parseOutput( const QString& output )
 }
 
 #ifdef SOUNDKONVERTER_KF5_BUILD
-K_PLUGIN_FACTORY(soundkonverter_codec_flac, registerPlugin<soundkonverter_codec_flac>();)
+K_PLUGIN_FACTORY(codec_flac, registerPlugin<soundkonverter_codec_flac>();)
 #endif
 
 #include "soundkonverter_codec_flac.moc"

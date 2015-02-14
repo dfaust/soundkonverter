@@ -15,7 +15,7 @@ set(soundkonverter_codec_fluidsynth_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_fluidsynth ${soundkonverter_codec_fluidsynth_SRCS})
+    add_library(soundkonverter_codec_fluidsynth MODULE ${soundkonverter_codec_fluidsynth_SRCS})
     target_link_libraries(soundkonverter_codec_fluidsynth KF5::WidgetsAddons KF5::KIOCore Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_fluidsynth ${soundkonverter_codec_fluidsynth_SRCS})

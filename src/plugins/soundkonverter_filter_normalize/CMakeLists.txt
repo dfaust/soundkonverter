@@ -16,7 +16,7 @@ set(soundkonverter_filter_normalize_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_filter_normalize ${soundkonverter_filter_normalize_SRCS})
+    add_library(soundkonverter_filter_normalize MODULE ${soundkonverter_filter_normalize_SRCS})
     target_link_libraries(soundkonverter_filter_normalize KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_filter_normalize ${soundkonverter_filter_normalize_SRCS})

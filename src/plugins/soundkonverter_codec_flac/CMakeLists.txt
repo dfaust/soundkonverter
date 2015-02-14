@@ -15,7 +15,7 @@ set(soundkonverter_codec_flac_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_flac ${soundkonverter_codec_flac_SRCS})
+    add_library(soundkonverter_codec_flac MODULE ${soundkonverter_codec_flac_SRCS})
     target_link_libraries(soundkonverter_codec_flac KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_flac ${soundkonverter_codec_flac_SRCS})

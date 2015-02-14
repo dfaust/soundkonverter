@@ -15,7 +15,7 @@ set(soundkonverter_codec_timidity_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_timidity ${soundkonverter_codec_timidity_SRCS})
+    add_library(soundkonverter_codec_timidity MODULE ${soundkonverter_codec_timidity_SRCS})
     target_link_libraries(soundkonverter_codec_timidity KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_timidity ${soundkonverter_codec_timidity_SRCS})

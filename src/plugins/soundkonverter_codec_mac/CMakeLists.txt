@@ -15,7 +15,7 @@ set(soundkonverter_codec_mac_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_mac ${soundkonverter_codec_mac_SRCS})
+    add_library(soundkonverter_codec_mac MODULE ${soundkonverter_codec_mac_SRCS})
     target_link_libraries(soundkonverter_codec_mac KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_mac ${soundkonverter_codec_mac_SRCS})

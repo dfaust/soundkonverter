@@ -15,7 +15,7 @@ set(soundkonverter_codec_ffmpeg_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_codec_ffmpeg ${soundkonverter_codec_ffmpeg_SRCS})
+    add_library(soundkonverter_codec_ffmpeg MODULE ${soundkonverter_codec_ffmpeg_SRCS})
     target_link_libraries(soundkonverter_codec_ffmpeg KF5::WidgetsAddons Qt5::Xml soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_codec_ffmpeg ${soundkonverter_codec_ffmpeg_SRCS})

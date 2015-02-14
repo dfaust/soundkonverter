@@ -13,7 +13,7 @@ set(soundkonverter_replaygain_mp3gain_SRCS
  )
 
 if (KF5_BUILD)
-    add_library(soundkonverter_replaygain_mp3gain ${soundkonverter_replaygain_mp3gain_SRCS})
+    add_library(soundkonverter_replaygain_mp3gain MODULE ${soundkonverter_replaygain_mp3gain_SRCS})
     target_link_libraries(soundkonverter_replaygain_mp3gain KF5::WidgetsAddons soundkonvertercore )
 else ()
     kde4_add_plugin(soundkonverter_replaygain_mp3gain ${soundkonverter_replaygain_mp3gain_SRCS})

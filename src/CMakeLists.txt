@@ -24,6 +24,8 @@ if (KF5_BUILD)
     find_package(ECM REQUIRED NO_MODULE)
     set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
+    add_definitions(-DSOUNDKONVERTER_KF5_BUILD)
+
     include(KDEInstallDirs)
     include(KDECompilerSettings)
     include(KDECMakeSettings)
@@ -32,8 +34,9 @@ if (KF5_BUILD)
 
     find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
     find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
+    find_package(Phonon4Qt5 REQUIRED)
 
-    set(CMAKE_AUTOMOC TRUE)
+    #set(CMAKE_AUTOMOC TRUE)
 else ()
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
@@ -56,7 +59,7 @@ add_subdirectory(plugins)
 
 # include directories
 if (KF5_BUILD)
-    #include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
+    include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 else ()
     include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 endif ()
@@ -85,7 +88,7 @@ set(soundkonvertercore_SRCS
 
 if (KF5_BUILD)
     add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
-    target_link_libraries(soundkonvertercore KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore)
+    target_link_libraries(soundkonvertercore KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::KDELibs4Support)
 else ()
     kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
     target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
@@ -142,7 +145,7 @@ set(soundkonverter_SRCS
 
 if (KF5_BUILD)
     add_executable(soundkonverter ${soundkonverter_SRCS})
-    target_link_libraries(soundkonverter kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
+    target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
 else ()
     kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
     target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)

@@ -8,6 +8,10 @@
 #include <cstdlib>
 #include <ctime>
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+#include <KGlobal>
+#endif
+
 
 LoggerItem::LoggerItem()
 {}

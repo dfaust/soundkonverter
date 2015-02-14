@@ -26,7 +26,7 @@ public:
     };
 
     /** Default Constructor */
-    soundkonverter_filter_sox( QObject *parent, const QStringList& args );
+    soundkonverter_filter_sox( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_filter_sox();
@@ -74,7 +74,9 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_FILTER( sox, soundkonverter_filter_sox )
+#endif
 
 
 #endif // SOUNDKONVERTER_FILTER_SOX_H

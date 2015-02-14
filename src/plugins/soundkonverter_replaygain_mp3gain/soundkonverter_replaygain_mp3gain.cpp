@@ -19,7 +19,7 @@ Mp3GainPluginItem::~Mp3GainPluginItem()
 {}
 
 
-soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *parent, const VARG_TYPE& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -305,6 +305,10 @@ float soundkonverter_replaygain_mp3gain::parseOutput( const QString& output )
 
     return progress;
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(replaygain_mp3gain, registerPlugin<soundkonverter_replaygain_mp3gain>();)
+#endif
 
 #include "soundkonverter_replaygain_mp3gain.moc"
 

@@ -9,7 +9,7 @@
 #include <QFile>
 
 
-soundkonverter_codec_musepack::soundkonverter_codec_musepack( QObject *parent, const QStringList& args  )
+soundkonverter_codec_musepack::soundkonverter_codec_musepack( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -256,5 +256,8 @@ ConversionOptions *soundkonverter_codec_musepack::conversionOptionsFromXml( QDom
     return options;
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_musepack, registerPlugin<soundkonverter_codec_musepack>();)
+#endif
 
 #include "soundkonverter_codec_musepack.moc"

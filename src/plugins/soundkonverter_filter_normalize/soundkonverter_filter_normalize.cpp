@@ -9,7 +9,7 @@
 #include <QFile>
 
 
-soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *parent, const QStringList& args  )
+soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *parent, const VARG_TYPE& args  )
     : FilterPlugin( parent )
 {
     Q_UNUSED(args)
@@ -167,6 +167,9 @@ FilterOptions *soundkonverter_filter_normalize::filterOptionsFromXml( QDomElemen
     return options;
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(filter_normalize, registerPlugin<soundkonverter_filter_normalize>();)
+#endif
 
 #include "soundkonverter_filter_normalize.moc"
 

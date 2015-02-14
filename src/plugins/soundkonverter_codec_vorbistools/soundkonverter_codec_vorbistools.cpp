@@ -6,7 +6,7 @@
 #include "vorbistoolscodecwidget.h"
 
 
-soundkonverter_codec_vorbistools::soundkonverter_codec_vorbistools( QObject *parent, const QStringList& args  )
+soundkonverter_codec_vorbistools::soundkonverter_codec_vorbistools( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -174,5 +174,8 @@ float soundkonverter_codec_vorbistools::parseOutput( const QString& output )
     return data.toFloat();
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_vorbistools, registerPlugin<soundkonverter_codec_vorbistools>();)
+#endif
 
 #include "soundkonverter_codec_vorbistools.moc"

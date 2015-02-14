@@ -17,7 +17,7 @@ class soundkonverter_codec_fluidsynth : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args );
+    soundkonverter_codec_fluidsynth( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_fluidsynth();
@@ -46,7 +46,9 @@ private slots:
 
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_CODEC( fluidsynth, soundkonverter_codec_fluidsynth )
+#endif
 
 
 #endif // SOUNDKONVERTER_CODEC_FLUIDSYNTH_H

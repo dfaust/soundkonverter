@@ -31,7 +31,7 @@ public:
     };
 
     /** Default Constructor */
-    soundkonverter_codec_libav( QObject *parent, const QStringList& args );
+    soundkonverter_codec_libav( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_libav();
@@ -79,7 +79,9 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_CODEC( libav, soundkonverter_codec_libav )
+#endif
 
 
 #endif // _SOUNDKONVERTER_CODEC_FFMPEG_H_

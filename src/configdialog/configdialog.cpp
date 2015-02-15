@@ -30,7 +30,7 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     config( _config )
 {
 #ifdef SOUNDKONVERTER_KF5_BUILD
-    buttonBox()->setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+    setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
     setWindowTitle(i18n("Settings"));
 #else
     setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
@@ -42,14 +42,18 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     coverArtPageChanged = false;
     backendsPageChanged = false;
 #ifdef SOUNDKONVERTER_KF5_BUILD
-    //FIXME button(QDialogButtonBox::Apply)->setEnabled( false );
+    buttonBox()->button(QDialogButtonBox::Apply)->setEnabled( false );
+
+    connect( button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(applyClicked()) );
+    connect( button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(okClicked()) );
+    connect( button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), this, SLOT(defaultClicked()) );
 #else
     button(KDialog::Apply)->setEnabled( false );
-#endif
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
     connect( this, SIGNAL(defaultClicked()), this, SLOT(defaultClicked()) );
+#endif
 
     configGeneralPage = new ConfigGeneralPage( config, this );
     generalPage = addPage( (QWidget*)configGeneralPage, i18n("General") );

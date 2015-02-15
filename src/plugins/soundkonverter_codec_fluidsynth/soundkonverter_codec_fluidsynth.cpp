@@ -27,7 +27,11 @@ soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *paren
     KConfigGroup group;
 
     group = conf->group( "Plugin-"+name() );
-    //FIXME soundFontFile = group.readEntry( "soundFontFile", KUrl() );
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    soundFontFile = group.readEntry( "soundFontFile", QUrl() );
+#else
+    soundFontFile = group.readEntry( "soundFontFile", KUrl() );
+#endif
 }
 
 soundkonverter_codec_fluidsynth::~soundkonverter_codec_fluidsynth()
@@ -109,7 +113,7 @@ void soundkonverter_codec_fluidsynth::configDialogSave()
         KConfigGroup group;
 
         group = conf->group( "Plugin-"+name() );
-        //FIXME group.writeEntry( "soundFontFile", soundFontFile );
+        group.writeEntry( "soundFontFile", soundFontFile );
 
         configDialog.data()->deleteLater();
     }

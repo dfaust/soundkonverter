@@ -39,7 +39,11 @@ private:
     QWeakPointer<KDialog> configDialog;
     KUrlRequester *configDialogSoundFontUrlRequester;
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    QUrl soundFontFile;
+#else
     KUrl soundFontFile;
+#endif
 
 private slots:
     void configDialogSave();

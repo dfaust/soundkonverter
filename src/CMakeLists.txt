@@ -155,7 +155,11 @@ install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 
 # install directories
 install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+if (KF5_BUILD)
+    install(FILES soundkonverterui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/soundkonverter)
+else ()
 install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
+endif ()
 
 install(FILES soundkonverter_codecplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_filterplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})

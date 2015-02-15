@@ -4,13 +4,13 @@
 #include "soundkonverter.h"
 #include "global.h"
 
-#include <kdeui_export.h>
 #include <KMainWindow>
 #include <KUniqueApplication>
 #ifdef SOUNDKONVERTER_KF5_BUILD
 #include <K4AboutData>
 #define KAboutData K4AboutData
 #else
+#include <kdeui_export.h>
 #include <KAboutData>
 #endif
 #include <KCmdLineArgs>

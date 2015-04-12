@@ -1,3 +1,6 @@
+2.1.91 (2.2.0 rc2):
+-Fix: Don't require an output path when using a user defined profile as command line argument
+
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files
 -Add: Adjust gain for mp3 files

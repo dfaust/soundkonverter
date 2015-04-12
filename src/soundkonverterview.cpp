@@ -401,15 +401,27 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
 
         cleanupParameters( &profile, &format );
 
-        if( !profile.isEmpty() && !format.isEmpty() && !directory.isEmpty() )
+        const bool isUserProfile = config->data.profiles.contains(profile);
+
+        if( ( !profile.isEmpty() && !format.isEmpty() && !directory.isEmpty() ) || isUserProfile )
         {
-            Options *options = new Options( config, "", 0 );
-            options->hide();
-            options->setProfile( profile );
-            options->setFormat( format );
-            options->setOutputDirectory( directory );
-            ConversionOptions *conversionOptions = options->currentConversionOptions();
-            delete options;
+            ConversionOptions *conversionOptions = 0;
+
+            if( !isUserProfile )
+            {
+                Options *options = new Options( config, "", 0 );
+                options->hide();
+                options->setProfile( profile );
+                options->setFormat( format );
+                options->setOutputDirectory( directory );
+                conversionOptions = options->currentConversionOptions();
+                delete options;
+            }
+            else
+            {
+                conversionOptions = config->data.profiles.value( profile );
+            }
+
             if( conversionOptions )
             {
                 fileList->addFiles( k_urls, conversionOptions, notifyCommand );
@@ -418,7 +430,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
             {
                 // FIXME error message, null pointer for conversion options
 //                 KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0"), i18n("Internal error") );
-                KMessageBox::error( this, "Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; Options::currentConversionOptions returned 0", "Internal error" );
+                KMessageBox::error( this, "Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nsoundKonverterView::addConvertFiles; conversionOptions=0, isUserProfile="+QString::number(isUserProfile), "Internal error" );
             }
         }
         else

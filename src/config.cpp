@@ -26,9 +26,6 @@ Config::~Config()
 {
     save();
 
-    qDeleteAll( data.profiles.values() );
-    data.profiles.clear();
-
     delete pPluginLoader;
     delete pTagEngine;
     delete pConversionOptionsManager;
@@ -372,9 +369,9 @@ void Config::load()
                             }
                             conversionOptions->filterOptions.append( filterOptions );
                         }
-                    }
-                    if( conversionOptions )
-                    {
+
+                        pConversionOptionsManager->addConversionOptions( conversionOptions );
+
                         data.profiles[profileName] = conversionOptions;
                         if( profileName != "soundkonverter_last_used" )
                             logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );

@@ -197,42 +197,36 @@ void ReplayGainFileListItemDelegate::paint( QPainter *painter, const QStyleOptio
 
     int m_left, m_top, m_right, m_bottom;
     item->treeWidget()->getContentsMargins( &m_left, &m_top, &m_right, &m_bottom );
-    //QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y()+m_top, option.rect.width()-m_left-m_right, option.rect.height()-m_top-m_bottom );
+
     QRect m_rect = QRect( option.rect.x()+m_left, option.rect.y(), option.rect.width()-m_left-m_right, option.rect.height() );
 
-    QRect textRect = painter->boundingRect( QRect(), Qt::AlignLeft|Qt::TextSingleLine, item->text(index.column()) );
-
-    if ( textRect.width() < m_rect.width() )
+    switch( index.column() )
     {
-        painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
-    }
-    else
-    {
-        painter->drawText( m_rect, Qt::AlignRight|Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
-        QLinearGradient linearGrad( QPoint(m_rect.x(),0), QPoint(m_rect.x()+15,0) );
-        linearGrad.setColorAt( 0, backgroundColor );
-        backgroundColor.setAlpha( 0 );
-        linearGrad.setColorAt( 1, backgroundColor );
-        painter->fillRect( m_rect.x(), m_rect.y(), 15, m_rect.height(), linearGrad );
-    }
-//     painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+        case 0:
+        {
+            QRect textRect = painter->boundingRect( QRect(), Qt::AlignLeft|Qt::TextSingleLine, item->text(index.column()) );
 
-//     QItemDelegate::paint( painter, _option, index );
+            if ( textRect.width() < m_rect.width() )
+            {
+                painter->drawText( m_rect, Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+            }
+            else
+            {
+                painter->drawText( m_rect, Qt::AlignRight|Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+                QLinearGradient linearGrad( QPoint(m_rect.x(),0), QPoint(m_rect.x()+15,0) );
+                linearGrad.setColorAt( 0, backgroundColor );
+                backgroundColor.setAlpha( 0 );
+                linearGrad.setColorAt( 1, backgroundColor );
+                painter->fillRect( m_rect.x(), m_rect.y(), 15, m_rect.height(), linearGrad );
+            }
+            break;
+        }
+        case 1:
+        case 2:
+        {
+            painter->drawText( m_rect, Qt::AlignRight|Qt::TextSingleLine|Qt::TextExpandTabs, item->text(index.column()) );
+        }
+    }
 
     painter->restore();
-
-//     int progress = (index.row() != 0 ? 100 / index.row() : 0);
-//
-//     // draw your cool progress bar here
-//     QStyleOptionProgressBar opt;
-//     opt.rect = option.rect;
-//     opt.minimum = 0;
-//     opt.maximum = 100;
-//     opt.progress = progress;
-//     opt.text = QString("%1%").arg(progress);
-//     opt.textVisible = true;
-//     QApplication::style()->drawControl(QStyle::CE_ProgressBar, &opt, painter, 0);
-
-    // maybe even let default implementation draw list item contents?
-    // QItemDelegate::paint(painter, option, index);
 }

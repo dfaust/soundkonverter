@@ -1,4 +1,5 @@
 2.1.91 (2.2.0 rc2):
+-Change: Remove both APE and ID3 Replay Gain tags with mp3gain and aacgain
 -Fix: Don't require an output path when using a user defined profile as command line argument
 
 2.1.90 (2.2.0 rc1):

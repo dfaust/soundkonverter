@@ -169,9 +169,9 @@ unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileLis
 
     QStringList command;
     command += binaries["mp3gain"];
-    command += "-k";
     if( mode == ReplayGainPlugin::Add )
     {
+        command += "-k";
         if( modifyAudioStream )
         {
             command += "-a";
@@ -180,6 +180,7 @@ unsigned int soundkonverter_replaygain_mp3gain::apply( const KUrl::List& fileLis
     }
     else if( mode == ReplayGainPlugin::Force )
     {
+        command += "-k";
         if( modifyAudioStream )
         {
             command += "-a";
@@ -261,6 +262,13 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
 
     QStringList command;
     command += binaries["mp3gain"];
+    // APE tags
+    command += "-s";
+    command += "a";
+    // ID3v2 tags
+    command += "-s";
+    command += "i";
+    // delete tags
     command += "-s";
     command += "d";
     foreach( const KUrl file, item->undoFileList )

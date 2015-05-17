@@ -34,7 +34,7 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
 
     group = conf->group( "Plugin-"+name() );
     tagMode = group.readEntry( "tagMode", 0 );
-    modifyAudioStream = group.readEntry( "modifyAudioStream", true );
+    modifyAudioStream = group.readEntry( "modifyAudioStream", false );
     gainAdjustment = group.readEntry( "gainAdjustment", 0.0 );
 }
 
@@ -148,7 +148,7 @@ void soundkonverter_replaygain_aacgain::configDialogDefault()
     if( configDialog.data() )
     {
         configDialogTagModeComboBox->setCurrentIndex( 0 );
-        configDialogModifyAudioStreamCheckBox->setChecked( true );
+        configDialogModifyAudioStreamCheckBox->setChecked( false );
         configDialogGainAdjustmentSpinBox->setValue( 0.0 );
     }
 }

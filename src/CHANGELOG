@@ -2,6 +2,7 @@
 -Change: Remove both APE and ID3 Replay Gain tags with mp3gain and aacgain
 -Change: Disable "modify audio stream" option by default in mp3gain and aacgain
 -Fix: Don't require an output path when using a user defined profile as command line argument
+-Fix: Don't crash when tags can't be read
 
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files

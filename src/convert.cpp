@@ -98,7 +98,7 @@ void Convert::convert( ConvertItem *item )
     if( !item->fileListItem->tags )
         item->fileListItem->tags = config->tagEngine()->readTags( inputUrl );
 
-    if( item->fileListItem->tags->isEncrypted )
+    if( item->fileListItem->tags && item->fileListItem->tags->isEncrypted )
     {
         logger->log( item->logID, "<br><span style=\"color:#C00000\">" + i18n("File is encrypted, conversion not possible") + "</span>" );
         remove( item, FileListItem::Encrypted );

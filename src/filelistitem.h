@@ -37,6 +37,7 @@ public:
         Encrypted                       = 7,
         BackendNeedsConfiguration       = 4,
         DiscFull                        = 5,
+        CantWriteOutput                 = 8,
         Failed                          = 6
     };
 

@@ -116,7 +116,13 @@ void Convert::convert( ConvertItem *item )
             remove( item, FileListItem::Skipped );
             return;
         }
-        OutputDirectory::makePath( item->outputUrl );
+        if( OutputDirectory::makePath(item->outputUrl) == KUrl() )
+        {
+            logger->log( item->logID, "\t" + i18n("Cannot create output directory \"%1\"",item->outputUrl.toLocalFile()) );
+            item->outputUrl = KUrl();
+            remove( item, FileListItem::CantWriteOutput );
+            return;
+        }
         fileList->updateItem( item->fileListItem );
     }
     usedOutputNames.insert( item->logID, item->outputUrl.toLocalFile() );
@@ -1226,6 +1232,9 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
             break;
         case FileListItem::DiscFull:
             exitMessage = i18nc("Conversion exit status","Not enough space on the output device");
+            break;
+        case FileListItem::CantWriteOutput:
+            exitMessage = i18nc("Conversion exit status","Cannot write to output directory, please check permissions");
             break;
         case FileListItem::Skipped:
             exitMessage = i18nc("Conversion exit status","File already exists");

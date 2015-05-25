@@ -361,13 +361,20 @@ KUrl OutputDirectory::makePath( const KUrl& url )
 {
     QFileInfo fileInfo( url.toLocalFile() );
 
-    QStringList dirs = fileInfo.absoluteDir().absolutePath().split( "/" );
+    QStringList directories = fileInfo.absoluteDir().absolutePath().split( "/" );
     QString mkDir;
     QDir dir;
-    for( QStringList::Iterator it = dirs.begin(); it != dirs.end(); ++it ) {
-        mkDir += "/" + *it;
+    foreach( const QString directory, directories )
+    {
+        mkDir += "/" + directory;
         dir.setPath( mkDir );
-        if( !dir.exists() ) dir.mkdir( mkDir );
+        if( !dir.exists() )
+        {
+            if( !dir.mkdir(mkDir) )
+            {
+                return KUrl();
+            }
+        }
     }
 
     return url;

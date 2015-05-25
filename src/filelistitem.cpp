@@ -95,6 +95,7 @@ void FileListItemDelegate::paint( QPainter *painter, const QStyleOptionViewItem&
                         isFailed = true;
                         break;
                     case FileListItem::DiscFull:
+                    case FileListItem::CantWriteOutput:
                         isFailed = true;
                         break;
                     case FileListItem::Skipped:

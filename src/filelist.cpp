@@ -606,6 +606,18 @@ void FileList::updateItem( FileListItem *item )
                     item->setText( Column_State, i18n("Disc full") );
                     break;
                 }
+                case FileListItem::CantWriteOutput:
+                {
+                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Can't write output") + "</a>" );
+                    connect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
+                    setItemWidget( item, Column_State, item->lInfo.data() );
+                    const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
+                    item->setToolTip( Column_State, toolTip );
+                    item->setToolTip( Column_Input, toolTip );
+                    item->setToolTip( Column_Output, toolTip );
+                    item->setToolTip( Column_Quality, toolTip );
+                    break;
+                }
                 case FileListItem::Skipped:
                 {
                     item->setText( Column_State, i18n("Skipped") );

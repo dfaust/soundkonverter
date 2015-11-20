@@ -48,7 +48,7 @@ endif ()
 find_package(Cdparanoia REQUIRED)
 find_package(Kcddb REQUIRED)
 
-set(TAGLIB_MIN_VERSION "1.4")
+set(TAGLIB_MIN_VERSION "1.10")
 find_package(Taglib REQUIRED)
 
 

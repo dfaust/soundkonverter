@@ -23,6 +23,7 @@
 #include <KMessageBox>
 #include <KFileDialog>
 #include <QDir>
+#include <KIcon>
 
 
 PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )

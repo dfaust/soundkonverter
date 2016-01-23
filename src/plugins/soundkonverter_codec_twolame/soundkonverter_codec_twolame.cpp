@@ -16,7 +16,7 @@
 #include <QGroupBox>
 #include <QSlider>
 
-soundkonverter_codec_twolame::soundkonverter_codec_twolame( QObject *parent, const QStringList& args  )
+soundkonverter_codec_twolame::soundkonverter_codec_twolame( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -208,5 +208,8 @@ float soundkonverter_codec_twolame::parseOutput( const QString& output )
     return -1;
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_twolame, registerPlugin<soundkonverter_codec_twolame>();)
+#endif
 
 #include "soundkonverter_codec_twolame.moc"

@@ -4,7 +4,7 @@
 #include "soundkonverter_replaygain_wvgain.h"
 
 
-soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain( QObject *parent, const VARG_TYPE& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -115,5 +115,9 @@ float soundkonverter_replaygain_wvgain::parseOutput( const QString& output )
 
     return -1;
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(replaygain_wvgain, registerPlugin<soundkonverter_replaygain_wvgain>();)
+#endif
 
 #include "soundkonverter_replaygain_wvgain.moc"

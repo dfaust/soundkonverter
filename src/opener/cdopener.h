@@ -20,7 +20,12 @@ extern "C"
 #include <phonon/mediaobject.h>
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
+#ifdef SOUNDKONVERTER_KF5_BUILD
+#include <phonon/MediaController>
+#else
 #include <Phonon/MediaController>
+#endif
+
 
 class TagEngine;
 class Config;

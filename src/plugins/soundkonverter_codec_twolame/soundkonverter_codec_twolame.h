@@ -14,7 +14,7 @@ class soundkonverter_codec_twolame : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_twolame( QObject *parent, const QStringList& args );
+    soundkonverter_codec_twolame( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_twolame();
@@ -34,7 +34,9 @@ public:
     float parseOutput( const QString& output );
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_CODEC( twolame, soundkonverter_codec_twolame )
+#endif
 
 
 #endif // _SOUNDKONVERTER_CODEC_TWOLAME_H_

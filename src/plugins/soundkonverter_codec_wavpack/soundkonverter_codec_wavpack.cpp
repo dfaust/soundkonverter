@@ -6,7 +6,7 @@
 #include "wavpackcodecwidget.h"
 
 
-soundkonverter_codec_wavpack::soundkonverter_codec_wavpack( QObject *parent, const QStringList& args  )
+soundkonverter_codec_wavpack::soundkonverter_codec_wavpack( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -174,5 +174,8 @@ float soundkonverter_codec_wavpack::parseOutput( const QString& output )
     return -1;
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_wavpack, registerPlugin<soundkonverter_codec_wavpack>();)
+#endif
 
 #include "soundkonverter_codec_wavpack.moc"

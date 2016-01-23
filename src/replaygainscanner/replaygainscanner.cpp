@@ -173,7 +173,11 @@ void ReplayGainScanner::fileDialogAccepted()
     QMap< QString, QList<QStringList> > problems;
     QString fileName;
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    QList<QUrl> urls = fileDialog->selectedUrls();
+#else
     QList<KUrl> urls = fileDialog->selectedUrls();
+#endif
 
     const bool canDecodeAac = config->pluginLoader()->canDecode( "m4a/aac" );
     const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
@@ -186,7 +190,11 @@ void ReplayGainScanner::fileDialogAccepted()
 
         if( !config->pluginLoader()->canReplayGain(codecName,0,&errorList) )
         {
+#ifdef SOUNDKONVERTER_KF5_BUILD
+            fileName = urls.at(i).toDisplayString(QUrl::PreferLocalFile);
+#else
             fileName = urls.at(i).pathOrUrl();
+#endif
 
             if( codecName.isEmpty() )
                 codecName = mimeType;

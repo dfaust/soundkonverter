@@ -3,6 +3,10 @@
 #ifndef CODECWIDGET_H
 #define CODECWIDGET_H
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    #include <kcoreaddons_export.h>
+#endif
+
 #include <QWidget>
 
 #include <KGenericFactory>
@@ -17,7 +21,12 @@ class ConversionOptions;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT FilterWidget : public QWidget
+#else
 class KDE_EXPORT FilterWidget : public QWidget
+#endif
 {
     Q_OBJECT
 public:
@@ -37,7 +46,11 @@ signals:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT CodecWidget : public QWidget
+#else
 class KDE_EXPORT CodecWidget : public QWidget
+#endif
 {
     Q_OBJECT
 public:

@@ -68,6 +68,7 @@ unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track
 
     command += binaries["icedax"];
     command += "-g";
+    command += "-H";
     command += "-D";
     command += device;
     if( track > 0 )

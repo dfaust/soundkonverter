@@ -1472,6 +1472,7 @@ void FileList::load( bool user )
                         QDomElement tags = file.elementsByTagName("tags").at(0).toElement();
                         item->tags = new TagData();
                         item->tags->artist = tags.attribute("artist");
+                        item->tags->albumArtist = tags.attribute("albumArtist");
                         item->tags->composer = tags.attribute("composer");
                         item->tags->album = tags.attribute("album");
                         item->tags->title = tags.attribute("title");
@@ -1486,6 +1487,7 @@ void FileList::load( bool user )
                         item->tags->albumGain = tags.attribute("album_gain").toFloat();
                         item->tags->length = tags.attribute("length").toInt();
                         item->tags->samplingRate = tags.attribute("samplingRate").toInt();
+                        item->tags->isEncrypted = tags.attribute("isEncrypted").toInt();
                     }
                     addTopLevelItem( item );
                     updateItem( item );
@@ -1552,6 +1554,7 @@ void FileList::save( bool user )
         {
             QDomElement tags = list.createElement("tags");
             tags.setAttribute("artist",item->tags->artist);
+            tags.setAttribute("albumArtist",item->tags->albumArtist);
             tags.setAttribute("composer",item->tags->composer);
             tags.setAttribute("album",item->tags->album);
             tags.setAttribute("title",item->tags->title);
@@ -1566,6 +1569,7 @@ void FileList::save( bool user )
             tags.setAttribute("album_gain",item->tags->albumGain);
             tags.setAttribute("length",item->tags->length);
             tags.setAttribute("samplingRate",item->tags->samplingRate);
+            tags.setAttribute("isEncrypted",item->tags->isEncrypted);
             file.appendChild(tags);
         }
     }

@@ -104,7 +104,7 @@ int Logger::getNewID()
 
     do {
         id = rand();
-    } while( !processes.contains(id) );
+    } while( processes.contains(id) );
 
     return id;
 }

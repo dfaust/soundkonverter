@@ -162,12 +162,12 @@ ConversionOptions *SoxCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool SoxCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool SoxCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
 
     if( currentFormat == "wav" ||
         currentFormat == "aiff" ||

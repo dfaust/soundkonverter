@@ -107,12 +107,12 @@ ConversionOptions *FFmpegCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool FFmpegCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool FFmpegCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
 
     if( currentFormat == "ac3" )
         cBitrate->setCurrentIndex( cBitrate->findText(QString::number(options->bitrate)+" kbps") );

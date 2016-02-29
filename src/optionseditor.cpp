@@ -363,7 +363,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     // remove all cover widgets
     foreach( QLabel* label, lCovers )
     {
-        bCovers->removeWidget( label );
+        bCovers->removeWidget( label ); // FIXME crash
         label->deleteLater();
     }
     lCovers.clear();
@@ -708,7 +708,7 @@ void OptionsEditor::editOptionsClicked()
 
     if( selectedItems.count() > 0 && selectedItems.first() )
     {
-        ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( selectedItems.first()->conversionOptionsId );
+        const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( selectedItems.first()->conversionOptionsId );
         if( conversionOptions )
             options->setCurrentConversionOptions( conversionOptions );
     }

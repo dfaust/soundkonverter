@@ -112,11 +112,11 @@ ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool NeroaacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool NeroaacCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
     {

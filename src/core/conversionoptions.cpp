@@ -142,7 +142,7 @@ bool ConversionOptions::equalsBasics( ConversionOptions *_other )
              cmdArguments ==_other->cmdArguments );
 }
 
-QDomElement ConversionOptions::toXml( QDomDocument document )
+QDomElement ConversionOptions::toXml( QDomDocument document ) const
 {
     QDomElement conversionOptions = document.createElement("conversionOptions");
     conversionOptions.setAttribute("pluginName",pluginName);

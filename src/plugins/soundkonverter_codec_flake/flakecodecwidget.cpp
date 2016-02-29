@@ -120,11 +120,11 @@ ConversionOptions *FlakeCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool FlakeCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool FlakeCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
     iCompressionLevel->setValue( options->compressionLevel );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );

@@ -199,7 +199,7 @@ void DirOpener::addClicked()
 
     if( mode == Convert )
     {
-        ConversionOptions *conversionOptions = options->currentConversionOptions();
+        const ConversionOptions *conversionOptions = options->currentConversionOptions();
         if( conversionOptions )
         {
             hide();

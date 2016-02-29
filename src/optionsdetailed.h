@@ -37,7 +37,7 @@ public:
     /** Return the current options */
     ConversionOptions *currentConversionOptions( bool saveLastUsed = true );
     /** Set the current options */
-    bool setCurrentConversionOptions( ConversionOptions *options );
+    bool setCurrentConversionOptions( const ConversionOptions *conversionOptions );
 
     QString currentProfile();
     bool setCurrentProfile( const QString& profile );

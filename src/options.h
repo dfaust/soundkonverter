@@ -32,7 +32,7 @@ public:
     ConversionOptions *currentConversionOptions();
 
     /** Set the current options */
-    bool setCurrentConversionOptions( ConversionOptions* optionsptions );
+    bool setCurrentConversionOptions( const ConversionOptions* optionsptions );
 
 public slots:
     /** Set the current profile */

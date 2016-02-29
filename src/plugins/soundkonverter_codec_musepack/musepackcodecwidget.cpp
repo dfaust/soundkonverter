@@ -134,11 +134,11 @@ ConversionOptions *MusePackCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool MusePackCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool MusePackCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
-    MusePackConversionOptions *options = static_cast<MusePackConversionOptions*>(_options);
+    const MusePackConversionOptions *options = static_cast<const MusePackConversionOptions*>(_options);
     cPreset->setCurrentIndex( (int)options->data.preset );
     presetChanged( cPreset->currentText() );
     dQuality->setValue( options->quality );

@@ -21,7 +21,7 @@ ConversionOptions *TimidityCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool TimidityCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool TimidityCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;

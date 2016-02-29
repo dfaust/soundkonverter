@@ -81,7 +81,7 @@ CodecWidget *soundkonverter_codec_vorbistools::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-unsigned int soundkonverter_codec_vorbistools::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+unsigned int soundkonverter_codec_vorbistools::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, const ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     QStringList command = convertCommand( inputFile, outputFile, inputCodec, outputCodec, _conversionOptions, tags, replayGain );
     if( command.isEmpty() )
@@ -104,7 +104,7 @@ unsigned int soundkonverter_codec_vorbistools::convert( const KUrl& inputFile, c
     return newItem->id;
 }
 
-QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, const ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)
@@ -114,7 +114,7 @@ QStringList soundkonverter_codec_vorbistools::convertCommand( const KUrl& inputF
         return QStringList();
 
     QStringList command;
-    ConversionOptions *conversionOptions = _conversionOptions;
+    const ConversionOptions *conversionOptions = _conversionOptions;
 
     if( outputCodec == "ogg vorbis" )
     {

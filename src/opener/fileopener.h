@@ -51,7 +51,7 @@ private slots:
     void showHelp();
 
 signals:
-    void open( const KUrl::List& files, ConversionOptions *conversionOptions );
+    void open( const KUrl::List& files, const ConversionOptions *conversionOptions );
 
 };
 

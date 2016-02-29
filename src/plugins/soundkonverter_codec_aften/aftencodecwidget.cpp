@@ -117,12 +117,12 @@ ConversionOptions *AftenCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool AftenCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool AftenCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
 
     if( options->qualityMode == ConversionOptions::Quality )
     {

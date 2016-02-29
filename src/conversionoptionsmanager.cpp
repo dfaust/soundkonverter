@@ -1,14 +1,4 @@
-//
-// C++ Implementation: conversionoptionsmanager
-//
-// Description:
-//
-//
-// Author: Daniel Faust <hessijames@gmail.com>, (C) 2008
-//
-// Copyright: See COPYING file that comes with this distribution
-//
-//
+
 #include "conversionoptionsmanager.h"
 #include "core/conversionoptions.h"
 #include "pluginloader.h"
@@ -21,9 +11,9 @@ ConversionOptionsManager::ConversionOptionsManager( PluginLoader *_pluginLoader 
 
 ConversionOptionsManager::~ConversionOptionsManager()
 {
-    for( int i=0; i<elements.size(); i++ )
+    foreach( ConversionOptionsElement element, elements.values() )
     {
-        delete elements.at(i).conversionOptions;
+        delete element.conversionOptions;
     }
     elements.clear();
 }
@@ -36,64 +26,57 @@ int ConversionOptionsManager::addConversionOptions( ConversionOptions *conversio
         return -1;
     }
 
-    for( int i=0; i<elements.size(); i++ )
+    foreach( const ConversionOptionsElement& element, elements )
     {
-        if( elements.at(i).conversionOptions->pluginName == conversionOptions->pluginName )
+        if( element.conversionOptions->pluginName == conversionOptions->pluginName )
         {
-            if( elements.at(i).conversionOptions->equals(conversionOptions) ) // NOTE equals gets reimplemented by the plugins
+            if( element.conversionOptions->equals(conversionOptions) ) // NOTE equals gets reimplemented by the plugins
             {
-                elements[i].references++;
-                return elements.at(i).id;
+                elements[element.id].references++;
+                return element.id;
             }
         }
     }
 
-    ConversionOptionsElement newElement;
-    newElement.id = idCounter++;
-    newElement.conversionOptions = conversionOptions;
-    newElement.references = 1;
-    elements.append( newElement );
-    return newElement.id;
+    ConversionOptionsElement element;
+    element.id = idCounter++;
+    element.conversionOptions = conversionOptions;
+    element.references = 1;
+    elements.insert( element.id, element );
+    return element.id;
 }
 
 int ConversionOptionsManager::increaseReferences( int id )
 {
-    for( int i=0; i<elements.size(); i++ )
+    if( elements.contains(id) )
     {
-        if( elements.at(i).id == id )
-        {
-            elements[i].references++;
-            return id;
-        }
+        elements[id].references++;
+        return id;
     }
+
     return -1;
 }
 
-ConversionOptions *ConversionOptionsManager::getConversionOptions( int id )
+const ConversionOptions *ConversionOptionsManager::getConversionOptions( int id ) const
 {
-    for( int i=0; i<elements.size(); i++ )
+    if( elements.contains(id) )
     {
-        if( elements.at(i).id == id )
-        {
-            return elements.at(i).conversionOptions;
-        }
+        return elements[id].conversionOptions;
     }
+
     return 0;
 }
 
 void ConversionOptionsManager::removeConversionOptions( int id )
 {
-    for( int i=0; i<elements.size(); i++ )
+    if( elements.contains(id) )
     {
-        if( elements.at(i).id == id )
+        elements[id].references--;
+
+        if( elements.value(id).references <= 0 )
         {
-            elements[i].references--;
-            if( elements.at(i).references <= 0 )
-            {
-                delete elements.at(i).conversionOptions;
-                elements.removeAt(i);
-            }
-            return;
+            delete elements.value(id).conversionOptions;
+            elements.remove(id);
         }
     }
 }
@@ -104,14 +87,7 @@ int ConversionOptionsManager::updateConversionOptions( int id, ConversionOptions
     return addConversionOptions( conversionOptions );
 }
 
-QList<int> ConversionOptionsManager::getAllIds()
+QList<int> ConversionOptionsManager::getAllIds() const
 {
-    QList<int> ids;
-
-    for( int i=0; i<elements.size(); i++ )
-    {
-        ids += elements.at(i).id;
-    }
-
-    return ids;
+    return elements.keys();
 }

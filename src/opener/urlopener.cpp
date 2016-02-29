@@ -137,7 +137,7 @@ void UrlOpener::okClickedSlot()
 {
     if( page == ConversionOptionsPage )
     {
-        ConversionOptions *conversionOptions = options->currentConversionOptions();
+        const ConversionOptions *conversionOptions = options->currentConversionOptions();
         if( conversionOptions )
         {
             options->accepted();

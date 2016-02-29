@@ -537,7 +537,7 @@ void FileList::updateItem( FileListItem *item )
         delete item->lInfo.data();
     }
 
-    ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
+    const ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(item->conversionOptionsId);
 
     switch( item->state )
     {

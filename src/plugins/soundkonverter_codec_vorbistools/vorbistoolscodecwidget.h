@@ -18,7 +18,7 @@ public:
     ~VorbisToolsCodecWidget();
 
     ConversionOptions *currentConversionOptions();
-    bool setCurrentConversionOptions( ConversionOptions *_options );
+    bool setCurrentConversionOptions( const ConversionOptions *_options );
     void setCurrentFormat( const QString& format );
     QString currentProfile();
     bool setCurrentProfile( const QString& profile );

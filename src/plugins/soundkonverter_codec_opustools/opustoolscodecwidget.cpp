@@ -95,16 +95,16 @@ ConversionOptions *OpusToolsCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool OpusToolsCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool OpusToolsCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options )
         return false;
 
-    ConversionOptions *options = _options;
-    OpusToolsConversionOptions *opusToolsOptions = 0;
+    const ConversionOptions *options = _options;
+    const OpusToolsConversionOptions *opusToolsOptions = 0;
     if( options->pluginName == global_plugin_name )
     {
-        opusToolsOptions = static_cast<OpusToolsConversionOptions*>(options);
+        opusToolsOptions = static_cast<const OpusToolsConversionOptions*>(options);
     }
 
     if( opusToolsOptions )

@@ -1235,7 +1235,7 @@ void CDOpener::proceedClicked()
 
 void CDOpener::addClicked()
 {
-    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    const ConversionOptions *conversionOptions = options->currentConversionOptions();
     if( conversionOptions )
     {
         QList<int> tracks;

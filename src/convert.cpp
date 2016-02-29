@@ -85,7 +85,7 @@ void Convert::convert( ConvertItem *item )
     if( !item )
         return;
 
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
+    const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( !conversionOptions )
         return;
 
@@ -333,7 +333,7 @@ void Convert::convertNextBackend( ConvertItem *item )
     if( !item )
         return;
 
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
+    const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( !conversionOptions )
         return;
 
@@ -1115,7 +1115,8 @@ void Convert::add( FileListItem *fileListItem )
 
     newItem->inputUrl = fileListItem->url;
 
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
+    logger->log( 1000, "config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);" );
+    const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !conversionOptions )
     {
         logger->log( 1000, "Convert::add(...) no ConversionOptions found" );
@@ -1128,6 +1129,7 @@ void Convert::add( FileListItem *fileListItem )
         logger->log( newItem->logID, "\t" + i18n("Track number: %1, device: %2",QString::number(fileListItem->track),fileListItem->device) );
     }
 
+    logger->log( 1000, "config->pluginLoader()->getConversionPipes( fileListItem->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );" );
     newItem->conversionPipes = config->pluginLoader()->getConversionPipes( fileListItem->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );
 
     logger->log( newItem->logID, "\t" + i18n("Possible conversion strategies:") );
@@ -1165,6 +1167,7 @@ void Convert::add( FileListItem *fileListItem )
     fileListItem->state = FileListItem::Converting;
 
     // and start
+    logger->log( 1000, "executeNextStep( newItem );" );
     executeNextStep( newItem );
 }
 
@@ -1197,7 +1200,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
         QFileInfo inputFileInfo( item->inputUrl.toLocalFile() );
         fileRatio /= inputFileInfo.size();
     }
-    ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
+    const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions( item->fileListItem->conversionOptionsId );
     if( fileRatio < 0.01 && outputFileInfo.size() < 100000 && returnCode != FileListItem::StoppedByUser && ( !conversionOptions || !config->pluginLoader()->isCodecInferiorQuality(conversionOptions->codecName) ) )
     {
         exitMessage = i18n("An error occurred, the output file size is less than one percent of the input file size");

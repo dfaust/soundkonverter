@@ -266,8 +266,8 @@ private slots:
     void fadeAnim();
 
 signals:
-    void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, ConversionOptions *conversionOptions, const QString& command );
-    void addDisc( const QString& device, ConversionOptions *conversionOptions );
+    void addTracks( const QString& device, QList<int> trackList, int tracks, QList<TagData*> tagList, const ConversionOptions *conversionOptions, const QString& command );
+    void addDisc( const QString& device, const ConversionOptions *conversionOptions );
     //void openCuesheetEditor( const QString& content );
 };
 

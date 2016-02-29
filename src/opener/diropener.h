@@ -73,7 +73,7 @@ private:
     QCheckBox *cRecursive;
 
 signals:
-    void open( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions = 0 );
+    void open( const KUrl& directory, bool recursive, const QStringList& codecList, const ConversionOptions *conversionOptions = 0 );
 };
 
 

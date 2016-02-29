@@ -21,7 +21,7 @@ public:
     ~TwoLameCodecWidget();
 
     ConversionOptions *currentConversionOptions();
-    bool setCurrentConversionOptions( ConversionOptions *options );
+    bool setCurrentConversionOptions( const ConversionOptions *options );
     void setCurrentFormat( const QString& format );
     QString currentProfile();
     bool setCurrentProfile( const QString& profile );

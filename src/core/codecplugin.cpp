@@ -20,7 +20,10 @@ CodecPlugin::CodecPlugin( QObject *parent )
 }
 
 CodecPlugin::~CodecPlugin()
-{}
+{
+    if( lastUsedConversionOptions )
+        delete lastUsedConversionOptions;
+}
 
 QString CodecPlugin::type()
 {

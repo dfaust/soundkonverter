@@ -70,11 +70,11 @@ ConversionOptions *MacCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool MacCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool MacCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
     iCompressionLevel->setValue( options->compressionLevel/1000 );
     return true;
 }

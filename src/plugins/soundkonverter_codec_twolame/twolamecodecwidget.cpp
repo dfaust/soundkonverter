@@ -110,7 +110,7 @@ ConversionOptions *TwoLameCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool TwoLameCodecWidget::setCurrentConversionOptions( ConversionOptions *options )
+bool TwoLameCodecWidget::setCurrentConversionOptions( const ConversionOptions *options )
 {
     if( !options || options->pluginName != global_plugin_name ) return false;
 

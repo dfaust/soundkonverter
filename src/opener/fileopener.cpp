@@ -197,7 +197,7 @@ void FileOpener::fileDialogAccepted()
 
 void FileOpener::okClickedSlot()
 {
-    ConversionOptions *conversionOptions = options->currentConversionOptions();
+    const ConversionOptions *conversionOptions = options->currentConversionOptions();
     if( conversionOptions )
     {
         options->accepted();

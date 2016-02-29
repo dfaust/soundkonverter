@@ -107,12 +107,12 @@ ConversionOptions *LibavCodecWidget::currentConversionOptions()
     return options;
 }
 
-bool LibavCodecWidget::setCurrentConversionOptions( ConversionOptions *_options )
+bool LibavCodecWidget::setCurrentConversionOptions( const ConversionOptions *_options )
 {
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-    ConversionOptions *options = _options;
+    const ConversionOptions *options = _options;
 
     if( currentFormat == "ac3" )
         cBitrate->setCurrentIndex( cBitrate->findText(QString::number(options->bitrate)+" kbps") );

@@ -90,9 +90,9 @@ ConversionOptions *Options::currentConversionOptions()
     return optionsDetailed->currentConversionOptions();
 }
 
-bool Options::setCurrentConversionOptions( ConversionOptions *options )
+bool Options::setCurrentConversionOptions( const ConversionOptions *conversionOptions )
 {
-    const bool success = optionsDetailed->setCurrentConversionOptions( options );
+    const bool success = optionsDetailed->setCurrentConversionOptions( conversionOptions );
     tabChanged( 0 ); // update optionsSimple
     return success;
 }

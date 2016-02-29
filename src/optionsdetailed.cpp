@@ -340,23 +340,21 @@ void OptionsDetailed::configurePlugin()
 
 ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed )
 {
-    ConversionOptions *options = 0;
-
     if( wPlugin && currentPlugin )
     {
-        options = wPlugin->currentConversionOptions();
-        if( options )
+        ConversionOptions *conversionOptions = wPlugin->currentConversionOptions();
+        if( conversionOptions )
         {
-            options->codecName = cFormat->currentText();
-            if( options->codecName != "wav" )
-                options->pluginName = currentPlugin->name();
+            conversionOptions->codecName = cFormat->currentText();
+            if( conversionOptions->codecName != "wav" )
+                conversionOptions->pluginName = currentPlugin->name();
             else
-                options->pluginName = "";
-            options->profile = wPlugin->currentProfile();
-            options->outputDirectoryMode = outputDirectory->mode();
-            options->outputDirectory = outputDirectory->directory();
-            options->outputFilesystem = outputDirectory->filesystem();
-            options->replaygain = cReplayGain->isEnabled() && cReplayGain->isChecked();
+                conversionOptions->pluginName = "";
+            conversionOptions->profile = wPlugin->currentProfile();
+            conversionOptions->outputDirectoryMode = outputDirectory->mode();
+            conversionOptions->outputDirectory = outputDirectory->directory();
+            conversionOptions->outputFilesystem = outputDirectory->filesystem();
+            conversionOptions->replaygain = cReplayGain->isEnabled() && cReplayGain->isChecked();
 
             for( int i=0; i<wFilter.size(); i++ )
             {
@@ -368,7 +366,7 @@ ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed 
                     if( filterOptions )
                     {
                         filterOptions->pluginName = plugin->name();
-                        options->filterOptions.append( filterOptions );
+                        conversionOptions->filterOptions.append( filterOptions );
                     }
                 }
             }
@@ -379,39 +377,41 @@ ConversionOptions *OptionsDetailed::currentConversionOptions( bool saveLastUsed 
                 saveCustomProfile( true );
                 config->data.general.lastFormat = cFormat->currentText();
             }
+
+            return conversionOptions;
         }
     }
 
-    return options;
+    return 0;
 }
 
-bool OptionsDetailed::setCurrentConversionOptions( ConversionOptions *options )
+bool OptionsDetailed::setCurrentConversionOptions( const ConversionOptions *conversionOptions )
 {
-    if( !options )
+    if( !conversionOptions )
         return false;
 
-    cFormat->setCurrentIndex( cFormat->findText(options->codecName) );
+    cFormat->setCurrentIndex( cFormat->findText(conversionOptions->codecName) );
     formatChanged( cFormat->currentText() );
-    if( options->codecName != "wav" )
+    if( conversionOptions->codecName != "wav" )
     {
-        cPlugin->setCurrentIndex( cPlugin->findText(options->pluginName) );
+        cPlugin->setCurrentIndex( cPlugin->findText(conversionOptions->pluginName) );
         encoderChanged( cPlugin->currentText() );
     }
-    outputDirectory->setMode( (OutputDirectory::Mode)options->outputDirectoryMode );
-    outputDirectory->setDirectory( options->outputDirectory );
-    cReplayGain->setChecked( options->replaygain );
+    outputDirectory->setMode( (OutputDirectory::Mode)conversionOptions->outputDirectoryMode );
+    outputDirectory->setDirectory( conversionOptions->outputDirectory );
+    cReplayGain->setChecked( conversionOptions->replaygain );
 
     bool succeeded = true;
 
-    if( options->codecName == "wav" )
+    if( conversionOptions->codecName == "wav" )
         succeeded = true;
     else if( wPlugin )
-        succeeded = wPlugin->setCurrentConversionOptions( options );
+        succeeded = wPlugin->setCurrentConversionOptions( conversionOptions );
     else
         succeeded = false;
 
     QStringList usedFilter;
-    foreach( FilterOptions *filterOptions, options->filterOptions )
+    foreach( FilterOptions *filterOptions, conversionOptions->filterOptions )
     {
         bool filterSucceeded = false;
         for( int i=0; i<wFilter.size(); i++ )

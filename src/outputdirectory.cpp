@@ -122,7 +122,7 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
 {
     QRegExp regEx( "%[abcdfgnpsty]{1,1}", Qt::CaseInsensitive );
 
-    ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
+    const ConversionOptions *options = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !options )
         return KUrl();
 

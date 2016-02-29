@@ -49,7 +49,7 @@ public:
     bool equalsFilters( ConversionOptions *_other );
     virtual bool equals( ConversionOptions *_other ); // checks if the other ConversionOptions is equal to this
 
-    virtual QDomElement toXml( QDomDocument document );
+    virtual QDomElement toXml( QDomDocument document ) const;
 
     virtual bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 

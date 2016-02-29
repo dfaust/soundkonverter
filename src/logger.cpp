@@ -163,6 +163,7 @@ void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain 
         if( removeId > -1 )
         {
             emit removedProcess( removeId );
+            delete processes.value( removeId );
             processes.remove( removeId );
         }
     }

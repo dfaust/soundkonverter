@@ -9,11 +9,21 @@
 #include <ctime>
 
 
-LoggerItem::LoggerItem()
-{}
+LoggerItem::LoggerItem( int logId, const QString& logIdentifier )
+{
+    id = logId;
+    identifier = logIdentifier;
+    file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(id)) );
+}
 
 LoggerItem::~LoggerItem()
-{}
+{
+    if( file.isOpen() )
+        file.close();
+
+    if( file.exists() )
+        file.remove();
+}
 
 
 Logger::Logger( QObject *parent)
@@ -24,12 +34,9 @@ Logger::Logger( QObject *parent)
     group = conf->group( "General" );
     writeLogFiles = group.readEntry( "writeLogFiles", false );
 
-    LoggerItem *item = new LoggerItem();
-    item->identifier = "soundKonverter";
-    item->id = 1000;
+    LoggerItem *item = new LoggerItem( 1000, "soundKonverter" );
     item->completed = true;
     item->succeeded = true;
-    item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
     if( writeLogFiles )
     {
         // TODO error handling
@@ -37,47 +44,20 @@ Logger::Logger( QObject *parent)
         item->textStream.setDevice( &(item->file) );
     }
 
-    processes.append( item );
+    processes.insert( item->id, item );
 
     srand( (unsigned)time(NULL) );
 }
 
 Logger::~Logger()
 {
-    for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
-    {
-        if( (*it)->file.isOpen() )
-            (*it)->file.close();
-
-        if( (*it)->file.exists() )
-            (*it)->file.remove();
-
-        delete *it;
-    }
+    qDeleteAll(processes);
 }
-
-// void Logger::cleanUp()
-// {
-//     for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
-//     {
-//         if( (*it)->id != 1000 )
-//         {
-//             emit removedProcess( (*it)->id );
-//             (*it)->file.close();
-//             (*it)->file.remove();
-//             delete *it;
-//         }
-//     }
-//     processes.clear();
-// }
 
 int Logger::registerProcess( const QString& identifier )
 {
-    LoggerItem *item = new LoggerItem();
-    item->identifier = identifier;
-    item->id = getNewID();
+    LoggerItem *item = new LoggerItem( getNewID(), identifier );
     item->completed = false;
-    item->file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(item->id)) );
     if( writeLogFiles )
     {
         // TODO error handling
@@ -85,7 +65,7 @@ int Logger::registerProcess( const QString& identifier )
         item->textStream.setDevice( &(item->file) );
     }
 
-    processes.append( item );
+    processes.insert( item->id, item );
 
     log( item->id, i18n("Identifier") + ": " + item->identifier );
     log( item->id, i18n("Log ID") + ": " + QString::number(item->id) );
@@ -97,108 +77,94 @@ int Logger::registerProcess( const QString& identifier )
 
 void Logger::log( int id, const QString& data )
 {
-    for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
+    if( processes.contains(id) )
     {
-        if( (*it)->id == id )
+        LoggerItem* const process = processes.value(id);
+
+        process->data.append( data );
+
+        while( process->data.count() > 10000 )
+            process->data.removeFirst();
+
+        if( writeLogFiles && process->file.isOpen() )
         {
-            (*it)->data.append( data );
-
-            if( (*it)->data.count() > 10000 )
-                (*it)->data.removeFirst();
-
-            if( writeLogFiles && (*it)->file.isOpen() )
-            {
-                (*it)->textStream << data;
-                (*it)->textStream << "\n";
-                (*it)->textStream.flush();
-            }
-            if( id == 1000 )
-                emit updateProcess( id );
-
-            return;
+            process->textStream << data;
+            process->textStream << "\n";
+            process->textStream.flush();
         }
+
+        if( id == 1000 )
+            emit updateProcess( id );
     }
 }
 
 int Logger::getNewID()
 {
-    bool ok;
     int id;
 
     do {
         id = rand();
-        ok = true;
-
-        for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
-        {
-            if( (*it)->id == id )
-                ok = false;
-        }
-
-    } while( !ok );
+    } while( !processes.contains(id) );
 
     return id;
 }
 
-LoggerItem* Logger::getLog( int id )
+const LoggerItem* Logger::getLog( int id ) const
 {
-    for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it )
-    {
-        if( (*it)->id == id )
-            return *it;
-    }
-
-    return 0;
+    return processes.value(id, 0);
 }
 
-QList<LoggerItem*> Logger::getLogs()
+QList< QPair<int, QString> > Logger::getLogs() const
 {
-/*    QList<LoggerItem*> items;
+    QList< QPair<int, QString> > logs;
 
-    for( QList<LoggerItem*>::Iterator it = processes.begin(); it != processes.end(); ++it ) {
-        if( (*it)->completed ) items.append( *it );
+    foreach( LoggerItem* process, processes )
+    {
+        logs << QPair<int, QString>(process->id, process->identifier);
     }
 
-    return items;*/
-    return processes;
+    return logs;
 }
 
 void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain )
 {
     Q_UNUSED( waitingForAlbumGain )
 
-    LoggerItem* removeItem = 0;
-    QTime time = QTime::currentTime();
-
-    for( int i=0; i<processes.count(); i++ )
+    if( processes.contains(id) )
     {
-        if( processes.at(i)->time < time && processes.at(i)->completed && processes.at(i)->succeeded && processes.at(i)->id != 1000 )
+        LoggerItem* const process = processes.value(id);
+
+        process->succeeded = succeeded;
+        process->completed = true;
+        process->time = process->time.currentTime();
+        process->data.append( i18n("Finished logging") );
+        if( process->file.isOpen() )
         {
-            time = processes.at(i)->time;
-            removeItem = processes.at(i);
+            process->textStream << i18n("Finished logging");
+            process->file.close();
         }
-        else if( processes.at(i)->id == id )
-        {
-            processes.at(i)->succeeded = succeeded;
-            processes.at(i)->completed = true;
-            processes.at(i)->time = processes.at(i)->time.currentTime();
-            processes.at(i)->data.append( i18n("Finished logging") );
-            if( processes.at(i)->file.isOpen() )
-            {
-                processes.at(i)->textStream << i18n("Finished logging");
-                processes.at(i)->file.close();
-            }
-            emit updateProcess( id );
-        }
+        emit updateProcess( id );
     }
 
-    if( removeItem && processes.count() > 11 )
+    if( processes.count() > 11 )
     {
-        emit removedProcess( removeItem->id );
-        if( removeItem->file.exists() )
-            removeItem->file.remove();
-        processes.removeAt( processes.indexOf(removeItem) );
-        delete removeItem;
+        QTime time = QTime::currentTime();
+
+        int removeId = -1;
+        foreach( LoggerItem* process, processes.values() )
+        {
+            if( process->time < time && process->completed && process->succeeded && process->id != 1000 )
+            {
+                time = process->time;
+                removeId = process->id;
+            }
+        }
+
+        if( removeId > -1 )
+        {
+            emit removedProcess( removeId );
+            processes.remove( removeId );
+        }
     }
 }
 
@@ -206,4 +172,3 @@ void Logger::updateWriteSetting( bool _writeLogFiles )
 {
     writeLogFiles = _writeLogFiles;
 }
-

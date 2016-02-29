@@ -75,17 +75,19 @@ void LogViewer::refillLogs()
 
     cItem->clear();
 
-    foreach( LoggerItem *log, logger->getLogs() )
+    QPair<int, QString> log;
+    foreach( log, logger->getLogs() )
     {
-        QString name = log->identifier;
+        const int id = log.first;
+        QString name = log.second;
         // TODO make the string width dependend on the window width
         if( name.length() > 73 )
             name = name.left(35) + "..." + name.right(35);
 
-        if( log->id == 1000 )
-            cItem->addItem( i18n("soundKonverter application log"), QVariant(log->id) );
+        if( id == 1000 )
+            cItem->addItem( i18n("soundKonverter application log"), QVariant(id) );
         else
-            cItem->addItem( name, QVariant(log->id) );
+            cItem->addItem( name, QVariant(id) );
     }
 
     if( cItem->findData(currentProcess) != -1 )
@@ -104,7 +106,7 @@ void LogViewer::itemChanged()
     kLog->setTextCursor( cursor );
 
     kLog->clear();
-    LoggerItem* item = logger->getLog( cItem->itemData(cItem->currentIndex()).toInt() );
+    const LoggerItem* const item = logger->getLog( cItem->itemData(cItem->currentIndex()).toInt() );
 
     if( !item )
         return;

@@ -1492,85 +1492,85 @@ void FileList::load( bool user )
 
 void FileList::save( bool user )
 {
-//     // assume it's a misclick if there's nothing to save
-//     if( user && topLevelItemCount() == 0 )
-//         return;
-//
-//     QTime time;
-//     time.start();
-//
-//     QDomDocument list("soundkonverter_filelist");
-//     QDomElement root = list.createElement("soundkonverter");
-//     root.setAttribute("type","filelist");
-//     list.appendChild(root);
-//
-//     foreach( const int id, config->conversionOptionsManager()->getAllIds() )
-//     {
-//         if( const ConversionOptions* options = config->conversionOptionsManager()->getConversionOptions(id) )
-//         {
-//             QDomElement conversionOptions = options->toXml(list);
-//             conversionOptions.setAttribute("id",id);
-//             root.appendChild(conversionOptions);
-//         }
-//         else
-//         {
-//             // FIXME error message, null pointer for conversion options
-//         }
-//     }
+    // assume it's a misclick if there's nothing to save
+    if( user && topLevelItemCount() == 0 )
+        return;
 
-//     const FileListItem *item;
-//     for( int i=0; i<topLevelItemCount(); i++ )
-//     {
-//         item = topLevelItem(i);
-//
-//         QDomElement file = list.createElement("file");
-//         file.setAttribute("url",item->url.pathOrUrl());
-//         // file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
-//         file.setAttribute("codecName",item->codecName);
-//         file.setAttribute("conversionOptionsId",item->conversionOptionsId);
-//         file.setAttribute("local",item->local);
-//         file.setAttribute("track",item->track);
-//         file.setAttribute("tracks",item->tracks);
-//         file.setAttribute("device",item->device);
-//         file.setAttribute("time",item->length);
-//         file.setAttribute("notifyCommand",item->notifyCommand);
-//         root.appendChild(file);
-//         if( item->tags )
-//         {
-//             QDomElement tags = list.createElement("tags");
-//             tags.setAttribute("artist",item->tags->artist);
-//             tags.setAttribute("albumArtist",item->tags->albumArtist);
-//             tags.setAttribute("composer",item->tags->composer);
-//             tags.setAttribute("album",item->tags->album);
-//             tags.setAttribute("title",item->tags->title);
-//             tags.setAttribute("genre",item->tags->genre);
-//             tags.setAttribute("comment",item->tags->comment);
-//             tags.setAttribute("track",item->tags->track);
-//             tags.setAttribute("trackTotal",item->tags->trackTotal);
-//             tags.setAttribute("disc",item->tags->disc);
-//             tags.setAttribute("discTotal",item->tags->discTotal);
-//             tags.setAttribute("year",item->tags->year);
-//             tags.setAttribute("track_gain",item->tags->trackGain);
-//             tags.setAttribute("album_gain",item->tags->albumGain);
-//             tags.setAttribute("length",item->tags->length);
-//             tags.setAttribute("samplingRate",item->tags->samplingRate);
-//             tags.setAttribute("isEncrypted",item->tags->isEncrypted);
-//             file.appendChild(tags);
-//         }
-//     }
+    QTime time;
+    time.start();
 
-//     list.toString();
-//
-//     const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
-//     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
-//     if( listFile.open( QIODevice::WriteOnly ) )
-//     {
-//         QTextStream stream(&listFile);
-//         stream << list.toString();
-//         listFile.close();
-//     }
-//
-//     logger->log( 1000, QString("Saving the file list took %1 ms").arg(time.elapsed()) );
+    QDomDocument list("soundkonverter_filelist");
+    QDomElement root = list.createElement("soundkonverter");
+    root.setAttribute("type","filelist");
+    list.appendChild(root);
+
+    foreach( const int id, config->conversionOptionsManager()->getAllIds() )
+    {
+        if( const ConversionOptions* options = config->conversionOptionsManager()->getConversionOptions(id) )
+        {
+            QDomElement conversionOptions = options->toXml(list);
+            conversionOptions.setAttribute("id",id);
+            root.appendChild(conversionOptions);
+        }
+        else
+        {
+            // FIXME error message, null pointer for conversion options
+        }
+    }
+
+    const FileListItem *item;
+    for( int i=0; i<topLevelItemCount(); i++ )
+    {
+        item = topLevelItem(i);
+
+        QDomElement file = list.createElement("file");
+        file.setAttribute("url",item->url.pathOrUrl());
+        // file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
+        file.setAttribute("codecName",item->codecName);
+        file.setAttribute("conversionOptionsId",item->conversionOptionsId);
+        file.setAttribute("local",item->local);
+        file.setAttribute("track",item->track);
+        file.setAttribute("tracks",item->tracks);
+        file.setAttribute("device",item->device);
+        file.setAttribute("time",item->length);
+        file.setAttribute("notifyCommand",item->notifyCommand);
+        root.appendChild(file);
+        if( item->tags )
+        {
+            QDomElement tags = list.createElement("tags");
+            tags.setAttribute("artist",item->tags->artist);
+            tags.setAttribute("albumArtist",item->tags->albumArtist);
+            tags.setAttribute("composer",item->tags->composer);
+            tags.setAttribute("album",item->tags->album);
+            tags.setAttribute("title",item->tags->title);
+            tags.setAttribute("genre",item->tags->genre);
+            tags.setAttribute("comment",item->tags->comment);
+            tags.setAttribute("track",item->tags->track);
+            tags.setAttribute("trackTotal",item->tags->trackTotal);
+            tags.setAttribute("disc",item->tags->disc);
+            tags.setAttribute("discTotal",item->tags->discTotal);
+            tags.setAttribute("year",item->tags->year);
+            tags.setAttribute("track_gain",item->tags->trackGain);
+            tags.setAttribute("album_gain",item->tags->albumGain);
+            tags.setAttribute("length",item->tags->length);
+            tags.setAttribute("samplingRate",item->tags->samplingRate);
+            tags.setAttribute("isEncrypted",item->tags->isEncrypted);
+            file.appendChild(tags);
+        }
+    }
+
+    list.toString();
+
+    const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
+    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
+    if( listFile.open( QIODevice::WriteOnly ) )
+    {
+        QTextStream stream(&listFile);
+        stream << list.toString();
+        listFile.close();
+    }
+
+    logger->log( 1000, QString("Saving the file list took %1 ms").arg(time.elapsed()) );
 }
 
 

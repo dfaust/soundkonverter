@@ -8,6 +8,11 @@ LameConversionOptions::LameConversionOptions()
     : ConversionOptions()
 {
     pluginName = global_plugin_name;
+
+    data.preset = Data::Standard;
+    data.presetBitrate = 160;
+    data.presetBitrateCbr = false;
+    data.presetFast = false;
 }
 
 LameConversionOptions::~LameConversionOptions()

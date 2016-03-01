@@ -8,6 +8,10 @@
 SoxFilterOptions::SoxFilterOptions()
 {
     pluginName = global_plugin_name;
+
+    data.sampleRate = 0;
+    data.sampleSize = 0;
+    data.channels = 0;
 }
 
 SoxFilterOptions::~SoxFilterOptions()

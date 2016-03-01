@@ -30,7 +30,7 @@ class OptionsSimple : public QWidget
     Q_OBJECT
 public:
     /** Constructor */
-    OptionsSimple( Config *_config, /*OptionsDetailed*,*/ const QString &text, QWidget* parent=0 );
+    OptionsSimple( Config *_config, /*OptionsDetailed*,*/ const QString &text, QWidget* parent );
 
     /** Detructor */
     ~OptionsSimple();

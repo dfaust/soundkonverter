@@ -23,7 +23,7 @@ class Options : public QWidget
     Q_OBJECT
 public:
     /** Constructor */
-    Options( Config *_config, const QString& text, QWidget *parent=0 );
+    Options( Config *_config, const QString& text, QWidget *parent );
 
     /** Destructor */
     ~Options();

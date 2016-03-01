@@ -7,6 +7,8 @@ MusePackConversionOptions::MusePackConversionOptions()
     : ConversionOptions()
 {
     pluginName = global_plugin_name;
+
+    data.preset = Data::Standard;
 }
 
 MusePackConversionOptions::~MusePackConversionOptions()

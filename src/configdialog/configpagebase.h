@@ -23,7 +23,7 @@ class ConfigPageBase : public QWidget
 {
     Q_OBJECT
 public:
-    ConfigPageBase( QWidget *parent=0 );
+    explicit ConfigPageBase( QWidget *parent );
     virtual ~ConfigPageBase();
 
     int spacingOffset;

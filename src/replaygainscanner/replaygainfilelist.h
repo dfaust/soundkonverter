@@ -37,7 +37,7 @@ public:
     };
 
     /** Constructor */
-    ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent=0 );
+    ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent );
 
     /** Destructor */
     ~ReplayGainFileList();

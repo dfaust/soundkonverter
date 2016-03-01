@@ -37,7 +37,7 @@ class BackendPluginItem : public QObject
 {
     Q_OBJECT
 public:
-    BackendPluginItem( QObject *parent=0 );
+    explicit BackendPluginItem( QObject *parent );
     virtual ~BackendPluginItem();
 
     KProcess *process;
@@ -80,7 +80,7 @@ public:
         QStringList extensions;
     };
 
-    BackendPlugin( QObject *parent=0 );
+    explicit BackendPlugin( QObject *parent );
     virtual ~BackendPlugin();
 
     virtual QString name() const = 0;

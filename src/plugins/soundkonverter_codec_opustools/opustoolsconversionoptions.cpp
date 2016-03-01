@@ -8,6 +8,8 @@ OpusToolsConversionOptions::OpusToolsConversionOptions()
     : ConversionOptions()
 {
     pluginName = global_plugin_name;
+
+    data.floatBitrate = 160.0f;
 }
 
 OpusToolsConversionOptions::~OpusToolsConversionOptions()

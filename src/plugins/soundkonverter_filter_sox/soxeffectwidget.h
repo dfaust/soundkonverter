@@ -14,7 +14,7 @@ class SoxEffectWidget : public QWidget
 {
     Q_OBJECT
 public:
-    SoxEffectWidget( QWidget *parent = 0 );
+    explicit SoxEffectWidget( QWidget *parent );
     ~SoxEffectWidget();
 
     void setRemoveButtonShown( bool shown );

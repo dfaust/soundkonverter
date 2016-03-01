@@ -28,7 +28,7 @@ public:
      * @param parent The parent widget
      * @param name The name of the file list
      */
-    ComboButton( QWidget *parent );
+    explicit ComboButton( QWidget *parent );
 
     /** Destructor */
     ~ComboButton();

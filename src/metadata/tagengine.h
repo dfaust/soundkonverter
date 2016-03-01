@@ -9,10 +9,8 @@
 
 class Config;
 
-class CoverData : public QObject
+class CoverData
 {
-    Q_OBJECT
-
 public:
     /*!
     * This describes the function or content of the picture.
@@ -63,7 +61,7 @@ public:
         PublisherLogo      = 0x14
     };
 
-    CoverData( const QByteArray& _data = QByteArray(), const QString& _mimyType = QString::null, Role _role = Other, const QString& _description = QString::null, QObject *parent = 0 );
+    CoverData( const QByteArray& _data = QByteArray(), const QString& _mimyType = QString::null, Role _role = Other, const QString& _description = QString::null );
     ~CoverData();
 
     QByteArray data;
@@ -75,10 +73,8 @@ public:
 };
 
 
-class TagData : public QObject
+class TagData
 {
-    Q_OBJECT
-
 public:
     TagData();
     ~TagData();
@@ -123,7 +119,7 @@ class TagEngine : public QObject
     Q_OBJECT
 
 public:
-    TagEngine( Config *_config );
+    explicit TagEngine( Config *_config );
     ~TagEngine();
 
     /** A list of all genre */

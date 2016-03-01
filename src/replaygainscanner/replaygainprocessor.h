@@ -20,7 +20,7 @@ class ReplayGainFileList;
 class ReplayGainProcessorItem
 {
 public:
-    ReplayGainProcessorItem( ReplayGainFileListItem *item );
+    explicit ReplayGainProcessorItem( ReplayGainFileListItem *item );
     ~ReplayGainProcessorItem();
 
     /** a reference to the file list item, in case it's a convert item */

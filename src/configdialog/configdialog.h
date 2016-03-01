@@ -17,7 +17,7 @@ class ConfigDialog : public KPageDialog
 {
     Q_OBJECT
 public:
-    ConfigDialog( Config *_config, QWidget *parent = 0/*, Page startPage = GeneralPage*/ );
+    ConfigDialog( Config *_config, QWidget *parent/*, Page startPage = GeneralPage*/ );
     ~ConfigDialog();
 
 private:

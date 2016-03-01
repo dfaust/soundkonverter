@@ -29,7 +29,7 @@ class OptionsDetailed : public QWidget
 {
     Q_OBJECT
 public:
-    OptionsDetailed( Config *_config, QWidget *parent=0 );
+    OptionsDetailed( Config *_config, QWidget *parent );
     ~OptionsDetailed();
 
     void init();

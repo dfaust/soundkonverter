@@ -30,7 +30,7 @@ public:
     /**
      * Default Constructor
      */
-    ConfigCoverArtPage( Config *_config, QWidget *parent=0 );
+    ConfigCoverArtPage( Config *_config, QWidget *parent );
 
     /**
      * Default Destructor

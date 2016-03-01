@@ -25,7 +25,7 @@ class KDE_EXPORT ReplayGainPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
-    ReplayGainPluginItem( QObject *parent=0 );
+    explicit ReplayGainPluginItem( QObject *parent );
     virtual ~ReplayGainPluginItem();
 
     struct Data // additional data
@@ -48,7 +48,7 @@ public:
         Force = 2
     };
 
-    ReplayGainPlugin( QObject *parent=0 );
+    explicit ReplayGainPlugin( QObject *parent );
     virtual ~ReplayGainPlugin();
 
     virtual QString type() const;

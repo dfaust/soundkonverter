@@ -55,8 +55,7 @@
 #endif
 
 
-CoverData::CoverData( const QByteArray& _data, const QString& _mimyType, Role _role, const QString& _description, QObject *parent )
-        : QObject( parent )
+CoverData::CoverData( const QByteArray& _data, const QString& _mimyType, Role _role, const QString& _description )
 {
     data = _data;
     mimeType = _mimyType;

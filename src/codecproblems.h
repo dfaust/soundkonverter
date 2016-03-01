@@ -29,7 +29,7 @@ public:
     };
     
     /** Default Constructor */
-    CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent=0, Qt::WFlags f=0 );
+    CodecProblems( Mode mode, const QList<Problem>& problemList, QWidget *parent, Qt::WFlags f=0 );
 
     /** Default Destructor */
     ~CodecProblems();

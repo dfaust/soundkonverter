@@ -52,7 +52,6 @@ private:
     QCheckBox *configDialogEnableParanoiaCheckBox;
     QCheckBox *configDialogEnableExtraParanoiaCheckBox;
 
-    int configVersion;
     int forceReadSpeed;
     int forceEndianness;
     int maximumRetries;

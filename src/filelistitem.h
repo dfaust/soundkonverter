@@ -41,7 +41,7 @@ public:
         Failed                          = 6
     };
 
-    FileListItem( QTreeWidget *parent );
+    explicit FileListItem( QTreeWidget *parent );
     FileListItem( QTreeWidget *parent, QTreeWidgetItem *after );
     ~FileListItem();
 
@@ -70,7 +70,7 @@ public:
 class FileListItemDelegate : public QItemDelegate
 {
 public:
-    FileListItemDelegate( QObject *parent = 0 );
+    explicit FileListItemDelegate( QObject *parent );
 
     virtual void paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 };

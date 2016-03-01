@@ -1251,7 +1251,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     if( returnCode == FileListItem::Succeeded || returnCode == FileListItem::SucceededWithProblems )
         writeTags( item );
 
-    if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions->replaygain ) )
+    if( !waitForAlbumGain && !item->fileListItem->notifyCommand.isEmpty() && ( !config->data.general.waitForAlbumGain || !conversionOptions || !conversionOptions->replaygain ) )
     {
         QList<ConvertItem*> albumItems;
         if( !albumName.isEmpty() )

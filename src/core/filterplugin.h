@@ -23,7 +23,7 @@ class KDE_EXPORT FilterPluginItem : public CodecPluginItem
 {
     Q_OBJECT
 public:
-    FilterPluginItem( QObject *parent=0 );
+    explicit FilterPluginItem( QObject *parent );
     virtual ~FilterPluginItem();
 };
 
@@ -33,7 +33,7 @@ class KDE_EXPORT FilterPlugin : public CodecPlugin
 {
     Q_OBJECT
 public:
-    FilterPlugin( QObject *parent=0 );
+    explicit FilterPlugin( QObject *parent );
     virtual ~FilterPlugin();
 
     virtual QString type() const;

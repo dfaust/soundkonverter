@@ -30,7 +30,7 @@ public:
     };
 
     /** Constructor */
-    OutputDirectory( Config *_config, QWidget *parent = 0 );
+    OutputDirectory( Config *_config, QWidget *parent );
 
     /** Destructor */
     ~OutputDirectory();

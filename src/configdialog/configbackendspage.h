@@ -32,7 +32,7 @@ class BackendsListWidget : public QGroupBox
     Q_OBJECT
 public:
     /** Default Constructor */
-    BackendsListWidget( const QString& _name, Config *_config, QWidget *parent=0 );
+    BackendsListWidget( const QString& _name, Config *_config, QWidget *parent );
 
     /** Default Destructor*/
     ~BackendsListWidget();
@@ -78,7 +78,7 @@ class ConfigBackendsPage : public ConfigPageBase
     Q_OBJECT
 public:
     /** Default Constructor */
-    ConfigBackendsPage( Config *_config, QWidget *parent=0 );
+    ConfigBackendsPage( Config *_config, QWidget *parent );
 
     /** Default Destructor */
     ~ConfigBackendsPage();

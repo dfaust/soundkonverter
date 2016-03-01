@@ -21,7 +21,11 @@ ReplayGainProcessorItem::ReplayGainProcessorItem( ReplayGainFileListItem *_fileL
 
     take = 0;
 
+    mode = ReplayGainPlugin::Add;
+
     killed = false;
+
+    logID = -1;
 
     time = 0;
 }

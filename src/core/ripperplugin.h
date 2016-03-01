@@ -13,7 +13,7 @@ class KDE_EXPORT RipperPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
-    RipperPluginItem( QObject *parent=0 );
+    explicit RipperPluginItem( QObject *parent );
     virtual ~RipperPluginItem();
 
     struct Data {
@@ -32,7 +32,7 @@ class KDE_EXPORT RipperPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
-    RipperPlugin( QObject *parent=0 );
+    explicit RipperPlugin( QObject *parent );
     virtual ~RipperPlugin();
 
     virtual QString type() const;

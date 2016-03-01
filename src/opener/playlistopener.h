@@ -29,7 +29,7 @@ class PlaylistOpener : public KDialog
 {
     Q_OBJECT
 public:
-    PlaylistOpener( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
+    PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f=0 );
     ~PlaylistOpener();
 
     /** true if the file dialog was aborted (don't execute the dialog) */

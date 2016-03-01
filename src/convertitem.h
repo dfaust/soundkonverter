@@ -40,7 +40,7 @@ public:
     };
 
     /** Constructor, @p item a pointer to the file list item */
-    ConvertItem( FileListItem *item );
+    explicit ConvertItem( FileListItem *item );
 
     /** Destructor */
     ~ConvertItem();

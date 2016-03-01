@@ -35,7 +35,7 @@ public:
     };
 
     /** Constructor */
-    DirOpener( Config *config, Mode _mode, QWidget *parent=0, Qt::WFlags f=0 );
+    DirOpener( Config *config, Mode _mode, QWidget *parent, Qt::WFlags f=0 );
 
     /** Destructor */
     ~DirOpener();

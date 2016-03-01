@@ -14,9 +14,9 @@
 class ReplayGainFileListItem : public QTreeWidgetItem
 {
 public:
-    ReplayGainFileListItem( QTreeWidget *parent );
+    explicit ReplayGainFileListItem( QTreeWidget *parent );
     ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding );
-    ReplayGainFileListItem( QTreeWidgetItem *parent );
+    explicit ReplayGainFileListItem( QTreeWidgetItem *parent );
 
     ~ReplayGainFileListItem();
 
@@ -59,7 +59,7 @@ public:
 class ReplayGainFileListItemDelegate : public QItemDelegate
 {
 public:
-    ReplayGainFileListItemDelegate( QObject *parent = 0 );
+    explicit ReplayGainFileListItemDelegate( QObject *parent );
 
     virtual void paint( QPainter *painter, const QStyleOptionViewItem& option, const QModelIndex& index ) const;
 };

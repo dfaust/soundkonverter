@@ -37,7 +37,7 @@ public:
         ConversionOptionsPage
     };
 
-    UrlOpener( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
+    UrlOpener( Config *_config, QWidget *parent, Qt::WFlags f=0 );
     ~UrlOpener();
 
     DialogPage currentPage() { return page; }

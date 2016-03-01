@@ -34,7 +34,7 @@ public:
     };
 
     /** Default Constructor */
-    CodecOptimizations( const QList<Optimization>& optimizationList, QWidget *parent=0, Qt::WFlags f=0 );
+    CodecOptimizations( const QList<Optimization>& optimizationList, QWidget *parent, Qt::WFlags f=0 );
 
     /** Default Destructor */
     ~CodecOptimizations();

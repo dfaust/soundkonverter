@@ -21,7 +21,7 @@ class AboutPlugins : public KDialog
     Q_OBJECT
 public:
     /** Default Constructor */
-    AboutPlugins( Config *_config, QWidget *parent=0, Qt::WFlags f=0 );
+    AboutPlugins( Config *_config, QWidget *parent, Qt::WFlags f=0 );
 
     /** Default Destructor */
     ~AboutPlugins();

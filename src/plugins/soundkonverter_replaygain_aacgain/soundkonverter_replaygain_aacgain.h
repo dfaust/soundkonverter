@@ -18,7 +18,7 @@ class AacGainPluginItem : public ReplayGainPluginItem
 {
     Q_OBJECT
 public:
-    AacGainPluginItem( QObject *parent=0 );
+    explicit AacGainPluginItem( QObject *parent );
     ~AacGainPluginItem();
 
     KUrl::List undoFileList;

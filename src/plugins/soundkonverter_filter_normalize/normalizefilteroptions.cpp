@@ -8,6 +8,8 @@
 NormalizeFilterOptions::NormalizeFilterOptions()
 {
     pluginName = global_plugin_name;
+
+    data.normalize = false;
 }
 
 NormalizeFilterOptions::~NormalizeFilterOptions()

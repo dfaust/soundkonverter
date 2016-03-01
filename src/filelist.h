@@ -38,7 +38,7 @@ public:
     };
 
     /** Constructor */
-    FileList( Logger *_logger, Config *_config, QWidget *parent = 0 );
+    FileList( Logger *_logger, Config *_config, QWidget *parent );
 
     /** Destructor */
     ~FileList();

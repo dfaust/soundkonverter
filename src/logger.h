@@ -39,7 +39,7 @@ class Logger : public QObject
 {
     Q_OBJECT
 public:
-    Logger( QObject *parent );
+    explicit Logger( QObject *parent );
     ~Logger();
 
     /** Creates a new logger item and returns the id of it, @p filename is added to the new logger item */

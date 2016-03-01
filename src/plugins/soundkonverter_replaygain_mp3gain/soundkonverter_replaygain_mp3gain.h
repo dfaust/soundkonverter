@@ -18,7 +18,7 @@ class Mp3GainPluginItem : public ReplayGainPluginItem
 {
     Q_OBJECT
 public:
-    Mp3GainPluginItem( QObject *parent=0 );
+    explicit Mp3GainPluginItem( QObject *parent );
     ~Mp3GainPluginItem();
 
     KUrl::List undoFileList;

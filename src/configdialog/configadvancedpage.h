@@ -29,7 +29,7 @@ public:
     /**
      * Default Constructor
      */
-    ConfigAdvancedPage( Config *_config, QWidget *parent=0 );
+    ConfigAdvancedPage( Config *_config, QWidget *parent );
 
     /**
      * Default Destructor

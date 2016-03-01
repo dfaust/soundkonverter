@@ -20,7 +20,7 @@ class LogViewer : public KDialog
 Q_OBJECT
 public:
     /** Default Constructor */
-    LogViewer( Logger* _logger, QWidget* parent=0, Qt::WFlags f=0 );
+    LogViewer( Logger* _logger, QWidget* parent, Qt::WFlags f=0 );
 
     /** Default Destructor */
     ~LogViewer();

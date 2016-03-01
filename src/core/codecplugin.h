@@ -14,7 +14,7 @@ class KDE_EXPORT CodecPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
-    CodecPluginItem( QObject *parent=0 );
+    explicit CodecPluginItem( QObject *parent );
     virtual ~CodecPluginItem();
 
     struct Data {
@@ -28,7 +28,7 @@ class KDE_EXPORT CodecPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
-    CodecPlugin( QObject *parent=0 );
+    explicit CodecPlugin( QObject *parent );
     virtual ~CodecPlugin();
 
     virtual QString type() const;

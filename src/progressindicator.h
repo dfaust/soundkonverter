@@ -42,7 +42,7 @@ public:
         FeatureTime  = 2
     };
 
-    ProgressIndicator( QWidget *parent = 0, Feature features = FeatureNone );
+    ProgressIndicator( QWidget *parent, Feature features = FeatureNone );
     ~ProgressIndicator();
 
 public slots:

@@ -322,6 +322,9 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
     {
         path = fileListItem->url.toLocalFile();
 
+        if( config->data.general.useVFATNames )
+            path = vfatPath( path );
+
         url = changeExtension( KUrl(path), extension );
 
         if( config->data.general.conflictHandling == Config::Data::General::NewFileName )

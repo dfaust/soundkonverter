@@ -43,7 +43,7 @@ bool LameConversionOptions::equals( ConversionOptions *_other )
     }
 }
 
-QDomElement LameConversionOptions::toXml( QDomDocument document )
+QDomElement LameConversionOptions::toXml( QDomDocument document ) const
 {
     QDomElement conversionOptions = ConversionOptions::toXml( document );
     QDomElement encodingOptions = conversionOptions.elementsByTagName("encodingOptions").at(0).toElement();

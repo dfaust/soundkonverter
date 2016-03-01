@@ -27,7 +27,7 @@ bool FilterOptions::equalsBasics( FilterOptions *_other )
              cmdArguments ==_other->cmdArguments );
 }
 
-QDomElement FilterOptions::toXml( QDomDocument document, const QString& elementName )
+QDomElement FilterOptions::toXml( QDomDocument document, const QString& elementName ) const
 {
     QDomElement filterOptions = document.createElement(elementName);
 

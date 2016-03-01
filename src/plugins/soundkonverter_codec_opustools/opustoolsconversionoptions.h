@@ -11,7 +11,7 @@ public:
     ~OpusToolsConversionOptions();
 
     bool equals( ConversionOptions *_other );
-    QDomElement toXml( QDomDocument document );
+    QDomElement toXml( QDomDocument document ) const;
     bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
     ConversionOptions* copy() const;

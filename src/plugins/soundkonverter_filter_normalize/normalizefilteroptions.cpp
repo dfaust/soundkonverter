@@ -25,7 +25,7 @@ bool NormalizeFilterOptions::equals( FilterOptions *_other )
     return ( FilterOptions::equals( _other ) && data.normalize == other->data.normalize );
 }
 
-QDomElement NormalizeFilterOptions::toXml( QDomDocument document, const QString elementName )
+QDomElement NormalizeFilterOptions::toXml( QDomDocument document, const QString& elementName ) const
 {
     QDomElement filterOptions = FilterOptions::toXml( document,elementName );
     filterOptions.setAttribute("normalize",data.normalize);

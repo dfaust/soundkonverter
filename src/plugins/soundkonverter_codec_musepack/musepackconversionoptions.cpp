@@ -35,7 +35,7 @@ bool MusePackConversionOptions::equals( ConversionOptions *_other )
     }
 }
 
-QDomElement MusePackConversionOptions::toXml( QDomDocument document )
+QDomElement MusePackConversionOptions::toXml( QDomDocument document ) const
 {
     QDomElement conversionOptions = ConversionOptions::toXml( document );
     QDomElement encodingOptions = conversionOptions.elementsByTagName("encodingOptions").at(0).toElement();

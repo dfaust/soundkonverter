@@ -12,7 +12,7 @@ public:
     ~NormalizeFilterOptions();
 
     bool equals( FilterOptions *_other );
-    QDomElement toXml( QDomDocument document, const QString elementName );
+    QDomElement toXml( QDomDocument document, const QString& elementName ) const;
     bool fromXml( QDomElement filterOptions );
 
     FilterOptions* copy() const;

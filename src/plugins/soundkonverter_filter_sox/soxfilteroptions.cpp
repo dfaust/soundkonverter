@@ -73,7 +73,7 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
     return true;
 }
 
-QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString elementName )
+QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString& elementName ) const
 {
     QDomElement filterOptions = FilterOptions::toXml( document, elementName );
     filterOptions.setAttribute("sampleRate",data.sampleRate);

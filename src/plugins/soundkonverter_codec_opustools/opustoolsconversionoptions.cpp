@@ -25,7 +25,7 @@ bool OpusToolsConversionOptions::equals( ConversionOptions *_other )
     return ( equalsBasics(_other) && equalsFilters(_other) && data.floatBitrate == other->data.floatBitrate );
 }
 
-QDomElement OpusToolsConversionOptions::toXml( QDomDocument document )
+QDomElement OpusToolsConversionOptions::toXml( QDomDocument document ) const
 {
     QDomElement conversionOptions = ConversionOptions::toXml( document );
     QDomElement encodingOptions = conversionOptions.elementsByTagName("encodingOptions").at(0).toElement();

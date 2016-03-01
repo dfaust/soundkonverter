@@ -23,7 +23,7 @@ public:
     bool equalsBasics( FilterOptions *_other );
     virtual bool equals( FilterOptions *_other ); // checks if the other FilterOptions is equal to this
 
-    virtual QDomElement toXml( QDomDocument document, const QString& elementName );
+    virtual QDomElement toXml( QDomDocument document, const QString& elementName ) const;
 
     virtual bool fromXml( QDomElement filterOptions );
 

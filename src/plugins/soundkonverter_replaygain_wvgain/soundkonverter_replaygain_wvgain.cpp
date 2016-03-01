@@ -17,7 +17,7 @@ soundkonverter_replaygain_wvgain::soundkonverter_replaygain_wvgain( QObject *par
 soundkonverter_replaygain_wvgain::~soundkonverter_replaygain_wvgain()
 {}
 
-QString soundkonverter_replaygain_wvgain::name()
+QString soundkonverter_replaygain_wvgain::name() const
 {
     return global_plugin_name;
 }

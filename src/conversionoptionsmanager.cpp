@@ -3,8 +3,9 @@
 #include "core/conversionoptions.h"
 #include "pluginloader.h"
 
-ConversionOptionsManager::ConversionOptionsManager( PluginLoader *_pluginLoader )
-    : pluginLoader( _pluginLoader )
+ConversionOptionsManager::ConversionOptionsManager( PluginLoader *_pluginLoader, QObject *parent )
+    : QObject( parent ),
+    pluginLoader( _pluginLoader )
 {
     idCounter = 0;
 }

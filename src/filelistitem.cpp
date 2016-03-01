@@ -11,6 +11,7 @@ FileListItem::FileListItem( QTreeWidget *parent, QTreeWidgetItem *after )
     conversionOptionsId = -1;
 
     state = WaitingForConversion;
+    returnCode = Succeeded;
     local = true;
     track = -1;
     tracks = 0;
@@ -27,6 +28,7 @@ FileListItem::FileListItem( QTreeWidget *parent )
     conversionOptionsId = -1;
 
     state = WaitingForConversion;
+    returnCode = Succeeded;
     local = true;
     track = -1;
     tracks = 0;

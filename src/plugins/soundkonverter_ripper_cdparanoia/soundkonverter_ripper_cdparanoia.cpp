@@ -35,7 +35,7 @@ soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *par
 soundkonverter_ripper_cdparanoia::~soundkonverter_ripper_cdparanoia()
 {}
 
-QString soundkonverter_ripper_cdparanoia::name()
+QString soundkonverter_ripper_cdparanoia::name() const
 {
     return global_plugin_name;
 }

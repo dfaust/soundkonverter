@@ -16,7 +16,7 @@ soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, con
 soundkonverter_codec_mplayer::~soundkonverter_codec_mplayer()
 {}
 
-QString soundkonverter_codec_mplayer::name()
+QString soundkonverter_codec_mplayer::name() const
 {
     return global_plugin_name;
 }

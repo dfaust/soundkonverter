@@ -25,7 +25,7 @@ soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, con
 soundkonverter_codec_neroaac::~soundkonverter_codec_neroaac()
 {}
 
-QString soundkonverter_codec_neroaac::name()
+QString soundkonverter_codec_neroaac::name() const
 {
     return global_plugin_name;
 }

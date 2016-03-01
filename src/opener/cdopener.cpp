@@ -835,10 +835,9 @@ void CDOpener::trackChanged()
 
     // rebuild the list of the selected tracks
     selectedTracks.clear();
-    QTreeWidgetItem *item;
     for( int i=0; i<trackList->topLevelItemCount(); i++ )
     {
-        item = trackList->topLevelItem( i );
+        QTreeWidgetItem *item = trackList->topLevelItem( i );
         if( item->isSelected() )
         {
             selectedTracks.append( i+1 );
@@ -1235,7 +1234,7 @@ void CDOpener::proceedClicked()
 
 void CDOpener::addClicked()
 {
-    const ConversionOptions *conversionOptions = options->currentConversionOptions();
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
     if( conversionOptions )
     {
         QList<int> tracks;

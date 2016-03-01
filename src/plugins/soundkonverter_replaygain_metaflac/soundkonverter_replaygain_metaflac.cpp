@@ -17,7 +17,7 @@ soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac( QObject 
 soundkonverter_replaygain_metaflac::~soundkonverter_replaygain_metaflac()
 {}
 
-QString soundkonverter_replaygain_metaflac::name()
+QString soundkonverter_replaygain_metaflac::name() const
 {
     return global_plugin_name;
 }

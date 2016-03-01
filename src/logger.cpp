@@ -14,6 +14,8 @@ LoggerItem::LoggerItem( int logId, const QString& logIdentifier )
     id = logId;
     identifier = logIdentifier;
     file.setFileName( KStandardDirs::locateLocal("data",QString("soundkonverter/log/%1.log").arg(id)) );
+    completed = false;
+    succeeded = false;
 }
 
 LoggerItem::~LoggerItem()
@@ -57,7 +59,6 @@ Logger::~Logger()
 int Logger::registerProcess( const QString& identifier )
 {
     LoggerItem *item = new LoggerItem( getNewID(), identifier );
-    item->completed = false;
     if( writeLogFiles )
     {
         // TODO error handling

@@ -125,7 +125,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
                 QList<QTreeWidgetItem*> q_items = selectedItems();
                 foreach( QTreeWidgetItem *q_item, q_items )
                 {
-                    ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+                    ReplayGainFileListItem *item = static_cast<ReplayGainFileListItem*>(q_item);
 
                     if( item->codecName != destination->codecName || item->samplingRate != destination->samplingRate )
                     {
@@ -548,28 +548,24 @@ void ReplayGainFileList::updateItem( ReplayGainFileListItem *item, bool initialU
 void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )
 {
     // iterate through all items and set the state to "Waiting"
-    ReplayGainFileListItem *item, *child;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
+        ReplayGainFileListItem *item = topLevelItem( i );
         if( item->type == ReplayGainFileListItem::Track )
         {
             bool isStopped = false;
-            if( item )
+            switch( item->state )
             {
-                switch( item->state )
+                case ReplayGainFileListItem::Waiting:
+                case ReplayGainFileListItem::WaitingForReplayGain:
+                case ReplayGainFileListItem::Processing:
                 {
-                    case ReplayGainFileListItem::Waiting:
-                    case ReplayGainFileListItem::WaitingForReplayGain:
-                    case ReplayGainFileListItem::Processing:
-                    {
-                        break;
-                    }
-                    case ReplayGainFileListItem::Stopped:
-                    {
-                        isStopped = true;
-                        break;
-                    }
+                    break;
+                }
+                case ReplayGainFileListItem::Stopped:
+                {
+                    isStopped = true;
+                    break;
                 }
             }
             if( isStopped )
@@ -582,10 +578,10 @@ void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )
         {
             for( int j=0; j<item->childCount(); j++ )
             {
-                child = (ReplayGainFileListItem*)item->child(j);
-                bool isStopped = false;
+                ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                 if( child )
                 {
+                    bool isStopped = false;
                     switch( child->state )
                     {
                         case ReplayGainFileListItem::Waiting:
@@ -600,29 +596,26 @@ void ReplayGainFileList::startProcessing( ReplayGainPlugin::ApplyMode _mode )
                             break;
                         }
                     }
-                }
-                if( isStopped )
-                {
-                    child->state = ReplayGainFileListItem::Waiting;
-                    updateItem( child );
+                    if( isStopped )
+                    {
+                        child->state = ReplayGainFileListItem::Waiting;
+                        updateItem( child );
+                    }
                 }
             }
             bool isStopped = false;
-            if( item )
+            switch( item->state )
             {
-                switch( item->state )
+                case ReplayGainFileListItem::Waiting:
+                case ReplayGainFileListItem::WaitingForReplayGain:
+                case ReplayGainFileListItem::Processing:
                 {
-                    case ReplayGainFileListItem::Waiting:
-                    case ReplayGainFileListItem::WaitingForReplayGain:
-                    case ReplayGainFileListItem::Processing:
-                    {
-                        break;
-                    }
-                    case ReplayGainFileListItem::Stopped:
-                    {
-                        isStopped = true;
-                        break;
-                    }
+                    break;
+                }
+                case ReplayGainFileListItem::Stopped:
+                {
+                    isStopped = true;
+                    break;
                 }
             }
             if( isStopped )
@@ -648,28 +641,24 @@ void ReplayGainFileList::cancelProcess()
     queue = false;
 //     emit queueModeChanged( queue );
 
-    ReplayGainFileListItem *item, *child;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
+        ReplayGainFileListItem *item = topLevelItem( i );
         if( item->type == ReplayGainFileListItem::Track )
         {
             bool canKill = false;
-            if( item )
+            switch( item->state )
             {
-                switch( item->state )
+                case ReplayGainFileListItem::Waiting:
+                case ReplayGainFileListItem::Stopped:
                 {
-                    case ReplayGainFileListItem::Waiting:
-                    case ReplayGainFileListItem::Stopped:
-                    {
-                        break;
-                    }
-                    case ReplayGainFileListItem::WaitingForReplayGain:
-                    case ReplayGainFileListItem::Processing:
-                    {
-                        canKill = true;
-                        break;
-                    }
+                    break;
+                }
+                case ReplayGainFileListItem::WaitingForReplayGain:
+                case ReplayGainFileListItem::Processing:
+                {
+                    canKill = true;
+                    break;
                 }
             }
             if( canKill )
@@ -678,21 +667,18 @@ void ReplayGainFileList::cancelProcess()
         else
         {
             bool canKill = false;
-            if( item )
+            switch( item->state )
             {
-                switch( item->state )
+                case ReplayGainFileListItem::Waiting:
+                case ReplayGainFileListItem::Stopped:
                 {
-                    case ReplayGainFileListItem::Waiting:
-                    case ReplayGainFileListItem::Stopped:
-                    {
-                        break;
-                    }
-                    case ReplayGainFileListItem::WaitingForReplayGain:
-                    case ReplayGainFileListItem::Processing:
-                    {
-                        canKill = true;
-                        break;
-                    }
+                    break;
+                }
+                case ReplayGainFileListItem::WaitingForReplayGain:
+                case ReplayGainFileListItem::Processing:
+                {
+                    canKill = true;
+                    break;
                 }
             }
             if( canKill )
@@ -703,10 +689,10 @@ void ReplayGainFileList::cancelProcess()
             {
                 for( int j=0; j<item->childCount(); j++ )
                 {
-                    child = (ReplayGainFileListItem*)item->child(j);
-                    bool canKill = false;
+                    ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                     if( child )
                     {
+                        bool canKill = false;
                         switch( child->state )
                         {
                             case ReplayGainFileListItem::Waiting:
@@ -721,9 +707,9 @@ void ReplayGainFileList::cancelProcess()
                                 break;
                             }
                         }
+                        if( canKill )
+                            emit killItem( child );
                     }
-                    if( canKill )
-                        emit killItem( child );
                 }
             }
         }
@@ -760,7 +746,7 @@ void ReplayGainFileList::processNextItem()
             float albumGain = 0;
             for( int j=0; j<item->childCount(); j++ )
             {
-                ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                 if( child->state != ReplayGainFileListItem::Waiting )
                 {
                     childProcessing = true;
@@ -796,7 +782,7 @@ void ReplayGainFileList::processNextItem()
             {
                 for( int j=0; j<item->childCount(); j++ )
                 {
-                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                    ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                     child->state = ReplayGainFileListItem::Processing;
                     updateItem( child );
                 }
@@ -813,7 +799,7 @@ void ReplayGainFileList::processNextItem()
             {
                 for( int j=0; j<item->childCount(); j++ )
                 {
-                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                    ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                     if( child->state == ReplayGainFileListItem::Waiting )
                     {
                         child->state = ReplayGainFileListItem::Stopped;
@@ -833,11 +819,10 @@ void ReplayGainFileList::processNextItem()
 int ReplayGainFileList::waitingCount()
 {
     int count = 0;
-    ReplayGainFileListItem *item;
 
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
+        ReplayGainFileListItem *item = topLevelItem( i );
         if( item->state == ReplayGainFileListItem::Waiting )
             count++;
     }
@@ -847,12 +832,11 @@ int ReplayGainFileList::waitingCount()
 
 int ReplayGainFileList::processingCount() // TODO use ReplayGainProcessor
 {
-    ReplayGainFileListItem *item, *child;
     int count = 0;
 
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem(i);
+        ReplayGainFileListItem *item = topLevelItem(i);
         if( item->type == ReplayGainFileListItem::Track )
         {
             if( item->state == ReplayGainFileListItem::Processing || item->state == ReplayGainFileListItem::WaitingForReplayGain )
@@ -868,7 +852,7 @@ int ReplayGainFileList::processingCount() // TODO use ReplayGainProcessor
             {
                 for( int j=0; j<item->childCount(); j++ )
                 {
-                    child = (ReplayGainFileListItem*)item->child(j);
+                    ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                     if( child->state == ReplayGainFileListItem::Processing || item->state == ReplayGainFileListItem::WaitingForReplayGain )
                     {
                         count++;
@@ -895,7 +879,7 @@ void ReplayGainFileList::itemFinished( ReplayGainFileListItem *item, ReplayGainF
         {
             for( int j=0; j<item->childCount(); j++ )
             {
-                ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                 child->state = ReplayGainFileListItem::Stopped;
                 child->returnCode = returnCode;
                 child->tags = config->tagEngine()->readTags( child->url );
@@ -930,13 +914,13 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
 {
     QList<QTreeWidgetItem*> q_items = selectedItems();
     bool canRemove = q_items.count() > 0;
-    bool canStart = q_items.count() > 0;
+//     bool canStart = q_items.count() > 0;
     bool canMove = q_items.count() > 0;
-    bool canKill = q_items.count() > 0;
+//     bool canKill = q_items.count() > 0;
 
     foreach( QTreeWidgetItem *q_item, q_items )
     {
-        ReplayGainFileListItem *item = (ReplayGainFileListItem*)q_item;
+        ReplayGainFileListItem *item = static_cast<ReplayGainFileListItem*>(q_item);
 
         if( item->type == ReplayGainFileListItem::Track )
         {
@@ -944,20 +928,20 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
             {
                 case ReplayGainFileListItem::Waiting:
                 {
-                    canKill = false;
+//                     canKill = false;
                     break;
                 }
                 case ReplayGainFileListItem::WaitingForReplayGain:
                 case ReplayGainFileListItem::Processing:
                 {
                     canRemove = false;
-                    canStart = false;
+//                     canStart = false;
                     canMove = false;
                     break;
                 }
                 case ReplayGainFileListItem::Stopped:
                 {
-                    canKill = false;
+//                     canKill = false;
                     break;
                 }
             }
@@ -968,32 +952,32 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
             if( item->state == ReplayGainFileListItem::Processing || item->state == ReplayGainFileListItem::WaitingForReplayGain )
             {
                 canRemove = false;
-                canStart = false;
+//                 canStart = false;
             }
             else
             {
                 for( int j=0; j<item->childCount(); j++ )
                 {
-                    ReplayGainFileListItem *child = (ReplayGainFileListItem*)item->child(j);
+                    ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
 
                     switch( child->state )
                     {
                         case ReplayGainFileListItem::Waiting:
                         {
-                            canKill = false;
+//                             canKill = false;
                             break;
                         }
                         case ReplayGainFileListItem::WaitingForReplayGain:
                         case ReplayGainFileListItem::Processing:
                         {
                             canRemove = false;
-                            canStart = false;
+//                             canStart = false;
                             canMove = false;
                             break;
                         }
                         case ReplayGainFileListItem::Stopped:
                         {
-                            canKill = false;
+//                             canKill = false;
                             break;
                         }
                     }
@@ -1118,11 +1102,9 @@ void ReplayGainFileList::moveSelectedItems()
 
 void ReplayGainFileList::removeSelectedItems()
 {
-    ReplayGainFileListItem *item, *child;
-
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem(i);
+        ReplayGainFileListItem *item = topLevelItem(i);
         if( item->type == ReplayGainFileListItem::Track && item->isSelected() && item->state != ReplayGainFileListItem::Processing )
         {
             emit timeChanged( -item->length );
@@ -1133,7 +1115,7 @@ void ReplayGainFileList::removeSelectedItems()
         {
             for( int j=0; j<item->childCount(); j++ )
             {
-                child = (ReplayGainFileListItem*)item->child(j);
+                ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(item->child(j));
                 if( child->type == ReplayGainFileListItem::Track && ( child->isSelected() || item->isSelected() ) && child->state != ReplayGainFileListItem::Processing )
                 {
                     emit timeChanged( -child->length );

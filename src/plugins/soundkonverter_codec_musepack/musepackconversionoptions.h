@@ -14,6 +14,8 @@ public:
     QDomElement toXml( QDomDocument document );
     bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
+    ConversionOptions* copy() const;
+
     struct Data {
         enum Preset {
             Telephone = 0,

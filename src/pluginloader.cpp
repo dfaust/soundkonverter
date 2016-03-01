@@ -55,7 +55,8 @@ bool moreThanReplayGainPipe( const ReplayGainPipe& pipe1, const ReplayGainPipe& 
 
 
 PluginLoader::PluginLoader( Logger *_logger, Config *_config )
-    : logger( _logger ),
+    : QObject( _config ),
+    logger( _logger ),
     config( _config )
 {
     atomPath += "moov";

@@ -17,7 +17,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_aften();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

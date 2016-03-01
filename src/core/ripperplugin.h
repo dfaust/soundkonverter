@@ -35,7 +35,7 @@ public:
     RipperPlugin( QObject *parent=0 );
     virtual ~RipperPlugin();
 
-    virtual QString type();
+    virtual QString type() const;
 
     virtual QList<ConversionPipeTrunk> codecTable() = 0;
 

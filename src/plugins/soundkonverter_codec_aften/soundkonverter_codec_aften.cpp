@@ -20,7 +20,7 @@ soundkonverter_codec_aften::soundkonverter_codec_aften( QObject *parent, const Q
 soundkonverter_codec_aften::~soundkonverter_codec_aften()
 {}
 
-QString soundkonverter_codec_aften::name()
+QString soundkonverter_codec_aften::name() const
 {
     return global_plugin_name;
 }

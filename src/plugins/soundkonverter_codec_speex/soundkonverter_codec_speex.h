@@ -17,7 +17,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_speex();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

@@ -16,7 +16,7 @@ soundkonverter_ripper_icedax::soundkonverter_ripper_icedax( QObject *parent, con
 soundkonverter_ripper_icedax::~soundkonverter_ripper_icedax()
 {}
 
-QString soundkonverter_ripper_icedax::name()
+QString soundkonverter_ripper_icedax::name() const
 {
     return global_plugin_name;
 }

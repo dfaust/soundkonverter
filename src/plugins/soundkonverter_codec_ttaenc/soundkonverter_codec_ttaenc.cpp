@@ -20,7 +20,7 @@ soundkonverter_codec_ttaenc::soundkonverter_codec_ttaenc( QObject *parent, const
 soundkonverter_codec_ttaenc::~soundkonverter_codec_ttaenc()
 {}
 
-QString soundkonverter_codec_ttaenc::name()
+QString soundkonverter_codec_ttaenc::name() const
 {
     return global_plugin_name;
 }

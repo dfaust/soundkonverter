@@ -83,8 +83,8 @@ public:
     BackendPlugin( QObject *parent=0 );
     virtual ~BackendPlugin();
 
-    virtual QString name() = 0;
-    virtual QString type() = 0;
+    virtual QString name() const = 0;
+    virtual QString type() const = 0;
 
     virtual FormatInfo formatInfo( const QString& codecName );
     virtual QString getCodecFromFile( const KUrl& filename, const QString& mimeType = "application/octet-stream", short *rating = 0 );

@@ -19,7 +19,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_twolame();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

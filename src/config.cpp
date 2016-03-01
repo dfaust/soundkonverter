@@ -19,16 +19,13 @@ Config::Config( Logger *_logger, QObject *parent )
 
     pPluginLoader = new PluginLoader( logger, this );
     pTagEngine = new TagEngine( this );
-    pConversionOptionsManager = new ConversionOptionsManager( pPluginLoader );
+    pConversionOptionsManager = new ConversionOptionsManager( pPluginLoader, this );
 }
 
 Config::~Config()
 {
     save();
-
-    delete pPluginLoader;
-    delete pTagEngine;
-    delete pConversionOptionsManager;
+    qDeleteAll(data.profiles);
 }
 
 void Config::load()
@@ -336,45 +333,44 @@ void Config::load()
                 QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
                 for( int i=0; i<conversionOptionsElements.count(); i++ )
                 {
-                    ConversionOptions *conversionOptions = 0;
-                    QList<QDomElement> filterOptionsElements;
                     const QString profileName = conversionOptionsElements.at(i).toElement().attribute("profileName");
                     const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
-                    CodecPlugin *plugin = (CodecPlugin*)pPluginLoader->backendPluginByName( pluginName );
+                    CodecPlugin *plugin = static_cast<CodecPlugin*>(pPluginLoader->backendPluginByName( pluginName ));
                     if( plugin )
                     {
-                        conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        QList<QDomElement> filterOptionsElements;
+                        ConversionOptions *conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        if( conversionOptions )
+                        {
+                            foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                            {
+                                FilterOptions *filterOptions = 0;
+                                const QString filterPluginName = filterOptionsElement.attribute("pluginName");
+                                FilterPlugin *filterPlugin = static_cast<FilterPlugin*>(pPluginLoader->backendPluginByName( filterPluginName ));
+                                if( filterPlugin )
+                                {
+                                    filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
+                                }
+                                else
+                                {
+                                    logger->log( 1000, "\tcannot load filter for profile: " + profileName );
+                                    continue;
+                                }
+                                conversionOptions->filterOptions.append( filterOptions );
+                            }
+
+                            pConversionOptionsManager->addConversionOptions( conversionOptions );
+
+                            data.profiles[profileName] = conversionOptions->copy();
+                            if( profileName != "soundkonverter_last_used" )
+                                logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );
+                        }
                     }
                     else
                     {
                         logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );
                         logger->log( 1000, "\t\tcannot be loaded beacause the plugin cannot be found" );
                         continue;
-                    }
-                    if( conversionOptions )
-                    {
-                        foreach( QDomElement filterOptionsElement, filterOptionsElements )
-                        {
-                            FilterOptions *filterOptions = 0;
-                            const QString filterPluginName = filterOptionsElement.attribute("pluginName");
-                            FilterPlugin *filterPlugin = (FilterPlugin*)pPluginLoader->backendPluginByName( filterPluginName );
-                            if( filterPlugin )
-                            {
-                                filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
-                            }
-                            else
-                            {
-                                logger->log( 1000, "\tcannot load filter for profile: " + profileName );
-                                continue;
-                            }
-                            conversionOptions->filterOptions.append( filterOptions );
-                        }
-
-                        pConversionOptionsManager->addConversionOptions( conversionOptions );
-
-                        data.profiles[profileName] = conversionOptions;
-                        if( profileName != "soundkonverter_last_used" )
-                            logger->log( 1000, "\tname: " + profileName + ", plugin: " + pluginName );
                     }
                 }
             }
@@ -421,7 +417,7 @@ void Config::load()
         }
         else
         {
-            ConversionOptions *conversionOptions = data.profiles.value( profile );
+            const ConversionOptions *conversionOptions = data.profiles.value( profile );
             if( conversionOptions )
                 sFormat += conversionOptions->codecName;
         }
@@ -638,15 +634,17 @@ QStringList Config::customProfiles()
 {
     QStringList profiles;
 
-    foreach( const QString profileName, data.profiles.keys() )
+    foreach( const QString& profileName, data.profiles.keys() )
     {
         if( profileName == "soundkonverter_last_used" )
             continue;
 
-        QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( data.profiles.value(profileName)->codecName );
-        foreach( CodecPlugin *plugin, plugins )
+        const ConversionOptions* profileConversionOptions = data.profiles.value(profileName);
+
+        QList<CodecPlugin*> plugins = pPluginLoader->encodersForCodec( profileConversionOptions->codecName );
+        foreach( const CodecPlugin *plugin, plugins )
         {
-            if( plugin->name() == data.profiles.value(profileName)->pluginName )
+            if( plugin->name() == profileConversionOptions->pluginName )
             {
                 profiles.append( profileName );
                 break;

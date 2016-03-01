@@ -228,7 +228,7 @@ void FileList::dropEvent( QDropEvent *event )
 
     if( k_urls.count() > 0 )
     {
-        ConversionOptions *conversionOptions = config->data.profiles.value("soundkonverter_last_used");
+        const ConversionOptions *conversionOptions = config->data.profiles.value("soundkonverter_last_used");
         if( conversionOptions )
             optionsLayer->setCurrentConversionOptions( conversionOptions );
         optionsLayer->addUrls( k_urls );
@@ -701,13 +701,12 @@ void FileList::updateAllItems()
 void FileList::startConversion()
 {
     // iterate through all items and set the state to "Waiting"
-    FileListItem *item;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
-        bool isStopped = false;
+        FileListItem *item = topLevelItem( i );
         if( item )
         {
+            bool isStopped = false;
             switch( item->state )
             {
                 case FileListItem::WaitingForConversion:
@@ -726,11 +725,11 @@ void FileList::startConversion()
                     isStopped = true;
                     break;
             }
-        }
-        if( isStopped )
-        {
-            item->state = FileListItem::WaitingForConversion;
-            updateItem( item );
+            if( isStopped )
+            {
+                item->state = FileListItem::WaitingForConversion;
+                updateItem( item );
+            }
         }
     }
 
@@ -745,13 +744,12 @@ void FileList::killConversion()
     queue = false;
     emit queueModeChanged( queue );
 
-    FileListItem *item;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
-        bool canKill = false;
+        FileListItem *item = topLevelItem( i );
         if( item )
         {
+            bool canKill = false;
             switch( item->state )
             {
                 case FileListItem::WaitingForConversion:
@@ -772,9 +770,9 @@ void FileList::killConversion()
                 case FileListItem::Stopped:
                     break;
             }
-        }
-        if( canKill )
-            emit killItem( item );
+            if( canKill )
+                emit killItem( item );
+            }
     }
 }
 
@@ -845,11 +843,10 @@ void FileList::convertNextItem()
 int FileList::waitingCount()
 {
     int count = 0;
-    FileListItem *item;
 
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
+        FileListItem *item = topLevelItem( i );
         if( item->state == FileListItem::WaitingForConversion )
             count++;
     }
@@ -860,39 +857,41 @@ int FileList::waitingCount()
 int FileList::convertingCount( bool includeWaiting ) // TODO use Convert
 {
     int count = 0;
-    FileListItem *item;
     QString albumName;
 
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem( i );
-        bool isConverting = false;
-        switch( item->state )
+        FileListItem *item = topLevelItem( i );
+        if( item )
         {
-            case FileListItem::WaitingForConversion:
-            case FileListItem::ApplyingAlbumGain:
-            case FileListItem::Stopped:
+            bool isConverting = false;
+            switch( item->state )
             {
-                break;
-            }
-            case FileListItem::WaitingForAlbumGain:
-            {
-                if( includeWaiting )
+                case FileListItem::WaitingForConversion:
+                case FileListItem::ApplyingAlbumGain:
+                case FileListItem::Stopped:
+                {
+                    break;
+                }
+                case FileListItem::WaitingForAlbumGain:
+                {
+                    if( includeWaiting )
+                    {
+                        isConverting = true;
+                    }
+                    break;
+                }
+                case FileListItem::Ripping:
+                case FileListItem::Converting:
+                case FileListItem::ApplyingReplayGain:
                 {
                     isConverting = true;
+                    break;
                 }
-                break;
             }
-            case FileListItem::Ripping:
-            case FileListItem::Converting:
-            case FileListItem::ApplyingReplayGain:
-            {
-                isConverting = true;
-                break;
-            }
+            if( isConverting )
+                count++;
         }
-        if( isConverting )
-            count++;
     }
 
     return count;
@@ -985,7 +984,7 @@ bool FileList::waitForAlbumGain( FileListItem *item ) // TODO was ist wenn die d
     FileListItem *nextItem;
 
     nextItem = item;
-    while( ( nextItem = (FileListItem*)itemAbove(nextItem) ) )
+    while( ( nextItem = static_cast<FileListItem*>(itemAbove(nextItem)) ) )
     {
         if( nextItem && nextItem->tags && nextItem->tags->album == item->tags->album )
         {
@@ -1001,7 +1000,7 @@ bool FileList::waitForAlbumGain( FileListItem *item ) // TODO was ist wenn die d
     }
 
     nextItem = item;
-    while( ( nextItem = (FileListItem*)itemBelow(nextItem) ) )
+    while( ( nextItem = static_cast<FileListItem*>(itemBelow(nextItem)) ) )
     {
         if( nextItem && nextItem->tags && nextItem->tags->album == item->tags->album )
         {
@@ -1063,7 +1062,7 @@ void FileList::rippingFinished( const QString& device )
 
 void FileList::showContextMenu( const QPoint& point )
 {
-    const FileListItem * const item = (FileListItem*)itemAt( point );
+    const FileListItem * const item = static_cast<FileListItem*>(itemAt( point ));
 
     // if item is null, we can abort here
     if( !item )
@@ -1078,31 +1077,25 @@ void FileList::showContextMenu( const QPoint& point )
 
     // is this file (of our item) beeing converted at the moment?
     bool isConverting = false;
-    if( item )
+    switch( item->state )
     {
-        switch( item->state )
-        {
-            case FileListItem::WaitingForConversion:
-                break;
-            case FileListItem::Ripping:
-                isConverting = true;
-                break;
-            case FileListItem::Converting:
-                isConverting = true;
-                break;
-            case FileListItem::ApplyingReplayGain:
-                isConverting = true;
-                break;
-            case FileListItem::WaitingForAlbumGain:
-                break;
-            case FileListItem::ApplyingAlbumGain:
-                break;
-            case FileListItem::Stopped:
-                break;
-        }
-    }
-    if( item->state == FileListItem::ApplyingAlbumGain )
-    {
+        case FileListItem::WaitingForConversion:
+            break;
+        case FileListItem::Ripping:
+            isConverting = true;
+            break;
+        case FileListItem::Converting:
+            isConverting = true;
+            break;
+        case FileListItem::ApplyingReplayGain:
+            isConverting = true;
+            break;
+        case FileListItem::WaitingForAlbumGain:
+            break;
+        case FileListItem::ApplyingAlbumGain:
+            break;
+        case FileListItem::Stopped:
+            break;
     }
     if( item->state == FileListItem::WaitingForAlbumGain )
     {
@@ -1196,14 +1189,13 @@ void FileList::selectNextItem()
 
 void FileList::removeSelectedItems()
 {
-    FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
-        item = (FileListItem*)items.at(i);
-        bool canRemove = false;
+        FileListItem *item = static_cast<FileListItem*>(items.at(i));
         if( item && item->isSelected() )
         {
+            bool canRemove = false;
             switch( item->state )
             {
                 case FileListItem::WaitingForConversion:
@@ -1241,14 +1233,13 @@ void FileList::convertSelectedItems()
 {
     bool started = false;
     bool callItemsSelected = false;
-    FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
-        item = (FileListItem*)items.at(i);
-        bool canConvert = false;
+        FileListItem *item = static_cast<FileListItem*>(items.at(i));
         if( item )
         {
+            bool canConvert = false;
             switch( item->state )
             {
                 case FileListItem::WaitingForConversion:
@@ -1268,21 +1259,21 @@ void FileList::convertSelectedItems()
                     canConvert = true;
                     break;
             }
-        }
-        if( canConvert )
-        {
-            // emit conversionStarted first because in case the plugin reports an error the conversion stop immediately
-            // and the itemFinished slot gets called. If conversionStarted was emitted at the end of this function
-            // it might broadcast the message that the conversion has started after the conversion already stopped
-            if( !started )
-                emit conversionStarted();
+            if( canConvert )
+            {
+                // emit conversionStarted first because in case the plugin reports an error the conversion stop immediately
+                // and the itemFinished slot gets called. If conversionStarted was emitted at the end of this function
+                // it might broadcast the message that the conversion has started after the conversion already stopped
+                if( !started )
+                    emit conversionStarted();
 
-            emit convertItem( item );
+                emit convertItem( item );
 
-            if( selectedFiles.contains(item) )
-                callItemsSelected = true;
+                if( selectedFiles.contains(item) )
+                    callItemsSelected = true;
 
-            started = true;
+                started = true;
+            }
         }
     }
 
@@ -1292,14 +1283,13 @@ void FileList::convertSelectedItems()
 
 void FileList::killSelectedItems()
 {
-    FileListItem *item;
     QList<QTreeWidgetItem*> items = selectedItems();
     for( int i=0; i<items.size(); i++ )
     {
-        item = (FileListItem*)items.at(i);
-        bool canKill = false;
+        FileListItem *item = static_cast<FileListItem*>(items.at(i));
         if( item )
         {
+            bool canKill = false;
             switch( item->state )
             {
                 case FileListItem::WaitingForConversion:
@@ -1320,9 +1310,9 @@ void FileList::killSelectedItems()
                 case FileListItem::Stopped:
                     break;
             }
+            if( canKill )
+                emit killItem( item );
         }
-        if( canKill )
-            emit killItem( item );
     }
 }
 
@@ -1333,7 +1323,7 @@ void FileList::itemsSelected()
     QList<QTreeWidgetItem*> items = selectedItems();
     foreach( QTreeWidgetItem* item, items )
     {
-        selectedFiles.append( (FileListItem*)item );
+        selectedFiles.append( static_cast<FileListItem*>(item) );
     }
 
     if( selectedFiles.count() > 0 )
@@ -1357,13 +1347,12 @@ void FileList::load( bool user )
         const int ret = KMessageBox::questionYesNo( this, i18n("Do you want to overwrite the current file list?\n\nIf not, the saved file list will be appended.") );
         if( ret == KMessageBox::Yes )
         {
-            FileListItem *item;
             for( int i=0; i<topLevelItemCount(); i++ )
             {
-                item = topLevelItem(i);
-                bool canRemove = false;
+                FileListItem *item = topLevelItem(i);
                 if( item )
                 {
+                    bool canRemove = false;
                     switch( item->state )
                     {
                         case FileListItem::WaitingForConversion:
@@ -1383,12 +1372,12 @@ void FileList::load( bool user )
                             canRemove = true;
                             break;
                     }
-                }
-                if( canRemove )
-                {
-                    config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
-                    delete item;
-                    i--;
+                    if( canRemove )
+                    {
+                        config->conversionOptionsManager()->removeConversionOptions( item->conversionOptionsId );
+                        delete item;
+                        i--;
+                    }
                 }
             }
 
@@ -1411,39 +1400,34 @@ void FileList::load( bool user )
                 QDomNodeList conversionOptionsElements = root.elementsByTagName("conversionOptions");
                 for( int i=0; i<conversionOptionsElements.count(); i++ )
                 {
-                    ConversionOptions *conversionOptions = 0;
                     QList<QDomElement> filterOptionsElements;
                     const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
-                    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( pluginName );
+                    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( pluginName ));
                     if( plugin )
                     {
-                        conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                    if( conversionOptions )
-                    {
-                        foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                        ConversionOptions *conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
+                        if( conversionOptions )
                         {
-                            FilterOptions *filterOptions = 0;
-                            const QString filterPluginName = filterOptionsElement.attribute("pluginName");
-                            FilterPlugin *filterPlugin = (FilterPlugin*)config->pluginLoader()->backendPluginByName( filterPluginName );
-                            if( filterPlugin )
+                            foreach( QDomElement filterOptionsElement, filterOptionsElements )
                             {
-                                filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
+                                FilterOptions *filterOptions = 0;
+                                const QString filterPluginName = filterOptionsElement.attribute("pluginName");
+                                FilterPlugin *filterPlugin = static_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName( filterPluginName ));
+                                if( filterPlugin )
+                                {
+                                    filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );
+                                }
+                                else
+                                {
+                                    continue;
+                                }
+                                conversionOptions->filterOptions.append( filterOptions );
                             }
-                            else
-                            {
-                                continue;
-                            }
-                            conversionOptions->filterOptions.append( filterOptions );
+                            const int id = conversionOptionsElements.at(i).toElement().attribute("id").toInt();
+                            conversionOptionsIds[id] = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
+                            conversionOptionsReferences[conversionOptionsIds[id]] = 0;
                         }
                     }
-                    const int id = conversionOptionsElements.at(i).toElement().attribute("id").toInt();
-                    conversionOptionsIds[id] = config->conversionOptionsManager()->addConversionOptions( conversionOptions );
-                    conversionOptionsReferences[conversionOptionsIds[id]] = 0;
                 }
                 QDomNodeList files = root.elementsByTagName("file");
                 pScanStatus->setValue( 0 );
@@ -1508,82 +1492,85 @@ void FileList::load( bool user )
 
 void FileList::save( bool user )
 {
-    // assume it's a misclick if there's nothing to save
-    if( user && topLevelItemCount() == 0 )
-        return;
+//     // assume it's a misclick if there's nothing to save
+//     if( user && topLevelItemCount() == 0 )
+//         return;
+//
+//     QTime time;
+//     time.start();
+//
+//     QDomDocument list("soundkonverter_filelist");
+//     QDomElement root = list.createElement("soundkonverter");
+//     root.setAttribute("type","filelist");
+//     list.appendChild(root);
+//
+//     foreach( const int id, config->conversionOptionsManager()->getAllIds() )
+//     {
+//         if( const ConversionOptions* options = config->conversionOptionsManager()->getConversionOptions(id) )
+//         {
+//             QDomElement conversionOptions = options->toXml(list);
+//             conversionOptions.setAttribute("id",id);
+//             root.appendChild(conversionOptions);
+//         }
+//         else
+//         {
+//             // FIXME error message, null pointer for conversion options
+//         }
+//     }
 
-    QTime time;
-    time.start();
+//     const FileListItem *item;
+//     for( int i=0; i<topLevelItemCount(); i++ )
+//     {
+//         item = topLevelItem(i);
+//
+//         QDomElement file = list.createElement("file");
+//         file.setAttribute("url",item->url.pathOrUrl());
+//         // file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
+//         file.setAttribute("codecName",item->codecName);
+//         file.setAttribute("conversionOptionsId",item->conversionOptionsId);
+//         file.setAttribute("local",item->local);
+//         file.setAttribute("track",item->track);
+//         file.setAttribute("tracks",item->tracks);
+//         file.setAttribute("device",item->device);
+//         file.setAttribute("time",item->length);
+//         file.setAttribute("notifyCommand",item->notifyCommand);
+//         root.appendChild(file);
+//         if( item->tags )
+//         {
+//             QDomElement tags = list.createElement("tags");
+//             tags.setAttribute("artist",item->tags->artist);
+//             tags.setAttribute("albumArtist",item->tags->albumArtist);
+//             tags.setAttribute("composer",item->tags->composer);
+//             tags.setAttribute("album",item->tags->album);
+//             tags.setAttribute("title",item->tags->title);
+//             tags.setAttribute("genre",item->tags->genre);
+//             tags.setAttribute("comment",item->tags->comment);
+//             tags.setAttribute("track",item->tags->track);
+//             tags.setAttribute("trackTotal",item->tags->trackTotal);
+//             tags.setAttribute("disc",item->tags->disc);
+//             tags.setAttribute("discTotal",item->tags->discTotal);
+//             tags.setAttribute("year",item->tags->year);
+//             tags.setAttribute("track_gain",item->tags->trackGain);
+//             tags.setAttribute("album_gain",item->tags->albumGain);
+//             tags.setAttribute("length",item->tags->length);
+//             tags.setAttribute("samplingRate",item->tags->samplingRate);
+//             tags.setAttribute("isEncrypted",item->tags->isEncrypted);
+//             file.appendChild(tags);
+//         }
+//     }
 
-    QDomDocument list("soundkonverter_filelist");
-    QDomElement root = list.createElement("soundkonverter");
-    root.setAttribute("type","filelist");
-    list.appendChild(root);
-
-    QList<int> ids = config->conversionOptionsManager()->getAllIds();
-    for( int i=0; i<ids.size(); i++ )
-    {
-        if( !config->conversionOptionsManager()->getConversionOptions(ids.at(i)) )
-        {
-            // FIXME error message, null pointer for conversion options
-            continue;
-        }
-        QDomElement conversionOptions = config->conversionOptionsManager()->getConversionOptions(ids.at(i))->toXml(list);
-        conversionOptions.setAttribute("id",ids.at(i));
-        root.appendChild(conversionOptions);
-    }
-
-    FileListItem *item;
-    for( int i=0; i<topLevelItemCount(); i++ )
-    {
-        item = topLevelItem(i);
-
-        QDomElement file = list.createElement("file");
-        file.setAttribute("url",item->url.pathOrUrl());
-        // file.setAttribute("outputUrl",item->outputUrl.pathOrUrl());
-        file.setAttribute("codecName",item->codecName);
-        file.setAttribute("conversionOptionsId",item->conversionOptionsId);
-        file.setAttribute("local",item->local);
-        file.setAttribute("track",item->track);
-        file.setAttribute("tracks",item->tracks);
-        file.setAttribute("device",item->device);
-        file.setAttribute("time",item->length);
-        file.setAttribute("notifyCommand",item->notifyCommand);
-        root.appendChild(file);
-        if( item->tags )
-        {
-            QDomElement tags = list.createElement("tags");
-            tags.setAttribute("artist",item->tags->artist);
-            tags.setAttribute("albumArtist",item->tags->albumArtist);
-            tags.setAttribute("composer",item->tags->composer);
-            tags.setAttribute("album",item->tags->album);
-            tags.setAttribute("title",item->tags->title);
-            tags.setAttribute("genre",item->tags->genre);
-            tags.setAttribute("comment",item->tags->comment);
-            tags.setAttribute("track",item->tags->track);
-            tags.setAttribute("trackTotal",item->tags->trackTotal);
-            tags.setAttribute("disc",item->tags->disc);
-            tags.setAttribute("discTotal",item->tags->discTotal);
-            tags.setAttribute("year",item->tags->year);
-            tags.setAttribute("track_gain",item->tags->trackGain);
-            tags.setAttribute("album_gain",item->tags->albumGain);
-            tags.setAttribute("length",item->tags->length);
-            tags.setAttribute("samplingRate",item->tags->samplingRate);
-            tags.setAttribute("isEncrypted",item->tags->isEncrypted);
-            file.appendChild(tags);
-        }
-    }
-
-    const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
-    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
-    if( listFile.open( QIODevice::WriteOnly ) )
-    {
-        QTextStream stream(&listFile);
-        stream << list.toString();
-        listFile.close();
-    }
-
-    logger->log( 1000, QString("Saving the file list took %1 ms").arg(time.elapsed()) );
+//     list.toString();
+//
+//     const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
+//     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
+//     if( listFile.open( QIODevice::WriteOnly ) )
+//     {
+//         QTextStream stream(&listFile);
+//         stream << list.toString();
+//         listFile.close();
+//     }
+//
+//     logger->log( 1000, QString("Saving the file list took %1 ms").arg(time.elapsed()) );
 }
 
 

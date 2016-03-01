@@ -19,7 +19,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_ripper_icedax();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

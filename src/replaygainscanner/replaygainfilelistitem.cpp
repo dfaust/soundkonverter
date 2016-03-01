@@ -8,24 +8,36 @@ ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent )
     : QTreeWidgetItem( parent ),
     tags( 0 )
 {
+    type = Track;
     state = Waiting;
+    returnCode = Succeeded;
+
     samplingRate = 0;
+    length = 0;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidget *parent, QTreeWidgetItem *preceding )
     : QTreeWidgetItem( parent, preceding ),
     tags( 0 )
 {
+    type = Track;
     state = Waiting;
+    returnCode = Succeeded;
+
     samplingRate = 0;
+    length = 0;
 }
 
 ReplayGainFileListItem::ReplayGainFileListItem( QTreeWidgetItem *parent )
     : QTreeWidgetItem( parent ),
     tags( 0 )
 {
+    type = Track;
     state = Waiting;
+    returnCode = Succeeded;
+
     samplingRate = 0;
+    length = 0;
 }
 
 ReplayGainFileListItem::~ReplayGainFileListItem()

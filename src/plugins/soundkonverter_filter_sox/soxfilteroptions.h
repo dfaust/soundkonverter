@@ -15,6 +15,8 @@ public:
     QDomElement toXml( QDomDocument document, const QString elementName );
     bool fromXml( QDomElement filterOptions );
 
+    FilterOptions* copy() const;
+
     struct EffectData {
         QString effectName;
         QVariantList data;

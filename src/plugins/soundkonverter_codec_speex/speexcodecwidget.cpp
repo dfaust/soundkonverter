@@ -143,7 +143,7 @@ bool SpeexCodecWidget::setCurrentProfile( const QString& profile )
 
 int SpeexCodecWidget::currentDataRate()
 {
-    int dataRate;
+    int dataRate = 0;
 
     if( currentFormat == "wav" )
     {

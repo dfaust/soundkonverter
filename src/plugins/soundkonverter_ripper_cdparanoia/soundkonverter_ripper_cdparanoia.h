@@ -25,7 +25,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_ripper_cdparanoia();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

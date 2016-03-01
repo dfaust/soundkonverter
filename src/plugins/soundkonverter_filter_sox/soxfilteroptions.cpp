@@ -139,3 +139,17 @@ bool SoxFilterOptions::fromXml( QDomElement filterOptions )
 
     return true;
 }
+
+FilterOptions* SoxFilterOptions::copy() const
+{
+    SoxFilterOptions* c = new SoxFilterOptions();
+    c->pluginName = pluginName;
+    c->cmdArguments = cmdArguments;
+
+    c->data.sampleRate = data.sampleRate;
+    c->data.sampleSize = data.sampleSize;
+    c->data.channels = data.channels;
+    c->data.effects = data.effects;
+
+    return static_cast<FilterOptions*>(c);
+}

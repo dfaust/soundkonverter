@@ -20,7 +20,7 @@ soundkonverter_codec_mac::soundkonverter_codec_mac( QObject *parent, const QStri
 soundkonverter_codec_mac::~soundkonverter_codec_mac()
 {}
 
-QString soundkonverter_codec_mac::name()
+QString soundkonverter_codec_mac::name() const
 {
     return global_plugin_name;
 }

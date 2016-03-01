@@ -21,7 +21,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_opustools();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

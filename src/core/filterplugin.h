@@ -36,7 +36,7 @@ public:
     FilterPlugin( QObject *parent=0 );
     virtual ~FilterPlugin();
 
-    virtual QString type();
+    virtual QString type() const;
 
     virtual FilterWidget *newFilterWidget() = 0;
     virtual FilterWidget *deleteFilterWidget( FilterWidget *filterWidget );

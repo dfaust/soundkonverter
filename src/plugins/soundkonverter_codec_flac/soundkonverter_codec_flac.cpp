@@ -20,7 +20,7 @@ soundkonverter_codec_flac::soundkonverter_codec_flac( QObject *parent, const QSt
 soundkonverter_codec_flac::~soundkonverter_codec_flac()
 {}
 
-QString soundkonverter_codec_flac::name()
+QString soundkonverter_codec_flac::name() const
 {
     return global_plugin_name;
 }

@@ -33,7 +33,7 @@ soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *paren
 soundkonverter_codec_fluidsynth::~soundkonverter_codec_fluidsynth()
 {}
 
-QString soundkonverter_codec_fluidsynth::name()
+QString soundkonverter_codec_fluidsynth::name() const
 {
     return global_plugin_name;
 }

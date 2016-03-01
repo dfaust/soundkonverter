@@ -201,15 +201,17 @@ CodecPlugin *OptionsDetailed::getCurrentPlugin()
 
 void OptionsDetailed::updateProfiles()
 {
+    if( pProfileLoad->menu() )
+        pProfileLoad->menu()->deleteLater();
+
     QMenu *menu = new QMenu( this );
-    const QStringList profiles = config->customProfiles();
-    for( int i=0; i<profiles.count(); i++ )
+    foreach( const QString& profile, config->customProfiles() )
     {
-        menu->addAction( profiles.at(i), this, SLOT(loadCustomProfileButtonClicked()) );
+        menu->addAction( profile, this, SLOT(loadCustomProfileButtonClicked()) );
     }
 
     pProfileLoad->setMenu( menu );
-    pProfileLoad->setShown( profiles.count() > 0 );
+    pProfileLoad->setShown( config->customProfiles().count() > 0 );
 }
 
 void OptionsDetailed::formatChanged( const QString& format )
@@ -270,7 +272,7 @@ void OptionsDetailed::formatChanged( const QString& format )
 
 void OptionsDetailed::encoderChanged( const QString& encoder )
 {
-    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( encoder );
+    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( encoder ));
     if( !plugin )
     {
 //         TODO leads to crashes
@@ -289,11 +291,9 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
     {
         connect( wPlugin, SIGNAL(optionsChanged()), this, SLOT(somethingChanged()) );
         qobject_cast<CodecWidget*>(wPlugin)->setCurrentFormat( cFormat->currentText() );
-        if( plugin->lastUsedConversionOptions )
+        if( plugin->lastConversionOptions() )
         {
-            wPlugin->setCurrentConversionOptions( plugin->lastUsedConversionOptions );
-            delete plugin->lastUsedConversionOptions;
-            plugin->lastUsedConversionOptions = 0;
+            wPlugin->setCurrentConversionOptions( plugin->lastConversionOptions() );
         }
         grid->addWidget( wPlugin, 2, 0 );
     }
@@ -330,7 +330,7 @@ void OptionsDetailed::somethingChanged()
 
 void OptionsDetailed::configurePlugin()
 {
-    CodecPlugin *plugin = (CodecPlugin*)config->pluginLoader()->backendPluginByName( cPlugin->currentText() );
+    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( cPlugin->currentText() ));
 
     if( plugin )
     {
@@ -587,7 +587,7 @@ bool OptionsDetailed::setCurrentProfile( const QString& profile )
 {
     if( config->data.profiles.keys().contains(profile) )
     {
-        ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+        const ConversionOptions *conversionOptions = config->data.profiles.value( profile );
         if( conversionOptions )
             return setCurrentConversionOptions( conversionOptions );
     }

@@ -29,7 +29,7 @@ RipperPlugin::RipperPlugin( QObject *parent )
 RipperPlugin::~RipperPlugin()
 {}
 
-QString RipperPlugin::type()
+QString RipperPlugin::type() const
 {
     return "ripper";
 }

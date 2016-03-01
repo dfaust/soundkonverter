@@ -19,7 +19,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_replaygain_metaflac();
 
-    QString name();
+    QString name() const;
 
     QList<ReplayGainPipe> codecTable();
 

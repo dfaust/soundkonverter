@@ -33,7 +33,7 @@ soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent,
 soundkonverter_codec_opustools::~soundkonverter_codec_opustools()
 {}
 
-QString soundkonverter_codec_opustools::name()
+QString soundkonverter_codec_opustools::name() const
 {
     return global_plugin_name;
 }

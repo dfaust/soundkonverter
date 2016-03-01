@@ -11,6 +11,8 @@ class Config;
 
 class CoverData : public QObject
 {
+    Q_OBJECT
+
 public:
     /*!
     * This describes the function or content of the picture.
@@ -76,6 +78,7 @@ public:
 class TagData : public QObject
 {
     Q_OBJECT
+
 public:
     TagData();
     ~TagData();
@@ -115,8 +118,10 @@ public:
 };
 
 
-class TagEngine
+class TagEngine : public QObject
 {
+    Q_OBJECT
+
 public:
     TagEngine( Config *_config );
     ~TagEngine();

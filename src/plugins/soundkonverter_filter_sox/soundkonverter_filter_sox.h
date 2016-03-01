@@ -31,7 +31,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_filter_sox();
 
-    QString name();
+    QString name() const;
     int version();
 
     QList<ConversionPipeTrunk> codecTable();

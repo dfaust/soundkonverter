@@ -23,9 +23,11 @@ public:
     bool equalsBasics( FilterOptions *_other );
     virtual bool equals( FilterOptions *_other ); // checks if the other FilterOptions is equal to this
 
-    virtual QDomElement toXml( QDomDocument document, const QString elementName );
+    virtual QDomElement toXml( QDomDocument document, const QString& elementName );
 
     virtual bool fromXml( QDomElement filterOptions );
+
+    virtual FilterOptions* copy() const;
 
     QString pluginName;             // an identificator to see which plugin created the FilterOptions
                                     // NOTE this must be unique for each plugin!
@@ -52,6 +54,8 @@ public:
     virtual QDomElement toXml( QDomDocument document ) const;
 
     virtual bool fromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
+
+    virtual ConversionOptions* copy() const;
 
     QString pluginName;             // an identificator to see which plugin created the ConversionOptions
                                     // NOTE this must be unique for each plugin!

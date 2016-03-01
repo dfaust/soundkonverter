@@ -179,7 +179,7 @@ soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const Q
 soundkonverter_codec_libav::~soundkonverter_codec_libav()
 {}
 
-QString soundkonverter_codec_libav::name()
+QString soundkonverter_codec_libav::name() const
 {
     return global_plugin_name;
 }

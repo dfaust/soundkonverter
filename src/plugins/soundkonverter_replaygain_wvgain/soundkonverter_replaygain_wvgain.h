@@ -19,7 +19,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_replaygain_wvgain();
 
-    QString name();
+    QString name() const;
 
     QList<ReplayGainPipe> codecTable();
 

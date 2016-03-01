@@ -40,7 +40,7 @@ soundkonverter_replaygain_mp3gain::soundkonverter_replaygain_mp3gain( QObject *p
 soundkonverter_replaygain_mp3gain::~soundkonverter_replaygain_mp3gain()
 {}
 
-QString soundkonverter_replaygain_mp3gain::name()
+QString soundkonverter_replaygain_mp3gain::name() const
 {
     return global_plugin_name;
 }
@@ -241,7 +241,7 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            item = (Mp3GainPluginItem*)backendItems.at(i);
+            item = static_cast<Mp3GainPluginItem*>(backendItems.at(i));
             break;
         }
     }

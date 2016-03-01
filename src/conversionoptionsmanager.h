@@ -8,8 +8,10 @@
 class ConversionOptions;
 class PluginLoader;
 
-class ConversionOptionsManager
+class ConversionOptionsManager : public QObject
 {
+    Q_OBJECT
+
 public:
     struct ConversionOptionsElement {
         int id;
@@ -17,7 +19,7 @@ public:
         ConversionOptions *conversionOptions;
     };
 
-    ConversionOptionsManager( PluginLoader *_pluginLoader );
+    ConversionOptionsManager( PluginLoader *_pluginLoader, QObject *parent );
     ~ConversionOptionsManager();
 
     int addConversionOptions( ConversionOptions *conversionOptions );

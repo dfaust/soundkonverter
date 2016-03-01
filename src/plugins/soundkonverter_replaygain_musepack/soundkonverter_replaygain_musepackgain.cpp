@@ -20,7 +20,7 @@ soundkonverter_replaygain_musepackgain::soundkonverter_replaygain_musepackgain( 
 soundkonverter_replaygain_musepackgain::~soundkonverter_replaygain_musepackgain()
 {}
 
-QString soundkonverter_replaygain_musepackgain::name()
+QString soundkonverter_replaygain_musepackgain::name() const
 {
     return global_plugin_name;
 }

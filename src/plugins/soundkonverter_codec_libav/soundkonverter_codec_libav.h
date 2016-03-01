@@ -36,7 +36,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_libav();
 
-    QString name();
+    QString name() const;
     int version();
 
     QList<ConversionPipeTrunk> codecTable();

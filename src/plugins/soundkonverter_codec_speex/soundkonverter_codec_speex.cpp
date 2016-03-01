@@ -21,7 +21,7 @@ soundkonverter_codec_speex::soundkonverter_codec_speex( QObject *parent, const Q
 soundkonverter_codec_speex::~soundkonverter_codec_speex()
 {}
 
-QString soundkonverter_codec_speex::name()
+QString soundkonverter_codec_speex::name() const
 {
     return global_plugin_name;
 }

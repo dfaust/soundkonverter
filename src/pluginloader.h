@@ -50,8 +50,10 @@ struct ConversionPipe
 /**
 	@author Daniel Faust <hessijames@gmail.com>
 */
-class PluginLoader
+class PluginLoader : public QObject
 {
+    Q_OBJECT
+
     friend class Config;
 
 public:

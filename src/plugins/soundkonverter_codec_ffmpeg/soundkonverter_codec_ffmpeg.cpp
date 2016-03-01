@@ -179,7 +179,7 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 soundkonverter_codec_ffmpeg::~soundkonverter_codec_ffmpeg()
 {}
 
-QString soundkonverter_codec_ffmpeg::name()
+QString soundkonverter_codec_ffmpeg::name() const
 {
     return global_plugin_name;
 }

@@ -333,14 +333,13 @@ KUrl OutputDirectory::calcPath( FileListItem *fileListItem, Config *config, cons
 
 KUrl OutputDirectory::changeExtension( const KUrl& url, const QString& extension )
 {
-    KUrl newUrl = url;
+    KUrl changedUrl = url;
 
-    QString fileName = newUrl.fileName();
-    fileName = newUrl.fileName().left( newUrl.fileName().lastIndexOf(".")+1 ) + extension;
+    const QString urlFileName = url.fileName();
+    const QString fileName = urlFileName.left( urlFileName.lastIndexOf(".")+1 ) + extension;
+    changedUrl.setFileName( fileName );
 
-    newUrl.setFileName( fileName );
-
-    return newUrl;
+    return changedUrl;
 }
 
 KUrl OutputDirectory::uniqueFileName( const KUrl& url, const QStringList& usedOutputNames )
@@ -349,8 +348,9 @@ KUrl OutputDirectory::uniqueFileName( const KUrl& url, const QStringList& usedOu
 
     while( QFile::exists(uniqueUrl.toLocalFile()) || usedOutputNames.contains(uniqueUrl.toLocalFile()) )
     {
-        QString fileName = uniqueUrl.fileName();
-        fileName = fileName.left( fileName.lastIndexOf(".")+1 ) + i18nc("will be appended to the filename if a file with the same name already exists","new") + fileName.mid( fileName.lastIndexOf(".") );
+        const QString newString = i18nc("will be appended to the filename if a file with the same name already exists","new");
+        const QString urlFileName = uniqueUrl.fileName();
+        const QString fileName = urlFileName.left( urlFileName.lastIndexOf(".")+1 ) + newString + urlFileName.mid( urlFileName.lastIndexOf(".") );
         uniqueUrl.setFileName( fileName );
     }
 

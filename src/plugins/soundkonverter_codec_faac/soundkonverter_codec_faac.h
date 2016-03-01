@@ -20,7 +20,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_faac();
 
-    QString name();
+    QString name() const;
     int version();
 
     QList<ConversionPipeTrunk> codecTable();

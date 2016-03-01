@@ -230,7 +230,7 @@ void PlaylistOpener::fileDialogAccepted()
 
 void PlaylistOpener::okClickedSlot()
 {
-    const ConversionOptions *conversionOptions = options->currentConversionOptions();
+    ConversionOptions *conversionOptions = options->currentConversionOptions();
     if( conversionOptions )
     {
         options->accepted();

@@ -38,3 +38,14 @@ bool NormalizeFilterOptions::fromXml( QDomElement filterOptions )
 
     return true;
 }
+
+FilterOptions* NormalizeFilterOptions::copy() const
+{
+    NormalizeFilterOptions* c = new NormalizeFilterOptions();
+    c->pluginName = pluginName;
+    c->cmdArguments = cmdArguments;
+
+    c->data.normalize = data.normalize;
+
+    return static_cast<FilterOptions*>(c);
+}

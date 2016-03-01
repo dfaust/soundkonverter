@@ -36,7 +36,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_ffmpeg();
 
-    QString name();
+    QString name() const;
     int version();
 
     QList<ConversionPipeTrunk> codecTable();

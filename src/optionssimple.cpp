@@ -315,11 +315,11 @@ void OptionsSimple::profileChanged()
     }
     else
     {
-        foreach( const QString profileName, config->data.profiles.keys() )
+        foreach( const QString& profileName, config->data.profiles.keys() )
         {
             if( profileName == profile )
             {
-                ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+                const ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
                 if( conversionOptions )
                 {
                     cFormat->addItem( conversionOptions->codecName );
@@ -367,7 +367,7 @@ void OptionsSimple::profileChanged()
 void OptionsSimple::outputDirectoryChanged()
 {
     const QString profileName = cProfile->currentText();
-    ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
+    const ConversionOptions *conversionOptions = config->data.profiles.value( profileName );
     if( conversionOptions )
     {
         if( conversionOptions->outputDirectoryMode != outputDirectory->mode() || conversionOptions->outputDirectory != outputDirectory->directory() )

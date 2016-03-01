@@ -65,16 +65,32 @@ bool LameConversionOptions::fromXml( QDomElement conversionOptions, QList<QDomEl
     return true;
 }
 
+ConversionOptions* LameConversionOptions::copy() const
+{
+    LameConversionOptions* c = new LameConversionOptions();
+    c->pluginName = pluginName;
+    c->qualityMode = qualityMode;
+    c->quality = quality;
+    c->bitrate = bitrate;
+    c->bitrateMode = bitrateMode;
+    c->cmdArguments = cmdArguments;
+    c->compressionLevel = compressionLevel;
+    c->profile = profile;
+    c->codecName = codecName;
+    c->outputDirectoryMode = outputDirectoryMode;
+    c->outputDirectory = outputDirectory;
+    c->outputFilesystem = outputFilesystem;
+    c->replaygain = replaygain;
 
+    foreach( const FilterOptions* f, filterOptions )
+    {
+        c->filterOptions.append(f->copy());
+    }
 
+    c->data.preset = data.preset;
+    c->data.presetBitrate = data.presetBitrate;
+    c->data.presetBitrateCbr = data.presetBitrateCbr;
+    c->data.presetFast = data.presetFast;
 
-
-
-
-
-
-
-
-
-
-
+    return static_cast<ConversionOptions*>(c);
+}

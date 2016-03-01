@@ -50,7 +50,7 @@ bool TimidityCodecWidget::setCurrentProfile( const QString& profile )
 
 int TimidityCodecWidget::currentDataRate()
 {
-    int dataRate;
+    int dataRate = 0;
 
     if( currentFormat == "wav" )
     {

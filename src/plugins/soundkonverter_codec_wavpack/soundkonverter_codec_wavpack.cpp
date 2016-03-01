@@ -21,7 +21,7 @@ soundkonverter_codec_wavpack::soundkonverter_codec_wavpack( QObject *parent, con
 soundkonverter_codec_wavpack::~soundkonverter_codec_wavpack()
 {}
 
-QString soundkonverter_codec_wavpack::name()
+QString soundkonverter_codec_wavpack::name() const
 {
     return global_plugin_name;
 }

@@ -21,7 +21,7 @@ ReplayGainPlugin::ReplayGainPlugin( QObject *parent )
 ReplayGainPlugin::~ReplayGainPlugin()
 {}
 
-QString ReplayGainPlugin::type()
+QString ReplayGainPlugin::type() const
 {
     return "replaygain";
 }

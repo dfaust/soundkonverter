@@ -34,7 +34,7 @@ soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QSt
 soundkonverter_codec_faac::~soundkonverter_codec_faac()
 {}
 
-QString soundkonverter_codec_faac::name()
+QString soundkonverter_codec_faac::name() const
 {
     return global_plugin_name;
 }

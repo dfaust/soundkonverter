@@ -22,7 +22,7 @@ soundkonverter_filter_normalize::soundkonverter_filter_normalize( QObject *paren
 soundkonverter_filter_normalize::~soundkonverter_filter_normalize()
 {}
 
-QString soundkonverter_filter_normalize::name()
+QString soundkonverter_filter_normalize::name() const
 {
     return global_plugin_name;
 }
@@ -74,8 +74,6 @@ FilterWidget *soundkonverter_filter_normalize::newFilterWidget()
     if( lastUsedFilterOptions )
     {
         widget->setCurrentFilterOptions( lastUsedFilterOptions );
-        delete lastUsedFilterOptions;
-        lastUsedFilterOptions = 0;
     }
     return qobject_cast<FilterWidget*>(widget);
 }

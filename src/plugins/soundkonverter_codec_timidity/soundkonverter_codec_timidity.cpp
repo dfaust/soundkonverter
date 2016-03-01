@@ -21,7 +21,7 @@ soundkonverter_codec_timidity::soundkonverter_codec_timidity( QObject *parent, c
 soundkonverter_codec_timidity::~soundkonverter_codec_timidity()
 {}
 
-QString soundkonverter_codec_timidity::name()
+QString soundkonverter_codec_timidity::name() const
 {
     return global_plugin_name;
 }

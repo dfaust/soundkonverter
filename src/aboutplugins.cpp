@@ -150,7 +150,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     problemInfos.clear();
     if( currentPlugin->type() == "codec" )
     {
-        CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
+        CodecPlugin *codecPlugin = static_cast<CodecPlugin*>(currentPlugin);
 
         QStringList codecsString;
         QMap<QString,int> encodeCodecs;
@@ -185,7 +185,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     }
     else if( currentPlugin->type() == "filter" )
     {
-        CodecPlugin *codecPlugin = (CodecPlugin*)currentPlugin;
+        CodecPlugin *codecPlugin = static_cast<CodecPlugin*>(currentPlugin);
 
         QStringList codecsString;
         QMap<QString,int> encodeCodecs;
@@ -220,7 +220,7 @@ void AboutPlugins::currentPluginChanged( const QString& pluginName )
     }
     else if( currentPlugin->type() == "replaygain" )
     {
-        ReplayGainPlugin *replaygainPlugin = (ReplayGainPlugin*)currentPlugin;
+        ReplayGainPlugin *replaygainPlugin = static_cast<ReplayGainPlugin*>(currentPlugin);
 
         QStringList codecs;
         QList<ReplayGainPipe> codecTable = replaygainPlugin->codecTable();

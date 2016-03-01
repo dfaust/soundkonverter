@@ -41,7 +41,7 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
 soundkonverter_replaygain_aacgain::~soundkonverter_replaygain_aacgain()
 {}
 
-QString soundkonverter_replaygain_aacgain::name()
+QString soundkonverter_replaygain_aacgain::name() const
 {
     return global_plugin_name;
 }
@@ -248,7 +248,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            item = (AacGainPluginItem*)backendItems.at(i);
+            item = static_cast<AacGainPluginItem*>(backendItems.at(i));
             break;
         }
     }

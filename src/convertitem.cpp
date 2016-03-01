@@ -9,7 +9,10 @@
 ConvertItem::ConvertItem( FileListItem *item )
     : fileListItem( item )
 {
-    getTime = replaygainTime = 0.0f;
+    getTime = 0.0f;
+    replaygainTime = 0.0f;
+    finishedTime = 0.0f;
+    progress = 0.0f;
 
     backendPlugin = 0;
     backendID = -1;
@@ -21,6 +24,10 @@ ConvertItem::ConvertItem( FileListItem *item )
 
     killed = false;
     internalReplayGainUsed = false;
+
+    mode = initial;
+    state = initial;
+    logID = -1;
 }
 
 ConvertItem::~ConvertItem()

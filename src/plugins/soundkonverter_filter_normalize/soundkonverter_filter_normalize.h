@@ -17,7 +17,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_filter_normalize();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

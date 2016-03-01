@@ -17,7 +17,7 @@ soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObj
 soundkonverter_replaygain_vorbisgain::~soundkonverter_replaygain_vorbisgain()
 {}
 
-QString soundkonverter_replaygain_vorbisgain::name()
+QString soundkonverter_replaygain_vorbisgain::name() const
 {
     return global_plugin_name;
 }

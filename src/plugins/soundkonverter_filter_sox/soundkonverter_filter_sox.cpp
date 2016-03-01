@@ -118,7 +118,7 @@ soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QSt
 soundkonverter_filter_sox::~soundkonverter_filter_sox()
 {}
 
-QString soundkonverter_filter_sox::name()
+QString soundkonverter_filter_sox::name() const
 {
     return global_plugin_name;
 }
@@ -300,8 +300,6 @@ FilterWidget *soundkonverter_filter_sox::newFilterWidget()
     if( lastUsedFilterOptions )
     {
         widget->setCurrentFilterOptions( lastUsedFilterOptions );
-        delete lastUsedFilterOptions;
-        lastUsedFilterOptions = 0;
     }
     return qobject_cast<FilterWidget*>(widget);
 }

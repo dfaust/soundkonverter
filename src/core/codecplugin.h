@@ -31,7 +31,7 @@ public:
     CodecPlugin( QObject *parent=0 );
     virtual ~CodecPlugin();
 
-    virtual QString type();
+    virtual QString type() const;
 
     virtual QList<ConversionPipeTrunk> codecTable() = 0;
     virtual CodecWidget *newCodecWidget() = 0;
@@ -49,6 +49,9 @@ public:
 
     virtual ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 
+    const ConversionOptions* lastConversionOptions();
+
+protected:
     ConversionOptions *lastUsedConversionOptions;
 
 };

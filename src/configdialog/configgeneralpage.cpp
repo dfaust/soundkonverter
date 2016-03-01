@@ -284,7 +284,7 @@ void ConfigGeneralPage::profileChanged()
     }
     else
     {
-        ConversionOptions *conversionOptions = config->data.profiles.value( profile );
+        const ConversionOptions *conversionOptions = config->data.profiles.value( profile );
         if( conversionOptions )
             cDefaultFormat->addItem( conversionOptions->codecName );
     }

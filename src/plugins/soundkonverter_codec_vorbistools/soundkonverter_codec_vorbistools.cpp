@@ -21,7 +21,7 @@ soundkonverter_codec_vorbistools::soundkonverter_codec_vorbistools( QObject *par
 soundkonverter_codec_vorbistools::~soundkonverter_codec_vorbistools()
 {}
 
-QString soundkonverter_codec_vorbistools::name()
+QString soundkonverter_codec_vorbistools::name() const
 {
     return global_plugin_name;
 }

@@ -6,6 +6,7 @@
 -Fix: Don't crash when tags can't be read
 -Fix: Error message when trying to write to a directory without permissions
 -Fix: Store album artist information to file list files
+-Fix: Some crashes
 
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files

@@ -76,7 +76,7 @@ public slots:
     void setCommand( const QString& _command );
 
     /** Set the current conversion options */
-    void setCurrentConversionOptions( ConversionOptions *options );
+    void setCurrentConversionOptions( const ConversionOptions *options );
 
 private slots:
     void fadeAnim();

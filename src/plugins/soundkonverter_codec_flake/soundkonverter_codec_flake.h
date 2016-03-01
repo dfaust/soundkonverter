@@ -17,7 +17,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_flake();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

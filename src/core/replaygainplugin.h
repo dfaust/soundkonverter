@@ -51,7 +51,7 @@ public:
     ReplayGainPlugin( QObject *parent=0 );
     virtual ~ReplayGainPlugin();
 
-    virtual QString type();
+    virtual QString type() const;
 
     virtual QList<ReplayGainPipe> codecTable() = 0;
 

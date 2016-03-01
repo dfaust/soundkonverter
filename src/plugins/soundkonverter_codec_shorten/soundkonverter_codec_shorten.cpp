@@ -20,7 +20,7 @@ soundkonverter_codec_shorten::soundkonverter_codec_shorten( QObject *parent, con
 soundkonverter_codec_shorten::~soundkonverter_codec_shorten()
 {}
 
-QString soundkonverter_codec_shorten::name()
+QString soundkonverter_codec_shorten::name() const
 {
     return global_plugin_name;
 }

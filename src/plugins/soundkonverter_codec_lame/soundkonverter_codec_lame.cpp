@@ -39,7 +39,7 @@ soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QSt
 soundkonverter_codec_lame::~soundkonverter_codec_lame()
 {}
 
-QString soundkonverter_codec_lame::name()
+QString soundkonverter_codec_lame::name() const
 {
     return global_plugin_name;
 }

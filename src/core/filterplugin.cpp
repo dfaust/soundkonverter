@@ -28,9 +28,12 @@ FilterPlugin::FilterPlugin( QObject *parent )
 }
 
 FilterPlugin::~FilterPlugin()
-{}
+{
+    if( lastUsedFilterOptions )
+        delete lastUsedFilterOptions;
+}
 
-QString FilterPlugin::type()
+QString FilterPlugin::type() const
 {
     return "filter";
 }
@@ -44,6 +47,7 @@ FilterWidget *FilterPlugin::deleteFilterWidget( FilterWidget *filterWidget )
         delete lastUsedFilterOptions;
 
     lastUsedFilterOptions = filterWidget->currentFilterOptions();
+
     delete filterWidget;
 
     return 0;

@@ -22,7 +22,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_lame();
 
-    QString name();
+    QString name() const;
 
     QList<ConversionPipeTrunk> codecTable();
 

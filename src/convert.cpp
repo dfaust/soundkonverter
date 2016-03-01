@@ -502,9 +502,10 @@ void Convert::replaygain( ConvertItem *item )
         }
     }
 
-    bool waitForVorbisGainFinish = false;
     if( item->backendPlugin->name() == "Vorbis Gain" )
     {
+        bool waitForVorbisGainFinish = false;
+
         foreach( const QString directory, directories )
         {
             if( activeVorbisGainDirectories.contains(directory) )
@@ -1115,7 +1116,6 @@ void Convert::add( FileListItem *fileListItem )
 
     newItem->inputUrl = fileListItem->url;
 
-    logger->log( 1000, "config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);" );
     const ConversionOptions *conversionOptions = config->conversionOptionsManager()->getConversionOptions(fileListItem->conversionOptionsId);
     if( !conversionOptions )
     {
@@ -1129,7 +1129,6 @@ void Convert::add( FileListItem *fileListItem )
         logger->log( newItem->logID, "\t" + i18n("Track number: %1, device: %2",QString::number(fileListItem->track),fileListItem->device) );
     }
 
-    logger->log( 1000, "config->pluginLoader()->getConversionPipes( fileListItem->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );" );
     newItem->conversionPipes = config->pluginLoader()->getConversionPipes( fileListItem->codecName, conversionOptions->codecName, conversionOptions->filterOptions, conversionOptions->pluginName );
 
     logger->log( newItem->logID, "\t" + i18n("Possible conversion strategies:") );
@@ -1167,7 +1166,6 @@ void Convert::add( FileListItem *fileListItem )
     fileListItem->state = FileListItem::Converting;
 
     // and start
-    logger->log( 1000, "executeNextStep( newItem );" );
     executeNextStep( newItem );
 }
 
@@ -1379,7 +1377,6 @@ void Convert::itemRemoved( FileListItem *fileListItem )
 void Convert::updateProgress()
 {
     float time = 0.0f;
-    float fileTime;
     QString fileProgressString;
 
     // trigger flushing of the logger cache
@@ -1409,7 +1406,8 @@ void Convert::updateProgress()
             fileProgress = 0; // make it a valid value so the calculations below work
         }
 
-        fileTime = 0.0f;
+        float fileTime = 0.0f;
+
         switch( item->state )
         {
             case ConvertItem::initial:

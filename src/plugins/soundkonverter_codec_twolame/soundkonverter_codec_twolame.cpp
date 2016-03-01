@@ -30,7 +30,7 @@ soundkonverter_codec_twolame::soundkonverter_codec_twolame( QObject *parent, con
 soundkonverter_codec_twolame::~soundkonverter_codec_twolame()
 {}
 
-QString soundkonverter_codec_twolame::name()
+QString soundkonverter_codec_twolame::name() const
 {
     return global_plugin_name;
 }

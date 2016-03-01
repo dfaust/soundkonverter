@@ -50,7 +50,7 @@ bool FluidsynthCodecWidget::setCurrentProfile( const QString& profile )
 
 int FluidsynthCodecWidget::currentDataRate()
 {
-    int dataRate;
+    int dataRate = 0;
 
     if( currentFormat == "wav" )
     {

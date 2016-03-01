@@ -143,7 +143,8 @@ TagData::~TagData()
 
 
 TagEngine::TagEngine( Config *_config )
-    : config( _config )
+    : QObject( _config ),
+    config( _config )
 {
     TagLib::StringList genres = TagLib::ID3v1::genreList();
     for( TagLib::StringList::ConstIterator it = genres.begin(), end = genres.end(); it != end; ++it )

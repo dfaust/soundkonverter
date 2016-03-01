@@ -24,7 +24,7 @@ soundkonverter_codec_musepack::soundkonverter_codec_musepack( QObject *parent, c
 soundkonverter_codec_musepack::~soundkonverter_codec_musepack()
 {}
 
-QString soundkonverter_codec_musepack::name()
+QString soundkonverter_codec_musepack::name() const
 {
     return global_plugin_name;
 }

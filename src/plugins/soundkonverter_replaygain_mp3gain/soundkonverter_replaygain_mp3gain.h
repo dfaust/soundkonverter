@@ -35,7 +35,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_replaygain_mp3gain();
 
-    QString name();
+    QString name() const;
 
     QList<ReplayGainPipe> codecTable();
 

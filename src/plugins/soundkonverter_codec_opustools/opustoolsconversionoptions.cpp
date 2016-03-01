@@ -44,16 +44,29 @@ bool OpusToolsConversionOptions::fromXml( QDomElement conversionOptions, QList<Q
     return true;
 }
 
+ConversionOptions* OpusToolsConversionOptions::copy() const
+{
+    OpusToolsConversionOptions* c = new OpusToolsConversionOptions();
+    c->pluginName = pluginName;
+    c->qualityMode = qualityMode;
+    c->quality = quality;
+    c->bitrate = bitrate;
+    c->bitrateMode = bitrateMode;
+    c->cmdArguments = cmdArguments;
+    c->compressionLevel = compressionLevel;
+    c->profile = profile;
+    c->codecName = codecName;
+    c->outputDirectoryMode = outputDirectoryMode;
+    c->outputDirectory = outputDirectory;
+    c->outputFilesystem = outputFilesystem;
+    c->replaygain = replaygain;
 
+    foreach( const FilterOptions* f, filterOptions )
+    {
+        c->filterOptions.append(f->copy());
+    }
 
+    c->data.floatBitrate = data.floatBitrate;
 
-
-
-
-
-
-
-
-
-
-
+    return static_cast<ConversionOptions*>(c);
+}

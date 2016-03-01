@@ -50,7 +50,7 @@ private slots:
     void okClickedSlot();
 
 signals:
-    void open( const KUrl::List& files, const ConversionOptions *conversionOptions );
+    void open( const KUrl::List& files, ConversionOptions *conversionOptions );
 
 };
 

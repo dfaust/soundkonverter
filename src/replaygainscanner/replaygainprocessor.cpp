@@ -284,7 +284,7 @@ void ReplayGainProcessor::add( ReplayGainFileListItem* fileListItem, ReplayGainP
     {
         for( int j=0; j<newItem->fileListItem->childCount(); j++ )
         {
-            ReplayGainFileListItem *child = (ReplayGainFileListItem*)newItem->fileListItem->child(j);
+            ReplayGainFileListItem *child = static_cast<ReplayGainFileListItem*>(newItem->fileListItem->child(j));
             newItem->time += child->length;
         }
     }

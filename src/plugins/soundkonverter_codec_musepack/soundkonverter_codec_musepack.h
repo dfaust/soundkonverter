@@ -17,7 +17,7 @@ public:
     /** Default Destructor */
     ~soundkonverter_codec_musepack();
 
-    QString name();
+    QString name() const;
 
     /** search for the backend binaries in the given directories */
     virtual void scanForBackends( const QStringList& directoryList = QStringList() );

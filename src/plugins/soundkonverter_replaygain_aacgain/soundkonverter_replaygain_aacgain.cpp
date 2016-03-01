@@ -163,7 +163,7 @@ void soundkonverter_replaygain_aacgain::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
+int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, ReplayGainPlugin::ApplyMode mode )
 {
     if( fileList.count() <= 0 )
         return BackendPlugin::UnknownError;
@@ -301,12 +301,12 @@ float soundkonverter_replaygain_aacgain::parseOutput( const QString& output )
     QRegExp reg2("(\\d+)%");
     if( output.contains(reg1) )
     {
-        float fraction = 1.0f/reg1.cap(2).toInt();
-        progress = 100*(reg1.cap(1).toInt()-1)*fraction + reg1.cap(3).toInt()*fraction;
+        float fraction = 1.0f/(float)reg1.cap(2).toInt();
+        progress = 100*((float)reg1.cap(1).toInt()-1)*fraction + (float)reg1.cap(3).toInt()*fraction;
     }
     else if( output.contains(reg2) )
     {
-        progress = reg2.cap(1).toInt();
+        progress = (float)reg2.cap(1).toInt();
     }
 
     // Applying mp3 gain change of -6 to /home/user/file.mp3...

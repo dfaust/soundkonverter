@@ -73,7 +73,7 @@ bool WavPackCodecWidget::setCurrentConversionOptions( const ConversionOptions *_
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
     const ConversionOptions *options = _options;
-    cCompressionLevel->setCurrentIndex( options->compressionLevel );
+    cCompressionLevel->setCurrentIndex( (int)options->compressionLevel );
     cCmdArguments->setChecked( !options->cmdArguments.isEmpty() );
     if( !options->cmdArguments.isEmpty() ) lCmdArguments->setText( options->cmdArguments );
     return true;

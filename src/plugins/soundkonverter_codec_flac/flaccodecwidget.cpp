@@ -72,7 +72,7 @@ bool FlacCodecWidget::setCurrentConversionOptions( const ConversionOptions *_opt
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
     const ConversionOptions *options = _options;
-    iCompressionLevel->setValue( options->compressionLevel );
+    iCompressionLevel->setValue( (int)options->compressionLevel );
     return true;
 }
 

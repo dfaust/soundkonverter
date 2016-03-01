@@ -75,7 +75,7 @@ bool MacCodecWidget::setCurrentConversionOptions( const ConversionOptions *_opti
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
     const ConversionOptions *options = _options;
-    iCompressionLevel->setValue( options->compressionLevel/1000 );
+    iCompressionLevel->setValue( (int)(options->compressionLevel/1000) );
     return true;
 }
 

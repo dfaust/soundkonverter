@@ -28,7 +28,7 @@ public:
     bool hasInfo();
     void showInfo( QWidget *parent );
 
-    unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add );
+    int apply( const KUrl::List& fileList, ApplyMode mode = Add );
     float parseOutput( const QString& output );
 
 };

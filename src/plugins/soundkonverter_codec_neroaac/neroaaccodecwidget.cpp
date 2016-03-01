@@ -81,7 +81,7 @@ NeroaacCodecWidget::~NeroaacCodecWidget()
 // TODO optimize
 int NeroaacCodecWidget::bitrateForQuality( double quality )
 {
-    return quality*100/3;
+    return (int)round(quality*100/3);
 }
 
 // TODO optimize
@@ -97,14 +97,14 @@ ConversionOptions *NeroaacCodecWidget::currentConversionOptions()
     if( cMode->currentText()==i18n("Quality") )
     {
         options->qualityMode = ConversionOptions::Quality;
-        options->quality = dQuality->value();
+        options->quality = (int)round(dQuality->value());
         options->bitrate = bitrateForQuality( options->quality );
         options->bitrateMode = ConversionOptions::Vbr;
     }
     else
     {
         options->qualityMode = ConversionOptions::Bitrate;
-        options->bitrate = dQuality->value();
+        options->bitrate = (int)round(dQuality->value());
         options->quality = qualityForBitrate( options->bitrate );
         options->bitrateMode = ( cBitrateMode->currentText()==i18n("Average") ) ? ConversionOptions::Abr : ConversionOptions::Cbr;
     }
@@ -239,7 +239,7 @@ bool NeroaacCodecWidget::setCurrentProfile( const QString& profile )
 
 int NeroaacCodecWidget::currentDataRate()
 {
-    int dataRate;
+    double dataRate;
 
     if( currentFormat == "wav" )
     {
@@ -268,7 +268,7 @@ int NeroaacCodecWidget::currentDataRate()
 //         }
     }
 
-    return dataRate;
+    return (int)round(dataRate);
 }
 
 void NeroaacCodecWidget::modeChanged( int mode )
@@ -321,7 +321,7 @@ void NeroaacCodecWidget::qualitySliderChanged( int quality )
 
 void NeroaacCodecWidget::qualitySpinBoxChanged( double quality )
 {
-    sQuality->setValue( round(quality*100) );
+    sQuality->setValue( (int)round(quality*100) );
 }
 
 // void NeroaacCodecWidget::channelsToggled( bool enabled )

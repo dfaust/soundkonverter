@@ -11,6 +11,8 @@
 //
 #include "configpagebase.h"
 
+#include <math.h>
+
 #include <QApplication>
 
 
@@ -20,7 +22,7 @@ ConfigPageBase::ConfigPageBase( QWidget *parent )
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     spacingOffset = 2 * fontHeight;
-    spacingSmall  = 0.5*fontHeight;
+    spacingSmall  = (int)round(0.5*fontHeight);
     spacingMedium =     fontHeight;
     spacingBig    = 2 * fontHeight;
 }

@@ -56,7 +56,7 @@ public:
     virtual QList<ReplayGainPipe> codecTable() = 0;
 
     /** adds replaygain to one or more files */
-    virtual unsigned int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
+    virtual int apply( const KUrl::List& fileList, ApplyMode mode = Add ) = 0;
 };
 
 #define K_EXPORT_SOUNDKONVERTER_REPLAYGAIN(libname, classname) \

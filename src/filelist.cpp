@@ -1518,10 +1518,9 @@ void FileList::save( bool user )
         }
     }
 
-    const FileListItem *item;
     for( int i=0; i<topLevelItemCount(); i++ )
     {
-        item = topLevelItem(i);
+        const FileListItem *item = topLevelItem(i);
 
         QDomElement file = list.createElement("file");
         file.setAttribute("url",item->url.pathOrUrl());

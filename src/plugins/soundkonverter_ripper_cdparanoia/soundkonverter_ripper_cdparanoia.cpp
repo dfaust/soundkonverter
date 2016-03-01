@@ -187,7 +187,7 @@ void soundkonverter_ripper_cdparanoia::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
+int soundkonverter_ripper_cdparanoia::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
 {
     QStringList command;
 
@@ -306,21 +306,19 @@ float soundkonverter_ripper_cdparanoia::parseOutput( const QString& output )
 
 void soundkonverter_ripper_cdparanoia::processOutput()
 {
-    RipperPluginItem *pluginItem;
-    float progress;
     for( int i=0; i<backendItems.size(); i++ )
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
             QString output = backendItems.at(i)->process->readAllStandardOutput().data();
-            pluginItem = qobject_cast<RipperPluginItem*>(backendItems.at(i));
+            RipperPluginItem *pluginItem = qobject_cast<RipperPluginItem*>(backendItems.at(i));
 
-            progress = parseOutput( output, &pluginItem->data.fromSector, &pluginItem->data.toSector );
+            float progress = parseOutput( output, &pluginItem->data.fromSector, &pluginItem->data.toSector );
 
             if( progress == -1 && !output.simplified().isEmpty() )
                 logOutput( backendItems.at(i)->id, output );
 
-            progress = (progress-pluginItem->data.fromSector) * 100 / (pluginItem->data.toSector-pluginItem->data.fromSector);
+            progress = (progress - (float)pluginItem->data.fromSector) * 100 / (float)(pluginItem->data.toSector - pluginItem->data.fromSector);
 
             if( progress > backendItems.at(i)->progress )
                 backendItems.at(i)->progress = progress;

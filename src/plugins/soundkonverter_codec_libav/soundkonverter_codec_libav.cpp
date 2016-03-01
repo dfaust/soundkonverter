@@ -423,7 +423,7 @@ CodecWidget *soundkonverter_codec_libav::newCodecWidget()
     return qobject_cast<CodecWidget*>(widget);
 }
 
-unsigned int soundkonverter_codec_libav::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, const ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
+int soundkonverter_codec_libav::convert( const KUrl& inputFile, const KUrl& outputFile, const QString& inputCodec, const QString& outputCodec, const ConversionOptions *_conversionOptions, TagData *tags, bool replayGain )
 {
     Q_UNUSED(inputCodec)
     Q_UNUSED(tags)
@@ -517,11 +517,11 @@ float soundkonverter_codec_libav::parseOutput( const QString& output, int *lengt
     QRegExp reg2("time=(\\d+)\\.\\d");
     if( output.contains(reg1) )
     {
-        return reg1.cap(1).toInt()*3600 + reg1.cap(2).toInt()*60 + reg1.cap(3).toInt();
+        return (float)reg1.cap(1).toInt()*3600 + (float)reg1.cap(2).toInt()*60 + (float)reg1.cap(3).toInt();
     }
     else if( output.contains(reg2) )
     {
-        return reg2.cap(1).toInt();
+        return (float)reg2.cap(1).toInt();
     }
 
     // TODO error handling
@@ -549,7 +549,7 @@ void soundkonverter_codec_libav::processOutput()
             if( progress == -1 && !output.simplified().isEmpty() )
                 logOutput( backendItems.at(i)->id, output );
 
-            progress = progress * 100 / pluginItem->data.length;
+            progress = progress * 100 / (float)pluginItem->data.length;
             if( progress > backendItems.at(i)->progress )
                 backendItems.at(i)->progress = progress;
 

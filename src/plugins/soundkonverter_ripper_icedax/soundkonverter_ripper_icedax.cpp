@@ -62,7 +62,7 @@ void soundkonverter_ripper_icedax::showInfo( QWidget *parent )
     Q_UNUSED(parent)
 }
 
-unsigned int soundkonverter_ripper_icedax::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
+int soundkonverter_ripper_icedax::rip( const QString& device, int track, int tracks, const KUrl& outputFile )
 {
     QStringList command;
 
@@ -134,7 +134,7 @@ float soundkonverter_ripper_icedax::parseOutput( const QString& output, RipperPl
     if( progress > 90 )
         processedFiles--;
 
-    return float( processedFiles * 100 + progress ) / ripperItem->data.fileCount;
+    return ((float)processedFiles * 100 + progress) / (float)ripperItem->data.fileCount;
 }
 
 float soundkonverter_ripper_icedax::parseOutput( const QString& output)

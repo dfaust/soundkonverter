@@ -149,7 +149,7 @@ FilterOptions* SoxFilterWidget::currentFilterOptions()
     }
 }
 
-bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
+bool SoxFilterWidget::setCurrentFilterOptions( const FilterOptions *_options )
 {
     // reset effect widgets
     for( int i=1; i<effectWidgets.count(); i++ )
@@ -180,7 +180,7 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     if( _options->pluginName != global_plugin_name )
         return false;
 
-    SoxFilterOptions *options = dynamic_cast<SoxFilterOptions*>(_options);
+    const SoxFilterOptions *options = dynamic_cast<const SoxFilterOptions*>(_options);
 
     chSampleRate->setChecked( options->data.sampleRate > 0 );
     if( options->data.sampleRate > 0 )
@@ -199,7 +199,7 @@ bool SoxFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     }
 
     bool first = true;
-    foreach( const SoxFilterOptions::EffectData effectData, options->data.effects )
+    foreach( const SoxFilterOptions::EffectData& effectData, options->data.effects )
     {
         if( !first )
             addEffectWidgetClicked();

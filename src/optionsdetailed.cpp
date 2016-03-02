@@ -86,7 +86,7 @@ OptionsDetailed::OptionsDetailed( Config* _config, QWidget* parent )
     grid->addWidget( lineFrame, gridRow++, 0 );
 
     int filterCount = 0;
-    foreach( QString pluginName, config->data.backends.enabledFilters )
+    foreach( const QString& pluginName, config->data.backends.enabledFilters )
     {
         FilterPlugin *plugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName(pluginName));
         if( !plugin )
@@ -411,7 +411,7 @@ bool OptionsDetailed::setCurrentConversionOptions( const ConversionOptions *conv
         succeeded = false;
 
     QStringList usedFilter;
-    foreach( FilterOptions *filterOptions, conversionOptions->filterOptions )
+    foreach( const FilterOptions *filterOptions, conversionOptions->filterOptions )
     {
         bool filterSucceeded = false;
         for( int i=0; i<wFilter.size(); i++ )

@@ -17,6 +17,8 @@ soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *paren
 {
     Q_UNUSED(args)
 
+    configDialogSoundFontUrlRequester = 0;
+
     binaries["fluidsynth"] = "";
 
     allCodecs += "midi";

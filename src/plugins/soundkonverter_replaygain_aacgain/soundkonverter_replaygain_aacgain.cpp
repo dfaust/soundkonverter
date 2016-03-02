@@ -24,6 +24,10 @@ soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *p
 {
     Q_UNUSED(args)
 
+    configDialogTagModeComboBox = 0;
+    configDialogModifyAudioStreamCheckBox = 0;
+    configDialogGainAdjustmentSpinBox = 0;
+
     binaries["aacgain"] = "";
 
     allCodecs += "m4v";
@@ -222,7 +226,7 @@ int soundkonverter_replaygain_aacgain::apply( const KUrl::List& fileList, Replay
             command += "i";
         }
     }
-    foreach( const KUrl file, fileList )
+    foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }
@@ -278,7 +282,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
     // delete tags
     command += "-s";
     command += "d";
-    foreach( const KUrl file, item->undoFileList )
+    foreach( const KUrl& file, item->undoFileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

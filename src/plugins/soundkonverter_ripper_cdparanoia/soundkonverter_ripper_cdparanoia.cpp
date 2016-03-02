@@ -19,6 +19,13 @@ soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *par
 {
     Q_UNUSED(args)
 
+    configDialogForceReadSpeedCheckBox = 0;
+    configDialogForceReadSpeedSpinBox = 0;
+    configDialogForceEndiannessComboBox = 0;
+    configDialogMaximumRetriesSpinBox = 0;
+    configDialogEnableParanoiaCheckBox = 0;
+    configDialogEnableExtraParanoiaCheckBox = 0;
+
     binaries["cdparanoia"] = "";
 
     KSharedConfig::Ptr conf = KGlobal::config();

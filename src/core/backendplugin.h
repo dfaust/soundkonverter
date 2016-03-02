@@ -105,11 +105,11 @@ public:
     /** holds all backend binaries and their location if they were found */
     QMap<QString,QString> binaries;
 
-    QString standardMessage( const QString& type, const QStringList& arguments );
-    QString standardMessage( const QString& type );
-    QString standardMessage( const QString& type, const QString& arguments1 );
-    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2 );
-    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 );
+    QString standardMessage( const QString& type, const QStringList& arguments ) const;
+    QString standardMessage( const QString& type ) const;
+    QString standardMessage( const QString& type, const QString& arguments1 ) const;
+    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2 ) const;
+    QString standardMessage( const QString& type, const QString& arguments1, const QString& arguments2, const QString& arguments3 ) const;
 
     /** returns the url as a string with all special characters escaped so the bash can find the files */
     QString escapeUrl( const KUrl& url );

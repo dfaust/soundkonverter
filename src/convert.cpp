@@ -162,7 +162,7 @@ void Convert::convert( ConvertItem *item )
             bool useInternalReplayGain = false;
             if( item->conversionPipes.at(item->take).trunks.at(0).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
             {
-                foreach( Config::CodecData codecData, config->data.backends.codecs )
+                foreach( const Config::CodecData& codecData, config->data.backends.codecs )
                 {
                     if( codecData.codecName == item->conversionPipes.at(item->take).trunks.at(0).codecTo )
                     {
@@ -224,7 +224,7 @@ void Convert::convert( ConvertItem *item )
 
             const int stepCount = item->conversionPipes.at(item->take).trunks.count() - 1;
             int step = 0;
-            foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
+            foreach( const ConversionPipeTrunk& trunk, item->conversionPipes.at(item->take).trunks )
             {
                 BackendPlugin *plugin = trunk.plugin;
                 QStringList command;
@@ -234,7 +234,7 @@ void Convert::convert( ConvertItem *item )
                 {
                     if( step == stepCount && trunk.data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
                     {
-                        foreach( Config::CodecData codecData, config->data.backends.codecs )
+                        foreach( const Config::CodecData& codecData, config->data.backends.codecs )
                         {
                             if( codecData.codecName == trunk.codecTo )
                             {
@@ -272,7 +272,7 @@ void Convert::convert( ConvertItem *item )
             item->state = ConvertItem::convert;
             // merge all conversion times into one since we are doing everything in one step
             float time = 0.0f;
-            foreach( float t, item->convertTimes )
+            foreach( const float t, item->convertTimes )
             {
                 time += t;
             }
@@ -401,7 +401,7 @@ void Convert::convertNextBackend( ConvertItem *item )
         bool useInternalReplayGain = false;
         if( step == stepCount && item->conversionPipes.at(item->take).trunks.at(step).data.hasInternalReplayGain && item->mode & ConvertItem::replaygain )
         {
-            foreach( Config::CodecData codecData, config->data.backends.codecs )
+            foreach( const Config::CodecData& codecData, config->data.backends.codecs )
             {
                 if( codecData.codecName == item->conversionPipes.at(item->take).trunks.at(step).codecTo )
                 {
@@ -706,7 +706,7 @@ void Convert::executeSameStep( ConvertItem *item )
         case ConvertItem::encode:
         {
             // remove temp/failed files
-            foreach( const KUrl url, item->tempConvertUrls )
+            foreach( const KUrl& url, item->tempConvertUrls )
             {
                 if( QFile::exists(url.toLocalFile()) )
                 {
@@ -822,7 +822,7 @@ void Convert::processOutput()
             const QString output = item->process.data()->readAllStandardOutput().data();
 
             bool logOutput = true;
-            foreach( const ConversionPipeTrunk trunk, item->conversionPipes.at(item->take).trunks )
+            foreach( const ConversionPipeTrunk& trunk, item->conversionPipes.at(item->take).trunks )
             {
                 const float progress = trunk.plugin->parseOutput( output );
 
@@ -1259,7 +1259,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
 
         albumItems.append( item );
 
-        foreach( ConvertItem *albumItem, albumItems )
+        foreach( const ConvertItem *albumItem, albumItems )
         {
             QString command = albumItem->fileListItem->notifyCommand;
             // command.replace( "%u", albumItem->fileListItem->url );
@@ -1276,7 +1276,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     {
         QFile::remove(item->tempInputUrl.toLocalFile());
     }
-    foreach( const KUrl url, item->tempConvertUrls )
+    foreach( const KUrl& url, item->tempConvertUrls )
     {
         if( QFile::exists(url.toLocalFile()) )
         {
@@ -1308,7 +1308,7 @@ void Convert::remove( ConvertItem *item, FileListItem::ReturnCode returnCode )
     {
         QList<ConvertItem*> albumItems = albumGainItems[albumName];
 
-        foreach( ConvertItem *albumItem, albumItems )
+        foreach( const ConvertItem *albumItem, albumItems )
         {
             emit finished( albumItem->fileListItem, FileListItem::Succeeded ); // send signal to FileList
         }
@@ -1464,7 +1464,7 @@ void Convert::updateProgress()
                     albumItems = albumGainItems[albumName];
                 if( !albumItems.contains(item) )
                     albumItems.append( item );
-                foreach( ConvertItem *albumItem, albumItems )
+                foreach( const ConvertItem *albumItem, albumItems )
                 {
                     fileTime += albumItem->replaygainTime;
                 }

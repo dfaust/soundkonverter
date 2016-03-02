@@ -255,7 +255,7 @@ int FileList::countDir( const QString& directory, bool recursive, int count )
     dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::Readable );
     dir.setSorting( QDir::Unsorted );
 
-    count += dir.count();
+    count += (int)dir.count();
 
     if( recursive )
     {
@@ -263,7 +263,7 @@ int FileList::countDir( const QString& directory, bool recursive, int count )
 
         const QStringList list = dir.entryList();
 
-        foreach( const QString fileName, list )
+        foreach( const QString& fileName, list )
         {
             count = countDir( directory + "/" + fileName, recursive, count );
         }
@@ -293,7 +293,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     const bool containsAlac = filter.contains("m4a/alac");
     const bool checkM4a = ( containsAac || containsAlac ) && containsAac != containsAlac;
 
-    foreach( const QString fileName, list )
+    foreach( const QString& fileName, list )
     {
         QFileInfo fileInfo( directory + "/" + fileName );
 
@@ -341,7 +341,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     }
 
     int batchNumber = 0;
-    foreach( const KUrl fileName, fileList )
+    foreach( const KUrl& fileName, fileList )
     {
         if( !_codecName.isEmpty() )
         {
@@ -1408,7 +1408,7 @@ void FileList::load( bool user )
                         ConversionOptions *conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
                         if( conversionOptions )
                         {
-                            foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                            foreach( const QDomElement& filterOptionsElement, filterOptionsElements )
                             {
                                 FilterOptions *filterOptions = 0;
                                 const QString filterPluginName = filterOptionsElement.attribute("pluginName");
@@ -1557,8 +1557,6 @@ void FileList::save( bool user )
             file.appendChild(tags);
         }
     }
-
-    list.toString();
 
     const QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );

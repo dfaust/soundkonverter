@@ -9,6 +9,10 @@
 #include <ctime>
 
 
+#define MAX_LOGS  20
+#define MAX_LINES 10000
+
+
 LoggerItem::LoggerItem( int logId, const QString& logIdentifier )
 {
     id = logId;
@@ -84,7 +88,7 @@ void Logger::log( int id, const QString& data )
 
         process->data.append( data );
 
-        while( process->data.count() > 10000 )
+        while( process->data.count() > MAX_LINES )
             process->data.removeFirst();
 
         if( writeLogFiles && process->file.isOpen() )
@@ -133,7 +137,7 @@ void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain 
 
     if( processes.contains(id) )
     {
-        LoggerItem* const process = processes.value(id);
+        LoggerItem* process = processes.value(id);
 
         process->succeeded = succeeded;
         process->completed = true;
@@ -147,12 +151,12 @@ void Logger::processCompleted( int id, bool succeeded, bool waitingForAlbumGain 
         emit updateProcess( id );
     }
 
-    if( processes.count() > 11 )
+    if( processes.count() > MAX_LOGS )
     {
         QTime time = QTime::currentTime();
 
         int removeId = -1;
-        foreach( LoggerItem* process, processes.values() )
+        foreach( const LoggerItem* process, processes.values() )
         {
             if( process->time < time && process->completed && process->succeeded && process->id != 1000 )
             {

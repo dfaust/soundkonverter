@@ -20,6 +20,8 @@ soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const
 {
     Q_UNUSED(args)
 
+    configDialogExperimantalCodecsEnabledCheckBox = 0;
+
     binaries["ffmpeg"] = "";
 
     KSharedConfig::Ptr conf = KGlobal::config();

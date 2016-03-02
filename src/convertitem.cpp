@@ -59,7 +59,7 @@ void ConvertItem::updateTimes()
     totalTime += getTime;
     if( conversionPipes.count() > take )
     {
-        foreach( const ConversionPipeTrunk trunk, conversionPipes.at(take).trunks )
+        foreach( const ConversionPipeTrunk& trunk, conversionPipes.at(take).trunks )
         {
             float time = 0.0f;
 

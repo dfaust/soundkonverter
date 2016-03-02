@@ -514,7 +514,7 @@ void BackendPlugin::processExit( int exitCode, QProcess::ExitStatus exitStatus )
     }
 }
 
-QString BackendPlugin::standardMessage( const QString& type, const QStringList& arguments )
+QString BackendPlugin::standardMessage( const QString& type, const QStringList& arguments ) const
 {
     if( type == "encode_codec,backend" )
     {
@@ -583,17 +583,17 @@ QString BackendPlugin::standardMessage( const QString& type, const QStringList& 
     return QString();
 }
 
-QString BackendPlugin::standardMessage( const QString& type )
+QString BackendPlugin::standardMessage( const QString& type ) const
 {
     return standardMessage( type, QStringList() );
 }
 
-QString BackendPlugin::standardMessage( const QString& type, const QString& argument1 )
+QString BackendPlugin::standardMessage( const QString& type, const QString& argument1 ) const
 {
     return standardMessage( type, QStringList(argument1) );
 }
 
-QString BackendPlugin::standardMessage(const QString& type, const QString& argument1, const QString& argument2)
+QString BackendPlugin::standardMessage(const QString& type, const QString& argument1, const QString& argument2) const
 {
     QStringList arguments;
     arguments.append( argument1 );
@@ -601,7 +601,7 @@ QString BackendPlugin::standardMessage(const QString& type, const QString& argum
     return standardMessage( type, arguments );
 }
 
-QString BackendPlugin::standardMessage(const QString& type, const QString& argument1, const QString& argument2, const QString& argument3)
+QString BackendPlugin::standardMessage(const QString& type, const QString& argument1, const QString& argument2, const QString& argument3) const
 {
     QStringList arguments;
     arguments.append( argument1 );

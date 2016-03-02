@@ -48,7 +48,7 @@ FilterOptions* NormalizeFilterWidget::currentFilterOptions()
     }
 }
 
-bool NormalizeFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
+bool NormalizeFilterWidget::setCurrentFilterOptions( const FilterOptions *_options )
 {
     if( !_options )
     {
@@ -60,7 +60,7 @@ bool NormalizeFilterWidget::setCurrentFilterOptions( FilterOptions *_options )
     if( _options->pluginName != global_plugin_name )
         return false;
 
-    NormalizeFilterOptions *options = dynamic_cast<NormalizeFilterOptions*>(_options);
+    const NormalizeFilterOptions *options = dynamic_cast<const NormalizeFilterOptions*>(_options);
     cNormalize->setChecked( options->data.normalize );
 
     return true;

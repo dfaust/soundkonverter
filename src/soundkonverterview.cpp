@@ -531,7 +531,7 @@ void soundKonverterView::cleanupParameters( QString *profile, QString *format )
     }
     else
     {
-        foreach( const QString format, formatList )
+        foreach( const QString& format, formatList )
         {
             if( config->pluginLoader()->codecExtensions(format).contains(old_format) )
             {

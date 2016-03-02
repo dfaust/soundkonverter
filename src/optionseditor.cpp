@@ -485,7 +485,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
         const QString genre               = ( firstItem->tags == 0 ) ? "" : firstItem->tags->genre;
         const QString comment             = ( firstItem->tags == 0 ) ? "" : firstItem->tags->comment;
 
-        foreach( FileListItem *item, selectedItems )
+        foreach( const FileListItem *item, selectedItems )
         {
             if( item->conversionOptionsId != conversionOptionsId )
             {

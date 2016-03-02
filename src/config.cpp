@@ -115,7 +115,7 @@ void Config::load()
 
     group = conf->group( "Backends" );
     formats = group.readEntry( "formats", QStringList() );
-    foreach( const QString format, formats )
+    foreach( const QString& format, formats )
     {
         CodecData codecData;
         codecData.codecName = format;
@@ -138,7 +138,7 @@ void Config::load()
 
     // build default backend priority list
 
-    foreach( const QString format, formats )
+    foreach( const QString& format, formats )
     {
         if( format == "wav" )
             continue;
@@ -166,7 +166,7 @@ void Config::load()
         enabledPlugins.clear();
         newPlugins.clear();
         // register existing enabled plugins as such and list new enabled plugins
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionFilterPipeTrunks )
+        foreach( const ConversionPipeTrunk& trunk, pPluginLoader->conversionFilterPipeTrunks )
         {
             if( trunk.codecTo == format && trunk.enabled )
             {
@@ -198,7 +198,7 @@ void Config::load()
         enabledPlugins.clear();
         newPlugins.clear();
         // register existing enabled plugins as such and list new enabled plugins
-        foreach( const ConversionPipeTrunk trunk, pPluginLoader->conversionFilterPipeTrunks )
+        foreach( const ConversionPipeTrunk& trunk, pPluginLoader->conversionFilterPipeTrunks )
         {
             if( trunk.codecFrom == format && trunk.enabled )
             {
@@ -235,7 +235,7 @@ void Config::load()
         }
         newPlugins.clear();
         // register existing enabled plugins as such and list new enabled plugins
-        foreach( const ReplayGainPipe pipe, pPluginLoader->replaygainPipes )
+        foreach( const ReplayGainPipe& pipe, pPluginLoader->replaygainPipes )
         {
             if( pipe.codecName == format && pipe.enabled )
             {
@@ -276,7 +276,7 @@ void Config::load()
     foreach( FilterPlugin *plugin, pPluginLoader->getAllFilterPlugins() )
     {
         pluginName = plugin->name();
-        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
+        foreach( const ConversionPipeTrunk& trunk, plugin->codecTable() )
         {
             if( trunk.enabled && trunk.codecFrom == "wav" && trunk.codecTo == "wav" )
             {
@@ -342,7 +342,7 @@ void Config::load()
                         ConversionOptions *conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
                         if( conversionOptions )
                         {
-                            foreach( QDomElement filterOptionsElement, filterOptionsElements )
+                            foreach( const QDomElement& filterOptionsElement, filterOptionsElements )
                             {
                                 FilterOptions *filterOptions = 0;
                                 const QString filterPluginName = filterOptionsElement.attribute("pluginName");
@@ -513,7 +513,7 @@ void Config::save()
     group = conf->group( "Backends" );
     group.deleteEntry( "rippers" );
     QStringList formats;
-    foreach( const CodecData codec, data.backends.codecs )
+    foreach( const CodecData& codec, data.backends.codecs )
     {
         const QString format = codec.codecName;
         group.writeEntry( format + "_encoders", codec.encoders );
@@ -565,7 +565,7 @@ void Config::writeServiceMenu()
     const QStringList convertFormats = pPluginLoader->formatList( PluginLoader::Decode, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
 
     mimeTypes.clear();
-    foreach( const QString format, convertFormats )
+    foreach( const QString& format, convertFormats )
     {
         mimeTypes += pPluginLoader->codecMimeTypes( format );
     }
@@ -601,7 +601,7 @@ void Config::writeServiceMenu()
     const QStringList replaygainFormats = pPluginLoader->formatList( PluginLoader::ReplayGain, PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
 
     mimeTypes.clear();
-    foreach( const QString format, replaygainFormats )
+    foreach( const QString& format, replaygainFormats )
     {
         mimeTypes += pPluginLoader->codecMimeTypes( format );
     }
@@ -671,7 +671,7 @@ QList<CodecOptimizations::Optimization> Config::getOptimizations( bool includeIg
     bool ignore;
 
     const QStringList formats = pPluginLoader->formatList( PluginLoader::Possibilities(PluginLoader::Encode|PluginLoader::Decode|PluginLoader::ReplayGain), PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid) );
-    foreach( const QString format, formats )
+    foreach( const QString& format, formats )
     {
         if( format == "wav" )
             continue;

@@ -22,6 +22,8 @@ soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QSt
 {
     Q_UNUSED(args)
 
+    configDialogStereoModeComboBox = 0;
+
     binaries["lame"] = "";
 
     allCodecs += "mp3";

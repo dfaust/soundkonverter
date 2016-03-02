@@ -90,7 +90,7 @@ int soundkonverter_replaygain_vorbisgain::apply( const KUrl::List& fileList, Rep
     {
         command += "--clean";
     }
-    foreach( const KUrl file, fileList )
+    foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

@@ -26,7 +26,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
     int rating2 = 0;
 
     int minimumRating1 = 0;
-    foreach( const ConversionPipeTrunk trunk, pipe1.trunks )
+    foreach( const ConversionPipeTrunk& trunk, pipe1.trunks )
     {
         if( minimumRating1 == 0 || trunk.rating < minimumRating1 )
             minimumRating1 = trunk.rating;
@@ -36,7 +36,7 @@ bool moreThanConversionPipe( const ConversionPipe& pipe1, const ConversionPipe& 
     rating1 += minimumRating1;
 
     int minimumRating2 = 0;
-    foreach( const ConversionPipeTrunk trunk, pipe2.trunks )
+    foreach( const ConversionPipeTrunk& trunk, pipe2.trunks )
     {
         if( minimumRating2 == 0 || trunk.rating < minimumRating2 )
             minimumRating2 = trunk.rating;
@@ -321,7 +321,7 @@ QStringList PluginLoader::formatList( Possibilities possibilities, CompressionTy
     QSet<QString> set;
     QStringList list;
 
-    foreach( const ConversionPipeTrunk trunk, conversionFilterPipeTrunks )
+    foreach( const ConversionPipeTrunk& trunk, conversionFilterPipeTrunks )
     {
         if( !trunk.enabled )
             continue;
@@ -393,7 +393,7 @@ QList<CodecPlugin*> PluginLoader::encodersForCodec( const QString& codecName )
 {
     QSet<CodecPlugin*> encoders;
 
-    foreach( const ConversionPipeTrunk pipeTrunk, conversionFilterPipeTrunks )
+    foreach( const ConversionPipeTrunk& pipeTrunk, conversionFilterPipeTrunks )
     {
         if( pipeTrunk.codecTo == codecName && pipeTrunk.enabled )
         {
@@ -502,7 +502,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
     }
 
     QList<FilterPlugin*> filterPlugins;
-    foreach( FilterOptions *filter, filterOptions )
+    foreach( const FilterOptions *filter, filterOptions )
     {
         filterPlugins.append( qobject_cast<FilterPlugin*>(backendPluginByName(filter->pluginName)) );
     }
@@ -521,7 +521,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                     if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(i).plugin) )
                         continue;
 
-                    foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                    foreach( const ConversionPipeTrunk& trunk, filterPipeTrunks )
                     {
                         if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
                         {
@@ -554,7 +554,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                     if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(i).plugin) )
                         continue;
 
-                    foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                    foreach( const ConversionPipeTrunk& trunk, filterPipeTrunks )
                     {
                         if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
                         {
@@ -623,7 +623,7 @@ QList<ConversionPipe> PluginLoader::getConversionPipes( const QString& codecFrom
                             if( plugin == qobject_cast<FilterPlugin*>(conversionFilterPipeTrunks.at(j).plugin) )
                                 continue;
 
-                            foreach( ConversionPipeTrunk trunk, filterPipeTrunks )
+                            foreach( const ConversionPipeTrunk& trunk, filterPipeTrunks )
                             {
                                 if( trunk.plugin == plugin && trunk.codecFrom == "wav" && trunk.codecTo == "wav" && trunk.enabled )
                                 {
@@ -783,7 +783,7 @@ QString PluginLoader::getCodecFromFile( const KUrl& filename, QString *mimeType,
 
     const QString extension = filename.url().mid( filename.url().lastIndexOf(".") + 1 ).toLower();
 
-    foreach( const BackendPlugin::FormatInfo info, formatInfos )
+    foreach( const BackendPlugin::FormatInfo& info, formatInfos )
     {
         short newRating = info.priority;
 

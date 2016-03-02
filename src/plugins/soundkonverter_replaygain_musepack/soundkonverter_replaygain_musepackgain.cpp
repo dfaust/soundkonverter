@@ -105,7 +105,7 @@ int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, R
 
     QStringList command;
     command += binaries["replaygain"];
-    foreach( const KUrl file, fileList )
+    foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

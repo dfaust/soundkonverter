@@ -83,7 +83,7 @@ int soundkonverter_replaygain_metaflac::apply( const KUrl::List& fileList, Repla
     {
         command += "--remove-replay-gain";
     }
-    foreach( const KUrl file, fileList )
+    foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

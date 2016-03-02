@@ -37,14 +37,14 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
         return false;
 
     QStringList effects;
-    foreach( EffectData effectData, data.effects )
+    foreach( const EffectData& effectData, data.effects )
     {
         effects.append( effectData.effectName );
     }
     effects.sort();
 
     QStringList other_effects;
-    foreach( EffectData otherEffectData, other->data.effects )
+    foreach( const EffectData& otherEffectData, other->data.effects )
     {
         other_effects.append( otherEffectData.effectName );
     }
@@ -52,9 +52,9 @@ bool SoxFilterOptions::equals( FilterOptions *_other )
 
     if( effects == other_effects )
     {
-        foreach( const EffectData effectData, data.effects )
+        foreach( const EffectData& effectData, data.effects )
         {
-            foreach( const EffectData otherEffectData, other->data.effects )
+            foreach( const EffectData& otherEffectData, other->data.effects )
             {
                 if( otherEffectData.effectName == effectData.effectName )
                 {
@@ -81,7 +81,7 @@ QDomElement SoxFilterOptions::toXml( QDomDocument document, const QString& eleme
     filterOptions.setAttribute("channels",data.channels);
 
     int i = 0;
-    foreach( const EffectData effectData, data.effects )
+    foreach( const EffectData& effectData, data.effects )
     {
         if( effectData.effectName == i18n("Disabled") )
             continue;

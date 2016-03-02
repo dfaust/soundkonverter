@@ -123,9 +123,9 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
             if( destination->type == ReplayGainFileListItem::Album )
             {
                 QList<QTreeWidgetItem*> q_items = selectedItems();
-                foreach( QTreeWidgetItem *q_item, q_items )
+                foreach( const QTreeWidgetItem *q_item, q_items )
                 {
-                    ReplayGainFileListItem *item = static_cast<ReplayGainFileListItem*>(q_item);
+                    const ReplayGainFileListItem *item = static_cast<const ReplayGainFileListItem*>(q_item);
 
                     if( item->codecName != destination->codecName || item->samplingRate != destination->samplingRate )
                     {
@@ -170,7 +170,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         const bool canDecodeAlac = config->pluginLoader()->canDecode( "m4a/alac" );
         const bool checkM4a = ( !canDecodeAac || !canDecodeAlac ) && canDecodeAac != canDecodeAlac;
 
-        foreach( QUrl url, q_urls )
+        foreach( const QUrl& url, q_urls )
         {
             QString mimeType;
             QString codecName = config->pluginLoader()->getCodecFromFile( url, &mimeType, checkM4a );
@@ -273,7 +273,7 @@ void ReplayGainFileList::dropEvent( QDropEvent *event )
         {
             addFiles( k_urls );
         }
-        foreach( KUrl url, k_urls_dirs )
+        foreach( const KUrl& url, k_urls_dirs )
         {
             addDir( url, true, config->pluginLoader()->formatList(PluginLoader::ReplayGain,PluginLoader::CompressionType(PluginLoader::InferiorQuality|PluginLoader::Lossy|PluginLoader::Lossless|PluginLoader::Hybrid)) );
         }
@@ -298,7 +298,7 @@ int ReplayGainFileList::countDir( const QString& directory, bool recursive, int 
     dir.setFilter( QDir::Files | QDir::NoDotAndDotDot | QDir::Readable );
     dir.setSorting( QDir::Unsorted );
 
-    count += dir.count();
+    count += (int)dir.count();
 
     if( recursive )
     {
@@ -306,7 +306,7 @@ int ReplayGainFileList::countDir( const QString& directory, bool recursive, int 
 
         const QStringList list = dir.entryList();
 
-        foreach( const QString fileName, list )
+        foreach( const QString& fileName, list )
         {
             count = countDir( directory + "/" + fileName, recursive, count );
         }
@@ -336,7 +336,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
     const bool containsAlac = filter.contains("m4a/alac");
     const bool checkM4a = ( containsAac || containsAlac ) && containsAac != containsAlac;
 
-    foreach( const QString fileName, list )
+    foreach( const QString& fileName, list )
     {
         QFileInfo fileInfo( directory + "/" + fileName );
 
@@ -372,7 +372,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
     ReplayGainFileListItem *newAlbumItem, *newTrackItem;
     QString codecName;
 
-    foreach( KUrl url, fileList )
+    foreach( const KUrl& url, fileList )
     {
         if( !_codecName.isEmpty() )
         {
@@ -918,9 +918,9 @@ void ReplayGainFileList::showContextMenu( const QPoint& point )
     bool canMove = q_items.count() > 0;
 //     bool canKill = q_items.count() > 0;
 
-    foreach( QTreeWidgetItem *q_item, q_items )
+    foreach( const QTreeWidgetItem *q_item, q_items )
     {
-        ReplayGainFileListItem *item = static_cast<ReplayGainFileListItem*>(q_item);
+        const ReplayGainFileListItem *item = static_cast<const ReplayGainFileListItem*>(q_item);
 
         if( item->type == ReplayGainFileListItem::Track )
         {

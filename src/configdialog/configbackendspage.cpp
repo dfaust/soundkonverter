@@ -274,7 +274,7 @@ ConfigBackendsPage::ConfigBackendsPage( Config *_config, QWidget *parent )
     QGridLayout *filterGrid = new QGridLayout();
 
     int row = 0;
-    foreach( const QString filterPluginName, config->data.backends.filters )
+    foreach( const QString& filterPluginName, config->data.backends.filters )
     {
         if( row == 0 )
         {
@@ -413,19 +413,19 @@ void ConfigBackendsPage::formatChanged( const QString& format, bool ignoreChange
     encoderList->setFormat( format );
     replaygainList->setFormat( format );
 
-    foreach( const Config::CodecData codec, config->data.backends.codecs )
+    foreach( const Config::CodecData& codec, config->data.backends.codecs )
     {
         if( codec.codecName == format )
         {
-            foreach( const QString decoder, codec.decoders )
+            foreach( const QString& decoder, codec.decoders )
             {
                 decoderList->addItem( decoder );
             }
-            foreach( const QString encoder, codec.encoders )
+            foreach( const QString& encoder, codec.encoders )
             {
                 encoderList->addItem( encoder );
             }
-            foreach( const QString replaygain, codec.replaygain )
+            foreach( const QString& replaygain, codec.replaygain )
             {
                 replaygainList->addItem( replaygain );
             }
@@ -446,7 +446,7 @@ void ConfigBackendsPage::resetDefaults()
     foreach( RipperPlugin *plugin, config->pluginLoader()->getAllRipperPlugins() )
     {
         const QString pluginName = plugin->name();
-        foreach( const ConversionPipeTrunk trunk, plugin->codecTable() )
+        foreach( const ConversionPipeTrunk& trunk, plugin->codecTable() )
         {
             if( trunk.enabled && allPlugins.filter(QRegExp("[0-9]{8,8}"+pluginName)).count() == 0 )
             {
@@ -505,7 +505,7 @@ void ConfigBackendsPage::saveSettings()
 
     config->data.backends.enabledFilters.clear();
     int i = 0;
-    foreach( QCheckBox *checkBox, filterCheckBoxes )
+    foreach( const QCheckBox *checkBox, filterCheckBoxes )
     {
         const QString filterPluginName = config->data.backends.filters.at(i);
 
@@ -543,7 +543,7 @@ void ConfigBackendsPage::somethingChanged()
     bool changed = false;
 
     int i = 0;
-    foreach( QCheckBox *checkBox, filterCheckBoxes )
+    foreach( const QCheckBox *checkBox, filterCheckBoxes )
     {
         if( checkBox == QObject::sender() )
         {
@@ -577,7 +577,7 @@ void ConfigBackendsPage::configureRipper()
 void ConfigBackendsPage::configureFilter()
 {
     int i = 0;
-    foreach( KPushButton *configButton, filterConfigButtons )
+    foreach( const KPushButton *configButton, filterConfigButtons )
     {
         if( configButton == QObject::sender() )
         {

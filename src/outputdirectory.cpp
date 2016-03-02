@@ -367,7 +367,7 @@ KUrl OutputDirectory::makePath( const KUrl& url )
     QStringList directories = fileInfo.absoluteDir().absolutePath().split( "/" );
     QString mkDir;
     QDir dir;
-    foreach( const QString directory, directories )
+    foreach( const QString& directory, directories )
     {
         mkDir += "/" + directory;
         dir.setPath( mkDir );

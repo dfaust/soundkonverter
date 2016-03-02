@@ -174,7 +174,7 @@ QDomElement ConversionOptions::toXml( QDomDocument document ) const
     conversionOptions.appendChild(features);
 
     int i = 0;
-    foreach( FilterOptions *filter, filterOptions )
+    foreach( const FilterOptions *filter, filterOptions )
     {
         QDomElement filterOptionsElement = filter->toXml(document,"filterOptions"+QString::number(i++));
         conversionOptions.appendChild(filterOptionsElement);

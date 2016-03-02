@@ -88,7 +88,7 @@ int soundkonverter_replaygain_wvgain::apply( const KUrl::List& fileList, ReplayG
     {
         command += "-c";
     }
-    foreach( const KUrl file, fileList )
+    foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";
     }

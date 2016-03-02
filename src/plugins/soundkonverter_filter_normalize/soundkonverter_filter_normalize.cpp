@@ -123,11 +123,11 @@ QStringList soundkonverter_filter_normalize::convertCommand( const KUrl& inputFi
 
     QStringList command;
 
-    foreach( FilterOptions *_filterOptions,_conversionOptions->filterOptions )
+    foreach( const FilterOptions *_filterOptions,_conversionOptions->filterOptions )
     {
         if( _filterOptions->pluginName == global_plugin_name )
         {
-            NormalizeFilterOptions *filterOptions = dynamic_cast<NormalizeFilterOptions*>(_filterOptions);
+            const NormalizeFilterOptions *filterOptions = dynamic_cast<const NormalizeFilterOptions*>(_filterOptions);
             if( filterOptions->data.normalize )
             {
                 command += binaries["normalize"];

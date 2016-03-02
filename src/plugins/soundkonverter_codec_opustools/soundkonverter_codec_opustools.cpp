@@ -16,6 +16,8 @@ soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent,
 {
     Q_UNUSED(args)
 
+    configDialogUncoupledChannelsCheckBox = 0;
+
     binaries["opusenc"] = "";
     binaries["opusdec"] = "";
 

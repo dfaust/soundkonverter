@@ -19,7 +19,7 @@ public:
     ~SoxFilterWidget();
 
     FilterOptions *currentFilterOptions();
-    bool setCurrentFilterOptions( FilterOptions *_options );
+    bool setCurrentFilterOptions( const FilterOptions *_options );
 
 private:
     QCheckBox *chSampleSize;

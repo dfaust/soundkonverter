@@ -20,6 +20,8 @@ soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const Q
 {
     Q_UNUSED(args)
 
+    configDialogExperimantalCodecsEnabledCheckBox = 0;
+
     binaries["avconv"] = "";
 
     KSharedConfig::Ptr conf = KGlobal::config();

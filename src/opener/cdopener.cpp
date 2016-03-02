@@ -447,7 +447,7 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
         else
         {
             QStringList list;
-            foreach( const QString desc, devices.values() )
+            foreach( const QString& desc, devices.values() )
             {
                 list.append( desc );
             }

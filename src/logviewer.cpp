@@ -111,7 +111,7 @@ void LogViewer::itemChanged()
     if( !item )
         return;
 
-    foreach( const QString line, item->data )
+    foreach( const QString& line, item->data )
         kLog->append( line );
 
     QPalette currentPalette = kLog->palette();

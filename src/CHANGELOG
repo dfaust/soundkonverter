@@ -2,6 +2,7 @@
 -Change: Remove both APE and ID3 Replay Gain tags with mp3gain and aacgain
 -Change: Disable "modify audio stream" option by default in mp3gain and aacgain
 -Change: Don't write icedax info file
+-Change: Set so-version for libsoundkonvertercore
 -Fix: Don't require an output path when using a user defined profile as command line argument
 -Fix: Don't crash when tags can't be read
 -Fix: Error message when trying to write to a directory without permissions

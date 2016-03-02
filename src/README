@@ -192,7 +192,7 @@ Reporting bugs - please report every bug you find, that's the only way I can fix
 ====================================================================================
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com
-but the best way is to create a bug report/ask a question at https://bugs.launchpad.net/soundkonverter
+but the best way is to create an issue at https://github.com/HessiJames/soundkonverter/issues
 
 Some tips for creating a useful bug report:
 
@@ -228,7 +228,7 @@ c) If you are running an operating system other than openSUSE and have installed
    and the additional developer information get installed automatically. But I haven't tested it.
 In order to reproduce a crash try doing the exact same thing you did when the crash occurred.
 If you managed to get a useful crash report you can either directly send it to me by clicking on the "Report problems or wishes" button
-or even better you can copy the generated information and create a new bug report at https://bugs.launchpad.net/soundkonverter and paste them there.
+or even better you can copy the generated information and create a new issue at https://github.com/HessiJames/soundkonverter/issues and paste them there.
 
 
 

@@ -54,6 +54,7 @@ QList<ConversionPipeTrunk> soundkonverter_codec_mplayer::codecTable()
     /// video
     fromCodecs += "avi";
     fromCodecs += "mkv";
+    fromCodecs += "webm";
     fromCodecs += "ogv";
     fromCodecs += "mpeg";
     fromCodecs += "mov";

@@ -290,6 +290,11 @@ BackendPlugin::FormatInfo BackendPlugin::formatInfo( const QString& codecName )
         info.mimeTypes.append( "video/x-matroska" );
         info.extensions.append( "mkv" );
     }
+    else if( codecName == "webm" )
+    {
+        info.mimeTypes.append( "video/webm" );
+        info.extensions.append( "webm" );
+    }
     else if( codecName == "ogv" )
     {
         info.mimeTypes.append( "video/ogg" );

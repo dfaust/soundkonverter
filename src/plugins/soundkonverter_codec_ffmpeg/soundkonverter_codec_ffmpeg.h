@@ -16,18 +16,17 @@ class soundkonverter_codec_ffmpeg : public CodecPlugin
 {
     Q_OBJECT
 public:
-    struct FFmpegCodecData
+    struct FFmpegEncoderData
     {
         QString name;
-        bool external;
-        bool experimental;
+        bool experimental = false;
     };
 
     struct CodecData
     {
         QString codecName;
-        QList<FFmpegCodecData> ffmpegCodecList;
-        FFmpegCodecData currentFFmpegCodec;
+        QList<FFmpegEncoderData> ffmpegEnoderList;
+        FFmpegEncoderData currentFFmpegEncoder;
     };
 
     /** Default Constructor */

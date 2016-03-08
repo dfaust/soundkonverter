@@ -14,6 +14,7 @@ find_package(Taglib REQUIRED)
 
 include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
+set(CMAKE_CXX_STANDARD 11)
 
 # all the warnings about constructions
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")

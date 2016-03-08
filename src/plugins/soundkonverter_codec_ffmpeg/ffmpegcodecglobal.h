@@ -4,5 +4,5 @@
 #endif
 
 #ifndef global_plugin_version
-#define global_plugin_version 2
+#define global_plugin_version 3
 #endif

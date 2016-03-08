@@ -1402,7 +1402,7 @@ void FileList::load( bool user )
                 {
                     QList<QDomElement> filterOptionsElements;
                     const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
-                    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( pluginName ));
+                    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( pluginName ));
                     if( plugin )
                     {
                         ConversionOptions *conversionOptions = plugin->conversionOptionsFromXml( conversionOptionsElements.at(i).toElement(), &filterOptionsElements );
@@ -1412,7 +1412,7 @@ void FileList::load( bool user )
                             {
                                 FilterOptions *filterOptions = 0;
                                 const QString filterPluginName = filterOptionsElement.attribute("pluginName");
-                                FilterPlugin *filterPlugin = static_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName( filterPluginName ));
+                                FilterPlugin *filterPlugin = qobject_cast<FilterPlugin*>(config->pluginLoader()->backendPluginByName( filterPluginName ));
                                 if( filterPlugin )
                                 {
                                     filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );

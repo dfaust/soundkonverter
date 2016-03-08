@@ -224,7 +224,7 @@ QStringList soundkonverter_codec_lame::convertCommand( const KUrl& inputFile, co
     const LameConversionOptions *lameConversionOptions = 0;
     if( conversionOptions->pluginName == name() )
     {
-        lameConversionOptions = static_cast<const LameConversionOptions*>(conversionOptions);
+        lameConversionOptions = dynamic_cast<const LameConversionOptions*>(conversionOptions);
     }
 
     if( outputCodec == "mp3" )

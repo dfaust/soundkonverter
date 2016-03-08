@@ -138,7 +138,7 @@ bool MusePackCodecWidget::setCurrentConversionOptions( const ConversionOptions *
 {
     if( !_options || _options->pluginName != global_plugin_name ) return false;
 
-    const MusePackConversionOptions *options = static_cast<const MusePackConversionOptions*>(_options);
+    const MusePackConversionOptions *options = dynamic_cast<const MusePackConversionOptions*>(_options);
     cPreset->setCurrentIndex( (int)options->data.preset );
     presetChanged( cPreset->currentText() );
     dQuality->setValue( options->quality );

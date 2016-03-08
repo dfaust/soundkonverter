@@ -104,7 +104,7 @@ bool OpusToolsCodecWidget::setCurrentConversionOptions( const ConversionOptions 
     const OpusToolsConversionOptions *opusToolsOptions = 0;
     if( options->pluginName == global_plugin_name )
     {
-        opusToolsOptions = static_cast<const OpusToolsConversionOptions*>(options);
+        opusToolsOptions = dynamic_cast<const OpusToolsConversionOptions*>(options);
     }
 
     if( opusToolsOptions )

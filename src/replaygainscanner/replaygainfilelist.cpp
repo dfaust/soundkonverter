@@ -1069,7 +1069,7 @@ void ReplayGainFileList::moveSelectedItems()
     const QList<QTreeWidgetItem*> q_items = selectedItems();
     foreach( QTreeWidgetItem *q_item, q_items )
     {
-        ReplayGainFileListItem *item = dynamic_cast<ReplayGainFileListItem*>(q_item);
+        ReplayGainFileListItem *item = static_cast<ReplayGainFileListItem*>(q_item);
         if( !item )
             continue;
 

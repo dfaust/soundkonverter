@@ -44,8 +44,6 @@ public:
     ~FileList();
 
     FileListItem *topLevelItem( int index ) const { return static_cast<FileListItem*>( QTreeWidget::topLevelItem(index) ); }
-//     FileListItem *itemAbove( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemAbove(item) ); }
-//     FileListItem *itemBelow( FileListItem* item ) const { return static_cast<FileListItem*>( QTreeWidget::itemBelow(item) ); }
 
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 

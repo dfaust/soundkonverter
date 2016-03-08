@@ -245,7 +245,7 @@ void soundkonverter_replaygain_mp3gain::undoProcessExit( int exitCode, QProcess:
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            item = static_cast<Mp3GainPluginItem*>(backendItems.at(i));
+            item = qobject_cast<Mp3GainPluginItem*>(backendItems.at(i));
             break;
         }
     }

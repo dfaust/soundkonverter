@@ -39,25 +39,25 @@ ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/
     connect( this, SIGNAL(defaultClicked()), this, SLOT(defaultClicked()) );
 
     configGeneralPage = new ConfigGeneralPage( config, this );
-    generalPage = addPage( static_cast<QWidget*>(configGeneralPage), i18n("General") );
+    generalPage = addPage( qobject_cast<QWidget*>(configGeneralPage), i18n("General") );
     generalPage->setHeader( "" );
     generalPage->setIcon( KIcon("configure") );
     connect( configGeneralPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configAdvancedPage = new ConfigAdvancedPage( config, this );
-    advancedPage = addPage( static_cast<QWidget*>(configAdvancedPage), i18n("Advanced") );
+    advancedPage = addPage( qobject_cast<QWidget*>(configAdvancedPage), i18n("Advanced") );
     advancedPage->setHeader( "" );
     advancedPage->setIcon( KIcon("preferences-desktop-gaming") );
     connect( configAdvancedPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configCoverArtPage = new ConfigCoverArtPage( config, this );
-    coverArtPage = addPage( static_cast<QWidget*>(configCoverArtPage), i18n("Cover art") );
+    coverArtPage = addPage( qobject_cast<QWidget*>(configCoverArtPage), i18n("Cover art") );
     coverArtPage->setHeader( "" );
     coverArtPage->setIcon( KIcon("image-x-generic") );
     connect( configCoverArtPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );
 
     configBackendsPage = new ConfigBackendsPage( config, this );
-    backendsPage = addPage( static_cast<QWidget*>(configBackendsPage), i18n("Backends") );
+    backendsPage = addPage( qobject_cast<QWidget*>(configBackendsPage), i18n("Backends") );
     backendsPage->setHeader( "" );
     backendsPage->setIcon( KIcon("applications-system") );
     connect( configBackendsPage, SIGNAL(configChanged(bool)), this, SLOT(configChanged(bool)) );

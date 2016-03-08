@@ -174,7 +174,7 @@ QStringList soundkonverter_codec_opustools::convertCommand( const KUrl& inputFil
     const OpusToolsConversionOptions *opusToolsConversionOptions = 0;
     if( conversionOptions->pluginName == name() )
     {
-        opusToolsConversionOptions = static_cast<const OpusToolsConversionOptions*>(conversionOptions);
+        opusToolsConversionOptions = dynamic_cast<const OpusToolsConversionOptions*>(conversionOptions);
     }
 
     if( outputCodec == "opus" )

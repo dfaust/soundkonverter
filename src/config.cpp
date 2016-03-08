@@ -335,7 +335,7 @@ void Config::load()
                 {
                     const QString profileName = conversionOptionsElements.at(i).toElement().attribute("profileName");
                     const QString pluginName = conversionOptionsElements.at(i).toElement().attribute("pluginName");
-                    CodecPlugin *plugin = static_cast<CodecPlugin*>(pPluginLoader->backendPluginByName( pluginName ));
+                    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(pPluginLoader->backendPluginByName( pluginName ));
                     if( plugin )
                     {
                         QList<QDomElement> filterOptionsElements;
@@ -346,7 +346,7 @@ void Config::load()
                             {
                                 FilterOptions *filterOptions = 0;
                                 const QString filterPluginName = filterOptionsElement.attribute("pluginName");
-                                FilterPlugin *filterPlugin = static_cast<FilterPlugin*>(pPluginLoader->backendPluginByName( filterPluginName ));
+                                FilterPlugin *filterPlugin = qobject_cast<FilterPlugin*>(pPluginLoader->backendPluginByName( filterPluginName ));
                                 if( filterPlugin )
                                 {
                                     filterOptions = filterPlugin->filterOptionsFromXml( filterOptionsElement );

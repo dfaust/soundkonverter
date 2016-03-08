@@ -166,7 +166,7 @@ QStringList soundkonverter_codec_musepack::convertCommand( const KUrl& inputFile
     const MusePackConversionOptions *musepackConversionOptions = 0;
     if( conversionOptions->pluginName == name() )
     {
-        musepackConversionOptions = static_cast<const MusePackConversionOptions*>(conversionOptions);
+        musepackConversionOptions = dynamic_cast<const MusePackConversionOptions*>(conversionOptions);
     }
 
     if( outputCodec == "musepack" )

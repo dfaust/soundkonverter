@@ -272,7 +272,7 @@ void OptionsDetailed::formatChanged( const QString& format )
 
 void OptionsDetailed::encoderChanged( const QString& encoder )
 {
-    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( encoder ));
+    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( encoder ));
     if( !plugin )
     {
 //         TODO leads to crashes
@@ -330,7 +330,7 @@ void OptionsDetailed::somethingChanged()
 
 void OptionsDetailed::configurePlugin()
 {
-    CodecPlugin *plugin = static_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( cPlugin->currentText() ));
+    CodecPlugin *plugin = qobject_cast<CodecPlugin*>(config->pluginLoader()->backendPluginByName( cPlugin->currentText() ));
 
     if( plugin )
     {

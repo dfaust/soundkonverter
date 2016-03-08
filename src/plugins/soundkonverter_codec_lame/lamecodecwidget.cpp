@@ -205,7 +205,7 @@ bool LameCodecWidget::setCurrentConversionOptions( const ConversionOptions *_opt
     if( !_options || _options->pluginName != global_plugin_name )
         return false;
 
-    const LameConversionOptions *options = static_cast<const LameConversionOptions*>(_options);
+    const LameConversionOptions *options = dynamic_cast<const LameConversionOptions*>(_options);
     cPreset->setCurrentIndex( (int)options->data.preset );
     presetChanged( cPreset->currentText() );
     iPresetBitrate->setValue( options->data.presetBitrate );

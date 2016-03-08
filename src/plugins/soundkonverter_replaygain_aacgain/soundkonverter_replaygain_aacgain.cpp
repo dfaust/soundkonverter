@@ -252,7 +252,7 @@ void soundkonverter_replaygain_aacgain::undoProcessExit( int exitCode, QProcess:
     {
         if( backendItems.at(i)->process == QObject::sender() )
         {
-            item = static_cast<AacGainPluginItem*>(backendItems.at(i));
+            item = qobject_cast<AacGainPluginItem*>(backendItems.at(i));
             break;
         }
     }

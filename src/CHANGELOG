@@ -10,6 +10,7 @@
 -Fix: Store album artist information to file list files
 -Fix: Some crashes
 -Fix: Handle newer ffmpeg versions
+-Fix: Don't wait with Replay Gain calculation for items with same album name but no Replay Gain conversion option set
 
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files

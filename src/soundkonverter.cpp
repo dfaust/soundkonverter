@@ -260,6 +260,11 @@ void soundKonverter::loadAutosaveFileList()
     m_view->loadAutosaveFileList();
 }
 
+void soundKonverter::loadFileList(const QString& fileListPath)
+{
+    m_view->loadFileList(fileListPath);
+}
+
 void soundKonverter::startupChecks()
 {
     // check if codec plugins could be loaded

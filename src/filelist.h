@@ -48,6 +48,7 @@ public:
     void setOptionsLayer( OptionsLayer *_optionsLayer ) { optionsLayer = _optionsLayer; }
 
     void load( bool user = false );
+    void load( const QString& fileListPath );
     void updateAllItems(); // Gets triggered if the configuration changes and the file list needs to be updated
     void updateItem( FileListItem *item );
 

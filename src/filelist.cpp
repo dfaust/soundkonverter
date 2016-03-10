@@ -1344,6 +1344,12 @@ void FileList::itemsSelected()
 
 void FileList::load( bool user )
 {
+    const QString fileListPath = user ? "filelist.xml" : "filelist_autosave.xml";
+    load( KStandardDirs::locateLocal("data","soundkonverter/"+fileListPath) );
+}
+
+void FileList::load( const QString& fileListPath )
+{
     if( topLevelItemCount() > 0 )
     {
         const int ret = KMessageBox::questionYesNo( this, i18n("Do you want to overwrite the current file list?\n\nIf not, the saved file list will be appended.") );
@@ -1389,8 +1395,7 @@ void FileList::load( bool user )
 
     QMap<int,int> conversionOptionsIds;
     QMap<int,int> conversionOptionsReferences;
-    QString fileName = user ? "filelist.xml" : "filelist_autosave.xml";
-    QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/"+fileName) );
+    QFile listFile( fileListPath );
     if( listFile.open( QIODevice::ReadOnly ) )
     {
         QDomDocument list("soundkonverter_filelist");

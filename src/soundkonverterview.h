@@ -48,6 +48,7 @@ public:
 
     void addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand = "" );
     void loadAutosaveFileList();
+    void loadFileList(const QString& fileListPath);
 
     KAction *start() { return startAction; }
     KActionMenu *stopMenu() { return stopActionMenu; }

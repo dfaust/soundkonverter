@@ -37,6 +37,7 @@ int soundKonverterApp::newInstance()
     const QString format = args->getOption( "format" );
     const QString directory = args->getOption( "output" );
     const QString notifyCommand = args->getOption( "command" );
+    const QString fileListPath = args->getOption( "file-list" );
 
     if( args->isSet( "invisible" ) )
     {
@@ -46,7 +47,7 @@ int soundKonverterApp::newInstance()
         mainWindow->showSystemTray();
     }
 
-    if( first && QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
+    if( first && fileListPath.isEmpty() && QFile::exists(KStandardDirs::locateLocal("data","soundkonverter/filelist_autosave.xml")) )
     {
         if( !visible )
         {
@@ -58,6 +59,10 @@ int soundKonverterApp::newInstance()
         mainWindow->show();
         kapp->processEvents();
         mainWindow->loadAutosaveFileList();
+    }
+    else if( !fileListPath.isEmpty() && QFile::exists(fileListPath) )
+    {
+        mainWindow->loadFileList(fileListPath);
     }
 
     const QString device = args->getOption( "rip" );

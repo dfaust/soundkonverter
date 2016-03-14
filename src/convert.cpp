@@ -466,11 +466,19 @@ void Convert::replaygain( ConvertItem *item )
     if( fileList->waitForAlbumGain(item->fileListItem) )
     {
         logger->log( item->logID, i18n("Skipping Replay Gain, Album Gain will be calculated later") );
-
-        albumGainItems[albumName].append( item );
-
         item->state = ConvertItem::replaygain;
-        executeNextStep( item );
+
+        if( !albumGainItems[albumName].contains(item) )
+        {
+            albumGainItems[albumName].append( item );
+            executeNextStep( item );
+        }
+        else
+        {
+            logger->log( item->logID, "\t" + i18n("No more backends left to try :(") );
+            albumGainItems[albumName].removeAll( item );
+            remove( item, FileListItem::Failed );
+        }
         return;
     }
 

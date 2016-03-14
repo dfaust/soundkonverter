@@ -13,6 +13,7 @@
 -Fix: Handle newer ffmpeg versions
 -Fix: Don't wait with Replay Gain calculation for items with same album name but no Replay Gain conversion option set
 -Fix: Don't convert all files at once if the conversion starts with copying files with the same input an output codec
+-Fix: Infinite loop when waiting for album gain for a failed item
 
 2.1.90 (2.2.0 rc1):
 -Add: Detect (DRM)-encrypted wma and m4a files

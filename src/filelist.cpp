@@ -989,7 +989,7 @@ bool FileList::waitForAlbumGain( FileListItem *item ) // TODO was ist wenn die d
         const ConversionOptions* conversionOptions = config->conversionOptionsManager()->getConversionOptions(nextItem->conversionOptionsId);
         if( nextItem->tags && nextItem->tags->album == item->tags->album && conversionOptions && conversionOptions->replaygain )
         {
-            if( nextItem->state != FileListItem::WaitingForAlbumGain )
+            if( nextItem->state != FileListItem::WaitingForAlbumGain && nextItem->state != FileListItem::Stopped )
             {
                 return true;
             }
@@ -1006,7 +1006,7 @@ bool FileList::waitForAlbumGain( FileListItem *item ) // TODO was ist wenn die d
         const ConversionOptions* conversionOptions = config->conversionOptionsManager()->getConversionOptions(nextItem->conversionOptionsId);
         if( nextItem->tags && nextItem->tags->album == item->tags->album && conversionOptions && conversionOptions->replaygain )
         {
-            if( nextItem->state != FileListItem::WaitingForAlbumGain )
+            if( nextItem->state != FileListItem::WaitingForAlbumGain && nextItem->state != FileListItem::Stopped )
             {
                 return true;
             }

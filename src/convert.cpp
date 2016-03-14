@@ -75,7 +75,7 @@ void Convert::get( ConvertItem *item )
 
     logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",item->inputUrl.pathOrUrl(),item->tempInputUrl.toLocalFile()) );
 
-    item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, 0700 , KIO::HideProgressInfo );
+    item->kioCopyJob = KIO::file_copy( item->inputUrl, item->tempInputUrl, -1 , KIO::HideProgressInfo );
     connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
     connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
 }
@@ -129,10 +129,13 @@ void Convert::convert( ConvertItem *item )
 
     if( config->data.general.copyIfSameCodec && item->fileListItem->codecName == conversionOptions->codecName )
     {
-        logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",inputUrl.pathOrUrl(),item->outputUrl.toLocalFile()) );
-        QFile::copy( inputUrl.pathOrUrl(), item->outputUrl.toLocalFile() );
         item->state = ConvertItem::convert;
-        executeNextStep( item );
+        logger->log( item->logID, i18n("Copying \"%1\" to \"%2\"",inputUrl.pathOrUrl(),item->outputUrl.toLocalFile()) );
+
+        item->kioCopyJob = KIO::file_copy( item->inputUrl, item->outputUrl, -1 , KIO::HideProgressInfo );
+        connect( item->kioCopyJob.data(), SIGNAL(result(KJob*)), this, SLOT(kioJobFinished(KJob*)) );
+//         connect( item->kioCopyJob.data(), SIGNAL(percent(KJob*,unsigned long)), this, SLOT(kioJobProgress(KJob*,unsigned long)) );
+
         return;
     }
 
@@ -762,6 +765,15 @@ void Convert::kioJobFinished( KJob *job )
                         fileTime = item->getTime;
                         break;
                     }
+                    case ConvertItem::convert:
+                    {
+                        fileTime = 0.0f;
+                        foreach( const float t, item->convertTimes )
+                        {
+                            fileTime += t;
+                        }
+                        break;
+                    }
                     default:
                     {
                         fileTime = 0.0f;
@@ -788,15 +800,25 @@ void Convert::kioJobFinished( KJob *job )
             else
             {
                 // remove temp/failed files
-                if( QFile::exists(item->tempInputUrl.toLocalFile()) )
+                KUrl url;
+                if( item->state == ConvertItem::get )
                 {
-                    QFile::remove(item->tempInputUrl.toLocalFile());
-                    logger->log( item->logID, i18nc("removing file","Removing: %1",item->tempInputUrl.toLocalFile()) );
+                    url = item->tempInputUrl;
                 }
-                if( QFile::exists(item->tempInputUrl.toLocalFile()+".part") )
+                else if( item->state == ConvertItem::convert )
                 {
-                    QFile::remove(item->tempInputUrl.toLocalFile()+".part");
-                    logger->log( item->logID, i18nc("removing file","Removing: %1",item->tempInputUrl.toLocalFile()+".part") );
+                    url = item->outputUrl;
+                }
+
+                if( QFile::exists(url.toLocalFile()) )
+                {
+                    QFile::remove(url.toLocalFile());
+                    logger->log( item->logID, i18nc("removing file","Removing: %1",url.toLocalFile()) );
+                }
+                if( QFile::exists(url.toLocalFile()+".part") )
+                {
+                    QFile::remove(url.toLocalFile()+".part");
+                    logger->log( item->logID, i18nc("removing file","Removing: %1",url.toLocalFile()+".part") );
                 }
 
                 if( job->error() == 1 )

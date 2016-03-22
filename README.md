@@ -1,4 +1,7 @@
+# soundKonverter
 soundKonverter is a frontend to various audio converters.
+
+![Screen shot of soundKonverter](soundkonverter.png)
 
 The key features are:
 - Audio conversion

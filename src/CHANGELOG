@@ -1,4 +1,4 @@
-2.1.91 (2.2.0 rc2):
+2.2.0:
 -Add: Decode webm audio stream
 -Add: --file-list argument
 -Change: Remove both APE and ID3 Replay Gain tags with mp3gain and aacgain

@@ -258,6 +258,8 @@ CDOpener::CDOpener( Config *_config, const QString& _device, QWidget *parent, Qt
     connect( pTrackDown, SIGNAL(clicked()), this, SLOT(trackDownPressed()) );
     tagGridLayout->addWidget( pTrackDown, 1, 0 );
 
+    setTabOrder(pTrackDown, pTrackUp);
+
     // add the inputs
     // add a horizontal box layout for the title
     QHBoxLayout *trackTitleBox = new QHBoxLayout();

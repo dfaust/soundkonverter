@@ -149,27 +149,7 @@ Precompiled packages:
 You can find soundKonverter packages for various distributions with a nice download interface and some instructions at:
 http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
 
-openSUSE users should either add the following installation source to yast: http://download.opensuse.org/repositories/home:/HessiJames/<suse version>
-eg.: http://download.opensuse.org/repositories/home:/HessiJames/openSUSE_12.2 for openSUSE 12.2.
-Or add the KDE:Extra repository (includes a lot more KDE applications).
-eg.: http://download.opensuse.org/repositories/KDE:/Extra/openSUSE_12.2 for openSUSE 12.2
-More information about openSUSE KDE repositories: http://en.opensuse.org/KDE_repositories
-
-Ubuntu/Debian Packages are also available at http://download.opensuse.org/repositories/home:/HessiJames
-The packages in the xUbuntu repositories are suitable for Ubuntu as well as for all its derivatives (like Kubuntu).
-Quick installation guide:
-Open the application launcher, start a terminal and enter the following commands (each line is one command, execute them by hitting [enter]):
-sudo -i
-wget http://download.opensuse.org/repositories/home:HessiJames/xUbuntu_12.04/Release.key
-apt-key add - < Release.key
-rm Release.key
-echo 'deb http://download.opensuse.org/repositories/home:HessiJames/xUbuntu_12.04/ /' >> /etc/apt/sources.list
-apt-get update
-apt-get install soundkonverter
-
-Packages for distributions other than openSUSE and Ubuntu are not tested, so please tell me if something is wrong with them.
-If your distribution is not listed here, you should start an internet search, there might be precompiled packages for your distribution provided by somebody else.
-But make sure the source is trustworthy of course...!
+For more information see: https://github.com/HessiJames/soundkonverter/wiki/Installing%20soundKonverter#precompiled-packages
 
 
 

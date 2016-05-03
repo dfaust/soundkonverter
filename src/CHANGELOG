@@ -1,3 +1,8 @@
+2.2.1:
+-Add: Dutch, Spanish (Argentina) and Polish (Poland) translations
+-Change: Swedish translation moved to Swedish (Sweden)
+-Change: Update translations
+
 2.2.0:
 -Add: Decode webm audio stream
 -Add: --file-list argument

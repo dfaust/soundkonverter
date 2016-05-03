@@ -3,8 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Alisha <alisha.4m@gmail.com>, 2013
-# Jeff Huang <s8321414@gmail.com>, 2013
+# A Kanashiro, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
@@ -13,100 +12,106 @@ msgstr ""
 "POT-Creation-Date: 2016-05-03 18:00+0200\n"
 "PO-Revision-Date: 2016-05-03 15:47+0000\n"
 "Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/hessijames/"
-"soundkonverter/language/zh_TW/)\n"
-"Language: zh_TW\n"
+"Language-Team: Spanish (Argentina) (http://www.transifex.com/hessijames/"
+"soundkonverter/language/es_AR/)\n"
+"Language: es_AR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: aboutplugins.cpp:20
 msgid "About plugins"
-msgstr "關於外掛程式"
+msgstr "Sobre los plugins"
 
 #: aboutplugins.cpp:34
 msgid "Installed plugins:"
-msgstr "已安裝的外掛程式："
+msgstr "Plugins instalados:"
 
 #: aboutplugins.cpp:131
 msgid "About plugin %1:"
-msgstr "關於外掛程式 %1："
+msgstr "Sobre el plugin %1:"
 
 #: aboutplugins.cpp:133
 msgid "Plugin type: %1"
-msgstr "外掛程式類型：%1"
+msgstr "Tipo de plugin: %1"
 
 #: aboutplugins.cpp:139
 msgid "Backend binaries:"
-msgstr "後端執行檔："
+msgstr "Binarios externos:"
 
 #: aboutplugins.cpp:144
 msgid "%1 (found at: %2)"
-msgstr "%1 (在這裡找到： %2)"
+msgstr "%1 (encontrado en: %2)"
 
 #: aboutplugins.cpp:146
 msgid "%1 (not found)"
-msgstr "%1（未發現）"
+msgstr "%1 (no encontrado)"
 
 #: aboutplugins.cpp:167 aboutplugins.cpp:202 aboutplugins.cpp:233
 msgid "Supported codecs:"
-msgstr "支援編碼："
+msgstr "Codecs soportados:"
 
 #: aboutplugins.cpp:172 aboutplugins.cpp:180 aboutplugins.cpp:207
 #: aboutplugins.cpp:215 aboutplugins.cpp:230
 msgid "Currently deactivated."
-msgstr "目前停用。"
+msgstr "Actualmente desactivado."
 
 #: aboutplugins.cpp:175 aboutplugins.cpp:210
 msgid "Encode: %1"
-msgstr "編碼：%1"
+msgstr "Codificar: %1"
 
 #: aboutplugins.cpp:183 aboutplugins.cpp:218
 msgid "Decode: %1"
-msgstr "解碼：%1"
+msgstr "Decodificar: %1"
 
 #: aboutplugins.cpp:243 configdialog/configbackendspage.cpp:163
 #: configdialog/configbackendspage.cpp:309
 #: configdialog/configbackendspage.cpp:388 optionsdetailed.cpp:304
 msgid "Configure %1 ..."
-msgstr "設定 %1 ..."
+msgstr "Configurar %1 ..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr "後端問題的解決方案"
+msgstr "Soluciones para problemas de binarios externos"
 
 #: codecoptimizations.cpp:27
 msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
-msgstr "您已經安裝或移除後端，並且您 soundKonverter 設定可以被優化。"
+msgstr ""
+"Ha instalado o eliminado binarios externos y sus configuraciones de "
+"soundKonverter pueden ser optimizadas."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr "為了編碼 %1 檔案，後端「%2」可以被替換為「%3」。"
+msgstr ""
+"Para codificar archivos %1, el binario '%2' puede ser reemplazado con .'%3'"
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
-msgstr "為了擷取音樂CD，後端「%1」可以被替換為「%2」。"
+msgstr ""
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr "為了解碼 %1 檔案，後端「%2」可以被替換為「%3」。"
+msgstr ""
+"Para decodificar archivos %1, el binario '%2' puede ser reemplazado por '%3'."
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
-msgstr "為了套用播放增益至 %1 檔案，後端「%2」可以被替換為「%3」。"
+msgstr ""
+"Para aplicar Replay Gain en los archiivos %1, el binario '%2' puede ser "
+"reemplazado por '%3'."
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
-msgstr "忽略"
+msgstr "Ignorar"
 
 #: codecoptimizations.cpp:71
 msgid "Fix"
-msgstr "修復"
+msgstr "Corregir"
 
 #: codecproblems.cpp:28
 msgid ""
@@ -114,33 +119,33 @@ msgid ""
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter 找不到任何缺少的套件。\n"
-"如果您缺少某些檔案格式，您可能需要通過您使用的作業系統發行版中的套件管理員安"
-"裝額外的外掛程式。"
+"soundKonverter no pudo encontrar los paquetes que faltan.⏎ Si le falta algún "
+"formato archivo, deberá instalar un plugin adicional con el administrador de "
+"paquetes de su distribución."
 
 #: codecproblems.cpp:32
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"某些已安裝的外掛程式不能正常工作。\n"
-"下面列出了可能的解決方案。"
+"Algún de los plugins instalados no está funcionando.⏎ Las posibles "
+"soluciones se listan debajo."
 
 #: codecproblems.cpp:37
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
-"有些檔案無法被解碼。\n"
-"下面列出了可能的解決方案。"
+"Algunos archivos no se pueden codificar.⏎ Las posibles soluciones se listan "
+"debajo."
 
 #: codecproblems.cpp:41
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
-"某些檔案不支持播放增益。\n"
-"下面列出了可能的解決方案。"
+"Replay Gain no está soportado por algunos archivos.⏎ Las posibles soluciones "
+"se listan debajo."
 
 #: codecproblems.cpp:47
 msgid ""
@@ -148,20 +153,21 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
-"擷取音樂CD不被任何已安裝的外掛程式支援。\n"
-"請查看您的發行版之套件管理員，以取得一個 soundKonverter 的CD擷取外掛程式。"
+"La extracción de CDs no está soportada por ninguno de los plugins instalados."
+"⏎ Consulte en el administrador de paquetes de su distribución para poder "
+"extraer CDs con soundKonverter."
 
 #: codecproblems.cpp:51
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
-"擷取音樂CD目前不被支援，因為缺少後端。\n"
-"下面列出了可能的解決方案。"
+"La extracción de CDs no está soportada porque faltan los binarios para ello."
+"⏎ Las posibles soluciones se listan debajo."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 msgid "Possible solutions for %1"
-msgstr "%1 可能的解決方案"
+msgstr "Posibles soluciones para %1"
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:244
@@ -169,11 +175,11 @@ msgstr "%1 可能的解決方案"
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:216
 msgctxt "like in either or"
 msgid "or"
-msgstr "或"
+msgstr "ó"
 
 #: codecproblems.cpp:71
 msgid "Affected files:"
-msgstr "受影響的檔案："
+msgstr "Archivos afectados"
 
 #: config.cpp:45 config.cpp:47 config.cpp:385 config.cpp:426
 #: configdialog/configgeneralpage.cpp:55 configdialog/configgeneralpage.cpp:71
@@ -184,7 +190,7 @@ msgstr "受影響的檔案："
 #: configdialog/configgeneralpage.cpp:282 options.cpp:43 options.cpp:64
 #: optionsdetailed.cpp:476
 msgid "Last used"
-msgstr "最後使用"
+msgstr "Último usado"
 
 #: config.cpp:46 config.cpp:389 config.cpp:396 config.cpp:402
 #: configdialog/configgeneralpage.cpp:75 configdialog/configgeneralpage.cpp:270
@@ -219,17 +225,17 @@ msgstr "最後使用"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:532
 #: soundkonverterview.cpp:564 soundkonverterview.cpp:566
 msgid "High"
-msgstr "高"
+msgstr "Alta"
 
 #: config.cpp:114 configdialog/configcoverartpage.cpp:135
 msgctxt "cover file name"
 msgid "cover"
-msgstr "封面"
+msgstr "cubierta"
 
 #: config.cpp:234 config.cpp:260 config.cpp:262 convert.cpp:172 convert.cpp:244
 #: convert.cpp:411
 msgid "Try internal"
-msgstr "嘗試內部"
+msgstr "Interna"
 
 #: config.cpp:386 config.cpp:402 configdialog/configgeneralpage.cpp:72
 #: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:469
@@ -262,7 +268,7 @@ msgstr "嘗試內部"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:463
 #: soundkonverterview.cpp:549 soundkonverterview.cpp:551
 msgid "Very low"
-msgstr "極低"
+msgstr "Muy baja"
 
 #: config.cpp:387 config.cpp:402 configdialog/configgeneralpage.cpp:73
 #: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:470
@@ -296,7 +302,7 @@ msgstr "極低"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:486
 #: soundkonverterview.cpp:554 soundkonverterview.cpp:556
 msgid "Low"
-msgstr "低"
+msgstr "Baja"
 
 #: config.cpp:388 config.cpp:402 configdialog/configgeneralpage.cpp:74
 #: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:471
@@ -330,7 +336,7 @@ msgstr "低"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:509
 #: soundkonverterview.cpp:559 soundkonverterview.cpp:561
 msgid "Medium"
-msgstr "中等"
+msgstr "Media"
 
 #: config.cpp:390 config.cpp:402 configdialog/configgeneralpage.cpp:76
 #: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:473
@@ -364,7 +370,7 @@ msgstr "中等"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:555
 #: soundkonverterview.cpp:569 soundkonverterview.cpp:571
 msgid "Very high"
-msgstr "極高"
+msgstr "Muy alta"
 
 #: config.cpp:391 config.cpp:406 configdialog/configgeneralpage.cpp:77
 #: configdialog/configgeneralpage.cpp:275 optionsdetailed.cpp:474
@@ -399,13 +405,13 @@ msgstr "極高"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:578
 #: soundkonverterview.cpp:574 soundkonverterview.cpp:576
 msgid "Lossless"
-msgstr "無損"
+msgstr "Sin pérdida"
 
 #: config.cpp:392 config.cpp:410 configdialog/configgeneralpage.cpp:280
 #: optionsdetailed.cpp:475 optionssimple.cpp:214 optionssimple.cpp:308
 #: soundkonverterview.cpp:579 soundkonverterview.cpp:581
 msgid "Hybrid"
-msgstr "混合"
+msgstr "Híbrido"
 
 #: config.cpp:414 optionsdetailed.cpp:478 optionssimple.cpp:171
 #: optionssimple.cpp:218 optionssimple.cpp:312 optionssimple.cpp:375
@@ -427,27 +433,27 @@ msgstr "混合"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:455
 msgid "User defined"
-msgstr "使用者定義的"
+msgstr "Definido por el usuario"
 
 #: config.cpp:579
 msgid "Convert with soundKonverter"
-msgstr "用 soundKonverter 轉換"
+msgstr "Convertir con soundKonverter"
 
 #: config.cpp:615
 msgid "Add Replay Gain with soundKonverter"
-msgstr "用 soundKonverter 加入播放增益"
+msgstr "Agregar Replay Gain con soundKonverter"
 
 #: configdialog/configadvancedpage.cpp:36 configdialog/configdialog.cpp:48
 msgid "Advanced"
-msgstr "進階"
+msgstr "Avanzado"
 
 #: configdialog/configadvancedpage.cpp:45
 msgid "Preferred file name extension for ogg vorbis files:"
-msgstr "Ogg Vorbis檔的偏好副檔名："
+msgstr "Extensión preferida para archivos ogg vorbis:"
 
 #: configdialog/configadvancedpage.cpp:61
 msgid "Preferred comment tag field for ogg vorbis and flac files:"
-msgstr "Ogg Vorbis和FLAC檔的偏好註釋標籤欄位："
+msgstr "Campo de comentario preferido para archivos ogg vorbis y flac:"
 
 #: configdialog/configadvancedpage.cpp:62
 #: configdialog/configadvancedpage.cpp:65
@@ -460,7 +466,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
-msgstr "Ogg Vorbis和FLAC檔的總曲目數量標籤欄位的偏好："
+msgstr ""
 
 #: configdialog/configadvancedpage.cpp:80
 #: configdialog/configadvancedpage.cpp:83
@@ -473,7 +479,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
-msgstr "Ogg Vorbis和FLAC檔總光碟數量標籤欄位的偏好："
+msgstr ""
 
 #: configdialog/configadvancedpage.cpp:99
 #: configdialog/configadvancedpage.cpp:102
@@ -486,7 +492,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
-msgstr "始終使用 FAT 相容的輸出檔名"
+msgstr "Siempre usar nombre de archivos compatibles con FAT"
 
 #: configdialog/configadvancedpage.cpp:118
 msgid ""
@@ -494,6 +500,9 @@ msgid ""
 "If the output directory is on a FAT file system FAT compatible file names "
 "will automatically be used independently from this option."
 msgstr ""
+"Reemplazar algunos caracteres especiales como '?' por '_'.⏎ Si el directorio "
+"de salida está en un sistema de archivo FAT, se usarán nombres de archivos "
+"compatibles con FAT automáticamente independientemente de esta opción."
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
@@ -501,11 +510,11 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
-msgstr "除錯"
+msgstr "Depurar"
 
 #: configdialog/configadvancedpage.cpp:144
 msgid "Write log files to disc"
-msgstr "寫日誌檔到磁碟"
+msgstr "Escribir registro al disco"
 
 #: configdialog/configadvancedpage.cpp:145
 msgid ""
@@ -514,37 +523,41 @@ msgid ""
 "the log viewer.\n"
 "Log files will be written to %1"
 msgstr ""
-"當正在轉換時，寫日誌檔到硬碟機。\n"
-"這可能是有用的，如果發生崩潰，而您無法使用日誌檢視器進入日誌檔。\n"
-"日誌檔將被寫到 %1"
+"Escribir registros al disco rígido mientras se convierte.⏎ Ésto puede ser "
+"útil si ocurre una falla y no puede acceder al registro usando un visor de "
+"registro.⏎ Los registros se escribirán en %1"
 
 #: configdialog/configadvancedpage.cpp:152
 msgid "Experimental"
-msgstr "實驗的"
+msgstr "Experimental"
 
 #: configdialog/configadvancedpage.cpp:161
 msgid "Store temporary files in memory unless the estimated size is more than:"
-msgstr "在記憶體中儲存暫存檔，除非估計大小會超過："
+msgstr ""
+"Guardar archivos temporarios en memoria a menos que el tamaño estimado sea "
+"más que:"
 
 #: configdialog/configadvancedpage.cpp:162
 #: configdialog/configadvancedpage.cpp:166
 msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
-msgstr "不要儲存預計將大於在記憶體中之值的檔案，以避免置換"
+msgstr ""
+"No almacenar los archivos que sean mayores que este valor en memoria para "
+"evitar swapping."
 
 #: configdialog/configadvancedpage.cpp:167
 msgctxt "mega in bytes"
 msgid "MiB"
-msgstr "MB"
+msgstr "MiB"
 
 #: configdialog/configadvancedpage.cpp:174
 msgid "It seems there's no filesystem mounted on /dev/shm"
-msgstr "似乎沒有檔案系統掛載在 /dev/shm"
+msgstr "Parece que no hay sistema de archivo montado en /dev/shm"
 
 #: configdialog/configadvancedpage.cpp:188
 msgid "Use pipes when possible"
-msgstr ""
+msgstr "Usar tubería cuando sea posible"
 
 #: configdialog/configadvancedpage.cpp:189
 msgid ""
@@ -552,77 +565,80 @@ msgid ""
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
+"Las tuberías son necesarias cuando se usan archivos temporales, mejorando el "
+"rendimiento.⏎ Pero algunos binarios causan errores cuando se usa este modo, "
+"por lo tanto debe ser cuidadoso."
 
 #: configdialog/configbackendspage.cpp:136
 #: configdialog/configbackendspage.cpp:197
 #: configdialog/configbackendspage.cpp:345
 msgid "Decoder"
-msgstr "解碼器"
+msgstr "Decodificador"
 
 #: configdialog/configbackendspage.cpp:138
 #: configdialog/configbackendspage.cpp:199
 #: configdialog/configbackendspage.cpp:348
 msgid "Encoder"
-msgstr "編碼器"
+msgstr "Codificador"
 
 #: configdialog/configbackendspage.cpp:140
 #: configdialog/configbackendspage.cpp:201
 #: configdialog/configbackendspage.cpp:351 convert.cpp:1501 filelist.cpp:562
 #: filelist.cpp:572
 msgid "Replay Gain"
-msgstr "播放增益"
+msgstr "Replay Gain"
 
 #: configdialog/configbackendspage.cpp:148
 msgid "Move %1 one position up"
-msgstr "%1 往上移一個位置"
+msgstr "Mover %1 una posición arriba"
 
 #: configdialog/configbackendspage.cpp:153
 msgid "Move %1 one position down"
-msgstr "%1 往下移一個位置"
+msgstr "Mover %1 una posición abajo"
 
 #: configdialog/configbackendspage.cpp:158
 msgid "About %1 ..."
-msgstr "關於 %1 ..."
+msgstr "Acerca de %1 ..."
 
 #: configdialog/configbackendspage.cpp:232
 msgid "CD ripper"
-msgstr "CD 擷取"
+msgstr "Extractor de CD"
 
 #: configdialog/configbackendspage.cpp:241
 msgid "Use plugin:"
-msgstr "使用外掛程式："
+msgstr "Usar plugin:"
 
 #: configdialog/configbackendspage.cpp:265
 msgid "Filters"
-msgstr "篩選器"
+msgstr "Filtros"
 
 #: configdialog/configbackendspage.cpp:281
 msgid "Enable plugins:"
-msgstr "啟用外掛程式："
+msgstr "Habilitar plugins:"
 
 #: configdialog/configbackendspage.cpp:320
 msgid "Priorities"
-msgstr "優先順序"
+msgstr "Prioridades"
 
 #: configdialog/configbackendspage.cpp:332
 msgid "Configure plugin priorities for format:"
-msgstr "設定格式的外掛程式優先順序："
+msgstr "Configurar prioridades de plugin para el formato:"
 
 #: configdialog/configbackendspage.cpp:359
 msgid "Show possible optimizations"
-msgstr "顯示可能的優化"
+msgstr "Mostrar optimizaciones posiles"
 
 #: configdialog/configbackendspage.cpp:399
 msgid ""
 "You have changed the current settings.\n"
 "Do you want to save them?"
 msgstr ""
-"您已經改變了目前的設定。\n"
-"您想要儲存它們嗎？"
+"Ha modificado las configuraciones actuales.\n"
+"¿Desea guardarlas?"
 
 #: configdialog/configbackendspage.cpp:399
 msgid "Settings changed"
-msgstr "變更的設定"
+msgstr "Configuraciones modificadas"
 
 #: configdialog/configbackendspage.cpp:475
 msgid ""
@@ -631,49 +647,48 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
-"這將選擇適用於所有格式的最好後端，並立即儲存新的偏好設定。\n"
-"\n"
-"您是否要繼續？"
 
 #: configdialog/configbackendspage.cpp:607
 msgid "All backend settings seem to be optimal, there is nothing to do."
-msgstr "所有後端設定似乎是最佳的，沒有什麼可以再做的了！"
+msgstr "Todos los binarios parecen estar bien, no hay nada que hacer."
 
 #: configdialog/configcoverartpage.cpp:24
 msgid "Saving covers to output directory"
-msgstr "儲存封面到輸出目錄"
+msgstr "Guardar cubiertas al directorio de salida"
 
 #: configdialog/configcoverartpage.cpp:36
 msgid "Save embedded covers to output directory"
-msgstr "儲存嵌入式封面到輸出目錄"
+msgstr "Almacenar cubiertas embebidas en el directorio de salida"
 
 #: configdialog/configcoverartpage.cpp:38
 msgid "Always"
-msgstr "總是"
+msgstr "Siempre"
 
 #: configdialog/configcoverartpage.cpp:40
 msgid "Only if embedding the covers into the output files is not possible"
-msgstr "只有當封面嵌入到輸出檔是不可能時"
+msgstr "Sólo embeber las cubiertas si no es posible"
 
 #: configdialog/configcoverartpage.cpp:42
 msgid "Never"
-msgstr "永遠不會"
+msgstr "Nunca"
 
 #: configdialog/configcoverartpage.cpp:62
 msgid "File name for the cover (when saving to output directory)"
-msgstr "封面的檔名(當儲存到輸出目錄時)"
+msgstr ""
+"Nombre de archivo para la cubierta (cuando se guarda en el directorio de "
+"salida)"
 
 #: configdialog/configcoverartpage.cpp:64
 msgid "The embedded cover description"
-msgstr "嵌入式封面描述"
+msgstr "Descripción de la cubierta embebida"
 
 #: configdialog/configcoverartpage.cpp:66
 msgid "The default cover file name"
-msgstr "預設封面檔名"
+msgstr "Nombre de archivo de cubierta por defecto"
 
 #: configdialog/configcoverartpage.cpp:70
 msgid "Default cover file name:"
-msgstr "預設封面檔名："
+msgstr "Nombre de archivo de cubierta por defecto:"
 
 #: configdialog/configcoverartpage.cpp:73
 msgid ""
@@ -685,77 +700,74 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"下面的字串是萬用字元將被\n"
-"在元數據中的資訊替換：\n"
-"%a - 演出者\n"
-"%b - 專輯\n"
-"%d - 封面說明\n"
-"%r - 封面作用"
+"Las siguientes líneas son comodines para ser reemplazados por la información "
+"en los metadatos:⏎  ⏎  %a - Artista ⏎  %b - Álbum %d - Descripción de "
+"cubierta ⏎ %r - Tipo de cubierta"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
-msgstr "設定"
+msgstr "Configuraciones"
 
 #: configdialog/configdialog.cpp:42
 msgid "General"
-msgstr "一般"
+msgstr "General"
 
 #: configdialog/configdialog.cpp:54
 msgid "Cover art"
-msgstr "封面"
+msgstr "Arte de cubierta"
 
 #: configdialog/configdialog.cpp:60 main.cpp:28
 msgid "Backends"
-msgstr "後端"
+msgstr "Binarios"
 
 #: configdialog/configgeneralpage.cpp:43
 msgid "User interface"
-msgstr "使用者界面"
+msgstr "Usar interface"
 
 #: configdialog/configgeneralpage.cpp:52
 msgid "Start in Mode:"
-msgstr "啟動模式："
+msgstr "Iniciar en Modo:"
 
 #: configdialog/configgeneralpage.cpp:56 options.cpp:79
 msgid "Simple"
-msgstr "精簡"
+msgstr "Simple"
 
 #: configdialog/configgeneralpage.cpp:57 options.cpp:80
 msgid "Detailed"
-msgstr "詳細"
+msgstr "Detallado"
 
 #: configdialog/configgeneralpage.cpp:67
 msgid "Default profile:"
-msgstr "預設設定檔："
+msgstr "Perfil por defecto:"
 
 #: configdialog/configgeneralpage.cpp:85
 msgid "Default format:"
-msgstr "預設格式："
+msgstr "Formato por defecto:"
 
 #: configdialog/configgeneralpage.cpp:95 optionseditor.cpp:52
 msgid "Conversion"
-msgstr "轉換"
+msgstr "Conversión"
 
 #: configdialog/configgeneralpage.cpp:118
 msgid "Conflict handling:"
-msgstr "衝突處理："
+msgstr "Manejo de conflicto:"
 
 #: configdialog/configgeneralpage.cpp:121
 msgid "Generate new file name"
-msgstr "產生新的檔名"
+msgstr "Generar nuevo nombre de archivo"
 
 #: configdialog/configgeneralpage.cpp:122
 msgid "Skip file"
-msgstr "跳過檔案"
+msgstr "Saltar archivo"
 
 #. i18n("Overwrite file") );
 #: configdialog/configgeneralpage.cpp:124
 msgid "Do that if the output file already exists"
-msgstr "這樣做，如果輸出檔已存在"
+msgstr "Hacer ésto si el archivo de salida ya existe"
 
 #: configdialog/configgeneralpage.cpp:134
 msgid "Number of files to convert at once:"
-msgstr "一次轉換的檔案數目："
+msgstr "Número de archivos para convertir a la vez:"
 
 #: configdialog/configgeneralpage.cpp:137
 #: configdialog/configgeneralpage.cpp:196
@@ -764,18 +776,20 @@ msgid ""
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
-"您不應該設定這個高於已安裝處理器核心數量的數字。\n"
-"已經有 %1 個處理器核心檢測到。"
+"Este número no debería ser mayor que la cantidad de núcleos de procesador "
+"disponibles.⏎ Se detectaron %1 núcleos de procesador."
 
 #: configdialog/configgeneralpage.cpp:150
 msgid "Apply album gain to converted files"
-msgstr "套用專輯增益到轉換後的檔案"
+msgstr "Aplicar ganancia de álbum a los archivos convertidos"
 
 #: configdialog/configgeneralpage.cpp:151
 msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
-msgstr "繼續等待在檔案清單中同一專輯的歌曲以套用專輯增益到所有的檔案。"
+msgstr ""
+"Mantener las canciones del mismo álbum esperando en la lista de archivos "
+"para poder aplicarle ganancia de álbum a todas ellas."
 
 #: configdialog/configgeneralpage.cpp:161
 msgid "Copy files instead of converting to the same file format"
@@ -791,38 +805,38 @@ msgstr ""
 #: replaygainscanner/replaygainscanner.cpp:34
 #: replaygainscanner/replaygainscanner.cpp:359
 msgid "Replay Gain tool"
-msgstr "播放增益工具"
+msgstr "Herramienta Replay Gain"
 
 #: configdialog/configgeneralpage.cpp:178
 msgid "Group files in the Replay Gain tool by:"
-msgstr "在播放增益工具中組織檔案依據："
+msgstr "Agrupar archivos en la herramienta Replay Gain por:"
 
 #: configdialog/configgeneralpage.cpp:181
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
-msgstr "專輯標籤和目錄"
+msgstr "Etiquetas y directorios de álbum"
 
 #: configdialog/configgeneralpage.cpp:182
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
-msgstr "僅專輯標籤"
+msgstr "Sólo etiquetas de álbum"
 
 #: configdialog/configgeneralpage.cpp:183
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
-msgstr "僅目錄"
+msgstr "Sólo directorios"
 
 #: configdialog/configgeneralpage.cpp:193
 msgid "Number of items to process at once:"
-msgstr "一次性處理項目數量："
+msgstr "Número de ítems a procesar a la vez:"
 
 #: convert.cpp:68 convert.cpp:1450
 msgid "Getting file"
-msgstr "取得檔案"
+msgstr "Obteniendo archivo"
 
 #: convert.cpp:76 convert.cpp:133
 msgid "Copying \"%1\" to \"%2\""
-msgstr "複製「%1」至「%2」"
+msgstr "Copiando \"%1\" a \"%2\""
 
 #: convert.cpp:103 convert.cpp:1138
 msgid "File is encrypted, conversion not possible"
@@ -835,53 +849,57 @@ msgstr ""
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64
 msgid "No more backends left to try :("
-msgstr "沒有更多的後端可去嘗試 :("
+msgstr "No quedan más binarios para probar :("
 
 #: convert.cpp:159 convert.cpp:274 convert.cpp:1456 filelist.cpp:582
 #: soundkonverter.cpp:321 soundkonverter.cpp:323 soundkonverter.cpp:350
 #: soundkonverter.cpp:352
 msgid "Converting"
-msgstr "轉換中"
+msgstr "Convirtiendo"
 
 #: convert.cpp:196 convert.cpp:435 convert.cpp:552
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
-msgstr "轉換失敗。至少使用的後端中的一個需要適當地設定。"
+msgstr ""
+"Falló la conversión. Al menos uno de los binarios utilizados debe "
+"configurarse apropiadamente."
 
 #: convert.cpp:202 convert.cpp:441 convert.cpp:558
 msgid ""
 "Conversion failed. The preferred plugin lacks support for a necessary "
 "feature."
-msgstr "轉換失敗。偏好的外掛程式缺乏一個必要的功能支援。"
+msgstr ""
+"Falló conversión. El plugin preferido carece de soporte para la "
+"característica necesitada."
 
 #: convert.cpp:208 convert.cpp:447 convert.cpp:564
 msgid "Conversion failed. Unknown Error."
-msgstr "轉換失敗。未知錯誤。"
+msgstr "Falló conversión. Error desconocido."
 
 #: convert.cpp:369 convert.cpp:1462 filelist.cpp:577
 msgid "Ripping"
-msgstr "擷取中"
+msgstr "Extrayendo"
 
 #: convert.cpp:374 convert.cpp:1468
 msgid "Decoding"
-msgstr "解碼中"
+msgstr "Decodificando"
 
 #: convert.cpp:379 convert.cpp:392 convert.cpp:398
 msgid "Applying filter"
-msgstr "套用篩選器"
+msgstr "Aplicando filtro"
 
 #: convert.cpp:387 convert.cpp:1480
 msgid "Encoding"
-msgstr "編碼中"
+msgstr "Codificando"
 
 #: convert.cpp:468
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
-msgstr "跳過播放增益，專輯的增益將稍後計算"
+msgstr "Saltando Replay Gain, la ganancia de álbum se calculará más tarde"
 
 #: convert.cpp:491 replaygainscanner/replaygainprocessor.cpp:60
 msgid "Applying Replay Gain"
-msgstr "套用播放增益"
+msgstr "Aplicando Replay Gain"
 
 #: convert.cpp:531 replaygainscanner/replaygainprocessor.cpp:89
 msgid "Waiting for running Vorbis Gain process to finish"
@@ -889,101 +907,103 @@ msgstr ""
 
 #: convert.cpp:580
 msgid "Writing tags"
-msgstr "寫入標籤中"
+msgstr "Escribiendo etiquetas"
 
 #: convert.cpp:632
 msgid "Executing next step"
-msgstr "執行下一步"
+msgstr "Ejecutando próximo paso"
 
 #: convert.cpp:797
 msgid "Read tags successfully"
-msgstr "成功讀取標籤"
+msgstr "Etiquetas leídas correctamente"
 
 #: convert.cpp:801
 msgid "Unable to read tags"
-msgstr "無法讀取標籤"
+msgstr "No se pueden leer etiquetas"
 
 #: convert.cpp:824 convert.cpp:829
 msgctxt "removing file"
 msgid "Removing: %1"
-msgstr "移除中：%1"
+msgstr "Eliminando: %1"
 
 #: convert.cpp:838
 msgid "An error occurred. Error code: %1 (%2)"
-msgstr "發生錯誤。錯誤代碼：%1 (%2)"
+msgstr "Ocurrió un error. Código de error: %1 (%2)"
 
 #: convert.cpp:955 convert.cpp:1040
 msgid "Conversion failed. Exit code: %1"
-msgstr "轉換失敗。退出代碼：%1"
+msgstr "Falló la conversión. Código de salida: %1"
 
 #: convert.cpp:1107
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
-msgstr "CD 音軌 %1：%2 - %3"
+msgstr "Pista %1: %2 - %3"
 
 #: convert.cpp:1111
 msgctxt "identificator for the logger"
 msgid "CD track %1"
-msgstr "CD 音軌 %1"
+msgstr "Pista %1"
 
 #: convert.cpp:1118
 msgid "Adding new item to conversion list: '%1'"
-msgstr "加入新的項目到轉換清單中：「%1」"
+msgstr "Agregando nuevo ítem a la lista de conversión: '%1'"
 
 #: convert.cpp:1127 replaygainscanner/replaygainprocessor.cpp:281
 msgid "Got log ID: %1"
-msgstr "取得日誌識別碼：%1"
+msgstr "Obtenido ID de registro: %1"
 
 #: convert.cpp:1159
 msgid "Track number: %1, device: %2"
-msgstr "音軌編號：%1，裝置：%2"
+msgstr "Número de pista: %1, dispositivo: %2"
 
 #: convert.cpp:1164
 msgid "Possible conversion strategies:"
-msgstr "可能的轉換策略："
+msgstr "Estrategias de conversión posibles:"
 
 #: convert.cpp:1178
 msgid "File system type: %1"
-msgstr "檔案系統類型：%1"
+msgstr "Tipo de sistema de archivo: %1"
 
 #: convert.cpp:1234
 msgid ""
 "An error occurred, the output file size is less than one percent of the "
 "input file size"
-msgstr "出現錯誤，輸出檔案大小是小於百分之一輸入檔案大小"
+msgstr ""
+"Ocurrió un error, el tamaño del archivo de salida es menor que el uno por "
+"ciento del archivo de entrada"
 
 #: convert.cpp:1238
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
-msgstr "轉換失敗，再嘗試一次。退出代碼：-2 (%1)"
+msgstr "Falló la conversión, probando de nuevo. Código de salida: -2 (%1)"
 
 #: convert.cpp:1240 convert.cpp:1318
 msgid "Removing partially converted output file"
-msgstr "移除部分轉換的輸出檔案"
+msgstr "Eliminando el archivo de salida convertido parcialmente"
 
 #: convert.cpp:1253 replaygainscanner/replaygainprocessor.cpp:323
 msgctxt "Conversion exit status"
 msgid "Normal exit"
-msgstr "正常退出"
+msgstr "Salida normal"
 
 #: convert.cpp:1256 replaygainscanner/replaygainprocessor.cpp:326
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr "成功，但發生了問題"
+msgstr ""
 
 #: convert.cpp:1259 replaygainscanner/replaygainprocessor.cpp:329
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr "由使用者中止"
+msgstr "Abortado por usuario"
 
 #: convert.cpp:1262 replaygainscanner/replaygainprocessor.cpp:332
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "後端需要設定"
+msgstr "Ejecutable necesita configuración"
 
 #: convert.cpp:1265
 msgctxt "Conversion exit status"
 msgid "Not enough space on the output device"
-msgstr "在輸出裝置上沒有足夠的空間"
+msgstr "No hay suficiente espacio en el dispositivo de salida"
 
 #: convert.cpp:1268
 msgctxt "Conversion exit status"
@@ -993,7 +1013,7 @@ msgstr ""
 #: convert.cpp:1271
 msgctxt "Conversion exit status"
 msgid "File already exists"
-msgstr "檔案已經存在"
+msgstr "El archivo ya existe"
 
 #: convert.cpp:1274
 msgctxt "Conversion exit status"
@@ -1003,44 +1023,44 @@ msgstr ""
 #: convert.cpp:1277 replaygainscanner/replaygainprocessor.cpp:338
 msgctxt "Conversion exit status"
 msgid "An error occurred"
-msgstr "發生了錯誤"
+msgstr "Ocurrió un error"
 
 #: convert.cpp:1298
 msgid "Executing command: \"%1\""
-msgstr "執行指令：「%1」"
+msgstr "Ejecutando comando: \"%1\""
 
 #: convert.cpp:1324 replaygainscanner/replaygainprocessor.cpp:342
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr "從轉換清單中移除檔案。退出代碼 %1 (%2)"
+msgstr "Eliminando archivo de la lista de conversión. Código de salida %1 (%2)"
 
 #: convert.cpp:1326
 msgid "Conversion time"
-msgstr "轉換時間"
+msgstr "Tiempo de conversión"
 
 #: convert.cpp:1327
 msgid "Output file size"
-msgstr "輸出檔案大小"
+msgstr "Tamaño del archivo de salida"
 
 #: convert.cpp:1328
 msgid "File size ratio"
-msgstr "檔案大小比例"
+msgstr "Razón de tamaño de archivo"
 
 #: convert.cpp:1435
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
-msgstr "未知"
+msgstr "Desconocido"
 
 #: convert.cpp:1474
 msgid "Filter"
-msgstr "篩選器"
+msgstr "Filtro"
 
 #: convert.cpp:1485 filelist.cpp:567
 msgid "Waiting for Replay Gain"
-msgstr "等待播放增益中"
+msgstr "Esperando para Replay Gain"
 
 #: convert.cpp:1509 replaygainscanner/replaygainprocessor.cpp:407
 msgid "Progress: %1"
-msgstr "進展情況：%1"
+msgstr "Progreso: %1"
 
 #: core/backendplugin.cpp:40
 msgid ""
@@ -1050,10 +1070,6 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
-"Wave 是一個非常簡單音訊格式。它不壓縮音訊流，所以它是無損的。但是檔案非常大，"
-"並且它不支持進階的功能，如標籤。<br>它幾乎是被任何軟體或裝置支持。<br><br><a "
-"href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/wiki/WAV</"
-"a>"
 
 #: core/backendplugin.cpp:47
 msgid ""
@@ -1063,11 +1079,6 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Advanced_Audio_Coding"
 "\">http://en.wikipedia.org/wiki/Advanced Audio Coding</a>"
 msgstr ""
-"進階音訊編碼(AAC)是一種有損和受歡迎的音訊格式。它被廣泛應用於蘋果電腦<br>在 "
-"soundKonverter 中，「aac」只有引用編解碼器。為了獲得一個包含標籤功能的檔案，"
-"使用了「m4a/aac」。<br><br><a href=\"http://en.wikipedia.org/wiki/"
-"Advanced_Audio_Coding\">http://en.wikipedia.org/wiki/Advanced Audio Coding</"
-"a>"
 
 #: core/backendplugin.cpp:54
 msgid ""
@@ -1092,6 +1103,9 @@ msgid ""
 "restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/Vorbis\">http://"
 "en.wikipedia.org/wiki/Vorbis</a>"
 msgstr ""
+"Ogg Vorbis es un codec libre de audio de alta calidad con pérdida. <br> Está "
+"libre de cualquier restricción legal.<br><br><a href=\"http://en.wikipedia."
+"org/wiki/Vorbis\">http://en.wikipedia.org/wiki/Vorbis</a>"
 
 #: core/backendplugin.cpp:95
 msgid ""
@@ -1116,6 +1130,9 @@ msgid ""
 "of any legal restrictions.<br><br><a href=\"http://en.wikipedia.org/wiki/FLAC"
 "\">http://en.wikipedia.org/wiki/FLAC</a>"
 msgstr ""
+"Free Lossless Audio Codec (FLAC) es un codec libre de audio sin pérdida."
+"<br>Es libre de cualquier restricción legal.<br><br><a href=\"http://en."
+"wikipedia.org/wiki/FLAC\">http://en.wikipedia.org/wiki/FLAC</a>"
 
 #: core/backendplugin.cpp:122
 msgid ""
@@ -1123,9 +1140,6 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/Windows_Media_Audio\">http://"
 "en.wikipedia.org/wiki/Windows Media Audio</a>"
 msgstr ""
-"Windows媒體音訊(WMA)是由微軟開發的一種有損音訊格式。<br><br><a href=\"http://"
-"en.wikipedia.org/wiki/Windows_Media_Audio\">http://en.wikipedia.org/wiki/"
-"Windows Media Audio</a>"
 
 #: core/backendplugin.cpp:128
 msgid ""
@@ -1165,8 +1179,6 @@ msgid ""
 "wikipedia.org/wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's "
 "Audio</a>"
 msgstr ""
-"Monkey's Audio 是無損音樂格式。<br><br><a href=\"http://en.wikipedia.org/"
-"wiki/Monkey's_Audio\">http://en.wikipedia.org/wiki/Monkey's Audio</a>"
 
 #: core/backendplugin.cpp:192
 msgid ""
@@ -1175,6 +1187,10 @@ msgid ""
 "obsolete.<br><br><a href=\"http://en.wikipedia.org/wiki/Speex\">http://en."
 "wikipedia.org/wiki/Speex<a/>"
 msgstr ""
+"Speex es un codificador con pérdida libre diseñado para codificación de voz "
+"de baja calidad.<br>Está libre de cualquier restricción. Debido a la "
+"aparición de Opus, Speex se considera obsoleto<br><br><a href=\"http://en."
+"wikipedia.org/wiki/Speex\">http://en.wikipedia.org/wiki/Speex<a/>"
 
 #: core/backendplugin.cpp:206
 msgid ""
@@ -1182,6 +1198,9 @@ msgid ""
 "for high quality.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
 "\">http://en.wikipedia.org/wiki/Musepack<a/>"
 msgstr ""
+"Musepack (MPC) es un formato libre con pérdida basado en mp2 y optimizado "
+"para alta calidad.<br><br><a href=\"http://en.wikipedia.org/wiki/Musepack"
+"\">http://en.wikipedia.org/wiki/Musepack<a/>"
 
 #: core/backendplugin.cpp:216
 msgid ""
@@ -1201,6 +1220,9 @@ msgid ""
 "WavPack (WV) is a free and lossless audio format.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/WavPack<a/>"
 msgstr ""
+"WavPack (WV) es un formato de audio libre sin pérdida.<br><br><a href="
+"\"http://en.wikipedia.org/wiki/WavPack\">http://en.wikipedia.org/wiki/"
+"WavPack<a/>"
 
 #: core/backendplugin.cpp:375
 msgid ""
@@ -1220,29 +1242,31 @@ msgstr ""
 
 #: core/backendplugin.cpp:454
 msgid "Killing process on user request"
-msgstr "在使用者要求時，終止行程"
+msgstr "Matando proceso a pedido de usuario"
 
 #: core/backendplugin.cpp:529
 msgid "In order to encode %1 files, you need to install '%2'."
-msgstr "為了替 %1 檔案編碼 ，您需要安裝「％2」。"
+msgstr "Para codificar los archivos %1, necesita instalar '%2'"
 
 #: core/backendplugin.cpp:536
 msgid "In order to decode %1 files, you need to install '%2'."
-msgstr "為了替 %1 檔案解碼，您需要安裝「％2」。"
+msgstr "Para decodificar los archivos %1, necesita instalar '%2'"
 
 #: core/backendplugin.cpp:543
 msgid "In order to transcode %1 files, you need to install '%2'."
-msgstr "為了替 %1 檔案轉碼，您需要安裝「％2」。"
+msgstr "Para transcodificar los archivos %1, necesita instalar '%2'"
 
 #: core/backendplugin.cpp:550
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
-msgstr "為了替 %1 檔案計算播放增益標籤，您需要安裝「％2」。"
+msgstr ""
+"Para calcular las etiquetas Replay Gain de los archivos %1, necesita "
+"instalar '%2'"
 
 #: core/backendplugin.cpp:557
 msgid "'%1' should be shipped with your distribution."
-msgstr ""
+msgstr "'%1' debería venir con sus distribución"
 
 #: core/backendplugin.cpp:564
 msgid ""
@@ -1250,30 +1274,33 @@ msgid ""
 "installation of your distribution. Many distributions offer '%1' in an "
 "additional software repository."
 msgstr ""
+"Como '%1' incluye codecs patentados, es posible que no estén incluidos por "
+"defecto en su distribución. Muchas distribuciones proveen '%1' en un "
+"repositorio adicional."
 
 #: core/backendplugin.cpp:571
 msgid "You can download '%1' at %2"
-msgstr "您可以下載「%1」在 %2"
+msgstr "Puede bajar '%1' en '%2'"
 
 #: core/backendplugin.cpp:580
 msgid "In order to use the filter %1, you need to install '%2'."
-msgstr "為了使用過濾器 %1，您需要安裝「％2」。"
+msgstr "Para usar el filtro %1, debe instalar '%2'."
 
 #: core/backendplugin.cpp:584
 msgid "In order to use the filters %1, you need to install '%2'."
-msgstr "為了使用過濾器 %1，您需要安裝「％2」。"
+msgstr "Para usar los filtros %1, debe instalar '%2'."
 
 #: filelist.cpp:51
 msgid "State"
-msgstr "狀態"
+msgstr "Estado"
 
 #: filelist.cpp:52
 msgid "Input"
-msgstr "輸入"
+msgstr "Entrada"
 
 #: filelist.cpp:53
 msgid "Output"
-msgstr "輸出"
+msgstr "Salida"
 
 #: filelist.cpp:54 plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:30
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:104
@@ -1302,25 +1329,25 @@ msgstr "輸出"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:64
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:137
 msgid "Quality"
-msgstr "品質"
+msgstr "Calidad"
 
 #: filelist.cpp:80
 msgid "Edit options..."
-msgstr "編輯選項..."
+msgstr "Editar opciones..."
 
 #: filelist.cpp:82
 msgid "Start conversion"
-msgstr "開始轉換"
+msgstr "Iniciar conversión"
 
 #: filelist.cpp:84
 msgid "Stop conversion"
-msgstr "停止轉換"
+msgstr "Detener conversión"
 
 #: filelist.cpp:86 optionssimple.cpp:47
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:101
 #: replaygainscanner/replaygainfilelist.cpp:75
 msgid "Remove"
-msgstr "移除"
+msgstr "Eliminar"
 
 #: filelist.cpp:179 opener/fileopener.cpp:142 opener/playlistopener.cpp:145
 #: replaygainscanner/replaygainfilelist.cpp:222
@@ -1330,19 +1357,19 @@ msgid ""
 "Maybe you need to install an additional soundKonverter plugin.\n"
 "You should have a look at your distribution's package manager for this."
 msgstr ""
-"這種檔案類型對於 soundKonverter 而言是未知的。\n"
-"也許您需要安裝一個額外的 soundKonverter 外掛程式。\n"
-"您應該看看系統的套件管理員是否有這個外掛程式。"
+"Este tipo de archivo es desconocido por soundKonverter.\n"
+"Deberá instalar un plugin adicional para soundKonverter.\n"
+"Consulte en el administrador de paquetes de su distribución."
 
 #: filelist.cpp:217 opener/fileopener.cpp:182 opener/playlistopener.cpp:185
 #: opener/playlistopener.cpp:217 replaygainscanner/replaygainfilelist.cpp:260
 #: replaygainscanner/replaygainscanner.cpp:248 soundkonverterview.cpp:385
 msgid "... and %1 more files"
-msgstr ""
+msgstr "... y %1 archivos más"
 
 #: filelist.cpp:548
 msgid "Will be skipped"
-msgstr "將被跳過"
+msgstr "Será saltado"
 
 #: filelist.cpp:552
 msgid "Will be copied"
@@ -1350,7 +1377,7 @@ msgstr ""
 
 #: filelist.cpp:556 soundkonverter.cpp:111 soundkonverter.cpp:115
 msgid "Waiting"
-msgstr "等待中"
+msgstr "Esperando"
 
 #: filelist.cpp:596
 msgctxt "Short conversion status"
@@ -1376,9 +1403,7 @@ msgstr ""
 msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
-msgstr ""
-"轉換失敗。\n"
-"請參閱日誌以獲取更多資訊。"
+msgstr "Falló la conversión.⏎ Mire el registro para más inforamción."
 
 #: filelist.cpp:623
 msgid "Skipped"
@@ -1396,7 +1421,7 @@ msgstr ""
 
 #: filelist.cpp:666
 msgid "CD track %1"
-msgstr "CD 音軌 %1"
+msgstr "Pista %1"
 
 #: filelist.cpp:1355
 msgid ""
@@ -1404,84 +1429,81 @@ msgid ""
 "\n"
 "If not, the saved file list will be appended."
 msgstr ""
-"您想覆蓋目前的檔案清單？\n"
-"\n"
-"如果不是這樣，儲存的檔案清單將被附加。"
+"¿Desea sobrescribir la lista de archivos actual?⏎ ⏎ Si no, el archivo se "
+"agregará a la lista."
 
 #: global.cpp:97 global.cpp:99 global.cpp:123 global.cpp:125
 msgctxt "days"
 msgid "d"
-msgstr "天"
+msgstr "d"
 
 #: global.cpp:99 global.cpp:101 global.cpp:125 global.cpp:127
 msgctxt "hours"
 msgid "h"
-msgstr "時"
+msgstr "h"
 
 #: global.cpp:101 global.cpp:103 global.cpp:105 global.cpp:127 global.cpp:129
 #: global.cpp:131
 msgctxt "minutes"
 msgid "m"
-msgstr "分"
+msgstr "m"
 
 #: global.cpp:103 global.cpp:105 global.cpp:107 global.cpp:109 global.cpp:111
 #: global.cpp:129 global.cpp:131 global.cpp:133
 msgctxt "seconds"
 msgid "s"
-msgstr "秒"
+msgstr "s"
 
 #: global.cpp:107 global.cpp:109 global.cpp:111 global.cpp:113
 msgctxt "milliseconds"
 msgid "ms"
-msgstr "毫秒"
+msgstr "ms"
 
 #: logger.cpp:75
 msgid "Identifier"
-msgstr "識別碼"
+msgstr "Identificador"
 
 #: logger.cpp:76
 msgid "Log ID"
-msgstr "登錄識別碼"
+msgstr "ID de registro"
 
 #: logger.cpp:145 logger.cpp:148
 msgid "Finished logging"
-msgstr "完成日誌記錄"
+msgstr "Finalizado el registro"
 
 #: logviewer.cpp:27
 msgid "Log Viewer"
-msgstr "日誌檢視器"
+msgstr "Visor de registro"
 
 #: logviewer.cpp:30
 msgid "Update"
-msgstr "更新"
+msgstr "Actualizar"
 
 #: logviewer.cpp:33
 msgid "Save to file..."
-msgstr "儲存到檔案..."
+msgstr "Guardar a archivo..."
 
 #: logviewer.cpp:44
 msgid "Log file:"
-msgstr "紀錄檔："
+msgstr "Registro:"
 
 #: logviewer.cpp:88
 msgid "soundKonverter application log"
-msgstr "soundKonverter 應用日誌"
+msgstr "Registro de aplicación de soundKonverter"
 
 #: logviewer.cpp:131
 msgid "Save log file"
-msgstr "儲存日誌檔"
+msgstr "Guardar registro"
 
 #: logviewer.cpp:138
 msgid "File already exists. Do you really want to overwrite it?"
-msgstr "檔案已存在！您真的想要覆蓋它嗎？"
+msgstr "Archivo ya existe. ¿Desea sobrescribirlo?"
 
 #: logviewer.cpp:143
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
-msgstr ""
-"寫入檔案失敗。\n"
-"也許您沒有取得寫入權限。"
+msgstr "Falló escritura de archivo.⏎ Tal vez no posee permiso de escritura."
 
 #: main.cpp:16
 msgid ""
@@ -1506,15 +1528,15 @@ msgstr "Daniel Faust"
 
 #: main.cpp:24
 msgid "David Vignoni"
-msgstr "David Vignoni"
+msgstr "Daniel Faust"
 
 #: main.cpp:24
 msgid "Nuvola icon theme"
-msgstr "Nuvola 圖示主題"
+msgstr "Tema de íconos Nuvola"
 
 #: main.cpp:25
 msgid "Scott Wheeler"
-msgstr "斯科特·惠勒"
+msgstr "Scott Wheeler"
 
 #: main.cpp:25
 msgid "TagLib"
@@ -1522,15 +1544,15 @@ msgstr "TagLib"
 
 #: main.cpp:26
 msgid "Marco Nelles"
-msgstr ""
+msgstr "Marco Nelles"
 
 #: main.cpp:26
 msgid "Audex"
-msgstr ""
+msgstr "Audex"
 
 #: main.cpp:27
 msgid "Amarok developers"
-msgstr "Amarok 開發者"
+msgstr "Desarrolladores de Amarok"
 
 #: main.cpp:27
 msgid "Amarok"
@@ -1538,7 +1560,7 @@ msgstr "Amarok"
 
 #: main.cpp:28
 msgid "All programmers of audio converters"
-msgstr "所有音訊轉換器的程式設計師"
+msgstr "Todos los programadores de conversores de audio"
 
 #: main.cpp:32
 msgid "Open the Replay Gain tool and add all given files"
@@ -1547,32 +1569,36 @@ msgstr ""
 #: main.cpp:33
 msgid "List all tracks on the cd drive <device>, 'auto' will search for a cd"
 msgstr ""
+"Listar todas las pistas de la unidad <dispositivo>, 'auto' buscará el cd"
 
 #: main.cpp:34
 msgid "Add all files using the given profile"
-msgstr "使用給定的設定檔加入所有的檔案"
+msgstr "Agregar todos los archivos usando el perfil dado"
 
 #: main.cpp:35
 msgid "Add all files using the given format"
-msgstr "使用給定的格式加入所有的檔案"
+msgstr "Agregar todos los archivos usando el formato dado"
 
 #: main.cpp:36
 msgid "Output all files to <directory>"
-msgstr "輸出所有檔案到 <directory>"
+msgstr "Volcar todos los archivos al <directorio>"
 
 #: main.cpp:37
 msgid "Start soundKonverter invisible"
-msgstr "開始 soundKonverter 隱形"
+msgstr "Iniciar soundKonverter invisible"
 
 #: main.cpp:38
 msgid "Start the conversion immediately (enabled when using '--invisible')"
 msgstr ""
+"Iniciar la conversión inmediatamente (habilitado cuando se usa '--invisible')"
 
 #: main.cpp:39
 msgid ""
 "Close soundKonverter after all files are converted (enabled when using '--"
 "invisible')"
 msgstr ""
+"Cerrar soundKonverter después de que todos los archivos sean convertidos "
+"(habilitado cuando se usa '--invisible')"
 
 #: main.cpp:40
 #, c-format
@@ -1580,6 +1606,8 @@ msgid ""
 "Execute <command> after each file has been converted (%i=input file, "
 "%o=output file)"
 msgstr ""
+"Ejecutar <comando> después de que cada archivo sea convertido (%i = archivo "
+"de entrada, %o = archivo de salida)"
 
 #: main.cpp:41
 msgid "Load the file list at <path> after starting soundKonverter"
@@ -1587,124 +1615,124 @@ msgstr ""
 
 #: main.cpp:42
 msgid "Audio file(s) to append to the file list"
-msgstr "音訊檔附加到檔案清單中"
+msgstr "Archivo(s) de audio para agregar a la lista"
 
 #: metadata/tagengine.cpp:74
 msgctxt "cover type"
 msgid "Unclassified"
-msgstr "未分類的"
+msgstr "Sin clasificar"
 
 #: metadata/tagengine.cpp:76
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
-msgstr "32x32 PNG檔案圖示"
+msgstr "ícono PNG de 32x32"
 
 #: metadata/tagengine.cpp:78
 msgctxt "cover type"
 msgid "File icon"
-msgstr "檔案圖示"
+msgstr "Ícono"
 
 #: metadata/tagengine.cpp:80
 msgctxt "cover type"
 msgid "Front cover"
-msgstr "封面"
+msgstr "Cubierta de tapa"
 
 #: metadata/tagengine.cpp:82
 msgctxt "cover type"
 msgid "Back cover"
-msgstr "封底"
+msgstr "Contratapa"
 
 #: metadata/tagengine.cpp:84
 msgctxt "cover type"
 msgid "Leaflet page"
-msgstr "傳單頁"
+msgstr "Folleto"
 
 #: metadata/tagengine.cpp:86
 msgctxt "cover type"
 msgid "CD photo"
-msgstr "CD 照片"
+msgstr "Foto del CD"
 
 #: metadata/tagengine.cpp:88
 msgctxt "cover type"
 msgid "Lead artist picture"
-msgstr "領導演出者照片"
+msgstr "Imagen del artista principal"
 
 #: metadata/tagengine.cpp:90
 msgctxt "cover type"
 msgid "Artist picture"
-msgstr "演出者照片"
+msgstr "Imagen de artista"
 
 #: metadata/tagengine.cpp:92
 msgctxt "cover type"
 msgid "Conductor picture"
-msgstr "指揮照片"
+msgstr "Imagen del director"
 
 #: metadata/tagengine.cpp:94
 msgctxt "cover type"
 msgid "Band picture"
-msgstr "樂隊照片"
+msgstr "Imagen de la banda"
 
 #: metadata/tagengine.cpp:96
 msgctxt "cover type"
 msgid "Composer picture"
-msgstr "作曲家照片"
+msgstr "Imagen del compositor"
 
 #: metadata/tagengine.cpp:98
 msgctxt "cover type"
 msgid "Lyricist picture"
-msgstr "作詞者照片"
+msgstr "Imagen del letrista"
 
 #: metadata/tagengine.cpp:100
 msgctxt "cover type"
 msgid "Picture of the recording location"
-msgstr "圖片記錄位置"
+msgstr "Imagen del lugar de grabación"
 
 #: metadata/tagengine.cpp:102
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
-msgstr "在錄製過程中的演出者圖片"
+msgstr "Imagen de los artistas durante la grabación"
 
 #: metadata/tagengine.cpp:104
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
-msgstr "在表演過程中演出者的圖片"
+msgstr "Imagen de los artistas durante la ejecución"
 
 #: metadata/tagengine.cpp:106
 msgctxt "cover type"
 msgid "Picture from a video"
-msgstr "從視訊中的圖片"
+msgstr "Imagen a partir de un video"
 
 #: metadata/tagengine.cpp:108
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
-msgstr "一個大的的圖片，彩色的魚"
+msgstr "Imagen de un pez, grande y colorido"
 
 #: metadata/tagengine.cpp:110
 msgctxt "cover type"
 msgid "Illustration related to the track"
-msgstr "曲目相關的插圖"
+msgstr "Ilustración relacionada con la pista"
 
 #: metadata/tagengine.cpp:112
 msgctxt "cover type"
 msgid "Band logo"
-msgstr "樂隊的標誌"
+msgstr "Logo de la banda"
 
 #: metadata/tagengine.cpp:114
 msgctxt "cover type"
 msgid "Publisher logo"
-msgstr "出版者標誌"
+msgstr "Logo del sello"
 
 #: opener/cdopener.cpp:123
 msgid "Add CD tracks"
-msgstr "加入 CD 音軌"
+msgstr "Agregar pistas"
 
 #: opener/cdopener.cpp:132
 msgid "1. Select CD tracks"
-msgstr "1. 選擇 CD 音軌"
+msgstr "1. Elegir pistas"
 
 #: opener/cdopener.cpp:137 opener/diropener.cpp:61 opener/urlopener.cpp:56
 msgid "2. Set conversion options"
-msgstr "2. 設定轉換選項"
+msgstr "2. Configurar opciones de conversión"
 
 #: opener/cdopener.cpp:170 optionseditor.cpp:161
 msgid "Album artist:"
@@ -1712,92 +1740,92 @@ msgstr ""
 
 #: opener/cdopener.cpp:177 optionseditor.cpp:177
 msgid "Album:"
-msgstr "專輯："
+msgstr "Álbum:"
 
 #: opener/cdopener.cpp:183 optionseditor.cpp:193
 msgid "Disc No.:"
-msgstr "光碟編號："
+msgstr "Disco Nro.:"
 
 #: opener/cdopener.cpp:191 optionseditor.cpp:118 optionseditor.cpp:204
 msgctxt "Track/Disc No. x of y"
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: opener/cdopener.cpp:196 optionseditor.cpp:216
 msgid "Year:"
-msgstr "年份："
+msgstr "Año:"
 
 #: opener/cdopener.cpp:201 optionseditor.cpp:228
 msgid "Genre:"
-msgstr "類型："
+msgstr "Género"
 
 #: opener/cdopener.cpp:221
 msgctxt "column title"
 msgid "Rip"
-msgstr "擷取"
+msgstr "Extraer"
 
 #: opener/cdopener.cpp:222 opener/cdopener.cpp:987
 #: replaygainscanner/replaygainfilelist.cpp:36
 msgid "Track"
-msgstr "曲目"
+msgstr "Pista"
 
 #: opener/cdopener.cpp:223
 msgid "Artist"
-msgstr "演出者"
+msgstr "Artista"
 
 #: opener/cdopener.cpp:224
 msgid "Composer"
-msgstr "作曲家"
+msgstr "Compositor"
 
 #: opener/cdopener.cpp:225
 msgid "Title"
-msgstr "標題"
+msgstr "Título"
 
 #: opener/cdopener.cpp:226
 msgid "Length"
-msgstr "長度"
+msgstr "Duración"
 
 #: opener/cdopener.cpp:227
 msgid "Player"
-msgstr "播放器"
+msgstr "Reproductor"
 
 #: opener/cdopener.cpp:243
 msgid "No track selected"
-msgstr "沒有選定的曲目"
+msgstr "No hay pistas seleccionadas"
 
 #: opener/cdopener.cpp:268 optionseditor.cpp:96
 msgid "Title:"
-msgstr "標題："
+msgstr "Título:"
 
 #: opener/cdopener.cpp:283 optionseditor.cpp:134
 msgid "Artist:"
-msgstr "演出者："
+msgstr "Artista:"
 
 #: opener/cdopener.cpp:294 optionseditor.cpp:145
 msgid "Composer:"
-msgstr "作曲家："
+msgstr "Compositor:"
 
 #: opener/cdopener.cpp:309 optionseditor.cpp:249
 msgid "Comment:"
-msgstr "評論："
+msgstr "Comentario:"
 
 #: opener/cdopener.cpp:360 opener/diropener.cpp:148 opener/fileopener.cpp:59
 #: opener/playlistopener.cpp:44 opener/urlopener.cpp:73 optionseditor.cpp:58
 #: optionslayer.cpp:42
 msgid "Select your desired output options and click on \"Ok\"."
-msgstr "選擇您想要的輸出選項，然後按「Ok」。"
+msgstr "Elija el directorio de salida y haga click en \"Ok\"."
 
 #: opener/cdopener.cpp:378
 msgid "Save cue sheet..."
-msgstr "儲存 cue 表..."
+msgstr "Guardar archivo cue ..."
 
 #: opener/cdopener.cpp:383
 msgid "Request CDDB"
-msgstr "請求 CDDB"
+msgstr "Buscar CDDB"
 
 #: opener/cdopener.cpp:388
 msgid "Rip entire CD to one file"
-msgstr "整個CD擷取到一個檔案"
+msgstr "Extraer el CD entero en un solo archivo"
 
 #: opener/cdopener.cpp:398
 msgid ""
@@ -1805,8 +1833,8 @@ msgid ""
 "backends.\n"
 "Possible solutions are listed below.\n"
 msgstr ""
-"整個CD擷取到單一個檔案是不被已安裝的後端支援。\n"
-"下面列出可能的解決方案。\n"
+"Extraer el CD en un solo archivo no está soportado por los binarios "
+"instalados.⏎ Las posibles soluciones se listan debajo.⏎\n"
 
 #: opener/cdopener.cpp:402
 msgid ""
@@ -1815,189 +1843,188 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional ripper plugin which supports ripping to one file."
 msgstr ""
-"整個CD擷取到單一個檔案是不被已安裝的後端支援。\n"
-"請檢查您系統的套件管理程式，為了安裝額外的有擷取功能並且支援擷取到一個檔案的"
-"外掛程式。"
+"La extracción de CD a un solo archivo no está soportada por los binarios "
+"instalados.⏎ Verifique con el administrador de paquetes de su distribución "
+"para poder instalar un plugin adicional que soporte extracción a un solo "
+"archivo."
 
 #: opener/cdopener.cpp:409 opener/diropener.cpp:40 opener/urlopener.cpp:84
 msgid "Proceed"
-msgstr "繼續"
+msgstr "Proceder"
 
 #: opener/cdopener.cpp:412 opener/fileopener.cpp:67
 #: opener/playlistopener.cpp:52 opener/urlopener.cpp:87 optionslayer.cpp:49
 msgid "Ok"
-msgstr "好"
+msgstr "Ok"
 
 #: opener/cdopener.cpp:416 opener/fileopener.cpp:70
 #: opener/playlistopener.cpp:55 opener/urlopener.cpp:91 optionslayer.cpp:52
 #: replaygainscanner/replaygainscanner.cpp:88
 msgid "Cancel"
-msgstr "取消"
+msgstr "Cancelar"
 
 #: opener/cdopener.cpp:457
 msgid "Select CD-ROM drive"
-msgstr "選擇 CD-ROM 裝置"
+msgstr "Elegir unidad de CD-ROM"
 
 #: opener/cdopener.cpp:457
 msgid "Multiple CD-ROM drives where found. Please select one:"
-msgstr "找到多個光碟機。請選擇其中一個："
+msgstr "Se han encontrado múltiples unidades de CD-ROM. Por favor elija una."
 
 #: opener/cdopener.cpp:555
 msgid "%1 (%2): Audio CD with %3 tracks"
-msgstr "%1 (%2): 音樂CD帶有 %3 曲目"
+msgstr "%1 (%2): Audio CD con %3 pistas"
 
 #: opener/cdopener.cpp:680
 msgid "Please wait, trying to download CDDB data ..."
-msgstr "請稍候，試著下載 CDDB 資料..."
+msgstr "Por favor espere, intentando bajar la información CDDB"
 
 #: opener/cdopener.cpp:729
 msgid "Select CDDB Entry"
-msgstr "選擇 CDDB 項目"
+msgstr "Elija una entrada CDDB"
 
 #: opener/cdopener.cpp:729
 msgid "Multiple CDDB entries where found. Please select one:"
-msgstr "找到多個 CDDB 項目。請選擇其中一個："
+msgstr "Se encontraron múltiples entradas CDDB. Elija una:"
 
 #: opener/cdopener.cpp:889
 msgid "All tracks"
-msgstr "所有音軌"
+msgstr "Todas las pistas"
 
 #: opener/cdopener.cpp:893
 msgid "Tracks"
-msgstr "音軌"
+msgstr "Pistas"
 
 #: opener/cdopener.cpp:1213
 msgid "Please select at least one track in order to proceed."
-msgstr "請選擇至少一首曲目，才能繼續進行。"
+msgstr "Por favor seleccione al menos una pista para proceder."
 
 #: opener/cdopener.cpp:1291 opener/diropener.cpp:212 opener/fileopener.cpp:209
 #: opener/playlistopener.cpp:242 opener/urlopener.cpp:149 optionslayer.cpp:139
 msgid "No conversion options selected."
-msgstr "沒有選擇轉換選項。"
+msgstr "No se eligieron opciones de conversión."
 
 #: opener/cdopener.cpp:1305
 msgid ""
 "A file with this name already exists.\n"
 "\n"
 "Do you want to overwrite the existing one?"
-msgstr ""
-"用這個名稱的檔案已經存在。\n"
-"\n"
-"您想覆蓋現有的嗎？"
+msgstr "Ya existe un archivo con ese nombre.⏎ ⏎ ¿Desea sobrescribirlo?"
 
 #: opener/cdopener.cpp:1306
 msgid "File already exists"
-msgstr "檔案已經存在"
+msgstr "Ya existe el archivo"
 
 #: opener/diropener.cpp:28
 msgid "Add folder"
-msgstr "加入資料夾"
+msgstr "Agregar carpeta"
 
 #: opener/diropener.cpp:56
 msgid "1. Select directory"
-msgstr "1. 選擇目錄"
+msgstr "1. Elegir directorio"
 
 #: opener/diropener.cpp:87
 msgid "Directory:"
-msgstr "目錄："
+msgstr "Directorio:"
 
 #: opener/diropener.cpp:94
 msgid "Only add selected file formats:"
-msgstr "只有加入選擇的檔案格式："
+msgstr "Sólo agregar los formatos de archivo seleccionados:"
 
 #: opener/diropener.cpp:122 opener/fileopener.cpp:75
 #: replaygainscanner/replaygainscanner.cpp:159
 msgid "Are you missing some file formats?"
-msgstr "您是否缺少某些檔案格式？"
+msgstr "¿No le está faltando algún formato de archivo?"
 
 #: opener/diropener.cpp:130
 msgid "Select all"
-msgstr "全選"
+msgstr "Seleccionar todos"
 
 #: opener/diropener.cpp:134
 msgid "Select none"
-msgstr "全部不選擇"
+msgstr "Seleccionar uno"
 
 #: opener/diropener.cpp:138
 msgid "Recursive"
-msgstr "遞回"
+msgstr "Recursivo"
 
 #: opener/diropener.cpp:140
 msgid "If checked, files from subdirectories will be added, too."
-msgstr "如果選中，從子目錄的檔案也將被加入。"
+msgstr ""
+"Si está seleccionado, los archivos del subdirectorio también se agregarán."
 
 #: opener/fileopener.cpp:33 opener/fileopener.cpp:79
 #: opener/playlistopener.cpp:60 replaygainscanner/replaygainscanner.cpp:163
 msgid "Add Files"
-msgstr "加入檔案"
+msgstr "Agregar archivos"
 
 #: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:153
 msgid "%1 files"
-msgstr "%1 檔案"
+msgstr "%1 archivos"
 
 #: opener/fileopener.cpp:56 replaygainscanner/replaygainscanner.cpp:155
 msgid "All supported files"
-msgstr "所有支援檔案"
+msgstr "Todos los archivos soportados"
 
 #: opener/fileopener.cpp:57 replaygainscanner/replaygainscanner.cpp:156
 msgid "All files"
-msgstr "所有檔案"
+msgstr "Todos los archivos"
 
 #: opener/playlistopener.cpp:33
 msgid "Add playlist"
-msgstr "加入播放清單"
+msgstr "Agregar lista de reproducción"
 
 #: opener/playlistopener.cpp:219
 msgid "The following files couldn't be found:\n"
-msgstr "無法找到以下檔案：\n"
+msgstr "No se encontraron los siguientes archivos: \n"
 
 #: opener/playlistopener.cpp:222
 msgid "Files not found"
-msgstr "找不到檔案"
+msgstr "No se encontraron archivos"
 
 #: opener/urlopener.cpp:36
 msgid "Add url"
-msgstr "加入網址"
+msgstr "Agregar url"
 
 #: opener/urlopener.cpp:51
 msgid "1. Enter url"
-msgstr "1. 輸入網址"
+msgstr "1. Ingresar url"
 
 #: opener/urlopener.cpp:117
 msgid "The Url you entered is invalid. Please try again."
-msgstr "您輸入的網址是無效的。請再試一次。"
+msgstr "La Url que ingresó es inválida. Intente de nuevo."
 
 #: optionsdetailed.cpp:44 optionssimple.cpp:61
 msgid "Format:"
-msgstr "格式："
+msgstr "Formato:"
 
 #: optionsdetailed.cpp:54
 msgid "Use Plugin:"
-msgstr "使用外掛程式："
+msgstr "Usar Plugin:"
 
 #: optionsdetailed.cpp:119 optionssimple.cpp:82
 msgid "Destination:"
-msgstr "目的地："
+msgstr "Destino:"
 
 #: optionsdetailed.cpp:127 optionssimple.cpp:104
 msgid "Calculate Replay Gain tags"
-msgstr "計算播放增益標籤"
+msgstr "Calcular etiquetas Replay Gain"
 
 #: optionsdetailed.cpp:137
 msgid "Save current options as a profile"
-msgstr "儲存目前選項為一個設定檔"
+msgstr "Guardar opciones actuales como un perfil"
 
 #: optionsdetailed.cpp:144
 msgid "Load saved profiles"
-msgstr "載入儲存的設定檔"
+msgstr "Cargar perfiles guardados"
 
 #: optionsdetailed.cpp:257
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
 msgstr ""
-"播放增益不支援 %1 檔案格式。\n"
-"下面列出了可能的解決方案。"
+"Replay Gain no está soportado por el formato %1.⏎ Las posibles soluciones se "
+"listan debajo."
 
 #: optionsdetailed.cpp:261
 msgid ""
@@ -2005,8 +2032,9 @@ msgid ""
 "Please check your distribution's package manager in order to install an "
 "additional Replay Gain plugin."
 msgstr ""
-"播放增益不支援 %1 檔案格式。\n"
-"請檢查您系統發行版之套件管理員，以安裝一個額外的播放增益外掛程式。"
+"Replay Gain no está soportado para el formato %1.⏎ Verifique con el "
+"administrador de paquetes de su distribución para poder instalar un plugin "
+"adicional de Replay Gain."
 
 #: optionsdetailed.cpp:267
 msgid ""
@@ -2019,76 +2047,78 @@ msgid ""
 "Using the current conversion options will create files with approximately %1 "
 "per minute."
 msgstr ""
+"Se crearán archivos usando las opciones actuales de conversión en %1 por "
+"minuto."
 
 #: optionsdetailed.cpp:457
 msgid "New profile"
-msgstr "新的設定檔"
+msgstr "Nuevo perfil"
 
 #: optionsdetailed.cpp:457
 msgid "Enter a name for the new profile:"
-msgstr "輸入新的設定檔名稱："
+msgstr "Ingrese nombre para el nuevo perfil:"
 
 #: optionsdetailed.cpp:464
 msgid "You cannot save a profile without a name."
-msgstr "您無法儲存沒有名字的設定檔。"
+msgstr "No puede guardar un perfil sin un nombre"
 
 #: optionsdetailed.cpp:464
 msgid "Profile name is empty"
-msgstr ""
+msgstr "Nombre de perfil vacío"
 
 #: optionsdetailed.cpp:484
 msgid "You cannot overwrite the built-in profiles."
-msgstr ""
+msgstr "No puede sobrescribir los perfiles predefinidos."
 
 #: optionsdetailed.cpp:484 optionsdetailed.cpp:509
 msgid "Profile already exists"
-msgstr ""
+msgstr "Ya existe perfil"
 
 #: optionsdetailed.cpp:509
 msgid ""
 "A profile with this name already exists.\n"
 "\n"
 "Do you want to overwrite the existing one?"
-msgstr ""
+msgstr "Ya existe un perfil con ese nombre.⏎ ⏎ ¿Desea sobrescribir ese perfil?"
 
 #: optionseditor.cpp:41
 msgid "Previous"
-msgstr "上一步"
+msgstr "Previo"
 
 #: optionseditor.cpp:43
 msgid "Next"
-msgstr "下一步"
+msgstr "Siguiente"
 
 #: optionseditor.cpp:66
 msgid "Edit conversion options"
-msgstr ""
+msgstr "Editar opciones de conversión"
 
 #: optionseditor.cpp:75
 msgid "Tags"
-msgstr "標籤"
+msgstr "Etiquetas"
 
 #: optionseditor.cpp:86
 msgid "Covers:"
-msgstr "封面："
+msgstr "Cubiertas:"
 
 #: optionseditor.cpp:103 optionseditor.cpp:114 optionseditor.cpp:125
 #: optionseditor.cpp:141 optionseditor.cpp:152 optionseditor.cpp:168
 #: optionseditor.cpp:184 optionseditor.cpp:200 optionseditor.cpp:211
 #: optionseditor.cpp:223 optionseditor.cpp:240 optionseditor.cpp:256
 msgid "Edit"
-msgstr "編輯"
+msgstr "Editar"
 
 #: optionseditor.cpp:107
 msgid "Track No.:"
-msgstr "音軌編號："
+msgstr "Pista Nro.:"
 
 #: optionseditor.cpp:266
 msgid "Edit tags"
-msgstr "編輯標籤"
+msgstr "Editar etiquetas"
 
 #: optionseditor.cpp:374
 msgid "No file selected"
-msgstr "沒有選擇檔案"
+msgstr "Ningún archivo seleccionado"
 
 #: optionseditor.cpp:405
 msgid ""
@@ -2099,6 +2129,11 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags after downloading."
 msgstr ""
+"No se pudieron leer las etiquetas porque no es un archivo local.⏎ "
+"soundKonverter tratará de leer las etiquetas cuando esté por convertir el "
+"archivo.⏎ Si desea editar las etiquetas, puede pulsar el botón de abajo pero "
+"entonces soundKonverter no va a tratar⏎ de leer las etiquetas después de "
+"bajarlas."
 
 #: optionseditor.cpp:415
 msgid ""
@@ -2109,41 +2144,47 @@ msgid ""
 "soundKonverter will not try\n"
 "to read the tags a second time."
 msgstr ""
+"Falló al leer las etiquetas de uno o más archivos. soundKonverter tratará de "
+"leer las etiquetas en un segundo intento, cuando esté por convertir los "
+"archivos. Si desea editar las etiquetas, cliquee en el botón de abajo pero "
+"soundKonverter no tratará de leer las etiquetas por segunda vez."
 
 #: optionseditor.cpp:441
 msgctxt "cover tooltip"
 msgid "Cover type:"
-msgstr ""
+msgstr "Tipo de cubierta:"
 
 #: optionseditor.cpp:443
 msgctxt "cover tooltip"
 msgid "Description:"
-msgstr ""
+msgstr "Descripción"
 
 #: optionseditor.cpp:444
 msgctxt "cover tooltip"
 msgid "Size:"
-msgstr "大小："
+msgstr "Tamaño:"
 
 #: optionseditor.cpp:444
 msgctxt "cover tooltip"
 msgid "%1 x %2 pixels (%3)"
-msgstr ""
+msgstr "%1 x %2 píxeles (%3)"
 
 #: optionseditor.cpp:446
 msgctxt "cover tooltip"
 msgid "Mime type:"
-msgstr ""
+msgstr "Tipo Mime:"
 
 #: optionseditor.cpp:471
 msgid "%1 Files"
-msgstr "%1 檔案"
+msgstr "%1 Archivos"
 
 #: optionseditor.cpp:493
 msgid ""
 "You have selected multiple files with different conversion options.\n"
 "You can change the options of all files by hitting the button below."
 msgstr ""
+"Ha seleccionado múltiples archivos con diferentes opciones de conversión. "
+"Puede cambiar las opciones de todos los archivos pulsando el botón de abajo."
 
 #: optionseditor.cpp:501
 msgid ""
@@ -2158,31 +2199,31 @@ msgstr ""
 #: optionssimple.cpp:38 plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:70
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:291
 msgid "Quality:"
-msgstr "品質："
+msgstr "Calidad:"
 
 #: optionssimple.cpp:49
 msgid "Remove the selected profile"
-msgstr ""
+msgstr "Eliminar el perfil seleccionado"
 
 #: optionssimple.cpp:52 optionssimple.cpp:71
 msgid "Info"
-msgstr "資訊"
+msgstr "Info"
 
 #: optionssimple.cpp:54
 msgid "Information about the selected profile"
-msgstr ""
+msgstr "Información sobre el perfil elegido"
 
 #: optionssimple.cpp:73
 msgid "Information about the selected file format"
-msgstr ""
+msgstr "Información sobre el formato de archivo elegido"
 
 #: optionssimple.cpp:77
 msgid "More formats..."
-msgstr "更多格式..."
+msgstr "Más formatos..."
 
 #: optionssimple.cpp:99
 msgid "Optional:"
-msgstr "可選："
+msgstr "Opcional"
 
 #: optionssimple.cpp:192
 msgid ""
@@ -2231,89 +2272,89 @@ msgstr ""
 
 #: optionssimple.cpp:220
 msgid "You can define your own profile in the \"Detailed\" tab."
-msgstr ""
+msgstr "Puede definir su propio perfil en la solapa \"Detallada\"."
 
 #: optionssimple.cpp:224
 msgid "This is a user defined profile."
-msgstr "這是一個使用者定義的設定檔。"
+msgstr "Este es un perfil definido por el usuario."
 
 #: optionssimple.cpp:227
 msgid "Profile info for %1"
-msgstr ""
+msgstr "Información de perfil para %1"
 
 #: optionssimple.cpp:234
 msgid "Do you really want to remove the profile: %1"
-msgstr "您是否真的想要移除設定檔：%1"
+msgstr "¿Realmente quiere eliminar el perfil: %1?"
 
 #: optionssimple.cpp:234
 msgid "Remove profile?"
-msgstr "移除設定檔？"
+msgstr "¿Eliminar perfil?"
 
 #: optionssimple.cpp:283
 msgid "Format info for %1"
-msgstr ""
+msgstr "Información de formato para %1"
 
 #: optionssimple.cpp:287
 msgid "Sorry, no format information available."
-msgstr "抱歉，沒有可用的格式資訊。"
+msgstr "Lo siento, la información de formato no está disponible."
 
 #: outputdirectory.cpp:38
 msgid "By meta data"
-msgstr "依元數據"
+msgstr "Por metadatos."
 
 #: outputdirectory.cpp:39
 msgid "Source directory"
-msgstr "來源目錄"
+msgstr "Directorio origen"
 
 #: outputdirectory.cpp:40
 msgid "Specify output directory"
-msgstr "自訂輸出目錄"
+msgstr "Especificar directorio de salida"
 
 #: outputdirectory.cpp:41
 msgid "Copy directory structure"
-msgstr "複製目錄結構"
+msgstr "Copiar la estructura de directorio"
 
 #: outputdirectory.cpp:52 outputdirectory.cpp:495
 msgid "Choose an output directory"
-msgstr "選擇輸出目錄"
+msgstr "Elegir un directorio de salida"
 
 #: outputdirectory.cpp:57
 msgid "Open the output directory with Dolphin"
-msgstr "用 Dolphin 開啟輸出目錄"
+msgstr "Abrir el directorio de salida con Dolphin"
 
 #: outputdirectory.cpp:231 outputdirectory.cpp:242
 msgid "Unknown Artist"
-msgstr "未知演出者"
+msgstr "Artista Desconocido"
 
 #: outputdirectory.cpp:247
 msgid "Unknown Album"
-msgstr "未知專輯"
+msgstr "Álbum Desconocido"
 
 #: outputdirectory.cpp:251
 msgid "No Comment"
-msgstr "沒有評論"
+msgstr "Sin Comentarios"
 
 #: outputdirectory.cpp:258
 msgid "Unknown Genre"
-msgstr "未知曲風"
+msgstr "Género Desconocido"
 
 #: outputdirectory.cpp:265
 msgid "Unknown Composer"
-msgstr "未知作曲家"
+msgstr "Compositor Desconocido"
 
 #: outputdirectory.cpp:269
 msgid "Unknown Title"
-msgstr "未知標題"
+msgstr "Título Desconocido"
 
 #: outputdirectory.cpp:354
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
-msgstr ""
+msgstr "nuevo"
 
 #: outputdirectory.cpp:550
 msgid "Name all converted files according to the specified pattern"
-msgstr ""
+msgstr "Llamar a todos los archivos convertidos según patrón especificado"
 
 #: outputdirectory.cpp:551
 msgid ""
@@ -2343,15 +2384,19 @@ msgstr ""
 #: outputdirectory.cpp:563
 msgid ""
 "Output all converted files into the same directory as the original files"
-msgstr "所有轉換後的檔案輸出到和原始檔案相同的目錄"
+msgstr ""
+"Volcar todos los archivos convertidos en el mismo directorio que los "
+"archivos originales"
 
 #: outputdirectory.cpp:574
 msgid "Output all converted files into the specified output directory"
-msgstr "所有轉換後的檔案輸出到指定的輸出目錄"
+msgstr ""
+"Volcar todos los archivos convertidos en el directorio de salida especificado"
 
 #: outputdirectory.cpp:585
 msgid "Copy the whole directory structure for all converted files"
-msgstr "為所有轉換後的檔案複製整個目錄結構"
+msgstr ""
+"Copiar toda la estructura de directorio para todos los archivos convertidos"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:27
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:27
@@ -2362,7 +2407,7 @@ msgstr "為所有轉換後的檔案複製整個目錄結構"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:33
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:61
 msgid "Mode:"
-msgstr "模式："
+msgstr "Modo:"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:31
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:135
@@ -2381,7 +2426,7 @@ msgstr "模式："
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:126
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:65
 msgid "Bitrate"
-msgstr "位元率"
+msgstr "Tasa de bits"
 
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:42
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:52
@@ -2417,7 +2462,7 @@ msgstr ""
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:89
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:249
 msgid "Bitrate:"
-msgstr "位元率︰"
+msgstr "Tasa de bit:"
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:81
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:59
@@ -2430,15 +2475,15 @@ msgstr "位元率︰"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:46
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:103
 msgid "Additional encoder arguments:"
-msgstr "額外的編碼器參數："
+msgstr "Argumentos adicionales del codificador:"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:211
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
-msgstr "於ffmpeg的設定對話框中，啟用實驗性的編解碼器。"
+msgstr "Habilitar codecs experimentales en la configuración de ffmpeg."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:216
 msgid "Compile ffmpeg with %1 support."
-msgstr "編譯具有 %1 支持的 ffmpeg。"
+msgstr "Compilar ffmpeg con soporte %1."
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:276
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
@@ -2450,17 +2495,17 @@ msgstr "編譯具有 %1 支持的 ffmpeg。"
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:82
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Configure %1"
-msgstr "設定 %1"
+msgstr "Configurar %1"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:281
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:373
 msgid "Enable experimental codecs"
-msgstr "啟用實驗性編解碼器"
+msgstr "Habilitar codecs experimentales"
 
 #: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:307
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:399
 msgid "Please restart soundKonverter in order to activate the changes."
-msgstr "請重新啟動 soundKonverter 以使變更生效。"
+msgstr "Reinicie soundKonverter para activar cambios."
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:28
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:30
@@ -2469,7 +2514,7 @@ msgstr "請重新啟動 soundKonverter 以使變更生效。"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:29
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:37
 msgid "Compression level:"
-msgstr "壓縮等級："
+msgstr "Nivel de compresión:"
 
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:40
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:50
@@ -2485,7 +2530,7 @@ msgstr ""
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:90
 msgid "Use SoundFont file:"
-msgstr "使用 SoundFont 音色檔："
+msgstr "Usar archivo SoundFont:"
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:91
 msgid ""
@@ -2493,23 +2538,24 @@ msgid ""
 "maps the midi data to sound effects.\n"
 "Have a look at %1 in order to get SoundFont files."
 msgstr ""
-"為了轉換MIDI資料為波形式，您需要一個SoundFont音色庫，它讓MIDI資料對應到聲音效"
-"果。"
+"Para poder convertir datos midi a formato wave necesita SoundFont para que "
+"mapee la información midi a efectos de sonido.\n"
+"Fíjese en %1 para obtener los archivos SoundFont."
 
 #: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:140
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
-msgstr "FluidSynth沒有配置。您需要設定一個SoundFont音色庫檔。"
+msgstr "FluidSynth no está configurado todavía. Necesita un archivo SoundFont."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:33
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:35
 msgid "Preset:"
-msgstr "預設："
+msgstr "Predefinido:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:36
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:398
 msgctxt "Backend profile"
 msgid "Medium"
-msgstr "中等"
+msgstr "Medio"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:37
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:405
@@ -2517,7 +2563,7 @@ msgstr "中等"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:277
 msgctxt "Backend profile"
 msgid "Standard"
-msgstr "標準"
+msgstr "Estándar"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:38
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:412
@@ -2525,7 +2571,7 @@ msgstr "標準"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:282
 msgctxt "Backend profile"
 msgid "Extreme"
-msgstr "極度"
+msgstr "Extremo"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:39
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:419
@@ -2533,40 +2579,41 @@ msgstr "極度"
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:287
 msgctxt "Backend profile"
 msgid "Insane"
-msgstr "瘋狂"
+msgstr "Demente"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:40
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:426
 msgid "Specify bitrate"
-msgstr "指定位元率"
+msgstr "Especificar tasa de bi"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:55
 msgid "cbr"
-msgstr ""
+msgstr "cbr"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:58
 msgid ""
 "Encode using a constant bitrate.\n"
 "Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
 msgstr ""
-"使用一個恆定的位元率編碼。\n"
-"僅適用於 80, 96, 112, 128, 160, 192, 224, 256 和 320 kbps"
+"Codificar usando tasa de bit constante.\n"
+"Only works with 80, 96, 112, 128, 160, 192, 224, 256 and 320 kbps"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:62
 msgid "Fast encoding"
-msgstr "快速編碼"
+msgstr "Codificación rápida"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:65
 msgid ""
 "Use a faster encoding algorithm (results in a slightly lower output quality)."
-msgstr "使用更快編碼演算法(會導致略低的輸出品質)。"
+msgstr ""
+"Usar un algoritmo de codificación rápida (implica menor calidad de salida)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:108
 #: plugins/soundkonverter_codec_neroaac/neroaaccodecwidget.cpp:61
 #: plugins/soundkonverter_codec_opustools/opustoolscodecwidget.cpp:55
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:57
 msgid "Bitrate mode:"
-msgstr "位元率模式："
+msgstr "Modo de tasa de bit:"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:111
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:219
@@ -2578,7 +2625,7 @@ msgstr "位元率模式："
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:122
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:267
 msgid "Variable"
-msgstr "變數"
+msgstr "Variable"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:112
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:195
@@ -2596,7 +2643,7 @@ msgstr "變數"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:129
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:286
 msgid "Average"
-msgstr "平均"
+msgstr "Media"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:113
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:229
@@ -2610,7 +2657,7 @@ msgstr "平均"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:130
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:287
 msgid "Constant"
-msgstr "常數"
+msgstr "Constante"
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:135
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:144
@@ -2625,15 +2672,17 @@ msgstr ""
 msgid ""
 "This preset should provide near transparency to most people on most music "
 "(~150 kbps abr)."
-msgstr "此預設應提供近透明對大部分人在多數音樂上(〜150 kbps abr)。"
+msgstr ""
+"Este preajuste debería proveer un sonido transparente para la mayoría de los "
+"casos (~150 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:410
 msgid ""
 "This preset should generally be transparent to most people on most music\n"
 "and is already quite high in quality (~230 kbps abr)."
 msgstr ""
-"此預設值通常應該是透明的，對大部分人在多數音樂上\n"
-"且品質已經相當高(~230 kbps abr)。"
+"Este preajuste debería ser transparente para la mayoría de los casos y ya es "
+"una calidad bastante alta (~230 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:417
 msgid ""
@@ -2641,8 +2690,8 @@ msgid ""
 "generally provide\n"
 "slightly higher quality than the standard mode (~280 kbps abr)."
 msgstr ""
-"如果您有極好的聽力和類似設備，這個預設值一般會提供\n"
-"品質稍微高於標準模式(〜280 kbps abr)。"
+"Si posee un equipo de buena calidad de audio, este preajuste proveerá un "
+"calidad ligeramente mayor que el modo estándar (~280 kbps abr)."
 
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:424
 msgid ""
@@ -2651,59 +2700,60 @@ msgid ""
 "the absolute highest quality with no regard to filesize, this is the way to "
 "go (320 kbps cbr)."
 msgstr ""
-"此預設通常會矯枉過正，對於大多數人和大多數情況下，但假如你一定要絕對\n"
-"的最高品質，而沒有考慮到檔案大小的話，這是要用的方式(320 kbps cbr)。"
+"Este preajuste es exagerado para la mayoría de la gente en la mayoría de los "
+"casos, pero si desea obtener la mayor calidad sin importar el tamaño de "
+"archivo, esta es la manera de hacerlo (320 kbps cbr)."
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:118
 msgid "Stereo mode:"
-msgstr "立體聲模式："
+msgstr "Modo stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:121
 msgid "Automatic"
-msgstr "自動"
+msgstr "Automático"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:122
 msgid "Joint Stereo"
-msgstr "聯合立體聲"
+msgstr "Joint Stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:123
 msgid "Simple Stereo"
-msgstr "簡單的立體聲"
+msgstr "Simple Stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:124
 msgid "Forced Joint Stereo"
-msgstr "強制聯合立體聲"
+msgstr "Forced Joint Stereo"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:125
 msgid "Dual Mono"
-msgstr "雙單聲道"
+msgstr "Dual Mono"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:168
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:92
 msgid "About %1"
-msgstr "關於 %1"
+msgstr "Sobre %1"
 
 #: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:173
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
 msgstr ""
-"LAME 是一個免費的高品質的MP3編碼器。\n"
-"您可以取得它在：http://lame.sourceforge.net"
+"LAME codificador de MP3 gratis de alta calidad.\n"
+"Lo puede obtener de: http://lame.sourceforge.net"
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:304
 msgid "Enable experimental codecs in the libav configuration dialog."
-msgstr "啟用在 libav 設定對話框中實驗性的編解碼器。"
+msgstr ""
 
 #: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:308
 msgid "Compile libav with %1 support."
-msgstr "編譯帶有 %1 支援的 libav 。"
+msgstr ""
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:38
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:262
 msgctxt "Backend profile"
 msgid "Telephone"
-msgstr ""
+msgstr "Teléfono"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:39
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:267
@@ -2715,51 +2765,51 @@ msgstr ""
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:272
 msgctxt "Backend profile"
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:44
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:292
 msgctxt "Backend profile"
 msgid "Braindead"
-msgstr ""
+msgstr "Muerte cerebral"
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:47
 msgid "Either use one of MusePacks's presets or your own settings."
-msgstr ""
+msgstr "O utiliza los ajustes de MusePack o los suyos."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:265
 msgid "low quality (~60 kbps abr)."
-msgstr "低品質（~60 kbps abr）。"
+msgstr "calidad baja (~60 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:270
 msgid "low/medium quality (~90 kbps abr)."
-msgstr "中下品質（~90 kbps abr）。"
+msgstr "calidad baja/media (~90 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:275
 msgid "medium quality (~130 kbps abr)."
-msgstr "中等品質（~130 kbps abr）。"
+msgstr "calidad media (~130 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:280
 msgid "high quality (~180 kbps abr)."
-msgstr "高品質（~180 kbps abr）。"
+msgstr "calidad alta (~180 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:285
 msgid "excellent quality (~210 kbps abr)."
-msgstr "最佳品質（~210 kbps abr）。"
+msgstr "calidad excelente (~210 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:290
 msgid "excellent quality (~240 kbps abr)."
-msgstr "最佳品質（~240~210 kbps abr）。"
+msgstr "calidad excelente (~240 kbps abr)."
 
 #: plugins/soundkonverter_codec_musepack/musepackcodecwidget.cpp:295
 msgid "excellent quality (~270 kbps abr)."
-msgstr "最佳品質（~270 kbps abr）。"
+msgstr "calidad excelente (~270 kbps abr)."
 
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:42
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:50
 #: plugins/soundkonverter_codec_neroaac/soundkonverter_codec_neroaac.cpp:58
 msgid "You can download '%1' at '%2' after entering an email address."
-msgstr ""
+msgstr "Puede bajar '%1' en '%2' después de ingresar la dirección de correo."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:52
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:60
@@ -2770,94 +2820,96 @@ msgid ""
 "'%1' is usually in the package '%2' which should be shipped with your "
 "distribution."
 msgstr ""
+"'%1' usualmente está en el paquete '%2' que debería venir con su "
+"distribución."
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:88
 msgid "Uncoupled channels"
-msgstr "非耦合聲道"
+msgstr "Canales desacoplados"
 
 #: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:89
 msgid "Use one mono stream per channel"
-msgstr "每聲道使用一個單聲道串流"
+msgstr ""
 
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:97
 msgid ""
 "TwoLame is a free MP2 encoder.\n"
 "You can get it at: http://www.twolame.org"
 msgstr ""
-"TwoLame 是一個免費MP2編碼器。\n"
-"您可以取得它，在：http://www.twolame.org"
+"TwoLame es un codificador de MP2 libre.\n"
+"Lo puede obtener de: http://www.twolame.org"
 
 #: plugins/soundkonverter_codec_wavpack/soundkonverter_codec_wavpack.cpp:46
 #: plugins/soundkonverter_replaygain_wvgain/soundkonverter_replaygain_wvgain.cpp:33
 msgid "'%1' is usually in the package '%2' which you can download at %3"
-msgstr ""
+msgstr "'%1' usualmente está en el paquete '%2' que se puede bajar en %3"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:33
 msgid "Fast"
-msgstr "快速"
+msgstr "Rápido"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:34
 msgid "Normal"
-msgstr "正常"
+msgstr "Normal"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:35
 msgid "High quality"
-msgstr "高品質"
+msgstr "Alta calidad"
 
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:36
 msgid "Very high quality"
-msgstr "極高品質"
+msgstr "Muy alta calidad"
 
 #: plugins/soundkonverter_filter_normalize/normalizefilterwidget.cpp:23
 msgid "Normalize"
-msgstr "標準化"
+msgstr "Normalizar"
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:188
 msgid "Enable experimental codecs in the sox configuration dialog."
-msgstr "啟用在 SOX 設定對話框中實驗性的編解碼器。"
+msgstr ""
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:192
 msgid "Compile sox with %1 support."
-msgstr ""
+msgstr "Compilar sox con soporte %1."
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:247
 msgid "Sample rate change quality:"
-msgstr "取樣率改變品質："
+msgstr ""
 
 #: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:250
 msgid "Quick"
-msgstr "快速"
+msgstr "Rápido"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:22
 msgid "Effect:"
-msgstr "效果："
+msgstr "Efecto:"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:27
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:189
 #: plugins/soundkonverter_filter_sox/soxfilteroptions.cpp:86
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:135
 msgid "Disabled"
-msgstr "已停用"
+msgstr "Deshabilitado"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:102
 msgid "Remove this effect"
-msgstr "移除這個效果"
+msgstr "Eliminar este efecto"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:106
 msgid "Add"
-msgstr "加入"
+msgstr "Agregar"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:107
 msgid "Add another effect"
-msgstr "加入另一個效果"
+msgstr "Agrear otro efecto"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:146
 msgid ""
 "Normalize:\n"
 "Change the volume so all files have the same loudness"
 msgstr ""
-"標準化：\n"
-"變更音量，讓所有檔案有相同的響度"
+"Normalizar:\n"
+"Cambiar el volumen para que todos los archivos tengan el mismo volumen"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:150
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:166
@@ -2873,41 +2925,41 @@ msgid ""
 "Bass:\n"
 "Amplify the low frequencies"
 msgstr ""
-"低音：\n"
-"放大低頻"
+"Bajo:\n"
+"Amplificar bajas frecuencias"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:176
 msgid ""
 "Treble:\n"
 "Amplify the high frequencies"
 msgstr ""
-"高音：\n"
-"放大高頻"
+"Agudos:\n"
+"Amplificar altas frecuencias"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:31
 msgid "Sample rate:"
-msgstr "取樣率："
+msgstr "Tasa de muestra:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:53
 msgid "Sample size:"
-msgstr "取樣大小："
+msgstr "Tamaño de muestra:"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:69
 msgid "Channels:"
-msgstr "聲道："
+msgstr "Canales"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:73
 msgid "Mono"
-msgstr "單聲道"
+msgstr "Mono"
 
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:74
 msgid "Stereo"
-msgstr "立體聲"
+msgstr "Stereo"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:96
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:89
 msgid "Use tag format:"
-msgstr "使用標籤的格式："
+msgstr "Usar formato de etiqueta:"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:105
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:98
@@ -2922,7 +2974,7 @@ msgstr ""
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:108
 msgid "Modify audio stream"
-msgstr "修改音訊串流"
+msgstr ""
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:116
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:109
@@ -2940,6 +2992,9 @@ msgid ""
 "'cdparanoia' is usually shipped with your distribution, the package name can "
 "vary."
 msgstr ""
+"Para poder extraer cds pista por pista o a un solo archivo, tiene que "
+"instalar 'cdparanoia'.⏎ 'cdparanoia' usualmente viene en su distribución, "
+"aunque el nombre del paquete puede variar."
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:89
 msgid "Force read speed:"
@@ -2972,31 +3027,31 @@ msgstr ""
 
 #: progressindicator.cpp:88
 msgid "Speed:"
-msgstr "速度："
+msgstr "Velocidad:"
 
 #: progressindicator.cpp:101
 msgid "Remaining time:"
-msgstr "剩餘時間："
+msgstr "Tiempo disponible:"
 
 #: progressindicator.cpp:164 soundkonverter.cpp:336 soundkonverter.cpp:338
 msgid "Finished"
-msgstr "已完成"
+msgstr "Finalizado"
 
 #: replaygainscanner/replaygainfilelist.cpp:35
 msgid "File"
-msgstr "檔案"
+msgstr "Archivo"
 
 #: replaygainscanner/replaygainfilelist.cpp:37
 msgid "Album"
-msgstr "專輯"
+msgstr "Álbum"
 
 #: replaygainscanner/replaygainfilelist.cpp:59
 msgid "Collapse all"
-msgstr "全部折疊"
+msgstr "Colapsar todo"
 
 #: replaygainscanner/replaygainfilelist.cpp:63
 msgid "Expand all"
-msgstr "全部展開"
+msgstr "Expandir todo"
 
 #. i18n("Calculate Replay Gain"), this );
 #. connect( processAddAction, SIGNAL(triggered()), this, SLOT(processAddSelectedItems()) );
@@ -3006,35 +3061,39 @@ msgstr "全部展開"
 #. connect( killAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
 #: replaygainscanner/replaygainfilelist.cpp:73
 msgid "Move to new Album"
-msgstr "移到新專輯"
+msgstr "Mover a nuevo Álbum"
 
 #: replaygainscanner/replaygainfilelist.cpp:149
 msgid ""
 "Some tracks can't be added to the album because either the codec or the "
 "sampling rate is different."
-msgstr "某些曲目不能被加入到專輯中，因為無論是編解碼器或取樣率都是不一樣的。"
+msgstr ""
 
 #: replaygainscanner/replaygainfilelist.cpp:1080
 msgid "New album"
-msgstr "新專輯"
+msgstr "Nuevo álbum"
 
 #: replaygainscanner/replaygainprocessor.cpp:118
 msgid "Replay Gain failed. The used backend needs to be configured properly."
-msgstr "播放增益失敗。需要正確地設定使用的後端。"
+msgstr ""
+"Replay Gain falló. El binario utilizado necesita estar configurado "
+"apropiadamente."
 
 #: replaygainscanner/replaygainprocessor.cpp:124
 msgid ""
 "Replay Gain failed. The preferred plugin lacks support for a necessary "
 "feature."
-msgstr "播放增益失敗。偏好的外掛程式缺乏一個必要功能的支持。"
+msgstr ""
+"Replay Gain falló. El plugin preferido carece del soporte para la "
+"característica necesaria."
 
 #: replaygainscanner/replaygainprocessor.cpp:131
 msgid "Replay Gain failed. Unknown Error."
-msgstr "播放增益失敗。未知的錯誤。"
+msgstr "Replay Gain fallo. Error Desconocido."
 
 #: replaygainscanner/replaygainprocessor.cpp:200
 msgid "Replay Gain failed. Exit code: %1"
-msgstr "播放增益失敗。退出代碼：%1"
+msgstr "Replay Gain falló. Código de salida: %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:272
 msgid "Adding new item to Replay Gain processing list: '%1'"
@@ -3042,26 +3101,26 @@ msgstr ""
 
 #: replaygainscanner/replaygainprocessor.cpp:280
 msgid "Replay Gain for %1"
-msgstr "%1 的播放增益"
+msgstr "Replay Gain para %1"
 
 #: replaygainscanner/replaygainprocessor.cpp:298
 msgid "Possible Replay Gain backends:"
-msgstr "可能的播放增益後端："
+msgstr ""
 
 #: replaygainscanner/replaygainprocessor.cpp:335
 msgctxt "Conversion exit status"
 msgid "Skipped"
-msgstr "已跳過"
+msgstr "Salteado"
 
 #: replaygainscanner/replaygainscanner.cpp:48 soundkonverter.cpp:163
 #: soundkonverterview.cpp:83
 msgid "Add folder..."
-msgstr "加入資料夾..."
+msgstr "Agregar carpeta..."
 
 #: replaygainscanner/replaygainscanner.cpp:49 soundkonverter.cpp:158
 #: soundkonverterview.cpp:82
 msgid "Add files..."
-msgstr "加入檔案..."
+msgstr "Agregar archivos..."
 
 #: replaygainscanner/replaygainscanner.cpp:55
 msgid "Show soundKonverter main window"
@@ -3069,51 +3128,49 @@ msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:78
 msgid "Tag untagged"
-msgstr "標記未加標籤的"
+msgstr "Etiqueta sin etiquetar"
 
 #: replaygainscanner/replaygainscanner.cpp:79
 msgid ""
 "Calculate Replay Gain tags for all files in the file list without Replay "
 "Gain tags."
-msgstr "計算在檔案清單中所有檔案的播放增益標籤，而無需播放增益標籤。"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:83
 msgid "Untag tagged"
-msgstr "取消標記已標記的"
+msgstr "Quitar etiqueta"
 
 #: replaygainscanner/replaygainscanner.cpp:84
 msgid "Remove the Replay Gain tags from all files in the file list."
-msgstr "從檔案清單中的所有檔案裡移除播放增益標籤。"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:93
 msgid "Force recalculation"
-msgstr "強制重新計算"
+msgstr "Forzar recálculo"
 
 #: replaygainscanner/replaygainscanner.cpp:94
 msgid ""
 "Recalculate Replay Gain tags for files that already have Replay Gain tags "
 "set."
-msgstr "重新計算已經有播放增益標籤的檔案之播放增益標籤。"
+msgstr ""
 
 #: replaygainscanner/replaygainscanner.cpp:99
 msgid "Close"
-msgstr "關閉"
+msgstr "Cerrar"
 
 #: replaygainscanner/replaygainscanner.cpp:329
 msgid ""
 "There are still Replay Gain jobs running.\n"
 "Do you really want to cancel them?"
 msgstr ""
-"還有播放增益作業正在運行。\n"
-"您真的要取消嗎？"
 
 #: soundkonverter.cpp:47
 msgid "This is soundKonverter %1"
-msgstr "這是 soundKonverter %1"
+msgstr "Ésto es soundKonverter %1"
 
 #: soundkonverter.cpp:49
 msgid "Compiled with TagLib %1.%2.%3"
-msgstr ""
+msgstr "Compilado con TagLib %1.%2.%3"
 
 #: soundkonverter.cpp:51
 msgid ""
@@ -3131,35 +3188,35 @@ msgstr ""
 
 #: soundkonverter.cpp:143
 msgid "View logs..."
-msgstr "檢視紀錄..."
+msgstr "Ver registros..."
 
 #: soundkonverter.cpp:148
 msgid "Replay Gain tool..."
-msgstr "播放增益工具..."
+msgstr "Herramienta Replay Gain ..."
 
 #: soundkonverter.cpp:153
 msgid "About plugins..."
-msgstr "關於外掛程式..."
+msgstr "Sobre plugins..."
 
 #: soundkonverter.cpp:168 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
-msgstr "加入 CD 音軌..."
+msgstr "Agregar pistas..."
 
 #: soundkonverter.cpp:173 soundkonverterview.cpp:85
 msgid "Add url..."
-msgstr "加入網址..."
+msgstr "Agregar url..."
 
 #: soundkonverter.cpp:178 soundkonverterview.cpp:86
 msgid "Add playlist..."
-msgstr "加入播放清單..."
+msgstr "Agregar listas de reproducción..."
 
 #: soundkonverter.cpp:183
 msgid "Load file list"
-msgstr "載入檔案清單"
+msgstr "Cargar lista de archivo"
 
 #: soundkonverter.cpp:188
 msgid "Save file list"
-msgstr "儲存檔案清單"
+msgstr "Guardar lista de archivos"
 
 #: soundkonverter.cpp:273
 msgid ""
@@ -3176,46 +3233,47 @@ msgstr ""
 
 #: soundkonverter.cpp:282 soundkonverter.cpp:287 soundkonverter.cpp:302
 msgid "Removing old file: %1"
-msgstr "移除舊檔： %1"
+msgstr "Eliminado archivo viejo: %1"
 
 #: soundkonverterview.cpp:94 soundkonverterview.cpp:97
 msgid "Start"
-msgstr "開始"
+msgstr "Iniciar"
 
 #: soundkonverterview.cpp:104 soundkonverterview.cpp:117
 msgid "Stop"
-msgstr "停止"
+msgstr "Detener"
 
 #: soundkonverterview.cpp:106
 msgid "Stop immediatelly"
-msgstr "立刻停止"
+msgstr ""
 
 #: soundkonverterview.cpp:109
 msgid "Stop after current conversions are completed"
-msgstr "在目前轉換完成後停止"
+msgstr "Detener una vez que las conversiones estén finalizadas"
 
 #: soundkonverterview.cpp:112
 msgid "Continue after current conversions are completed"
-msgstr "在目前轉換完成後繼續"
+msgstr "Continuar después que las conversiones actuales estén finalizadas"
 
 #: soundkonverterview.cpp:263
 msgid "No CD device found"
-msgstr "找不到 CD 裝置"
+msgstr "No se encontró unidad de CD"
 
 #: rc.cpp:1
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Alisha"
+msgstr "Sus nombres"
 
 #: rc.cpp:2
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "alisha.4m@gmail.com"
+msgstr "Sus emails"
 
 #: rc.cpp:3
 msgid "Audio file converter, CD ripper and Replay Gain tool"
-msgstr "音樂格式轉換、CD 擷取、播放增益工具"
+msgstr ""
+"Conversor de archivos de audio, extractor de CD y herramienta Replay Gain"
 
 #: rc.cpp:4
 msgid "Rip Audio CD with soundKonverter"
-msgstr "用 soundKonverter 擷取音樂CD "
+msgstr "Extraer audio CD con soundKonverter"

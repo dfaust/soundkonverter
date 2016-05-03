@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# softmetz <me@ninan.info>, 2013
-# HessiJames <hessijames@gmail.com>, 2010-2011,2013-2014
-# HessiJames <hessijames@gmail.com>, 2011-2012
+# Christian Kalkhoff <me@ninan.info>, 2013
+# Daniel Faust <hessijames@gmail.com>, 2010-2011,2013-2014,2016
+# Daniel Faust <hessijames@gmail.com>, 2011-2012
 # stefanniedermann <stefan.niedermann@googlemail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2014-02-26 12:26+0100\n"
-"PO-Revision-Date: 2014-02-17 12:00+0000\n"
-"Last-Translator: HessiJames <hessijames@gmail.com>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/soundkonverter/"
+"POT-Creation-Date: 2016-05-03 18:00+0200\n"
+"PO-Revision-Date: 2016-05-03 15:47+0000\n"
+"Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
+"Language-Team: German (http://www.transifex.com/hessijames/soundkonverter/"
 "language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -175,9 +175,9 @@ msgid "Possible solutions for %1"
 msgstr "Mögliche Lösungen für %1"
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:333
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:333
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:214
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:244
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:336
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:216
 msgctxt "like in either or"
 msgid "or"
 msgstr "oder"
@@ -186,29 +186,28 @@ msgstr "oder"
 msgid "Affected files:"
 msgstr "Betroffene Dateien:"
 
-#: config.cpp:51 config.cpp:53 config.cpp:391 config.cpp:432
+#: config.cpp:45 config.cpp:47 config.cpp:385 config.cpp:426
 #: configdialog/configgeneralpage.cpp:55 configdialog/configgeneralpage.cpp:71
-#: configdialog/configgeneralpage.cpp:252
-#: configdialog/configgeneralpage.cpp:254
-#: configdialog/configgeneralpage.cpp:258
-#: configdialog/configgeneralpage.cpp:263
-#: configdialog/configgeneralpage.cpp:268 options.cpp:43 options.cpp:64
+#: configdialog/configgeneralpage.cpp:266
+#: configdialog/configgeneralpage.cpp:268
+#: configdialog/configgeneralpage.cpp:272
+#: configdialog/configgeneralpage.cpp:277
+#: configdialog/configgeneralpage.cpp:282 options.cpp:43 options.cpp:64
 #: optionsdetailed.cpp:476
 msgid "Last used"
 msgstr "Zuletzt benutzt"
 
-#: config.cpp:52 config.cpp:395 config.cpp:402 config.cpp:408
-#: configdialog/configgeneralpage.cpp:75
-#: configdialog/configgeneralpage.cpp:256 options.cpp:73
-#: optionsdetailed.cpp:472 optionssimple.cpp:166 optionssimple.cpp:202
-#: optionssimple.cpp:300
+#: config.cpp:46 config.cpp:389 config.cpp:396 config.cpp:402
+#: configdialog/configgeneralpage.cpp:75 configdialog/configgeneralpage.cpp:270
+#: options.cpp:73 optionsdetailed.cpp:472 optionssimple.cpp:166
+#: optionssimple.cpp:202 optionssimple.cpp:300
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:173
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:210
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:143
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:179
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:210
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:233
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:288
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:215
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:238
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:293
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:270
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:318
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:210
@@ -224,35 +223,35 @@ msgstr "Zuletzt benutzt"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:201
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:163
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:202
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:251
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:253
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:400
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:423
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:446
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:532
-#: soundkonverterview.cpp:547 soundkonverterview.cpp:549
+#: soundkonverterview.cpp:564 soundkonverterview.cpp:566
 msgid "High"
 msgstr "Hoch"
 
-#: config.cpp:119 configdialog/configcoverartpage.cpp:135
+#: config.cpp:114 configdialog/configcoverartpage.cpp:135
 msgctxt "cover file name"
 msgid "cover"
 msgstr "cover"
 
-#: config.cpp:239 config.cpp:265 config.cpp:267 convert.cpp:147
-#: convert.cpp:219 convert.cpp:386
+#: config.cpp:234 config.cpp:260 config.cpp:262 convert.cpp:172 convert.cpp:244
+#: convert.cpp:411
 msgid "Try internal"
 msgstr "Intern probieren"
 
-#: config.cpp:392 config.cpp:408 configdialog/configgeneralpage.cpp:72
-#: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:469
+#: config.cpp:386 config.cpp:402 configdialog/configgeneralpage.cpp:72
+#: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:469
 #: optionssimple.cpp:163 optionssimple.cpp:190 optionssimple.cpp:300
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:161
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:186
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:131
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:155
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:198
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:221
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:246
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:203
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:226
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:251
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:258
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:285
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:198
@@ -272,20 +271,20 @@ msgstr "Intern probieren"
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:411
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:434
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:463
-#: soundkonverterview.cpp:532 soundkonverterview.cpp:534
+#: soundkonverterview.cpp:549 soundkonverterview.cpp:551
 msgid "Very low"
 msgstr "Sehr niedrig"
 
-#: config.cpp:393 config.cpp:408 configdialog/configgeneralpage.cpp:73
-#: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:470
+#: config.cpp:387 config.cpp:402 configdialog/configgeneralpage.cpp:73
+#: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:470
 #: optionssimple.cpp:164 optionssimple.cpp:194 optionssimple.cpp:300
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:165
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:194
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:135
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:163
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:202
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:225
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:260
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:207
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:230
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:265
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:262
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:296
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:202
@@ -301,25 +300,25 @@ msgstr "Sehr niedrig"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:183
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:155
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:184
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:249
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:251
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:392
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:415
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:438
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:486
-#: soundkonverterview.cpp:537 soundkonverterview.cpp:539
+#: soundkonverterview.cpp:554 soundkonverterview.cpp:556
 msgid "Low"
 msgstr "Niedrig"
 
-#: config.cpp:394 config.cpp:408 configdialog/configgeneralpage.cpp:74
-#: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:471
+#: config.cpp:388 config.cpp:402 configdialog/configgeneralpage.cpp:74
+#: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:471
 #: optionssimple.cpp:165 optionssimple.cpp:198 optionssimple.cpp:300
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:169
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:202
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:139
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:171
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:206
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:229
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:274
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:211
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:234
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:279
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:266
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:307
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:206
@@ -335,25 +334,25 @@ msgstr "Niedrig"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:192
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:159
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:193
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:250
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:252
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:396
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:419
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:442
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:509
-#: soundkonverterview.cpp:542 soundkonverterview.cpp:544
+#: soundkonverterview.cpp:559 soundkonverterview.cpp:561
 msgid "Medium"
 msgstr "Mittel"
 
-#: config.cpp:396 config.cpp:408 configdialog/configgeneralpage.cpp:76
-#: configdialog/configgeneralpage.cpp:256 optionsdetailed.cpp:473
+#: config.cpp:390 config.cpp:402 configdialog/configgeneralpage.cpp:76
+#: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:473
 #: optionssimple.cpp:167 optionssimple.cpp:206 optionssimple.cpp:300
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:177
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:218
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:147
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:187
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:214
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:237
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:302
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:219
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:242
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:307
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:274
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:329
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:214
@@ -369,21 +368,21 @@ msgstr "Mittel"
 #: plugins/soundkonverter_codec_twolame/twolamecodecwidget.cpp:210
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:167
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:211
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:252
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:254
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:404
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:427
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:450
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:555
-#: soundkonverterview.cpp:552 soundkonverterview.cpp:554
+#: soundkonverterview.cpp:569 soundkonverterview.cpp:571
 msgid "Very high"
 msgstr "Sehr hoch"
 
-#: config.cpp:397 config.cpp:412 configdialog/configgeneralpage.cpp:77
-#: configdialog/configgeneralpage.cpp:261 optionsdetailed.cpp:474
+#: config.cpp:391 config.cpp:406 configdialog/configgeneralpage.cpp:77
+#: configdialog/configgeneralpage.cpp:275 optionsdetailed.cpp:474
 #: optionssimple.cpp:168 optionssimple.cpp:210 optionssimple.cpp:304
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:157
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:127
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:188
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:193
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:88
 #: plugins/soundkonverter_codec_flac/flaccodecwidget.cpp:93
 #: plugins/soundkonverter_codec_flake/flakecodecwidget.cpp:143
@@ -409,22 +408,22 @@ msgstr "Sehr hoch"
 #: plugins/soundkonverter_codec_wavpack/wavpackcodecwidget.cpp:96
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:382
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:578
-#: soundkonverterview.cpp:557 soundkonverterview.cpp:559
+#: soundkonverterview.cpp:574 soundkonverterview.cpp:576
 msgid "Lossless"
 msgstr "Verlustfrei"
 
-#: config.cpp:398 config.cpp:416 configdialog/configgeneralpage.cpp:266
+#: config.cpp:392 config.cpp:410 configdialog/configgeneralpage.cpp:280
 #: optionsdetailed.cpp:475 optionssimple.cpp:214 optionssimple.cpp:308
-#: soundkonverterview.cpp:562 soundkonverterview.cpp:564
+#: soundkonverterview.cpp:579 soundkonverterview.cpp:581
 msgid "Hybrid"
 msgstr "Hybrid"
 
-#: config.cpp:420 optionsdetailed.cpp:478 optionssimple.cpp:171
+#: config.cpp:414 optionsdetailed.cpp:478 optionssimple.cpp:171
 #: optionssimple.cpp:218 optionssimple.cpp:312 optionssimple.cpp:375
 #: plugins/soundkonverter_codec_aften/aftencodecwidget.cpp:180
 #: plugins/soundkonverter_codec_faac/faaccodecwidget.cpp:150
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:192
-#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:241
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:197
+#: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:246
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:41
 #: plugins/soundkonverter_codec_lame/lamecodecwidget.cpp:277
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:192
@@ -441,11 +440,11 @@ msgstr "Hybrid"
 msgid "User defined"
 msgstr "Benutzerdefiniert"
 
-#: config.cpp:584
+#: config.cpp:579
 msgid "Convert with soundKonverter"
 msgstr "Mit soundKonverter konvertieren"
 
-#: config.cpp:620
+#: config.cpp:615
 msgid "Add Replay Gain with soundKonverter"
 msgstr "Replay Gain mit soundKonverter hinzufügen"
 
@@ -608,8 +607,8 @@ msgstr "Kodierer"
 
 #: configdialog/configbackendspage.cpp:140
 #: configdialog/configbackendspage.cpp:201
-#: configdialog/configbackendspage.cpp:351 convert.cpp:1346 filelist.cpp:550
-#: filelist.cpp:560
+#: configdialog/configbackendspage.cpp:351 convert.cpp:1501 filelist.cpp:562
+#: filelist.cpp:572
 msgid "Replay Gain"
 msgstr "Replay Gain"
 
@@ -776,9 +775,7 @@ msgstr "Standard-Profil:"
 msgid "Default format:"
 msgstr "Standard-Format:"
 
-#. i18n: file: soundkonverterui.rc:14
-#. i18n: ectx: Menu (conversion)
-#: configdialog/configgeneralpage.cpp:95 optionseditor.cpp:52 rc.cpp:3
+#: configdialog/configgeneralpage.cpp:95 optionseditor.cpp:52
 msgid "Conversion"
 msgstr "Konvertierung"
 
@@ -794,6 +791,7 @@ msgstr "Neue Dateinamen generieren"
 msgid "Skip file"
 msgstr "Datei überspringen"
 
+#. i18n("Overwrite file") );
 #: configdialog/configgeneralpage.cpp:124
 msgid "Do that if the output file already exists"
 msgstr "Tue dies, wenn die Ausgabe-Datei bereits existiert"
@@ -803,7 +801,7 @@ msgid "Number of files to convert at once:"
 msgstr "Anzahl von Dateien, die auf einmal konvertiert werden:"
 
 #: configdialog/configgeneralpage.cpp:137
-#: configdialog/configgeneralpage.cpp:185
+#: configdialog/configgeneralpage.cpp:196
 msgid ""
 "You shouldn't set this number higher than the amount of installed processor "
 "cores.\n"
@@ -825,55 +823,75 @@ msgstr ""
 "Lieder des selben Albums in der Dateiliste warten lassen, um Album Gain für "
 "alle Dateien berechnen zu können."
 
-#: configdialog/configgeneralpage.cpp:158
+#: configdialog/configgeneralpage.cpp:161
+msgid "Copy files instead of converting to the same file format"
+msgstr "Kopiere Dateien anstatt ins selbe Format zu konvertieren"
+
+#: configdialog/configgeneralpage.cpp:162
+msgid ""
+"If the input and the output file format are the same, copy the files instead "
+"of re-encoding them."
+msgstr ""
+"Wenn Ein- und Ausgabe-Datei-Formate gleich sind, kopiere Dateien anstatt sie "
+"neu zu kodieren"
+
+#: configdialog/configgeneralpage.cpp:169
 #: replaygainscanner/replaygainscanner.cpp:34
-#: replaygainscanner/replaygainscanner.cpp:358
+#: replaygainscanner/replaygainscanner.cpp:359
 msgid "Replay Gain tool"
 msgstr "Replay Gain Werkzeug"
 
-#: configdialog/configgeneralpage.cpp:167
+#: configdialog/configgeneralpage.cpp:178
 msgid "Group files in the Replay Gain tool by:"
 msgstr "Gruppiere Dateien im Replay Gain Werkzeug anhand von:"
 
-#: configdialog/configgeneralpage.cpp:170
+#: configdialog/configgeneralpage.cpp:181
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags and directories"
 msgstr "Album-Tags und Verzeichnissen"
 
-#: configdialog/configgeneralpage.cpp:171
+#: configdialog/configgeneralpage.cpp:182
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Album tags only"
 msgstr "Nur Album-Tags"
 
-#: configdialog/configgeneralpage.cpp:172
+#: configdialog/configgeneralpage.cpp:183
 msgctxt "Group files in the Replay Gain tool by"
 msgid "Directories only"
 msgstr "Nur Verzeichnissen"
 
-#: configdialog/configgeneralpage.cpp:182
+#: configdialog/configgeneralpage.cpp:193
 msgid "Number of items to process at once:"
 msgstr "Anzahl von Dateien, die auf einmal verarbeitet werden sollen:"
 
-#: convert.cpp:68 convert.cpp:1301
+#: convert.cpp:68 convert.cpp:1450
 msgid "Getting file"
 msgstr "Hole Datei"
 
-#: convert.cpp:76
+#: convert.cpp:76 convert.cpp:133
 msgid "Copying \"%1\" to \"%2\""
 msgstr "Kopiere \"%1\" nach \"%2\""
 
-#: convert.cpp:119 convert.cpp:462
-#: replaygainscanner/replaygainprocessor.cpp:60
+#: convert.cpp:103 convert.cpp:1138
+msgid "File is encrypted, conversion not possible"
+msgstr "Datei ist verschlüsselt, Konvertierung nicht möglich"
+
+#: convert.cpp:121
+msgid "Cannot create output directory \"%1\""
+msgstr "Kann Ausgabeverzeichnis \"%1\" nicht erzeugen"
+
+#: convert.cpp:144 convert.cpp:478 convert.cpp:495
+#: replaygainscanner/replaygainprocessor.cpp:64
 msgid "No more backends left to try :("
 msgstr "Keine weiteren Backends zum Ausprobieren übrig :("
 
-#: convert.cpp:134 convert.cpp:249 convert.cpp:1307 filelist.cpp:570
-#: soundkonverter.cpp:313 soundkonverter.cpp:315 soundkonverter.cpp:342
-#: soundkonverter.cpp:344
+#: convert.cpp:159 convert.cpp:274 convert.cpp:1456 filelist.cpp:582
+#: soundkonverter.cpp:321 soundkonverter.cpp:323 soundkonverter.cpp:350
+#: soundkonverter.cpp:352
 msgid "Converting"
 msgstr "Konvertiere"
 
-#: convert.cpp:171 convert.cpp:410 convert.cpp:487
+#: convert.cpp:196 convert.cpp:435 convert.cpp:552
 msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
@@ -881,7 +899,7 @@ msgstr ""
 "Konvertierung fehlgeschlagen. Mindestens ein Backend muss erst noch "
 "eingerichtet werden."
 
-#: convert.cpp:177 convert.cpp:416 convert.cpp:493
+#: convert.cpp:202 convert.cpp:441 convert.cpp:558
 msgid ""
 "Conversion failed. The preferred plugin lacks support for a necessary "
 "feature."
@@ -889,98 +907,98 @@ msgstr ""
 "Konvertierung fehlgeschlagen. Dem bevorzugten Plugin fehlt eine notwendige "
 "Funktion."
 
-#: convert.cpp:183 convert.cpp:422 convert.cpp:499
+#: convert.cpp:208 convert.cpp:447 convert.cpp:564
 msgid "Conversion failed. Unknown Error."
 msgstr "Konvertierung fehlgeschlagen. Unbekannter Fehler."
 
-#: convert.cpp:344 convert.cpp:1313 filelist.cpp:565
+#: convert.cpp:369 convert.cpp:1462 filelist.cpp:577
 msgid "Ripping"
 msgstr "Rippe"
 
-#: convert.cpp:349 convert.cpp:1319
+#: convert.cpp:374 convert.cpp:1468
 msgid "Decoding"
 msgstr "Dekodiere"
 
-#: convert.cpp:354 convert.cpp:367 convert.cpp:373
+#: convert.cpp:379 convert.cpp:392 convert.cpp:398
 msgid "Applying filter"
 msgstr "Wende Filter an"
 
-#: convert.cpp:362 convert.cpp:1331
+#: convert.cpp:387 convert.cpp:1480
 msgid "Encoding"
 msgstr "Kodiere"
 
-#: convert.cpp:443
+#: convert.cpp:468
 msgid "Skipping Replay Gain, Album Gain will be calculated later"
 msgstr "Überspringe Replay Gain, Album Gain wird später berechnet"
 
-#: convert.cpp:458 replaygainscanner/replaygainprocessor.cpp:56
+#: convert.cpp:491 replaygainscanner/replaygainprocessor.cpp:60
 msgid "Applying Replay Gain"
 msgstr "Bereche Replay Gain"
 
-#: convert.cpp:515
+#: convert.cpp:531 replaygainscanner/replaygainprocessor.cpp:89
+msgid "Waiting for running Vorbis Gain process to finish"
+msgstr "Warte auf Beendigung von Vorbis Gain Prozess"
+
+#: convert.cpp:580
 msgid "Writing tags"
 msgstr "Schreibe Metadaten"
 
-#: convert.cpp:542
-msgid "Running user script"
-msgstr "Führe Benutzer-Skript aus"
-
-#: convert.cpp:567
+#: convert.cpp:632
 msgid "Executing next step"
 msgstr "Führe nächsten Schritt aus"
 
-#: convert.cpp:711
+#: convert.cpp:797
 msgid "Read tags successfully"
 msgstr "Metadaten erfolgreich gelesen"
 
-#: convert.cpp:715
+#: convert.cpp:801
 msgid "Unable to read tags"
 msgstr "Metadaten konnten nicht gelesen werden"
 
-#: convert.cpp:728 convert.cpp:733
+#: convert.cpp:824 convert.cpp:829
 msgctxt "removing file"
 msgid "Removing: %1"
 msgstr "Entferne: %1"
 
-#: convert.cpp:742
+#: convert.cpp:838
 msgid "An error occurred. Error code: %1 (%2)"
 msgstr "Es trat ein Fehler auf. Fehlercode: %1 (%2)"
 
-#: convert.cpp:846 convert.cpp:909
+#: convert.cpp:955 convert.cpp:1040
 msgid "Conversion failed. Exit code: %1"
 msgstr "Konvertierung fehlgeschlagen. Beendigungscode: %1"
 
-#: convert.cpp:976
+#: convert.cpp:1107
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
 msgstr "CD Stück %1: %2 - %3"
 
-#: convert.cpp:980
+#: convert.cpp:1111
 msgctxt "identificator for the logger"
 msgid "CD track %1"
 msgstr "CD Stück %1"
 
-#: convert.cpp:987
+#: convert.cpp:1118
 msgid "Adding new item to conversion list: '%1'"
 msgstr "Füge neues Element zur Konvertierungsliste hinzu: '%1'"
 
-#: convert.cpp:994 replaygainscanner/replaygainprocessor.cpp:223
+#: convert.cpp:1127 replaygainscanner/replaygainprocessor.cpp:281
 msgid "Got log ID: %1"
 msgstr "Protokoll-ID: %1"
 
-#: convert.cpp:1019
+#: convert.cpp:1159
 msgid "Track number: %1, device: %2"
 msgstr "Stücknummer: %1, Gerät: %2"
 
-#: convert.cpp:1024
+#: convert.cpp:1164
 msgid "Possible conversion strategies:"
 msgstr "Mögliche Konvertierungsstrategien:"
 
-#: convert.cpp:1038
+#: convert.cpp:1178
 msgid "File system type: %1"
 msgstr "Dateisystem-Typ: %1"
 
-#: convert.cpp:1096
+#: convert.cpp:1234
 msgid ""
 "An error occurred, the output file size is less than one percent of the "
 "input file size"
@@ -988,80 +1006,95 @@ msgstr ""
 "Es trat ein Fehler auf, die Ausgabedatei ist weniger als ein Prozent der "
 "Eingabedatei groß"
 
-#: convert.cpp:1100
+#: convert.cpp:1238
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
 msgstr ""
 "Konvertierung fehlgeschlagen, versuche es erneut. Beendigungscode: -2 (%1)"
 
-#: convert.cpp:1102 convert.cpp:1174
+#: convert.cpp:1240 convert.cpp:1318
 msgid "Removing partially converted output file"
 msgstr "Entferne teilweise konvertierte Ausgabedateien"
 
-#: convert.cpp:1115 replaygainscanner/replaygainprocessor.cpp:265
+#: convert.cpp:1253 replaygainscanner/replaygainprocessor.cpp:323
 msgctxt "Conversion exit status"
 msgid "Normal exit"
 msgstr "Normale Beendigung"
 
-#: convert.cpp:1118 replaygainscanner/replaygainprocessor.cpp:268
+#: convert.cpp:1256 replaygainscanner/replaygainprocessor.cpp:326
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
 msgstr "Erfolgreich, jedoch traten Probleme auf"
 
-#: convert.cpp:1121 replaygainscanner/replaygainprocessor.cpp:271
+#: convert.cpp:1259 replaygainscanner/replaygainprocessor.cpp:329
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
 msgstr "Vom Benutzer abgebrochen"
 
-#: convert.cpp:1124 replaygainscanner/replaygainprocessor.cpp:274
+#: convert.cpp:1262 replaygainscanner/replaygainprocessor.cpp:332
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
 msgstr "Backend muss konfiguriert werden"
 
-#: convert.cpp:1127
+#: convert.cpp:1265
 msgctxt "Conversion exit status"
 msgid "Not enough space on the output device"
 msgstr "Nicht genügend Speicherplatz auf dem Ausgabegerät"
 
-#: convert.cpp:1130
+#: convert.cpp:1268
+msgctxt "Conversion exit status"
+msgid "Cannot write to output directory, please check permissions"
+msgstr ""
+"Kann nicht in Ausgabeverzeichnis schreiben, bitte Berechtigungen überprüfen"
+
+#: convert.cpp:1271
 msgctxt "Conversion exit status"
 msgid "File already exists"
 msgstr "Datei existiert bereits"
 
-#: convert.cpp:1133 replaygainscanner/replaygainprocessor.cpp:280
+#: convert.cpp:1274
+msgctxt "Conversion exit status"
+msgid "File is encrypted"
+msgstr "Datei ist verschlüsselt"
+
+#: convert.cpp:1277 replaygainscanner/replaygainprocessor.cpp:338
 msgctxt "Conversion exit status"
 msgid "An error occurred"
 msgstr "Es trat ein Fehler auf"
 
-#: convert.cpp:1154
+#: convert.cpp:1298
 msgid "Executing command: \"%1\""
 msgstr "Führe Befehl aus: \"%1\""
 
-#: convert.cpp:1180 replaygainscanner/replaygainprocessor.cpp:284
+#: convert.cpp:1324 replaygainscanner/replaygainprocessor.cpp:342
 msgid "Removing file from conversion list. Exit code %1 (%2)"
 msgstr "Entferne Datei von der Konvertierungsliste. Beendigungscode %1 (%2)"
 
-#: convert.cpp:1182
+#: convert.cpp:1326
 msgid "Conversion time"
 msgstr "Konvertierungszeit"
 
-#: convert.cpp:1183
+#: convert.cpp:1327
 msgid "Output file size"
 msgstr "Ausgabe-Dateigröße"
 
-#: convert.cpp:1184
+#: convert.cpp:1328
 msgid "File size ratio"
 msgstr "Dateigrößen-Quotient"
 
-#: convert.cpp:1291
+#: convert.cpp:1435
 msgctxt "The conversion progress can't be determined"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: convert.cpp:1325
+#: convert.cpp:1474
 msgid "Filter"
 msgstr "Filter"
 
-#: convert.cpp:1354 replaygainscanner/replaygainprocessor.cpp:331
+#: convert.cpp:1485 filelist.cpp:567
+msgid "Waiting for Replay Gain"
+msgstr "Warte auf Replay Gain"
+
+#: convert.cpp:1509 replaygainscanner/replaygainprocessor.cpp:407
 msgid "Progress: %1"
 msgstr "Fortschritt: %1"
 
@@ -1286,7 +1319,7 @@ msgstr ""
 "\"http://de.wikipedia.org/wiki/Wavpack\">http://de.wikipedia.org/wiki/"
 "Wavpack</a>"
 
-#: core/backendplugin.cpp:370
+#: core/backendplugin.cpp:375
 msgid ""
 "8-Bit Sampled Voice (8SVX) is an audio file format standard developed by "
 "Electronic Arts for the Commodore-Amiga computer series.<br><br><a href="
@@ -1296,7 +1329,7 @@ msgstr ""
 "Format Standard für die Commodore-Amiga Computer.<br><br><a href=\"http://en."
 "wikipedia.org/wiki/8SVX\">http://en.wikipedia.org/wiki/8SVX</a>"
 
-#: core/backendplugin.cpp:381
+#: core/backendplugin.cpp:386
 msgid ""
 "Audio Interchange File Format (AIFF) is a very simple audio format that "
 "doesn't compress the audio stream so it's lossless but the file size is very "
@@ -1311,23 +1344,23 @@ msgstr ""
 "Audio_Interchange_File_Format\">http://de.wikipedia.org/wiki/Audio "
 "Interchange File Format</a>"
 
-#: core/backendplugin.cpp:449
+#: core/backendplugin.cpp:454
 msgid "Killing process on user request"
 msgstr "Beende Prozess auf Wunsch des Benutzers"
 
-#: core/backendplugin.cpp:524
+#: core/backendplugin.cpp:529
 msgid "In order to encode %1 files, you need to install '%2'."
 msgstr "Um %1 Dateien kodieren zu können, müssen Sie '%2' installieren."
 
-#: core/backendplugin.cpp:531
+#: core/backendplugin.cpp:536
 msgid "In order to decode %1 files, you need to install '%2'."
 msgstr "Um %1 Dateien dekodieren zu können, müssen Sie '%2' installieren."
 
-#: core/backendplugin.cpp:538
+#: core/backendplugin.cpp:543
 msgid "In order to transcode %1 files, you need to install '%2'."
 msgstr "Um %1 Dateien transkodieren zu können, müssen Sie '%2' installieren."
 
-#: core/backendplugin.cpp:545
+#: core/backendplugin.cpp:550
 msgid ""
 "In order to calculate Replay Gain tags for %1 files, you need to install "
 "'%2'."
@@ -1335,11 +1368,11 @@ msgstr ""
 "Um Replay Gain Tags für %1 Dateien berechnen zu können, müssen Sie '%2' "
 "installieren."
 
-#: core/backendplugin.cpp:552
+#: core/backendplugin.cpp:557
 msgid "'%1' should be shipped with your distribution."
 msgstr "'%1' sollte mit ihrer Distribution ausgeliefert werden."
 
-#: core/backendplugin.cpp:559
+#: core/backendplugin.cpp:564
 msgid ""
 "Since '%1' includes patented codecs, it may not be included in the default "
 "installation of your distribution. Many distributions offer '%1' in an "
@@ -1349,15 +1382,15 @@ msgstr ""
 "Standardinstallation ihrer Distribution enthalten. Viele Distributionen "
 "stellen '%1' jedoch in einer zusätzlichen Paketquelle zur Verfügung."
 
-#: core/backendplugin.cpp:566
+#: core/backendplugin.cpp:571
 msgid "You can download '%1' at %2"
 msgstr "Sie können '%1' unter %2 herunterladen"
 
-#: core/backendplugin.cpp:575
+#: core/backendplugin.cpp:580
 msgid "In order to use the filter %1, you need to install '%2'."
 msgstr "Um den Filter %1 verwenden zu können müssen Sie '%2' installieren."
 
-#: core/backendplugin.cpp:579
+#: core/backendplugin.cpp:584
 msgid "In order to use the filters %1, you need to install '%2'."
 msgstr "Um die Filter %1 verwenden zu können müssen Sie '%2' installieren."
 
@@ -1421,8 +1454,8 @@ msgid "Remove"
 msgstr "Entfernen"
 
 #: filelist.cpp:179 opener/fileopener.cpp:142 opener/playlistopener.cpp:145
-#: replaygainscanner/replaygainfilelist.cpp:215
-#: replaygainscanner/replaygainscanner.cpp:207 soundkonverterview.cpp:347
+#: replaygainscanner/replaygainfilelist.cpp:222
+#: replaygainscanner/replaygainscanner.cpp:208 soundkonverterview.cpp:347
 msgid ""
 "This file type is unknown to soundKonverter.\n"
 "Maybe you need to install an additional soundKonverter plugin.\n"
@@ -1433,40 +1466,44 @@ msgstr ""
 "Dazu sollten Sie im Paketmanager ihrer Distribution nachschauen."
 
 #: filelist.cpp:217 opener/fileopener.cpp:182 opener/playlistopener.cpp:185
-#: opener/playlistopener.cpp:217 replaygainscanner/replaygainfilelist.cpp:253
-#: replaygainscanner/replaygainscanner.cpp:247 soundkonverterview.cpp:385
+#: opener/playlistopener.cpp:217 replaygainscanner/replaygainfilelist.cpp:260
+#: replaygainscanner/replaygainscanner.cpp:248 soundkonverterview.cpp:385
 msgid "... and %1 more files"
 msgstr "... und %1 weitere Dateien"
 
-#: filelist.cpp:540 filelist.cpp:599
+#: filelist.cpp:548
 msgid "Will be skipped"
 msgstr "Wird übersprungen"
 
-#: filelist.cpp:544 soundkonverter.cpp:109 soundkonverter.cpp:113
+#: filelist.cpp:552
+msgid "Will be copied"
+msgstr "Wird kopiert werden"
+
+#: filelist.cpp:556 soundkonverter.cpp:111 soundkonverter.cpp:115
 msgid "Waiting"
 msgstr "Warte"
 
-#: filelist.cpp:555
-msgid "Waiting for Replay Gain"
-msgstr "Warte auf Replay Gain"
-
-#: filelist.cpp:584
+#: filelist.cpp:596
+msgctxt "Short conversion status"
 msgid "Stopped"
 msgstr "Gestoppt"
 
-#: filelist.cpp:589
+#: filelist.cpp:601
+msgctxt "Short conversion status"
 msgid "Backend not configured"
 msgstr "Backend nicht konfiguriert"
 
-#: filelist.cpp:594
+#: filelist.cpp:606
+msgctxt "Short conversion status"
 msgid "Disc full"
 msgstr "Datenträger voll"
 
-#: filelist.cpp:604
-msgid "Failed"
-msgstr "Fehlgeschlagen"
+#: filelist.cpp:611
+msgctxt "Short conversion status"
+msgid "Can't write output"
+msgstr "Kann nicht schreiben"
 
-#: filelist.cpp:607
+#: filelist.cpp:614 filelist.cpp:631 filelist.cpp:643
 msgid ""
 "The conversion has failed.\n"
 "See the log for more information."
@@ -1474,11 +1511,25 @@ msgstr ""
 "Die Konvertierung ist fehlgeschlagen.\n"
 "Schauen Sie ins Protokoll für weitere Information."
 
-#: filelist.cpp:631
+#: filelist.cpp:623
+msgid "Skipped"
+msgstr "Übersprungen"
+
+#: filelist.cpp:628
+msgctxt "Short conversion status"
+msgid "File is encrypted"
+msgstr "Datei ist verschlüsselt"
+
+#: filelist.cpp:640
+msgctxt "Short conversion status"
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+#: filelist.cpp:666
 msgid "CD track %1"
 msgstr "CD-Stück %1"
 
-#: filelist.cpp:1318
+#: filelist.cpp:1355
 msgid ""
 "Do you want to overwrite the current file list?\n"
 "\n"
@@ -1515,15 +1566,15 @@ msgctxt "milliseconds"
 msgid "ms"
 msgstr "ms"
 
-#: logger.cpp:90
+#: logger.cpp:75
 msgid "Identifier"
 msgstr "Identifikator"
 
-#: logger.cpp:91
+#: logger.cpp:76
 msgid "Log ID"
 msgstr "Protokoll-ID"
 
-#: logger.cpp:185 logger.cpp:188
+#: logger.cpp:145 logger.cpp:148
 msgid "Finished logging"
 msgstr "Protokollieren beendet"
 
@@ -1543,19 +1594,19 @@ msgstr "In Datei speichern ..."
 msgid "Log file:"
 msgstr "Protokoll-Datei:"
 
-#: logviewer.cpp:86
+#: logviewer.cpp:88
 msgid "soundKonverter application log"
 msgstr "soundKonverter Protokoll"
 
-#: logviewer.cpp:129
+#: logviewer.cpp:131
 msgid "Save log file"
 msgstr "Protokoll-Datei speichern"
 
-#: logviewer.cpp:136
+#: logviewer.cpp:138
 msgid "File already exists. Do you really want to overwrite it?"
 msgstr "Datei existiert bereits. Möchten Sie diese wirklich überschreiben?"
 
-#: logviewer.cpp:141
+#: logviewer.cpp:143
 msgid ""
 "Writing to file failed.\n"
 "Maybe you haven't got write permission."
@@ -1568,23 +1619,22 @@ msgid ""
 "soundKonverter is a frontend to various audio converters, Replay Gain tools "
 "and CD rippers.\n"
 "\n"
-"Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
-"or simply send me a mail to hessijames@gmail.com"
+"Please file bug reports at https://github.com/HessiJames/soundkonverter/"
+"issues"
 msgstr ""
 "soundKonverter ist eine Oberfläche für verschiedene Audio-Konverter, Replay "
 "Gain Werkzeuge und CD-Ripper.\n"
 "\n"
-"Bitte erstellen Sie Fehlerberichte unter https://bugs.launchpad.net/"
-"soundkonverter\n"
-"oder senden Sie mir einfach eine E-Mail an hessijames@gmail.com"
+"Bitte erstellen Sie Fehlerberichte unter https://github.com/HessiJames/"
+"soundkonverter/issues"
 
 #: main.cpp:22
 msgid "soundKonverter"
 msgstr "soundKonverter"
 
 #: main.cpp:22
-msgid "(C) 2005-2012 Daniel Faust"
-msgstr "(C) 2005-2012 Daniel Faust"
+msgid "(C) 2005-2016 Daniel Faust"
+msgstr "(C) 2005-2016 Daniel Faust"
 
 #: main.cpp:23
 msgid "Daniel Faust"
@@ -1674,110 +1724,114 @@ msgstr ""
 "%o=Ausgabedatei)"
 
 #: main.cpp:41
+msgid "Load the file list at <path> after starting soundKonverter"
+msgstr "Lade die Dateiliste bei <pfad> nach dem Starten von soundKonverter"
+
+#: main.cpp:42
 msgid "Audio file(s) to append to the file list"
 msgstr "Audio Datei(en) zum Hinzufügen an die Dateiliste"
 
-#: metadata/tagengine.cpp:69
+#: metadata/tagengine.cpp:74
 msgctxt "cover type"
 msgid "Unclassified"
 msgstr "Nicht eingeordnet"
 
-#: metadata/tagengine.cpp:71
+#: metadata/tagengine.cpp:76
 msgctxt "cover type"
 msgid "32x32 PNG file icon"
 msgstr "32x32 PNG Datei Icon"
 
-#: metadata/tagengine.cpp:73
+#: metadata/tagengine.cpp:78
 msgctxt "cover type"
 msgid "File icon"
 msgstr "Datei Icon"
 
-#: metadata/tagengine.cpp:75
+#: metadata/tagengine.cpp:80
 msgctxt "cover type"
 msgid "Front cover"
 msgstr "Frontseitencover"
 
-#: metadata/tagengine.cpp:77
+#: metadata/tagengine.cpp:82
 msgctxt "cover type"
 msgid "Back cover"
 msgstr "Rückseitencover"
 
-#: metadata/tagengine.cpp:79
+#: metadata/tagengine.cpp:84
 msgctxt "cover type"
 msgid "Leaflet page"
 msgstr "Broschürenseite"
 
-#: metadata/tagengine.cpp:81
+#: metadata/tagengine.cpp:86
 msgctxt "cover type"
 msgid "CD photo"
 msgstr "CD Photo"
 
-#: metadata/tagengine.cpp:83
+#: metadata/tagengine.cpp:88
 msgctxt "cover type"
 msgid "Lead artist picture"
 msgstr "Hauptinterpretenbild"
 
-#: metadata/tagengine.cpp:85
+#: metadata/tagengine.cpp:90
 msgctxt "cover type"
 msgid "Artist picture"
 msgstr "Interpretenbild"
 
-#: metadata/tagengine.cpp:87
+#: metadata/tagengine.cpp:92
 msgctxt "cover type"
 msgid "Conductor picture"
 msgstr "Dirigentenbild"
 
-#: metadata/tagengine.cpp:89
+#: metadata/tagengine.cpp:94
 msgctxt "cover type"
 msgid "Band picture"
 msgstr "Bandbild"
 
-#: metadata/tagengine.cpp:91
+#: metadata/tagengine.cpp:96
 msgctxt "cover type"
 msgid "Composer picture"
 msgstr "Komponistenbild"
 
-#: metadata/tagengine.cpp:93
+#: metadata/tagengine.cpp:98
 msgctxt "cover type"
 msgid "Lyricist picture"
 msgstr "Lyrikerbild"
 
-#: metadata/tagengine.cpp:95
+#: metadata/tagengine.cpp:100
 msgctxt "cover type"
 msgid "Picture of the recording location"
 msgstr "Bild des Aufnahmeortes"
 
-#: metadata/tagengine.cpp:97
+#: metadata/tagengine.cpp:102
 msgctxt "cover type"
 msgid "Picture of the artists during recording"
 msgstr "Bild des Interprten während der Aufnahme"
 
-#: metadata/tagengine.cpp:99
+#: metadata/tagengine.cpp:104
 msgctxt "cover type"
 msgid "Picture of the artists during performance"
 msgstr "Bild des Interprten während einer Aufführung"
 
-#: metadata/tagengine.cpp:101
+#: metadata/tagengine.cpp:106
 msgctxt "cover type"
 msgid "Picture from a video"
 msgstr "Bild aus einem Video"
 
-#: metadata/tagengine.cpp:103
+#: metadata/tagengine.cpp:108
 msgctxt "cover type"
 msgid "Picture of a large, coloured fish"
 msgstr "Bild eines großen, eingefärbten Fisches"
 
-#: metadata/tagengine.cpp:105
+#: metadata/tagengine.cpp:110
 msgctxt "cover type"
 msgid "Illustration related to the track"
 msgstr "Illustration im Zusammenhang mit dem Lied"
 
-#: metadata/tagengine.cpp:107
+#: metadata/tagengine.cpp:112
 msgctxt "cover type"
 msgid "Band logo"
 msgstr "Bandlogo"
 
-#: metadata/tagengine.cpp:109
+#: metadata/tagengine.cpp:114
 msgctxt "cover type"
 msgid "Publisher logo"
 msgstr "Herausgeberlogo"
@@ -1824,7 +1878,7 @@ msgctxt "column title"
 msgid "Rip"
 msgstr "Rippen"
 
-#: opener/cdopener.cpp:222 opener/cdopener.cpp:986
+#: opener/cdopener.cpp:222 opener/cdopener.cpp:987
 #: replaygainscanner/replaygainfilelist.cpp:36
 msgid "Track"
 msgstr "Stück"
@@ -1853,41 +1907,41 @@ msgstr "Player"
 msgid "No track selected"
 msgstr "Keine Stücke ausgewählt"
 
-#: opener/cdopener.cpp:266 optionseditor.cpp:96
+#: opener/cdopener.cpp:268 optionseditor.cpp:96
 msgid "Title:"
 msgstr "Titel:"
 
-#: opener/cdopener.cpp:281 optionseditor.cpp:134
+#: opener/cdopener.cpp:283 optionseditor.cpp:134
 msgid "Artist:"
 msgstr "Interpret:"
 
-#: opener/cdopener.cpp:292 optionseditor.cpp:145
+#: opener/cdopener.cpp:294 optionseditor.cpp:145
 msgid "Composer:"
 msgstr "Komponist:"
 
-#: opener/cdopener.cpp:307 optionseditor.cpp:249
+#: opener/cdopener.cpp:309 optionseditor.cpp:249
 msgid "Comment:"
 msgstr "Kommentar:"
 
-#: opener/cdopener.cpp:358 opener/diropener.cpp:148 opener/fileopener.cpp:59
+#: opener/cdopener.cpp:360 opener/diropener.cpp:148 opener/fileopener.cpp:59
 #: opener/playlistopener.cpp:44 opener/urlopener.cpp:73 optionseditor.cpp:58
 #: optionslayer.cpp:42
 msgid "Select your desired output options and click on \"Ok\"."
 msgstr "Wählen Sie die gewünschten Ausgabe-Optionen und klicken Sie auf \"Ok\""
 
-#: opener/cdopener.cpp:376
+#: opener/cdopener.cpp:378
 msgid "Save cue sheet..."
 msgstr "Cuesheet speichern ..."
 
-#: opener/cdopener.cpp:381
+#: opener/cdopener.cpp:383
 msgid "Request CDDB"
 msgstr "CDDB anfordern"
 
-#: opener/cdopener.cpp:386
+#: opener/cdopener.cpp:388
 msgid "Rip entire CD to one file"
 msgstr "Komplette CD in eine Datei rippen"
 
-#: opener/cdopener.cpp:396
+#: opener/cdopener.cpp:398
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1897,7 +1951,7 @@ msgstr ""
 "Backends nicht unterstützt.\n"
 "Mögliche Lösungen sind hierunter aufgelistet.\n"
 
-#: opener/cdopener.cpp:400
+#: opener/cdopener.cpp:402
 msgid ""
 "Ripping an entire cd to a single file is not supported by the installed "
 "backends.\n"
@@ -1909,64 +1963,64 @@ msgstr ""
 "Bitte schauen Sie im Paketmanager ihrer Distribution, ob es ein Plugin gibt, "
 "welches das Rippen in eine Datei unterstützt."
 
-#: opener/cdopener.cpp:407 opener/diropener.cpp:40 opener/urlopener.cpp:84
+#: opener/cdopener.cpp:409 opener/diropener.cpp:40 opener/urlopener.cpp:84
 msgid "Proceed"
 msgstr "Weiter"
 
-#: opener/cdopener.cpp:410 opener/fileopener.cpp:67
+#: opener/cdopener.cpp:412 opener/fileopener.cpp:67
 #: opener/playlistopener.cpp:52 opener/urlopener.cpp:87 optionslayer.cpp:49
 msgid "Ok"
 msgstr "Ok"
 
-#: opener/cdopener.cpp:414 opener/fileopener.cpp:70
+#: opener/cdopener.cpp:416 opener/fileopener.cpp:70
 #: opener/playlistopener.cpp:55 opener/urlopener.cpp:91 optionslayer.cpp:52
 #: replaygainscanner/replaygainscanner.cpp:88
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: opener/cdopener.cpp:455
+#: opener/cdopener.cpp:457
 msgid "Select CD-ROM drive"
 msgstr "Wähle CD-ROM-Laufwerk"
 
-#: opener/cdopener.cpp:455
+#: opener/cdopener.cpp:457
 msgid "Multiple CD-ROM drives where found. Please select one:"
 msgstr ""
 "Es wurden mehrere CD-ROM-Laufwerke gefunden. Bitte wählen Sie eines aus:"
 
-#: opener/cdopener.cpp:553
+#: opener/cdopener.cpp:555
 msgid "%1 (%2): Audio CD with %3 tracks"
 msgstr "%1 (%2): Audio CD mit %3 Stücken"
 
-#: opener/cdopener.cpp:678
+#: opener/cdopener.cpp:680
 msgid "Please wait, trying to download CDDB data ..."
 msgstr "Bitte warten, versuche CDDB-Daten herunterzuladen ..."
 
-#: opener/cdopener.cpp:727
+#: opener/cdopener.cpp:729
 msgid "Select CDDB Entry"
 msgstr "Wähle CDDB Eintrag"
 
-#: opener/cdopener.cpp:727
+#: opener/cdopener.cpp:729
 msgid "Multiple CDDB entries where found. Please select one:"
 msgstr "Es wurden mehrere CDDB Einträge gefunden. Bitte wählen Sie einen aus:"
 
-#: opener/cdopener.cpp:888
+#: opener/cdopener.cpp:889
 msgid "All tracks"
 msgstr "Alle Stücke"
 
-#: opener/cdopener.cpp:892
+#: opener/cdopener.cpp:893
 msgid "Tracks"
 msgstr "Stücke"
 
-#: opener/cdopener.cpp:1212
+#: opener/cdopener.cpp:1213
 msgid "Please select at least one track in order to proceed."
 msgstr "Bitte wählen Sie mindestens ein Stück, um fortzufahren."
 
-#: opener/cdopener.cpp:1290 opener/diropener.cpp:212 opener/fileopener.cpp:209
+#: opener/cdopener.cpp:1291 opener/diropener.cpp:212 opener/fileopener.cpp:209
 #: opener/playlistopener.cpp:242 opener/urlopener.cpp:149 optionslayer.cpp:139
 msgid "No conversion options selected."
 msgstr "Keine Konvertierungsoptionen ausgewählt."
 
-#: opener/cdopener.cpp:1304
+#: opener/cdopener.cpp:1305
 msgid ""
 "A file with this name already exists.\n"
 "\n"
@@ -1976,7 +2030,7 @@ msgstr ""
 "\n"
 "Wollen Sie diese überschreiben?"
 
-#: opener/cdopener.cpp:1305
+#: opener/cdopener.cpp:1306
 msgid "File already exists"
 msgstr "Datei existiert bereits"
 
@@ -1997,7 +2051,7 @@ msgid "Only add selected file formats:"
 msgstr "Nur ausgewählte Formate hinzufügen:"
 
 #: opener/diropener.cpp:122 opener/fileopener.cpp:75
-#: replaygainscanner/replaygainscanner.cpp:158
+#: replaygainscanner/replaygainscanner.cpp:159
 msgid "Are you missing some file formats?"
 msgstr "Vermissen Sie einige Dateiformate?"
 
@@ -2019,19 +2073,19 @@ msgstr ""
 "Wenn ausgewählt, werden auch Dateien aus Unterverzeichnissen hinzugefügt."
 
 #: opener/fileopener.cpp:33 opener/fileopener.cpp:79
-#: opener/playlistopener.cpp:60 replaygainscanner/replaygainscanner.cpp:162
+#: opener/playlistopener.cpp:60 replaygainscanner/replaygainscanner.cpp:163
 msgid "Add Files"
 msgstr "Dateien hinzufügen"
 
-#: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:152
+#: opener/fileopener.cpp:54 replaygainscanner/replaygainscanner.cpp:153
 msgid "%1 files"
 msgstr "%1 Dateien"
 
-#: opener/fileopener.cpp:56 replaygainscanner/replaygainscanner.cpp:154
+#: opener/fileopener.cpp:56 replaygainscanner/replaygainscanner.cpp:155
 msgid "All supported files"
 msgstr "Alle unterstützten Dateien"
 
-#: opener/fileopener.cpp:57 replaygainscanner/replaygainscanner.cpp:155
+#: opener/fileopener.cpp:57 replaygainscanner/replaygainscanner.cpp:156
 msgid "All files"
 msgstr "Alle Dateien"
 
@@ -2083,7 +2137,7 @@ msgstr "Speichere aktuelle Optionen als Profil"
 msgid "Load saved profiles"
 msgstr "Gespeicherte Profile laden"
 
-#: optionsdetailed.cpp:255
+#: optionsdetailed.cpp:257
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Possible solutions are listed below."
@@ -2091,7 +2145,7 @@ msgstr ""
 "Replay Gain wird für das %1 Dateiformat nicht unterstützt.\n"
 "Mögliche Lösungen sind hierunter aufgelistet."
 
-#: optionsdetailed.cpp:259
+#: optionsdetailed.cpp:261
 msgid ""
 "Replay Gain is not supported for the %1 file format.\n"
 "Please check your distribution's package manager in order to install an "
@@ -2101,7 +2155,7 @@ msgstr ""
 "Bitte schauen Sie im Paketmanager ihrer Distribution nach einem zusätzlichen "
 "Replay Gain Plugin."
 
-#: optionsdetailed.cpp:265
+#: optionsdetailed.cpp:267
 msgid ""
 "Replay Gain tags can tell your music player how loud a track is\n"
 "so it can adjust the volume to play all tracks with equal loudness."
@@ -2283,8 +2337,7 @@ msgstr ""
 "Aber dann wird soundKonverter nichtmehr versuchen die Metadaten erneut "
 "einzulesen."
 
-#: optionssimple.cpp:38
-#: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:70
+#: optionssimple.cpp:38 plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:70
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:291
 msgid "Quality:"
 msgstr "Qualität:"
@@ -2424,7 +2477,7 @@ msgstr "Ordner angeben"
 msgid "Copy directory structure"
 msgstr "Kopiere Ordnerstruktur"
 
-#: outputdirectory.cpp:52 outputdirectory.cpp:477
+#: outputdirectory.cpp:52 outputdirectory.cpp:495
 msgid "Choose an output directory"
 msgstr "Wähle ein Ausgabeverzeichnis"
 
@@ -2432,41 +2485,41 @@ msgstr "Wähle ein Ausgabeverzeichnis"
 msgid "Open the output directory with Dolphin"
 msgstr "Öffne das Augabeverzeichnis mit Dolphin"
 
-#: outputdirectory.cpp:231 outputdirectory.cpp:235
+#: outputdirectory.cpp:231 outputdirectory.cpp:242
 msgid "Unknown Artist"
 msgstr "Unbekannter Interpret"
 
-#: outputdirectory.cpp:239
+#: outputdirectory.cpp:247
 msgid "Unknown Album"
 msgstr "Unbekanntes Album"
 
-#: outputdirectory.cpp:243
+#: outputdirectory.cpp:251
 msgid "No Comment"
 msgstr "Kein Kommentar"
 
-#: outputdirectory.cpp:250
+#: outputdirectory.cpp:258
 msgid "Unknown Genre"
 msgstr "Unbekanntes Genre"
 
-#: outputdirectory.cpp:257
+#: outputdirectory.cpp:265
 msgid "Unknown Composer"
 msgstr "Unbekannter Komponist"
 
-#: outputdirectory.cpp:261
+#: outputdirectory.cpp:269
 msgid "Unknown Title"
 msgstr "Unbekannter Titel"
 
-#: outputdirectory.cpp:345
+#: outputdirectory.cpp:354
 msgctxt ""
 "will be appended to the filename if a file with the same name already exists"
 msgid "new"
 msgstr "neu"
 
-#: outputdirectory.cpp:532
+#: outputdirectory.cpp:550
 msgid "Name all converted files according to the specified pattern"
 msgstr "Benenne alle konvertierten Dateien mit Hilfe der Platzhalter"
 
-#: outputdirectory.cpp:533
+#: outputdirectory.cpp:551
 msgid ""
 "The following strings are wildcards that will be replaced\n"
 "by the information in the meta data:\n"
@@ -2512,17 +2565,17 @@ msgstr ""
 "Um eckige Klammern zu verwenden müssen Sie ein Backslash vorranstellen "
 "('\\[' und '\\]')."
 
-#: outputdirectory.cpp:545
+#: outputdirectory.cpp:563
 msgid ""
 "Output all converted files into the same directory as the original files"
 msgstr ""
 "Gebe alle Dateien in das selbe Verzeichnis, wie die Originaldateien aus"
 
-#: outputdirectory.cpp:556
+#: outputdirectory.cpp:574
 msgid "Output all converted files into the specified output directory"
 msgstr "Gebe alle Dateien in das angegebene Verzeichnis aus"
 
-#: outputdirectory.cpp:567
+#: outputdirectory.cpp:585
 msgid "Copy the whole directory structure for all converted files"
 msgstr ""
 "Kopiere die komplette Verzeichnisstruktur für alle konvertierten Dateien"
@@ -2584,6 +2637,10 @@ msgstr ""
 "Qualitätsstufe von %1 bis %2, wobei %2 die höchste Stufe ist.\n"
 "Je höher die Qualität, desto größer die Datei und umgekehrt."
 
+#: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:87
+msgid "Compile faac with MP4 support."
+msgstr "Kompiliere faac mit MP4-Unterstützung"
+
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:89
@@ -2604,33 +2661,33 @@ msgstr "Bitrate:"
 msgid "Additional encoder arguments:"
 msgstr "Zusätzliche Encoder-Argumente:"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:301
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:211
 msgid "Enable experimental codecs in the ffmpeg configuration dialog."
 msgstr "Aktivieren Sie experimentelle Codecs im ffmpeg Konfigurationsdialog."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:305
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:216
 msgid "Compile ffmpeg with %1 support."
 msgstr "Kompiliere ffmpeg mit %1-Unterstützung."
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:365
-#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:83
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:111
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:365
-#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:81
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:240
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:83
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:76
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:75
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:276
+#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:85
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:113
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:368
+#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:83
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:242
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:89
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:82
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
 msgid "Configure %1"
 msgstr "%1 einrichten"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:370
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:370
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:281
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:373
 msgid "Enable experimental codecs"
 msgstr "Aktiviere experimentelle Codecs"
 
-#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:396
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:396
+#: plugins/soundkonverter_codec_ffmpeg/soundkonverter_codec_ffmpeg.cpp:307
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:399
 msgid "Please restart soundKonverter in order to activate the changes."
 msgstr "Bitte starten Sie soundKonverter, damit die Änderungen wirksam werden."
 
@@ -2658,11 +2715,11 @@ msgstr ""
 "Je besser die Kompression, desto langsamer die Konvertierung aber desto "
 "kleiner die Datei und umgekehrt."
 
-#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:88
+#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:90
 msgid "Use SoundFont file:"
 msgstr "Verwende SoundFont-Datei:"
 
-#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:89
+#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:91
 msgid ""
 "In order to convert the midi data to a wave form you need a SoundFont which "
 "maps the midi data to sound effects.\n"
@@ -2672,7 +2729,7 @@ msgstr ""
 "benötigt, die midi-Daten mit Sound-Effekten verbindet.\n"
 "Schauen Sie sich %1 an, um SoundFont-Dateien zu bekommen."
 
-#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:138
+#: plugins/soundkonverter_codec_fluidsynth/soundkonverter_codec_fluidsynth.cpp:140
 msgid "FluidSynth is not configured, yet. You need to set a SoundFont file."
 msgstr ""
 "FluidSynth ist noch nicht konfiguriert. Sie müssen eine SoundFont-Datei "
@@ -2846,36 +2903,36 @@ msgstr ""
 "Dateigröße haben möchen,\n"
 "sollten Sie diese Vorauswahl verwenden (320 kbps cbr)."
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:116
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:118
 msgid "Stereo mode:"
 msgstr "Stereo-Modus:"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:119
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:121
 msgid "Automatic"
 msgstr "Automatisch"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:120
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:122
 msgid "Joint Stereo"
 msgstr "Verbundenes Stereo"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:121
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:123
 msgid "Simple Stereo"
 msgstr "Einfaches Stereo"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:122
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:124
 msgid "Forced Joint Stereo"
 msgstr "Erzwungenes verbundenes Stereo"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:123
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:125
 msgid "Dual Mono"
 msgstr "Dual Mono"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:166
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:168
 #: plugins/soundkonverter_codec_twolame/soundkonverter_codec_twolame.cpp:92
 msgid "About %1"
 msgstr "Über %1"
 
-#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:171
+#: plugins/soundkonverter_codec_lame/soundkonverter_codec_lame.cpp:173
 msgid ""
 "LAME is a free high quality MP3 encoder.\n"
 "You can get it at: http://lame.sourceforge.net"
@@ -2883,12 +2940,12 @@ msgstr ""
 "LAME ist ein freier und hochwertiger MP3 Kodierer.\n"
 "Sie können ihn unter http://lame.sourceforge.net herunterladen."
 
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:301
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:304
 msgid "Enable experimental codecs in the libav configuration dialog."
 msgstr ""
 "Aktivieren Sie experimentelle Codecs in der libav Konfigurationsdialog."
 
-#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:305
+#: plugins/soundkonverter_codec_libav/soundkonverter_codec_libav.cpp:308
 msgid "Compile libav with %1 support."
 msgstr "Kompiliere libav mit %1-Unterstützung."
 
@@ -2958,8 +3015,8 @@ msgstr ""
 "Sie können '%1' unter %2 herunterladen nachdem Sie eine E-Mail-Adresse "
 "angegeben haben."
 
-#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:50
-#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:58
+#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:52
+#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:60
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:38
 #: plugins/soundkonverter_codec_vorbistools/soundkonverter_codec_vorbistools.cpp:46
 #: plugins/soundkonverter_replaygain_metaflac/soundkonverter_replaygain_metaflac.cpp:33
@@ -2970,11 +3027,11 @@ msgstr ""
 "'%1' ist üblicherweise im Paket '%2', welches mit ihrer Distribution "
 "mitgeliefert worden sein sollte."
 
-#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:86
+#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:88
 msgid "Uncoupled channels"
 msgstr "Entkoppelte Kanäle"
 
-#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:87
+#: plugins/soundkonverter_codec_opustools/soundkonverter_codec_opustools.cpp:89
 msgid "Use one mono stream per channel"
 msgstr "Benutze einen Mono-Stream pro Kanal"
 
@@ -3013,19 +3070,19 @@ msgstr "Sehr hohe Qualität"
 msgid "Normalize"
 msgstr "Normalisieren"
 
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:186
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:188
 msgid "Enable experimental codecs in the sox configuration dialog."
 msgstr "Aktivieren Sie experimentelle Codecs in der sox Konfigurationsdialog."
 
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:190
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:192
 msgid "Compile sox with %1 support."
 msgstr "Kompiliere sox mit %1-Unterstützung."
 
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:245
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:247
 msgid "Sample rate change quality:"
 msgstr "Qualität der Sample Rate-Änderung:"
 
-#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:248
+#: plugins/soundkonverter_filter_sox/soundkonverter_filter_sox.cpp:250
 msgid "Quick"
 msgstr "Schnell"
 
@@ -3035,7 +3092,7 @@ msgstr "Effekt:"
 
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:27
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:189
-#: plugins/soundkonverter_filter_sox/soxfilteroptions.cpp:82
+#: plugins/soundkonverter_filter_sox/soxfilteroptions.cpp:86
 #: plugins/soundkonverter_filter_sox/soxfilterwidget.cpp:135
 msgid "Disabled"
 msgstr "Deaktiviert"
@@ -3063,6 +3120,8 @@ msgstr ""
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:150
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:166
 #: plugins/soundkonverter_filter_sox/soxeffectwidget.cpp:180
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:109
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:102
 msgctxt "decibel"
 msgid "dB"
 msgstr "dB"
@@ -3103,18 +3162,28 @@ msgstr "Mono"
 msgid "Stereo"
 msgstr "Stereo"
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:90
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:83
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:96
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:89
 msgid "Use tag format:"
 msgstr "Benutze Tag Format:"
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:99
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:92
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:105
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:98
+msgid "Adjust gain:"
+msgstr "Lautstärke anpassen:"
+
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:110
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:103
+msgid "Lower or raise the suggested gain"
+msgstr "Empfohlene Lautstärke erhöhen oder verringern"
+
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:108
 msgid "Modify audio stream"
 msgstr "Modifiziere Audio-Stream"
 
-#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:100
-#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:93
+#: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:116
+#: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:109
 msgid ""
 "Write gain adjustments directly into the encoded data. That way the "
 "adjustment works with all mp3 players.\n"
@@ -3126,7 +3195,7 @@ msgstr ""
 "Die Änderungen können weiterhin rückgängig gemacht werden, da Korrekturdaten "
 "geschrieben werden."
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:53
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:60
 msgid ""
 "In order to rip audio cds per track or to a single file, you need to install "
 "'cdparanoia'.\n"
@@ -3138,23 +3207,24 @@ msgstr ""
 "'cdparanoia' wird normalerweise mit ihrer Distribution ausgeliefert, der "
 "Paketname kann allerdings verschieden sein."
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:82
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:89
 msgid "Force read speed:"
 msgstr "Erzwinge Lesegeschwindigkeit:"
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:92
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:99
+msgctxt "Byte-Order"
 msgid "Endianness:"
-msgstr "Endian:"
+msgstr "Byte-Reihenfolge"
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:102
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:109
 msgid "Maximum read retries:"
 msgstr "Maximale Leseversuche:"
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:110
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:117
 msgid "Enable paranoia"
 msgstr "Paranoia aktivieren"
 
-#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:115
+#: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:122
 msgid "Enable extra paranoia"
 msgstr "Extra Paranoia aktivieren"
 
@@ -3178,7 +3248,7 @@ msgstr "Geschwindigkeit:"
 msgid "Remaining time:"
 msgstr "Verbleibende Zeit:"
 
-#: progressindicator.cpp:165 soundkonverter.cpp:328 soundkonverter.cpp:330
+#: progressindicator.cpp:164 soundkonverter.cpp:336 soundkonverter.cpp:338
 msgid "Finished"
 msgstr "Beendet"
 
@@ -3198,11 +3268,17 @@ msgstr "Alle zuklappen"
 msgid "Expand all"
 msgstr "Alle aufklappen"
 
+#. i18n("Calculate Replay Gain"), this );
+#. connect( processAddAction, SIGNAL(triggered()), this, SLOT(processAddSelectedItems()) );
+#. processRemoveAction = new KAction( KIcon("list-remove"), i18n("Remove Replay Gain"), this );
+#. connect( processRemoveAction, SIGNAL(triggered()), this, SLOT(processRemoveSelectedItems()) );
+#. killAction = new KAction( KIcon("process-stop"), i18n("Stop calculation"), this );
+#. connect( killAction, SIGNAL(triggered()), this, SLOT(killSelectedItems()) );
 #: replaygainscanner/replaygainfilelist.cpp:73
 msgid "Move to new Album"
 msgstr "Verschiebe in neues Ablum"
 
-#: replaygainscanner/replaygainfilelist.cpp:142
+#: replaygainscanner/replaygainfilelist.cpp:149
 msgid ""
 "Some tracks can't be added to the album because either the codec or the "
 "sampling rate is different."
@@ -3210,17 +3286,17 @@ msgstr ""
 "Einige Titel konnten nicht zum Album hinzugefügt werden, weil entweder der "
 "Codec oder die Sample-Rate unterschiedlich sind."
 
-#: replaygainscanner/replaygainfilelist.cpp:1050
+#: replaygainscanner/replaygainfilelist.cpp:1080
 msgid "New album"
 msgstr "Neues Album"
 
-#: replaygainscanner/replaygainprocessor.cpp:89
+#: replaygainscanner/replaygainprocessor.cpp:118
 msgid "Replay Gain failed. The used backend needs to be configured properly."
 msgstr ""
 "Replay Gain fehlgeschlagen. Das benutzte Backend muss korrekt konfiguriert "
 "werden."
 
-#: replaygainscanner/replaygainprocessor.cpp:95
+#: replaygainscanner/replaygainprocessor.cpp:124
 msgid ""
 "Replay Gain failed. The preferred plugin lacks support for a necessary "
 "feature."
@@ -3228,37 +3304,37 @@ msgstr ""
 "Replay Gain fehlgeschlagen. Dem bevorzugten Plugin fehlt die Unterstützung "
 "für eine benötigte Funktion."
 
-#: replaygainscanner/replaygainprocessor.cpp:102
+#: replaygainscanner/replaygainprocessor.cpp:131
 msgid "Replay Gain failed. Unknown Error."
 msgstr "Replay Gain fehlgeschlagen. Unbekannter Fehler."
 
-#: replaygainscanner/replaygainprocessor.cpp:142
+#: replaygainscanner/replaygainprocessor.cpp:200
 msgid "Replay Gain failed. Exit code: %1"
 msgstr "Replay Gain fehlgeschlagen. Beendigungscode: %1"
 
-#: replaygainscanner/replaygainprocessor.cpp:214
+#: replaygainscanner/replaygainprocessor.cpp:272
 msgid "Adding new item to Replay Gain processing list: '%1'"
 msgstr "Füge neuen Eintrag zur Replay Gain Verarbeitungsliste hinzu: '%1'"
 
-#: replaygainscanner/replaygainprocessor.cpp:222
+#: replaygainscanner/replaygainprocessor.cpp:280
 msgid "Replay Gain for %1"
 msgstr "Replay Gain für %1"
 
-#: replaygainscanner/replaygainprocessor.cpp:240
+#: replaygainscanner/replaygainprocessor.cpp:298
 msgid "Possible Replay Gain backends:"
 msgstr "Mögliche Replay Gain Backends:"
 
-#: replaygainscanner/replaygainprocessor.cpp:277
+#: replaygainscanner/replaygainprocessor.cpp:335
 msgctxt "Conversion exit status"
 msgid "Skipped"
 msgstr "Übersprungen"
 
-#: replaygainscanner/replaygainscanner.cpp:48 soundkonverter.cpp:160
+#: replaygainscanner/replaygainscanner.cpp:48 soundkonverter.cpp:163
 #: soundkonverterview.cpp:83
 msgid "Add folder..."
 msgstr "Verzeichnis hinzufügen ..."
 
-#: replaygainscanner/replaygainscanner.cpp:49 soundkonverter.cpp:155
+#: replaygainscanner/replaygainscanner.cpp:49 soundkonverter.cpp:158
 #: soundkonverterview.cpp:82
 msgid "Add files..."
 msgstr "Dateien hinzufügen ..."
@@ -3303,7 +3379,7 @@ msgstr ""
 msgid "Close"
 msgstr "Schließen"
 
-#: replaygainscanner/replaygainscanner.cpp:328
+#: replaygainscanner/replaygainscanner.cpp:329
 msgid ""
 "There are still Replay Gain jobs running.\n"
 "Do you really want to cancel them?"
@@ -3339,39 +3415,39 @@ msgstr ""
 "Zur Unterstützung von Cover in Ogg Opus Dateien wird taglib 1.9 oder höher "
 "benötigt."
 
-#: soundkonverter.cpp:140
+#: soundkonverter.cpp:143
 msgid "View logs..."
 msgstr "Protokolle anzeigen ..."
 
-#: soundkonverter.cpp:145
+#: soundkonverter.cpp:148
 msgid "Replay Gain tool..."
 msgstr "Replay Gain Werkzeug ..."
 
-#: soundkonverter.cpp:150
+#: soundkonverter.cpp:153
 msgid "About plugins..."
 msgstr "Über Plugins ..."
 
-#: soundkonverter.cpp:165 soundkonverterview.cpp:84
+#: soundkonverter.cpp:168 soundkonverterview.cpp:84
 msgid "Add CD tracks..."
 msgstr "CD-Stücke hinzufügen ..."
 
-#: soundkonverter.cpp:170 soundkonverterview.cpp:85
+#: soundkonverter.cpp:173 soundkonverterview.cpp:85
 msgid "Add url..."
 msgstr "Url hinzufügen ..."
 
-#: soundkonverter.cpp:175 soundkonverterview.cpp:86
+#: soundkonverter.cpp:178 soundkonverterview.cpp:86
 msgid "Add playlist..."
 msgstr "Wiedergabeliste hinzufügen ..."
 
-#: soundkonverter.cpp:180
+#: soundkonverter.cpp:183
 msgid "Load file list"
 msgstr "Dateiliste laden"
 
-#: soundkonverter.cpp:185
+#: soundkonverter.cpp:188
 msgid "Save file list"
 msgstr "Dateiliste speichern"
 
-#: soundkonverter.cpp:265
+#: soundkonverter.cpp:273
 msgid ""
 "No codec plugins could be loaded. Without codec plugins soundKonverter can't "
 "work.\n"
@@ -3393,7 +3469,7 @@ msgstr ""
 "2. Ihre Installation ist beschädigt.\n"
 "In diesem Fall versuchen Sie soundKonverter neu zu installieren."
 
-#: soundkonverter.cpp:274 soundkonverter.cpp:279 soundkonverter.cpp:294
+#: soundkonverter.cpp:282 soundkonverter.cpp:287 soundkonverter.cpp:302
 msgid "Removing old file: %1"
 msgstr "Lösche alte Datei: %1"
 
@@ -3421,26 +3497,20 @@ msgstr "Fortsetzen, nachdem aktuelle Konvertierungen fertig sind"
 msgid "No CD device found"
 msgstr "Kein CD-Gerät gefunden"
 
-#. i18n: file: soundkonverterui.rc:20
-#. i18n: ectx: Menu (tools)
-#: rc.cpp:6
-msgid "Tools"
-msgstr "Werkzeuge"
-
-#: rc.cpp:7
+#: rc.cpp:1
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr "Daniel Faust"
 
-#: rc.cpp:8
+#: rc.cpp:2
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "hessijames@gmail.com"
 
-#: rc.cpp:9
+#: rc.cpp:3
 msgid "Audio file converter, CD ripper and Replay Gain tool"
 msgstr "Audio-Datei Konverter, CD Ripper und Replay Gain Werkzeug"
 
-#: rc.cpp:10
+#: rc.cpp:4
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Audio-CD mit soundKonverter auslesen"

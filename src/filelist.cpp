@@ -593,22 +593,22 @@ void FileList::updateItem( FileListItem *item )
                 }
                 case FileListItem::StoppedByUser:
                 {
-                    item->setText( Column_State, i18n("Stopped") );
+                    item->setText( Column_State, i18nc("Short conversion status", "Stopped") );
                     break;
                 }
                 case FileListItem::BackendNeedsConfiguration:
                 {
-                    item->setText( Column_State, i18n("Backend not configured") );
+                    item->setText( Column_State, i18nc("Short conversion status", "Backend not configured") );
                     break;
                 }
                 case FileListItem::DiscFull:
                 {
-                    item->setText( Column_State, i18n("Disc full") );
+                    item->setText( Column_State, i18nc("Short conversion status", "Disc full") );
                     break;
                 }
                 case FileListItem::CantWriteOutput:
                 {
-                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Can't write output") + "</a>" );
+                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18nc("Short conversion status", "Can't write output") + "</a>" );
                     connect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
                     setItemWidget( item, Column_State, item->lInfo.data() );
                     const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
@@ -625,7 +625,7 @@ void FileList::updateItem( FileListItem *item )
                 }
                 case FileListItem::Encrypted:
                 {
-                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("File is encrypted") + "</a>" );
+                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18nc("Short conversion status", "File is encrypted") + "</a>" );
                     connect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
                     setItemWidget( item, Column_State, item->lInfo.data() );
                     const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");
@@ -637,7 +637,7 @@ void FileList::updateItem( FileListItem *item )
                 }
                 case FileListItem::Failed:
                 {
-                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18n("Failed") + "</a>" );
+                    item->lInfo = new QLabel( "<a href=\"" + QString::number(item->logId) + "\">" + i18nc("Short conversion status", "Failed") + "</a>" );
                     connect( item->lInfo.data(), SIGNAL(linkActivated(const QString&)), this, SLOT(showLogClicked(const QString&)) );
                     setItemWidget( item, Column_State, item->lInfo.data() );
                     const QString toolTip = i18n("The conversion has failed.\nSee the log for more information.");

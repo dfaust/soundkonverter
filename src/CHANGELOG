@@ -1,6 +1,7 @@
 2.2.2:
 -Change: Move Polish (Poland) translation to Polish
 -Change: Move Swedish (Sweden) translation back to Swedish
+-Change: Remove so-version for libsoundkonvertercore to satisfy obs lint
 
 2.2.1:
 -Add: Dutch, Spanish (Argentina) and Polish (Poland) translations

@@ -15,9 +15,9 @@ msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2016-05-03 18:00+0200\n"
-"PO-Revision-Date: 2016-05-03 15:47+0000\n"
-"Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
+"POT-Creation-Date: 2016-05-21 10:30+0200\n"
+"PO-Revision-Date: 2016-05-21 08:02+0000\n"
+"Last-Translator: fri\n"
 "Language-Team: Czech (http://www.transifex.com/hessijames/soundkonverter/"
 "language/cs/)\n"
 "Language: cs\n"
@@ -872,7 +872,7 @@ msgstr "Soubor je zašifrován, převod není možný"
 
 #: convert.cpp:121
 msgid "Cannot create output directory \"%1\""
-msgstr ""
+msgstr "Nelze vytvořit výstupní adresář \"%1\""
 
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64
@@ -1037,7 +1037,7 @@ msgstr "Na výstupním zařízení není dostatek místa"
 #: convert.cpp:1268
 msgctxt "Conversion exit status"
 msgid "Cannot write to output directory, please check permissions"
-msgstr ""
+msgstr "Nelze zapisovat do výstupního adresáře. Prověřte, prosím, oprávnění"
 
 #: convert.cpp:1271
 msgctxt "Conversion exit status"
@@ -1477,22 +1477,22 @@ msgstr "Čeká se"
 #: filelist.cpp:596
 msgctxt "Short conversion status"
 msgid "Stopped"
-msgstr ""
+msgstr "Zastaveno"
 
 #: filelist.cpp:601
 msgctxt "Short conversion status"
 msgid "Backend not configured"
-msgstr ""
+msgstr "Jádro není nastaveno"
 
 #: filelist.cpp:606
 msgctxt "Short conversion status"
 msgid "Disc full"
-msgstr ""
+msgstr "Disk je plný"
 
 #: filelist.cpp:611
 msgctxt "Short conversion status"
 msgid "Can't write output"
-msgstr ""
+msgstr "Nelze zapsat výstup"
 
 #: filelist.cpp:614 filelist.cpp:631 filelist.cpp:643
 msgid ""
@@ -1509,12 +1509,12 @@ msgstr "Přeskočeno"
 #: filelist.cpp:628
 msgctxt "Short conversion status"
 msgid "File is encrypted"
-msgstr ""
+msgstr "Soubor je zašifrován"
 
 #: filelist.cpp:640
 msgctxt "Short conversion status"
 msgid "Failed"
-msgstr ""
+msgstr "Nepodařilo se"
 
 #: filelist.cpp:666
 msgid "CD track %1"
@@ -1613,6 +1613,11 @@ msgid ""
 "Please file bug reports at https://github.com/HessiJames/soundkonverter/"
 "issues"
 msgstr ""
+"soundKonverter je rozhraní pro různé převodníky zvuku, nástroje pro "
+"vyrovnání hlasitosti skladeb a vytahovače skladeb z CD.\n"
+"\n"
+"Chyby, prosím, hlaste na stránkách https://github.com/HessiJames/"
+"soundkonverter/issues"
 
 #: main.cpp:22
 msgid "soundKonverter"
@@ -1620,7 +1625,7 @@ msgstr "soundKonverter"
 
 #: main.cpp:22
 msgid "(C) 2005-2016 Daniel Faust"
-msgstr ""
+msgstr "(C) 2005-2016 Daniel Faust"
 
 #: main.cpp:23
 msgid "Daniel Faust"
@@ -1713,7 +1718,7 @@ msgstr ""
 
 #: main.cpp:41
 msgid "Load the file list at <path> after starting soundKonverter"
-msgstr ""
+msgstr "Nahrát seznam souborů <path> po spuštění soundKonverteru"
 
 #: main.cpp:42
 msgid "Audio file(s) to append to the file list"

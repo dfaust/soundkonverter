@@ -5,14 +5,15 @@
 # Translators:
 # Arthur Țițeică <arthur@psw.ro>, 2013
 # Arthur Țițeică <arthur.titeica@gmail.com>, 2013-2014
+# symbianflo <symbianflo@fastwebnet.it>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
 "soundkonverter/\n"
-"POT-Creation-Date: 2016-05-03 18:00+0200\n"
-"PO-Revision-Date: 2016-05-03 15:47+0000\n"
-"Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
+"POT-Creation-Date: 2016-05-21 10:30+0200\n"
+"PO-Revision-Date: 2016-05-21 08:02+0000\n"
+"Last-Translator: symbianflo <symbianflo@fastwebnet.it>\n"
 "Language-Team: Romanian (http://www.transifex.com/hessijames/soundkonverter/"
 "language/ro/)\n"
 "Language: ro\n"
@@ -528,7 +529,7 @@ msgstr ""
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Ejectare CD la după ce extragerea a fost finalizat"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -823,13 +824,15 @@ msgstr ""
 
 #: configdialog/configgeneralpage.cpp:161
 msgid "Copy files instead of converting to the same file format"
-msgstr ""
+msgstr "Copiaţi fişierele în loc de conversie ptr. acelaşi format de fişier"
 
 #: configdialog/configgeneralpage.cpp:162
 msgid ""
 "If the input and the output file format are the same, copy the files instead "
 "of re-encoding them."
 msgstr ""
+"În cazul în care formatele de intrare şi ieşire ale  fişierelor sunt "
+"identice, copiaţi fişierele în loc de a re-codare-le."
 
 #: configdialog/configgeneralpage.cpp:169
 #: replaygainscanner/replaygainscanner.cpp:34
@@ -870,11 +873,11 @@ msgstr "Se copiază \"%1\" în \"%2\""
 
 #: convert.cpp:103 convert.cpp:1138
 msgid "File is encrypted, conversion not possible"
-msgstr ""
+msgstr "Fişierul este criptat, conversia nu este posibilă"
 
 #: convert.cpp:121
 msgid "Cannot create output directory \"%1\""
-msgstr ""
+msgstr "Imposibil crearea directorului de ieşire \"%1\""
 
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64
@@ -933,7 +936,7 @@ msgstr "Se aplică Replay Gain"
 
 #: convert.cpp:531 replaygainscanner/replaygainprocessor.cpp:89
 msgid "Waiting for running Vorbis Gain process to finish"
-msgstr ""
+msgstr "Aşteptarea rulrii procesului Vorbis Gain pentru a termina"
 
 #: convert.cpp:580
 msgid "Writing tags"
@@ -976,7 +979,7 @@ msgstr "Piesă CD %1"
 
 #: convert.cpp:1118
 msgid "Adding new item to conversion list: '%1'"
-msgstr ""
+msgstr "Adăugare element nou la lista de conversie: '%1'"
 
 #: convert.cpp:1127 replaygainscanner/replaygainprocessor.cpp:281
 msgid "Got log ID: %1"
@@ -1023,7 +1026,7 @@ msgstr "Finalizat cu succes dar au apărut probleme"
 #: convert.cpp:1259 replaygainscanner/replaygainprocessor.cpp:329
 msgctxt "Conversion exit status"
 msgid "Aborted by the user"
-msgstr ""
+msgstr "Anulat de utilizator"
 
 #: convert.cpp:1262 replaygainscanner/replaygainprocessor.cpp:332
 msgctxt "Conversion exit status"
@@ -1039,6 +1042,8 @@ msgstr "Nu există destul spațiu pe dispozitivul de ieșire"
 msgctxt "Conversion exit status"
 msgid "Cannot write to output directory, please check permissions"
 msgstr ""
+"Imposibil scrisul in directorul de ieşire, vă rugăm să verificaţi "
+"permisiunile"
 
 #: convert.cpp:1271
 msgctxt "Conversion exit status"
@@ -1048,7 +1053,7 @@ msgstr "Fișierul deja există"
 #: convert.cpp:1274
 msgctxt "Conversion exit status"
 msgid "File is encrypted"
-msgstr ""
+msgstr "Fişierul este criptat"
 
 #: convert.cpp:1277 replaygainscanner/replaygainprocessor.cpp:338
 msgctxt "Conversion exit status"
@@ -1061,7 +1066,7 @@ msgstr "Se rulează comanda: \"%1\""
 
 #: convert.cpp:1324 replaygainscanner/replaygainprocessor.cpp:342
 msgid "Removing file from conversion list. Exit code %1 (%2)"
-msgstr ""
+msgstr "Eliminarea fişierului din lista de conversie. Codul de ieşire %1 (%2)"
 
 #: convert.cpp:1326
 msgid "Conversion time"
@@ -1073,7 +1078,7 @@ msgstr "Mărimea fișierului de ieșire"
 
 #: convert.cpp:1328
 msgid "File size ratio"
-msgstr ""
+msgstr "Raportul de mărime al fişierului"
 
 #: convert.cpp:1435
 msgctxt "The conversion progress can't be determined"
@@ -1086,7 +1091,7 @@ msgstr "Filtru"
 
 #: convert.cpp:1485 filelist.cpp:567
 msgid "Waiting for Replay Gain"
-msgstr ""
+msgstr "Aşteptind Replay Gain"
 
 #: convert.cpp:1509 replaygainscanner/replaygainprocessor.cpp:407
 msgid "Progress: %1"
@@ -1100,6 +1105,11 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
+"Wave este un format audio foarte simplu care nu comprima fluxul audio, "
+"astfel încât este fără pierderi, dar dimensiunea fişierului este foarte mare "
+"şi ea nu are suport pentru funcţii avansate cum ar fi Tag-uri. <br>Este "
+"suportat de aproape orice software sau dispozitiv.<br><br><a href=\"http://"
+"en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/wiki/WAV</a>"
 
 #: core/backendplugin.cpp:47
 msgid ""

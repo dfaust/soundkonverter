@@ -26,7 +26,11 @@
 #include <KMessageBox>
 #include <QDir>
 
-#if KDE_IS_VERSION(4,4,0)
+//#ifdef SOUNDKONVERTER_KF5_BUILD
+    //#define KAction QAction
+//#endif
+
+#if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
     #include <KStatusNotifierItem>
 #else
     #include <KSystemTrayIcon>
@@ -101,21 +105,18 @@ void soundKonverter::saveProperties( KConfigGroup& configGroup )
 
 void soundKonverter::showSystemTray()
 {
-    if( !systemTray )
-    {
-        #if KDE_IS_VERSION(4,4,0)
-            systemTray = new KStatusNotifierItem( this );
-            systemTray->setCategory( KStatusNotifierItem::ApplicationStatus );
-            systemTray->setStatus( KStatusNotifierItem::Active );
-            systemTray->setIconByName( "soundkonverter" );
-            systemTray->setToolTip( "soundkonverter", i18n("Waiting"), "" );
-        #else
-            systemTray = new KSystemTrayIcon( this );
-            systemTray->setIcon( KIcon("soundkonverter") );
-            systemTray->setToolTip( i18n("Waiting") );
-            systemTray->show();
-        #endif
-    }
+    #if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
+        systemTray = new KStatusNotifierItem( this );
+        systemTray->setCategory( KStatusNotifierItem::ApplicationStatus );
+        systemTray->setStatus( KStatusNotifierItem::Active );
+        systemTray->setIconByName( "soundkonverter" );
+        systemTray->setToolTip( "soundkonverter", i18n("Waiting"), "" );
+    #else
+        systemTray = new KSystemTrayIcon( this );
+        systemTray->setIcon( KIcon("soundkonverter") );
+        systemTray->setToolTip( i18n("Waiting") );
+        systemTray->show();
+    #endif
 }
 
 void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )

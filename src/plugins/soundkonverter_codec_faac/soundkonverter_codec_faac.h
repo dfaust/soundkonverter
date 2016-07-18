@@ -15,7 +15,7 @@ class soundkonverter_codec_faac : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_faac( QObject *parent, const QStringList& args );
+    soundkonverter_codec_faac( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_faac();
@@ -49,7 +49,9 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_CODEC( faac, soundkonverter_codec_faac )
+#endif
 
 
 #endif // _SOUNDKONVERTER_CODEC_FAAC_H_

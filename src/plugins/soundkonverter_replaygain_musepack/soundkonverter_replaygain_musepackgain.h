@@ -14,7 +14,7 @@ class soundkonverter_replaygain_musepackgain : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_musepackgain( QObject *parent, const QStringList& args );
+    soundkonverter_replaygain_musepackgain( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_musepackgain();
@@ -36,7 +36,9 @@ public:
 
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( musepackgain, soundkonverter_replaygain_musepackgain )
+#endif
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_MUSEPACKGAIN_H_

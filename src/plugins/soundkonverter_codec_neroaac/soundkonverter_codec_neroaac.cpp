@@ -9,7 +9,7 @@
 
 // NeroAAC is a propritary implementation of an aac encoder that claims to reach a better quality then faac.\nYou can download it at http://www.nero.com/enu/downloads-nerodigital-nero-aac-codec.php
 
-soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, const QStringList& args  )
+soundkonverter_codec_neroaac::soundkonverter_codec_neroaac( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -210,5 +210,8 @@ void soundkonverter_codec_neroaac::processOutput()
     }
 }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_neroaac, registerPlugin<soundkonverter_codec_neroaac>();)
+#endif
 
 #include "soundkonverter_codec_neroaac.moc"

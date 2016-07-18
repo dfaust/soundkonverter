@@ -30,7 +30,7 @@ class soundkonverter_replaygain_mp3gain : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_mp3gain( QObject *parent, const QStringList& args );
+    soundkonverter_replaygain_mp3gain( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_mp3gain();
@@ -66,7 +66,9 @@ private slots:
 
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( mp3gain, soundkonverter_replaygain_mp3gain )
+#endif
 
 
 #endif // _SOUNDKONVERTER_REPLAYGAIN_MP3GAIN_H_

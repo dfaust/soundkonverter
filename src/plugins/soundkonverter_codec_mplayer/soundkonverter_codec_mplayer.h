@@ -12,7 +12,7 @@ class soundkonverter_codec_mplayer : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_mplayer( QObject *parent, const QStringList& args );
+    soundkonverter_codec_mplayer( QObject *parent, const VARG_TYPE& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_mplayer();
@@ -38,7 +38,9 @@ private:
 
 };
 
+#ifndef SOUNDKONVERTER_KF5_BUILD
 K_EXPORT_SOUNDKONVERTER_CODEC( mplayer, soundkonverter_codec_mplayer )
+#endif
 
 
 #endif // SOUNDKONVERTER_CODEC_MPLAYER_H

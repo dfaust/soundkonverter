@@ -2,6 +2,10 @@
 #ifndef BACKENDPLUGIN_H
 #define BACKENDPLUGIN_H
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    #include <kcoreaddons_export.h>
+#endif
+
 #include <KGenericFactory>
 #include <KProcess>
 #include <KUrl>
@@ -48,7 +52,11 @@ public:
 /**
     @author Daniel Faust <hessijames@gmail.com>
 */
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT BackendPlugin : public QObject
+#else
 class KDE_EXPORT BackendPlugin : public QObject
+#endif
 {
     Q_OBJECT
 public:

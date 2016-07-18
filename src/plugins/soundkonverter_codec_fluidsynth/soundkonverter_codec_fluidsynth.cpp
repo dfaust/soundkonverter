@@ -12,7 +12,7 @@
 #include <KUrlRequester>
 
 
-soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args  )
+soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *parent, const VARG_TYPE& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -29,7 +29,11 @@ soundkonverter_codec_fluidsynth::soundkonverter_codec_fluidsynth( QObject *paren
     KConfigGroup group;
 
     group = conf->group( "Plugin-"+name() );
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    soundFontFile = group.readEntry( "soundFontFile", QUrl() );
+#else
     soundFontFile = group.readEntry( "soundFontFile", KUrl() );
+#endif
 }
 
 soundkonverter_codec_fluidsynth::~soundkonverter_codec_fluidsynth()
@@ -200,6 +204,10 @@ float soundkonverter_codec_fluidsynth::parseOutput( const QString& output )
 
     return -1;
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(codec_fluidsynth, registerPlugin<soundkonverter_codec_fluidsynth>();)
+#endif
 
 
 #include "soundkonverter_codec_fluidsynth.moc"

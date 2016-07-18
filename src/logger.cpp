@@ -8,6 +8,10 @@
 #include <cstdlib>
 #include <ctime>
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+#include <KGlobal>
+#endif
+
 
 #define MAX_LOGS  20
 #define MAX_LINES 10000

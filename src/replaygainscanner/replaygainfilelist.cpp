@@ -14,6 +14,7 @@
 #include <QFileInfo>
 #include <KAction>
 #include <QMenu>
+#include <KIcon>
 
 
 ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent )

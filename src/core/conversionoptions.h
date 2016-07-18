@@ -3,6 +3,10 @@
 #ifndef CONVERSIONOPTIONS_H
 #define CONVERSIONOPTIONS_H
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    #include <kcoreaddons_export.h>
+#endif
+
 #include <KGenericFactory>
 
 #include <QString>
@@ -14,7 +18,12 @@
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT FilterOptions
+#else
 class KDE_EXPORT FilterOptions
+#endif
 {
 public:
     FilterOptions();
@@ -41,7 +50,11 @@ public:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
+#ifdef SOUNDKONVERTER_KF5_BUILD
+class KCOREADDONS_EXPORT ConversionOptions
+#else
 class KDE_EXPORT ConversionOptions
+#endif
 {
 public:
     ConversionOptions();

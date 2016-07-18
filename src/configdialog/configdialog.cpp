@@ -21,22 +21,39 @@
 #include <KIcon>
 #include <KPushButton>
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+#include <QDialogButtonBox>
+#endif
+
 ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/ )
     : KPageDialog( parent ),
     config( _config )
 {
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+    setWindowTitle(i18n("Settings"));
+#else
     setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
     setCaption( i18n("Settings") );
+#endif
 
     generalPageChanged = false;
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    buttonBox()->button(QDialogButtonBox::Apply)->setEnabled( false );
+
+    connect( button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(applyClicked()) );
+    connect( button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(okClicked()) );
+    connect( button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), this, SLOT(defaultClicked()) );
+#else
     button(KDialog::Apply)->setEnabled( false );
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
     connect( this, SIGNAL(defaultClicked()), this, SLOT(defaultClicked()) );
+#endif
 
     configGeneralPage = new ConfigGeneralPage( config, this );
     generalPage = addPage( qobject_cast<QWidget*>(configGeneralPage), i18n("General") );
@@ -90,7 +107,11 @@ void ConfigDialog::configChanged( bool state )
 
     const bool changed = ( generalPageChanged || advancedlPageChanged || coverArtPageChanged || backendsPageChanged );
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    button(QDialogButtonBox::Apply)->setEnabled( changed );
+#else
     button(KDialog::Apply)->setEnabled( changed );
+#endif
 }
 
 void ConfigDialog::applyClicked()
@@ -101,7 +122,11 @@ void ConfigDialog::applyClicked()
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
+#ifdef SOUNDKONVERTER_KF5_BUILD
+    button(QDialogButtonBox::Apply)->setEnabled( false );
+#else
     button(KDialog::Apply)->setEnabled( false );
+#endif
 }
 
 void ConfigDialog::okClicked()

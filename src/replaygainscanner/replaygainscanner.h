@@ -3,6 +3,7 @@
 #define REPLAYGAINSCANNER_H
 
 #include <KDialog>
+#include <KUrl>
 
 class Config;
 class Logger;

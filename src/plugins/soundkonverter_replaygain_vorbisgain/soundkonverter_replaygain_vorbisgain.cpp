@@ -4,7 +4,7 @@
 #include "soundkonverter_replaygain_vorbisgain.h"
 
 
-soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_vorbisgain::soundkonverter_replaygain_vorbisgain( QObject *parent, const VARG_TYPE& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -165,5 +165,9 @@ void soundkonverter_replaygain_vorbisgain::processOutput()
         }
     }
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(replaygain_vorbisgain, registerPlugin<soundkonverter_replaygain_vorbisgain>();)
+#endif
 
 #include "soundkonverter_replaygain_vorbisgain.moc"

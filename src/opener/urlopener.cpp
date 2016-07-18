@@ -23,6 +23,7 @@
 
 #include <KUrlRequester>
 #include <QDir>
+#include <KIcon>
 
 
 // TODO enable proceed button only if at least one file got selected // copy'n'paste error ???
@@ -118,7 +119,11 @@ void UrlOpener::proceedClickedSlot()
             return;
         }
 
+#ifdef SOUNDKONVERTER_KF5_BUILD
+        urls += urlRequester->url();
+#else
         urls = urlRequester->url();
+#endif
 
         urlRequester->hide();
         options->show();

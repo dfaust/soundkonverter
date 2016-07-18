@@ -7,7 +7,7 @@
 #include <QFile>
 
 
-soundkonverter_replaygain_musepackgain::soundkonverter_replaygain_musepackgain( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_musepackgain::soundkonverter_replaygain_musepackgain( QObject *parent, const VARG_TYPE& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -128,5 +128,9 @@ float soundkonverter_replaygain_musepackgain::parseOutput( const QString& output
 
     return -1;
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(replaygain_musepackgain, registerPlugin<soundkonverter_replaygain_musepackgain>();)
+#endif
 
 #include "soundkonverter_replaygain_musepackgain.moc"

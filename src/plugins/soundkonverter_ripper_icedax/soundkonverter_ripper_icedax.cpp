@@ -5,7 +5,7 @@
 
 #include <KLocale>
 
-soundkonverter_ripper_icedax::soundkonverter_ripper_icedax( QObject *parent, const QStringList& args  )
+soundkonverter_ripper_icedax::soundkonverter_ripper_icedax( QObject *parent, const VARG_TYPE& args  )
     : RipperPlugin( parent )
 {
     Q_UNUSED(args)
@@ -163,5 +163,9 @@ void soundkonverter_ripper_icedax::processOutput()
         }
     }
 }
+
+#ifdef SOUNDKONVERTER_KF5_BUILD
+K_PLUGIN_FACTORY(ripper_icedax, registerPlugin<soundkonverter_ripper_icedax>();)
+#endif
 
 #include "soundkonverter_ripper_icedax.moc"

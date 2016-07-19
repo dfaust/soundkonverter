@@ -34,8 +34,8 @@ if (KF5_BUILD)
     include(ECMInstallIcons)
     include(FeatureSummary)
 
-    find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
-    find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
+    find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
+    find_package(KF5 REQUIRED COMPONENTS Cddb I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
     find_package(Phonon4Qt5 REQUIRED)
 else ()
     set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
@@ -47,7 +47,6 @@ endif ()
 
 # additional libs
 find_package(Cdparanoia REQUIRED)
-find_package(Kcddb REQUIRED)
 
 set(TAGLIB_MIN_VERSION "1.10")
 find_package(Taglib REQUIRED)
@@ -145,7 +144,7 @@ set(soundkonverter_SRCS
 
 if (KF5_BUILD)
     add_executable(soundkonverter ${soundkonverter_SRCS})
-    target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
+    target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid KF5::Cddb Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
 else ()
     kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
     target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)

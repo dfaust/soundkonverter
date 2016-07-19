@@ -5,9 +5,15 @@
 #include <KDialog>
 #include <QTimer>
 
+#if SOUNDKONVERTER_KF5_BUILD
+#include <KCddb/Kcddb>
+#include <KCddb/Client>
+#include <KCddb/Cdinfo>
+#else
 #include <libkcddb/kcddb.h>
 #include <libkcddb/client.h>
 #include <libkcddb/cdinfo.h>
+#endif
 
 extern "C"
 {

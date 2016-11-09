@@ -12,9 +12,9 @@
         <binary>soundkonverter</binary>
     </provides>
 
-    <url type="homepage">https://github.com/HessiJames/soundkonverter</url>
-    <url type="bugtracker">https://github.com/HessiJames/soundkonverter/issues</url>
-    <url type="help">https://github.com/HessiJames/soundkonverter/wiki</url>
+    <url type="homepage">https://github.com/dfaust/soundkonverter</url>
+    <url type="bugtracker">https://github.com/dfaust/soundkonverter/issues</url>
+    <url type="help">https://github.com/dfaust/soundkonverter/wiki</url>
 
     <description>
         <p>soundKonverter is a frontend to various audio converters.</p>

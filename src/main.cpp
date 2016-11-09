@@ -13,7 +13,7 @@
 
 
 static const char description[] =
-I18N_NOOP("soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n\nPlease file bug reports at https://github.com/HessiJames/soundkonverter/issues");
+I18N_NOOP("soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n\nPlease file bug reports at https://github.com/dfaust/soundkonverter/issues");
 
 static const char version[] = SOUNDKONVERTER_VERSION_STRING;
 

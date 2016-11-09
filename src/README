@@ -50,7 +50,7 @@ If you try to convert a file that is not supported, soundKonverter will tell you
 
 soundKonverter has nothing to do with the soundconverter project, the very similar name is just an unfortunate coincident.
 
-Websites: https://github.com/HessiJames/soundkonverter
+Websites: https://github.com/dfaust/soundkonverter
           http://kde-apps.org/content/show.php?content=29024
 
 
@@ -149,18 +149,18 @@ Precompiled packages:
 You can find soundKonverter packages for various distributions with a nice download interface and some instructions at:
 http://software.opensuse.org/download.html?project=home:HessiJames&package=soundkonverter
 
-For more information see: https://github.com/HessiJames/soundkonverter/wiki/Installing%20soundKonverter#precompiled-packages
+For more information see: https://github.com/dfaust/soundkonverter/wiki/Installing%20soundKonverter#precompiled-packages
 
 
 
 Git repository:
 ===============
-For everybody who is interested, there is a git repository at https://github.com/HessiJames/soundkonverter
+For everybody who is interested, there is a git repository at https://github.com/dfaust/soundkonverter
 In order to obtain the source code from the git repository you need to install "git" and execute the following commands:
 
 initialize local git repository:
 
-git clone git://github.com/HessiJames/soundkonverter.git
+git clone git://github.com/dfaust/soundkonverter.git
 
 update repository:
 
@@ -172,7 +172,7 @@ Reporting bugs - please report every bug you find, that's the only way I can fix
 ====================================================================================
 You can either leave a comment at http://kde-apps.org/content/show.php?content=29024
 or write me a mail to hessijames@gmail.com
-but the best way is to create an issue at https://github.com/HessiJames/soundkonverter/issues
+but the best way is to create an issue at https://github.com/dfaust/soundkonverter/issues
 
 Some tips for creating a useful bug report:
 
@@ -208,7 +208,7 @@ c) If you are running an operating system other than openSUSE and have installed
    and the additional developer information get installed automatically. But I haven't tested it.
 In order to reproduce a crash try doing the exact same thing you did when the crash occurred.
 If you managed to get a useful crash report you can either directly send it to me by clicking on the "Report problems or wishes" button
-or even better you can copy the generated information and create a new issue at https://github.com/HessiJames/soundkonverter/issues and paste them there.
+or even better you can copy the generated information and create a new issue at https://github.com/dfaust/soundkonverter/issues and paste them there.
 
 
 
@@ -219,4 +219,4 @@ If you would like to translate soundKonverter to your native language you can re
 
 Patches:
 You can very easily fork the current code with github. You can then work in your forked version and request a pull.
-Have a look at: https://github.com/HessiJames/soundkonverter
+Have a look at: https://github.com/dfaust/soundkonverter

@@ -12,7 +12,7 @@ soundkonverter_replaygain_musepackgain::soundkonverter_replaygain_musepackgain( 
 {
     Q_UNUSED(args)
 
-    binaries["replaygain"] = "";
+    binaries["mpcgain"] = "";
 
     allCodecs += "musepack";
 }
@@ -25,30 +25,6 @@ QString soundkonverter_replaygain_musepackgain::name() const
     return global_plugin_name;
 }
 
-void soundkonverter_replaygain_musepackgain::scanForBackends( const QStringList& directoryList )
-{
-    binaries["replaygain"] = KStandardDirs::findExe( "replaygain" ); // sv7
-    if( binaries["replaygain"].isEmpty() )
-        binaries["replaygain"] = KStandardDirs::findExe( "mpcgain" ); // sv8
-
-    if( binaries["replaygain"].isEmpty() )
-    {
-        for( QList<QString>::const_iterator b = directoryList.begin(); b != directoryList.end(); ++b )
-        {
-            if( QFile::exists((*b) + "/replaygain") )
-            {
-                binaries["replaygain"] = (*b) + "/replaygain";
-                break;
-            }
-            else if( QFile::exists((*b) + "/mpcgain") )
-            {
-                binaries["replaygain"] = (*b) + "/mpcgain";
-                break;
-            }
-        }
-    }
-}
-
 QList<ReplayGainPipe> soundkonverter_replaygain_musepackgain::codecTable()
 {
     QList<ReplayGainPipe> table;
@@ -56,8 +32,8 @@ QList<ReplayGainPipe> soundkonverter_replaygain_musepackgain::codecTable()
 
     newPipe.codecName = "musepack";
     newPipe.rating = 100;
-    newPipe.enabled = ( binaries["replaygain"] != "" );
-    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "musepack", "replaygain" ) + "\n" + standardMessage( "install_website_backend,url", "replaygain", "http://www.musepack.net" );
+    newPipe.enabled = ( binaries["mpcgain"] != "" );
+    newPipe.problemInfo = standardMessage( "replygain_codec,backend", "musepack", "mpcgain" ) + "\n" + standardMessage( "install_website_backend,url", "mpcgain", "http://www.musepack.net" );
     table.append( newPipe );
 
     return table;
@@ -104,7 +80,7 @@ int soundkonverter_replaygain_musepackgain::apply( const KUrl::List& fileList, R
     connect( newItem->process, SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(processExit(int,QProcess::ExitStatus)) );
 
     QStringList command;
-    command += binaries["replaygain"];
+    command += binaries["mpcgain"];
     foreach( const KUrl& file, fileList )
     {
         command += "\"" + escapeUrl(file) + "\"";

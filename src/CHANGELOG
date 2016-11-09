@@ -1,3 +1,6 @@
+2.2.3:
+-Change: MusePack Gain plugin: Look for mpcgain rather than replaygain binary
+
 2.2.2:
 -Change: Move Polish (Poland) translation to Polish
 -Change: Move Swedish (Sweden) translation back to Swedish

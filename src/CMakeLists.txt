@@ -1,8 +1,5 @@
 project(soundkonverter)
-cmake_minimum_required(VERSION 2.8.12)
-
-cmake_policy(SET CMP0046 NEW)
-cmake_policy(SET CMP0002 OLD)
+cmake_minimum_required(VERSION 3.3.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -31,13 +28,13 @@ if (KF5_BUILD)
     include(KDEInstallDirs)
     include(KDECompilerSettings)
     include(KDECMakeSettings)
-    include(ECMPackageConfigHelpers)
+    include(CMakePackageConfigHelpers)
     include(ECMInstallIcons)
     include(FeatureSummary)
 
     find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
     find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
-	find_package(KF5Cddb)
+    find_package(KF5Cddb)
     set_package_properties(KF5Cddb PROPERTIES
         DESCRIPTION "KF5 CDDB library"
         URL "https://github.com/isoft-linux/libkcddb"

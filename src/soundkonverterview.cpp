@@ -176,11 +176,11 @@ void soundKonverterView::showFileDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -194,11 +194,11 @@ void soundKonverterView::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -272,11 +272,11 @@ void soundKonverterView::showUrlDialog()
 {
     UrlOpener *dialog = new UrlOpener( config, this );
 
-    connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
 
     dialog->exec();
 
-    disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+    disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
 
     delete dialog;
 
@@ -290,11 +290,11 @@ void soundKonverterView::showPlaylistDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(open(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }

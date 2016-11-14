@@ -142,7 +142,7 @@ void UrlOpener::okClickedSlot()
         if( conversionOptions )
         {
             options->accepted();
-            emit open( urls, conversionOptions );
+            emit openFiles( urls, conversionOptions );
             accept();
         }
         else

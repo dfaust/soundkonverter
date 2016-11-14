@@ -3,7 +3,7 @@
 #define REPLAYGAINSCANNER_H
 
 #include <KDialog>
-#include <KUrl>
+#include <QUrl>
 
 class Config;
 class Logger;
@@ -28,7 +28,7 @@ public:
     ReplayGainScanner( Config*, Logger*, bool showMainWindowButton, QWidget *parent, Qt::WFlags f=0 );
     ~ReplayGainScanner();
 
-    void addFiles( KUrl::List urls );
+    void addFiles( QList<QUrl> urls );
 
 private slots:
     void addClicked( int );

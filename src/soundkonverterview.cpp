@@ -64,7 +64,7 @@ soundKonverterView::soundKonverterView( Logger *_logger, Config *_config, CDMana
     fileList->setOptionsLayer( optionsLayer );
     optionsLayer->hide();
     gridLayout->addWidget( optionsLayer, 1, 0 );
-    connect( optionsLayer, SIGNAL(done(const KUrl::List&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*,const QString&)) );
+    connect( optionsLayer, SIGNAL(done(const QList<QUrl>&,ConversionOptions*,const QString&)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*,const QString&)) );
     connect( optionsLayer, SIGNAL(saveFileList()), fileList, SLOT(save()) );
 
 
@@ -176,11 +176,11 @@ void soundKonverterView::showFileDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -194,7 +194,7 @@ void soundKonverterView::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&,ConversionOptions*)), fileList, SLOT(addDir(const QUrl&,bool,const QStringList&,ConversionOptions*)) );
 
         dialog->exec();
 
@@ -272,11 +272,11 @@ void soundKonverterView::showUrlDialog()
 {
     UrlOpener *dialog = new UrlOpener( config, this );
 
-    connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+    connect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
     dialog->exec();
 
-    disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
+    disconnect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
     delete dialog;
 
@@ -290,11 +290,11 @@ void soundKonverterView::showPlaylistDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), fileList, SLOT(addFiles(const KUrl::List&,ConversionOptions*)) );
+        connect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), fileList, SLOT(addFiles(const QList<QUrl>&,ConversionOptions*)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(openFiles(const KUrl::List&,ConversionOptions*)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const QList<QUrl>&,ConversionOptions*)), 0, 0 );
 
         fileList->save( false );
     }
@@ -304,7 +304,7 @@ void soundKonverterView::showPlaylistDialog()
 
 void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profile, QString _format, const QString& directory, const QString& notifyCommand )
 {
-    KUrl::List k_urls;
+    QList<QUrl> k_urls;
     QStringList errorList;
     //    codec    @0 files @1 solutions
     QMap< QString, QList<QStringList> > problems;

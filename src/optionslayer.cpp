@@ -111,7 +111,7 @@ void OptionsLayer::fadeAnim()
     frame->setPalette( newPalette );
 }
 
-void OptionsLayer::addUrls( const KUrl::List& _urls )
+void OptionsLayer::addUrls( const QList<QUrl>& _urls )
 {
     urls += _urls;
 }

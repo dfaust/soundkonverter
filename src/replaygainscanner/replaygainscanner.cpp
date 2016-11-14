@@ -286,11 +286,11 @@ void ReplayGainScanner::showDirDialog()
 
     if( !dialog->dialogAborted )
     {
-        connect( dialog, SIGNAL(openFiles(const KUrl&,bool,const QStringList&)), fileList, SLOT(addDir(const KUrl&,bool,const QStringList&)) );
+        connect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&)), fileList, SLOT(addDir(const QUrl&,bool,const QStringList&)) );
 
         dialog->exec();
 
-        disconnect( dialog, SIGNAL(openFiles(const KUrl&,bool,const QStringList&)), 0, 0 );
+        disconnect( dialog, SIGNAL(openFiles(const QUrl&,bool,const QStringList&)), 0, 0 );
     }
 
     delete dialog;
@@ -302,7 +302,7 @@ void ReplayGainScanner::showMainWindowClicked()
     emit showMainWindow();
 }
 
-void ReplayGainScanner::addFiles( KUrl::List urls )
+void ReplayGainScanner::addFiles( QList<QUrl> urls )
 {
     fileList->addFiles( urls );
 }

@@ -14,7 +14,7 @@
 
 #include <KDialog>
 
-#include <KUrl>
+#include <QUrl>
 
 class Config;
 class Options;
@@ -60,7 +60,7 @@ private slots:
     void okClickedSlot();
 
 signals:
-    void openFiles( const KUrl::List& files, ConversionOptions *conversionOptions );
+    void openFiles( const QList<QUrl>& files, ConversionOptions *conversionOptions );
 
 };
 

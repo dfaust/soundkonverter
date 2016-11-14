@@ -12,7 +12,7 @@ class soundkonverter_codec_musepack : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_musepack( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_codec_musepack( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_musepack();
@@ -37,11 +37,4 @@ public:
     ConversionOptions *conversionOptionsFromXml( QDomElement conversionOptions, QList<QDomElement> *filterOptionsElements = 0 );
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_CODEC( musepack, soundkonverter_codec_musepack )
-#endif
-
-
 #endif // SOUNDKONVERTER_CODEC_MUSEPACK_H
-
-

@@ -24,9 +24,7 @@
 #include <QMenu>
 #include <QToolButton>
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 #define setShown setVisible
-#endif
 
 //
 // class OptionsDetailed

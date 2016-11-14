@@ -116,20 +116,12 @@ SoxEffectWidget::~SoxEffectWidget()
 
 void SoxEffectWidget::setAddButtonShown( bool shown )
 {
-#ifdef SOUNDKONVERTER_KF5_BUILD
     pAdd->setVisible( shown );
-#else
-    pAdd->setShown( shown );
-#endif
 }
 
 void SoxEffectWidget::setRemoveButtonShown( bool shown )
 {
-#ifdef SOUNDKONVERTER_KF5_BUILD
     pRemove->setVisible( shown );
-#else
-    pRemove->setShown( shown );
-#endif
 }
 
 void SoxEffectWidget::removeClicked()

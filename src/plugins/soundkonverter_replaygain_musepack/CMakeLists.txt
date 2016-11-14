@@ -1,24 +1,13 @@
 project(soundkonverter_replaygain_musepackgain)
 
-if (KF5_BUILD)
-    find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-else ()
-    find_package(KDE4 REQUIRED)
-    include (KDE4Defaults)
-    include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-endif ()
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
 
 set(soundkonverter_replaygain_musepackgain_SRCS
    soundkonverter_replaygain_musepackgain.cpp
- )
+)
 
-if (KF5_BUILD)
-    add_library(soundkonverter_replaygain_musepackgain MODULE ${soundkonverter_replaygain_musepackgain_SRCS})
-    target_link_libraries(soundkonverter_replaygain_musepackgain KF5::WidgetsAddons soundkonvertercore )
-else ()
-    kde4_add_plugin(soundkonverter_replaygain_musepackgain ${soundkonverter_replaygain_musepackgain_SRCS})
-    target_link_libraries(soundkonverter_replaygain_musepackgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
-endif ()
+add_library(soundkonverter_replaygain_musepackgain MODULE ${soundkonverter_replaygain_musepackgain_SRCS})
+target_link_libraries(soundkonverter_replaygain_musepackgain KF5::WidgetsAddons soundkonvertercore)
 
 ########### install files ###############
 

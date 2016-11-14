@@ -37,7 +37,6 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
 {
     tagEngine = config->tagEngine();
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
     QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
     buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel );
     User1 = new QPushButton(KIcon("go-next"), i18n("Next"));
@@ -46,21 +45,9 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
     User2 = new QPushButton(KIcon("go-previous"), i18n("Previous"));
     User2->setAutoRepeat(true);
     buttonBox->addButton(User2, QDialogButtonBox::ActionRole);
-#else
-    setButtons( KDialog::User1 | KDialog::User2 | KDialog::Ok | KDialog::Apply | KDialog::Cancel );
-    setButtonText( KDialog::User2, i18n("Previous") );
-    setButtonIcon( KDialog::User2, KIcon("go-previous") );
-    setButtonText( KDialog::User1, i18n("Next") );
-    setButtonIcon( KDialog::User1, KIcon("go-next") );
-#endif
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyChanges()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(applyChanges()) );
-
-#ifndef SOUNDKONVERTER_KF5_BUILD
-    button(KDialog::User2)->setAutoRepeat(true);
-    button(KDialog::User1)->setAutoRepeat(true);
-#endif
 
     QWidget *conversionOptionsWidget = new QWidget( this );
     KPageWidgetItem *conversionOptionsPage = addPage( conversionOptionsWidget, i18n("Conversion") );
@@ -385,11 +372,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
     if( selectedItems.count() == 0 )
     {
-#ifdef SOUNDKONVERTER_KF5_BUILD
         setWindowTitle( i18n("No file selected") );
-#else
-        setCaption( i18n("No file selected") );
-#endif
         options->setEnabled( false );
         lEditOptions->hide();
         pEditOptions->hide();
@@ -411,11 +394,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     {
         FileListItem *item = selectedItems.first();
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
         setWindowTitle(selectedItems.first()->url.fileName());
-#else
-        setCaption( selectedItems.first()->url.fileName() );
-#endif
 
         const bool success = options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(selectedItems.first()->conversionOptionsId) );
         options->setEnabled( success );
@@ -490,11 +469,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     }
     else // selectedItems.count() > 1
     {
-#ifdef SOUNDKONVERTER_KF5_BUILD
         setWindowTitle(i18n("%1 Files").arg(selectedItems.count()));
-#else
-        setCaption( i18n("%1 Files").arg(selectedItems.count()) );
-#endif
 
         FileListItem *firstItem = selectedItems.first();
         const int     conversionOptionsId = firstItem->conversionOptionsId;
@@ -655,20 +630,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
 void OptionsEditor::setPreviousEnabled( bool enabled )
 {
-#ifdef SOUNDKONVERTER_KF5_BUILD
     User2->setEnabled(enabled);
-#else
-    enableButton( User2, enabled );
-#endif
 }
 
 void OptionsEditor::setNextEnabled( bool enabled )
 {
-#ifdef SOUNDKONVERTER_KF5_BUILD
     User1->setEnabled(enabled);
-#else
-    enableButton( User1, enabled );
-#endif
 }
 
 void OptionsEditor::applyChanges()

@@ -15,7 +15,7 @@
 #include <QFileInfo>
 
 
-soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const VARG_TYPE& args  )
+soundkonverter_filter_sox::soundkonverter_filter_sox( QObject *parent, const QVariantList& args  )
     : FilterPlugin( parent )
 {
     Q_UNUSED(args)
@@ -529,10 +529,6 @@ void soundkonverter_filter_sox::infoProcessExit( int exitCode, QProcess::ExitSta
     infoProcess.data()->deleteLater();
 }
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 K_PLUGIN_FACTORY(filter_sox, registerPlugin<soundkonverter_filter_sox>();)
-#endif
-
 
 #include "soundkonverter_filter_sox.moc"
-

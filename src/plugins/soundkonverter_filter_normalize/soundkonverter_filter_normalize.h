@@ -12,7 +12,7 @@ class soundkonverter_filter_normalize : public FilterPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_filter_normalize( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_filter_normalize( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_filter_normalize();
@@ -36,11 +36,4 @@ public:
     FilterOptions *filterOptionsFromXml( QDomElement filterOptions );
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_FILTER( normalize, soundkonverter_filter_normalize )
-#endif
-
-
 #endif // SOUNDKONVERTER_FILTER_NORMALIZE_H
-
-

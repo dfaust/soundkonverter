@@ -2,14 +2,8 @@
 #ifndef CODECPLUGIN_H
 #define CODECPLUGIN_H
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
-    #include <kcoreaddons_export.h>
-    #include <QVariantList>
-    #define VARG_TYPE QVariantList
-#else
-    #include <QStringList>
-    #define VARG_TYPE QStringList
-#endif
+#include <kcoreaddons_export.h>
+#include <QVariantList>
 
 #include "backendplugin.h"
 #include "conversionoptions.h"
@@ -18,11 +12,7 @@ class CodecPlugin;
 class CodecWidget;
 class TagData;
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 class KCOREADDONS_EXPORT CodecPluginItem : public BackendPluginItem
-#else
-class KDE_EXPORT CodecPluginItem : public BackendPluginItem
-#endif
 {
     Q_OBJECT
 public:
@@ -36,11 +26,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-#ifdef SOUNDKONVERTER_KF5_BUILD
 class KCOREADDONS_EXPORT CodecPlugin : public BackendPlugin
-#else
-class KDE_EXPORT CodecPlugin : public BackendPlugin
-#endif
 {
     Q_OBJECT
 public:
@@ -72,10 +58,4 @@ protected:
 
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-#define K_EXPORT_SOUNDKONVERTER_CODEC(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_codec_##libname, KGenericFactory<classname>("soundkonverter_codec_" #libname) )
-#endif
-
 #endif // CODECPLUGIN_H
-

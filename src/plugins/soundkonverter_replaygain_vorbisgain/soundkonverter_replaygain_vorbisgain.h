@@ -14,7 +14,7 @@ class soundkonverter_replaygain_vorbisgain : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_vorbisgain( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_replaygain_vorbisgain( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_vorbisgain();
@@ -38,11 +38,4 @@ private slots:
 
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( vorbisgain, soundkonverter_replaygain_vorbisgain )
-#endif
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_VORBISGAIN_H_
-
-

@@ -50,11 +50,7 @@ private:
     DialogPage page;
     QLabel *lSelector;
     QLabel *lOptions;
-#ifdef SOUNDKONVERTER_KF5_BUILD
     QList<QUrl> urls;
-#else
-    KUrl::List urls;
-#endif
     KPushButton *pProceed;
     KPushButton *pAdd;
     KPushButton *pCancel;

@@ -1,24 +1,13 @@
 project(soundkonverter_replaygain_wvgain)
 
-if (KF5_BUILD)
-    find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-else ()
-    find_package(KDE4 REQUIRED)
-    include (KDE4Defaults)
-    include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
-endif ()
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
 
 set(soundkonverter_replaygain_wvgain_SRCS
    soundkonverter_replaygain_wvgain.cpp
- )
+)
 
-if (KF5_BUILD)
-    add_library(soundkonverter_replaygain_wvgain MODULE ${soundkonverter_replaygain_wvgain_SRCS})
-    target_link_libraries(soundkonverter_replaygain_wvgain KF5::WidgetsAddons soundkonvertercore )
-else ()
-    kde4_add_plugin(soundkonverter_replaygain_wvgain ${soundkonverter_replaygain_wvgain_SRCS})
-    target_link_libraries(soundkonverter_replaygain_wvgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
-endif ()
+add_library(soundkonverter_replaygain_wvgain MODULE ${soundkonverter_replaygain_wvgain_SRCS})
+target_link_libraries(soundkonverter_replaygain_wvgain KF5::WidgetsAddons soundkonvertercore)
 
 ########### install files ###############
 

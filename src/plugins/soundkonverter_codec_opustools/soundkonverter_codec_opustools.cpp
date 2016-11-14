@@ -11,7 +11,7 @@
 #include <QBoxLayout>
 
 
-soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent, const VARG_TYPE& args  )
+soundkonverter_codec_opustools::soundkonverter_codec_opustools( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -235,8 +235,6 @@ ConversionOptions *soundkonverter_codec_opustools::conversionOptionsFromXml( QDo
     return options;
 }
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 K_PLUGIN_FACTORY( codec_opustools, registerPlugin<soundkonverter_codec_opustools>(); )
-#endif
 
 #include "soundkonverter_codec_opustools.moc"

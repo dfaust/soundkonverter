@@ -5,15 +5,9 @@
 #include <KDialog>
 #include <QTimer>
 
-#if SOUNDKONVERTER_KF5_BUILD
 #include <KCddb/Kcddb>
 #include <KCddb/Client>
 #include <KCddb/Cdinfo>
-#else
-#include <libkcddb/kcddb.h>
-#include <libkcddb/client.h>
-#include <libkcddb/cdinfo.h>
-#endif
 
 extern "C"
 {
@@ -26,11 +20,7 @@ extern "C"
 #include <phonon/mediaobject.h>
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
-#ifdef SOUNDKONVERTER_KF5_BUILD
 #include <phonon/MediaController>
-#else
-#include <Phonon/MediaController>
-#endif
 
 
 class TagEngine;

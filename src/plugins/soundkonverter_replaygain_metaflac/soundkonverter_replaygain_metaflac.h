@@ -14,7 +14,7 @@ class soundkonverter_replaygain_metaflac : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_metaflac( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_replaygain_metaflac( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_metaflac();
@@ -33,11 +33,4 @@ public:
 
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( metaflac, soundkonverter_replaygain_metaflac )
-#endif
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_METAFLAC_H_
-
-

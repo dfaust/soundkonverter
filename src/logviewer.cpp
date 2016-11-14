@@ -14,9 +14,7 @@
 #include <KFileDialog>
 #include <KMessageBox>
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 #include <KGlobal>
-#endif
 
 
 LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )

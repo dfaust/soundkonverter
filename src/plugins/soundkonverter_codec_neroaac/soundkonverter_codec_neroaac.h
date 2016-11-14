@@ -12,7 +12,7 @@ class soundkonverter_codec_neroaac : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_neroaac( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_codec_neroaac( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_neroaac();
@@ -38,11 +38,4 @@ private slots:
     void processOutput();
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_CODEC( neroaac, soundkonverter_codec_neroaac )
-#endif
-
-
 #endif // _SOUNDKONVERTER_CODEC_NEROAAC_H_
-
-

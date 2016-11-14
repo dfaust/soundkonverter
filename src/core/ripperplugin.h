@@ -2,14 +2,8 @@
 #ifndef RIPPERPLUGIN_H
 #define RIPPERPLUGIN_H
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
-    #include <kcoreaddons_export.h>
-    #include <QVariantList>
-    #define VARG_TYPE QVariantList
-#else
-    #include <QStringList>
-    #define VARG_TYPE QStringList
-#endif
+#include <kcoreaddons_export.h>
+#include <QVariantList>
 
 #include "backendplugin.h"
 
@@ -18,11 +12,7 @@
 class RipperPlugin;
 
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 class KCOREADDONS_EXPORT RipperPluginItem : public BackendPluginItem
-#else
-class KDE_EXPORT RipperPluginItem : public BackendPluginItem
-#endif
 {
     Q_OBJECT
 public:
@@ -41,11 +31,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-#ifdef SOUNDKONVERTER_KF5_BUILD
 class KCOREADDONS_EXPORT RipperPlugin : public BackendPlugin
-#else
-class KDE_EXPORT RipperPlugin : public BackendPlugin
-#endif
 {
     Q_OBJECT
 public:
@@ -62,10 +48,4 @@ public:
     virtual QStringList ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile ) = 0;
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-#define K_EXPORT_SOUNDKONVERTER_RIPPER(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_ripper_##libname, KGenericFactory<classname>("soundkonverter_ripper_" #libname) )
-#endif
-
 #endif // RIPPERPLUGIN_H
-

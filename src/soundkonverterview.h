@@ -52,11 +52,7 @@ public:
     void loadAutosaveFileList();
     void loadFileList(const QString& fileListPath);
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
     QAction *start() { return startAction; }
-#else
-    KAction *start() { return startAction; }
-#endif
     KActionMenu *stopMenu() { return stopActionMenu; }
 
     void startConversion();
@@ -106,11 +102,7 @@ private:
     /** The button to start the conversion */
     KPushButton *pStart;
     /** Tha start action */
-#ifdef SOUNDKONVERTER_KF5_BUILD
     QAction *startAction;
-#else
-    KAction *startAction;
-#endif
 
     /** The button to stop the conversion */
     KPushButton *pStop;

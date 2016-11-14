@@ -12,7 +12,7 @@ class soundkonverter_codec_flake : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_flake( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_codec_flake( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_flake();
@@ -33,11 +33,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_CODEC( flake, soundkonverter_codec_flake )
-#endif
-
-
 #endif // _SOUNDKONVERTER_CODEC_FLAKE_H_
-
-

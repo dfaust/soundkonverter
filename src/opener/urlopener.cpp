@@ -119,11 +119,7 @@ void UrlOpener::proceedClickedSlot()
             return;
         }
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
         urls += urlRequester->url();
-#else
-        urls = urlRequester->url();
-#endif
 
         urlRequester->hide();
         options->show();

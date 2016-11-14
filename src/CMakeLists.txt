@@ -18,36 +18,28 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
 
 
 # kde libs
-option(KF5_BUILD "Build for KF5" ON)
-if (KF5_BUILD)
-    find_package(ECM REQUIRED NO_MODULE)
-    set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+find_package(ECM REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
-    add_definitions(-DSOUNDKONVERTER_KF5_BUILD)
+add_definitions(-DSOUNDKONVERTER_KF5_BUILD)
 
-    include(KDEInstallDirs)
-    include(KDECompilerSettings)
-    include(KDECMakeSettings)
-    include(CMakePackageConfigHelpers)
-    include(ECMInstallIcons)
-    include(FeatureSummary)
+include(KDEInstallDirs)
+include(KDECompilerSettings)
+include(KDECMakeSettings)
+include(CMakePackageConfigHelpers)
+include(ECMInstallIcons)
+include(FeatureSummary)
 
-    find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
-    find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
-    find_package(KF5Cddb)
-    set_package_properties(KF5Cddb PROPERTIES
-        DESCRIPTION "KF5 CDDB library"
-        URL "https://github.com/isoft-linux/libkcddb"
-        TYPE REQUIRED
-        PURPOSE "libkcddb is used to retrieve audio CD meta data from the internet."
-    )
-    find_package(Phonon4Qt5 REQUIRED)
-else ()
-    set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
-
-    find_package(KDE4 REQUIRED)
-    include(KDE4Defaults)
-endif ()
+find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
+find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
+find_package(KF5Cddb)
+set_package_properties(KF5Cddb PROPERTIES
+    DESCRIPTION "KF5 CDDB library"
+    URL "https://github.com/isoft-linux/libkcddb"
+    TYPE REQUIRED
+    PURPOSE "libkcddb is used to retrieve audio CD meta data from the internet."
+)
+find_package(Phonon4Qt5 REQUIRED)
 
 
 # additional libs
@@ -62,21 +54,12 @@ add_subdirectory(plugins)
 
 
 # include directories
-if (KF5_BUILD)
-    include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
-else ()
-    include_directories(${KDE4_INCLUDES} ${QT_INCLUDES} ${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
-endif ()
+include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
 
 
 # translation
-if (KF5_BUILD)
-    include(ECMOptionalAddSubdirectory)
-    ecm_optional_add_subdirectory( po )
-else ()
-    include(MacroOptionalAddSubdirectory)
-    macro_optional_add_subdirectory( po )
-endif ()
+include(ECMOptionalAddSubdirectory)
+ecm_optional_add_subdirectory( po )
 
 
 # soundkonvertercore
@@ -90,13 +73,8 @@ set(soundkonvertercore_SRCS
    core/ripperplugin.cpp
 )
 
-if (KF5_BUILD)
-    add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
-    target_link_libraries(soundkonvertercore KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::KDELibs4Support)
-else ()
-    kde4_add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
-    target_link_libraries(soundkonvertercore ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS})
-endif ()
+add_library(soundkonvertercore SHARED ${soundkonvertercore_SRCS})
+target_link_libraries(soundkonvertercore KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::KDELibs4Support)
 
 install(TARGETS soundkonvertercore DESTINATION ${LIB_INSTALL_DIR})
 
@@ -147,24 +125,15 @@ set(soundkonverter_SRCS
    aboutplugins.cpp
 )
 
-if (KF5_BUILD)
-    add_executable(soundkonverter ${soundkonverter_SRCS})
-    target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid KF5::Cddb Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
-else ()
-    kde4_add_executable(soundkonverter ${soundkonverter_SRCS})
-    target_link_libraries(soundkonverter ${KDE4_KDEUI_LIBS} ${KDE4_KFILE_LIBS} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBRARY} ${KDE4_PHONON_LIBS} ${TAGLIB_LIBRARIES} kcddb ${CDPARANOIA_LIBRARIES} soundkonvertercore)
-endif ()
+add_executable(soundkonverter ${soundkonverter_SRCS})
+target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid KF5::Cddb Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
 
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 
 
 # install directories
 install(FILES soundkonverter.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-if (KF5_BUILD)
-    install(FILES soundkonverterui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/soundkonverter)
-else ()
-install(FILES soundkonverterui.rc DESTINATION ${DATA_INSTALL_DIR}/soundkonverter)
-endif ()
+install(FILES soundkonverterui.rc DESTINATION ${KXMLGUI_INSTALL_DIR}/soundkonverter)
 
 install(FILES soundkonverter_codecplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter_filterplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
@@ -179,15 +148,4 @@ add_subdirectory(images)
 
 
 # summary
-if (KF5_BUILD)
-    feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
-else ()
-    macro_display_feature_log()
-endif ()
-
-
-# uninstall target
-if (!KF5_BUILD)
-    configure_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
-    add_custom_target(uninstall COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-endif ()
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)

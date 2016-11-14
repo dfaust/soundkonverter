@@ -73,11 +73,7 @@ private:
     QCheckBox *cRecursive;
 
 signals:
-#ifdef SOUNDKONVERTER_KF5_BUILD
     void open( const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions = 0 );
-#else
-    void open( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions = 0 );
-#endif
 };
 
 

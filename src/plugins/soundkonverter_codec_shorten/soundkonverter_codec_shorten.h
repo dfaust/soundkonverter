@@ -12,7 +12,7 @@ class soundkonverter_codec_shorten : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_shorten( QObject *parent, const VARG_TYPE& args );
+    soundkonverter_codec_shorten( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_shorten();
@@ -33,11 +33,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-#ifndef SOUNDKONVERTER_KF5_BUILD
-K_EXPORT_SOUNDKONVERTER_CODEC( shorten, soundkonverter_codec_shorten )
-#endif
-
-
 #endif // _SOUNDKONVERTER_CODEC_SHORTEN_H_
-
-

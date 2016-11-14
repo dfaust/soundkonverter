@@ -6,7 +6,7 @@
 #include "flakecodecwidget.h"
 
 
-soundkonverter_codec_flake::soundkonverter_codec_flake( QObject *parent, const VARG_TYPE& args  )
+soundkonverter_codec_flake::soundkonverter_codec_flake( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -137,9 +137,6 @@ float soundkonverter_codec_flake::parseOutput( const QString& output )
     return -1;
 }
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 K_PLUGIN_FACTORY(codec_flake, registerPlugin<soundkonverter_codec_flake>();)
-#endif
-
 
 #include "soundkonverter_codec_flake.moc"

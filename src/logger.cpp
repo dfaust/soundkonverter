@@ -8,9 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 #include <KGlobal>
-#endif
 
 
 #define MAX_LOGS  20

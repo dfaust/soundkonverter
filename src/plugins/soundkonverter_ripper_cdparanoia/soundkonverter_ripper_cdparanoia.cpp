@@ -14,7 +14,7 @@
 #include <KDialog>
 
 
-soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *parent, const VARG_TYPE& args  )
+soundkonverter_ripper_cdparanoia::soundkonverter_ripper_cdparanoia( QObject *parent, const QVariantList& args  )
     : RipperPlugin( parent )
 {
     Q_UNUSED(args)
@@ -335,8 +335,6 @@ void soundkonverter_ripper_cdparanoia::processOutput()
     }
 }
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
 K_PLUGIN_FACTORY(ripper_cdparanoia, registerPlugin<soundkonverter_ripper_cdparanoia>();)
-#endif
 
 #include "soundkonverter_ripper_cdparanoia.moc"

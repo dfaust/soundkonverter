@@ -111,10 +111,8 @@ private:
     Config *config;
     TagEngine *tagEngine;
 
-#ifdef SOUNDKONVERTER_KF5_BUILD
     QPushButton *User1;
     QPushButton *User2;
-#endif
 
 public slots:
     // connected to FileList

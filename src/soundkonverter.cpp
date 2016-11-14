@@ -26,15 +26,7 @@
 #include <KMessageBox>
 #include <QDir>
 
-//#ifdef SOUNDKONVERTER_KF5_BUILD
-    //#define KAction QAction
-//#endif
-
-#if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
-    #include <KStatusNotifierItem>
-#else
-    #include <KSystemTrayIcon>
-#endif
+#include <KStatusNotifierItem>
 
 soundKonverter::soundKonverter()
     : KXmlGuiWindow(),
@@ -105,18 +97,11 @@ void soundKonverter::saveProperties( KConfigGroup& configGroup )
 
 void soundKonverter::showSystemTray()
 {
-    #if KDE_IS_VERSION(4,4,0) || defined SOUNDKONVERTER_KF5_BUILD
-        systemTray = new KStatusNotifierItem( this );
-        systemTray->setCategory( KStatusNotifierItem::ApplicationStatus );
-        systemTray->setStatus( KStatusNotifierItem::Active );
-        systemTray->setIconByName( "soundkonverter" );
-        systemTray->setToolTip( "soundkonverter", i18n("Waiting"), "" );
-    #else
-        systemTray = new KSystemTrayIcon( this );
-        systemTray->setIcon( KIcon("soundkonverter") );
-        systemTray->setToolTip( i18n("Waiting") );
-        systemTray->show();
-    #endif
+    systemTray = new KStatusNotifierItem( this );
+    systemTray->setCategory( KStatusNotifierItem::ApplicationStatus );
+    systemTray->setStatus( KStatusNotifierItem::Active );
+    systemTray->setIconByName( "soundkonverter" );
+    systemTray->setToolTip( "soundkonverter", i18n("Waiting"), "" );
 }
 
 void soundKonverter::addConvertFiles( const KUrl::List& urls, const QString& profile, const QString& format, const QString& directory, const QString& notifyCommand )
@@ -140,52 +125,52 @@ void soundKonverter::setupActions()
     KStandardAction::quit( this, SLOT(close()), actionCollection() );
     KStandardAction::preferences( this, SLOT(showConfigDialog()), actionCollection() );
 
-    KAction *logviewer = actionCollection()->addAction("logviewer");
+    QAction *logviewer = actionCollection()->addAction("logviewer");
     logviewer->setText(i18n("View logs..."));
     logviewer->setIcon(KIcon("view-list-text"));
     connect( logviewer, SIGNAL(triggered()), this, SLOT(showLogViewer()) );
 
-    KAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
+    QAction *replaygainscanner = actionCollection()->addAction("replaygainscanner");
     replaygainscanner->setText(i18n("Replay Gain tool..."));
     replaygainscanner->setIcon(KIcon("soundkonverter-replaygain"));
     connect( replaygainscanner, SIGNAL(triggered()), this, SLOT(showReplayGainScanner()) );
 
-    KAction *aboutplugins = actionCollection()->addAction("aboutplugins");
+    QAction *aboutplugins = actionCollection()->addAction("aboutplugins");
     aboutplugins->setText(i18n("About plugins..."));
     aboutplugins->setIcon(KIcon("preferences-plugin"));
     connect( aboutplugins, SIGNAL(triggered()), this, SLOT(showAboutPlugins()) );
 
-    KAction *add_files = actionCollection()->addAction("add_files");
+    QAction *add_files = actionCollection()->addAction("add_files");
     add_files->setText(i18n("Add files..."));
     add_files->setIcon(KIcon("audio-x-generic"));
     connect( add_files, SIGNAL(triggered()), m_view, SLOT(showFileDialog()) );
 
-    KAction *add_folder = actionCollection()->addAction("add_folder");
+    QAction *add_folder = actionCollection()->addAction("add_folder");
     add_folder->setText(i18n("Add folder..."));
     add_folder->setIcon(KIcon("folder"));
     connect( add_folder, SIGNAL(triggered()), m_view, SLOT(showDirDialog()) );
 
-    KAction *add_audiocd = actionCollection()->addAction("add_audiocd");
+    QAction *add_audiocd = actionCollection()->addAction("add_audiocd");
     add_audiocd->setText(i18n("Add CD tracks..."));
     add_audiocd->setIcon(KIcon("media-optical-audio"));
     connect( add_audiocd, SIGNAL(triggered()), m_view, SLOT(showCdDialog()) );
 
-    KAction *add_url = actionCollection()->addAction("add_url");
+    QAction *add_url = actionCollection()->addAction("add_url");
     add_url->setText(i18n("Add url..."));
     add_url->setIcon(KIcon("network-workgroup"));
     connect( add_url, SIGNAL(triggered()), m_view, SLOT(showUrlDialog()) );
 
-    KAction *add_playlist = actionCollection()->addAction("add_playlist");
+    QAction *add_playlist = actionCollection()->addAction("add_playlist");
     add_playlist->setText(i18n("Add playlist..."));
     add_playlist->setIcon(KIcon("view-media-playlist"));
     connect( add_playlist, SIGNAL(triggered()), m_view, SLOT(showPlaylistDialog()) );
 
-    KAction *load = actionCollection()->addAction("load");
+    QAction *load = actionCollection()->addAction("load");
     load->setText(i18n("Load file list"));
     load->setIcon(KIcon("document-open"));
     connect( load, SIGNAL(triggered()), m_view, SLOT(loadFileList()) );
 
-    KAction *save = actionCollection()->addAction("save");
+    QAction *save = actionCollection()->addAction("save");
     save->setText(i18n("Save file list"));
     save->setIcon(KIcon("document-save"));
     connect( save, SIGNAL(triggered()), m_view, SLOT(saveFileList()) );

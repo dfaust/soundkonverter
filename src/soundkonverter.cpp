@@ -43,13 +43,6 @@ soundKonverter::soundKonverter()
     logger->log( 1000, i18n("This is soundKonverter %1").arg(SOUNDKONVERTER_VERSION_STRING) );
 
     logger->log( 1000, "\n" + i18n("Compiled with TagLib %1.%2.%3").arg(TAGLIB_MAJOR_VERSION).arg(TAGLIB_MINOR_VERSION).arg(TAGLIB_PATCH_VERSION) );
-    #if (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION < 7)
-    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for cover art in FLAC picture format for Xiph tags requires taglib 1.7 or later.") + "</span>" );
-    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for cover art for ASF/WMA tags requires taglib 1.7 or later.") + "</span>" );
-    #endif
-    #if (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION < 9)
-    logger->log( 1000, "<span style=\"color:red;\">" + i18n("Support for tags for Ogg Opus files requires taglib 1.9 or later.") + "</span>" );
-    #endif
 
     config = new Config( logger, this );
     config->load();
@@ -303,11 +296,7 @@ void soundKonverter::conversionStarted()
 {
     if( systemTray )
     {
-        #if KDE_IS_VERSION(4,4,0)
-            systemTray->setToolTip( "soundkonverter", i18n("Converting") + ": 0%", "" );
-        #else
-            systemTray->setToolTip( i18n("Converting") + ": 0%" );
-        #endif
+        systemTray->setToolTip( "soundkonverter", i18n("Converting") + ": 0%", "" );
     }
 }
 
@@ -318,11 +307,7 @@ void soundKonverter::conversionStopped( bool failed )
 
     if( systemTray )
     {
-        #if KDE_IS_VERSION(4,4,0)
-            systemTray->setToolTip( "soundkonverter", i18n("Finished"), "" );
-        #else
-            systemTray->setToolTip( i18n("Finished") );
-        #endif
+        systemTray->setToolTip( "soundkonverter", i18n("Finished"), "" );
     }
 }
 

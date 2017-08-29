@@ -356,23 +356,7 @@ void soundKonverterView::addConvertFiles( const KUrl::List& urls, QString _profi
         problem.codecName = problems.keys().at(i);
         if( problem.codecName != "wav" )
         {
-            #if QT_VERSION >= 0x040500
-                problems[problem.codecName][1].removeDuplicates();
-            #else
-                QStringList found;
-                for( int j=0; j<problems.value(problem.codecName).at(1).count(); j++ )
-                {
-                    if( found.contains(problems.value(problem.codecName).at(1).at(j)) )
-                    {
-                        problems[problem.codecName][1].removeAt(j);
-                        j--;
-                    }
-                    else
-                    {
-                        found += problems.value(problem.codecName).at(1).at(j);
-                    }
-                }
-            #endif
+            problems[problem.codecName][1].removeDuplicates();
             problem.solutions = problems.value(problem.codecName).at(1);
             if( problems.value(problem.codecName).at(0).count() <= 3 )
             {

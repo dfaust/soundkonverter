@@ -70,7 +70,7 @@ private:
     ReplayGainFileList *fileList;
     Logger *logger;
 
-    QStringList activeVorbisGainDirectories; // vorbisgain creates temporary files with the fixed name "vorbisgain.tmp", so it must run only once per directory (https://github.com/HessiJames/soundkonverter/issues/12)
+    QStringList activeVorbisGainDirectories; // vorbisgain creates temporary files with the fixed name "vorbisgain.tmp", so it must run only once per directory (https://github.com/dfaust/soundkonverter/issues/12)
 
     struct LogQueue {
         int id;

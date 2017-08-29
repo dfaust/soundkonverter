@@ -4,24 +4,6 @@
 #include "config.h"
 
 
-// Taglib added support for FLAC pictures in 1.7.0
-#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 7)
-# define TAGLIB_HAS_FLAC_PICTURELIST
-# define TAGLIB_HAS_ASF_PICTURE
-#endif
-
-// Taglib added support for DRM detection in 1.8.0
-#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 8)
-# define TAGLIB_HAS_MP4_DRM
-# define TAGLIB_HAS_ASF_DRM
-#endif
-
-// Taglib added support for opus in 1.9.0
-#if (TAGLIB_MAJOR_VERSION > 1) || (TAGLIB_MAJOR_VERSION == 1 && TAGLIB_MINOR_VERSION >= 9)
-# define TAGLIB_HAS_OPUS
-#endif
-
-
 #include <QFile>
 #include <QDir>
 #include <QBuffer>
@@ -49,10 +31,7 @@
 #include <mpcfile.h>
 #include <mp4tag.h>
 #include <mp4file.h>
-
-#ifdef TAGLIB_HAS_OPUS
 #include <opusfile.h>
-#endif
 
 
 CoverData::CoverData( const QByteArray& _data, const QString& _mimyType, Role _role, const QString& _description )
@@ -350,7 +329,6 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     tagData->musicBrainzReleaseId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].front() );
             }
         }
-        #ifdef TAGLIB_HAS_OPUS
         else if( TagLib::Ogg::Opus::File *file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref.file()) )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
@@ -383,7 +361,6 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                     tagData->musicBrainzReleaseId = TStringToQString( tag->fieldListMap()["MUSICBRAINZ_ALBUMID"].front() );
             }
         }
-        #endif // TAGLIB_HAS_OPUS
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
         {
             // cpil : Compilation (true vs. false)
@@ -425,9 +402,7 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 }
             }
 
-            #ifdef TAGLIB_HAS_MP4_DRM
             tagData->isEncrypted = file->audioProperties()->isEncrypted();
-            #endif // TAGLIB_HAS_MP4_DRM
         }
         else if( TagLib::ASF::File *file = dynamic_cast<TagLib::ASF::File*>(fileref.file()) )
         {
@@ -466,9 +441,7 @@ TagData* TagEngine::readTags( const KUrl& fileName )
                 }
             }
 
-            #ifdef TAGLIB_HAS_ASF_DRM
             tagData->isEncrypted = file->audioProperties()->isEncrypted();
-            #endif // TAGLIB_HAS_ASF_DRM
         }
         /*else if( TagLib::MPC::File *file = dynamic_cast<TagLib::MPC::File *>( fileref.file() ) )
         {
@@ -850,7 +823,6 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 }
             }
         }
-        #ifdef TAGLIB_HAS_OPUS
         else if( TagLib::Ogg::Opus::File *file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref.file()) )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
@@ -926,7 +898,6 @@ bool TagEngine::writeTags( const KUrl& fileName, TagData *tagData )
                 }
             }
         }
-        #endif // TAGLIB_HAS_OPUS
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
         {
             if( TagLib::MP4::Tag *tag = file->tag() )
@@ -1072,7 +1043,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
 
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
                 const TagLib::StringList& block = tag->fieldListMap()["METADATA_BLOCK_PICTURE"];
                 for( TagLib::StringList::ConstIterator i = block.begin(); i != block.end(); ++i )
                 {
@@ -1087,7 +1057,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
                     CoverData *newCover = new CoverData( image_data, TStringToQString(picture.mimeType()), CoverData::Role(picture.type()), TStringToQString(picture.description()) );
                     covers.append( newCover );
                 }
-                #endif // TAGLIB_HAS_FLAC_PICTURELIST
 
 
                 TagLib::Ogg::FieldListMap map = tag->fieldListMap();
@@ -1133,7 +1102,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
         }
         else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File*>(fileref.file()) )
         {
-            #ifdef TAGLIB_HAS_FLAC_PICTURELIST
             const TagLib::List<TagLib::FLAC::Picture*> picturelist = file->pictureList();
             for( TagLib::List<TagLib::FLAC::Picture*>::ConstIterator it = picturelist.begin(); it != picturelist.end(); it++ )
             {
@@ -1143,16 +1111,11 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
                 CoverData *newCover = new CoverData( image_data, TStringToQString(picture->mimeType()), CoverData::Role(picture->type()), TStringToQString(picture->description()) );
                 covers.append( newCover );
             }
-            #else
-            Q_UNUSED(file)
-            #endif // TAGLIB_HAS_FLAC_PICTURELIST
         }
-        #ifdef TAGLIB_HAS_OPUS
         else if( TagLib::Ogg::Opus::File *file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref.file()) )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
                 const TagLib::StringList& block = tag->fieldListMap()["METADATA_BLOCK_PICTURE"];
                 for( TagLib::StringList::ConstIterator i = block.begin(); i != block.end(); ++i )
                 {
@@ -1167,10 +1130,8 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
                     CoverData *newCover = new CoverData( image_data, TStringToQString(picture.mimeType()), CoverData::Role(picture.type()), TStringToQString(picture.description()) );
                     covers.append( newCover );
                 }
-                #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
         }
-        #endif // TAGLIB_HAS_OPUS
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
         {
             if( TagLib::MP4::Tag *tag = file->tag() )
@@ -1196,7 +1157,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
         {
             if( TagLib::ASF::Tag *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_ASF_PICTURE
                 TagLib::ASF::AttributeListMap map = tag->attributeListMap();
                 for( TagLib::ASF::AttributeListMap::ConstIterator it = map.begin(); it != map.end(); ++it )
                 {
@@ -1218,9 +1178,6 @@ QList<CoverData*> TagEngine::readCovers( const KUrl& fileName )
                         }
                     }
                 }
-                #else
-                Q_UNUSED(tag)
-                #endif // TAGLIB_HAS_ASF_PICTURE
             }
         }
     }
@@ -1261,7 +1218,6 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
                 foreach( CoverData *cover, covers )
                 {
                     TagLib::FLAC::Picture newPicture;
@@ -1278,16 +1234,12 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
                     TagLib::ByteVector t_block_b64 = TagLib::ByteVector( q_block_b64.data(), q_block_b64.size() );
                     tag->addField( "METADATA_BLOCK_PICTURE", t_block_b64, false );
                 }
-                #else
-                Q_UNUSED(tag)
-                #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
 
             return fileref.save();
         }
         else if( TagLib::FLAC::File *file = dynamic_cast<TagLib::FLAC::File*>(fileref.file()) )
         {
-            #ifdef TAGLIB_HAS_FLAC_PICTURELIST
             foreach( CoverData *cover, covers )
             {
                 TagLib::FLAC::Picture *newPicture = new TagLib::FLAC::Picture();
@@ -1300,18 +1252,13 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
 
                 file->addPicture( newPicture );
             }
-            #else
-            Q_UNUSED(file)
-            #endif // TAGLIB_HAS_FLAC_PICTURELIST
 
             return fileref.save();
         }
-        #ifdef TAGLIB_HAS_OPUS
         else if( TagLib::Ogg::Opus::File *file = dynamic_cast<TagLib::Ogg::Opus::File*>(fileref.file()) )
         {
             if( TagLib::Ogg::XiphComment *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_FLAC_PICTURELIST
                 foreach( CoverData *cover, covers )
                 {
                     TagLib::FLAC::Picture newPicture;
@@ -1328,12 +1275,10 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
                     TagLib::ByteVector t_block_b64 = TagLib::ByteVector( q_block_b64.data(), q_block_b64.size() );
                     tag->addField( "METADATA_BLOCK_PICTURE", t_block_b64, false );
                 }
-                #endif // TAGLIB_HAS_FLAC_PICTURELIST
             }
 
             return fileref.save();
         }
-        #endif // TAGLIB_HAS_OPUS
         else if( TagLib::MP4::File *file = dynamic_cast<TagLib::MP4::File*>(fileref.file()) )
         {
             if( TagLib::MP4::Tag *tag = file->tag() )
@@ -1354,7 +1299,6 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
         {
             if( TagLib::ASF::Tag *tag = file->tag() )
             {
-                #ifdef TAGLIB_HAS_ASF_PICTURE
                 foreach( CoverData *cover, covers )
                 {
                     TagLib::ASF::Picture *newPicture = new TagLib::ASF::Picture();
@@ -1367,9 +1311,6 @@ bool TagEngine::writeCovers( const KUrl& fileName, QList<CoverData*> covers )
 
                     tag->addAttribute( TagLib::String("WM/Picture"), TagLib::ASF::Attribute( newPicture->render() ) );
                 }
-                #else
-                Q_UNUSED(tag)
-                #endif // TAGLIB_HAS_ASF_PICTURE
             }
 
             return fileref.save();

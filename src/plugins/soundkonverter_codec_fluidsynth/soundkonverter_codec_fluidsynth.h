@@ -17,7 +17,7 @@ class soundkonverter_codec_fluidsynth : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_fluidsynth( QObject *parent, const QStringList& args );
+    soundkonverter_codec_fluidsynth( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_fluidsynth();
@@ -39,16 +39,11 @@ private:
     QWeakPointer<KDialog> configDialog;
     KUrlRequester *configDialogSoundFontUrlRequester;
 
-    KUrl soundFontFile;
+    QUrl soundFontFile;
 
 private slots:
     void configDialogSave();
 
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( fluidsynth, soundkonverter_codec_fluidsynth )
-
-
 #endif // SOUNDKONVERTER_CODEC_FLUIDSYNTH_H
-
-

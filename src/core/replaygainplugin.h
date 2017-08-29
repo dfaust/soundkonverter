@@ -2,6 +2,9 @@
 #ifndef REPLAYGAINPLUGIN_H
 #define REPLAYGAINPLUGIN_H
 
+#include <kcoreaddons_export.h>
+#include <QVariantList>
+
 #include "backendplugin.h"
 
 #include <QMap>
@@ -21,7 +24,7 @@ struct ReplayGainPipe
 };
 
 
-class KDE_EXPORT ReplayGainPluginItem : public BackendPluginItem
+class KCOREADDONS_EXPORT ReplayGainPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
@@ -38,7 +41,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class KDE_EXPORT ReplayGainPlugin : public BackendPlugin
+class KCOREADDONS_EXPORT ReplayGainPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
@@ -63,4 +66,3 @@ public:
         K_EXPORT_COMPONENT_FACTORY( soundkonverter_replaygain_##libname, KGenericFactory<classname>("soundkonverter_replaygain_" #libname) )
 
 #endif // REPLAYGAINPLUGIN_H
-

@@ -20,7 +20,7 @@ class soundkonverter_ripper_cdparanoia : public RipperPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_ripper_cdparanoia( QObject *parent, const QStringList& args );
+    soundkonverter_ripper_cdparanoia( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_ripper_cdparanoia();
@@ -64,9 +64,4 @@ private slots:
     void configDialogDefault();
 };
 
-K_EXPORT_SOUNDKONVERTER_RIPPER( cdparanoia, soundkonverter_ripper_cdparanoia )
-
-
 #endif // SOUNDKONVERTER_RIPPER_CDPARANOIA_H
-
-

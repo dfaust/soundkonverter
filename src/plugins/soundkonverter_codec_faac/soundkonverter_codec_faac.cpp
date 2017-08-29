@@ -9,7 +9,7 @@
 #include <KConfigGroup>
 
 
-soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QStringList& args  )
+soundkonverter_codec_faac::soundkonverter_codec_faac( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -273,5 +273,6 @@ void soundkonverter_codec_faac::infoProcessExit( int exitCode, QProcess::ExitSta
     infoProcess.data()->deleteLater();
 }
 
+K_PLUGIN_FACTORY(codec_faac, registerPlugin<soundkonverter_codec_faac>();)
 
 #include "soundkonverter_codec_faac.moc"

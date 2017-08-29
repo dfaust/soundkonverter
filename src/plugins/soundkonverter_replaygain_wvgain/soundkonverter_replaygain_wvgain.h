@@ -14,7 +14,7 @@ class soundkonverter_replaygain_wvgain : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_wvgain( QObject *parent, const QStringList& args );
+    soundkonverter_replaygain_wvgain( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_wvgain();
@@ -33,9 +33,4 @@ public:
 
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( wvgain, soundkonverter_replaygain_wvgain )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_WVGAIN_H_
-
-

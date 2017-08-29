@@ -4,10 +4,9 @@
 #include "soundkonverter.h"
 #include "global.h"
 
-#include <kdeui_export.h>
 #include <KMainWindow>
 #include <KUniqueApplication>
-#include <KAboutData>
+#include <K4AboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
 
@@ -19,13 +18,14 @@ static const char version[] = SOUNDKONVERTER_VERSION_STRING;
 
 int main(int argc, char **argv)
 {
-    KAboutData about("soundkonverter", 0, ki18n("soundKonverter"), version, ki18n(description), KAboutData::License_GPL, ki18n("(C) 2005-2016 Daniel Faust"), KLocalizedString(), 0, "hessijames@gmail.com");
+    K4AboutData about("soundkonverter", 0, ki18n("soundKonverter"), version, ki18n(description), K4AboutData::License_GPL, ki18n("(C) 2005-2017 Daniel Faust"), KLocalizedString(), 0, "hessijames@gmail.com");
     about.addAuthor( ki18n("Daniel Faust"), KLocalizedString(), "hessijames@gmail.com" );
     about.addCredit( ki18n("David Vignoni"), ki18n("Nuvola icon theme"), 0, "http://www.icon-king.com" );
     about.addCredit( ki18n("Scott Wheeler"), ki18n("TagLib"), "wheeler@kde.org", "http://ktown.kde.org/~wheeler" );
     about.addCredit( ki18n("Marco Nelles"), ki18n("Audex"), 0, "http://opensource.maniatek.de/audex" );
     about.addCredit( ki18n("Amarok developers"), ki18n("Amarok"), 0, "http://amarok.kde.org" );
     about.addCredit( ki18n("All programmers of audio converters"), ki18n("Backends") );
+    about.addCredit( ki18n("Patrick Auernig"), ki18n("Inital Port to KDE Frameworks 5"), "patrick.auernig@gmail.com" );
     KCmdLineArgs::init(argc, argv, &about);
 
     KCmdLineOptions options;
@@ -53,4 +53,3 @@ int main(int argc, char **argv)
     // mainWin has WDestructiveClose flag by default, so it will delete itself.
     return app.exec();
 }
-

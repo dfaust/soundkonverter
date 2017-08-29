@@ -6,8 +6,10 @@
 #ifndef _SOUNDKONVERTERVIEW_H_
 #define _SOUNDKONVERTERVIEW_H_
 
+
 #include <QWidget>
 #include <KUrl>
+
 
 class KPushButton;
 class QMenu;
@@ -50,7 +52,7 @@ public:
     void loadAutosaveFileList();
     void loadFileList(const QString& fileListPath);
 
-    KAction *start() { return startAction; }
+    QAction *start() { return startAction; }
     KActionMenu *stopMenu() { return stopActionMenu; }
 
     void startConversion();
@@ -100,7 +102,7 @@ private:
     /** The button to start the conversion */
     KPushButton *pStart;
     /** Tha start action */
-    KAction *startAction;
+    QAction *startAction;
 
     /** The button to stop the conversion */
     KPushButton *pStop;

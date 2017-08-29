@@ -11,6 +11,7 @@
 
 #include <KComboBox>
 #include <KPushButton>
+#include <KIcon>
 
 
 SoxEffectWidget::SoxEffectWidget( QWidget *parent )
@@ -115,12 +116,12 @@ SoxEffectWidget::~SoxEffectWidget()
 
 void SoxEffectWidget::setAddButtonShown( bool shown )
 {
-    pAdd->setShown( shown );
+    pAdd->setVisible( shown );
 }
 
 void SoxEffectWidget::setRemoveButtonShown( bool shown )
 {
-    pRemove->setShown( shown );
+    pRemove->setVisible( shown );
 }
 
 void SoxEffectWidget::removeClicked()

@@ -12,7 +12,7 @@ class soundkonverter_codec_flac : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_flac( QObject *parent, const QStringList& args );
+    soundkonverter_codec_flac( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_flac();
@@ -33,9 +33,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( flac, soundkonverter_codec_flac )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FLAC_H_
-
-

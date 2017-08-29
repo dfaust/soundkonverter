@@ -15,7 +15,7 @@
 
 // TODO check for decoders at runtime, too
 
-soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args  )
+soundkonverter_codec_ffmpeg::soundkonverter_codec_ffmpeg( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -522,5 +522,6 @@ void soundkonverter_codec_ffmpeg::infoProcessExit( int exitCode, QProcess::ExitS
     infoProcess.data()->deleteLater();
 }
 
-#include "soundkonverter_codec_ffmpeg.moc"
+K_PLUGIN_FACTORY(codec_ffmpeg, registerPlugin<soundkonverter_codec_ffmpeg>();)
 
+#include "soundkonverter_codec_ffmpeg.moc"

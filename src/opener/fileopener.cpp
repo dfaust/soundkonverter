@@ -23,6 +23,7 @@
 #include <KMessageBox>
 #include <KFileDialog>
 #include <QDir>
+#include <KIcon>
 
 
 FileOpener::FileOpener( Config *_config, QWidget *parent, Qt::WFlags f )
@@ -120,7 +121,7 @@ void FileOpener::fileDialogAccepted()
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {
-            fileName = urls.at(i).pathOrUrl();
+            fileName = urls.at(i).url(QUrl::PreferLocalFile);
 
             if( codecName.isEmpty() )
                 codecName = mimeType;
@@ -201,7 +202,7 @@ void FileOpener::okClickedSlot()
     if( conversionOptions )
     {
         options->accepted();
-        emit open( urls, conversionOptions );
+        emit openFiles( urls, conversionOptions );
         accept();
     }
     else

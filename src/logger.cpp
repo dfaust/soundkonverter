@@ -8,6 +8,8 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <KGlobal>
+
 
 #define MAX_LOGS  20
 #define MAX_LINES 10000

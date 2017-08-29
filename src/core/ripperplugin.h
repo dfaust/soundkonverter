@@ -2,6 +2,9 @@
 #ifndef RIPPERPLUGIN_H
 #define RIPPERPLUGIN_H
 
+#include <kcoreaddons_export.h>
+#include <QVariantList>
+
 #include "backendplugin.h"
 
 #include <KUrl>
@@ -9,7 +12,7 @@
 class RipperPlugin;
 
 
-class KDE_EXPORT RipperPluginItem : public BackendPluginItem
+class KCOREADDONS_EXPORT RipperPluginItem : public BackendPluginItem
 {
     Q_OBJECT
 public:
@@ -28,7 +31,7 @@ public:
 
 
 /** @author Daniel Faust <hessijames@gmail.com> */
-class KDE_EXPORT RipperPlugin : public BackendPlugin
+class KCOREADDONS_EXPORT RipperPlugin : public BackendPlugin
 {
     Q_OBJECT
 public:
@@ -45,8 +48,4 @@ public:
     virtual QStringList ripCommand( const QString& device, int track, int tracks, const KUrl& outputFile ) = 0;
 };
 
-#define K_EXPORT_SOUNDKONVERTER_RIPPER(libname, classname) \
-        K_EXPORT_COMPONENT_FACTORY( soundkonverter_ripper_##libname, KGenericFactory<classname>("soundkonverter_ripper_" #libname) )
-
 #endif // RIPPERPLUGIN_H
-

@@ -6,7 +6,7 @@
 #include "maccodecwidget.h"
 
 
-soundkonverter_codec_mac::soundkonverter_codec_mac( QObject *parent, const QStringList& args  )
+soundkonverter_codec_mac::soundkonverter_codec_mac( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -156,5 +156,5 @@ float soundkonverter_codec_mac::parseOutput( const QString& output )
     return -1;
 }
 
-
+K_PLUGIN_FACTORY(codec_mac, registerPlugin<soundkonverter_codec_mac>();)
 #include "soundkonverter_codec_mac.moc"

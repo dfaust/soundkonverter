@@ -24,6 +24,8 @@
 #include <QMenu>
 #include <QToolButton>
 
+#define setShown setVisible
+
 //
 // class OptionsDetailed
 //

@@ -90,7 +90,7 @@ soundKonverter will need the following packages to compile:
 kde development packages version 4.4 or higher
 taglib development package version 1.4 or higher
 cdparanoia development package
-libkcddb (sometimes kdemultimedia) development package
+libkcddb (KF5Cddb) development package
 gettext-tools
 cmake
 All dependencies - and whether they are fulfilled - should be shown when running cmake.

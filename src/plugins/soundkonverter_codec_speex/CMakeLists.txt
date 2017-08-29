@@ -1,16 +1,15 @@
 project(soundkonverter_codec_speex)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
+find_package(Qt5 REQUIRED COMPONENTS Xml)
 
 set(soundkonverter_codec_speex_SRCS
    soundkonverter_codec_speex.cpp
    speexcodecwidget.cpp
- )
+)
 
-kde4_add_plugin(soundkonverter_codec_speex ${soundkonverter_codec_speex_SRCS})
-
-target_link_libraries(soundkonverter_codec_speex ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} soundkonvertercore )
+add_library(soundkonverter_codec_speex MODULE ${soundkonverter_codec_speex_SRCS})
+target_link_libraries(soundkonverter_codec_speex KF5::WidgetsAddons Qt5::Xml soundkonvertercore)
 
 ########### install files ###############
 

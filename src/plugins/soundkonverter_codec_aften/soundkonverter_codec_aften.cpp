@@ -6,7 +6,7 @@
 #include "aftencodecwidget.h"
 
 
-soundkonverter_codec_aften::soundkonverter_codec_aften( QObject *parent, const QStringList& args  )
+soundkonverter_codec_aften::soundkonverter_codec_aften( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -148,5 +148,6 @@ float soundkonverter_codec_aften::parseOutput( const QString& output )
     return -1;
 }
 
+K_PLUGIN_FACTORY(codec_aften, registerPlugin<soundkonverter_codec_aften>();)
 
 #include "soundkonverter_codec_aften.moc"

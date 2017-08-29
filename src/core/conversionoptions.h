@@ -1,7 +1,8 @@
 
-
 #ifndef CONVERSIONOPTIONS_H
 #define CONVERSIONOPTIONS_H
+
+#include <kcoreaddons_export.h>
 
 #include <KGenericFactory>
 
@@ -14,7 +15,8 @@
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT FilterOptions
+
+class KCOREADDONS_EXPORT FilterOptions
 {
 public:
     FilterOptions();
@@ -41,7 +43,7 @@ public:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT ConversionOptions
+class KCOREADDONS_EXPORT ConversionOptions
 {
 public:
     ConversionOptions();

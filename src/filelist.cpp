@@ -188,23 +188,7 @@ void FileList::dropEvent( QDropEvent *event )
         problem.codecName = problems.keys().at(i);
         if( problem.codecName != "wav" )
         {
-            #if QT_VERSION >= 0x040500
-                problems[problem.codecName][1].removeDuplicates();
-            #else
-                QStringList found;
-                for( int j=0; j<problems.value(problem.codecName).at(1).count(); j++ )
-                {
-                    if( found.contains(problems.value(problem.codecName).at(1).at(j)) )
-                    {
-                        problems[problem.codecName][1].removeAt(j);
-                        j--;
-                    }
-                    else
-                    {
-                        found += problems.value(problem.codecName).at(1).at(j);
-                    }
-                }
-            #endif
+            problems[problem.codecName][1].removeDuplicates();
             problem.solutions = problems.value(problem.codecName).at(1);
             if( problems.value(problem.codecName).at(0).count() <= 3 )
             {
@@ -310,7 +294,9 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
 
             if( filter.contains(codecName) )
             {
-                addFiles( KUrl(directory + "/" + fileName), 0, "", codecName, conversionOptionsId );
+                QList<QUrl> urls;
+                urls.append(directory + "/" + fileName);
+                addFiles( urls, 0, "", codecName, conversionOptionsId );
             }
 
             if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
@@ -324,7 +310,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
     return count;
 }
 
-void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId )
+void FileList::addFiles( const QList<QUrl>& fileList, ConversionOptions *conversionOptions, const QString& command, const QString& _codecName, int conversionOptionsId )
 {
     QString codecName;
     QString filePathName;
@@ -341,7 +327,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     }
 
     int batchNumber = 0;
-    foreach( const KUrl& fileName, fileList )
+    foreach( const QUrl& fileName, fileList )
     {
         if( !_codecName.isEmpty() )
         {
@@ -432,7 +418,7 @@ void FileList::addFiles( const KUrl::List& fileList, ConversionOptions *conversi
     }
 }
 
-void FileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
+void FileList::addDir( const QUrl& directory, bool recursive, const QStringList& codecList, ConversionOptions *conversionOptions )
 {
     if( !conversionOptions )
     {

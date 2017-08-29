@@ -17,7 +17,7 @@
 #include <QGroupBox>
 #include <QSlider>
 
-soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QStringList& args  )
+soundkonverter_codec_lame::soundkonverter_codec_lame( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -389,5 +389,6 @@ ConversionOptions *soundkonverter_codec_lame::conversionOptionsFromXml( QDomElem
     return options;
 }
 
+K_PLUGIN_FACTORY(codec_lame, registerPlugin<soundkonverter_codec_lame>();)
 
 #include "soundkonverter_codec_lame.moc"

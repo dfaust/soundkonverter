@@ -20,11 +20,7 @@ class LogViewer;
 class CDManager;
 class ReplayGainScanner;
 
-#if KDE_IS_VERSION(4,4,0)
-    class KStatusNotifierItem;
-#else
-    class KSystemTrayIcon;
-#endif
+class KStatusNotifierItem;
 
 
 /**
@@ -80,11 +76,7 @@ private:
     soundKonverterView *m_view;
     LogViewer *logViewer;
 
-    #if KDE_IS_VERSION(4,4,0)
-        KStatusNotifierItem *systemTray;
-    #else
-        KSystemTrayIcon *systemTray;
-    #endif
+    KStatusNotifierItem *systemTray;
 
     /// exit soundkonverter after all files have been converted
     bool autoclose;

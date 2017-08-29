@@ -16,7 +16,7 @@ class soundkonverter_codec_opustools : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_opustools( QObject *parent, const QStringList& args );
+    soundkonverter_codec_opustools( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_opustools();
@@ -50,9 +50,4 @@ private slots:
 
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( opustools, soundkonverter_codec_opustools )
-
-
 #endif // SOUNDKONVERTER_CODEC_OPUSTOOLS_H
-
-

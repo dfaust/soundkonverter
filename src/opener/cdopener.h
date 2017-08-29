@@ -5,9 +5,9 @@
 #include <KDialog>
 #include <QTimer>
 
-#include <libkcddb/kcddb.h>
-#include <libkcddb/client.h>
-#include <libkcddb/cdinfo.h>
+#include <KCddb/Kcddb>
+#include <KCddb/Client>
+#include <KCddb/Cdinfo>
 
 extern "C"
 {
@@ -20,7 +20,8 @@ extern "C"
 #include <phonon/mediaobject.h>
 #include <phonon/volumeslider.h>
 #include <phonon/backendcapabilities.h>
-#include <Phonon/MediaController>
+#include <phonon/MediaController>
+
 
 class TagEngine;
 class Config;

@@ -17,7 +17,7 @@ class soundkonverter_codec_lame : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_lame( QObject *parent, const QStringList& args );
+    soundkonverter_codec_lame( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_lame();
@@ -51,9 +51,4 @@ private slots:
 
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( lame, soundkonverter_codec_lame )
-
-
 #endif // _SOUNDKONVERTER_CODEC_LAME_H_
-
-

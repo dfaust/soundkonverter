@@ -37,16 +37,16 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
 {
     tagEngine = config->tagEngine();
 
-    setButtons( KDialog::User1 | KDialog::User2 | KDialog::Ok | KDialog::Apply | KDialog::Cancel );
-    setButtonText( KDialog::User2, i18n("Previous") );
-    setButtonIcon( KDialog::User2, KIcon("go-previous") );
-    setButtonText( KDialog::User1, i18n("Next") );
-    setButtonIcon( KDialog::User1, KIcon("go-next") );
+    setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel );
+    nextButton = new QPushButton(KIcon("go-next"), i18n("Next"));
+    nextButton->setAutoRepeat(true);
+    addActionButton(nextButton);
+    prevButton = new QPushButton(KIcon("go-previous"), i18n("Previous"));
+    prevButton->setAutoRepeat(true);
+    addActionButton(prevButton);
+
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyChanges()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(applyChanges()) );
-
-    button(KDialog::User2)->setAutoRepeat(true);
-    button(KDialog::User1)->setAutoRepeat(true);
 
     QWidget *conversionOptionsWidget = new QWidget( this );
     KPageWidgetItem *conversionOptionsPage = addPage( conversionOptionsWidget, i18n("Conversion") );
@@ -371,7 +371,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
     if( selectedItems.count() == 0 )
     {
-        setCaption( i18n("No file selected") );
+        setWindowTitle( i18n("No file selected") );
         options->setEnabled( false );
         lEditOptions->hide();
         pEditOptions->hide();
@@ -393,7 +393,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     {
         FileListItem *item = selectedItems.first();
 
-        setCaption( selectedItems.first()->url.fileName() );
+        setWindowTitle(selectedItems.first()->url.fileName());
 
         const bool success = options->setCurrentConversionOptions( config->conversionOptionsManager()->getConversionOptions(selectedItems.first()->conversionOptionsId) );
         options->setEnabled( success );
@@ -468,7 +468,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     }
     else // selectedItems.count() > 1
     {
-        setCaption( i18n("%1 Files").arg(selectedItems.count()) );
+        setWindowTitle(i18n("%1 Files").arg(selectedItems.count()));
 
         FileListItem *firstItem = selectedItems.first();
         const int     conversionOptionsId = firstItem->conversionOptionsId;
@@ -629,12 +629,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
 void OptionsEditor::setPreviousEnabled( bool enabled )
 {
-    enableButton( User2, enabled );
+    prevButton->setEnabled(enabled);
 }
 
 void OptionsEditor::setNextEnabled( bool enabled )
 {
-    enableButton( User1, enabled );
+    nextButton->setEnabled(enabled);
 }
 
 void OptionsEditor::applyChanges()

@@ -12,7 +12,7 @@ class soundkonverter_codec_speex : public CodecPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_codec_speex( QObject *parent, const QStringList& args );
+    soundkonverter_codec_speex( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_speex();
@@ -32,9 +32,4 @@ public:
     float parseOutput( const QString& output );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( speex, soundkonverter_codec_speex )
-
-
 #endif // SOUNDKONVERTER_CODEC_SPEEX_H
-
-

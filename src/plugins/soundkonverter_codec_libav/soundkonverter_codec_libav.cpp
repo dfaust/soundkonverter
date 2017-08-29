@@ -15,7 +15,7 @@
 
 // TODO check for decoders at runtime, too
 
-soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const QStringList& args  )
+soundkonverter_codec_libav::soundkonverter_codec_libav( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -608,5 +608,6 @@ void soundkonverter_codec_libav::infoProcessExit( int exitCode, QProcess::ExitSt
     infoProcess.data()->deleteLater();
 }
 
-#include "soundkonverter_codec_libav.moc"
+K_PLUGIN_FACTORY(codec_libav, registerPlugin<soundkonverter_codec_libav>();)
 
+#include "soundkonverter_codec_libav.moc"

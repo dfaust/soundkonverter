@@ -30,7 +30,7 @@ public:
     };
 
     /** Default Constructor */
-    soundkonverter_codec_ffmpeg( QObject *parent, const QStringList& args );
+    soundkonverter_codec_ffmpeg( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_codec_ffmpeg();
@@ -78,9 +78,4 @@ private slots:
     void infoProcessExit( int exitCode, QProcess::ExitStatus exitStatus );
 };
 
-K_EXPORT_SOUNDKONVERTER_CODEC( ffmpeg, soundkonverter_codec_ffmpeg )
-
-
 #endif // _SOUNDKONVERTER_CODEC_FFMPEG_H_
-
-

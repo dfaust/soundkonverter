@@ -1,15 +1,13 @@
 project(soundkonverter_ripper_cdparanoia)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
 
 set(soundkonverter_ripper_cdparanoia_SRCS
    soundkonverter_ripper_cdparanoia.cpp
- )
+)
 
-kde4_add_plugin(soundkonverter_ripper_cdparanoia ${soundkonverter_ripper_cdparanoia_SRCS})
-
-target_link_libraries(soundkonverter_ripper_cdparanoia ${KDE4_KDEUI_LIBS} soundkonvertercore )
+add_library(soundkonverter_ripper_cdparanoia MODULE ${soundkonverter_ripper_cdparanoia_SRCS})
+target_link_libraries(soundkonverter_ripper_cdparanoia KF5::WidgetsAddons soundkonvertercore)
 
 ########### install files ###############
 

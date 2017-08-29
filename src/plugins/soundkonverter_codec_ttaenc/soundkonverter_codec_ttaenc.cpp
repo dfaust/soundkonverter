@@ -6,7 +6,7 @@
 #include "ttaenccodecwidget.h"
 
 
-soundkonverter_codec_ttaenc::soundkonverter_codec_ttaenc( QObject *parent, const QStringList& args  )
+soundkonverter_codec_ttaenc::soundkonverter_codec_ttaenc( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -151,5 +151,6 @@ float soundkonverter_codec_ttaenc::parseOutput( const QString& output )
     return -1;
 }
 
+K_PLUGIN_FACTORY(codec_ttaenc, registerPlugin<soundkonverter_codec_ttaenc>();)
 
 #include "soundkonverter_codec_ttaenc.moc"

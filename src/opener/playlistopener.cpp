@@ -23,6 +23,7 @@
 #include <KMessageBox>
 #include <KFileDialog>
 #include <QDir>
+#include <KIcon>
 
 
 PlaylistOpener::PlaylistOpener( Config *_config, QWidget *parent, Qt::WFlags f )
@@ -101,12 +102,12 @@ void PlaylistOpener::fileDialogAccepted()
             line = stream.readLine();
             if( !line.startsWith("#EXTM3U") && !line.startsWith("#EXTINF") && !line.isEmpty() )
             {
-                KUrl url(line);
-                if( url.isRelative() ) url = KUrl( playlistUrl.directory() + "/" + line );
-                url.cleanPath();
+                QUrl url(line);
+                if( url.isRelative() ) url = QUrl( playlistUrl.path() + "/" + line );
+                url = url.adjusted(QUrl::NormalizePathSegments);
 
                 if( !url.isLocalFile() || QFile::exists(url.toLocalFile()) ) urls += url;
-                else filesNotFound += url.pathOrUrl();
+                else filesNotFound += url.url(QUrl::PreferLocalFile);
             }
         } while( !line.isNull() );
         playlistFile.close();
@@ -123,7 +124,7 @@ void PlaylistOpener::fileDialogAccepted()
 
         if( !config->pluginLoader()->canDecode(codecName,&errorList) )
         {
-            fileName = urls.at(i).pathOrUrl();
+            fileName = urls.at(i).url(QUrl::PreferLocalFile);
 
             if( codecName.isEmpty() )
                 codecName = mimeType;
@@ -234,7 +235,7 @@ void PlaylistOpener::okClickedSlot()
     if( conversionOptions )
     {
         options->accepted();
-        emit open( urls, conversionOptions );
+        emit openFiles( urls, conversionOptions );
         accept();
     }
     else

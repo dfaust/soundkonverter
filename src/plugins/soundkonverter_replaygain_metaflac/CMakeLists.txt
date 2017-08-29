@@ -1,15 +1,13 @@
 project(soundkonverter_replaygain_metaflac)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
 
 set(soundkonverter_replaygain_metaflac_SRCS
    soundkonverter_replaygain_metaflac.cpp
- )
+)
 
-kde4_add_plugin(soundkonverter_replaygain_metaflac ${soundkonverter_replaygain_metaflac_SRCS})
-
-target_link_libraries(soundkonverter_replaygain_metaflac ${KDE4_KDEUI_LIBS} soundkonvertercore )
+add_library(soundkonverter_replaygain_metaflac MODULE ${soundkonverter_replaygain_metaflac_SRCS})
+target_link_libraries(soundkonverter_replaygain_metaflac KF5::WidgetsAddons soundkonvertercore)
 
 ########### install files ###############
 

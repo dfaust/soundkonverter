@@ -5,7 +5,7 @@
 #include "../../core/conversionoptions.h"
 
 
-soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, const QStringList& args  )
+soundkonverter_codec_mplayer::soundkonverter_codec_mplayer( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -202,5 +202,6 @@ float soundkonverter_codec_mplayer::parseOutput( const QString& output )
     return -1;
 }
 
-#include "soundkonverter_codec_mplayer.moc"
+K_PLUGIN_FACTORY(codec_mplayer, registerPlugin<soundkonverter_codec_mplayer>();)
 
+#include "soundkonverter_codec_mplayer.moc"

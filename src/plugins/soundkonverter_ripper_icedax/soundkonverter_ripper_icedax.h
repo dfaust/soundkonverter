@@ -14,7 +14,7 @@ class soundkonverter_ripper_icedax : public RipperPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_ripper_icedax( QObject *parent, const QStringList& args );
+    soundkonverter_ripper_icedax( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_ripper_icedax();
@@ -38,9 +38,4 @@ private slots:
     void processOutput();
 };
 
-K_EXPORT_SOUNDKONVERTER_RIPPER( icedax, soundkonverter_ripper_icedax )
-
-
 #endif // SOUNDKONVERTER_RIPPER_ICEDAX_H
-
-

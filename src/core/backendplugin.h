@@ -2,6 +2,8 @@
 #ifndef BACKENDPLUGIN_H
 #define BACKENDPLUGIN_H
 
+#include <kcoreaddons_export.h>
+
 #include <KGenericFactory>
 #include <KProcess>
 #include <KUrl>
@@ -48,7 +50,7 @@ public:
 /**
     @author Daniel Faust <hessijames@gmail.com>
 */
-class KDE_EXPORT BackendPlugin : public QObject
+class KCOREADDONS_EXPORT BackendPlugin : public QObject
 {
     Q_OBJECT
 public:

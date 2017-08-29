@@ -21,22 +21,24 @@
 #include <KIcon>
 #include <KPushButton>
 
+#include <QDialogButtonBox>
+
 ConfigDialog::ConfigDialog( Config *_config, QWidget *parent/*, Page startPage*/ )
     : KPageDialog( parent ),
     config( _config )
 {
-    setButtons( KDialog::Help | KDialog::Default | KDialog::Apply | KDialog::Ok | KDialog::Cancel );
-    setCaption( i18n("Settings") );
+    setStandardButtons( QDialogButtonBox::Help | QDialogButtonBox::RestoreDefaults | QDialogButtonBox::Apply | QDialogButtonBox::Ok | QDialogButtonBox::Cancel );
+    setWindowTitle(i18n("Settings"));
 
     generalPageChanged = false;
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
-    button(KDialog::Apply)->setEnabled( false );
+    buttonBox()->button(QDialogButtonBox::Apply)->setEnabled( false );
 
-    connect( this, SIGNAL(applyClicked()), this, SLOT(applyClicked()) );
-    connect( this, SIGNAL(okClicked()), this, SLOT(okClicked()) );
-    connect( this, SIGNAL(defaultClicked()), this, SLOT(defaultClicked()) );
+    connect( button(QDialogButtonBox::Apply), SIGNAL(clicked()), this, SLOT(applyClicked()) );
+    connect( button(QDialogButtonBox::Ok), SIGNAL(clicked()), this, SLOT(okClicked()) );
+    connect( button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked()), this, SLOT(defaultClicked()) );
 
     configGeneralPage = new ConfigGeneralPage( config, this );
     generalPage = addPage( qobject_cast<QWidget*>(configGeneralPage), i18n("General") );
@@ -90,7 +92,7 @@ void ConfigDialog::configChanged( bool state )
 
     const bool changed = ( generalPageChanged || advancedlPageChanged || coverArtPageChanged || backendsPageChanged );
 
-    button(KDialog::Apply)->setEnabled( changed );
+    button(QDialogButtonBox::Apply)->setEnabled( changed );
 }
 
 void ConfigDialog::applyClicked()
@@ -101,7 +103,7 @@ void ConfigDialog::applyClicked()
     advancedlPageChanged = false;
     coverArtPageChanged = false;
     backendsPageChanged = false;
-    button(KDialog::Apply)->setEnabled( false );
+    button(QDialogButtonBox::Apply)->setEnabled( false );
 }
 
 void ConfigDialog::okClicked()

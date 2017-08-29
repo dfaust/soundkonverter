@@ -23,6 +23,7 @@
 
 #include <KUrlRequester>
 #include <QDir>
+#include <KIcon>
 
 
 // TODO enable proceed button only if at least one file got selected // copy'n'paste error ???
@@ -118,7 +119,7 @@ void UrlOpener::proceedClickedSlot()
             return;
         }
 
-        urls = urlRequester->url();
+        urls += urlRequester->url();
 
         urlRequester->hide();
         options->show();
@@ -141,7 +142,7 @@ void UrlOpener::okClickedSlot()
         if( conversionOptions )
         {
             options->accepted();
-            emit open( urls, conversionOptions );
+            emit openFiles( urls, conversionOptions );
             accept();
         }
         else

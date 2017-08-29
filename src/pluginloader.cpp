@@ -129,7 +129,7 @@ void PluginLoader::load()
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
-            CodecPlugin *plugin = KService::createInstance<CodecPlugin>( offers.at(i), 0, allArgs, &error );
+            CodecPlugin *plugin = offers.at(i).data()->createInstance<CodecPlugin>(0, allArgs, &error );
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
@@ -189,7 +189,8 @@ void PluginLoader::load()
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
-            FilterPlugin *plugin = KService::createInstance<FilterPlugin>( offers.at(i), 0, allArgs, &error );
+
+            FilterPlugin *plugin = offers.at(i).data()->createInstance<FilterPlugin>(0, allArgs, &error );
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
@@ -250,7 +251,8 @@ void PluginLoader::load()
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
-            ReplayGainPlugin *plugin = KService::createInstance<ReplayGainPlugin>( offers.at(i), 0, allArgs, &error );
+
+            ReplayGainPlugin *plugin = offers.at(i).data()->createInstance<ReplayGainPlugin>(0, allArgs, &error );
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );
@@ -286,7 +288,7 @@ void PluginLoader::load()
             QVariantList allArgs;
             allArgs << offers.at(i)->storageId() << "";
             QString error;
-            RipperPlugin *plugin = KService::createInstance<RipperPlugin>( offers.at(i), 0, allArgs, &error );
+            RipperPlugin *plugin = offers.at(i).data()->createInstance<RipperPlugin>(0, allArgs, &error );
             if( plugin )
             {
                 logger->log( 1000, "\tloading plugin: " + plugin->name() );

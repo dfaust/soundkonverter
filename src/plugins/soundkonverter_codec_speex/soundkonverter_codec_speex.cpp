@@ -6,7 +6,7 @@
 #include "speexcodecwidget.h"
 
 
-soundkonverter_codec_speex::soundkonverter_codec_speex( QObject *parent, const QStringList& args  )
+soundkonverter_codec_speex::soundkonverter_codec_speex( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -152,5 +152,6 @@ float soundkonverter_codec_speex::parseOutput( const QString& output )
     return -1;
 }
 
+K_PLUGIN_FACTORY(codec_speex, registerPlugin<soundkonverter_codec_speex>();)
 
 #include "soundkonverter_codec_speex.moc"

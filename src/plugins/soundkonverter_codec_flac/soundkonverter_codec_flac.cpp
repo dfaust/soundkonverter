@@ -6,7 +6,7 @@
 #include "flaccodecwidget.h"
 
 
-soundkonverter_codec_flac::soundkonverter_codec_flac( QObject *parent, const QStringList& args  )
+soundkonverter_codec_flac::soundkonverter_codec_flac( QObject *parent, const QVariantList& args  )
     : CodecPlugin( parent )
 {
     Q_UNUSED(args)
@@ -159,5 +159,6 @@ float soundkonverter_codec_flac::parseOutput( const QString& output )
     return -1;
 }
 
+K_PLUGIN_FACTORY(codec_flac, registerPlugin<soundkonverter_codec_flac>();)
 
 #include "soundkonverter_codec_flac.moc"

@@ -30,7 +30,7 @@ class soundkonverter_replaygain_aacgain : public ReplayGainPlugin
     Q_OBJECT
 public:
     /** Default Constructor */
-    soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args );
+    soundkonverter_replaygain_aacgain( QObject *parent, const QVariantList& args );
 
     /** Default Destructor */
     ~soundkonverter_replaygain_aacgain();
@@ -66,9 +66,4 @@ private slots:
 
 };
 
-K_EXPORT_SOUNDKONVERTER_REPLAYGAIN( aacgain, soundkonverter_replaygain_aacgain )
-
-
 #endif // _SOUNDKONVERTER_REPLAYGAIN_AACGAIN_H_
-
-

@@ -14,6 +14,7 @@
 #include <QFileInfo>
 #include <KAction>
 #include <QMenu>
+#include <KIcon>
 
 
 ReplayGainFileList::ReplayGainFileList( Config *_config, Logger *_logger, QWidget *parent )
@@ -353,7 +354,9 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
 
             if( filter.contains(codecName) )
             {
-                addFiles( KUrl(directory + "/" + fileName), codecName );
+                QList<QUrl> urls;
+                urls.append(directory + "/" + fileName);
+                addFiles( urls, codecName );
             }
 
             if( tScanStatus.elapsed() > ConfigUpdateDelay * 10 )
@@ -486,7 +489,7 @@ void ReplayGainFileList::addFiles( const KUrl::List& fileList, const QString& _c
 //     emit fileCountChanged( topLevelItemCount() );
 }
 
-void ReplayGainFileList::addDir( const KUrl& directory, bool recursive, const QStringList& codecList )
+void ReplayGainFileList::addDir( const QUrl& directory, bool recursive, const QStringList& codecList )
 {
     pScanStatus->setValue( 0 );
     pScanStatus->setMaximum( 0 );

@@ -1,15 +1,13 @@
 project(soundkonverter_replaygain_aacgain)
-find_package(KDE4 REQUIRED)
-include (KDE4Defaults)
-include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
+
+find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
 
 set(soundkonverter_replaygain_aacgain_SRCS
    soundkonverter_replaygain_aacgain.cpp
- )
+)
 
-kde4_add_plugin(soundkonverter_replaygain_aacgain ${soundkonverter_replaygain_aacgain_SRCS})
-
-target_link_libraries(soundkonverter_replaygain_aacgain ${KDE4_KDEUI_LIBS} soundkonvertercore )
+add_library(soundkonverter_replaygain_aacgain MODULE ${soundkonverter_replaygain_aacgain_SRCS})
+target_link_libraries(soundkonverter_replaygain_aacgain KF5::WidgetsAddons soundkonvertercore)
 
 ########### install files ###############
 

@@ -14,6 +14,8 @@
 #include <KFileDialog>
 #include <KMessageBox>
 
+#include <KGlobal>
+
 
 LogViewer::LogViewer( Logger* _logger, QWidget *parent, Qt::WFlags f )
     : KDialog( parent, f ),

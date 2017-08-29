@@ -4,7 +4,7 @@
 #include "soundkonverter_replaygain_metaflac.h"
 
 
-soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_metaflac::soundkonverter_replaygain_metaflac( QObject *parent, const QVariantList& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -105,5 +105,7 @@ float soundkonverter_replaygain_metaflac::parseOutput( const QString& output )
     // metaflac doesn't provide any progress data
     return -1;
 }
+
+K_PLUGIN_FACTORY(replaygain_metaflac, registerPlugin<soundkonverter_replaygain_metaflac>();)
 
 #include "soundkonverter_replaygain_metaflac.moc"

@@ -1,7 +1,8 @@
 
-
 #ifndef CODECWIDGET_H
 #define CODECWIDGET_H
+
+#include <kcoreaddons_export.h>
 
 #include <QWidget>
 
@@ -17,7 +18,7 @@ class ConversionOptions;
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT FilterWidget : public QWidget
+class KCOREADDONS_EXPORT FilterWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -37,7 +38,7 @@ signals:
  * @author Daniel Faust <hessijames@gmail.com>
  * @version 1.0
  */
-class KDE_EXPORT CodecWidget : public QWidget
+class KCOREADDONS_EXPORT CodecWidget : public QWidget
 {
     Q_OBJECT
 public:

@@ -19,7 +19,7 @@ AacGainPluginItem::~AacGainPluginItem()
 {}
 
 
-soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *parent, const QStringList& args  )
+soundkonverter_replaygain_aacgain::soundkonverter_replaygain_aacgain( QObject *parent, const QVariantList& args  )
     : ReplayGainPlugin( parent )
 {
     Q_UNUSED(args)
@@ -325,6 +325,6 @@ float soundkonverter_replaygain_aacgain::parseOutput( const QString& output )
     return progress;
 }
 
+K_PLUGIN_FACTORY(replaygain_aacgain, registerPlugin<soundkonverter_replaygain_aacgain>();)
+
 #include "soundkonverter_replaygain_aacgain.moc"
-
-

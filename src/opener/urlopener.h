@@ -14,7 +14,7 @@
 
 #include <KDialog>
 
-#include <KUrl>
+#include <QUrl>
 
 class Config;
 class Options;
@@ -50,7 +50,7 @@ private:
     DialogPage page;
     QLabel *lSelector;
     QLabel *lOptions;
-    KUrl::List urls;
+    QList<QUrl> urls;
     KPushButton *pProceed;
     KPushButton *pAdd;
     KPushButton *pCancel;
@@ -60,7 +60,7 @@ private slots:
     void okClickedSlot();
 
 signals:
-    void open( const KUrl::List& files, ConversionOptions *conversionOptions );
+    void openFiles( const QList<QUrl>& files, ConversionOptions *conversionOptions );
 
 };
 

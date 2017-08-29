@@ -203,8 +203,8 @@ void DirOpener::addClicked()
         if( conversionOptions )
         {
             hide();
-            options->accepted();
-            emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, conversionOptions );
+
+            emit openFiles( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs, conversionOptions );
             accept();
         }
         else
@@ -215,7 +215,7 @@ void DirOpener::addClicked()
     else if( mode == ReplayGain )
     {
         hide();
-        emit open( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs );
+        emit openFiles( uDirectory->url(), cRecursive->checkState() == Qt::Checked, selectedCodecs );
         accept();
     }
 }

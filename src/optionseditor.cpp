@@ -37,14 +37,13 @@ OptionsEditor::OptionsEditor( Config *_config, QWidget *parent )
 {
     tagEngine = config->tagEngine();
 
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(this);
-    buttonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel );
-    User1 = new QPushButton(KIcon("go-next"), i18n("Next"));
-    User1->setAutoRepeat(true);
-    buttonBox->addButton(User1, QDialogButtonBox::ActionRole);
-    User2 = new QPushButton(KIcon("go-previous"), i18n("Previous"));
-    User2->setAutoRepeat(true);
-    buttonBox->addButton(User2, QDialogButtonBox::ActionRole);
+    setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Apply | QDialogButtonBox::Cancel );
+    nextButton = new QPushButton(KIcon("go-next"), i18n("Next"));
+    nextButton->setAutoRepeat(true);
+    addActionButton(nextButton);
+    prevButton = new QPushButton(KIcon("go-previous"), i18n("Previous"));
+    prevButton->setAutoRepeat(true);
+    addActionButton(prevButton);
 
     connect( this, SIGNAL(applyClicked()), this, SLOT(applyChanges()) );
     connect( this, SIGNAL(okClicked()), this, SLOT(applyChanges()) );
@@ -630,12 +629,12 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
 
 void OptionsEditor::setPreviousEnabled( bool enabled )
 {
-    User2->setEnabled(enabled);
+    prevButton->setEnabled(enabled);
 }
 
 void OptionsEditor::setNextEnabled( bool enabled )
 {
-    User1->setEnabled(enabled);
+    nextButton->setEnabled(enabled);
 }
 
 void OptionsEditor::applyChanges()

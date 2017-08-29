@@ -111,8 +111,8 @@ private:
     Config *config;
     TagEngine *tagEngine;
 
-    QPushButton *User1;
-    QPushButton *User2;
+    QPushButton *nextButton;
+    QPushButton *prevButton;
 
 public slots:
     // connected to FileList

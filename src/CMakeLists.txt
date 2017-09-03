@@ -32,12 +32,6 @@ include(FeatureSummary)
 find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
 find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
 find_package(KF5Cddb)
-set_package_properties(KF5Cddb PROPERTIES
-    DESCRIPTION "KF5 CDDB library"
-    URL "https://github.com/isoft-linux/libkcddb"
-    TYPE REQUIRED
-    PURPOSE "libkcddb is used to retrieve audio CD meta data from the internet."
-)
 find_package(Phonon4Qt5 REQUIRED)
 
 

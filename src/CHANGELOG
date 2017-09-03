@@ -1,4 +1,5 @@
-2.2.3:
+Unreleased:
+-Change: Port to KDE Frameworks 5
 -Change: MusePack Gain plugin: Look for mpcgain rather than replaygain binary
 
 2.2.2:

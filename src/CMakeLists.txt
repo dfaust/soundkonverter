@@ -3,18 +3,19 @@ cmake_minimum_required(VERSION 3.3.0)
 
 set(CMAKE_CXX_STANDARD 11)
 
-# all the warnings about constructions
+# show more warnings
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 # strict ISO C and ISO C++
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic")
-# treat warnings as errors
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 # use c++11 standard
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # implicit conversions
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion")
 # implicit conversions from signed to unsigned
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wsign-conversion")
+
+# hide deprecated declarations warnings
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
 
 # kde libs
 find_package(ECM REQUIRED NO_MODULE)

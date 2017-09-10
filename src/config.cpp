@@ -320,6 +320,18 @@ void Config::load()
         data.backends.enabledFilters.append( data.backends.filters.first() );
     }
 
+    // import KDE4 profiles - paths are hard-coded because I don't know how to properly get the KDE4 data path
+    if( data.app.configVersion < 1006 )
+    {
+        const QString src = QDir::homePath() + "/.kde4/share/apps/soundkonverter/profiles.xml";
+        const QString dest = KStandardDirs::locateLocal("data","soundkonverter/profiles.xml");
+        if( QFile::exists(src) && !QFile::exists(dest) )
+        {
+            QFile::copy(src, dest);
+            logger->log( 1000, i18n("Importing old profiles from: %1").arg(src) );
+        }
+    }
+
     logger->log( 1000, "\nloading profiles ..." );
     QFile listFile( KStandardDirs::locateLocal("data","soundkonverter/profiles.xml") );
     if( listFile.open( QIODevice::ReadOnly ) )

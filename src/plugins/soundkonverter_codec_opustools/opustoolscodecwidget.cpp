@@ -135,23 +135,23 @@ QString OpusToolsCodecWidget::currentProfile()
     {
         return i18n("Lossless");
     }
-    else if( dQuality->value() == 80 )
+    else if( dQuality->value() == 64 )
     {
         return i18n("Very low");
     }
-    else if( dQuality->value() == 128 )
+    else if( dQuality->value() == 96 )
     {
         return i18n("Low");
     }
-    else if( dQuality->value() == 192 )
+    else if( dQuality->value() == 128 )
     {
         return i18n("Medium");
     }
-    else if( dQuality->value() == 240 )
+    else if( dQuality->value() == 160 )
     {
         return i18n("High");
     }
-    else if( dQuality->value() == 320 )
+    else if( dQuality->value() == 192 )
     {
         return i18n("Very high");
     }
@@ -163,36 +163,36 @@ bool OpusToolsCodecWidget::setCurrentProfile( const QString& profile )
 {
     if( profile == i18n("Very low") )
     {
-        sQuality->setValue( 8000 );
-        dQuality->setValue( 80 );
+        sQuality->setValue( 6400 );
+        dQuality->setValue( 64 );
         cBitrateMode->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("Low") )
+    {
+        sQuality->setValue( 9600 );
+        dQuality->setValue( 96 );
+        cBitrateMode->setCurrentIndex( 0 );
+        return true;
+    }
+    else if( profile == i18n("Medium") )
     {
         sQuality->setValue( 12800 );
         dQuality->setValue( 128 );
         cBitrateMode->setCurrentIndex( 0 );
         return true;
     }
-    else if( profile == i18n("Medium") )
-    {
-        sQuality->setValue( 19200 );
-        dQuality->setValue( 192 );
-        cBitrateMode->setCurrentIndex( 0 );
-        return true;
-    }
     else if( profile == i18n("High") )
     {
-        sQuality->setValue( 24000 );
-        dQuality->setValue( 240 );
+        sQuality->setValue( 16000 );
+        dQuality->setValue( 160 );
         cBitrateMode->setCurrentIndex( 0 );
         return true;
     }
     else if( profile == i18n("Very high") )
     {
-        sQuality->setValue( 32000 );
-        dQuality->setValue( 320 );
+        sQuality->setValue( 19200 );
+        dQuality->setValue( 192 );
         cBitrateMode->setCurrentIndex( 0 );
         return true;
     }

@@ -1,6 +1,7 @@
 Unreleased:
 -Change: Port to KDE Frameworks 5
 -Change: MusePack Gain plugin: Look for mpcgain rather than replaygain binary
+-Change: Lower bitrates for opus presets
 
 2.2.2:
 -Change: Move Polish (Poland) translation to Polish

@@ -1,3 +1,7 @@
+3.0.1:
+-Fix: Destination mode "Source directory" creates filenames consisting only of the file extension
+-Fix: All files "Failed" to convert when dragging a folder (Invalid URL)
+
 3.0.0:
 -Change: Port to KDE Frameworks 5
 -Change: MusePack Gain plugin: Look for mpcgain rather than replaygain binary

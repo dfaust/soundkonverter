@@ -22,19 +22,19 @@ msgstr ""
 
 #: aboutplugins.cpp:20
 msgid "About plugins"
-msgstr "Sobre los plugins"
+msgstr "Acerca de los enchufes"
 
 #: aboutplugins.cpp:34
 msgid "Installed plugins:"
-msgstr "Plugins instalados:"
+msgstr "Enchufes instalados:"
 
 #: aboutplugins.cpp:131
 msgid "About plugin %1:"
-msgstr "Sobre el plugin %1:"
+msgstr "Acerca de enchufes %1:"
 
 #: aboutplugins.cpp:133
 msgid "Plugin type: %1"
-msgstr "Tipo de plugin: %1"
+msgstr "Tipo de enchufes: %1"
 
 #: aboutplugins.cpp:139
 msgid "Backend binaries:"
@@ -50,7 +50,7 @@ msgstr "%1 (no encontrado)"
 
 #: aboutplugins.cpp:167 aboutplugins.cpp:202 aboutplugins.cpp:233
 msgid "Supported codecs:"
-msgstr "Codecs soportados:"
+msgstr "códecs soportados:"
 
 #: aboutplugins.cpp:172 aboutplugins.cpp:180 aboutplugins.cpp:207
 #: aboutplugins.cpp:215 aboutplugins.cpp:230
@@ -73,37 +73,35 @@ msgstr "Configurar %1 ..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
-msgstr "Soluciones para problemas de binarios externos"
+msgstr "Soluciones para los problemas de binario"
 
 #: codecoptimizations.cpp:27
 msgid ""
 "You have installed or removed backends and your soundKonverter settings can "
 "be optimized."
 msgstr ""
-"Ha instalado o eliminado binarios externos y sus configuraciones de "
-"soundKonverter pueden ser optimizadas."
+"Ha instalado o eliminado binarios y sus configuraciones de soundKonverter pueden "
+"ser optimizadas."
 
 #: codecoptimizations.cpp:51
 msgid "For encoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr ""
-"Para codificar archivos %1, el binario '%2' puede ser reemplazado con .'%3'"
+msgstr "Para codificar archivos %1, el binario '%2' puede ser reemplazado con '%3'."
 
 #: codecoptimizations.cpp:55
 msgid "For ripping audio CDs the backend '%1' can be replaced with '%2'."
-msgstr ""
+msgstr "Para extraer CD de audio, el binario '%1' puede ser reemplazado por '%2'."
 
 #: codecoptimizations.cpp:59
 msgid "For decoding %1 files the backend '%2' can be replaced with '%3'."
-msgstr ""
-"Para decodificar archivos %1, el binario '%2' puede ser reemplazado por '%3'."
+msgstr "Para decodificar archivos %1 el binario '%2' puede ser reemplazado por '%3'."
 
 #: codecoptimizations.cpp:63
 msgid ""
 "For applying Replay Gain to %1 files the backend '%2' can be replaced with "
 "'%3'."
 msgstr ""
-"Para aplicar Replay Gain en los archiivos %1, el binario '%2' puede ser "
-"reemplazado por '%3'."
+"Para aplicar Replay Gain en los archivos %1 el binario '%2' puede ser reemplazado con "
+"'%3'."
 
 #: codecoptimizations.cpp:66
 msgid "Ignore"
@@ -119,33 +117,33 @@ msgid ""
 "If you are missing some file formats you might need to install an additional "
 "plugin via the package manager of your distribution."
 msgstr ""
-"soundKonverter no pudo encontrar los paquetes que faltan.⏎ Si le falta algún "
-"formato archivo, deberá instalar un plugin adicional con el administrador de "
-"paquetes de su distribución."
+"soundKonverter no pudo encontrar los paquetes que faltan.\n"
+"Si le falta algún archivo de formatos, deberá instalar un enchufe adicional "
+"con el administrador de paquetes de su distribución."
 
 #: codecproblems.cpp:32
 msgid ""
 "Some of the installed plugins aren't working.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Algún de los plugins instalados no está funcionando.⏎ Las posibles "
-"soluciones se listan debajo."
+"Algúnos de los enchufes instalados no están funcionando.\n"
+"Las posibles soluciones se listan abajo."
 
 #: codecproblems.cpp:37
 msgid ""
 "Some files can't be decoded.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Algunos archivos no se pueden codificar.⏎ Las posibles soluciones se listan "
-"debajo."
+"Algunos archivos no pueden ser decodificados.\n"
+"Las posibles soluciones se listan abajo."
 
 #: codecproblems.cpp:41
 msgid ""
 "Replay Gain isn't supported for some files.\n"
 "Possible solutions are listed below."
 msgstr ""
-"Replay Gain no está soportado por algunos archivos.⏎ Las posibles soluciones "
-"se listan debajo."
+"Replay Gain no está soportado por algunos archivos.\n"
+"Las posibles soluciones se listan abajo."
 
 #: codecproblems.cpp:47
 msgid ""
@@ -153,17 +151,17 @@ msgid ""
 "Please have a look at your distributions package manager in order to get a "
 "cd ripper plugin for soundKonverter."
 msgstr ""
-"La extracción de CDs no está soportada por ninguno de los plugins instalados."
-"⏎ Consulte en el administrador de paquetes de su distribución para poder "
-"extraer CDs con soundKonverter."
+"La extracción de CDs no está soportada por ninguno de los enchufes instalados.\n"
+"Consulte en el administrador de paquetes de su distribución para poder "
+"extraer CDs con enchufes de soundKonverter."
 
 #: codecproblems.cpp:51
 msgid ""
 "Ripping audio CDs is currently not supported because of missing backends.\n"
 "Possible solutions are listed below."
 msgstr ""
-"La extracción de CDs no está soportada porque faltan los binarios para ello."
-"⏎ Las posibles soluciones se listan debajo."
+"La extracción de CDs no está soportada porque faltan los binarios.\n"
+"Las posibles soluciones se listan abajo."
 
 #: codecproblems.cpp:67 codecproblems.cpp:71
 msgid "Possible solutions for %1"
@@ -235,7 +233,7 @@ msgstr "cubierta"
 #: config.cpp:234 config.cpp:260 config.cpp:262 convert.cpp:172 convert.cpp:244
 #: convert.cpp:411
 msgid "Try internal"
-msgstr "Interna"
+msgstr "Probar interno"
 
 #: config.cpp:386 config.cpp:402 configdialog/configgeneralpage.cpp:72
 #: configdialog/configgeneralpage.cpp:270 optionsdetailed.cpp:469
@@ -433,7 +431,7 @@ msgstr "Híbrido"
 #: plugins/soundkonverter_codec_vorbistools/vorbistoolscodecwidget.cpp:170
 #: plugins/soundkonverter_filter_sox/soxcodecwidget.cpp:455
 msgid "User defined"
-msgstr "Definido por el usuario"
+msgstr "Definido por usuario"
 
 #: config.cpp:579
 msgid "Convert with soundKonverter"
@@ -463,10 +461,12 @@ msgid ""
 "Comments will be written to the selected field, when reading tags the "
 "selected field will be preferred."
 msgstr ""
+"Algunas aplicaciones usan el campo DESCRIPCIÓN aunque el campo COMENTARIO es "
+"el correcto.\n"
 
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
-msgstr ""
+msgstr "Número preferido de pistas totales y campo de etiquetas para ogg vorbis y archivos flac:"
 
 #: configdialog/configadvancedpage.cpp:80
 #: configdialog/configadvancedpage.cpp:83
@@ -476,10 +476,14 @@ msgid ""
 "When using the field TRACKNUMBER, the track number and the total tracks "
 "number will be written to the same field separated by a slash ('/')."
 msgstr ""
+"El número total de pistas se escribirán en el campo seleccionado al leer las etiquetas"
+"el campo seleccionado será preferido.\n"
+"Cuando se utiliza el campo NÚMERO DE PISTA, el número de pista y el total de pistas"
+"el número se escribirá en el mismo campo separado por una diagonal ('/')."
 
 #: configdialog/configadvancedpage.cpp:98
 msgid "Preferred total discs number tag field for ogg vorbis and flac files:"
-msgstr ""
+msgstr "Campo de etiqueta del número total de discos preferidos para ogg vorbis y archivos flac:"
 
 #: configdialog/configadvancedpage.cpp:99
 #: configdialog/configadvancedpage.cpp:102
@@ -489,6 +493,10 @@ msgid ""
 "When using the field DISCNUMBER, the disc number and the total discs number "
 "will be written to the same field separated by a slash ('/')."
 msgstr ""
+"El número total de discos se escribirán en el campo seleccionado al leer las etiquetas "
+"el campo seleccionado será preferido.\n"
+"Cuando se usa el campo NÚMERO DE DISCO, el número de disco y el número total de discos "
+"se escribirán en el mismo campo separado por una diagonal ('/')."
 
 #: configdialog/configadvancedpage.cpp:117
 msgid "Always use FAT compatible output file names"
@@ -500,13 +508,13 @@ msgid ""
 "If the output directory is on a FAT file system FAT compatible file names "
 "will automatically be used independently from this option."
 msgstr ""
-"Reemplazar algunos caracteres especiales como '?' por '_'.⏎ Si el directorio "
-"de salida está en un sistema de archivo FAT, se usarán nombres de archivos "
-"compatibles con FAT automáticamente independientemente de esta opción."
+"Reemplazar algunos caracteres especiales como '?' por '_'.\n"
+"Si el directorio de salida está en un sistema de archivo FAT, compatible a nombres de archivos "
+"podria se usado automáticamente independientemente de esta opción."
 
 #: configdialog/configadvancedpage.cpp:128
 msgid "Eject CD after ripping has been completed"
-msgstr ""
+msgstr "Expulsar CD después de terminar la extracción"
 
 #: configdialog/configadvancedpage.cpp:135
 msgid "Debug"
@@ -523,9 +531,10 @@ msgid ""
 "the log viewer.\n"
 "Log files will be written to %1"
 msgstr ""
-"Escribir registros al disco rígido mientras se convierte.⏎ Ésto puede ser "
-"útil si ocurre una falla y no puede acceder al registro usando un visor de "
-"registro.⏎ Los registros se escribirán en %1"
+"Escribir registros al disco rígido mientras se convierte.\n"
+"Ésto puede ser útil si ocurre una falla y no puede acceder al archivo de registro usando "
+"el visor de registros.\n"
+"Archivos de registro se escribirán en %1"
 
 #: configdialog/configadvancedpage.cpp:152
 msgid "Experimental"
@@ -533,9 +542,7 @@ msgstr "Experimental"
 
 #: configdialog/configadvancedpage.cpp:161
 msgid "Store temporary files in memory unless the estimated size is more than:"
-msgstr ""
-"Guardar archivos temporarios en memoria a menos que el tamaño estimado sea "
-"más que:"
+msgstr "Guardar archivos temporarios en memoria a menos que el tamaño estimado sea más que:"
 
 #: configdialog/configadvancedpage.cpp:162
 #: configdialog/configadvancedpage.cpp:166
@@ -543,8 +550,8 @@ msgid ""
 "Don't store files that are expected to be bigger than this value in memory "
 "to avoid swapping"
 msgstr ""
-"No almacenar los archivos que sean mayores que este valor en memoria para "
-"evitar swapping."
+"No almacenar los archivos que sean mayores que este valor en memoria "
+"para evitar intercambios"
 
 #: configdialog/configadvancedpage.cpp:167
 msgctxt "mega in bytes"
@@ -565,9 +572,9 @@ msgid ""
 "performance.\n"
 "But some backends cause errors in this mode so be cautious."
 msgstr ""
-"Las tuberías son necesarias cuando se usan archivos temporales, mejorando el "
-"rendimiento.⏎ Pero algunos binarios causan errores cuando se usa este modo, "
-"por lo tanto debe ser cuidadoso."
+"Las tuberías son innecesarias cuando se usan archivos temporales, mejorando el "
+"rendimiento.\n"
+"Pero algunos binarios causan errores cuando se usa este modo por lo tanto ser cuidadoso."
 
 #: configdialog/configbackendspage.cpp:136
 #: configdialog/configbackendspage.cpp:197
@@ -606,7 +613,7 @@ msgstr "Extractor de CD"
 
 #: configdialog/configbackendspage.cpp:241
 msgid "Use plugin:"
-msgstr "Usar plugin:"
+msgstr "Usar enchufe:"
 
 #: configdialog/configbackendspage.cpp:265
 msgid "Filters"
@@ -614,7 +621,7 @@ msgstr "Filtros"
 
 #: configdialog/configbackendspage.cpp:281
 msgid "Enable plugins:"
-msgstr "Habilitar plugins:"
+msgstr "Habilitar enchufes:"
 
 #: configdialog/configbackendspage.cpp:320
 msgid "Priorities"
@@ -622,7 +629,7 @@ msgstr "Prioridades"
 
 #: configdialog/configbackendspage.cpp:332
 msgid "Configure plugin priorities for format:"
-msgstr "Configurar prioridades de plugin para el formato:"
+msgstr "Configurar prioridades de enchufe para el formato:"
 
 #: configdialog/configbackendspage.cpp:359
 msgid "Show possible optimizations"
@@ -634,7 +641,7 @@ msgid ""
 "Do you want to save them?"
 msgstr ""
 "Ha modificado las configuraciones actuales.\n"
-"¿Desea guardarlas?"
+"Desea guardarlas?"
 
 #: configdialog/configbackendspage.cpp:399
 msgid "Settings changed"
@@ -647,10 +654,14 @@ msgid ""
 "\n"
 "Do you want to continue?"
 msgstr ""
+"Esto elegirá los mejores binarios para todos los formatos y guardará las nuevas"
+"preferencias inmediatamente.\n"
+"\n"
+"Quieres continuar?"
 
 #: configdialog/configbackendspage.cpp:607
 msgid "All backend settings seem to be optimal, there is nothing to do."
-msgstr "Todos los binarios parecen estar bien, no hay nada que hacer."
+msgstr "Todos los ajustes de los binarios parecen estar bien, no hay nada que hacer."
 
 #: configdialog/configcoverartpage.cpp:24
 msgid "Saving covers to output directory"
@@ -666,7 +677,7 @@ msgstr "Siempre"
 
 #: configdialog/configcoverartpage.cpp:40
 msgid "Only if embedding the covers into the output files is not possible"
-msgstr "Sólo embeber las cubiertas si no es posible"
+msgstr "Solo si no es posible embeber las cubiertas en los archivos de salida"
 
 #: configdialog/configcoverartpage.cpp:42
 msgid "Never"
@@ -675,8 +686,7 @@ msgstr "Nunca"
 #: configdialog/configcoverartpage.cpp:62
 msgid "File name for the cover (when saving to output directory)"
 msgstr ""
-"Nombre de archivo para la cubierta (cuando se guarda en el directorio de "
-"salida)"
+"Nombre de archivo para la cubierta (cuando se guarda en el directorio de salida)"
 
 #: configdialog/configcoverartpage.cpp:64
 msgid "The embedded cover description"
@@ -700,13 +710,17 @@ msgid ""
 "%d - Cover description\n"
 "%r - Cover role"
 msgstr ""
-"Las siguientes líneas son comodines para ser reemplazados por la información "
-"en los metadatos:⏎  ⏎  %a - Artista ⏎  %b - Álbum %d - Descripción de "
-"cubierta ⏎ %r - Tipo de cubierta"
+"Las siguientes cadenas son comodines que ser reemplazados\n"
+"por la información en los metadatos:\n"
+"\n"
+"%a - Artista\n"
+"%b - Álbum\n"
+"%d - Descripción de cubierta\n"
+"%r - Papel de portada"
 
 #: configdialog/configdialog.cpp:29
 msgid "Settings"
-msgstr "Configuraciones"
+msgstr "Ajustes"
 
 #: configdialog/configdialog.cpp:42
 msgid "General"
@@ -776,8 +790,9 @@ msgid ""
 "cores.\n"
 "There have been %1 processor cores detected."
 msgstr ""
-"Este número no debería ser mayor que la cantidad de núcleos de procesador "
-"disponibles.⏎ Se detectaron %1 núcleos de procesador."
+"Este número no debería ser mayor a la cantidad de núcleos del "
+"procesador.\n"
+"Se detectaron %1 núcleos de procesador."
 
 #: configdialog/configgeneralpage.cpp:150
 msgid "Apply album gain to converted files"
@@ -788,18 +803,20 @@ msgid ""
 "Keep songs of the same album waiting in file list in order to apply album "
 "gain to all files."
 msgstr ""
-"Mantener las canciones del mismo álbum esperando en la lista de archivos "
-"para poder aplicarle ganancia de álbum a todas ellas."
+"Mantener las canciones del mismo álbum esperando en la lista de archivos para poder aplicar al álbum "
+"de ganancia a todos los archivos."
 
 #: configdialog/configgeneralpage.cpp:161
 msgid "Copy files instead of converting to the same file format"
-msgstr ""
+msgstr ""Copiar archivos en lugar de convertirlos al mismo formato de archivo"
 
 #: configdialog/configgeneralpage.cpp:162
 msgid ""
 "If the input and the output file format are the same, copy the files instead "
 "of re-encoding them."
 msgstr ""
+"Si la entrada y el formato del archivo de salida son iguales, copiar los archivos en lugar "
+"de volver a codificarlos."
 
 #: configdialog/configgeneralpage.cpp:169
 #: replaygainscanner/replaygainscanner.cpp:34
@@ -809,7 +826,7 @@ msgstr "Herramienta Replay Gain"
 
 #: configdialog/configgeneralpage.cpp:178
 msgid "Group files in the Replay Gain tool by:"
-msgstr "Agrupar archivos en la herramienta Replay Gain por:"
+msgstr "Grupo de archivos en la herramienta Replay Gain por:"
 
 #: configdialog/configgeneralpage.cpp:181
 msgctxt "Group files in the Replay Gain tool by"
@@ -828,7 +845,7 @@ msgstr "Sólo directorios"
 
 #: configdialog/configgeneralpage.cpp:193
 msgid "Number of items to process at once:"
-msgstr "Número de ítems a procesar a la vez:"
+msgstr "Número de elementos a procesar a la vez:"
 
 #: convert.cpp:68 convert.cpp:1450
 msgid "Getting file"
@@ -840,11 +857,11 @@ msgstr "Copiando \"%1\" a \"%2\""
 
 #: convert.cpp:103 convert.cpp:1138
 msgid "File is encrypted, conversion not possible"
-msgstr ""
+msgstr "El archivo está encriptado, la conversión no es posible"
 
 #: convert.cpp:121
 msgid "Cannot create output directory \"%1\""
-msgstr ""
+msgstr "No se puede crear el directorio de salida \"% 1 \ ""
 
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64
@@ -862,20 +879,20 @@ msgid ""
 "Conversion failed. At least one of the used backends needs to be configured "
 "properly."
 msgstr ""
-"Falló la conversión. Al menos uno de los binarios utilizados debe "
-"configurarse apropiadamente."
+"Falló la conversión. Al menos uno de los binarios utilizados debe configurarse "
+"apropiadamente."
 
 #: convert.cpp:202 convert.cpp:441 convert.cpp:558
 msgid ""
 "Conversion failed. The preferred plugin lacks support for a necessary "
 "feature."
 msgstr ""
-"Falló conversión. El plugin preferido carece de soporte para la "
-"característica necesitada."
+"Falló la conversión. El enchufe preferido carece de soporte para la característica "
+"necesitada."
 
 #: convert.cpp:208 convert.cpp:447 convert.cpp:564
 msgid "Conversion failed. Unknown Error."
-msgstr "Falló conversión. Error desconocido."
+msgstr "Falló la conversión. Error desconocido."
 
 #: convert.cpp:369 convert.cpp:1462 filelist.cpp:577
 msgid "Ripping"
@@ -903,7 +920,7 @@ msgstr "Aplicando Replay Gain"
 
 #: convert.cpp:531 replaygainscanner/replaygainprocessor.cpp:89
 msgid "Waiting for running Vorbis Gain process to finish"
-msgstr ""
+msgstr "Esperando correr el proceso Vorbis Gain para terminar"
 
 #: convert.cpp:580
 msgid "Writing tags"
@@ -937,16 +954,16 @@ msgstr "Falló la conversión. Código de salida: %1"
 #: convert.cpp:1107
 msgctxt "identificator for the logger"
 msgid "CD track %1: %2 - %3"
-msgstr "Pista %1: %2 - %3"
+msgstr "Pista de CD %1: %2 - %3"
 
 #: convert.cpp:1111
 msgctxt "identificator for the logger"
 msgid "CD track %1"
-msgstr "Pista %1"
+msgstr "Pista de CD %1"
 
 #: convert.cpp:1118
 msgid "Adding new item to conversion list: '%1'"
-msgstr "Agregando nuevo ítem a la lista de conversión: '%1'"
+msgstr "Agregando nuevo elemento a la lista de conversión: '%1'"
 
 #: convert.cpp:1127 replaygainscanner/replaygainprocessor.cpp:281
 msgid "Got log ID: %1"
@@ -969,8 +986,8 @@ msgid ""
 "An error occurred, the output file size is less than one percent of the "
 "input file size"
 msgstr ""
-"Ocurrió un error, el tamaño del archivo de salida es menor que el uno por "
-"ciento del archivo de entrada"
+"Ocurrió un error, el tamaño del archivo de salida es menor que el uno por ciento "
+"del archivo de entrada"
 
 #: convert.cpp:1238
 msgid "Conversion failed, trying again. Exit code: -2 (%1)"
@@ -988,7 +1005,7 @@ msgstr "Salida normal"
 #: convert.cpp:1256 replaygainscanner/replaygainprocessor.cpp:326
 msgctxt "Conversion exit status"
 msgid "Succeeded but problems occurred"
-msgstr ""
+msgstr "Tuve éxito pero ocurrieron problemas"
 
 #: convert.cpp:1259 replaygainscanner/replaygainprocessor.cpp:329
 msgctxt "Conversion exit status"
@@ -998,7 +1015,7 @@ msgstr "Abortado por usuario"
 #: convert.cpp:1262 replaygainscanner/replaygainprocessor.cpp:332
 msgctxt "Conversion exit status"
 msgid "Backend needs configuration"
-msgstr "Ejecutable necesita configuración"
+msgstr "Binario necesita configuración"
 
 #: convert.cpp:1265
 msgctxt "Conversion exit status"
@@ -1008,7 +1025,7 @@ msgstr "No hay suficiente espacio en el dispositivo de salida"
 #: convert.cpp:1268
 msgctxt "Conversion exit status"
 msgid "Cannot write to output directory, please check permissions"
-msgstr ""
+msgstr "No se puede escribir en el directorio de salida, compruebe los permisos"
 
 #: convert.cpp:1271
 msgctxt "Conversion exit status"
@@ -1018,7 +1035,7 @@ msgstr "El archivo ya existe"
 #: convert.cpp:1274
 msgctxt "Conversion exit status"
 msgid "File is encrypted"
-msgstr ""
+msgstr "El archivo está encriptado"
 
 #: convert.cpp:1277 replaygainscanner/replaygainprocessor.cpp:338
 msgctxt "Conversion exit status"
@@ -1043,7 +1060,7 @@ msgstr "Tamaño del archivo de salida"
 
 #: convert.cpp:1328
 msgid "File size ratio"
-msgstr "Razón de tamaño de archivo"
+msgstr "proporción de tamaño de archivo"
 
 #: convert.cpp:1435
 msgctxt "The conversion progress can't be determined"
@@ -1070,6 +1087,11 @@ msgid ""
 "<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
 "wiki/WAV</a>"
 msgstr ""
+"(Wave) es un formato de audio muy simple que no comprime la transmisión de audio "
+"es sin pérdida pero el tamaño del archivo es muy grande y no admite avanzadas "
+"características como etiquetas.<br>Es compatible con cualquier programa o dispositivo."
+"<br><br><a href=\"http://en.wikipedia.org/wiki/WAV\">http://en.wikipedia.org/"
+"wiki/WAV</a>"
 
 #: core/backendplugin.cpp:47
 msgid ""

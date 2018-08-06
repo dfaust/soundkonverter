@@ -355,7 +355,7 @@ int ReplayGainFileList::listDir( const QString& directory, const QStringList& fi
             if( filter.contains(codecName) )
             {
                 QList<QUrl> urls;
-                urls.append(directory + "/" + fileName);
+                urls.append("file://" + directory + "/" + fileName);
                 addFiles( urls, codecName );
             }
 

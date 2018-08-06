@@ -1,3 +1,6 @@
+unreleased:
+-Fix: Add directories to the Replay Gain tool
+
 3.0.1:
 -Fix: Destination mode "Source directory" creates filenames consisting only of the file extension
 -Fix: All files "Failed" to convert when dragging a folder (Invalid URL)

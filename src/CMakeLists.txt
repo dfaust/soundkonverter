@@ -135,7 +135,7 @@ install(FILES soundkonverter_replaygainplugin.desktop DESTINATION ${SERVICETYPES
 install(FILES soundkonverter_ripperplugin.desktop DESTINATION ${SERVICETYPES_INSTALL_DIR})
 install(FILES soundkonverter-rip-audiocd.desktop DESTINATION ${DATA_INSTALL_DIR}/solid/actions)
 
-install(FILES soundkonverter.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/appdata)
+install(FILES soundkonverter.appdata.xml DESTINATION ${SHARE_INSTALL_PREFIX}/metainfo)
 
 add_subdirectory(icons)
 add_subdirectory(images)

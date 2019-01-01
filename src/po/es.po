@@ -463,6 +463,8 @@ msgid ""
 msgstr ""
 "Algunas aplicaciones usan el campo DESCRIPCIÓN aunque el campo COMENTARIO es "
 "el correcto.\n"
+"Comments will be written to the selected field, when reading tags the "
+"selected field will be preferred."
 
 #: configdialog/configadvancedpage.cpp:79
 msgid "Preferred total tracks number tag field for ogg vorbis and flac files:"
@@ -808,7 +810,7 @@ msgstr ""
 
 #: configdialog/configgeneralpage.cpp:161
 msgid "Copy files instead of converting to the same file format"
-msgstr ""Copiar archivos en lugar de convertirlos al mismo formato de archivo"
+msgstr "Copiar archivos en lugar de convertirlos al mismo formato de archivo"
 
 #: configdialog/configgeneralpage.cpp:162
 msgid ""
@@ -861,7 +863,7 @@ msgstr "El archivo está encriptado, la conversión no es posible"
 
 #: convert.cpp:121
 msgid "Cannot create output directory \"%1\""
-msgstr "No se puede crear el directorio de salida \"% 1 \ ""
+msgstr "No se puede crear el directorio de salida \"% 1 \""
 
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64

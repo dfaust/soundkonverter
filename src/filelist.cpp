@@ -295,7 +295,7 @@ int FileList::listDir( const QString& directory, const QStringList& filter, bool
             if( filter.contains(codecName) )
             {
                 QList<QUrl> urls;
-                urls.append("file://" + directory + "/" + fileName);
+                urls.append(QUrl::fromLocalFile(directory + '/' + fileName));
                 addFiles( urls, 0, "", codecName, conversionOptionsId );
             }
 

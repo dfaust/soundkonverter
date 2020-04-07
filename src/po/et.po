@@ -619,7 +619,7 @@ msgstr "Kasutatav plugin:"
 
 #: configdialog/configbackendspage.cpp:265
 msgid "Filters"
-msgstr "Fintrid"
+msgstr "Filtrid"
 
 #: configdialog/configbackendspage.cpp:281
 msgid "Enable plugins:"

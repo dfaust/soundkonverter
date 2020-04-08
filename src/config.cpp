@@ -328,7 +328,7 @@ void Config::load()
         if( QFile::exists(src) && !QFile::exists(dest) )
         {
             QFile::copy(src, dest);
-            logger->log( 1000, i18n("Importing old profiles from: %1").arg(src) );
+            logger->log( 1000, i18n("Importing old profiles from: %1",src) );
         }
     }
 

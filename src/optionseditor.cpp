@@ -468,7 +468,7 @@ void OptionsEditor::itemsSelected( QList<FileListItem*> items )
     }
     else // selectedItems.count() > 1
     {
-        setWindowTitle(i18n("%1 Files").arg(selectedItems.count()));
+        setWindowTitle(i18n("%1 Files",selectedItems.count()));
 
         FileListItem *firstItem = selectedItems.first();
         const int     conversionOptionsId = firstItem->conversionOptionsId;

@@ -9,7 +9,7 @@
 #include <K4AboutData>
 #include <KCmdLineArgs>
 #include <KLocale>
-
+#include <KLocalizedString>
 
 static const char description[] =
 I18N_NOOP("soundKonverter is a frontend to various audio converters, Replay Gain tools and CD rippers.\n\nPlease file bug reports at https://github.com/dfaust/soundkonverter/issues");
@@ -18,6 +18,8 @@ static const char version[] = SOUNDKONVERTER_VERSION_STRING;
 
 int main(int argc, char **argv)
 {
+    KLocalizedString::setApplicationDomain("soundkonverter");
+    
     K4AboutData about("soundkonverter", 0, ki18n("soundKonverter"), version, ki18n(description), K4AboutData::License_GPL, ki18n("(C) 2005-2017 Daniel Faust"), KLocalizedString(), 0, "hessijames@gmail.com");
     about.addAuthor( ki18n("Daniel Faust"), KLocalizedString(), "hessijames@gmail.com" );
     about.addCredit( ki18n("David Vignoni"), ki18n("Nuvola icon theme"), 0, "http://www.icon-king.com" );

@@ -67,7 +67,7 @@ msgstr "Dekodeerimine: %1"
 #: configdialog/configbackendspage.cpp:309
 #: configdialog/configbackendspage.cpp:388 optionsdetailed.cpp:304
 msgid "Configure %1 ..."
-msgstr "%1 seadistamine..."
+msgstr "%1i seadistamine..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"

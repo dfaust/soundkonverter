@@ -1,26 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
-# Daniel Faust <hessijames@gmail.com>, 2012
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2011-2013
-# Mihkel Tõnnov <mihhkel@gmail.com>, 2011
+# Mihkel Tõnnov <mihhkel@gmail.com>, 2008-2009, 2011-2014, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: soundkonverter\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/"
-"soundkonverter/\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/ubuntu/%2Bsource/soundkonverter/\n"
 "POT-Creation-Date: 2016-05-21 10:30+0200\n"
-"PO-Revision-Date: 2016-05-03 15:47+0000\n"
-"Last-Translator: Daniel Faust <hessijames@gmail.com>\n"
-"Language-Team: Estonian (http://www.transifex.com/hessijames/soundkonverter/"
-"language/et/)\n"
+"PO-Revision-Date: 2020-04-07 13:51+0200\n"
+"Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
+"Language-Team: Estonian <>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #: aboutplugins.cpp:20
 msgid "About plugins"
@@ -71,7 +67,7 @@ msgstr "Dekodeerimine: %1"
 #: configdialog/configbackendspage.cpp:309
 #: configdialog/configbackendspage.cpp:388 optionsdetailed.cpp:304
 msgid "Configure %1 ..."
-msgstr "%1 seadistamine..."
+msgstr "%1i seadistamine..."
 
 #: codecoptimizations.cpp:17 codecproblems.cpp:14
 msgid "Solutions for backend problems"
@@ -623,7 +619,7 @@ msgstr "Kasutatav plugin:"
 
 #: configdialog/configbackendspage.cpp:265
 msgid "Filters"
-msgstr "Fintrid"
+msgstr "Filtrid"
 
 #: configdialog/configbackendspage.cpp:281
 msgid "Enable plugins:"
@@ -814,12 +810,14 @@ msgstr ""
 #: configdialog/configgeneralpage.cpp:161
 msgid "Copy files instead of converting to the same file format"
 msgstr ""
+"Samasse vormingusse teisendamise asemel failid kopeeritakse"
 
 #: configdialog/configgeneralpage.cpp:162
 msgid ""
 "If the input and the output file format are the same, copy the files instead "
 "of re-encoding them."
 msgstr ""
+"Kui sisend- ja väljundvorming on sama, siis failide uuesti kodeerimise asemel need lihtsalt kopeeritakse."
 
 #: configdialog/configgeneralpage.cpp:169
 #: replaygainscanner/replaygainscanner.cpp:34
@@ -861,10 +859,12 @@ msgstr "Kopeerimine: \"%1\" -> \"%2\""
 #: convert.cpp:103 convert.cpp:1138
 msgid "File is encrypted, conversion not possible"
 msgstr ""
+"Fail on krüptitud, teisendamine pole võimalik"
 
 #: convert.cpp:121
 msgid "Cannot create output directory \"%1\""
 msgstr ""
+"Väljundkataloogi \"%1\" loomine pole võimalik"
 
 #: convert.cpp:144 convert.cpp:478 convert.cpp:495
 #: replaygainscanner/replaygainprocessor.cpp:64
@@ -924,6 +924,7 @@ msgstr "Helitugevuse paranduse rakendamine"
 #: convert.cpp:531 replaygainscanner/replaygainprocessor.cpp:89
 msgid "Waiting for running Vorbis Gain process to finish"
 msgstr ""
+"Vorbis Gaini protsessi lõpetamise järel ootamine"
 
 #: convert.cpp:580
 msgid "Writing tags"
@@ -1028,6 +1029,7 @@ msgstr "Väljundseadmel pole piisavalt ruumi"
 msgctxt "Conversion exit status"
 msgid "Cannot write to output directory, please check permissions"
 msgstr ""
+"Väljundkataloogi kirjutamine pole võimalik - vaata, et õigused oleks paigas"
 
 #: convert.cpp:1271
 msgctxt "Conversion exit status"
@@ -1038,6 +1040,7 @@ msgstr "Fail on juba olemas"
 msgctxt "Conversion exit status"
 msgid "File is encrypted"
 msgstr ""
+"Fail on krüptitud"
 
 #: convert.cpp:1277 replaygainscanner/replaygainprocessor.cpp:338
 msgctxt "Conversion exit status"
@@ -1453,6 +1456,7 @@ msgstr "Jäetakse vahele"
 #: filelist.cpp:552
 msgid "Will be copied"
 msgstr ""
+"Kopeeritakse"
 
 #: filelist.cpp:556 soundkonverter.cpp:111 soundkonverter.cpp:115
 msgid "Waiting"
@@ -1462,21 +1466,25 @@ msgstr "Ootel"
 msgctxt "Short conversion status"
 msgid "Stopped"
 msgstr ""
+"Peatatud"
 
 #: filelist.cpp:601
 msgctxt "Short conversion status"
 msgid "Backend not configured"
 msgstr ""
+"Taustprogramm seadistamata"
 
 #: filelist.cpp:606
 msgctxt "Short conversion status"
 msgid "Disc full"
 msgstr ""
+"Ketas täis"
 
 #: filelist.cpp:611
 msgctxt "Short conversion status"
 msgid "Can't write output"
 msgstr ""
+"Väljundfaili pole võimalik kirjutada"
 
 #: filelist.cpp:614 filelist.cpp:631 filelist.cpp:643
 msgid ""
@@ -1489,16 +1497,19 @@ msgstr ""
 #: filelist.cpp:623
 msgid "Skipped"
 msgstr ""
+"Jäeti vahele"
 
 #: filelist.cpp:628
 msgctxt "Short conversion status"
 msgid "File is encrypted"
 msgstr ""
+"Fail on krüptitud"
 
 #: filelist.cpp:640
 msgctxt "Short conversion status"
 msgid "Failed"
 msgstr ""
+"Ebaõnnestus"
 
 #: filelist.cpp:666
 msgid "CD track %1"
@@ -1594,9 +1605,11 @@ msgid ""
 "soundKonverter is a frontend to various audio converters, Replay Gain tools "
 "and CD rippers.\n"
 "\n"
-"Please file bug reports at https://github.com/dfaust/soundkonverter/"
-"issues"
+"Please file bug reports at https://github.com/dfaust/soundkonverter/issues"
 msgstr ""
+"soundKonverter on mitmete audioteisendajate, helitugevuse parandustööriistade ja CD-rippijate kasutajaliides\n"
+"\n"
+"Palun esita veateated aadressil https://github.com/dfaust/soundkonverter/issues"
 
 #: main.cpp:22
 msgid "soundKonverter"
@@ -1605,6 +1618,7 @@ msgstr "soundKonverter"
 #: main.cpp:22
 msgid "(C) 2005-2016 Daniel Faust"
 msgstr ""
+"(C) 2005-2016 Daniel Faust"
 
 #: main.cpp:23
 msgid "Daniel Faust"
@@ -1696,6 +1710,7 @@ msgstr ""
 #: main.cpp:41
 msgid "Load the file list at <path> after starting soundKonverter"
 msgstr ""
+"soundKonverteri käivitamise järel laaditakse <asukohast> faililoend"
 
 #: main.cpp:42
 msgid "Audio file(s) to append to the file list"
@@ -2461,8 +2476,7 @@ msgid "Unknown Title"
 msgstr "Pealkiri teadmata"
 
 #: outputdirectory.cpp:354
-msgctxt ""
-"will be appended to the filename if a file with the same name already exists"
+msgctxt "will be appended to the filename if a file with the same name already exists"
 msgid "new"
 msgstr "uus"
 
@@ -2589,6 +2603,7 @@ msgstr ""
 #: plugins/soundkonverter_codec_faac/soundkonverter_codec_faac.cpp:87
 msgid "Compile faac with MP4 support."
 msgstr ""
+"Kompileeri faac MP4 toega."
 
 #: plugins/soundkonverter_codec_ffmpeg/ffmpegcodecwidget.cpp:30
 #: plugins/soundkonverter_codec_libav/libavcodecwidget.cpp:30
@@ -3110,11 +3125,13 @@ msgstr "Sildivorming:"
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:98
 msgid "Adjust gain:"
 msgstr ""
+"Kohandatud parandus:"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:110
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:103
 msgid "Lower or raise the suggested gain"
 msgstr ""
+"Pakutava helitugevuse paranduse suurendamine või vähendamine"
 
 #: plugins/soundkonverter_replaygain_aacgain/soundkonverter_replaygain_aacgain.cpp:115
 #: plugins/soundkonverter_replaygain_mp3gain/soundkonverter_replaygain_mp3gain.cpp:108
@@ -3152,6 +3169,7 @@ msgstr "Sunnitakse lugemiskiirust:"
 msgctxt "Byte-Order"
 msgid "Endianness:"
 msgstr ""
+"Baidijärjestus:"
 
 #: plugins/soundkonverter_ripper_cdparanoia/soundkonverter_ripper_cdparanoia.cpp:109
 msgid "Maximum read retries:"
@@ -3450,3 +3468,305 @@ msgstr "Helifailide teisendaja, CD-rippija ja helitugevuse parandustööriist"
 #: rc.cpp:4
 msgid "Rip Audio CD with soundKonverter"
 msgstr "Ripi audio-CD soundKonverteriga"
+
+#~ msgid "Running user script"
+#~ msgstr "Kasutajaskripti käivitamine"
+
+#~ msgid "Stopped"
+#~ msgstr "Peatatud"
+
+#~ msgid "Backend not configured"
+#~ msgstr "Taustprogramm seadistamata"
+
+#~ msgid "Disc full"
+#~ msgstr "Ketas täis"
+
+#~ msgid "Failed"
+#~ msgstr "Ebaõnnestus"
+
+#~ msgid ""
+#~ "soundKonverter is a frontend to various audio converters, Replay Gain "
+#~ "tools and CD rippers.\n"
+#~ "\n"
+#~ "Please file bug reports at https://bugs.launchpad.net/soundkonverter\n"
+#~ "or simply send me a mail to hessijames@gmail.com"
+#~ msgstr ""
+#~ "soundKonverter on mitmete audioteisendajate, helitugevuse "
+#~ "parandustööriistade ja CD-rippijate kasutajaliides.\n"
+#~ "\n"
+#~ "Palun esita veateated aadressil https://bugs.launchpad.net/ubuntu/+source/"
+#~ "soundkonverter\n"
+#~ "või lihtsalt saada e-kiri: hessijames@gmail.com"
+
+#~ msgid "(C) 2005-2012 Daniel Faust"
+#~ msgstr "(C) 2005-2012 Daniel Faust"
+
+#~ msgid "Endianness:"
+#~ msgstr "Otsalisus:"
+
+#~ msgid "Tools"
+#~ msgstr "Tööriistad"
+
+#~ msgid "Various Artists"
+#~ msgstr "Mitu esitajat"
+
+#~ msgid "Various Composer"
+#~ msgstr "Mitu heliloojat"
+
+#~ msgid "Unknown"
+#~ msgstr "Teadmata"
+
+#~ msgid "DVD Recorder"
+#~ msgstr "DVD-kirjuti"
+
+#~ msgid "CD Recorder"
+#~ msgstr "CD-kirjuti"
+
+#~ msgid "DVD Player"
+#~ msgstr "DVD-lugeja"
+
+#~ msgid "CD Player"
+#~ msgstr "CD-lugeja"
+
+#~ msgid "Quality level from -50 to 50."
+#~ msgstr "Kvaliteedi tase vahemikus -50 kuni 50."
+
+#~ msgid "Quality level from 9 to 0 where 0 is the highest quality."
+#~ msgstr ""
+#~ "Kvaliteeditase vahemikus 9 kuni 0, kusjuures 0 on kõrgeim kvaliteet."
+
+#~ msgid ""
+#~ "Reading/writing covers is not supported for ogg/METADATA_BLOCK_PICTURE, "
+#~ "flac and asf/wma files. TagLib 1.7 is needed for that."
+#~ msgstr ""
+#~ "Kaanepiltide lugemist-kirjutamist ei toetata FLAC- ja ASF/WMA-failide "
+#~ "ning ogg/METADATA_BLOCK_PICTURE puhul. Selleks on vaja TagLib'i versiooni "
+#~ "1.7."
+
+#~ msgid ""
+#~ "Conversion failed. The preferred plugin lacks support for a ecessary "
+#~ "feature."
+#~ msgstr ""
+#~ "Teisendamine ebaõnnestus. Eelistatud plugin ei toeta vajalikku "
+#~ "funktsiooni."
+
+#~ msgid "Status update delay"
+#~ msgstr "Oleku uuendamise viivitus"
+
+#~ msgid "Update the progress bar in this interval (time in milliseconds)"
+#~ msgstr "Määrab edenemise uuendamise intervalli (millisekundites)."
+
+#~ msgid "Remove partially converted files if a conversion fails"
+#~ msgstr "Teisenduse nurjumisel eemaldatakse poolelijäänud failid"
+
+#~ msgid ""
+#~ "Disable this for debugging or if you are sure the files get converted "
+#~ "correctly."
+#~ msgstr ""
+#~ "See tasub välja lülitada vigade otsimisel või kui oled kindel, et failid "
+#~ "teisendatakse korrektselt."
+
+#~ msgid "Backend"
+#~ msgstr "Taustprogramm"
+
+#~ msgid "%1 settings"
+#~ msgstr "Vormingu \"%1\" seaded"
+
+#~ msgid "File name for the cover"
+#~ msgstr "Kaanepildi failinimi"
+
+#~ msgid "Create actions menus for the file manager"
+#~ msgstr "Failihalduri toimingumenüüsse kirjete loomine"
+
+#~ msgid ""
+#~ "These service menus won't get removed if you uninstall soundKonverter.\n"
+#~ "But you can remove them by disabling this option."
+#~ msgstr ""
+#~ "soundKonverteri eemaldamisel jäävad teenusmenüü kirjeid alles.\n"
+#~ "Selle valiku keelamisel nad kustutatakse."
+
+#~ msgid "Moving file to destination"
+#~ msgstr "Faili liigutamine sihtkohta"
+
+#~ msgid "Wave won't compress the audio stream."
+#~ msgstr "Wave helivoogu kokku ei paki."
+
+#~ msgid ""
+#~ "Advanced Audio Coding is a lossy and popular audio format. It is widely "
+#~ "used by Apple Inc."
+#~ msgstr ""
+#~ "Advanced Audio Coding on populaarne kadudega helivorming. Kasutatakse "
+#~ "laialt Apple'i toodetes."
+
+#~ msgid ""
+#~ "m4a files are encoded with the aac codec. It is widely used by Apple Inc."
+#~ msgstr ""
+#~ "m4a-failid kodeeritakse AAC-koodekiga. Kasutatakse laialt Apple'i "
+#~ "toodetes."
+
+#~ msgid ""
+#~ "Ogg Vorbis is a free and lossy high quality audio codec.\n"
+#~ "For more information see: http://www.xiph.org/vorbis/"
+#~ msgstr ""
+#~ "Ogg Vorbis on vaba ja kõrgekvaliteetne kadudega helikoodek.\n"
+#~ "Lisainfo: http://www.xiph.org/vorbis/"
+
+#~ msgid ""
+#~ "MP3 is the most popular lossy audio codec. It's supported by all audio "
+#~ "players."
+#~ msgstr ""
+#~ "MP3 on populaarseim kadudega helikoodek. Seda toetavad kõik audiomängijad."
+
+#~ msgid ""
+#~ "Flac is the free lossless audio codec.\n"
+#~ "As it's name says, it compresses without any loss of quality."
+#~ msgstr ""
+#~ "FLAC (\"Free Lossless Audio Codec\") on vaba kadudeta helikoodek.\n"
+#~ "Nagu nimi ütleb, pakib see heli ilma kvaliteedikadudeta."
+
+#~ msgid "Windows Media Audio is a proprietary audio codec from Microsoft."
+#~ msgstr "Windows Media Audio on Microsofti omanduslik helikoodek."
+
+#~ msgid "Dolby Digital-Audio"
+#~ msgstr "Dolby Digital heli"
+
+#~ msgid ""
+#~ "Apple Lossless Audio Codec is a lossless audio format from Apple Inc.."
+#~ msgstr "Apple Lossless Audio Codec on Apple'i kadudeta helivorming."
+
+#~ msgid "MPEG-1 Audio Layer II is an old lossy audio format."
+#~ msgstr "MPEG-1 Audio Layer II on vana kadudega helivorming."
+
+#~ msgid "MPEG-4 Audio Lossless Coding"
+#~ msgstr "MPEG-4 Audio Lossless Coding (kaduteta helivorming)"
+
+#~ msgid ""
+#~ "Adaptive Multi-Rate Narrow-Band is based on 3gp and mainly used for "
+#~ "speech compression in mobile communication."
+#~ msgstr ""
+#~ "Adaptive Multi-Rate Narrow-Band põhineb 3GP-l ja seda kasutatakse "
+#~ "peamiselt kõne pakkimisel mobiilsides."
+
+#~ msgid ""
+#~ "Adaptive Multi-Rate Wide-Band is an advanced version of amr nb which uses "
+#~ "a higher data rate resulting in a higher quality."
+#~ msgstr ""
+#~ "Adaptive Multi-Rate Wide-Band on AMR NB täiuslikum versioon, mis kasutab "
+#~ "suuremat andmekiirust ja seega pakub kõrgemat kvaliteeti."
+
+#~ msgid ""
+#~ "Monkey’s Audio is a fast and efficient but proprietary lossless audio "
+#~ "format."
+#~ msgstr ""
+#~ "Monkey’s Audio on kiire ja tõhus, kuid omanduslik kaduteta helivorming."
+
+#~ msgid ""
+#~ "Speex is a free and lossy audio codec designed for low quality speech "
+#~ "encoding.\n"
+#~ "For more information see: http://www.speex.org"
+#~ msgstr ""
+#~ "Speex on vaba kadudega helikoodek, mis loodi kõne madalakvaliteediliseks "
+#~ "kodeerimiseks.\n"
+#~ "Lisainfo: http://www.speex.org"
+
+#~ msgid "MPEG-1 Audio Layer I very old and lossy file format."
+#~ msgstr "MPEG-1 Audio Layer I on väga vana kadudega helivorming."
+
+#~ msgid ""
+#~ "Shorten is a free and lossless audio codec.\n"
+#~ "For more information see: http://etree.org/shnutils/shorten/"
+#~ msgstr ""
+#~ "Shorten on vaba kadudeta helikoodek.\n"
+#~ "Lisainfo: http://etree.org/shnutils/shorten/"
+
+#~ msgid "True Audio is a free lossless audio format."
+#~ msgstr "True Audio on vaba kadudeta helivorming."
+
+#~ msgid ""
+#~ "WavPack is a free and lossless audio codec.\n"
+#~ "For more information see: http://www.wavpack.com"
+#~ msgstr ""
+#~ "WavPack on vaba kadudeta helikoodek.\n"
+#~ "Lisainfo: http://www.wavpack.com"
+
+#~ msgid "Real Media Audio is a proprietary and lossy codec."
+#~ msgstr "Real Media Audio on omanduslik kadudega koodek."
+
+#~ msgid "3GP is a audio/video container format for mobile devices."
+#~ msgstr "3GP on audio/video-konteinervorming mobiilseadmete jaoks."
+
+#~ msgid "Real Media is a proprietary and lossy codec."
+#~ msgstr "Real Media on omanduslik kadudega koodek."
+
+#~ msgid ""
+#~ "midi is a very old sound file format, that doesn't encode audio waves but "
+#~ "stores instrument timings."
+#~ msgstr ""
+#~ "MIDI on väga vana helifailivorming, milles kodeeritud helilainete asemel "
+#~ "on kirjas instrumentide ajastused."
+
+#~ msgid ""
+#~ "Amiga-SoundTracker-Audio is a very old sound file format, that doesn't "
+#~ "encode audio waves but stores instrument timings."
+#~ msgstr ""
+#~ "Amiga-SoundTracker-Audio on väga vana failivorming, milles kodeeritud "
+#~ "helilainete asemel on kirjas instrumentide ajastused."
+
+#~ msgid "Filename"
+#~ msgstr "Failinimi"
+
+#~ msgid "Output format"
+#~ msgstr "Väljundvorming"
+
+#~ msgid "Choose your prefered output options and click on \"Apply\"!"
+#~ msgstr "Vali soovitud väljundseaded ja klõpsa \"Rakenda\"."
+
+#~ msgid "More"
+#~ msgstr "Rohkem"
+
+#~ msgid ""
+#~ "This produces sound files of a medium quality.\n"
+#~ "If your disc space is limited, you can use this to save your music."
+#~ msgstr ""
+#~ "Seda profiili kasutades luuakse keskpärase helikvaliteediga failid.\n"
+#~ "Kui kettaruum on piiratud, võib muusika salvestamiseks just seda kasutada."
+
+#~ msgid ""
+#~ "This produces sound files of a very high quality.\n"
+#~ "You should only use this, if you are a quality freak and have enough disc "
+#~ "space available."
+#~ msgstr ""
+#~ "Seda profiili kasutades luuakse ülikõrge helikvaliteediga failid.\n"
+#~ "Seda peaks kasutama ainult juhul, kui oled tõeline kvaliteedifriik ja "
+#~ "kettal on palju vaba ruumi."
+
+#~ msgid ""
+#~ "This produces files, that have exact the same quality as the input "
+#~ "files.\n"
+#~ "This files are very big and definitely only for quality freaks."
+#~ msgstr ""
+#~ "Seda profiili kasutades luuakse failid, mille helikvaliteet on "
+#~ "sisendfailiga identne.\n"
+#~ "Saadavad failid on väga suured ja mõeldud kahtlemata ainult "
+#~ "kvaliteedifriikidele."
+
+#~ msgid ""
+#~ "This produces two files. One lossy compressed playable file and one "
+#~ "correction file.\n"
+#~ "Both files together result in a file that is equivalent to the input file."
+#~ msgstr ""
+#~ "Seda profiili kasutades luuakse kaks faili: üks kadudega pakitud, "
+#~ "esitamiseks mõeldud fail, ning üks korrektsioonifail.\n"
+#~ "Need kaks koos annavad sisendfailiga võrdse helikvaliteedi."
+
+#~ msgid "Resample"
+#~ msgstr "Ümberdiskreetimine"
+
+#~ msgid "Joint"
+#~ msgstr "Liitstereo"
+
+#~ msgid "Dual"
+#~ msgstr "Kaks kanalit"
+
+#~ msgid "The following files could not be added:"
+#~ msgstr "Järgmisi faile polnud võimalik lisada:"

@@ -110,7 +110,7 @@ void soundkonverter_codec_lame::showConfigDialog( ActionType action, const QStri
     if( !configDialog.data() )
     {
         configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setCaption( i18n("Configure %1",global_plugin_name) );
         configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );
@@ -165,7 +165,7 @@ bool soundkonverter_codec_lame::hasInfo()
 void soundkonverter_codec_lame::showInfo( QWidget *parent )
 {
     KDialog *dialog = new KDialog( parent );
-    dialog->setCaption( i18n("About %1").arg(global_plugin_name)  );
+    dialog->setCaption( i18n("About %1",global_plugin_name) );
     dialog->setButtons( KDialog::Ok );
 
     QLabel *widget = new QLabel( dialog );

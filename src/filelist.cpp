@@ -649,7 +649,7 @@ void FileList::updateItem( FileListItem *item )
         }
         else // shouldn't be possible
         {
-            item->setText( Column_Input, i18n("CD track %1").arg(item->track) );
+            item->setText( Column_Input, i18n("CD track %1",item->track) );
         }
     }
     else

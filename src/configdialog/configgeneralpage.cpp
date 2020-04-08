@@ -134,7 +134,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QLabel *lNumFiles = new QLabel( i18n("Number of files to convert at once:"), this );
     numFilesBox->addWidget( lNumFiles );
     iNumFiles = new KIntSpinBox( this );
-    iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
+    iNumFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.", processorsCount) );
     iNumFiles->setRange( 1, 100 );
     iNumFiles->setValue( config->data.general.numFiles );
     numFilesBox->addWidget( iNumFiles );
@@ -193,7 +193,7 @@ ConfigGeneralPage::ConfigGeneralPage( Config *_config, QWidget *parent )
     QLabel *lNumReplayGainFiles = new QLabel( i18n("Number of items to process at once:"), this );
     numReplayGainFilesBox->addWidget( lNumReplayGainFiles );
     iNumReplayGainFiles = new KIntSpinBox( this );
-    iNumReplayGainFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.").arg(processorsCount) );
+    iNumReplayGainFiles->setToolTip( i18n("You shouldn't set this number higher than the amount of installed processor cores.\nThere have been %1 processor cores detected.", processorsCount) );
     iNumReplayGainFiles->setRange( 1, 100 );
     iNumReplayGainFiles->setValue( config->data.general.numReplayGainFiles );
     numReplayGainFilesBox->addWidget( iNumReplayGainFiles );

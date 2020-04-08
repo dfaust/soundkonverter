@@ -553,7 +553,7 @@ QMap<QString,QString> CDOpener::cdDevices()
                 cdDrive = cdda_identify( device.toAscii(), CDDA_MESSAGE_PRINTIT, 0 );
                 if( cdDrive && cdda_open(cdDrive) == 0 )
                 {
-                    const QString desc = i18n("%1 (%2): Audio CD with %3 tracks").arg(name).arg(device).arg(cdda_audio_tracks(cdDrive));
+                    const QString desc = i18n("%1 (%2): Audio CD with %3 tracks",name,device,cdda_audio_tracks(cdDrive));
                     devices.insert( device, desc );
                 }
             }

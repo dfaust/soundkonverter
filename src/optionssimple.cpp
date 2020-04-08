@@ -231,7 +231,7 @@ void OptionsSimple::profileRemove()
 {
     const QString profileName = cProfile->currentText();
 
-    const int ret = KMessageBox::questionYesNo( this, i18n("Do you really want to remove the profile: %1").arg(profileName), i18n("Remove profile?") );
+    const int ret = KMessageBox::questionYesNo( this, i18n("Do you really want to remove the profile: %1",profileName), i18n("Remove profile?") );
     if( ret == KMessageBox::Yes )
     {
         QDomDocument list("soundkonverter_profilelist");
@@ -389,7 +389,7 @@ void OptionsSimple::currentDataRateChanged( int dataRate )
     {
         const QString dataRateString = Global::prettyNumber(dataRate,"B");
         lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
+        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.",dataRateString) );
     }
     else
     {

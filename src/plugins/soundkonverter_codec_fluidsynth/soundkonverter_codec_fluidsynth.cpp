@@ -82,7 +82,7 @@ void soundkonverter_codec_fluidsynth::showConfigDialog( ActionType action, const
         const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
         configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+        configDialog.data()->setCaption( i18n("Configure %1",global_plugin_name) );
         configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );

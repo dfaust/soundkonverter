@@ -40,9 +40,9 @@ soundKonverter::soundKonverter()
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     logger = new Logger( this );
-    logger->log( 1000, i18n("This is soundKonverter %1").arg(SOUNDKONVERTER_VERSION_STRING) );
+    logger->log( 1000, i18n("This is soundKonverter %1",SOUNDKONVERTER_VERSION_STRING) );
 
-    logger->log( 1000, "\n" + i18n("Compiled with TagLib %1.%2.%3").arg(TAGLIB_MAJOR_VERSION).arg(TAGLIB_MINOR_VERSION).arg(TAGLIB_PATCH_VERSION) );
+    logger->log( 1000, "\n" + i18n("Compiled with TagLib %1.%2.%3",TAGLIB_MAJOR_VERSION,TAGLIB_MINOR_VERSION,TAGLIB_PATCH_VERSION) );
 
     config = new Config( logger, this );
     config->load();
@@ -258,12 +258,12 @@ void soundKonverter::startupChecks()
         if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") )
         {
             QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop");
-            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") );
+            logger->log( 1000, i18n("Removing old file: %1",QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/convert_with_soundkonverter.desktop") );
         }
         if( QFile::exists(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") )
         {
             QFile::remove(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop");
-            logger->log( 1000, i18n("Removing old file: %1").arg(QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
+            logger->log( 1000, i18n("Removing old file: %1",QDir::homePath()+"/.kde4/share/kde4/services/ServiceMenus/add_replaygain_with_soundkonverter.desktop") );
         }
     }
 
@@ -278,7 +278,7 @@ void soundKonverter::startupChecks()
         if( *it != "1000.log" && (*it).endsWith(".log") )
         {
             QFile::remove( dir.absolutePath() + "/" + (*it) );
-            logger->log( 1000, i18n("Removing old file: %1").arg(dir.absolutePath()+"/"+(*it)) );
+            logger->log( 1000, i18n("Removing old file: %1",dir.absolutePath()+"/"+(*it)) );
         }
     }
 

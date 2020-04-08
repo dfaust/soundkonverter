@@ -278,7 +278,7 @@ void OptionsDetailed::encoderChanged( const QString& encoder )
     if( !plugin )
     {
 //         TODO leads to crashes
-//         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'").arg(encoder), i18n("Internal error") );
+//         KMessageBox::error( this, i18n("Sorry, this shouldn't happen.\n\nPlease report this bug and attach the following error message:\n\nOptionsDetailed::encoderChanged; PluginLoader::codecPluginByName returned 0 for encoder: '%1'",encoder), i18n("Internal error") );
         return;
     }
     if( wPlugin )
@@ -319,7 +319,7 @@ void OptionsDetailed::somethingChanged()
     {
         const QString dataRateString = Global::prettyNumber(dataRate,"B");
         lEstimSize->setText( QString(QChar(8776))+" "+dataRateString+" / min." );
-        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.").arg(dataRateString) );
+        lEstimSize->setToolTip( i18n("Using the current conversion options will create files with approximately %1 per minute.",dataRateString) );
     }
     else
     {

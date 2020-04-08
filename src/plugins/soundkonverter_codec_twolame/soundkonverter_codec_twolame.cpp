@@ -66,7 +66,7 @@ void soundkonverter_codec_twolame::showConfigDialog( ActionType action, const QS
     Q_UNUSED(parent)
 
 //     KDialog *dialog = new KDialog( parent );
-//     dialog->setCaption( i18n("Configure %1").arg(global_plugin_name)  );
+//     dialog->setCaption( i18n("Configure %1",global_plugin_name) );
 //     dialog->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Apply );
 
 //     QWidget *widget = new QWidget( dialog );
@@ -89,7 +89,7 @@ bool soundkonverter_codec_twolame::hasInfo()
 void soundkonverter_codec_twolame::showInfo( QWidget *parent )
 {
     KDialog *dialog = new KDialog( parent );
-    dialog->setCaption( i18n("About %1").arg(global_plugin_name)  );
+    dialog->setCaption( i18n("About %1",global_plugin_name) );
     dialog->setButtons( KDialog::Ok );
 
     QLabel *widget = new QLabel( dialog );

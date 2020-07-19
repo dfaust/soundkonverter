@@ -40,7 +40,7 @@ find_package(Phonon4Qt5 REQUIRED)
 find_package(Cdparanoia REQUIRED)
 
 set(TAGLIB_MIN_VERSION "1.10")
-find_package(Taglib REQUIRED)
+find_package(Taglib ${TAGLIB_MIN_VERSION} REQUIRED)
 
 
 # plugins 
@@ -48,7 +48,7 @@ add_subdirectory(plugins)
 
 
 # include directories
-include_directories(${TAGLIB_INCLUDES} ${CDPARANOIA_INCLUDE_DIR})
+include_directories(${CDPARANOIA_INCLUDE_DIR})
 
 
 # translation
@@ -120,7 +120,7 @@ set(soundkonverter_SRCS
 )
 
 add_executable(soundkonverter ${soundkonverter_SRCS})
-target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid KF5::Cddb Phonon::phonon4qt5 ${TAGLIB_LIBRARIES} ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
+target_link_libraries(soundkonverter KF5::WidgetsAddons KF5::KIOFileWidgets KF5::KIOCore KF5::Solid KF5::Cddb Phonon::phonon4qt5 Taglib::Taglib ${CDPARANOIA_LIBRARIES} KF5::KDELibs4Support soundkonvertercore)
 
 install(TARGETS soundkonverter DESTINATION ${BIN_INSTALL_DIR})
 

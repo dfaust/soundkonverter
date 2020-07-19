@@ -1,8 +1,5 @@
 project(soundkonverter_filter_sox)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_filter_sox_SRCS
    soundkonverter_filter_sox.cpp
    soxfilteroptions.cpp

@@ -30,7 +30,7 @@ include(CMakePackageConfigHelpers)
 include(ECMInstallIcons)
 include(FeatureSummary)
 
-find_package(Qt5 REQUIRED COMPONENTS Network Core Widgets)
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets Xml)
 find_package(KF5 REQUIRED COMPONENTS I18n XmlGui KIO Solid Config ConfigWidgets WidgetsAddons KDELibs4Support)
 find_package(KF5Cddb)
 find_package(Phonon4Qt5 REQUIRED)

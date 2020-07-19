@@ -1,7 +1,5 @@
 project(soundkonverter_replaygain_musepackgain)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-
 set(soundkonverter_replaygain_musepackgain_SRCS
    soundkonverter_replaygain_musepackgain.cpp
 )

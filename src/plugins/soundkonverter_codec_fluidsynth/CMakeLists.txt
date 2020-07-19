@@ -1,8 +1,5 @@
 project(soundkonverter_codec_fluidsynth)
 
-find_package(KF5 REQUIRED COMPONENTS KIO WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_fluidsynth_SRCS
    soundkonverter_codec_fluidsynth.cpp
    fluidsynthcodecwidget.cpp

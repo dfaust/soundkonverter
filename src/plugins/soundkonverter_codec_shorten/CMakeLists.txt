@@ -1,8 +1,5 @@
 project(soundkonverter_codec_shorten)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_shorten_SRCS
    soundkonverter_codec_shorten.cpp
    shortencodecwidget.cpp

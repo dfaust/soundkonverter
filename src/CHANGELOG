@@ -1,5 +1,7 @@
 unreleased:
 -Fix: Add directories to the Replay Gain tool
+-Fix: Install appdata in /usr/share/metainfo
+-Fix: Find taglib with ECM 5.72.0 (thanks to Andreas Sturmlechner <asturm@gentoo.org>)
 
 3.0.1:
 -Fix: Destination mode "Source directory" creates filenames consisting only of the file extension

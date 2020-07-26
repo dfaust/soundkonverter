@@ -1,7 +1,5 @@
 project(soundkonverter_replaygain_vorbisgain)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-
 set(soundkonverter_replaygain_vorbisgain_SRCS
    soundkonverter_replaygain_vorbisgain.cpp
 )

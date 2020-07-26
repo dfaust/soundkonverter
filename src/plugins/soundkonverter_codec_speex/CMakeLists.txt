@@ -1,8 +1,5 @@
 project(soundkonverter_codec_speex)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_speex_SRCS
    soundkonverter_codec_speex.cpp
    speexcodecwidget.cpp

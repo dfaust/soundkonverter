@@ -1,8 +1,5 @@
 project(soundkonverter_codec_libav)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_libav_SRCS
    soundkonverter_codec_libav.cpp
    libavcodecwidget.cpp

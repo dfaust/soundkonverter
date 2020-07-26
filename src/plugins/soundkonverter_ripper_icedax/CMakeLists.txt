@@ -1,7 +1,5 @@
 project(soundkonverter_ripper_icedax)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-
 set(soundkonverter_ripper_icedax_SRCS
    soundkonverter_ripper_icedax.cpp
 )

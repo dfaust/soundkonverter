@@ -1,8 +1,5 @@
 project(soundkonverter_codec_timidity)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_timidity_SRCS
    soundkonverter_codec_timidity.cpp
    timiditycodecwidget.cpp

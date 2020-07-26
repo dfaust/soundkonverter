@@ -1,8 +1,5 @@
 project(soundkonverter_codec_musepack)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-find_package(Qt5 REQUIRED COMPONENTS Xml)
-
 set(soundkonverter_codec_musepack_SRCS
    soundkonverter_codec_musepack.cpp
    musepackcodecwidget.cpp

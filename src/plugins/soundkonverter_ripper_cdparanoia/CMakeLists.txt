@@ -1,7 +1,5 @@
 project(soundkonverter_ripper_cdparanoia)
 
-find_package(KF5 REQUIRED COMPONENTS WidgetsAddons)
-
 set(soundkonverter_ripper_cdparanoia_SRCS
    soundkonverter_ripper_cdparanoia.cpp
 )

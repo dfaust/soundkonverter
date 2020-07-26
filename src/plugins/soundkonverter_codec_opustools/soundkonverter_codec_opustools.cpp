@@ -80,7 +80,7 @@ void soundkonverter_codec_opustools::showConfigDialog( ActionType action, const 
     if( !configDialog.data() )
     {
         configDialog = new KDialog( parent );
-        configDialog.data()->setCaption( i18n("Configure %1",global_plugin_name) );
+        configDialog.data()->setCaption( i18n("Configure %1",*global_plugin_name) );
         configDialog.data()->setButtons( KDialog::Ok | KDialog::Cancel | KDialog::Default );
 
         QWidget *configDialogWidget = new QWidget( configDialog.data() );

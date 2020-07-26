@@ -40,7 +40,7 @@ soundKonverter::soundKonverter()
     const int fontHeight = QFontMetrics(QApplication::font()).boundingRect("M").size().height();
 
     logger = new Logger( this );
-    logger->log( 1000, i18n("This is soundKonverter %1",SOUNDKONVERTER_VERSION_STRING) );
+    logger->log( 1000, i18n("This is soundKonverter %1",*SOUNDKONVERTER_VERSION_STRING) );
 
     logger->log( 1000, "\n" + i18n("Compiled with TagLib %1.%2.%3",TAGLIB_MAJOR_VERSION,TAGLIB_MINOR_VERSION,TAGLIB_PATCH_VERSION) );
 
